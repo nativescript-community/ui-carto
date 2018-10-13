@@ -1,0 +1,36 @@
+import { BaseTileLayer, CartoViewBase, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKey } from './carto.common';
+import { Position, Projection } from './carto';
+export { setLicenseKey, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent };
+import { EPSG3857 } from './android/shared';
+export * from './android/layers';
+export * from './android/elements';
+export * from './android/shared';
+export * from './android/datasources';
+export declare class CartoMap extends CartoViewBase {
+    static projection: EPSG3857;
+    nativeProjection: com.carto.projections.EPSG3857;
+    _projection: Projection;
+    readonly mapView: com.carto.ui.MapView;
+    projection: Projection;
+    createNativeView(): Object;
+    onLoaded(): void;
+    initNativeView(): void;
+    disposeNativeView(): void;
+    fromNativeMapPos(pos: com.carto.core.MapPos): Position;
+    getFocusPos(): Position;
+    setFocusPos(value: string | Position): void;
+    getZoom(): number;
+    setZoom(value: number): void;
+    getBearing(): number;
+    setBearing(value: number): void;
+    getTilt(): number;
+    setTilt(value: number): void;
+    getMetersPerPixel(): number;
+    addLayer(layer: BaseTileLayer<any, any>): void;
+    removeLayer(layer: BaseTileLayer<any, any>): void;
+    removeAllLayers(layers: Array<BaseTileLayer<any, any>>): void;
+    clearAllCaches(): void;
+    clearPreloadingCaches(): void;
+    cancelAllTasks(): void;
+    screenToMap(x: number, y: number): Position;
+}

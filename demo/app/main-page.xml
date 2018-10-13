@@ -1,0 +1,7 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
+  xmlns:carto="nativescript-carto">
+  <StackLayout backgroundColor="red">
+    <Label text="this i a test" backgroundColor="red" height="40"/>
+    <carto:CartoMap id="mapView" backgroundColor="green" zoom="14" center="45.012486,6.116902" source="carto.streets,https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew"/>
+  </StackLayout>
+</Page>

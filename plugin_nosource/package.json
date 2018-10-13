@@ -1,0 +1,29 @@
+{
+    "name": "nativescript-carto",
+    "version": "1.0.0",
+    "description": "Nativescript plugin for Carto Mobile SDK",
+    "main": "carto",
+    "typings": "carto.d.ts",
+    "nativescript": {
+        "platforms": {
+            "android": "4.2.0",
+            "ios": "4.2.0"
+        }
+    },
+    "keywords": [
+        "NativeScript",
+        "JavaScript",
+        "iOS"
+    ],
+    "author": {
+        "name": "Your Name",
+        "email": "youremail@yourdomain.com"
+    },
+    "bugs": {
+        "url": "https://github.com/farfromrefug/nativescript-carto/issues"
+    },
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/farfromrefug/nativescript-carto",
+    "dependencies": {},
+    "bootstrapper": "nativescript-plugin-seed"
+}
