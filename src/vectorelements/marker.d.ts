@@ -1,21 +1,31 @@
 import { IProjection } from '../projections/projection';
-import { Position } from '../core/core';
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements';
+import { MapPos } from '../core/core';
+import { BaseVectorElement, BaseVectorElementStyleBuilder, VectorElementOptions } from './vectorelements';
+import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
+import { ImageSource } from 'tns-core-modules/image-source/image-source';
+import { Geometry } from '../geometry/geometry';
+import { Color } from 'tns-core-modules/color/color';
 
-export class MarkerStyleBuilderOptions {
+export class MarkerStyleBuilderOptions extends VectorElementOptions {
     size?: number;
-    color?: string;
+    placementPriority?: number;
+    bitmap?: string | ImageSource | ImageAsset;
+    color?: string | Color;
 }
-export class MarkerStyleBuilder<T, U extends MarkerStyleBuilderOptions> extends BaseElementStyleBuilder<any, MarkerStyleBuilderOptions> {
+export class MarkerStyleBuilder<T, U extends MarkerStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, MarkerStyleBuilderOptions> {
     constructor(options: U);
     buildStyle(): any;
 }
 
 export class MarkerOptions extends MarkerStyleBuilderOptions {
-    metaData?: Object;
-    pos: Position;
+    pos?: MapPos;
     projection?: IProjection;
     rotation?: number;
+    styleBuilder?: MarkerStyleBuilder<any, any>;
+    style?: any;
+    geometry?: Geometry;
+}
+export class Marker extends BaseVectorElement<any, MarkerOptions> {
+    styleBuilder?: MarkerStyleBuilder<any, any>;
     style?: any;
 }
-export class Marker extends BaseElement<any, MarkerOptions> {}

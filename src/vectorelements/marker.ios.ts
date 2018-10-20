@@ -1,36 +1,22 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.ios';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { ImageSource } from 'tns-core-modules/image-source/image-source';
+import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
+import { _createImageSourceFromSrc } from '../carto.common';
+import { iosNativeColorProperty, iosNativeImageProperty, iosNativeProperty } from '../carto.ios';
 
-export class MarkerStyleBuilder extends BaseElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
+export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
         return NTMarkerStyleBuilder.alloc().init();
     }
-    get size() {
-        return this.native ? this.native.getSize() : this.options.size;
-    }
-    set size(value: number) {
-        if (this.native) {
-            this.native.setSize(value);
-            this._buildStyle = null;
-        }
-    }
-    get color() {
-        if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
-        }
-        return this.options.color;
-    }
-    set color(value: string) {
-        if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a));
-            this._buildStyle = null;
-        }
-    }
+    @iosNativeProperty width: number;
+    @iosNativeProperty size: number;
+    @iosNativeProperty placementPriority: number;
+    @iosNativeColorProperty color: Color | string;
+    @iosNativeImageProperty bitmap: string;
 
     _buildStyle: NTMarkerStyle;
     buildStyle() {
@@ -41,9 +27,9 @@ export class MarkerStyleBuilder extends BaseElementStyleBuilder<NTMarkerStyleBui
     }
 }
 
-export class Marker extends BaseElement<NTMarker, MarkerOptions> {
+export class Marker extends BaseVectorElement<NTMarker, MarkerOptions> {
     createNative(options: MarkerOptions) {
-        const style = options.style instanceof MarkerStyleBuilder ? options.style.buildStyle() : options.style;
+        const style: NTMarkerStyle = options.style || options.styleBuilder.buildStyle();
         const pos = options.pos;
         let nativePos;
         if (options.projection) {
@@ -59,6 +45,7 @@ export class Marker extends BaseElement<NTMarker, MarkerOptions> {
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: MarkerStyleBuilder | NTMarkerStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof MarkerStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

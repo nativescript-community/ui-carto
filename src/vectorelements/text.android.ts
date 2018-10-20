@@ -1,24 +1,29 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.android';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { BillboardOrientation } from './vectorelements';
+import { androidNativeColorProperty, androidNativeProperty } from '../carto.android';
 
-export class TextStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
+export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
         return new com.carto.styles.TextStyleBuilder();
     }
-    get color() {
+    @androidNativeColorProperty color: Color | string;
+    @androidNativeProperty fontSize: number;
+    @androidNativeProperty fontName: string;
+
+    get orientationMode() {
         if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
+            return this.native.getOrientationMode() as any;
         }
-        return this.options.color;
+        return this.options.orientationMode;
     }
-    set color(value: string) {
+    set orientationMode(value: BillboardOrientation) {
+        this.options.orientationMode = value;
         if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a));
+            this.native.setOrientationMode(com.carto.styles.BillboardOrientation.values()[value]);
             this._buildStyle = null;
         }
     }
@@ -32,9 +37,9 @@ export class TextStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.T
     }
 }
 
-export class Text extends BaseElement<com.carto.vectorelements.Text, TextOptions> {
+export class Text extends BaseVectorElement<com.carto.vectorelements.Text, TextOptions> {
     createNative(options: TextOptions) {
-        const style = options.style instanceof TextStyleBuilder ? options.style.buildStyle() : options.style;
+        const style: com.carto.styles.TextStyle = options.style || options.styleBuilder.buildStyle();
         const pos = options.pos;
         let nativePos;
         if (options.projection) {
@@ -50,6 +55,7 @@ export class Text extends BaseElement<com.carto.vectorelements.Text, TextOptions
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: TextStyleBuilder | com.carto.styles.TextStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof TextStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

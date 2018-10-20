@@ -1,24 +1,24 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.android';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { LineStyleBuilder } from './line';
+import { androidNativeColorProperty, mapPosVectorFromArgs, mapPosVectorVectorFromArgs } from '../carto.android';
 
-export class PolygonStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.PolygonStyleBuilder, PolygonStyleBuilderOptions> {
+export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {
         return new com.carto.styles.PolygonStyleBuilder();
     }
-    get color() {
-        if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
-        }
-        return this.options.color;
+    @androidNativeColorProperty color: Color | string;
+
+    get lineStyleBuilder() {
+        return this.options.lineStyleBuilder;
     }
-    set color(value: string) {
+    set lineStyleBuilder(value: LineStyleBuilder<any, any>) {
+        this.options.lineStyleBuilder = value;
         if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a));
+            this.native.setLineStyle(value.buildStyle());
             this._buildStyle = null;
         }
     }
@@ -32,21 +32,13 @@ export class PolygonStyleBuilder extends BaseElementStyleBuilder<com.carto.style
     }
 }
 
-export class Polygon extends BaseElement<com.carto.vectorelements.Polygon, PolygonOptions> {
+export class Polygon extends BaseVectorElement<com.carto.vectorelements.Polygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
-        const style = options.style instanceof PolygonStyleBuilder ? options.style.buildStyle() : options.style;
-        const poses = options.poses;
-        const nativePoses = new com.carto.core.MapPosVector();
-        if (options.projection) {
-            poses.forEach(p => {
-                nativePoses.add(options.projection.getNative().fromWgs84(toNativeMapPos(p)));
-            });
-        } else {
-            poses.forEach(p => {
-                nativePoses.add(toNativeMapPos(p));
-            });
+        const style: com.carto.styles.PolygonStyle = options.style || options.styleBuilder.buildStyle();
+        const result = new com.carto.vectorelements.Polygon(mapPosVectorFromArgs(options.poses, options.projection), style);
+        if (options.holes) {
+            result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
         }
-        const result = new com.carto.vectorelements.Polygon(nativePoses, style);
         result['owner'] = new WeakRef(this);
         return result;
     }
@@ -54,6 +46,7 @@ export class Polygon extends BaseElement<com.carto.vectorelements.Polygon, Polyg
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: PolygonStyleBuilder | com.carto.styles.PolygonStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof PolygonStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

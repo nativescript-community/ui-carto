@@ -1,11 +1,23 @@
-import { CartoViewBase, getLicenseKey, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKey, setLicenseKeyRegistered } from './ui.common';
+import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import { EPSG3857 } from '../projections/epsg3857';
 import { IProjection } from '../projections/projection';
-import { fromNativeMapPos, Position, toNativeMapPos } from '../core/core';
-import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
+import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
+import { restrictedPanningProperty } from './cssproperties';
 
-export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered, setLicenseKey };
+export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
+
+let licenseKey: string;
+export function registerLicense(value: string) {
+    const result = NTMapView.registerLicense(value);
+    if (result) {
+        licenseKey = value;
+    }
+    setLicenseKeyRegistered(result);
+}
+export function getLicenseKey() {
+    return licenseKey;
+}
 
 class NTMapEventListenerImpl extends NTMapEventListener {
     private _owner: WeakRef<CartoMap>;
@@ -65,8 +77,7 @@ export class CartoMap extends CartoViewBase {
             console.log('need NTMapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
-                const result = NTMapView.registerLicense(license);
-                setLicenseKeyRegistered(result);
+                registerLicense(license);
             } else {
                 console.error('no license to register !!!');
             }
@@ -79,7 +90,6 @@ export class CartoMap extends CartoViewBase {
     set projection(proj: IProjection) {
         this._projection = proj;
         this.nativeProjection = this._projection.getNative();
-        console.log('set projection', proj, this.nativeProjection);
         this.mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
     }
 
@@ -96,15 +106,10 @@ export class CartoMap extends CartoViewBase {
 
         // 3.Set initial location and other parameters, _do not animate_
         mapView.setRotationDurationSeconds(0, 0);
-        this.mapReady = true;
-        this.notify({
-            eventName: MapReadyEvent,
-            object: this,
-            data: mapView
-        });
 
         return mapView;
     }
+
 
     /**
      * Initializes properties/listeners of the native view.
@@ -135,88 +140,108 @@ export class CartoMap extends CartoViewBase {
         return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
     }
 
-    getFocusPos(): Position {
-        console.log('get focusPos', !!this.mapView);
-        if (this.mapView) {
-            return this.fromNativeMapPos(this.mapView.getFocusPos());
-        }
-        return this.style['focusPos'];
-    }
+    // getZoom(): number {
+    //     if (this.mapView) {
+    //         return this.mapView.getZoom();
+    //     }
+    //     return this.style['zoom'];
+    // }
+    // getBearing(): number {
+    //     if (this.mapView) {
+    //         return this.mapView.getRotation();
+    //     }
+    //     return this.style['bearing'];
+    // }
 
-    setFocusPos(value: string | Position) {
-        this.style['focusPos'] = value;
-    }
-    getZoom(): number {
-        if (this.mapView) {
-            return this.mapView.getZoom();
-        }
-        return this.style['zoom'];
-    }
-    setZoom(value: number) {
-        this.style['zoom'] = value;
-    }
-    getBearing(): number {
-        if (this.mapView) {
-            return this.mapView.getRotation();
-        }
-        return this.style['bearing'];
-    }
+    // setBearing(value: number) {
+    //     this.style['bearing'] = value;
+    // }
+    // getTilt(): number {
+    //     if (this.mapView) {
+    //         return this.mapView.getTilt();
+    //     }
+    //     return this.style['tilt'];
+    // }
 
-    setBearing(value: number) {
-        this.style['bearing'] = value;
-    }
-    getTilt(): number {
-        if (this.mapView) {
-            return this.mapView.getTilt();
-        }
-        return this.style['tilt'];
-    }
+    // setTilt(value: number) {
+    //     this.style['tilt'] = value;
+    // }
 
-    setTilt(value: number) {
-        this.style['tilt'] = value;
-    }
-    getMetersPerPixel(): number {
-        if (this.mapView) {
-            const pos = this.mapView.getFocusPos();
-            const zoom = this.mapView.getZoom();
-            return (156543.03392 * Math.cos((pos.getX() * Math.PI) / 180)) / Math.pow(2, zoom);
-        }
-        return this.style['metersPerPixel'];
-    }
+    // get focusPos(): MapPos {
+    //     console.log('get focusPos', !!this.nativeViewProtected, new Error().stack);
+    //     if (this.nativeViewProtected) {
+    //         return this.fromNativeMapPos(this.mapView.getFocusPos());
+    //     }
+    //     return this.style['focusPos'];
+    // }
 
-    [zoomProperty.setNative](zoom: number) {
-        if (!this.mapView) {
+    // get zoom(): number {
+    //     console.log('get zoom', !!this.nativeViewProtected, new Error().stack);
+    //     if (this.nativeViewProtected) {
+    //         return this.mapView.getZoom();
+    //     }
+    //     return this.style['zoom'];
+    // }
+    // get bearing(): number {
+    //     if (this.nativeViewProtected) {
+    //         return this.mapView.getRotation();
+    //     }
+    //     return this.style['bearing'];
+    // }
+    // get tilt(): number {
+    //     if (this.nativeViewProtected) {
+    //         return this.mapView.getTilt();
+    //     }
+    //     return this.style['tilt'];
+    // }
+
+    getMapfocusPos(): MapPos {
+        return fromNativeMapPos(this.mapView.getFocusPos());
+    }
+    getMapzoom() {
+        return this.mapView.getZoom();
+    }
+    getMapbearing() {
+        return this.mapView.getRotation();
+    }
+    getMaptilt() {
+        return this.mapView.getTilt();
+    }
+    getMapmaxZoom() {
+        return 22;
+    }
+    getMapminZoom() {
+        return 0;
+    }
+    setFocusPos(value: MapPos, duration: number) {
+        this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
+    }
+    setZoom(value: number, duration: number) {
+        this.mapView.setZoomDurationSeconds(value, duration / 1000);
+    }
+    setTilt(value: number, duration: number) {
+        this.mapView.setTiltDurationSeconds(value, duration / 1000);
+    }
+    setBearing(value: number, duration: number) {
+        this.mapView.setRotationDurationSeconds(value, duration / 1000);
+    }
+    [restrictedPanningProperty.setNative](value: boolean) {
+        if (!this.nativeViewProtected) {
             return;
         }
-        this.mapView.setZoomDurationSeconds(zoom, 0);
-    }
-    [tiltProperty.setNative](value: number) {
-        if (!this.mapView) {
-            return;
-        }
-        this.mapView.setTiltDurationSeconds(value, 0);
-    }
-    [bearingProperty.setNative](value: number) {
-        if (!this.mapView) {
-            return;
-        }
-        this.mapView.setRotationDurationSeconds(value, 0);
-    }
-    [focusPosProperty.setNative](pos: string | Position) {
-        if (!this.mapView || !this.nativeProjection) {
-            return;
-        }
-        if (typeof pos === 'string') {
-            const positions = pos.split(',').map(parseFloat);
-            this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(NTMapPos.alloc().initWithXY(positions[1], positions[0])), 0);
-        } else {
-            this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(pos)), 0);
-        }
+        this.mapView.getOptions().setRestrictedPanning(value);
     }
 
-    addLayer(layer: TileLayer<any, any>) {
-        if (this.mapView && !!layer.getNative()) {
-            this.mapView.getLayers().add(layer.getNative());
+    addLayer(layer: TileLayer<any, any>, index?: number) {
+        if (this.mapView) {
+            const native: NTTileLayer = layer.getNative();
+            if (!!native) {
+                if (index !== undefined) {
+                    this.mapView.getLayers().insertLayer(index, native);
+                } else {
+                    this.mapView.getLayers().add(native);
+                }
+            }
         }
     }
 

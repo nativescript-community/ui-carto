@@ -1,9 +1,10 @@
-import { IProjection } from '../projections/projection';
-import { Position } from '../core/core';
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements';
+import { Projection } from '../projections/projection';
+import { MapPos, MapPosVector } from '../core/core';
+import { BaseVectorElement, BaseVectorElementStyleBuilder, VectorElementOptions } from './vectorelements';
+import { Color } from 'tns-core-modules/color/color';
 
 declare enum LineJointType {
-    NONE,
+    FaceCamera,
     BEVEL,
     MITER,
     ROUND
@@ -13,21 +14,22 @@ declare enum LineEndType {
     SQUARE,
     NONE
 }
-export class LineStyleBuilderOptions {
-    color?: string;
+export class LineStyleBuilderOptions extends VectorElementOptions {
+    color?: string | Color;
     width?: number;
     joinType?: LineJointType;
     endType?: LineEndType;
 }
 export class LineOptions extends LineStyleBuilderOptions {
-    metaData?: Object;
-    poses: Position[];
-    projection?: IProjection;
-    style?: any;
+    poses: MapPosVector | MapPos[];
+    projection?: Projection;
 }
-export class LineStyleBuilder<T, U extends LineStyleBuilderOptions> extends BaseElementStyleBuilder<any, LineStyleBuilderOptions> {
+export class LineStyleBuilder<T, U extends LineStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, LineStyleBuilderOptions> {
     constructor(options: U);
     buildStyle(): any;
 }
 
-export class Line extends BaseElement<any, LineOptions> {}
+export class Line extends BaseVectorElement<any, LineOptions> {
+    styleBuilder?: any;
+    style?: any;
+}

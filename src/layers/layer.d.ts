@@ -6,7 +6,6 @@ export interface LayerOptions {
     visible?: boolean;
     visibleZoomRange?: [number, number];
 }
-export interface TileLayerOptions extends LayerOptions {}
 
 export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
     constructor(options: U);
@@ -16,6 +15,10 @@ export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
     visible: boolean;
     visibleZoomRange: [number, number];
 }
+export interface TileLayerOptions extends LayerOptions {
+    preloading?: boolean;
+}
 export class TileLayer<T, U extends TileLayerOptions> extends Layer<T, U> {
     constructor(options: U);
+    preloading: boolean;
 }

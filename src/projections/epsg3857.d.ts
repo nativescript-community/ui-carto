@@ -1,4 +1,6 @@
-import { Projection } from './projection';
-import { EPSG3857Options } from './epsg3857.common';
+import { ProjectionClass, ProjectionOptions } from './projection';
 
-export class EPSG3857 extends Projection<EPSG3857Options> {}
+export interface EPSG3857Options extends ProjectionOptions {}
+export class EPSG3857 extends ProjectionClass<any, EPSG3857Options> {
+    createNative()
+}

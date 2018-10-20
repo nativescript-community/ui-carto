@@ -1,21 +1,27 @@
 import { IProjection } from '../projections/projection';
-import { Position } from '../core/core';
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements';
+import { MapPos } from '../core/core';
+import { BaseVectorElement, BaseVectorElementStyleBuilder, VectorElementOptions } from './vectorelements';
+import { Color } from 'tns-core-modules/color/color';
+import { BillboardOrientation } from './vectorelements';
 
-export class TextStyleBuilderOptions {
-    color?: string;
+export class TextStyleBuilderOptions extends VectorElementOptions {
+    color?: string | Color;
+    orientationMode?: BillboardOrientation
+    fontSize?: number
+    fontName?: string
 }
 export class TextOptions extends TextStyleBuilderOptions {
-    metaData?: Object;
-    pos: Position;
+    pos: MapPos;
     text: string;
     projection?: IProjection;
-    style?: any;
 }
 
-export class TextStyleBuilder<T, U extends TextStyleBuilderOptions> extends BaseElementStyleBuilder<any, TextStyleBuilderOptions> {
+export class TextStyleBuilder<T, U extends TextStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, TextStyleBuilderOptions> {
     constructor(options: U);
     buildStyle(): any;
 }
 
-export class Text extends BaseElement<any, TextOptions> {}
+export class Text extends BaseVectorElement<any, TextOptions> {
+    styleBuilder?: TextStyleBuilder<any, any>;
+    style?: any;
+}

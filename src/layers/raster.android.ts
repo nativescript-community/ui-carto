@@ -10,6 +10,6 @@ export class RasterTileLayer extends RasterTileLayerBase<com.carto.layers.Raster
 
 export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<com.carto.layers.CartoOnlineRasterTileLayer, CartoOnlineRasterTileLayerOptions> {
     createNative(options) {
-        return new com.carto.layers.CartoOnlineRasterTileLayer(options.dataSource.getNative());
+        return new com.carto.layers.CartoOnlineRasterTileLayer(options.source);
     }
 }

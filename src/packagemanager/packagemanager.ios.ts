@@ -111,7 +111,11 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     }
     set listener(listener: CartoPackageManagerListener) {
         if (this.native) {
-            this.native.setPackageManagerListener(NTPackageManagerListenerImpl.initWithOwner(new WeakRef(listener)));
+            if (listener) {
+                this.native.setPackageManagerListener(NTPackageManagerListenerImpl.initWithOwner(new WeakRef(listener)));
+            } else {
+                this.native.setPackageManagerListener(null);
+            }
         }
     }
     start() {

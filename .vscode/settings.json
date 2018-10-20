@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "*demo*/app/**/*.js": true,
+        "*demo*/app/**/*.js.map": true,
+        "src/**/*.js": true,
+        "src/**/*.js.map": true
+    },
+    "search.exclude": {
+        "**/*demo*": true,
+        "src/**/*.js": true,
+        "src/**/*.js.map": true
+    }
+}

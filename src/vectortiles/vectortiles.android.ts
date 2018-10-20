@@ -2,6 +2,7 @@ import {MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectortil
 
 import { BaseVectorTileDecoder } from './vectortiles.common';
 import { File, knownFolders, path } from 'tns-core-modules/file-system';
+import { getRelativePathToApp } from '../carto.common';
 const currentAppFolder = knownFolders.currentApp();
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
@@ -12,8 +13,9 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     createNative(options: MBVectorTileDecoderOptions) {
-        if (File.exists(path.join(currentAppFolder.path, '..', options.zipPath))) {
-            const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(options.zipPath);
+        const zipPath = getRelativePathToApp( options.zipPath);
+        if (zipPath) {
+            const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
             const pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
             const vectorTileStyleSet = new com.carto.styles.CompiledStyleSet(pack, options.style);
             const result = new com.carto.vectortiles.MBVectorTileDecoder(vectorTileStyleSet);

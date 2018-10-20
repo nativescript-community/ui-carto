@@ -1,6 +1,7 @@
-import { EPSG3857Base } from './epsg3857.common';
+import { ProjectionClass } from './projection.android';
+import { EPSG3857Options } from './epsg3857';
 
-export class EPSG3857 extends EPSG3857Base<com.carto.projections.EPSG3857> {
+export class EPSG3857 extends ProjectionClass<com.carto.projections.EPSG3857, EPSG3857Options> {
     createNative() {
         return new com.carto.projections.EPSG3857();
     }

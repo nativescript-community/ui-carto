@@ -1,5 +1,4 @@
 import { BaseNative } from '../carto.common';
-import { ElementOptions, ElementStyleBuilderOptions } from './vectorelements';
+import { VectorElementOptions, VectorElementStyleBuilderOptions } from './vectorelements';
 
-export abstract class BaseElement<T, U extends ElementOptions> extends BaseNative<T, U> {}
-export abstract class BaseElementStyleBuilder<T, U extends ElementStyleBuilderOptions> extends BaseNative<T, U> {}
+export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementStyleBuilderOptions> extends BaseNative<T, U> {}

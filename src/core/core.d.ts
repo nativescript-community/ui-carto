@@ -1,17 +1,19 @@
-export class Position {
-    public latitude: number;
-    public longitude: number;
-    public altitude?: number;
-    public speed?: number;
+export interface MapPos {
+    latitude: number;
+    longitude: number;
+    altitude?: number;
+    speed?: number;
 }
 
-export class Bounds {
-    public northeast: Position;
-    public southwest: Position;
-    public static fromCoordinates(southwest: Position, northeast: Position): Bounds;
+export interface Bounds {
+    northeast: MapPos;
+    southwest: MapPos;
 }
-export declare function fromNativeMapPos(pos): Position;
-export declare function toNativeMapPos(pos: Position): any;
+export namespace Bounds{
+    function fromCoordinates(southwest: MapPos, northeast: MapPos): Bounds;
+}
+export declare function fromNativeMapPos(pos): MapPos;
+export declare function toNativeMapPos(pos: MapPos): any;
 export declare function fromNativeMapBounds(bounds: any): Bounds;
 export declare function toNativeMapBounds(bounds: Bounds): any;
 
@@ -27,3 +29,18 @@ declare enum ClickType {
     DOUBLE,
     DUAL
 }
+
+declare abstract class NativeVector<T> {
+    native: any;
+    size(): number;
+    public getNative(): any;
+    public reserve(size: number);
+    public get(index: number): T;
+    public add(pos: T | MapPos);
+    public capacity(): number;
+    public clear();
+    public isEmpty(): boolean;
+    public set(index: number, pos: T);
+}
+export class MapPosVector extends NativeVector<any> {}
+export class MapPosVectorVector extends NativeVector<any> {}

@@ -1,10 +1,11 @@
 import { BaseNative } from '../carto';
 import { IProjection } from '../projections/projection';
-import { Position, Bounds } from '../core/core';
+import { MapPos, Bounds } from '../core/core';
+import { FeatureCollection } from '../geometry/feature';
 
 export interface GeocodingRequest {
     projection: IProjection;
-    location: Position;
+    location: MapPos;
     locationRadius?: number;
     query: string;
 }
@@ -30,20 +31,6 @@ export interface Address {
     categories: string[];
 }
 
-export interface Geometry {
-    centerPos: Position,
-    bounds: Bounds
-}
-
-export interface Feature {
-    properties: {};
-    geometry: any;
-}
-
-export interface FeatureCollection {
-    getFeature(index: number): Feature;
-    getFeatureCount(): number;
-}
 
 export interface GeocodingResult {
     getAddress(): Address;

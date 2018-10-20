@@ -1,24 +1,30 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.ios';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { BillboardOrientation } from './vectorelements';
+import { iosNativeColorProperty, iosNativeProperty } from '../carto.ios';
 
-export class TextStyleBuilder extends BaseElementStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
+export class TextStyleBuilder extends BaseVectorElementStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
         return NTTextStyleBuilder.alloc().init();
     }
-    get color() {
+
+    @iosNativeColorProperty color: Color | string;
+    @iosNativeProperty fontSize: number;
+    @iosNativeProperty fontName: string;
+
+    get orientationMode() {
         if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
+            return this.native.getOrientationMode() as any;
         }
-        return this.options.color;
+        return this.options.orientationMode;
     }
-    set color(value: string) {
+    set orientationMode(value: BillboardOrientation) {
+        this.options.orientationMode = value;
         if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a));
+            this.native.setOrientationMode(value as number);
             this._buildStyle = null;
         }
     }
@@ -32,9 +38,9 @@ export class TextStyleBuilder extends BaseElementStyleBuilder<NTTextStyleBuilder
     }
 }
 
-export class Text extends BaseElement<NTText, TextOptions> {
+export class Text extends BaseVectorElement<NTText, TextOptions> {
     createNative(options: TextOptions) {
-        const style = options.style instanceof TextStyleBuilder ? options.style.buildStyle() : options.style;
+        const style: NTTextStyle = options.style || options.styleBuilder.buildStyle();
         const pos = options.pos;
         let nativePos;
         if (options.projection) {
@@ -46,10 +52,16 @@ export class Text extends BaseElement<NTText, TextOptions> {
         result['owner'] = new WeakRef(this);
         return result;
     }
+
+    @iosNativeColorProperty color: Color | string;
+    @iosNativeProperty fontSize: number;
+    @iosNativeProperty fontName: string;
+
     get style() {
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: TextStyleBuilder | NTTextStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof TextStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

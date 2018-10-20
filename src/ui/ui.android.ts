@@ -1,11 +1,29 @@
-import { CartoViewBase, getLicenseKey, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKey, setLicenseKeyRegistered } from './ui.common';
+import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import { EPSG3857 } from '../projections/epsg3857';
-import { IProjection } from '../projections/projection';
-import { fromNativeMapPos, Position, toNativeMapPos } from '../core/core';
-import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
+import { IProjection, Projection } from '../projections/projection';
+import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
+import * as application from 'application';
+import { restrictedPanningProperty } from './cssproperties';
 
-export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered, setLicenseKey };
+export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
+
+let licenseKey: string;
+export function registerLicense(value: string) {
+    const context = application.android.context;
+    if (!context) {
+        throw new Error('application context not initialized!');
+    }
+    console.log('registerLicense', value);
+    const result = com.carto.ui.MapView.registerLicense(value, context);
+    if (result) {
+        licenseKey = value;
+    }
+    setLicenseKeyRegistered(result);
+}
+export function getLicenseKey() {
+    return licenseKey;
+}
 
 interface MapView extends com.akylas.carto.additions.AKMapView {
     // tslint:disable-next-line:no-misused-new
@@ -83,6 +101,7 @@ export class CartoMap extends CartoViewBase {
     static projection = new EPSG3857();
     nativeProjection: com.carto.projections.EPSG3857;
     _projection: IProjection;
+
     get mapView() {
         return this.nativeViewProtected as com.carto.ui.MapView;
     }
@@ -92,7 +111,6 @@ export class CartoMap extends CartoViewBase {
     set projection(proj: IProjection) {
         this._projection = proj;
         this.nativeProjection = this._projection.getNative();
-        console.log('set projection', proj, this.nativeProjection);
         if (this.nativeViewProtected) {
             this.mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
         }
@@ -103,8 +121,7 @@ export class CartoMap extends CartoViewBase {
             console.log('need MapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
-                const result = com.carto.ui.MapView.registerLicense(license, this._context);
-                setLicenseKeyRegistered(result);
+                registerLicense(license);
             } else {
                 console.error('no license to register !!!');
             }
@@ -116,12 +133,9 @@ export class CartoMap extends CartoViewBase {
         // listener.owner = this;
         // mapView.setMapEventListener(listener);
         // (mapView as any).listener = listener;
-
-        this.projection = CartoMap.projection;
-        mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
-
-        // 1. Set the base projection to be used for MapView, MapEventListener and Options methods
-        // mapView.getOptions().setBaseProjection(CartoMap.projection); // Since EPSG3857 is the default base projection, this is not needed
+        this.projection = new Projection(undefined, mapView.getOptions().getBaseProjection());
+        // this.projection = CartoMap.projection;
+        // mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
 
         // 2. General options
         mapView.getOptions().setRotatable(true); // allows the map to rotate (this is the default behavior)
@@ -129,15 +143,9 @@ export class CartoMap extends CartoViewBase {
         mapView.getOptions().setTileThreadPoolSize(4); // use two threads to download tiles
 
         // 3.Set initial location and other parameters, _do not animate_
-        mapView.setRotation(0);
-        this.mapReady = true;
-        return mapView;
-    }
+        mapView.setMapRotation(this.style['bearing'], 0);
 
-    public onLoaded() {
-        super.onLoaded();
-        // console.log('onLoaded', MapReadyEvent);
-        this.sendEvent(MapReadyEvent);
+        return mapView;
     }
 
     /**
@@ -172,48 +180,124 @@ export class CartoMap extends CartoViewBase {
         return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
     }
 
-    getFocusPos(): Position {
-        console.log('get focusPos', !!this.mapView);
-        if (this.mapView) {
-            return this.fromNativeMapPos(this.mapView.getFocusPos());
+    // get focusPos(): MapPos {
+    //     if (this.nativeViewProtected) {
+    //         return this.fromNativeMapPos(this.mapView.getFocusPos());
+    //     }
+    //     return this.style.focusPos;
+    // }
+    // set focusPos(value: MapPos) {
+    //     this.style.focusPos = value;
+    // }
+    // get bearing(): number {
+    //     if (this.nativeViewProtected) {
+    //         return this.mapView.getMapRotation();
+    //     }
+    //     return this.style.bearing;
+    // }
+
+    // set bearing(value: number) {
+    //     this.style.bearing = value;
+    // }
+    // get tilt(): number {
+    //     if (this.nativeViewProtected) {
+    //         return this.mapView.getTilt();
+    //     }
+    //     return this.style.tilt;
+    // }
+    // set tilt(value: number) {
+    //     this.style.tilt = value;
+    // }
+    // set minZoom(value: number) {
+    //     this.style.minZoom = value;
+    // }
+    // set maxZoom(value: number) {
+    //     this.style.maxZoom = value;
+    // }
+
+    // get zoom(): number {
+    //     if (this.nativeViewProtected) {
+    //         return this.mapView.getZoom();
+    //     }
+    //     return this.style.zoom;
+    // }
+    // set zoom(value: number) {
+    //     this.style.zoom = value;
+    // }
+    get metersPerPixel(): number {
+        if (this.nativeViewProtected) {
+            const pos = this.focusPos;
+            const zoom = this.zoom;
+            return (156543.03390625 * Math.cos((pos.latitude * Math.PI) / 180)) / Math.pow(2, zoom);
         }
-        return this.style['focusPos'];
+        return 0;
     }
 
-    setFocusPos(value: string | Position) {
-        this.style['focusPos'] = value;
+    getMapfocusPos(): MapPos {
+        return fromNativeMapPos(this.mapView.getFocusPos());
     }
-    getZoom(): number {
-        if (this.mapView) {
-            return this.mapView.getZoom();
-        }
-        return this.style['zoom'];
+    getMapzoom() {
+        return this.mapView.getZoom();
     }
-    setZoom(value: number) {
-        this.style['zoom'] = value;
+    getMapbearing() {
+        return this.mapView.getMapRotation();
     }
-    getBearing(): number {
-        if (this.mapView) {
-            return this.mapView.getMapRotation();
-        }
-        return this.style['bearing'];
+    getMaptilt() {
+        return this.mapView.getTilt();
     }
-
-    setBearing(value: number) {
-        this.style['bearing'] = value;
+    getMapmaxZoom() {
+        return 22;
     }
-    getTilt(): number {
-        if (this.mapView) {
-            return this.mapView.getTilt();
-        }
-        return this.style['tilt'];
+    getMapminZoom() {
+        return 0;
+    }
+    setFocusPos(value: MapPos, duration: number) {
+        this.mapView.setFocusPos(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
 
-    setTilt(value: number) {
-        this.style['tilt'] = value;
+    setZoom(value: number, duration: number) {
+        this.mapView.setZoom(value, duration / 1000);
     }
+    setTilt(value: number, duration: number) {
+        this.mapView.setTilt(value, duration / 1000);
+    }
+    setBearing(value: number, duration: number) {
+        this.mapView.setMapRotation(value, duration / 1000);
+    }
+
+    [restrictedPanningProperty.setNative](value: boolean) {
+        if (!this.nativeViewProtected) {
+            return;
+        }
+        this.mapView.getOptions().setRestrictedPanning(value);
+    }
+
+    // // setZoom(value: number) {
+    // //     this.style['zoom'] = value;
+    // // }
+    // getBearing(): number {
+    //     if (this.mapView) {
+    //         return this.mapView.getMapRotation();
+    //     }
+    //     return this.style['bearing'];
+    // }
+
+    // setBearing(value: number) {
+    //     this.style['bearing'] = value;
+    // }
+    // getTilt(): number {
+    //     if (this.mapView) {
+    //         return this.mapView.getTilt();
+    //     }
+    //     return this.style['tilt'];
+    // }
+
+    // setTilt(value: number) {
+    //     this.style['tilt'] = value;
+    // }
+
     // metersToEquatorPixels(map, location, zoom, meters) {
-    //     // CameraPosition position = map.getCameraPosition();
+    //     // CameraMapPos MapPos = map.getCameraMapPos();
     //     let center = location;
     //     if (center == null) {
     //         center = map.getFocusPos();
@@ -229,56 +313,16 @@ export class CartoMap extends CartoViewBase {
     //     const metersPerPixel = 40075016.68 / (256 * Math.pow(2, zoomLevel));
     //     return 1 / (meters / Math.cos(latRadians) / metersPerPixel);
     // }
-    getMetersPerPixel(): number {
-        if (this.mapView) {
-            const pos = this.getFocusPos();
-            const zoom = this.getZoom();
-            console.log('getMetersPerPixel', pos, zoom);
-            return (156543.03390625 * Math.cos((pos.latitude * Math.PI) / 180)) / Math.pow(2, zoom);
-        }
-        return this.style['metersPerPixel'];
-    }
 
-    [zoomProperty.setNative](value: number) {
-        if (!this.mapView) {
-            return;
-        }
-        console.log('native setZoom', value, typeof value);
-        this.mapView.setZoom(value, 0);
-    }
-    [tiltProperty.setNative](value: number) {
-        if (!this.mapView) {
-            return;
-        }
-        console.log('native setTilt', value, typeof value);
-        this.mapView.setTilt(value, 0);
-    }
-    [bearingProperty.setNative](value: number) {
-        if (!this.mapView) {
-            return;
-        }
-        this.mapView.setMapRotation(value, 0);
-    }
-    [focusPosProperty.setNative](value: string | Position) {
-        if (!this.mapView || !this.nativeProjection) {
-            return;
-        }
-        console.log('native setFocusPos', value, typeof value);
-        if (typeof value === 'string') {
-            const positions = value.split(',').map(parseFloat);
-            this.mapView.setFocusPos(this.nativeProjection.fromWgs84(new com.carto.core.MapPos(positions[1], positions[0])), 0);
-        } else {
-            this.mapView.setFocusPos(this.nativeProjection.fromWgs84(toNativeMapPos(value)), 0);
-        }
-    }
-
-    addLayer(layer: TileLayer<any, any>) {
-        // console.log('addLayer1', layer, !!this.mapView);
+    addLayer(layer: TileLayer<any, any>, index?: number) {
         if (this.mapView) {
-            const native = layer.getNative();
-            // console.log('addLayer2', layer, native);
+            const native: com.carto.layers.TileLayer = layer.getNative();
             if (!!native) {
-                this.mapView.getLayers().add(native);
+                if (index !== undefined) {
+                    this.mapView.getLayers().insert(index, native);
+                } else {
+                    this.mapView.getLayers().add(native);
+                }
             }
         }
     }

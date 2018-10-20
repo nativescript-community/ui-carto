@@ -2,6 +2,7 @@ import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectorti
 
 import { File, knownFolders, path } from 'tns-core-modules/file-system';
 import { BaseVectorTileDecoder } from './vectortiles.common';
+import { getRelativePathToApp } from '../carto.common';
 const currentAppFolder = knownFolders.currentApp();
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTileDecoder, VectorTileDecoderOptions> {
@@ -13,8 +14,9 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTileDecoder
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDecoder, MBVectorTileDecoderOptions> {
     createNative(options: MBVectorTileDecoderOptions) {
-        if (File.exists(path.join(currentAppFolder.path, '..', options.zipPath))) {
-            const vectorTileStyleSetData = NTAssetUtils.loadAsset(options.zipPath);
+        const zipPath = getRelativePathToApp( options.zipPath);
+        if (zipPath) {
+            const vectorTileStyleSetData = NTAssetUtils.loadAsset(zipPath);
             const pack = NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
             const vectorTileStyleSet = NTCompiledStyleSet.alloc().initWithAssetPackageStyleName(pack, options.style);
             const result = NTMBVectorTileDecoder.alloc().initWithCompiledStyleSet(vectorTileStyleSet);

@@ -1,36 +1,17 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { androidNativeColorProperty, androidNativeImageProperty, androidNativeProperty } from '../carto.android';
 
-export class PointStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
+export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
         return new com.carto.styles.PointStyleBuilder();
     }
-    get size() {
-        return this.native ? this.native.getSize() : this.options.size;
-    }
-    set size(value: number) {
-        if (this.native) {
-            this.native.setSize(value);
-            this._buildStyle = null;
-        }
-    }
-    get color() {
-        if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
-        }
-        return this.options.color;
-    }
-    set color(value: string) {
-        if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a));
-            this._buildStyle = null;
-        }
-    }
+    @androidNativeProperty size: number;
+    @androidNativeColorProperty color: Color | string;
+    // @androidNativeImageProperty image: string;
 
     _buildStyle: com.carto.styles.PointStyle;
     buildStyle() {
@@ -41,9 +22,9 @@ export class PointStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.
     }
 }
 
-export class Point extends BaseElement<com.carto.vectorelements.Point, PointOptions> {
+export class Point extends BaseVectorElement<com.carto.vectorelements.Point, PointOptions> {
     createNative(options: PointOptions) {
-        const style = options.style instanceof PointStyleBuilder ? options.style.buildStyle() : options.style;
+        const style: com.carto.styles.PointStyle = options.style || options.styleBuilder.buildStyle();
         const pos = options.pos;
         let nativePos;
         if (options.projection) {
@@ -59,6 +40,7 @@ export class Point extends BaseElement<com.carto.vectorelements.Point, PointOpti
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: PointStyleBuilder | com.carto.styles.PointStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof PointStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

@@ -10,6 +10,6 @@ export class RasterTileLayer extends RasterTileLayerBase<NTRasterTileLayer, Rast
 
 export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlineRasterTileLayer, CartoOnlineRasterTileLayerOptions> {
     createNative(options) {
-        return NTCartoOnlineRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative());
+        return NTCartoOnlineRasterTileLayer.alloc().initWithSource(options.source);
     }
 }

@@ -8,7 +8,7 @@ import com.carto.ui.MapEventListener;
 import com.carto.ui.MapView;
 
 public class AKMapView extends MapView {
-    Handler mainHandler;
+    Handler mainHandler = null;
     public AKMapView(Context context) {
         super(context);
         this.mainHandler = new Handler(context.getMainLooper());
@@ -16,8 +16,6 @@ public class AKMapView extends MapView {
     }
 
     private final MapEventListener mapEventListener = new MapEventListener() {
-
-
         @Override
         public void onMapMoved() {
             mainHandler.post(new Runnable() {

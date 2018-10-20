@@ -1,4 +1,4 @@
-import { Bounds, Position } from './core';
+import { Bounds, MapPos } from './core';
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
@@ -32,9 +32,9 @@ export function fromNativeMapPos(pos: NTMapPos) {
         latitude: pos.getY(),
         longitude: pos.getX(),
         altitude: pos.getZ()
-    } as Position;
+    } as MapPos;
 }
-export function toNativeMapPos(pos: Position) {
+export function toNativeMapPos(pos: MapPos) {
     //  ignore z for now as points can get under the map!
     return NTMapPos.alloc().initWithXY(pos.longitude, pos.latitude);
 }
@@ -46,4 +46,62 @@ export function fromNativeMapBounds(bounds: NTMapBounds) {
 }
 export function toNativeMapBounds(bounds: Bounds) {
     return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
+}
+
+abstract class NativeVector<T> {
+    native: any;
+    size() {
+        return this.native.size();
+    }
+    public reserve(size: number) {
+        return this.native.reserve(size);
+    }
+    public get(index: number): T {
+        return this.native.get(index);
+    }
+    public add(pos: T) {
+        return this.native.add(pos);
+    }
+    public capacity() {
+        return this.native.capacity();
+    }
+    public clear() {
+        return this.native.capacity();
+    }
+    public isEmpty() {
+        return this.native.isEmpty();
+    }
+    public set(index: number, pos: T) {
+        return this.native.setVal(index, pos);
+    }
+    public getNative() {
+        return this.native;
+    }
+}
+export class MapPosVector extends NativeVector<NTMapPos> {
+    native: NTMapPosVector;
+    constructor(size?: number) {
+        super();
+        this.native = NTMapPosVector.alloc().init();
+    }
+
+    public add(pos: NTMapPos | MapPos) {
+        if ((pos as any).latitude) {
+            pos = toNativeMapPos(pos as MapPos);
+        }
+        return this.native.add(pos as NTMapPos);
+    }
+}
+export class MapPosVectorVector extends NativeVector<NTMapPosVector> {
+    native: NTMapPosVectorVector;
+    constructor(size?: number) {
+        super();
+        this.native = NTMapPosVectorVector.alloc().init();
+    }
+    public add(pos: NTMapPosVector | MapPosVector) {
+        if (pos instanceof MapPosVector) {
+            return this.native.add(pos.getNative());
+        }
+        return this.native.add(pos);
+    }
 }

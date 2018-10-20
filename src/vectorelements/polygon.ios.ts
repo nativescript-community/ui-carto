@@ -1,24 +1,24 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { LineStyleBuilder } from './line';
+import { iosNativeColorProperty, mapPosVectorFromArgs, mapPosVectorVectorFromArgs } from '../carto.ios';
 
-export class PolygonStyleBuilder extends BaseElementStyleBuilder<NTPolygonStyleBuilder, PolygonStyleBuilderOptions> {
+export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {
         return NTPolygonStyleBuilder.alloc().init();
     }
-    get color() {
-        if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
-        }
-        return this.options.color;
+    @iosNativeColorProperty color: Color | string;
+
+    get lineStyleBuilder() {
+        return this.options.lineStyleBuilder;
     }
-    set color(value: string) {
+    set lineStyleBuilder(value: LineStyleBuilder<any, any>) {
+        this.options.lineStyleBuilder = value;
         if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a));
+            this.native.setLineStyle(value.buildStyle());
             this._buildStyle = null;
         }
     }
@@ -32,28 +32,21 @@ export class PolygonStyleBuilder extends BaseElementStyleBuilder<NTPolygonStyleB
     }
 }
 
-export class Polygon extends BaseElement<NTPolygon, PolygonOptions> {
+export class Polygon extends BaseVectorElement<NTPolygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
-        const style = options.style instanceof PolygonStyleBuilder ? options.style.buildStyle() : options.style;
-        const poses = options.poses;
-        const nativePoses = NTMapPosVector.alloc().init();
-        if (options.projection) {
-            poses.forEach(p => {
-                nativePoses.add(options.projection.getNative().fromWgs84(toNativeMapPos(p)));
-            });
-        } else {
-            poses.forEach(p => {
-                nativePoses.add(toNativeMapPos(p));
-            });
+        const style: NTPolygonStyle = options.style ||  options.styleBuilder.buildStyle();
+        const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.poses, options.projection), style);
+        if (options.holes) {
+            result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
         }
-        const result = NTPolygon.alloc().initWithPosesStyle(nativePoses, style);
-        result['owner'] = new WeakRef(this);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
     get style() {
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: PolygonStyleBuilder | NTPolygonStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof PolygonStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

@@ -1,7 +1,9 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.android';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { androidNativeColorProperty, androidNativeProperty, mapPosVectorFromArgs } from '../carto.android';
 
 export enum LineJointType {
     BEVEL = com.carto.styles.LineJoinType.LINE_JOIN_TYPE_BEVEL.ordinal(),
@@ -15,37 +17,13 @@ export enum LineEndType {
     SQUARE = com.carto.styles.LineEndType.LINE_END_TYPE_SQUARE.ordinal(),
     NONE = com.carto.styles.LineEndType.LINE_END_TYPE_NONE.ordinal()
 }
-export class LineStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.LineStyleBuilder, LineStyleBuilderOptions> {
+export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.LineStyleBuilder, LineStyleBuilderOptions> {
     createNative(options: LineStyleBuilderOptions) {
         return new com.carto.styles.LineStyleBuilder();
     }
-    get color() {
-        if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
-        }
-        return this.options.color;
-    }
-    set color(value: string) {
-        if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a));
-            this._buildStyle = null;
-        }
-    }
-    get width() {
-        if (this.native) {
-            return this.native.getWidth();
-        }
-        return this.options.width;
-    }
-    set width(value: number) {
-        if (this.native) {
-            this.native.setWidth(value);
-            this._buildStyle = null;
-        }
-    }
+
+    @androidNativeProperty width: number;
+    @androidNativeColorProperty color: Color | string;
 
     get joinType() {
         if (this.native) {
@@ -54,6 +32,7 @@ export class LineStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.L
         return this.options.joinType;
     }
     set joinType(value: number) {
+        this.options.joinType = value;
         if (this.native) {
             this.native.setLineJoinType(com.carto.styles.LineJoinType.values()[value]);
             this._buildStyle = null;
@@ -66,7 +45,7 @@ export class LineStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.L
         return this.options.endType;
     }
     set endType(value: number) {
-        console.log('set endType', value);
+        this.options.endType = value;
         if (this.native) {
             this.native.setLineEndType(com.carto.styles.LineEndType.values()[value]);
             this._buildStyle = null;
@@ -82,22 +61,10 @@ export class LineStyleBuilder extends BaseElementStyleBuilder<com.carto.styles.L
     }
 }
 
-export class Line extends BaseElement<com.carto.vectorelements.Line, LineOptions> {
+export class Line extends BaseVectorElement<com.carto.vectorelements.Line, LineOptions> {
     createNative(options: LineOptions) {
-        const style = options.style instanceof LineStyleBuilder ? options.style.buildStyle() : options.style;
-        const poses = options.poses;
-        const nativePoses = new com.carto.core.MapPosVector();
-        if (options.projection) {
-            poses.forEach(p => {
-                nativePoses.add(options.projection.getNative().fromWgs84(toNativeMapPos(p)));
-            });
-        } else {
-            poses.forEach(p => {
-                nativePoses.add(toNativeMapPos(p));
-            });
-        }
-        console.log('creating line', poses, options.projection, nativePoses);
-        const result = new com.carto.vectorelements.Line(nativePoses, style);
+        const style: com.carto.styles.LineStyle = options.style || options.styleBuilder.buildStyle();
+        const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.poses, options.projection), style);
         result['owner'] = new WeakRef(this);
         return result;
     }
@@ -105,6 +72,7 @@ export class Line extends BaseElement<com.carto.vectorelements.Line, LineOptions
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: LineStyleBuilder | com.carto.styles.LineStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof LineStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

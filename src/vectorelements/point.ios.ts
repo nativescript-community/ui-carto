@@ -1,36 +1,17 @@
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BaseVectorElement } from './vectorelements.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
+import { iosNativeColorProperty, iosNativeImageProperty, iosNativeProperty } from '../carto.ios';
 
-export class PointStyleBuilder extends BaseElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
+export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
         return NTPointStyleBuilder.alloc().init();
     }
-    get size() {
-        return this.native ? this.native.getSize() : this.options.size;
-    }
-    set size(value: number) {
-        if (this.native) {
-            this.native.setSize(value);
-            this._buildStyle = null;
-        }
-    }
-    get color() {
-        if (this.native) {
-            const nativeColor = this.native.getColor();
-            this._buildStyle = null;
-            return new Color(nativeColor.getARGB()).hex;
-        }
-        return this.options.color;
-    }
-    set color(value: string) {
-        if (this.native) {
-            const theColor = new Color(value);
-            this.native.setColor(NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a));
-            this._buildStyle = null;
-        }
-    }
+    @iosNativeProperty size: number;
+    @iosNativeColorProperty color: Color | string;
+    // @iosNativeImageProperty image: string;
 
     _buildStyle: NTPointStyle;
     buildStyle() {
@@ -41,9 +22,9 @@ export class PointStyleBuilder extends BaseElementStyleBuilder<NTPointStyleBuild
     }
 }
 
-export class Point extends BaseElement<NTPoint, PointOptions> {
+export class Point extends BaseVectorElement<NTPoint, PointOptions> {
     createNative(options: PointOptions) {
-        const style = options.style instanceof PointStyleBuilder ? options.style.buildStyle() : options.style;
+        const style: NTPointStyle = options.style || options.styleBuilder.buildStyle();
         const pos = options.pos;
         let nativePos;
         if (options.projection) {
@@ -59,6 +40,7 @@ export class Point extends BaseElement<NTPoint, PointOptions> {
         return this.native ? this.native.getStyle() : this.options.style;
     }
     set style(value: PointStyleBuilder | NTPointStyle) {
+        this.options.style = value;
         if (this.native) {
             if (value instanceof PointStyleBuilder) {
                 this.native.setStyle(value.buildStyle());

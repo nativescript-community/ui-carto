@@ -1,5 +1,6 @@
 import { LocalVectorDataSourceOptions } from './vector';
 import { DataSource } from './datasource';
+import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
 
 export abstract class VectorDataSource<T extends NTVectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
@@ -10,7 +11,10 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
     createNative(options: LocalVectorDataSourceOptions) {
         return NTLocalVectorDataSource.alloc().initWithProjection(options.projection.getNative());
     }
-    add(element: any) {
+    add(element: BaseVectorElement<any, any>) {
         this.getNative().add(element.getNative() as NTVectorElement);
+    }
+    addAll(elements: VectorElementVector) {
+        this.getNative().addAll(elements.getNative() as NTVectorElementVector);
     }
 }

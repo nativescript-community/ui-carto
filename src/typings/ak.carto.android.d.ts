@@ -24,6 +24,14 @@ declare namespace com {
                 export class AKVectorTileEventListener extends com.carto.layers.VectorTileEventListener {
                     onClicked(info: com.carto.ui.VectorTileClickInfo): boolean;
                 }
+                export class AKVectorElementEventListener extends com.carto.layers.VectorElementEventListener {
+                    onClicked(info: com.carto.ui.VectorElementClickInfo): boolean;
+                }
+                export class AKClusterElementBuilder extends com.carto.layers.ClusterElementBuilder {
+                    buildCluster(pos: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector): com.carto.vectorelements.VectorElement;
+                    setUseNativeBuilder(value: boolean);
+                    setBitmap(bitmap: any);
+                }
             }
         }
     }

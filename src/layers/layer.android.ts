@@ -31,4 +31,14 @@ export abstract class Layer<T extends com.carto.layers.Layer, U extends LayerOpt
         this.native && this.native.setVisibleZoomRange(new com.carto.core.MapRange(value[0], value[1]));
     }
 }
-export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends TileLayerOptions> extends Layer<T, U> {}
+export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends TileLayerOptions> extends Layer<T, U> {
+    set preloading(value: boolean) {
+        this.native && this.native.setPreloading(value);
+    }
+    get preloading() {
+        if (this.native) {
+            return this.native.isPreloading();
+        }
+        return this.options.preloading;
+    }
+}

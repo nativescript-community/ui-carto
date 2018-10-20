@@ -1,6 +1,7 @@
-import { EPSG3857Base } from './epsg3857.common';
+import { ProjectionClass } from './projection.ios';
+import { EPSG3857Options } from './epsg3857';
 
-export class EPSG3857 extends EPSG3857Base<NTEPSG3857> {
+export class EPSG3857 extends ProjectionClass<NTEPSG3857, EPSG3857Options> {
     createNative() {
         return NTEPSG3857.alloc().init();
     }

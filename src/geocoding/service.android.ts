@@ -1,7 +1,8 @@
-import { Address, Feature, FeatureCollection as IFeatureCollection, GeocodingRequest, GeocodingResult as IGeocodingResult, GeocodingServiceOptions, Geometry } from './service';
+import { Address, GeocodingRequest, GeocodingResult as IGeocodingResult, GeocodingServiceOptions } from './service';
 import { BaseGeocodingService } from './service.common';
-import { fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core/core';
-import { nativeVariantToJS, nativeVectorToArray } from '../utils/utils';
+import { toNativeMapPos } from '../core/core';
+import { nativeVectorToArray } from '../utils/utils';
+import { FeatureCollection } from '../geometry/feature';
 
 export class GeocodingService extends BaseGeocodingService<com.carto.geocoding.GeocodingService, GeocodingServiceOptions> {
     createNative(options: GeocodingServiceOptions) {
@@ -24,24 +25,6 @@ export class GeocodingService extends BaseGeocodingService<com.carto.geocoding.G
     }
 }
 
-export class FeatureCollection implements IFeatureCollection {
-    constructor(private native: com.carto.geometry.FeatureCollection) {}
-
-    getFeature(index: number) {
-        const nResult = this.native.getFeature(index);
-        const nGeo = nResult.getGeometry();
-        return {
-            properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: {
-                centerPos: fromNativeMapPos(nGeo.getCenterPos()),
-                bounds: fromNativeMapBounds(nGeo.getBounds())
-            } as Geometry
-        } as Feature;
-    }
-    getFeatureCount() {
-        return this.native.getFeatureCount();
-    }
-}
 
 export class GeocodingResult implements IGeocodingResult {
     constructor(private native: com.carto.geocoding.GeocodingResult) {}

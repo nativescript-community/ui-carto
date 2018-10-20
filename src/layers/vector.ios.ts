@@ -1,13 +1,19 @@
-import { CartoOfflineVectorTileLayerOptions, CartoOnlineVectorTileLayerOptions, VectorLayerOptions, VectorTileLayerOptions } from './vector';
+import { CartoOfflineVectorTileLayerOptions, CartoOnlineVectorTileLayerOptions, ClusteredVectorLayerLayerOptions, VectorLayerOptions, VectorTileLayerOptions } from './vector';
 import { TileDataSource } from '../datasources/datasource';
-import { Layer, TileLayer, TileLayerOptions } from './layer';
+import { Layer, TileLayer } from './layer';
 import { BaseNative } from '../carto';
 import { VectorDataSource } from '../datasources/vector';
-import { VectorTileDecoder } from '../vectortiles/vectortiles';
+import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { CartoPackageManager } from '../packagemanager/packagemanager';
 
-export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends TileLayer<T, U> {
-
+export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
+    getTileDecoder() {
+        if (this.options.decoder) {
+            return this.options.decoder;
+        } else {
+            return new MBVectorTileDecoder(undefined, this.getNative().getTileDecoder());
+        }
+    }
 }
 
 export class CartoOnlineVectorTileLayer extends BaseVectorTileLayer<NTCartoOnlineVectorTileLayer, CartoOnlineVectorTileLayerOptions> {
@@ -33,8 +39,13 @@ export class VectorTileLayer extends TileLayer<NTVectorTileLayer, VectorTileLaye
         return null;
     }
 }
-
-export class VectorLayer extends Layer<NTVectorLayer, VectorLayerOptions> {
+export abstract class BaseVectorLayer<T extends NTVectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
+    // setVectorElementEventListener(listener: IVectorElementEventListener) {
+        // initVectorElementEventListener();
+        // this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this)));
+    // }
+}
+export class VectorLayer extends BaseVectorLayer<NTVectorLayer, VectorLayerOptions> {
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {
             const dataSource = (options.dataSource as TileDataSource<any, any>).getNative();
@@ -92,34 +103,34 @@ class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
         return null;
     }
 }
-class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
-    private _owner: WeakRef<EditableVectorLayer>;
+// class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
+//     private _owner: WeakRef<EditableVectorLayer>;
 
-    public static initWithOwner(owner: WeakRef<EditableVectorLayer>): NTVectorElementEventListenerImpl {
-        const delegate = NTVectorElementEventListenerImpl.new() as NTVectorElementEventListenerImpl;
-        delegate._owner = owner;
-        return delegate;
-    }
+//     public static initWithOwner(owner: WeakRef<EditableVectorLayer>): NTVectorElementEventListenerImpl {
+//         const delegate = NTVectorElementEventListenerImpl.new() as NTVectorElementEventListenerImpl;
+//         delegate._owner = owner;
+//         return delegate;
+//     }
 
-    onVectorElementClicked(clickInfo: NTVectorElementClickInfo): boolean {
-        const owner = this._owner.get();
-        console.log('onVectorElementClicked', clickInfo, owner);
-        if (owner) {
-            owner.setSelectedVectorElement(clickInfo.getVectorElement());
-        }
+//     onVectorElementClicked(clickInfo: NTVectorElementClickInfo): boolean {
+//         const owner = this._owner.get();
+//         console.log('onVectorElementClicked', clickInfo, owner);
+//         if (owner) {
+//             owner.setSelectedVectorElement(clickInfo.getVectorElement());
+//         }
 
-        return true;
-        // return super.onVectorElementClicked(clickInfo);
-    }
-}
-export class EditableVectorLayer extends Layer<NTEditableVectorLayer, VectorLayerOptions> {
+//         return true;
+//         // return super.onVectorElementClicked(clickInfo);
+//     }
+// }
+export class EditableVectorLayer extends BaseVectorLayer<NTEditableVectorLayer, VectorLayerOptions> {
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {
             const dataSource = (options.dataSource as TileDataSource<any, any>).getNative();
             if (dataSource) {
                 const result = NTEditableVectorLayer.alloc().initWithDataSource((options.dataSource as VectorDataSource<any, any>).getNative());
-                result.setVectorEditEventListener(NTVectorEditEventListenerImpl.initWithOwner(new WeakRef(this)));
-                result.setVectorElementEventListener(NTVectorElementEventListenerImpl.initWithOwner(new WeakRef(this)));
+                // result.setVectorEditEventListener(NTVectorEditEventListenerImpl.initWithOwner(new WeakRef(this)));
+                // result.setVectorElementEventListener(NTVectorElementEventListenerImpl.initWithOwner(new WeakRef(this)));
                 return result;
             }
         }
@@ -128,6 +139,39 @@ export class EditableVectorLayer extends Layer<NTEditableVectorLayer, VectorLaye
     setSelectedVectorElement(element) {
         if (this.native) {
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
+        }
+    }
+}
+
+export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer, ClusteredVectorLayerLayerOptions> {
+    createNative(options: VectorLayerOptions) {
+        return NTClusteredVectorLayer.alloc().initWithDataSource(options.dataSource.getNative());
+    }
+    get minimumClusterDistance() {
+        return this.options.minimumClusterDistance;
+    }
+    set minimumClusterDistance(value: number) {
+        this.options.minimumClusterDistance = value;
+        if (this.native) {
+            this.native.setMinimumClusterDistance(value);
+        }
+    }
+    get maximumClusterZoom() {
+        return this.options.maximumClusterZoom;
+    }
+    set maximumClusterZoom(value: number) {
+        this.options.maximumClusterZoom = value;
+        if (this.native) {
+            this.native.setMaximumClusterZoom(value);
+        }
+    }
+    get animatedClusters() {
+        return this.options.animatedClusters;
+    }
+    set animatedClusters(value: boolean) {
+        this.options.animatedClusters = value;
+        if (this.native) {
+            this.native.setAnimatedClusters(value);
         }
     }
 }

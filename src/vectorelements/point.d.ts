@@ -1,20 +1,24 @@
 import { IProjection } from '../projections/projection';
-import { Position } from '../core/core';
-import { BaseElement, BaseElementStyleBuilder } from './vectorelements';
+import { MapPos } from '../core/core';
+import { BaseVectorElement, BaseVectorElementStyleBuilder, VectorElementOptions } from './vectorelements';
+import { Color } from 'tns-core-modules/color/color';
 
-export class PointStyleBuilderOptions {
+export class PointStyleBuilderOptions extends VectorElementOptions {
     size?: number;
-    color?: string;
+    color?: string | Color;
 }
-export class PointStyleBuilder<T, U extends PointStyleBuilderOptions> extends BaseElementStyleBuilder<any, PointStyleBuilderOptions> {
+export class PointStyleBuilder<T, U extends PointStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, PointStyleBuilderOptions> {
     constructor(options: U);
     buildStyle(): any;
+    size?: number;
+    color?: string | Color;
 }
 
 export class PointOptions extends PointStyleBuilderOptions {
-    metaData?: Object;
-    pos: Position;
+    pos: MapPos;
     projection?: IProjection;
+}
+export class Point extends BaseVectorElement<any, PointOptions> {
+    styleBuilder?: PointStyleBuilder<any, any>;
     style?: any;
 }
-export class Point extends BaseElement<any, PointOptions> {}

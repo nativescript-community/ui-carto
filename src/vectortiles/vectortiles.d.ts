@@ -11,5 +11,6 @@ export interface MBVectorTileDecoderOptions extends VectorTileDecoderOptions {
     style: string;
 }
 export class MBVectorTileDecoder extends BaseNative<any, MBVectorTileDecoderOptions> {
-    constructor(options: MBVectorTileDecoderOptions);
+    constructor(options: MBVectorTileDecoderOptions, native?: any);
+    setStyleParameter(param: string, value: string);
 }
