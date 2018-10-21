@@ -1,4 +1,3 @@
-import { MapPos } from '../core/core';
 import { ProjectionOptions } from './projection';
 import { BaseNative } from '../carto.common';
 

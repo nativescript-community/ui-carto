@@ -5,6 +5,7 @@ import { VectorElementVector } from '../vectorelements/vectorelements';
 import { BaseVectorElement } from '../vectorelements/vectorelements.android';
 import { ImageSource } from 'tns-core-modules/image-source/image-source';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
+import { nativeCartoImageProperty, nativeImageProperty } from '../carto.android';
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 
@@ -43,10 +44,14 @@ function initClusterElementBuilderNative() {
 }
 
 export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
+
+    @nativeImageProperty bitmap: string;
     createNative() {
         console.log('create ClusterElementBuilder');
         initClusterElementBuilderNative();
-        return new ClusterElementBuilderNative(new WeakRef(this));
+        const result =  new ClusterElementBuilderNative(new WeakRef(this));
+        // result.setUseNativeBuilder(false);
+        return result;
         // return new com.carto.layers.ClusterElementBuilder();
     }
     buildClusterElement?: (pos: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
@@ -58,22 +63,22 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
     //     this.native.setClusterBitmap(source.android as android.graphics.Bitmap);
     // }
 
-    get image() {
-        return this.options.image;
-    }
-    set image(value: string | ImageSource | ImageAsset) {
-        if (this.native) {
-            console.log('getting cluster builder image');
-            const source = _createImageSourceFromSrc(value);
-            console.log('got cluster builder image', !!source.android);
-            // this.native.setBitmap(source.android);
+    // get image() {
+    //     return this.options.image;
+    // }
+    // set image(value: string | ImageSource | ImageAsset) {
+    //     if (this.native) {
+    //         console.log('getting cluster builder image');
+    //         const source = _createImageSourceFromSrc(value);
+    //         console.log('got cluster builder image', !!source.android);
+    //         // this.native.setBitmap(source.android);
 
-            // this.setImageFromSource(value);
-            console.log('cluster builder image set');
-            // this.native.setBitmap(getImage(value));
-            // this._buildStyle = null;
-        }
-    }
+    //         // this.setImageFromSource(value);
+    //         console.log('cluster builder image set');
+    //         // this.native.setBitmap(getImage(value));
+    //         // this._buildStyle = null;
+    //     }
+    // }
 }
 
 // export class ClusterElementBuilder extends  ClusterElementBuilder() {

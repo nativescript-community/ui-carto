@@ -10,7 +10,7 @@ public class SynchronousHandler {
         private final Runnable mRunnable;
         private boolean mFinished = false;
 
-        public NotifyRunnable( final Runnable r) {
+        public NotifyRunnable(final Runnable r) {
             mRunnable = r;
         }
 
@@ -20,6 +20,7 @@ public class SynchronousHandler {
 
         @Override
         public void run() {
+            Log.d("NotifyRunnable", "run");
             synchronized (this) {
                 try {
                     mRunnable.run();
@@ -32,6 +33,7 @@ public class SynchronousHandler {
                     // }
                 } finally {
                     mFinished = true;
+                    runningTasks -= 1;
                     this.notify();
                 }
             }
@@ -46,11 +48,15 @@ public class SynchronousHandler {
      * this method.
      *
      */
+
+    static int runningTasks = 0;
+
     public static void postAndWait(final Handler handler, final Runnable r) {
-        Log.d("SynchronousHandler", "postAndWait: " + ((handler.getLooper() == Looper.myLooper()) ? "true" : "false"));
+        Log.d("SynchronousHandler", "postAndWait: " + ((handler.getLooper() == Looper.myLooper()) ? "true" : "false") + " " + runningTasks);
         if (handler.getLooper() == Looper.myLooper()) {
             r.run();
         } else {
+            runningTasks += 1;
             synchronized (handler) {
                 NotifyRunnable runnable = new NotifyRunnable(r);
                 boolean success = handler.post(runnable);

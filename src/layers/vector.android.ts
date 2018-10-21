@@ -17,6 +17,7 @@ import { CartoPackageManager } from '../packagemanager/packagemanager';
 import { fromNativeMapPos } from '../core/core';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { Projection } from '../projections/projection';
+import { nativeProperty } from '../carto.android';
 
 export enum VectorTileRenderOrder {
     HIDDEN,
@@ -269,31 +270,35 @@ export class ClusteredVectorLayer extends Layer<com.carto.layers.ClusteredVector
     createNative(options: ClusteredVectorLayerLayerOptions) {
         return new com.carto.layers.ClusteredVectorLayer(options.dataSource.getNative(), options.builder.getNative());
     }
-    get minimumClusterDistance() {
-        return this.options.minimumClusterDistance;
-    }
-    set minimumClusterDistance(value: number) {
-        this.options.minimumClusterDistance = value;
-        if (this.native) {
-            this.native.setMinimumClusterDistance(value);
-        }
-    }
-    get maximumClusterZoom() {
-        return this.options.maximumClusterZoom;
-    }
-    set maximumClusterZoom(value: number) {
-        this.options.maximumClusterZoom = value;
-        if (this.native) {
-            this.native.setMaximumClusterZoom(value);
-        }
-    }
-    get animatedClusters() {
-        return this.options.animatedClusters;
-    }
-    set animatedClusters(value: boolean) {
-        this.options.animatedClusters = value;
-        if (this.native) {
-            this.native.setAnimatedClusters(value);
-        }
-    }
+
+    @nativeProperty minimumClusterDistance: number;
+    @nativeProperty maximumClusterZoom: number;
+    @nativeProperty animatedClusters: boolean;
+    // get minimumClusterDistance() {
+    //     return this.options.minimumClusterDistance;
+    // }
+    // set minimumClusterDistance(value: number) {
+    //     this.options.minimumClusterDistance = value;
+    //     if (this.native) {
+    //         this.native.setMinimumClusterDistance(value);
+    //     }
+    // }
+    // get maximumClusterZoom() {
+    //     return this.options.maximumClusterZoom;
+    // }
+    // set maximumClusterZoom(value: number) {
+    //     this.options.maximumClusterZoom = value;
+    //     if (this.native) {
+    //         this.native.setMaximumClusterZoom(value);
+    //     }
+    // }
+    // get animatedClusters() {
+    //     return this.options.animatedClusters;
+    // }
+    // set animatedClusters(value: boolean) {
+    //     this.options.animatedClusters = value;
+    //     if (this.native) {
+    //         this.native.setAnimatedClusters(value);
+    //     }
+    // }
 }

@@ -3,26 +3,17 @@ import { BaseVectorElement } from './vectorelements.android';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { ImageSource } from 'tns-core-modules/image-source';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-import { _createImageSourceFromSrc } from '../carto.common';
-import { androidNativeColorProperty, androidNativeImageProperty, androidNativeProperty } from '../carto.android';
+import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.android';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
         return new com.carto.styles.MarkerStyleBuilder();
     }
-    @androidNativeProperty width: number;
-    @androidNativeProperty size: number;
-    @androidNativeProperty placementPriority: number;
-    @androidNativeColorProperty color: Color | string;
-    @androidNativeImageProperty bitmap: string;
-
-    private setImageFromSource(value: string | ImageSource | ImageAsset) {
-        const source = _createImageSourceFromSrc(value);
-        this.native.setBitmap(com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(source.android as android.graphics.Bitmap));
-        this._buildStyle = null;
-    }
+    @nativeProperty width: number;
+    @nativeProperty size: number;
+    @nativeProperty placementPriority: number;
+    @nativeColorProperty color: Color | string;
+    @nativeCartoImageProperty bitmap: string;
 
     _buildStyle: com.carto.styles.MarkerStyle;
     buildStyle() {

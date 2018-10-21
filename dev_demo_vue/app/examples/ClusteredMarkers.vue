@@ -62,8 +62,8 @@ export default Vue.extend({
             this.loadGeoJSON().then((json: string) => {
                 console.log('read geojson');
                 const styleBuilder = new MarkerStyleBuilder({
-                    size: 30,
-                    image: '~/assets/images/marker_black.png'
+                    size: 14,
+                    // image: '~/assets/images/marker_black.png'
                 });
                 // mBuilder.bitmap = BitmapUtils.createBitmapFromAndroidBitmap(cBuilder.image)
                 // mBuilder.size = 30.0;
@@ -118,7 +118,11 @@ export default Vue.extend({
                     }
 
                     if (styleBuilder == null) {
-                        styleBuilder = new MarkerStyleBuilder({ size: 30, placementPriority: -count });
+                        styleBuilder = new MarkerStyleBuilder({
+                            size: 30,
+                            placementPriority: -count,
+                            bitmap: '~/assets/images/marker_black.png'
+                        });
                         // builder.bitmap = BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap)
 
                         this.elementsStyles.set(count, styleBuilder);
@@ -126,12 +130,12 @@ export default Vue.extend({
                     // console.log('buildClusterElement', pos, count, !!styleBuilder);
                     return new Marker({ pos, styleBuilder });
                 },
-                image: '~/assets/images/marker_black.png'
+                bitmap: '~/assets/images/marker_black.png'
             });
             const dataSource = (this.dataSource = new LocalVectorDataSource({ projection: this.mapView.projection }));
             const layer = new ClusteredVectorLayer({ dataSource, builder, minimumClusterDistance: 50 });
-            // layer.setVectorElementEventListener(this);
             this.mapView.addLayer(layer);
+            // layer.setVectorElementEventListener(this);
         },
         setCurrentLayer(id: string) {
             console.log('setCurrentLayer', id);

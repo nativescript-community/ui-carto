@@ -1,14 +1,14 @@
 import { BaseVectorElement } from './vectorelements.android';
 import { NMLModelOptions } from './nmlmodel';
 import { toNativeMapPos } from '../core/core';
-import { androidNativeProperty } from '../carto.android';
+import { nativeProperty } from '../carto.android';
 import { getRelativePathToApp } from '../carto.common';
 
 // export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.NMLModelStyleBuilder, NMLModelStyleBuilderOptions> {
 //     createNative(options: NMLModelStyleBuilderOptions) {
 //         return new com.carto.styles.NMLModelStyleBuilder();
 //     }
-//     // @androidNativeImageProperty image: string;
+//     // @nativeCartoImageProperty image: string;
 
 //     _buildStyle: com.carto.styles.NMLModelStyle;
 //     buildStyle() {
@@ -20,7 +20,7 @@ import { getRelativePathToApp } from '../carto.common';
 // }
 
 export class NMLModel extends BaseVectorElement<com.carto.vectorelements.NMLModel, NMLModelOptions> {
-    @androidNativeProperty scale: number;
+    @nativeProperty scale: number;
 
     createNative(options: NMLModelOptions) {
         // const style: com.carto.styles.NMLModelStyle = options.style || options.styleBuilder.buildStyle();

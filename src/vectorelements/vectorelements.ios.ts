@@ -1,5 +1,6 @@
 import { VectorElementOptions } from './vectorelements';
 import { BaseNative } from '../carto.common';
+import { nativeMapToJS } from '../utils/utils.ios';
 
 export enum BillboardOrientation {
     FACE_CAMERA = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA,
@@ -13,15 +14,7 @@ export class BaseVectorElement<T extends NTVectorElement, U extends VectorElemen
     }
     get metaData(): Object {
         if (this.native) {
-            const theMap = this.native.getMetaData();
-            const result = {};
-            const count = theMap.size();
-            let key;
-            for (let index = 0; index < count; index++) {
-                key = theMap.get_key(index);
-                result[key] = theMap.get(key).getString();
-            }
-            return result;
+            return nativeMapToJS(this.native.getMetaData());
         } else {
             return this.options.metaData;
         }

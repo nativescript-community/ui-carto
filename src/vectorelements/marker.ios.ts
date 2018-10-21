@@ -3,20 +3,17 @@ import { BaseVectorElement } from './vectorelements.ios';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { ImageSource } from 'tns-core-modules/image-source/image-source';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-import { _createImageSourceFromSrc } from '../carto.common';
-import { iosNativeColorProperty, iosNativeImageProperty, iosNativeProperty } from '../carto.ios';
+import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.ios';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
         return NTMarkerStyleBuilder.alloc().init();
     }
-    @iosNativeProperty width: number;
-    @iosNativeProperty size: number;
-    @iosNativeProperty placementPriority: number;
-    @iosNativeColorProperty color: Color | string;
-    @iosNativeImageProperty bitmap: string;
+    @nativeProperty width: number;
+    @nativeProperty size: number;
+    @nativeProperty placementPriority: number;
+    @nativeColorProperty color: Color | string;
+    @nativeCartoImageProperty bitmap: string;
 
     _buildStyle: NTMarkerStyle;
     buildStyle() {

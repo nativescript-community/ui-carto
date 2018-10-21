@@ -1,6 +1,6 @@
 import { VectorElementOptions } from './vectorelements';
 // import { BaseVectorElement } from './vectorelements.common';
-import { nativeMapToJS } from '../utils/utils';
+import { nativeMapToJS } from '../utils/utils.android';
 import { BaseNative } from '../carto.common';
 
 
@@ -16,14 +16,6 @@ export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement,
     }
     get metaData(): Object {
         if (this.native) {
-            // const theMap = this.native.getMetaData();
-            // const result = {};
-            // const count = theMap.size();
-            // let key;
-            // for (let index = 0; index < count; index++) {
-            //     key = theMap.get_key(index);
-            //     result[key] = theMap.get(key).getString();
-            // }
             return nativeMapToJS(this.native.getMetaData());
         } else {
             return this.options.metaData;

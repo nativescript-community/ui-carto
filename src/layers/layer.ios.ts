@@ -1,25 +1,12 @@
 import { BaseLayer } from './layer.common';
 import { LayerOptions, TileLayerOptions } from './layer';
+import { nativeProperty } from '../carto.ios';
 
 export abstract class Layer<T extends NTLayer, U extends LayerOptions> extends BaseLayer<T, U> {
-    get opacity() {
-        return this.native ? this.native.getOpacity() : this.options.opacity;
-    }
-    set opacity(opacity: number) {
-        this.native && this.native.setOpacity(opacity);
-    }
-    get updatePriority() {
-        return this.native ? this.native.getUpdatePriority() : this.options.updatePriority;
-    }
-    set updatePriority(value: number) {
-        this.native && this.native.setUpdatePriority(value);
-    }
-    get visible() {
-        return this.native ? this.native.isVisible() : this.options.visible;
-    }
-    set visible(value: boolean) {
-        this.native && this.native.setVisible(value);
-    }
+    @nativeProperty opacity: number;
+    @nativeProperty updatePriority: number;
+    @nativeProperty visible: boolean;
+
     get visibleZoomRange() {
         if (this.native) {
             const zoomRange = this.native.getVisibleZoomRange();

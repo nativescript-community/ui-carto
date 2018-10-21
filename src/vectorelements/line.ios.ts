@@ -3,7 +3,7 @@ import { BaseVectorElement } from './vectorelements.ios';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { iosNativeColorProperty, iosNativeProperty, mapPosVectorFromArgs } from '../carto.ios';
+import { mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '../carto.ios';
 
 export enum LineJointType {
     BEVEL = NTLineJoinType.T_LINE_JOIN_TYPE_BEVEL,
@@ -22,35 +22,10 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
     createNative(options: LineStyleBuilderOptions) {
         return NTLineStyleBuilder.alloc().init();
     }
-    @iosNativeProperty width: number;
-    @iosNativeColorProperty color: Color | string;
-
-    get joinType() {
-        if (this.native) {
-            return this.native.getLineJoinType();
-        }
-        return this.options.joinType;
-    }
-    set joinType(value: number) {
-        this.options.joinType = value;
-        if (this.native) {
-            this.native.setLineJoinType(value);
-            this._buildStyle = null;
-        }
-    }
-    get endType() {
-        if (this.native) {
-            return this.native.getLineEndType();
-        }
-        return this.options.endType;
-    }
-    set endType(value: number) {
-        this.options.endType = value;
-        if (this.native) {
-            this.native.setLineEndType(value);
-            this._buildStyle = null;
-        }
-    }
+    @nativeProperty width: number;
+    @nativeColorProperty color: Color | string;
+    @nativeProperty joinType: LineJointType;
+    @nativeProperty endType: LineEndType;
 
     _buildStyle: NTLineStyle;
     buildStyle() {

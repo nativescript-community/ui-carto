@@ -1,9 +1,7 @@
 import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectortiles';
 
-import { File, knownFolders, path } from 'tns-core-modules/file-system';
 import { BaseVectorTileDecoder } from './vectortiles.common';
 import { getRelativePathToApp } from '../carto.common';
-const currentAppFolder = knownFolders.currentApp();
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTileDecoder, VectorTileDecoderOptions> {
     createNative(options: VectorTileDecoderOptions) {

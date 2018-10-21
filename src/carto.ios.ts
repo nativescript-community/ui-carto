@@ -4,7 +4,7 @@ import { MapPos } from './core/core';
 import { MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core.ios';
 import { Projection } from './projections/projection.ios';
 
-export const iosNativeProperty = (target: Object, key: string | symbol, converter?) => {
+export const nativeProperty = (target: Object, key: string | symbol, converter?) => {
     const capKey = capitalize(key);
     const getterKey = 'get' + capKey;
     const setterKey = 'set' + capKey;
@@ -40,8 +40,8 @@ export const iosNativeProperty = (target: Object, key: string | symbol, converte
     });
 };
 
-export function iosNativeColorProperty(target: Object, key: string | symbol) {
-    return iosNativeProperty(target, key, {
+export function nativeColorProperty(target: Object, key: string | symbol) {
+    return nativeProperty(target, key, {
         fromNative(value) {
             return new Color(value.getARGB() as number).hex;
         },
@@ -52,14 +52,26 @@ export function iosNativeColorProperty(target: Object, key: string | symbol) {
     });
 }
 
-export function iosNativeImageProperty(target: Object, key: string | symbol) {
-    return iosNativeProperty(target, key, {
+export function nativeCartoImageProperty(target: Object, key: string | symbol) {
+    return nativeProperty(target, key, {
         fromNative(value, target) {
             return target.options[key];
         },
         toNative(value) {
             value = _createImageSourceFromSrc(value);
             return NTBitmapUtils.createBitmapFromUIImage(value.ios as UIImage);
+        }
+    });
+}
+
+export function nativeImageProperty(target: Object, key: string | symbol) {
+    return nativeProperty(target, key, {
+        fromNative(value, target) {
+            return target.options[key];
+        },
+        toNative(value) {
+            value = _createImageSourceFromSrc(value);
+            return (value.ios as UIImage);
         }
     });
 }

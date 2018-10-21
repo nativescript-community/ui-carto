@@ -3,15 +3,14 @@ import { BaseVectorElement } from './vectorelements.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { androidNativeColorProperty, androidNativeImageProperty, androidNativeProperty } from '../carto.android';
+import { nativeColorProperty, nativeProperty } from '../carto.android';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
         return new com.carto.styles.PointStyleBuilder();
     }
-    @androidNativeProperty size: number;
-    @androidNativeColorProperty color: Color | string;
-    // @androidNativeImageProperty image: string;
+    @nativeProperty size: number;
+    @nativeColorProperty color: Color | string;
 
     _buildStyle: com.carto.styles.PointStyle;
     buildStyle() {
@@ -33,7 +32,7 @@ export class Point extends BaseVectorElement<com.carto.vectorelements.Point, Poi
             nativePos = toNativeMapPos(pos);
         }
         const result = new com.carto.vectorelements.Point(nativePos, style);
-        result['owner'] = new WeakRef(this);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
     get style() {

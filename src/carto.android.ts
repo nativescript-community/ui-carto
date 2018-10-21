@@ -4,7 +4,7 @@ import { MapPos } from './core/core';
 import { MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core.android';
 import { Projection } from './projections/projection.android';
 
-export const androidNativeProperty = (target: Object, key: string | symbol, converter?) => {
+export const nativeProperty = (target: Object, key: string | symbol, converter?) => {
     const capKey = capitalize(key);
     const getterKey = 'get' + capKey;
     const setterKey = 'set' + capKey;
@@ -41,8 +41,8 @@ export const androidNativeProperty = (target: Object, key: string | symbol, conv
     });
 };
 
-export function androidNativeColorProperty(target: Object, key: string | symbol) {
-    return androidNativeProperty(target, key, {
+export function nativeColorProperty(target: Object, key: string | symbol) {
+    return nativeProperty(target, key, {
         fromNative(value) {
             return new Color(value.getARGB() as number).hex;
         },
@@ -53,14 +53,38 @@ export function androidNativeColorProperty(target: Object, key: string | symbol)
     });
 }
 
-export function androidNativeImageProperty(target: Object, key: string | symbol) {
-    return androidNativeProperty(target, key, {
+export function nativeEnumProperty(enumType: any) {
+    return function (target: Object, key: string | symbol) {
+        return nativeProperty(target, key, {
+            fromNative(value) {
+                return value.ordinal();
+            },
+            toNative(value) {
+                return enumType.values()[value];
+            }
+        });
+    };
+}
+
+export function nativeCartoImageProperty(target: Object, key: string | symbol) {
+    return nativeProperty(target, key, {
         fromNative(value, target) {
             return target.options[key];
         },
         toNative(value) {
             value = _createImageSourceFromSrc(value);
             return com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(value.android as android.graphics.Bitmap);
+        }
+    });
+}
+export function nativeImageProperty(target: Object, key: string | symbol) {
+    return nativeProperty(target, key, {
+        fromNative(value, target) {
+            return target.options[key];
+        },
+        toNative(value) {
+            value = _createImageSourceFromSrc(value);
+            return (value.android as android.graphics.Bitmap);
         }
     });
 }

@@ -3,7 +3,7 @@ import { BaseVectorElement } from './vectorelements.android';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { androidNativeColorProperty, androidNativeProperty, mapPosVectorFromArgs } from '../carto.android';
+import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
 
 export enum LineJointType {
     BEVEL = com.carto.styles.LineJoinType.LINE_JOIN_TYPE_BEVEL.ordinal(),
@@ -22,35 +22,10 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
         return new com.carto.styles.LineStyleBuilder();
     }
 
-    @androidNativeProperty width: number;
-    @androidNativeColorProperty color: Color | string;
-
-    get joinType() {
-        if (this.native) {
-            return this.native.getLineJoinType().ordinal();
-        }
-        return this.options.joinType;
-    }
-    set joinType(value: number) {
-        this.options.joinType = value;
-        if (this.native) {
-            this.native.setLineJoinType(com.carto.styles.LineJoinType.values()[value]);
-            this._buildStyle = null;
-        }
-    }
-    get endType() {
-        if (this.native) {
-            return this.native.getLineEndType().ordinal();
-        }
-        return this.options.endType;
-    }
-    set endType(value: number) {
-        this.options.endType = value;
-        if (this.native) {
-            this.native.setLineEndType(com.carto.styles.LineEndType.values()[value]);
-            this._buildStyle = null;
-        }
-    }
+    @nativeProperty width: number;
+    @nativeColorProperty color: Color | string;
+    @nativeEnumProperty(com.carto.styles.LineJoinType) joinType: LineJointType;
+    @nativeEnumProperty(com.carto.styles.LineEndType) endType: LineEndType;
 
     _buildStyle: com.carto.styles.LineStyle;
     buildStyle() {

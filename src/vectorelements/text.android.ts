@@ -4,29 +4,16 @@ import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
 import { BillboardOrientation } from './vectorelements';
-import { androidNativeColorProperty, androidNativeProperty } from '../carto.android';
+import { nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
 
 export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
         return new com.carto.styles.TextStyleBuilder();
     }
-    @androidNativeColorProperty color: Color | string;
-    @androidNativeProperty fontSize: number;
-    @androidNativeProperty fontName: string;
-
-    get orientationMode() {
-        if (this.native) {
-            return this.native.getOrientationMode() as any;
-        }
-        return this.options.orientationMode;
-    }
-    set orientationMode(value: BillboardOrientation) {
-        this.options.orientationMode = value;
-        if (this.native) {
-            this.native.setOrientationMode(com.carto.styles.BillboardOrientation.values()[value]);
-            this._buildStyle = null;
-        }
-    }
+    @nativeColorProperty color: Color | string;
+    @nativeProperty fontSize: number;
+    @nativeProperty fontName: string;
+    @nativeEnumProperty(com.carto.styles.BillboardOrientation) orientationMode: BillboardOrientation;
 
     _buildStyle: com.carto.styles.LabelStyle;
     buildStyle() {

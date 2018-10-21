@@ -3,33 +3,31 @@ import { BaseVectorElement } from './vectorelements.ios';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { iosNativeColorProperty, iosNativeImageProperty, iosNativeProperty } from '../carto.ios';
+import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.ios';
 
 export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<NTBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {
         return NTBalloonPopupStyleBuilder.alloc().init();
     }
-    @iosNativeColorProperty color: string | Color;
-    @iosNativeProperty cornerRadius: number;
-    @iosNativeColorProperty descriptionColor: string | Color;
-    @iosNativeProperty descriptionFontName: string;
-    @iosNativeProperty descriptionFontSize: number;
-    // @iosNativeProperty description: string;
-    @iosNativeProperty descriptionWrap: boolean;
-    @iosNativeColorProperty leftColor: string | Color;
-    @iosNativeImageProperty leftImage: string;
-    @iosNativeColorProperty rightColor: string | Color;
-    @iosNativeImageProperty rightImage: string;
-    @iosNativeColorProperty strokeColor: string | Color;
-    @iosNativeProperty strokeWidth: number;
-    @iosNativeColorProperty titleColor: string | Color;
-    @iosNativeProperty titleFontName: string;
-    @iosNativeProperty titleFontSize: number;
-    // @iosNativeProperty title: string;
-    @iosNativeProperty titleWrap: boolean;
-    @iosNativeProperty triangleHeight: number;
-    @iosNativeProperty triangleWidth: number;
-    @iosNativeProperty placementPriority: number;
+    @nativeColorProperty color: string | Color;
+    @nativeProperty cornerRadius: number;
+    @nativeColorProperty descriptionColor: string | Color;
+    @nativeProperty descriptionFontName: string;
+    @nativeProperty descriptionFontSize: number;
+    @nativeProperty descriptionWrap: boolean;
+    @nativeColorProperty leftColor: string | Color;
+    @nativeCartoImageProperty leftImage: string;
+    @nativeColorProperty rightColor: string | Color;
+    @nativeCartoImageProperty rightImage: string;
+    @nativeColorProperty strokeColor: string | Color;
+    @nativeProperty strokeWidth: number;
+    @nativeColorProperty titleColor: string | Color;
+    @nativeProperty titleFontName: string;
+    @nativeProperty titleFontSize: number;
+    @nativeProperty titleWrap: boolean;
+    @nativeProperty triangleHeight: number;
+    @nativeProperty triangleWidth: number;
+    @nativeProperty placementPriority: number;
 
     _buildStyle: NTBalloonPopupStyle;
     buildStyle() {

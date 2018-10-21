@@ -5,6 +5,7 @@ import { BaseNative } from '../carto';
 import { VectorDataSource } from '../datasources/vector';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { CartoPackageManager } from '../packagemanager/packagemanager';
+import { nativeProperty } from '../carto.ios';
 
 export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
     getTileDecoder() {
@@ -41,8 +42,8 @@ export class VectorTileLayer extends TileLayer<NTVectorTileLayer, VectorTileLaye
 }
 export abstract class BaseVectorLayer<T extends NTVectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
     // setVectorElementEventListener(listener: IVectorElementEventListener) {
-        // initVectorElementEventListener();
-        // this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this)));
+    // initVectorElementEventListener();
+    // this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this)));
     // }
 }
 export class VectorLayer extends BaseVectorLayer<NTVectorLayer, VectorLayerOptions> {
@@ -147,31 +148,8 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
     createNative(options: VectorLayerOptions) {
         return NTClusteredVectorLayer.alloc().initWithDataSource(options.dataSource.getNative());
     }
-    get minimumClusterDistance() {
-        return this.options.minimumClusterDistance;
-    }
-    set minimumClusterDistance(value: number) {
-        this.options.minimumClusterDistance = value;
-        if (this.native) {
-            this.native.setMinimumClusterDistance(value);
-        }
-    }
-    get maximumClusterZoom() {
-        return this.options.maximumClusterZoom;
-    }
-    set maximumClusterZoom(value: number) {
-        this.options.maximumClusterZoom = value;
-        if (this.native) {
-            this.native.setMaximumClusterZoom(value);
-        }
-    }
-    get animatedClusters() {
-        return this.options.animatedClusters;
-    }
-    set animatedClusters(value: boolean) {
-        this.options.animatedClusters = value;
-        if (this.native) {
-            this.native.setAnimatedClusters(value);
-        }
-    }
+
+    @nativeProperty minimumClusterDistance: number;
+    @nativeProperty maximumClusterZoom: number;
+    @nativeProperty animatedClusters: boolean;
 }

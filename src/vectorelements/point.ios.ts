@@ -3,15 +3,14 @@ import { BaseVectorElement } from './vectorelements.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { iosNativeColorProperty, iosNativeImageProperty, iosNativeProperty } from '../carto.ios';
+import { nativeColorProperty, nativeProperty } from '../carto.ios';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
         return NTPointStyleBuilder.alloc().init();
     }
-    @iosNativeProperty size: number;
-    @iosNativeColorProperty color: Color | string;
-    // @iosNativeImageProperty image: string;
+    @nativeProperty size: number;
+    @nativeColorProperty color: Color | string;
 
     _buildStyle: NTPointStyle;
     buildStyle() {
@@ -33,7 +32,7 @@ export class Point extends BaseVectorElement<NTPoint, PointOptions> {
             nativePos = toNativeMapPos(pos);
         }
         const result = NTPoint.alloc().initWithPosStyle(nativePos, style);
-        result['owner'] = new WeakRef(this);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
     get style() {

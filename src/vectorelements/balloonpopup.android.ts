@@ -3,33 +3,31 @@ import { BaseVectorElement } from './vectorelements.android';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { androidNativeColorProperty, androidNativeImageProperty, androidNativeProperty } from '../carto.android';
+import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.android';
 
 export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.BalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {
         return new com.carto.styles.BalloonPopupStyleBuilder();
     }
-    @androidNativeColorProperty color: string | Color;
-    @androidNativeProperty cornerRadius: number;
-    @androidNativeColorProperty descriptionColor: string | Color;
-    @androidNativeProperty descriptionFontName: string;
-    @androidNativeProperty descriptionFontSize: number;
-    // @androidNativeProperty description: string;
-    @androidNativeProperty descriptionWrap: boolean;
-    @androidNativeColorProperty leftColor: string | Color;
-    @androidNativeImageProperty leftImage: string;
-    @androidNativeColorProperty rightColor: string | Color;
-    @androidNativeImageProperty rightImage: string;
-    @androidNativeColorProperty strokeColor: string | Color;
-    @androidNativeProperty strokeWidth: number;
-    @androidNativeColorProperty titleColor: string | Color;
-    @androidNativeProperty titleFontName: string;
-    @androidNativeProperty titleFontSize: number;
-    // @androidNativeProperty title: string;
-    @androidNativeProperty titleWrap: boolean;
-    @androidNativeProperty triangleHeight: number;
-    @androidNativeProperty triangleWidth: number;
-    @androidNativeProperty placementPriority: number;
+    @nativeColorProperty color: string | Color;
+    @nativeProperty cornerRadius: number;
+    @nativeColorProperty descriptionColor: string | Color;
+    @nativeProperty descriptionFontName: string;
+    @nativeProperty descriptionFontSize: number;
+    @nativeProperty descriptionWrap: boolean;
+    @nativeColorProperty leftColor: string | Color;
+    @nativeCartoImageProperty leftImage: string;
+    @nativeColorProperty rightColor: string | Color;
+    @nativeCartoImageProperty rightImage: string;
+    @nativeColorProperty strokeColor: string | Color;
+    @nativeProperty strokeWidth: number;
+    @nativeColorProperty titleColor: string | Color;
+    @nativeProperty titleFontName: string;
+    @nativeProperty titleFontSize: number;
+    @nativeProperty titleWrap: boolean;
+    @nativeProperty triangleHeight: number;
+    @nativeProperty triangleWidth: number;
+    @nativeProperty placementPriority: number;
 
     _buildStyle: com.carto.styles.BalloonPopupStyle;
     buildStyle() {

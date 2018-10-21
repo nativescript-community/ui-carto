@@ -2,15 +2,14 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseVectorElement } from './vectorelements.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { LineStyleBuilder } from './line';
-import { iosNativeColorProperty, mapPosVectorFromArgs, mapPosVectorVectorFromArgs } from '../carto.ios';
+import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto.ios';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {
         return NTPolygonStyleBuilder.alloc().init();
     }
-    @iosNativeColorProperty color: Color | string;
+    @nativeColorProperty color: Color | string;
 
     get lineStyleBuilder() {
         return this.options.lineStyleBuilder;
@@ -34,7 +33,7 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon
 
 export class Polygon extends BaseVectorElement<NTPolygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
-        const style: NTPolygonStyle = options.style ||  options.styleBuilder.buildStyle();
+        const style: NTPolygonStyle = options.style || options.styleBuilder.buildStyle();
         const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.poses, options.projection), style);
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));

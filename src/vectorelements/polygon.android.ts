@@ -2,15 +2,14 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseVectorElement } from './vectorelements.android';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { LineStyleBuilder } from './line';
-import { androidNativeColorProperty, mapPosVectorFromArgs, mapPosVectorVectorFromArgs } from '../carto.android';
+import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto.android';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {
         return new com.carto.styles.PolygonStyleBuilder();
     }
-    @androidNativeColorProperty color: Color | string;
+    @nativeColorProperty color: Color | string;
 
     get lineStyleBuilder() {
         return this.options.lineStyleBuilder;

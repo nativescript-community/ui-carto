@@ -3,15 +3,15 @@ import { BaseVectorElement } from './vectorelements.ios';
 import { NMLModelOptions } from './nmlmodel';
 // import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { iosNativeProperty } from '../carto.ios';
+import { nativeProperty } from '../carto.ios';
 import { getRelativePathToApp } from '../carto.common';
-// import { iosNativeColorProperty, iosNativeImageProperty, iosNativeProperty } from '../carto.ios';
+// import { nativeColorProperty, nativeCartoImageProperty, nativeProperty } from '../carto.ios';
 
 // export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<NTNMLModelStyleBuilder, NMLModelStyleBuilderOptions> {
 //     createNative(options: NMLModelStyleBuilderOptions) {
 //         return NTNMLModelStyleBuilder.alloc().init();
 //     }
-//     // @iosNativeImageProperty image: string;
+//     // @nativeCartoImageProperty image: string;
 
 //     _buildStyle: NTNMLModelStyle;
 //     buildStyle() {
@@ -23,7 +23,7 @@ import { getRelativePathToApp } from '../carto.common';
 // }
 
 export class NMLModel extends BaseVectorElement<NTNMLModel, NMLModelOptions> {
-    @iosNativeProperty scale: number;
+    @nativeProperty scale: number;
 
     createNative(options: NMLModelOptions) {
         // const style: NTNMLModelStyle = options.style || options.styleBuilder.buildStyle();
