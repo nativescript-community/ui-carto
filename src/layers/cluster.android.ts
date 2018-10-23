@@ -3,9 +3,7 @@ import { ClusterElementBuilderOptions } from './cluster';
 import { fromNativeMapPos, MapPos } from '../core/core';
 import { VectorElementVector } from '../vectorelements/vectorelements';
 import { BaseVectorElement } from '../vectorelements/vectorelements.android';
-import { ImageSource } from 'tns-core-modules/image-source/image-source';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-import { nativeCartoImageProperty, nativeImageProperty } from '../carto.android';
+import { nativeImageProperty } from '../carto.android';
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 
