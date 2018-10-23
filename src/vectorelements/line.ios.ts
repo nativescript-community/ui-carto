@@ -2,7 +2,6 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseVectorElement } from './vectorelements.ios';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '../carto.ios';
 
 export enum LineJointType {
@@ -26,6 +25,8 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
     @nativeColorProperty color: Color | string;
     @nativeProperty joinType: LineJointType;
     @nativeProperty endType: LineEndType;
+    @nativeProperty clickWidth: number;
+    @nativeProperty stretchFactor: number;
 
     _buildStyle: NTLineStyle;
     buildStyle() {

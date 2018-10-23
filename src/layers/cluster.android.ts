@@ -9,7 +9,7 @@ import { nativeCartoImageProperty, nativeImageProperty } from '../carto.android'
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 
-interface ClusterElementBuilderNative extends com.akylas.carto.additions.AKClusterElementBuilder {
+export interface ClusterElementBuilderNative extends com.akylas.carto.additions.AKClusterElementBuilder {
     // tslint:disable-next-line:no-misused-new
     new (owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderNative;
 }

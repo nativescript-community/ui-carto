@@ -2,7 +2,6 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseVectorElement } from './vectorelements.android';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
 
 export enum LineJointType {
@@ -26,6 +25,8 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     @nativeColorProperty color: Color | string;
     @nativeEnumProperty(com.carto.styles.LineJoinType) joinType: LineJointType;
     @nativeEnumProperty(com.carto.styles.LineEndType) endType: LineEndType;
+    @nativeProperty clickWidth: number;
+    @nativeProperty stretchFactor: number;
 
     _buildStyle: com.carto.styles.LineStyle;
     buildStyle() {

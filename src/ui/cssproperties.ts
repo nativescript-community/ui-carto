@@ -33,6 +33,7 @@ export const focusPosProperty = new CssProperty<Style, MapPos>({
             const MapPoss = v.split(',').map(parseFloat);
             return { latitude: MapPoss[0], longitude: MapPoss[1] };
         }
+        return v;
     }
 });
 focusPosProperty.register(Style);

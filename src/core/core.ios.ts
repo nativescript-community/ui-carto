@@ -48,7 +48,7 @@ export function toNativeMapBounds(bounds: Bounds) {
     return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
 }
 
-abstract class NativeVector<T> {
+export abstract class NativeVector<T> {
     native: any;
     size() {
         return this.native.size();

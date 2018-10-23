@@ -6,6 +6,12 @@ declare enum BillboardOrientation {
     GROUND
 }
 
+declare enum BillboardScaling {
+    CONST_SCREEN_SIZE,
+    SCREEN_SIZE,
+    WORLD_SIZE
+}
+
 export class VectorElementOptions {
     metaData?: Object;
     styleBuilder?: any;

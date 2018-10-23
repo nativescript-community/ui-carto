@@ -12,6 +12,7 @@ export class PointStyleBuilder<T, U extends PointStyleBuilderOptions> extends Ba
     buildStyle(): any;
     size?: number;
     color?: string | Color;
+    clickSize?: number;
 }
 
 export class PointOptions extends PointStyleBuilderOptions {

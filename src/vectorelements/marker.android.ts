@@ -3,7 +3,8 @@ import { BaseVectorElement } from './vectorelements.android';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.android';
+import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
+import { BillboardOrientation, BillboardScaling } from './vectorelements';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -14,6 +15,11 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.
     @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;
     @nativeCartoImageProperty bitmap: string;
+    @nativeProperty anchorPointX: number;
+    @nativeProperty anchorPointY: number;
+    @nativeProperty clickSize: number;
+    @nativeEnumProperty(com.carto.styles.BillboardScaling) scalingMode: BillboardScaling;
+    @nativeEnumProperty(com.carto.styles.BillboardOrientation) orientationMode: BillboardOrientation;
 
     _buildStyle: com.carto.styles.MarkerStyle;
     buildStyle() {
@@ -25,6 +31,7 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.
 }
 
 export class Marker extends BaseVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
+    @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style: com.carto.styles.MarkerStyle = options.style || options.styleBuilder.buildStyle();
         // console.log('creating marker', style);
@@ -56,14 +63,5 @@ export class Marker extends BaseVectorElement<com.carto.vectorelements.Marker, M
                 this.native.setStyle(value);
             }
         }
-    }
-    get rotation() {
-        if (this.native) {
-            return this.native.getRotation();
-        }
-        return this.options.rotation;
-    }
-    set rotation(value: number) {
-        this.native && this.native.setRotation(value);
     }
 }

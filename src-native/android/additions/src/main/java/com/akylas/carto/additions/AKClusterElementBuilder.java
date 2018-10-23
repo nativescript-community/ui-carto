@@ -49,7 +49,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         final Object[] arr = new Object[1];
         Log.d("AKCartoAdditions", "buildClusterElement: " + elements.size());
         if (mainHandler == null) {
-            mainHandler = Handler.createAsync(android.os.Looper.getMainLooper());
+            mainHandler = new Handler(android.os.Looper.getMainLooper());
         }
 
         SynchronousHandler.postAndWait(mainHandler, new Runnable() {

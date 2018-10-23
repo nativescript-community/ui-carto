@@ -5,7 +5,12 @@ import { nativeMapToJS } from '../utils/utils.ios';
 export enum BillboardOrientation {
     FACE_CAMERA = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA,
     FACE_CAMERA_GROUND = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND,
-    GROUND = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_GROUND,
+    GROUND = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_GROUND
+}
+export enum BillboardScaling {
+    CONST_SCREEN_SIZE = NTBillboardScaling.T_BILLBOARD_SCALING_CONST_SCREEN_SIZE,
+    SCREEN_SIZE = NTBillboardScaling.T_BILLBOARD_SCALING_SCREEN_SIZE,
+    WORLD_SIZE = NTBillboardScaling.T_BILLBOARD_SCALING_WORLD_SIZE
 }
 
 export class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {

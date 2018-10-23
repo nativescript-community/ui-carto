@@ -11,6 +11,7 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.s
     }
     @nativeProperty size: number;
     @nativeColorProperty color: Color | string;
+    @nativeProperty clickSize: number;
 
     _buildStyle: com.carto.styles.PointStyle;
     buildStyle() {

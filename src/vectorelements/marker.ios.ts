@@ -4,6 +4,7 @@ import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
 import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.ios';
+import { BillboardOrientation, BillboardScaling } from './vectorelements';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -14,6 +15,11 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerSt
     @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;
     @nativeCartoImageProperty bitmap: string;
+    @nativeProperty anchorPointX: number;
+    @nativeProperty anchorPointY: number;
+    @nativeProperty clickSize: number;
+    @nativeProperty scalingMode: BillboardScaling;
+    @nativeProperty orientationMode: BillboardOrientation;
 
     _buildStyle: NTMarkerStyle;
     buildStyle() {
@@ -25,6 +31,7 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerSt
 }
 
 export class Marker extends BaseVectorElement<NTMarker, MarkerOptions> {
+    @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style: NTMarkerStyle = options.style || options.styleBuilder.buildStyle();
         const pos = options.pos;
@@ -50,14 +57,5 @@ export class Marker extends BaseVectorElement<NTMarker, MarkerOptions> {
                 this.native.setStyle(value);
             }
         }
-    }
-    get rotation() {
-        if (this.native) {
-            return this.native.getRotation();
-        }
-        return this.options.rotation;
-    }
-    set rotation(value: number) {
-        this.native && this.native.setRotation(value);
     }
 }

@@ -31,7 +31,7 @@ export default Vue.extend({
         return {
             currentLayerType: 'voyager',
             layerTypes: ['voyager', 'positron', 'darkmatter', 'here.normal.day', 'here.satellite.day'],
-            languages: ['Local', 'en', 'de', 'es', 'it', 'fr', 'ru']
+            languages: ['en', 'de', 'es', 'it', 'fr', 'ru']
         };
     },
     methods: {

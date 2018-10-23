@@ -35,7 +35,7 @@ export function toNativeMapBounds(bounds: Bounds) {
     return new com.carto.core.MapBounds(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
 }
 
-abstract class NativeVector<T> {
+export abstract class NativeVector<T> {
     native: any;
     // constructor(size?: number) {
     //     this.native = new T(size);

@@ -19,6 +19,8 @@ export class LineStyleBuilderOptions extends VectorElementOptions {
     width?: number;
     joinType?: LineJointType;
     endType?: LineEndType;
+    clickWidth?: number;
+    stretchFactor?: number;
 }
 export class LineOptions extends LineStyleBuilderOptions {
     poses: MapPosVector | MapPos[];

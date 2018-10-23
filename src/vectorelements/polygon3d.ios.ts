@@ -10,6 +10,7 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolyg
         return NTPolygon3DStyleBuilder.alloc().init();
     }
     @nativeColorProperty color: Color | string;
+    @nativeColorProperty sideColor: Color | string;
 
     _buildStyle: NTPolygon3DStyle;
     buildStyle() {

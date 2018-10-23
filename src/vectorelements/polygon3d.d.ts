@@ -7,6 +7,7 @@ import { MapPosVector, MapPosVectorVector } from '../core/core';
 export class Polygon3DStyleBuilderOptions extends VectorElementOptions {
     size?: number;
     color?: string | Color;
+    sideColor?: Color | string;
     // lineStyleBuilder?:LineStyleBuilder<any, any>
 }
 export class Polygon3DStyleBuilder<T, U extends Polygon3DStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, Polygon3DStyleBuilderOptions> {

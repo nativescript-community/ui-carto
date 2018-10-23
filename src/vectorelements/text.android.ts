@@ -14,6 +14,10 @@ export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     @nativeProperty fontSize: number;
     @nativeProperty fontName: string;
     @nativeEnumProperty(com.carto.styles.BillboardOrientation) orientationMode: BillboardOrientation;
+    @nativeProperty breakLines: boolean;
+    @nativeProperty strokeWidth: number;
+    @nativeProperty strokeColor: Color | string;
+    @nativeProperty backgroundColor: Color | string;
 
     _buildStyle: com.carto.styles.LabelStyle;
     buildStyle() {

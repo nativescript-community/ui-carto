@@ -9,6 +9,7 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.car
         return new com.carto.styles.Polygon3DStyleBuilder();
     }
     @nativeColorProperty color: Color | string;
+    @nativeColorProperty sideColor: Color | string;
 
 
     _buildStyle: com.carto.styles.Polygon3DStyle;

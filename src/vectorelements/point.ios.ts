@@ -11,6 +11,7 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyl
     }
     @nativeProperty size: number;
     @nativeColorProperty color: Color | string;
+    @nativeProperty clickSize: number;
 
     _buildStyle: NTPointStyle;
     buildStyle() {

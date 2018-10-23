@@ -6,12 +6,12 @@ import { Marker } from './marker';
 
 export class BalloonPopupStyleBuilderOptions extends VectorElementOptions {
     color?: string | Color;
-    cornerRadius?: number
+    cornerRadius?: number;
     descriptionColor?: string | Color;
-    descriptionFontName?: string
-    descriptionFontSize?: number
-    description?: string
-    descriptionWrap?: boolean
+    descriptionFontName?: string;
+    descriptionFontSize?: number;
+    description?: string;
+    descriptionWrap?: boolean;
     leftColor?: string | Color;
     leftImage?: string;
     rightColor?: string | Color;
@@ -19,13 +19,13 @@ export class BalloonPopupStyleBuilderOptions extends VectorElementOptions {
     strokeColor?: string | Color;
     strokeWidth?: number;
     titleColor?: string | Color;
-    titleFontName?: string
-    titleFontSize?: number
-    title?: string
-    titleWrap?: boolean
-    triangleHeight?: number
-    triangleWidth?: number
-    placementPriority?: number
+    titleFontName?: string;
+    titleFontSize?: number;
+    title?: string;
+    titleWrap?: boolean;
+    triangleHeight?: number;
+    triangleWidth?: number;
+    placementPriority?: number;
 }
 export class BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, BalloonPopupStyleBuilderOptions> {
     constructor(options: U);

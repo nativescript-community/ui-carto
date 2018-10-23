@@ -9,5 +9,6 @@
         "**/*demo*": true,
         "src/**/*.js": true,
         "src/**/*.js.map": true
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "disabled"
 }

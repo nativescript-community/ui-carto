@@ -15,6 +15,10 @@ export class TextStyleBuilder extends BaseVectorElementStyleBuilder<NTTextStyleB
     @nativeProperty fontSize: number;
     @nativeProperty fontName: string;
     @nativeProperty orientationMode: BillboardOrientation;
+    @nativeProperty breakLines: boolean;
+    @nativeProperty strokeWidth: number;
+    @nativeProperty strokeColor: Color | string;
+    @nativeProperty backgroundColor: Color | string;
 
     _buildStyle: NTTextStyle;
     buildStyle() {

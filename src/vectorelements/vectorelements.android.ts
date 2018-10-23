@@ -3,11 +3,16 @@ import { VectorElementOptions } from './vectorelements';
 import { nativeMapToJS } from '../utils/utils.android';
 import { BaseNative } from '../carto.common';
 
-
 export enum BillboardOrientation {
     FACE_CAMERA = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA.ordinal(),
     FACE_CAMERA_GROUND = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND.ordinal(),
-    GROUND = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.ordinal(),
+    GROUND = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.ordinal()
+}
+
+export enum BillboardScaling {
+    CONST_SCREEN_SIZE = com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE.ordinal(),
+    SCREEN_SIZE = com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE.ordinal(),
+    WORLD_SIZE = com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE.ordinal()
 }
 
 export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
