@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
@@ -38,20 +38,15 @@ export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<NTBa
     }
 }
 
-export class BalloonPopup extends BaseVectorElement<NTBalloonPopup, BalloonPopupOptions> {
+export class BalloonPopup extends BasePointVectorElement<NTBalloonPopup, BalloonPopupOptions> {
     createNative(options: BalloonPopupOptions) {
         const style: NTBalloonPopupStyle = options.style || options.styleBuilder.buildStyle();
         let result: NTBalloonPopup;
         if (options.marker) {
             result = NTBalloonPopup.alloc().initWithBaseBillboardStyleTitleDesc(options.marker.getNative(), style, options.title, options.description);
         } else {
-            const pos = options.pos;
-            let nativePos;
-            if (options.projection) {
-                nativePos = options.projection.getNative().fromWgs84(toNativeMapPos(pos));
-            } else {
-                nativePos = toNativeMapPos(pos);
-            }
+            const nativePos = this.getNativePos(options.position, options.projection);
+
             result = NTBalloonPopup.alloc().initWithPosStyleTitleDesc(nativePos, style, options.title, options.description);
         }
         // result['owner'] = new WeakRef(this);

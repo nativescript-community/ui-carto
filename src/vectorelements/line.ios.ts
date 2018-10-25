@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BaseLineVectorElement } from './vectorelements.ios';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '../carto.ios';
@@ -37,12 +37,12 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
     }
 }
 
-export class Line extends BaseVectorElement<NTLine, LineOptions> {
+export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     createNative(options: LineOptions) {
         const style: NTLineStyle = options.style || options.styleBuilder.buildStyle();
 
-        const result = NTLine.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.poses, options.projection), style);
-        result['owner'] = new WeakRef(this);
+        const result = NTLine.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.projection), style);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
     get style() {

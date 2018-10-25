@@ -62,7 +62,7 @@ function initVectorTileEventListener() {
                         featureId: info.getFeatureId(),
                         featureData,
                         featureLayerName: info.getFeatureLayerName(),
-                        pos: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos())
+                        position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos())
                     }) || false
                 );
             }
@@ -101,7 +101,7 @@ function initVectorElementEventListener() {
                         layer: this._layer.get() as any,
                         element,
                         metaData: element.metaData,
-                        pos: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos()),
+                        position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos()),
                         elementPos: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getElementClickPos())) : fromNativeMapPos(info.getElementClickPos())
                     }) || false
                 );

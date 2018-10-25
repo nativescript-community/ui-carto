@@ -5,5 +5,5 @@ export declare const nativeProperty: (target: Object, key: string | symbol, conv
 export declare function nativeColorProperty(target: Object, key: string | symbol): void;
 export declare function nativeCartoImageProperty(target: Object, key: string | symbol): void;
 export declare function nativeImageProperty(target: Object, key: string | symbol): void;
-export declare function mapPosVectorFromArgs(poses: MapPosVector | MapPos[], projection?: Projection): NTMapPosVector;
-export declare function mapPosVectorVectorFromArgs(poses: MapPosVectorVector | MapPos[][], projection?: Projection): NTMapPosVectorVector;
+export declare function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], projection?: Projection): NTMapPosVector;
+export declare function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], projection?: Projection): NTMapPosVectorVector;

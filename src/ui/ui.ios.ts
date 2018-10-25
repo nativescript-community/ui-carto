@@ -60,7 +60,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                 object: owner,
                 data: {
                     clickType: mapClickInfo.getClickType(),
-                    pos: owner.fromNativeMapPos(mapClickInfo.getClickPos())
+                    position: owner.fromNativeMapPos(mapClickInfo.getClickPos())
                 }
             });
         }
@@ -136,7 +136,7 @@ export class CartoMap extends CartoViewBase {
         // you have to reset it to its initial state here.
         super.disposeNativeView();
     }
-    fromNativeMapPos(pos: NTMapPos) {
+    fromNativeMapPos(position: NTMapPos) {
         return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
     }
 

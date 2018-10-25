@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
 import { BillboardOrientation } from './vectorelements';
@@ -16,7 +16,7 @@ export declare class TextStyleBuilder extends BaseVectorElementStyleBuilder<NTTe
     _buildStyle: NTTextStyle;
     buildStyle(): NTTextStyle;
 }
-export declare class Text extends BaseVectorElement<NTText, TextOptions> {
+export declare class Text extends BasePointVectorElement<NTText, TextOptions> {
     createNative(options: TextOptions): NTText;
     style: TextStyleBuilder | NTTextStyle;
 }

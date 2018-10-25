@@ -15,7 +15,7 @@ export declare class CartoMap extends CartoViewBase {
     createNativeView(): Object;
     initNativeView(): void;
     disposeNativeView(): void;
-    fromNativeMapPos(pos: com.carto.core.MapPos): MapPos;
+    fromNativeMapPos(position: com.carto.core.MapPos): MapPos;
     readonly metersPerPixel: number;
     getMapfocusPos(): MapPos;
     getMapzoom(): number;

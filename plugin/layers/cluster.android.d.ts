@@ -9,5 +9,5 @@ export interface ClusterElementBuilderNative extends com.akylas.carto.additions.
 export declare class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
     bitmap: string;
     createNative(): ClusterElementBuilderNative;
-    buildClusterElement?: (pos: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
+    buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
 }

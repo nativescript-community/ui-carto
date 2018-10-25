@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BaseLineVectorElement } from './vectorelements.ios';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty } from '../carto.ios';
@@ -21,10 +21,10 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolyg
     }
 }
 
-export class Polygon3D extends BaseVectorElement<NTPolygon3D, Polygon3DOptions> {
+export class Polygon3D extends BaseLineVectorElement<NTPolygon3D, Polygon3DOptions> {
     createNative(options: Polygon3DOptions) {
         const style: NTPolygon3DStyle = options.style || options.styleBuilder.buildStyle();
-        const result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.poses, options.projection), style, options.height);
+        const result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.positions, options.projection), style, options.height);
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
         }

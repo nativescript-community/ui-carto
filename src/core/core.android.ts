@@ -13,16 +13,16 @@ export enum ClickType {
     DUAL = com.carto.ui.ClickType.CLICK_TYPE_DUAL.ordinal()
 }
 
-export function fromNativeMapPos(pos: com.carto.core.MapPos) {
+export function fromNativeMapPos(position: com.carto.core.MapPos) {
     return {
-        latitude: pos.getY(),
-        longitude: pos.getX(),
-        altitude: pos.getZ()
+        latitude: position.getY(),
+        longitude: position.getX(),
+        altitude: position.getZ()
     } as MapPos;
 }
-export function toNativeMapPos(pos: MapPos) {
+export function toNativeMapPos(position: MapPos) {
     //  ignore z for now as points can get under the map!
-    return new com.carto.core.MapPos(pos.longitude, pos.latitude);
+    return new com.carto.core.MapPos(position.longitude, position.latitude);
 }
 
 export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
@@ -49,8 +49,8 @@ export abstract class NativeVector<T> {
     public get(index: number): T {
         return this.native.get(index);
     }
-    public add(pos: T) {
-        return this.native.add(pos);
+    public add(position: T) {
+        return this.native.add(position);
     }
     public capacity() {
         return this.native.capacity();
@@ -61,8 +61,8 @@ export abstract class NativeVector<T> {
     public isEmpty() {
         return this.native.isEmpty();
     }
-    public set(index: number, pos: T) {
-        return this.native.set(index, pos);
+    public set(index: number, position: T) {
+        return this.native.set(index, position);
     }
     public getNative() {
         return this.native;
@@ -74,11 +74,11 @@ export class MapPosVector extends NativeVector<com.carto.core.MapPos> {
         super();
         this.native = new com.carto.core.MapPosVector();
     }
-    public add(pos: com.carto.core.MapPos | MapPos) {
-        if ((pos as any).latitude) {
-            pos = toNativeMapPos(pos as MapPos);
+    public add(position: com.carto.core.MapPos | MapPos) {
+        if ((position as any).latitude) {
+            position = toNativeMapPos(position as MapPos);
         }
-        return this.native.add(pos as com.carto.core.MapPos);
+        return this.native.add(position as com.carto.core.MapPos);
     }
 }
 export class MapPosVectorVector extends NativeVector<com.carto.core.MapPosVector> {
@@ -87,11 +87,11 @@ export class MapPosVectorVector extends NativeVector<com.carto.core.MapPosVector
         super();
         this.native = new com.carto.core.MapPosVectorVector();
     }
-    public add(pos: com.carto.core.MapPosVector | MapPosVector) {
-        console.log('MapPosVectorVector', 'add', pos, pos instanceof MapPosVector);
-        if (pos instanceof MapPosVector) {
-            return this.native.add(pos.getNative());
+    public add(position: com.carto.core.MapPosVector | MapPosVector) {
+        console.log('MapPosVectorVector', 'add', position, position instanceof MapPosVector);
+        if (position instanceof MapPosVector) {
+            return this.native.add(position.getNative());
         }
-        return this.native.add(pos);
+        return this.native.add(position);
     }
 }

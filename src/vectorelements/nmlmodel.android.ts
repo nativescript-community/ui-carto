@@ -1,6 +1,5 @@
-import { BaseVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements.android';
 import { NMLModelOptions } from './nmlmodel';
-import { toNativeMapPos } from '../core/core';
 import { nativeProperty } from '../carto.android';
 import { getRelativePathToApp } from '../carto.common';
 
@@ -19,20 +18,14 @@ import { getRelativePathToApp } from '../carto.common';
 //     }
 // }
 
-export class NMLModel extends BaseVectorElement<com.carto.vectorelements.NMLModel, NMLModelOptions> {
+export class NMLModel extends BasePointVectorElement<com.carto.vectorelements.NMLModel, NMLModelOptions> {
     @nativeProperty scale: number;
 
     createNative(options: NMLModelOptions) {
         // const style: com.carto.styles.NMLModelStyle = options.style || options.styleBuilder.buildStyle();
         const modelPath = getRelativePathToApp(options.name);
         if (modelPath) {
-            const pos = options.pos;
-            let nativePos;
-            if (options.projection) {
-                nativePos = options.projection.getNative().fromWgs84(toNativeMapPos(pos));
-            } else {
-                nativePos = toNativeMapPos(pos);
-            }
+            const nativePos = this.getNativePos(options.position, options.projection);
             const result = new com.carto.vectorelements.NMLModel(nativePos, com.carto.utils.AssetUtils.loadAsset(modelPath));
             // result['owner'] = new WeakRef(this);
             return result;

@@ -1,8 +1,7 @@
 // import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { NMLModelOptions } from './nmlmodel';
 // import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { nativeProperty } from '../carto.ios';
 import { getRelativePathToApp } from '../carto.common';
 // import { nativeColorProperty, nativeCartoImageProperty, nativeProperty } from '../carto.ios';
@@ -22,20 +21,14 @@ import { getRelativePathToApp } from '../carto.common';
 //     }
 // }
 
-export class NMLModel extends BaseVectorElement<NTNMLModel, NMLModelOptions> {
+export class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions> {
     @nativeProperty scale: number;
 
     createNative(options: NMLModelOptions) {
         // const style: NTNMLModelStyle = options.style || options.styleBuilder.buildStyle();
         const modelPath = getRelativePathToApp(options.name);
         if (modelPath) {
-            const pos = options.pos;
-            let nativePos;
-            if (options.projection) {
-                nativePos = options.projection.getNative().fromWgs84(toNativeMapPos(pos));
-            } else {
-                nativePos = toNativeMapPos(pos);
-            }
+            const nativePos = this.getNativePos(options.position, options.projection);
             const result = NTNMLModel.alloc().initWithPosSourceModelData(nativePos, NTAssetUtils.loadAsset(modelPath));
             // result['owner'] = new WeakRef(this);
             return result;

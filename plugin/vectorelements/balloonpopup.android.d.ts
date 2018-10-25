@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements.android';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 export declare class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.BalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
@@ -26,7 +26,7 @@ export declare class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuil
     _buildStyle: com.carto.styles.BalloonPopupStyle;
     buildStyle(): com.carto.styles.BalloonPopupStyle;
 }
-export declare class BalloonPopup extends BaseVectorElement<com.carto.vectorelements.BalloonPopup, BalloonPopupOptions> {
+export declare class BalloonPopup extends BasePointVectorElement<com.carto.vectorelements.BalloonPopup, BalloonPopupOptions> {
     createNative(options: BalloonPopupOptions): com.carto.vectorelements.BalloonPopup;
     style: BalloonPopupStyleBuilder | com.carto.styles.BalloonPopupStyle;
 }

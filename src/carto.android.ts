@@ -89,13 +89,13 @@ export function nativeImageProperty(target: Object, key: string | symbol) {
     });
 }
 
-export function mapPosVectorFromArgs(poses: MapPosVector | MapPos[], projection?: Projection) {
+export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], projection?: Projection) {
     let nativePoses: com.carto.core.MapPosVector;
-    console.log('mapPosVectorFromArgs', poses, poses instanceof MapPosVector);
-    if (typeof (poses as any).getNative === 'function') {
-        nativePoses = (poses as MapPosVector).getNative();
+    console.log('mapPosVectorFromArgs', positions, positions instanceof MapPosVector);
+    if (typeof (positions as any).getNative === 'function') {
+        nativePoses = (positions as MapPosVector).getNative();
     } else {
-        const arrayPoses = poses as MapPos[];
+        const arrayPoses = positions as MapPos[];
         nativePoses = new com.carto.core.MapPosVector();
         if (projection) {
             arrayPoses.forEach(p => {
@@ -110,12 +110,12 @@ export function mapPosVectorFromArgs(poses: MapPosVector | MapPos[], projection?
     return nativePoses;
 }
 
-export function mapPosVectorVectorFromArgs(poses: MapPosVectorVector | MapPos[][], projection?: Projection) {
+export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], projection?: Projection) {
     let nativePoses: com.carto.core.MapPosVectorVector;
-    if (typeof (poses as any).getNative === 'function') {
-        nativePoses = (poses as MapPosVectorVector).getNative();
+    if (typeof (positions as any).getNative === 'function') {
+        nativePoses = (positions as MapPosVectorVector).getNative();
     } else {
-        const arrayPoses = poses as MapPos[][];
+        const arrayPoses = positions as MapPos[][];
         nativePoses = new com.carto.core.MapPosVectorVector();
         arrayPoses.forEach(p => {
             nativePoses.add(mapPosVectorFromArgs(p, projection));

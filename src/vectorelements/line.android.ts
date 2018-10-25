@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.android';
+import { BaseLineVectorElement } from './vectorelements.android';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
@@ -37,11 +37,11 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     }
 }
 
-export class Line extends BaseVectorElement<com.carto.vectorelements.Line, LineOptions> {
+export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, LineOptions> {
     createNative(options: LineOptions) {
         const style: com.carto.styles.LineStyle = options.style || options.styleBuilder.buildStyle();
-        const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.poses, options.projection), style);
-        result['owner'] = new WeakRef(this);
+        const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.positions, options.projection), style);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
     get style() {

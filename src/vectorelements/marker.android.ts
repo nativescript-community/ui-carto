@@ -1,8 +1,7 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements.android';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
 import { BillboardOrientation, BillboardScaling } from './vectorelements';
 
@@ -30,22 +29,16 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.
     }
 }
 
-export class Marker extends BaseVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
+export class Marker extends BasePointVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style: com.carto.styles.MarkerStyle = options.style || options.styleBuilder.buildStyle();
         // console.log('creating marker', style);
-        const pos = options.pos;
-        let nativePos;
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
             result = new com.carto.vectorelements.Marker(options.geometry as com.carto.geometry.Geometry, style);
         } else {
-            if (options.projection) {
-                nativePos = (options.projection.getNative() as com.carto.projections.Projection).fromWgs84(toNativeMapPos(pos));
-            } else {
-                nativePos = toNativeMapPos(pos);
-            }
+            const nativePos = this.getNativePos(options.position, options.projection);
             result = new com.carto.vectorelements.Marker(nativePos, style);
         }
         // result['owner'] = new WeakRef(this);

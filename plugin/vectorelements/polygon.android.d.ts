@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.android';
+import { BaseLineVectorElement } from './vectorelements.android';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { LineStyleBuilder } from './line';
@@ -10,7 +10,7 @@ export declare class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<c
     _buildStyle: com.carto.styles.PolygonStyle;
     buildStyle(): com.carto.styles.PolygonStyle;
 }
-export declare class Polygon extends BaseVectorElement<com.carto.vectorelements.Polygon, PolygonOptions> {
+export declare class Polygon extends BaseLineVectorElement<com.carto.vectorelements.Polygon, PolygonOptions> {
     createNative(options: PolygonOptions): com.carto.vectorelements.Polygon;
     style: PolygonStyleBuilder | com.carto.styles.PolygonStyle;
 }

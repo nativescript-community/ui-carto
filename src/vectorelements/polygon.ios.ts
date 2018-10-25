@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BaseLineVectorElement } from './vectorelements.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { LineStyleBuilder } from './line';
@@ -31,10 +31,10 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon
     }
 }
 
-export class Polygon extends BaseVectorElement<NTPolygon, PolygonOptions> {
+export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
         const style: NTPolygonStyle = options.style || options.styleBuilder.buildStyle();
-        const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.poses, options.projection), style);
+        const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.projection), style);
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
         }

@@ -1,8 +1,7 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.ios';
 import { BillboardOrientation, BillboardScaling } from './vectorelements';
 
@@ -30,19 +29,18 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerSt
     }
 }
 
-export class Marker extends BaseVectorElement<NTMarker, MarkerOptions> {
+export class Marker extends BasePointVectorElement<NTMarker, MarkerOptions> {
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style: NTMarkerStyle = options.style || options.styleBuilder.buildStyle();
-        const pos = options.pos;
-        let nativePos;
-        if (options.projection) {
-            nativePos = options.projection.getNative().fromWgs84(toNativeMapPos(pos));
+        let result: NTMarker;
+        if (options.geometry) {
+            result = NTMarker.alloc().initWithGeometryStyle(options.geometry as NTGeometry, style);
         } else {
-            nativePos = toNativeMapPos(pos);
+            const nativePos = this.getNativePos(options.position, options.projection);
+            result = NTMarker.alloc().initWithPosStyle(nativePos, style);
         }
-        const result = NTMarker.alloc().initWithPosStyle(nativePos, style);
-        result['owner'] = new WeakRef(this);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
     get style() {

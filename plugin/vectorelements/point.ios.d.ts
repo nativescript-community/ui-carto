@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 export declare class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
@@ -10,7 +10,7 @@ export declare class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTP
     _buildStyle: NTPointStyle;
     buildStyle(): NTPointStyle;
 }
-export declare class Point extends BaseVectorElement<NTPoint, PointOptions> {
+export declare class Point extends BasePointVectorElement<NTPoint, PointOptions> {
     createNative(options: PointOptions): NTPoint;
     style: PointStyleBuilder | NTPointStyle;
 }

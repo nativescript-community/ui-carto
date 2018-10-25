@@ -12,17 +12,17 @@ export class ClusterElementBuilderImpl extends NTClusterElementBuilder {
         delegate._owner = owner;
         return delegate;
     }
-    buildClusterElementSwigExplicitNTClusterElementBuilderElements(pos: NTMapPos, nElements: NTVectorElementVector | number) {
+    buildClusterElementSwigExplicitNTClusterElementBuilderElements(position: NTMapPos, nElements: NTVectorElementVector | number) {
         const owner = this._owner.get();
         if (owner.buildClusterElement) {
-            const result = owner.buildClusterElement(fromNativeMapPos(pos), new VectorElementVector(nElements as NTVectorElementVector));
+            const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(nElements as NTVectorElementVector));
             if (result instanceof BaseVectorElement) {
                 return result.getNative();
             } else if (result) {
                 return result;
             }
         }
-        return super.buildClusterElementSwigExplicitNTClusterElementBuilderElements(pos, nElements as NTVectorElementVector);
+        return super.buildClusterElementSwigExplicitNTClusterElementBuilderElements(position, nElements as NTVectorElementVector);
     }
 }
 
@@ -30,7 +30,7 @@ export class ClusterElementBuilder extends BaseNative<NTClusterElementBuilder, C
     createNative() {
         return ClusterElementBuilderImpl.initWithOwner(new WeakRef(this));
     }
-    buildClusterElement?: (pos: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | NTVectorElement;
+    buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | NTVectorElement;
 }
 
 // export class ClusterElementBuilder extends  ClusterElementBuilder() {

@@ -3,11 +3,11 @@ import { ProjectionOptions } from './projection';
 import { BaseProjection } from './projection.common';
 
 export abstract class ProjectionClass<T extends com.carto.projections.Projection, U extends ProjectionOptions> extends BaseProjection<T, U> {
-    fromWgs84(pos: MapPos) {
-        return fromNativeMapPos(this.getNative().fromWgs84(toNativeMapPos(pos)));
+    fromWgs84(position: MapPos) {
+        return fromNativeMapPos(this.getNative().fromWgs84(toNativeMapPos(position)));
     }
-    toWgs84(pos: MapPos) {
-        return fromNativeMapPos(this.getNative().toWgs84(toNativeMapPos(pos)));
+    toWgs84(position: MapPos) {
+        return fromNativeMapPos(this.getNative().toWgs84(toNativeMapPos(position)));
     }
 }
 

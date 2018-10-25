@@ -6,5 +6,5 @@ export declare function nativeColorProperty(target: Object, key: string | symbol
 export declare function nativeEnumProperty(enumType: any): (target: Object, key: string | symbol) => void;
 export declare function nativeCartoImageProperty(target: Object, key: string | symbol): void;
 export declare function nativeImageProperty(target: Object, key: string | symbol): void;
-export declare function mapPosVectorFromArgs(poses: MapPosVector | MapPos[], projection?: Projection): com.carto.core.MapPosVector;
-export declare function mapPosVectorVectorFromArgs(poses: MapPosVectorVector | MapPos[][], projection?: Projection): com.carto.core.MapPosVectorVector;
+export declare function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], projection?: Projection): com.carto.core.MapPosVector;
+export declare function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], projection?: Projection): com.carto.core.MapPosVectorVector;

@@ -1,4 +1,4 @@
-import {MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectortiles';
+import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectortiles';
 
 import { BaseVectorTileDecoder } from './vectortiles.common';
 import { getRelativePathToApp } from '../carto.common';
@@ -11,10 +11,19 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     createNative(options: MBVectorTileDecoderOptions) {
-        const zipPath = getRelativePathToApp( options.zipPath);
-        if (zipPath) {
+        let pack: com.carto.utils.ZippedAssetPackage;
+        if (options.zipPath) {
+            const zipPath = getRelativePathToApp(options.zipPath);
             const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
-            const pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
+            pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
+        }
+        if (options.cartoCss) {
+            if (pack) {
+                return new com.carto.vectortiles.MBVectorTileDecoder(new com.carto.styles.CartoCSSStyleSet(options.cartoCss, pack));
+            } else {
+                return new com.carto.vectortiles.MBVectorTileDecoder(new com.carto.styles.CartoCSSStyleSet(options.cartoCss));
+            }
+        } else if (pack) {
             const vectorTileStyleSet = new com.carto.styles.CompiledStyleSet(pack, options.style);
             const result = new com.carto.vectortiles.MBVectorTileDecoder(vectorTileStyleSet);
             return result;

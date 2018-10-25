@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BaseLineVectorElement } from './vectorelements.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { LineStyleBuilder } from './line';
@@ -10,7 +10,7 @@ export declare class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<N
     _buildStyle: NTPolygonStyle;
     buildStyle(): NTPolygonStyle;
 }
-export declare class Polygon extends BaseVectorElement<NTPolygon, PolygonOptions> {
+export declare class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
     createNative(options: PolygonOptions): NTPolygon;
     style: PolygonStyleBuilder | NTPolygonStyle;
 }

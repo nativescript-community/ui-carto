@@ -24,18 +24,18 @@ function initClusterElementBuilderNative() {
             return global.__native(this);
         }
 
-        buildCluster(pos: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
+        buildCluster(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
             const owner = this.owner.get();
-            console.log('test buildCluster1', pos.getX(), pos.getY(), !!owner.buildClusterElement);
+            console.log('test buildCluster1', position.getX(), position.getY(), !!owner.buildClusterElement);
             if (owner.buildClusterElement) {
-                const result = owner.buildClusterElement(fromNativeMapPos(pos), new VectorElementVector(undefined, nElements));
+                const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
                 if (result instanceof BaseVectorElement) {
                     return result.getNative();
                 } else if (result) {
                     return result;
                 }
             }
-            return super.buildCluster(pos, nElements as com.carto.vectorelements.VectorElementVector);
+            return super.buildCluster(position, nElements as com.carto.vectorelements.VectorElementVector);
         }
     }
     ClusterElementBuilderNative = ClusterElementBuilderImpl as any;
@@ -52,7 +52,7 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
         return result;
         // return new com.carto.layers.ClusterElementBuilder();
     }
-    buildClusterElement?: (pos: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
+    buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
 
     // private setImageFromSource(value: string | ImageSource | ImageAsset) {
     //     console.log('setImageFromSource', value);

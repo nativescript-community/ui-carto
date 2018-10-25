@@ -27,16 +27,16 @@ export enum PackageAction {
     REMOVING = NTPackageAction.T_PACKAGE_ACTION_REMOVING
 }
 
-export function fromNativeMapPos(pos: NTMapPos) {
+export function fromNativeMapPos(position: NTMapPos) {
     return {
-        latitude: pos.getY(),
-        longitude: pos.getX(),
-        altitude: pos.getZ()
+        latitude: position.getY(),
+        longitude: position.getX(),
+        altitude: position.getZ()
     } as MapPos;
 }
-export function toNativeMapPos(pos: MapPos) {
+export function toNativeMapPos(position: MapPos) {
     //  ignore z for now as points can get under the map!
-    return NTMapPos.alloc().initWithXY(pos.longitude, pos.latitude);
+    return NTMapPos.alloc().initWithXY(position.longitude, position.latitude);
 }
 export function fromNativeMapBounds(bounds: NTMapBounds) {
     return {
@@ -59,8 +59,8 @@ export abstract class NativeVector<T> {
     public get(index: number): T {
         return this.native.get(index);
     }
-    public add(pos: T) {
-        return this.native.add(pos);
+    public add(position: T) {
+        return this.native.add(position);
     }
     public capacity() {
         return this.native.capacity();
@@ -71,8 +71,8 @@ export abstract class NativeVector<T> {
     public isEmpty() {
         return this.native.isEmpty();
     }
-    public set(index: number, pos: T) {
-        return this.native.setVal(index, pos);
+    public set(index: number, position: T) {
+        return this.native.setVal(index, position);
     }
     public getNative() {
         return this.native;
@@ -85,11 +85,11 @@ export class MapPosVector extends NativeVector<NTMapPos> {
         this.native = NTMapPosVector.alloc().init();
     }
 
-    public add(pos: NTMapPos | MapPos) {
-        if ((pos as any).latitude) {
-            pos = toNativeMapPos(pos as MapPos);
+    public add(position: NTMapPos | MapPos) {
+        if ((position as any).latitude) {
+            position = toNativeMapPos(position as MapPos);
         }
-        return this.native.add(pos as NTMapPos);
+        return this.native.add(position as NTMapPos);
     }
 }
 export class MapPosVectorVector extends NativeVector<NTMapPosVector> {
@@ -98,10 +98,10 @@ export class MapPosVectorVector extends NativeVector<NTMapPosVector> {
         super();
         this.native = NTMapPosVectorVector.alloc().init();
     }
-    public add(pos: NTMapPosVector | MapPosVector) {
-        if (pos instanceof MapPosVector) {
-            return this.native.add(pos.getNative());
+    public add(position: NTMapPosVector | MapPosVector) {
+        if (position instanceof MapPosVector) {
+            return this.native.add(position.getNative());
         }
-        return this.native.add(pos);
+        return this.native.add(position);
     }
 }

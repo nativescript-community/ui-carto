@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BaseLineVectorElement } from './vectorelements.ios';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 export declare enum LineJointType {
@@ -24,7 +24,7 @@ export declare class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLi
     _buildStyle: NTLineStyle;
     buildStyle(): NTLineStyle;
 }
-export declare class Line extends BaseVectorElement<NTLine, LineOptions> {
+export declare class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     createNative(options: LineOptions): NTLine;
     style: LineStyleBuilder | NTLineStyle;
 }

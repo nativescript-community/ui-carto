@@ -4,7 +4,7 @@ set -o pipefail
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SOURCE_DIR="$CURRENT_DIR/../src"
-TO_SOURCE_DIR="$CURRENT_DIR/src"
+PLUGIN_DIR="$CURRENT_DIR/plugin"
 PACK_DIR="$CURRENT_DIR/package"
 ROOT_DIR="$CURRENT_DIR/.."
 PUBLISH=--publish
@@ -13,54 +13,53 @@ PUBLISH=--publish
 ARGS={$1""}
 
 install(){
-    cd $CURRENT_DIR
-    npm i
+    cd $ROOT_DIR
+    # npm i
 }
 
 pack() {
-    echo 'Clearing /src and /package...'
-    node_modules/.bin/rimraf "$TO_SOURCE_DIR"
-    node_modules/.bin/rimraf "$PACK_DIR"
+    echo 'package...'
+    # node_modules/.bin/rimraf "$TO_SOURCE_DIR"
+    # node_modules/.bin/rimraf "$PACK_DIR"
 
-    cd $SOURCE_DIR
-    npm i
-    cd $CURRENT_DIR
+    cd $ROOT_DIR
+    echo 'Building /src...'
+    # node_modules/.bin/tsc
 
-    if [[ $ARGS != *"native"* ]]; then
+    # if [[ $ARGS != *"native"* ]]; then
+        
+    #     if [ $ARGS != *"android"* ]; then
+    #         # compile native android
+    #         echo 'Building native android...'
+    #         ./build-android.sh
+    #     else
+    #         echo 'Building native android was skipped...'
+    #     fi
 
-        if [ $ARGS != *"android"* ]; then
-            # compile native android
-            echo 'Building native android...'
-            ./build-android.sh
-        else
-            echo 'Building native android was skipped...'
-        fi
-
-        if [ $ARGS != *"ios"* ]; then
-            # compile native ios
-            echo 'Building native ios...'
-            ./build-ios.sh
-        else
-            echo 'Building native ios was skipped...'
-        fi
-    else
-        echo "Native build was skipped, using existing native binaries..."
-    fi
+    #     if [ $ARGS != *"ios"* ]; then
+    #         # compile native ios
+    #         echo 'Building native ios...'
+    #         ./build-ios.sh
+    #     else
+    #         echo 'Building native ios was skipped...'
+    #     fi
+    # else
+    #     echo "Native build was skipped, using existing native binaries..."
+    # fi
 
     # copy src
-    echo 'Copying src...'
-    node_modules/.bin/ncp "$SOURCE_DIR" "$TO_SOURCE_DIR"
+    echo 'Copying src typings'
+    cd $SOURCE_DIR
+    echo ../node_modules/.bin/cpy '**/*.d.ts' '../plugin' --parents
+    ../node_modules/.bin/cpy '**/*.d.ts' '../plugin' --parents
+    # echo node_modules/.bin/cpy "$SOURCE_DIR/**/*.d.ts" "$PLUGIN_DIR"
+    # node_modules/.bin/ncp "$SOURCE_DIR/*.d.ts" "$PLUGIN_DIR"
 
     # copy LICENSE to src
     echo 'Copying README & LICENSE to /src...'
-    node_modules/.bin/ncp "$ROOT_DIR"/LICENSE.md "$TO_SOURCE_DIR"/LICENSE.md
-    node_modules/.bin/ncp "$ROOT_DIR"/README.md "$TO_SOURCE_DIR"/README.md
+    # node_modules/.bin/ncp "$ROOT_DIR"/LICENSE.md "$PLUGIN_DIR"/LICENSE.md
+    # node_modules/.bin/ncp "$ROOT_DIR"/README.md "$PLUGIN_DIR"/README.md
 
-    # compile package and copy files required by npm
-    echo 'Building /src...'
-    cd "$TO_SOURCE_DIR"
-    node_modules/.bin/tsc
-    cd ..
 
     echo 'Creating package...'
     # create package dir
@@ -68,12 +67,12 @@ pack() {
 
     # create the package
     cd "$PACK_DIR"
-    npm pack "$TO_SOURCE_DIR"
+    npm pack "$PLUGIN_DIR"
     echo "Package created in $PACK_DIR"
 
     # delete source directory used to create the package
-    cd ..
-    node_modules/.bin/rimraf "$TO_SOURCE_DIR"
+    cd $CURRENT_DIR
+    # node_modules/.bin/rimraf "$TO_SOURCE_DIR"
 }
 
 install && pack

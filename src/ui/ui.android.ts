@@ -63,7 +63,7 @@ function initMapView() {
     //         this.owner &&
     //             this.owner.get().sendEvent(MapClickedEvent, {
     //                 clickType: mapClickInfo.getClickType(),
-    //                 pos: this.owner.get().fromNativeMapPos(mapClickInfo.getClickPos())
+    //                 position: this.owner.get().fromNativeMapPos(mapClickInfo.getClickPos())
     //             });
     //     }
     // }
@@ -91,7 +91,7 @@ function initMapView() {
             this.owner &&
                 this.owner.sendEvent(MapClickedEvent, {
                     clickType: mapClickInfo.getClickType(),
-                    pos: this.owner.fromNativeMapPos(mapClickInfo.getClickPos())
+                    position: this.owner.fromNativeMapPos(mapClickInfo.getClickPos())
                 });
         }
     }
@@ -176,7 +176,7 @@ export class CartoMap extends CartoViewBase {
         super.disposeNativeView();
     }
 
-    fromNativeMapPos(pos: com.carto.core.MapPos) {
+    fromNativeMapPos(position: com.carto.core.MapPos) {
         return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
     }
 

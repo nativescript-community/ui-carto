@@ -1,8 +1,7 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
 import { BillboardOrientation } from './vectorelements';
 import { nativeColorProperty, nativeProperty } from '../carto.ios';
 
@@ -29,16 +28,10 @@ export class TextStyleBuilder extends BaseVectorElementStyleBuilder<NTTextStyleB
     }
 }
 
-export class Text extends BaseVectorElement<NTText, TextOptions> {
+export class Text extends BasePointVectorElement<NTText, TextOptions> {
     createNative(options: TextOptions) {
         const style: NTTextStyle = options.style || options.styleBuilder.buildStyle();
-        const pos = options.pos;
-        let nativePos;
-        if (options.projection) {
-            nativePos = options.projection.getNative().fromWgs84(toNativeMapPos(pos));
-        } else {
-            nativePos = toNativeMapPos(pos);
-        }
+        const nativePos = this.getNativePos(options.position, options.projection);
         const result = NTText.alloc().initWithPosStyleText(nativePos, style, options.text);
         // result['owner'] = new WeakRef(this);
         return result;

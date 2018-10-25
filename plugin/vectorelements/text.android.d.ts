@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements.android';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
 import { BillboardOrientation } from './vectorelements';
@@ -16,7 +16,7 @@ export declare class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.
     _buildStyle: com.carto.styles.LabelStyle;
     buildStyle(): com.carto.styles.LabelStyle;
 }
-export declare class Text extends BaseVectorElement<com.carto.vectorelements.Text, TextOptions> {
+export declare class Text extends BasePointVectorElement<com.carto.vectorelements.Text, TextOptions> {
     createNative(options: TextOptions): com.carto.vectorelements.Text;
     style: TextStyleBuilder | com.carto.styles.TextStyle;
 }

@@ -108,7 +108,7 @@ export abstract class CartoViewBase extends View {
     abstract setZoom(value: number, duration: number);
     abstract setBearing(value: number, duration: number);
     abstract setTilt(value: number, duration: number);
-    abstract fromNativeMapPos(pos: any): MapPos;
+    abstract fromNativeMapPos(position: any): MapPos;
 }
 
 

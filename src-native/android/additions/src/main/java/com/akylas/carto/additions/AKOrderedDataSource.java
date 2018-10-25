@@ -6,6 +6,7 @@ import com.carto.core.MapTile;
 import com.carto.datasources.TileDataSource;
 import com.carto.datasources.components.TileData;
 import com.carto.projections.Projection;
+import android.util.Log;
 
 public class AKOrderedDataSource extends TileDataSource {
     TileDataSource[] sources;
@@ -27,8 +28,10 @@ public class AKOrderedDataSource extends TileDataSource {
         
         minZoom = firstSource.getMinZoom();
         maxZoom = firstSource.getMaxZoom();
+        Log.d("OrderedDataSource", "source" + 0 + " " +  minZoom + "," + maxZoom);
         for(int i = 1; i< sourcesCount; i++) {
             TileDataSource source = sources[i];
+            Log.d("OrderedDataSource", "source" + 0 + " " +  source.getMinZoom() + "," + source.getMaxZoom());
             minZoom = Math.min(minZoom, source.getMinZoom());
             maxZoom = Math.max(maxZoom, source.getMaxZoom());
             
@@ -61,7 +64,7 @@ public class AKOrderedDataSource extends TileDataSource {
     
     @Override
     public TileData loadTile(MapTile tile) {
-//        return sources[1].loadTile(tile);
+    //    return sources[1].loadTile(tile);
         TileData result = null;
         int zoom = tile.getZoom();
         for(int i = 0; i< sourcesCount; i++) {

@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
@@ -9,9 +9,12 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.s
     createNative(options: PointStyleBuilderOptions) {
         return new com.carto.styles.PointStyleBuilder();
     }
-    @nativeProperty size: number;
-    @nativeColorProperty color: Color | string;
-    @nativeProperty clickSize: number;
+    @nativeProperty
+    size: number;
+    @nativeColorProperty
+    color: Color | string;
+    @nativeProperty
+    clickSize: number;
 
     _buildStyle: com.carto.styles.PointStyle;
     buildStyle() {
@@ -22,16 +25,10 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.s
     }
 }
 
-export class Point extends BaseVectorElement<com.carto.vectorelements.Point, PointOptions> {
+export class Point extends BasePointVectorElement<com.carto.vectorelements.Point, PointOptions> {
     createNative(options: PointOptions) {
         const style: com.carto.styles.PointStyle = options.style || options.styleBuilder.buildStyle();
-        const pos = options.pos;
-        let nativePos;
-        if (options.projection) {
-            nativePos = options.projection.getNative().fromWgs84(toNativeMapPos(pos));
-        } else {
-            nativePos = toNativeMapPos(pos);
-        }
+        const nativePos = this.getNativePos(options.position, options.projection);
         const result = new com.carto.vectorelements.Point(nativePos, style);
         // result['owner'] = new WeakRef(this);
         return result;

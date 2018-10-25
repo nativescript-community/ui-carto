@@ -1,6 +1,6 @@
-import { BaseVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements.ios';
 import { NMLModelOptions } from './nmlmodel';
-export declare class NMLModel extends BaseVectorElement<NTNMLModel, NMLModelOptions> {
+export declare class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions> {
     scale: number;
     createNative(options: NMLModelOptions): NTNMLModel;
 }
