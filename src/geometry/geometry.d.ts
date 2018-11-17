@@ -1,4 +1,4 @@
-import { MapPos, Bounds } from '../core/core';
+import { MapPos, MapBounds } from '../core/core';
 
 export interface Geometry {
     getCenterPos(): any // native pos

@@ -6,17 +6,29 @@ import { Projection } from '../projections/projection';
 import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs } from '../carto';
 
-export enum BillboardOrientation {
-    FACE_CAMERA = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA.ordinal(),
-    FACE_CAMERA_GROUND = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND.ordinal(),
-    GROUND = com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.ordinal()
-}
+export const BillboardOrientation = {
+    get FACE_CAMERA() {
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA;
+    },
+    get FACE_CAMERA_GROUND() {
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND;
+    },
+    get GROUND() {
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND;
+    }
+};
 
-export enum BillboardScaling {
-    CONST_SCREEN_SIZE = com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE.ordinal(),
-    SCREEN_SIZE = com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE.ordinal(),
-    WORLD_SIZE = com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE.ordinal()
-}
+export const BillboardScaling = {
+    get CONST_SCREEN_SIZE() {
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE;
+    },
+    get SCREEN_SIZE() {
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE;
+    },
+    get WORLD_SIZE() {
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE;
+    }
+};
 
 export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
     createNative(options: U) {

@@ -132,6 +132,7 @@ export default {
     },
     methods: {
         onNavigatedTo() {
+            console.log('app', 'onNavigatedTo');
             GC();
         },
         onItemTap(item) {

@@ -1,6 +1,7 @@
 require('./ts_helpers');
 import Vue, { registerElement } from 'nativescript-vue';
 import App from './App.vue';
+import Overlays from './examples/Overlays.vue';
 import './styles.scss';
 import { CartoMap, registerLicense } from '~/nativescript-carto/ui/ui';
 import * as application from 'application';

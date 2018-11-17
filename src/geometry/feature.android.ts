@@ -1,9 +1,9 @@
-import { Feature, FeatureCollection as IFeatureCollection } from './feature';
+import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
 import { nativeVariantToJS } from '../utils/utils';
 import { Geometry } from './geometry';
 
 export class FeatureCollection implements IFeatureCollection {
-    constructor(private native: com.carto.geometry.FeatureCollection) {}
+    constructor(protected native: com.carto.geometry.FeatureCollection) {}
 
     getFeature(index: number) {
         const nResult = this.native.getFeature(index);
@@ -20,5 +20,21 @@ export class FeatureCollection implements IFeatureCollection {
     }
     get featureCount() {
         return this.native.getFeatureCount();
+    }
+}
+
+export class VectorTileFeatureCollection extends FeatureCollection {
+    constructor(protected native: com.carto.geometry.VectorTileFeatureCollection) {
+        super(native);
+    }
+
+    getFeature(index: number) {
+        const nResult = this.native.getFeature(index) as com.carto.geometry.VectorTileFeature;
+        return {
+            properties: nativeVariantToJS(nResult.getProperties()),
+            geometry: nResult.getGeometry() as Geometry,
+            id: nResult.getId(),
+            layerName: nResult.getLayerName()
+        } as VectorTileFeature;
     }
 }

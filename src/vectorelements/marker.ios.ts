@@ -10,6 +10,7 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerSt
         return NTMarkerStyleBuilder.alloc().init();
     }
     @nativeProperty width: number;
+    @nativeProperty scaleWithDPI: boolean;
     @nativeProperty size: number;
     @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;

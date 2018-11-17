@@ -10,6 +10,7 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.
         return new com.carto.styles.MarkerStyleBuilder();
     }
     @nativeProperty width: number;
+    @nativeProperty scaleWithDPI: boolean;
     @nativeProperty size: number;
     @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;
@@ -33,7 +34,7 @@ export class Marker extends BasePointVectorElement<com.carto.vectorelements.Mark
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style: com.carto.styles.MarkerStyle = options.style || options.styleBuilder.buildStyle();
-        // console.log('creating marker', style);
+        // console.log('creating marker', options.position, options.projection, options.geometry);
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
             result = new com.carto.vectorelements.Marker(options.geometry as com.carto.geometry.Geometry, style);

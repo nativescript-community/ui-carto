@@ -1,6 +1,6 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
 import { TileDataSource } from './datasource';
-import { Bounds, toNativeMapBounds } from '../core/core';
+import { MapBounds, toNativeMapBounds } from '../core/core';
 
 class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     private _owner: WeakRef<TileDownloadListener>;
@@ -68,7 +68,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<NTPersistentCa
     stopAllDownloads() {
         return this.native && this.native.stopAllDownloads();
     }
-    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: Bounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
+    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
         this.getNative().startDownloadAreaMinZoomMaxZoomTileDownloadListener(
             toNativeMapBounds(mapBounds),
             minZoom,

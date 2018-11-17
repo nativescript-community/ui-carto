@@ -17,9 +17,6 @@ export class PolygonOptions extends LineVectorElementOptions {
     positions: MapPosVector | MapPos[];
     holes?: MapPos[][] | MapPosVectorVector;
     projection?: Projection;
-    size?: number;
-    color?: string | Color;
-    lineStyleBuilder?:LineStyleBuilder<any, any>
 }
 
 export class Polygon extends BaseLineVectorElement<any, PolygonOptions> {

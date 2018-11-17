@@ -1,4 +1,4 @@
-import { Bounds, MapPos } from './core';
+import { MapBounds, MapPos } from './core';
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
@@ -42,9 +42,9 @@ export function fromNativeMapBounds(bounds: NTMapBounds) {
     return {
         southwest: fromNativeMapPos(bounds.getMin()),
         northeast: fromNativeMapPos(bounds.getMax())
-    } as Bounds;
+    } as MapBounds;
 }
-export function toNativeMapBounds(bounds: Bounds) {
+export function toNativeMapBounds(bounds: MapBounds) {
     return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
 }
 

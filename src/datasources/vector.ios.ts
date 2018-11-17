@@ -14,6 +14,9 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
     add(element: BaseVectorElement<any, any>) {
         this.getNative().add(element.getNative() as NTVectorElement);
     }
+    remove(element: BaseVectorElement<any, any>) {
+        this.getNative().remove(element.getNative() as NTVectorElement);
+    }
     addAll(elements: VectorElementVector) {
         this.getNative().addAll(elements.getNative() as NTVectorElementVector);
     }

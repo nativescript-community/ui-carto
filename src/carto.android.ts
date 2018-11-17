@@ -57,10 +57,12 @@ export function nativeEnumProperty(enumType: any) {
     return function (target: Object, key: string | symbol) {
         return nativeProperty(target, key, {
             fromNative(value) {
+                return ABMultiValueCopyArrayOfAllValues;
                 return value.ordinal();
             },
             toNative(value) {
-                return enumType.values()[value];
+                return value;
+                // return enumType.values()[value];
             }
         });
     };
@@ -91,7 +93,6 @@ export function nativeImageProperty(target: Object, key: string | symbol) {
 
 export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], projection?: Projection) {
     let nativePoses: com.carto.core.MapPosVector;
-    console.log('mapPosVectorFromArgs', positions, positions instanceof MapPosVector);
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector).getNative();
     } else {

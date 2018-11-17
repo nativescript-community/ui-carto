@@ -63,7 +63,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:' + computeSupportVersion()
-    compile 'com.carto:carto-mobile-sdk:4.1.4-rc.1@aar'
+    compile 'com.carto:carto-mobile-sdk:4.1.4@aar'
 }
 
 task cleanBuildDir (type: Delete) {

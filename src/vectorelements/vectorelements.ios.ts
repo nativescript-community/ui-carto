@@ -5,16 +5,29 @@ import { Projection } from '../projections/projection';
 import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs } from '../carto';
 
-export enum BillboardOrientation {
-    FACE_CAMERA = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA,
-    FACE_CAMERA_GROUND = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND,
-    GROUND = NTBillboardOrientation.T_BILLBOARD_ORIENTATION_GROUND
-}
-export enum BillboardScaling {
-    CONST_SCREEN_SIZE = NTBillboardScaling.T_BILLBOARD_SCALING_CONST_SCREEN_SIZE,
-    SCREEN_SIZE = NTBillboardScaling.T_BILLBOARD_SCALING_SCREEN_SIZE,
-    WORLD_SIZE = NTBillboardScaling.T_BILLBOARD_SCALING_WORLD_SIZE
-}
+export const BillboardOrientation = {
+    get FACE_CAMERA() {
+        return NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA;
+    },
+    get FACE_CAMERA_GROUND() {
+        return NTBillboardOrientation.T_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND;
+    },
+    get GROUND() {
+        return NTBillboardOrientation.T_BILLBOARD_ORIENTATION_GROUND;
+    }
+};
+
+export const BillboardScaling = {
+    get CONST_SCREEN_SIZE() {
+        return NTBillboardScaling.T_BILLBOARD_SCALING_CONST_SCREEN_SIZE;
+    },
+    get SCREEN_SIZE() {
+        return NTBillboardScaling.T_BILLBOARD_SCALING_SCREEN_SIZE;
+    },
+    get WORLD_SIZE() {
+        return NTBillboardScaling.T_BILLBOARD_SCALING_WORLD_SIZE;
+    }
+};
 
 export class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
     createNative(options: U) {

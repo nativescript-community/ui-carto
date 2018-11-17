@@ -4,6 +4,7 @@ import { IProjection } from '../projections/projection';
 import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
 import { restrictedPanningProperty } from './cssproperties';
+import { MapOptions } from './ui';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -108,6 +109,10 @@ export class CartoMap extends CartoViewBase {
         mapView.setRotationDurationSeconds(0, 0);
 
         return mapView;
+    }
+
+    getOptions() {
+        return this.mapView.getOptions() as MapOptions;
     }
 
 

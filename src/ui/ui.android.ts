@@ -5,6 +5,7 @@ import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
 import * as application from 'application';
 import { restrictedPanningProperty } from './cssproperties';
+import { MapOptions } from './ui';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -126,8 +127,16 @@ export class CartoMap extends CartoViewBase {
                 console.error('no license to register !!!');
             }
         }
+        console.log('creating mapView');
         // Create new instance
         const mapView = new MapView(this._context, new WeakRef(this));
+        // mapView.setPreserveEGLContextOnPause(true);
+        mapView.onResume();
+        // mapView.setEGLContextClientVersion(2);
+        // mapView.setEGLConfigChooser(new com.carto.ui.ConfigChooser());
+        // mapView.setRenderer(mapView);
+        // mapView.setRenderMode(android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        // console.log('setPreserveEGLContextOnPause');
 
         // const listener = new MapEventListener(new WeakRef(this));
         // listener.owner = this;
@@ -138,16 +147,21 @@ export class CartoMap extends CartoViewBase {
         // mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
 
         // 2. General options
-        mapView.getOptions().setRotatable(true); // allows the map to rotate (this is the default behavior)
-        mapView.getOptions().setZoomGestures(true); // allows the map to rotate (this is the default behavior)
-        mapView.getOptions().setTileThreadPoolSize(4); // use two threads to download tiles
+
+        const options = mapView.getOptions();
+        options.setRotatable(true); // allows the map to rotate (this is the default behavior)
+        options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
+        options.setTileThreadPoolSize(4); // use two threads to download tiles
 
         // 3.Set initial location and other parameters, _do not animate_
-        mapView.setMapRotation(this.style['bearing'], 0);
+        // mapView.setMapRotation(this.style['bearing'], 0);
 
         return mapView;
     }
 
+    getOptions() {
+        return this.mapView.getOptions() as MapOptions;
+    }
     /**
      * Initializes properties/listeners of the native view.
      */
@@ -169,7 +183,7 @@ export class CartoMap extends CartoViewBase {
         // Remove reference from native listener to this instance.
         // (this.nativeViewProtected as any).listener.owner = null;
         (this.nativeViewProtected as any).owner = null;
-
+        (this.nativeViewProtected as any).onPause();
         // If you want to recycle nativeView and have modified the nativeView
         // without using Property or CssProperty (e.g. outside our property system - 'setNative' callbacks)
         // you have to reset it to its initial state here.

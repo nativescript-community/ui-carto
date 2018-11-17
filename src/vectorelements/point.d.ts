@@ -15,11 +15,10 @@ export class PointStyleBuilder<T, U extends PointStyleBuilderOptions> extends Ba
     clickSize?: number;
 }
 
-export class PointOptions extends PointVectorElementOptions {
-    size?: number;
-    color?: string | Color;
-}
+export class PointOptions extends PointVectorElementOptions {}
 export class Point extends BasePointVectorElement<any, PointOptions> {
     styleBuilder?: PointStyleBuilder<any, any>;
     style?: any;
+    size?: number;
+    color?: string | Color;
 }

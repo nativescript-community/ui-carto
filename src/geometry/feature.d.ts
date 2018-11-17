@@ -3,6 +3,16 @@ import { Geometry } from './geometry';
 export interface Feature {
     properties: {};
     geometry: Geometry;
+    // getProperties(): any;
+
+    // getGeometry(): Geometry;
+}
+
+
+export interface VectorTileFeature extends Feature {
+    id: number;
+    layerName: string;
+    mapTile: any;
 }
 
 export class FeatureCollection {
@@ -11,4 +21,7 @@ export class FeatureCollection {
     getGeometry(index: number): Geometry;
     getFeatureCount(): number;
     readonly featureCount: number;
+}
+export class VectorTileFeatureCollection extends FeatureCollection {
+    getFeature(index: number): VectorTileFeature;
 }

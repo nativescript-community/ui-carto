@@ -39,7 +39,7 @@ export function addOverlyingLines(map: CartoMap, source: LocalVectorDataSource, 
     const vectorLayer2 = new VectorLayer({ dataSource: source2, visibleZoomRange: [10, 24] });
     map.addLayer(vectorLayer2);
 
-    // Create line style, and line poses
+    // Create line style, and line positions
     let lineStyleBuilder = new LineStyleBuilder({
         color: new Color(255, 255, 255, 255),
         width: 8
@@ -54,18 +54,18 @@ export function addOverlyingLines(map: CartoMap, source: LocalVectorDataSource, 
     ];
 
     // .add first line
-    const line1 = new Line({ projection, poses: linePoses, styleBuilder: lineStyleBuilder });
+    const line1 = new Line({ projection, positions: linePoses, styleBuilder: lineStyleBuilder });
     line1.metaData = { ClickText: 'Line nr 1' };
     source2.add(line1);
 
-    // Create another line style, use the same lines poses
+    // Create another line style, use the same lines positions
     lineStyleBuilder = new LineStyleBuilder({
         color: new Color(255, 204, 15, 0),
         width: 12
     });
 
     // .add second line to the second layer.
-    const line2 = new Line({ projection, poses: linePoses, styleBuilder: lineStyleBuilder });
+    const line2 = new Line({ projection, positions: linePoses, styleBuilder: lineStyleBuilder });
     line2.metaData = { ClickText: 'Line nr 2' };
     source.add(line2);
 }
@@ -79,7 +79,7 @@ export function addText1(source: LocalVectorDataSource, projection: Projection) 
     });
 
     // .add text
-    const popup = new Text({ projection, pos: { latitude: 59.422269, longitude: 24.653302 }, styleBuilder: builder, text: 'Face camera text' });
+    const popup = new Text({ projection, position: { latitude: 59.422269, longitude: 24.653302 }, styleBuilder: builder, text: 'Face camera text' });
     popup.metaData = { ClickText: 'Text nr 1' };
     source.add(popup);
 }
@@ -89,7 +89,7 @@ export function addText2(source: LocalVectorDataSource, projection: Projection) 
         orientationMode: BillboardOrientation.FACE_CAMERA_GROUND
     });
 
-    const popup = new Text({ projection, pos: { latitude: 59.426869, longitude: 24.633216 }, styleBuilder: builder, text: 'Face camera ground text' });
+    const popup = new Text({ projection, position: { latitude: 59.426869, longitude: 24.633216 }, styleBuilder: builder, text: 'Face camera ground text' });
     popup.metaData = { ClickText: 'Text nr 2' };
 
     source.add(popup);
@@ -101,7 +101,7 @@ export function addText3(source: LocalVectorDataSource, projection: Projection) 
         orientationMode: BillboardOrientation.GROUND
     });
 
-    const popup = new Text({ projection, pos: { latitude: 59.420839, longitude: 24.646457 }, styleBuilder: builder, text: 'Ground text' });
+    const popup = new Text({ projection, position: { latitude: 59.420839, longitude: 24.646457 }, styleBuilder: builder, text: 'Ground text' });
     popup.metaData = { ClickText: 'Text nr 3' };
 
     source.add(popup);
@@ -127,7 +127,7 @@ export function addBalloonPopup1(source: LocalVectorDataSource, projection: Proj
 
     // builder.RightMargins = new BalloonPopupMargins(2, 6, 12, 6);
 
-    const popup1 = new BalloonPopup({ projection, pos: { latitude: 59.425521, longitude: 24.655662 }, styleBuilder: builder, title: 'Popup with pos', description: 'Images, round' });
+    const popup1 = new BalloonPopup({ projection, position: { latitude: 59.425521, longitude: 24.655662 }, styleBuilder: builder, title: 'Popup with pos', description: 'Images, round' });
     popup1.metaData = { ClickText: 'Popup nr 1' };
     source.add(popup1);
 }
@@ -171,7 +171,7 @@ export function addBalloonPopup3(source: LocalVectorDataSource, projection: Proj
 
     const title = "This title will be wrapped if there's not enough space on the screen.";
     const description = 'Description is set to be truncated with three dots, unless the screen is really really big.';
-    const popup = new BalloonPopup({ projection, pos: { latitude: 59.432521, longitude: 24.658662 }, styleBuilder: builder, title, description });
+    const popup = new BalloonPopup({ projection, position: { latitude: 59.432521, longitude: 24.658662 }, styleBuilder: builder, title, description });
     popup.metaData = { ClickText: 'Popup nr 3' };
     source.add(popup);
 }
@@ -182,7 +182,7 @@ export function add2DPolygon(source: LocalVectorDataSource, projection: Projecti
         color: new Color(255, 0, 0, 0)
     });
 
-    // Create polygon style and poses
+    // Create polygon style and positions
     const polygonBuilder = new PolygonStyleBuilder({
         color: new Color(255, 255, 0, 0),
         lineStyleBuilder: lineBuilder
@@ -213,7 +213,7 @@ export function add2DPolygon(source: LocalVectorDataSource, projection: Projecti
     ];
 
     // .add polygon
-    const polygon = new Polygon({ projection, poses: polygonPoses, holes: polygonHoles, styleBuilder: polygonBuilder });
+    const polygon = new Polygon({ projection, positions: polygonPoses, holes: polygonHoles, styleBuilder: polygonBuilder });
     polygon.metaData = { ClickText: 'Polygon' };
     source.add(polygon);
 }
@@ -222,13 +222,13 @@ export function add3DCar(source: LocalVectorDataSource, projection: Projection) 
     // //.add a single 3D model to the vector layer
     // // Be sure to add milktruck.nml to your *Assets*, not Drawable, folder (Android)
     const name = '~/assets/milktruck.nml';
-    const model = new NMLModel({ projection, pos: { latitude: 59.423939, longitude: 24.646469 }, name, scale: 20 });
+    const model = new NMLModel({ projection, position: { latitude: 59.423939, longitude: 24.646469 }, name, scale: 20 });
     model.metaData = { ClickText: 'Single Model' };
     source.add(model);
 }
 
 export function add3DPolygon(source: LocalVectorDataSource, projection: Projection) {
-    // Create 3d polygon style and poses
+    // Create 3d polygon style and positions
     const polygon3DStyleBuilder = new Polygon3DStyleBuilder({
         color: new Color(255, 51, 51, 255)
     });
@@ -239,7 +239,7 @@ export function add3DPolygon(source: LocalVectorDataSource, projection: Projecti
     polygon3DPoses.add(projection.fromWgs84({ latitude: 59.413123, longitude: 24.652667 }));
     polygon3DPoses.add(projection.fromWgs84({ latitude: 59.416703, longitude: 24.650736 }));
     polygon3DPoses.add(projection.fromWgs84({ latitude: 59.416245, longitude: 24.646444 }));
-    // Create 3d polygon holes poses
+    // Create 3d polygon holes positions
     const holePositions = new MapPosVector();
     holePositions.add(projection.fromWgs84({ latitude: 59.411922, longitude: 24.643409 }));
     holePositions.add(projection.fromWgs84({ latitude: 59.412896, longitude: 24.651207 }));
@@ -247,7 +247,7 @@ export function add3DPolygon(source: LocalVectorDataSource, projection: Projecti
     const holes = new MapPosVectorVector();
     holes.add(holePositions);
     // .add to datasource
-    const polygon = new Polygon3D({ poses: polygon3DPoses, holes, styleBuilder: polygon3DStyleBuilder, height: 150 });
+    const polygon = new Polygon3D({ positions: polygon3DPoses, holes, styleBuilder: polygon3DStyleBuilder, height: 150 });
     polygon.metaData = { ClickText: 'Polygon 3D' };
     source.add(polygon);
 }
@@ -264,7 +264,7 @@ export function GetMarker(projection: Projection, position: MapPos, image: any) 
     });
 
     // Create and return marker
-    return new Marker({ projection, pos: position, styleBuilder: builder });
+    return new Marker({ projection, position, styleBuilder: builder });
 }
 
 export function GetPoint(projection: Projection, position: MapPos, color) {
@@ -273,5 +273,5 @@ export function GetPoint(projection: Projection, position: MapPos, color) {
         size: 16
     });
 
-    return new Point({ projection, pos: position, styleBuilder: pointStyleBuilder });
+    return new Point({ projection, position, styleBuilder: pointStyleBuilder });
 }

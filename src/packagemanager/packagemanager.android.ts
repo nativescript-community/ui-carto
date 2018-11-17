@@ -1,19 +1,53 @@
-import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageManagerTileDataSourceOptions, PackageStatus } from './packagemanager';
+import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from './packagemanager';
 import { DataSource, TileDataSource } from '../datasources/datasource';
+import { MapBounds, MapPos } from '../core/core';
+import { toNativeMapBounds, toNativeMapPos } from '../core/core.android';
+import { Projection } from '../projections/projection';
 
-export enum CartoMapStyle {
-    VOYAGER = com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_VOYAGER.ordinal(),
-    POSITRON = com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_POSITRON.ordinal(),
-    DARKMATTER = com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER.ordinal()
-}
+export const CartoMapStyle = {
+    get VOYAGER() {
+        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_VOYAGER;
+    },
+    get POSITRON() {
+        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_POSITRON;
+    },
+    get DARKMATTER() {
+        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER;
+    }
+};
 
-export enum PackageErrorType {
-    CONNECTION = com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_CONNECTION.ordinal(),
-    DOWNLOAD_LIMIEXCEEDED = com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED.ordinal(),
-    NO_OFFLINE_PLAN = com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN.ordinal(),
-    PACKAGE_TOO_BIG = com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG.ordinal(),
-    SYSTEM = com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_SYSTEM.ordinal()
-}
+export const PackageType = {
+    get MAP() {
+        return com.carto.packagemanager.PackageType.PACKAGE_TYPE_MAP;
+    },
+    get ROUTING() {
+        return com.carto.packagemanager.PackageType.PACKAGE_TYPE_ROUTING;
+    },
+    get GEOCODING() {
+        return com.carto.packagemanager.PackageType.PACKAGE_TYPE_GEOCODING;
+    },
+    get VALHALLA_ROUTING() {
+        return com.carto.packagemanager.PackageType.PACKAGE_TYPE_VALHALLA_ROUTING;
+    }
+};
+
+export const PackageErrorType = {
+    get CONNECTION() {
+        return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_CONNECTION;
+    },
+    get DOWNLOAD_LIMIEXCEEDED() {
+        return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED;
+    },
+    get NO_OFFLINE_PLAN() {
+        return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN;
+    },
+    get PACKAGE_TOO_BIG() {
+        return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG;
+    },
+    get SYSTEM() {
+        return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_SYSTEM;
+    }
+};
 // export enum PackageAction {
 //     READY = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_READY.ordinal(),
 //     WAITING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_WAITING.ordinal(),
@@ -21,13 +55,23 @@ export enum PackageErrorType {
 //     COPYING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_COPYING.ordinal(),
 //     REMOVING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_REMOVING.ordinal()
 // }
-export enum PackageAction {
-    READY,
-    WAITING,
-    DOWNLOADING,
-    COPYING,
-    REMOVING
-}
+export const PackageAction = {
+    get READY() {
+        return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_READY;
+    },
+    get WAITING() {
+        return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_WAITING;
+    },
+    get DOWNLOADING() {
+        return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_DOWNLOADING;
+    },
+    get COPYING() {
+        return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_COPYING;
+    },
+    get REMOVING() {
+        return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_REMOVING;
+    }
+};
 
 class PackageManagerListenerImpl extends com.carto.packagemanager.PackageManagerListener {
     private _owner: WeakRef<CartoPackageManagerListener>;
@@ -68,10 +112,7 @@ class PackageManagerListenerImpl extends com.carto.packagemanager.PackageManager
     onPackageStatusChanged(id: string, version: number, status: com.carto.packagemanager.PackageStatus): void {
         const owner = this._owner.get();
         if (owner && owner.onPackageStatusChanged) {
-            owner.onPackageStatusChanged(id, version, {
-                currentAction: status.getCurrentAction() as any,
-                progress: status.getProgress()
-            });
+            owner.onPackageStatusChanged(id, version, status as any);
         }
     }
 
@@ -128,14 +169,8 @@ export function fromVariant(variant: com.carto.core.Variant) {
         }
     }
 }
-export enum PackageType {
-    MAP,
-    ROUTING,
-    GEOCODING,
-    VALHALLA_ROUTING
-}
 
-function fromNTPackageInfo(packageInfo: com.carto.packagemanager.PackageInfo) {
+function fromNativeackageInfo(packageInfo: com.carto.packagemanager.PackageInfo) {
     return {
         metaInfo: packageInfo.getMetaInfo() ? fromVariant(packageInfo.getMetaInfo().getVariant()) : undefined,
         name: packageInfo.getName(),
@@ -148,9 +183,9 @@ function fromNTPackageInfo(packageInfo: com.carto.packagemanager.PackageInfo) {
     };
 }
 
-export class CartoPackageManager extends DataSource<com.carto.packagemanager.CartoPackageManager, CartoPackageManagerOptions> {
+export class CartoPackageManager extends DataSource<com.akylas.carto.additions.AKCartoPackageManager, CartoPackageManagerOptions> {
     createNative(options: CartoPackageManagerOptions) {
-        return new com.carto.packagemanager.CartoPackageManager(options.source, options.dataFolder);
+        return new com.akylas.carto.additions.AKCartoPackageManager(options.source, options.dataFolder);
     }
     set listener(listener: CartoPackageManagerListener) {
         if (this.native) {
@@ -167,6 +202,12 @@ export class CartoPackageManager extends DataSource<com.carto.packagemanager.Car
     stop(wait: boolean) {
         this.getNative().stop(wait);
     }
+    getServerPackageListAge() {
+        return this.getNative().getServerPackageListAge();
+    }
+    getServerPackageListMetaInfo() {
+        return this.getNative().getServerPackageListMetaInfo();
+    }
     startPackageListDownload() {
         return this.getNative().startPackageListDownload();
     }
@@ -182,21 +223,47 @@ export class CartoPackageManager extends DataSource<com.carto.packagemanager.Car
     getLocalPackage(packageId: string) {
         return this.getNative().getLocalPackage(packageId);
     }
-    getLocalPackages() {
-        const vector = this.getNative().getLocalPackages();
-        console.log('getLocalPackages', vector.size());
-        const result = [];
-        for (let index = 0; index < vector.size(); index++) {
-            result[index] = vector.get(index);
+    getLocalPackageStatus(packageId: string, version: number) {
+        return this.getNative().getLocalPackageStatus(packageId, version);
+    }
+    getLocalPackages(callback?: (result: PackageInfoVector) => void) {
+        if (callback) {
+            return this.getNative().getLocalPackagesCallback(new com.akylas.carto.additions.ServerPackagesCallback({ onServerPackages: callback as any }));
         }
-        return result as PackageInfo[];
+        return this.getNative().getLocalPackages();
+        // const result = [];
+        // for (let index = 0; index < vector.size(); index++) {
+        //     result[index] = vector.get(index);
+        // }
+        // return result as PackageInfo[];
     }
     getServerPackage(packageId: string) {
         return this.getNative().getServerPackage(packageId);
     }
-    getServerPackages() {
-        const vector = this.getNative().getServerPackages();
-        console.log('getServerPackages', vector.size());
+    getServerPackages(callback?: (result: PackageInfoVector) => void) {
+        if (callback) {
+            return this.getNative().getServerPackagesCallback(new com.akylas.carto.additions.ServerPackagesCallback({ onServerPackages: callback as any }));
+        }
+        return this.getNative().getServerPackages();
+        // console.log('getServerPackages', vector.size());
+        // const result = [];
+        // for (let index = 0; index < vector.size(); index++) {
+        //     result[index] = vector.get(index);
+        // }
+        // return result as PackageInfo[];
+    }
+    setPackagePriority(id: string, priority: number) {
+        this.getNative().setPackagePriority(id, priority);
+    }
+    cancelPackageTasks(id: string) {
+        this.getNative().cancelPackageTasks(id);
+    }
+    isAreaDownloaded(bounds: MapBounds, zoom: number, projection: Projection) {
+        return this.getNative().isAreaDownloaded(toNativeMapBounds(bounds), zoom, projection.getNative());
+    }
+    suggestPackages(position: MapPos, projection: Projection) {
+        const vector = this.getNative().suggestPackages(toNativeMapPos(position), projection.getNative());
+        // console.log('getServerPackages', vector.size());
         const result = [];
         for (let index = 0; index < vector.size(); index++) {
             result[index] = vector.get(index);

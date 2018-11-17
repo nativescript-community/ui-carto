@@ -1,6 +1,6 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
 import { TileDataSource } from './datasource';
-import { Bounds, toNativeMapBounds } from '../core/core';
+import { MapBounds, toNativeMapBounds } from '../core/core';
 
 export class PersistentCacheTileDataSource extends TileDataSource<com.carto.datasources.PersistentCacheTileDataSource, PersistentCacheTileDataSourceOptions> {
     createNative(options: PersistentCacheTileDataSourceOptions) {
@@ -24,7 +24,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
     stopAllDownloads() {
         return this.native && this.native.stopAllDownloads();
     }
-    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: Bounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
+    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
         this.getNative().startDownloadArea(toNativeMapBounds(mapBounds), minZoom, maxZoom, TileDownloadListenerImpl.initWithOwner(new WeakRef(tileDownloadListener)));
     }
 }

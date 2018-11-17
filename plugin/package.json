@@ -16,8 +16,8 @@
         "iOS"
     ],
     "author": {
-        "name": "Your Name",
-        "email": "youremail@yourdomain.com"
+        "name": "Martin Guillon",
+    "email": "martin.guillon@akylas.fr"
     },
     "bugs": {
         "url": "https://github.com/farfromrefug/nativescript-carto/issues"

@@ -109,7 +109,7 @@ export default Vue.extend({
         },
         initializeClusterLayer() {
             const builder = new ClusterElementBuilder({
-                buildClusterElement: (pos: MapPos, elements: VectorElementVector) => {
+                buildClusterElement: (position: MapPos, elements: VectorElementVector) => {
                     const count = elements ? elements.size() : 0;
                     let styleBuilder = this.findByKey(count);
 
@@ -128,7 +128,7 @@ export default Vue.extend({
                         this.elementsStyles.set(count, styleBuilder);
                     }
                     // console.log('buildClusterElement', pos, count, !!styleBuilder);
-                    return new Marker({ pos, styleBuilder });
+                    return new Marker({ position, styleBuilder });
                 },
                 bitmap: '~/assets/images/marker_black.png'
             });

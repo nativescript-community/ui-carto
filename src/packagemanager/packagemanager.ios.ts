@@ -1,6 +1,9 @@
 import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageManagerTileDataSourceOptions } from './packagemanager';
 import { DataSource, TileDataSource } from '../datasources/datasource';
 import { nativeVariantToJS } from '../utils/utils';
+import { MapBounds, MapPos } from '../core/core';
+import { Projection } from '../projections/projection';
+import { toNativeMapBounds, toNativeMapPos } from '../core/core.ios';
 
 export enum PackageErrorType {
     CONNECTION = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_CONNECTION,
@@ -63,10 +66,7 @@ class NTPackageManagerListenerImpl extends NTPackageManagerListener {
     onPackageStatusChangedVersionStatus(id: string, version: number, status: NTPackageStatus): void {
         const owner = this._owner.get();
         if (owner && owner.onPackageStatusChanged) {
-            owner.onPackageStatusChanged(id, version, {
-                currentAction: status.getCurrentAction() as number,
-                progress: status.getProgress()
-            });
+            owner.onPackageStatusChanged(id, version, status as any);
         }
     }
 
@@ -124,6 +124,13 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     stop(wait: boolean) {
         this.getNative().stop(wait);
     }
+
+    getServerPackageListAge() {
+        return this.getNative().getServerPackageListAge();
+    }
+    getServerPackageListMetaInfo() {
+        return this.getNative().getServerPackageListMetaInfo();
+    }
     startPackageListDownload() {
         return this.getNative().startPackageListDownload();
     }
@@ -139,6 +146,10 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     getLocalPackage(packageId: string) {
         return this.getNative().getLocalPackage(packageId);
     }
+
+    getLocalPackageStatus(packageId: string, version: number) {
+        return this.getNative().getLocalPackageStatusVersion(packageId, version);
+    }
     getLocalPackages() {
         const vector = this.getNative().getLocalPackages();
         const result = [];
@@ -152,6 +163,25 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     }
     getServerPackages() {
         const vector = this.getNative().getServerPackages();
+        const result = [];
+        for (let index = 0; index < vector.size(); index++) {
+            result[index] = vector.get(index);
+        }
+        return result as PackageInfo[];
+    }
+    setPackagePriority(id: string, priority: number) {
+        this.getNative().setPackagePriorityPriority(id, priority);
+    }
+    cancelPackageTasks(id: string) {
+        this.getNative().cancelPackageTasks(id);
+    }
+
+    isAreaDownloaded(bounds: MapBounds, zoom: number, projection: Projection) {
+        return this.getNative().isAreaDownloadedZoomProjection(toNativeMapBounds(bounds), zoom, projection.getNative());
+    }
+    suggestPackages(position: MapPos, projection: Projection) {
+        const vector = this.getNative().suggestPackagesProjection(toNativeMapPos(position), projection.getNative());
+        // console.log('getServerPackages', vector.size());
         const result = [];
         for (let index = 0; index < vector.size(); index++) {
             result[index] = vector.get(index);

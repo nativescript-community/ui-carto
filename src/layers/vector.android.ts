@@ -18,12 +18,25 @@ import { fromNativeMapPos } from '../core/core';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { Projection } from '../projections/projection';
 import { nativeProperty } from '../carto.android';
+import { nativeVariantToJS } from '../utils/utils.android';
 
-export enum VectorTileRenderOrder {
-    HIDDEN,
-    LAYER,
-    LAST
-}
+// export enum VectorTileRenderOrder {
+//     HIDDEN,
+//     LAYER,
+//     LAST
+// }
+
+export const VectorTileRenderOrder = {
+    get HIDDEN() {
+        return com.carto.layers.VectorTileRenderOrder.VECTOR_TILE_RENDER_ORDER_HIDDEN;
+    },
+    get LAYER() {
+        return com.carto.layers.VectorTileRenderOrder.VECTOR_TILE_RENDER_ORDER_LAYER;
+    },
+    get LAST() {
+        return com.carto.layers.VectorTileRenderOrder.VECTOR_TILE_RENDER_ORDER_LAST;
+    }
+};
 
 interface VectorTileEventListener extends com.akylas.carto.additions.AKVectorTileEventListener {
     // tslint:disable-next-line:no-misused-new
@@ -46,22 +59,27 @@ function initVectorTileEventListener() {
         public onClicked(info: com.carto.ui.VectorTileClickInfo) {
             const owner = this._owner.get();
             if (owner && owner.onVectorTileClicked) {
-                const featureData = {};
+                // const featureData = {};
+                // const feature = info.getFeature();
+                // const variant = feature.getProperties();
+                // const keys = variant.getObjectKeys();
+                // let key, i;
+                // for (i = 0; i < keys.size(); i++) {
+                //     key = keys.get(i);
+                //     featureData[key] = variant.getObjectElement(key).getString();
+                // }
                 const feature = info.getFeature();
-                const variant = feature.getProperties();
-                const keys = variant.getObjectKeys();
-                let key, i;
-                for (i = 0; i < keys.size(); i++) {
-                    key = keys.get(i);
-                    featureData[key] = variant.getObjectElement(key).getString();
-                }
+                const geometry = feature.getGeometry();
+                const featurePos = geometry.getCenterPos();
                 return (
                     owner.onVectorTileClicked({
                         type: info.getClickType(),
                         layer: this._layer.get() as any,
                         featureId: info.getFeatureId(),
-                        featureData,
+                        featureData: nativeVariantToJS(info.getFeature().getProperties()),
                         featureLayerName: info.getFeatureLayerName(),
+                        featureGeometry: geometry,
+                        featurePosition: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(featurePos)) : fromNativeMapPos(featurePos),
                         position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos())
                     }) || false
                 );
@@ -113,8 +131,8 @@ function initVectorElementEventListener() {
 }
 
 export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
-    setLabelRenderOrder(order: VectorTileRenderOrder) {
-        this.getNative().setLabelRenderOrder(order as any);
+    setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
+        this.getNative().setLabelRenderOrder(order);
     }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
         if (listener) {
@@ -148,12 +166,12 @@ export class VectorTileLayer extends BaseVectorTileLayer<com.carto.layers.Vector
 
 export class CartoOnlineVectorTileLayer extends BaseVectorTileLayer<com.carto.layers.CartoOnlineVectorTileLayer, CartoOnlineVectorTileLayerOptions> {
     createNative(options: CartoOnlineVectorTileLayerOptions) {
-        return new com.carto.layers.CartoOnlineVectorTileLayer(com.carto.layers.CartoBaseMapStyle.values()[options.style]);
+        return new com.carto.layers.CartoOnlineVectorTileLayer(options.style as any);
     }
 }
 export class CartoOfflineVectorTileLayer extends TileLayer<com.carto.layers.CartoOfflineVectorTileLayer, CartoOfflineVectorTileLayerOptions> {
     createNative(options: CartoOfflineVectorTileLayerOptions) {
-        return new com.carto.layers.CartoOfflineVectorTileLayer((options.packageManager as CartoPackageManager).getNative(), com.carto.layers.CartoBaseMapStyle.values()[options.style]);
+        return new com.carto.layers.CartoOfflineVectorTileLayer((options.packageManager as CartoPackageManager).getNative(), options.style as any);
     }
 }
 
@@ -271,9 +289,12 @@ export class ClusteredVectorLayer extends Layer<com.carto.layers.ClusteredVector
         return new com.carto.layers.ClusteredVectorLayer(options.dataSource.getNative(), options.builder.getNative());
     }
 
-    @nativeProperty minimumClusterDistance: number;
-    @nativeProperty maximumClusterZoom: number;
-    @nativeProperty animatedClusters: boolean;
+    @nativeProperty
+    minimumClusterDistance: number;
+    @nativeProperty
+    maximumClusterZoom: number;
+    @nativeProperty
+    animatedClusters: boolean;
     // get minimumClusterDistance() {
     //     return this.options.minimumClusterDistance;
     // }
