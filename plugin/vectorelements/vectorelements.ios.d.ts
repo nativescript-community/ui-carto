@@ -2,16 +2,16 @@ import { LineVectorElementOptions, PointVectorElementOptions, VectorElementOptio
 import { BaseNative } from '../carto.common';
 import { Projection } from '../projections/projection';
 import { MapPos, MapPosVector } from '../core/core';
-export declare enum BillboardOrientation {
-    FACE_CAMERA = 0,
-    FACE_CAMERA_GROUND = 1,
-    GROUND = 2,
-}
-export declare enum BillboardScaling {
-    CONST_SCREEN_SIZE = 2,
-    SCREEN_SIZE = 1,
-    WORLD_SIZE = 0,
-}
+export declare const BillboardOrientation: {
+    readonly FACE_CAMERA: NTBillboardOrientation;
+    readonly FACE_CAMERA_GROUND: NTBillboardOrientation;
+    readonly GROUND: NTBillboardOrientation;
+};
+export declare const BillboardScaling: {
+    readonly CONST_SCREEN_SIZE: NTBillboardScaling;
+    readonly SCREEN_SIZE: NTBillboardScaling;
+    readonly WORLD_SIZE: NTBillboardScaling;
+};
 export declare class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
     createNative(options: U): any;
     metaData: Object;

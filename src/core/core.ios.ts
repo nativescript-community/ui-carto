@@ -12,21 +12,14 @@ export enum ClickType {
     DOUBLE = NTClickType.T_CLICK_TYPE_DOUBLE,
     DUAL = NTClickType.T_CLICK_TYPE_DUAL
 }
-export enum PackageErrorType {
-    CONNECTION = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_CONNECTION,
-    DOWNLOAD_LIMIT_EXCEEDED = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED,
-    NO_OFFLINE_PLAN = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN,
-    PACKAGE_TOO_BIG = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG,
-    SYSTEM = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_SYSTEM
-}
-export enum PackageAction {
-    READY = NTPackageAction.T_PACKAGE_ACTION_READY,
-    WAITING = NTPackageAction.T_PACKAGE_ACTION_WAITING,
-    DOWNLOADING = NTPackageAction.T_PACKAGE_ACTION_DOWNLOADING,
-    COPYING = NTPackageAction.T_PACKAGE_ACTION_COPYING,
-    REMOVING = NTPackageAction.T_PACKAGE_ACTION_REMOVING
-}
 
+export function nativeVectorToArray<T>(vector: NativeVector<T>) {
+    const result: T[] = [];
+    for (let index = 0; index < vector.size(); index++) {
+        result[index] = vector.get(index);
+    }
+    return result;
+}
 export function fromNativeMapPos(position: NTMapPos) {
     return {
         latitude: position.getY(),

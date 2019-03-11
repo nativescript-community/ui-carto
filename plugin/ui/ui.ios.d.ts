@@ -3,6 +3,7 @@ import { EPSG3857 } from '../projections/epsg3857';
 import { IProjection } from '../projections/projection';
 import { MapPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
+import { MapOptions } from './ui';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 export declare function registerLicense(value: string): void;
 export declare function getLicenseKey(): string;
@@ -14,6 +15,7 @@ export declare class CartoMap extends CartoViewBase {
     _projection: IProjection;
     projection: IProjection;
     createNativeView(): Object;
+    getOptions(): MapOptions;
     initNativeView(): void;
     disposeNativeView(): void;
     fromNativeMapPos(position: NTMapPos): MapPos;

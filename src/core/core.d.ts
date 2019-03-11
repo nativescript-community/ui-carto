@@ -9,18 +9,19 @@ export interface MapBounds {
     northeast: MapPos;
     southwest: MapPos;
 }
-export namespace MapBounds{
+export namespace MapBounds {
     function fromCoordinates(southwest: MapPos, northeast: MapPos): MapBounds;
 }
 export declare function fromNativeMapPos(pos): MapPos;
 export declare function toNativeMapPos(position: MapPos): any;
 export declare function fromNativeMapBounds(bounds: any): MapBounds;
 export declare function toNativeMapBounds(bounds: MapBounds): any;
+export declare function nativeVectorToArray<T>(vector: NativeVector<T>): T[];
 
-declare enum CartoMapStyle {
-    VOYAGER,
-    POSITRON,
-    DARKMATTER
+declare class  CartoMapStyle {
+    static  VOYAGER: CartoMapStyle
+    static  POSITRON: CartoMapStyle
+    static  DARKMATTER: CartoMapStyle
 }
 
 declare enum ClickType {

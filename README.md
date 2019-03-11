@@ -26,6 +26,36 @@ Describe any usage specifics for your plugin. Give examples for Android, iOS, An
     Usage code snippets here
     ```)
 
+### Android 
+o do this in Android 9 Pie you will have to set a networkSecurityConfig in your Manifest application tag like this:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest ... >
+    <application android:networkSecurityConfig="@xml/network_security_config">
+    </application>
+</manifest>
+```
+Then in your xml folder you now have to create a file named network_security_config just like the way you have named it in the Manifest and from there the content of your file should be like this to enable all requests without encryptions:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
+```
+From there you are good to go. Now your app will make requests for all types of connections. For additional information read here.
+
+## Generate typings
+
+### Android
+```
+
+### iOS
+
 ## API
 
 Describe your plugin methods and properties here. See [nativescript-feedback](https://github.com/EddyVerbruggen/nativescript-feedback) for example.

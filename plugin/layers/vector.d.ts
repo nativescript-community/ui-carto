@@ -7,6 +7,7 @@ import { MBVectorTileDecoder } from '../vectortiles/vectortiles';
 import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { Projection } from '../projections/projection';
+import { Geometry } from '../geometry/geometry';
 
 export enum VectorTileRenderOrder {
     HIDDEN,
@@ -21,6 +22,8 @@ export interface VectorTileEventData {
     featureData: { [k: string]: string };
     featureLayerName: string;
     position: MapPos;
+    featurePosition: MapPos;
+    featureGeometry: Geometry;
 }
 export interface VectorElementEventData {
     type: any;

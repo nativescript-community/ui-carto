@@ -4,18 +4,6 @@ import { MapBounds, MapPos } from '../core/core';
 import { toNativeMapBounds, toNativeMapPos } from '../core/core.android';
 import { Projection } from '../projections/projection';
 
-export const CartoMapStyle = {
-    get VOYAGER() {
-        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_VOYAGER;
-    },
-    get POSITRON() {
-        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_POSITRON;
-    },
-    get DARKMATTER() {
-        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER;
-    }
-};
-
 export const PackageType = {
     get MAP() {
         return com.carto.packagemanager.PackageType.PACKAGE_TYPE_MAP;
@@ -77,7 +65,7 @@ class PackageManagerListenerImpl extends com.carto.packagemanager.PackageManager
     private _owner: WeakRef<CartoPackageManagerListener>;
 
     public static initWithOwner(owner: WeakRef<CartoPackageManagerListener>): PackageManagerListenerImpl {
-        const delegate = new PackageManagerListenerImpl() as PackageManagerListenerImpl;
+        const delegate = new PackageManagerListenerImpl();
         delegate._owner = owner;
         return delegate;
     }

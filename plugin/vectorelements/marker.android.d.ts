@@ -6,6 +6,7 @@ import { BillboardOrientation, BillboardScaling } from './vectorelements';
 export declare class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions): com.carto.styles.MarkerStyleBuilder;
     width: number;
+    scaleWithDPI: boolean;
     size: number;
     placementPriority: number;
     color: Color | string;

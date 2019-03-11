@@ -6,67 +6,57 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SOURCE_NAME="CartoAdditions"
 IOS_SOURCE_DIR="$CURRENT_DIR/../src-native/ios"
 
-PROJECT_NAME="$SOURCE_NAME.xcworkspace"
+CONFIGURATION="Release"
+PROJECT_NAME="$SOURCE_NAME"
 TARGET_NAME="$SOURCE_NAME"
 FRAMEWORK_NAME="$SOURCE_NAME"
 
-BUILD_DIR="$IOS_SOURCE_DIR/build/intermediates/${FRAMEWORK_NAME}"
-BUILD_FOR_SIMULATOR_DIR="$BUILD_DIR/Release-iphonesimulator"
-BUILD_OUTPUT_DIR="$IOS_SOURCE_DIR/build/outputs"
+BUILD_DIR="$IOS_SOURCE_DIR/build"
+# BUILD_FOR_SIMULATOR_DIR="$BUILD_DIR/$CONFIGURATION-iphonesimulator"
+# BUILD_OUTPUT_DIR="$IOS_SOURCE_DIR/build/outputs"
 
 PLUGIN_TARGET_DIR="$CURRENT_DIR/../plugin/platforms"
 PLUGIN_TARGET_SUBDIR="$PLUGIN_TARGET_DIR/ios"
 
 CARTO_FRAMEWORK="$IOS_SOURCE_DIR/Pods/CartoMobileSDK/CartoMobileSDK.framework"
 
+UNIVERSAL_OUTPUTFOLDER="$IOS_SOURCE_DIR/build/outputs"
+
+
 cd $IOS_SOURCE_DIR
 
-if [ -d "$BUILD_DIR" ]; then
-    rm -rf "$BUILD_DIR"
+if [ -d "$BUILD_UNIVERSAL_OUTPUTFOLDERDIR" ]; then
+    rm -rf "$UNIVERSAL_OUTPUTFOLDER"
 fi
 
 echo "install pod" 
 pod install
-cp -r $IOS_SOURCE_DIR/FrameworkFix/* $CARTO_FRAMEWORK
 
-echo "Build for iphonesimulator $PROJECT_NAME"
-xcodebuild -workspace $PROJECT_NAME -scheme $TARGET_NAME \
-    -configuration Release \
-    -sdk iphonesimulator \
-    GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS ' \
-    CONFIGURATION_BUILD_DIR=$BUILD_FOR_SIMULATOR_DIR \
-    clean build -quiet
+# Make sure the output directory exists
 
-echo "Build for iphoneos $PROJECT_NAME"
-xcodebuild -workspace $PROJECT_NAME -scheme $TARGET_NAME \
-    -configuration Release \
-    -sdk iphoneos \
-    GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS ' \
-    clean build archive -quiet
+mkdir -p "${UNIVERSAL_OUTPUTFOLDER}"
 
-DEVICE_DIR="$(xcodebuild -workspace $PROJECT_NAME -scheme $TARGET_NAME -configuration Release \
-    -showBuildSettings | grep -v PODS_CONFIGURATION_BUILD_DIR | grep CONFIGURATION_BUILD_DIR | sed 's/.*= //')"
-echo "DEVICE_DIR \"$DEVICE_DIR\""
-echo "BUILD_OUTPUT_DIR \"$BUILD_OUTPUT_DIR\""
+# Next, work out if we're in SIM or DEVICE
 
-if [ -d "$BUILD_OUTPUT_DIR/$FRAMEWORK_NAME.framework" ]; then
-    rm -rf "$BUILD_OUTPUT_DIR/$FRAMEWORK_NAME.framework"
-fi
+xcodebuild -workspace $PROJECT_NAME.xcworkspace -scheme $TARGET_NAME -configuration Debug -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR="${BUILD_DIR}" BUILD_ROOT="${BUILD_ROOT}" clean build
 
-mkdir -p "$BUILD_OUTPUT_DIR/$FRAMEWORK_NAME.framework"
+xcodebuild -workspace $PROJECT_NAME.xcworkspace -scheme $TARGET_NAME ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR="${BUILD_DIR}" BUILD_ROOT="${BUILD_ROOT}" clean build
 
+# Step 2. Copy the framework structure (from iphoneos build) to the universal folder
 
-cp -R "$DEVICE_DIR/$FRAMEWORK_NAME.framework" "$BUILD_OUTPUT_DIR"
+cp -R "${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework" "${UNIVERSAL_OUTPUTFOLDER}/"
 
-echo "Build fat framework"
-xcrun -sdk iphoneos lipo -create \
-    $BUILD_FOR_SIMULATOR_DIR/$FRAMEWORK_NAME.framework/$FRAMEWORK_NAME \
-    $DEVICE_DIR/$FRAMEWORK_NAME.framework/$FRAMEWORK_NAME \
--o "$BUILD_OUTPUT_DIR/$FRAMEWORK_NAME.framework/$FRAMEWORK_NAME"
+# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory
 
-rm -rf $BUILD_DIR
+# BUILD_PRODUCTS="${SYMROOT}/../../../../Products"
 
-echo "$FRAMEWORK_NAME.framework was built in $BUILD_OUTPUT_DIR"
+cp -R "${BUILD_DIR}/Debug-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/." "${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule"
+
+# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory
+
+lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}" "${BUILD_DIR}/Debug-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}" "${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}"
+
+echo "$FRAMEWORK_NAME.framework was built in $UNIVERSAL_OUTPUTFOLDER"
 
 if [ ! -d $PLUGIN_TARGET_DIR ]; then
     mkdir $PLUGIN_TARGET_DIR
@@ -76,8 +66,10 @@ if [ ! -d $PLUGIN_TARGET_SUBDIR ]; then
     mkdir $PLUGIN_TARGET_SUBDIR
 fi
 
+rm -fr "$PLUGIN_TARGET_SUBDIR/CartoMobileSDK.framework"
 cp -R "$CARTO_FRAMEWORK" $PLUGIN_TARGET_SUBDIR
-cp -R "$BUILD_OUTPUT_DIR/$FRAMEWORK_NAME.framework" $PLUGIN_TARGET_SUBDIR
+cp -r $IOS_SOURCE_DIR/FrameworkFix/* "$PLUGIN_TARGET_SUBDIR/CartoMobileSDK.framework"
+cp -R "$UNIVERSAL_OUTPUTFOLDER/$FRAMEWORK_NAME.framework" $PLUGIN_TARGET_SUBDIR
 
 echo "iOS Framework was copied to $PLUGIN_TARGET_SUBDIR"
 

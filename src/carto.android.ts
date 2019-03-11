@@ -22,14 +22,16 @@ export const nativeProperty = (target: Object, key: string | symbol, converter?)
 
     // property setter
     const setter = function(value) {
-        // console.log('calling setter for', key, setterKey, value);
+        console.log('calling setter for', key, setterKey, value);
         this.options[key] = value;
-        if (this.native) {
+        if (this.native && this.native[setterKey]) {
             if (converter) {
                 value = converter.toNative(value);
             }
             this.native[setterKey](value);
             this._buildStyle = null;
+        } else {
+            console.error('could not set native key', setterKey, 'on', this.native);
         }
     };
     // Create new property with getter and setter
@@ -57,7 +59,7 @@ export function nativeEnumProperty(enumType: any) {
     return function (target: Object, key: string | symbol) {
         return nativeProperty(target, key, {
             fromNative(value) {
-                return ABMultiValueCopyArrayOfAllValues;
+                // return ABMultiValueCopyArrayOfAllValues;
                 return value.ordinal();
             },
             toNative(value) {

@@ -6,5 +6,6 @@ export declare abstract class VectorDataSource<T extends com.carto.datasources.V
 export declare class LocalVectorDataSource extends VectorDataSource<com.carto.datasources.LocalVectorDataSource, LocalVectorDataSourceOptions> {
     createNative(options: LocalVectorDataSourceOptions): com.carto.datasources.LocalVectorDataSource;
     add(element: BaseVectorElement<any, any>): void;
+    remove(element: BaseVectorElement<any, any>): void;
     addAll(elements: VectorElementVector): void;
 }

@@ -47,3 +47,69 @@ export function nativeMapToJS(theMap: com.carto.core.StringVariantMap) {
     }
     return result;
 }
+
+export interface LogEventListener extends com.carto.utils.LogEventListener {
+    // tslint:disable-next-line:no-misused-new
+    new (): LogEventListener;
+    // owner: LogEventListener;
+}
+
+let LogEventListener: LogEventListener;
+
+// interface MapEventListener extends com.carto.ui.MapEventListener {
+//     // tslint:disable-next-line:no-misused-new
+//     new (owner: WeakRef<CartoMap>): MapEventListener;
+// }
+
+// let MapEventListener: MapEventListener;
+
+function initLogEventListenerClass() {
+    if (LogEventListener) {
+        return;
+    }
+
+    // @Interfaces([com.carto.ui.MapEventListener])
+    // class MapEventListenerImpl extends com.carto.ui.MapEventListener {
+    //     constructor(private owner: WeakRef<CartoMap>) {
+    //         super();
+    //         return global.__native(this);
+    //     }
+    //     public onMapIdle() {
+    //         this.owner && this.owner.get().sendEvent(MapIdleEvent);
+    //     }
+    //     public onMapMoved() {
+    //         this.owner && this.owner.get().sendEvent(MapMovedEvent);
+    //     }
+    //     public onMapStable() {
+    //         this.owner && this.owner.get().sendEvent(MapStableEvent);
+    //     }
+    //     public onMapClicked(mapClickInfo: com.carto.ui.MapClickInfo) {
+    //         this.owner &&
+    //             this.owner.get().sendEvent(MapClickedEvent, {
+    //                 clickType: mapClickInfo.getClickType(),
+    //                 position: this.owner.get().fromNativeMapPos(mapClickInfo.getClickPos())
+    //             });
+    //     }
+    // }
+    // MapEventListener = MapEventListenerImpl as any;
+
+    class LogEventListenerImpl extends com.carto.utils.LogEventListener {
+        constructor() {
+            super();
+            return global.__native(this);
+        }
+        public onDebugEvent(event) {
+            console.log('onDebugEvent', event);
+            return true;
+            // this.owner && this.owner.sendEvent(MapIdleEvent);
+        }
+    }
+    LogEventListener = LogEventListenerImpl as any;
+}
+
+export function setShowDebug(value: boolean) {
+    initLogEventListenerClass();
+    com.carto.utils.Log.setLogEventListener(new LogEventListener());
+    // com.carto.utils.Log.setShowDebug(value);
+    com.carto.utils.Log.setShowWarn(value);
+}

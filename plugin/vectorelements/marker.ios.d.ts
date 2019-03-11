@@ -6,6 +6,7 @@ import { BillboardOrientation, BillboardScaling } from './vectorelements';
 export declare class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions): NTMarkerStyleBuilder;
     width: number;
+    scaleWithDPI: boolean;
     size: number;
     placementPriority: number;
     color: Color | string;

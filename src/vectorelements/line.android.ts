@@ -1,21 +1,35 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseLineVectorElement } from './vectorelements.android';
-import { LineOptions, LineStyleBuilderOptions } from './line';
+import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
 
-export enum LineJointType {
-    BEVEL = com.carto.styles.LineJoinType.LINE_JOIN_TYPE_BEVEL.ordinal(),
-    MITER = com.carto.styles.LineJoinType.LINE_JOIN_TYPE_MITER.ordinal(),
-    NONE = com.carto.styles.LineJoinType.LINE_JOIN_TYPE_NONE.ordinal(),
-    ROUND = com.carto.styles.LineJoinType.LINE_JOIN_TYPE_ROUND.ordinal()
-}
+export const LineJointType = {
+    get BEVEL() {
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_BEVEL;
+    },
+    get MITER() {
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_MITER;
+    },
+    get NONE() {
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_NONE;
+    },
+    get ROUND() {
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_ROUND;
+    }
+};
 
-export enum LineEndType {
-    ROUND = com.carto.styles.LineEndType.LINE_END_TYPE_ROUND.ordinal(),
-    SQUARE = com.carto.styles.LineEndType.LINE_END_TYPE_SQUARE.ordinal(),
-    NONE = com.carto.styles.LineEndType.LINE_END_TYPE_NONE.ordinal()
-}
+export const LineEndType = {
+    get ROUND() {
+        return com.carto.styles.LineEndType.LINE_END_TYPE_ROUND;
+    },
+    get SQUARE() {
+        return com.carto.styles.LineEndType.LINE_END_TYPE_SQUARE;
+    },
+    get NONE() {
+        return com.carto.styles.LineEndType.LINE_END_TYPE_NONE;
+    }
+};
 export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.LineStyleBuilder, LineStyleBuilderOptions> {
     createNative(options: LineStyleBuilderOptions) {
         return new com.carto.styles.LineStyleBuilder();
@@ -23,8 +37,8 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
 
     @nativeProperty width: number;
     @nativeColorProperty color: Color | string;
-    @nativeEnumProperty(com.carto.styles.LineJoinType) joinType: LineJointType;
-    @nativeEnumProperty(com.carto.styles.LineEndType) endType: LineEndType;
+    @nativeEnumProperty(com.carto.styles.LineJoinType) lineJoinType: ILineJointType;
+    @nativeEnumProperty(com.carto.styles.LineEndType) lineEndType: ILineEndType;
     @nativeProperty clickWidth: number;
     @nativeProperty stretchFactor: number;
 

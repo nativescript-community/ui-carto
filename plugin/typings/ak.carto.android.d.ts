@@ -4,6 +4,21 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
+                export class ServerPackagesCallback {
+                    constructor(impl?: { onServerPackages: (result: com.carto.packagemanager.PackageInfoVector) => void });
+                    onServerPackages (result: com.carto.packagemanager.PackageInfoVector);
+                }
+                export class AKCartoPackageManager extends com.carto.packagemanager.CartoPackageManager {
+                    getServerPackagesCallback(callback: com.akylas.carto.additions.ServerPackagesCallback);
+                    getLocalPackagesCallback(callback: com.akylas.carto.additions.ServerPackagesCallback);
+                }
+                export class VectorTileSearchServiceCallback {
+                    constructor(impl?: { onFindFeatures: (result: com.carto.geometry.VectorTileFeatureCollection) => void });
+                    onFindFeatures (result: com.carto.geometry.VectorTileFeatureCollection);
+                }
+                export class AKVectorTileSearchService extends com.carto.search.VectorTileSearchService {
+                    findFeaturesCallback(request: com.carto.search.SearchRequest, callback: com.akylas.carto.additions.VectorTileSearchServiceCallback);
+                }
                 export class AKHTTPTileDataSource extends com.carto.datasources.HTTPTileDataSource {
                     setAutoHD(value: boolean): this;
                 }

@@ -1,14 +1,17 @@
 import { Layer, TileLayer } from './layer';
-import { CartoOfflineVectorTileLayerOptions, CartoOnlineVectorTileLayerOptions, ClusteredVectorLayerLayerOptions, VectorElementEventListener as IVectorElementEventListener, VectorLayerOptions, VectorTileEventListener as IVectorTileEventListener, VectorTileLayerOptions } from './vector';
+import { CartoOfflineVectorTileLayerOptions, CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions, ClusteredVectorLayerLayerOptions, VectorElementEventListener as IVectorElementEventListener, VectorLayerOptions, VectorTileEventListener as IVectorTileEventListener, VectorTileLayerOptions } from './vector';
+export interface CartoOnlineVectorTileLayerOptions extends ICartoOnlineVectorTileLayerOptions {
+    style: com.carto.layers.CartoBaseMapStyle;
+}
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { Projection } from '../projections/projection';
-export declare enum VectorTileRenderOrder {
-    HIDDEN = 0,
-    LAYER = 1,
-    LAST = 2,
-}
+export declare const VectorTileRenderOrder: {
+    readonly HIDDEN: com.carto.layers.VectorTileRenderOrder;
+    readonly LAYER: com.carto.layers.VectorTileRenderOrder;
+    readonly LAST: com.carto.layers.VectorTileRenderOrder;
+};
 export declare abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
-    setLabelRenderOrder(order: VectorTileRenderOrder): void;
+    setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder): void;
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection): void;
     getTileDecoder(): VectorTileDecoder | MBVectorTileDecoder;
 }

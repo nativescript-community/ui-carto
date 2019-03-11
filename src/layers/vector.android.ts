@@ -2,13 +2,17 @@ import { TileDataSource } from '../datasources/datasource';
 import { Layer, TileLayer } from './layer';
 import {
     CartoOfflineVectorTileLayerOptions,
-    CartoOnlineVectorTileLayerOptions,
+    CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
     VectorElementEventListener as IVectorElementEventListener,
     VectorLayerOptions,
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileLayerOptions
 } from './vector';
+
+export interface CartoOnlineVectorTileLayerOptions extends ICartoOnlineVectorTileLayerOptions {
+    style: com.carto.layers.CartoBaseMapStyle;
+}
 
 import { BaseNative } from '../carto';
 import { VectorDataSource } from '../datasources/vector';
@@ -154,10 +158,10 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
 export class VectorTileLayer extends BaseVectorTileLayer<com.carto.layers.VectorTileLayer, VectorTileLayerOptions> {
     createNative(options: VectorTileLayerOptions) {
         if (!!options.dataSource && !!options.decoder) {
-            const dataSource = (options.dataSource as TileDataSource<any, any>).getNative();
-            const decoder = (options.decoder as VectorTileDecoder).getNative();
+            const dataSource = options.dataSource.getNative();
+            const decoder = options.decoder.getNative();
             if (dataSource && decoder) {
-                return new com.carto.layers.VectorTileLayer((options.dataSource as TileDataSource<any, any>).getNative(), (options.decoder as VectorTileDecoder).getNative());
+                return new com.carto.layers.VectorTileLayer(options.dataSource.getNative(), options.decoder.getNative());
             }
         }
         return null;
@@ -171,7 +175,7 @@ export class CartoOnlineVectorTileLayer extends BaseVectorTileLayer<com.carto.la
 }
 export class CartoOfflineVectorTileLayer extends TileLayer<com.carto.layers.CartoOfflineVectorTileLayer, CartoOfflineVectorTileLayerOptions> {
     createNative(options: CartoOfflineVectorTileLayerOptions) {
-        return new com.carto.layers.CartoOfflineVectorTileLayer((options.packageManager as CartoPackageManager).getNative(), options.style as any);
+        return new com.carto.layers.CartoOfflineVectorTileLayer(options.packageManager.getNative(), options.style as any);
     }
 }
 
@@ -189,7 +193,7 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
 export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, VectorLayerOptions> {
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {
-            const dataSource = (options.dataSource as TileDataSource<any, any>).getNative();
+            const dataSource = options.dataSource.getNative();
             if (dataSource) {
                 return new com.carto.layers.VectorLayer((options.dataSource as VectorDataSource<any, any>).getNative());
             }
@@ -202,7 +206,7 @@ class VectorEditEventListenerImpl extends com.carto.layers.VectorEditEventListen
     private _owner: WeakRef<EditableVectorLayer>;
 
     public static initWithOwner(owner: WeakRef<EditableVectorLayer>): VectorEditEventListenerImpl {
-        const delegate = new VectorEditEventListenerImpl() as VectorEditEventListenerImpl;
+        const delegate = new VectorEditEventListenerImpl();
         delegate._owner = owner;
         return delegate;
     }

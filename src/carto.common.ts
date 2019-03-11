@@ -3,15 +3,15 @@ import { fromAsset, fromNativeSource, fromUrl, ImageSource } from 'tns-core-modu
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from 'tns-core-modules/utils/utils';
 
-export interface CreatMarkerOptions extends Location {
-    title: string;
-    subtitle: string;
-    selected: boolean;
-}
+// export interface CreatMarkerOptions extends Location {
+//     title: string;
+//     subtitle: string;
+//     selected: boolean;
+// }
 
-export interface CreatRouteOptions {
-    points: Location[];
-}
+// export interface CreatRouteOptions {
+//     points: Location[];
+// }
 
 // type Options<T> = { [P in keyof T]: any };
 
@@ -120,13 +120,12 @@ export function capitalize(s) {
 import { knownFolders, path } from 'tns-core-modules/file-system';
 let currentAppFolder: string;
 
-
 function getFileName(str: string): string {
     let fileName = typeof str === 'string' ? str.trim() : '';
+    if (!currentAppFolder) {
+        currentAppFolder = knownFolders.currentApp().path;
+    }
     if (fileName.indexOf('~/') === 0) {
-        if (!currentAppFolder) {
-            currentAppFolder = knownFolders.currentApp().path;
-        }
         fileName = path.join(currentAppFolder, fileName.replace('~/', ''));
     }
     return fileName;
@@ -134,7 +133,12 @@ function getFileName(str: string): string {
 
 export function getRelativePathToApp(str: string) {
     const filePath = getFileName(str);
-    const toReplace = currentAppFolder.split('/').slice(0, -1).join('/');
-    const result = filePath.replace(toReplace, '').slice(1);
-    return result;
+    const toReplace = currentAppFolder
+        .split('/')
+        .slice(0, -1)
+        .join('/');
+    if (filePath.indexOf(toReplace) === 0) {
+        return filePath.replace(toReplace, '').slice(1);
+    }
+    return filePath;
 }

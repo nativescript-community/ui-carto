@@ -46,6 +46,14 @@ export function toNativeMapPos(position: MapPos) {
     return new com.carto.core.MapPos(position.longitude, position.latitude);
 }
 
+export function nativeVectorToArray<T>(vector: NativeVector<T>) {
+    const result: T[] = [];
+    for (let index = 0; index < vector.size(); index++) {
+        result[index] = vector.get(index);
+    }
+    return result;
+}
+
 export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
     return {
         southwest: fromNativeMapPos(bounds.getMin()),

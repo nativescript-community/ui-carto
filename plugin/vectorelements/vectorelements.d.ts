@@ -20,7 +20,7 @@ export class VectorElementOptions {
     style?: any;
 }
 export class PointVectorElementOptions extends VectorElementOptions {
-    position: MapPos;
+    position?: MapPos;
     projection?: Projection;
 }
 export class LineVectorElementOptions extends VectorElementOptions {

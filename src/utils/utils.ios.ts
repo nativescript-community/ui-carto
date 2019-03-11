@@ -50,3 +50,8 @@ export function nativeMapToJS(theMap: NTStringVariantMap) {
     }
     return result;
 }
+
+export function setShowDebug(value: boolean) {
+    NTLog.setShowDebug(value);
+    NTLog.setShowWarn(value);
+}

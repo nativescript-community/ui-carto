@@ -15,8 +15,8 @@ export function registerLicense(value: string) {
     if (!context) {
         throw new Error('application context not initialized!');
     }
-    console.log('registerLicense', value);
     const result = com.carto.ui.MapView.registerLicense(value, context);
+    console.log('registerLicense', value, result);
     if (result) {
         licenseKey = value;
     }
@@ -26,9 +26,10 @@ export function getLicenseKey() {
     return licenseKey;
 }
 
-interface MapView extends com.akylas.carto.additions.AKMapView {
+export interface MapView extends com.akylas.carto.additions.AKMapView {
     // tslint:disable-next-line:no-misused-new
     new (context, owner: WeakRef<CartoMap>): MapView;
+    owner: CartoMap;
 }
 
 let MapView: MapView;
@@ -40,7 +41,7 @@ let MapView: MapView;
 
 // let MapEventListener: MapEventListener;
 
-function initMapView() {
+function initMapViewClass() {
     if (MapView) {
         return;
     }
@@ -99,6 +100,7 @@ function initMapView() {
     MapView = MapViewImpl as any;
 }
 export class CartoMap extends CartoViewBase {
+    nativeViewProtected: MapView;
     static projection = new EPSG3857();
     nativeProjection: com.carto.projections.EPSG3857;
     _projection: IProjection;
@@ -117,7 +119,7 @@ export class CartoMap extends CartoViewBase {
         }
     }
     public createNativeView(): Object {
-        initMapView();
+        initMapViewClass();
         if (!isLicenseKeyRegistered()) {
             console.log('need MapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
@@ -130,31 +132,13 @@ export class CartoMap extends CartoViewBase {
         console.log('creating mapView');
         // Create new instance
         const mapView = new MapView(this._context, new WeakRef(this));
-        // mapView.setPreserveEGLContextOnPause(true);
-        mapView.onResume();
-        // mapView.setEGLContextClientVersion(2);
-        // mapView.setEGLConfigChooser(new com.carto.ui.ConfigChooser());
-        // mapView.setRenderer(mapView);
-        // mapView.setRenderMode(android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-        // console.log('setPreserveEGLContextOnPause');
 
-        // const listener = new MapEventListener(new WeakRef(this));
-        // listener.owner = this;
-        // mapView.setMapEventListener(listener);
-        // (mapView as any).listener = listener;
         this.projection = new Projection(undefined, mapView.getOptions().getBaseProjection());
-        // this.projection = CartoMap.projection;
-        // mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
-
-        // 2. General options
 
         const options = mapView.getOptions();
         options.setRotatable(true); // allows the map to rotate (this is the default behavior)
         options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
         options.setTileThreadPoolSize(4); // use two threads to download tiles
-
-        // 3.Set initial location and other parameters, _do not animate_
-        // mapView.setMapRotation(this.style['bearing'], 0);
 
         return mapView;
     }
@@ -169,7 +153,7 @@ export class CartoMap extends CartoViewBase {
         // Attach the owner to nativeView.
         // When nativeView is tapped we get the owning JS object through this field.
         super.initNativeView();
-        (this.nativeViewProtected as any).owner = this;
+        this.nativeViewProtected.owner = this;
         // (this.nativeViewProtected as any).listener.owner = this;
     }
 
@@ -182,8 +166,8 @@ export class CartoMap extends CartoViewBase {
     disposeNativeView(): void {
         // Remove reference from native listener to this instance.
         // (this.nativeViewProtected as any).listener.owner = null;
-        (this.nativeViewProtected as any).owner = null;
-        (this.nativeViewProtected as any).onPause();
+        this.nativeViewProtected.owner = null;
+        // this.nativeViewProtected.onPause();
         // If you want to recycle nativeView and have modified the nativeView
         // without using Property or CssProperty (e.g. outside our property system - 'setNative' callbacks)
         // you have to reset it to its initial state here.

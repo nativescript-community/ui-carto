@@ -1,5 +1,7 @@
 import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageManagerTileDataSourceOptions } from './packagemanager';
 import { DataSource, TileDataSource } from '../datasources/datasource';
+import { MapBounds, MapPos } from '../core/core';
+import { Projection } from '../projections/projection';
 export declare enum PackageErrorType {
     CONNECTION = 1,
     DOWNLOAD_LIMIT_EXCEEDED = 2,
@@ -25,14 +27,21 @@ export declare class CartoPackageManager extends DataSource<NTCartoPackageManage
     listener: CartoPackageManagerListener;
     start(): boolean;
     stop(wait: boolean): void;
+    getServerPackageListAge(): number;
+    getServerPackageListMetaInfo(): NTPackageMetaInfo;
     startPackageListDownload(): boolean;
     startPackageDownload(id: string): boolean;
     startPackageRemove(id: string): boolean;
     startPackageImportVersionPackageFileName(packageId: string, version: number, packageFileName: string): boolean;
     getLocalPackage(packageId: string): NTPackageInfo;
-    getLocalPackages(): PackageInfo[];
+    getLocalPackageStatus(packageId: string, version: number): NTPackageStatus;
+    getLocalPackages(): NTPackageInfoVector;
     getServerPackage(packageId: string): NTPackageInfo;
-    getServerPackages(): PackageInfo[];
+    getServerPackages(): NTPackageInfoVector;
+    setPackagePriority(id: string, priority: number): void;
+    cancelPackageTasks(id: string): void;
+    isAreaDownloaded(bounds: MapBounds, zoom: number, projection: Projection): boolean;
+    suggestPackages(position: MapPos, projection: Projection): PackageInfo[];
 }
 export declare class PackageManagerTileDataSource extends TileDataSource<NTPackageManagerTileDataSource, PackageManagerTileDataSourceOptions> {
     createNative(options: PackageManagerTileDataSourceOptions): NTPackageManagerTileDataSource;

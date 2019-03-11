@@ -5,17 +5,18 @@ export interface MapPos {
     speed?: number;
 }
 
-export interface Bounds {
+export interface MapBounds {
     northeast: MapPos;
     southwest: MapPos;
 }
-export namespace Bounds{
-    function fromCoordinates(southwest: MapPos, northeast: MapPos): Bounds;
+export namespace MapBounds {
+    function fromCoordinates(southwest: MapPos, northeast: MapPos): MapBounds;
 }
 export declare function fromNativeMapPos(pos): MapPos;
 export declare function toNativeMapPos(position: MapPos): any;
-export declare function fromNativeMapBounds(bounds: any): Bounds;
-export declare function toNativeMapBounds(bounds: Bounds): any;
+export declare function fromNativeMapBounds(bounds: any): MapBounds;
+export declare function toNativeMapBounds(bounds: MapBounds): any;
+export declare function nativeVectorToArray<T>(vector: NativeVector<T>): T[];
 
 declare enum CartoMapStyle {
     VOYAGER,

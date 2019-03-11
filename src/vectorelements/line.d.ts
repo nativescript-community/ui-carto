@@ -17,8 +17,8 @@ declare enum LineEndType {
 export class LineStyleBuilderOptions extends VectorElementOptions {
     color?: string | Color;
     width?: number;
-    joinType?: LineJointType;
-    endType?: LineEndType;
+    lineJoinType?: LineJointType;
+    lineEndType?: LineEndType;
     clickWidth?: number;
     stretchFactor?: number;
 }

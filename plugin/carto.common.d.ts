@@ -1,14 +1,6 @@
 import { Observable } from 'tns-core-modules/ui/core/view';
 import { ImageSource } from 'tns-core-modules/image-source/image-source';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-export interface CreatMarkerOptions extends Location {
-    title: string;
-    subtitle: string;
-    selected: boolean;
-}
-export interface CreatRouteOptions {
-    points: Location[];
-}
 export declare abstract class BaseNative<T, U extends {}> extends Observable {
     options: U;
     constructor(options?: U, native?: T);

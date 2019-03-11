@@ -1,6 +1,6 @@
 import { BaseNative } from '../carto';
 import { IProjection } from '../projections/projection';
-import { MapPos, Bounds } from '../core/core';
+import { MapPos, MapBounds } from '../core/core';
 import { FeatureCollection } from '../geometry/feature';
 
 export interface GeocodingRequest {

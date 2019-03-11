@@ -14,6 +14,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
         let pack: com.carto.utils.ZippedAssetPackage;
         if (options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
+            console.log('MBVectorTileDecoder', 'createNative', options.zipPath, zipPath);
             const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
             pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
         }
