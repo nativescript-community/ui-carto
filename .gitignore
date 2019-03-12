@@ -66,4 +66,5 @@ report
 
 Pods
 *.lock
-*.xcworkspaceCartoMobileSDK.framework/
+*.xcworkspace
+CartoMobileSDK.framework/
