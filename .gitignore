@@ -69,3 +69,4 @@ Pods
 *.lock
 *.xcworkspace
 *.framework/
+*.tgz
