@@ -55,6 +55,7 @@ build
 node_modules
 *.tmp.*
 platforms
+!plugin/platforms
 lib
 *.css
 !webpack.*.js
@@ -67,4 +68,4 @@ report
 Pods
 *.lock
 *.xcworkspace
-CartoMobileSDK.framework/
+*.framework/
