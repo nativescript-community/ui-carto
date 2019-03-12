@@ -7,6 +7,20 @@ export declare const MapStableEvent = "mapStable";
 export declare const MapIdleEvent = "mapIdle";
 export declare const MapMovedEvent = "mapMoved";
 export declare const MapClickedEvent = "mapClicked";
+export interface MapPropertyOptions {
+    converter?: Function;
+    defaultValue?: any;
+    nativeGetterName?: string;
+    getConverter?: Function;
+    ios?: {
+        nativeGetterName?: string;
+    };
+    android?: {
+        nativeGetterName?: string;
+    };
+}
+export declare function mapProperty(target: any, k?: any, desc?: PropertyDescriptor): any;
+export declare function mapProperty(options: MapPropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export declare abstract class CartoViewBase extends View {
     mapReady: boolean;
     nativeProjection: any;

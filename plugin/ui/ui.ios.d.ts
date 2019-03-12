@@ -19,12 +19,6 @@ export declare class CartoMap extends CartoViewBase {
     initNativeView(): void;
     disposeNativeView(): void;
     fromNativeMapPos(position: NTMapPos): MapPos;
-    getMapfocusPos(): MapPos;
-    getMapzoom(): number;
-    getMapbearing(): number;
-    getMaptilt(): number;
-    getMapmaxZoom(): number;
-    getMapminZoom(): number;
     setFocusPos(value: MapPos, duration: number): void;
     setZoom(value: number, duration: number): void;
     setTilt(value: number, duration: number): void;

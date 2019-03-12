@@ -1,3 +1,7 @@
+import { BaseNative } from '../carto.common';
+import { ZippedAssetPackageOptions } from './utils';
+import { File, knownFolders, path } from 'tns-core-modules/file-system';
+
 export function nativeVectorToArray(nVector: com.carto.core.StringVector) {
     const count = nVector.size();
     const result = [];
@@ -54,4 +58,18 @@ export function nativeMapToJS(theMap: NTStringVariantMap) {
 export function setShowDebug(value: boolean) {
     NTLog.setShowDebug(value);
     NTLog.setShowWarn(value);
+}
+
+const currentAppFolder = knownFolders.currentApp();
+
+export class ZippedAssetPackage extends BaseNative<NTZippedAssetPackage, ZippedAssetPackageOptions> {
+    createNative(options: ZippedAssetPackageOptions) {
+        if (File.exists(path.join(currentAppFolder.path, '..', options.zipPath))) {
+            const vectorTileStyleSetData = NTAssetUtils.loadAsset(options.zipPath);
+            return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
+        } else {
+            console.error(`could not find zip file: ${options.zipPath}`);
+            return null;
+        }
+    }
 }

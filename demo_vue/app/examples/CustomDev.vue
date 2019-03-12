@@ -4,7 +4,7 @@
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$navigateBack" />
         </ActionBar>
         <GridLayout orientation="vertical" rows="*,50">
-            <CartoMap ref="mapView" row="0" zoom="5" width="100%" height="100%" @mapReady="onMapReady" />
+            <CartoMap ref="mapView" row="0" zoom="15" width="100%" height="100%" @mapReady="onMapReady" focusPos="45.19199, 5.7190" />
             <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
                 <!-- <Button text="Layer" @tap="onSelectLayer"></Button> -->
                 <!-- <Button text="Language" @tap="onSelectLanguage"></Button> -->
@@ -68,11 +68,11 @@ export default class BaseMaps extends BaseVueComponent {
         console.log(e.eventName, e.data);
     };
     onMapMoved = (e: MapEventData) => {
-        // console.log('getZoom', (e.object as CartoMap).getZoom());
-        // console.log('getBearing', (e.object as CartoMap).getBearing());
-        // console.log('getTilt', (e.object as CartoMap).getTilt());
-        // console.log('getMetersPerPixel', (e.object as CartoMap).getMetersPerPixel());
-        // console.log(e.eventName);
+        const map = (e.object as CartoMap)
+        // console.log('zoom', map.zoom);
+        // console.log('bearing', map.bearing);
+        // console.log('tilt', map.tilt);
+        // console.log('focusPos', map.focusPos);
     };
     onVectorTileClicked = (info: VectorTileEventData) => {
         console.log('on vector click', info.featureId, info.featureLayerName, info.position, info.type, info.featureData);
@@ -88,17 +88,17 @@ export default class BaseMaps extends BaseVueComponent {
         mapView.on(MapClickedEvent, this.onMapClicked);
         mapView.on(MapMovedEvent, this.onMapMoved);
 
-        const dataFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'packaged'));
-        this.packageManager = new CartoPackageManager({
-            source: 'carto.streets',
-            dataFolder: dataFolder.path,
-            listener: this
-        });
+        // const dataFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'packaged'));
+        // this.packageManager = new CartoPackageManager({
+        //     source: 'carto.streets',
+        //     dataFolder: dataFolder.path,
+        //     listener: this
+        // });
 
-        this.packageManager.start();
-        console.log('packageManager local packages', this.packageManager.getLocalPackages().size());
+        // this.packageManager.start();
+        // console.log('packageManager local packages', this.packageManager.getLocalPackages().size());
         // console.log('packageManager server packages', this.packageManager.getServerPackages().map(p => p.getName()));
-        this.packageManager.startPackageListDownload();
+        // this.packageManager.startPackageListDownload();
 
         const cacheFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'carto_cache'));
         // const source2 = new OrderedTileDataSource({
@@ -106,31 +106,61 @@ export default class BaseMaps extends BaseVueComponent {
         //         new PackageManagerTileDataSource({ packageManager: this.packageManager }),
         //         new PersistentCacheTileDataSource({
         //             dataSource: new CartoOnlineTileDataSource({ source: 'carto.streets' }),
-        //             databasePath: cacheFolder.path
+            // databasePath: path.join(cacheFolder.path, 'source1')
         //         })
         //     ]
         // });
-        const source2 = new MergeTileDataSource({
-            dataSources: [
-                new CartoOnlineTileDataSource({ source: 'carto.streets' }),
-                new HTTPTileDataSource({
-                    minZoom: 0,
-                    maxZoom: 22,
-                    url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`
-                })
-            ]
+        const source2 = new PersistentCacheTileDataSource({
+            dataSource: new MergeTileDataSource({
+                dataSources: [
+                    new HTTPTileDataSource({
+                        minZoom: 0,
+                        maxZoom: 22,
+                        httpHeaders: {
+                            Referer: 'app://com.akylas.nativescript.cartodemo'
+                        },
+                        url: `http://tiles.basemaps.cartocdn.com/vectortiles/carto.streets/v1/{z}/{x}/{y}.mvt?appToken=e934fef8-6841-4f53-9999-ac579c41e695`
+                    }),
+                    new HTTPTileDataSource({
+                        minZoom: 0,
+                        maxZoom: 22,
+                        url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`
+                    })
+                ]
+            }),
+            databasePath: path.join(cacheFolder.path, 'source2')
         });
 
         this.cartoLayer = new VectorTileLayer({
             dataSource: source2,
             decoder: new MBVectorTileDecoder({
-                zipPath: '~/assets/carto.zip',
-                style: 'voyager'
+                dirPath: '~/assets/carto',
+                style: 'voyager',
+                liveReload: true
             }),
             opacity: 1
         });
         this.cartoLayer.setVectorTileEventListener(this);
         mapView.addLayer(this.cartoLayer);
+
+        // const dataSource1 = new HTTPTileDataSource({
+        //     minZoom: 0,
+        //     maxZoom: 22,
+        //     autoHD: false,
+        //     httpHeaders:{
+        //         Referer: 'app://com.akylas.nativescript.cartodemo'
+        //     },
+        //     url: `http://tiles.basemaps.cartocdn.com/vectortiles/carto.streets/v1/{z}/{x}/{y}.mvt?appToken=e934fef8-6841-4f53-9999-ac579c41e695`
+        // });
+        // const testLayer = new VectorTileLayer({
+        //     dataSource: dataSource1,
+        //     decoder: new MBVectorTileDecoder({
+        //         dirPath: '~/assets/bright',
+        //         style: 'voyager'
+        //     }),
+        //     opacity: 1
+        // });
+        // mapView.addLayer(testLayer);
 
         const dataSource = new HTTPTileDataSource({
             minZoom: 0,

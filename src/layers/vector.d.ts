@@ -75,7 +75,7 @@ export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends
     getTileDecoder(): MBVectorTileDecoder;
 }
 
-export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
+export abstract class BaseVectorLayer<T, U extends VectorLayerOptions> extends Layer<T, U> {
     setVectorElementEventListener(listener: VectorElementEventListener, projection?: Projection): void;
 }
 

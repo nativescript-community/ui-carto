@@ -2,6 +2,7 @@ import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectorti
 
 import { BaseVectorTileDecoder } from './vectortiles.common';
 import { getRelativePathToApp } from '../carto.common';
+import { DirAssetPackage } from 'nativescript-carto/utils/utils.android';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
     createNative(options: VectorTileDecoderOptions) {
@@ -11,12 +12,14 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     createNative(options: MBVectorTileDecoderOptions) {
-        let pack: com.carto.utils.ZippedAssetPackage;
-        if (options.zipPath) {
+        let pack: com.carto.utils.AssetPackage;
+        // console.log('MBVectorTileDecoder', 'createNative', options);
+        if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
-            console.log('MBVectorTileDecoder', 'createNative', options.zipPath, zipPath);
             const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
             pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
+        } else if (!!options.dirPath) {
+            pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
         }
         if (options.cartoCss) {
             if (pack) {
@@ -29,7 +32,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
             const result = new com.carto.vectortiles.MBVectorTileDecoder(vectorTileStyleSet);
             return result;
         } else {
-            console.error(`could not find zip file: ${options.zipPath}`);
+            console.error(`could not create MBVectorTileDecoder pack for options: ${options}`);
             return null;
         }
     }

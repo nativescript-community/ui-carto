@@ -231,25 +231,26 @@ export class CartoMap extends CartoViewBase {
         return 0;
     }
 
-    getMapfocusPos(): MapPos {
-        return fromNativeMapPos(this.mapView.getFocusPos());
-    }
-    getMapzoom() {
-        return this.mapView.getZoom();
-    }
-    getMapbearing() {
-        return this.mapView.getMapRotation();
-    }
-    getMaptilt() {
-        return this.mapView.getTilt();
-    }
-    getMapmaxZoom() {
-        return 22;
-    }
-    getMapminZoom() {
-        return 0;
-    }
+    // getMapfocusPos(): MapPos {
+    //     return fromNativeMapPos(this.mapView.getFocusPos());
+    // }
+    // getMapzoom() {
+    //     return this.mapView.getZoom();
+    // }
+    // getMapbearing() {
+    //     return this.mapView.getMapRotation();
+    // }
+    // getMaptilt() {
+    //     return this.mapView.getTilt();
+    // }
+    // getMapmaxZoom() {
+    //     return 22;
+    // }
+    // getMapminZoom() {
+    //     return 0;
+    // }
     setFocusPos(value: MapPos, duration: number) {
+        console.log('setFocusPos', value);
         this.mapView.setFocusPos(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
 
@@ -270,6 +271,20 @@ export class CartoMap extends CartoViewBase {
         this.mapView.getOptions().setRestrictedPanning(value);
     }
 
+    // [focusPosProperty.setNative](value: MapPos) {
+    //     console.log('focusPosProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
+    //     if (!this.nativeViewProtected || !this.nativeProjection) {
+    //         return;
+    //     }
+    //     this.setFocusPos(value, 0);
+    // }
+    // [zoomProperty.setNative](value: number) {
+    //     console.log('zoomProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
+    //     if (!this.nativeViewProtected) {
+    //         return;
+    //     }
+    //     this.setZoom(value, 0);
+    // }
     // // setZoom(value: number) {
     // //     this.style['zoom'] = value;
     // // }

@@ -1309,6 +1309,36 @@ declare module com {
 	}
 }
 
+declare module com {
+	export module carto {
+		export module datasources {
+			export class MergedMBVTTileDataSource extends com.carto.datasources.TileDataSource {
+				public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSource>;
+				public constructor(param0: number, param1: number);
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.datasources.TileDataSource);
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
+				public swigGetClassName(): string;
+				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
+				public getMaxZoom(): number;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public static getCPtr(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.MergedMBVTTileDataSource;
+				public swigTakeOwnership(): void;
+				public getDataExtent(): com.carto.core.MapBounds;
+				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
+				public getMinZoom(): number;
+			}
+		}
+	}
+}
+
 
 
 declare module com {

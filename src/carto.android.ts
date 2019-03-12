@@ -22,7 +22,7 @@ export const nativeProperty = (target: Object, key: string | symbol, converter?)
 
     // property setter
     const setter = function(value) {
-        console.log('calling setter for', key, setterKey, value);
+        // console.log('calling setter for', key, setterKey, value);
         this.options[key] = value;
         if (this.native && this.native[setterKey]) {
             if (converter) {

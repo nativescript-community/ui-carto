@@ -8,5 +8,5 @@ export declare class OrderedTileDataSource extends TileDataSource<com.carto.data
     createNative(options: OrderedTileDataSourceOptions): com.carto.datasources.OrderedTileDataSource;
 }
 export declare class MergeTileDataSource extends TileDataSource<com.akylas.carto.additions.AKMergeTileDataSource, MergeTileDataSourceOptions> {
-    createNative(options: MergeTileDataSourceOptions): com.akylas.carto.additions.AKMergeTileDataSource;
+    createNative(options: MergeTileDataSourceOptions): com.carto.datasources.MergedMBVTTileDataSource;
 }

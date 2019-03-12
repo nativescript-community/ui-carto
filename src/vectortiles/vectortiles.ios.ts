@@ -20,7 +20,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
             const result = NTMBVectorTileDecoder.alloc().initWithCompiledStyleSet(vectorTileStyleSet);
             return result;
         } else {
-            console.error(`could not find zip file: ${options.zipPath}`);
+            console.error(`could not create MBVectorTileDecoder pack for options: ${options}`);
             return null;
         }
     }

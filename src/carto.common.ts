@@ -120,7 +120,7 @@ export function capitalize(s) {
 import { knownFolders, path } from 'tns-core-modules/file-system';
 let currentAppFolder: string;
 
-function getFileName(str: string): string {
+export function getFileName(str: string): string {
     let fileName = typeof str === 'string' ? str.trim() : '';
     if (!currentAppFolder) {
         currentAppFolder = knownFolders.currentApp().path;

@@ -18,7 +18,7 @@ export declare class BaseVectorElement<T extends NTVectorElement, U extends Vect
 }
 export declare abstract class BasePointVectorElement<T extends NTVectorElement & {
     getPos?(): NTMapPos;
-    setPos?(pos: NTMapPos): any;
+    setPos?(pos: NTMapPos);
 }, U extends PointVectorElementOptions> extends BaseNative<T, U> {
     projection?: Projection;
     position: MapPos;
@@ -26,7 +26,7 @@ export declare abstract class BasePointVectorElement<T extends NTVectorElement &
 }
 export declare abstract class BaseLineVectorElement<T extends NTVectorElement & {
     getPoses?(): NTMapPosVector;
-    setPoses?(pos: NTMapPosVector): any;
+    setPoses?(pos: NTMapPosVector);
 }, U extends LineVectorElementOptions> extends BaseNative<T, U> {
     projection?: Projection;
     positions: MapPosVector | MapPos[];

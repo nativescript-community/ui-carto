@@ -96,7 +96,7 @@ export class CartoMap extends CartoViewBase {
 
     public createNativeView(): Object {
         // Create new instance
-        const mapView: NTMapView = (this.mapView = NTMapView.alloc().init() as NTMapView);
+        const mapView: NTMapView = (this.mapView = NTMapView.alloc().init());
         mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
 
         this.projection = CartoMap.projection;
@@ -115,14 +115,13 @@ export class CartoMap extends CartoViewBase {
         return this.mapView.getOptions() as MapOptions;
     }
 
-
     /**
      * Initializes properties/listeners of the native view.
      */
     initNativeView(): void {
         // Attach the owner to nativeView.
         // When nativeView is tapped we get the owning JS object through this field.
-        (this.nativeView as any).owner = this;
+        this.nativeView.owner = this;
         super.initNativeView();
     }
 
@@ -134,7 +133,7 @@ export class CartoMap extends CartoViewBase {
      */
     disposeNativeView(): void {
         // Remove reference from native listener to this instance.
-        (this.nativeView as any).owner = null;
+        this.nativeView.owner = null;
 
         // If you want to recycle nativeView and have modified the nativeView
         // without using Property or CssProperty (e.g. outside our property system - 'setNative' callbacks)
@@ -200,24 +199,24 @@ export class CartoMap extends CartoViewBase {
     //     return this.style['tilt'];
     // }
 
-    getMapfocusPos(): MapPos {
-        return fromNativeMapPos(this.mapView.getFocusPos());
-    }
-    getMapzoom() {
-        return this.mapView.getZoom();
-    }
-    getMapbearing() {
-        return this.mapView.getRotation();
-    }
-    getMaptilt() {
-        return this.mapView.getTilt();
-    }
-    getMapmaxZoom() {
-        return 22;
-    }
-    getMapminZoom() {
-        return 0;
-    }
+    // getMapfocusPos(): MapPos {
+    //     return fromNativeMapPos(this.mapView.getFocusPos());
+    // }
+    // getMapzoom() {
+    //     return this.mapView.getZoom();
+    // }
+    // getMapbearing() {
+    //     return this.mapView.getRotation();
+    // }
+    // getMaptilt() {
+    //     return this.mapView.getTilt();
+    // }
+    // getMapmaxZoom() {
+    //     return 22;
+    // }
+    // getMapminZoom() {
+    //     return 0;
+    // }
     setFocusPos(value: MapPos, duration: number) {
         this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
