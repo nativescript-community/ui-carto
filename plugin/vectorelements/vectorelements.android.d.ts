@@ -18,7 +18,7 @@ export declare class BaseVectorElement<T extends com.carto.vectorelements.Vector
 }
 export declare abstract class BasePointVectorElement<T extends com.carto.vectorelements.VectorElement & {
     getPos?(): com.carto.core.MapPos;
-    setPos?(pos: com.carto.core.MapPos);
+    setPos?(pos: com.carto.core.MapPos): any;
 }, U extends PointVectorElementOptions> extends BaseNative<T, U> {
     projection?: Projection;
     position: MapPos;
@@ -26,7 +26,7 @@ export declare abstract class BasePointVectorElement<T extends com.carto.vectore
 }
 export declare abstract class BaseLineVectorElement<T extends com.carto.vectorelements.VectorElement & {
     getPoses?(): com.carto.core.MapPosVector;
-    setPoses?(pos: com.carto.core.MapPosVector);
+    setPoses?(pos: com.carto.core.MapPosVector): any;
 }, U extends LineVectorElementOptions> extends BaseNative<T, U> {
     projection?: Projection;
     positions: MapPosVector | MapPos[];

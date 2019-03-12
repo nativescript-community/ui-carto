@@ -7,20 +7,20 @@ export declare enum PackageErrorType {
     DOWNLOAD_LIMIT_EXCEEDED = 2,
     NO_OFFLINE_PLAN = 4,
     PACKAGE_TOO_BIG = 3,
-    SYSTEM = 0,
+    SYSTEM = 0
 }
 export declare enum PackageAction {
     READY = 0,
     WAITING = 1,
     DOWNLOADING = 2,
     COPYING = 3,
-    REMOVING = 4,
+    REMOVING = 4
 }
 export declare enum PackageType {
     MAP = 0,
     ROUTING = 1,
     GEOCODING = 2,
-    VALHALLA_ROUTING = 3,
+    VALHALLA_ROUTING = 3
 }
 export declare class CartoPackageManager extends DataSource<NTCartoPackageManager, CartoPackageManagerOptions> {
     createNative(options: CartoPackageManagerOptions): NTCartoPackageManager;

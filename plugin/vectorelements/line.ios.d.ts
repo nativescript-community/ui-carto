@@ -6,12 +6,12 @@ export declare enum LineJointType {
     BEVEL = 2,
     MITER = 1,
     NONE = 0,
-    ROUND = 3,
+    ROUND = 3
 }
 export declare enum LineEndType {
     ROUND = 2,
     SQUARE = 1,
-    NONE = 0,
+    NONE = 0
 }
 export declare class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleBuilder, LineStyleBuilderOptions> {
     createNative(options: LineStyleBuilderOptions): NTLineStyleBuilder;

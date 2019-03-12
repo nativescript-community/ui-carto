@@ -2,13 +2,13 @@ import { MapBounds, MapPos } from './core';
 export declare enum CartoMapStyle {
     VOYAGER = 2,
     POSITRON = 0,
-    DARKMATTER = 1,
+    DARKMATTER = 1
 }
 export declare enum ClickType {
     SINGLE = 0,
     LONG = 1,
     DOUBLE = 2,
-    DUAL = 3,
+    DUAL = 3
 }
 export declare function nativeVectorToArray<T>(vector: NativeVector<T>): T[];
 export declare function fromNativeMapPos(position: NTMapPos): MapPos;
