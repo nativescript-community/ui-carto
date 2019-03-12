@@ -3,7 +3,6 @@ const { relative, resolve } = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
@@ -211,10 +210,9 @@ module.exports = env => {
             ]
         },
         plugins: [
-            // new ForkTsCheckerWebpackPlugin({
-            //     tsconfig: resolve(tsconfig),
-
-            // }),
+            new ForkTsCheckerWebpackPlugin({
+                tsconfig: resolve(tsconfig),
+            }),
             // ... Vue Loader plugin omitted
             // make sure to include the plugin!
             new VueLoaderPlugin(),
@@ -257,6 +255,7 @@ module.exports = env => {
 
     if (report) {
         // Generate report files for bundles content
+        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
         config.plugins.push(
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
