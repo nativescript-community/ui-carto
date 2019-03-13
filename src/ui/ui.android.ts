@@ -178,50 +178,6 @@ export class CartoMap extends CartoViewBase {
         return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
     }
 
-    // get focusPos(): MapPos {
-    //     if (this.nativeViewProtected) {
-    //         return this.fromNativeMapPos(this.mapView.getFocusPos());
-    //     }
-    //     return this.style.focusPos;
-    // }
-    // set focusPos(value: MapPos) {
-    //     this.style.focusPos = value;
-    // }
-    // get bearing(): number {
-    //     if (this.nativeViewProtected) {
-    //         return this.mapView.getMapRotation();
-    //     }
-    //     return this.style.bearing;
-    // }
-
-    // set bearing(value: number) {
-    //     this.style.bearing = value;
-    // }
-    // get tilt(): number {
-    //     if (this.nativeViewProtected) {
-    //         return this.mapView.getTilt();
-    //     }
-    //     return this.style.tilt;
-    // }
-    // set tilt(value: number) {
-    //     this.style.tilt = value;
-    // }
-    // set minZoom(value: number) {
-    //     this.style.minZoom = value;
-    // }
-    // set maxZoom(value: number) {
-    //     this.style.maxZoom = value;
-    // }
-
-    // get zoom(): number {
-    //     if (this.nativeViewProtected) {
-    //         return this.mapView.getZoom();
-    //     }
-    //     return this.style.zoom;
-    // }
-    // set zoom(value: number) {
-    //     this.style.zoom = value;
-    // }
     get metersPerPixel(): number {
         if (this.nativeViewProtected) {
             const pos = this.focusPos;
@@ -230,27 +186,7 @@ export class CartoMap extends CartoViewBase {
         }
         return 0;
     }
-
-    // getMapfocusPos(): MapPos {
-    //     return fromNativeMapPos(this.mapView.getFocusPos());
-    // }
-    // getMapzoom() {
-    //     return this.mapView.getZoom();
-    // }
-    // getMapbearing() {
-    //     return this.mapView.getMapRotation();
-    // }
-    // getMaptilt() {
-    //     return this.mapView.getTilt();
-    // }
-    // getMapmaxZoom() {
-    //     return 22;
-    // }
-    // getMapminZoom() {
-    //     return 0;
-    // }
     setFocusPos(value: MapPos, duration: number) {
-        console.log('setFocusPos', value);
         this.mapView.setFocusPos(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
 

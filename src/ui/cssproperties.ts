@@ -28,13 +28,12 @@ zoomProperty.register(Style);
 export const focusPosProperty = new CssProperty<Style, MapPos>({
     name: 'focusPos',
     cssName: 'focus-pos',
+
     valueConverter: v => {
-        console.log('handling focusPosProperty', v);
+        // only called for string values!!
         if (typeof v === 'string') {
             const MapPoss = v.split(',').map(parseFloat);
             return { latitude: MapPoss[0], longitude: MapPoss[1] };
-        } else if (Array.isArray(v)) {
-            return { latitude: v[0], longitude: v[1] };
         }
         return v;
     }

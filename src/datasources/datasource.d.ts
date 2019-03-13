@@ -13,7 +13,7 @@ export interface OrderedTileDataSourceOptions extends DataSourceOptions {
 }
 export class OrderedTileDataSource<T, U extends OrderedTileDataSourceOptions> extends TileDataSource<T, U> {}
 
-export interface MergeTileDataSourceOptions extends DataSourceOptions {
+export interface MergedMBVTTileDataSourceOptions extends DataSourceOptions {
     dataSources: Array<TileDataSource<any, any>>;
 }
-export class MergeTileDataSource<T, U extends MergeTileDataSourceOptions> extends TileDataSource<T, U> {}
+export class MergedMBVTTileDataSource<T, U extends MergedMBVTTileDataSourceOptions> extends TileDataSource<T, U> {}

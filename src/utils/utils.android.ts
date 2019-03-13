@@ -215,14 +215,14 @@ function intDirAssetPackageClass() {
             // this.dirPath = dirPath;
         }
         public loadAsset(name) {
-            // const startTime = Date.now();
+            const startTime = Date.now();
             let result: com.carto.core.BinaryData;
             if (this.loadUsingNS) {
                 result = new com.carto.core.BinaryData(File.fromPath(path.join(this.dirPath, name)).readSync());
             } else {
                 result = AssetUtils.loadAsset(path.join(this.cartoDirPath, name));
             }
-            // console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
+            console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
             return result;
         }
         public getAssetNames() {

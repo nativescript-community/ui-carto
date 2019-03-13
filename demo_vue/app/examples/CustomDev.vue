@@ -4,7 +4,7 @@
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$navigateBack" />
         </ActionBar>
         <GridLayout orientation="vertical" rows="*,50">
-            <CartoMap ref="mapView" row="0" zoom="15" width="100%" height="100%" @mapReady="onMapReady" focusPos="45.19199, 5.7190" />
+            <CartoMap ref="mapView" row="0" zoom="15" width="100%" height="100%" @mapReady="onMapReady" :focusPos="[45.19199, 5.7190]" />
             <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
                 <!-- <Button text="Layer" @tap="onSelectLayer"></Button> -->
                 <!-- <Button text="Language" @tap="onSelectLanguage"></Button> -->

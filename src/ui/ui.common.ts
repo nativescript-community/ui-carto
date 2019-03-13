@@ -164,9 +164,12 @@ export abstract class CartoViewBase extends View {
     }
 
     [focusPosProperty.setNative](value: MapPos) {
-        console.log('focusPosProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
+        // console.log('focusPosProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
         if (!this.nativeViewProtected || !this.nativeProjection) {
             return;
+        }
+        if (Array.isArray(value)) {
+            value =  { latitude: value[0], longitude: value[1] };
         }
         this.setFocusPos(value, 0);
     }
