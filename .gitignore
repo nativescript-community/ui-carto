@@ -70,5 +70,5 @@ Pods
 *.framework/
 *.tgz
 
-plugin/*.d.ts
+/plugin/**/*.d.ts
 !plugin/platforms
