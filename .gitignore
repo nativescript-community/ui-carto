@@ -55,7 +55,6 @@ build
 node_modules
 *.tmp.*
 platforms
-!plugin/platforms
 lib
 *.css
 !webpack.*.js
@@ -70,3 +69,6 @@ Pods
 *.xcworkspace
 *.framework/
 *.tgz
+
+plugin/*.d.ts
+!plugin/platforms
