@@ -24,7 +24,7 @@
     ],
     "author": {
         "name": "Martin Guillon",
-    "email": "martin.guillon@akylas.fr"
+        "email": "martin.guillon@akylas.fr"
     },
     "bugs": {
         "url": "https://github.com/farfromrefug/nativescript-carto/issues"

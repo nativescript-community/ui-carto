@@ -2,8 +2,9 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BasePointVectorElement } from './vectorelements.android';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
-import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
+import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty } from '../carto.android';
 import { BillboardOrientation, BillboardScaling } from './vectorelements';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -18,8 +19,8 @@ export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.
     @nativeProperty anchorPointX: number;
     @nativeProperty anchorPointY: number;
     @nativeProperty clickSize: number;
-    @nativeEnumProperty(com.carto.styles.BillboardScaling) scalingMode: BillboardScaling;
-    @nativeEnumProperty(com.carto.styles.BillboardOrientation) orientationMode: BillboardOrientation;
+    @nativeEnumProperty scalingMode: BillboardScaling;
+    @nativeEnumProperty orientationMode: BillboardOrientation;
 
     _buildStyle: com.carto.styles.MarkerStyle;
     buildStyle() {

@@ -4,7 +4,7 @@ import { Projection } from '../projections/projection.ios';
 import { TileDataSource } from '../datasources/datasource.ios';
 import { VectorTileDecoder } from '../vectortiles/vectortiles.ios';
 import { VectorTileFeatureCollection } from '../geometry/feature';
-import { nativeProperty } from '../carto.ios';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;

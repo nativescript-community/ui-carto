@@ -19,16 +19,16 @@
 <script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
-import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core/core';
 import { CartoMap, MapEventData } from 'nativescript-carto/ui/ui';
-import { CartoOnlineRasterTileLayer, RasterTileLayer } from 'nativescript-carto/layers/raster';
 import { action } from 'ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
-import { CartoPackageManager, PackageManagerTileDataSource, PackageStatus, PackageInfo, PackageErrorType } from 'nativescript-carto/packagemanager/packagemanager';
 import { Folder, path, knownFolders } from 'tns-core-modules/file-system/file-system';
 import * as dialogs from 'tns-core-modules/ui/dialogs';
-import { OrderedTileDataSource, MergeTileDataSource } from 'nativescript-carto/datasources/datasource';
+import { CartoOnlineRasterTileLayer, RasterTileLayer } from 'nativescript-carto/layers/raster';
+import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from 'nativescript-carto/layers/vector';
+import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core/core';
+import { CartoPackageManager, PackageManagerTileDataSource, PackageStatus, PackageInfo, PackageErrorType } from 'nativescript-carto/packagemanager/packagemanager';
+import { OrderedTileDataSource, MergedMBVTTileDataSource } from 'nativescript-carto/datasources/datasource';
 import { PersistentCacheTileDataSource } from 'nativescript-carto/datasources/cache';
 import { CartoOnlineTileDataSource } from 'nativescript-carto/datasources/cartoonline';
 import { MBVectorTileDecoder } from 'nativescript-carto/vectortiles/vectortiles';
@@ -111,7 +111,7 @@ export default class BaseMaps extends BaseVueComponent {
         //     ]
         // });
         const source2 = new PersistentCacheTileDataSource({
-            dataSource: new MergeTileDataSource({
+            dataSource: new MergedMBVTTileDataSource({
                 dataSources: [
                     new HTTPTileDataSource({
                         minZoom: 0,

@@ -2,7 +2,7 @@
 import { BasePointVectorElement } from './vectorelements.ios';
 import { NMLModelOptions } from './nmlmodel';
 // import { Color } from 'tns-core-modules/color/color';
-import { nativeProperty } from '../carto.ios';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 import { getRelativePathToApp } from '../carto.common';
 // import { nativeColorProperty, nativeCartoImageProperty, nativeProperty } from '../carto.ios';
 

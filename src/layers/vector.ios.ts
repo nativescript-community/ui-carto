@@ -13,7 +13,7 @@ import { BaseNative } from '../carto';
 import { VectorDataSource } from '../datasources/vector';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { CartoPackageManager } from '../packagemanager/packagemanager';
-import { nativeProperty } from '../carto.ios';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 import { fromNativeMapPos } from '../core/core';
 import { Projection } from '../projections/projection';
 import { VectorElement } from '../vectorelements/vectorelements';

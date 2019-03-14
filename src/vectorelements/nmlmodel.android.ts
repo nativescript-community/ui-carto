@@ -1,7 +1,7 @@
 import { BasePointVectorElement } from './vectorelements.android';
 import { NMLModelOptions } from './nmlmodel';
-import { nativeProperty } from '../carto.android';
 import { getRelativePathToApp } from '../carto.common';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 // export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.NMLModelStyleBuilder, NMLModelStyleBuilderOptions> {
 //     createNative(options: NMLModelStyleBuilderOptions) {

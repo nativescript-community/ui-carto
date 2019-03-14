@@ -3,18 +3,16 @@ import { BasePointVectorElement } from './vectorelements.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { nativeColorProperty, nativeProperty } from '../carto.android';
+import { nativeColorProperty } from '../carto.android';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
         return new com.carto.styles.PointStyleBuilder();
     }
-    @nativeProperty
-    size: number;
-    @nativeColorProperty
-    color: Color | string;
-    @nativeProperty
-    clickSize: number;
+    @nativeProperty size: number;
+    @nativeColorProperty color: Color | string;
+    @nativeProperty clickSize: number;
 
     _buildStyle: com.carto.styles.PointStyle;
     buildStyle() {

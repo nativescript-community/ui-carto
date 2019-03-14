@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Nativescript plugin for Carto Mobile SDK",
     "scripts": {
-        "tsc": "tsc -skipLibCheck && cpy **/*.d.ts ../plugin --parents --cwd=src",
+        "tsc": "tsc -skipLibCheck && cpy '**/*.d.ts' '../plugin' --parents --cwd=src",
         "clean": "rimraf ./plugin/**/*.d.ts ./plugin/**/*.js ./plugin/**/*.js.map plugin/node_modules plugin/package-lock.json",
         "build.wrappers": "npm i && npm run tsc",
         "build.android": "bash src-native/android/build.sh",

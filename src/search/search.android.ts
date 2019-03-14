@@ -4,7 +4,7 @@ import { Projection } from '../projections/projection.android';
 import { TileDataSource } from '../datasources/datasource.android';
 import { VectorTileDecoder } from '../vectortiles/vectortiles.android';
 import { VectorTileFeatureCollection } from '../geometry/feature';
-import { nativeProperty } from '../carto.android';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 import { toNativeMapPos } from '../core/core.android';
 
 export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions.AKVectorTileSearchService, VectorTileSearchServiceOptions> {

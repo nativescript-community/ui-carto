@@ -2,8 +2,9 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BasePointVectorElement } from './vectorelements.ios';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
-import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.ios';
+import { nativeCartoImageProperty, nativeColorProperty } from '../carto.ios';
 import { BillboardOrientation, BillboardScaling } from './vectorelements';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {

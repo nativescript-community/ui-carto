@@ -123,4 +123,9 @@ export class CartoMap extends View {
     setBearing(value: number, duration: number);
     setTilt(value: number, duration: number);
     setFocusPos(value: string | MapPos, duration: number);
+
+    requestRedraw() 
+    clearAllCaches() 
+    clearPreloadingCaches() 
+    cancelAllTasks() 
 }

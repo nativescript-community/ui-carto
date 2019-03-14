@@ -2,7 +2,8 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseLineVectorElement } from './vectorelements.android';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
-import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
+import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty } from '../carto.android';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export const LineJointType = {
     get BEVEL() {
@@ -37,8 +38,8 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
 
     @nativeProperty width: number;
     @nativeColorProperty color: Color | string;
-    @nativeEnumProperty(com.carto.styles.LineJoinType) lineJoinType: ILineJointType;
-    @nativeEnumProperty(com.carto.styles.LineEndType) lineEndType: ILineEndType;
+    @nativeEnumProperty lineJoinType: ILineJointType;
+    @nativeEnumProperty lineEndType: ILineEndType;
     @nativeProperty clickWidth: number;
     @nativeProperty stretchFactor: number;
 

@@ -36,7 +36,7 @@ public class AKHTTPTileDataSource
 
         // Check if any of the bitmap is null (if so return null) :
         boolean anyNull = false;
-        boolean allNull = false;
+        boolean allNull = true;
         for (int i = 0; i < parts.length; i++) {
             if (parts[i] == null) {
                 anyNull = true;
@@ -124,6 +124,7 @@ public class AKHTTPTileDataSource
             t4.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return null;
         }
 
         return mergeTileDatas(tiles);

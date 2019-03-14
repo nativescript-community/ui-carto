@@ -196,6 +196,9 @@ export class CartoMap extends CartoViewBase {
     cancelAllTasks() {
         this.mapView && this.mapView.cancelAllTasks();
     }
+    requestRedraw() {
+        this.mapView && this.mapView.getMapRenderer().requestRedraw();
+    }
     screenToMap(x: number, y: number) {
         if (this.mapView) {
             return this.fromNativeMapPos(this.mapView.screenToMap(NTScreenPos.alloc().initWithXY(x, y)));

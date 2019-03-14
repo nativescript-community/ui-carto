@@ -3,7 +3,8 @@ import { BasePointVectorElement } from './vectorelements.android';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
 import { BillboardOrientation } from './vectorelements';
-import { nativeColorProperty, nativeEnumProperty, nativeProperty } from '../carto.android';
+import { nativeColorProperty, nativeEnumProperty} from '../carto.android';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
@@ -12,7 +13,7 @@ export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     @nativeColorProperty color: Color | string;
     @nativeProperty fontSize: number;
     @nativeProperty fontName: string;
-    @nativeEnumProperty(com.carto.styles.BillboardOrientation) orientationMode: BillboardOrientation;
+    @nativeEnumProperty orientationMode: BillboardOrientation;
     @nativeProperty breakLines: boolean;
     @nativeProperty strokeWidth: number;
     @nativeProperty strokeColor: Color | string;

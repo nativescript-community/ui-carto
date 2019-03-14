@@ -294,6 +294,9 @@ export class CartoMap extends CartoViewBase {
     clearPreloadingCaches() {
         this.mapView && this.mapView.clearPreloadingCaches();
     }
+    requestRedraw() {
+        this.mapView && this.mapView.getMapRenderer().requestRedraw();
+    }
     cancelAllTasks() {
         this.mapView && this.mapView.cancelAllTasks();
     }

@@ -2,6 +2,7 @@ import { Observable } from 'tns-core-modules/ui/core/view';
 import { fromAsset, fromNativeSource, fromUrl, ImageSource } from 'tns-core-modules/image-source/image-source';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from 'tns-core-modules/utils/utils';
+import { isAndroid } from 'tns-core-modules/platform/platform';
 
 // export interface CreatMarkerOptions extends Location {
 //     title: string;
@@ -14,6 +15,86 @@ import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from 'tns-core-modul
 // }
 
 // type Options<T> = { [P in keyof T]: any };
+
+export interface NativePropertyOptions {
+    converter?: {
+        fromNative: Function;
+        toNative: Function;
+    };
+    defaultValue?: any;
+    nativeGetterName?: string;
+    nativeSetterName?: string;
+    getConverter?: Function;
+    ios?: {
+        nativeGetterName?: string;
+        nativeSetterName?: string;
+    };
+    android?: {
+        nativeGetterName?: string;
+        nativeSetterName?: string;
+    };
+}
+
+function createGetter(key: string, options: NativePropertyOptions) {
+    console.log('createGetter', key, options);
+    const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
+    const converter = options.converter;
+    return function() {
+        let result;
+        console.log('getter', key, nativeGetterName);
+        if (this.native && this.native[nativeGetterName]) {
+            result = this.native[nativeGetterName]();
+        } else {
+            result = this.options[key] || options.defaultValue;
+        }
+        result = converter ? converter.fromNative.call(this, result, key) : result;
+        // console.log('getter', key, options, nativeGetterName, !!getConverter, result);
+        return result;
+    };
+}
+function createSetter(key, options: NativePropertyOptions) {
+    console.log('createSetter', key, options);
+    const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+    return function(newVal) {
+        console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
+        this.options[key] = newVal;
+        if (this.native && this.native[nativeSetterName]) {
+            const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
+            this.native[nativeSetterName](actualVal);
+            this._buildStyle = null;
+        }
+        // this.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: key, value: actualVal });
+    };
+}
+
+function hasSetter(obj, prop) {
+    const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+    return descriptor && !!descriptor['set'];
+}
+function nativePropertyGenerator(target: Object, key: string, options?: NativePropertyOptions) {
+    console.log('mapPropertyGenerator', key, Object.keys(options));
+    Object.defineProperty(target, key, {
+        get: createGetter(key, options),
+        set: createSetter(key, options),
+        enumerable: true,
+        configurable: true
+    });
+}
+export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeProperty(...args) {
+    console.log('test deco', typeof args[0], Object.keys(args[0]), args[1], typeof args[1]);
+    if (args.length === 1) {
+        /// this must be a factory
+        return function(target: any, key?: string, descriptor?: PropertyDescriptor) {
+            return nativePropertyGenerator(target, key, args[0] || {});
+        };
+    } else {
+        const options = typeof args[1] === 'string' ? undefined : args[0];
+        const startIndex = !!options ? 1 : 0;
+        return nativePropertyGenerator(args[startIndex], args[startIndex + 1], options || {});
+    }
+}
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
     constructor(public options?: U, native?: T) {

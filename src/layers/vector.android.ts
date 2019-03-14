@@ -21,7 +21,7 @@ import { CartoPackageManager } from '../packagemanager/packagemanager';
 import { fromNativeMapPos } from '../core/core';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { Projection } from '../projections/projection';
-import { nativeProperty } from '../carto.android';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 import { nativeVariantToJS } from '../utils/utils.android';
 
 // export enum VectorTileRenderOrder {

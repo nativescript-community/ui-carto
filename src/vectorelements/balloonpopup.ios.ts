@@ -3,7 +3,8 @@ import { BasePointVectorElement } from './vectorelements.ios';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '../carto.ios';
+import { nativeCartoImageProperty, nativeColorProperty } from '../carto.ios';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<NTBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {

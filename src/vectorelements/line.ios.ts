@@ -2,7 +2,8 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseLineVectorElement } from './vectorelements.ios';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
-import { mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '../carto.ios';
+import { mapPosVectorFromArgs, nativeColorProperty } from '../carto.ios';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export enum LineJointType {
     BEVEL = NTLineJoinType.T_LINE_JOIN_TYPE_BEVEL,
