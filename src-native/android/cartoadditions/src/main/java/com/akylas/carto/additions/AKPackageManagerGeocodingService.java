@@ -8,7 +8,7 @@ public class AKPackageManagerGeocodingService extends PackageManagerGeocodingSer
     public AKPackageManagerGeocodingService(PackageManager manager) {
         super(manager);
     }
-    public void calculateAddress (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
+    public void calculateAddressCallback (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
         AKGeocodingServiceAdditions.calculateAddress(this, request, callback);
     }
 }

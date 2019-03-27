@@ -1,10 +1,10 @@
 package com.akylas.carto.additions;
 
 import com.carto.geocoding.GeocodingRequest;
-import com.carto.geocoding.MapBoxOnlineGeocodingService;
+import com.carto.geocoding.TomTomOnlineGeocodingService;
 
-public class AKMapBoxOnlineGeocodingService extends MapBoxOnlineGeocodingService {
-    public AKMapBoxOnlineGeocodingService(String token) {
+public class AKTomTomOnlineGeocodingService extends TomTomOnlineGeocodingService {
+    public AKTomTomOnlineGeocodingService(String token) {
         super(token);
     }
     public void calculateAddressCallback (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {

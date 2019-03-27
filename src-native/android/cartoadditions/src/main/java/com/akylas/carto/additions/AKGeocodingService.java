@@ -6,7 +6,7 @@ import com.carto.geocoding.GeocodingService;
 import com.carto.geocoding.GeocodingRequest;
 
 public class AKGeocodingService extends GeocodingService {
-    public void calculateAddress (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
+    public void calculateAddressCallback (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
         AKGeocodingServiceAdditions.calculateAddress(this, request, callback);
     }
 }

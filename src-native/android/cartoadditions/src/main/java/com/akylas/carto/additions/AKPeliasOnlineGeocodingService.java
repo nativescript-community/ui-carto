@@ -8,7 +8,7 @@ public class AKPeliasOnlineGeocodingService extends PeliasOnlineGeocodingService
     public AKPeliasOnlineGeocodingService(String key) {
         super(key);
     }
-    public void calculateAddress (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
+    public void calculateAddressCallback (final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
         AKGeocodingServiceAdditions.calculateAddress(this, request, callback);
     }
 }

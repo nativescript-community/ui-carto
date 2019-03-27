@@ -23,7 +23,6 @@ public class AKCartoPackageManager extends CartoPackageManager {
     static Handler mainHandler = null;
 
     public void getServerPackagesCallback(final ServerPackagesCallback callback) {
-        Log.d(TAG, "getServerPackagesCallback");
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -38,11 +37,11 @@ public class AKCartoPackageManager extends CartoPackageManager {
                     mainHandler = new Handler(android.os.Looper.getMainLooper());
                 }
                 // final PackageInfo[] fRa = resultArray;
-                Log.d(TAG, "getServerPackagesCallback about to run result");
+                // Log.d(TAG, "getServerPackagesCallback about to run result");
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, "getServerPackagesCallback run main callback");
+                        // Log.d(TAG, "getServerPackagesCallback run main callback");
                         callback.onServerPackages(results);
                     }
                 });
@@ -53,7 +52,7 @@ public class AKCartoPackageManager extends CartoPackageManager {
     }
 
     public void getLocalPackagesCallback(final ServerPackagesCallback callback) {
-        Log.d(TAG, "getLocalPackagesCallback");
+        // Log.d(TAG, "getLocalPackagesCallback");
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -68,7 +67,7 @@ public class AKCartoPackageManager extends CartoPackageManager {
                     mainHandler = new Handler(android.os.Looper.getMainLooper());
                 }
                 // final PackageInfo[] fRa = resultArray;
-                Log.d(TAG, "getLocalPackagesCallback about to run result");
+                // Log.d(TAG, "getLocalPackagesCallback about to run result");
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
