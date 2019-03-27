@@ -32,5 +32,7 @@ export interface VectorTileSearchServiceOptions extends SearchServiceOptions {
 // export abstract class BaseSearchService<T, U extends SearchServiceOptions> extends BaseNative<T, U> {}
 
 export class VectorTileSearchService extends BaseNative<any, VectorTileSearchServiceOptions> {
+    minZoom?: number;
+    maxZoom?: number;
     findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void): VectorTileFeatureCollection;
 }

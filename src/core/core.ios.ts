@@ -1,4 +1,4 @@
-import { MapBounds, MapPos } from './core';
+import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core';
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
@@ -31,6 +31,17 @@ export function toNativeMapPos(position: MapPos) {
     //  ignore z for now as points can get under the map!
     return NTMapPos.alloc().initWithXY(position.longitude, position.latitude);
 }
+export function fromNativeScreenPos(position: NTScreenPos) {
+    return {
+        x: position.getY(),
+        y: position.getX()
+    } as ScreenPos;
+}
+export function toNativeScreenPos(position: ScreenPos) {
+    //  ignore z for now as points can get under the map!
+    return NTScreenPos.alloc().initWithXY(position.x, position.y);
+}
+
 export function fromNativeMapBounds(bounds: NTMapBounds) {
     return {
         southwest: fromNativeMapPos(bounds.getMin()),
@@ -39,6 +50,19 @@ export function fromNativeMapBounds(bounds: NTMapBounds) {
 }
 export function toNativeMapBounds(bounds: MapBounds) {
     return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
+}
+
+export function fromNativeScreenBounds(bounds: NTScreenBounds) {
+    return {
+        min: fromNativeScreenPos(bounds.getMin()),
+        max: fromNativeScreenPos(bounds.getMax())
+    } as ScreenBounds;
+}
+export function toNativeScreenBounds(bounds: ScreenBounds) {
+    if (bounds) {
+        return NTScreenBounds.alloc().initWithMinMax(toNativeScreenPos(bounds.min), toNativeScreenPos(bounds.max));
+    }
+    return NTScreenBounds.alloc().init();
 }
 
 export abstract class NativeVector<T> {

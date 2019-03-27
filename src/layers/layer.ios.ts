@@ -3,10 +3,6 @@ import { LayerOptions, TileLayerOptions } from './layer';
 import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export abstract class Layer<T extends NTLayer, U extends LayerOptions> extends BaseLayer<T, U> {
-    @nativeProperty opacity: number;
-    @nativeProperty updatePriority: number;
-    @nativeProperty visible: boolean;
-
     get visibleZoomRange() {
         if (this.native) {
             const zoomRange = this.native.getVisibleZoomRange();
@@ -22,13 +18,15 @@ export abstract class Layer<T extends NTLayer, U extends LayerOptions> extends B
     }
 }
 export abstract class TileLayer<T extends NTTileLayer, U extends TileLayerOptions> extends Layer<T, U> {
-    set preloading(value: boolean) {
-        this.native && this.native.setPreloading(value);
-    }
-    get preloading() {
+    @nativeProperty preloading: boolean;
+    @nativeProperty synchronizedRefresh: boolean;
+    @nativeProperty zoomLevelBias: number;
+    @nativeProperty maxOverzoomLevel: number;
+    @nativeProperty maxUnderzoomLevel: number;
+
+    clearTileCaches( all: boolean) {
         if (this.native) {
-            return this.native.isPreloading();
+            this.native.clearTileCaches( all);
         }
-        return this.options.preloading;
     }
 }

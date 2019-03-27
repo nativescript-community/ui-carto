@@ -1,7 +1,8 @@
 import { Projection } from '../projections/projection';
-import { MapPos, MapPosVector } from '../core/core';
-import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions , VectorElementOptions } from './vectorelements';
+import { MapBounds, MapPos, MapPosVector } from '../core/core';
+import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
+import { Geometry } from 'nativescript-carto/geometry/geometry';
 
 declare enum LineJointType {
     FaceCamera,
@@ -46,4 +47,8 @@ export class Line extends BaseLineVectorElement<any, LineOptions> {
     endType?: LineEndType;
     clickWidth?: number;
     stretchFactor?: number;
+    setPoses(positions: MapPosVector | MapPos[]);
+    getPoses(): MapPosVector | MapPos[];
+    getGeometry(): Geometry;
+    getBounds(): MapBounds;
 }

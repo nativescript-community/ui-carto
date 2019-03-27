@@ -36,12 +36,12 @@ export interface NativePropertyOptions {
 }
 
 function createGetter(key: string, options: NativePropertyOptions) {
-    console.log('createGetter', key, options);
+    // console.log('createGetter', key, options);
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function() {
         let result;
-        console.log('getter', key, nativeGetterName);
+        // console.log('getter', key, nativeGetterName);
         if (this.native && this.native[nativeGetterName]) {
             result = this.native[nativeGetterName]();
         } else {
@@ -53,10 +53,10 @@ function createGetter(key: string, options: NativePropertyOptions) {
     };
 }
 function createSetter(key, options: NativePropertyOptions) {
-    console.log('createSetter', key, options);
+    // console.log('createSetter', key, options);
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function(newVal) {
-        console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
+        // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
@@ -72,7 +72,7 @@ function hasSetter(obj, prop) {
     return descriptor && !!descriptor['set'];
 }
 function nativePropertyGenerator(target: Object, key: string, options?: NativePropertyOptions) {
-    console.log('mapPropertyGenerator', key, Object.keys(options));
+    // console.log('mapPropertyGenerator', key, Object.keys(options));
     Object.defineProperty(target, key, {
         get: createGetter(key, options),
         set: createSetter(key, options),
@@ -83,7 +83,7 @@ function nativePropertyGenerator(target: Object, key: string, options?: NativePr
 export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeProperty(...args) {
-    console.log('test deco', typeof args[0], Object.keys(args[0]), args[1], typeof args[1]);
+    // console.log('test deco', typeof args[0], Object.keys(args[0]), args[1], typeof args[1]);
     if (args.length === 1) {
         /// this must be a factory
         return function(target: any, key?: string, descriptor?: PropertyDescriptor) {

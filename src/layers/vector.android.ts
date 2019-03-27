@@ -297,33 +297,8 @@ export class ClusteredVectorLayer extends Layer<com.carto.layers.ClusteredVector
     minimumClusterDistance: number;
     @nativeProperty
     maximumClusterZoom: number;
-    @nativeProperty
+    @nativeProperty({
+        nativeGetterName: 'isAnimatedClusters'
+    })
     animatedClusters: boolean;
-    // get minimumClusterDistance() {
-    //     return this.options.minimumClusterDistance;
-    // }
-    // set minimumClusterDistance(value: number) {
-    //     this.options.minimumClusterDistance = value;
-    //     if (this.native) {
-    //         this.native.setMinimumClusterDistance(value);
-    //     }
-    // }
-    // get maximumClusterZoom() {
-    //     return this.options.maximumClusterZoom;
-    // }
-    // set maximumClusterZoom(value: number) {
-    //     this.options.maximumClusterZoom = value;
-    //     if (this.native) {
-    //         this.native.setMaximumClusterZoom(value);
-    //     }
-    // }
-    // get animatedClusters() {
-    //     return this.options.animatedClusters;
-    // }
-    // set animatedClusters(value: boolean) {
-    //     this.options.animatedClusters = value;
-    //     if (this.native) {
-    //         this.native.setAnimatedClusters(value);
-    //     }
-    // }
 }

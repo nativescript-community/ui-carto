@@ -2,7 +2,7 @@ import { View } from 'tns-core-modules/ui/page/page';
 import { EventData } from 'tns-core-modules/data/observable';
 import { IProjection, Projection } from '../projections/projection';
 import { Layer } from '../layers/layer';
-import { MapPos } from '../core/core';
+import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core/core';
 
 export function registerLicense(key: string);
 
@@ -112,20 +112,23 @@ export class CartoMap extends View {
     restrictedPanning: boolean;
     readonly metersPerPixel: number;
 
-    addLayer(layer: Layer<any, any>, index?:number);
+    addLayer(layer: Layer<any, any>, index?: number);
     removeLayer(layer: Layer<any, any>);
-    screenToMap(x: number, y: number);
+    screenToMap(pos: ScreenPos): MapPos;
+    mapToScreen(pos: MapPos): ScreenPos;
     sendEvent(eventName: string, data?);
     fromNativeMapPos(position: any): MapPos;
-    getOptions():MapOptions
+    getOptions(): MapOptions;
 
     setZoom(value: number, duration: number);
     setBearing(value: number, duration: number);
     setTilt(value: number, duration: number);
-    setFocusPos(value: string | MapPos, duration: number);
+    setFocusPos(value: MapPos, duration: number);
 
-    requestRedraw() 
-    clearAllCaches() 
-    clearPreloadingCaches() 
-    cancelAllTasks() 
+    moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number);
+
+    requestRedraw();
+    clearAllCaches();
+    clearPreloadingCaches();
+    cancelAllTasks();
 }

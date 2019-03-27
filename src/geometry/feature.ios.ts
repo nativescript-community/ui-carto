@@ -23,6 +23,9 @@ export class FeatureCollection implements IFeatureCollection {
     get featureCount() {
         return this.native.getFeatureCount();
     }
+    getNative() {
+        return this.native;
+    }
 }
 
 export class VectorTileFeatureCollection extends FeatureCollection {
@@ -31,7 +34,7 @@ export class VectorTileFeatureCollection extends FeatureCollection {
     }
 
     getFeature(index: number) {
-        const nResult = this.native.getFeature(index) as NTVectorTileFeature;
+        const nResult = this.native.getFeature(index);
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
             geometry: nResult.getGeometry() as Geometry,

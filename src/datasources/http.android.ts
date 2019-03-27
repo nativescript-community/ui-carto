@@ -1,13 +1,20 @@
 import { HTTPTileDataSourceOptions } from './http';
 import { DataSource } from './datasource';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
-export class HTTPTileDataSource extends DataSource<com.akylas.carto.additions.AKHTTPTileDataSource, HTTPTileDataSourceOptions> {
+export class HTTPTileDataSource extends DataSource<com.carto.datasources.HTTPTileDataSource, HTTPTileDataSourceOptions> {
+    @nativeProperty({
+        nativeGetterName: 'isTMSScheme'
+    })
+    TMSScheme: boolean;
+    @nativeProperty maxAgeHeaderCheck: boolean;
+    @nativeProperty baseUrl: string;
     createNative(options: HTTPTileDataSourceOptions) {
-        return new com.akylas.carto.additions.AKHTTPTileDataSource(options.minZoom, options.maxZoom, options.url);
+        return new com.carto.datasources.HTTPTileDataSource(options.minZoom, options.maxZoom, options.url);
     }
-    set autoHD(value: boolean) {
-        this.native.setAutoHD(value);
-    }
+    // set autoHD(value: boolean) {
+    //     this.native.setAutoHD(value);
+    // }
     set httpHeaders(value: { [k: string]: string }) {
         const map = new com.carto.core.StringMap();
         for (const key in value) {

@@ -4,6 +4,8 @@ import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty } from '../carto.ios';
 import { nativeProperty } from 'nativescript-carto/carto.common';
+import { MapPos, MapPosVector } from 'nativescript-carto/core/core';
+import { fromNativeMapBounds } from 'nativescript-carto/core/core.ios';
 
 export enum LineJointType {
     BEVEL = NTLineJoinType.T_LINE_JOIN_TYPE_BEVEL,
@@ -58,5 +60,22 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
                 this.native.setStyle(value);
             }
         }
+    }
+    setPoses(positions: MapPosVector | MapPos[]) {
+        this.positions = positions;
+        if (this.native) {
+            this.native.setPoses(mapPosVectorFromArgs(positions, this.projection));
+        }
+    }
+    getPoses() {
+        return this.positions;
+    }
+    getGeometry() {
+        return this.getNative().getGeometry();
+    }
+    getBounds() {
+        const nBounds = this.getNative().getBounds();
+        const nProjection = this.projection.getNative();
+        return fromNativeMapBounds(NTMapBounds.alloc().initWithMinMax(nProjection.toWgs84(nBounds.getMin()), nProjection.toWgs84(nBounds.getMax())));
     }
 }

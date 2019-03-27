@@ -7,5 +7,7 @@ export interface RasterTileLayerOptions extends TileLayerOptions {
 export interface CartoOnlineRasterTileLayerOptions extends RasterTileLayerOptions {
     source?: string;
 }
-export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {}
+export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {
+    dataSource?: TileDataSource<any, any>;
+}
 export class CartoOnlineRasterTileLayer extends TileLayer<any, CartoOnlineRasterTileLayerOptions> {}

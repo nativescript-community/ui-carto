@@ -1,11 +1,12 @@
 import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import { EPSG3857 } from '../projections/epsg3857';
 import { IProjection, Projection } from '../projections/projection';
-import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core/core';
+import { fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, MapBounds, MapPos, ScreenBounds, ScreenPos, toNativeMapBounds, toNativeMapPos, toNativeScreenBounds } from '../core/core';
 import { TileLayer } from '../layers/layer';
 import * as application from 'application';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
+import { toNativeScreenPos } from 'nativescript-carto/core/core.android';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -129,16 +130,16 @@ export class CartoMap extends CartoViewBase {
                 console.error('no license to register !!!');
             }
         }
-        console.log('creating mapView');
         // Create new instance
         const mapView = new MapView(this._context, new WeakRef(this));
-
-        this.projection = new Projection(undefined, mapView.getOptions().getBaseProjection());
-
         const options = mapView.getOptions();
+        console.log('creating mapView', options.getBaseProjection());
+
+        this.projection = new Projection(undefined, options.getBaseProjection());
+
         options.setRotatable(true); // allows the map to rotate (this is the default behavior)
         options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
-        options.setTileThreadPoolSize(4); // use two threads to download tiles
+        options.setTileThreadPoolSize(2); // use two threads to download tiles
 
         return mapView;
     }
@@ -175,7 +176,16 @@ export class CartoMap extends CartoViewBase {
     }
 
     fromNativeMapPos(position: com.carto.core.MapPos) {
-        return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
+        return fromNativeMapPos(this.nativeProjection.toWgs84(position));
+    }
+    fromNativeMapBounds(position: com.carto.core.MapBounds) {
+        return fromNativeMapBounds(new com.carto.core.MapBounds(this.nativeProjection.toWgs84(position.getMin()), this.nativeProjection.toWgs84(position.getMax())));
+    }
+    toNativeMapPos(position: MapPos) {
+        return this.nativeProjection.fromWgs84(toNativeMapPos(position));
+    }
+    toNativeMapBounds(position: MapBounds) {
+        return new com.carto.core.MapBounds(this.nativeProjection.fromWgs84(toNativeMapPos(position.southwest)), this.nativeProjection.fromWgs84(toNativeMapPos(position.northeast)));
     }
 
     get metersPerPixel(): number {
@@ -199,7 +209,10 @@ export class CartoMap extends CartoViewBase {
     setBearing(value: number, duration: number) {
         this.mapView.setMapRotation(value, duration / 1000);
     }
-
+    moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
+        console.log('moveToFitBounds', mapBounds, this.toNativeMapBounds(mapBounds), screenBounds, toNativeScreenBounds(screenBounds));
+        this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds);
+    }
     [restrictedPanningProperty.setNative](value: boolean) {
         if (!this.nativeViewProtected) {
             return;
@@ -300,9 +313,15 @@ export class CartoMap extends CartoViewBase {
     cancelAllTasks() {
         this.mapView && this.mapView.cancelAllTasks();
     }
-    screenToMap(x: number, y: number) {
+    screenToMap(pos: ScreenPos) {
         if (this.mapView) {
-            return this.fromNativeMapPos(this.mapView.screenToMap(new com.carto.core.ScreenPos(x, y)));
+            return this.fromNativeMapPos(this.mapView.screenToMap(toNativeScreenPos(pos)));
+        }
+        return null;
+    }
+    mapToScreen(pos: MapPos) {
+        if (this.mapView) {
+            return fromNativeScreenPos(this.mapView.mapToScreen(this.nativeProjection.fromWgs84(toNativeMapPos(pos))));
         }
         return null;
     }

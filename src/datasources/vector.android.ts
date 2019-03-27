@@ -1,6 +1,8 @@
 import { LocalVectorDataSourceOptions } from './vector';
 import { DataSource } from './datasource';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
+import { GeometrySimplifier } from 'nativescript-carto/geometry/simplifier';
+import { FeatureCollection } from 'nativescript-carto/geometry/feature';
 
 export abstract class VectorDataSource<T extends com.carto.datasources.VectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
@@ -19,5 +21,14 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
     }
     addAll(elements: VectorElementVector) {
         this.getNative().addAll(elements.getNative() as com.carto.vectorelements.VectorElementVector);
+    }
+    setGeometrySimplifier(simplifier: GeometrySimplifier<any, any>) {
+        this.getNative().setGeometrySimplifier(simplifier.getNative());
+    }
+    clear() {
+        this.getNative().clear();
+    }
+    addFeatureCollection(featureCollection: FeatureCollection, style: com.carto.styles.Style) {
+        this.getNative().addFeatureCollection(featureCollection.getNative(), style);
     }
 }

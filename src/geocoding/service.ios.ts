@@ -29,18 +29,18 @@ export class GeocodingService extends BaseGeocodingService<NTGeocodingService, G
 export class GeocodingResult implements IGeocodingResult {
     constructor(private native: NTGeocodingResult) {}
     getAddress() {
-        const nResult = this.native.getAddress();
-        return {
-            street: nResult.getStreet(),
-            country: nResult.getCountry(),
-            name: nResult.getName(),
-            neighbourhood: nResult.getNeighbourhood(),
-            postcode: nResult.getPostcode(),
-            houseNumber: nResult.getHouseNumber(),
-            region: nResult.getRegion(),
-            locality: nResult.getLocality(),
-            categories: nativeVectorToArray(nResult.getCategories())
-        } as Address;
+        return this.native.getAddress() as Address;
+        // return {
+        //     street: nResult.getStreet(),
+        //     country: nResult.getCountry(),
+        //     name: nResult.getName(),
+        //     neighbourhood: nResult.getNeighbourhood(),
+        //     postcode: nResult.getPostcode(),
+        //     houseNumber: nResult.getHouseNumber(),
+        //     region: nResult.getRegion(),
+        //     locality: nResult.getLocality(),
+        //     categories: nativeVectorToArray(nResult.getCategories())
+        // };
     }
     getRank() {
         return this.native.getRank();

@@ -70,7 +70,7 @@ export class CartoPackageManager extends DataSource<any, CartoPackageManagerOpti
     start(): boolean;
     startPackageListDownload(): boolean;
     getServerPackageListAge(): number;
-    etServerPackageListMetaInfo(): PackageMetaInfo;
+    getServerPackageListMetaInfo(): PackageMetaInfo;
     stop(wait: boolean): boolean;
     startPackageListDownload(): boolean;
     startPackageDownload(id: string): boolean;

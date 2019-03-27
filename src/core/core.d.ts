@@ -5,9 +5,18 @@ export interface MapPos {
     speed?: number;
 }
 
+export interface ScreenPos {
+    x: number;
+    y: number;
+}
+
 export interface MapBounds {
     northeast: MapPos;
     southwest: MapPos;
+}
+export interface ScreenBounds {
+    min: ScreenPos;
+    max: ScreenPos;
 }
 export namespace MapBounds {
     function fromCoordinates(southwest: MapPos, northeast: MapPos): MapBounds;
@@ -17,6 +26,11 @@ export declare function toNativeMapPos(position: MapPos): any;
 export declare function fromNativeMapBounds(bounds: any): MapBounds;
 export declare function toNativeMapBounds(bounds: MapBounds): any;
 export declare function nativeVectorToArray<T>(vector: NativeVector<T>): T[];
+
+export declare function fromNativeScreenPos(pos): ScreenPos;
+export declare function toNativeScreenPos(position: ScreenPos): any;
+export declare function fromNativeScreenBounds(pos): ScreenBounds;
+export declare function toNativeScreenBounds(position: ScreenBounds): any;
 
 declare class  CartoMapStyle {
     static  VOYAGER: CartoMapStyle

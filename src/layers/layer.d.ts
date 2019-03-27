@@ -17,8 +17,17 @@ export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
 }
 export interface TileLayerOptions extends LayerOptions {
     preloading?: boolean;
+    synchronizedRefresh?: boolean;
+    zoomLevelBias?: number;
+    maxOverzoomLevel?: number;
+    maxUnderzoomLevel?: number;
 }
 export class TileLayer<T, U extends TileLayerOptions> extends Layer<T, U> {
     constructor(options: U);
     preloading: boolean;
+    synchronizedRefresh: boolean;
+    zoomLevelBias: number;
+    maxOverzoomLevel: number;
+    maxUnderzoomLevel: number;
+    clearTileCaches( all: boolean) 
 }

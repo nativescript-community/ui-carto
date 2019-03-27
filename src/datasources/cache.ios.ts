@@ -1,6 +1,7 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
 import { TileDataSource } from './datasource';
 import { MapBounds, toNativeMapBounds } from '../core/core';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     private _owner: WeakRef<TileDownloadListener>;
@@ -47,11 +48,13 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     }
 }
 export class PersistentCacheTileDataSource extends TileDataSource<NTPersistentCacheTileDataSource, PersistentCacheTileDataSourceOptions> {
+    @nativeProperty capacity: number;
+    @nativeProperty cacheOnlyMode: number;
     createNative(options: PersistentCacheTileDataSourceOptions) {
         if (options.databasePath) {
-            return NTPersistentCacheTileDataSource.alloc().initWithDataSourceDatabasePath((options.dataSource as TileDataSource<any, any>).getNative(), options.databasePath);
+            return NTPersistentCacheTileDataSource.alloc().initWithDataSourceDatabasePath(options.dataSource.getNative(), options.databasePath);
         } else {
-            return NTPersistentCacheTileDataSource.alloc().initWithDataSource((options.dataSource as TileDataSource<any, any>).getNative());
+            return NTPersistentCacheTileDataSource.alloc().initWithDataSource(options.dataSource.getNative());
         }
     }
     close() {
@@ -59,11 +62,11 @@ export class PersistentCacheTileDataSource extends TileDataSource<NTPersistentCa
             this.native.close();
         }
     }
+    clear() {
+        this.getNative().clear();
+    }
     isOpen() {
         return this.native && this.native.isOpen();
-    }
-    setCacheOnlyMode(value: boolean) {
-        return this.getNative().setCacheOnlyMode(value);
     }
     stopAllDownloads() {
         return this.native && this.native.stopAllDownloads();
@@ -79,13 +82,8 @@ export class PersistentCacheTileDataSource extends TileDataSource<NTPersistentCa
 }
 
 export class MemoryCacheTileDataSource extends TileDataSource<NTMemoryCacheTileDataSource, MemoryCacheTileDataSourceOptions> {
+    @nativeProperty capacity: number;
     createNative(options: MemoryCacheTileDataSourceOptions) {
-        return NTMemoryCacheTileDataSource.alloc().initWithDataSource((options.dataSource as TileDataSource<any, any>).getNative());
-    }
-    get capacity() {
-        return this.native ? this.native.getCapacity() : this.options.capacity;
-    }
-    set capacity(value: number) {
-        this.native.setCapacity(value);
+        return NTMemoryCacheTileDataSource.alloc().initWithDataSource(options.dataSource.getNative());
     }
 }

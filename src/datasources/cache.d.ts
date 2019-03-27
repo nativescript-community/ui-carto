@@ -1,5 +1,4 @@
-import { DataSource, TileDataSourceOptions, TileDataSource } from './datasource';
-
+import { DataSource, TileDataSource, TileDataSourceOptions } from './datasource';
 
 export interface TileDownloadListener {
     onDownloadCompleted();
@@ -11,12 +10,17 @@ export interface TileDownloadListener {
 export interface PersistentCacheTileDataSourceOptions extends TileDataSourceOptions {
     dataSource: TileDataSource<any, any>;
     databasePath?: string;
+    capacity?: number;
+    cacheOnlyMode?: boolean;
 }
-export class PersistentCacheTileDataSource extends DataSource<any, PersistentCacheTileDataSourceOptions> {}
-
+export class PersistentCacheTileDataSource extends DataSource<any, PersistentCacheTileDataSourceOptions> {
+    capacity: number;
+    cacheOnlyMode: boolean;
+    clear();
+}
 
 export interface MemoryCacheTileDataSourceOptions extends TileDataSourceOptions {
     dataSource: TileDataSource<any, any>;
-    capacity: number;
+    capacity?: number;
 }
 export class MemoryCacheTileDataSource extends DataSource<any, MemoryCacheTileDataSourceOptions> {}

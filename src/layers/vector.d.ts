@@ -70,6 +70,7 @@ export interface ClusteredVectorLayerLayerOptions extends VectorTileLayerOptions
 }
 
 export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends TileLayer<T, U> {
+    dataSource?: TileDataSource<any, any>;
     setLabelRenderOrder(order: VectorTileRenderOrder): void;
     setVectorTileEventListener(listener: VectorTileEventListener, projection?: Projection): void;
     getTileDecoder(): MBVectorTileDecoder;

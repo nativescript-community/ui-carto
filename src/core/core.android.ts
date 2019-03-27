@@ -1,4 +1,4 @@
-import { MapBounds, MapPos } from './core';
+import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core';
 
 export const CartoMapStyle = {
     get VOYAGER() {
@@ -45,6 +45,16 @@ export function toNativeMapPos(position: MapPos) {
     //  ignore z for now as points can get under the map!
     return new com.carto.core.MapPos(position.longitude, position.latitude);
 }
+export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
+    return {
+        x: position.getY(),
+        y: position.getX()
+    } as ScreenPos;
+}
+export function toNativeScreenPos(position: ScreenPos) {
+    //  ignore z for now as points can get under the map!
+    return new com.carto.core.ScreenPos(position.x, position.y);
+}
 
 export function nativeVectorToArray<T>(vector: NativeVector<T>) {
     const result: T[] = [];
@@ -62,6 +72,19 @@ export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
 }
 export function toNativeMapBounds(bounds: MapBounds) {
     return new com.carto.core.MapBounds(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
+}
+
+export function fromNativeScreenBounds(bounds: com.carto.core.ScreenBounds) {
+    return {
+        min: fromNativeScreenPos(bounds.getMin()),
+        max: fromNativeScreenPos(bounds.getMax())
+    } as ScreenBounds;
+}
+export function toNativeScreenBounds(bounds: ScreenBounds) {
+    if (bounds) {
+        return new com.carto.core.ScreenBounds(toNativeScreenPos(bounds.min), toNativeScreenPos(bounds.max));
+    }
+    return new com.carto.core.ScreenBounds();
 }
 
 export abstract class NativeVector<T> {

@@ -1,10 +1,11 @@
 import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import { EPSG3857 } from '../projections/epsg3857';
 import { IProjection } from '../projections/projection';
-import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core/core';
+import { fromNativeMapPos, MapPos, toNativeMapPos, ScreenPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
+import { toNativeScreenPos, fromNativeScreenPos } from 'nativescript-carto/core/core.ios';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -199,9 +200,15 @@ export class CartoMap extends CartoViewBase {
     requestRedraw() {
         this.mapView && this.mapView.getMapRenderer().requestRedraw();
     }
-    screenToMap(x: number, y: number) {
+    screenToMap(pos: ScreenPos) {
         if (this.mapView) {
-            return this.fromNativeMapPos(this.mapView.screenToMap(NTScreenPos.alloc().initWithXY(x, y)));
+            return this.fromNativeMapPos(this.mapView.screenToMap(toNativeScreenPos(pos)));
+        }
+        return null;
+    }
+    mapToScreen(pos: MapPos) {
+        if (this.mapView) {
+            return fromNativeScreenPos(this.mapView.mapToScreen(this.nativeProjection.fromWgs84(toNativeMapPos(pos))));
         }
         return null;
     }

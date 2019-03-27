@@ -47,6 +47,26 @@ declare namespace com {
                     setUseNativeBuilder(value: boolean);
                     setBitmap(bitmap: any);
                 }
+
+                export class GeocodingServiceAddressCallback {
+                    constructor(impl?: { onGeoCodingResult: (err: Error, result: com.carto.geocoding.GeocodingResultVector) => void });
+                    onGeoCodingResult (err: Error, result: com.carto.geocoding.GeocodingResultVector);
+                }
+                export class AKGeocodingService extends com.carto.geocoding.GeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
+                export class AKPackageManagerGeocodingService extends com.carto.geocoding.PackageManagerGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
+                export class AKPeliasOnlineGeocodingService extends com.carto.geocoding.PeliasOnlineGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
+                export class AKMapBoxOnlineGeocodingService extends com.carto.geocoding.MapBoxOnlineGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
+                export class AKTomTomOnlineGeocodingService extends com.carto.geocoding.TomTomOnlineGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
             }
         }
     }

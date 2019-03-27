@@ -8,7 +8,6 @@ export interface Feature {
     // getGeometry(): Geometry;
 }
 
-
 export interface VectorTileFeature extends Feature {
     id: number;
     layerName: string;
@@ -21,6 +20,7 @@ export class FeatureCollection {
     getGeometry(index: number): Geometry;
     getFeatureCount(): number;
     readonly featureCount: number;
+    getNative();
 }
 export class VectorTileFeatureCollection extends FeatureCollection {
     getFeature(index: number): VectorTileFeature;

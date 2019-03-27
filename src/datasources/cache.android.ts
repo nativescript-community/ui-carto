@@ -1,25 +1,24 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
 import { TileDataSource } from './datasource';
 import { MapBounds, toNativeMapBounds } from '../core/core';
+import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class PersistentCacheTileDataSource extends TileDataSource<com.carto.datasources.PersistentCacheTileDataSource, PersistentCacheTileDataSourceOptions> {
+    @nativeProperty capacity: number;
+    @nativeProperty cacheOnlyMode: number;
     createNative(options: PersistentCacheTileDataSourceOptions) {
-        if (options.databasePath) {
-            return new com.carto.datasources.PersistentCacheTileDataSource(options.dataSource.getNative(), options.databasePath);
-        } else {
-            return new com.carto.datasources.PersistentCacheTileDataSource(options.dataSource.getNative());
-        }
+        return new com.carto.datasources.PersistentCacheTileDataSource(options.dataSource.getNative(), options.databasePath);
     }
     close() {
         if (this.native) {
             this.native.close();
         }
     }
+    clear() {
+        this.getNative().clear();
+    }
     isOpen() {
         return this.native && this.native.isOpen();
-    }
-    setCacheOnlyMode(value: boolean) {
-        return this.getNative().setCacheOnlyMode(value);
     }
     stopAllDownloads() {
         return this.native && this.native.stopAllDownloads();
@@ -33,7 +32,7 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
     private _owner: WeakRef<TileDownloadListener>;
 
     public static initWithOwner(owner: WeakRef<TileDownloadListener>): TileDownloadListenerImpl {
-        const delegate = new TileDownloadListenerImpl() as TileDownloadListenerImpl;
+        const delegate = new TileDownloadListenerImpl() ;
         delegate._owner = owner;
         return delegate;
     }
@@ -75,13 +74,8 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
 }
 
 export class MemoryCacheTileDataSource extends TileDataSource<com.carto.datasources.MemoryCacheTileDataSource, MemoryCacheTileDataSourceOptions> {
+    @nativeProperty capacity: number;
     createNative(options: MemoryCacheTileDataSourceOptions) {
         return new com.carto.datasources.MemoryCacheTileDataSource(options.dataSource.getNative());
-    }
-    get capacity() {
-        return this.native ? this.native.getCapacity() : this.options.capacity;
-    }
-    set capacity(value: number) {
-        this.native.setCapacity(value);
     }
 }

@@ -21,6 +21,9 @@ export class FeatureCollection implements IFeatureCollection {
     get featureCount() {
         return this.native.getFeatureCount();
     }
+    getNative() {
+        return this.native;
+    }
 }
 
 export class VectorTileFeatureCollection extends FeatureCollection {

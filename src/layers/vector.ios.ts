@@ -245,5 +245,8 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
 
     @nativeProperty minimumClusterDistance: number;
     @nativeProperty maximumClusterZoom: number;
-    @nativeProperty animatedClusters: boolean;
+    @nativeProperty({
+        nativeGetterName: 'isAnimatedClusters'
+    })
+    animatedClusters: boolean;
 }
