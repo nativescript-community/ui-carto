@@ -74,3 +74,4 @@ Pods
 !plugin/platforms
 *.aar*
 /plugin/package-lock.json
+plugin/**/*.d.ts
