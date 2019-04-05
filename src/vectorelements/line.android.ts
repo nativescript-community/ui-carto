@@ -4,8 +4,9 @@ import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptio
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty } from 'nativescript-carto/carto.android';
 import { nativeProperty } from 'nativescript-carto/carto.common';
-import { MapPos, MapPosVector } from 'nativescript-carto/core/core';
+import { MapBounds, MapPos, MapPosVector } from 'nativescript-carto/core/core';
 import { fromNativeMapBounds } from 'nativescript-carto/core/core.android';
+export { MapBounds };
 
 export const LineJointType = {
     get BEVEL() {

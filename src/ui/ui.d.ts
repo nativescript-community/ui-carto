@@ -4,7 +4,7 @@ import { IProjection, Projection } from '../projections/projection';
 import { Layer } from '../layers/layer';
 import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core/core';
 
-export function registerLicense(key: string);
+export function registerLicense(key: string, callback?: (result: boolean) => void);
 
 export const MapReadyEvent: string;
 /**

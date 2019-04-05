@@ -1,21 +1,24 @@
 import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import { EPSG3857 } from '../projections/epsg3857';
 import { IProjection } from '../projections/projection';
-import { fromNativeMapPos, MapPos, toNativeMapPos, ScreenPos } from '../core/core';
+import { fromNativeMapPos, MapPos, ScreenPos, toNativeMapPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
-import { toNativeScreenPos, fromNativeScreenPos } from 'nativescript-carto/core/core.ios';
+import { fromNativeScreenPos, toNativeScreenPos } from 'nativescript-carto/core/core.ios';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
 let licenseKey: string;
-export function registerLicense(value: string) {
+export function registerLicense(value: string, callback?: (result: boolean) => void) {
     const result = NTMapView.registerLicense(value);
     if (result) {
         licenseKey = value;
     }
     setLicenseKeyRegistered(result);
+    if (callback) {
+        callback(result);
+    }
 }
 export function getLicenseKey() {
     return licenseKey;

@@ -8,21 +8,41 @@ import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
 import { toNativeScreenPos } from 'nativescript-carto/core/core.android';
 
+import { profile } from 'tns-core-modules/profiling';
+
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
 let licenseKey: string;
-export function registerLicense(value: string) {
+
+export const registerLicense = profile('registerLicense', (value: string, callback?: (result: boolean) => void) => {
     const context = application.android.context;
     if (!context) {
         throw new Error('application context not initialized!');
     }
-    const result = com.carto.ui.MapView.registerLicense(value, context);
-    console.log('registerLicense', value, result);
-    if (result) {
-        licenseKey = value;
+    if (callback) {
+        return com.akylas.carto.additions.AKLicenseManager.registerLicenseCallback(
+            value,
+            context,
+            new com.akylas.carto.additions.RegisterLicenseCallback({
+                onLicenseRegistered: result => {
+                    if (result) {
+                        licenseKey = value;
+                    }
+                    setLicenseKeyRegistered(result);
+                    callback(result);
+                }
+            })
+        );
+    } else {
+        const result = com.carto.ui.MapView.registerLicense(value, context);
+        console.log('registerLicense', value, result);
+        if (result) {
+            licenseKey = value;
+        }
+        setLicenseKeyRegistered(result);
+        return result;
     }
-    setLicenseKeyRegistered(result);
-}
+});
 export function getLicenseKey() {
     return licenseKey;
 }

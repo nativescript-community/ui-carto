@@ -2,13 +2,17 @@ package com.akylas.carto.additions;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
 import com.carto.ui.MapClickInfo;
 import com.carto.ui.MapEventListener;
 import com.carto.ui.MapView;
 
 public class AKMapView extends MapView {
+    static final String TAG = "AKMapView";
     Handler mainHandler = null;
+
+    
     public AKMapView(Context context) {
         super(context);
         this.mainHandler = new Handler(context.getMainLooper());
@@ -24,7 +28,7 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapMoved();
                 }
             });
-            //            AKMapView.this.onMapMoved();
+            // AKMapView.this.onMapMoved();
         }
 
         @Override
@@ -35,7 +39,7 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapIdle();
                 }
             });
-//            AKMapView.this.onMapIdle();
+            // AKMapView.this.onMapIdle();
         }
 
         @Override
@@ -46,7 +50,7 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapStable();
                 }
             });
-//            AKMapView.this.onMapStable();
+            // AKMapView.this.onMapStable();
         }
 
         @Override
@@ -57,7 +61,7 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapClicked(mapClickInfo);
                 }
             });
-//            AKMapView.this.onMapClicked(mapClickInfo);
+            // AKMapView.this.onMapClicked(mapClickInfo);
         }
     };
 

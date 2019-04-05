@@ -70,7 +70,7 @@ module.exports = env => {
         aliases = Object.assign(aliases, {
             '#': srcFullPath,
             'nativescript-carto$': '#/carto.' + platform,
-            'nativescript-carto': '#/carto',
+            'nativescript-carto': '#/carto'
         });
     }
     const tsconfig = 'tsconfig.json';
@@ -210,9 +210,9 @@ module.exports = env => {
             ]
         },
         plugins: [
-            new ForkTsCheckerWebpackPlugin({
-                tsconfig: resolve(tsconfig),
-            }),
+            // new ForkTsCheckerWebpackPlugin({
+            //     tsconfig: resolve(tsconfig),
+            // }),
             // ... Vue Loader plugin omitted
             // make sure to include the plugin!
             new VueLoaderPlugin(),

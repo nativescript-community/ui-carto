@@ -4,9 +4,10 @@ import { LineOptions, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty } from '../carto.ios';
 import { nativeProperty } from 'nativescript-carto/carto.common';
-import { MapPos, MapPosVector } from 'nativescript-carto/core/core';
+import { MapBounds, MapPos, MapPosVector } from 'nativescript-carto/core/core';
 import { fromNativeMapBounds } from 'nativescript-carto/core/core.ios';
 
+export { MapBounds };
 export enum LineJointType {
     BEVEL = NTLineJoinType.T_LINE_JOIN_TYPE_BEVEL,
     MITER = NTLineJoinType.T_LINE_JOIN_TYPE_MITER,
