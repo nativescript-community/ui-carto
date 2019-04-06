@@ -2,7 +2,7 @@ import { BaseNative } from '../carto.common';
 import { ClusterElementBuilderOptions } from './cluster';
 import { MapPos } from '../core/core';
 import { VectorElementVector } from '../vectorelements/vectorelements';
-import { BaseVectorElement } from '../vectorelements/vectorelements.ios';
+import { BaseVectorElement } from '../vectorelements/vectorelements';
 export declare class ClusterElementBuilderImpl extends NTClusterElementBuilder {
     private _owner;
     static initWithOwner(owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderImpl;

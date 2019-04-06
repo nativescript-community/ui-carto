@@ -1,9 +1,9 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseLineVectorElement } from './vectorelements.android';
+import { BaseLineVectorElement } from './vectorelements';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { LineStyleBuilder } from './line';
-import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto.android';
+import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto';
 import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PolygonStyleBuilder, PolygonStyleBuilderOptions> {

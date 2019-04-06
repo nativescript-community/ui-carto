@@ -29,5 +29,5 @@ export class TileLayer<T, U extends TileLayerOptions> extends Layer<T, U> {
     zoomLevelBias: number;
     maxOverzoomLevel: number;
     maxUnderzoomLevel: number;
-    clearTileCaches( all: boolean) 
+    clearTileCaches( all: boolean);
 }

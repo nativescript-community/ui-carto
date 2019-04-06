@@ -1,20 +1,8 @@
-import {
-    Address,
-    GeocodingRequest,
-    GeocodingResult as IGeocodingResult,
-    GeocodingServiceOptions,
-    MapBoxOnlineGeocodingServiceOptions,
-    OSMOfflineGeocodingServiceOptions,
-    PackageManagerGeocodingServiceOptions,
-    PeliasOnlineGeocodingServiceOptions,
-    TomTomOnlineGeocodingServiceOptions
-} from './service';
-import { BaseGeocodingService } from './service.common';
 import { NativeVector, toNativeMapPos } from '../core/core';
-import { nativeVectorToArray } from '../utils/utils';
 import { FeatureCollection } from '../geometry/feature';
-import { nativeProperty } from 'nativescript-carto/carto.common';
-
+import { GeocodingRequest, GeocodingResult as IGeocodingResult, GeocodingServiceOptions, MapBoxOnlineGeocodingServiceOptions, PackageManagerGeocodingServiceOptions, PeliasOnlineGeocodingServiceOptions, TomTomOnlineGeocodingServiceOptions } from './service';
+import { nativeProperty } from 'nativescript-carto/carto';
+import {BaseGeocodingService} from './service.common';
 export class GeocodingResultVector extends NativeVector<com.carto.geocoding.GeocodingResult> {
     constructor(public native: com.carto.geocoding.GeocodingResultVector) {
         super();

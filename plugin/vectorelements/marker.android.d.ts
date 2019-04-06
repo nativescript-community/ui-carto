@@ -1,8 +1,7 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.android';
-import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation, BillboardScaling } from './vectorelements';
+import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
+import { BasePointVectorElement, BillboardOrientation, BillboardScaling } from './vectorelements';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 export declare class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions): com.carto.styles.MarkerStyleBuilder;
     width: number;

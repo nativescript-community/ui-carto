@@ -2,7 +2,7 @@ import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectorti
 
 import { BaseVectorTileDecoder } from './vectortiles.common';
 import { getRelativePathToApp } from '../carto.common';
-import { DirAssetPackage } from 'nativescript-carto/utils/utils.android';
+import { DirAssetPackage } from 'nativescript-carto/utils/utils';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
     createNative(options: VectorTileDecoderOptions) {

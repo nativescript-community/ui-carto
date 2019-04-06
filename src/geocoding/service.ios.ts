@@ -1,7 +1,6 @@
 import { Address, GeocodingRequest, GeocodingResult as IGeocodingResult, GeocodingServiceOptions } from './service';
 import { BaseGeocodingService } from './service.common';
 import { toNativeMapPos } from '../core/core';
-import { nativeVectorToArray } from '../utils/utils';
 import { FeatureCollection } from '../geometry/feature';
 
 export class GeocodingService extends BaseGeocodingService<NTGeocodingService, GeocodingServiceOptions> {

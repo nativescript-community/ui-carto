@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.ios';
+import { BasePointVectorElement } from './vectorelements';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 export declare class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<NTBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {

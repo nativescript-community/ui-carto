@@ -1,7 +1,7 @@
-import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from './packagemanager';
-import { DataSource, TileDataSource } from '../datasources/datasource';
 import { MapBounds, MapPos } from '../core/core';
+import { DataSource, TileDataSource } from '../datasources/datasource';
 import { Projection } from '../projections/projection';
+import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from './packagemanager';
 export declare const PackageType: {
     readonly MAP: com.carto.packagemanager.PackageType;
     readonly ROUTING: com.carto.packagemanager.PackageType;

@@ -16,4 +16,4 @@ export interface DirAssetPackageOptions {
     loadUsingNS?: boolean;
 }
 
-export abstract class DirAssetPackage extends BaseNative<any, DirAssetPackageOptions> {}
+export class DirAssetPackage extends BaseNative<any, DirAssetPackageOptions> {}

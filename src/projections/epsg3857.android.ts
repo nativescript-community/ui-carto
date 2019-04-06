@@ -1,4 +1,4 @@
-import { ProjectionClass } from './projection.android';
+import { ProjectionClass } from './projection';
 import { EPSG3857Options } from './epsg3857';
 
 export class EPSG3857 extends ProjectionClass<com.carto.projections.EPSG3857, EPSG3857Options> {

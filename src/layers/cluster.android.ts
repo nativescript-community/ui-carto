@@ -1,9 +1,8 @@
 import { _createImageSourceFromSrc, BaseNative } from '../carto.common';
-import { ClusterElementBuilderOptions } from './cluster';
 import { fromNativeMapPos, MapPos } from '../core/core';
-import { VectorElementVector } from '../vectorelements/vectorelements';
-import { BaseVectorElement } from '../vectorelements/vectorelements.android';
-import { nativeImageProperty } from '../carto.android';
+import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
+import { ClusterElementBuilderOptions } from './cluster';
+import { nativeImageProperty } from 'nativescript-carto/carto';
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 
@@ -35,19 +34,18 @@ function initClusterElementBuilderNative() {
                     return result;
                 }
             }
-            return super.buildCluster(position, nElements as com.carto.vectorelements.VectorElementVector);
+            return super.buildCluster(position, nElements);
         }
     }
     ClusterElementBuilderNative = ClusterElementBuilderImpl as any;
 }
 
 export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
-
     @nativeImageProperty bitmap: string;
     createNative() {
         console.log('create ClusterElementBuilder');
         initClusterElementBuilderNative();
-        const result =  new ClusterElementBuilderNative(new WeakRef(this));
+        const result = new ClusterElementBuilderNative(new WeakRef(this));
         // result.setUseNativeBuilder(false);
         return result;
         // return new com.carto.layers.ClusterElementBuilder();

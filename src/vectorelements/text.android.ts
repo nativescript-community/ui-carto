@@ -1,9 +1,8 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.android';
-import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation } from './vectorelements';
-import { nativeColorProperty, nativeEnumProperty} from '../carto.android';
+import { nativeColorProperty, nativeEnumProperty } from '../carto';
+import { TextOptions, TextStyleBuilderOptions } from './text';
+import { BasePointVectorElement, BillboardOrientation } from './vectorelements';
 import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {

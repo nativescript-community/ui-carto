@@ -5,7 +5,7 @@ import { fromNativeMapPos, MapPos, ScreenPos, toNativeMapPos } from '../core/cor
 import { TileLayer } from '../layers/layer';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
-import { fromNativeScreenPos, toNativeScreenPos } from 'nativescript-carto/core/core.ios';
+import { fromNativeScreenPos, toNativeScreenPos } from 'nativescript-carto/core/core';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 

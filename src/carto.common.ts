@@ -16,24 +16,6 @@ import { isAndroid } from 'tns-core-modules/platform/platform';
 
 // type Options<T> = { [P in keyof T]: any };
 
-export interface NativePropertyOptions {
-    converter?: {
-        fromNative: Function;
-        toNative: Function;
-    };
-    defaultValue?: any;
-    nativeGetterName?: string;
-    nativeSetterName?: string;
-    getConverter?: Function;
-    ios?: {
-        nativeGetterName?: string;
-        nativeSetterName?: string;
-    };
-    android?: {
-        nativeGetterName?: string;
-        nativeSetterName?: string;
-    };
-}
 
 function createGetter(key: string, options: NativePropertyOptions) {
     // console.log('createGetter', key, options);
@@ -199,6 +181,7 @@ export function capitalize(s) {
 }
 
 import { knownFolders, path } from 'tns-core-modules/file-system';
+import { NativePropertyOptions } from './carto';
 let currentAppFolder: string;
 
 export function getFileName(str: string): string {

@@ -15,8 +15,7 @@ export interface GeocodingServiceOptions {
     // metaData?: Object;
 }
 
-export abstract class BaseGeocodingService<T, U extends GeocodingServiceOptions> extends BaseNative<T, U> {}
-export abstract class GeocodingService<T, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
+export abstract class GeocodingService<T, U extends GeocodingServiceOptions> extends BaseNative<T, U> {
     public calculateAddresses(options: GeocodingRequest, callback: (error: Error, res: GeocodingResultVector) => void);
 }
 

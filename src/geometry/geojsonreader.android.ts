@@ -1,7 +1,7 @@
 import { BaseNative } from '../carto.common';
 import { GeoJSONGeometryReaderOptions } from './geojsonreader';
 import { FeatureCollection } from './feature';
-import { Projection } from '../projections/projection.android';
+import { Projection } from '../projections/projection';
 
 export class GeoJSONGeometryReader extends BaseNative<com.carto.geometry.GeoJSONGeometryReader, GeoJSONGeometryReaderOptions> {
     createNative() {

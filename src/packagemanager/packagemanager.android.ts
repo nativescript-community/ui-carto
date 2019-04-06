@@ -1,8 +1,7 @@
-import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from './packagemanager';
+import { MapBounds, MapPos, toNativeMapBounds, toNativeMapPos } from '../core/core';
 import { DataSource, TileDataSource } from '../datasources/datasource';
-import { MapBounds, MapPos } from '../core/core';
-import { toNativeMapBounds, toNativeMapPos } from '../core/core.android';
 import { Projection } from '../projections/projection';
+import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from './packagemanager';
 
 export const PackageType = {
     get MAP() {

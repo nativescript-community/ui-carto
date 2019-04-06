@@ -1,9 +1,9 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
-import { nativeColorProperty } from '../carto.android';
+import { nativeColorProperty } from '../carto';
 import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {

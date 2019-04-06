@@ -1,15 +1,15 @@
 import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
+import * as application from 'application';
+import { toNativeScreenPos } from 'nativescript-carto/core/core';
+import { profile } from 'tns-core-modules/profiling';
+import { fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, MapBounds, MapPos, ScreenBounds, ScreenPos, toNativeMapPos, toNativeScreenBounds } from '../core/core';
+import { TileLayer } from '../layers/layer';
 import { EPSG3857 } from '../projections/epsg3857';
 import { IProjection, Projection } from '../projections/projection';
-import { fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, MapBounds, MapPos, ScreenBounds, ScreenPos, toNativeMapBounds, toNativeMapPos, toNativeScreenBounds } from '../core/core';
-import { TileLayer } from '../layers/layer';
-import * as application from 'application';
 import { restrictedPanningProperty } from './cssproperties';
+
+
 import { MapOptions } from './ui';
-import { toNativeScreenPos } from 'nativescript-carto/core/core.android';
-
-import { profile } from 'tns-core-modules/profiling';
-
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
 let licenseKey: string;

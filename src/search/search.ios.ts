@@ -1,11 +1,11 @@
-import { SearchRequest, VectorTileSearchServiceOptions } from './search';
 import { BaseNative } from '../carto.common';
-import { Projection } from '../projections/projection.ios';
-import { TileDataSource } from '../datasources/datasource.ios';
-import { VectorTileDecoder } from '../vectortiles/vectortiles.ios';
+import { TileDataSource } from '../datasources/datasource';
 import { VectorTileFeatureCollection } from '../geometry/feature';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { Projection } from '../projections/projection';
+import { VectorTileDecoder } from '../vectortiles/vectortiles';
+import { SearchRequest, VectorTileSearchServiceOptions } from './search';
 
+import { nativeProperty } from 'nativescript-carto/carto.common';
 export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
     @nativeProperty maxZoom: number;
@@ -14,13 +14,13 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
             const layer = options.layer.getNative() as NTVectorTileLayer;
             return NTVectorTileSearchService.alloc().initWithDataSourceTileDecoder(layer.getDataSource(), layer.getTileDecoder());
         } else {
-            return NTVectorTileSearchService.alloc().initWithDataSourceTileDecoder((options.dataSource as TileDataSource<any, any>).getNative(), (options.decoder as VectorTileDecoder).getNative());
+            return NTVectorTileSearchService.alloc().initWithDataSourceTileDecoder(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
     public findFeatures(options: SearchRequest) {
         const nRequest = NTSearchRequest.alloc().init();
         if (options.projection) {
-            nRequest.setProjection((options.projection as Projection).getNative());
+            nRequest.setProjection(options.projection.getNative());
         }
         if (options.searchRadius !== undefined) {
             nRequest.setSearchRadius(options.searchRadius);

@@ -1,9 +1,8 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.ios';
-import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation } from './vectorelements';
-import { nativeColorProperty } from '../carto.ios';
+import { nativeColorProperty } from '../carto';
+import { TextOptions, TextStyleBuilderOptions } from './text';
+import { BasePointVectorElement, BillboardOrientation } from './vectorelements';
 import { nativeProperty } from 'nativescript-carto/carto.common';
 
 export class TextStyleBuilder extends BaseVectorElementStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {

@@ -1,7 +1,7 @@
 import { LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
 // import { BaseVectorElement } from './vectorelements.common';
-import { nativeMapToJS } from '../utils/utils.android';
 import { BaseNative } from '../carto.common';
+import { nativeMapToJS } from '../utils/utils';
 import { Projection } from '../projections/projection';
 import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs } from '../carto';

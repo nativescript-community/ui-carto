@@ -1,4 +1,4 @@
-import { BasePointVectorElement } from './vectorelements.android';
+import { BasePointVectorElement } from './vectorelements';
 import { NMLModelOptions } from './nmlmodel';
 import { getRelativePathToApp } from '../carto.common';
 import { nativeProperty } from 'nativescript-carto/carto.common';

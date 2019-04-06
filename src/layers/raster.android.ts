@@ -4,7 +4,7 @@ import { TileDataSource } from '../datasources/datasource';
 
 export class RasterTileLayer extends RasterTileLayerBase<com.carto.layers.RasterTileLayer, RasterTileLayerOptions> {
     createNative(options: RasterTileLayerOptions) {
-        return new com.carto.layers.RasterTileLayer((options.dataSource as TileDataSource<any, any>).getNative());
+        return new com.carto.layers.RasterTileLayer(options.dataSource.getNative());
     }
 }
 

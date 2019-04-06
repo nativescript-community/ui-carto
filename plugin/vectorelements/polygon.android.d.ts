@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseLineVectorElement } from './vectorelements.android';
+import { BaseLineVectorElement } from './vectorelements';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
 import { LineStyleBuilder } from './line';

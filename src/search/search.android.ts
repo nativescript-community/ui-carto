@@ -1,12 +1,12 @@
 import { SearchRequest, VectorTileSearchServiceOptions } from './search';
 import { BaseNative } from '../carto.common';
-import { Projection } from '../projections/projection.android';
-import { TileDataSource } from '../datasources/datasource.android';
-import { VectorTileDecoder } from '../vectortiles/vectortiles.android';
+import { Projection } from '../projections/projection';
+import { TileDataSource } from '../datasources/datasource';
+import { VectorTileDecoder } from '../vectortiles/vectortiles';
 import { VectorTileFeatureCollection } from '../geometry/feature';
-import { nativeProperty } from 'nativescript-carto/carto.common';
-import { toNativeMapPos } from '../core/core.android';
+import { toNativeMapPos } from '../core/core';
 
+import { nativeProperty } from 'nativescript-carto/carto.common';
 export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty
     minZoom: number;
@@ -17,13 +17,13 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
             const layer = options.layer.getNative() as com.carto.layers.VectorTileLayer;
             return new com.akylas.carto.additions.AKVectorTileSearchService(layer.getDataSource(), layer.getTileDecoder());
         } else {
-            return new com.akylas.carto.additions.AKVectorTileSearchService((options.dataSource as TileDataSource<any, any>).getNative(), (options.decoder as VectorTileDecoder).getNative());
+            return new com.akylas.carto.additions.AKVectorTileSearchService(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
     public findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void) {
         const nRequest = new com.carto.search.SearchRequest();
         if (options.projection) {
-            nRequest.setProjection((options.projection as Projection).getNative());
+            nRequest.setProjection(options.projection.getNative());
         }
         if (options.searchRadius !== undefined) {
             nRequest.setSearchRadius(options.searchRadius);

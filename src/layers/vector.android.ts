@@ -22,7 +22,7 @@ import { fromNativeMapPos } from '../core/core';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { Projection } from '../projections/projection';
 import { nativeProperty } from 'nativescript-carto/carto.common';
-import { nativeVariantToJS } from '../utils/utils.android';
+import { nativeVariantToJS } from '../utils/utils';
 
 // export enum VectorTileRenderOrder {
 //     HIDDEN,

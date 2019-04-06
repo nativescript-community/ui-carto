@@ -1,8 +1,7 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.ios';
-import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation, BillboardScaling } from './vectorelements';
+import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
+import { BasePointVectorElement, BillboardOrientation, BillboardScaling } from './vectorelements';
 export declare class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions): NTMarkerStyleBuilder;
     width: number;

@@ -1,8 +1,8 @@
-import { _createImageSourceFromSrc, capitalize, nativeProperty, NativePropertyOptions } from './carto.common';
 import { Color } from 'tns-core-modules/color/color';
-import { MapPos } from './core/core';
-import { MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core.android';
-import { Projection } from './projections/projection.android';
+import { _createImageSourceFromSrc, nativeProperty } from './carto.common';
+import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core';
+import { Projection } from './projections/projection';
+import { NativePropertyOptions } from './carto';
 
 // export const nativeProperty = (target: Object, key: string | symbol, converter?) => {
 //     const capKey = capitalize(key);

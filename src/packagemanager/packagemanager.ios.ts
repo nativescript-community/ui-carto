@@ -1,9 +1,8 @@
-import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageManagerTileDataSourceOptions } from './packagemanager';
+import { MapBounds, MapPos, toNativeMapBounds, toNativeMapPos } from '../core/core';
 import { DataSource, TileDataSource } from '../datasources/datasource';
-import { nativeVariantToJS } from '../utils/utils';
-import { MapBounds, MapPos } from '../core/core';
 import { Projection } from '../projections/projection';
-import { toNativeMapBounds, toNativeMapPos } from '../core/core.ios';
+import { nativeVariantToJS } from '../utils/utils';
+import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageManagerTileDataSourceOptions } from './packagemanager';
 
 export enum PackageErrorType {
     CONNECTION = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_CONNECTION,

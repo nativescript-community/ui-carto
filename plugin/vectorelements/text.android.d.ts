@@ -1,8 +1,7 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements.android';
-import { TextOptions, TextStyleBuilderOptions } from './text';
 import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation } from './vectorelements';
+import { TextOptions, TextStyleBuilderOptions } from './text';
+import { BasePointVectorElement, BillboardOrientation } from './vectorelements';
 export declare class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions): com.carto.styles.TextStyleBuilder;
     color: Color | string;

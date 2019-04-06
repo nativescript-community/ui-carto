@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseLineVectorElement } from './vectorelements.android';
+import { BaseLineVectorElement } from './vectorelements';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 import { Color } from 'tns-core-modules/color/color';
 export declare class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.Polygon3DStyleBuilder, Polygon3DStyleBuilderOptions> {
