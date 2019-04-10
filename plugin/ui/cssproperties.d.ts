@@ -1,4 +1,5 @@
-import { CssProperty, Style } from 'tns-core-modules/ui/core/view';
+import { CssProperty } from 'tns-core-modules/ui/core/properties';
+import { Style } from 'tns-core-modules/ui/styling/style';
 import { MapPos } from '../core/core';
 declare module 'tns-core-modules/ui/styling/style' {
     interface Style {

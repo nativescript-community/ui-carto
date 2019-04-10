@@ -1,47 +1,9 @@
-import { Color } from 'tns-core-modules/color/color';
-import { _createImageSourceFromSrc, nativeProperty } from './carto.common';
+import { Color } from 'tns-core-modules/color';
+import { _createImageSourceFromSrc, BaseNative, nativeProperty } from './carto.common';
 import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core';
 import { Projection } from './projections/projection';
 import { NativePropertyOptions } from './carto';
-
-// export const nativeProperty = (target: Object, key: string | symbol, converter?) => {
-//     const capKey = capitalize(key);
-//     const getterKey = 'get' + capKey;
-//     const setterKey = 'set' + capKey;
-//     // property getter
-//     const getter = function() {
-//         if (this.native) {
-//             let result = this.native[getterKey]();
-//             if (converter) {
-//                 result = converter.fromNative(result, this);
-//             }
-//             return result;
-//         }
-//         return this.options[key];
-//     };
-
-//     // property setter
-//     const setter = function(value) {
-//         console.log('calling setter for', key, setterKey, value);
-//         this.options[key] = value;
-//         if (this.native && this.native[setterKey]) {
-//             if (converter) {
-//                 value = converter.toNative(value);
-//             }
-//             this.native[setterKey](value);
-//             this._buildStyle = null;
-//         } else {
-//             console.error('could not set native key', setterKey, 'on', this.native);
-//         }
-//     };
-//     // Create new property with getter and setter
-//     Object.defineProperty(target, key, {
-//         get: getter,
-//         set: setter,
-//         enumerable: true,
-//         configurable: true
-//     });
-// };
+export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
@@ -65,21 +27,7 @@ export function nativeColorProperty(...args) {
 export function nativeEnumProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeEnumProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeEnumProperty(...args) {
-    return nativeProperty(
-        {
-            // converter: {
-            //     fromNative(value) {
-            //         return value;
-            //         // return value.ordinal();
-            //     },
-            //     toNative(value) {
-            //         return value;
-            //         // return enumType.values()[value];
-            //     }
-            // }
-        },
-        ...args
-    );
+    return nativeProperty({}, ...args);
 }
 
 export function nativeCartoImageProperty(target: any, k?, desc?: PropertyDescriptor): any;

@@ -1,26 +1,6 @@
-export interface MapPos {
-    latitude: number;
-    longitude: number;
-    altitude?: number;
-    speed?: number;
-}
+import { ScreenPos, MapPos, MapBounds, ScreenBounds } from "./core.common";
+export { ScreenPos, MapPos, MapBounds, ScreenBounds }
 
-export interface ScreenPos {
-    x: number;
-    y: number;
-}
-
-export interface MapBounds {
-    northeast: MapPos;
-    southwest: MapPos;
-}
-export interface ScreenBounds {
-    min: ScreenPos;
-    max: ScreenPos;
-}
-export namespace MapBounds {
-    function fromCoordinates(southwest: MapPos, northeast: MapPos): MapBounds;
-}
 export declare function fromNativeMapPos(pos): MapPos;
 export declare function toNativeMapPos(position: MapPos): any;
 export declare function fromNativeMapBounds(bounds: any): MapBounds;
@@ -45,7 +25,7 @@ declare enum ClickType {
     DUAL
 }
 
-declare abstract class NativeVector<T> {
+export abstract class NativeVector<T> {
     native: any;
     size(): number;
     public getNative(): any;

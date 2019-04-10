@@ -1,5 +1,6 @@
-import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core';
-
+import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core.common';
+export { MapBounds, MapPos, ScreenBounds, ScreenPos };
+    
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
     POSITRON = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_POSITRON,

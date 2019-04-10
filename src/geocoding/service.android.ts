@@ -1,15 +1,23 @@
 import { NativeVector, toNativeMapPos } from '../core/core';
 import { FeatureCollection } from '../geometry/feature';
-import { GeocodingRequest, GeocodingResult as IGeocodingResult, GeocodingServiceOptions, MapBoxOnlineGeocodingServiceOptions, PackageManagerGeocodingServiceOptions, PeliasOnlineGeocodingServiceOptions, TomTomOnlineGeocodingServiceOptions } from './service';
+import {
+    GeocodingRequest,
+    GeocodingResult as IGeocodingResult,
+    GeocodingServiceOptions,
+    MapBoxOnlineGeocodingServiceOptions,
+    PackageManagerGeocodingServiceOptions,
+    PeliasOnlineGeocodingServiceOptions,
+    TomTomOnlineGeocodingServiceOptions
+} from './service';
 import { nativeProperty } from 'nativescript-carto/carto';
-import {BaseGeocodingService} from './service.common';
+import { BaseGeocodingService } from './service.common';
 export class GeocodingResultVector extends NativeVector<com.carto.geocoding.GeocodingResult> {
     constructor(public native: com.carto.geocoding.GeocodingResultVector) {
         super();
     }
 }
 
-export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
+abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
     // createNative(options: GeocodingServiceOptions) {
     //     return new com.carto.geocoding.GeocodingService();
     // }
@@ -34,7 +42,7 @@ export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGe
     }
 }
 
-export class GeocodingResult implements IGeocodingResult {
+class GeocodingResult implements IGeocodingResult {
     constructor(private native: com.carto.geocoding.GeocodingResult) {}
     getAddress() {
         return this.native.getAddress();
@@ -58,7 +66,7 @@ export class GeocodingResult implements IGeocodingResult {
     }
 }
 
-export class PackageManagerGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
+class PackageManagerGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -67,7 +75,7 @@ export class PackageManagerGeocodingService extends GeocodingService<com.akylas.
         return new com.akylas.carto.additions.AKPackageManagerGeocodingService(options.packageManager.getNative());
     }
 }
-export class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
+class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -79,7 +87,7 @@ export class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.ca
     }
 }
 
-export class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
+class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -91,7 +99,7 @@ export class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.ca
     }
 }
 
-export class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
+class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -103,6 +111,7 @@ export class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.ca
     }
 }
 
+export { GeocodingService, GeocodingResult, MapBoxOnlineGeocodingService, TomTomOnlineGeocodingService, PeliasOnlineGeocodingService, PackageManagerGeocodingService };
 // export class OSMOfflineGeocodingService extends GeocodingService<com.carto.geocoding.OSMOfflineGeocodingService, OSMOfflineGeocodingServiceOptions> {
 //     // @nativeProperty
 //     // autoComplete: number;

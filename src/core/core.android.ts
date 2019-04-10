@@ -1,4 +1,5 @@
-import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core';
+import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core.common';
+export { MapBounds, MapPos, ScreenBounds, ScreenPos };
 
 export const CartoMapStyle = {
     get VOYAGER() {

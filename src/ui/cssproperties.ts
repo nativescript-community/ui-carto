@@ -1,5 +1,7 @@
-import { booleanConverter, CssProperty, Style } from 'tns-core-modules/ui/core/view';
+import { CssProperty } from 'tns-core-modules/ui/core/properties';
+import { Style } from 'tns-core-modules/ui/styling/style';
 import { MapPos } from '../core/core';
+import { booleanConverter } from 'tns-core-modules/ui/core/view-base';
 declare module 'tns-core-modules/ui/styling/style' {
     interface Style {
         zoom: number;
