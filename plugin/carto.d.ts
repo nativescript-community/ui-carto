@@ -1,4 +1,4 @@
-import { Observable } from 'tns-core-modules/ui/page/page';
+import { Observable } from 'tns-core-modules/data/observable';
 import { MapPos, MapPosVector, MapPosVectorVector } from './core/core';
 import { Projection } from './projections/projection';
 import { ImageSource } from 'tns-core-modules/image-source/image-source';

@@ -1,4 +1,4 @@
-import { View } from 'tns-core-modules/ui/page/page';
+import { View } from 'tns-core-modules/ui/core/view';
 import { EventData } from 'tns-core-modules/data/observable';
 import { IProjection, Projection } from '../projections/projection';
 import { Layer } from '../layers/layer';
