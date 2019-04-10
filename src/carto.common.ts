@@ -1,4 +1,4 @@
-import { Observable } from 'tns-core-modules/ui/core/view';
+import { Observable } from 'tns-core-modules/data/observable';
 import { fromAsset, fromNativeSource, fromUrl, ImageSource } from 'tns-core-modules/image-source/image-source';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from 'tns-core-modules/utils/utils';

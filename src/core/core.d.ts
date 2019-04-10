@@ -1,5 +1,5 @@
-import { ScreenPos, MapPos, MapBounds, ScreenBounds } from "./core.common";
-export { ScreenPos, MapPos, MapBounds, ScreenBounds }
+import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core.common';
+export { ScreenPos, MapPos, MapBounds, ScreenBounds };
 
 export declare function fromNativeMapPos(pos): MapPos;
 export declare function toNativeMapPos(position: MapPos): any;
@@ -12,13 +12,13 @@ export declare function toNativeScreenPos(position: ScreenPos): any;
 export declare function fromNativeScreenBounds(pos): ScreenBounds;
 export declare function toNativeScreenBounds(position: ScreenBounds): any;
 
-declare class  CartoMapStyle {
-    static  VOYAGER: CartoMapStyle
-    static  POSITRON: CartoMapStyle
-    static  DARKMATTER: CartoMapStyle
+export class  CartoMapStyle {
+    static  VOYAGER: CartoMapStyle;
+    static  POSITRON: CartoMapStyle;
+    static  DARKMATTER: CartoMapStyle;
 }
 
-declare enum ClickType {
+export enum ClickType {
     SINGLE,
     LONG,
     DOUBLE,
