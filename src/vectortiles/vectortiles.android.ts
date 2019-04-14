@@ -11,30 +11,40 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 }
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
+    pack: com.carto.utils.AssetPackage;
     createNative(options: MBVectorTileDecoderOptions) {
-        let pack: com.carto.utils.AssetPackage;
-        // console.log('MBVectorTileDecoder', 'createNative', options);
+               // console.log('MBVectorTileDecoder', 'createNative', options);
         if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
             const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
-            pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
+            this.pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
         } else if (!!options.dirPath) {
-            pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
+            this.pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
         }
         if (options.cartoCss) {
-            if (pack) {
-                return new com.carto.vectortiles.MBVectorTileDecoder(new com.carto.styles.CartoCSSStyleSet(options.cartoCss, pack));
+            if (this.pack) {
+                return new com.carto.vectortiles.MBVectorTileDecoder(new com.carto.styles.CartoCSSStyleSet(options.cartoCss, this.pack));
             } else {
                 return new com.carto.vectortiles.MBVectorTileDecoder(new com.carto.styles.CartoCSSStyleSet(options.cartoCss));
             }
-        } else if (pack) {
-            const vectorTileStyleSet = new com.carto.styles.CompiledStyleSet(pack, options.style);
+        } else if (this.pack) {
+            const vectorTileStyleSet = new com.carto.styles.CompiledStyleSet(this.pack, options.style);
             const result = new com.carto.vectortiles.MBVectorTileDecoder(vectorTileStyleSet);
             return result;
         } else {
             console.error(`could not create MBVectorTileDecoder pack for options: ${options}`);
             return null;
         }
+    }
+
+    set style(style: string) {
+        this.options.style = style;
+        if (this.native) {
+            this.getNative().setCompiledStyleSet(new com.carto.styles.CompiledStyleSet(this.pack, style));
+        }
+    }
+    get style() {
+        return this.options.style;
     }
 
     setStyleParameter(param: string, value: string) {

@@ -14,6 +14,8 @@ export interface MBVectorTileDecoderOptions extends VectorTileDecoderOptions {
     liveReload?: boolean;
 }
 export class MBVectorTileDecoder extends BaseNative<any, MBVectorTileDecoderOptions> {
+    style?: string;
+    liveReload?: boolean;
     constructor(options: MBVectorTileDecoderOptions, native?: any);
     setStyleParameter(param: string, value: string);
 }

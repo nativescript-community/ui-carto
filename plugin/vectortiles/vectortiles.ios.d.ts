@@ -4,6 +4,8 @@ export declare class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTil
     createNative(options: VectorTileDecoderOptions): NTVectorTileDecoder;
 }
 export declare class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDecoder, MBVectorTileDecoderOptions> {
+    pack: NTZippedAssetPackage;
     createNative(options: MBVectorTileDecoderOptions): NTMBVectorTileDecoder;
+    style: string;
     setStyleParameter(param: string, value: string): void;
 }
