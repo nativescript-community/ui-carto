@@ -41,9 +41,10 @@ export default class BaseMaps extends BaseVueComponent {
         // setTimeout(function() {
         const mapView = e.object as CartoMap;
         console.log('map ready!');
-        const europe = { longitude: 15.2551, latitude: 54.526 };
-        mapView.setFocusPos(europe, 0);
+        
         this.setCurrentLayer(this.currentLayerType);
+        mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
+        mapView.setZoom(15, 0);
         // this.updateLanguage('fr');
     }
     onVectorTileClicked(info: VectorTileEventData) {
