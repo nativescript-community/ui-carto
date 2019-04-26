@@ -1,20 +1,5 @@
 declare module com {
 	export module carto {
-		export class BuildConfig {
-			public static class: java.lang.Class<com.carto.BuildConfig>;
-			public static DEBUG: boolean;
-			public static APPLICATION_ID: string;
-			public static BUILD_TYPE: string;
-			public static FLAVOR: string;
-			public static VERSION_CODE: number;
-			public static VERSION_NAME: string;
-			public constructor();
-		}
-	}
-}
-
-declare module com {
-	export module carto {
 		export module components {
 			export class Layers {
 				public static class: java.lang.Class<com.carto.components.Layers>;
@@ -79,6 +64,7 @@ declare module com {
 				public static class: java.lang.Class<com.carto.components.Options>;
 				public swigCMemOwn: boolean;
 				public setTileThreadPoolSize(param0: number): void;
+				public setRenderProjectionMode(param0: com.carto.components.RenderProjectionMode): void;
 				public setDPI(param0: number): void;
 				public setWatermarkAlignmentY(param0: number): void;
 				public setUserInput(param0: boolean): void;
@@ -91,6 +77,7 @@ declare module com {
 				public hashCode(): number;
 				public equals(param0: any): boolean;
 				public getBackgroundBitmap(): com.carto.graphics.Bitmap;
+				public getSkyColor(): com.carto.graphics.Color;
 				public setZoomGestures(param0: boolean): void;
 				public getAmbientLightColor(): com.carto.graphics.Color;
 				public isZoomGestures(): boolean;
@@ -118,6 +105,7 @@ declare module com {
 				public setAmbientLightColor(param0: com.carto.graphics.Color): void;
 				public isTiltGestureReversed(): boolean;
 				public setSeamlessPanning(param0: boolean): void;
+				public getRenderProjectionMode(): com.carto.components.RenderProjectionMode;
 				public getWatermarkScale(): number;
 				public isKineticRotation(): boolean;
 				public finalize(): void;
@@ -133,23 +121,20 @@ declare module com {
 				public getWatermarkPadding(): com.carto.core.ScreenPos;
 				public isKineticZoom(): boolean;
 				public getDPI(): number;
-				public getProjectionMode(): com.carto.components.ProjectionMode;
 				public getWatermarkAlignmentY(): number;
 				public setZoomRange(param0: com.carto.core.MapRange): void;
-				public getSkyBitmap(): com.carto.graphics.Bitmap;
 				public getBaseProjection(): com.carto.projections.Projection;
 				public static getCPtr(param0: com.carto.components.Options): number;
 				public constructor(param0: number, param1: boolean);
+				public setSkyColor(param0: com.carto.graphics.Color): void;
 				public isKineticPan(): boolean;
 				public getZoomRange(): com.carto.core.MapRange;
 				public setDrawDistance(param0: number): void;
 				public getPanningMode(): com.carto.components.PanningMode;
 				public swigGetRawPtr(): number;
-				public setSkyBitmap(param0: com.carto.graphics.Bitmap): void;
 				public getMainLightDirection(): com.carto.core.MapVec;
 				public getMainLightColor(): com.carto.graphics.Color;
 				public getTileDrawSize(): number;
-				public setProjectionMode(param0: com.carto.components.ProjectionMode): void;
 				public isRestrictedPanning(): boolean;
 				public setWatermarkScale(param0: number): void;
 				public setKineticZoom(param0: boolean): void;
@@ -171,7 +156,6 @@ declare module com {
 				public static PANNING_MODE_STICKY: com.carto.components.PanningMode;
 				public static PANNING_MODE_STICKY_FINAL: com.carto.components.PanningMode;
 				public static values(): native.Array<com.carto.components.PanningMode>;
-				public ordinal() : number
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.components.PanningMode;
 				public static valueOf(param0: string): com.carto.components.PanningMode;
@@ -193,7 +177,6 @@ declare module com {
 				public static PIVOT_MODE_TOUCHPOINT: com.carto.components.PivotMode;
 				public static PIVOT_MODE_CENTERPOINT: com.carto.components.PivotMode;
 				public static valueOf(param0: string): com.carto.components.PivotMode;
-				public ordinal() : number
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.components.PivotMode;
 				public static values(): native.Array<com.carto.components.PivotMode>;
@@ -210,19 +193,18 @@ declare module com {
 declare module com {
 	export module carto {
 		export module components {
-			export class ProjectionMode {
-				public static class: java.lang.Class<com.carto.components.ProjectionMode>;
-				public static PROJECTION_MODE_ORTHOGONAL: com.carto.components.ProjectionMode;
-				public static PROJECTION_MODE_PERSPECTIVE: com.carto.components.ProjectionMode;
+			export class RenderProjectionMode {
+				public static class: java.lang.Class<com.carto.components.RenderProjectionMode>;
+				public static RENDER_PROJECTION_MODE_PLANAR: com.carto.components.RenderProjectionMode;
+				public static RENDER_PROJECTION_MODE_SPHERICAL: com.carto.components.RenderProjectionMode;
+				public static values(): native.Array<com.carto.components.RenderProjectionMode>;
 				public swigValue(): number;
-				public ordinal() : number;
-				public static values(): native.Array<com.carto.components.ProjectionMode>;
-				public static valueOf(param0: string): com.carto.components.ProjectionMode;
-				public static swigToEnum(param0: number): com.carto.components.ProjectionMode;
+				public static valueOf(param0: string): com.carto.components.RenderProjectionMode;
+				public static swigToEnum(param0: number): com.carto.components.RenderProjectionMode;
 			}
-			export module ProjectionMode {
+			export module RenderProjectionMode {
 				export class SwigNext {
-					public static class: java.lang.Class<com.carto.components.ProjectionMode.SwigNext>;
+					public static class: java.lang.Class<com.carto.components.RenderProjectionMode.SwigNext>;
 				}
 			}
 		}
@@ -474,6 +456,7 @@ declare module com {
 				public static getCPtr(param0: com.carto.core.MapRange): number;
 				public delete(): void;
 				public hashCode(): number;
+				public getMidrange(): number;
 				public equals(param0: any): boolean;
 			}
 		}
@@ -519,7 +502,6 @@ declare module com {
 				public constructor(param0: number, param1: number);
 				public mul(param0: number): com.carto.core.MapVec;
 				public constructor(param0: number, param1: number, param2: number);
-				public getRotated2D(param0: number, param1: number): com.carto.core.MapVec;
 				public crossProduct3D(param0: com.carto.core.MapVec): com.carto.core.MapVec;
 				public getY(): number;
 				public length(): number;
@@ -816,7 +798,6 @@ declare module com {
 				public static VARIANT_TYPE_OBJECT: com.carto.core.VariantType;
 				public swigValue(): number;
 				public static valueOf(param0: string): com.carto.core.VariantType;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.core.VariantType>;
 				public static swigToEnum(param0: number): com.carto.core.VariantType;
 			}
@@ -1017,6 +998,39 @@ declare module com {
 declare module com {
 	export module carto {
 		export module datasources {
+			export class GeoJSONVectorTileDataSource extends com.carto.datasources.TileDataSource {
+				public static class: java.lang.Class<com.carto.datasources.GeoJSONVectorTileDataSource>;
+				public constructor(param0: number, param1: number);
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public setLayerGeoJSON(param0: number, param1: com.carto.core.Variant): void;
+				public setLayerFeatureCollection(param0: number, param1: com.carto.projections.Projection, param2: com.carto.geometry.FeatureCollection): void;
+				public deleteLayer(param0: number): void;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
+				public swigGetClassName(): string;
+				public createLayer(param0: string): number;
+				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.GeoJSONVectorTileDataSource;
+				public swigTakeOwnership(): void;
+				public static getCPtr(param0: com.carto.datasources.GeoJSONVectorTileDataSource): number;
+				public getDataExtent(): com.carto.core.MapBounds;
+				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
+			}
+		}
+	}
+}
+
+
+
+declare module com {
+	export module carto {
+		export module datasources {
 			export class HTTPTileDataSource extends com.carto.datasources.TileDataSource {
 				public static class: java.lang.Class<com.carto.datasources.HTTPTileDataSource>;
 				public constructor(param0: number, param1: number);
@@ -1063,7 +1077,6 @@ declare module com {
 				public static LOCAL_SPATIAL_INDEX_TYPE_KDTREE: com.carto.datasources.LocalSpatialIndexType;
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.datasources.LocalSpatialIndexType;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.datasources.LocalSpatialIndexType>;
 				public static valueOf(param0: string): com.carto.datasources.LocalSpatialIndexType;
 			}
@@ -1123,7 +1136,6 @@ declare module com {
 				public static class: java.lang.Class<com.carto.datasources.MBTilesScheme>;
 				public static MBTILES_SCHEME_TMS: com.carto.datasources.MBTilesScheme;
 				public static MBTILES_SCHEME_XYZ: com.carto.datasources.MBTilesScheme;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.datasources.MBTilesScheme>;
 				public static valueOf(param0: string): com.carto.datasources.MBTilesScheme;
 				public static swigToEnum(param0: number): com.carto.datasources.MBTilesScheme;
@@ -1208,19 +1220,28 @@ declare module com {
 declare module com {
 	export module carto {
 		export module datasources {
-			export class NMLModelLODTreeDataSource {
-				public static class: java.lang.Class<com.carto.datasources.NMLModelLODTreeDataSource>;
-				public swigCMemOwn: boolean;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.NMLModelLODTreeDataSource;
-				public swigGetRawPtr(): number;
-				public getProjection(): com.carto.projections.Projection;
-				public static getCPtr(param0: com.carto.datasources.NMLModelLODTreeDataSource): number;
-				public delete(): void;
+			export class MergedMBVTTileDataSource extends com.carto.datasources.TileDataSource {
+				public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSource>;
+				public constructor(param0: number, param1: number);
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.datasources.TileDataSource);
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);
+				public static getCPtr(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
+				public swigGetClassName(): string;
+				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
+				public getMaxZoom(): number;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public swigTakeOwnership(): void;
 				public getDataExtent(): com.carto.core.MapBounds;
-				public swigGetClassName(): string;
-				public swigGetDirectorObject(): any;
+				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.MergedMBVTTileDataSource;
+				public getMinZoom(): number;
 			}
 		}
 	}
@@ -1232,50 +1253,9 @@ declare module com {
 
 
 
-declare module com {
-	export module carto {
-		export module datasources {
-			export class OfflineNMLModelLODTreeDataSource extends com.carto.datasources.NMLModelLODTreeDataSource {
-				public static class: java.lang.Class<com.carto.datasources.OfflineNMLModelLODTreeDataSource>;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.NMLModelLODTreeDataSource;
-				public swigGetRawPtr(): number;
-				public static getCPtr(param0: com.carto.datasources.NMLModelLODTreeDataSource): number;
-				public delete(): void;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.OfflineNMLModelLODTreeDataSource;
-				public getDataExtent(): com.carto.core.MapBounds;
-				public static getCPtr(param0: com.carto.datasources.OfflineNMLModelLODTreeDataSource): number;
-				public swigGetClassName(): string;
-				public constructor(param0: string);
-				public swigGetDirectorObject(): any;
-			}
-		}
-	}
-}
 
 
 
-declare module com {
-	export module carto {
-		export module datasources {
-			export class OnlineNMLModelLODTreeDataSource extends com.carto.datasources.NMLModelLODTreeDataSource {
-				public static class: java.lang.Class<com.carto.datasources.OnlineNMLModelLODTreeDataSource>;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.NMLModelLODTreeDataSource;
-				public swigGetRawPtr(): number;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.OnlineNMLModelLODTreeDataSource;
-				public static getCPtr(param0: com.carto.datasources.NMLModelLODTreeDataSource): number;
-				public delete(): void;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public static getCPtr(param0: com.carto.datasources.OnlineNMLModelLODTreeDataSource): number;
-				public swigGetClassName(): string;
-				public constructor(param0: string);
-				public swigGetDirectorObject(): any;
-			}
-		}
-	}
-}
 
 
 
@@ -1300,36 +1280,6 @@ declare module com {
 				public swigGetRawPtr(): number;
 				public delete(): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.OrderedTileDataSource;
-				public swigTakeOwnership(): void;
-				public getDataExtent(): com.carto.core.MapBounds;
-				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
-				public getMinZoom(): number;
-			}
-		}
-	}
-}
-
-declare module com {
-	export module carto {
-		export module datasources {
-			export class MergedMBVTTileDataSource extends com.carto.datasources.TileDataSource {
-				public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSource>;
-				public constructor(param0: number, param1: number);
-				public swigReleaseOwnership(): void;
-				public swigDirectorDisconnect(): void;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.datasources.TileDataSource);
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
-				public swigGetClassName(): string;
-				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
-				public getMaxZoom(): number;
-				public swigGetDirectorObject(): any;
-				public constructor();
-				public static getCPtr(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public swigGetRawPtr(): number;
-				public delete(): void;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.MergedMBVTTileDataSource;
 				public swigTakeOwnership(): void;
 				public getDataExtent(): com.carto.core.MapBounds;
 				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
@@ -1528,7 +1478,11 @@ declare module com {
 	}
 }
 
-
+declare module com {
+	export module carto {
+		
+	}
+}
 
 declare module com {
 	export module carto {
@@ -1552,7 +1506,11 @@ declare module com {
 	}
 }
 
-
+declare module com {
+	export module carto {
+		
+	}
+}
 
 declare module com {
 	export module carto {
@@ -2041,7 +1999,6 @@ declare module com {
 				public swigGetRawPtr(): number;
 				public static getCPtr(param0: com.carto.geometry.GeometrySimplifier): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.GeometrySimplifier;
-				public simplify(param0: com.carto.geometry.Geometry, param1: number): com.carto.geometry.Geometry;
 				public delete(): void;
 				public static getCPtr(param0: com.carto.geometry.DouglasPeuckerGeometrySimplifier): number;
 				public finalize(): void;
@@ -2215,7 +2172,6 @@ declare module com {
 				public swigGetRawPtr(): number;
 				public static getCPtr(param0: com.carto.geometry.GeometrySimplifier): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.GeometrySimplifier;
-				public simplify(param0: com.carto.geometry.Geometry, param1: number): com.carto.geometry.Geometry;
 				public delete(): void;
 				public hashCode(): number;
 				public finalize(): void;
@@ -2760,7 +2716,6 @@ declare module com {
 				public static COLOR_FORMAT_RGBA_4444: com.carto.graphics.ColorFormat;
 				public static COLOR_FORMAT_RGB_565: com.carto.graphics.ColorFormat;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.graphics.ColorFormat>;
 				public static swigToEnum(param0: number): com.carto.graphics.ColorFormat;
 				public static valueOf(param0: string): com.carto.graphics.ColorFormat;
@@ -2779,59 +2734,29 @@ declare module com {
 declare module com {
 	export module carto {
 		export module graphics {
-			export class Frustum {
-				public static class: java.lang.Class<com.carto.graphics.Frustum>;
-				public swigCMemOwn: boolean;
-				public swigGetRawPtr(): number;
-				public delete(): void;
-				public hashCode(): number;
-				public circleIntersects(param0: com.carto.core.MapPos, param1: number): boolean;
-				public cuboidIntersects(param0: com.carto.core.MapBounds): boolean;
-				public finalize(): void;
-				public equals(param0: any): boolean;
-				public pointInside(param0: com.carto.core.MapPos): boolean;
-				public constructor(param0: number, param1: boolean);
-				public sphereIntersects(param0: com.carto.core.MapPos, param1: number): boolean;
-				public squareIntersects(param0: com.carto.core.MapBounds): boolean;
-				public static getCPtr(param0: com.carto.graphics.Frustum): number;
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module graphics {
 			export class ViewState {
 				public static class: java.lang.Class<com.carto.graphics.ViewState>;
 				public swigCMemOwn: boolean;
 				public getHeight(): number;
-				public getFrustum(): com.carto.graphics.Frustum;
 				public getZoom(): number;
 				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
 				public getScreenWidth(): number;
+				public getAspectRatio(): number;
+				public getFar(): number;
 				public isCameraChanged(): boolean;
+				public swigGetRawPtr(): number;
+				public getWidth(): number;
+				public getFOVY(): number;
 				public getNear(): number;
 				public getUnitToDPCoef(): number;
 				public getScreenHeight(): number;
 				public getUnitToPXCoef(): number;
 				public delete(): void;
 				public hashCode(): number;
+				public getRotation(): number;
 				public getDPI(): number;
 				public equals(param0: any): boolean;
-				public getProjectionMode(): com.carto.components.ProjectionMode;
-				public constructor(param0: number, param1: boolean);
-				public getCameraPos(): com.carto.core.MapPos;
-				public getAspectRatio(): number;
-				public getFar(): number;
-				public swigGetRawPtr(): number;
-				public getWidth(): number;
-				public getFOVY(): number;
-				public getRotation(): number;
-				public getFocusPos(): com.carto.core.MapPos;
-				public getUpVec(): com.carto.core.MapVec;
 				public getTilt(): number;
 				public getZoom0Distance(): number;
 				public getDPToPX(): number;
@@ -2851,7 +2776,6 @@ declare module com {
 				public static CARTO_BASEMAP_STYLE_POSITRON: com.carto.layers.CartoBaseMapStyle;
 				public static CARTO_BASEMAP_STYLE_DARKMATTER: com.carto.layers.CartoBaseMapStyle;
 				public static CARTO_BASEMAP_STYLE_VOYAGER: com.carto.layers.CartoBaseMapStyle;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.layers.CartoBaseMapStyle>;
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.layers.CartoBaseMapStyle;
@@ -3010,7 +2934,6 @@ declare module com {
 				public static CLUSTER_BUILDER_MODE_ELEMENT_COUNT: com.carto.layers.ClusterBuilderMode;
 				public static swigToEnum(param0: number): com.carto.layers.ClusterBuilderMode;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.layers.ClusterBuilderMode>;
 				public static valueOf(param0: string): com.carto.layers.ClusterBuilderMode;
 			}
@@ -3177,60 +3100,7 @@ declare module com {
 	}
 }
 
-declare module com {
-	export module carto {
-		export module layers {
-			export class NMLModelLODTreeEventListener {
-				public static class: java.lang.Class<com.carto.layers.NMLModelLODTreeEventListener>;
-				public swigCMemOwn: boolean;
-				public static getCPtr(param0: com.carto.layers.NMLModelLODTreeEventListener): number;
-				public swigReleaseOwnership(): void;
-				public swigDirectorDisconnect(): void;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public swigGetClassName(): string;
-				public swigGetDirectorObject(): any;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.NMLModelLODTreeEventListener;
-				public constructor();
-				public swigGetRawPtr(): number;
-				public delete(): void;
-				public swigTakeOwnership(): void;
-				public onNMLModelLODTreeClicked(param0: com.carto.ui.NMLModelLODTreeClickInfo): boolean;
-			}
-		}
-	}
-}
 
-
-
-declare module com {
-	export module carto {
-		export module layers {
-			export class NMLModelLODTreeLayer extends com.carto.layers.Layer {
-				public static class: java.lang.Class<com.carto.layers.NMLModelLODTreeLayer>;
-				public getMaxMemorySize(): number;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.NMLModelLODTreeLayer;
-				public getNMLModelLODTreeEventListener(): com.carto.layers.NMLModelLODTreeEventListener;
-				public constructor(param0: com.carto.datasources.NMLModelLODTreeDataSource);
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public setMaxMemorySize(param0: number): void;
-				public swigGetClassName(): string;
-				public getLODResolutionFactor(): number;
-				public swigGetDirectorObject(): any;
-				public getDataSource(): com.carto.datasources.NMLModelLODTreeDataSource;
-				public static getCPtr(param0: com.carto.layers.NMLModelLODTreeLayer): number;
-				public swigGetRawPtr(): number;
-				public setLODResolutionFactor(param0: number): void;
-				public static getCPtr(param0: com.carto.layers.Layer): number;
-				public delete(): void;
-				public isUpdateInProgress(): boolean;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.Layer;
-				public setNMLModelLODTreeEventListener(param0: com.carto.layers.NMLModelLODTreeEventListener): void;
-			}
-		}
-	}
-}
 
 
 
@@ -3405,7 +3275,6 @@ declare module com {
 				public static TILE_SUBSTITUTION_POLICY_NONE: com.carto.layers.TileSubstitutionPolicy;
 				public static valueOf(param0: string): com.carto.layers.TileSubstitutionPolicy;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.layers.TileSubstitutionPolicy>;
 				public static swigToEnum(param0: number): com.carto.layers.TileSubstitutionPolicy;
 			}
@@ -3517,7 +3386,6 @@ declare module com {
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.layers.VectorElementDragPointStyle;
 				public static valueOf(param0: string): com.carto.layers.VectorElementDragPointStyle;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.layers.VectorElementDragPointStyle>;
 			}
 			export module VectorElementDragPointStyle {
@@ -3539,7 +3407,6 @@ declare module com {
 				public static VECTOR_ELEMENT_DRAG_RESULT_MODIFY: com.carto.layers.VectorElementDragResult;
 				public static VECTOR_ELEMENT_DRAG_RESULT_DELETE: com.carto.layers.VectorElementDragResult;
 				public static swigToEnum(param0: number): com.carto.layers.VectorElementDragResult;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.layers.VectorElementDragResult>;
 				public swigValue(): number;
 				public static valueOf(param0: string): com.carto.layers.VectorElementDragResult;
@@ -3591,10 +3458,12 @@ declare module com {
 				public swigGetClassName(): string;
 				public swigGetDirectorObject(): any;
 				public getDataSource(): com.carto.datasources.VectorDataSource;
+				public setZBuffering(param0: boolean): void;
 				public swigGetRawPtr(): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.VectorLayer;
 				public static getCPtr(param0: com.carto.layers.Layer): number;
 				public delete(): void;
+				public isZBuffering(): boolean;
 				public getVectorElementEventListener(): com.carto.layers.VectorElementEventListener;
 				public isUpdateInProgress(): boolean;
 				public setVectorElementEventListener(param0: com.carto.layers.VectorElementEventListener): void;
@@ -3676,7 +3545,6 @@ declare module com {
 				public static VECTOR_TILE_RENDER_ORDER_LAST: com.carto.layers.VectorTileRenderOrder;
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.layers.VectorTileRenderOrder;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.layers.VectorTileRenderOrder>;
 				public static valueOf(param0: string): com.carto.layers.VectorTileRenderOrder;
 			}
@@ -3727,7 +3595,6 @@ declare module com {
 				public static PACKAGE_ACTION_REMOVING: com.carto.packagemanager.PackageAction;
 				public static valueOf(param0: string): com.carto.packagemanager.PackageAction;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.packagemanager.PackageAction>;
 				public static swigToEnum(param0: number): com.carto.packagemanager.PackageAction;
 			}
@@ -3751,7 +3618,6 @@ declare module com {
 				public static PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG: com.carto.packagemanager.PackageErrorType;
 				public static PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN: com.carto.packagemanager.PackageErrorType;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.packagemanager.PackageErrorType>;
 				public static swigToEnum(param0: number): com.carto.packagemanager.PackageErrorType;
 				public static valueOf(param0: string): com.carto.packagemanager.PackageErrorType;
@@ -3976,7 +3842,6 @@ declare module com {
 				public static PACKAGE_TILE_STATUS_FULL: com.carto.packagemanager.PackageTileStatus;
 				public static valueOf(param0: string): com.carto.packagemanager.PackageTileStatus;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.packagemanager.PackageTileStatus>;
 				public static swigToEnum(param0: number): com.carto.packagemanager.PackageTileStatus;
 			}
@@ -4000,7 +3865,6 @@ declare module com {
 				public static PACKAGE_TYPE_VALHALLA_ROUTING: com.carto.packagemanager.PackageType;
 				public static valueOf(param0: string): com.carto.packagemanager.PackageType;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.packagemanager.PackageType>;
 				public static swigToEnum(param0: number): com.carto.packagemanager.PackageType;
 			}
@@ -4027,11 +3891,36 @@ declare module com {
 				public swigGetDirectorObject(): any;
 				public static getCPtr(param0: com.carto.projections.Projection): number;
 				public constructor();
-				public fromInternalScale(param0: number): number;
 				public swigGetRawPtr(): number;
 				public delete(): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.projections.EPSG3857;
 				public static getCPtr(param0: com.carto.projections.EPSG3857): number;
+				public fromWgs84(param0: com.carto.core.MapPos): com.carto.core.MapPos;
+			}
+		}
+	}
+}
+
+
+
+declare module com {
+	export module carto {
+		export module projections {
+			export class EPSG4326 extends com.carto.projections.Projection {
+				public static class: java.lang.Class<com.carto.projections.EPSG4326>;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.projections.EPSG4326;
+				public toWgs84(param0: com.carto.core.MapPos): com.carto.core.MapPos;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.projections.Projection;
+				public getName(): string;
+				public swigGetClassName(): string;
+				public swigGetDirectorObject(): any;
+				public static getCPtr(param0: com.carto.projections.Projection): number;
+				public constructor();
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public static getCPtr(param0: com.carto.projections.EPSG4326): number;
 				public fromWgs84(param0: com.carto.core.MapPos): com.carto.core.MapPos;
 			}
 		}
@@ -4052,13 +3941,11 @@ declare module com {
 				public constructor(param0: number, param1: boolean);
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.projections.Projection;
 				public getBounds(): com.carto.core.MapBounds;
-				public getLocalScale(param0: com.carto.core.MapPos): number;
 				public getName(): string;
 				public toLatLong(param0: number, param1: number): com.carto.core.MapPos;
 				public swigGetClassName(): string;
 				public swigGetDirectorObject(): any;
 				public static getCPtr(param0: com.carto.projections.Projection): number;
-				public fromInternalScale(param0: number): number;
 				public swigGetRawPtr(): number;
 				public delete(): void;
 				public hashCode(): number;
@@ -4077,20 +3964,18 @@ declare module com {
 			export class MapRenderer {
 				public static class: java.lang.Class<com.carto.renderers.MapRenderer>;
 				public swigCMemOwn: boolean;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public static getCPtr(param0: com.carto.renderers.MapRenderer): number;
-				public getMapRendererListener(): com.carto.renderers.MapRendererListener;
-				public requestRedraw(): void;
-				public screenToMap(param0: com.carto.core.ScreenPos, param1: com.carto.graphics.ViewState): com.carto.core.MapPos;
 				public swigGetRawPtr(): number;
 				public getViewState(): com.carto.graphics.ViewState;
 				public captureRendering(param0: com.carto.renderers.RendererCaptureListener, param1: boolean): void;
 				public delete(): void;
 				public hashCode(): number;
 				public setMapRendererListener(param0: com.carto.renderers.MapRendererListener): void;
+				public finalize(): void;
 				public equals(param0: any): boolean;
-				public mapToScreen(param0: com.carto.core.MapPos, param1: com.carto.graphics.ViewState): com.carto.core.ScreenPos;
+				public constructor(param0: number, param1: boolean);
+				public static getCPtr(param0: com.carto.renderers.MapRenderer): number;
+				public getMapRendererListener(): com.carto.renderers.MapRendererListener;
+				public requestRedraw(): void;
 			}
 		}
 	}
@@ -4200,7 +4085,11 @@ declare module com {
 	}
 }
 
-
+declare module com {
+	export module carto {
+		
+	}
+}
 
 declare module com {
 	export module carto {
@@ -4286,35 +4175,6 @@ declare module com {
 
 
 
-declare module com {
-	export module carto {
-		export module routing {
-			export class PackageManagerValhallaRoutingService extends com.carto.routing.RoutingService {
-				public static class: java.lang.Class<com.carto.routing.PackageManagerValhallaRoutingService>;
-				public static getCPtr(param0: com.carto.routing.RoutingService): number;
-				public swigReleaseOwnership(): void;
-				public swigDirectorDisconnect(): void;
-				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
-				public finalize(): void;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.PackageManagerValhallaRoutingService;
-				public constructor(param0: number, param1: boolean);
-				public swigGetClassName(): string;
-				public swigGetDirectorObject(): any;
-				public constructor();
-				public setProfile(param0: string): void;
-				public swigGetRawPtr(): number;
-				public delete(): void;
-				public getProfile(): string;
-				public swigTakeOwnership(): void;
-				public constructor(param0: com.carto.packagemanager.PackageManager);
-				public static getCPtr(param0: com.carto.routing.PackageManagerValhallaRoutingService): number;
-				public matchRoute(param0: com.carto.routing.RouteMatchingRequest): com.carto.routing.RouteMatchingResult;
-			}
-		}
-	}
-}
-
 
 
 declare module com {
@@ -4389,7 +4249,6 @@ declare module com {
 				public static ROUTING_ACTION_GO_DOWN: com.carto.routing.RoutingAction;
 				public static ROUTING_ACTION_WAIT: com.carto.routing.RoutingAction;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.routing.RoutingAction>;
 				public static swigToEnum(param0: number): com.carto.routing.RoutingAction;
 				public static valueOf(param0: string): com.carto.routing.RoutingAction;
@@ -4568,67 +4427,7 @@ declare module com {
 
 
 
-declare module com {
-	export module carto {
-		export module routing {
-			export class ValhallaOfflineRoutingService extends com.carto.routing.RoutingService {
-				public static class: java.lang.Class<com.carto.routing.ValhallaOfflineRoutingService>;
-				public static getCPtr(param0: com.carto.routing.RoutingService): number;
-				public static getCPtr(param0: com.carto.routing.ValhallaOfflineRoutingService): number;
-				public swigReleaseOwnership(): void;
-				public swigDirectorDisconnect(): void;
-				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public swigGetClassName(): string;
-				public constructor(param0: string);
-				public swigGetDirectorObject(): any;
-				public constructor();
-				public setProfile(param0: string): void;
-				public swigGetRawPtr(): number;
-				public delete(): void;
-				public getProfile(): string;
-				public swigTakeOwnership(): void;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.ValhallaOfflineRoutingService;
-				public matchRoute(param0: com.carto.routing.RouteMatchingRequest): com.carto.routing.RouteMatchingResult;
-			}
-		}
-	}
-}
 
-
-
-declare module com {
-	export module carto {
-		export module routing {
-			export class ValhallaOnlineRoutingService extends com.carto.routing.RoutingService {
-				public static class: java.lang.Class<com.carto.routing.ValhallaOnlineRoutingService>;
-				public static getCPtr(param0: com.carto.routing.RoutingService): number;
-				public swigReleaseOwnership(): void;
-				public static getCPtr(param0: com.carto.routing.ValhallaOnlineRoutingService): number;
-				public swigDirectorDisconnect(): void;
-				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
-				public finalize(): void;
-				public getCustomServiceURL(): string;
-				public constructor(param0: number, param1: boolean);
-				public swigGetClassName(): string;
-				public constructor(param0: string);
-				public swigGetDirectorObject(): any;
-				public constructor();
-				public setProfile(param0: string): void;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.ValhallaOnlineRoutingService;
-				public setCustomServiceURL(param0: string): void;
-				public swigGetRawPtr(): number;
-				public delete(): void;
-				public getProfile(): string;
-				public swigTakeOwnership(): void;
-				public matchRoute(param0: com.carto.routing.RouteMatchingRequest): com.carto.routing.RouteMatchingResult;
-			}
-		}
-	}
-}
 
 
 
@@ -4825,64 +4624,6 @@ declare module com {
 
 declare module com {
 	export module carto {
-		export module services {
-			export class CartoVisBuilder {
-				public static class: java.lang.Class<com.carto.services.CartoVisBuilder>;
-				public swigCMemOwn: boolean;
-				public setBounds(param0: com.carto.core.MapBounds): void;
-				public swigReleaseOwnership(): void;
-				public swigDirectorDisconnect(): void;
-				public setZoom(param0: number): void;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public swigGetClassName(): string;
-				public addLayer(param0: com.carto.layers.Layer, param1: com.carto.core.Variant): void;
-				public swigGetDirectorObject(): any;
-				public constructor();
-				public setCenter(param0: com.carto.core.MapPos): void;
-				public static getCPtr(param0: com.carto.services.CartoVisBuilder): number;
-				public swigGetRawPtr(): number;
-				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.services.CartoVisBuilder;
-				public delete(): void;
-				public swigTakeOwnership(): void;
-				public setDescription(param0: com.carto.core.Variant): void;
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module services {
-			export class CartoVisLoader {
-				public static class: java.lang.Class<com.carto.services.CartoVisLoader>;
-				public swigCMemOwn: boolean;
-				public getVectorTileAssetPackage(): com.carto.utils.AssetPackage;
-				public static getCPtr(param0: com.carto.services.CartoVisLoader): number;
-				public setVectorTileAssetPackage(param0: com.carto.utils.AssetPackage): void;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-				public isStrictMode(): boolean;
-				public constructor();
-				public loadVis(param0: com.carto.services.CartoVisBuilder, param1: string): void;
-				public swigGetRawPtr(): number;
-				public setDefaultVectorLayerMode(param0: boolean): void;
-				public delete(): void;
-				public hashCode(): number;
-				public equals(param0: any): boolean;
-				public setStrictMode(param0: boolean): void;
-				public isDefaultVectorLayerMode(): boolean;
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
 		export module styles {
 			export class AnimationStyle {
 				public static class: java.lang.Class<com.carto.styles.AnimationStyle>;
@@ -4953,7 +4694,6 @@ declare module com {
 				public static ANIMATION_TYPE_SMOOTHSTEP: com.carto.styles.AnimationType;
 				public static ANIMATION_TYPE_SPRING: com.carto.styles.AnimationType;
 				public swigValue(): number;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.styles.AnimationType>;
 				public static valueOf(param0: string): com.carto.styles.AnimationType;
 				public static swigToEnum(param0: number): com.carto.styles.AnimationType;
@@ -5123,7 +4863,6 @@ declare module com {
 				public static BILLBOARD_ORIENTATION_GROUND: com.carto.styles.BillboardOrientation;
 				public swigValue(): number;
 				public static valueOf(param0: string): com.carto.styles.BillboardOrientation;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.styles.BillboardOrientation>;
 				public static swigToEnum(param0: number): com.carto.styles.BillboardOrientation;
 			}
@@ -5146,7 +4885,6 @@ declare module com {
 				public static BILLBOARD_SCALING_CONST_SCREEN_SIZE: com.carto.styles.BillboardScaling;
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.styles.BillboardScaling;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.styles.BillboardScaling>;
 				public static valueOf(param0: string): com.carto.styles.BillboardScaling;
 			}
@@ -5408,14 +5146,12 @@ declare module com {
 	export module carto {
 		export module styles {
 			export class LineEndType {
-				public ordinal() : number
 				public static class: java.lang.Class<com.carto.styles.LineEndType>;
 				public static LINE_END_TYPE_NONE: com.carto.styles.LineEndType;
 				public static LINE_END_TYPE_SQUARE: com.carto.styles.LineEndType;
 				public static LINE_END_TYPE_ROUND: com.carto.styles.LineEndType;
 				public swigValue(): number;
 				public static valueOf(param0: string): com.carto.styles.LineEndType;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.styles.LineEndType>;
 				public static swigToEnum(param0: number): com.carto.styles.LineEndType;
 			}
@@ -5432,7 +5168,6 @@ declare module com {
 	export module carto {
 		export module styles {
 			export class LineJoinType {
-				public ordinal() : number
 				public static class: java.lang.Class<com.carto.styles.LineJoinType>;
 				public static LINE_JOIN_TYPE_NONE: com.carto.styles.LineJoinType;
 				public static LINE_JOIN_TYPE_MITER: com.carto.styles.LineJoinType;
@@ -5440,7 +5175,6 @@ declare module com {
 				public static LINE_JOIN_TYPE_ROUND: com.carto.styles.LineJoinType;
 				public swigValue(): number;
 				public static swigToEnum(param0: number): com.carto.styles.LineJoinType;
-				public ordinal() : number;
 				public static values(): native.Array<com.carto.styles.LineJoinType>;
 				public static valueOf(param0: string): com.carto.styles.LineJoinType;
 			}
@@ -5580,6 +5314,54 @@ declare module com {
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.BillboardStyleBuilder;
 				public setOrientationMode(param0: com.carto.styles.BillboardOrientation): void;
 				public buildStyle(): com.carto.styles.MarkerStyle;
+			}
+		}
+	}
+}
+
+
+
+
+
+declare module com {
+	export module carto {
+		export module styles {
+			export class NMLModelStyle extends com.carto.styles.Style {
+				public static class: java.lang.Class<com.carto.styles.NMLModelStyle>;
+				public swigGetRawPtr(): number;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.NMLModelStyle;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.Style;
+				public delete(): void;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public static getCPtr(param0: com.carto.styles.Style): number;
+				public static getCPtr(param0: com.carto.styles.NMLModelStyle): number;
+				public swigGetDirectorObject(): any;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module styles {
+			export class NMLModelStyleBuilder extends com.carto.styles.StyleBuilder {
+				public static class: java.lang.Class<com.carto.styles.NMLModelStyleBuilder>;
+				public getModelAsset(): com.carto.core.BinaryData;
+				public static getCPtr(param0: com.carto.styles.StyleBuilder): number;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.StyleBuilder;
+				public swigGetClassName(): string;
+				public setModelAsset(param0: com.carto.core.BinaryData): void;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public buildStyle(): com.carto.styles.NMLModelStyle;
+				public static getCPtr(param0: com.carto.styles.NMLModelStyleBuilder): number;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.NMLModelStyleBuilder;
 			}
 		}
 	}
@@ -6037,7 +5819,6 @@ declare module com {
 	export module carto {
 		export module ui {
 			export class ClickType {
-				public ordinal() : number
 				public static class: java.lang.Class<com.carto.ui.ClickType>;
 				public static CLICK_TYPE_SINGLE: com.carto.ui.ClickType;
 				public static CLICK_TYPE_LONG: com.carto.ui.ClickType;
@@ -6177,29 +5958,6 @@ declare module com {
 				public screenToMap(param0: com.carto.core.ScreenPos): com.carto.core.MapPos;
 				public getOptions(): com.carto.components.Options;
 				public getMapRenderer(): com.carto.renderers.MapRenderer;
-			}
-		}
-	}
-}
-
-declare module com {
-	export module carto {
-		export module ui {
-			export class NMLModelLODTreeClickInfo {
-				public static class: java.lang.Class<com.carto.ui.NMLModelLODTreeClickInfo>;
-				public swigCMemOwn: boolean;
-				public getClickType(): com.carto.ui.ClickType;
-				public swigGetRawPtr(): number;
-				public getClickPos(): com.carto.core.MapPos;
-				public getElementClickPos(): com.carto.core.MapPos;
-				public delete(): void;
-				public hashCode(): number;
-				public getMetaData(): com.carto.core.StringMap;
-				public getLayer(): com.carto.layers.Layer;
-				public finalize(): void;
-				public equals(param0: any): boolean;
-				public constructor(param0: number, param1: boolean);
-				public static getCPtr(param0: com.carto.ui.NMLModelLODTreeClickInfo): number;
 			}
 		}
 	}
@@ -6363,7 +6121,6 @@ declare module com {
 				public static VECTOR_ELEMENT_DRAG_MODE_VERTEX: com.carto.ui.VectorElementDragMode;
 				public static VECTOR_ELEMENT_DRAG_MODE_ELEMENT: com.carto.ui.VectorElementDragMode;
 				public static values(): native.Array<com.carto.ui.VectorElementDragMode>;
-				public ordinal() : number
 				public swigValue(): number;
 				public static valueOf(param0: string): com.carto.ui.VectorElementDragMode;
 				public static swigToEnum(param0: number): com.carto.ui.VectorElementDragMode;
@@ -6855,19 +6612,22 @@ declare module com {
 		export module vectorelements {
 			export class NMLModel extends com.carto.vectorelements.VectorElement {
 				public static class: java.lang.Class<com.carto.vectorelements.NMLModel>;
+				public getStyle(): com.carto.styles.NMLModelStyle;
 				public static getCPtr(param0: com.carto.vectorelements.NMLModel): number;
 				public getScale(): number;
 				public finalize(): void;
 				public getRotationAxis(): com.carto.core.MapVec;
 				public setScale(param0: number): void;
 				public constructor(param0: number, param1: boolean);
-				public getBounds(): com.carto.core.MapBounds;
 				public setPos(param0: com.carto.core.MapPos): void;
 				public constructor(param0: com.carto.core.MapPos, param1: com.carto.core.BinaryData);
 				public getRotationAngle(): number;
 				public setRotation(param0: com.carto.core.MapVec, param1: number): void;
 				public swigGetClassName(): string;
+				public constructor(param0: com.carto.core.MapPos, param1: com.carto.styles.NMLModelStyle);
+				public setStyle(param0: com.carto.styles.NMLModelStyle): void;
 				public swigGetDirectorObject(): any;
+				public constructor(param0: com.carto.geometry.Geometry, param1: com.carto.styles.NMLModelStyle);
 				public swigGetRawPtr(): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.NMLModel;
 				public delete(): void;
@@ -7117,6 +6877,7 @@ declare module com {
 		export module vectortiles {
 			export class CartoVectorTileDecoder extends com.carto.vectortiles.VectorTileDecoder {
 				public static class: java.lang.Class<com.carto.vectortiles.CartoVectorTileDecoder>;
+				public addFallbackFont(param0: com.carto.core.BinaryData): void;
 				public setLayerStyleSet(param0: string, param1: com.carto.styles.CartoCSSStyleSet): void;
 				public finalize(): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectortiles.VectorTileDecoder;
@@ -7151,6 +6912,7 @@ declare module com {
 				public constructor(param0: com.carto.styles.CartoCSSStyleSet);
 				public getCartoCSSStyleSet(): com.carto.styles.CartoCSSStyleSet;
 				public getStyleParameters(): com.carto.core.StringVector;
+				public addFallbackFont(param0: com.carto.core.BinaryData): void;
 				public constructor(param0: com.carto.styles.CompiledStyleSet);
 				public finalize(): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectortiles.VectorTileDecoder;
@@ -7181,6 +6943,7 @@ declare module com {
 			export class TorqueTileDecoder extends com.carto.vectortiles.VectorTileDecoder {
 				public static class: java.lang.Class<com.carto.vectortiles.TorqueTileDecoder>;
 				public constructor(param0: com.carto.styles.CartoCSSStyleSet);
+				public addFallbackFont(param0: com.carto.core.BinaryData): void;
 				public getStyleSet(): com.carto.styles.CartoCSSStyleSet;
 				public finalize(): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectortiles.VectorTileDecoder;
@@ -7211,6 +6974,7 @@ declare module com {
 			export class VectorTileDecoder {
 				public static class: java.lang.Class<com.carto.vectortiles.VectorTileDecoder>;
 				public swigCMemOwn: boolean;
+				public addFallbackFont(param0: com.carto.core.BinaryData): void;
 				public finalize(): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectortiles.VectorTileDecoder;
 				public constructor(param0: number, param1: boolean);
