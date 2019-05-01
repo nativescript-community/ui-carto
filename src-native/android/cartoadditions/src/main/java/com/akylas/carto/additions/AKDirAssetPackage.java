@@ -18,7 +18,7 @@ public class AKDirAssetPackage extends AssetPackage {
     private StringVector assetNames;
 
     public AKDirAssetPackage(Context context, String path) {
-        super(-1, false);
+        super();
         this.dirPath = path;
         this.context = context;
     }
