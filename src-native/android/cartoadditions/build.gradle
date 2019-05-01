@@ -1,8 +1,4 @@
-import groovy.json.JsonSlurper //used to parse package.json
-import groovy.json.JsonBuilder
-import groovy.json.JsonOutput
 
-def isWinOs = System.properties['os.name'].toLowerCase().contains('windows')
 
 apply plugin: 'com.android.library'
 
@@ -63,7 +59,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:' + computeSupportVersion()
-    compile 'com.carto:carto-mobile-sdk:4.1.5-rc.1@aar'
+    compile 'com.carto:carto-mobile-sdk:4.2.0-rc.1@aar'
 }
 
 task cleanBuildDir (type: Delete) {
