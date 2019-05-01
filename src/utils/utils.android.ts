@@ -227,12 +227,13 @@ function intDirAssetPackageClass() {
         public getAssetNames() {
             if (this.assetNames == null) {
                 try {
-                    // const startTime = Date.now();
+                    const startTime = Date.now();
                     this.assetNames = new com.carto.core.StringVector();
-                    walkDir(this.dirPath, (fileRelPath: string) => this.assetNames.add(fileRelPath));
+                    const test = [];
+                    walkDir(this.dirPath, (fileRelPath: string) => {this.assetNames.add(fileRelPath); test.push(fileRelPath)});
 
-                    // console.log(`getAssetNames done ${this.assetNames.size()}`);
-                    // console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
+                    console.log(`getAssetNames done ${this.assetNames.size()}: ${test}`);
+                    console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
                     // }
                 } catch (e) {}
             }
