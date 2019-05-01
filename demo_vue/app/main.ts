@@ -1,14 +1,30 @@
 // require('./ts_helpers');
-import Vue, { registerElement } from 'nativescript-vue';
+import Vue from 'nativescript-vue';
 import App from './App.vue';
-import Overlays from './examples/Overlays.vue';
 import './styles.scss';
 import { registerLicense } from 'nativescript-carto/ui/ui';
 import { setShowDebug } from 'nativescript-carto/utils/utils';
 import * as application from 'application';
+import { isAndroid } from 'tns-core-modules/ui/page/page';
+import { knownFolders } from 'tns-core-modules/file-system';
+
+const currentApp = knownFolders.currentApp();
+require('source-map-support').install({
+    environment: 'node',
+    handleUncaughtExceptions: false,
+    retrieveSourceMap(source) {
+        const sourceMapPath = source + '.map';
+        const sourceMapRelativePath = sourceMapPath.replace('file://', '').replace(currentApp.path + '/', '');
+
+        return {
+            url: sourceMapRelativePath + '/',
+            map: currentApp.getFile(sourceMapRelativePath).readTextSync()
+        };
+    }
+});
+// setShowDebug(true);
 
 import CollectionView from 'nativescript-collectionview/vue';
-import { isAndroid } from 'tns-core-modules/ui/page/page';
 Vue.use(CollectionView);
 
 import CartoPlugin from 'nativescript-carto/vue';

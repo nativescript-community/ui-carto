@@ -40,6 +40,7 @@ module.exports = env => {
         development = false, // --env.development
         snapshot, // --env.snapshot
         production, // --env.production
+        sourceMap, // --env.sourceMap
         report, // --env.report
         hmr // --env.hmr
     } = env;
@@ -69,10 +70,27 @@ module.exports = env => {
         const srcFullPath = resolve(projectRoot, '..', 'src');
         aliases = Object.assign(aliases, {
             '#': srcFullPath,
+            'nativescript-carto/vue$': '#/vue/index',
             'nativescript-carto$': '#/carto.' + platform,
-            'nativescript-carto': '#/carto'
+            'nativescript-carto/ui/ui$': '#/ui/ui.' + platform,
+            'nativescript-carto/ui/utils$': '#/utils/utils.' + platform,
+            'nativescript-carto/core/core$': '#/core/core.' + platform,
+            'nativescript-carto/packagemanager/packagemanager$': '#/packagemanager/packagemanager.' + platform,
+            'nativescript-carto/layers/vector$': '#/layers/vector.' + platform,
+            'nativescript-carto/layers/raster$': '#/layers/raster.' + platform,
+            'nativescript-carto/datasources/datasource$': '#/datasources/datasource.' + platform,
+            'nativescript-carto/datasources/cache$': '#/datasources/cache.' + platform,
+            'nativescript-carto/datasources/cartoonline$': '#/datasources/cartoonline.' + platform,
+            'nativescript-carto/datasources/http$': '#/datasources/http.' + platform,
+            'nativescript-carto/datasources/vector$': '#/datasources/vector.' + platform,
+            'nativescript-carto/vectortiles/vectortiles$': '#/vectortiles/vectortiles.' + platform,
+            'nativescript-carto/vectorelements/marker$': '#/vectorelements/marker.' + platform,
+            'nativescript-carto/vectorelements/point$': '#/vectorelements/point.' + platform,
+            'nativescript-carto/vectorelements/line$': '#/vectorelements/line.' + platform,
+            'nativescript-carto/projections/line$': '#/vectorelements/line.' + platform,
         });
     }
+    const shouldProduceSourceMap = sourceMap !== undefined ? sourceMap : !production;
     const tsconfig = 'tsconfig.json';
 
     const config = {
@@ -118,7 +136,7 @@ module.exports = env => {
             fs: 'empty',
             __dirname: false
         },
-        devtool: 'none',
+        devtool: shouldProduceSourceMap ? 'source-map' : 'none',
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -127,7 +145,7 @@ module.exports = env => {
                         chunks: 'all',
                         test: module => {
                             const moduleName = module.nameForCondition ? module.nameForCondition() : '';
-                            return /[\\/]node_modules[\\/]/.test(moduleName) || appComponents.some(comp => comp === moduleName);
+                            return /[\\/]node_modules[\\/]/.test(moduleName) || /[\\/]nativescript-carto[\\/]/.test(moduleName) || appComponents.some(comp => comp === moduleName);
                         },
                         enforce: true
                     }

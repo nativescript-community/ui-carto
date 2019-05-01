@@ -40,7 +40,7 @@ export default class BaseMaps extends BaseVueComponent {
     onMapReady(e) {
         // setTimeout(function() {
         const mapView = e.object as CartoMap;
-        console.log('map ready!');
+        console.log('map ready!', this.currentLayerType);
         
         this.setCurrentLayer(this.currentLayerType);
         mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);

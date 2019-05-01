@@ -38,6 +38,7 @@ import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
 import { Point, PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
 import { LineStyleBuilder, Line, LineJointType, LineEndType } from 'nativescript-carto/vectorelements/line';
 import { MapClickedEvent, MapStableEvent, MapReadyEvent, MapMovedEvent } from 'nativescript-carto/ui/ui';
+import { Projection } from 'nativescript-carto/projections/projection';
 
 @Component({})
 export default class BaseMaps extends BaseVueComponent {
@@ -75,12 +76,14 @@ export default class BaseMaps extends BaseVueComponent {
         // console.log('focusPos', map.focusPos);
     };
     onVectorTileClicked = (info: VectorTileEventData) => {
-        console.log('on vector click', info.featureId, info.featureLayerName, info.position, info.type, info.featureData);
+        console.log('on vector click', info.featureId, info.featureLayerName, info.position);
         return true; // event only for first detected  layer
     };
+    mapProjection: Projection
     onMapReady(e: MapEventData) {
         // console.log('onMapReady', e);
         const mapView = this.mapView;
+        this.mapProjection = mapView.projection;
 
         mapView.on(MapReadyEvent, this.onMapReady);
         mapView.on(MapStableEvent, this.onMapStable);
@@ -140,7 +143,7 @@ export default class BaseMaps extends BaseVueComponent {
             }),
             opacity: 1
         });
-        this.cartoLayer.setVectorTileEventListener(this);
+        this.cartoLayer.setVectorTileEventListener(this, this.mapProjection);
         mapView.addLayer(this.cartoLayer);
 
         // const dataSource1 = new HTTPTileDataSource({
@@ -165,7 +168,6 @@ export default class BaseMaps extends BaseVueComponent {
         const dataSource = new HTTPTileDataSource({
             minZoom: 0,
             maxZoom: 22,
-            autoHD: false,
             subdomains: 'abc',
             url: `http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
         });
