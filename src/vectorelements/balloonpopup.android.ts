@@ -4,7 +4,7 @@ import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonp
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
 import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.BalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {

@@ -13,7 +13,7 @@ import { BaseNative } from '../carto';
 import { VectorDataSource } from '../datasources/vector';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { CartoPackageManager } from '../packagemanager/packagemanager';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 import { fromNativeMapPos } from '../core/core';
 import { Projection } from '../projections/projection';
 import { VectorElement } from '../vectorelements/vectorelements';
@@ -42,8 +42,8 @@ export class VectorElementEventListener extends NTVectorElementEventListener {
                     layer: this._layer.get() as any,
                     element,
                     metaData: element.metaData,
-                    position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos()),
-                    elementPos: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getElementClickPos())) : fromNativeMapPos(info.getElementClickPos())
+                    position: fromNativeMapPos(info.getClickPos()),
+                    elementPos: fromNativeMapPos(info.getElementClickPos())
                 }) || false
             );
         }
@@ -85,8 +85,8 @@ export class VectorTileEventListener extends NTVectorTileEventListener {
                     featureData: nativeVariantToJS(info.getFeature().getProperties()),
                     featureLayerName: info.getFeatureLayerName(),
                     featureGeometry: geometry,
-                    featurePosition: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(featurePos)) : fromNativeMapPos(featurePos),
-                    position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos())
+                    featurePosition: fromNativeMapPos(featurePos),
+                    position: fromNativeMapPos(info.getClickPos())
                 }) || false
             );
         }
@@ -128,7 +128,7 @@ export class VectorTileLayer extends TileLayer<NTVectorTileLayer, VectorTileLaye
             const dataSource = options.dataSource.getNative();
             const decoder = options.decoder.getNative();
             if (dataSource && decoder) {
-                return NTVectorTileLayer.alloc().initWithDataSourceDecoder(options.dataSource.getNative(), options.decoder.getNative());
+                return NTVectorTileLayer.alloc().initWithDataSourceDecoder(dataSource, decoder);
             }
         }
         return null;

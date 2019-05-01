@@ -1,13 +1,19 @@
-import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
-import { EPSG3857 } from '../projections/epsg3857';
-import { IProjection } from '../projections/projection';
-import { fromNativeMapPos, MapPos, ScreenPos, toNativeMapPos } from '../core/core';
+import { fromNativeMapPos, fromNativeScreenPos, MapPos, ScreenPos, toNativeMapPos, toNativeScreenPos } from '../core/core';
 import { TileLayer } from '../layers/layer';
+import { EPSG4326 } from '../projections/epsg4326';
+import { IProjection } from '../projections/projection';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
-import { fromNativeScreenPos, toNativeScreenPos } from 'nativescript-carto/core/core';
+import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
+
+
+export enum RenderProjectionMode {
+    RENDER_PROJECTION_MODE_PLANAR = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
+    RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL
+}
+
 
 let licenseKey: string;
 export function registerLicense(value: string, callback?: (result: boolean) => void) {
@@ -73,9 +79,9 @@ class NTMapEventListenerImpl extends NTMapEventListener {
 }
 
 export class CartoMap extends CartoViewBase {
-    private mapView: NTMapView;
-    static projection = new EPSG3857();
-    nativeProjection: NTEPSG3857;
+    static projection = new EPSG4326();
+    nativeProjection: NTProjection;
+    _projection: IProjection;
     constructor() {
         super();
         if (!isLicenseKeyRegistered()) {
@@ -88,35 +94,30 @@ export class CartoMap extends CartoViewBase {
             }
         }
     }
-    _projection: IProjection;
+
+    get mapView() {
+        return this.nativeViewProtected as NTMapView;
+    }
     get projection() {
         return this._projection;
     }
     set projection(proj: IProjection) {
         this._projection = proj;
         this.nativeProjection = this._projection.getNative();
-        this.mapView.getOptions().setBaseProjection(this.nativeProjection); // Since EPSG3857 is the default base projection, this is not needed
+        if (this.nativeViewProtected) {
+            this.mapView.getOptions().setBaseProjection(this.nativeProjection);
+        }
     }
 
     public createNativeView(): Object {
-        // Create new instance
-        const mapView: NTMapView = (this.mapView = NTMapView.alloc().init());
-        mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
-
-        this.projection = CartoMap.projection;
-        // 2. General options
-        mapView.getOptions().setRotatable(true); // allows the map to rotate (this is the default behavior)
-        mapView.getOptions().setZoomGestures(true); // allows the map to rotate (this is the default behavior)
-        mapView.getOptions().setTileThreadPoolSize(4); // use two threads to download tiles
-
-        // 3.Set initial location and other parameters, _do not animate_
-        mapView.setRotationDurationSeconds(0, 0);
-
-        return mapView;
+        return NTMapView.alloc().init();
     }
 
     getOptions() {
-        return this.mapView.getOptions() as MapOptions;
+        if (this.mapReady) {
+            return this.mapView.getOptions() as MapOptions;
+        } 
+        return null;
     }
 
     /**
@@ -127,25 +128,28 @@ export class CartoMap extends CartoViewBase {
         // When nativeView is tapped we get the owning JS object through this field.
         this.nativeView.owner = this;
         super.initNativeView();
+        this.mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
+        const options = this.nativeViewProtected.getOptions();
+        if (!this.projection) {
+            this.projection = CartoMap.projection;
+        }
+        // 2. General options
+        options.setRotatable(true); // allows the map to rotate (this is the default behavior)
+        options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
+        options.setTileThreadPoolSize(2); // use two threads to download tiles
+
+        // 3.Set initial location and other parameters, _do not animate_
+        // this.nativeView.setRotationDurationSeconds(0, 0);
     }
 
-    /**
-     * Clean up references to the native view and resets nativeView to its original state.
-     * If you have changed nativeView in some other way except through setNative callbacks
-     * you have a chance here to revert it back to its original state
-     * so that it could be reused later.
-     */
     disposeNativeView(): void {
         // Remove reference from native listener to this instance.
+        this.mapView.setMapEventListener(null);
         this.nativeView.owner = null;
-
-        // If you want to recycle nativeView and have modified the nativeView
-        // without using Property or CssProperty (e.g. outside our property system - 'setNative' callbacks)
-        // you have to reset it to its initial state here.
         super.disposeNativeView();
     }
     fromNativeMapPos(position: NTMapPos) {
-        return fromNativeMapPos(this.nativeProjection.toWgs84(this.mapView.getFocusPos()));
+        return fromNativeMapPos(position);
     }
     setFocusPos(value: MapPos, duration: number) {
         this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);

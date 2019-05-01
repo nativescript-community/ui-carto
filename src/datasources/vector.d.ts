@@ -1,8 +1,8 @@
 import { DataSource, TileDataSourceOptions } from './datasource';
 import { IProjection } from '../projections/projection';
 import { VectorElement, VectorElementVector } from '../vectorelements/vectorelements';
-import { FeatureCollection } from 'nativescript-carto/geometry/feature';
-import { GeometrySimplifier } from 'nativescript-carto/geometry/simplifier';
+import { FeatureCollection } from '../geometry/feature';
+import { GeometrySimplifier } from '../geometry/simplifier';
 
 export interface VectorDataSourceOptions extends TileDataSourceOptions {
     projection: IProjection;

@@ -1,7 +1,7 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
 import { TileDataSource } from './datasource';
 import { MapBounds, toNativeMapBounds } from '../core/core';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     private _owner: WeakRef<TileDownloadListener>;

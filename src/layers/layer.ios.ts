@@ -1,6 +1,6 @@
 import { BaseLayer } from './layer.common';
 import { LayerOptions, TileLayerOptions } from './layer';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 export abstract class Layer<T extends NTLayer, U extends LayerOptions> extends BaseLayer<T, U> {
     get visibleZoomRange() {

@@ -3,7 +3,7 @@ import { Color } from 'tns-core-modules/color/color';
 import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BasePointVectorElement, BillboardOrientation, BillboardScaling } from './vectorelements';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {

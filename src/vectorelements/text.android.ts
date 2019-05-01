@@ -3,7 +3,7 @@ import { Color } from 'tns-core-modules/color/color';
 import { nativeColorProperty, nativeEnumProperty } from '../carto';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { BasePointVectorElement, BillboardOrientation } from './vectorelements';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {

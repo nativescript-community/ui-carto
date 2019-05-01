@@ -6,6 +6,11 @@ import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core/core';
 
 export function registerLicense(key: string, callback?: (result: boolean) => void);
 
+export enum RenderProjectionMode {
+    RENDER_PROJECTION_MODE_PLANAR,
+    RENDER_PROJECTION_MODE_SPHERICAL
+}
+
 export const MapReadyEvent: string;
 /**
  * Listener method that gets called when map is in 'stable' state - map animations have finished,
@@ -45,8 +50,9 @@ export class MapOptions {
     getPanBounds(): any;
     getPanningMode(): any;
     getPivotMode(): any;
-    getProjectionMode(): any;
-    getSkyBitmap(): any;
+    getRenderProjectionMode(): any;
+    // getProjectionMode(): any;
+    // getSkyBitmap(): any;
     getTileDrawSize(): number;
     getTileThreadPoolSize(): number;
     getTiltRange(): any;
@@ -84,11 +90,12 @@ export class MapOptions {
     setPanBounds(panBounds: any): void;
     setPanningMode(panningMode: any): void;
     setPivotMode(pivotMode: any): void;
-    setProjectionMode(projectionMode: any): void;
+    // setProjectionMode(projectionMode: any): void;
+    setRenderProjectionMode(mode:any): void;
     setRestrictedPanning(enabled: boolean): void;
     setRotatable(enabled: boolean): void;
     setSeamlessPanning(enabled: boolean): void;
-    setSkyBitmap(skyBitmap: any): void;
+    // setSkyBitmap(skyBitmap: any): void;
     setTileDrawSize(tileDrawSize: number): void;
     setTileThreadPoolSize(poolSize: number): void;
     setTiltGestureReversed(reversed: boolean): void;

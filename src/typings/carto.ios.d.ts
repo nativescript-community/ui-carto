@@ -149,7 +149,7 @@ declare class NTAssetPackage extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -412,95 +412,6 @@ declare class NTBalloonPopupStyleBuilder extends NTPopupStyleBuilder {
 	setTriangleWidth(triangleWidth: number): void;
 }
 
-declare class NTBaseMapView extends NSObject {
-
-	static alloc(): NTBaseMapView; // inherited from NSObject
-
-	static getSDKVersion(): string;
-
-	static new(): NTBaseMapView; // inherited from NSObject
-
-	static registerLicenseListener(licenseKey: string, listener: NTLicenseManagerListener): boolean;
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	cancelAllTasks(): void;
-
-	clearAllCaches(): void;
-
-	clearPreloadingCaches(): void;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	getFocusPos(): NTMapPos;
-
-	getLayers(): NTLayers;
-
-	getMapEventListener(): NTMapEventListener;
-
-	getMapRenderer(): NTMapRenderer;
-
-	getOptions(): NTOptions;
-
-	getRedrawRequestListener(): NTRedrawRequestListener;
-
-	getRotation(): number;
-
-	getTilt(): number;
-
-	getZoom(): number;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	mapToScreen(mapPos: NTMapPos): NTScreenPos;
-
-	moveToFitBoundsScreenBoundsIntegerZoomDurationSeconds(mapBounds: NTMapBounds, screenBounds: NTScreenBounds, integerZoom: boolean, durationSeconds: number): void;
-
-	moveToFitBoundsScreenBoundsIntegerZoomResetRotationResetTiltDurationSeconds(mapBounds: NTMapBounds, screenBounds: NTScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number): void;
-
-	onDrawFrame(): void;
-
-	onInputEventX1Y1X2Y2(event: number, x1: number, y1: number, x2: number, y2: number): void;
-
-	onSurfaceChangedHeight(width: number, height: number): void;
-
-	onSurfaceCreated(): void;
-
-	onSurfaceDestroyed(): void;
-
-	onWheelEventXY(delta: number, x: number, y: number): void;
-
-	panDurationSeconds(deltaPos: NTMapVec, durationSeconds: number): void;
-
-	rotateDurationSeconds(deltaAngle: number, durationSeconds: number): void;
-
-	rotateTargetPosDurationSeconds(deltaAngle: number, targetPos: NTMapPos, durationSeconds: number): void;
-
-	screenToMap(screenPos: NTScreenPos): NTMapPos;
-
-	setFocusPosDurationSeconds(pos: NTMapPos, durationSeconds: number): void;
-
-	setMapEventListener(mapEventListener: NTMapEventListener): void;
-
-	setRedrawRequestListener(listener: NTRedrawRequestListener): void;
-
-	setRotationDurationSeconds(angle: number, durationSeconds: number): void;
-
-	setRotationTargetPosDurationSeconds(angle: number, targetPos: NTMapPos, durationSeconds: number): void;
-
-	setTiltDurationSeconds(tilt: number, durationSeconds: number): void;
-
-	setZoomDurationSeconds(zoom: number, durationSeconds: number): void;
-
-	setZoomTargetPosDurationSeconds(zoom: number, targetPos: NTMapPos, durationSeconds: number): void;
-
-	tiltDurationSeconds(deltaTilt: number, durationSeconds: number): void;
-
-	zoomDurationSeconds(deltaZoom: number, durationSeconds: number): void;
-
-	zoomTargetPosDurationSeconds(deltaZoom: number, targetPos: NTMapPos, durationSeconds: number): void;
-}
-
 declare class NTBillboard extends NTVectorElement {
 
 	static alloc(): NTBillboard; // inherited from NSObject
@@ -620,13 +531,13 @@ declare class NTBinaryData extends NSObject {
 
 	constructor(o: { dataPtr: string | interop.Pointer | interop.Reference<any>; size: number; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
 	getData(): string;
 
-// 	hash(): number;
+	// // hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -673,7 +584,7 @@ declare class NTBitmap extends NSObject {
 
 	getWidth(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -772,7 +683,7 @@ declare class NTCartoCSSStyleSet extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCartoCSS(cartoCSS: string): this;
 
@@ -811,7 +722,7 @@ declare class NTCartoMapsService extends NSObject {
 
 	getVectorTileBufferSize(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -948,7 +859,7 @@ declare class NTCartoSQLService extends NSObject {
 
 	getUsername(): string;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -1017,78 +928,6 @@ declare class NTCartoVectorTileLayer extends NTVectorTileLayer {
 	setFallbackLanguage(lang: string): void;
 
 	setLanguage(lang: string): void;
-}
-
-declare class NTCartoVisBuilder extends NSObject {
-
-	static alloc(): NTCartoVisBuilder; // inherited from NSObject
-
-	static new(): NTCartoVisBuilder; // inherited from NSObject
-
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTCartoVisBuilder;
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	addLayerAttributes(layer: NTLayer, attributes: NTVariant): void;
-
-	addLayerSwigExplicitNTCartoVisBuilderAttributes(layer: NTLayer, attributes: NTVariant): void;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	setBounds(mapBounds: NTMapBounds): void;
-
-	setBoundsSwigExplicitNTCartoVisBuilder(mapBounds: NTMapBounds): void;
-
-	setCenter(mapPos: NTMapPos): void;
-
-	setCenterSwigExplicitNTCartoVisBuilder(mapPos: NTMapPos): void;
-
-	setDescription(descriptionInfo: NTVariant): void;
-
-	setDescriptionSwigExplicitNTCartoVisBuilder(descriptionInfo: NTVariant): void;
-
-	setZoom(zoom: number): void;
-
-	setZoomSwigExplicitNTCartoVisBuilder(zoom: number): void;
-
-	swigGetClassName(): string;
-
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTCartoVisLoader extends NSObject {
-
-	static alloc(): NTCartoVisLoader; // inherited from NSObject
-
-	static new(): NTCartoVisLoader; // inherited from NSObject
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	getVectorTileAssetPackage(): NTAssetPackage;
-
-// 	hash(): number;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	isDefaultVectorLayerMode(): boolean;
-
-	isStrictMode(): boolean;
-
-	loadVisVisURL(builder: NTCartoVisBuilder, visURL: string): void;
-
-	setDefaultVectorLayerMode(vectorLayerMode: boolean): void;
-
-	setStrictMode(strictMode: boolean): void;
-
-	setVectorTileAssetPackage(assetPackage: NTAssetPackage): void;
-
-	swigGetRawPtr(): number;
 }
 
 declare const enum NTClickType {
@@ -1181,7 +1020,7 @@ declare class NTColor extends NSObject {
 
 	constructor(o: { r: number; g: number; b: number; a: number; });
 
-// 	description(): string;
+	// description(): string;
 
 	getA(): number;
 
@@ -1195,7 +1034,7 @@ declare class NTColor extends NSObject {
 
 	getR(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -1229,6 +1068,25 @@ declare const enum NTColorFormat {
 	T_COLOR_FORMAT_RGB_565 = 3
 }
 
+declare class NTCombinedTileDataSource extends NTTileDataSource {
+
+	static alloc(): NTCombinedTileDataSource; // inherited from NSObject
+
+	static new(): NTCombinedTileDataSource; // inherited from NSObject
+
+	constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource; zoomLevel: number; });
+
+	getDataExtentSwigExplicitNTCombinedTileDataSource(): NTMapBounds;
+
+	getMaxZoomSwigExplicitNTCombinedTileDataSource(): number;
+
+	getMinZoomSwigExplicitNTCombinedTileDataSource(): number;
+
+	initWithDataSource1DataSource2ZoomLevel(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource, zoomLevel: number): this;
+
+	loadTileSwigExplicitNTCombinedTileDataSource(tile: NTMapTile): NTTileData;
+}
+
 declare class NTCompiledStyleSet extends NSObject {
 
 	static alloc(): NTCompiledStyleSet; // inherited from NSObject
@@ -1249,7 +1107,7 @@ declare class NTCompiledStyleSet extends NSObject {
 
 	getStyleName(): string;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithAssetPackage(assetPackage: NTAssetPackage): this;
 
@@ -1272,11 +1130,11 @@ declare class NTCullState extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getProjectionEnvelope(proj: NTProjection): NTMapEnvelope;
+	getProjectionEnvelope(projection: NTProjection): NTMapEnvelope;
 
 	getViewState(): NTViewState;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -1355,6 +1213,13 @@ declare class NTEPSG3857 extends NTProjection {
 	static new(): NTEPSG3857; // inherited from NSObject
 }
 
+declare class NTEPSG4326 extends NTProjection {
+
+	static alloc(): NTEPSG4326; // inherited from NSObject
+
+	static new(): NTEPSG4326; // inherited from NSObject
+}
+
 declare class NTEditableVectorLayer extends NTVectorLayer {
 
 	static alloc(): NTEditableVectorLayer; // inherited from NSObject
@@ -1397,7 +1262,7 @@ declare class NTFeature extends NSObject {
 
 	getProperties(): NTVariant;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -1503,33 +1368,6 @@ declare class NTFeatureVector extends NSObject {
 	swigGetRawPtr(): number;
 }
 
-declare class NTFrustum extends NSObject {
-
-	static alloc(): NTFrustum; // inherited from NSObject
-
-	static new(): NTFrustum; // inherited from NSObject
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	circleIntersectsRadius(center: NTMapPos, radius: number): boolean;
-
-	cuboidIntersects(cuboid: NTMapBounds): boolean;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-// 	hash(): number;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	pointInside(point: NTMapPos): boolean;
-
-	sphereIntersectsRadius(center: NTMapPos, radius: number): boolean;
-
-	squareIntersects(square: NTMapBounds): boolean;
-
-	swigGetRawPtr(): number;
-}
-
 declare class NTGeoJSONGeometryReader extends NSObject {
 
 	static alloc(): NTGeoJSONGeometryReader; // inherited from NSObject
@@ -1580,6 +1418,25 @@ declare class NTGeoJSONGeometryWriter extends NSObject {
 	writeGeometry(geometry: NTGeometry): string;
 }
 
+declare class NTGeoJSONVectorTileDataSource extends NTTileDataSource {
+
+	static alloc(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
+
+	static new(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
+
+	createLayer(name: string): number;
+
+	deleteLayer(layerIndex: number): void;
+
+	getDataExtentSwigExplicitNTGeoJSONVectorTileDataSource(): NTMapBounds;
+
+	loadTileSwigExplicitNTGeoJSONVectorTileDataSource(mapTile: NTMapTile): NTTileData;
+
+	setLayerFeatureCollectionProjectionFeatureCollection(layerIndex: number, projection: NTProjection, featureCollection: NTFeatureCollection): void;
+
+	setLayerGeoJSONGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
+}
+
 declare class NTGeocodingRequest extends NSObject {
 
 	static alloc(): NTGeocodingRequest; // inherited from NSObject
@@ -1590,7 +1447,7 @@ declare class NTGeocodingRequest extends NSObject {
 
 	constructor(o: { projection: NTProjection; query: string; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -1602,7 +1459,7 @@ declare class NTGeocodingRequest extends NSObject {
 
 	getQuery(): string;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -1625,7 +1482,7 @@ declare class NTGeocodingResult extends NSObject {
 
 	constructor(o: { projection: NTProjection; address: NTAddress; rank: number; featureCollection: NTFeatureCollection; });
 
-// 	description(): string;
+	// description(): string;
 
 	getAddress(): NTAddress;
 
@@ -1637,7 +1494,7 @@ declare class NTGeocodingResult extends NSObject {
 
 	getRank(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -1714,7 +1571,7 @@ declare class NTGeometry extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -1790,11 +1647,9 @@ declare class NTGeometrySimplifier extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	simplifyScale(geometry: NTGeometry, scale: number): NTGeometry;
 
 	swigGetClassName(): string;
 
@@ -1987,7 +1842,7 @@ declare class NTLayer extends NSObject {
 
 	getVisibleZoomRange(): NTMapRange;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -2071,7 +1926,7 @@ declare class NTLayers extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -2084,29 +1939,6 @@ declare class NTLayers extends NSObject {
 	setAll(layers: NTLayerVector): void;
 
 	setLayer(index: number, layer: NTLayer): void;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTLicenseManagerListener extends NSObject {
-
-	static alloc(): NTLicenseManagerListener; // inherited from NSObject
-
-	static new(): NTLicenseManagerListener; // inherited from NSObject
-
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTLicenseManagerListener;
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	onLicenseUpdated(licenseKey: string): void;
-
-	swigGetClassName(): string;
-
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
 	swigGetRawPtr(): number;
 }
@@ -2461,7 +2293,7 @@ declare class NTMapBounds extends NSObject {
 
 	containsPos(pos: NTMapPos): boolean;
 
-// 	description(): string;
+	// description(): string;
 
 	getCenter(): NTMapPos;
 
@@ -2473,7 +2305,7 @@ declare class NTMapBounds extends NSObject {
 
 	getMin(): NTMapPos;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -2548,7 +2380,7 @@ declare class NTMapClickInfo extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -2569,7 +2401,7 @@ declare class NTMapEnvelope extends NSObject {
 
 	contains(envelope: NTMapEnvelope): boolean;
 
-// 	description(): string;
+	// description(): string;
 
 	getBounds(): NTMapBounds;
 
@@ -2577,7 +2409,7 @@ declare class NTMapEnvelope extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -2645,7 +2477,7 @@ declare class NTMapPos extends NSObject {
 
 	add(v: NTMapVec): NTMapPos;
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -2655,7 +2487,7 @@ declare class NTMapPos extends NSObject {
 
 	getZ(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -2746,15 +2578,17 @@ declare class NTMapRange extends NSObject {
 
 	constructor(o: { min: number; max: number; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
 	getMax(): number;
 
+	getMidrange(): number;
+
 	getMin(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -2787,15 +2621,11 @@ declare class NTMapRenderer extends NSObject {
 
 	getViewState(): NTViewState;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	mapToScreenViewState(mapPos: NTMapPos, viewState: NTViewState): NTScreenPos;
-
 	requestRedraw(): void;
-
-	screenToMapViewState(screenPos: NTScreenPos, viewState: NTViewState): NTMapPos;
 
 	setMapRendererListener(listener: NTMapRendererListener): void;
 
@@ -2841,7 +2671,7 @@ declare class NTMapTile extends NSObject {
 
 	constructor(o: { x: number; y: number; zoom: number; frameNr: number; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -2855,7 +2685,7 @@ declare class NTMapTile extends NSObject {
 
 	getZoom(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -2886,7 +2716,7 @@ declare class NTMapVec extends NSObject {
 
 	crossProduct3D(v: NTMapVec): NTMapVec;
 
-// 	description(): string;
+	// description(): string;
 
 	div(divider: number): NTMapVec;
 
@@ -2896,15 +2726,13 @@ declare class NTMapVec extends NSObject {
 
 	getNormalized(): NTMapVec;
 
-	getRotated2DCos(sin: number, cos: number): NTMapVec;
-
 	getX(): number;
 
 	getY(): number;
 
 	getZ(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -3102,6 +2930,25 @@ declare class NTMemoryCacheTileDataSource extends NTCacheTileDataSource {
 	setCapacitySwigExplicitNTMemoryCacheTileDataSource(capacityInBytes: number): void;
 }
 
+declare class NTMergedMBVTTileDataSource extends NTTileDataSource {
+
+	static alloc(): NTMergedMBVTTileDataSource; // inherited from NSObject
+
+	static new(): NTMergedMBVTTileDataSource; // inherited from NSObject
+
+	constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource; });
+
+	getDataExtentSwigExplicitNTMergedMBVTTileDataSource(): NTMapBounds;
+
+	getMaxZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
+
+	getMinZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
+
+	initWithDataSource1DataSource2(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource): this;
+
+	loadTileSwigExplicitNTMergedMBVTTileDataSource(tile: NTMapTile): NTTileData;
+}
+
 declare class NTMultiGeometry extends NTGeometry {
 
 	static alloc(): NTMultiGeometry; // inherited from NSObject
@@ -3164,7 +3011,11 @@ declare class NTNMLModel extends NTVectorElement {
 
 	constructor(o: { geometry: NTGeometry; sourceModelData: NTBinaryData; });
 
+	constructor(o: { geometry: NTGeometry; style: NTNMLModelStyle; });
+
 	constructor(o: { pos: NTMapPos; sourceModelData: NTBinaryData; });
+
+	constructor(o: { pos: NTMapPos; style: NTNMLModelStyle; });
 
 	getRotationAngle(): number;
 
@@ -3172,9 +3023,15 @@ declare class NTNMLModel extends NTVectorElement {
 
 	getScale(): number;
 
+	getStyle(): NTNMLModelStyle;
+
 	initWithGeometrySourceModelData(geometry: NTGeometry, sourceModelData: NTBinaryData): this;
 
+	initWithGeometryStyle(geometry: NTGeometry, style: NTNMLModelStyle): this;
+
 	initWithPosSourceModelData(pos: NTMapPos, sourceModelData: NTBinaryData): this;
+
+	initWithPosStyle(pos: NTMapPos, style: NTNMLModelStyle): this;
 
 	setGeometry(geometry: NTGeometry): void;
 
@@ -3183,108 +3040,28 @@ declare class NTNMLModel extends NTVectorElement {
 	setRotationAngle(axis: NTMapVec, angle: number): void;
 
 	setScale(scale: number): void;
+
+	setStyle(style: NTNMLModelStyle): void;
 }
 
-declare class NTNMLModelLODTreeClickInfo extends NSObject {
+declare class NTNMLModelStyle extends NTStyle {
 
-	static alloc(): NTNMLModelLODTreeClickInfo; // inherited from NSObject
+	static alloc(): NTNMLModelStyle; // inherited from NSObject
 
-	static new(): NTNMLModelLODTreeClickInfo; // inherited from NSObject
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	getClickPos(): NTMapPos;
-
-	getClickType(): NTClickType;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	getElementClickPos(): NTMapPos;
-
-	getLayer(): NTLayer;
-
-	getMetaData(): NTStringMap;
-
-// 	hash(): number;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+	static new(): NTNMLModelStyle; // inherited from NSObject
 }
 
-declare class NTNMLModelLODTreeDataSource extends NSObject {
+declare class NTNMLModelStyleBuilder extends NTStyleBuilder {
 
-	static alloc(): NTNMLModelLODTreeDataSource; // inherited from NSObject
+	static alloc(): NTNMLModelStyleBuilder; // inherited from NSObject
 
-	static new(): NTNMLModelLODTreeDataSource; // inherited from NSObject
+	static new(): NTNMLModelStyleBuilder; // inherited from NSObject
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTNMLModelLODTreeDataSource;
+	buildStyle(): NTNMLModelStyle;
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+	getModelAsset(): NTBinaryData;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	getDataExtent(): NTMapBounds;
-
-	getProjection(): NTProjection;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetClassName(): string;
-
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTNMLModelLODTreeEventListener extends NSObject {
-
-	static alloc(): NTNMLModelLODTreeEventListener; // inherited from NSObject
-
-	static new(): NTNMLModelLODTreeEventListener; // inherited from NSObject
-
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTNMLModelLODTreeEventListener;
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	onNMLModelLODTreeClicked(clickInfo: NTNMLModelLODTreeClickInfo): boolean;
-
-	onNMLModelLODTreeClickedSwigExplicitNTNMLModelLODTreeEventListener(clickInfo: NTNMLModelLODTreeClickInfo): boolean;
-
-	swigGetClassName(): string;
-
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTNMLModelLODTreeLayer extends NTLayer {
-
-	static alloc(): NTNMLModelLODTreeLayer; // inherited from NSObject
-
-	static new(): NTNMLModelLODTreeLayer; // inherited from NSObject
-
-	constructor(o: { dataSource: NTNMLModelLODTreeDataSource; });
-
-	getDataSource(): NTNMLModelLODTreeDataSource;
-
-	getLODResolutionFactor(): number;
-
-	getMaxMemorySize(): number;
-
-	getNMLModelLODTreeEventListener(): NTNMLModelLODTreeEventListener;
-
-	initWithDataSource(dataSource: NTNMLModelLODTreeDataSource): this;
-
-	setLODResolutionFactor(factor: number): void;
-
-	setMaxMemorySize(size: number): void;
-
-	setNMLModelLODTreeEventListener(nmlModelLODTreeEventListener: NTNMLModelLODTreeEventListener): void;
+	setModelAsset(modelAsset: NTBinaryData): void;
 }
 
 declare class NTOSMOfflineGeocodingService extends NTGeocodingService {
@@ -3338,28 +3115,6 @@ declare class NTOSRMOfflineRoutingService extends NTRoutingService {
 	initWithPath(path: string): this;
 }
 
-declare class NTOfflineNMLModelLODTreeDataSource extends NTNMLModelLODTreeDataSource {
-
-	static alloc(): NTOfflineNMLModelLODTreeDataSource; // inherited from NSObject
-
-	static new(): NTOfflineNMLModelLODTreeDataSource; // inherited from NSObject
-
-	constructor(o: { path: string; });
-
-	initWithPath(path: string): this;
-}
-
-declare class NTOnlineNMLModelLODTreeDataSource extends NTNMLModelLODTreeDataSource {
-
-	static alloc(): NTOnlineNMLModelLODTreeDataSource; // inherited from NSObject
-
-	static new(): NTOnlineNMLModelLODTreeDataSource; // inherited from NSObject
-
-	constructor(o: { serviceURL: string; });
-
-	initWithServiceURL(serviceURL: string): this;
-}
-
 declare class NTOptions extends NSObject {
 
 	static alloc(): NTOptions; // inherited from NSObject
@@ -3398,9 +3153,9 @@ declare class NTOptions extends NSObject {
 
 	getPivotMode(): NTPivotMode;
 
-	getProjectionMode(): NTProjectionMode;
+	getRenderProjectionMode(): NTRenderProjectionMode;
 
-	getSkyBitmap(): NTBitmap;
+	getSkyColor(): NTColor;
 
 	getTileDrawSize(): number;
 
@@ -3420,7 +3175,7 @@ declare class NTOptions extends NSObject {
 
 	getZoomRange(): NTMapRange;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -3480,7 +3235,7 @@ declare class NTOptions extends NSObject {
 
 	setPivotMode(pivotMode: NTPivotMode): void;
 
-	setProjectionMode(projectionMode: NTProjectionMode): void;
+	setRenderProjectionMode(renderProjectionMode: NTRenderProjectionMode): void;
 
 	setRestrictedPanning(enabled: boolean): void;
 
@@ -3488,7 +3243,7 @@ declare class NTOptions extends NSObject {
 
 	setSeamlessPanning(enabled: boolean): void;
 
-	setSkyBitmap(skyBitmap: NTBitmap): void;
+	setSkyColor(color: NTColor): void;
 
 	setTileDrawSize(tileDrawSize: number): void;
 
@@ -3590,7 +3345,7 @@ declare class NTPackageInfo extends NSObject {
 
 	getVersion(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -3662,7 +3417,7 @@ declare class NTPackageManager extends NSObject {
 
 	getServerPackages(): NTPackageInfoVector;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -3814,25 +3569,6 @@ declare class NTPackageManagerTileDataSource extends NTTileDataSource {
 	loadTileSwigExplicitNTPackageManagerTileDataSource(mapTile: NTMapTile): NTTileData;
 }
 
-declare class NTPackageManagerValhallaRoutingService extends NTRoutingService {
-
-	static alloc(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
-
-	static new(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
-
-	constructor(o: { packageManager: NTPackageManager; });
-
-	calculateRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: NTRoutingRequest): NTRoutingResult;
-
-	getProfile(): string;
-
-	initWithPackageManager(packageManager: NTPackageManager): this;
-
-	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
-
-	setProfile(profile: string): void;
-}
-
 declare class NTPackageMetaInfo extends NSObject {
 
 	static alloc(): NTPackageMetaInfo; // inherited from NSObject
@@ -3847,7 +3583,7 @@ declare class NTPackageMetaInfo extends NSObject {
 
 	getVariant(): NTVariant;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -3872,7 +3608,7 @@ declare class NTPackageStatus extends NSObject {
 
 	getProgress(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -3901,7 +3637,7 @@ declare class NTPackageTileMask extends NSObject {
 
 	getTileStatus(tile: NTMapTile): NTPackageTileStatus;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4341,7 +4077,7 @@ declare class NTPopupClickInfo extends NSObject {
 
 	getPopup(): NTPopup;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4368,7 +4104,7 @@ declare class NTPopupDrawInfo extends NSObject {
 
 	getScreenBounds(): NTScreenBounds;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithAnchorScreenPosScreenBoundsPopupDpToPX(anchorScreenPos: NTScreenPos, screenBounds: NTScreenBounds, popup: NTPopup, dpToPX: number): this;
 
@@ -4403,8 +4139,6 @@ declare class NTProjection extends NSObject {
 
 	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-	fromInternalScale(size: number): number;
-
 	fromLatLng(lat: number, lng: number): NTMapPos;
 
 	fromWgs84(pos: NTMapPos): NTMapPos;
@@ -4413,11 +4147,9 @@ declare class NTProjection extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getLocalScale(pos: NTMapPos): number;
-
 	getName(): string;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4430,13 +4162,6 @@ declare class NTProjection extends NSObject {
 	toLatLongY(x: number, y: number): NTMapPos;
 
 	toWgs84(pos: NTMapPos): NTMapPos;
-}
-
-declare const enum NTProjectionMode {
-
-	T_PROJECTION_MODE_ORTHOGONAL = 0,
-
-	T_PROJECTION_MODE_PERSPECTIVE = 1
 }
 
 declare class NTRasterTileClickInfo extends NSObject {
@@ -4461,7 +4186,7 @@ declare class NTRasterTileClickInfo extends NSObject {
 
 	getNearestColor(): NTColor;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4537,6 +4262,13 @@ declare class NTRedrawRequestListener extends NSObject {
 	swigGetRawPtr(): number;
 }
 
+declare const enum NTRenderProjectionMode {
+
+	T_RENDER_PROJECTION_MODE_PLANAR = 0,
+
+	T_RENDER_PROJECTION_MODE_SPHERICAL = 1
+}
+
 declare class NTRendererCaptureListener extends NSObject {
 
 	static alloc(): NTRendererCaptureListener; // inherited from NSObject
@@ -4572,7 +4304,7 @@ declare class NTReverseGeocodingRequest extends NSObject {
 
 	constructor(o: { projection: NTProjection; location: NTMapPos; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -4582,7 +4314,7 @@ declare class NTReverseGeocodingRequest extends NSObject {
 
 	getSearchRadius(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4626,7 +4358,7 @@ declare class NTRouteMatchingRequest extends NSObject {
 
 	constructor(o: { projection: NTProjection; points: NTMapPosVector; accuracy: number; });
 
-// 	description(): string;
+	// description(): string;
 
 	getAccuracy(): number;
 
@@ -4636,7 +4368,7 @@ declare class NTRouteMatchingRequest extends NSObject {
 
 	getProjection(): NTProjection;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4655,7 +4387,7 @@ declare class NTRouteMatchingResult extends NSObject {
 
 	constructor(o: { projection: NTProjection; points: NTMapPosVector; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -4663,7 +4395,7 @@ declare class NTRouteMatchingResult extends NSObject {
 
 	getProjection(): NTProjection;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4719,7 +4451,7 @@ declare class NTRoutingInstruction extends NSObject {
 
 	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-// 	description(): string;
+	// description(): string;
 
 	getAction(): NTRoutingAction;
 
@@ -4739,7 +4471,7 @@ declare class NTRoutingInstruction extends NSObject {
 
 	getTurnAngle(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithActionPointIndexStreetNameTurnAngleAzimuthDistanceTime(action: NTRoutingAction, pointIndex: number, streetName: string, turnAngle: number, azimuth: number, distance: number, time: number): this;
 
@@ -4789,7 +4521,7 @@ declare class NTRoutingRequest extends NSObject {
 
 	constructor(o: { projection: NTProjection; points: NTMapPosVector; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -4797,7 +4529,7 @@ declare class NTRoutingRequest extends NSObject {
 
 	getProjection(): NTProjection;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4816,7 +4548,7 @@ declare class NTRoutingResult extends NSObject {
 
 	constructor(o: { projection: NTProjection; points: NTMapPosVector; instructions: NTRoutingInstructionVector; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -4830,7 +4562,7 @@ declare class NTRoutingResult extends NSObject {
 
 	getTotalTime(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -4897,7 +4629,7 @@ declare class NTScreenBounds extends NSObject {
 
 	containsPos(pos: NTScreenPos): boolean;
 
-// 	description(): string;
+	// description(): string;
 
 	getCenter(): NTScreenPos;
 
@@ -4911,7 +4643,7 @@ declare class NTScreenBounds extends NSObject {
 
 	getWidth(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -4936,7 +4668,7 @@ declare class NTScreenPos extends NSObject {
 
 	constructor(o: { x: number; y: number; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -4944,7 +4676,7 @@ declare class NTScreenPos extends NSObject {
 
 	getY(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -4996,7 +4728,7 @@ declare class NTSearchRequest extends NSObject {
 
 	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-// 	description(): string;
+	// description(): string;
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -5010,7 +4742,7 @@ declare class NTSearchRequest extends NSObject {
 
 	getSearchRadius(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5200,7 +4932,7 @@ declare class NTStyle extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5225,7 +4957,7 @@ declare class NTStyleBuilder extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5386,7 +5118,7 @@ declare class NTTileData extends NSObject {
 
 	getMaxAge(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5695,7 +5427,7 @@ declare class NTUTFGridClickInfo extends NSObject {
 
 	getLayer(): NTLayer;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5727,48 +5459,6 @@ declare class NTUTFGridEventListener extends NSObject {
 	swigGetRawPtr(): number;
 }
 
-declare class NTValhallaOfflineRoutingService extends NTRoutingService {
-
-	static alloc(): NTValhallaOfflineRoutingService; // inherited from NSObject
-
-	static new(): NTValhallaOfflineRoutingService; // inherited from NSObject
-
-	constructor(o: { path: string; });
-
-	calculateRouteSwigExplicitNTValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
-
-	getProfile(): string;
-
-	initWithPath(path: string): this;
-
-	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
-
-	setProfile(profile: string): void;
-}
-
-declare class NTValhallaOnlineRoutingService extends NTRoutingService {
-
-	static alloc(): NTValhallaOnlineRoutingService; // inherited from NSObject
-
-	static new(): NTValhallaOnlineRoutingService; // inherited from NSObject
-
-	constructor(o: { apiKey: string; });
-
-	calculateRouteSwigExplicitNTValhallaOnlineRoutingService(request: NTRoutingRequest): NTRoutingResult;
-
-	getCustomServiceURL(): string;
-
-	getProfile(): string;
-
-	initWithApiKey(apiKey: string): this;
-
-	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
-
-	setCustomServiceURL(serviceURL: string): void;
-
-	setProfile(profile: string): void;
-}
-
 declare class NTVariant extends NSObject {
 
 	static alloc(): NTVariant; // inherited from NSObject
@@ -5793,7 +5483,7 @@ declare class NTVariant extends NSObject {
 
 	containsObjectKey(key: string): boolean;
 
-// 	description(): string;
+	// description(): string;
 
 	getArrayElement(idx: number): NTVariant;
 
@@ -5815,7 +5505,7 @@ declare class NTVariant extends NSObject {
 
 	getType(): NTVariantType;
 
-// 	hash(): number;
+	// hash(): number;
 
 	hashInternal(): number;
 
@@ -5860,7 +5550,7 @@ declare class NTVariantArrayBuilder extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5879,7 +5569,7 @@ declare class NTVariantObjectBuilder extends NSObject {
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -5958,7 +5648,7 @@ declare class NTVectorData extends NSObject {
 
 	getElements(): NTVectorElementVector;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -6073,7 +5763,7 @@ declare class NTVectorElement extends NSObject {
 
 	getMetaDataElement(key: string): NTVariant;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -6116,7 +5806,7 @@ declare class NTVectorElementClickInfo extends NSObject {
 
 	getVectorElement(): NTVectorElement;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -6141,7 +5831,7 @@ declare class NTVectorElementDragInfo extends NSObject {
 
 	getVectorElement(): NTVectorElement;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -6276,7 +5966,11 @@ declare class NTVectorLayer extends NTLayer {
 
 	initWithDataSource(dataSource: NTVectorDataSource): this;
 
+	isZBuffering(): boolean;
+
 	setVectorElementEventListener(eventListener: NTVectorElementEventListener): void;
+
+	setZBuffering(enabled: boolean): void;
 }
 
 declare class NTVectorTileClickInfo extends NSObject {
@@ -6305,7 +5999,7 @@ declare class NTVectorTileClickInfo extends NSObject {
 
 	getMapTile(): NTMapTile;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -6322,13 +6016,15 @@ declare class NTVectorTileDecoder extends NSObject {
 
 	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
+	addFallbackFont(fontData: NTBinaryData): void;
+
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
 	getMaxZoom(): number;
 
 	getMinZoom(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
@@ -6516,8 +6212,6 @@ declare class NTViewState extends NSObject {
 
 	getAspectRatio(): number;
 
-	getCameraPos(): NTMapPos;
-
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
 	getDPI(): number;
@@ -6528,15 +6222,9 @@ declare class NTViewState extends NSObject {
 
 	getFar(): number;
 
-	getFocusPos(): NTMapPos;
-
-	getFrustum(): NTFrustum;
-
 	getHeight(): number;
 
 	getNear(): number;
-
-	getProjectionMode(): NTProjectionMode;
 
 	getRotation(): number;
 
@@ -6550,15 +6238,13 @@ declare class NTViewState extends NSObject {
 
 	getUnitToPXCoef(): number;
 
-	getUpVec(): NTMapVec;
-
 	getWidth(): number;
 
 	getZoom(): number;
 
 	getZoom0Distance(): number;
 
-// 	hash(): number;
+	// hash(): number;
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 

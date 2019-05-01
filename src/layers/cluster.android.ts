@@ -2,7 +2,7 @@ import { _createImageSourceFromSrc, BaseNative } from '../carto.common';
 import { fromNativeMapPos, MapPos } from '../core/core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
-import { nativeImageProperty } from 'nativescript-carto/carto';
+import { nativeImageProperty } from '../carto';
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 

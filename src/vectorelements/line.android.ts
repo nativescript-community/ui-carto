@@ -1,10 +1,10 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty } from 'nativescript-carto/carto';
-import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from 'nativescript-carto/core/core';
+import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty } from '../carto';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core/core';
 import { Color } from 'tns-core-modules/color/color';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './vectorelements';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 export { MapBounds };
 
 export const LineJointType = {
@@ -89,7 +89,7 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
     }
     getBounds() {
         const nBounds = this.getNative().getBounds();
-        const nProjection = this.projection.getNative();
-        return fromNativeMapBounds(new com.carto.core.MapBounds(nProjection.toWgs84(nBounds.getMin()), nProjection.toWgs84(nBounds.getMax())));
+        // const nProjection = this.projection.getNative();
+        return fromNativeMapBounds(new com.carto.core.MapBounds(nBounds.getMin(), nBounds.getMax()));
     }
 }

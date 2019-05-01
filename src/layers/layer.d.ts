@@ -1,4 +1,6 @@
 import { BaseNative } from '../carto';
+import { DataSource } from '../datasources/datasource';
+import { Projection } from '../projections/projection';
 
 export interface LayerOptions {
     updatePriority?: number;
@@ -30,4 +32,6 @@ export class TileLayer<T, U extends TileLayerOptions> extends Layer<T, U> {
     maxOverzoomLevel: number;
     maxUnderzoomLevel: number;
     clearTileCaches( all: boolean);
+    getDataSource(): DataSource<any, any>
+    getProjection(): Projection
 }

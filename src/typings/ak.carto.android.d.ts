@@ -4,6 +4,9 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
+                export class AssetPackage extends com.carto.utils.AssetPackage {
+                    
+                }
                 export class ServerPackagesCallback {
                     constructor(impl?: { onServerPackages: (result: com.carto.packagemanager.PackageInfoVector) => void });
                     onServerPackages(result: com.carto.packagemanager.PackageInfoVector);

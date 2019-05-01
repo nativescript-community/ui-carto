@@ -63,9 +63,6 @@ export abstract class BasePointVectorElement<
     get position() {
         if (this.native && this.native.getPos) {
             const nativePos = this.native.getPos();
-            if (this.projection) {
-                return fromNativeMapPos(this.projection.getNative().toWgs84(nativePos));
-            }
             return fromNativeMapPos(nativePos);
         }
         return this.options.position;

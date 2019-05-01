@@ -1,6 +1,8 @@
 import { BaseLayer } from './layer.common';
 import { LayerOptions, TileLayerOptions } from './layer';
-import { nativeProperty } from 'nativescript-carto/carto';
+import { nativeProperty } from '../carto';
+import { TileDataSource } from '../datasources/datasource';
+import { Projection } from '../projections/projection';
 
 export abstract class Layer<T extends com.carto.layers.Layer, U extends LayerOptions> extends BaseLayer<T, U> {
     get visibleZoomRange() {
@@ -24,9 +26,22 @@ export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends 
     @nativeProperty maxOverzoomLevel: number;
     @nativeProperty maxUnderzoomLevel: number;
 
-    clearTileCaches( all: boolean) {
+    clearTileCaches(all: boolean) {
         if (this.native) {
-            this.native.clearTileCaches( all);
+            this.native.clearTileCaches(all);
         }
+    }
+
+    getDataSource() {
+        if (this['datasource']) {
+            return this['datasource'];
+        }
+        return new TileDataSource<any, any>(undefined, this.getNative().getDataSource());
+    }
+    getProjection() {
+        if (this['projection']) {
+            return this['projection'];
+        }
+        return new Projection(undefined, this.getNative().getDataSource().getProjection());
     }
 }

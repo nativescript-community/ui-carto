@@ -1,7 +1,6 @@
 import { BaseNative, getFileName, getRelativePathToApp } from '../carto.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from './utils';
 import { File, FileSystemEntity, Folder, knownFolders, path } from 'tns-core-modules/file-system';
-import * as application from 'tns-core-modules/application';
 
 export function nativeVectorToArray(nVector: com.carto.core.StringVector) {
     const count = nVector.size();
@@ -113,9 +112,9 @@ function initLogEventListenerClass() {
 }
 
 export function setShowDebug(value: boolean) {
-    initLogEventListenerClass();
-    com.carto.utils.Log.setLogEventListener(new LogEventListener());
-    // com.carto.utils.Log.setShowDebug(value);
+    // initLogEventListenerClass();
+    // com.carto.utils.Log.setLogEventListener(new LogEventListener());
+    com.carto.utils.Log.setShowDebug(value);
     com.carto.utils.Log.setShowWarn(value);
 }
 
@@ -195,7 +194,7 @@ function intDirAssetPackageClass() {
         });
     }
 
-    class DirAssetPackageNativeImpl extends com.carto.utils.AssetPackage {
+    class DirAssetPackageNativeImpl extends com.akylas.carto.additions.AssetPackage {
         assetNames: com.carto.core.StringVector;
         // context: android.content.Context;
         dirPath: string;
@@ -211,7 +210,7 @@ function intDirAssetPackageClass() {
             this.loadUsingNS = !!options.loadUsingNS;
             this.dirPath = getFileName(dirPath);
             this.cartoDirPath = getRelativePathToApp(dirPath);
-            // console.log('DirAssetPackageNativeImpl', dirPath, this.dirPath, this.cartoDirPath, this.loadUsingNS);
+            console.log('DirAssetPackageNativeImpl', dirPath, this.dirPath, this.cartoDirPath, this.loadUsingNS);
             // this.dirPath = dirPath;
         }
         public loadAsset(name) {
@@ -245,9 +244,12 @@ function intDirAssetPackageClass() {
 
 export class DirAssetPackage extends BaseNative<DirAssetPackageNative, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
+        console.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
             intDirAssetPackageClass();
+            console.log('intDirAssetPackageClass done');
             const result = new DirAssetPackageNative();
+            console.log('about to initialize');
             result.initialize(options);
             return result;
         } else {

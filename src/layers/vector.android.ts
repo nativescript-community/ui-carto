@@ -1,4 +1,11 @@
-import { TileDataSource } from '../datasources/datasource';
+import { nativeProperty } from '../carto.common';
+import { BaseNative } from '../carto';
+import { fromNativeMapPos } from '../core/core';
+import { VectorDataSource } from '../datasources/vector';
+import { Projection } from '../projections/projection';
+import { nativeVariantToJS } from '../utils/utils';
+import { VectorElement } from '../vectorelements/vectorelements';
+import { MBVectorTileDecoder } from '../vectortiles/vectortiles';
 import { Layer, TileLayer } from './layer';
 import {
     CartoOfflineVectorTileLayerOptions,
@@ -13,22 +20,6 @@ import {
 export interface CartoOnlineVectorTileLayerOptions extends ICartoOnlineVectorTileLayerOptions {
     style: com.carto.layers.CartoBaseMapStyle;
 }
-
-import { BaseNative } from '../carto';
-import { VectorDataSource } from '../datasources/vector';
-import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
-import { CartoPackageManager } from '../packagemanager/packagemanager';
-import { fromNativeMapPos } from '../core/core';
-import { VectorElement } from '../vectorelements/vectorelements';
-import { Projection } from '../projections/projection';
-import { nativeProperty } from 'nativescript-carto/carto.common';
-import { nativeVariantToJS } from '../utils/utils';
-
-// export enum VectorTileRenderOrder {
-//     HIDDEN,
-//     LAYER,
-//     LAST
-// }
 
 export const VectorTileRenderOrder = {
     get HIDDEN() {
@@ -63,18 +54,17 @@ function initVectorTileEventListener() {
         public onClicked(info: com.carto.ui.VectorTileClickInfo) {
             const owner = this._owner.get();
             if (owner && owner.onVectorTileClicked) {
-                // const featureData = {};
-                // const feature = info.getFeature();
-                // const variant = feature.getProperties();
-                // const keys = variant.getObjectKeys();
-                // let key, i;
-                // for (i = 0; i < keys.size(); i++) {
-                //     key = keys.get(i);
-                //     featureData[key] = variant.getObjectElement(key).getString();
-                // }
                 const feature = info.getFeature();
                 const geometry = feature.getGeometry();
-                const featurePos = geometry.getCenterPos();
+                let position = info.getClickPos();
+                let featurePos = geometry.getCenterPos();
+
+                if (this.projection) {
+                    const layerProj = this._layer.get().getNative().getDataSource().getProjection();
+                    const nProj = this.projection.getNative();
+                    featurePos = nProj.fromWgs84(layerProj.toWgs84(featurePos));
+                    position = nProj.fromWgs84(layerProj.toWgs84(position));
+                }
                 return (
                     owner.onVectorTileClicked({
                         type: info.getClickType(),
@@ -83,8 +73,8 @@ function initVectorTileEventListener() {
                         featureData: nativeVariantToJS(info.getFeature().getProperties()),
                         featureLayerName: info.getFeatureLayerName(),
                         featureGeometry: geometry,
-                        featurePosition: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(featurePos)) : fromNativeMapPos(featurePos),
-                        position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos())
+                        featurePosition: fromNativeMapPos(featurePos),
+                        position: fromNativeMapPos(position)
                     }) || false
                 );
             }
@@ -116,15 +106,22 @@ function initVectorElementEventListener() {
             const owner = this._owner.get();
             if (owner && owner.onVectorElementClicked) {
                 const element = new VectorElement(undefined, info.getVectorElement());
-
+                let position = info.getClickPos();
+                let elementPos = info.getElementClickPos();
+                if (this.projection) {
+                    const layerProj = this._layer.get().getNative().getDataSource().getProjection();
+                    const nProj = this.projection.getNative();
+                    elementPos = nProj.fromWgs84(layerProj.toWgs84(elementPos));
+                    position = nProj.fromWgs84(layerProj.toWgs84(position));
+                }
                 return (
                     owner.onVectorElementClicked({
                         type: info.getClickType(),
                         layer: this._layer.get() as any,
                         element,
                         metaData: element.metaData,
-                        position: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getClickPos())) : fromNativeMapPos(info.getClickPos()),
-                        elementPos: this.projection ? fromNativeMapPos(this.projection.getNative().toWgs84(info.getElementClickPos())) : fromNativeMapPos(info.getElementClickPos())
+                        position: fromNativeMapPos(position),
+                        elementPos: fromNativeMapPos(elementPos)
                     }) || false
                 );
             }
@@ -161,7 +158,7 @@ export class VectorTileLayer extends BaseVectorTileLayer<com.carto.layers.Vector
             const dataSource = options.dataSource.getNative();
             const decoder = options.decoder.getNative();
             if (dataSource && decoder) {
-                return new com.carto.layers.VectorTileLayer(options.dataSource.getNative(), options.decoder.getNative());
+                return new com.carto.layers.VectorTileLayer(dataSource, decoder);
             }
         }
         return null;

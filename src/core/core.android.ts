@@ -43,8 +43,9 @@ export function fromNativeMapPos(position: com.carto.core.MapPos) {
     } as MapPos;
 }
 export function toNativeMapPos(position: MapPos) {
+    const result = new com.carto.core.MapPos(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
     //  ignore z for now as points can get under the map!
-    return new com.carto.core.MapPos(position.longitude, position.latitude);
+    return result;
 }
 export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
     return {

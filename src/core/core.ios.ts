@@ -1,6 +1,6 @@
 import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core.common';
 export { MapBounds, MapPos, ScreenBounds, ScreenPos };
-    
+
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
     POSITRON = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_POSITRON,
@@ -30,7 +30,7 @@ export function fromNativeMapPos(position: NTMapPos) {
 }
 export function toNativeMapPos(position: MapPos) {
     //  ignore z for now as points can get under the map!
-    return NTMapPos.alloc().initWithXY(position.longitude, position.latitude);
+    return NTMapPos.alloc().initWithXYZ(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
 }
 export function fromNativeScreenPos(position: NTScreenPos) {
     return {

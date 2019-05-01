@@ -9,7 +9,7 @@ import {
     PeliasOnlineGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions
 } from './service';
-import { nativeProperty } from 'nativescript-carto/carto';
+import { nativeProperty } from '../carto';
 import { BaseGeocodingService } from './service.common';
 export class GeocodingResultVector extends NativeVector<com.carto.geocoding.GeocodingResult> {
     constructor(public native: com.carto.geocoding.GeocodingResultVector) {

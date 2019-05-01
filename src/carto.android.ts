@@ -75,15 +75,15 @@ export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], project
     } else {
         const arrayPoses = positions as MapPos[];
         nativePoses = new com.carto.core.MapPosVector();
-        if (projection) {
-            arrayPoses.forEach(p => {
-                nativePoses.add(projection.getNative().fromWgs84(toNativeMapPos(p)));
-            });
-        } else {
-            arrayPoses.forEach(p => {
-                nativePoses.add(toNativeMapPos(p));
-            });
-        }
+        // if (projection) {
+        //     arrayPoses.forEach(p => {
+        //         nativePoses.add(projection.getNative().fromWgs84(toNativeMapPos(p)));
+        //     });
+        // } else {
+        arrayPoses.forEach(p => {
+            nativePoses.add(toNativeMapPos(p));
+        });
+        // }
     }
     return nativePoses;
 }

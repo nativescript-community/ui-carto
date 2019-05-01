@@ -2,7 +2,11 @@ import { DataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSour
 import { BaseNative } from '../carto.common';
 
 export abstract class DataSource<T extends com.carto.datasources.TileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {}
-export abstract class TileDataSource<T extends com.carto.datasources.TileDataSource, U extends TileDataSourceOptions> extends BaseNative<T, U> {}
+export class TileDataSource<T extends com.carto.datasources.TileDataSource, U extends TileDataSourceOptions> extends BaseNative<T, U> {
+    createNative(options) {
+        return null;
+    }
+}
 
 export class OrderedTileDataSource extends TileDataSource<com.carto.datasources.OrderedTileDataSource, OrderedTileDataSourceOptions> {
     createNative(options: OrderedTileDataSourceOptions) {

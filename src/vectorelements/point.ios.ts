@@ -3,7 +3,7 @@ import { BasePointVectorElement } from './vectorelements';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeColorProperty } from '../carto';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {

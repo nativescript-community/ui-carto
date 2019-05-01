@@ -2,7 +2,7 @@ import { Projection } from '../projections/projection';
 import { MapBounds, MapPos, MapPosVector } from '../core/core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
-import { Geometry } from 'nativescript-carto/geometry/geometry';
+import { Geometry } from '../geometry/geometry';
 
 declare enum LineJointType {
     FaceCamera,

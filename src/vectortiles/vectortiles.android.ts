@@ -2,7 +2,7 @@ import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectorti
 
 import { BaseVectorTileDecoder } from './vectortiles.common';
 import { getRelativePathToApp } from '../carto.common';
-import { DirAssetPackage } from 'nativescript-carto/utils/utils';
+import { DirAssetPackage } from '../utils/utils';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
     createNative(options: VectorTileDecoderOptions) {
@@ -13,7 +13,7 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: com.carto.utils.AssetPackage;
     createNative(options: MBVectorTileDecoderOptions) {
-               // console.log('MBVectorTileDecoder', 'createNative', options);
+        console.log('MBVectorTileDecoder', 'createNative', options);
         if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
             const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);

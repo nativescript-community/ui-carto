@@ -1,8 +1,8 @@
 import { MBTilesTileDataSourceOptions } from './mbtiles';
 import { TileDataSource } from './datasource';
 
-export class MBTilesTileDataSource extends TileDataSource<com.akylas.carto.additions.AKMBTilesTileDataSource, MBTilesTileDataSourceOptions> {
+export class MBTilesTileDataSource extends TileDataSource<com.carto.datasources.MBTilesTileDataSource, MBTilesTileDataSourceOptions> {
     createNative(options: MBTilesTileDataSourceOptions) {
-        return new com.akylas.carto.additions.AKMBTilesTileDataSource(options.minZoom, options.maxZoom, options.databasePath);
+        return new com.carto.datasources.MBTilesTileDataSource(options.minZoom, options.maxZoom, options.databasePath);
     }
 }

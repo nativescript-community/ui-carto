@@ -1,10 +1,10 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from 'nativescript-carto/core/core';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core/core';
 import { Color } from 'tns-core-modules/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty } from '../carto';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './vectorelements';
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 
 export { MapBounds };
 export enum LineJointType {
@@ -75,7 +75,6 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     }
     getBounds() {
         const nBounds = this.getNative().getBounds();
-        const nProjection = this.projection.getNative();
-        return fromNativeMapBounds(NTMapBounds.alloc().initWithMinMax(nProjection.toWgs84(nBounds.getMin()), nProjection.toWgs84(nBounds.getMax())));
+        return fromNativeMapBounds(NTMapBounds.alloc().initWithMinMax(nBounds.getMin(), nBounds.getMax()));
     }
 }

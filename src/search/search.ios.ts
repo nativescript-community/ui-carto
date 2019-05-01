@@ -1,11 +1,7 @@
-import { BaseNative } from '../carto.common';
-import { TileDataSource } from '../datasources/datasource';
+import { BaseNative, nativeProperty } from '../carto.common';
 import { VectorTileFeatureCollection } from '../geometry/feature';
-import { Projection } from '../projections/projection';
-import { VectorTileDecoder } from '../vectortiles/vectortiles';
 import { SearchRequest, VectorTileSearchServiceOptions } from './search';
 
-import { nativeProperty } from 'nativescript-carto/carto.common';
 export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
     @nativeProperty maxZoom: number;

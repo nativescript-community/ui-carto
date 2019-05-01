@@ -1,4 +1,4 @@
-import { nativeProperty } from 'nativescript-carto/carto.common';
+import { nativeProperty } from '../carto.common';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty } from '../carto';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';

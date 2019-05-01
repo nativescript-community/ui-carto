@@ -1,12 +1,8 @@
-import { SearchRequest, VectorTileSearchServiceOptions } from './search';
-import { BaseNative } from '../carto.common';
-import { Projection } from '../projections/projection';
-import { TileDataSource } from '../datasources/datasource';
-import { VectorTileDecoder } from '../vectortiles/vectortiles';
-import { VectorTileFeatureCollection } from '../geometry/feature';
+import { BaseNative, nativeProperty } from '../carto.common';
 import { toNativeMapPos } from '../core/core';
+import { VectorTileFeatureCollection } from '../geometry/feature';
+import { SearchRequest, VectorTileSearchServiceOptions } from './search';
 
-import { nativeProperty } from 'nativescript-carto/carto.common';
 export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty
     minZoom: number;
@@ -38,11 +34,7 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
             nRequest.setGeometry(options.geometry as any);
         } else {
             if (options.position) {
-                if (options.projection) {
-                    nRequest.setGeometry(new com.carto.geometry.PointGeometry(options.projection.getNative().fromWgs84(toNativeMapPos(options.position))));
-                } else {
-                    nRequest.setGeometry(new com.carto.geometry.PointGeometry(toNativeMapPos(options.position)));
-                }
+                nRequest.setGeometry(new com.carto.geometry.PointGeometry(toNativeMapPos(options.position)));
             }
         }
         if (callback) {

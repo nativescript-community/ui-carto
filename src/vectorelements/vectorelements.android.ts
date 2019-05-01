@@ -63,9 +63,6 @@ export abstract class BasePointVectorElement<
     get position() {
         if (this.native && this.native.getPos) {
             const nativePos = this.native.getPos();
-            if (this.projection) {
-                return fromNativeMapPos(this.projection.getNative().toWgs84(nativePos));
-            }
             return fromNativeMapPos(nativePos);
         }
         return this.options.position;
@@ -73,17 +70,13 @@ export abstract class BasePointVectorElement<
     set position(pos: MapPos) {
         this.options.position = pos;
         if (this.native && this.native.setPos) {
-            this.native.setPos(this.getNativePos(pos, this.projection));
+            this.native.setPos(this.getNativePos(pos));
         }
     }
 
-    getNativePos(pos: MapPos, projection: Projection): com.carto.core.MapPos {
+    getNativePos(pos: MapPos): com.carto.core.MapPos {
         let nativePos;
-        if (projection) {
-            nativePos = projection.getNative().fromWgs84(toNativeMapPos(pos));
-        } else {
-            nativePos = toNativeMapPos(pos);
-        }
+        nativePos = toNativeMapPos(pos);
         return nativePos;
     }
 }

@@ -6,7 +6,7 @@ export interface DataSourceOptions {
 }
 export interface TileDataSourceOptions extends DataSourceOptions {}
 export abstract class DataSource<T, U extends DataSourceOptions> extends BaseNative<T, U> {}
-export abstract class TileDataSource<T, U extends TileDataSourceOptions> extends DataSource<T, U> {}
+export class TileDataSource<T, U extends TileDataSourceOptions> extends DataSource<T, U> {}
 
 export interface OrderedTileDataSourceOptions extends DataSourceOptions {
     dataSources: Array<TileDataSource<any, any>>;

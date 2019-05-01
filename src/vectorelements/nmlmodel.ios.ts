@@ -1,25 +1,7 @@
-// import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements';
+import { getRelativePathToApp, nativeProperty } from '../carto.common';
 import { NMLModelOptions } from './nmlmodel';
-// import { Color } from 'tns-core-modules/color/color';
-import { nativeProperty } from 'nativescript-carto/carto.common';
-import { getRelativePathToApp } from '../carto.common';
-// import { nativeColorProperty, nativeCartoImageProperty, nativeProperty } from '../carto';
+import { BasePointVectorElement } from './vectorelements';
 
-// export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<NTNMLModelStyleBuilder, NMLModelStyleBuilderOptions> {
-//     createNative(options: NMLModelStyleBuilderOptions) {
-//         return NTNMLModelStyleBuilder.alloc().init();
-//     }
-//     // @nativeCartoImageProperty image: string;
-
-//     _buildStyle: NTNMLModelStyle;
-//     buildStyle() {
-//         if (!this._buildStyle) {
-//             this._buildStyle = this.getNative().buildStyle();
-//         }
-//         return this._buildStyle;
-//     }
-// }
 
 export class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions> {
     @nativeProperty scale: number;

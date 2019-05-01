@@ -1,8 +1,8 @@
 import { LocalVectorDataSourceOptions } from './vector';
 import { DataSource } from './datasource';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
-import { GeometrySimplifier } from 'nativescript-carto/geometry/simplifier';
-import { FeatureCollection } from 'nativescript-carto/geometry/feature';
+import { GeometrySimplifier } from '../geometry/simplifier';
+import { FeatureCollection } from '../geometry/feature';
 
 export abstract class VectorDataSource<T extends NTVectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
