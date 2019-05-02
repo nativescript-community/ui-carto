@@ -216,6 +216,7 @@ function intDirAssetPackageClass() {
         public loadAsset(name) {
             const startTime = Date.now();
             let result: com.carto.core.BinaryData;
+            console.log(`loadAsset ${this.dirPath} ${name}`);
             if (this.loadUsingNS) {
                 result = new com.carto.core.BinaryData(File.fromPath(path.join(this.dirPath, name)).readSync());
             } else {
