@@ -8,12 +8,10 @@ import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, M
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
-
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
     RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL
 }
-
 
 let licenseKey: string;
 export function registerLicense(value: string, callback?: (result: boolean) => void) {
@@ -116,7 +114,7 @@ export class CartoMap extends CartoViewBase {
     getOptions() {
         if (this.mapReady) {
             return this.mapView.getOptions() as MapOptions;
-        } 
+        }
         return null;
     }
 
