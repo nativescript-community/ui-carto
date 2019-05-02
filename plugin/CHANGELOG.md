@@ -1,3 +1,24 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.2.10 (2019-05-02)
+
+
+
+## 1.2.9 (2019-04-10)
+
+
+
+## 1.2.8 (2019-04-10)
+
+**Note:** Version bump only for package nativescript-carto
+
+
+
+
+
 ### Changelog
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.

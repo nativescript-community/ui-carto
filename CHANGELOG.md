@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.2.10](https://github.com/farfromrefug/nativescript-carto/compare/1.2.9...1.2.10) (2019-05-02)
+
+
+### Features
+
+* layer get datasource and projection for ios ([c84f6f5](https://github.com/farfromrefug/nativescript-carto/commit/c84f6f5))
+
+
+
+
+
 ### Changelog
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
