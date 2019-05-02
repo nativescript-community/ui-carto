@@ -75,3 +75,4 @@ Pods
 *.aar*
 /plugin/package-lock.json
 plugin/**/*.d.ts
+/schema
