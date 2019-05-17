@@ -1,19 +1,3 @@
-<template>
-    <Page ref="page">
-        <ActionBar :title="title" backgroundColor="#3F51B5">
-            <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$navigateBack" />
-        </ActionBar>
-        <GridLayout orientation="vertical" rows="*,50">
-            <CartoMap ref="mapView" row="0" zoom="5" width="100%" height="100%" @mapReady="onMapReady" />
-            <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
-                <Button text="Layer" @tap="onSelectLayer"></Button>
-                <Button text="Language" @tap="onSelectLanguage"></Button>
-            </StackLayout>
-        </GridLayout>
-    </Page>
-</template>
-
-<script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
 import { CartoOnlineVectorTileLayer, VectorTileEventData } from 'nativescript-carto/layers/vector';
@@ -23,15 +7,14 @@ import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
 import { action } from 'ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
 
-@Component({})
 export default class BaseMaps extends BaseVueComponent {
     @Prop() title: string;
     @Prop() description: string;
 
-    currentLayer
-    currentLayerType = 'voyager'
+    currentLayer;
+    currentLayerType = 'voyager';
     layerTypes = ['voyager', 'positron', 'darkmatter', 'here.normal.day', 'here.satellite.day'];
-    languages =['Local', 'en', 'de', 'es', 'it', 'fr', 'ru'];
+    languages = ['Local', 'en', 'de', 'es', 'it', 'fr', 'ru'];
 
     get mapView() {
         return (this.$refs.mapView as any).nativeView as CartoMap;
@@ -41,7 +24,7 @@ export default class BaseMaps extends BaseVueComponent {
         // setTimeout(function() {
         const mapView = e.object as CartoMap;
         console.log('map ready!', this.currentLayerType);
-        
+
         this.setCurrentLayer(this.currentLayerType);
         mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
         mapView.setZoom(15, 0);
@@ -122,11 +105,3 @@ export default class BaseMaps extends BaseVueComponent {
         });
     }
 }
-</script>
-
-<style scoped>
-ActionBar {
-    background-color: #3f51b5;
-    color: #ffffff;
-}
-</style>

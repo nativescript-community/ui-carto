@@ -27,7 +27,7 @@ import * as Overlays from './OverlayUtils';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component({})
-export default class BaseMaps extends BaseVueComponent {
+export default class OverlaysExample extends BaseVueComponent {
     @Prop() title: string;
     @Prop() description: string;
     currentLayerType = 'voyager';

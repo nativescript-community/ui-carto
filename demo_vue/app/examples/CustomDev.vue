@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from 'nativescript-vue';
-import BaseVueComponent from './BaseVueComponent';
+import BaseMaps from './BaseMaps';
 import { CartoMap, MapEventData } from 'nativescript-carto/ui/ui';
 import { action } from 'ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
@@ -39,12 +39,22 @@ import { Point, PointStyleBuilder } from 'nativescript-carto/vectorelements/poin
 import { LineStyleBuilder, Line, LineJointType, LineEndType } from 'nativescript-carto/vectorelements/line';
 import { MapClickedEvent, MapStableEvent, MapReadyEvent, MapMovedEvent } from 'nativescript-carto/ui/ui';
 import { Projection } from 'nativescript-carto/projections/projection';
+import BaseVueComponent from './BaseVueComponent';
 
 @Component({})
-export default class BaseMaps extends BaseVueComponent {
+export default class Example extends BaseMaps {
     @Prop() title: string;
     @Prop() description: string;
 
+    constructor() {
+        super();
+           console.log('constructor');
+ }
+
+    mounted() {
+        console.log('mounted');
+        super.mounted();
+    }
     // currentLayer
     // currentLayerType = 'voyager'
     // layerTypes = ['voyager', 'positron', 'darkmatter', 'here.normal.day', 'here.satellite.day'];
@@ -81,7 +91,7 @@ export default class BaseMaps extends BaseVueComponent {
     };
     mapProjection: Projection
     onMapReady(e: MapEventData) {
-        // console.log('onMapReady', e);
+        console.log('onMapReady');
         const mapView = this.mapView;
         this.mapProjection = mapView.projection;
 
@@ -118,7 +128,7 @@ export default class BaseMaps extends BaseVueComponent {
                 dataSources: [
                     new HTTPTileDataSource({
                         minZoom: 0,
-                        maxZoom: 22,
+                        maxZoom: 14,
                         httpHeaders: {
                             Referer: 'app://com.akylas.nativescript.cartodemo'
                         },
@@ -132,19 +142,24 @@ export default class BaseMaps extends BaseVueComponent {
                 ]
             }),
             databasePath: path.join(cacheFolder.path, 'source2')
-        });
+        }); 
 
-        this.cartoLayer = new VectorTileLayer({
-            dataSource: source2,
-            decoder: new MBVectorTileDecoder({
-                dirPath: '~/assets/carto',
-                style: 'voyager',
-                liveReload: true
-            }),
-            opacity: 1
-        });
-        this.cartoLayer.setVectorTileEventListener(this, this.mapProjection);
-        mapView.addLayer(this.cartoLayer);
+        try {
+            this.cartoLayer = new VectorTileLayer({
+                dataSource: source2,
+                decoder: new MBVectorTileDecoder({
+                    zipPath: '~/assets/walkaholic.zip',
+                    style: 'voyager',
+                    liveReload: true
+                }),
+                opacity: 1
+            });
+            this.cartoLayer.setVectorTileEventListener(this, this.mapProjection);
+            mapView.addLayer(this.cartoLayer);
+        } catch(err) {
+            alert(err);
+        }
+        
 
         // const dataSource1 = new HTTPTileDataSource({
         //     minZoom: 0,
@@ -165,17 +180,17 @@ export default class BaseMaps extends BaseVueComponent {
         // });
         // mapView.addLayer(testLayer);
 
-        const dataSource = new HTTPTileDataSource({
-            minZoom: 0,
-            maxZoom: 22,
-            subdomains: 'abc',
-            url: `http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
-        });
-        this.rasterLayer = new RasterTileLayer({
-            dataSource,
-            opacity: 0.5
-        });
-        mapView.addLayer(this.rasterLayer);
+        // const dataSource = new HTTPTileDataSource({
+        //     minZoom: 0,
+        //     maxZoom: 22,
+        //     subdomains: 'abc',
+        //     url: `http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+        // });
+        // this.rasterLayer = new RasterTileLayer({
+        //     dataSource,
+        //     opacity: 0.5
+        // });
+        // mapView.addLayer(this.rasterLayer);
 
         const localDataSource = new LocalVectorDataSource({
             projection: mapView.projection

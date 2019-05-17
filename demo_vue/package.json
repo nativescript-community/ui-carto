@@ -6,8 +6,8 @@
     "license": "MIT",
     "nativescript": {
         "id": "com.akylas.nativescript.cartodemo",
-        "tns-android": {
-            "version": "5.3.1"
+        "tns-ios": {
+            "version": "6.0.0-2019-05-16-165318-01"
         }
     },
     "dependencies": {
@@ -15,24 +15,24 @@
         "nativescript-carto": "file:../plugin",
         "nativescript-collectionview": "^1.0.17",
         "nativescript-feedback": "^1.3.9",
-        "nativescript-perms": "1.0.4",
+        "nativescript-perms": "1.0.6",
         "nativescript-vue": "^2.0.2",
         "source-map-support": "^0.5.12",
-        "tns-core-modules": "^5.3.1"
+        "tns-core-modules": "^5.4.0"
     },
     "devDependencies": {
         "@babel/core": "~7.4.4",
         "akylas-nativescript-vue-template-compiler": "~2.1.14",
-        "babel-loader": "~8.0.5",
-        "fork-ts-checker-webpack-plugin": "^1.2.0",
+        "babel-loader": "~8.0.6",
+        "fork-ts-checker-webpack-plugin": "^1.3.3",
         "nativescript-dev-typescript": "~0.9.0",
-        "nativescript-dev-webpack": "~0.21.2",
+        "nativescript-dev-webpack": "~0.22.0",
         "node-sass": "^4.12.0",
-        "tns-platform-declarations": "^5.3.1",
+        "tns-platform-declarations": "^5.4.0",
         "tslib": "^1.9.3",
         "typescript": "^3.4.5",
         "vue": "^2.6.10",
         "vue-loader": "~15.7.0",
-        "vue-property-decorator": "^8.1.0"
+        "vue-property-decorator": "^8.1.1"
     }
 }

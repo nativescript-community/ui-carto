@@ -19,6 +19,8 @@
 
 <script lang="ts">
 import { GC } from 'utils/utils';
+import BaseVueComponent from './examples/BaseVueComponent';
+import Component from 'vue-class-component';
 
 const samples = [
     {
@@ -129,28 +131,25 @@ const samples = [
         image: '~/assets/images/icon_sample_user_data.png'
     }
 ];
-export default {
-    data() {
-        return {
-            itemList: samples
-        };
-    },
-    methods: {
-        onNavigatedTo() {
-            console.log('app', 'onNavigatedTo');
-            GC();
-        },
-        onItemTap(item) {
-            console.log(`Tapped3 on ${item.title}`);
-            this.$navigateTo(require(`~/examples/${item.component}.vue`).default, {
-                props: {
-                    title: item.title,
-                    description: item.description
-                }
-            });
-        }
+@Component({})
+export default class App extends BaseVueComponent {
+    itemList = samples;
+
+    onNavigatedTo() {
+        console.log('app', 'onNavigatedTo');
+        GC();
     }
-};
+    onItemTap(item) {
+        const module = require(`./examples/${item.component}.vue`).default;
+        console.log(`Tapped3 on ${item.title}, ${item.component}`, module);
+        this.$navigateTo(module, {
+            props: {
+                title: item.title,
+                description: item.description
+            }
+        } as any);
+    }
+}
 </script>
 
 <style scoped>

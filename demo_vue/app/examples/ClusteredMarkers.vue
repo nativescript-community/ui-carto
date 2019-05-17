@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import Vue from 'nativescript-vue';
-import BaseVueComponent from './BaseVueComponent';
+import BaseMaps from './BaseMaps';
 import { CartoOnlineVectorTileLayer, ClusteredVectorLayer, VectorLayer, VectorTileEventData } from 'nativescript-carto/layers/vector';
 import { CartoMapStyle, MapPos } from 'nativescript-carto/core/core';
 import { CartoMap, MapStableEvent } from 'nativescript-carto/ui/ui';
@@ -31,7 +31,7 @@ import { Projection } from 'nativescript-carto/projections/projection';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component({})
-export default class BaseMaps extends BaseVueComponent {
+export default class Example extends BaseMaps {
     @Prop() title: string;
     @Prop() description: string;
     currentLayerType = 'voyager';
