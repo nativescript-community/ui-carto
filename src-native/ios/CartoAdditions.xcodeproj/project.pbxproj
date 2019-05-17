@@ -22,9 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		A8638C334D7A58C4F11A2AF4 /* libPods-CartoAdditions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 262DF97048156C2514F4DFAD /* libPods-CartoAdditions.a */; };
-		D57B4CB1223264D400EFC1C9 /* AKHTTPTileDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D57B4CB0223264D400EFC1C9 /* AKHTTPTileDataSource.m */; };
 		D57B4CB2223271E600EFC1C9 /* CartoAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D57B4CAE2232648E00EFC1C9 /* CartoAdditions.h */; };
-		D57B4CB3223271E800EFC1C9 /* AKHTTPTileDataSource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D57B4CAF223264D400EFC1C9 /* AKHTTPTileDataSource.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,7 +33,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				D57B4CB2223271E600EFC1C9 /* CartoAdditions.h in CopyFiles */,
-				D57B4CB3223271E800EFC1C9 /* AKHTTPTileDataSource.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +47,6 @@
 		BF42575B1C16F61E00E15E71 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		BF6DBD801C109B9800FC37E0 /* libCartoAdditions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCartoAdditions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57B4CAE2232648E00EFC1C9 /* CartoAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoAdditions.h; sourceTree = "<group>"; };
-		D57B4CAF223264D400EFC1C9 /* AKHTTPTileDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKHTTPTileDataSource.h; sourceTree = "<group>"; };
-		D57B4CB0223264D400EFC1C9 /* AKHTTPTileDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKHTTPTileDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +103,6 @@
 				D57B4CAE2232648E00EFC1C9 /* CartoAdditions.h */,
 				BF42575B1C16F61E00E15E71 /* module.modulemap */,
 				BF42575A1C16EEAB00E15E71 /* Info.plist */,
-				D57B4CAF223264D400EFC1C9 /* AKHTTPTileDataSource.h */,
-				D57B4CB0223264D400EFC1C9 /* AKHTTPTileDataSource.m */,
 			);
 			path = CartoAdditions;
 			sourceTree = "<group>";
@@ -201,7 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n\n# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${PROJECT_DIR}/../../plugin/platforms/ios/CartoAdditions.framework\n\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -workspace CartoAdditions.xcworkspace -scheme CartoAdditions ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos OBJROOT=\"${OBJROOT}/DependentBuilds\" BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -workspace CartoAdditions.xcworkspace -scheme CartoAdditions -configuration Debug ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator OBJROOT=\"${OBJROOT}/DependentBuilds\" BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\ncp \"${PROJECT_DIR}/CartoAdditions/Info.plist\" \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}/Modules\"\ncp \"${PROJECT_DIR}/CartoAdditions/module.modulemap\" \"${UNIVERSAL_OUTPUTFOLDER}/Modules/\"\n\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}/Headers\"\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}/Headers/\"*\ncp -R \"${BUILD_DIR}/${CONFIGURATION}\"-iphoneos/include/CartoAdditions/* \"${UNIVERSAL_OUTPUTFOLDER}/Headers\"\n";
+			shellScript = "\n\n# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${PROJECT_DIR}/../../plugin/platforms/ios/CartoAdditions.framework\n\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -workspace CartoAdditions.xcworkspace -scheme CartoAdditions ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos OBJROOT=\"${OBJROOT}/DependentBuilds\" BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -workspace CartoAdditions.xcworkspace -scheme CartoAdditions -configuration Debug ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator OBJROOT=\"${OBJROOT}/DependentBuilds\" BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libPods-${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/libPods-${PROJECT_NAME}.a\"\n\ncp \"${PROJECT_DIR}/CartoAdditions/Info.plist\" \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}/Modules\"\ncp \"${PROJECT_DIR}/CartoAdditions/module.modulemap\" \"${UNIVERSAL_OUTPUTFOLDER}/Modules/\"\n\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}/Headers\"\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}/Headers/\"*\ncp -R \"${BUILD_DIR}/${CONFIGURATION}\"-iphoneos/include/CartoAdditions/* \"${UNIVERSAL_OUTPUTFOLDER}/Headers\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -210,7 +203,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D57B4CB1223264D400EFC1C9 /* AKHTTPTileDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
