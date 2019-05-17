@@ -5,7 +5,7 @@ import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections/projection';
 import { nativeVariantToJS } from '../utils/utils';
 import { VectorElement } from '../vectorelements/vectorelements';
-import { MBVectorTileDecoder } from '../vectortiles/vectortiles';
+import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { Layer, TileLayer } from './layer';
 import {
     CartoOfflineVectorTileLayerOptions,
@@ -16,6 +16,8 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileLayerOptions
 } from './vector';
+
+export { VectorTileDecoder }
 
 export interface CartoOnlineVectorTileLayerOptions extends ICartoOnlineVectorTileLayerOptions {
     style: com.carto.layers.CartoBaseMapStyle;
