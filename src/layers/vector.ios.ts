@@ -19,50 +19,69 @@ import { Projection } from '../projections/projection';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { nativeVariantToJS } from '../utils/utils';
 
-export class VectorElementEventListener extends NTVectorElementEventListener {
+export enum VectorTileRenderOrder {
+    HIDDEN = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_HIDDEN,
+    LAYER = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAYER,
+    LAST = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAST
+}
+
+export class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorElementEventListener>;
     private projection?: Projection;
 
-    public static initWithOwner(owner: WeakRef<IVectorElementEventListener>, layer, projection?: Projection): VectorElementEventListener {
-        const delegate = VectorElementEventListener.new() as VectorElementEventListener;
+    public static initWithOwner(owner: WeakRef<IVectorElementEventListener>, layer: WeakRef<BaseVectorLayer<any, any>>, projection?: Projection): NTVectorElementEventListenerImpl {
+        const delegate = NTVectorElementEventListenerImpl.new() as NTVectorElementEventListenerImpl;
         delegate._owner = owner;
         delegate._layer = layer;
         delegate.projection = projection;
         return delegate;
     }
     public onClicked(info: com.carto.ui.VectorElementClickInfo) {
+        console.log('VectorElementEventListener', 'onClicked', info);
         const owner = this._owner.get();
         if (owner && owner.onVectorElementClicked) {
             const element = new VectorElement(undefined, info.getVectorElement());
-
+            let position = info.getClickPos();
+            let elementPos = info.getElementClickPos();
+            if (this.projection) {
+                const layerProj = this._layer
+                    .get()
+                    .getNative()
+                    .getDataSource()
+                    .getProjection();
+                const nProj = this.projection.getNative();
+                elementPos = nProj.fromWgs84(layerProj.toWgs84(elementPos));
+                position = nProj.fromWgs84(layerProj.toWgs84(position));
+            }
             return (
                 owner.onVectorElementClicked({
                     type: info.getClickType(),
                     layer: this._layer.get() as any,
                     element,
                     metaData: element.metaData,
-                    position: fromNativeMapPos(info.getClickPos()),
-                    elementPos: fromNativeMapPos(info.getElementClickPos())
+                    position: fromNativeMapPos(position),
+                    elementPos: fromNativeMapPos(elementPos)
                 }) || false
             );
         }
         return false;
     }
 }
-export class VectorTileEventListener extends NTVectorTileEventListener {
+export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorTileEventListener>;
     private projection?: Projection;
 
-    public static initWithOwner(owner: WeakRef<IVectorTileEventListener>, layer, projection?: Projection): VectorTileEventListener {
-        const delegate = VectorTileEventListener.new() as VectorTileEventListener;
+    public static initWithOwner(owner: WeakRef<IVectorTileEventListener>, layer, projection?: Projection): NTVectorTileEventListenerImpl {
+        const delegate = NTVectorTileEventListenerImpl.new() as NTVectorTileEventListenerImpl;
         delegate._owner = owner;
         delegate._layer = layer;
         delegate.projection = projection;
         return delegate;
     }
     public onClicked(info: com.carto.ui.VectorTileClickInfo) {
+        console.log('VectorTileEventListener', 'onClicked', info);
         const owner = this._owner.get();
         if (owner && owner.onVectorTileClicked) {
             // const featureData = {};
@@ -76,7 +95,19 @@ export class VectorTileEventListener extends NTVectorTileEventListener {
             // }
             const feature = info.getFeature();
             const geometry = feature.getGeometry();
-            const featurePos = geometry.getCenterPos();
+            let position = info.getClickPos();
+            let featurePos = geometry.getCenterPos();
+
+            if (this.projection) {
+                const layerProj = this._layer
+                    .get()
+                    .getNative()
+                    .getDataSource()
+                    .getProjection();
+                const nProj = this.projection.getNative();
+                featurePos = nProj.fromWgs84(layerProj.toWgs84(featurePos));
+                position = nProj.fromWgs84(layerProj.toWgs84(position));
+            }
             return (
                 owner.onVectorTileClicked({
                     type: info.getClickType(),
@@ -86,7 +117,7 @@ export class VectorTileEventListener extends NTVectorTileEventListener {
                     featureLayerName: info.getFeatureLayerName(),
                     featureGeometry: geometry,
                     featurePosition: fromNativeMapPos(featurePos),
-                    position: fromNativeMapPos(info.getClickPos())
+                    position: fromNativeMapPos(position)
                 }) || false
             );
         }
@@ -95,9 +126,13 @@ export class VectorTileEventListener extends NTVectorTileEventListener {
 }
 
 export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
+    setLabelRenderOrder(order: NTVectorTileRenderOrder) {
+        this.getNative().setLabelRenderOrder(order);
+    }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
+        console.log(this.constructor.name, 'setVectorTileEventListener', !!listener);
         if (listener) {
-            this.getNative().setVectorTileEventListener(VectorTileEventListener.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+            this.getNative().setVectorTileEventListener(NTVectorTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
         } else {
             this.getNative().setVectorTileEventListener(null);
         }
@@ -122,7 +157,7 @@ export class CartoOfflineVectorTileLayer extends BaseVectorTileLayer<NTCartoOffl
     }
 }
 
-export class VectorTileLayer extends TileLayer<NTVectorTileLayer, VectorTileLayerOptions> {
+export class VectorTileLayer extends BaseVectorTileLayer<NTVectorTileLayer, VectorTileLayerOptions> {
     createNative(options: VectorTileLayerOptions) {
         if (!!options.dataSource && !!options.decoder) {
             const dataSource = options.dataSource.getNative();
@@ -139,6 +174,13 @@ export abstract class BaseVectorLayer<T extends NTVectorLayer, U extends VectorL
     // initVectorElementEventListener();
     // this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this)));
     // }
+    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection) {
+        if (listener) {
+            this.getNative().setVectorElementEventListener(NTVectorElementEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+        } else {
+            this.getNative().setVectorElementEventListener(null);
+        }
+    }
 }
 export class VectorLayer extends BaseVectorLayer<NTVectorLayer, VectorLayerOptions> {
     createNative(options: VectorLayerOptions) {
