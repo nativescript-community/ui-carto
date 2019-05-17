@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.12](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.11...v1.2.12) (2019-05-17)
+
+
+### Bug Fixes
+
+* ios MBVectorTileDecoder ([4aa90d8](https://github.com/farfromrefug/nativescript-carto/commit/4aa90d8))
+* ios VectorTileRenderOrder ([6d5dfe7](https://github.com/farfromrefug/nativescript-carto/commit/6d5dfe7))
+
+
+### Features
+
+* ios MergedMBVTTileDataSource ([62a64e1](https://github.com/farfromrefug/nativescript-carto/commit/62a64e1))
+* ios NTDirAssetPackageImpl ([bbae91e](https://github.com/farfromrefug/nativescript-carto/commit/bbae91e))
+
+
+
+
+
 ## [1.2.11](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.10...v1.2.11) (2019-05-02)
 
 **Note:** Version bump only for package nativescript-carto
