@@ -17,7 +17,6 @@
         "plugin.watch.android": "npm i && npm-watch build.android",
         "plugin.watch.ios": "npm i && npm-watch build.ios",
         "plugin.watch": "npm run plugin.watch.tsc & npm run plugin.watch.android & npm run plugin.watch.ios",
-        "beforeStage": "auto-changelog --output plugin/CHANGELOG.md",
         "publish": "npm run build && lerna publish",
         "commitmsg": "commitlint -e $GIT_PARAMS"
     },
