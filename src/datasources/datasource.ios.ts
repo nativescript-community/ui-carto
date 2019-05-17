@@ -11,16 +11,13 @@ export class TileDataSource<T extends NTTileDataSource, U extends TileDataSource
 export class OrderedTileDataSource extends TileDataSource<NTOrderedTileDataSource, OrderedTileDataSourceOptions> {
     createNative(options: OrderedTileDataSourceOptions) {
         const dataSources: NTTileDataSource[] = options.dataSources.map(d => d.getNative());
-        // const array = Array.create(com.carto.datasources.TileDataSource, options.dataSources.length);
-        // options.dataSources.forEach((d, i) => (array[i] = d.getNative()));
         return NTOrderedTileDataSource.alloc().initWithDataSource1DataSource2(dataSources[0], dataSources[1]);
     }
 }
 
-// export class MergeTileDataSource extends TileDataSource<NTMergedMBVTTileDataSource, MergeTileDataSourceOptions> {
-//     createNative(options: MergeTileDataSourceOptions) {
-//         const array = Array.create(com.carto.datasources.TileDataSource, options.dataSources.length);
-//         options.dataSources.forEach((d, i) => (array[i] = d.getNative()));
-//         return new NTMergeTileDataSource(array);
-//     }
-// }
+export class MergedMBVTTileDataSource extends TileDataSource<NTMergedMBVTTileDataSource, MergedMBVTTileDataSourceOptions> {
+    createNative(options: MergedMBVTTileDataSourceOptions) {
+        const dataSources: NTTileDataSource[] = options.dataSources.map(d => d.getNative());
+        return NTMergedMBVTTileDataSource.alloc().initWithDataSource1DataSource2(dataSources[0], dataSources[1]);
+    }
+}
