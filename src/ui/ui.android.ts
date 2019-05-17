@@ -217,11 +217,7 @@ export class CartoMap extends CartoViewBase {
         return 0;
     }
     setFocusPos(value: MapPos, duration: number) {
-        const nativePoint = toNativeMapPos(value);
-
-        console.log('setFocusPos', value, nativePoint, duration);
-
-        this.mapView.setFocusPos(nativePoint, duration / 1000);
+        this.mapView.setFocusPos(toNativeMapPos(value), duration / 1000);
     }
 
     setZoom(value: number, duration: number) {
