@@ -231,7 +231,10 @@ function intDirAssetPackageClass() {
                     const startTime = Date.now();
                     this.assetNames = new com.carto.core.StringVector();
                     const test = [];
-                    walkDir(this.dirPath, (fileRelPath: string) => {this.assetNames.add(fileRelPath); test.push(fileRelPath)});
+                    walkDir(this.dirPath, (fileRelPath: string) => {
+                        this.assetNames.add(fileRelPath);
+                        test.push(fileRelPath);
+                    });
 
                     console.log(`getAssetNames done ${this.assetNames.size()}: ${test}`);
                     console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
