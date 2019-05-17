@@ -1,4 +1,4 @@
 
 dependencies {
-    compile 'com.carto:carto-mobile-sdk:4.2.0-rc.1@aar'
+    compile 'com.carto:carto-mobile-sdk:4.2.0-rc.2@aar'
 }
