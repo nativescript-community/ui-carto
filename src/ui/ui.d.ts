@@ -121,8 +121,8 @@ export class CartoMap extends View {
 
     addLayer(layer: Layer<any, any>, index?: number);
     removeLayer(layer: Layer<any, any>);
-    screenToMap(pos: ScreenPos): MapPos;
-    mapToScreen(pos: MapPos): ScreenPos;
+    screenToMap(pos: ScreenPos | any): MapPos;
+    mapToScreen(pos: MapPos | any): ScreenPos;
     sendEvent(eventName: string, data?);
     fromNativeMapPos(position: any): MapPos;
     getOptions(): MapOptions;

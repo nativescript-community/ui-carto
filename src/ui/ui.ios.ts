@@ -205,15 +205,21 @@ export class CartoMap extends CartoViewBase {
     requestRedraw() {
         this.mapView && this.mapView.getMapRenderer().requestRedraw();
     }
-    screenToMap(pos: ScreenPos) {
+    screenToMap(pos: ScreenPos | NTScreenPos) {
         if (this.mapView) {
+            if (pos instanceof NTScreenPos) {
+                return this.fromNativeMapPos(this.mapView.screenToMap(pos));
+            }
             return this.fromNativeMapPos(this.mapView.screenToMap(toNativeScreenPos(pos)));
         }
         return null;
     }
-    mapToScreen(pos: MapPos) {
+    mapToScreen(pos: MapPos | NTMapPos) {
         if (this.mapView) {
-            return fromNativeScreenPos(this.mapView.mapToScreen(this.nativeProjection.fromWgs84(toNativeMapPos(pos))));
+            if (pos instanceof NTMapPos) {
+                return fromNativeScreenPos(this.mapView.mapToScreen(pos));
+            }
+            return fromNativeScreenPos(this.mapView.mapToScreen(toNativeMapPos(pos)));
         }
         return null;
     }

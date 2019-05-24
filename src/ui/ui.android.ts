@@ -335,12 +335,18 @@ export class CartoMap extends CartoViewBase {
     }
     screenToMap(pos: ScreenPos) {
         if (this.mapView) {
+            if (pos instanceof com.carto.core.ScreenPos) {
+                return this.fromNativeMapPos(this.mapView.screenToMap(pos));
+            }
             return this.fromNativeMapPos(this.mapView.screenToMap(toNativeScreenPos(pos)));
         }
         return null;
     }
-    mapToScreen(pos: MapPos) {
+    mapToScreen(pos: MapPos | com.carto.core.MapPos) {
         if (this.mapView) {
+            if (pos instanceof com.carto.core.MapPos) {
+                return fromNativeScreenPos(this.mapView.mapToScreen(pos));
+            }
             return fromNativeScreenPos(this.mapView.mapToScreen(toNativeMapPos(pos)));
         }
         return null;
