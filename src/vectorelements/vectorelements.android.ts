@@ -116,7 +116,7 @@ export class VectorElementVector extends BaseNative<com.carto.vectorelements.Vec
     elements: Array<BaseVectorElement<any, any>> = [];
     createNative() {
         const result = new com.carto.vectorelements.VectorElementVector();
-        // console.log('create native VectorElementVector', this.elements.length);
+        // this.log('create native VectorElementVector', this.elements.length);
         if (this.elements.length > 0) {
             this.elements.forEach(element => {
                 result.add(element.getNative());

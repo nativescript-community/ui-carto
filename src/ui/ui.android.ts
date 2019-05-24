@@ -139,18 +139,18 @@ export class CartoMap extends CartoViewBase {
         return this._projection;
     }
     set projection(proj: IProjection) {
-        console.log('set projection', proj);
+        this.log('set projection', proj);
         this._projection = proj;
         this.nativeProjection = this._projection.getNative();
         if (this.nativeViewProtected) {
-            console.log('set native projection', this.nativeProjection);
+            this.log('set native projection', this.nativeProjection);
             this.mapView.getOptions().setBaseProjection(this.nativeProjection);
         }
     }
     public createNativeView(): Object {
         initMapViewClass();
         if (!isLicenseKeyRegistered()) {
-            console.log('need MapView register', this.style['licenseKey'], getLicenseKey());
+            this.log('need MapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);
@@ -176,12 +176,12 @@ export class CartoMap extends CartoViewBase {
         // When nativeView is tapped we get the owning JS object through this field.
         this.nativeView.owner = this;
         super.initNativeView();
-        console.log('creating projection', this.projection, CartoMap.projection);
+        this.log('creating projection', this.projection, CartoMap.projection);
         if (!this.projection) {
             this.projection = CartoMap.projection;
         }
         const options = this.nativeViewProtected.getOptions();
-        console.log('initNativeView mapView', options.getBaseProjection());
+        this.log('initNativeView mapView', options.getBaseProjection());
 
         options.setRotatable(true); // allows the map to rotate (this is the default behavior)
         options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
@@ -230,7 +230,7 @@ export class CartoMap extends CartoViewBase {
         this.mapView.setMapRotation(value, duration / 1000);
     }
     moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
-        console.log('moveToFitBounds', mapBounds, this.toNativeMapBounds(mapBounds), screenBounds, toNativeScreenBounds(screenBounds));
+        this.log('moveToFitBounds', mapBounds, this.toNativeMapBounds(mapBounds), screenBounds, toNativeScreenBounds(screenBounds));
         this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds);
     }
     [restrictedPanningProperty.setNative](value: boolean) {

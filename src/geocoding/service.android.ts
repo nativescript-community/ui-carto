@@ -29,12 +29,12 @@ abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocoding
         if (options.location) {
             nRequest.setLocation(toNativeMapPos(options.location));
         }
-        console.log('calculateAddresses', options);
+        this.log('calculateAddresses', options);
         this.getNative().calculateAddressCallback(
             nRequest,
             new com.akylas.carto.additions.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
-                    console.log('onGeoCodingResult', res);
+                    this.log('onGeoCodingResult', res);
                     callback(err, res ? new GeocodingResultVector(res) : null);
                 }
             })

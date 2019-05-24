@@ -130,7 +130,7 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
         this.getNative().setLabelRenderOrder(order);
     }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
-        console.log(this.constructor.name, 'setVectorTileEventListener', !!listener);
+        this.log('setVectorTileEventListener', !!listener);
         if (listener) {
             this.getNative().setVectorTileEventListener(NTVectorTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
         } else {

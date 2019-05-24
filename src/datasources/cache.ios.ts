@@ -13,7 +13,6 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     }
     onDownloadCompleted() {
         const owner = this._owner.get();
-        console.log('onDownloadCompleted', owner);
         if (owner && owner.onDownloadCompleted) {
             owner.onDownloadCompleted();
         }
@@ -21,7 +20,6 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
 
     onDownloadFailed(tile: NTMapTile) {
         const owner = this._owner.get();
-        console.log('onDownloadFailed', owner);
         if (owner && owner.onDownloadFailed) {
             owner.onDownloadFailed({
                 tileId: tile.getTileId(),
@@ -33,7 +31,6 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
 
     onDownloadProgress(progress: number) {
         const owner = this._owner.get();
-        console.log('onDownloadProgress', owner);
         if (owner && owner.onDownloadProgress) {
             owner.onDownloadProgress(progress);
         }
@@ -41,7 +38,6 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
 
     onDownloadStarting(tileCount: number) {
         const owner = this._owner.get();
-        console.log('onDownloadStarting', owner);
         if (owner && owner.onDownloadStarting) {
             owner.onDownloadProgress(tileCount);
         }

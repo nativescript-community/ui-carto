@@ -34,7 +34,7 @@ export class Marker extends BasePointVectorElement<com.carto.vectorelements.Mark
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style: com.carto.styles.MarkerStyle = options.style || options.styleBuilder.buildStyle();
-        // console.log('creating marker', options.position, options.projection, options.geometry, options.style);
+        // this.log('creating marker', options.position, options.projection, options.geometry, options.style);
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
             result = new com.carto.vectorelements.Marker(options.geometry as com.carto.geometry.Geometry, style);

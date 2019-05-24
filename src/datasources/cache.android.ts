@@ -38,7 +38,6 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
     }
     onDownloadCompleted() {
         const owner = this._owner.get();
-        console.log('onDownloadCompleted', owner);
         if (owner && owner.onDownloadCompleted) {
             owner.onDownloadCompleted();
         }
@@ -46,7 +45,6 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
 
     onDownloadFailed(tile: com.carto.core.MapTile) {
         const owner = this._owner.get();
-        console.log('onDownloadFailed', owner);
         if (owner && owner.onDownloadFailed) {
             owner.onDownloadFailed({
                 tileId: tile.getTileId(),
@@ -58,7 +56,6 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
 
     onDownloadProgress(progress: number) {
         const owner = this._owner.get();
-        console.log('onDownloadProgress', owner);
         if (owner && owner.onDownloadProgress) {
             owner.onDownloadProgress(progress);
         }
@@ -66,7 +63,6 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
 
     onDownloadStarting(tileCount: number) {
         const owner = this._owner.get();
-        console.log('onDownloadStarting', owner);
         if (owner && owner.onDownloadStarting) {
             owner.onDownloadProgress(tileCount);
         }

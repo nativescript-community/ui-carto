@@ -154,6 +154,10 @@ export abstract class CartoViewBase extends View {
         }
     }
 
+    log(...args) {
+        console.log(`[${this.constructor.name}]`, ...args);
+    }
+    
     public onLoaded() {
         super.onLoaded();
         if (!this.mapReady) {

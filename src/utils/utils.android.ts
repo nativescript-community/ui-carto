@@ -249,12 +249,12 @@ function intDirAssetPackageClass() {
 
 export class DirAssetPackage extends BaseNative<DirAssetPackageNative, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
-        console.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
+        this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
             intDirAssetPackageClass();
-            console.log('intDirAssetPackageClass done');
+            this.log('intDirAssetPackageClass done');
             const result = new DirAssetPackageNative();
-            console.log('about to initialize');
+            this.log('about to initialize');
             result.initialize(options);
             return result;
         } else {

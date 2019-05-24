@@ -142,7 +142,6 @@ export class MapPosVectorVector extends NativeVector<com.carto.core.MapPosVector
         this.native = new com.carto.core.MapPosVectorVector();
     }
     public add(position: com.carto.core.MapPosVector | MapPosVector) {
-        console.log('MapPosVectorVector', 'add', position, position instanceof MapPosVector);
         if (position instanceof MapPosVector) {
             return this.native.add(position.getNative());
         }

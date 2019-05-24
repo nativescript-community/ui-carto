@@ -38,7 +38,7 @@ function createSetter(key, options: NativePropertyOptions) {
     // console.log('createSetter', key, options);
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function(newVal) {
-        // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
+        this.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
@@ -49,10 +49,10 @@ function createSetter(key, options: NativePropertyOptions) {
     };
 }
 
-function hasSetter(obj, prop) {
-    const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-    return descriptor && !!descriptor['set'];
-}
+// function hasSetter(obj, prop) {
+//     const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+//     return descriptor && !!descriptor['set'];
+// }
 function nativePropertyGenerator(target: Object, key: string, options?: NativePropertyOptions) {
     // console.log('mapPropertyGenerator', key, Object.keys(options));
     Object.defineProperty(target, key, {
@@ -99,6 +99,10 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         return this.native;
     }
     abstract createNative(options: U): T;
+
+    log(...args) {
+        console.log(`[${this.constructor.name}]`, ...args);
+    }
 }
 
 export function _createImageSourceFromSrc(value: string | ImageSource | ImageAsset): ImageSource {
