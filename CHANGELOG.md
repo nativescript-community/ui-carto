@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.13](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.12...v1.2.13) (2019-05-24)
+
+
+### Bug Fixes
+
+* no need to convert to Wgs84 ([65b1347](https://github.com/farfromrefug/nativescript-carto/commit/65b1347))
+* null check ([48a3f79](https://github.com/farfromrefug/nativescript-carto/commit/48a3f79))
+* zip loading fix in MBVectorTileDecoder on android ([1a1abce](https://github.com/farfromrefug/nativescript-carto/commit/1a1abce))
+
+
+### Features
+
+* support passing native  objects ([770c5e1](https://github.com/farfromrefug/nativescript-carto/commit/770c5e1))
+
+
+
+
+
 ## [1.2.12](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.11...v1.2.12) (2019-05-17)
 
 
