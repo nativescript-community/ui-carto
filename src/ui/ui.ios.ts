@@ -83,7 +83,7 @@ export class CartoMap extends CartoViewBase {
     constructor() {
         super();
         if (!isLicenseKeyRegistered()) {
-            console.log('need NTMapView register', this.style['licenseKey'], getLicenseKey());
+            this.log('need NTMapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);
