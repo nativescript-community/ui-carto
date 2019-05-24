@@ -22,6 +22,9 @@ export function nativeVectorToArray<T>(vector: NativeVector<T>) {
     return result;
 }
 export function fromNativeMapPos(position: NTMapPos) {
+    if (!position) {
+        return null;
+    }
     return {
         latitude: position.getY(),
         longitude: position.getX(),
@@ -29,6 +32,9 @@ export function fromNativeMapPos(position: NTMapPos) {
     } as MapPos;
 }
 export function toNativeMapPos(position: MapPos) {
+    if (!position) {
+        return null;
+    }
     //  ignore z for now as points can get under the map!
     return NTMapPos.alloc().initWithXYZ(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
 }

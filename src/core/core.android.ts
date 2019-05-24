@@ -36,6 +36,9 @@ export const ClickType = {
 // }
 
 export function fromNativeMapPos(position: com.carto.core.MapPos) {
+    if (!position) {
+        return null;
+    }
     return {
         latitude: position.getY(),
         longitude: position.getX(),
@@ -43,6 +46,9 @@ export function fromNativeMapPos(position: com.carto.core.MapPos) {
     } as MapPos;
 }
 export function toNativeMapPos(position: MapPos) {
+    if (!position) {
+        return null;
+    }
     const result = new com.carto.core.MapPos(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
     //  ignore z for now as points can get under the map!
     return result;
