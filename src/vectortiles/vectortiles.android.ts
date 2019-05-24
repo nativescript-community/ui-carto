@@ -1,7 +1,7 @@
 import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from './vectortiles';
-
+import { File } from 'tns-core-modules/file-system';
 import { BaseVectorTileDecoder } from './vectortiles.common';
-import { getRelativePathToApp } from '../carto.common';
+import { getFileName, getRelativePathToApp } from '../carto.common';
 import { DirAssetPackage } from '../utils/utils';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
@@ -13,10 +13,19 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: com.carto.utils.AssetPackage;
     createNative(options: MBVectorTileDecoderOptions) {
-        console.log('MBVectorTileDecoder', 'createNative', options);
+        this.log('createNative', options);
         if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
-            const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
+            let vectorTileStyleSetData: com.carto.core.BinaryData;
+            this.log('zipPath', zipPath, options.liveReload);
+            if (options.liveReload === true) {
+                const data = File.fromPath(getFileName(options.zipPath)).readSync();
+                // const arr = new ArrayBuffer(data.length);
+                // data.getBytes(arr as any);
+                vectorTileStyleSetData = new com.carto.core.BinaryData(data);
+            } else {
+                vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
+            }
             this.pack = new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
         } else if (!!options.dirPath) {
             this.pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
