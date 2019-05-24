@@ -125,7 +125,7 @@ export abstract class CartoViewBase extends View {
     // tilt: number;
     @mapProperty({
         getConverter(value) {
-            return value ? fromNativeMapPos(this.nativeProjection.toWgs84(value)) : value;
+            return fromNativeMapPos(value);
         }
     })
     focusPos: MapPos;
