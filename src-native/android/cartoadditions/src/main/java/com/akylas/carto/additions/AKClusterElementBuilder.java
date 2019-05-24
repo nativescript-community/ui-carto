@@ -47,7 +47,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             return nativeBuildClusterElement(pos, elements);
         }
         final Object[] arr = new Object[1];
-        Log.d("AKCartoAdditions", "buildClusterElement: " + elements.size());
+        // Log.d("AKCartoAdditions", "buildClusterElement: " + elements.size());
         if (mainHandler == null) {
             mainHandler = new Handler(android.os.Looper.getMainLooper());
         }
@@ -55,11 +55,11 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         SynchronousHandler.postAndWait(mainHandler, new Runnable() {
             @Override
             public void run() {
-                Log.d("AKCartoAdditions", "buildClusterElement runnable");
+                // Log.d("AKCartoAdditions", "buildClusterElement runnable");
                 arr[0] = AKClusterElementBuilder.this.buildCluster(pos, elements);
             }
         });
-        Log.d("AKCartoAdditions", "buildClusterElement4: done");
+        // Log.d("AKCartoAdditions", "buildClusterElement4: done");
         // Runnable r = new Runnable() {
         // @Override
         // public void run() {

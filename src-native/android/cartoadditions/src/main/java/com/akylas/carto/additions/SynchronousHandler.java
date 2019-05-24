@@ -52,7 +52,7 @@ public class SynchronousHandler {
     static int runningTasks = 0;
 
     public static void postAndWait(final Handler handler, final Runnable r) {
-        Log.d("SynchronousHandler", "postAndWait: " + ((handler.getLooper() == Looper.myLooper()) ? "true" : "false") + " " + runningTasks);
+        // Log.d("SynchronousHandler", "postAndWait: " + ((handler.getLooper() == Looper.myLooper()) ? "true" : "false") + " " + runningTasks);
         if (handler.getLooper() == Looper.myLooper()) {
             r.run();
         } else {
@@ -60,7 +60,7 @@ public class SynchronousHandler {
             synchronized (handler) {
                 NotifyRunnable runnable = new NotifyRunnable(r);
                 boolean success = handler.post(runnable);
-                Log.d("SynchronousHandler", "posted: " + (success ? "true" : "false"));
+                // Log.d("SynchronousHandler", "posted: " + (success ? "true" : "false"));
                 if (success) {
                     synchronized (runnable) {
                         try {
