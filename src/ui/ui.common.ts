@@ -157,7 +157,7 @@ export abstract class CartoViewBase extends View {
     log(...args) {
         console.log(`[${this.constructor.name}]`, ...args);
     }
-    
+
     public onLoaded() {
         super.onLoaded();
         if (!this.mapReady) {
@@ -173,7 +173,7 @@ export abstract class CartoViewBase extends View {
             return;
         }
         if (Array.isArray(value)) {
-            value =  { latitude: value[0], longitude: value[1] };
+            value = { latitude: value[0], longitude: value[1] };
         }
         this.setFocusPos(value, 0);
     }
