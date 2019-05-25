@@ -36,30 +36,62 @@ export interface MapPosEventData extends EventData {
 }
 
 export class MapOptions {
+    /**
+     * @returns native Carto Color
+     */
     getAmbientLightColor(): any;
+    /**
+     * @returns native Carto Bitmap
+     */
     getBackgroundBitmap(): any;
     getBaseProjection(): any;
+    /**
+     * @returns native Carto Color
+     */
     getClearColor(): any;
     getDPI(): number;
     getDrawDistance(): number;
     getEnvelopeThreadPoolSize(): number;
     getFieldOfViewY(): number;
+    /**
+     * @returns native Carto MapPos
+     */
     getFocusPointOffset(): any;
+    /**
+     * @returns native Carto Color
+     */
     getMainLightColor(): any;
+    /**
+     * @returns native Carto MapVec
+     */
     getMainLightDirection(): any;
+    /**
+     * @returns native Carto MapBounds
+     */
     getPanBounds(): any;
     getPanningMode(): any;
     getPivotMode(): any;
     getRenderProjectionMode(): any;
-    // getProjectionMode(): any;
-    // getSkyBitmap(): any;
+    /**
+     * @returns native Carto Color
+     */
+    getSkyColor(): any;
     getTileDrawSize(): number;
     getTileThreadPoolSize(): number;
+    /**
+     * @returns native Carto MapRange
+     */
     getTiltRange(): any;
     getWatermarkAlignmentX(): number;
     getWatermarkAlignmentY(): number;
+    /**
+     * @returns native Carto Bitmap
+     */
     getWatermarkBitmap(): any;
-    getWatermarkPadding(): any;
+    /**
+     * @returns native ScreenPos padding
+     */
+    getWatermarkPadding(): any
     getWatermarkScale(): number;
     getZoomRange(): any;
     isClickTypeDetection(): boolean;
@@ -72,41 +104,73 @@ export class MapOptions {
     isTiltGestureReversed(): boolean;
     isUserInput(): boolean;
     isZoomGestures(): boolean;
+    /**
+     * @param color native Carto Color
+     */
     setAmbientLightColor(color: any): void;
+    /**
+     * @param backgroundBitmap native Carto Bitmap
+     */
     setBackgroundBitmap(backgroundBitmap: any): void;
     setBaseProjection(baseProjection: any): void;
+    /**
+     * @param color native Carto Color
+     */
     setClearColor(color: any): void;
     setClickTypeDetection(enabled: boolean): void;
     setDPI(dpi: number): void;
     setDrawDistance(drawDistance: number): void;
     setEnvelopeThreadPoolSize(poolSize: number): void;
     setFieldOfViewY(fovY: number): void;
+    /**
+     * @param offset native Carto MapPos
+     */
     setFocusPointOffset(offset: any): void;
     setKineticPan(enabled: boolean): void;
     setKineticRotation(enabled: boolean): void;
     setKineticZoom(enabled: boolean): void;
+    /**
+     * @param color  native Carto Color
+     */
     setMainLightColor(color: any): void;
+    /**
+     * @param direction native Carto MapVec
+     */
     setMainLightDirection(direction: any): void;
+    /**
+     * @param panBounds native Carto MapBounds
+     */
     setPanBounds(panBounds: any): void;
     setPanningMode(panningMode: any): void;
     setPivotMode(pivotMode: any): void;
-    // setProjectionMode(projectionMode: any): void;
     setRenderProjectionMode(mode:any): void;
     setRestrictedPanning(enabled: boolean): void;
     setRotatable(enabled: boolean): void;
     setSeamlessPanning(enabled: boolean): void;
-    // setSkyBitmap(skyBitmap: any): void;
     setTileDrawSize(tileDrawSize: number): void;
     setTileThreadPoolSize(poolSize: number): void;
     setTiltGestureReversed(reversed: boolean): void;
+    /**
+     * @param tiltRange native Carto  MapRange
+     */
     setTiltRange(tiltRange: any): void;
     setUserInput(enabled: boolean): void;
     setWatermarkAlignmentX(alignmentX: number): void;
     setWatermarkAlignmentY(alignmentY: number): void;
+    /**
+     * @param watermarkBitmap  native Carto Bitmap
+     */
     setWatermarkBitmap(watermarkBitmap: any): void;
-    // setWatermarkPaddingX(padding: any): void;
+    /**
+     * @param padding:  native ScreenPos parameter
+     */
+    setWatermarkPadding(padding: any): void;
+    
     setWatermarkScale(scale: number): void;
     setZoomGestures(enabled: boolean): void;
+    /**
+     * @param zoomRange native Carto  MapRange
+     */
     setZoomRange(zoomRange: any);
 }
 

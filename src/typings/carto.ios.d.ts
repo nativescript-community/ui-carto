@@ -3261,7 +3261,7 @@ declare class NTOptions extends NSObject {
 
 	setWatermarkBitmap(watermarkBitmap: NTBitmap): void;
 
-	setWatermarkPaddingX(padding: NTScreenPos): void;
+	setWatermarkPadding(padding: NTScreenPos): void;
 
 	setWatermarkScale(scale: number): void;
 
