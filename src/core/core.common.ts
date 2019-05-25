@@ -9,6 +9,15 @@ export interface ScreenPos {
     x: number;
     y: number;
 }
+export interface MapVec {
+    x: number;
+    y: number;
+    z: number;
+}
+export interface MapRange {
+    min: number;
+    max: number;
+}
 
 export interface MapBounds {
     northeast: MapPos;

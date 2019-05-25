@@ -1,4 +1,4 @@
-import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core.common';
+import { MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './core.common';
 export { MapBounds, MapPos, ScreenBounds, ScreenPos };
 
 export const CartoMapStyle = {
@@ -60,8 +60,27 @@ export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
     } as ScreenPos;
 }
 export function toNativeScreenPos(position: ScreenPos) {
-    //  ignore z for now as points can get under the map!
     return new com.carto.core.ScreenPos(position.x, position.y);
+}
+export function fromNativeMapRange(value: com.carto.core.MapRange) {
+    return {
+        max: value.getMax(),
+        min: value.getMin()
+    } as MapRange;
+}
+export function toNativeMapRange(value: MapRange) {
+    //  ignore z for now as points can get under the map!
+    return new com.carto.core.MapRange(value.min, value.max);
+}
+export function toNativeMapVec(value: MapVec) {
+    return new com.carto.core.MapVec(value.x, value.y, value.z);
+}
+export function fromNativeMapVec(value: com.carto.core.MapVec) {
+    return {
+        x: value.getX(),
+        y: value.getY(),
+        z: value.getZ()
+    } as MapVec;
 }
 
 export function nativeVectorToArray<T>(vector: NativeVector<T>) {
