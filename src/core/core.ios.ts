@@ -1,4 +1,4 @@
-import { MapBounds, MapPos, ScreenBounds, ScreenPos } from './core.common';
+import { MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './core.common';
 export { MapBounds, MapPos, ScreenBounds, ScreenPos };
 
 export enum CartoMapStyle {
@@ -47,6 +47,26 @@ export function fromNativeScreenPos(position: NTScreenPos) {
 export function toNativeScreenPos(position: ScreenPos) {
     //  ignore z for now as points can get under the map!
     return NTScreenPos.alloc().initWithXY(position.x, position.y);
+}
+export function fromNativeMapRange(value: NTMapRange) {
+    return {
+        max: value.getMax(),
+        min: value.getMin()
+    } as MapRange;
+}
+export function toNativeMapRange(value: MapRange) {
+    //  ignore z for now as points can get under the map!
+    return NTMapRange.alloc().initWithMinMax(value.min, value.max);
+}
+export function toNativeMapVec(value: MapVec) {
+    return NTMapVec.alloc().initWithXYZ(value.x, value.y, value.z);
+}
+export function fromNativeMapVec(value: NTMapVec) {
+    return {
+        x: value.getX(),
+        y: value.getY(),
+        z: value.getZ()
+    } as MapVec;
 }
 
 export function fromNativeMapBounds(bounds: NTMapBounds) {
