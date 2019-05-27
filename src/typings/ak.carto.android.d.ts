@@ -22,6 +22,13 @@ declare namespace com {
                 export class AKVectorTileSearchService extends com.carto.search.VectorTileSearchService {
                     findFeaturesCallback(request: com.carto.search.SearchRequest, callback: com.akylas.carto.additions.VectorTileSearchServiceCallback);
                 }
+                export class FeatureCollectionSearchServiceCallback {
+                    constructor(impl?: { onFindFeatures: (result: com.carto.geometry.FeatureCollection) => void });
+                    onFindFeatures(result: com.carto.geometry.FeatureCollection);
+                }
+                export class AKFeatureCollectionSearchService extends com.carto.search.FeatureCollectionSearchService {
+                    findFeaturesCallback(request: com.carto.search.SearchRequest, callback: com.akylas.carto.additions.FeatureCollectionSearchServiceCallback);
+                }
                 export class AKHTTPTileDataSource extends com.carto.datasources.HTTPTileDataSource {
                     setAutoHD(value: boolean): this;
                 }
@@ -56,6 +63,27 @@ declare namespace com {
                     buildCluster(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector): com.carto.vectorelements.VectorElement;
                     setUseNativeBuilder(value: boolean);
                     setBitmap(bitmap: any);
+                }
+
+                export class RoutingServiceRouteCallback {
+                    constructor(impl?: { onRoutingResult: (err: Error, result: com.carto.routing.RoutingResult) => void });
+                    namespace(err: Error, result: com.carto.routing.RoutingResult);
+                }
+                export class AKRoutingService extends com.carto.routing.RoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
+                export class AKPackageManagerRoutingService extends com.carto.routing.PackageManagerRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
+                export class AKCartoOnlineRoutingService extends com.carto.routing.CartoOnlineRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
+                export class AKSGREOfflineRoutingService extends com.carto.routing.SGREOfflineRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
+
+                export class AKOSRMOfflineRoutingService extends com.carto.routing.OSRMOfflineRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
                 }
 
                 export class GeocodingServiceAddressCallback {
