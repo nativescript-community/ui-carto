@@ -2,14 +2,14 @@ import { nativeProperty } from '../carto.common';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty } from '../carto';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BasePointVectorElement, BillboardOrientation, BillboardScaling } from './vectorelements';
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
+import { BasePointVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
 
-export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
+export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
         return new com.carto.styles.MarkerStyleBuilder();
     }
     @nativeProperty width: number;
+    @nativeProperty hideIfOverlapped: boolean;
     @nativeProperty scaleWithDPI: boolean;
     @nativeProperty size: number;
     @nativeProperty placementPriority: number;

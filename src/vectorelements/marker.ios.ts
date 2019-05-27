@@ -2,21 +2,17 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BasePointVectorElement, BillboardOrientation, BillboardScaling } from './vectorelements';
+import { BasePointVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
 import { nativeProperty } from '../carto.common';
 
-export class MarkerStyleBuilder extends BaseVectorElementStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
+export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
         return NTMarkerStyleBuilder.alloc().init();
     }
     @nativeProperty width: number;
-    @nativeProperty scaleWithDPI: boolean;
     @nativeProperty size: number;
-    @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;
     @nativeCartoImageProperty bitmap: string;
-    @nativeProperty anchorPointX: number;
-    @nativeProperty anchorPointY: number;
     @nativeProperty clickSize: number;
     @nativeProperty scalingMode: BillboardScaling;
     @nativeProperty orientationMode: BillboardOrientation;

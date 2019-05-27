@@ -1,9 +1,10 @@
-import { LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
-import { BaseNative } from '../carto.common';
+import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
+import { BaseNative, nativeProperty } from '../carto.common';
 import { nativeMapToJS } from '../utils/utils';
 import { Projection } from '../projections/projection';
 import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs } from '../carto';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {
@@ -30,6 +31,7 @@ export const BillboardScaling = {
 };
 
 export class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
+    @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
     }
@@ -58,7 +60,7 @@ export abstract class BasePointVectorElement<
         setPos?(pos: NTMapPos);
     },
     U extends PointVectorElementOptions
-> extends BaseNative<T, U> {
+> extends BaseVectorElement<T, U> {
     projection?: Projection;
     get position() {
         if (this.native && this.native.getPos) {
@@ -141,4 +143,22 @@ export class VectorElementVector extends BaseNative<NTVectorElementVector, any> 
             this.native.add(element.getNative());
         }
     }
+}
+
+export abstract class BillboardStyleBuilder<T extends NTBillboardStyleBuilder, U extends BillboardStyleBuilderOptions> extends BaseVectorElementStyleBuilder<T, U> {
+    createNative(options: BillboardStyleBuilderOptions) {
+        return null;
+    }
+    @nativeProperty scaleWithDPI: boolean;
+    @nativeProperty hideIfOverlapped: boolean;
+    @nativeProperty horizontalOffset: number;
+    @nativeProperty verticalOffset: number;
+    @nativeProperty animationStyle: AnimationStyle;
+    @nativeProperty placementPriority: number;
+    @nativeProperty causesOverlap: boolean;
+    @nativeProperty attachAnchorPointX: number;
+    @nativeProperty attachAnchorPointY: number;
+
+    _buildStyle: NTStyleBuilder;
+    abstract buildStyle();
 }

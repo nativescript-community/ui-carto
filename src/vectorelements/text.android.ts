@@ -1,11 +1,10 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeColorProperty, nativeEnumProperty } from '../carto';
-import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BasePointVectorElement, BillboardOrientation } from './vectorelements';
 import { nativeProperty } from '../carto.common';
+import { TextOptions, TextStyleBuilderOptions } from './text';
+import { BasePointVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
 
-export class TextStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
+export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
         return new com.carto.styles.TextStyleBuilder();
     }

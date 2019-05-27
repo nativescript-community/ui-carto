@@ -1,9 +1,9 @@
 import { Projection } from '../projections/projection';
 import { MapPos } from '../core/core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
+import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions, BillboardStyleBuilderOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
 
-export class PointStyleBuilderOptions extends VectorElementOptions {
+export class PointStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;
     color?: string | Color;
 }

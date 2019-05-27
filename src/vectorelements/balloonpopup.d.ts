@@ -1,10 +1,11 @@
 import { IProjection } from '../projections/projection';
 import { MapPos } from '../core/core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
+import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions, BillboardStyleBuilderOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
 import { Marker } from './marker';
+import { BillboardStyleBuilder } from './vectorelements.ios';
 
-export class BalloonPopupStyleBuilderOptions extends VectorElementOptions {
+export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: string | Color;
     cornerRadius?: number;
     descriptionColor?: string | Color;
@@ -23,9 +24,8 @@ export class BalloonPopupStyleBuilderOptions extends VectorElementOptions {
     titleWrap?: boolean;
     triangleHeight?: number;
     triangleWidth?: number;
-    placementPriority?: number;
 }
-export class BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, BalloonPopupStyleBuilderOptions> {
+export class BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends BillboardStyleBuilder<any, BalloonPopupStyleBuilderOptions> {
     constructor(options: U);
     buildStyle(): any;
     size?: number;

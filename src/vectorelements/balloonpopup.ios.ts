@@ -1,12 +1,12 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements';
+import { BasePointVectorElement, BillboardStyleBuilder } from './vectorelements';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
 import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 
-export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<NTBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
+export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<NTBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {
         return NTBalloonPopupStyleBuilder.alloc().init();
     }
@@ -28,7 +28,6 @@ export class BalloonPopupStyleBuilder extends BaseVectorElementStyleBuilder<NTBa
     @nativeProperty titleWrap: boolean;
     @nativeProperty triangleHeight: number;
     @nativeProperty triangleWidth: number;
-    @nativeProperty placementPriority: number;
 
     _buildStyle: NTBalloonPopupStyle;
     buildStyle() {

@@ -1,10 +1,11 @@
-import { LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
+import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
 // import { BaseVectorElement } from './vectorelements.common';
-import { BaseNative } from '../carto.common';
+import { BaseNative, nativeProperty } from '../carto.common';
 import { nativeMapToJS } from '../utils/utils';
 import { Projection } from '../projections/projection';
 import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core/core';
 import { mapPosVectorFromArgs } from '../carto';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {
@@ -31,6 +32,7 @@ export const BillboardScaling = {
 };
 
 export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
+    @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
     }
@@ -58,7 +60,7 @@ export abstract class BasePointVectorElement<
         setPos?(pos: com.carto.core.MapPos);
     },
     U extends PointVectorElementOptions
-> extends BaseNative<T, U> {
+> extends BaseVectorElement<T, U> {
     projection?: Projection;
     get position() {
         if (this.native && this.native.getPos) {
@@ -77,6 +79,7 @@ export abstract class BasePointVectorElement<
     getNativePos(pos: MapPos): com.carto.core.MapPos {
         let nativePos;
         nativePos = toNativeMapPos(pos);
+        // console.log('getNativePos', pos, nativePos);
         return nativePos;
     }
 }
@@ -139,4 +142,22 @@ export class VectorElementVector extends BaseNative<com.carto.vectorelements.Vec
             this.native.add(element.getNative());
         }
     }
+}
+
+export abstract class BillboardStyleBuilder<T extends com.carto.styles.BillboardStyleBuilder, U extends BillboardStyleBuilderOptions> extends BaseVectorElementStyleBuilder<T, U> {
+    createNative(options: BillboardStyleBuilderOptions) {
+        return null;
+    }
+    @nativeProperty scaleWithDPI: boolean;
+    @nativeProperty hideIfOverlapped: boolean;
+    @nativeProperty horizontalOffset: number;
+    @nativeProperty verticalOffset: number;
+    @nativeProperty animationStyle: AnimationStyle;
+    @nativeProperty placementPriority: number;
+    @nativeProperty causesOverlap: boolean;
+    @nativeProperty attachAnchorPointX: number;
+    @nativeProperty attachAnchorPointY: number;
+
+    _buildStyle: com.carto.styles.StyleBuilder;
+    abstract buildStyle();
 }

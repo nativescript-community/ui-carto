@@ -1,11 +1,10 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeColorProperty } from '../carto';
-import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BasePointVectorElement, BillboardOrientation } from './vectorelements';
 import { nativeProperty } from '../carto.common';
+import { TextOptions, TextStyleBuilderOptions } from './text';
+import { BasePointVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
 
-export class TextStyleBuilder extends BaseVectorElementStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
+export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
         return NTTextStyleBuilder.alloc().init();
     }
