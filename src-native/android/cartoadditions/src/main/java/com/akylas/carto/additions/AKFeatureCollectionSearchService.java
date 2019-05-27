@@ -1,0 +1,42 @@
+package com.akylas.carto.additions;
+
+import android.os.Handler;
+import android.util.Log;
+
+import com.carto.search.FeatureCollectionSearchService;
+import com.carto.search.SearchRequest;
+import com.carto.projections.Projection;
+import com.carto.geometry.FeatureCollection;
+
+import java.io.IOException;
+
+public class AKFeatureCollectionSearchService extends FeatureCollectionSearchService {
+    private final String TAG = "AKFeatureCollectionSearchService";
+
+
+    public AKFeatureCollectionSearchService(Projection projection , FeatureCollection features) {
+        super(projection, features);
+    }
+
+    static Handler mainHandler = null;
+
+    public void findFeaturesCallback(final SearchRequest request, final FeatureCollectionSearchServiceCallback callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final FeatureCollection results = AKFeatureCollectionSearchService.this.findFeatures(request);
+                if (mainHandler == null) {
+                    mainHandler = new Handler(android.os.Looper.getMainLooper());
+                }
+                // final PackageInfo[] fRa = resultArray;
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onFindFeatures(results);
+                    }
+                });
+
+            }
+        }).start();
+    }
+}
