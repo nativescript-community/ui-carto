@@ -1,6 +1,7 @@
 import { BaseNative, nativeProperty } from '../carto.common';
-import { VectorTileFeatureCollection } from '../geometry/feature';
-import { SearchRequest, VectorTileSearchServiceOptions } from './search';
+import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
+import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from './search';
+import { toNativeMapPos } from 'nativescript-carto/core/core';
 
 export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
@@ -31,5 +32,37 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
             nRequest.setGeometry(options.geometry as any);
         }
         return new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
+    }
+}
+
+export class FeatureCollectionSearchService extends BaseNative<NTFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
+    createNative(options: FeatureCollectionSearchServiceOptions) {
+        return NTFeatureCollectionSearchService.alloc().initWithProjectionFeatureCollection(options.projection.getNative(), options.features.getNative());
+    }
+    public findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void) {
+        const nRequest = NTSearchRequest.alloc().init();
+        if (options.projection) {
+            nRequest.setProjection(options.projection.getNative());
+        }
+        if (options.searchRadius !== undefined) {
+            nRequest.setSearchRadius(options.searchRadius);
+        }
+        if (options.filterExpression !== undefined) {
+            nRequest.setFilterExpression(options.filterExpression);
+        }
+        if (options.regexFilter !== undefined) {
+            nRequest.setRegexFilter(options.regexFilter);
+        }
+        if (options.geometry) {
+            nRequest.setGeometry(options.geometry as any);
+        } else {
+            if (options.position) {
+                nRequest.setGeometry(NTPointGeometry.alloc().initWithPos(toNativeMapPos(options.position)));
+            }
+        }
+        if (callback) {
+            callback(new FeatureCollection(this.getNative().findFeatures(nRequest)));
+        }
+        return new FeatureCollection(this.getNative().findFeatures(nRequest));
     }
 }
