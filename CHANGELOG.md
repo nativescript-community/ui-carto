@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.16](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.15...v1.2.16) (2019-05-27)
+
+
+### Bug Fixes
+
+* wrong options declarations for LineStyleBuilder ([f4ff4d1](https://github.com/farfromrefug/nativescript-carto/commit/f4ff4d1))
+
+
+
+
+
 ## [1.2.15](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.14...v1.2.15) (2019-05-27)
 
 
