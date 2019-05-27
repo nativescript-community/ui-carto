@@ -31,9 +31,12 @@ export function fromNativeMapPos(position: NTMapPos) {
         altitude: position.getZ()
     } as MapPos;
 }
-export function toNativeMapPos(position: MapPos) {
+export function toNativeMapPos(position: MapPos | NTMapPos) {
     if (!position) {
         return null;
+    }
+    if (position instanceof NTMapPos) {
+        return position;
     }
     //  ignore z for now as points can get under the map!
     return NTMapPos.alloc().initWithXYZ(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
@@ -44,7 +47,10 @@ export function fromNativeScreenPos(position: NTScreenPos) {
         y: position.getX()
     } as ScreenPos;
 }
-export function toNativeScreenPos(position: ScreenPos) {
+export function toNativeScreenPos(position: ScreenPos | NTScreenPos) {
+    if (position instanceof NTScreenPos) {
+        return position;
+    }
     //  ignore z for now as points can get under the map!
     return NTScreenPos.alloc().initWithXY(position.x, position.y);
 }
@@ -55,10 +61,16 @@ export function fromNativeMapRange(value: NTMapRange) {
     } as MapRange;
 }
 export function toNativeMapRange(value: MapRange) {
+    if (value instanceof NTMapRange) {
+        return value;
+    }
     //  ignore z for now as points can get under the map!
     return NTMapRange.alloc().initWithMinMax(value.min, value.max);
 }
 export function toNativeMapVec(value: MapVec) {
+    if (value instanceof NTMapVec) {
+        return value;
+    }
     return NTMapVec.alloc().initWithXYZ(value.x, value.y, value.z);
 }
 export function fromNativeMapVec(value: NTMapVec) {
@@ -76,6 +88,9 @@ export function fromNativeMapBounds(bounds: NTMapBounds) {
     } as MapBounds;
 }
 export function toNativeMapBounds(bounds: MapBounds) {
+    if (bounds instanceof NTMapBounds) {
+        return bounds;
+    }
     return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
 }
 
@@ -86,6 +101,9 @@ export function fromNativeScreenBounds(bounds: NTScreenBounds) {
     } as ScreenBounds;
 }
 export function toNativeScreenBounds(bounds: ScreenBounds) {
+    if (bounds instanceof NTScreenBounds) {
+        return bounds;
+    }
     if (bounds) {
         return NTScreenBounds.alloc().initWithMinMax(toNativeScreenPos(bounds.min), toNativeScreenPos(bounds.max));
     }
@@ -124,9 +142,9 @@ export abstract class NativeVector<T> {
 }
 export class MapPosVector extends NativeVector<NTMapPos> {
     native: NTMapPosVector;
-    constructor(size?: number) {
+    constructor(native?) {
         super();
-        this.native = NTMapPosVector.alloc().init();
+        this.native = native || NTMapPosVector.alloc().init();
     }
 
     public add(position: NTMapPos | MapPos) {
@@ -138,9 +156,9 @@ export class MapPosVector extends NativeVector<NTMapPos> {
 }
 export class MapPosVectorVector extends NativeVector<NTMapPosVector> {
     native: NTMapPosVectorVector;
-    constructor(size?: number) {
+    constructor(native?) {
         super();
-        this.native = NTMapPosVectorVector.alloc().init();
+        this.native = native || NTMapPosVectorVector.alloc().init();
     }
     public add(position: NTMapPosVector | MapPosVector) {
         if (position instanceof MapPosVector) {

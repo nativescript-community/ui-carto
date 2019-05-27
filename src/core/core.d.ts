@@ -30,6 +30,7 @@ export enum ClickType {
 }
 
 export abstract class NativeVector<T> {
+    constructor(native?)
     native: any;
     size(): number;
     public getNative(): any;

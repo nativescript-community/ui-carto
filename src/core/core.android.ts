@@ -45,9 +45,12 @@ export function fromNativeMapPos(position: com.carto.core.MapPos) {
         altitude: position.getZ()
     } as MapPos;
 }
-export function toNativeMapPos(position: MapPos) {
+export function toNativeMapPos(position: MapPos | com.carto.core.MapPos) {
     if (!position) {
         return null;
+    }
+    if (position instanceof com.carto.core.MapPos) {
+        return position;
     }
     const result = new com.carto.core.MapPos(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
     //  ignore z for now as points can get under the map!
@@ -60,19 +63,29 @@ export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
     } as ScreenPos;
 }
 export function toNativeScreenPos(position: ScreenPos) {
+    if (position instanceof com.carto.core.ScreenPos) {
+        return position;
+    }
     return new com.carto.core.ScreenPos(position.x, position.y);
 }
 export function fromNativeMapRange(value: com.carto.core.MapRange) {
+    
     return {
         max: value.getMax(),
         min: value.getMin()
     } as MapRange;
 }
 export function toNativeMapRange(value: MapRange) {
+    if (value instanceof com.carto.core.MapRange) {
+        return value;
+    }
     //  ignore z for now as points can get under the map!
     return new com.carto.core.MapRange(value.min, value.max);
 }
 export function toNativeMapVec(value: MapVec) {
+    if (value instanceof com.carto.core.MapVec) {
+        return value;
+    }
     return new com.carto.core.MapVec(value.x, value.y, value.z);
 }
 export function fromNativeMapVec(value: com.carto.core.MapVec) {
@@ -98,6 +111,9 @@ export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
     } as MapBounds;
 }
 export function toNativeMapBounds(bounds: MapBounds) {
+    if (bounds instanceof com.carto.core.MapBounds) {
+        return bounds;
+    }
     return new com.carto.core.MapBounds(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
 }
 
@@ -108,6 +124,9 @@ export function fromNativeScreenBounds(bounds: com.carto.core.ScreenBounds) {
     } as ScreenBounds;
 }
 export function toNativeScreenBounds(bounds: ScreenBounds) {
+    if (bounds instanceof com.carto.core.ScreenBounds) {
+        return bounds;
+    }
     if (bounds) {
         return new com.carto.core.ScreenBounds(toNativeScreenPos(bounds.min), toNativeScreenPos(bounds.max));
     }
@@ -149,9 +168,9 @@ export abstract class NativeVector<T> {
 }
 export class MapPosVector extends NativeVector<com.carto.core.MapPos> {
     native: com.carto.core.MapPosVector;
-    constructor() {
+    constructor(native?) {
         super();
-        this.native = new com.carto.core.MapPosVector();
+        this.native = native || new com.carto.core.MapPosVector();
     }
     public add(position: com.carto.core.MapPos | MapPos) {
         if ((position as any).latitude) {
@@ -162,9 +181,9 @@ export class MapPosVector extends NativeVector<com.carto.core.MapPos> {
 }
 export class MapPosVectorVector extends NativeVector<com.carto.core.MapPosVector> {
     native: com.carto.core.MapPosVectorVector;
-    constructor() {
+    constructor(native?) {
         super();
-        this.native = new com.carto.core.MapPosVectorVector();
+        this.native = native || new com.carto.core.MapPosVectorVector();
     }
     public add(position: com.carto.core.MapPosVector | MapPosVector) {
         if (position instanceof MapPosVector) {
