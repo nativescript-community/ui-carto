@@ -55,11 +55,16 @@ android {
         }
     }
 }
-
+repositories {
+	maven {
+		url  "https://dl.bintray.com/farfromrefug/carto-mobile-sdk"
+	}
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:' + computeSupportVersion()
-    compile 'com.carto:carto-mobile-sdk:4.2.0-rc.2@aar'
+    compile 'com.akylas:carto-mobile-sdk:4.2.0@aar'
+    // compile files('../../../plugin/platforms/android/carto-mobile-sdk-4.2.0-rc.3.aar')
 }
 
 task cleanBuildDir (type: Delete) {
