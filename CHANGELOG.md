@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.15](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.14...v1.2.15) (2019-05-27)
+
+
+### Features
+
+* valhalla routing support ([cd2df9a](https://github.com/farfromrefug/nativescript-carto/commit/cd2df9a))
+
+
+
+
+
 ## [1.2.14](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.13...v1.2.14) (2019-05-27)
 
 
