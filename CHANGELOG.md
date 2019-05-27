@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.14](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.13...v1.2.14) (2019-05-27)
+
+
+### Bug Fixes
+
+* android fix missing apiKey argument ([f1ca362](https://github.com/farfromrefug/nativescript-carto/commit/f1ca362))
+* better map options ([db8a1b4](https://github.com/farfromrefug/nativescript-carto/commit/db8a1b4))
+* refactoring vector elements and added more native properties ([acd0332](https://github.com/farfromrefug/nativescript-carto/commit/acd0332))
+
+
+### Features
+
+* added FeatureCollectionSearchService ([4a6822b](https://github.com/farfromrefug/nativescript-carto/commit/4a6822b))
+* added routing ([9ef9e8c](https://github.com/farfromrefug/nativescript-carto/commit/9ef9e8c))
+* geocoding services for ios ([2936f3f](https://github.com/farfromrefug/nativescript-carto/commit/2936f3f))
+* more methods to convert native carto objects ([0890279](https://github.com/farfromrefug/nativescript-carto/commit/0890279))
+* more methods to convert native carto objects ([c8af6fc](https://github.com/farfromrefug/nativescript-carto/commit/c8af6fc))
+
+
+
+
+
 ## [1.2.13](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.12...v1.2.13) (2019-05-24)
 
 
