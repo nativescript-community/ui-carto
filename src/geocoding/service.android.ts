@@ -83,7 +83,7 @@ class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.carto.add
     @nativeProperty
     customServiceURL: string;
     createNative(options: PeliasOnlineGeocodingServiceOptions) {
-        return new com.akylas.carto.additions.AKPeliasOnlineGeocodingService();
+        return new com.akylas.carto.additions.AKPeliasOnlineGeocodingService(options.apiKey);
     }
 }
 
