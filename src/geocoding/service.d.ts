@@ -65,6 +65,7 @@ export interface PeliasOnlineGeocodingServiceOptions {
     autoComplete?: boolean;
     language?: string;
     customServiceURL?: string;
+    apiKey: string;
 }
 export class PeliasOnlineGeocodingService extends GeocodingService<any, PeliasOnlineGeocodingServiceOptions> {}
 

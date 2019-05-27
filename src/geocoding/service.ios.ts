@@ -1,13 +1,29 @@
-import { Address, GeocodingRequest, GeocodingResult as IGeocodingResult, GeocodingServiceOptions } from './service';
+import {
+    Address,
+    GeocodingRequest,
+    GeocodingResult as IGeocodingResult,
+    GeocodingServiceOptions,
+    MapBoxOnlineGeocodingServiceOptions,
+    PackageManagerGeocodingServiceOptions,
+    PeliasOnlineGeocodingServiceOptions,
+    TomTomOnlineGeocodingServiceOptions
+} from './service';
 import { BaseGeocodingService } from './service.common';
-import { toNativeMapPos } from '../core/core';
+import { NativeVector, toNativeMapPos } from '../core/core';
 import { FeatureCollection } from '../geometry/feature';
+import { nativeProperty } from '../carto';
 
-export class GeocodingService extends BaseGeocodingService<NTGeocodingService, GeocodingServiceOptions> {
-    createNative(options: GeocodingServiceOptions) {
-        return NTGeocodingService.alloc().init();
+export class GeocodingResultVector extends NativeVector<NTGeocodingResult> {
+    constructor(public native: NTGeocodingResultVector) {
+        super();
     }
-    public calculateAddresses(options: GeocodingRequest) {
+}
+
+abstract class GeocodingService<T extends NTGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
+    createNative(options: GeocodingServiceOptions) {
+        return null;
+    }
+    public calculateAddresses(options: GeocodingRequest, callback: (err: Error, res: GeocodingResultVector) => void) {
         const nRequest = NTGeocodingRequest.alloc().initWithProjectionQuery(options.projection.getNative(), options.query);
         if (options.locationRadius !== undefined) {
             nRequest.setLocationRadius(options.locationRadius);
@@ -16,16 +32,12 @@ export class GeocodingService extends BaseGeocodingService<NTGeocodingService, G
             nRequest.setLocation(toNativeMapPos(options.location));
         }
         const vector = this.getNative().calculateAddresses(nRequest);
-        const result: GeocodingResult[] = [];
-        for (let index = 0; index < vector.size(); index++) {
-            result[index] = new GeocodingResult(vector.get(index));
-        }
-        return result;
+        const result = vector ? new GeocodingResultVector(vector) : null;
+        callback(null, result);
     }
 }
 
-
-export class GeocodingResult implements IGeocodingResult {
+class GeocodingResult implements IGeocodingResult {
     constructor(private native: NTGeocodingResult) {}
     getAddress() {
         return this.native.getAddress() as Address;
@@ -48,3 +60,50 @@ export class GeocodingResult implements IGeocodingResult {
         return new FeatureCollection(this.native.getFeatureCollection());
     }
 }
+
+class PackageManagerGeocodingService extends GeocodingService<NTPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
+    @nativeProperty
+    autoComplete: boolean;
+    @nativeProperty
+    language: string;
+    createNative(options: PackageManagerGeocodingServiceOptions) {
+        return new NTPackageManagerGeocodingService(options.packageManager.getNative());
+    }
+}
+class PeliasOnlineGeocodingService extends GeocodingService<NTPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
+    @nativeProperty
+    autoComplete: boolean;
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: PeliasOnlineGeocodingServiceOptions) {
+        return NTPeliasOnlineGeocodingService.alloc().initWithApiKey(options.apiKey);
+    }
+}
+
+class TomTomOnlineGeocodingService extends GeocodingService<NTTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
+    @nativeProperty
+    autoComplete: boolean;
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: TomTomOnlineGeocodingServiceOptions) {
+        return NTTomTomOnlineGeocodingService.alloc().initWithApiKey(options.apiKey);
+    }
+}
+
+class MapBoxOnlineGeocodingService extends GeocodingService<NTMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
+    @nativeProperty
+    autoComplete: boolean;
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: MapBoxOnlineGeocodingServiceOptions) {
+        return NTMapBoxOnlineGeocodingService.alloc().initWithAccessToken(options.apiKey);
+    }
+}
+
+export { GeocodingRequest, GeocodingService, GeocodingResult, MapBoxOnlineGeocodingService, TomTomOnlineGeocodingService, PeliasOnlineGeocodingService, PackageManagerGeocodingService };
