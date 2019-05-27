@@ -40,6 +40,42 @@ export function nativeVariantToJS(variant: com.carto.core.Variant) {
     }
     return undefined;
 }
+export function JSVariantToNative(variant: any) {
+    if (Array.isArray(variant)) {
+        const builder = new com.carto.core.VariantArrayBuilder();
+        for (let index = 0; index < variant.length; index++) {
+            const obj = variant[index];
+            if (typeof obj === 'boolean') {
+                builder.addBool(obj);
+            } else if (typeof obj === 'number') {
+                builder.addDouble(obj);
+            } else if (typeof obj === 'string') {
+                builder.addString(obj);
+            } else {
+                builder.addVariant(JSVariantToNative(obj));
+            }
+        }
+        return builder.buildVariant();
+    } else if (typeof variant === 'object') {
+        const builder = new com.carto.core.VariantObjectBuilder();
+        Object.keys(variant).forEach(k => {
+            const obj = variant[k];
+            if (typeof obj === 'boolean') {
+                builder.setBool(k, obj);
+            } else if (typeof obj === 'number') {
+                builder.setDouble(k, obj);
+            } else if (typeof obj === 'string') {
+                builder.setString(k, obj);
+            } else {
+                builder.setVariant(k, JSVariantToNative(obj));
+            }
+        });
+        return builder.buildVariant();
+    } else if (variant) {
+        return new com.carto.core.Variant(variant);
+    }
+    return null;
+}
 
 export function nativeMapToJS(theMap: com.carto.core.StringVariantMap) {
     const result = {};

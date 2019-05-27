@@ -43,6 +43,50 @@ export function nativeVariantToJS(variant: NTVariant) {
     }
     return undefined;
 }
+export function JSVariantToNative(variant: any) {
+    if (Array.isArray(variant)) {
+        const builder = NTVariantArrayBuilder.alloc().init();
+        for (let index = 0; index < variant.length; index++) {
+            const obj = variant[index];
+            if (typeof obj === 'boolean') {
+                builder.addBool(obj);
+            } else if (typeof obj === 'number') {
+                builder.addDouble(obj);
+            } else if (typeof obj === 'string') {
+                builder.addString(obj);
+            } else {
+                builder.addVariant(JSVariantToNative(obj));
+            }
+        }
+        return builder.buildVariant();
+    } else if (typeof variant === 'object') {
+        const builder = NTVariantObjectBuilder.alloc().init();
+        Object.keys(variant).forEach(k => {
+            const obj = variant[k];
+            if (typeof obj === 'boolean') {
+                builder.setBoolVal(k, obj);
+            } else if (typeof obj === 'number') {
+                builder.setDoubleVal(k, obj);
+            } else if (typeof obj === 'string') {
+                builder.setStringStr(k, obj);
+            } else {
+                builder.setVariantVar(k, JSVariantToNative(obj));
+            }
+        });
+        return builder.buildVariant();
+    } else if (variant) {
+        if (typeof variant === 'boolean') {
+            return NTVariant.alloc().initWithBoolVal(variant);
+        } else if (typeof variant === 'number') {
+            return NTVariant.alloc().initWithDoubleVal(variant);
+        } else if (typeof variant === 'string') {
+            return NTVariant.alloc().initWithString(variant);
+        } else {
+            return NTVariant.alloc().initWithObject(variant);
+        }
+    }
+    return null;
+}
 
 export function nativeMapToJS(theMap: NTStringVariantMap) {
     const result = {};
