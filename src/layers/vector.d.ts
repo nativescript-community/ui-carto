@@ -2,7 +2,7 @@ import { Layer, LayerOptions, TileLayer, TileLayerOptions } from './layer';
 import { TileDataSource } from '../datasources/datasource';
 import { VectorTileDecoder } from '../vectortiles/vectortiles';
 import { CartoPackageManager } from '../packagemanager/packagemanager';
-import { CartoMapStyle, MapPos } from '../core/core';
+import { CartoMapStyle, MapPos, ClickType } from '../core/core';
 import { MBVectorTileDecoder } from '../vectortiles/vectortiles';
 import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements/vectorelements';
@@ -16,7 +16,7 @@ export enum VectorTileRenderOrder {
 }
 
 export interface VectorTileEventData {
-    type: any;
+    clickType: ClickType;
     layer: BaseVectorTileLayer<any, any>;
     featureId: number;
     featureData: { [k: string]: string };
@@ -26,7 +26,7 @@ export interface VectorTileEventData {
     featureGeometry: Geometry;
 }
 export interface VectorElementEventData {
-    type: any;
+    clickType: ClickType;
     layer: BaseVectorTileLayer<any, any>;
     // featureId: number;
     // featureData: { [k: string]: string };

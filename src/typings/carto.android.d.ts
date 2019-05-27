@@ -4150,6 +4150,88 @@ declare module com {
 declare module com {
 	export module carto {
 		export module routing {
+			export class PackageManagerValhallaRoutingService extends com.carto.routing.RoutingService {
+				public static class: java.lang.Class<com.carto.routing.PackageManagerValhallaRoutingService>;
+				public static getCPtr(param0: com.carto.routing.RoutingService): number;
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public static getCPtr(param0: com.carto.routing.PackageManagerValhallaRoutingService): number;
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public swigTakeOwnership(): void;
+				public constructor(param0: com.carto.packagemanager.PackageManager);
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.PackageManagerValhallaRoutingService;
+			}
+		}
+	}
+}
+
+
+
+declare module com {
+	export module carto {
+		export module routing {
+			export class ValhallaOfflineRoutingService extends com.carto.routing.RoutingService {
+				public static class: java.lang.Class<com.carto.routing.ValhallaOfflineRoutingService>;
+				public static getCPtr(param0: com.carto.routing.RoutingService): number;
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
+				public static getCPtr(param0: com.carto.routing.ValhallaOfflineRoutingService): number;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.ValhallaOfflineRoutingService;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public constructor(param0: string);
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public swigTakeOwnership(): void;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module routing {
+			export class ValhallaOnlineRoutingService extends com.carto.routing.RoutingService {
+				public static class: java.lang.Class<com.carto.routing.ValhallaOnlineRoutingService>;
+				public static getCPtr(param0: com.carto.routing.RoutingService): number;
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
+				public static getCPtr(param0: com.carto.routing.ValhallaOnlineRoutingService): number;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.ValhallaOnlineRoutingService;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public constructor(param0: string);
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public swigTakeOwnership(): void;
+			}
+		}
+	}
+}
+
+
+
+declare module com {
+	export module carto {
+		export module routing {
 			export class PackageManagerRoutingService extends com.carto.routing.RoutingService {
 				public static class: java.lang.Class<com.carto.routing.PackageManagerRoutingService>;
 				public static getCPtr(param0: com.carto.routing.RoutingService): number;

@@ -17,7 +17,7 @@ import {
     VectorTileLayerOptions
 } from './vector';
 
-export { VectorTileDecoder }
+export { VectorTileDecoder };
 
 export interface CartoOnlineVectorTileLayerOptions extends ICartoOnlineVectorTileLayerOptions {
     style: com.carto.layers.CartoBaseMapStyle;
@@ -62,14 +62,18 @@ function initVectorTileEventListener() {
                 let featurePos = geometry.getCenterPos();
 
                 if (this.projection) {
-                    const layerProj = this._layer.get().getNative().getDataSource().getProjection();
+                    const layerProj = this._layer
+                        .get()
+                        .getNative()
+                        .getDataSource()
+                        .getProjection();
                     const nProj = this.projection.getNative();
                     featurePos = nProj.fromWgs84(layerProj.toWgs84(featurePos));
                     position = nProj.fromWgs84(layerProj.toWgs84(position));
                 }
                 return (
                     owner.onVectorTileClicked({
-                        type: info.getClickType(),
+                        clickType: info.getClickType()as any,
                         layer: this._layer.get() as any,
                         featureId: info.getFeatureId(),
                         featureData: nativeVariantToJS(info.getFeature().getProperties()),
@@ -111,14 +115,18 @@ function initVectorElementEventListener() {
                 let position = info.getClickPos();
                 let elementPos = info.getElementClickPos();
                 if (this.projection) {
-                    const layerProj = this._layer.get().getNative().getDataSource().getProjection();
+                    const layerProj = this._layer
+                        .get()
+                        .getNative()
+                        .getDataSource()
+                        .getProjection();
                     const nProj = this.projection.getNative();
                     elementPos = nProj.fromWgs84(layerProj.toWgs84(elementPos));
                     position = nProj.fromWgs84(layerProj.toWgs84(position));
                 }
                 return (
                     owner.onVectorElementClicked({
-                        type: info.getClickType(),
+                        clickType: info.getClickType() as any,
                         layer: this._layer.get() as any,
                         element,
                         metaData: element.metaData,

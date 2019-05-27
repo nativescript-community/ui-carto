@@ -61,21 +61,26 @@ export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptio
 }
 export class PackageManagerRoutingService extends RoutingService<any, PackageManagerRoutingServiceOptions> {}
 
+export type ValhallaProfile = 'car' | 'auto' | 'auto_shorter' | 'bus' | 'bicycle' | 'pedestrian' | 'truck';
 
-// export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOptions {
-//     path: string;
-// }
-// export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {}
+export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOptions {
+    path: string;
+    profile?: ValhallaProfile;
+}
+export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {}
 
-// export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
-//     apiKey: string;
-// }
-// export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {}
+export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
+    apiKey: string;
+    profile?: ValhallaProfile;
+    customServiceURL?: string;
+}
+export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {}
 
-// export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
-//     packageManager: CartoPackageManager;
-// }
-// export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {}
+export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
+    packageManager: CartoPackageManager;
+    profile?: ValhallaProfile;
+}
+export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {}
 
 export interface SGREOfflineRoutingServiceOptions {
     projection: Projection;

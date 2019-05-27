@@ -85,6 +85,16 @@ declare namespace com {
                 export class AKOSRMOfflineRoutingService extends com.carto.routing.OSRMOfflineRoutingService {
                     calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
                 }
+                export class AKPackageManagerValhallaRoutingService extends com.carto.routing.PackageManagerValhallaRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
+                export class AKValhallaOnlineRoutingService extends com.carto.routing.ValhallaOnlineRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
+
+                export class AKValhallaOfflineRoutingService extends com.carto.routing.ValhallaOfflineRoutingService {
+                    calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                }
 
                 export class GeocodingServiceAddressCallback {
                     constructor(impl?: { onGeoCodingResult: (err: Error, result: com.carto.geocoding.GeocodingResultVector) => void });

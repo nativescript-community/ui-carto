@@ -56,7 +56,7 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
             }
             return (
                 owner.onVectorElementClicked({
-                    type: info.getClickType(),
+                    clickType: info.getClickType() as any,
                     layer: this._layer.get() as any,
                     element,
                     metaData: element.metaData,
@@ -110,7 +110,7 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
             }
             return (
                 owner.onVectorTileClicked({
-                    type: info.getClickType(),
+                    clickType: info.getClickType() as any,
                     layer: this._layer.get() as any,
                     featureId: info.getFeatureId(),
                     featureData: nativeVariantToJS(info.getFeature().getProperties()),

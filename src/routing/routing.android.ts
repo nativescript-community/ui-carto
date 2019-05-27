@@ -1,13 +1,16 @@
-import { mapPosVectorFromArgs } from '../carto';
+import { mapPosVectorFromArgs, nativeProperty } from '../carto';
 import { NativeVector } from '../core/core';
 import {
     CartoOnlineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
+    PackageManagerValhallaRoutingServiceOptions,
     RoutingInstruction,
     RoutingRequest,
     RoutingServiceOptions,
-    SGREOfflineRoutingServiceOptions
+    SGREOfflineRoutingServiceOptions,
+    ValhallaOfflineRoutingServiceOptions,
+    ValhallaOnlineRoutingServiceOptions
 } from './routing';
 import { BaseRoutingService, RoutingResult } from './routing.common';
 import { JSVariantToNative } from 'nativescript-carto/utils/utils';
@@ -122,4 +125,36 @@ class OSRMOfflineRoutingService extends RoutingService<com.akylas.carto.addition
     }
 }
 
-export { RoutingService, RoutingResult, PackageManagerRoutingService, SGREOfflineRoutingService, OSRMOfflineRoutingService, CartoOnlineRoutingService };
+class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.additions.AKValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
+    @nativeProperty profile: string;
+    createNative(options: ValhallaOfflineRoutingServiceOptions) {
+        return new com.akylas.carto.additions.AKValhallaOfflineRoutingService(options.path);
+    }
+}
+
+class ValhallaOnlineRoutingService extends RoutingService<com.akylas.carto.additions.AKValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+    @nativeProperty profile: string;
+    @nativeProperty customServiceURL: string;
+    createNative(options: ValhallaOnlineRoutingServiceOptions) {
+        return new com.akylas.carto.additions.AKValhallaOnlineRoutingService(options.apiKey);
+    }
+}
+
+class PackageManagerValhallaRoutingService extends RoutingService<com.akylas.carto.additions.AKPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
+    @nativeProperty profile: string;
+    createNative(options: PackageManagerValhallaRoutingServiceOptions) {
+        return new com.akylas.carto.additions.AKPackageManagerValhallaRoutingService(options.packageManager.getNative());
+    }
+}
+
+export {
+    RoutingService,
+    RoutingResult,
+    PackageManagerRoutingService,
+    SGREOfflineRoutingService,
+    OSRMOfflineRoutingService,
+    CartoOnlineRoutingService,
+    ValhallaOfflineRoutingService,
+    ValhallaOnlineRoutingService,
+    PackageManagerValhallaRoutingService
+};
