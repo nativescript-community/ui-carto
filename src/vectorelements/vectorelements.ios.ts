@@ -92,7 +92,7 @@ export abstract class BaseLineVectorElement<
         setPoses?(pos: NTMapPosVector);
     },
     U extends LineVectorElementOptions
-> extends BaseNative<T, U> {
+> extends BaseVectorElement<T, U> {
     projection?: Projection;
     get positions() {
         // if (this.native && this.native.getPoses) {

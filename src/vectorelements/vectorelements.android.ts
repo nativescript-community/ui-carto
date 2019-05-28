@@ -89,7 +89,7 @@ export abstract class BaseLineVectorElement<
         setPoses?(pos: com.carto.core.MapPosVector);
     },
     U extends LineVectorElementOptions
-> extends BaseNative<T, U> {
+> extends BaseVectorElement<T, U> {
     projection?: Projection;
     get positions() {
         // if (this.native && this.native.getPoses) {
