@@ -105,23 +105,36 @@ function initMapViewClass() {
         }
         public onMapIdle() {
             // console.log('onMapIdle');
-            this.owner && this.owner.sendEvent(MapIdleEvent);
+            const owner = this.owner;
+            if (owner && owner.hasListeners(MapIdleEvent)) {
+                owner.sendEvent(MapIdleEvent);
+            }
         }
-        public onMapMoved() {
-            // console.log('onMapMoved', this.owner);
-            this.owner && this.owner.sendEvent(MapMovedEvent);
+        public onMapMoved(userAction: boolean) {
+            console.log('onMapMoved', userAction);
+            const owner = this.owner;
+            if (owner && owner.hasListeners(MapMovedEvent)) {
+                owner.sendEvent(MapMovedEvent, {userAction});
+            }
         }
-        public onMapStable() {
+        public onMapStable(userAction: boolean) {
             // console.log('onMapStable');
-            this.owner && this.owner.sendEvent(MapStableEvent);
+            const owner = this.owner;
+            if (owner) {
+                if (owner.hasListeners(MapStableEvent)) {
+                    owner.sendEvent(MapStableEvent, {userAction});
+                }
+            }
         }
         public onMapClicked(mapClickInfo: com.carto.ui.MapClickInfo) {
             // console.log('onMapClicked', mapClickInfo);
-            this.owner &&
-                this.owner.sendEvent(MapClickedEvent, {
+            const owner = this.owner;
+            if (owner && owner.hasListeners(MapClickedEvent)) {
+                owner.sendEvent(MapClickedEvent, {
                     clickType: mapClickInfo.getClickType(),
                     position: this.owner.fromNativeMapPos(mapClickInfo.getClickPos())
                 });
+            }
         }
     }
     MapView = MapViewImpl as any;
@@ -132,6 +145,8 @@ export class CartoMap extends CartoViewBase {
     nativeProjection: com.carto.projections.Projection;
     _projection: IProjection;
 
+
+
     get mapView() {
         return this.nativeViewProtected as com.carto.ui.MapView;
     }
@@ -139,18 +154,18 @@ export class CartoMap extends CartoViewBase {
         return this._projection;
     }
     set projection(proj: IProjection) {
-        this.log('set projection', proj);
+        // this.log('set projection', proj);
         this._projection = proj;
         this.nativeProjection = this._projection.getNative();
         if (this.nativeViewProtected) {
-            this.log('set native projection', this.nativeProjection);
+            // this.log('set native projection', this.nativeProjection);
             this.mapView.getOptions().setBaseProjection(this.nativeProjection);
         }
     }
     public createNativeView(): Object {
         initMapViewClass();
         if (!isLicenseKeyRegistered()) {
-            this.log('need MapView register', this.style['licenseKey'], getLicenseKey());
+            // this.log('need MapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);
@@ -176,16 +191,16 @@ export class CartoMap extends CartoViewBase {
         // When nativeView is tapped we get the owning JS object through this field.
         this.nativeView.owner = this;
         super.initNativeView();
-        this.log('creating projection', this.projection, CartoMap.projection);
+        // this.log('creating projection', this.projection, CartoMap.projection);
         if (!this.projection) {
             this.projection = CartoMap.projection;
         }
         const options = this.nativeViewProtected.getOptions();
-        this.log('initNativeView mapView', options.getBaseProjection());
+        // this.log('initNativeView mapView', options.getBaseProjection());
 
-        options.setRotatable(true); // allows the map to rotate (this is the default behavior)
-        options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
-        options.setTileThreadPoolSize(2); // use two threads to download tiles
+        // options.setRotatable(true); // allows the map to rotate (this is the default behavior)
+        // options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
+        // options.setTileThreadPoolSize(2); // use two threads to download tiles
 
         // (this.nativeViewProtected as any).listener.owner = this;
     }
@@ -208,14 +223,6 @@ export class CartoMap extends CartoViewBase {
         return new com.carto.core.MapBounds(toNativeMapPos(position.southwest), toNativeMapPos(position.northeast));
     }
 
-    get metersPerPixel(): number {
-        if (this.nativeViewProtected) {
-            const pos = this.focusPos;
-            const zoom = this.zoom;
-            return (156543.03390625 * Math.cos((pos.latitude * Math.PI) / 180)) / Math.pow(2, zoom);
-        }
-        return 0;
-    }
     setFocusPos(value: MapPos, duration: number) {
         this.mapView.setFocusPos(toNativeMapPos(value), duration / 1000);
     }
@@ -230,7 +237,7 @@ export class CartoMap extends CartoViewBase {
         this.mapView.setMapRotation(value, duration / 1000);
     }
     moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
-        this.log('moveToFitBounds', mapBounds, this.toNativeMapBounds(mapBounds), screenBounds, toNativeScreenBounds(screenBounds));
+        // this.log('moveToFitBounds', mapBounds, this.toNativeMapBounds(mapBounds), screenBounds, toNativeScreenBounds(screenBounds));
         this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds);
     }
     [restrictedPanningProperty.setNative](value: boolean) {

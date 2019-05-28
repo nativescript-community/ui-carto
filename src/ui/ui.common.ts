@@ -200,4 +200,14 @@ export abstract class CartoViewBase extends View {
     abstract setBearing(value: number, duration: number);
     abstract setTilt(value: number, duration: number);
     abstract fromNativeMapPos(position: any): MapPos;
+
+
+    get metersPerPixel(): number {
+        if (this.nativeViewProtected) {
+            const pos = this.focusPos;
+            const zoom = this.zoom;
+            return (156543.03390625 * Math.cos((pos.latitude * Math.PI) / 180)) / Math.pow(2, zoom);
+        }
+        return 0;
+    }
 }

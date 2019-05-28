@@ -47,18 +47,22 @@ class NTMapEventListenerImpl extends NTMapEventListener {
     public onMapMoved() {
         const owner = this._owner.get();
         if (owner && owner.hasListeners(MapMovedEvent)) {
-            // const zoom = owner.zoom;
-            // const mpp = owner.metersPerPixel;
             owner.notify({
                 eventName: MapMovedEvent,
-                object: owner
+                object: owner,
+                data: { userAction: owner.userAction }
             });
         }
     }
     public onMapStable() {
         const owner = this._owner.get();
-        if (owner && owner.hasListeners(MapStableEvent)) {
-            owner.notify({ eventName: MapStableEvent, object: owner });
+
+        if (owner) {
+            if (owner.hasListeners(MapStableEvent)) {
+                owner.notify({ eventName: MapStableEvent, object: owner,
+                    data: { userAction: owner.userAction } });
+            }
+            owner.userAction = false;
         }
     }
     public onMapClicked(mapClickInfo: NTMapClickInfo) {
@@ -76,14 +80,44 @@ class NTMapEventListenerImpl extends NTMapEventListener {
     }
 }
 
+class MapView extends NTMapView {
+    owner: CartoMap;
+
+    touchesBeganWithEvent(touches, event) {
+        super.touchesBeganWithEvent(touches, event);
+        if (this.owner) {
+            this.owner.userAction = false;
+        }
+    }
+    touchesMovedWithEvent(touches, event) {
+        super.touchesMovedWithEvent(touches, event);
+        if (this.owner) {
+            this.owner.userAction = true;
+        }
+    }
+    // touchesCancelledWithEvent(touches, event) {
+    //     super.touchesCancelledWithEvent(touches, event);
+    //     if (this.owner) {
+    //         this.owner.userAction = false;
+    //     }
+    // }
+    // touchesEndedWithEvent(touches, event) {
+    //     super.touchesEndedWithEvent(touches, event);
+    //     if (this.owner) {
+    //         this.owner.userAction = false;
+    //     }
+    // }
+}
+
 export class CartoMap extends CartoViewBase {
     static projection = new EPSG4326();
     nativeProjection: NTProjection;
     _projection: IProjection;
+    userAction = false;
     constructor() {
         super();
         if (!isLicenseKeyRegistered()) {
-            this.log('need NTMapView register', this.style['licenseKey'], getLicenseKey());
+            // this.log('need NTMapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);
@@ -108,7 +142,7 @@ export class CartoMap extends CartoViewBase {
     }
 
     public createNativeView(): Object {
-        return NTMapView.alloc().init();
+        return MapView.alloc().init();
     }
 
     getOptions() {
@@ -127,20 +161,15 @@ export class CartoMap extends CartoViewBase {
         this.nativeView.owner = this;
         super.initNativeView();
         this.mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
-        const options = this.nativeViewProtected.getOptions();
+
+        // const options = this.nativeViewProtected.getOptions();
         if (!this.projection) {
             this.projection = CartoMap.projection;
         }
-        // 2. General options
-        options.setRotatable(true); // allows the map to rotate (this is the default behavior)
-        options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
-        options.setTileThreadPoolSize(2); // use two threads to download tiles
-
-        // 3.Set initial location and other parameters, _do not animate_
-        // this.nativeView.setRotationDurationSeconds(0, 0);
     }
 
     disposeNativeView(): void {
+
         // Remove reference from native listener to this instance.
         this.mapView.setMapEventListener(null);
         this.nativeView.owner = null;
@@ -150,15 +179,19 @@ export class CartoMap extends CartoViewBase {
         return fromNativeMapPos(position);
     }
     setFocusPos(value: MapPos, duration: number) {
+        // this.userAction = true;
         this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
     setZoom(value: number, duration: number) {
+        // this.userAction = true;
         this.mapView.setZoomDurationSeconds(value, duration / 1000);
     }
     setTilt(value: number, duration: number) {
+        // this.userAction = true;
         this.mapView.setTiltDurationSeconds(value, duration / 1000);
     }
     setBearing(value: number, duration: number) {
+        // this.userAction = true;
         this.mapView.setRotationDurationSeconds(value, duration / 1000);
     }
     [restrictedPanningProperty.setNative](value: boolean) {

@@ -48,9 +48,9 @@ declare namespace com {
                 }
                 export class AKMapView extends com.carto.ui.MapView {
                     onMapClicked(mapClickInfo: com.carto.ui.MapClickInfo);
-                    onMapMoved();
+                    onMapMoved(userAction: boolean);
                     onMapIdle();
-                    onMapStable();
+                    onMapStable(userAction: boolean);
                 }
 
                 export class AKVectorTileEventListener extends com.carto.layers.VectorTileEventListener {

@@ -8,9 +8,12 @@ import com.carto.ui.MapClickInfo;
 import com.carto.ui.MapEventListener;
 import com.carto.ui.MapView;
 
+import android.view.MotionEvent;
+
 public class AKMapView extends MapView {
     static final String TAG = "AKMapView";
     Handler mainHandler = null;
+    public boolean userAction = false;
 
     
     public AKMapView(Context context) {
@@ -19,13 +22,38 @@ public class AKMapView extends MapView {
         this.setMapEventListener(mapEventListener);
     }
 
+    @Override
+    public synchronized boolean onTouchEvent(MotionEvent event) {
+
+        boolean clickable = isClickable() || isLongClickable();
+        if (!isEnabled() || !clickable) {
+            return clickable;
+        }
+
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_POINTER_DOWN:
+            case MotionEvent.ACTION_DOWN:
+                this.userAction = false;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                this.userAction = true;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
+                // this.userAction = false;
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
     private final MapEventListener mapEventListener = new MapEventListener() {
         @Override
         public void onMapMoved() {
             mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    AKMapView.this.onMapMoved();
+                    AKMapView.this.onMapMoved(userAction);
                 }
             });
             // AKMapView.this.onMapMoved();
@@ -47,7 +75,8 @@ public class AKMapView extends MapView {
             mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    AKMapView.this.onMapStable();
+                    AKMapView.this.onMapStable(AKMapView.this.userAction);
+                    AKMapView.this.userAction = false;
                 }
             });
             // AKMapView.this.onMapStable();
@@ -65,7 +94,25 @@ public class AKMapView extends MapView {
         }
     };
 
-    public void onMapMoved() {
+
+    // public void setFocusPos(value, duration) {
+    //     this.userAction = true;
+    //     super.setfocusPos(value, duration);
+    // }
+    // public void setZoom(value: number, duration: number) {
+    //     this.userAction = true;
+    //     super.setZoom(value, duration);
+    // }
+    // public void setTilt(value: number, duration: number) {
+    //     this.userAction = true;
+    //     super.setTilt(value, duration);
+    // }
+    // public void setBearing(value: number, duration: number) {
+    //     this.userAction = true;
+    //     super.setBearing(value, duration);
+    // }
+
+    public void onMapMoved(boolean userAction) {
 
     }
 
@@ -73,7 +120,7 @@ public class AKMapView extends MapView {
 
     }
 
-    public void onMapStable() {
+    public void onMapStable(boolean userAction) {
 
     }
 
