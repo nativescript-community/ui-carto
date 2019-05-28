@@ -5,6 +5,7 @@ import {
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
     PackageManagerValhallaRoutingServiceOptions,
+    RouteMatchingRequest,
     RoutingInstruction,
     RoutingRequest,
     RoutingServiceOptions,
@@ -12,7 +13,7 @@ import {
     ValhallaOfflineRoutingServiceOptions,
     ValhallaOnlineRoutingServiceOptions
 } from './routing';
-import { BaseRoutingService, RoutingResult } from './routing.common';
+import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './routing.common';
 import { JSVariantToNative } from 'nativescript-carto/utils/utils';
 
 export const RoutingAction = {
@@ -74,18 +75,10 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
     // }
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
         const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
-        // if (options.locationRadius !== undefined) {
-        //     nRequest.setLocationRadius(options.locationRadius);
-        // }
-        // if (options.location) {
-        //     nRequest.setLocation(toNativeMapPos(options.location));
-        // }
-        this.log('calculateRoute', options);
         this.getNative().calculateRouteCallback(
             nRequest,
             new com.akylas.carto.additions.RoutingServiceRouteCallback({
                 onRoutingResult: (err, res) => {
-                    this.log('onGeoCodingResult', res);
                     callback(err, res ? new RoutingResult(res) : null);
                 }
             })
@@ -130,6 +123,17 @@ class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.addi
     createNative(options: ValhallaOfflineRoutingServiceOptions) {
         return new com.akylas.carto.additions.AKValhallaOfflineRoutingService(options.path);
     }
+    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
+        this.getNative().matchRouteCallback(
+            nRequest,
+            new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
+                onRouteMatchingResult: (err, res) => {
+                    callback(err, res ? new RouteMatchingResult(res) : null);
+                }
+            })
+        );
+    }
 }
 
 class ValhallaOnlineRoutingService extends RoutingService<com.akylas.carto.additions.AKValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
@@ -144,6 +148,17 @@ class PackageManagerValhallaRoutingService extends RoutingService<com.akylas.car
     @nativeProperty profile: string;
     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
         return new com.akylas.carto.additions.AKPackageManagerValhallaRoutingService(options.packageManager.getNative());
+    }
+    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
+        this.getNative().matchRouteCallback(
+            nRequest,
+            new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
+                onRouteMatchingResult: (err, res) => {
+                    callback(err, res ? new RouteMatchingResult(res) : null);
+                }
+            })
+        );
     }
 }
 

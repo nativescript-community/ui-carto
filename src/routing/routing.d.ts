@@ -32,6 +32,12 @@ export interface RoutingRequest {
     points: MapPos[];
 }
 
+export interface RouteMatchingRequest {
+    projection: Projection;
+    points: MapPos[];
+    accuracy: number;
+}
+
 export interface RoutingServiceOptions {}
 
 export interface RoutingInstruction {
@@ -52,6 +58,11 @@ export interface RoutingResult {
     getInstructions(): RoutingInstructionVector;
 }
 
+export interface RouteMatchingResult {
+    getPoints(): MapPosVector;
+    getProjection(): Projection;
+}
+
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
     calculateRoute(options: RoutingRequest, callback?: (error: Error, res: RoutingResult) => void): RoutingResult;
 }
@@ -67,20 +78,30 @@ export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOpti
     path: string;
     profile?: ValhallaProfile;
 }
-export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {}
+export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
+    profile: ValhallaProfile;
+
+    matchRoute(options: RouteMatchingRequest, callback?: (error: Error, res: RouteMatchingResult) => void): RouteMatchingResult;
+}
 
 export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
     apiKey: string;
     profile?: ValhallaProfile;
     customServiceURL?: string;
 }
-export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {}
+export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {
+    profile: ValhallaProfile;
+}
 
 export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
     packageManager: CartoPackageManager;
     profile?: ValhallaProfile;
 }
-export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {}
+export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {
+    profile: ValhallaProfile;
+    matchRoute(options: RouteMatchingRequest, callback?: (error: Error, res: RouteMatchingResult) => void): RouteMatchingResult;
+
+}
 
 export interface SGREOfflineRoutingServiceOptions {
     projection: Projection;
