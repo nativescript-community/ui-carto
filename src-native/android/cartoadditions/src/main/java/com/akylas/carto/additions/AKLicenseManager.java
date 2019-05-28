@@ -10,7 +10,6 @@ public class AKLicenseManager {
 
     static public void registerLicenseCallback(final String key, final android.content.Context context,
             final RegisterLicenseCallback callback) {
-        Log.d(TAG, "registerLicenseCallback: " + key);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
