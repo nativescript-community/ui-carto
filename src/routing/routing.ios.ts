@@ -10,9 +10,10 @@ import {
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
-    ValhallaOnlineRoutingServiceOptions
+    ValhallaOnlineRoutingServiceOptions,
+    RouteMatchingRequest
 } from './routing';
-import { BaseRoutingService, RoutingResult } from './routing.common';
+import { BaseRoutingService, RoutingResult, RouteMatchingResult } from './routing.common';
 import { JSVariantToNative } from 'nativescript-carto/utils/utils';
 
 export enum RoutingAction {
@@ -76,23 +77,39 @@ class OSRMOfflineRoutingService extends RoutingService<NTOSRMOfflineRoutingServi
     }
 }
 
-// class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
-//     createNative(options: ValhallaOfflineRoutingServiceOptions) {
-//         return  NTValhallaOfflineRoutingService.alloc().init(options.path);
-//     }
-// }
+class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
+    createNative(options: ValhallaOfflineRoutingServiceOptions) {
+        return NTValhallaOfflineRoutingService.alloc().initWithPath(options.path);
+    }
+    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection), options.accuracy);
 
-// class ValhallaOnlineRoutingService extends RoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
-//     createNative(options: ValhallaOnlineRoutingServiceOptions) {
-//         return  NTValhallaOnlineRoutingService.alloc().init(options.apiKey);
-//     }
-// }
+        const nRes = this.getNative().matchRoute(nRequest);
+        const result = nRes ? new RouteMatchingResult(nRes) : null;
+        callback(null, result);
+        return result;
+    }
+}
 
-// class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
-//     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
-//         return  NTPackageManagerValhallaRoutingService.alloc().init(options.packageManager.getNative());
-//     }
-// }
+class ValhallaOnlineRoutingService extends RoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+    createNative(options: ValhallaOnlineRoutingServiceOptions) {
+        return NTValhallaOnlineRoutingService.alloc().initWithApiKey(options.apiKey);
+    }
+}
+
+class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
+    createNative(options: PackageManagerValhallaRoutingServiceOptions) {
+        return NTPackageManagerValhallaRoutingService.alloc().initWithPackageManager(options.packageManager.getNative());
+    }
+    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection), options.accuracy);
+
+        const nRes = this.getNative().matchRoute(nRequest);
+        const result = nRes ? new RouteMatchingResult(nRes) : null;
+        callback(null, result);
+        return result;
+    }
+}
 
 export {
     RoutingService,
@@ -100,6 +117,8 @@ export {
     PackageManagerRoutingService,
     SGREOfflineRoutingService,
     OSRMOfflineRoutingService,
-    CartoOnlineRoutingService
-    // ValhallaOfflineRoutingService, ValhallaOnlineRoutingService, PackageManagerValhallaRoutingService
+    CartoOnlineRoutingService,
+    ValhallaOfflineRoutingService,
+    ValhallaOnlineRoutingService,
+    PackageManagerValhallaRoutingService
 };
