@@ -69,6 +69,10 @@ declare namespace com {
                     constructor(impl?: { onRoutingResult: (err: Error, result: com.carto.routing.RoutingResult) => void });
                     namespace(err: Error, result: com.carto.routing.RoutingResult);
                 }
+                export class RoutingServiceRouteMatchingCallback {
+                    constructor(impl?: { onRouteMatchingResult: (err: Error, result: com.carto.routing.RouteMatchingResult) => void });
+                    namespace(err: Error, result: com.carto.routing.RouteMatchingResult);
+                }
                 export class AKRoutingService extends com.carto.routing.RoutingService {
                     calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
                 }
@@ -87,6 +91,7 @@ declare namespace com {
                 }
                 export class AKPackageManagerValhallaRoutingService extends com.carto.routing.PackageManagerValhallaRoutingService {
                     calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                    matchRouteCallback(request: com.carto.routing.RouteMatchingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteMatchingCallback);
                 }
                 export class AKValhallaOnlineRoutingService extends com.carto.routing.ValhallaOnlineRoutingService {
                     calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
@@ -94,6 +99,7 @@ declare namespace com {
 
                 export class AKValhallaOfflineRoutingService extends com.carto.routing.ValhallaOfflineRoutingService {
                     calculateRouteCallback(request: com.carto.routing.RoutingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteCallback);
+                    matchRouteCallback(request: com.carto.routing.RouteMatchingRequest, callback: com.akylas.carto.additions.RoutingServiceRouteMatchingCallback);
                 }
 
                 export class GeocodingServiceAddressCallback {

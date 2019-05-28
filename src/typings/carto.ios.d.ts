@@ -3569,6 +3569,25 @@ declare class NTPackageManagerTileDataSource extends NTTileDataSource {
 	loadTileSwigExplicitNTPackageManagerTileDataSource(mapTile: NTMapTile): NTTileData;
 }
 
+declare class NTPackageManagerValhallaRoutingService extends NTRoutingService {
+
+	static alloc(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
+
+	static new(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
+
+	constructor(o: { packageManager: NTPackageManager; });
+
+	calculateRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: NTRoutingRequest): NTRoutingResult;
+
+	getProfile(): string;
+
+	initWithPackageManager(packageManager: NTPackageManager): this;
+
+	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+
+	setProfile(profile: string): void;
+}
+
 declare class NTPackageMetaInfo extends NSObject {
 
 	static alloc(): NTPackageMetaInfo; // inherited from NSObject
@@ -5457,6 +5476,48 @@ declare class NTUTFGridEventListener extends NSObject {
 	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
 	swigGetRawPtr(): number;
+}
+
+declare class NTValhallaOfflineRoutingService extends NTRoutingService {
+
+	static alloc(): NTValhallaOfflineRoutingService; // inherited from NSObject
+
+	static new(): NTValhallaOfflineRoutingService; // inherited from NSObject
+
+	constructor(o: { path: string; });
+
+	calculateRouteSwigExplicitNTValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+
+	getProfile(): string;
+
+	initWithPath(path: string): this;
+
+	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+
+	setProfile(profile: string): void;
+}
+
+declare class NTValhallaOnlineRoutingService extends NTRoutingService {
+
+	static alloc(): NTValhallaOnlineRoutingService; // inherited from NSObject
+
+	static new(): NTValhallaOnlineRoutingService; // inherited from NSObject
+
+	constructor(o: { apiKey: string; });
+
+	calculateRouteSwigExplicitNTValhallaOnlineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+
+	getCustomServiceURL(): string;
+
+	getProfile(): string;
+
+	initWithApiKey(apiKey: string): this;
+
+	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+
+	setCustomServiceURL(serviceURL: string): void;
+
+	setProfile(profile: string): void;
 }
 
 declare class NTVariant extends NSObject {
