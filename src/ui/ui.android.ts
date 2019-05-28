@@ -111,7 +111,6 @@ function initMapViewClass() {
             }
         }
         public onMapMoved(userAction: boolean) {
-            console.log('onMapMoved', userAction);
             const owner = this.owner;
             if (owner && owner.hasListeners(MapMovedEvent)) {
                 owner.sendEvent(MapMovedEvent, {userAction});
