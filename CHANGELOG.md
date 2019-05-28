@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.17](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.16...v1.2.17) (2019-05-28)
+
+
+### Bug Fixes
+
+* ios valhalla implementation ([cb2c9c1](https://github.com/farfromrefug/nativescript-carto/commit/cb2c9c1))
+* wrong Line inheritance (preventing properties to work) ([d939406](https://github.com/farfromrefug/nativescript-carto/commit/d939406))
+
+
+### Features
+
+* route matching ([ddf85b9](https://github.com/farfromrefug/nativescript-carto/commit/ddf85b9))
+
+
+
+
+
 ## [1.2.16](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.15...v1.2.16) (2019-05-27)
 
 
