@@ -113,7 +113,7 @@ function initMapViewClass() {
         public onMapMoved(userAction: boolean) {
             const owner = this.owner;
             if (owner && owner.hasListeners(MapMovedEvent)) {
-                owner.sendEvent(MapMovedEvent, {userAction});
+                owner.sendEvent(MapMovedEvent, { userAction });
             }
         }
         public onMapStable(userAction: boolean) {
@@ -121,7 +121,7 @@ function initMapViewClass() {
             const owner = this.owner;
             if (owner) {
                 if (owner.hasListeners(MapStableEvent)) {
-                    owner.sendEvent(MapStableEvent, {userAction});
+                    owner.sendEvent(MapStableEvent, { userAction });
                 }
             }
         }
@@ -143,8 +143,6 @@ export class CartoMap extends CartoViewBase {
     static projection = new EPSG4326();
     nativeProjection: com.carto.projections.Projection;
     _projection: IProjection;
-
-
 
     get mapView() {
         return this.nativeViewProtected as com.carto.ui.MapView;

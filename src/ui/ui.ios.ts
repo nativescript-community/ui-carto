@@ -59,8 +59,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
 
         if (owner) {
             if (owner.hasListeners(MapStableEvent)) {
-                owner.notify({ eventName: MapStableEvent, object: owner,
-                    data: { userAction: owner.userAction } });
+                owner.notify({ eventName: MapStableEvent, object: owner, data: { userAction: owner.userAction } });
             }
             owner.userAction = false;
         }
@@ -169,7 +168,6 @@ export class CartoMap extends CartoViewBase {
     }
 
     disposeNativeView(): void {
-
         // Remove reference from native listener to this instance.
         this.mapView.setMapEventListener(null);
         this.nativeView.owner = null;
@@ -179,19 +177,15 @@ export class CartoMap extends CartoViewBase {
         return fromNativeMapPos(position);
     }
     setFocusPos(value: MapPos, duration: number) {
-        // this.userAction = true;
         this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
     setZoom(value: number, duration: number) {
-        // this.userAction = true;
         this.mapView.setZoomDurationSeconds(value, duration / 1000);
     }
     setTilt(value: number, duration: number) {
-        // this.userAction = true;
         this.mapView.setTiltDurationSeconds(value, duration / 1000);
     }
     setBearing(value: number, duration: number) {
-        // this.userAction = true;
         this.mapView.setRotationDurationSeconds(value, duration / 1000);
     }
     [restrictedPanningProperty.setNative](value: boolean) {
