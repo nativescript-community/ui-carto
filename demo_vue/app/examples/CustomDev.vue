@@ -136,7 +136,7 @@ export default class Example extends BaseMaps {
                     }),
                     new HTTPTileDataSource({
                         minZoom: 0,
-                        maxZoom: 22,
+                        maxZoom: 14,
                         url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`
                     })
                 ]
@@ -148,7 +148,7 @@ export default class Example extends BaseMaps {
             this.cartoLayer = new VectorTileLayer({
                 dataSource: source2,
                 decoder: new MBVectorTileDecoder({
-                    zipPath: '~/assets/walkaholic.zip',
+                    zipPath: '~/assets/cartostyles-v1.zip',
                     style: 'voyager',
                     liveReload: true
                 }),

@@ -1,5 +1,5 @@
 import { Observable } from 'tns-core-modules/data/observable';
-import { CartoMap } from 'nativescript-carto';
+import { CartoMap } from 'nativescript-carto/ui/ui';
 import { Zip } from 'nativescript-zip2';
 import * as fs from 'tns-core-modules/file-system';
 
@@ -10,20 +10,20 @@ export class CartoModel extends Observable {
     super();
   }
 
-  reloadCssFromDir() {
-    console.log(`reloadCssFromDir ${destZip.path}`);
-    Zip.zip({
-      destination:destZip.path,
-      folderToArchive:fs.path.join(appPath, 'mss'),
-      keepParentDirectory:false
-    })
-      .then(() => {
-        console.log(`zipped file ${destZip.path}`);
-        this.mapView.updateDecoderStyle(destZip.path);
-      })
-      .catch((err) => {
-        console.log(`zip error: ${err}`);
-      });
-  }
+  // reloadCssFromDir() {
+  //   console.log(`reloadCssFromDir ${destZip.path}`);
+  //   Zip.zip({
+  //     destination:destZip.path,
+  //     folderToArchive:fs.path.join(appPath, 'mss'),
+  //     keepParentDirectory:false
+  //   })
+  //     .then(() => {
+  //       console.log(`zipped file ${destZip.path}`);
+  //       this.mapView.updateDecoderStyle(destZip.path);
+  //     })
+  //     .catch((err) => {
+  //       console.log(`zip error: ${err}`);
+  //     });
+  // }
 }
  
