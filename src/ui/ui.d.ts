@@ -191,7 +191,8 @@ export class CartoMap extends View {
     fromNativeMapPos(position: any): MapPos;
     getOptions(): MapOptions;
 
-    setZoom(value: number, duration: number);
+    setZoom(value: number, target: number | MapPos, duration?: number);
+    setMapRotation(value: number, target: number | MapPos, duration?: number);
     setBearing(value: number, duration: number);
     setTilt(value: number, duration: number);
     setFocusPos(value: MapPos, duration: number);

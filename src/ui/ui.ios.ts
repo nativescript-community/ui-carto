@@ -179,8 +179,19 @@ export class CartoMap extends CartoViewBase {
     setFocusPos(value: MapPos, duration: number) {
         this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
     }
-    setZoom(value: number, duration: number) {
-        this.mapView.setZoomDurationSeconds(value, duration / 1000);
+    setZoom(value: number, targetPos: MapPos | number, duration: number) {
+        if (typeof targetPos === 'number') {
+            this.mapView.setZoomDurationSeconds(value, targetPos / 1000);
+        } else {
+            this.mapView.setZoomTargetPosDurationSeconds(value, toNativeMapPos(targetPos), duration / 1000);
+        }
+    }
+    setMapRotation(value: number, targetPos: MapPos | number, duration: number) {
+        if (typeof targetPos === 'number') {
+            this.mapView.setRotationDurationSeconds(value, targetPos / 1000);
+        } else {
+            this.mapView.setRotationTargetPosDurationSeconds(value, toNativeMapPos(targetPos), duration / 1000);
+        }
     }
     setTilt(value: number, duration: number) {
         this.mapView.setTiltDurationSeconds(value, duration / 1000);

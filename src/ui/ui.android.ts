@@ -215,8 +215,19 @@ export class CartoMap extends CartoViewBase {
         this.mapView.setFocusPos(toNativeMapPos(value), duration / 1000);
     }
 
-    setZoom(value: number, duration: number) {
-        this.mapView.setZoom(value, duration / 1000);
+    setMapRotation(value: number, targetPos: MapPos | number, duration: number) {
+        if (typeof targetPos === 'number') {
+            this.mapView.setMapRotation(value, targetPos / 1000);
+        } else {
+            this.mapView.setMapRotation(value, toNativeMapPos(targetPos), duration / 1000);
+        }
+    }
+    setZoom(value: number, targetPos: MapPos | number, duration: number) {
+        if (typeof targetPos === 'number') {
+            this.mapView.setZoom(value, targetPos / 1000);
+        } else {
+            this.mapView.setZoom(value, toNativeMapPos(targetPos), duration / 1000);
+        }
     }
     setTilt(value: number, duration: number) {
         this.mapView.setTilt(value, duration / 1000);
@@ -225,7 +236,6 @@ export class CartoMap extends CartoViewBase {
         this.mapView.setMapRotation(value, duration / 1000);
     }
     moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
-        // this.log('moveToFitBounds', mapBounds, this.toNativeMapBounds(mapBounds), screenBounds, toNativeScreenBounds(screenBounds));
         this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds);
     }
     [restrictedPanningProperty.setNative](value: boolean) {
@@ -234,62 +244,6 @@ export class CartoMap extends CartoViewBase {
         }
         this.mapView.getOptions().setRestrictedPanning(value);
     }
-
-    // [focusPosProperty.setNative](value: MapPos) {
-    //     console.log('focusPosProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
-    //     if (!this.nativeViewProtected || !this.nativeProjection) {
-    //         return;
-    //     }
-    //     this.setFocusPos(value, 0);
-    // }
-    // [zoomProperty.setNative](value: number) {
-    //     console.log('zoomProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
-    //     if (!this.nativeViewProtected) {
-    //         return;
-    //     }
-    //     this.setZoom(value, 0);
-    // }
-    // // setZoom(value: number) {
-    // //     this.style['zoom'] = value;
-    // // }
-    // getBearing(): number {
-    //     if (this.mapView) {
-    //         return this.mapView.getMapRotation();
-    //     }
-    //     return this.style['bearing'];
-    // }
-
-    // setBearing(value: number) {
-    //     this.style['bearing'] = value;
-    // }
-    // getTilt(): number {
-    //     if (this.mapView) {
-    //         return this.mapView.getTilt();
-    //     }
-    //     return this.style['tilt'];
-    // }
-
-    // setTilt(value: number) {
-    //     this.style['tilt'] = value;
-    // }
-
-    // metersToEquatorPixels(map, location, zoom, meters) {
-    //     // CameraMapPos MapPos = map.getCameraMapPos();
-    //     let center = location;
-    //     if (center == null) {
-    //         center = map.getFocusPos();
-    //         if (center == null) {
-    //             center = new MapPos(0, 0);
-    //         }
-    //     }
-    //     let zoomLevel = zoom;
-    //     if (zoomLevel < 0) {
-    //         zoomLevel = map.getZoom();
-    //     }
-    //     const latRadians = (center.getX() * Math.PI) / 180;
-    //     const metersPerPixel = 40075016.68 / (256 * Math.pow(2, zoomLevel));
-    //     return 1 / (meters / Math.cos(latRadians) / metersPerPixel);
-    // }
 
     addLayer(layer: TileLayer<any, any>, index?: number) {
         if (this.mapView) {
