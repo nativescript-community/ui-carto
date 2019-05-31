@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.18](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.17...v1.2.18) (2019-05-31)
+
+
+### Bug Fixes
+
+* better signatture for setZoom and setMapRotation ([376d9aa](https://github.com/farfromrefug/nativescript-carto/commit/376d9aa))
+* do not initialize some options ([f2db797](https://github.com/farfromrefug/nativescript-carto/commit/f2db797))
+
+
+### Features
+
+* report userAction on mapMoved and idle. Allows userFollow logic ([66e67ec](https://github.com/farfromrefug/nativescript-carto/commit/66e67ec))
+* report when a map move was triggered by the user ([b4d14d5](https://github.com/farfromrefug/nativescript-carto/commit/b4d14d5))
+* reverse geocoding ([bc1edde](https://github.com/farfromrefug/nativescript-carto/commit/bc1edde))
+
+
+
+
+
 ## [1.2.17](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.16...v1.2.17) (2019-05-28)
 
 
