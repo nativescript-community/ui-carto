@@ -190,18 +190,9 @@ export class CartoMap extends CartoViewBase {
         // When nativeView is tapped we get the owning JS object through this field.
         this.nativeView.owner = this;
         super.initNativeView();
-        // this.log('creating projection', this.projection, CartoMap.projection);
         if (!this.projection) {
             this.projection = CartoMap.projection;
         }
-        const options = this.nativeViewProtected.getOptions();
-        // this.log('initNativeView mapView', options.getBaseProjection());
-
-        // options.setRotatable(true); // allows the map to rotate (this is the default behavior)
-        // options.setZoomGestures(true); // allows the map to rotate (this is the default behavior)
-        // options.setTileThreadPoolSize(2); // use two threads to download tiles
-
-        // (this.nativeViewProtected as any).listener.owner = this;
     }
 
     disposeNativeView(): void {
