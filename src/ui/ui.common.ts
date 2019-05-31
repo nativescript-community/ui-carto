@@ -2,6 +2,9 @@ import { CSSType, View } from 'tns-core-modules/ui/core/view';
 import { fromNativeMapPos, MapPos } from '../core/core';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { isAndroid } from 'tns-core-modules/platform/platform';
+import { Layer } from 'nativescript-carto/layers/layer';
+import { NativeVector } from 'nativescript-carto/core/core.android';
+import { nativeVectorToArray } from 'nativescript-carto/utils/utils';
 
 let licenseKeyRegistered = false;
 export function setLicenseKeyRegistered(value: boolean) {
@@ -115,6 +118,52 @@ export function mapProperty(...args) {
 //     });
 //     // }
 // };
+
+export class Layers<T extends any> {
+    constructor(private native: T) {}
+    // constructor(size?: number) {
+    //     this.native = new T(size);
+    // }
+    count() {
+        return this.native.count();
+    }
+    insert(index: number, layer: Layer<any, any>) {
+        return this.native.insert(index, layer.getNative());
+    }
+    set(index: number, layer: Layer<any, any>) {
+        return this.native.set(index, layer.getNative());
+    }
+    removeAll(layers: Array<Layer<any, any>>) {
+        layers.forEach(this.remove);
+    }
+    remove(layer: Layer<any, any>) {
+        return this.native.remove(layer.getNative());
+    }
+    add(layer: Layer<any, any>) {
+        return this.native.add(layer.getNative());
+    }
+    get(index: number) {
+        return this.native.get(index);
+    }
+    addAll(layers: Array<Layer<any, any>>) {
+        layers.forEach(this.add);
+    }
+    setAll(layers: Array<Layer<any, any>>) {
+        this.clear();
+        this.addAll(layers);
+    }
+    getAll() {
+        return nativeVectorToArray(this.native.getAll());
+    }
+    clear() {
+        return this.native.clear();
+    }
+
+    public getNative() {
+        return this.native;
+    }
+}
+
 @CSSType('CartoMap')
 export abstract class CartoViewBase extends View {
     public mapReady = false;
@@ -200,7 +249,6 @@ export abstract class CartoViewBase extends View {
     abstract setBearing(value: number, duration: number);
     abstract setTilt(value: number, duration: number);
     abstract fromNativeMapPos(position: any): MapPos;
-
 
     get metersPerPixel(): number {
         if (this.nativeViewProtected) {

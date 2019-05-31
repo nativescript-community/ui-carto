@@ -4,7 +4,8 @@ import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections/projection';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
-import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
+import { CartoViewBase, isLicenseKeyRegistered, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
+import { NativeVector } from 'nativescript-carto/core/core.android';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -206,14 +207,21 @@ export class CartoMap extends CartoViewBase {
         this.mapView.getOptions().setRestrictedPanning(value);
     }
 
+    getLayers() {
+        if (this.mapView) {
+            return new Layers<NTLayers>(this.mapView.getLayers());
+        }
+        return null;
+    }
     addLayer(layer: TileLayer<any, any>, index?: number) {
         if (this.mapView) {
             const native: NTTileLayer = layer.getNative();
             if (!!native) {
-                if (index !== undefined) {
-                    this.mapView.getLayers().insertLayer(index, native);
+                const layers = this.mapView.getLayers();
+                if (index !== undefined && index <= layers.count()) {
+                    layers.insertLayer(index, native);
                 } else {
-                    this.mapView.getLayers().add(native);
+                    layers.add(native);
                 }
             }
         }

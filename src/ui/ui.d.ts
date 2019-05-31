@@ -3,7 +3,8 @@ import { EventData } from 'tns-core-modules/data/observable';
 import { IProjection, Projection } from '../projections/projection';
 import { Layer } from '../layers/layer';
 import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core/core';
-
+import { Layers } from './ui.common';
+export { Layers };
 export function registerLicense(key: string, callback?: (result: boolean) => void);
 
 export enum RenderProjectionMode {
@@ -91,7 +92,7 @@ export class MapOptions {
     /**
      * @returns native ScreenPos padding
      */
-    getWatermarkPadding(): any
+    getWatermarkPadding(): any;
     getWatermarkScale(): number;
     getZoomRange(): any;
     isClickTypeDetection(): boolean;
@@ -143,7 +144,7 @@ export class MapOptions {
     setPanBounds(panBounds: any): void;
     setPanningMode(panningMode: any): void;
     setPivotMode(pivotMode: any): void;
-    setRenderProjectionMode(mode:any): void;
+    setRenderProjectionMode(mode: any): void;
     setRestrictedPanning(enabled: boolean): void;
     setRotatable(enabled: boolean): void;
     setSeamlessPanning(enabled: boolean): void;
@@ -165,7 +166,7 @@ export class MapOptions {
      * @param padding:  native ScreenPos parameter
      */
     setWatermarkPadding(padding: any): void;
-    
+
     setWatermarkScale(scale: number): void;
     setZoomGestures(enabled: boolean): void;
     /**
@@ -185,6 +186,7 @@ export class CartoMap extends View {
 
     addLayer(layer: Layer<any, any>, index?: number);
     removeLayer(layer: Layer<any, any>);
+    getLayers(): Layers<any>;
     screenToMap(pos: ScreenPos | any): MapPos;
     mapToScreen(pos: MapPos | any): ScreenPos;
     sendEvent(eventName: string, data?);

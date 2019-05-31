@@ -1,4 +1,4 @@
-import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
+import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered, Layers } from './ui.common';
 import * as application from 'application';
 import { profile } from 'tns-core-modules/profiling';
 import { fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, MapBounds, MapPos, ScreenBounds, ScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core/core';
@@ -245,14 +245,21 @@ export class CartoMap extends CartoViewBase {
         this.mapView.getOptions().setRestrictedPanning(value);
     }
 
+    getLayers() {
+        if (this.mapView) {
+            return new Layers<com.carto.components.Layers>(this.mapView.getLayers());
+        }
+        return null;
+    }
     addLayer(layer: TileLayer<any, any>, index?: number) {
         if (this.mapView) {
             const native: com.carto.layers.TileLayer = layer.getNative();
             if (!!native) {
-                if (index !== undefined) {
-                    this.mapView.getLayers().insert(index, native);
+                const layers = this.mapView.getLayers();
+                if (index !== undefined && index <= layers.count()) {
+                    layers.insert(index, native);
                 } else {
-                    this.mapView.getLayers().add(native);
+                    layers.add(native);
                 }
             }
         }
