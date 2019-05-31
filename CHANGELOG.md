@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.19](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.18...v1.2.19) (2019-05-31)
+
+
+### Features
+
+* getLayers support ([aee0683](https://github.com/farfromrefug/nativescript-carto/commit/aee0683))
+
+
+
+
+
 ## [1.2.18](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.17...v1.2.18) (2019-05-31)
 
 
