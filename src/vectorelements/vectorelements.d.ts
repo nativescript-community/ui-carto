@@ -24,7 +24,7 @@ export class AnimationStyle {
 
 export class VectorElementOptions {
     visible?: boolean;
-    metaData?: Object;
+    metaData?: { [k: string]: string };
     styleBuilder?: any;
     style?: any;
 }
@@ -51,7 +51,7 @@ export class BillboardStyleBuilderOptions extends VectorElementStyleBuilderOptio
 
 export abstract class BaseVectorElement<T, U extends VectorElementOptions> extends BaseNative<T, U> {
     visible?: boolean;
-    metaData: Object;
+    metaData: { [k: string]: string };
 }
 export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions> extends BaseVectorElement<T, U> {
     position: MapPos;

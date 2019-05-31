@@ -17,11 +17,11 @@ export interface SearchRequest {
 }
 
 export interface SearchServiceOptions {
-    // metaData?: Object;
+    // metaData?: { [k: string]: string };
 }
 
 export interface VectorTileSearchServiceOptions extends SearchServiceOptions {
-    // metaData?: Object;
+    // metaData?: { [k: string]: string };
     layer?: VectorTileLayer;
     dataSource?: TileDataSource<any, any>;
     decoder?: VectorTileDecoder;

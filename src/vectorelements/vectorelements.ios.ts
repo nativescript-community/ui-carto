@@ -35,14 +35,14 @@ export class BaseVectorElement<T extends NTVectorElement, U extends VectorElemen
     createNative(options: U) {
         return null;
     }
-    get metaData(): Object {
+    get metaData(): { [k: string]: string } {
         if (this.native) {
             return nativeMapToJS(this.native.getMetaData());
         } else {
             return this.options.metaData;
         }
     }
-    set metaData(value: Object) {
+    set metaData(value: { [k: string]: string }) {
         this.options.metaData = value;
         if (this.native) {
             const theMap = NTStringVariantMap.alloc().init();

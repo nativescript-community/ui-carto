@@ -31,7 +31,7 @@ export interface VectorElementEventData {
     // featureId: number;
     // featureData: { [k: string]: string };
     // featureLayerName: string;
-    metaData: Object;
+    metaData: { [k: string]: string };
     element: VectorElement<any, any>;
     position: MapPos;
     elementPos: MapPos;

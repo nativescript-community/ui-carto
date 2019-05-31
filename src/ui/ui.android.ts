@@ -1,4 +1,4 @@
-import { CartoViewBase, isLicenseKeyRegistered, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered, Layers } from './ui.common';
+import { CartoViewBase, isLicenseKeyRegistered, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import * as application from 'application';
 import { profile } from 'tns-core-modules/profiling';
 import { fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, MapBounds, MapPos, ScreenBounds, ScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core/core';

@@ -18,11 +18,11 @@ export interface ReverseGeocodingRequest {
 }
 
 export interface GeocodingServiceOptions {
-    // metaData?: Object;
+    // metaData?: { [k: string]: string };
 }
 
 export interface ReverseGeocodingServiceOptions {
-    // metaData?: Object;
+    // metaData?: { [k: string]: string };
 }
 
 export abstract class GeocodingService<T, U extends GeocodingServiceOptions> extends BaseNative<T, U> {
