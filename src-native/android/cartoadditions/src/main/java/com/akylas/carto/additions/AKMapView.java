@@ -23,7 +23,7 @@ public class AKMapView extends MapView {
     }
 
     @Override
-    public synchronized boolean onTouchEvent(MotionEvent event) {
+    public  boolean onTouchEvent(MotionEvent event) {
 
         boolean clickable = isClickable() || isLongClickable();
         if (!isEnabled() || !clickable) {
@@ -56,7 +56,6 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapMoved(userAction);
                 }
             });
-            // AKMapView.this.onMapMoved();
         }
 
         @Override
@@ -67,7 +66,6 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapIdle();
                 }
             });
-            // AKMapView.this.onMapIdle();
         }
 
         @Override
@@ -79,7 +77,6 @@ public class AKMapView extends MapView {
                     AKMapView.this.userAction = false;
                 }
             });
-            // AKMapView.this.onMapStable();
         }
 
         @Override
@@ -90,28 +87,8 @@ public class AKMapView extends MapView {
                     AKMapView.this.onMapClicked(mapClickInfo);
                 }
             });
-            // AKMapView.this.onMapClicked(mapClickInfo);
         }
     };
-
-
-    // public void setFocusPos(value, duration) {
-    //     this.userAction = true;
-    //     super.setfocusPos(value, duration);
-    // }
-    // public void setZoom(value: number, duration: number) {
-    //     this.userAction = true;
-    //     super.setZoom(value, duration);
-    // }
-    // public void setTilt(value: number, duration: number) {
-    //     this.userAction = true;
-    //     super.setTilt(value, duration);
-    // }
-    // public void setBearing(value: number, duration: number) {
-    //     this.userAction = true;
-    //     super.setBearing(value, duration);
-    // }
-
     public void onMapMoved(boolean userAction) {
 
     }

@@ -5,22 +5,23 @@ import {
     GeocodingResult as IGeocodingResult,
     GeocodingServiceOptions,
     MapBoxOnlineGeocodingServiceOptions,
+    MapBoxOnlineReverseGeocodingServiceOptions,
     PackageManagerGeocodingServiceOptions,
+    PackageManagerReverseGeocodingServiceOptions,
     PeliasOnlineGeocodingServiceOptions,
-    TomTomOnlineGeocodingServiceOptions
+    PeliasOnlineReverseGeocodingServiceOptions,
+    ReverseGeocodingRequest,
+    ReverseGeocodingServiceOptions,
+    TomTomOnlineGeocodingServiceOptions,
+    TomTomOnlineReverseGeocodingServiceOptions
 } from './service';
 import { nativeProperty } from '../carto';
 import { BaseGeocodingService } from './service.common';
-export class GeocodingResultVector extends NativeVector<com.carto.geocoding.GeocodingResult> {
-    constructor(public native: com.carto.geocoding.GeocodingResultVector) {
-        super();
-    }
-}
 
-abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
-    // createNative(options: GeocodingServiceOptions) {
-    //     return new com.carto.geocoding.GeocodingService();
-    // }
+
+
+export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
+
     public calculateAddresses(options: GeocodingRequest, callback: (err: Error, res: GeocodingResultVector) => void) {
         const nRequest = new com.carto.geocoding.GeocodingRequest(options.projection.getNative(), options.query);
         if (options.locationRadius !== undefined) {
@@ -29,12 +30,27 @@ abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocoding
         if (options.location) {
             nRequest.setLocation(toNativeMapPos(options.location));
         }
-        this.log('calculateAddresses', options);
         this.getNative().calculateAddressCallback(
             nRequest,
             new com.akylas.carto.additions.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
-                    this.log('onGeoCodingResult', res);
+                    callback(err, res ? new GeocodingResultVector(res) : null);
+                }
+            })
+        );
+    }
+}
+export abstract class ReverseGeocodingService<T extends com.akylas.carto.additions.AKReverseGeocodingService, U extends ReverseGeocodingServiceOptions> extends BaseGeocodingService<T, U> {
+
+    public calculateAddresses(options: ReverseGeocodingRequest, callback: (err: Error, res: GeocodingResultVector) => void) {
+        const nRequest = new com.carto.geocoding.ReverseGeocodingRequest(options.projection.getNative(), toNativeMapPos(options.location));
+        if (options.searchRadius !== undefined) {
+            nRequest.setSearchRadius(options.searchRadius);
+        }
+        this.getNative().calculateAddressCallback(
+            nRequest,
+            new com.akylas.carto.additions.GeocodingServiceAddressCallback({
+                onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
                 }
             })
@@ -42,7 +58,7 @@ abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocoding
     }
 }
 
-class GeocodingResult implements IGeocodingResult {
+export class GeocodingResult implements IGeocodingResult {
     constructor(private native: com.carto.geocoding.GeocodingResult) {}
     getAddress() {
         return this.native.getAddress();
@@ -66,7 +82,15 @@ class GeocodingResult implements IGeocodingResult {
     }
 }
 
-class PackageManagerGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
+export class GeocodingResultVector extends NativeVector<GeocodingResult> {
+    constructor(public native: com.carto.geocoding.GeocodingResultVector) {
+        super();
+    }
+    public get(index: number)  {
+        return new GeocodingResult(this.native.get(index));
+    }
+}
+export class PackageManagerGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -75,7 +99,7 @@ class PackageManagerGeocodingService extends GeocodingService<com.akylas.carto.a
         return new com.akylas.carto.additions.AKPackageManagerGeocodingService(options.packageManager.getNative());
     }
 }
-class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
+export class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -87,7 +111,7 @@ class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.carto.add
     }
 }
 
-class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
+export class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -99,7 +123,7 @@ class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.carto.add
     }
 }
 
-class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
+export class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
     @nativeProperty
@@ -111,11 +135,40 @@ class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.carto.add
     }
 }
 
-export { GeocodingService, GeocodingResult, MapBoxOnlineGeocodingService, TomTomOnlineGeocodingService, PeliasOnlineGeocodingService, PackageManagerGeocodingService };
-// export class OSMOfflineGeocodingService extends GeocodingService<com.carto.geocoding.OSMOfflineGeocodingService, OSMOfflineGeocodingServiceOptions> {
-//     // @nativeProperty
-//     // autoComplete: number;
-//     createNative(options: PackageManagerGeocodingServiceOptions) {
-//         return new com.carto.geocoding.OSMOfflineGeocodingService(options.packageManager.getNative());
-//     }
-// }
+export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKPackageManagerReverseGeocodingService(options.packageManager.getNative());
+    }
+}
+export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKPeliasOnlineReverseGeocodingService, PeliasOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKPeliasOnlineReverseGeocodingService(options.apiKey);
+    }
+}
+
+export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKTomTomOnlineReverseGeocodingService, TomTomOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: TomTomOnlineReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKTomTomOnlineReverseGeocodingService(options.apiKey);
+    }
+}
+
+export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKMapBoxOnlineReverseGeocodingService, MapBoxOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: MapBoxOnlineReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKMapBoxOnlineReverseGeocodingService(options.apiKey);
+    }
+}
+

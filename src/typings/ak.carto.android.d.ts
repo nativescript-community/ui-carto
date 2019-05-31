@@ -109,17 +109,32 @@ declare namespace com {
                 export class AKGeocodingService extends com.carto.geocoding.GeocodingService {
                     calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
                 }
+                export class AKReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.ReverseGeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
                 export class AKPackageManagerGeocodingService extends com.carto.geocoding.PackageManagerGeocodingService {
                     calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
+                export class AKPackageManagerReverseGeocodingService extends com.carto.geocoding.PackageManagerReverseGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.ReverseGeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
                 }
                 export class AKPeliasOnlineGeocodingService extends com.carto.geocoding.PeliasOnlineGeocodingService {
                     calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
                 }
+                export class AKPeliasOnlineReverseGeocodingService extends com.carto.geocoding.PeliasOnlineReverseGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.ReverseGeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
                 export class AKMapBoxOnlineGeocodingService extends com.carto.geocoding.MapBoxOnlineGeocodingService {
                     calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
                 }
+                export class AKMapBoxOnlineReverseGeocodingService extends com.carto.geocoding.MapBoxOnlineReverseGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.ReverseGeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
                 export class AKTomTomOnlineGeocodingService extends com.carto.geocoding.TomTomOnlineGeocodingService {
                     calculateAddressCallback(request: com.carto.geocoding.GeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
+                }
+                export class AKTomTomOnlineReverseGeocodingService extends com.carto.geocoding.TomTomOnlineReverseGeocodingService {
+                    calculateAddressCallback(request: com.carto.geocoding.ReverseGeocodingRequest, callback: com.akylas.carto.additions.GeocodingServiceAddressCallback);
                 }
             }
         }

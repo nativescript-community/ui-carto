@@ -11,17 +11,27 @@ export interface GeocodingRequest {
     query: string;
 }
 
+export interface ReverseGeocodingRequest {
+    projection: IProjection;
+    location?: MapPos;
+    searchRadius?: number;
+}
+
 export interface GeocodingServiceOptions {
+    // metaData?: Object;
+}
+
+export interface ReverseGeocodingServiceOptions {
     // metaData?: Object;
 }
 
 export abstract class GeocodingService<T, U extends GeocodingServiceOptions> extends BaseNative<T, U> {
     public calculateAddresses(options: GeocodingRequest, callback: (error: Error, res: GeocodingResultVector) => void);
 }
-
-export interface GeocodingServiceOptions {
-    // metaData?: Object;
+export abstract class ReverseGeocodingService<T, U extends ReverseGeocodingServiceOptions> extends BaseNative<T, U> {
+    public calculateAddresses(options: ReverseGeocodingRequest, callback: (error: Error, res: GeocodingResultVector) => void);
 }
+
 
 export interface Address {
     // street: string;
@@ -56,10 +66,21 @@ export interface PackageManagerGeocodingServiceOptions extends GeocodingServiceO
     language?: string;
     packageManager: CartoPackageManager;
 }
-export class PackageManagerGeocodingService extends GeocodingService<any, PackageManagerGeocodingServiceOptions> {}
+export class PackageManagerGeocodingService extends GeocodingService<any, PackageManagerGeocodingServiceOptions> {
+    language: string;
+
+}
+export interface PackageManagerReverseGeocodingServiceOptions extends ReverseGeocodingServiceOptions {
+    language?: string;
+    packageManager: CartoPackageManager;
+}
+export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<any, PackageManagerReverseGeocodingServiceOptions> {
+    language: string;
+
+}
 
 export interface OSMOfflineGeocodingServiceOptions {}
-export class POSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {}
+export class OSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {}
 
 export interface PeliasOnlineGeocodingServiceOptions {
     autoComplete?: boolean;
@@ -67,7 +88,21 @@ export interface PeliasOnlineGeocodingServiceOptions {
     customServiceURL?: string;
     apiKey: string;
 }
-export class PeliasOnlineGeocodingService extends GeocodingService<any, PeliasOnlineGeocodingServiceOptions> {}
+export class PeliasOnlineGeocodingService extends GeocodingService<any, PeliasOnlineGeocodingServiceOptions> {
+    autoComplete?: boolean;
+    language?: string;
+    customServiceURL?: string;
+}
+
+export interface PeliasOnlineReverseGeocodingServiceOptions {
+    language?: string;
+    customServiceURL?: string;
+    apiKey: string;
+}
+export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<any, PeliasOnlineReverseGeocodingServiceOptions> {
+    language?: string;
+    customServiceURL?: string;
+}
 
 export interface TomTomOnlineGeocodingServiceOptions {
     autoComplete?: boolean;
@@ -75,7 +110,21 @@ export interface TomTomOnlineGeocodingServiceOptions {
     customServiceURL?: string;
     apiKey: string;
 }
-export class TomTomOnlineGeocodingService extends GeocodingService<any, TomTomOnlineGeocodingServiceOptions> {}
+export class TomTomOnlineGeocodingService extends GeocodingService<any, TomTomOnlineGeocodingServiceOptions> {
+    autoComplete?: boolean;
+    language?: string;
+    customServiceURL?: string;
+}
+
+export interface TomTomOnlineReverseGeocodingServiceOptions {
+    language?: string;
+    customServiceURL?: string;
+    apiKey: string;
+}
+export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<any, TomTomOnlineReverseGeocodingServiceOptions> {
+    language?: string;
+    customServiceURL?: string;
+}
 
 export interface MapBoxOnlineGeocodingServiceOptions {
     autoComplete?: boolean;
@@ -83,4 +132,18 @@ export interface MapBoxOnlineGeocodingServiceOptions {
     customServiceURL?: string;
     apiKey: string;
 }
-export class MapBoxOnlineGeocodingService extends GeocodingService<any, MapBoxOnlineGeocodingServiceOptions> {}
+export class MapBoxOnlineGeocodingService extends GeocodingService<any, MapBoxOnlineGeocodingServiceOptions> {
+    autoComplete?: boolean;
+    language?: string;
+    customServiceURL?: string;
+}
+
+export interface MapBoxOnlineReverseGeocodingServiceOptions {
+    language?: string;
+    customServiceURL?: string;
+    apiKey: string;
+}
+export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService<any, MapBoxOnlineReverseGeocodingServiceOptions> {
+    language?: string;
+    customServiceURL?: string;
+}
