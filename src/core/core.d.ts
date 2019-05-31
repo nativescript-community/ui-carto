@@ -36,11 +36,11 @@ export abstract class NativeVector<T> {
     public getNative(): any;
     public reserve(size: number);
     public get(index: number): T;
-    public add(position: T | MapPos);
+    public add(value: T);
     public capacity(): number;
     public clear();
     public isEmpty(): boolean;
-    public set(index: number, position: T);
+    public set(index: number, value: T);
 }
 export class MapPosVector extends NativeVector<any> {}
 export class MapPosVectorVector extends NativeVector<any> {}
