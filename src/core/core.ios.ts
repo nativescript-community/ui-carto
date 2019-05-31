@@ -128,7 +128,7 @@ export abstract class NativeVector<T> {
         return this.native.capacity();
     }
     public clear() {
-        return this.native.capacity();
+        return this.native.clear();
     }
     public isEmpty() {
         return this.native.isEmpty();
@@ -152,6 +152,14 @@ export class MapPosVector extends NativeVector<NTMapPos> {
             position = toNativeMapPos(position as MapPos);
         }
         return this.native.add(position as NTMapPos);
+    }
+
+    toArray() {
+        const result: MapPos[] = [];
+        for (let i = 0; i < this.size(); i++) {
+            result.push(fromNativeMapPos(this.get(i)));
+        }
+        return result;
     }
 }
 export class MapPosVectorVector extends NativeVector<NTMapPosVector> {

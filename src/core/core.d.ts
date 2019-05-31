@@ -42,5 +42,7 @@ export abstract class NativeVector<T> {
     public isEmpty(): boolean;
     public set(index: number, value: T);
 }
-export class MapPosVector extends NativeVector<any> {}
+export class MapPosVector extends NativeVector<any> {
+    toArray() :MapPos[]
+}
 export class MapPosVectorVector extends NativeVector<any> {}
