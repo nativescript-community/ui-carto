@@ -1,5 +1,5 @@
-import { nativeProperty } from '../carto.common';
 import { BaseNative } from '../carto';
+import { nativeProperty } from '../carto.common';
 import { fromNativeMapPos } from '../core/core';
 import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections/projection';
@@ -7,15 +7,7 @@ import { nativeVariantToJS } from '../utils/utils';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { Layer, TileLayer } from './layer';
-import {
-    CartoOfflineVectorTileLayerOptions,
-    CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,
-    ClusteredVectorLayerLayerOptions,
-    VectorElementEventListener as IVectorElementEventListener,
-    VectorLayerOptions,
-    VectorTileEventListener as IVectorTileEventListener,
-    VectorTileLayerOptions
-} from './vector';
+import { CartoOfflineVectorTileLayerOptions, CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions, ClusteredVectorLayerLayerOptions, VectorElementEventListener as IVectorElementEventListener, VectorLayerOptions, VectorTileEventListener as IVectorTileEventListener, VectorTileLayerOptions } from './vector';
 
 export { VectorTileDecoder };
 

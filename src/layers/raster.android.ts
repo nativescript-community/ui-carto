@@ -1,6 +1,5 @@
 import { CartoOnlineRasterTileLayerOptions, RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
-import { TileDataSource } from '../datasources/datasource';
 
 export class RasterTileLayer extends RasterTileLayerBase<com.carto.layers.RasterTileLayer, RasterTileLayerOptions> {
     createNative(options: RasterTileLayerOptions) {

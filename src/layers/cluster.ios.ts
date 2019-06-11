@@ -4,7 +4,6 @@ import { fromNativeMapPos, MapPos } from '../core/core';
 import { VectorElementVector } from '../vectorelements/vectorelements';
 import { BaseVectorElement } from '../vectorelements/vectorelements';
 
-
 export class ClusterElementBuilderImpl extends NTClusterElementBuilder {
     private _owner: WeakRef<ClusterElementBuilder>;
     public static initWithOwner(owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderImpl {
