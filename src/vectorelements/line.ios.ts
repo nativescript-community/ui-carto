@@ -26,8 +26,16 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
     }
     @nativeProperty width: number;
     @nativeColorProperty color: Color | string;
-    @nativeProperty joinType: LineJointType;
-    @nativeProperty endType: LineEndType;
+    @nativeProperty({
+        nativeSetterName: 'setLineJoinType',
+        nativeGetterName: 'getLineJoinType'
+    })
+    joinType: LineJointType;
+    @nativeProperty({
+        nativeSetterName: 'setLineEndType',
+        nativeGetterName: 'getLineEndType'
+    })
+    endType: LineEndType;
     @nativeProperty clickWidth: number;
     @nativeProperty stretchFactor: number;
 
