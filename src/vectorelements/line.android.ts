@@ -1,10 +1,10 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { mapPosVectorFromArgs, nativeColorProperty, nativeEnumProperty } from '../carto';
-import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core/core';
 import { Color } from 'tns-core-modules/color/color';
+import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty } from '../carto';
+import { nativeProperty } from '../carto.common';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core/core';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './vectorelements';
-import { nativeProperty } from '../carto.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 export { MapBounds };
 
 export const LineJointType = {
