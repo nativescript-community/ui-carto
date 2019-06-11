@@ -25,6 +25,10 @@ public class AKVectorTileEventListener extends VectorTileEventListener {
                 arr[0] = new Boolean(AKVectorTileEventListener.this.onClicked(clickInfo));
             }
         });
-        return (Boolean)arr[0];
+        if (arr[0] != null) {
+            return (Boolean)arr[0];
+        } else {
+            return false;
+        }
     }
 }
