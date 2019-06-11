@@ -9,25 +9,25 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {
-        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA;
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA.swigValue();
     },
     get FACE_CAMERA_GROUND() {
-        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND;
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND.swigValue();
     },
     get GROUND() {
-        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND;
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.swigValue();
     }
 };
 
 export const BillboardScaling = {
     get CONST_SCREEN_SIZE() {
-        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE;
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE.swigValue();
     },
     get SCREEN_SIZE() {
-        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE;
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE.swigValue();
     },
     get WORLD_SIZE() {
-        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE;
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE.swigValue();
     }
 };
 

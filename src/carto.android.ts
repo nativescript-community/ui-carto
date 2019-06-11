@@ -29,6 +29,23 @@ export function nativeEnumProperty(options: NativePropertyOptions): (target: any
 export function nativeEnumProperty(...args) {
     return nativeProperty({}, ...args);
 }
+export function nativeAndroidEnumProperty(androidEnum, options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any {
+    // console.log('nativeAndroidEnumProperty', androidEnum, options);
+    return nativeProperty(
+        Object.assign(options || {}, {
+            converter: {
+                fromNative(value: typeof androidEnum) {
+                    // console.log('nativeAndroidEnumProperty', 'fromNative', value, value.swigValue());
+                    return value.swigValue();
+                },
+                toNative(value: any) {
+                    // console.log('nativeAndroidEnumProperty', 'fromNtoNativeative', value, androidEnum, androidEnum.swigToEnum(value));
+                    return androidEnum.swigToEnum(value);
+                }
+            }
+        })
+    );
+}
 
 export function nativeCartoImageProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeCartoImageProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;

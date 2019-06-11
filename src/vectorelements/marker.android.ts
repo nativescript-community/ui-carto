@@ -1,6 +1,6 @@
-import { nativeProperty } from '../carto.common';
 import { Color } from 'tns-core-modules/color/color';
-import { nativeCartoImageProperty, nativeColorProperty, nativeEnumProperty } from '../carto';
+import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '../carto';
+import { nativeProperty } from '../carto.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BasePointVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
 
@@ -18,8 +18,8 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
     @nativeProperty anchorPointX: number;
     @nativeProperty anchorPointY: number;
     @nativeProperty clickSize: number;
-    @nativeEnumProperty scalingMode: BillboardScaling;
-    @nativeEnumProperty orientationMode: BillboardOrientation;
+    @nativeAndroidEnumProperty(com.carto.styles.BillboardScaling, {}) scalingMode: BillboardScaling;
+    @nativeAndroidEnumProperty(com.carto.styles.BillboardOrientation, {}) orientationMode: BillboardOrientation;
 
     _buildStyle: com.carto.styles.MarkerStyle;
     buildStyle() {

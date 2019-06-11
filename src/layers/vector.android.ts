@@ -72,8 +72,8 @@ function initVectorTileEventListener() {
                     position = nProj.fromWgs84(layerProj.toWgs84(position));
                 }
                 return (
-                    owner.onVectorTileClicked({
-                        clickType: info.getClickType()as any,
+                    owner.onVectorTileClicked.call(owner, {
+                        clickType: info.getClickType().swigValue(),
                         layer: this._layer.get() as any,
                         featureId: info.getFeatureId(),
                         featureData: nativeVariantToJS(info.getFeature().getProperties()),
@@ -125,8 +125,8 @@ function initVectorElementEventListener() {
                     position = nProj.fromWgs84(layerProj.toWgs84(position));
                 }
                 return (
-                    owner.onVectorElementClicked({
-                        clickType: info.getClickType() as any,
+                    owner.onVectorElementClicked.call(owner, {
+                        clickType: info.getClickType().swigValue(),
                         layer: this._layer.get() as any,
                         element,
                         metaData: element.metaData,

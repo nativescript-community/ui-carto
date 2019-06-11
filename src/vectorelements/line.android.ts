@@ -9,28 +9,28 @@ export { MapBounds };
 
 export const LineJointType = {
     get BEVEL() {
-        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_BEVEL;
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_BEVEL.swigValue();
     },
     get MITER() {
-        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_MITER;
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_MITER.swigValue();
     },
     get NONE() {
-        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_NONE;
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_NONE.swigValue();
     },
     get ROUND() {
-        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_ROUND;
+        return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_ROUND.swigValue();
     }
 };
 
 export const LineEndType = {
     get ROUND() {
-        return com.carto.styles.LineEndType.LINE_END_TYPE_ROUND;
+        return com.carto.styles.LineEndType.LINE_END_TYPE_ROUND.swigValue();
     },
     get SQUARE() {
-        return com.carto.styles.LineEndType.LINE_END_TYPE_SQUARE;
+        return com.carto.styles.LineEndType.LINE_END_TYPE_SQUARE.swigValue();
     },
     get NONE() {
-        return com.carto.styles.LineEndType.LINE_END_TYPE_NONE;
+        return com.carto.styles.LineEndType.LINE_END_TYPE_NONE.swigValue();
     }
 };
 export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.LineStyleBuilder, LineStyleBuilderOptions> {
@@ -40,8 +40,16 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
 
     @nativeProperty width: number;
     @nativeColorProperty color: Color | string;
-    @nativeEnumProperty lineJoinType: ILineJointType;
-    @nativeEnumProperty lineEndType: ILineEndType;
+    @nativeAndroidEnumProperty(com.carto.styles.LineJoinType, {
+        nativeSetterName: 'setLineJoinType',
+        nativeGetterName: 'getLineJoinType'
+    })
+    joinType: ILineJointType;
+    @nativeAndroidEnumProperty(com.carto.styles.LineEndType, {
+        nativeSetterName: 'setLineEndType',
+        nativeGetterName: 'getLineEndType'
+    })
+    endType: ILineEndType;
     @nativeProperty clickWidth: number;
     @nativeProperty stretchFactor: number;
 

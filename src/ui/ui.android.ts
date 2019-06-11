@@ -130,7 +130,7 @@ function initMapViewClass() {
             const owner = this.owner;
             if (owner && owner.hasListeners(MapClickedEvent)) {
                 owner.sendEvent(MapClickedEvent, {
-                    clickType: mapClickInfo.getClickType(),
+                    clickType: mapClickInfo.getClickType().swigValue(),
                     position: this.owner.fromNativeMapPos(mapClickInfo.getClickPos())
                 });
             }
