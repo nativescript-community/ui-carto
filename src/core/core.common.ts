@@ -1,8 +1,14 @@
+export type LatitudeKeys = 'latitude' | 'lat';
+export type LongitudeKeys = 'longitude' | 'lon' | 'lng';
+
 export interface MapPos {
-    latitude: number;
-    longitude: number;
-    altitude?: number;
+    latitude?: number;
+    lat?: number;
+    longitude?: number;
+    lon?: number;
+    lng?: number;
     speed?: number;
+    altitude?: number;
 }
 
 export interface ScreenPos {
@@ -30,3 +36,10 @@ export interface ScreenBounds {
 // export namespace MapBounds {
 //     function fromCoordinates(southwest: MapPos, northeast: MapPos): MapBounds;
 // }
+export let LatitudeKey: LatitudeKeys = 'latitude';
+export let LongitudeKey: LongitudeKeys = 'longitude';
+
+export function setMapPosKeys(latitude: LatitudeKeys, longitude: LongitudeKeys) {
+    LatitudeKey = latitude;
+    LongitudeKey = longitude;
+}

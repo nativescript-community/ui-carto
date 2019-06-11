@@ -1,5 +1,5 @@
-import { MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './core.common';
-export { ScreenPos, MapPos, MapBounds, ScreenBounds, MapVec, MapRange };
+import { LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './core.common';
+export { LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, ScreenPos, MapPos, MapBounds, ScreenBounds, MapVec, MapRange };
 
 export declare function fromNativeMapPos(pos): MapPos;
 export declare function toNativeMapPos(position: MapPos): any;
@@ -15,6 +15,7 @@ export declare function fromNativeMapVec(value): MapVec;
 export declare function toNativeMapVec(value: MapVec): any;
 export declare function fromNativeMapRange(value): MapRange;
 export declare function toNativeMapRange(value: MapRange): any;
+export declare function setMapPosKeys(latitude: LatitudeKeys, longitude: LongitudeKeys) ;
 
 export class CartoMapStyle {
     static VOYAGER: CartoMapStyle;
@@ -42,7 +43,7 @@ export abstract class NativeVector<T> {
     public isEmpty(): boolean;
     public set(index: number, value: T);
 }
-export class MapPosVector extends NativeVector<any> {
+export class MapPosVector extends NativeVector<MapPos> {
     toArray() :MapPos[]
 }
-export class MapPosVectorVector extends NativeVector<any> {}
+export class MapPosVectorVector extends NativeVector<NativeVector<MapPos>> {}

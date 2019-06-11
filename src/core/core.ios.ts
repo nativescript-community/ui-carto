@@ -1,5 +1,5 @@
-import { MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './core.common';
-export { MapBounds, MapPos, ScreenBounds, ScreenPos };
+import { LatitudeKey, LongitudeKey, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+export { LatitudeKey, LongitudeKey, MapBounds, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
@@ -26,8 +26,8 @@ export function fromNativeMapPos(position: NTMapPos) {
         return null;
     }
     return {
-        latitude: position.getY(),
-        longitude: position.getX(),
+        [LatitudeKey]: position.getY(),
+        [LongitudeKey]: position.getX(),
         altitude: position.getZ()
     } as MapPos;
 }
@@ -39,7 +39,7 @@ export function toNativeMapPos(position: MapPos | NTMapPos) {
         return position;
     }
     //  ignore z for now as points can get under the map!
-    return NTMapPos.alloc().initWithXYZ(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
+    return NTMapPos.alloc().initWithXYZ(position[LongitudeKey], position[LatitudeKey], position.altitude > 0 ? position.altitude : 0);
 }
 export function fromNativeScreenPos(position: NTScreenPos) {
     return {
@@ -148,10 +148,11 @@ export class MapPosVector extends NativeVector<NTMapPos> {
     }
 
     public add(position: NTMapPos | MapPos) {
-        if ((position as any).latitude) {
+        if (position instanceof NTMapPos) {
             position = toNativeMapPos(position as MapPos);
+            return this.native.add(position);
         }
-        return this.native.add(position as NTMapPos);
+        return this.native.add(toNativeMapPos(position));
     }
 
     toArray() {

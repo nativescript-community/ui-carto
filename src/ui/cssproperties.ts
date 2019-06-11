@@ -1,6 +1,6 @@
 import { CssProperty } from 'tns-core-modules/ui/core/properties';
 import { Style } from 'tns-core-modules/ui/styling/style';
-import { MapPos } from '../core/core';
+import { LatitudeKey, LongitudeKey, MapPos } from '../core/core';
 import { booleanConverter } from 'tns-core-modules/ui/core/view-base';
 declare module 'tns-core-modules/ui/styling/style' {
     interface Style {
@@ -35,7 +35,7 @@ export const focusPosProperty = new CssProperty<Style, MapPos>({
         // only called for string values!!
         if (typeof v === 'string') {
             const MapPoss = v.split(',').map(parseFloat);
-            return { latitude: MapPoss[0], longitude: MapPoss[1] };
+            return { [LatitudeKey]: MapPoss[0], [LongitudeKey]: MapPoss[1] };
         }
         return v;
     }

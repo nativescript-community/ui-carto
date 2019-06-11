@@ -1,5 +1,5 @@
 import { CSSType, View } from 'tns-core-modules/ui/core/view';
-import { fromNativeMapPos, MapPos } from '../core/core';
+import { fromNativeMapPos, LatitudeKey, MapPos } from '../core/core';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { isAndroid } from 'tns-core-modules/platform/platform';
 import { Layer } from 'nativescript-carto/layers/layer';
@@ -221,9 +221,9 @@ export abstract class CartoViewBase extends View {
         if (!this.nativeViewProtected || !this.nativeProjection) {
             return;
         }
-        if (Array.isArray(value)) {
-            value = { latitude: value[0], longitude: value[1] };
-        }
+        // if (Array.isArray(value)) {
+        //     value = { latitude: value[0], longitude: value[1] };
+        // }
         this.setFocusPos(value, 0);
     }
     [zoomProperty.setNative](value: number) {
@@ -254,7 +254,7 @@ export abstract class CartoViewBase extends View {
         if (this.nativeViewProtected) {
             const pos = this.focusPos;
             const zoom = this.zoom;
-            return (156543.03390625 * Math.cos((pos.latitude * Math.PI) / 180)) / Math.pow(2, zoom);
+            return (156543.03390625 * Math.cos((pos[LatitudeKey] * Math.PI) / 180)) / Math.pow(2, zoom);
         }
         return 0;
     }

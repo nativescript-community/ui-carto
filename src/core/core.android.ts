@@ -1,5 +1,5 @@
-import { MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './core.common';
-export { MapBounds, MapPos, ScreenBounds, ScreenPos };
+import { LatitudeKey, LongitudeKey, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+export { LatitudeKey, LongitudeKey, MapBounds, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export const CartoMapStyle = {
     get VOYAGER() {
@@ -40,8 +40,8 @@ export function fromNativeMapPos(position: com.carto.core.MapPos) {
         return null;
     }
     return {
-        latitude: position.getY(),
-        longitude: position.getX(),
+        [LatitudeKey]: position.getY(),
+        [LongitudeKey]: position.getX(),
         altitude: position.getZ()
     } as MapPos;
 }
@@ -52,7 +52,7 @@ export function toNativeMapPos(position: MapPos | com.carto.core.MapPos) {
     if (position instanceof com.carto.core.MapPos) {
         return position;
     }
-    const result = new com.carto.core.MapPos(position.longitude, position.latitude, position.altitude > 0 ? position.altitude : 0);
+    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], position.altitude > 0 ? position.altitude : 0);
     //  ignore z for now as points can get under the map!
     return result;
 }
@@ -69,7 +69,6 @@ export function toNativeScreenPos(position: ScreenPos) {
     return new com.carto.core.ScreenPos(position.x, position.y);
 }
 export function fromNativeMapRange(value: com.carto.core.MapRange) {
-    
     return {
         max: value.getMax(),
         min: value.getMin()
@@ -173,10 +172,11 @@ export class MapPosVector extends NativeVector<com.carto.core.MapPos> {
         this.native = native || new com.carto.core.MapPosVector();
     }
     public add(position: com.carto.core.MapPos | MapPos) {
-        if ((position as any).latitude) {
+        if (position instanceof com.carto.core.MapPos ) {
             position = toNativeMapPos(position as MapPos);
+            return this.native.add(position );
         }
-        return this.native.add(position as com.carto.core.MapPos);
+        return this.native.add(toNativeMapPos(position));
     }
 
     toArray() {
