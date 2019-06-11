@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.20](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.19...v1.2.20) (2019-06-11)
+
+
+### Bug Fixes
+
+* better handle off android enum properties ([267c26a](https://github.com/farfromrefug/nativescript-carto/commit/267c26a))
+* fixed joinType and endType properties ([5f0e655](https://github.com/farfromrefug/nativescript-carto/commit/5f0e655))
+* import fixes ([a49ea72](https://github.com/farfromrefug/nativescript-carto/commit/a49ea72))
+* metaData type ([e72c92e](https://github.com/farfromrefug/nativescript-carto/commit/e72c92e))
+* prevent NPE error ([5ba6d27](https://github.com/farfromrefug/nativescript-carto/commit/5ba6d27))
+
+
+### Features
+
+* allow to use custom keys for MapPos objects ([031c219](https://github.com/farfromrefug/nativescript-carto/commit/031c219))
+* toArray for MapPosVector ([72156e6](https://github.com/farfromrefug/nativescript-carto/commit/72156e6))
+
+
+
+
+
 ## [1.2.19](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.18...v1.2.19) (2019-05-31)
 
 
