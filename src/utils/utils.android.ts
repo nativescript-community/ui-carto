@@ -177,13 +177,6 @@ export interface DirAssetPackageNative extends com.carto.utils.AssetPackage {
 
 let DirAssetPackageNative: DirAssetPackageNative;
 
-// interface MapEventListener extends com.carto.ui.MapEventListener {
-//     // tslint:disable-next-line:no-misused-new
-//     new (owner: WeakRef<CartoMap>): MapEventListener;
-// }
-
-// let MapEventListener: MapEventListener;
-
 // Full DirAssetPackage written in TS for live sync
 function intDirAssetPackageClass() {
     if (DirAssetPackageNative) {
@@ -191,31 +184,6 @@ function intDirAssetPackageClass() {
     }
 
     const AssetUtils = com.carto.utils.AssetUtils;
-
-    // @Interfaces([com.carto.ui.MapEventListener])
-    // class MapEventListenerImpl extends com.carto.ui.MapEventListener {
-    //     constructor(private owner: WeakRef<CartoMap>) {
-    //         super();
-    //         return global.__native(this);
-    //     }
-    //     public onMapIdle() {
-    //         this.owner && this.owner.get().sendEvent(MapIdleEvent);
-    //     }
-    //     public onMapMoved() {
-    //         this.owner && this.owner.get().sendEvent(MapMovedEvent);
-    //     }
-    //     public onMapStable() {
-    //         this.owner && this.owner.get().sendEvent(MapStableEvent);
-    //     }
-    //     public onMapClicked(mapClickInfo: com.carto.ui.MapClickInfo) {
-    //         this.owner &&
-    //             this.owner.get().sendEvent(MapClickedEvent, {
-    //                 clickType: mapClickInfo.getClickType(),
-    //                 position: this.owner.get().fromNativeMapPos(mapClickInfo.getClickPos())
-    //             });
-    //     }
-    // }
-    // MapEventListener = MapEventListenerImpl as any;
 
     function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
         // console.log('walkDir', dirPath);
