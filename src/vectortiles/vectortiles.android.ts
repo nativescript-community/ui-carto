@@ -13,11 +13,11 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: com.carto.utils.AssetPackage;
     createNative(options: MBVectorTileDecoderOptions) {
-        this.log('createNative', options);
+        // this.log('createNative', options);
         if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
             let vectorTileStyleSetData: com.carto.core.BinaryData;
-            this.log('zipPath', zipPath, options.liveReload);
+            // this.log('zipPath', zipPath, options.liveReload);
             if (options.liveReload === true) {
                 const data = File.fromPath(getFileName(options.zipPath)).readSync();
                 // const arr = new ArrayBuffer(data.length);

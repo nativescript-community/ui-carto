@@ -43,7 +43,7 @@ function initClusterElementBuilderNative() {
 export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
     @nativeImageProperty bitmap: string;
     createNative() {
-        this.log('create ClusterElementBuilder');
+        // this.log('create ClusterElementBuilder');
         initClusterElementBuilderNative();
         const result = new ClusterElementBuilderNative(new WeakRef(this));
         // result.setUseNativeBuilder(false);

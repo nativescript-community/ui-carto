@@ -192,9 +192,9 @@ export class DirAssetPackage extends BaseNative<NTDirAssetPackageImpl, DirAssetP
     createNative(options: DirAssetPackageOptions) {
         this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
-            this.log('intDirAssetPackageClass done');
+            // this.log('intDirAssetPackageClass done');
             const result = NTDirAssetPackageImpl.new();
-            this.log('about to initialize');
+            // this.log('about to initialize');
             result.initialize(options);
             return result;
         } else {
