@@ -121,8 +121,6 @@ export class CartoMap extends CartoViewBase {
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);
-            } else {
-                console.error('no license to register !!!');
             }
         }
     }
