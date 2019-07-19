@@ -63,6 +63,8 @@ declare namespace com {
                     buildCluster(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector): com.carto.vectorelements.VectorElement;
                     setUseNativeBuilder(value: boolean);
                     setBitmap(bitmap: any);
+                    setColor(value: com.carto.graphics.Color )
+                    setSize( value) 
                 }
 
                 export class RoutingServiceRouteCallback {

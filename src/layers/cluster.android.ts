@@ -1,8 +1,9 @@
-import { _createImageSourceFromSrc, BaseNative } from '../carto.common';
+import { _createImageSourceFromSrc, BaseNative, nativeProperty } from '../carto.common';
 import { fromNativeMapPos, MapPos } from '../core/core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
-import { nativeImageProperty } from '../carto';
+import { nativeImageProperty, nativeColorProperty } from '../carto';
+import { Color } from 'tns-core-modules/color/color';
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 
@@ -22,7 +23,18 @@ function initClusterElementBuilderNative() {
             super();
             return global.__native(this);
         }
-
+        // buildClusterElement( position: com.carto.core.MapPos, nElements: any) {
+        //     const owner = this.owner.get();
+        //     if (owner.buildClusterElement) {
+        //         const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
+        //         if (result instanceof BaseVectorElement) {
+        //             return result.getNative();
+        //         } else if (result) {
+        //             return result;
+        //         }
+        //     }
+        //     return super.buildClusterElement(position, nElements);
+        // }
         buildCluster(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
             const owner = this.owner.get();
             console.log('test buildCluster1', position.getX(), position.getY(), !!owner.buildClusterElement);
@@ -42,10 +54,15 @@ function initClusterElementBuilderNative() {
 
 export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
     @nativeImageProperty bitmap: string;
-    createNative() {
-        // this.log('create ClusterElementBuilder');
+    @nativeColorProperty color: string | Color ;
+    @nativeProperty size: number;
+    createNative(options: ClusterElementBuilderOptions) {
+        this.log('create ClusterElementBuilder', !!this.buildClusterElement, !!this.options.buildClusterElement, !!options.buildClusterElement);
         initClusterElementBuilderNative();
         const result = new ClusterElementBuilderNative(new WeakRef(this));
+        if (!!options.buildClusterElement) {
+            result.setUseNativeBuilder(false);
+        }
         // result.setUseNativeBuilder(false);
         return result;
         // return new com.carto.layers.ClusterElementBuilder();

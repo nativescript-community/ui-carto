@@ -25,6 +25,8 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
 
     private Map<Integer, MarkerStyle> markerStyles = new HashMap<>();
     private android.graphics.Bitmap markerBitmap = null;
+    private com.carto.graphics.Color markerColor = null;
+    private int markerSize = 20;
 
     boolean useNativeBuilder = true;
 
@@ -33,8 +35,13 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     }
 
     public void setBitmap(android.graphics.Bitmap value) {
-        Log.d("AKClusterElementBuilder", "setBitmap ");
         markerBitmap = value;
+    }
+    public void setColor(com.carto.graphics.Color value) {
+        markerColor = value;
+    }
+    public void setSize(int value) {
+        markerSize = value;
     }
 
     public VectorElement buildCluster(MapPos pos, VectorElementVector nElements) {
@@ -106,7 +113,6 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
 
     public VectorElement nativeBuildClusterElement(MapPos pos, VectorElementVector elements) {
 
-        Log.d("AKCartoAdditions", "nativeBuildClusterElement: " + elements.size());
         // Try to reuse existing marker styles
         MarkerStyle style = markerStyles.get((int) elements.size());
 
@@ -117,7 +123,6 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         if (style == null) {
             MarkerStyleBuilder styleBuilder = new MarkerStyleBuilder();
             if (markerBitmap != null) {
-                Log.d("AKCartoAdditions", "creating bitmap: " + markerBitmap.getWidth());
                 Bitmap canvasBitmap = markerBitmap.copy(Bitmap.Config.ARGB_8888, true);
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
 
@@ -135,9 +140,11 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                 styleBuilder.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap));
             }
 
-            styleBuilder.setSize(30);
+            styleBuilder.setSize(markerSize);
             styleBuilder.setPlacementPriority((int) elements.size());
-
+            if (markerColor != null) {
+                styleBuilder.setColor(markerColor);
+            }
             style = styleBuilder.buildStyle();
 
             markerStyles.put((int) elements.size(), style);
