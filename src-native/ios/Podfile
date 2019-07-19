@@ -2,7 +2,6 @@ target 'CartoAdditions' do
 
     source 'https://github.com/CocoaPods/Specs.git'
     platform :ios, '8.0'
-    pod 'CartoMobileSDK', '4.2.0-rc.2'
-    
+    pod 'Akylas-CartoMobileSDK', '4.2.1'    
 end
 
