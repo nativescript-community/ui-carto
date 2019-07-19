@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.22](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.21...v1.2.22) (2019-07-19)
+
+
+### Bug Fixes
+
+* cleanup on dispose ([34cb78b](https://github.com/farfromrefug/nativescript-carto/commit/34cb78b))
+* cluster improvements ([926c05c](https://github.com/farfromrefug/nativescript-carto/commit/926c05c))
+
+
+
+
+
 ## [1.2.21](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.20...v1.2.21) (2019-06-13)
 
 
