@@ -192,6 +192,8 @@ export class CartoMap extends CartoViewBase {
     }
 
     disposeNativeView(): void {
+        this._projection = null;
+        this.nativeProjection = null;
         this.nativeView.owner = null;
         super.disposeNativeView();
     }
@@ -254,7 +256,8 @@ export class CartoMap extends CartoViewBase {
             const native: com.carto.layers.TileLayer = layer.getNative();
             if (!!native) {
                 const layers = this.mapView.getLayers();
-                if (index !== undefined && index <= layers.count()) {
+                // console.log('addLayer', index, layers.count(), native);
+                if (index !== undefined && index < layers.count()) {
                     layers.insert(index, native);
                 } else {
                     layers.add(native);
