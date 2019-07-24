@@ -54,14 +54,14 @@ export interface VectorElementEventListener {
     onVectorElementClicked(info: VectorElementEventData);
 }
 export interface VectorEditEventListener {
-    onElementModify(param0: com.carto.vectorelements.VectorElement, param1: com.carto.geometry.Geometry): void;
-    onElementDeselected(param0: com.carto.vectorelements.VectorElement): void;
-    onElementSelect(param0: com.carto.vectorelements.VectorElement): boolean;
-    onSelectDragPointStyle(param0: com.carto.vectorelements.VectorElement, param1: com.carto.layers.VectorElementDragPointStyle): PointStyleBuilder;
+    onElementModify(param0: VectorElement<any, any>, param1: Geometry): void;
+    onElementDeselected(param0: VectorElement<any, any>): void;
+    onElementSelect(param0: VectorElement<any, any>): boolean;
+    onSelectDragPointStyle(param0: VectorElement<any, any>, style: any): PointStyleBuilder;
     onDragMove(param0: VectorElementDragInfo): VectorElementDragResult;
     onDragEnd(param0: VectorElementDragInfo): VectorElementDragResult;
     onDragStart(param0: VectorElementDragInfo): VectorElementDragResult;
-    onElementDelete(param0: com.carto.vectorelements.VectorElement): void;
+    onElementDelete(param0: VectorElement<any, any>): void;
 }
 
 export interface VectorLayerOptions extends LayerOptions {
