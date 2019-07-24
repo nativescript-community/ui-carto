@@ -33,7 +33,7 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
 export class Marker extends BasePointVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
-        const style: com.carto.styles.MarkerStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         // this.log('creating marker', options.position, options.projection, options.geometry, options.style);
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
@@ -45,17 +45,25 @@ export class Marker extends BasePointVectorElement<com.carto.vectorelements.Mark
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: com.carto.styles.MarkerStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.carto.styles.MarkerStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof MarkerStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new MarkerStyleBuilder(styleBuilder as MarkerStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: MarkerStyleBuilder | com.carto.styles.MarkerStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: MarkerStyleBuilder | com.carto.styles.MarkerStyle | MarkerStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof MarkerStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

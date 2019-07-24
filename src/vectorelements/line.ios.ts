@@ -50,23 +50,29 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
 
 export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     createNative(options: LineOptions) {
-        const style: NTLineStyle = options.style || options.styleBuilder.buildStyle();
-
+        const style = this.buildStyle();
         const result = NTLine.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.projection), style);
-        // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTLineStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTLineStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof LineStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new LineStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
-    set style(value: LineStyleBuilder | NTLineStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: LineStyleBuilder | NTLineStyle | LineStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof LineStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
     setPoses(positions: MapPosVector | MapPos[]) {
@@ -83,6 +89,6 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     }
     getBounds() {
         const nBounds = this.getNative().getBounds();
-        return fromNativeMapBounds(NTMapBounds.alloc().initWithMinMax(nBounds.getMin(), nBounds.getMax()));
+        return fromNativeMapBounds(nBounds);
     }
 }

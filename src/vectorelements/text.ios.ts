@@ -9,14 +9,18 @@ export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, 
         return NTTextStyleBuilder.alloc().init();
     }
 
-    @nativeColorProperty color: Color | string;
     @nativeProperty fontSize: number;
+    @nativeProperty anchorPointX: number;
+    @nativeProperty anchorPointY: number;
     @nativeProperty fontName: string;
     @nativeProperty orientationMode: BillboardOrientation;
     @nativeProperty breakLines: boolean;
     @nativeProperty strokeWidth: number;
-    @nativeProperty strokeColor: Color | string;
-    @nativeProperty backgroundColor: Color | string;
+    @nativeColorProperty color: Color | string;
+    @nativeColorProperty strokeColor: Color | string;
+    @nativeColorProperty borderColor: Color | string;
+    @nativeColorProperty backgroundColor: Color | string;
+    @nativeProperty flippable: boolean;
 
     _buildStyle: NTTextStyle;
     buildStyle() {
@@ -28,25 +32,34 @@ export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, 
 }
 
 export class Text extends BasePointVectorElement<NTText, TextOptions> {
+    @nativeProperty text: string;
     createNative(options: TextOptions) {
-        const style: NTTextStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);
         const result = NTText.alloc().initWithPosStyleText(nativePos, style, options.text);
         // result['owner'] = new WeakRef(this);
         return result;
     }
 
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTTextStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTTextStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof TextStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new TextStyleBuilder(styleBuilder as TextStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: TextStyleBuilder | NTTextStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: TextStyleBuilder | NTTextStyle | TextStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof TextStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

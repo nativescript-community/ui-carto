@@ -64,22 +64,30 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
 
 export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, LineOptions> {
     createNative(options: LineOptions) {
-        const style: com.carto.styles.LineStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.positions, options.projection), style);
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: com.carto.styles.LineStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.carto.styles.LineStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof LineStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new LineStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
-    set style(value: LineStyleBuilder | com.carto.styles.LineStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: LineStyleBuilder | com.carto.styles.LineStyle | LineStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof LineStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 
@@ -98,6 +106,6 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
     getBounds() {
         const nBounds = this.getNative().getBounds();
         // const nProjection = this.projection.getNative();
-        return fromNativeMapBounds(new com.carto.core.MapBounds(nBounds.getMin(), nBounds.getMax()));
+        return fromNativeMapBounds(nBounds);
     }
 }

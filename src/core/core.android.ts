@@ -1,4 +1,4 @@
-import { LatitudeKey, LongitudeKey, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+import { LatitudeKey, LongitudeKey, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, AltitudeKey } from './core.common';
 export { LatitudeKey, LongitudeKey, MapBounds, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export const CartoMapStyle = {
@@ -52,7 +52,10 @@ export function toNativeMapPos(position: MapPos | com.carto.core.MapPos) {
     if (position instanceof com.carto.core.MapPos) {
         return position;
     }
-    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], position.altitude > 0 ? position.altitude : 0);
+    if (position[LongitudeKey] === undefined || position[LatitudeKey] === undefined) {
+        throw new Error('toNativeMapPos: missing parameters');
+    }
+    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
     //  ignore z for now as points can get under the map!
     return result;
 }
@@ -172,9 +175,9 @@ export class MapPosVector extends NativeVector<com.carto.core.MapPos> {
         this.native = native || new com.carto.core.MapPosVector();
     }
     public add(position: com.carto.core.MapPos | MapPos) {
-        if (position instanceof com.carto.core.MapPos ) {
+        if (position instanceof com.carto.core.MapPos) {
             position = toNativeMapPos(position as MapPos);
-            return this.native.add(position );
+            return this.native.add(position);
         }
         return this.native.add(toNativeMapPos(position));
     }

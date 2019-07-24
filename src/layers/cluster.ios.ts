@@ -1,8 +1,7 @@
 import { BaseNative } from '../carto.common';
-import { ClusterElementBuilderOptions } from './cluster';
 import { fromNativeMapPos, MapPos } from '../core/core';
-import { VectorElementVector } from '../vectorelements/vectorelements';
-import { BaseVectorElement } from '../vectorelements/vectorelements';
+import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
+import { ClusterElementBuilderOptions } from './cluster';
 
 export class ClusterElementBuilderImpl extends NTClusterElementBuilder {
     private _owner: WeakRef<ClusterElementBuilder>;
@@ -14,7 +13,7 @@ export class ClusterElementBuilderImpl extends NTClusterElementBuilder {
     buildClusterElementSwigExplicitNTClusterElementBuilderElements(position: NTMapPos, nElements: NTVectorElementVector | number) {
         const owner = this._owner.get();
         if (owner.buildClusterElement) {
-            const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(nElements as NTVectorElementVector));
+            const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
             if (result instanceof BaseVectorElement) {
                 return result.getNative();
             } else if (result) {

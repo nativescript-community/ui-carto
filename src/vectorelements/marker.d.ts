@@ -16,19 +16,29 @@ export class MarkerStyleBuilderOptions extends BillboardStyleBuilderOptions {
     scalingMode?: BillboardScaling;
     orientationMode?: BillboardOrientation;
 }
-export class MarkerStyleBuilder<T, U extends MarkerStyleBuilderOptions> extends BillboardStyleBuilder<any, MarkerStyleBuilderOptions> {
-    constructor(options: U);
+export class MarkerStyleBuilder extends BillboardStyleBuilder<any, MarkerStyleBuilderOptions> {
     buildStyle(): any;
+    width: number;
+    hideIfOverlapped: boolean;
+    scaleWithDPI: boolean;
+    size: number;
+    placementPriority: number;
+    color: Color | string;
+    bitmap: string;
+    anchorPointX: number;
+    anchorPointY: number;
+    clickSize: number;
+    scalingMode: BillboardScaling;
+    orientationMode: BillboardOrientation;
 }
 
 export class MarkerOptions extends PointVectorElementOptions {
     rotation?: number;
-    styleBuilder?: MarkerStyleBuilder<any, any>;
-    style?: any;
+    styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions;
     geometry?: Geometry;
 }
 export class Marker extends BasePointVectorElement<any, MarkerOptions> {
-    styleBuilder?: MarkerStyleBuilder<any, any>;
+    styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions | any;
     style?: any;
     size?: number;
     placementPriority?: number;

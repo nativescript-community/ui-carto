@@ -9,43 +9,57 @@ export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.Tex
     createNative(options: TextStyleBuilderOptions) {
         return new com.carto.styles.TextStyleBuilder();
     }
-    @nativeColorProperty color: Color | string;
     @nativeProperty fontSize: number;
     @nativeProperty fontName: string;
-    @nativeAndroidEnumProperty( com.carto.styles.BillboardOrientation, {})  orientationMode: BillboardOrientation;
+    @nativeAndroidEnumProperty(com.carto.styles.BillboardOrientation, {}) orientationMode: BillboardOrientation;
     @nativeProperty breakLines: boolean;
+    @nativeProperty textField: string;
     @nativeProperty strokeWidth: number;
-    @nativeProperty strokeColor: Color | string;
-    @nativeProperty backgroundColor: Color | string;
+    @nativeColorProperty color: Color | string;
+    @nativeColorProperty strokeColor: Color | string;
+    @nativeColorProperty borderColor: Color | string;
+    @nativeColorProperty backgroundColor: Color | string;
+    @nativeProperty anchorPointX: number;
+    @nativeProperty anchorPointY: number;
+    @nativeProperty flippable: boolean;
 
-    _buildStyle: com.carto.styles.LabelStyle;
+    _buildStyle: com.carto.styles.TextStyle;
     buildStyle() {
         if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+            this._buildStyle = this.getNative().buildStyle() as com.carto.styles.TextStyle;
         }
         return this._buildStyle;
     }
 }
 
 export class Text extends BasePointVectorElement<com.carto.vectorelements.Text, TextOptions> {
+    @nativeProperty text: string;
     createNative(options: TextOptions) {
-        const style: com.carto.styles.TextStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);
         const result = new com.carto.vectorelements.Text(nativePos, style, options.text);
-        result['owner'] = new WeakRef(this);
+        // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: com.carto.styles.TextStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.carto.styles.TextStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof TextStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new TextStyleBuilder(styleBuilder as TextStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: TextStyleBuilder | com.carto.styles.TextStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? (this.native.getStyle() as com.carto.styles.TextStyle) : this.options.styleBuilder;
+    }
+    set styleBuilder(value: TextStyleBuilder | com.carto.styles.TextStyle | TextStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof TextStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

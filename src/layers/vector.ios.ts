@@ -25,6 +25,13 @@ export enum VectorTileRenderOrder {
     LAST = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAST
 }
 
+export enum VectorElementDragResult {
+    IGNORE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE,
+    STOP = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_STOP,
+    MODIFY = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_MODIFY,
+    DELETE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_DELETE
+}
+
 export class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorElementEventListener>;

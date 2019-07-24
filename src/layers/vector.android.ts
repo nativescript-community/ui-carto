@@ -1,13 +1,22 @@
 import { BaseNative } from '../carto';
 import { nativeProperty } from '../carto.common';
-import { fromNativeMapPos } from '../core/core';
+import { fromNativeMapPos, fromNativeScreenPos } from '../core/core';
 import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections/projection';
 import { nativeVariantToJS } from '../utils/utils';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
 import { Layer, TileLayer } from './layer';
-import { CartoOfflineVectorTileLayerOptions, CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions, ClusteredVectorLayerLayerOptions, VectorElementEventListener as IVectorElementEventListener, VectorLayerOptions, VectorTileEventListener as IVectorTileEventListener, VectorTileLayerOptions } from './vector';
+import {
+    CartoOfflineVectorTileLayerOptions,
+    CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,
+    ClusteredVectorLayerLayerOptions,
+    VectorEditEventListener as IVectorEditEventListener,
+    VectorElementEventListener as IVectorElementEventListener,
+    VectorLayerOptions,
+    VectorTileEventListener as IVectorTileEventListener,
+    VectorTileLayerOptions
+} from './vector';
 
 export { VectorTileDecoder };
 
@@ -24,6 +33,21 @@ export const VectorTileRenderOrder = {
     },
     get LAST() {
         return com.carto.layers.VectorTileRenderOrder.VECTOR_TILE_RENDER_ORDER_LAST;
+    }
+};
+
+export const VectorElementDragResult = {
+    get IGNORE() {
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+    },
+    get DELETE() {
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_DELETE;
+    },
+    get MODIFY() {
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_MODIFY;
+    },
+    get STOP() {
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_STOP;
     }
 };
 
@@ -201,51 +225,111 @@ export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, V
     }
 }
 
-class VectorEditEventListenerImpl extends com.carto.layers.VectorEditEventListener {
-    private _owner: WeakRef<EditableVectorLayer>;
-
-    public static initWithOwner(owner: WeakRef<EditableVectorLayer>): VectorEditEventListenerImpl {
-        const delegate = new VectorEditEventListenerImpl();
-        delegate._owner = owner;
-        return delegate;
+interface VectorEditEventListener extends com.carto.layers.VectorEditEventListener {
+    // tslint:disable-next-line:no-misused-new
+    new (owner: WeakRef<IVectorEditEventListener>, layer: WeakRef<EditableVectorLayer>, projection?: Projection): VectorEditEventListener;
+}
+let VectorEditEventListener: VectorEditEventListener;
+function initVectorEditEventListener() {
+    if (VectorTileEventListener) {
+        return;
     }
+    class VectorEditEventListenerImpl extends com.carto.layers.VectorEditEventListener {
+        private _owner: WeakRef<IVectorEditEventListener>;
+        private _layer: WeakRef<EditableVectorLayer>;
 
-    onDragEnd(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
-        console.log('onDragEnd', dragInfo);
-        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+        constructor(owner: WeakRef<IVectorEditEventListener>, layer: WeakRef<EditableVectorLayer>, private projection?: Projection) {
+            super();
+            this._owner = owner;
+            this._layer = layer;
+        }
+
+        onDragEnd(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
+            const owner = this._owner.get();
+            if (owner && owner.onDragEnd) {
+                return owner.onDragEnd.call(owner, {
+                    layer: this._layer.get() as any,
+                    element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                    position: fromNativeMapPos(dragInfo.getMapPos()),
+                    screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                    dragMode: dragInfo.getDragMode().swigValue()
+                });
+            }
+            return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+        }
+
+        onDragMove(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
+            const owner = this._owner.get();
+            if (owner && owner.onDragMove) {
+                return owner.onDragMove.call(owner, {
+                    layer: this._layer.get() as any,
+                    element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                    position: fromNativeMapPos(dragInfo.getMapPos()),
+                    screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                    dragMode: dragInfo.getDragMode().swigValue()
+                });
+            }
+            return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+        }
+
+        onDragStart(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
+            const owner = this._owner.get();
+            if (owner && owner.onDragStart) {
+                return owner.onDragStart.call(owner, {
+                    layer: this._layer.get() as any,
+                    element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                    position: fromNativeMapPos(dragInfo.getMapPos()),
+                    screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                    dragMode: dragInfo.getDragMode().swigValue()
+                });
+            }
+            return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+        }
+
+        onElementDelete(element: com.carto.vectorelements.VectorElement) {
+            const owner = this._owner.get();
+            if (owner && owner.onElementDelete) {
+                const el = new VectorElement(undefined, element);
+                owner.onElementDelete.call(owner, el);
+            }
+        }
+
+        onElementDeselected(element: com.carto.vectorelements.VectorElement) {
+            const owner = this._owner.get();
+            if (owner && owner.onElementDelete) {
+                const el = new VectorElement(undefined, element);
+                owner.onElementDelete.call(owner, el);
+            }
+        }
+
+        onElementModify(element: com.carto.vectorelements.VectorElement, geometry: com.carto.geometry.Geometry) {
+            const owner = this._owner.get();
+            if (owner && owner.onElementModify) {
+                const el = new VectorElement(undefined, element);
+                owner.onElementModify.call(owner, el, geometry);
+            }
+        }
+
+        onElementSelect(element: com.carto.vectorelements.VectorElement) {
+            const owner = this._owner.get();
+            if (owner && owner.onElementSelect) {
+                const el = new VectorElement(undefined, element);
+                return owner.onElementSelect.call(owner, el);
+            }
+            return true;
+        }
+
+        onSelectDragPointStyle(element: com.carto.vectorelements.VectorElement, dragPointStyle: com.carto.layers.VectorElementDragPointStyle) {
+            const owner = this._owner.get();
+            if (owner && owner.onElementSelect) {
+                const el = new VectorElement(undefined, element);
+                const styleBuilder = owner.onSelectDragPointStyle.call(owner, el);
+                return styleBuilder ? styleBuilder.buildStyle() : null;
+            }
+            return null;
+        }
     }
-
-    onDragMove(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
-        console.log('onDragMove', dragInfo);
-        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
-    }
-
-    onDragStart(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
-        console.log('onDragStart', dragInfo);
-        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
-    }
-
-    onElementDelete(element: com.carto.vectorelements.VectorElement) {
-        console.log('onElementDelete', element);
-    }
-
-    onElementDeselected(element: com.carto.vectorelements.VectorElement) {
-        console.log('onElementDeselected', element);
-    }
-
-    // onElementModifyGeometry(element: NTVectorElement, geometry: NTGeometry) {
-    //     console.log('onElementModifyGeometry', element);
-    // }
-
-    onElementSelect(element: com.carto.vectorelements.VectorElement) {
-        console.log('onElementSelect', element);
-        return true;
-    }
-
-    onSelectDragPointStyle(element: com.carto.vectorelements.VectorElement, dragPointStyle: com.carto.layers.VectorElementDragPointStyle) {
-        console.log('onSelectDragPointStyleDragPointStyle', element, dragPointStyle);
-        return null;
-    }
+    VectorEditEventListener = VectorEditEventListenerImpl as any;
 }
 // class VectorElementEventListenerImpl extends com.akylas.carto.additions.AKVectorElementEventListener {
 //     private _owner: WeakRef<VectorLayer>;
@@ -283,6 +367,15 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
     setSelectedVectorElement(element) {
         if (this.native) {
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
+        }
+    }
+
+    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection) {
+        if (listener) {
+            initVectorEditEventListener();
+            this.getNative().setVectorEditEventListener(new VectorEditEventListener(new WeakRef(listener), new WeakRef(this), projection));
+        } else {
+            this.getNative().setVectorEditEventListener(null);
         }
     }
 }

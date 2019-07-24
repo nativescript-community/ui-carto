@@ -2,7 +2,7 @@ import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { BaseLineVectorElement } from './vectorelements';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from 'tns-core-modules/color/color';
-import { LineStyleBuilder } from './line';
+import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
 import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygonStyleBuilder, PolygonStyleBuilderOptions> {
@@ -14,12 +14,27 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon
     get lineStyleBuilder() {
         return this.options.lineStyleBuilder;
     }
-    set lineStyleBuilder(value: LineStyleBuilder<any, any>) {
+    set lineStyleBuilder(value: LineStyleBuilder | LineStyleBuilderOptions | any) {
         this.options.lineStyleBuilder = value;
         if (this.native) {
-            this.native.setLineStyle(value.buildStyle());
+            this.native.setLineStyle(this.buildLineStyle());
             this._buildStyle = null;
         }
+    }
+    buildLineStyle() {
+        let style: NTLineStyle;
+        const styleBuilder = this.options.lineStyleBuilder;
+        if (!styleBuilder) {
+            return null;
+        }
+        if (styleBuilder instanceof NTLineStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof LineStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new LineStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
 
     _buildStyle: NTPolygonStyle;
@@ -33,7 +48,7 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon
 
 export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
-        const style: NTPolygonStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.projection), style);
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
@@ -41,17 +56,25 @@ export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTPolygonStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTPolygonStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof PolygonStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new PolygonStyleBuilder(styleBuilder as PolygonStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: PolygonStyleBuilder | NTPolygonStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: PolygonStyleBuilder | NTPolygonStyle | PolygonStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof PolygonStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

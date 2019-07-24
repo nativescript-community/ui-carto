@@ -68,6 +68,7 @@ export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementSt
 export abstract class BillboardStyleBuilder<T, U extends BillboardStyleBuilderOptions> extends BaseVectorElementStyleBuilder<T, U> {}
 
 export class VectorElementVector extends BaseNative<any, any> {
+    elements: Array<BaseVectorElement<any, any>>;
     size();
     getElement(index: number): VectorElement<any, any>;
     add(element: VectorElement<any, any>);

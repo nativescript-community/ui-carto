@@ -29,7 +29,7 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuild
 export class Marker extends BasePointVectorElement<NTMarker, MarkerOptions> {
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
-        const style: NTMarkerStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         let result: NTMarker;
         if (options.geometry) {
             result = NTMarker.alloc().initWithGeometryStyle(options.geometry as NTGeometry, style);
@@ -40,17 +40,25 @@ export class Marker extends BasePointVectorElement<NTMarker, MarkerOptions> {
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTMarkerStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTMarkerStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof MarkerStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new MarkerStyleBuilder(styleBuilder as MarkerStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: MarkerStyleBuilder | NTMarkerStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: MarkerStyleBuilder | NTMarkerStyle | MarkerStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof MarkerStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

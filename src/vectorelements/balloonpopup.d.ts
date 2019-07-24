@@ -36,9 +36,10 @@ export class BalloonPopupOptions extends PointVectorElementOptions {
     marker?: Marker;
     title?: string;
     description?: string;
+    styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;
 }
 export class BalloonPopup extends BasePointVectorElement<any, BalloonPopupOptions> {
-    styleBuilder?: BalloonPopupStyleBuilder<any, any>;
+    styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;
     style?: any;
     color?: string | Color;
     cornerRadius?: number;

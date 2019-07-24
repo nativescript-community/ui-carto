@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement, BillboardStyleBuilder } from './vectorelements';
+import { BasePointVectorElement, BaseVectorElement, BillboardStyleBuilder, VectorElementOptions, VectorElementStyleBuilderOptions } from './vectorelements';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from 'tns-core-modules/color/color';
 import { toNativeMapPos } from '../core/core';
@@ -40,7 +40,7 @@ export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<NTBalloonPop
 
 export class BalloonPopup extends BasePointVectorElement<NTBalloonPopup, BalloonPopupOptions> {
     createNative(options: BalloonPopupOptions) {
-        const style: NTBalloonPopupStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         let result: NTBalloonPopup;
         if (options.marker) {
             result = NTBalloonPopup.alloc().initWithBaseBillboardStyleTitleDesc(options.marker.getNative(), style, options.title, options.description);
@@ -52,17 +52,56 @@ export class BalloonPopup extends BasePointVectorElement<NTBalloonPopup, Balloon
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTBalloonPopupStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTBalloonPopupStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new BalloonPopupStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
-    set style(value: BalloonPopupStyleBuilder | NTBalloonPopupStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: BalloonPopupStyleBuilder | NTBalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof BalloonPopupStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }
+
+// class BuildingStyleObject<BO extends VectorElementStyleBuilderOptions, OptionsType extends VectorElementOptions, N, SN, E extends BaseVectorElement<N, OptionsType>, B extends BaseVectorElementStyleBuilder<SN, BO>> {
+//     _styleBuilder: B;
+//     _builtStyle: SN;
+//     buildStyle() {
+//         let style: NTBalloonPopupStyle;
+//         const styleBuilder = this._styleBuilder;
+//         if (styleBuilder instanceof NTBalloonPopupStyle) {
+//             style = styleBuilder;
+//         } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
+//             style = styleBuilder.buildStyle();
+//         } else if (styleBuilder.hasOwnProperty) {
+//             style = new BalloonPopupStyleBuilder(styleBuilder).buildStyle();
+//         }
+//         return styleBuilder.buildStyle();
+//     }
+//     get styleBuilder() {
+//         return this._styleBuilder;
+//     }
+//     set styleBuilder(value: OptionsType | B) {
+//         if ((value as any).getNative) {
+//             this._styleBuilder = value as B;
+//         } else {
+//             this._styleBuilder = new OptionsType(value);
+//         }
+//         this.options.styleBuilder = value as any;
+//         if (this.native) {
+//             this.native.setStyle(this.buildStyle());
+//         }
+//     }
+// }

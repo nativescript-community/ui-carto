@@ -25,10 +25,10 @@ export class LineStyleBuilderOptions extends VectorElementOptions {
 }
 export class LineOptions extends LineVectorElementOptions {
     positions: MapPosVector | MapPos[];
+    styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions;
     projection?: Projection;
 }
-export class LineStyleBuilder<T, U extends LineStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, LineStyleBuilderOptions> {
-    constructor(options: U);
+export class LineStyleBuilder extends BaseVectorElementStyleBuilder<any, LineStyleBuilderOptions> {
     buildStyle(): any;
     color?: string | Color;
     width?: number;
@@ -39,7 +39,7 @@ export class LineStyleBuilder<T, U extends LineStyleBuilderOptions> extends Base
 }
 
 export class Line extends BaseLineVectorElement<any, LineOptions> {
-    styleBuilder?: any;
+    styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions | any;
     style?: any;
     color?: string | Color;
     width?: number;

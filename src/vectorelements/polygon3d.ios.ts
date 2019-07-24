@@ -22,7 +22,7 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolyg
 
 export class Polygon3D extends BaseLineVectorElement<NTPolygon3D, Polygon3DOptions> {
     createNative(options: Polygon3DOptions) {
-        const style: NTPolygon3DStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.positions, options.projection), style, options.height);
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
@@ -30,17 +30,25 @@ export class Polygon3D extends BaseLineVectorElement<NTPolygon3D, Polygon3DOptio
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTPolygon3DStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTPolygon3DStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof Polygon3DStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new Polygon3DStyleBuilder(styleBuilder as Polygon3DStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: Polygon3DStyleBuilder | NTPolygon3DStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: Polygon3DStyleBuilder | NTPolygon3DStyle | Polygon3DStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof Polygon3DStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

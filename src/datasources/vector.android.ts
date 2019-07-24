@@ -14,13 +14,29 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
         return new com.carto.datasources.LocalVectorDataSource(options.projection.getNative());
     }
     add(element: BaseVectorElement<any, any>) {
-        this.getNative().add(element.getNative() as com.carto.vectorelements.VectorElement);
+        const nativeObj = element.getNative();
+        console.log('LocalVectorDataSource', 'add', nativeObj);
+        if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
+            this.getNative().addAll(nativeObj);
+        } else {
+            this.getNative().add(nativeObj as com.carto.vectorelements.VectorElement);
+
+        }
     }
     remove(element: BaseVectorElement<any, any>) {
-        this.getNative().remove(element.getNative() as com.carto.vectorelements.VectorElement);
+        const nativeObj = element.getNative();
+        if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
+            this.getNative().removeAll(nativeObj);
+        } else {
+            this.getNative().remove(nativeObj as com.carto.vectorelements.VectorElement);
+
+        }
     }
     addAll(elements: VectorElementVector) {
         this.getNative().addAll(elements.getNative() as com.carto.vectorelements.VectorElementVector);
+    }
+    removeAll(elements: VectorElementVector) {
+        this.getNative().removeAll(elements.getNative() as com.carto.vectorelements.VectorElementVector);
     }
     setGeometrySimplifier(simplifier: GeometrySimplifier<any, any>) {
         this.getNative().setGeometrySimplifier(simplifier.getNative());

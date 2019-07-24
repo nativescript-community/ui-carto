@@ -24,23 +24,31 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyl
 
 export class Point extends BasePointVectorElement<NTPoint, PointOptions> {
     createNative(options: PointOptions) {
-        const style: NTPointStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);
         const result = NTPoint.alloc().initWithPosStyle(nativePos, style);
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: NTPointStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTPointStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof PointStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new PointStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
-    set style(value: PointStyleBuilder | NTPointStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: PointStyleBuilder | NTPointStyle | PointStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof PointStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

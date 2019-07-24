@@ -11,7 +11,6 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.car
     @nativeColorProperty color: Color | string;
     @nativeColorProperty sideColor: Color | string;
 
-
     _buildStyle: com.carto.styles.Polygon3DStyle;
     buildStyle() {
         if (!this._buildStyle) {
@@ -23,7 +22,7 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.car
 
 export class Polygon3D extends BaseLineVectorElement<com.carto.vectorelements.Polygon3D, Polygon3DOptions> {
     createNative(options: Polygon3DOptions) {
-        const style: com.carto.styles.Polygon3DStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const result = new com.carto.vectorelements.Polygon3D(mapPosVectorFromArgs(options.positions, options.projection), style, options.height);
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
@@ -31,17 +30,25 @@ export class Polygon3D extends BaseLineVectorElement<com.carto.vectorelements.Po
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: com.carto.styles.Polygon3DStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.carto.styles.Polygon3DStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof Polygon3DStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new Polygon3DStyleBuilder(styleBuilder as Polygon3DStyleBuilderOptions).buildStyle();
+        }
+        return style;
     }
-    set style(value: Polygon3DStyleBuilder | com.carto.styles.Polygon3DStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: Polygon3DStyleBuilderOptions | Polygon3DStyleBuilder | com.carto.styles.Polygon3DStyle ) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof Polygon3DStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

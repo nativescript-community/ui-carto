@@ -5,29 +5,42 @@ import { Color } from 'tns-core-modules/color/color';
 import { BillboardOrientation } from './vectorelements';
 
 export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
-    color?: string | Color;
+    color?: Color | string;
     orientationMode?: BillboardOrientation;
     fontSize?: number;
+    anchorPointX?: number;
+    anchorPointY?: number;
     fontName?: string;
+    breakLines?: boolean;
+    textField?: string;
+    strokeWidth?: number;
+    strokeColor?: Color | string;
+    borderColor?: Color | string;
+    backgroundColor?: Color | string;
+    flippable?: boolean;
 }
 export class TextOptions extends PointVectorElementOptions {
     text: string;
-    breakLines?: boolean;
-    strokeWidth?: number;
-    strokeColor?: Color | string;
-    backgroundColor?: Color | string;
+    
+    styleBuilder?: TextStyleBuilder | TextStyleBuilderOptions;
 }
 
-export class TextStyleBuilder<T, U extends TextStyleBuilderOptions> extends BillboardStyleBuilder<any, TextStyleBuilderOptions> {
-    constructor(options: U);
+export class TextStyleBuilder extends BillboardStyleBuilder<any, TextStyleBuilderOptions> {
     buildStyle(): any;
-}
-
-export class Text extends BasePointVectorElement<any, TextOptions> {
-    styleBuilder?: TextStyleBuilder<any, any>;
-    style?: any;
-    color?: string | Color;
+    color?: Color | string;
+    strokeColor?: Color | string;
+    borderColor?: Color | string;
+    backgroundColor?: Color | string;
     orientationMode?: BillboardOrientation;
     fontSize?: number;
     fontName?: string;
+    breakLines?: boolean;
+    flippable?: boolean;
+    textField?: string;
+    anchorPointX?: number;
+    anchorPointY?: number;
+}
+
+export class Text extends BasePointVectorElement<any, TextOptions> {
+    styleBuilder?: TextStyleBuilder | TextStyleBuilderOptions | any;
 }

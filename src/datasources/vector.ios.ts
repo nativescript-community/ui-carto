@@ -14,6 +14,21 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
         return NTLocalVectorDataSource.alloc().initWithProjection(options.projection.getNative());
     }
     add(element: BaseVectorElement<any, any>) {
+        const nativeObj = element.getNative();
+        if (nativeObj instanceof NTVectorElementVector) {
+            this.getNative().addAll(nativeObj);
+        } else {
+            this.getNative().add(nativeObj as NTVectorElement);
+        }
+        this.getNative().add(element.getNative() as NTVectorElement);
+    }
+    remove(element: BaseVectorElement<any, any>) {
+        const nativeObj = element.getNative();
+        if (nativeObj instanceof NTVectorElementVector) {
+            this.getNative().removeAll(nativeObj);
+        } else {
+            this.getNative().remove(nativeObj as NTVectorElement);
+        }
         this.getNative().add(element.getNative() as NTVectorElement);
     }
     clear() {
@@ -22,13 +37,12 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
     addFeatureCollection(featureCollection: FeatureCollection, style: NTStyle) {
         this.getNative().addFeatureCollectionStyle(featureCollection.getNative(), style);
     }
-    remove(element: BaseVectorElement<any, any>) {
-        this.getNative().remove(element.getNative() as NTVectorElement);
-    }
     addAll(elements: VectorElementVector) {
         this.getNative().addAll(elements.getNative() as NTVectorElementVector);
     }
-
+    removeAll(elements: VectorElementVector) {
+        this.getNative().removeAll(elements.getNative() as NTVectorElementVector);
+    }
     setGeometrySimplifier(simplifier: GeometrySimplifier<any, any>) {
         this.getNative().setGeometrySimplifier(simplifier.getNative());
     }

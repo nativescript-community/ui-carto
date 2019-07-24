@@ -1,9 +1,9 @@
-import { _createImageSourceFromSrc, BaseNative, nativeProperty } from '../carto.common';
+import { Color } from 'tns-core-modules/color/color';
+import { nativeColorProperty, nativeImageProperty } from '../carto';
+import { BaseNative, nativeProperty } from '../carto.common';
 import { fromNativeMapPos, MapPos } from '../core/core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
-import { nativeImageProperty, nativeColorProperty } from '../carto';
-import { Color } from 'tns-core-modules/color/color';
 
 let ClusterElementBuilderNative: ClusterElementBuilderNative;
 
@@ -37,7 +37,6 @@ function initClusterElementBuilderNative() {
         // }
         buildCluster(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
             const owner = this.owner.get();
-            console.log('test buildCluster1', position.getX(), position.getY(), !!owner.buildClusterElement);
             if (owner.buildClusterElement) {
                 const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
                 if (result instanceof BaseVectorElement) {

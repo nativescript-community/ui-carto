@@ -127,14 +127,14 @@ export class VectorElementVector extends BaseNative<com.carto.vectorelements.Vec
         }
         return result;
     }
+    getElement(index: number): BaseVectorElement<any, any> {
+        return this.elements[index] || new BaseVectorElement(undefined, this.native.get(index));
+    }
     size() {
         if (this.native) {
             return this.native.size();
         }
         return this.elements.length;
-    }
-    getElement(index: number): BaseVectorElement<any, any> {
-        return this.elements[index] || new BaseVectorElement(undefined, this.native.get(index));
     }
     add(element: BaseVectorElement<any, any>) {
         this.elements.push(element);

@@ -10,9 +10,11 @@ export class Polygon3DStyleBuilderOptions extends VectorElementOptions {
     sideColor?: Color | string;
     // lineStyleBuilder?:LineStyleBuilder<any, any>
 }
-export class Polygon3DStyleBuilder<T, U extends Polygon3DStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, Polygon3DStyleBuilderOptions> {
-    constructor(options: U);
+export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<any, Polygon3DStyleBuilderOptions> {
     buildStyle(): any;
+    size?: number;
+    color?: string | Color;
+    sideColor?: Color | string;
 }
 
 export class Polygon3DOptions extends LineVectorElementOptions {
@@ -20,10 +22,11 @@ export class Polygon3DOptions extends LineVectorElementOptions {
     positions: MapPosVector | MapPos[];
     holes?: MapPos[][] | MapPosVectorVector;
     projection?: Projection;
+    styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions
 }
 
 export class Polygon3D extends BaseLineVectorElement<any, Polygon3DOptions> {
-    styleBuilder?: Polygon3DStyleBuilder<any, any>;
+    styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions | any;
     style?: any;
     size?: number;
     color?: string | Color;

@@ -41,7 +41,7 @@ export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<com.carto.st
 
 export class BalloonPopup extends BasePointVectorElement<com.carto.vectorelements.BalloonPopup, BalloonPopupOptions> {
     createNative(options: BalloonPopupOptions) {
-        const style: com.carto.styles.BalloonPopupStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         let result: com.carto.vectorelements.BalloonPopup;
         if (options.marker) {
             result = new com.carto.vectorelements.BalloonPopup(options.marker.getNative(), style, this.options.title, this.options.description);
@@ -52,17 +52,25 @@ export class BalloonPopup extends BasePointVectorElement<com.carto.vectorelement
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: com.carto.styles.BalloonPopupStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.carto.styles.BalloonPopupStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new BalloonPopupStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
-    set style(value: BalloonPopupStyleBuilder | com.carto.styles.BalloonPopupStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? (this.native.getStyle() as com.carto.styles.BalloonPopupStyle) : this.options.styleBuilder;
+    }
+    set styleBuilder(value: BalloonPopupStyleBuilder | com.carto.styles.BalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof BalloonPopupStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

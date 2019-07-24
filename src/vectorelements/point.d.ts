@@ -7,17 +7,19 @@ export class PointStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;
     color?: string | Color;
 }
-export class PointStyleBuilder<T, U extends PointStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, PointStyleBuilderOptions> {
-    constructor(options: U);
+export class PointStyleBuilder extends BaseVectorElementStyleBuilder<any, PointStyleBuilderOptions> {
     buildStyle(): any;
     size?: number;
     color?: string | Color;
     clickSize?: number;
 }
 
-export class PointOptions extends PointVectorElementOptions {}
+export class PointOptions extends PointVectorElementOptions {
+    styleBuilder?: PointStyleBuilder | PointStyleBuilderOptions;
+
+}
 export class Point extends BasePointVectorElement<any, PointOptions> {
-    styleBuilder?: PointStyleBuilder<any, any>;
+    styleBuilder?: PointStyleBuilder | PointStyleBuilderOptions;
     style?: any;
     size?: number;
     color?: string | Color;

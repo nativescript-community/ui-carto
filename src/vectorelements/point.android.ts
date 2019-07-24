@@ -25,23 +25,31 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.s
 
 export class Point extends BasePointVectorElement<com.carto.vectorelements.Point, PointOptions> {
     createNative(options: PointOptions) {
-        const style: com.carto.styles.PointStyle = options.style || options.styleBuilder.buildStyle();
+        const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);
         const result = new com.carto.vectorelements.Point(nativePos, style);
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    get style() {
-        return this.native ? this.native.getStyle() : this.options.style;
+    buildStyle() {
+        let style: com.carto.styles.PointStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.carto.styles.PointStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof PointStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new PointStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
     }
-    set style(value: PointStyleBuilder | com.carto.styles.PointStyle) {
-        this.options.style = value;
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: PointStyleBuilder | com.carto.styles.PointStyle | PointStyleBuilderOptions) {
+        this.options.styleBuilder = value as any;
         if (this.native) {
-            if (value instanceof PointStyleBuilder) {
-                this.native.setStyle(value.buildStyle());
-            } else {
-                this.native.setStyle(value);
-            }
+            this.native.setStyle(this.buildStyle());
         }
     }
 }

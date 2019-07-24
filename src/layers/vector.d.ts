@@ -2,17 +2,24 @@ import { Layer, LayerOptions, TileLayer, TileLayerOptions } from './layer';
 import { TileDataSource } from '../datasources/datasource';
 import { VectorTileDecoder } from '../vectortiles/vectortiles';
 import { CartoPackageManager } from '../packagemanager/packagemanager';
-import { CartoMapStyle, MapPos, ClickType } from '../core/core';
+import { CartoMapStyle, ClickType, MapPos } from '../core/core';
 import { MBVectorTileDecoder } from '../vectortiles/vectortiles';
 import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements/vectorelements';
 import { Projection } from '../projections/projection';
 import { Geometry } from '../geometry/geometry';
+import { PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
 
 export enum VectorTileRenderOrder {
     HIDDEN,
     LAYER,
     LAST
+}
+export enum VectorElementDragResult {
+    IGNORE,
+    STOP,
+    MODIFY,
+    DELETE
 }
 
 export interface VectorTileEventData {
@@ -37,12 +44,24 @@ export interface VectorElementEventData {
     elementPos: MapPos;
 }
 
+export interface VectorElementDragInfo {}
+
 export interface VectorTileEventListener {
     onVectorTileClicked(info: VectorTileEventData);
 }
 
 export interface VectorElementEventListener {
     onVectorElementClicked(info: VectorElementEventData);
+}
+export interface VectorEditEventListener {
+    onElementModify(param0: com.carto.vectorelements.VectorElement, param1: com.carto.geometry.Geometry): void;
+    onElementDeselected(param0: com.carto.vectorelements.VectorElement): void;
+    onElementSelect(param0: com.carto.vectorelements.VectorElement): boolean;
+    onSelectDragPointStyle(param0: com.carto.vectorelements.VectorElement, param1: com.carto.layers.VectorElementDragPointStyle): PointStyleBuilder;
+    onDragMove(param0: VectorElementDragInfo): VectorElementDragResult;
+    onDragEnd(param0: VectorElementDragInfo): VectorElementDragResult;
+    onDragStart(param0: VectorElementDragInfo): VectorElementDragResult;
+    onElementDelete(param0: com.carto.vectorelements.VectorElement): void;
 }
 
 export interface VectorLayerOptions extends LayerOptions {
