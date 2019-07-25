@@ -20,7 +20,6 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
         } else {
             this.getNative().add(nativeObj as NTVectorElement);
         }
-        this.getNative().add(element.getNative() as NTVectorElement);
     }
     remove(element: BaseVectorElement<any, any>) {
         const nativeObj = element.getNative();
@@ -29,7 +28,6 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
         } else {
             this.getNative().remove(nativeObj as NTVectorElement);
         }
-        this.getNative().add(element.getNative() as NTVectorElement);
     }
     clear() {
         this.getNative().clear();
