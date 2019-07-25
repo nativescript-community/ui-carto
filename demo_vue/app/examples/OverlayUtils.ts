@@ -40,10 +40,7 @@ export function addOverlyingLines(map: CartoMap, source: LocalVectorDataSource, 
     map.addLayer(vectorLayer2);
 
     // Create line style, and line positions
-    let lineStyleBuilder = new LineStyleBuilder({
-        color: new Color(255, 255, 255, 255),
-        width: 8
-    });
+    // let lineStyleBuilder = new LineStyleBuilder();
 
     const linePoses = [
         { latitude: 59.422074, longitude: 24.645565 },
@@ -54,12 +51,15 @@ export function addOverlyingLines(map: CartoMap, source: LocalVectorDataSource, 
     ];
 
     // .add first line
-    const line1 = new Line({ projection, positions: linePoses, styleBuilder: lineStyleBuilder });
+    const line1 = new Line({ projection, positions: linePoses, styleBuilder: {
+        color: new Color(255, 255, 255, 255),
+        width: 8
+    } });
     line1.metaData = { ClickText: 'Line nr 1' };
     source2.add(line1);
 
     // Create another line style, use the same lines positions
-    lineStyleBuilder = new LineStyleBuilder({
+    const lineStyleBuilder = new LineStyleBuilder({
         color: new Color(255, 204, 15, 0),
         width: 12
     });

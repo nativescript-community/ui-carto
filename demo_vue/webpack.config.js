@@ -3,7 +3,7 @@ const { relative, resolve } = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('terser-webpack-plugin');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const NsVueTemplateCompiler = require('akylas-nativescript-vue-template-compiler');
@@ -136,7 +136,7 @@ module.exports = env => {
             fs: 'empty',
             __dirname: false
         },
-        devtool: shouldProduceSourceMap ? 'source-map' : 'none',
+        devtool: shouldProduceSourceMap ? 'inline-source-map' : 'none',
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -156,7 +156,7 @@ module.exports = env => {
                 new UglifyJsPlugin({
                     parallel: true,
                     cache: true,
-                    uglifyOptions: {
+                    terserOptions: {
                         output: {
                             comments: false
                         },
@@ -192,14 +192,14 @@ module.exports = env => {
                 },
                 {
                     test: /\.css$/,
-                    use: ['nativescript-dev-webpack/style-hot-loader', 'nativescript-dev-webpack/apply-css-loader.js', { loader: 'css-loader', options: { minimize: false, url: false } }]
+                    use: ['nativescript-dev-webpack/style-hot-loader', 'nativescript-dev-webpack/apply-css-loader.js', { loader: 'css-loader', options: { url: false } }]
                 },
                 {
                     test: /\.scss$/,
                     use: [
                         'nativescript-dev-webpack/style-hot-loader',
                         'nativescript-dev-webpack/apply-css-loader.js',
-                        { loader: 'css-loader', options: { minimize: false, url: false } },
+                        { loader: 'css-loader', options: { url: false } },
                         'sass-loader'
                     ]
                 },
