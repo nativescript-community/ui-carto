@@ -176,7 +176,7 @@ export class CartoMap extends CartoViewBase {
         return fromNativeMapPos(position);
     }
     setFocusPos(value: MapPos, duration: number) {
-        this.mapView.setFocusPosDurationSeconds(this.nativeProjection.fromWgs84(toNativeMapPos(value)), duration / 1000);
+        this.mapView.setFocusPosDurationSeconds(toNativeMapPos(value), duration / 1000);
     }
     setZoom(value: number, targetPos: MapPos | number, duration: number) {
         if (typeof targetPos === 'number') {
