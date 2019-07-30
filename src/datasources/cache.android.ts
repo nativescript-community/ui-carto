@@ -7,7 +7,11 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
     @nativeProperty capacity: number;
     @nativeProperty cacheOnlyMode: number;
     createNative(options: PersistentCacheTileDataSourceOptions) {
-        return new com.carto.datasources.PersistentCacheTileDataSource(options.dataSource.getNative(), options.databasePath);
+        if (options.databasePath) {
+            return new com.carto.datasources.PersistentCacheTileDataSource(options.dataSource.getNative(), options.databasePath);
+        } else {
+            return new com.carto.datasources.PersistentCacheTileDataSource(options.dataSource.getNative());
+        }
     }
     close() {
         if (this.native) {
