@@ -1,5 +1,6 @@
-import { LatitudeKey, LongitudeKey, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, AltitudeKey } from './core.common';
-export { LatitudeKey, LongitudeKey, MapBounds, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
+import { AltitudeKey, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+import { BaseNative } from '../carto.common';
+export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export const CartoMapStyle = {
     get VOYAGER() {
@@ -27,6 +28,31 @@ export const ClickType = {
         return com.carto.ui.ClickType.CLICK_TYPE_DUAL.swigValue();
     }
 };
+
+export class MapBounds extends BaseNative<com.carto.core.MapBounds, {}> {
+    constructor(public northeast: MapPos, public southwest: MapPos, native?: com.carto.core.MapBounds) {
+        super(undefined, native);
+    }
+    createNative() {
+        return new com.carto.core.MapBounds(toNativeMapPos(this.southwest), toNativeMapPos(this.northeast));
+    }
+    contains(position: MapPos | MapBounds) {
+        if (position['southwest']) {
+            return this.getNative().contains(toNativeMapBounds(position as MapBounds));
+        } else {
+            return this.getNative().contains(toNativeMapPos(position as MapPos));
+        }
+    }
+    intersects(position: MapBounds) {
+        return this.getNative().intersects(toNativeMapBounds(position));
+    }
+    equals(position: MapBounds) {
+        return this.getNative().equals(toNativeMapBounds(position));
+    }
+    getCenter() {
+        return fromNativeMapPos(this.getNative().getCenter());
+    }
+}
 
 // export enum ClickType {
 //     SINGLE = com.carto.ui.ClickType.CLICK_TYPE_SINGLE.ordinal(),
@@ -107,14 +133,13 @@ export function nativeVectorToArray<T>(vector: NativeVector<T>) {
 }
 
 export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
-    return {
-        southwest: fromNativeMapPos(bounds.getMin()),
-        northeast: fromNativeMapPos(bounds.getMax())
-    } as MapBounds;
+    return new MapBounds(fromNativeMapPos(bounds.getMin()), fromNativeMapPos(bounds.getMax()));
 }
 export function toNativeMapBounds(bounds: MapBounds) {
     if (bounds instanceof com.carto.core.MapBounds) {
         return bounds;
+    } else if (bounds.getNative) {
+        return bounds.getNative();
     }
     return new com.carto.core.MapBounds(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
 }

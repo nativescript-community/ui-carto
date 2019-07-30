@@ -26,11 +26,7 @@ export interface MapRange {
     max: number;
 }
 
-export interface MapBounds {
-    northeast: MapPos;
-    southwest: MapPos;
-}
-export interface ScreenBounds {
+export class ScreenBounds {
     min: ScreenPos;
     max: ScreenPos;
 }

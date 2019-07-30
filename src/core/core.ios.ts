@@ -1,5 +1,6 @@
-import { LatitudeKey, LongitudeKey, MapBounds, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
-export { LatitudeKey, LongitudeKey, MapBounds, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
+import { LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
+import { BaseNative } from '../carto.common';
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
@@ -12,6 +13,32 @@ export enum ClickType {
     LONG = NTClickType.T_CLICK_TYPE_LONG,
     DOUBLE = NTClickType.T_CLICK_TYPE_DOUBLE,
     DUAL = NTClickType.T_CLICK_TYPE_DUAL
+}
+
+
+export class MapBounds extends BaseNative<NTMapBounds, {}> {
+    constructor(public northeast: MapPos, public southwest: MapPos, native?: NTMapBounds) {
+        super(undefined, native);
+    }
+    createNative() {
+        return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(this.southwest), toNativeMapPos(this.northeast));
+    }
+    contains(position: MapPos | MapBounds) {
+        if (position['southwest']) {
+            return this.getNative().containsBounds(toNativeMapBounds(position as MapBounds));
+        } else {
+            return this.getNative().containsPos(toNativeMapPos(position as MapPos));
+        }
+    }
+    intersects(position: MapBounds) {
+        return this.getNative().intersects(toNativeMapBounds(position));
+    }
+    equals(position: MapBounds) {
+        return this.getNative().isEqualInternal(toNativeMapBounds(position));
+    }
+    getCenter() {
+        return fromNativeMapPos(this.getNative().getCenter());
+    }
 }
 
 export function nativeVectorToArray<T>(vector: NativeVector<T>) {
@@ -82,10 +109,7 @@ export function fromNativeMapVec(value: NTMapVec) {
 }
 
 export function fromNativeMapBounds(bounds: NTMapBounds) {
-    return {
-        southwest: fromNativeMapPos(bounds.getMin()),
-        northeast: fromNativeMapPos(bounds.getMax())
-    } as MapBounds;
+    return new MapBounds(fromNativeMapPos(bounds.getMin()), fromNativeMapPos(bounds.getMax()));
 }
 export function toNativeMapBounds(bounds: MapBounds) {
     if (bounds instanceof NTMapBounds) {
