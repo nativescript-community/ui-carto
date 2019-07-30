@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.26](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.25...v1.2.26) (2019-07-30)
+
+
+### Bug Fixes
+
+* mapBounds is now a class to allow native calls ([899df54](https://github.com/farfromrefug/nativescript-carto/commit/899df54))
+* options.databasePath. Should it work? ([298c804](https://github.com/farfromrefug/nativescript-carto/commit/298c804))
+* setFocusPos fix on iOS ([3a1b155](https://github.com/farfromrefug/nativescript-carto/commit/3a1b155))
+
+
+### Features
+
+* added GeoJSONVectorTileDataSource ([21e1593](https://github.com/farfromrefug/nativescript-carto/commit/21e1593))
+
+
+
+
+
 ## [1.2.25](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.24...v1.2.25) (2019-07-25)
 
 
