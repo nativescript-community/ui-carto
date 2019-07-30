@@ -32,7 +32,7 @@ class TileDownloadListenerImpl extends com.carto.datasources.TileDownloadListene
     private _owner: WeakRef<TileDownloadListener>;
 
     public static initWithOwner(owner: WeakRef<TileDownloadListener>): TileDownloadListenerImpl {
-        const delegate = new TileDownloadListenerImpl() ;
+        const delegate = new TileDownloadListenerImpl();
         delegate._owner = owner;
         return delegate;
     }
