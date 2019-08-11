@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.27](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.26...v1.2.27) (2019-08-11)
+
+
+### Bug Fixes
+
+* better thrown error ([2571723](https://github.com/farfromrefug/nativescript-carto/commit/2571723))
+* trying to improve stylebuilder update ([ab087f5](https://github.com/farfromrefug/nativescript-carto/commit/ab087f5))
+
+
+### Features
+
+* captureRendering ([b57d858](https://github.com/farfromrefug/nativescript-carto/commit/b57d858))
+
+
+
+
+
 ## [1.2.26](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.25...v1.2.26) (2019-07-30)
 
 

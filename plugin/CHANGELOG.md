@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.27](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.26...v1.2.27) (2019-08-11)
+
+**Note:** Version bump only for package nativescript-carto
+
+
+
+
+
 ## [1.2.26](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.25...v1.2.26) (2019-07-30)
 
 **Note:** Version bump only for package nativescript-carto
