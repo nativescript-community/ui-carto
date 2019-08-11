@@ -79,7 +79,7 @@ export function toNativeMapPos(position: MapPos | com.carto.core.MapPos) {
         return position;
     }
     if (position[LongitudeKey] === undefined || position[LatitudeKey] === undefined) {
-        throw new Error('toNativeMapPos: missing parameters');
+        throw new Error(`toNativeMapPos: missing lat/lon parameters in ${position}`);
     }
     const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
     //  ignore z for now as points can get under the map!
