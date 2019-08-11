@@ -4,5 +4,5 @@ repositories {
 	}
 }
 dependencies {
-    compile 'com.akylas:carto-mobile-sdk:4.2.1@aar'
+    implementation 'com.akylas:carto-mobile-sdk:4.2.1@aar'
 }
