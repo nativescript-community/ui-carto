@@ -139,7 +139,7 @@ function initLogEventListenerClass() {
             return global.__native(this);
         }
         public onDebugEvent(event) {
-            console.log('onDebugEvent', event);
+
             return true;
             // this.owner && this.owner.sendEvent(MapIdleEvent);
         }
