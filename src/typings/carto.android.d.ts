@@ -6002,7 +6002,7 @@ declare module com {
 declare module com {
 	export module carto {
 		export module ui {
-			export class MapView {
+			export class MapView extends globalAndroid.opengl.GLSurfaceView {
 				public static class: java.lang.Class<com.carto.ui.MapView>;
 				public setMapRotation(param0: number, param1: number): void;
 				public getZoom(): number;
