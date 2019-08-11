@@ -16,7 +16,7 @@ export function nativeColorProperty(...args) {
                     return new Color(value.getARGB() as number).hex;
                 },
                 toNative(value) {
-                    console.log('nativeColorProperty', 'toNative', value);
+                    // console.log('nativeColorProperty', 'toNative', value, new Error().stack);
                     const theColor = typeof value === 'string' ? new Color(value) : value;
                     return new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a);
                 }
