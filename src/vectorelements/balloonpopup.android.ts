@@ -68,8 +68,8 @@ export class BalloonPopup extends BasePointVectorElement<com.carto.vectorelement
         return this.native ? (this.native.getStyle() as com.carto.styles.BalloonPopupStyle) : this.options.styleBuilder;
     }
     set styleBuilder(value: BalloonPopupStyleBuilder | com.carto.styles.BalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

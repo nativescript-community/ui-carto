@@ -34,7 +34,7 @@ export class Marker extends BasePointVectorElement<com.carto.vectorelements.Mark
     @nativeProperty rotation: number;
     createNative(options: MarkerOptions) {
         const style = this.buildStyle();
-        // this.log('creating marker', options.position, options.projection, options.geometry, options.style);
+        // this.log('creating marker', options.position, options.projection, options.geometry, options.styleBuilder);
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
             result = new com.carto.vectorelements.Marker(options.geometry as com.carto.geometry.Geometry, style);
@@ -45,6 +45,7 @@ export class Marker extends BasePointVectorElement<com.carto.vectorelements.Mark
         // result['owner'] = new WeakRef(this);
         return result;
     }
+    _builStyle: com.carto.styles.MarkerStyle;
     buildStyle() {
         let style: com.carto.styles.MarkerStyle;
         const styleBuilder = this.options.styleBuilder;
@@ -55,14 +56,16 @@ export class Marker extends BasePointVectorElement<com.carto.vectorelements.Mark
         } else if (styleBuilder.hasOwnProperty) {
             style = new MarkerStyleBuilder(styleBuilder as MarkerStyleBuilderOptions).buildStyle();
         }
+        this._builStyle = style;
         return style;
     }
     get styleBuilder() {
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
     set styleBuilder(value: MarkerStyleBuilder | com.carto.styles.MarkerStyle | MarkerStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
+            this._builStyle = null;
             this.native.setStyle(this.buildStyle());
         }
     }

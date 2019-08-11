@@ -73,8 +73,8 @@ export class Polygon extends BaseLineVectorElement<com.carto.vectorelements.Poly
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
     set styleBuilder(value: PolygonStyleBuilder | com.carto.styles.PolygonStyle | PolygonStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

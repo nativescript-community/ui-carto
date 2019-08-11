@@ -46,8 +46,8 @@ export class Polygon3D extends BaseLineVectorElement<NTPolygon3D, Polygon3DOptio
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
     set styleBuilder(value: Polygon3DStyleBuilder | NTPolygon3DStyle | Polygon3DStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

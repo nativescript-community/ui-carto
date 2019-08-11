@@ -57,8 +57,8 @@ export class Text extends BasePointVectorElement<com.carto.vectorelements.Text, 
         return this.native ? (this.native.getStyle() as com.carto.styles.TextStyle) : this.options.styleBuilder;
     }
     set styleBuilder(value: TextStyleBuilder | com.carto.styles.TextStyle | TextStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

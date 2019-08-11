@@ -56,8 +56,8 @@ export class Marker extends BasePointVectorElement<NTMarker, MarkerOptions> {
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
     set styleBuilder(value: MarkerStyleBuilder | NTMarkerStyle | MarkerStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

@@ -85,8 +85,8 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
     set styleBuilder(value: LineStyleBuilder | com.carto.styles.LineStyle | LineStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

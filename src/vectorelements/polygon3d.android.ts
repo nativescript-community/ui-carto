@@ -45,9 +45,9 @@ export class Polygon3D extends BaseLineVectorElement<com.carto.vectorelements.Po
     get styleBuilder() {
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
-    set styleBuilder(value: Polygon3DStyleBuilderOptions | Polygon3DStyleBuilder | com.carto.styles.Polygon3DStyle ) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+    set styleBuilder(value: Polygon3DStyleBuilderOptions | Polygon3DStyleBuilder | com.carto.styles.Polygon3DStyle) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }

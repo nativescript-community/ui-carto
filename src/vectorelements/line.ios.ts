@@ -70,8 +70,8 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
         return this.native ? this.native.getStyle() : this.options.styleBuilder;
     }
     set styleBuilder(value: LineStyleBuilder | NTLineStyle | LineStyleBuilderOptions) {
-        this.options.styleBuilder = value as any;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
     }
