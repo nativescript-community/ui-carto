@@ -16,7 +16,6 @@ import { isAndroid } from 'tns-core-modules/platform/platform';
 
 // type Options<T> = { [P in keyof T]: any };
 
-
 function createGetter(key: string, options: NativePropertyOptions) {
     // console.log('createGetter', key, options);
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
@@ -83,10 +82,13 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         }
     }
     native: T;
+    duringInit = false;
     initNativeView(native: T, options: U) {
+        this.duringInit = true;
         for (const key in options) {
             (this as any)[key] = options[key];
         }
+        this.duringInit = false;
     }
     getNative() {
         if (!this.native) {
