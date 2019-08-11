@@ -10,6 +10,8 @@ import { MapOptions } from './ui';
 import { EPSG4326 } from '../projections/epsg4326';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
+import { fromNativeSource } from 'tns-core-modules/image-source';
+
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_PLANAR;
@@ -42,7 +44,7 @@ export const registerLicense = profile('registerLicense', (value: string, callba
         );
     } else {
         const result = com.carto.ui.MapView.registerLicense(value, context);
-        console.log('registerLicense', value, result);
+
         if (result) {
             licenseKey = value;
         }
@@ -52,6 +54,33 @@ export const registerLicense = profile('registerLicense', (value: string, callba
 });
 export function getLicenseKey() {
     return licenseKey;
+}
+
+interface RendererCaptureListener extends com.carto.renderers.RendererCaptureListener {
+    // tslint:disable-next-line:no-misused-new
+    new (callback: WeakRef<Function>): RendererCaptureListener;
+}
+let RendererCaptureListener: RendererCaptureListener;
+function initRendererCaptureListener() {
+    if (RendererCaptureListener) {
+        return;
+    }
+    class RendererCaptureListenerImpl extends com.carto.renderers.RendererCaptureListener {
+        private _callback: WeakRef<Function>;
+
+        constructor(callback: WeakRef<Function>) {
+            super();
+            this._callback = callback;
+        }
+
+        onMapRendered(param0: com.carto.graphics.Bitmap) {
+            const callback = this._callback.get();
+            if (callback) {
+                callback(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(param0));
+            }
+        }
+    }
+    RendererCaptureListener = RendererCaptureListenerImpl as any;
 }
 
 export interface MapView extends com.akylas.carto.additions.AKMapView {
@@ -307,5 +336,19 @@ export class CartoMap extends CartoViewBase {
             return fromNativeScreenPos(this.mapView.mapToScreen(toNativeMapPos(pos)));
         }
         return null;
+    }
+
+    captureRendering(wait = false) {
+        return new Promise(resolve => {
+            initRendererCaptureListener();
+            this.mapView.getMapRenderer().captureRendering(
+                new RendererCaptureListener(
+                    new WeakRef(function(bitmap) {
+                        resolve(fromNativeSource(bitmap));
+                    })
+                ),
+                wait
+            );
+        });
     }
 }

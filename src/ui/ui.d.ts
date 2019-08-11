@@ -4,6 +4,7 @@ import { IProjection, Projection } from '../projections/projection';
 import { Layer } from '../layers/layer';
 import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core/core';
 import { Layers } from './ui.common';
+import { ImageSource } from 'tns-core-modules/image-source/image-source';
 export { Layers };
 export function registerLicense(key: string, callback?: (result: boolean) => void);
 
@@ -205,4 +206,5 @@ export class CartoMap extends View {
     clearAllCaches();
     clearPreloadingCaches();
     cancelAllTasks();
+    captureRendering(wait?: boolean): Promise<ImageSource>
 }

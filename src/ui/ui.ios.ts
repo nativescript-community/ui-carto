@@ -6,6 +6,7 @@ import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from './ui';
 import { CartoViewBase, isLicenseKeyRegistered, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './ui.common';
 import { NativeVector } from 'nativescript-carto/core/core.android';
+import { fromNativeSource } from 'tns-core-modules/image-source/image-source';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -76,6 +77,22 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                     position: owner.fromNativeMapPos(mapClickInfo.getClickPos())
                 }
             });
+        }
+    }
+}
+
+class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
+    private _callback: WeakRef<Function>;
+    public static initWithCallback(callback: WeakRef<Function>): NTRendererCaptureListenerImpl {
+        const delegate = NTRendererCaptureListenerImpl.new() as NTRendererCaptureListenerImpl;
+        delegate._callback = callback;
+        return delegate;
+    }
+
+    onMapRenderedSwigExplicitNTRendererCaptureListener(param0: NTBitmap) {
+        const callback = this._callback.get();
+        if (callback) {
+            callback(NTBitmapUtils.createUIImageFromBitmap(param0));
         }
     }
 }
@@ -266,5 +283,18 @@ export class CartoMap extends CartoViewBase {
             return fromNativeScreenPos(this.mapView.mapToScreen(toNativeMapPos(pos)));
         }
         return null;
+    }
+
+    captureRendering(wait = false) {
+        return new Promise(resolve => {
+            this.mapView.getMapRenderer().captureRenderingWaitWhileUpdating(
+                NTRendererCaptureListenerImpl.initWithCallback(
+                    new WeakRef(function(bitmap) {
+                        resolve(fromNativeSource(bitmap));
+                    })
+                ),
+                wait
+            );
+        });
     }
 }
