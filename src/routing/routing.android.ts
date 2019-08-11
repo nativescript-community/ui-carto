@@ -108,7 +108,7 @@ class SGREOfflineRoutingService extends RoutingService<com.akylas.carto.addition
 
 class CartoOnlineRoutingService extends RoutingService<com.akylas.carto.additions.AKCartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
     createNative(options: CartoOnlineRoutingServiceOptions) {
-        console.log('creating CartoOnlineRoutingService');
+
         return new com.akylas.carto.additions.AKCartoOnlineRoutingService(options.source);
     }
 }

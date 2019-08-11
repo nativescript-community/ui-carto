@@ -15,7 +15,7 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
     }
     add(element: BaseVectorElement<any, any>) {
         const nativeObj = element.getNative();
-        console.log('LocalVectorDataSource', 'add', nativeObj);
+
         if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
             this.getNative().addAll(nativeObj);
         } else {

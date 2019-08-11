@@ -56,7 +56,6 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
     @nativeColorProperty color: string | Color ;
     @nativeProperty size: number;
     createNative(options: ClusterElementBuilderOptions) {
-        this.log('create ClusterElementBuilder', !!this.buildClusterElement, !!this.options.buildClusterElement, !!options.buildClusterElement);
         initClusterElementBuilderNative();
         const result = new ClusterElementBuilderNative(new WeakRef(this));
         if (!!options.buildClusterElement) {
