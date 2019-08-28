@@ -48,7 +48,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
 
     set style(style: string) {
         this.options.style = style;
-        if (this.native) {
+        if (this.native && !this.duringInit) {
             this.getNative().setCompiledStyleSet(new com.carto.styles.CompiledStyleSet(this.pack, style));
         }
     }
