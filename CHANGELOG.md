@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.28](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.27...v1.2.28) (2019-08-28)
+
+
+### Bug Fixes
+
+* prevent styles being loaded twice ([6f6c887](https://github.com/farfromrefug/nativescript-carto/commit/6f6c887))
+
+
+### Features
+
+* all debug methods like the sdk ([037f336](https://github.com/farfromrefug/nativescript-carto/commit/037f336))
+* tileSubstitutionPolicy not working yet! ([2811576](https://github.com/farfromrefug/nativescript-carto/commit/2811576))
+
+
+
+
+
 ## [1.2.27](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.26...v1.2.27) (2019-08-11)
 
 
