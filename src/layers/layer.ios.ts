@@ -4,6 +4,13 @@ import { nativeProperty } from '../carto.common';
 import { TileDataSource } from '../datasources/datasource';
 import { Projection } from '../projections/projection';
 
+
+
+export enum TileSubstitutionPolicy {
+    TILE_SUBSTITUTION_POLICY_ALL = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_ALL,
+    TILE_SUBSTITUTION_POLICY_VISIBLE = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_VISIBLE,
+    TILE_SUBSTITUTION_POLICY_NONE = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_NONE
+}
 export abstract class Layer<T extends NTLayer, U extends LayerOptions> extends BaseLayer<T, U> {
     get visibleZoomRange() {
         if (this.native) {
@@ -25,6 +32,7 @@ export abstract class TileLayer<T extends NTTileLayer, U extends TileLayerOption
     @nativeProperty zoomLevelBias: number;
     @nativeProperty maxOverzoomLevel: number;
     @nativeProperty maxUnderzoomLevel: number;
+    @nativeProperty tileSubstitutionPolicy: TileSubstitutionPolicy;
 
     clearTileCaches( all: boolean) {
         if (this.native) {

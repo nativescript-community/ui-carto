@@ -1,8 +1,20 @@
-import { BaseLayer } from './layer.common';
-import { LayerOptions, TileLayerOptions } from './layer';
-import { nativeProperty } from '../carto';
+import { nativeAndroidEnumProperty, nativeProperty } from '../carto';
 import { TileDataSource } from '../datasources/datasource';
 import { Projection } from '../projections/projection';
+import { LayerOptions, TileLayerOptions } from './layer';
+import { BaseLayer } from './layer.common';
+
+export const TileSubstitutionPolicy = {
+    get TILE_SUBSTITUTION_POLICY_ALL() {
+        return com.carto.layers.TileSubstitutionPolicy.TILE_SUBSTITUTION_POLICY_ALL;
+    },
+    get TILE_SUBSTITUTION_POLICY_VISIBLE() {
+        return com.carto.layers.TileSubstitutionPolicy.TILE_SUBSTITUTION_POLICY_VISIBLE;
+    },
+    get TILE_SUBSTITUTION_POLICY_NONE() {
+        return com.carto.layers.TileSubstitutionPolicy.TILE_SUBSTITUTION_POLICY_NONE;
+    }
+};
 
 export abstract class Layer<T extends com.carto.layers.Layer, U extends LayerOptions> extends BaseLayer<T, U> {
     get visibleZoomRange() {
@@ -25,6 +37,7 @@ export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends 
     @nativeProperty zoomLevelBias: number;
     @nativeProperty maxOverzoomLevel: number;
     @nativeProperty maxUnderzoomLevel: number;
+    @nativeAndroidEnumProperty(com.carto.layers.TileSubstitutionPolicy, {}) tileSubstitutionPolicy;
 
     clearTileCaches(all: boolean) {
         if (this.native) {
@@ -42,6 +55,11 @@ export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends 
         if (this['projection']) {
             return this['projection'];
         }
-        return new Projection(undefined, this.getNative().getDataSource().getProjection());
+        return new Projection(
+            undefined,
+            this.getNative()
+                .getDataSource()
+                .getProjection()
+        );
     }
 }
