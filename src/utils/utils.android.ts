@@ -148,10 +148,16 @@ function initLogEventListenerClass() {
 }
 
 export function setShowDebug(value: boolean) {
-    // initLogEventListenerClass();
-    // com.carto.utils.Log.setLogEventListener(new LogEventListener());
     com.carto.utils.Log.setShowDebug(value);
+}
+export function setShowWarn(value: boolean) {
     com.carto.utils.Log.setShowWarn(value);
+}
+export function setShowInfo(value: boolean) {
+    com.carto.utils.Log.setShowInfo(value);
+}
+export function setShowError(value: boolean) {
+    com.carto.utils.Log.setShowError(value);
 }
 
 const currentAppFolder = knownFolders.currentApp();

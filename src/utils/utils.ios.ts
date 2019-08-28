@@ -101,7 +101,15 @@ export function nativeMapToJS(theMap: NTStringVariantMap) {
 
 export function setShowDebug(value: boolean) {
     NTLog.setShowDebug(value);
+}
+export function setShowWarn(value: boolean) {
     NTLog.setShowWarn(value);
+}
+export function setShowInfo(value: boolean) {
+    NTLog.setShowInfo(value);
+}
+export function setShowError(value: boolean) {
+    NTLog.setShowError(value);
 }
 
 const currentAppFolder = knownFolders.currentApp();

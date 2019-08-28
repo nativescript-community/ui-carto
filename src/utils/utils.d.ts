@@ -6,6 +6,9 @@ export function nativeVariantToJS(nMap): any;
 export function JSVariantToNative(nMap): any;
 
 export function setShowDebug(value: boolean);
+export function setShowWarn(value: boolean);
+export function setShowInfo(value: boolean);
+export function setShowError(value: boolean);
 
 export interface ZippedAssetPackageOptions {
     zipPath: string;
