@@ -117,27 +117,27 @@ export function nativeImageProperty(...args) {
 //     });
 // }
 
-export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], projection?: Projection) {
+export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], ignoreAltitude = true) {
     let nativePoses: NTMapPosVector;
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector).getNative();
     } else {
         const arrayPoses = positions as MapPos[];
         nativePoses = NTMapPosVector.alloc().init();
-        if (projection) {
-            arrayPoses.forEach(p => {
-                nativePoses.add(projection.getNative().fromWgs84(toNativeMapPos(p)));
-            });
-        } else {
-            arrayPoses.forEach(p => {
-                nativePoses.add(toNativeMapPos(p));
-            });
-        }
+        // if (projection) {
+        //     arrayPoses.forEach(p => {
+        //         nativePoses.add(projection.getNative().fromWgs84(toNativeMapPos(p, ignoreAltitude)));
+        //     });
+        // } else {
+        arrayPoses.forEach(p => {
+            nativePoses.add(toNativeMapPos(p, ignoreAltitude));
+        });
+        // }
     }
     return nativePoses;
 }
 
-export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], projection?: Projection) {
+export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], ignoreAltitude = false) {
     let nativePoses: NTMapPosVectorVector;
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVectorVector).getNative();
@@ -145,7 +145,7 @@ export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPo
         const arrayPoses = positions as MapPos[][];
         nativePoses = NTMapPosVectorVector.alloc().init();
         arrayPoses.forEach(p => {
-            nativePoses.add(mapPosVectorFromArgs(p, projection));
+            nativePoses.add(mapPosVectorFromArgs(p, ignoreAltitude));
         });
     }
     return nativePoses;

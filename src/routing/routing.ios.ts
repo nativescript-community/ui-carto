@@ -37,7 +37,7 @@ export enum RoutingAction {
 }
 abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
-        const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
+        const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
 
         // this.log('calculateRoute', options);
         const nRes = this.getNative().calculateRoute(nRequest);
@@ -82,7 +82,7 @@ class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRout
         return NTValhallaOfflineRoutingService.alloc().initWithPath(options.path);
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection), options.accuracy);
+        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
 
         const nRes = this.getNative().matchRoute(nRequest);
         const result = nRes ? new RouteMatchingResult(nRes) : null;
@@ -102,7 +102,7 @@ class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManag
         return NTPackageManagerValhallaRoutingService.alloc().initWithPackageManager(options.packageManager.getNative());
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection), options.accuracy);
+        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
 
         const nRes = this.getNative().matchRoute(nRequest);
         const result = nRes ? new RouteMatchingResult(nRes) : null;

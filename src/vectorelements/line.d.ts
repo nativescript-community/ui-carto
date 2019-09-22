@@ -40,6 +40,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<any, LineSty
 
 export class Line extends BaseLineVectorElement<any, LineOptions> {
     styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions | any;
+    ignoreAltitude?:boolean
     style?: any;
     color?: string | Color;
     width?: number;

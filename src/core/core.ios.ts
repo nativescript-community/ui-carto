@@ -1,4 +1,4 @@
-import { LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+import { LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, AltitudeKey } from './core.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 import { BaseNative } from '../carto.common';
 
@@ -58,7 +58,7 @@ export function fromNativeMapPos(position: NTMapPos) {
         altitude: position.getZ()
     } as MapPos;
 }
-export function toNativeMapPos(position: MapPos | NTMapPos) {
+export function toNativeMapPos(position: MapPos | NTMapPos, ignoreAltitude = false) {
     if (!position) {
         return null;
     }
@@ -66,7 +66,7 @@ export function toNativeMapPos(position: MapPos | NTMapPos) {
         return position;
     }
     //  ignore z for now as points can get under the map!
-    return NTMapPos.alloc().initWithXYZ(position[LongitudeKey], position[LatitudeKey], position.altitude > 0 ? position.altitude : 0);
+    return NTMapPos.alloc().initWithXYZ(position[LongitudeKey], position[LatitudeKey],  (!ignoreAltitude && position[AltitudeKey] > 0) ? position[AltitudeKey] : 0);
 }
 export function fromNativeScreenPos(position: NTScreenPos) {
     return {

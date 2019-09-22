@@ -74,7 +74,7 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
     //     return new com.carto.geocoding.RoutingService();
     // }
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
-        const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
+        const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
         this.getNative().calculateRouteCallback(
             nRequest,
             new com.akylas.carto.additions.RoutingServiceRouteCallback({
@@ -124,7 +124,7 @@ class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.addi
         return new com.akylas.carto.additions.AKValhallaOfflineRoutingService(options.path);
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
+        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
         this.getNative().matchRouteCallback(
             nRequest,
             new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
@@ -150,7 +150,7 @@ class PackageManagerValhallaRoutingService extends RoutingService<com.akylas.car
         return new com.akylas.carto.additions.AKPackageManagerValhallaRoutingService(options.packageManager.getNative());
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points, options.projection));
+        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
         this.getNative().matchRouteCallback(
             nRequest,
             new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({

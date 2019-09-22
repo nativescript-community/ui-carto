@@ -49,9 +49,9 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon
 export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
         const style = this.buildStyle();
-        const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.projection), style);
+        const result = NTPolygon.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
         if (options.holes) {
-            result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
+            result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.ignoreAltitude));
         }
         // result['owner'] = new WeakRef(this);
         return result;

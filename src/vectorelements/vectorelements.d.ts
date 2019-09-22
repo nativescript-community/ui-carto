@@ -35,6 +35,7 @@ export class PointVectorElementOptions extends VectorElementOptions {
 export class LineVectorElementOptions extends VectorElementOptions {
     positions: MapPosVector | MapPos[];
     projection?: Projection;
+    ignoreAltitude?:boolean
 }
 export class VectorElementStyleBuilderOptions extends VectorElementOptions {}
 export class BillboardStyleBuilderOptions extends VectorElementStyleBuilderOptions {

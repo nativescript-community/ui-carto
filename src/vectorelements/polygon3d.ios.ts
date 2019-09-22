@@ -23,9 +23,9 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolyg
 export class Polygon3D extends BaseLineVectorElement<NTPolygon3D, Polygon3DOptions> {
     createNative(options: Polygon3DOptions) {
         const style = this.buildStyle();
-        const result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.positions, options.projection), style, options.height);
+        const result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style, options.height);
         if (options.holes) {
-            result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.projection));
+            result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.ignoreAltitude));
         }
         // result['owner'] = new WeakRef(this);
         return result;

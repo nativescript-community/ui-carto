@@ -3,7 +3,7 @@ import { BaseNative } from '../carto';
 export { LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, ScreenPos, MapPos, ScreenBounds, MapVec, MapRange };
 
 export declare function fromNativeMapPos(pos): MapPos;
-export declare function toNativeMapPos(position: MapPos): any;
+export declare function toNativeMapPos(position: MapPos, ignoreAltitude?:boolean): any;
 export declare function fromNativeMapBounds(bounds: any): MapBounds;
 export declare function toNativeMapBounds(bounds: MapBounds): any;
 export declare function nativeVectorToArray<T>(vector: NativeVector<T>): T[];

@@ -51,7 +51,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
 export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     createNative(options: LineOptions) {
         const style = this.buildStyle();
-        const result = NTLine.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.projection), style);
+        const result = NTLine.alloc().initWithPosesStyle(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
         return result;
     }
     buildStyle() {
@@ -78,7 +78,7 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     setPoses(positions: MapPosVector | MapPos[]) {
         this.positions = positions;
         if (this.native) {
-            this.native.setPoses(mapPosVectorFromArgs(positions, this.projection));
+            this.native.setPoses(mapPosVectorFromArgs(positions, this.options.ignoreAltitude));
         }
     }
     getPoses() {

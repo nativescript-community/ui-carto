@@ -71,7 +71,7 @@ export function fromNativeMapPos(position: com.carto.core.MapPos) {
         altitude: position.getZ()
     } as MapPos;
 }
-export function toNativeMapPos(position: MapPos | com.carto.core.MapPos) {
+export function toNativeMapPos(position: MapPos | com.carto.core.MapPos, ignoreAltitude = false) {
     if (!position) {
         return null;
     }
@@ -81,7 +81,7 @@ export function toNativeMapPos(position: MapPos | com.carto.core.MapPos) {
     if (position[LongitudeKey] === undefined || position[LatitudeKey] === undefined) {
         throw new Error(`toNativeMapPos: missing lat/lon parameters in ${position}`);
     }
-    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
+    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey],  (!ignoreAltitude && position[AltitudeKey] > 0) ? position[AltitudeKey] : 0);
     //  ignore z for now as points can get under the map!
     return result;
 }

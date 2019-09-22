@@ -104,7 +104,7 @@ export abstract class BaseLineVectorElement<
     set positions(positions: MapPosVector | MapPos[]) {
         this.options.positions = positions;
         if (this.native && this.native.setPoses) {
-            this.native.setPoses(mapPosVectorFromArgs(positions, this.projection));
+            this.native.setPoses(mapPosVectorFromArgs(positions, this.options.ignoreAltitude));
         }
     }
 }

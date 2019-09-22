@@ -86,7 +86,7 @@ export function nativeImageProperty(...args) {
     );
 }
 
-export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], projection?: Projection) {
+export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], ignoreAltitude = true) {
     let nativePoses: com.carto.core.MapPosVector;
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector).getNative();
@@ -99,14 +99,14 @@ export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], project
         //     });
         // } else {
         arrayPoses.forEach(p => {
-            nativePoses.add(toNativeMapPos(p));
+            nativePoses.add(toNativeMapPos(p, ignoreAltitude));
         });
         // }
     }
     return nativePoses;
 }
 
-export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], projection?: Projection) {
+export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPos[][], ignoreAltitude = true) {
     let nativePoses: com.carto.core.MapPosVectorVector;
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVectorVector).getNative();
@@ -114,7 +114,7 @@ export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPo
         const arrayPoses = positions as MapPos[][];
         nativePoses = new com.carto.core.MapPosVectorVector();
         arrayPoses.forEach(p => {
-            nativePoses.add(mapPosVectorFromArgs(p, projection));
+            nativePoses.add(mapPosVectorFromArgs(p, ignoreAltitude));
         });
     }
     return nativePoses;

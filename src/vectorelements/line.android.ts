@@ -65,7 +65,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
 export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, LineOptions> {
     createNative(options: LineOptions) {
         const style = this.buildStyle();
-        const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.positions, options.projection), style);
+        const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
         // result['owner'] = new WeakRef(this);
         return result;
     }
@@ -94,7 +94,7 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
     setPoses(positions: MapPosVector | MapPos[]) {
         this.positions = positions;
         if (this.native) {
-            this.native.setPoses(mapPosVectorFromArgs(positions, this.projection));
+            this.native.setPoses(mapPosVectorFromArgs(positions, this.options.ignoreAltitude));
         }
     }
     getPoses() {
