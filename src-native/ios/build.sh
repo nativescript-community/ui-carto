@@ -7,4 +7,4 @@ SOURCE_NAME="CartoAdditions"
 IOS_SOURCE_DIR="$CURRENT_DIR"
 
 cd $IOS_SOURCE_DIR
-xcodebuild -workspace CartoAdditions.xcworkspace -scheme universal
+xcodebuild -workspace CartoAdditions.xcworkspace -scheme universal -sdk iphonesimulator
