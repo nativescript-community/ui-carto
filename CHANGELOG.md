@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.29](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.28...v1.2.29) (2019-09-27)
+
+
+### Bug Fixes
+
+* default line elements ignore altitude ([f22cd06](https://github.com/farfromrefug/nativescript-carto/commit/f22cd06))
+* MapbBounds inversed coordinates ([7a72a29](https://github.com/farfromrefug/nativescript-carto/commit/7a72a29))
+
+
+
+
+
 ## [1.2.28](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.27...v1.2.28) (2019-08-28)
 
 
