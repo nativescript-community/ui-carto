@@ -133,7 +133,7 @@ export function nativeVectorToArray<T>(vector: NativeVector<T>) {
 }
 
 export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
-    return new MapBounds(fromNativeMapPos(bounds.getMin()), fromNativeMapPos(bounds.getMax()));
+    return new MapBounds(fromNativeMapPos(bounds.getMax()), fromNativeMapPos(bounds.getMin()));
 }
 export function toNativeMapBounds(bounds: MapBounds) {
     if (bounds instanceof com.carto.core.MapBounds) {

@@ -109,7 +109,7 @@ export function fromNativeMapVec(value: NTMapVec) {
 }
 
 export function fromNativeMapBounds(bounds: NTMapBounds) {
-    return new MapBounds(fromNativeMapPos(bounds.getMin()), fromNativeMapPos(bounds.getMax()));
+    return new MapBounds(fromNativeMapPos(bounds.getMax()), fromNativeMapPos(bounds.getMin()));
 }
 export function toNativeMapBounds(bounds: MapBounds) {
     if (bounds instanceof NTMapBounds) {
