@@ -5,6 +5,7 @@ import { isAndroid } from 'tns-core-modules/platform/platform';
 import { Layer } from 'nativescript-carto/layers/layer';
 import { NativeVector } from 'nativescript-carto/core/core.android';
 import { nativeVectorToArray } from 'nativescript-carto/utils/utils';
+import { ContentView } from 'tns-core-modules/ui/page/page';
 
 let licenseKeyRegistered = false;
 export function setLicenseKeyRegistered(value: boolean) {
@@ -165,7 +166,7 @@ export class Layers<T extends any> {
 }
 
 @CSSType('CartoMap')
-export abstract class CartoViewBase extends View {
+export abstract class CartoViewBase extends ContentView {
     public mapReady = false;
     nativeProjection: any;
     // focusPos: MapPos;
@@ -206,6 +207,10 @@ export abstract class CartoViewBase extends View {
     log(...args) {
         console.log(`[${this.constructor.name}]`, ...args);
     }
+    // public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number): void {
+    //     console.log('onMeasure', widthMeasureSpec, heightMeasureSpec);
+    //     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    // }
 
     public onLoaded() {
         super.onLoaded();
@@ -213,7 +218,7 @@ export abstract class CartoViewBase extends View {
             this.mapReady = true;
             this.sendEvent(MapReadyEvent);
         }
-        // console.log('onLoaded', MapReadyEvent);
+        console.log('onLoaded', MapReadyEvent);
     }
 
     [focusPosProperty.setNative](value: MapPos) {
