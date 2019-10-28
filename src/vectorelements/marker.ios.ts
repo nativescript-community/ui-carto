@@ -1,9 +1,8 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
-import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BasePointVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
 import { nativeProperty } from '../carto.common';
+import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -26,8 +25,7 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuild
     }
 }
 
-export class Marker extends BasePointVectorElement<NTMarker, MarkerOptions> {
-    @nativeProperty rotation: number;
+export class Marker extends BaseBillboardVectorElement<NTMarker, MarkerOptions> {
     createNative(options: MarkerOptions) {
         const style = this.buildStyle();
         let result: NTMarker;

@@ -32,6 +32,9 @@ export class PointVectorElementOptions extends VectorElementOptions {
     position?: MapPos;
     projection?: Projection;
 }
+export class BillboardVectorElementOptions extends PointVectorElementOptions {
+    rotation?: number;
+}
 export class LineVectorElementOptions extends VectorElementOptions {
     positions: MapPosVector | MapPos[];
     projection?: Projection;
@@ -58,6 +61,9 @@ export abstract class BasePointVectorElement<T, U extends PointVectorElementOpti
     position: MapPos;
     projection?: Projection;
     getNativePos(pos: MapPos, projection: Projection): any;
+}
+export abstract class BaseBillboardVectorElement<T, U extends BillboardVectorElementOptions> extends BasePointVectorElement<T, U> {
+    rotation?: number;
 }
 export abstract class BaseLineVectorElement<T, U extends LineVectorElementOptions> extends BaseVectorElement<T, U> {
     positions: MapPosVector | MapPos[];

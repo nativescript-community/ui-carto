@@ -83,6 +83,11 @@ export abstract class BasePointVectorElement<
         return nativePos;
     }
 }
+
+export abstract class BaseBillboardVectorElement<T extends com.carto.vectorelements.Billboard, U extends PointVectorElementOptions> extends BasePointVectorElement<T, U> {
+    @nativeProperty rotation: number;
+}
+
 export abstract class BaseLineVectorElement<
     T extends com.carto.vectorelements.VectorElement & {
         getPoses?(): com.carto.core.MapPosVector;

@@ -1,12 +1,8 @@
-import { IProjection } from '../projections/projection';
-import { MapPos } from '../core/core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
+import { Color } from 'tns-core-modules/color/color';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 import { ImageSource } from 'tns-core-modules/image-source/image-source';
 import { Geometry } from '../geometry/geometry';
-import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation, BillboardScaling } from './vectorelements';
-import { BillboardStyleBuilder } from './vectorelements';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, BillboardVectorElementOptions } from './vectorelements';
 
 export class MarkerStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;
@@ -32,12 +28,11 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<any, MarkerStyleBu
     orientationMode: BillboardOrientation;
 }
 
-export class MarkerOptions extends PointVectorElementOptions {
-    rotation?: number;
+export class MarkerOptions extends BillboardVectorElementOptions {
     styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions;
     geometry?: Geometry;
 }
-export class Marker extends BasePointVectorElement<any, MarkerOptions> {
+export class Marker extends BaseBillboardVectorElement<any, MarkerOptions> {
     styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions | any;
     style?: any;
     size?: number;

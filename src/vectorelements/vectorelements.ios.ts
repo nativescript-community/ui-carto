@@ -86,6 +86,12 @@ export abstract class BasePointVectorElement<
         return nativePos;
     }
 }
+
+
+export abstract class BaseBillboardVectorElement<T extends NTBillboard, U extends PointVectorElementOptions> extends BasePointVectorElement<T, U> {
+    @nativeProperty rotation: number;
+}
+
 export abstract class BaseLineVectorElement<
     T extends NTVectorElement & {
         getPoses?(): NTMapPosVector;

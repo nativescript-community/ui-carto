@@ -1,9 +1,9 @@
+import { nativeAndroidEnumProperty } from 'nativescript-carto/carto.android';
 import { Color } from 'tns-core-modules/color/color';
 import { nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BasePointVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
-import { nativeAndroidEnumProperty } from 'nativescript-carto/carto.android';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
@@ -32,7 +32,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.Tex
     }
 }
 
-export class Text extends BasePointVectorElement<com.carto.vectorelements.Text, TextOptions> {
+export class Text extends BaseBillboardVectorElement<com.carto.vectorelements.Text, TextOptions> {
     @nativeProperty text: string;
     createNative(options: TextOptions) {
         const style = this.buildStyle();

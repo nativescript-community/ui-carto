@@ -2,7 +2,7 @@ import { Color } from 'tns-core-modules/color/color';
 import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BasePointVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -30,8 +30,7 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
     }
 }
 
-export class Marker extends BasePointVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
-    @nativeProperty rotation: number;
+export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
     createNative(options: MarkerOptions) {
         const style = this.buildStyle();
         // this.log('creating marker', options.position, options.projection, options.geometry, options.styleBuilder);

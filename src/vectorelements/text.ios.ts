@@ -2,7 +2,7 @@ import { Color } from 'tns-core-modules/color/color';
 import { nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BasePointVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
@@ -31,7 +31,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, 
     }
 }
 
-export class Text extends BasePointVectorElement<NTText, TextOptions> {
+export class Text extends BaseBillboardVectorElement<NTText, TextOptions> {
     @nativeProperty text: string;
     createNative(options: TextOptions) {
         const style = this.buildStyle();

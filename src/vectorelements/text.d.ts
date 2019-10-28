@@ -1,8 +1,5 @@
-import { IProjection } from '../projections/projection';
-import { MapPos } from '../core/core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, VectorElementOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
-import { BillboardOrientation } from './vectorelements';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, BillboardVectorElementOptions } from './vectorelements';
 
 export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: Color | string;
@@ -19,9 +16,8 @@ export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     backgroundColor?: Color | string;
     flippable?: boolean;
 }
-export class TextOptions extends PointVectorElementOptions {
-    text: string;
-    
+export class TextOptions extends BillboardVectorElementOptions {
+    text?: string;
     styleBuilder?: TextStyleBuilder | TextStyleBuilderOptions;
 }
 
@@ -41,6 +37,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<any, TextStyleBuilde
     anchorPointY?: number;
 }
 
-export class Text extends BasePointVectorElement<any, TextOptions> {
+export class Text extends BaseBillboardVectorElement<any, TextOptions> {
+    text?: string;
     styleBuilder?: TextStyleBuilder | TextStyleBuilderOptions | any;
 }
