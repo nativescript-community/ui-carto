@@ -1,4 +1,4 @@
-import { LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, AltitudeKey } from './core.common';
+import { LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, AltitudeKey, DefaultLatLonKeys, GenericMapPos } from './core.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 import { BaseNative } from '../carto.common';
 
@@ -16,25 +16,25 @@ export enum ClickType {
 }
 
 
-export class MapBounds extends BaseNative<NTMapBounds, {}> {
-    constructor(public northeast: MapPos, public southwest: MapPos, native?: NTMapBounds) {
+export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}> {
+    constructor(public northeast: GenericMapPos<T>, public southwest: GenericMapPos<T>, native?: NTMapBounds) {
         super(undefined, native);
     }
     createNative() {
         return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(this.southwest), toNativeMapPos(this.northeast));
     }
-    contains(position: MapPos | MapBounds) {
+    contains(position: GenericMapPos<T> | MapBounds<T>) {
         if (position['southwest']) {
-            return this.getNative().containsBounds(toNativeMapBounds(position as MapBounds));
+            return this.getNative().containsBounds(toNativeMapBounds<T>(position as MapBounds<T>));
         } else {
-            return this.getNative().containsPos(toNativeMapPos(position as MapPos));
+            return this.getNative().containsPos(toNativeMapPos<T>(position as GenericMapPos<T>));
         }
     }
-    intersects(position: MapBounds) {
-        return this.getNative().intersects(toNativeMapBounds(position));
+    intersects(position: MapBounds<T>) {
+        return this.getNative().intersects(toNativeMapBounds<T>(position));
     }
-    equals(position: MapBounds) {
-        return this.getNative().isEqualInternal(toNativeMapBounds(position));
+    equals(position: MapBounds<T>) {
+        return this.getNative().isEqualInternal(toNativeMapBounds<T>(position));
     }
     getCenter() {
         return fromNativeMapPos(this.getNative().getCenter());
@@ -48,17 +48,17 @@ export function nativeVectorToArray<T>(vector: NativeVector<T>) {
     }
     return result;
 }
-export function fromNativeMapPos(position: NTMapPos) {
+export function fromNativeMapPos<T = DefaultLatLonKeys>(position: NTMapPos) {
     if (!position) {
         return null;
     }
     return {
         [LatitudeKey]: position.getY(),
         [LongitudeKey]: position.getX(),
-        altitude: position.getZ()
-    } as MapPos;
+        [AltitudeKey]: position.getZ()
+    } as GenericMapPos<T>;
 }
-export function toNativeMapPos(position: MapPos | NTMapPos, ignoreAltitude = false) {
+export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T> | NTMapPos, ignoreAltitude = false) {
     if (!position) {
         return null;
     }
@@ -108,14 +108,14 @@ export function fromNativeMapVec(value: NTMapVec) {
     } as MapVec;
 }
 
-export function fromNativeMapBounds(bounds: NTMapBounds) {
-    return new MapBounds(fromNativeMapPos(bounds.getMax()), fromNativeMapPos(bounds.getMin()));
+export function fromNativeMapBounds<T = DefaultLatLonKeys>(bounds: NTMapBounds) {
+    return new MapBounds<T>(fromNativeMapPos<T>(bounds.getMax()), fromNativeMapPos<T>(bounds.getMin()));
 }
-export function toNativeMapBounds(bounds: MapBounds) {
+export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
     if (bounds instanceof NTMapBounds) {
         return bounds;
     }
-    return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
+    return NTMapBounds.alloc().initWithMinMax(toNativeMapPos<T>(bounds.southwest), toNativeMapPos<T>(bounds.northeast));
 }
 
 export function fromNativeScreenBounds(bounds: NTScreenBounds) {
@@ -164,36 +164,36 @@ export abstract class NativeVector<T> {
         return this.native;
     }
 }
-export class MapPosVector extends NativeVector<NTMapPos> {
+export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos> {
     native: NTMapPosVector;
     constructor(native?) {
         super();
         this.native = native || NTMapPosVector.alloc().init();
     }
 
-    public add(position: NTMapPos | MapPos) {
+    public add(position: NTMapPos | GenericMapPos<T>) {
         if (position instanceof NTMapPos) {
-            position = toNativeMapPos(position as MapPos);
+            position = toNativeMapPos<T>(position);
             return this.native.add(position);
         }
         return this.native.add(toNativeMapPos(position));
     }
 
     toArray() {
-        const result: MapPos[] = [];
+        const result: GenericMapPos<T>[] = [];
         for (let i = 0; i < this.size(); i++) {
             result.push(fromNativeMapPos(this.get(i)));
         }
         return result;
     }
 }
-export class MapPosVectorVector extends NativeVector<NTMapPosVector> {
+export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPosVector> {
     native: NTMapPosVectorVector;
     constructor(native?) {
         super();
         this.native = native || NTMapPosVectorVector.alloc().init();
     }
-    public add(position: NTMapPosVector | MapPosVector) {
+    public add(position: NTMapPosVector | MapPosVector<T>) {
         if (position instanceof MapPosVector) {
             return this.native.add(position.getNative());
         }

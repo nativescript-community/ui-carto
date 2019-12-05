@@ -2,6 +2,7 @@ import { Color } from 'tns-core-modules/color';
 import { NativePropertyOptions } from './carto';
 import { BaseNative, nativeProperty, _createImageSourceFromSrc } from './carto.common';
 import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core';
+import { DefaultLatLonKeys, GenericMapPos } from './core/core.common';
 export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -85,12 +86,12 @@ export function nativeImageProperty(...args) {
     );
 }
 
-export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], ignoreAltitude = true) {
+export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[], ignoreAltitude = true) {
     let nativePoses: com.carto.core.MapPosVector;
     if (typeof (positions as any).getNative === 'function') {
-        nativePoses = (positions as MapPosVector).getNative();
+        nativePoses = (positions as MapPosVector<T>).getNative();
     } else {
-        const arrayPoses = positions as MapPos[];
+        const arrayPoses = positions as GenericMapPos<T>[];
         nativePoses = new com.carto.core.MapPosVector();
         // if (projection) {
         //     arrayPoses.forEach(p => {
@@ -98,7 +99,7 @@ export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], ignoreA
         //     });
         // } else {
         arrayPoses.forEach(p => {
-            nativePoses.add(toNativeMapPos(p, ignoreAltitude));
+            nativePoses.add(toNativeMapPos<T>(p, ignoreAltitude));
         });
         // }
     }

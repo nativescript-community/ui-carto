@@ -1,5 +1,6 @@
 import { Color } from 'tns-core-modules/color/color';
 import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, BillboardVectorElementOptions } from './vectorelements';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
 
 export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: Color | string;
@@ -16,7 +17,7 @@ export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     backgroundColor?: Color | string;
     flippable?: boolean;
 }
-export class TextOptions extends BillboardVectorElementOptions {
+export class TextOptions<T = DefaultLatLonKeys> extends BillboardVectorElementOptions<T> {
     text?: string;
     styleBuilder?: TextStyleBuilder | TextStyleBuilderOptions;
 }
@@ -37,7 +38,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<any, TextStyleBuilde
     anchorPointY?: number;
 }
 
-export class Text extends BaseBillboardVectorElement<any, TextOptions> {
+export class Text<T = DefaultLatLonKeys> extends BaseBillboardVectorElement<any, TextOptions<T>, T> {
     text?: string;
     styleBuilder?: TextStyleBuilder | TextStyleBuilderOptions | any;
 }

@@ -44,7 +44,6 @@ export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.
         // result['owner'] = new WeakRef(this);
         return result;
     }
-    _builStyle: com.carto.styles.MarkerStyle;
     buildStyle() {
         let style: com.carto.styles.MarkerStyle;
         const styleBuilder = this.options.styleBuilder;
@@ -55,7 +54,6 @@ export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.
         } else if (styleBuilder.hasOwnProperty) {
             style = new MarkerStyleBuilder(styleBuilder as MarkerStyleBuilderOptions).buildStyle();
         }
-        this._builStyle = style;
         return style;
     }
     get styleBuilder() {
@@ -64,7 +62,6 @@ export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.
     set styleBuilder(value: MarkerStyleBuilder | com.carto.styles.MarkerStyle | MarkerStyleBuilderOptions) {
         if (this.native && !this.duringInit) {
             this.options.styleBuilder = value as any;
-            this._builStyle = null;
             this.native.setStyle(this.buildStyle());
         }
     }

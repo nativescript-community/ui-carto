@@ -1,6 +1,7 @@
 import { BaseNative } from '../carto';
 import { MapPos, MapPosVector } from '../core/core';
 import { Projection } from '../projections/projection';
+import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/core.common';
 
 declare enum BillboardOrientation {
     FACE_CAMERA,
@@ -28,15 +29,15 @@ export class VectorElementOptions {
     styleBuilder?: any;
     style?: any;
 }
-export class PointVectorElementOptions extends VectorElementOptions {
-    position?: MapPos;
+export class PointVectorElementOptions<T = DefaultLatLonKeys> extends VectorElementOptions {
+    position?: GenericMapPos<T>;
     projection?: Projection;
 }
-export class BillboardVectorElementOptions extends PointVectorElementOptions {
+export class BillboardVectorElementOptions<K = DefaultLatLonKeys> extends PointVectorElementOptions<K> {
     rotation?: number;
 }
-export class LineVectorElementOptions extends VectorElementOptions {
-    positions: MapPosVector | MapPos[];
+export class LineVectorElementOptions<T = DefaultLatLonKeys> extends VectorElementOptions {
+    positions: MapPosVector<T> | GenericMapPos<T>[];
     projection?: Projection;
     ignoreAltitude?:boolean
 }
@@ -57,16 +58,16 @@ export abstract class BaseVectorElement<T, U extends VectorElementOptions> exten
     visible?: boolean;
     metaData: { [k: string]: string };
 }
-export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions> extends BaseVectorElement<T, U> {
-    position: MapPos;
+export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
+    position: GenericMapPos<K>;
     projection?: Projection;
-    getNativePos(pos: MapPos, projection: Projection): any;
+    getNativePos(pos: GenericMapPos<K>, projection: Projection): any;
 }
-export abstract class BaseBillboardVectorElement<T, U extends BillboardVectorElementOptions> extends BasePointVectorElement<T, U> {
+export abstract class BaseBillboardVectorElement<T, U extends BillboardVectorElementOptions<K>, K = DefaultLatLonKeys> extends BasePointVectorElement<T, U, K> {
     rotation?: number;
 }
-export abstract class BaseLineVectorElement<T, U extends LineVectorElementOptions> extends BaseVectorElement<T, U> {
-    positions: MapPosVector | MapPos[];
+export abstract class BaseLineVectorElement<T, U extends LineVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
+    positions: MapPosVector<K> | GenericMapPos<K>[];
     projection?: Projection;
 }
 export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {}

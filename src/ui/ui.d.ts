@@ -5,6 +5,7 @@ import { Layer } from '../layers/layer';
 import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core/core';
 import { Layers } from './ui.common';
 import { ImageSource } from 'tns-core-modules/image-source/image-source';
+import { GenericMapPos, DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
 export { Layers };
 export function registerLicense(key: string, callback?: (result: boolean) => void);
 
@@ -33,8 +34,8 @@ export const MapClickedEvent: string;
 export interface MapEventData extends EventData {
     data: any;
 }
-export interface MapPosEventData extends EventData {
-    MapPos: MapPos;
+export interface MapPosEventData<T = DefaultLatLonKeys> extends EventData {
+    MapPos: GenericMapPos<T>;
 }
 
 export class MapOptions {
@@ -176,9 +177,9 @@ export class MapOptions {
     setZoomRange(zoomRange: any);
 }
 
-export class CartoMap extends View {
+export class CartoMap<T = DefaultLatLonKeys> extends View {
     public projection: Projection;
-    focusPos: MapPos;
+    focusPos: GenericMapPos<T>;
     zoom: number;
     bearing: number;
     tilt: number;
@@ -188,19 +189,19 @@ export class CartoMap extends View {
     addLayer(layer: Layer<any, any>, index?: number);
     removeLayer(layer: Layer<any, any>);
     getLayers(): Layers<any>;
-    screenToMap(pos: ScreenPos | any): MapPos;
-    mapToScreen(pos: MapPos | any): ScreenPos;
+    screenToMap(pos: ScreenPos | any): GenericMapPos<T>;
+    mapToScreen(pos: GenericMapPos<T> | any): ScreenPos;
     sendEvent(eventName: string, data?);
-    fromNativeMapPos(position: any): MapPos;
+    fromNativeMapPos(position: any): GenericMapPos<T>;
     getOptions(): MapOptions;
 
-    setZoom(value: number, target: number | MapPos, duration?: number);
-    setMapRotation(value: number, target: number | MapPos, duration?: number);
+    setZoom(value: number, target: number | GenericMapPos<T>, duration?: number);
+    setMapRotation(value: number, target: number | GenericMapPos<T>, duration?: number);
     setBearing(value: number, duration: number);
     setTilt(value: number, duration: number);
-    setFocusPos(value: MapPos, duration: number);
+    setFocusPos(value: GenericMapPos<T>, duration: number);
 
-    moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number);
+    moveToFitBounds(mapBounds: MapBounds<T>, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number);
 
     requestRedraw();
     clearAllCaches();

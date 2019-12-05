@@ -1,4 +1,4 @@
-import { AltitudeKey, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './core.common';
+import { AltitudeKey, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, DefaultLatLonKeys } from './core.common';
 import { BaseNative } from '../carto.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
@@ -29,18 +29,18 @@ export const ClickType = {
     }
 };
 
-export class MapBounds extends BaseNative<com.carto.core.MapBounds, {}> {
-    constructor(public northeast: MapPos, public southwest: MapPos, native?: com.carto.core.MapBounds) {
+export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.MapBounds, {}> {
+    constructor(public northeast: GenericMapPos<T>, public southwest: GenericMapPos<T>, native?: com.carto.core.MapBounds) {
         super(undefined, native);
     }
     createNative() {
-        return new com.carto.core.MapBounds(toNativeMapPos(this.southwest), toNativeMapPos(this.northeast));
+        return new com.carto.core.MapBounds(toNativeMapPos<T>(this.southwest), toNativeMapPos<T>(this.northeast));
     }
-    contains(position: MapPos | MapBounds) {
+    contains(position: GenericMapPos<T> | MapBounds<T>) {
         if (position['southwest']) {
-            return this.getNative().contains(toNativeMapBounds(position as MapBounds));
+            return this.getNative().contains(toNativeMapBounds<T>(position as MapBounds<T>));
         } else {
-            return this.getNative().contains(toNativeMapPos(position as MapPos));
+            return this.getNative().contains(toNativeMapPos<T>(position as GenericMapPos<T>));
         }
     }
     intersects(position: MapBounds) {
@@ -61,17 +61,17 @@ export class MapBounds extends BaseNative<com.carto.core.MapBounds, {}> {
 //     DUAL = com.carto.ui.ClickType.CLICK_TYPE_DUAL.ordinal()
 // }
 
-export function fromNativeMapPos(position: com.carto.core.MapPos) {
+export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core.MapPos) {
     if (!position) {
         return null;
     }
     return {
         [LatitudeKey]: position.getY(),
         [LongitudeKey]: position.getX(),
-        altitude: position.getZ()
-    } as MapPos;
+        [AltitudeKey]: position.getZ()
+    } as GenericMapPos<T>;
 }
-export function toNativeMapPos(position: MapPos | com.carto.core.MapPos, ignoreAltitude = false) {
+export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T> | com.carto.core.MapPos, ignoreAltitude = false) {
     if (!position) {
         return null;
     }
@@ -132,16 +132,16 @@ export function nativeVectorToArray<T>(vector: NativeVector<T>) {
     return result;
 }
 
-export function fromNativeMapBounds(bounds: com.carto.core.MapBounds) {
-    return new MapBounds(fromNativeMapPos(bounds.getMax()), fromNativeMapPos(bounds.getMin()));
+export function fromNativeMapBounds<T = DefaultLatLonKeys>(bounds: com.carto.core.MapBounds) {
+    return new MapBounds<T>(fromNativeMapPos<T>(bounds.getMax()), fromNativeMapPos<T>(bounds.getMin()));
 }
-export function toNativeMapBounds(bounds: MapBounds) {
+export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
     if (bounds instanceof com.carto.core.MapBounds) {
         return bounds;
     } else if (bounds.getNative) {
         return bounds.getNative();
     }
-    return new com.carto.core.MapBounds(toNativeMapPos(bounds.southwest), toNativeMapPos(bounds.northeast));
+    return new com.carto.core.MapBounds(toNativeMapPos<T>(bounds.southwest), toNativeMapPos<T>(bounds.northeast));
 }
 
 export function fromNativeScreenBounds(bounds: com.carto.core.ScreenBounds) {
@@ -193,35 +193,35 @@ export abstract class NativeVector<T> {
         return this.native;
     }
 }
-export class MapPosVector extends NativeVector<com.carto.core.MapPos> {
+export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPos> {
     native: com.carto.core.MapPosVector;
     constructor(native?) {
         super();
         this.native = native || new com.carto.core.MapPosVector();
     }
-    public add(position: com.carto.core.MapPos | MapPos) {
+    public add(position: com.carto.core.MapPos | GenericMapPos<T>) {
         if (position instanceof com.carto.core.MapPos) {
-            position = toNativeMapPos(position as MapPos);
-            return this.native.add(position);
+            position = toNativeMapPos<T>(position);
+            return this.native.add(position as com.carto.core.MapPos);
         }
         return this.native.add(toNativeMapPos(position));
     }
 
     toArray() {
-        const result: MapPos[] = [];
+        const result: GenericMapPos<T>[] = [];
         for (let i = 0; i < this.size(); i++) {
-            result.push(fromNativeMapPos(this.get(i)));
+            result.push(fromNativeMapPos<T>(this.get(i)));
         }
         return result;
     }
 }
-export class MapPosVectorVector extends NativeVector<com.carto.core.MapPosVector> {
+export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPosVector> {
     native: com.carto.core.MapPosVectorVector;
     constructor(native?) {
         super();
         this.native = native || new com.carto.core.MapPosVectorVector();
     }
-    public add(position: com.carto.core.MapPosVector | MapPosVector) {
+    public add(position: com.carto.core.MapPosVector | MapPosVector<T>) {
         if (position instanceof MapPosVector) {
             return this.native.add(position.getNative());
         }

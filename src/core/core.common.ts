@@ -2,15 +2,18 @@ export type LatitudeKeys = 'latitude' | 'lat';
 export type LongitudeKeys = 'longitude' | 'lon' | 'lng';
 export type AltitudeKeys = 'altitude' | 'alt' | 'ele';
 
-export interface MapPos {
-    latitude?: number;
-    lat?: number;
-    longitude?: number;
-    lon?: number;
-    lng?: number;
-    speed?: number;
+export type DefaultLatLonKeys = {
+    latitude: number;
+    longitude: number;
     altitude?: number;
-}
+};
+
+export type GenericMapPos<T = DefaultLatLonKeys> = {
+    [P in keyof T]: number;
+} & {
+    speed?: number;
+};
+export type MapPos = GenericMapPos<DefaultLatLonKeys>;
 
 export interface ScreenPos {
     x: number;
@@ -37,10 +40,12 @@ export let LatitudeKey: LatitudeKeys = 'latitude';
 export let LongitudeKey: LongitudeKeys = 'longitude';
 export let AltitudeKey: AltitudeKeys = 'altitude';
 
-export function setMapPosKeys(latitude: LatitudeKeys, longitude: LongitudeKeys, altitude: AltitudeKeys) {
+export function setMapPosKeys(latitude: LatitudeKeys, longitude: LongitudeKeys, altitude?: AltitudeKeys) {
     LatitudeKey = latitude;
     LongitudeKey = longitude;
-    AltitudeKey = altitude;
+    if (altitude) {
+        AltitudeKey = altitude;
+    }
 }
 
 export function applyMixins(derivedCtor: any, baseCtors: any[]) {

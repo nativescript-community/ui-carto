@@ -4,6 +4,7 @@ import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorEleme
 import { Color } from 'tns-core-modules/color/color';
 import { Marker } from './marker';
 import { BillboardStyleBuilder } from './vectorelements.ios';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
 
 export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: string | Color;
@@ -32,13 +33,13 @@ export class BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptio
     color?: string | Color;
 }
 
-export class BalloonPopupOptions extends PointVectorElementOptions {
-    marker?: Marker;
+export class BalloonPopupOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
+    marker?: Marker<T>;
     title?: string;
     description?: string;
     styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;
 }
-export class BalloonPopup extends BasePointVectorElement<any, BalloonPopupOptions> {
+export class BalloonPopup<T = DefaultLatLonKeys> extends BasePointVectorElement<any, BalloonPopupOptions<T>, T> {
     styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;
     style?: any;
     color?: string | Color;

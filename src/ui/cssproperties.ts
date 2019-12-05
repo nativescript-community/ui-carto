@@ -2,10 +2,11 @@ import { CssProperty } from 'tns-core-modules/ui/core/properties';
 import { Style } from 'tns-core-modules/ui/styling/style';
 import { LatitudeKey, LongitudeKey, MapPos } from '../core/core';
 import { booleanConverter } from 'tns-core-modules/ui/core/view-base';
+import { GenericMapPos } from 'nativescript-carto/core/core.common';
 declare module 'tns-core-modules/ui/styling/style' {
     interface Style {
         zoom: number;
-        focusPos: MapPos;
+        focusPos: GenericMapPos;
         bearing: number;
         minZoom: number;
         maxZoom: number;
@@ -27,15 +28,14 @@ export const zoomProperty = new CssProperty<Style, number>({
 });
 zoomProperty.register(Style);
 
-export const focusPosProperty = new CssProperty<Style, MapPos>({
+export const focusPosProperty = new CssProperty<Style, GenericMapPos>({
     name: 'focusPos',
     cssName: 'focus-pos',
-
     valueConverter: v => {
         // only called for string values!!
         if (typeof v === 'string') {
             const MapPoss = v.split(',').map(parseFloat);
-            return { [LatitudeKey]: MapPoss[0], [LongitudeKey]: MapPoss[1] };
+            return { [LatitudeKey]: MapPoss[0], [LongitudeKey]: MapPoss[1] } as any;
         }
         return v;
     }

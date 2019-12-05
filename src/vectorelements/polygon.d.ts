@@ -3,6 +3,7 @@ import { MapPos, MapPosVector, MapPosVectorVector } from '../core/core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from './vectorelements';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
 import { Color } from 'tns-core-modules/color/color';
+import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/core.common';
 export class PolygonStyleBuilderOptions extends VectorElementOptions {
     size?: number;
     color?: string | Color;
@@ -14,14 +15,13 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<any, Poly
     buildStyle(): any;
 }
 
-export class PolygonOptions extends LineVectorElementOptions {
-    positions: MapPosVector | MapPos[];
-    holes?: MapPos[][] | MapPosVectorVector;
+export class PolygonOptions<T = DefaultLatLonKeys> extends LineVectorElementOptions<T> {
+    holes?: GenericMapPos<T>[][] | MapPosVectorVector<T>;
     projection?: Projection;
     styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions;
 }
 
-export class Polygon extends BaseLineVectorElement<any, PolygonOptions> {
+export class Polygon<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, PolygonOptions<T>, T> {
     styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions | any;
     style?: any;
     size?: number;

@@ -2,6 +2,7 @@ import { IProjection } from '../projections/projection';
 import { MapPos } from '../core/core';
 import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
 
 // export class NMLModelStyleBuilderOptions extends VectorElementOptions {
 
@@ -11,13 +12,13 @@ import { Color } from 'tns-core-modules/color/color';
 //     buildStyle(): any;
 // }
 
-export class NMLModelOptions extends PointVectorElementOptions {
+export class NMLModelOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
     name: string;
     scale?: number;
     // styleBuilder?: NMLModelStyleBuilder<any, any>;
     // style?: any;
 }
-export class NMLModel extends BasePointVectorElement<any, NMLModelOptions> {
+export class NMLModel<T = DefaultLatLonKeys> extends BasePointVectorElement<any, NMLModelOptions<T>, T> {
     // styleBuilder?: NMLModelStyleBuilder<any, any>;
     // style?: any;
 }

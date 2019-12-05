@@ -2,6 +2,7 @@ import { Projection } from '../projections/projection';
 import { MapPos } from '../core/core';
 import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions, BillboardStyleBuilderOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
 
 export class PointStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;
@@ -14,11 +15,11 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<any, PointS
     clickSize?: number;
 }
 
-export class PointOptions extends PointVectorElementOptions {
+export class PointOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
     styleBuilder?: PointStyleBuilder | PointStyleBuilderOptions;
 
 }
-export class Point extends BasePointVectorElement<any, PointOptions> {
+export class Point<T = DefaultLatLonKeys> extends BasePointVectorElement<any, PointOptions<T>, T> {
     styleBuilder?: PointStyleBuilder | PointStyleBuilderOptions;
     style?: any;
     size?: number;
