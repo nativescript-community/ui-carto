@@ -3,7 +3,7 @@ import { MapBounds, MapPos, MapPosVector } from '../core/core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from './vectorelements';
 import { Color } from 'tns-core-modules/color/color';
 import { Geometry } from '../geometry/geometry';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
+import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/core.common';
 
 declare enum LineJointType {
     FaceCamera,
@@ -48,8 +48,8 @@ export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Line
     endType?: LineEndType;
     clickWidth?: number;
     stretchFactor?: number;
-    setPoses(positions: MapPosVector | MapPos[]);
-    getPoses(): MapPosVector | MapPos[];
+    setPoses(positions: MapPosVector<T> | GenericMapPos<T>[]);
+    getPoses(): MapPosVector<T> | GenericMapPos<T>[];
     getGeometry(): Geometry;
-    getBounds(): MapBounds;
+    getBounds(): MapBounds<T>;
 }
