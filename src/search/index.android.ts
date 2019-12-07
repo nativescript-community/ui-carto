@@ -1,4 +1,4 @@
-import { BaseNative, nativeProperty } from '../carto.common';
+import { BaseNative, nativeProperty } from '../index.common';
 import { toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';

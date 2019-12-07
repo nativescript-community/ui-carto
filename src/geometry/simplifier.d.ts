@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 export interface GeometrySimplifierOptions {}
 export interface DouglasPeuckerGeometrySimplifierOptions extends GeometrySimplifierOptions {
     tolerance: number;

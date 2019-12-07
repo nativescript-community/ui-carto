@@ -1,10 +1,10 @@
 import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from '.';
 // import { BaseVectorElement } from './vectorelements.common';
-import { BaseNative, nativeProperty } from '../carto.common';
+import { BaseNative, nativeProperty } from '../index.common';
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
 import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core';
-import { mapPosVectorFromArgs } from '../carto';
+import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
 
 export const BillboardOrientation = {

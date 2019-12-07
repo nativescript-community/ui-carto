@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color';
-import { nativeColorProperty, nativeImageProperty } from '../carto';
-import { BaseNative, nativeProperty } from '../carto.common';
+import { nativeColorProperty, nativeImageProperty } from '..';
+import { BaseNative, nativeProperty } from '../index.common';
 import { fromNativeMapPos, MapPos } from '../core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';

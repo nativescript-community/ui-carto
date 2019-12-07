@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { MapPos, MapPosVector } from '../core';
 import { Projection } from '../projections';
 import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';

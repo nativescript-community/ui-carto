@@ -3,8 +3,8 @@ import { BasePointVectorElement } from '.';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color/color';
 import { toNativeMapPos } from '../core';
-import { nativeColorProperty } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { nativeColorProperty } from '..';
+import { nativeProperty } from '../index.common';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {

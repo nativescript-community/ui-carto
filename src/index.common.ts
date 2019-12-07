@@ -184,7 +184,7 @@ export function capitalize(s) {
 }
 
 import { knownFolders, path } from '@nativescript/core/file-system';
-import { NativePropertyOptions } from './carto';
+import { NativePropertyOptions } from '.';
 let currentAppFolder: string;
 
 export function getFileName(str: string): string {

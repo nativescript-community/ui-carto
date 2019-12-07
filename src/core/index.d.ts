@@ -1,5 +1,5 @@
 import { LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, DefaultLatLonKeys, GenericMapPos, AltitudeKeys } from './index.common';
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 export { DefaultLatLonKeys, GenericMapPos, LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, ScreenPos, MapPos, ScreenBounds, MapVec, MapRange };
 
 export declare function fromNativeMapPos<T = DefaultLatLonKeys>(pos): GenericMapPos<T>;

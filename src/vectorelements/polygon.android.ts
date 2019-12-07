@@ -3,8 +3,8 @@ import { BaseLineVectorElement } from '.';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from '@nativescript/core/color/color';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
-import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
+import { nativeProperty } from '../index.common';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {

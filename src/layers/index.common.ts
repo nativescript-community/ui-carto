@@ -1,4 +1,4 @@
-import { BaseNative, nativeProperty } from '../carto.common';
+import { BaseNative, nativeProperty } from '../index.common';
 import { LayerOptions, TileSubstitutionPolicy } from '.';
 
 export abstract class BaseLayer<T, U extends LayerOptions> extends BaseNative<T, U> {

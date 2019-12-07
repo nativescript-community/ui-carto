@@ -1,5 +1,5 @@
 import { DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 import { Projection } from 'nativescript-carto/projections';
 import { FeatureCollection } from '../geometry/feature';
 import { JSVariantToNative } from '../utils';

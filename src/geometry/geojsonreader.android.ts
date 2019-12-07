@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 import { GeoJSONGeometryReaderOptions } from './geojsonreader';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';

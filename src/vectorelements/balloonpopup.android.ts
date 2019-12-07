@@ -3,8 +3,8 @@ import { BasePointVectorElement, BillboardStyleBuilder } from '.';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from '@nativescript/core/color/color';
 import { toNativeMapPos } from '../core';
-import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { nativeCartoImageProperty, nativeColorProperty } from '..';
+import { nativeProperty } from '../index.common';
 
 export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<com.carto.styles.BalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {

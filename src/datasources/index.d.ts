@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { Projection } from 'nativescript-carto/projections';
 import { FeatureCollection } from 'nativescript-carto/geometry/feature';
 

@@ -17,7 +17,7 @@ import {
 import { BaseGeocodingService } from './service.common';
 import { NativeVector, toNativeMapPos } from '../core';
 import { FeatureCollection } from '../geometry/feature';
-import { nativeProperty } from '../carto';
+import { nativeProperty } from '..';
 
 export abstract class GeocodingService<T extends NTGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
     createNative(options: GeocodingServiceOptions) {

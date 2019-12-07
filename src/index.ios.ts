@@ -1,8 +1,8 @@
-import { _createImageSourceFromSrc, BaseNative, nativeProperty } from './carto.common';
+import { _createImageSourceFromSrc, BaseNative, nativeProperty } from './index.common';
 import { Color } from '@nativescript/core';
 import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
 import { Projection } from './projections';
-import { NativePropertyOptions } from './carto';
+import { NativePropertyOptions } from '.';
 export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;

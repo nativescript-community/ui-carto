@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { VectorTileLayer } from '../layers/vector';
 import { TileDataSource } from '../datasources';
 import { VectorTileDecoder } from '../vectortiles';

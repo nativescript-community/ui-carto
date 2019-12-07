@@ -15,7 +15,7 @@ import {
     TomTomOnlineGeocodingServiceOptions,
     TomTomOnlineReverseGeocodingServiceOptions
 } from './service';
-import { nativeProperty } from '../carto';
+import { nativeProperty } from '..';
 import { BaseGeocodingService } from './service.common';
 
 

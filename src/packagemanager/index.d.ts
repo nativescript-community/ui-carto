@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { TileDataSource, TileDataSourceOptions } from '../datasources';
 import { DataSource } from '../datasources';
 import { MapPos, MapBounds, NativeVector } from '../core';

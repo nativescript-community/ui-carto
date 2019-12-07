@@ -1,0 +1,57 @@
+import { Observable } from '@nativescript/core/data/observable';
+import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector } from './core';
+import { Projection } from './projections';
+import { ImageSource } from '@nativescript/core/image-source';
+import { ImageAsset } from '@nativescript/core/image-asset';
+
+export abstract class BaseNative<T, U extends {}> extends Observable {
+    options: U;
+    native: T;
+    duringInit: boolean;
+    constructor(options?: U, native?: T);
+    initNativeView(native: T, options: U): void;
+    getNative(): T;
+    log(...args);
+}
+export interface NativePropertyOptions {
+    converter?: {
+        fromNative: Function;
+        toNative: Function;
+    };
+    defaultValue?: any;
+    nativeGetterName?: string;
+    nativeSetterName?: string;
+    getConverter?: Function;
+    ios?: {
+        nativeGetterName?: string;
+        nativeSetterName?: string;
+    };
+    android?: {
+        nativeGetterName?: string;
+        nativeSetterName?: string;
+    };
+}
+
+export declare function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeProperty(...args);
+
+export declare function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[], ignoreAltitude?: boolean): any;
+export declare function mapPosVectorVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVectorVector<T> | GenericMapPos<T>[][], ignoreAltitude?: boolean): any;
+
+export declare function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeColorProperty(...args);
+export declare function nativeEnumProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeEnumProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeEnumProperty(...args);
+
+export declare function nativeAndroidEnumProperty(enumClass, options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+
+export declare function nativeCartoImageProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeCartoImageProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeCartoImageProperty(...args);
+
+export declare function nativeImageProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeImageProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeImageProperty(...args);

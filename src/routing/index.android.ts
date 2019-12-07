@@ -1,4 +1,4 @@
-import { mapPosVectorFromArgs, nativeProperty } from '../carto';
+import { mapPosVectorFromArgs, nativeProperty } from '..';
 import { NativeVector } from '../core';
 import {
     CartoOnlineRoutingServiceOptions,

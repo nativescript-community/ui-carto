@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 
 export interface VectorTileDecoderOptions {}
 

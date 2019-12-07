@@ -1,10 +1,10 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core';
 import { Color } from '@nativescript/core/color/color';
-import { mapPosVectorFromArgs, nativeColorProperty } from '../carto';
+import { mapPosVectorFromArgs, nativeColorProperty } from '..';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from '.';
-import { nativeProperty } from '../carto.common';
+import { nativeProperty } from '../index.common';
 
 export { MapBounds };
 export enum LineJointType {

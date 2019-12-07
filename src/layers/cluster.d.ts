@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { MapPos } from '../core';
 import { VectorElement, VectorElementVector } from '../vectorelements';
 import { BaseVectorElement } from '../vectorelements';

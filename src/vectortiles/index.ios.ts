@@ -1,6 +1,6 @@
 import { DirAssetPackage, nativeVectorToArray } from 'nativescript-carto/utils';
 import { File } from '@nativescript/core/file-system';
-import { getFileName, getRelativePathToApp } from '../carto.common';
+import { getFileName, getRelativePathToApp } from '../index.common';
 import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
 import { BaseVectorTileDecoder } from './index.common';
 

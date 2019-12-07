@@ -1,7 +1,7 @@
 import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
 import { File } from '@nativescript/core/file-system';
 import { BaseVectorTileDecoder } from './index.common';
-import { getFileName, getRelativePathToApp } from '../carto.common';
+import { getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackage } from '../utils';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {

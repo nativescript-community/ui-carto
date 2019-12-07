@@ -1,4 +1,4 @@
-import { BaseNative, getFileName, getRelativePathToApp } from '../carto.common';
+import { BaseNative, getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
 

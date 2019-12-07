@@ -1,6 +1,6 @@
 import { HTTPTileDataSourceOptions } from './http';
 import { DataSource } from '.';
-import { nativeProperty } from '../carto.common';
+import { nativeProperty } from '../index.common';
 
 export class HTTPTileDataSource extends DataSource<NTHTTPTileDataSource, HTTPTileDataSourceOptions> {
     @nativeProperty({

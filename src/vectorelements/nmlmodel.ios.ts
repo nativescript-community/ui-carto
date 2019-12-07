@@ -1,4 +1,4 @@
-import { getRelativePathToApp, nativeProperty } from '../carto.common';
+import { getRelativePathToApp, nativeProperty } from '../index.common';
 import { NMLModelOptions } from './nmlmodel';
 import { BasePointVectorElement } from '.';
 

@@ -1,5 +1,5 @@
-import { BaseNative } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { BaseNative } from '..';
+import { nativeProperty } from '../index.common';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections';

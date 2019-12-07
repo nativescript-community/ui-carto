@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { DataSource } from '../datasources';
 import { Projection } from '../projections';
 

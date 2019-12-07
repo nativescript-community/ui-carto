@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 import { DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
 import { JSVariantToNative } from 'nativescript-carto/utils';
 import { FeatureCollection } from 'nativescript-carto/geometry/feature.ios';

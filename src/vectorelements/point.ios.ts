@@ -2,8 +2,8 @@ import { BaseVectorElementStyleBuilder } from './index.common';
 import { BasePointVectorElement } from '.';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color/color';
-import { nativeColorProperty } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { nativeColorProperty } from '..';
+import { nativeProperty } from '../index.common';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {

@@ -1,6 +1,6 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { Color } from '@nativescript/core/color/color';
-import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto';
+import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 import { BaseLineVectorElement } from '.';
 

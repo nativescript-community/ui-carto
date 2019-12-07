@@ -1,6 +1,6 @@
 import { BaseLayer } from './index.common';
 import { LayerOptions, TileLayerOptions } from '.';
-import { nativeProperty } from '../carto.common';
+import { nativeProperty } from '../index.common';
 import { TileDataSource } from '../datasources';
 import { Projection } from '../projections';
 

@@ -1,4 +1,4 @@
-import { nativeAndroidEnumProperty, nativeProperty } from '../carto';
+import { nativeAndroidEnumProperty, nativeProperty } from '..';
 import { TileDataSource } from '../datasources';
 import { Projection } from '../projections';
 import { LayerOptions, TileLayerOptions } from '.';

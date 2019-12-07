@@ -1,6 +1,6 @@
 import { LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, AltitudeKey, DefaultLatLonKeys, GenericMapPos } from './index.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,

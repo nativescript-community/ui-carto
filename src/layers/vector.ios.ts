@@ -9,11 +9,11 @@ import {
 } from './vector';
 import { TileDataSource } from '../datasources';
 import { Layer, TileLayer } from '.';
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { VectorDataSource } from '../datasources/vector';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
 import { CartoPackageManager } from '../packagemanager';
-import { nativeProperty } from '../carto.common';
+import { nativeProperty } from '../index.common';
 import { fromNativeMapPos } from '../core';
 import { Projection } from '../projections';
 import { VectorElement } from '../vectorelements';

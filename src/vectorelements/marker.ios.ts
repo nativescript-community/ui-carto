@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color/color';
-import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { nativeCartoImageProperty, nativeColorProperty } from '..';
+import { nativeProperty } from '../index.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 

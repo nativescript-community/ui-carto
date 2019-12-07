@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color/color';
-import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '../carto';
-import { nativeProperty } from '../carto.common';
+import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '..';
+import { nativeProperty } from '../index.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 

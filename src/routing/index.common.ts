@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 import { RouteMatchingResult as IRouteMatchingResult, RoutingInstructionVector, RoutingResult as IRoutingResult, RoutingServiceOptions } from '.';
 import { Projection } from 'nativescript-carto/projections';
 import { MapPosVector } from 'nativescript-carto/core';

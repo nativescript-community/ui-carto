@@ -1,5 +1,5 @@
 import { AltitudeKey, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, DefaultLatLonKeys } from './index.common';
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export const CartoMapStyle = {

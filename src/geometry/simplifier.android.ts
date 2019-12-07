@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 import { DouglasPeuckerGeometrySimplifierOptions, GeometrySimplifierOptions } from './simplifier';
 
 export abstract class GeometrySimplifier<T extends com.carto.geometry.GeometrySimplifier, U extends GeometrySimplifierOptions> extends BaseNative<T, U> {}

@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto';
+import { BaseNative } from '..';
 import { IProjection } from '../projections';
 import { MapBounds, MapPos, NativeVector } from '../core';
 import { FeatureCollection } from '../geometry/feature';

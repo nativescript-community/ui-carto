@@ -1,4 +1,4 @@
-import { BaseNative } from '../carto.common';
+import { BaseNative } from '../index.common';
 import { EPSG3857Options } from './epsg3857';
 import { MapPos } from '../core';
 

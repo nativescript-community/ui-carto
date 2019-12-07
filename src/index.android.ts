@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color';
-import { NativePropertyOptions } from './carto';
-import { BaseNative, nativeProperty, _createImageSourceFromSrc } from './carto.common';
+import { NativePropertyOptions } from '.';
+import { BaseNative, nativeProperty, _createImageSourceFromSrc } from './index.common';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
 export { BaseNative, nativeProperty };
 
