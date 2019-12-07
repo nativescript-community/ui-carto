@@ -1,6 +1,6 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
-import { TileDataSource } from './datasource';
-import { MapBounds, toNativeMapBounds } from '../core/core';
+import { TileDataSource } from '.';
+import { MapBounds, toNativeMapBounds } from '../core';
 import { nativeProperty } from '../carto.common';
 
 export class PersistentCacheTileDataSource extends TileDataSource<com.carto.datasources.PersistentCacheTileDataSource, PersistentCacheTileDataSourceOptions> {

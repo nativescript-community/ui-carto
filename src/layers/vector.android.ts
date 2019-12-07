@@ -1,12 +1,12 @@
 import { BaseNative } from '../carto';
 import { nativeProperty } from '../carto.common';
-import { fromNativeMapPos, fromNativeScreenPos } from '../core/core';
+import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { VectorDataSource } from '../datasources/vector';
-import { Projection } from '../projections/projection';
-import { nativeVariantToJS } from '../utils/utils';
-import { VectorElement } from '../vectorelements/vectorelements';
-import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
-import { Layer, TileLayer } from './layer';
+import { Projection } from '../projections';
+import { nativeVariantToJS } from '../utils';
+import { VectorElement } from '../vectorelements';
+import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
+import { Layer, TileLayer } from '.';
 import {
     CartoOfflineVectorTileLayerOptions,
     CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,

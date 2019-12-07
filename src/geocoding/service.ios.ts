@@ -15,7 +15,7 @@ import {
     TomTomOnlineReverseGeocodingServiceOptions
 } from './service';
 import { BaseGeocodingService } from './service.common';
-import { NativeVector, toNativeMapPos } from '../core/core';
+import { NativeVector, toNativeMapPos } from '../core';
 import { FeatureCollection } from '../geometry/feature';
 import { nativeProperty } from '../carto';
 

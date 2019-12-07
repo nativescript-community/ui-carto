@@ -1,9 +1,9 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core/core';
-import { Color } from 'tns-core-modules/color/color';
+import { BaseVectorElementStyleBuilder } from './index.common';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core';
+import { Color } from '@nativescript/core/color/color';
 import { mapPosVectorFromArgs, nativeColorProperty } from '../carto';
 import { LineOptions, LineStyleBuilderOptions } from './line';
-import { BaseLineVectorElement } from './vectorelements';
+import { BaseLineVectorElement } from '.';
 import { nativeProperty } from '../carto.common';
 
 export { MapBounds };

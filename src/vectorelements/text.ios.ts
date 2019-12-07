@@ -1,8 +1,8 @@
-import { Color } from 'tns-core-modules/color/color';
+import { Color } from '@nativescript/core/color/color';
 import { nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder } from './vectorelements';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder } from '.';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {

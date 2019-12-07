@@ -1,5 +1,5 @@
 import { CartoOnlineTileDataSourceOptions } from './cartoonline';
-import { DataSource } from './datasource';
+import { DataSource } from '.';
 
 export class CartoOnlineTileDataSource extends DataSource<com.carto.datasources.CartoOnlineTileDataSource, CartoOnlineTileDataSourceOptions> {
     createNative(options: CartoOnlineTileDataSourceOptions) {

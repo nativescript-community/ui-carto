@@ -1,8 +1,8 @@
-import { Color } from 'tns-core-modules/color/color';
+import { Color } from '@nativescript/core/color/color';
 import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from './vectorelements';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {

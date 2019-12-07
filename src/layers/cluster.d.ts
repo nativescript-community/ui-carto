@@ -1,10 +1,10 @@
 import { BaseNative } from '../carto';
-import { MapPos } from '../core/core';
-import { VectorElement, VectorElementVector } from '../vectorelements/vectorelements';
-import { BaseVectorElement } from '../vectorelements/vectorelements';
-import { ImageSource } from 'tns-core-modules/image-source/image-source';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-import { Color } from 'tns-core-modules/color/color';
+import { MapPos } from '../core';
+import { VectorElement, VectorElementVector } from '../vectorelements';
+import { BaseVectorElement } from '../vectorelements';
+import { ImageSource } from '@nativescript/core/image-source';
+import { ImageAsset } from '@nativescript/core/image-asset';
+import { Color } from '@nativescript/core/color';
 
 export interface ClusterElementBuilderOptions {
     image?: string | ImageSource | ImageAsset;

@@ -1,8 +1,8 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement } from './vectorelements';
+import { BaseVectorElementStyleBuilder } from './index.common';
+import { BasePointVectorElement } from '.';
 import { PointOptions, PointStyleBuilderOptions } from './point';
-import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
+import { Color } from '@nativescript/core/color/color';
+import { toNativeMapPos } from '../core';
 import { nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 

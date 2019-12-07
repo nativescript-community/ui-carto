@@ -1,4 +1,4 @@
-import { DataSource, TileDataSource, TileDataSourceOptions } from './datasource';
+import { DataSource, TileDataSource, TileDataSourceOptions } from '.';
 
 export interface TileDownloadListener {
     onDownloadCompleted();

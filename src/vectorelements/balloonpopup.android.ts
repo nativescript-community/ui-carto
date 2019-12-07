@@ -1,8 +1,8 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BasePointVectorElement, BillboardStyleBuilder } from './vectorelements';
+import { BaseVectorElementStyleBuilder } from './index.common';
+import { BasePointVectorElement, BillboardStyleBuilder } from '.';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
-import { Color } from 'tns-core-modules/color/color';
-import { toNativeMapPos } from '../core/core';
+import { Color } from '@nativescript/core/color/color';
+import { toNativeMapPos } from '../core';
 import { nativeCartoImageProperty, nativeColorProperty } from '../carto';
 import { nativeProperty } from '../carto.common';
 

@@ -1,8 +1,8 @@
 import { BaseNative } from '../carto';
-import { IProjection } from '../projections/projection';
-import { MapBounds, MapPos, NativeVector } from '../core/core';
+import { IProjection } from '../projections';
+import { MapBounds, MapPos, NativeVector } from '../core';
 import { FeatureCollection } from '../geometry/feature';
-import { CartoPackageManager } from '../packagemanager/packagemanager';
+import { CartoPackageManager } from '../packagemanager';
 
 export interface GeocodingRequest {
     projection: IProjection;

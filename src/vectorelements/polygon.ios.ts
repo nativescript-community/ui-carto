@@ -1,7 +1,7 @@
-import { BaseVectorElementStyleBuilder } from './vectorelements.common';
-import { BaseLineVectorElement } from './vectorelements';
+import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseLineVectorElement } from '.';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
-import { Color } from 'tns-core-modules/color/color';
+import { Color } from '@nativescript/core/color/color';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
 import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '../carto';
 

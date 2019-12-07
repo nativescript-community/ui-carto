@@ -1,6 +1,6 @@
-import { Color } from 'tns-core-modules/color/color';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, BillboardVectorElementOptions } from './vectorelements';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
+import { Color } from '@nativescript/core/color/color';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, BillboardVectorElementOptions } from '.';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
 
 export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: Color | string;

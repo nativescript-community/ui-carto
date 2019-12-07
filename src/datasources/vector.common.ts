@@ -1,5 +1,5 @@
-import { DataSource, TileDataSourceOptions } from './datasource';
-import { Projection } from '../projections/projection';
+import { DataSource, TileDataSourceOptions } from '.';
+import { Projection } from '../projections';
 export interface VectorDataSourceOptions extends TileDataSourceOptions {
     projection: Projection;
 }

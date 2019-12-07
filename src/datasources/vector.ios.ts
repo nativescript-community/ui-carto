@@ -1,6 +1,6 @@
 import { LocalVectorDataSourceOptions } from './vector';
-import { DataSource } from './datasource';
-import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
+import { DataSource } from '.';
+import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { GeometrySimplifier } from '../geometry/simplifier';
 import { FeatureCollection } from '../geometry/feature';
 

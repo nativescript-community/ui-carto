@@ -1,7 +1,7 @@
-import { Color } from 'tns-core-modules/color/color';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-import { ImageSource } from 'tns-core-modules/image-source/image-source';
-import { Geometry } from '../geometry/geometry';
+import { Color } from '@nativescript/core/color/color';
+import { ImageAsset } from '@nativescript/core/image-asset/image-asset';
+import { ImageSource } from '@nativescript/core/image-source/image-source';
+import { Geometry } from '../geometry';
 import {
     BaseBillboardVectorElement,
     BillboardOrientation,
@@ -10,8 +10,8 @@ import {
     BillboardStyleBuilderOptions,
     PointVectorElementOptions,
     BillboardVectorElementOptions
-} from './vectorelements';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
+} from '.';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
 
 export class MarkerStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;

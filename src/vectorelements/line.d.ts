@@ -1,9 +1,9 @@
-import { Projection } from '../projections/projection';
-import { MapBounds, MapPos, MapPosVector } from '../core/core';
-import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from './vectorelements';
-import { Color } from 'tns-core-modules/color/color';
-import { Geometry } from '../geometry/geometry';
-import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/core.common';
+import { Projection } from '../projections';
+import { MapBounds, MapPos, MapPosVector } from '../core';
+import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
+import { Color } from '@nativescript/core/color/color';
+import { Geometry } from '../geometry';
+import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
 
 declare enum LineJointType {
     FaceCamera,

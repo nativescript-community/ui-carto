@@ -1,4 +1,4 @@
-import { TileDataSource, TileDataSourceOptions } from './datasource';
+import { TileDataSource, TileDataSourceOptions } from '.';
 export interface HTTPTileDataSourceOptions extends TileDataSourceOptions {
     url: string;
     httpHeaders?: { [k: string]: string };

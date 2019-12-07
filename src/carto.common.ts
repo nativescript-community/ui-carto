@@ -1,8 +1,8 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import { fromAsset, fromNativeSource, fromUrl, ImageSource } from 'tns-core-modules/image-source/image-source';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
-import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from 'tns-core-modules/utils/utils';
-import { isAndroid } from 'tns-core-modules/platform/platform';
+import { Observable } from '@nativescript/core/data/observable';
+import { fromAsset, fromNativeSource, fromUrl, ImageSource } from '@nativescript/core/image-source';
+import { ImageAsset } from '@nativescript/core/image-asset';
+import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from '@nativescript/core/utils/utils';
+import { isAndroid } from '@nativescript/core/platform';
 
 // export interface CreatMarkerOptions extends Location {
 //     title: string;
@@ -183,7 +183,7 @@ export function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-import { knownFolders, path } from 'tns-core-modules/file-system';
+import { knownFolders, path } from '@nativescript/core/file-system';
 import { NativePropertyOptions } from './carto';
 let currentAppFolder: string;
 

@@ -1,6 +1,6 @@
 import { BaseNative } from '../carto.common';
-import { fromNativeMapPos, MapPos } from '../core/core';
-import { BaseVectorElement, VectorElementVector } from '../vectorelements/vectorelements';
+import { fromNativeMapPos, MapPos } from '../core';
+import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 
 export class ClusterElementBuilderImpl extends NTClusterElementBuilder {

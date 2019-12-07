@@ -12,7 +12,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = env => {
     // Add your custom Activities, Services and other android app components here.
-    const appComponents = ['tns-core-modules/ui/frame', 'tns-core-modules/ui/frame/activity'];
+    const appComponents = ['@nativecript-core/ui/frame', '@nativecript-core/ui/frame/activity'];
 
     const platform = env && ((env.android && 'android') || (env.ios && 'ios'));
     if (!platform) {
@@ -112,8 +112,8 @@ module.exports = env => {
         },
         resolve: {
             extensions: ['.js', '.ts', '.scss', '.css'],
-            // Resolve {N} system modules from tns-core-modules
-            modules: [resolve(__dirname, 'node_modules/tns-core-modules'), resolve(__dirname, 'node_modules'), 'node_modules/tns-core-modules', 'node_modules'],
+            // Resolve {N} system modules from @nativecript-core
+            modules: [resolve(__dirname, 'node_modules/@nativecript-core'), resolve(__dirname, 'node_modules'), 'node_modules/@nativecript-core', 'node_modules'],
             alias: aliases,
             // resolve symlinks to symlinked modules
             symlinks: true
@@ -289,7 +289,7 @@ module.exports = env => {
         config.plugins.push(
             new nsWebpack.NativeScriptSnapshotPlugin({
                 chunk: 'vendor',
-                requireModules: ['tns-core-modules/bundle-entry-points'],
+                requireModules: ['@nativecript-core/bundle-entry-points'],
                 projectRoot,
                 webpackConfig: config
             })

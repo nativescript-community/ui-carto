@@ -1,6 +1,6 @@
 import { BaseNative } from '../carto';
 import { FeatureCollection } from './feature';
-import { Projection } from '../projections/projection';
+import { Projection } from '../projections';
 
 export interface GeoJSONGeometryReaderOptions {
     targetProjection?: Projection;

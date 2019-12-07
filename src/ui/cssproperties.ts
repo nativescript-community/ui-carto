@@ -1,19 +1,9 @@
-import { CssProperty } from 'tns-core-modules/ui/core/properties';
-import { Style } from 'tns-core-modules/ui/styling/style';
-import { LatitudeKey, LongitudeKey, MapPos } from '../core/core';
-import { booleanConverter } from 'tns-core-modules/ui/core/view-base';
-import { GenericMapPos } from 'nativescript-carto/core/core.common';
-declare module 'tns-core-modules/ui/styling/style' {
-    interface Style {
-        zoom: number;
-        focusPos: GenericMapPos;
-        bearing: number;
-        minZoom: number;
-        maxZoom: number;
-        tilt: number;
-        restrictedPanning: boolean;
-    }
-}
+import { CssProperty } from '@nativescript/core/ui/core/properties';
+import { Style } from '@nativescript/core/ui/styling/style';
+import { LatitudeKey, LongitudeKey, MapPos } from '../core';
+import { booleanConverter } from '@nativescript/core/ui/core/view-base';
+import { GenericMapPos } from 'nativescript-carto/core/index.common';
+
 
 export const licenseKeyProperty = new CssProperty<Style, string>({
     name: 'licenseKey',

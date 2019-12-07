@@ -1,10 +1,10 @@
-import { IProjection } from '../projections/projection';
-import { MapPos } from '../core/core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions, BillboardStyleBuilderOptions } from './vectorelements';
-import { Color } from 'tns-core-modules/color/color';
+import { IProjection } from '../projections';
+import { MapPos } from '../core';
+import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions, BillboardStyleBuilderOptions } from '.';
+import { Color } from '@nativescript/core/color/color';
 import { Marker } from './marker';
-import { BillboardStyleBuilder } from './vectorelements.ios';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/core.common';
+import { BillboardStyleBuilder } from './index.ios';
+import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
 
 export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: string | Color;

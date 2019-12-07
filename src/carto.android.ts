@@ -1,8 +1,7 @@
-import { Color } from 'tns-core-modules/color';
+import { Color } from '@nativescript/core/color';
 import { NativePropertyOptions } from './carto';
 import { BaseNative, nativeProperty, _createImageSourceFromSrc } from './carto.common';
-import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core';
-import { DefaultLatLonKeys, GenericMapPos } from './core/core.common';
+import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
 export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;

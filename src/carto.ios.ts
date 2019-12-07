@@ -1,7 +1,7 @@
 import { _createImageSourceFromSrc, BaseNative, nativeProperty } from './carto.common';
-import { Color } from 'tns-core-modules/color/color';
-import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core/core';
-import { Projection } from './projections/projection';
+import { Color } from '@nativescript/core';
+import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
+import { Projection } from './projections';
 import { NativePropertyOptions } from './carto';
 export { BaseNative, nativeProperty };
 

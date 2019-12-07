@@ -1,5 +1,5 @@
-import { TileLayer, TileLayerOptions } from './layer';
-import { TileDataSource } from '../datasources/datasource';
+import { TileLayer, TileLayerOptions } from '.';
+import { TileDataSource } from '../datasources';
 
 export interface RasterTileLayerOptions extends TileLayerOptions {
     dataSource?: TileDataSource<any, any>;

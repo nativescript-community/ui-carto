@@ -1,13 +1,13 @@
-import { Layer, LayerOptions, TileLayer, TileLayerOptions } from './layer';
-import { TileDataSource } from '../datasources/datasource';
-import { VectorTileDecoder } from '../vectortiles/vectortiles';
-import { CartoPackageManager } from '../packagemanager/packagemanager';
-import { CartoMapStyle, ClickType, MapPos } from '../core/core';
-import { MBVectorTileDecoder } from '../vectortiles/vectortiles';
+import { Layer, LayerOptions, TileLayer, TileLayerOptions } from '.';
+import { TileDataSource } from '../datasources';
+import { VectorTileDecoder } from '../vectortiles';
+import { CartoPackageManager } from '../packagemanager';
+import { CartoMapStyle, ClickType, MapPos } from '../core';
+import { MBVectorTileDecoder } from '../vectortiles';
 import { ClusterElementBuilder } from './cluster';
-import { VectorElement } from '../vectorelements/vectorelements';
-import { Projection } from '../projections/projection';
-import { Geometry } from '../geometry/geometry';
+import { VectorElement } from '../vectorelements';
+import { Projection } from '../projections';
+import { Geometry } from '../geometry';
 import { PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
 
 export enum VectorTileRenderOrder {

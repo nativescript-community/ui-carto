@@ -1,4 +1,4 @@
-import { NativeVector, toNativeMapPos } from '../core/core';
+import { NativeVector, toNativeMapPos } from '../core';
 import { FeatureCollection } from '../geometry/feature';
 import {
     GeocodingRequest,

@@ -1,5 +1,5 @@
 import { MBTilesTileDataSourceOptions } from './mbtiles';
-import { TileDataSource } from './datasource';
+import { TileDataSource } from '.';
 
 export class MBTilesTileDataSource extends TileDataSource<com.carto.datasources.MBTilesTileDataSource, MBTilesTileDataSourceOptions> {
     createNative(options: MBTilesTileDataSourceOptions) {

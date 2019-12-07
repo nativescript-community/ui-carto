@@ -1,6 +1,6 @@
 import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
-import { nativeVariantToJS } from '../utils/utils';
-import { Geometry } from './geometry';
+import { nativeVariantToJS } from '../utils';
+import { Geometry } from '.';
 
 export class FeatureCollection implements IFeatureCollection {
     constructor(protected native: com.carto.geometry.FeatureCollection) {}

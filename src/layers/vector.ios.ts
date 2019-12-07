@@ -7,17 +7,17 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileLayerOptions
 } from './vector';
-import { TileDataSource } from '../datasources/datasource';
-import { Layer, TileLayer } from './layer';
+import { TileDataSource } from '../datasources';
+import { Layer, TileLayer } from '.';
 import { BaseNative } from '../carto';
 import { VectorDataSource } from '../datasources/vector';
-import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles/vectortiles';
-import { CartoPackageManager } from '../packagemanager/packagemanager';
+import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
+import { CartoPackageManager } from '../packagemanager';
 import { nativeProperty } from '../carto.common';
-import { fromNativeMapPos } from '../core/core';
-import { Projection } from '../projections/projection';
-import { VectorElement } from '../vectorelements/vectorelements';
-import { nativeVariantToJS } from '../utils/utils';
+import { fromNativeMapPos } from '../core';
+import { Projection } from '../projections';
+import { VectorElement } from '../vectorelements';
+import { nativeVariantToJS } from '../utils';
 
 export enum VectorTileRenderOrder {
     HIDDEN = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_HIDDEN,

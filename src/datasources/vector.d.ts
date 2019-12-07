@@ -1,6 +1,6 @@
-import { DataSource, TileDataSourceOptions } from './datasource';
-import { IProjection } from '../projections/projection';
-import { VectorElement, VectorElementVector } from '../vectorelements/vectorelements';
+import { DataSource, TileDataSourceOptions } from '.';
+import { IProjection } from '../projections';
+import { VectorElement, VectorElementVector } from '../vectorelements';
 import { FeatureCollection } from '../geometry/feature';
 import { GeometrySimplifier } from '../geometry/simplifier';
 

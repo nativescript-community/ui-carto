@@ -1,6 +1,6 @@
 import { getRelativePathToApp, nativeProperty } from '../carto.common';
 import { NMLModelOptions } from './nmlmodel';
-import { BasePointVectorElement } from './vectorelements';
+import { BasePointVectorElement } from '.';
 
 export class NMLModel extends BasePointVectorElement<com.carto.vectorelements.NMLModel, NMLModelOptions> {
     @nativeProperty scale: number;
