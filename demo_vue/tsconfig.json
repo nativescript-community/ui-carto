@@ -3,8 +3,6 @@
         "target": "es5",
         "module": "esnext",
         "moduleResolution": "node",
-        "incremental": true,
-        "tsBuildInfoFile": ".tsbuildinfo",
         "removeComments": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

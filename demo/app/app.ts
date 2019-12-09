@@ -1,7 +1,7 @@
-﻿import { registerLicense } from 'nativescript-carto/ui/ui';
-import { setShowDebug } from 'nativescript-carto/utils/utils';
-import * as application from 'tns-core-modules/application';
-import { isAndroid } from 'tns-core-modules/ui/page/page';
+﻿import { registerLicense } from 'nativescript-carto/ui';
+import { setShowDebug } from 'nativescript-carto/utils';
+import * as application from '@nativescript/core/application';
+import { isAndroid } from '@nativescript/core/ui/page/page';
 
 if (isAndroid) {
     application.on(application.launchEvent, () => {

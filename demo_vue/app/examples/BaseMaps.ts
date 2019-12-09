@@ -1,15 +1,16 @@
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
 import { CartoOnlineVectorTileLayer, VectorTileEventData } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos } from 'nativescript-carto/core/core';
-import { CartoMap } from 'nativescript-carto/ui/ui';
+import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
+import { CartoMap } from 'nativescript-carto/ui';
 import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
-import { action } from 'ui/dialogs';
+import { action } from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
 
+// @Component({})
 export default class BaseMaps extends BaseVueComponent {
-    @Prop() title: string;
-    @Prop() description: string;
+    // @Prop() title: string;
+    // @Prop() description: string;
 
     currentLayer;
     currentLayerType = 'voyager';
@@ -26,8 +27,16 @@ export default class BaseMaps extends BaseVueComponent {
         console.log('map ready!', this.currentLayerType);
 
         this.setCurrentLayer(this.currentLayerType);
-        mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
-        mapView.setZoom(15, 0);
+        const options = mapView.getOptions();
+        // options.setWatermarkPadding(toNativeScreenPos({ x: 80, y: 0 }));
+        options.setRestrictedPanning(true);
+        options.setSeamlessPanning(true);
+        options.setEnvelopeThreadPoolSize(2);
+        options.setTileThreadPoolSize(2);
+        options.setZoomGestures(true);
+        options.setRotatable(true);
+        // mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
+        // mapView.setZoom(15, 0);
         // this.updateLanguage('fr');
     }
     onVectorTileClicked(info: VectorTileEventData) {

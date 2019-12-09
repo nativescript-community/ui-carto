@@ -1,7 +1,7 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import { CartoMap } from 'nativescript-carto/ui/ui';
+import { Observable } from '@nativescript/core/data/observable';
+import { CartoMap } from 'nativescript-carto/ui';
 import { Zip } from 'nativescript-zip2';
-import * as fs from 'tns-core-modules/file-system';
+import * as fs from '@nativescript/core/file-system';
 
 const destZip = fs.File.fromPath(fs.path.join(fs.knownFolders.temp().path, 'carto.zip'));
 let appPath = fs.knownFolders.currentApp().path;

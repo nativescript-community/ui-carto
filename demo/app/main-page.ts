@@ -1,7 +1,7 @@
-import * as observable from 'tns-core-modules/data/observable';
-import * as pages from 'tns-core-modules/ui/page';
+import * as observable from '@nativescript/core/data/observable';
+import * as pages from '@nativescript/core/ui/page';
 import { CartoModel } from './main-view-model';
-import { CartoMap } from 'nativescript-carto/ui/ui';
+import { CartoMap } from 'nativescript-carto/ui';
 
 // Event handler for Page 'loaded' event attached in main-page.xml
 export function pageLoaded(args: observable.EventData) {

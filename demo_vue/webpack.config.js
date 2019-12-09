@@ -62,6 +62,7 @@ module.exports = env => {
     let aliases = {
         '~': appFullPath,
         '@': appFullPath,
+        'tns-core-modules':'@nativescript/core',
         vue: 'akylas-nativescript-vue',
         'nativescript-vue': 'akylas-nativescript-vue'
     };

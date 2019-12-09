@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { GC } from 'utils/utils';
+import { GC } from '@nativescript/core/utils/utils';
 import BaseVueComponent from './examples/BaseVueComponent';
 import Component from 'vue-class-component';
 

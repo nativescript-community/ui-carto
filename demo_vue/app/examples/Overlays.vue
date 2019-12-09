@@ -17,17 +17,18 @@
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
 import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos } from 'nativescript-carto/core/core';
-import { CartoMap } from 'nativescript-carto/ui/ui';
+import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
+import { CartoMap } from 'nativescript-carto/ui';
 import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
-import { action } from 'ui/dialogs';
+import { action } from '@nativescript/core/ui/dialogs';
 import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
 
 import * as Overlays from './OverlayUtils';
 import { Component, Prop } from 'vue-property-decorator';
+import BaseMaps from './BaseMaps';
 
 @Component({})
-export default class OverlaysExample extends BaseVueComponent {
+export default class OverlaysExample extends BaseMaps {
     @Prop() title: string;
     @Prop() description: string;
     currentLayerType = 'voyager';
@@ -41,6 +42,7 @@ export default class OverlaysExample extends BaseVueComponent {
     onMapReady(e) {
         // setTimeout(function() {
         const mapView = e.object as CartoMap;
+        super.onMapReady(e);
         console.log('map ready!');
         const europe = { longitude: 24.662893, latitude: 59.419365 };
         mapView.setFocusPos(europe, 0);

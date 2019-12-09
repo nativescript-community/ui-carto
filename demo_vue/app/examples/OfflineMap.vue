@@ -18,22 +18,23 @@
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
 import { CartoOnlineVectorTileLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core/core';
-import { CartoMap } from 'nativescript-carto/ui/ui';
+import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core';
+import { CartoMap } from 'nativescript-carto/ui';
 import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
-import { action } from 'ui/dialogs';
-import { CartoPackageManager, PackageInfo } from 'nativescript-carto/packagemanager/packagemanager';
-import { File, Folder, knownFolders, path } from 'tns-core-modules/file-system';
-import { isAndroid } from 'tns-core-modules/platform';
+import { action } from '@nativescript/core/ui/dialogs';
+import { CartoPackageManager, PackageInfo } from 'nativescript-carto/packagemanager';
+import { File, Folder, knownFolders, path } from '@nativescript/core/file-system';
+import { isAndroid } from '@nativescript/core/platform';
 import { CartoOfflineVectorTileLayer } from 'nativescript-carto/layers/vector';
 import * as permissions from 'nativescript-perms';
 import { Feedback } from 'nativescript-feedback';
-import * as dialogs from 'tns-core-modules/ui/dialogs';
+import * as dialogs from '@nativescript/core/ui/dialogs';
 var feedback = new Feedback();
 import { Component, Prop } from 'vue-property-decorator';
+import BaseMaps from './BaseMaps';
 
 @Component({})
-export default class BaseMaps extends BaseVueComponent {
+export default class OfflineMap extends BaseMaps {
     @Prop() title: string;
     @Prop() description: string;
     currentLayerType = 'voyager';
@@ -52,6 +53,7 @@ export default class BaseMaps extends BaseVueComponent {
 
     onMapReady(e) {
         console.log('map ready!');
+        super.onMapReady(e);
         permissions
             .request('storage')
             .then(result => {

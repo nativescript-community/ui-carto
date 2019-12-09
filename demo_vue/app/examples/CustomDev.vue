@@ -19,26 +19,26 @@
 <script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseMaps from './BaseMaps';
-import { CartoMap, MapEventData } from 'nativescript-carto/ui/ui';
-import { action } from 'ui/dialogs';
+import { CartoMap, MapEventData } from 'nativescript-carto/ui';
+import { action } from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
-import { Folder, path, knownFolders } from 'tns-core-modules/file-system/file-system';
-import * as dialogs from 'tns-core-modules/ui/dialogs';
+import { Folder, path, knownFolders } from '@nativescript/core/file-system/file-system';
+import * as dialogs from '@nativescript/core/ui/dialogs';
 import { CartoOnlineRasterTileLayer, RasterTileLayer } from 'nativescript-carto/layers/raster';
 import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core/core';
-import { CartoPackageManager, PackageManagerTileDataSource, PackageStatus, PackageInfo, PackageErrorType } from 'nativescript-carto/packagemanager/packagemanager';
-import { OrderedTileDataSource, MergedMBVTTileDataSource } from 'nativescript-carto/datasources/datasource';
+import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core';
+import { CartoPackageManager, PackageManagerTileDataSource, PackageStatus, PackageInfo, PackageErrorType } from 'nativescript-carto/packagemanager';
+import { OrderedTileDataSource, MergedMBVTTileDataSource } from 'nativescript-carto/datasources';
 import { PersistentCacheTileDataSource } from 'nativescript-carto/datasources/cache';
 import { CartoOnlineTileDataSource } from 'nativescript-carto/datasources/cartoonline';
-import { MBVectorTileDecoder } from 'nativescript-carto/vectortiles/vectortiles';
+import { MBVectorTileDecoder } from 'nativescript-carto/vectortiles';
 import { HTTPTileDataSource } from 'nativescript-carto/datasources/http';
 import { MarkerStyleBuilder, Marker } from 'nativescript-carto/vectorelements/marker';
 import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
 import { Point, PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
 import { LineStyleBuilder, Line, LineJointType, LineEndType } from 'nativescript-carto/vectorelements/line';
-import { MapClickedEvent, MapStableEvent, MapReadyEvent, MapMovedEvent } from 'nativescript-carto/ui/ui';
-import { Projection } from 'nativescript-carto/projections/projection';
+import { MapClickedEvent, MapStableEvent, MapReadyEvent, MapMovedEvent } from 'nativescript-carto/ui';
+import { Projection } from 'nativescript-carto/projections';
 import BaseVueComponent from './BaseVueComponent';
 
 @Component({})
@@ -92,7 +92,12 @@ export default class Example extends BaseMaps {
     mapProjection: Projection
     onMapReady(e: MapEventData) {
         console.log('onMapReady');
+        super.onMapReady(e
+        );
         const mapView = this.mapView;
+
+        mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
+        mapView.setZoom(15, 0);
         this.mapProjection = mapView.projection;
 
         mapView.on(MapReadyEvent, this.onMapReady);
@@ -101,17 +106,17 @@ export default class Example extends BaseMaps {
         mapView.on(MapClickedEvent, this.onMapClicked);
         mapView.on(MapMovedEvent, this.onMapMoved);
 
-        // const dataFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'packaged'));
-        // this.packageManager = new CartoPackageManager({
-        //     source: 'carto.streets',
-        //     dataFolder: dataFolder.path,
-        //     listener: this
-        // });
+        const dataFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'packaged'));
+        this.packageManager = new CartoPackageManager({
+            source: 'carto.streets',
+            dataFolder: dataFolder.path,
+            listener: this
+        });
 
-        // this.packageManager.start();
+        this.packageManager.start();
         // console.log('packageManager local packages', this.packageManager.getLocalPackages().size());
         // console.log('packageManager server packages', this.packageManager.getServerPackages().map(p => p.getName()));
-        // this.packageManager.startPackageListDownload();
+        this.packageManager.startPackageListDownload();
 
         const cacheFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'carto_cache'));
         // const source2 = new OrderedTileDataSource({
@@ -230,8 +235,8 @@ export default class Example extends BaseMaps {
 
         const lineStyleBuilder = new LineStyleBuilder({
             width: 6,
-            lineEndType: LineEndType.SQUARE,
-            lineJoinType: LineJointType.ROUND,
+            endType: LineEndType.SQUARE,
+            joinType: LineJointType.ROUND,
             color: '#0000ff'
         });
         const line = new Line({

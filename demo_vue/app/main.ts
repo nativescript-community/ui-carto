@@ -2,11 +2,11 @@
 import Vue from 'nativescript-vue';
 import App from './App.vue';
 import './styles.scss';
-import { registerLicense } from 'nativescript-carto/ui/ui';
-import { setShowDebug } from 'nativescript-carto/utils/utils';
-import * as application from 'application';
-import { isAndroid } from 'tns-core-modules/ui/page/page';
-import { knownFolders } from 'tns-core-modules/file-system';
+import { registerLicense } from 'nativescript-carto/ui';
+import { setShowDebug } from 'nativescript-carto/utils';
+import * as application from '@nativescript/core/application';
+import { isAndroid } from '@nativescript/core/ui/page/page';
+import { knownFolders } from '@nativescript/core/file-system';
 
 const currentApp = knownFolders.currentApp();
 require('source-map-support').install({

@@ -1,7 +1,7 @@
 import Vue from 'nativescript-vue';
-import { Page } from 'tns-core-modules/ui/page/page';
-import { isAndroid, isIOS } from 'tns-core-modules/platform/platform';
-import { CartoMap } from 'nativescript-carto/ui/ui';
+import { Page } from '@nativescript/core/ui/page';
+import { isAndroid, isIOS } from '@nativescript/core/platform/platform';
+import { CartoMap } from 'nativescript-carto/ui';
 
 export default class BaseVueComponent extends Vue {
     public isAndroid = isAndroid;

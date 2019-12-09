@@ -17,17 +17,17 @@
 import Vue from 'nativescript-vue';
 import BaseMaps from './BaseMaps';
 import { CartoOnlineVectorTileLayer, ClusteredVectorLayer, VectorLayer, VectorTileEventData } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos } from 'nativescript-carto/core/core';
-import { CartoMap, MapStableEvent } from 'nativescript-carto/ui/ui';
+import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
+import { CartoMap, MapStableEvent } from 'nativescript-carto/ui';
 import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
-import { action } from 'ui/dialogs';
-import { Folder, knownFolders, path } from 'tns-core-modules/file-system/file-system';
+import { action } from '@nativescript/core/ui/dialogs';
+import { Folder, knownFolders, path } from '@nativescript/core/file-system/file-system';
 import { ClusterElementBuilder } from 'nativescript-carto/layers/cluster';
 import { GeoJSONGeometryReader } from 'nativescript-carto/geometry/geojsonreader';
 import { MarkerStyleBuilder, Marker } from 'nativescript-carto/vectorelements/marker';
-import { VectorElementVector } from 'nativescript-carto/vectorelements/vectorelements';
+import { VectorElementVector } from 'nativescript-carto/vectorelements';
 import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
-import { Projection } from 'nativescript-carto/projections/projection';
+import { Projection } from 'nativescript-carto/projections';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component({})
@@ -37,7 +37,7 @@ export default class Example extends BaseMaps {
     currentLayerType = 'voyager';
     layerTypes = ['voyager', 'positron', 'darkmatter', 'here.normal.day', 'here.satellite.day'];
     languages = ['Local', 'en', 'de', 'es', 'it', 'fr', 'ru'];
-    elementsStyles = new Map<number, MarkerStyleBuilder<any, any>>();
+    elementsStyles = new Map<number, MarkerStyleBuilder>();
 
     // get mapView() {
     //     return (this.$refs.mapView as any).nativeView as CartoMap;
@@ -69,7 +69,7 @@ export default class Example extends BaseMaps {
             console.log('read geojson');
             const styleBuilder = new MarkerStyleBuilder({
                 size: 14,
-                image: '~/assets/images/marker_black.png'
+                bitmap: '~/assets/images/marker_black.png'
             });
             // mBuilder.bitmap = BitmapUtils.createBitmapFromAndroidBitmap(cBuilder.image)
             // mBuilder.size = 30.0;
@@ -96,7 +96,7 @@ export default class Example extends BaseMaps {
                 // This data set features point geometry, however, it can also be LineGeometry or PolygonGeometry
                 const geometry = features.getGeometry(i);
                 // console.log('feature geometry', geometry.getCenterPos().getX());
-                elements.add(new Marker({ geometry, styleBuilder, metaData: { index: i } }));
+                elements.add(new Marker({ geometry, styleBuilder, metaData: { index: i+'' } }));
             }
             console.log('elements', elements.size());
             this.initializeClusterLayer();
