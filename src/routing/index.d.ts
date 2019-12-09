@@ -5,7 +5,7 @@ import { VectorTileDecoder } from '../vectortiles';
 import { Projection } from '../projections';
 import { Geometry } from '../geometry';
 import { Feature, FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
-import { MapPos, MapPosVector, NativeVector } from '../core';
+import { DefaultLatLonKeys, MapPos, MapPosVector, NativeVector, GenericMapPos } from '../core';
 import { CartoPackageManager } from 'nativescript-carto/packagemanager';
 
 declare enum RoutingAction {
@@ -27,14 +27,14 @@ declare enum RoutingAction {
     GO_DOWN,
     WAIT
 }
-export interface RoutingRequest {
+export interface RoutingRequest<T = DefaultLatLonKeys> {
     projection: Projection;
-    points: MapPos[];
+    points: GenericMapPos<T>[];
 }
 
-export interface RouteMatchingRequest {
+export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
     projection: Projection;
-    points: MapPos[];
+    points: GenericMapPos<T>[];
     accuracy: number;
 }
 
@@ -51,20 +51,20 @@ export interface RoutingInstruction {
 }
 export class RoutingInstructionVector extends NativeVector<RoutingInstruction> {}
 
-export interface RoutingResult {
-    getPoints(): MapPosVector;
+export interface RoutingResult<T = DefaultLatLonKeys> {
+    getPoints(): MapPosVector<T>;
     getTotalTime(): number;
     getTotalDistance(): number;
     getInstructions(): RoutingInstructionVector;
 }
 
-export interface RouteMatchingResult {
-    getPoints(): MapPosVector;
+export interface RouteMatchingResult<T = DefaultLatLonKeys> {
+    getPoints(): MapPosVector<T>;
     getProjection(): Projection;
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
-    calculateRoute(options: RoutingRequest, callback?: (error: Error, res: RoutingResult) => void): RoutingResult;
+    calculateRoute<T = DefaultLatLonKeys>(options: RoutingRequest<T>, callback?: (error: Error, res: RoutingResult<T>) => void): RoutingResult<T>;
 }
 
 export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptions {

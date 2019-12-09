@@ -2,7 +2,7 @@ import { Layer, LayerOptions, TileLayer, TileLayerOptions } from '.';
 import { TileDataSource } from '../datasources';
 import { VectorTileDecoder } from '../vectortiles';
 import { CartoPackageManager } from '../packagemanager';
-import { CartoMapStyle, ClickType, MapPos } from '../core';
+import { CartoMapStyle, ClickType, DefaultLatLonKeys, GenericMapPos, MapPos } from '../core';
 import { MBVectorTileDecoder } from '../vectortiles';
 import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements';
@@ -22,17 +22,17 @@ export enum VectorElementDragResult {
     DELETE
 }
 
-export interface VectorTileEventData {
+export interface VectorTileEventData<T = DefaultLatLonKeys> {
     clickType: ClickType;
     layer: BaseVectorTileLayer<any, any>;
     featureId: number;
     featureData: { [k: string]: string };
     featureLayerName: string;
-    position: MapPos;
-    featurePosition: MapPos;
+    position: GenericMapPos<T>;
+    featurePosition: GenericMapPos<T>;
     featureGeometry: Geometry;
 }
-export interface VectorElementEventData {
+export interface VectorElementEventData<T = DefaultLatLonKeys> {
     clickType: ClickType;
     layer: BaseVectorTileLayer<any, any>;
     // featureId: number;
@@ -40,18 +40,18 @@ export interface VectorElementEventData {
     // featureLayerName: string;
     metaData: { [k: string]: string };
     element: VectorElement<any, any>;
-    position: MapPos;
-    elementPos: MapPos;
+    position: GenericMapPos<T>;
+    elementPos: GenericMapPos<T>;
 }
 
 export interface VectorElementDragInfo {}
 
-export interface VectorTileEventListener {
-    onVectorTileClicked(info: VectorTileEventData);
+export interface VectorTileEventListener<T = DefaultLatLonKeys> {
+    onVectorTileClicked(info: VectorTileEventData<T>);
 }
 
-export interface VectorElementEventListener {
-    onVectorElementClicked(info: VectorElementEventData);
+export interface VectorElementEventListener<T = DefaultLatLonKeys> {
+    onVectorElementClicked(info: VectorElementEventData<T>);
 }
 export interface VectorEditEventListener {
     onElementModify(param0: VectorElement<any, any>, param1: Geometry): void;
@@ -91,12 +91,12 @@ export interface ClusteredVectorLayerLayerOptions extends VectorTileLayerOptions
 export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends TileLayer<T, U> {
     dataSource?: TileDataSource<any, any>;
     setLabelRenderOrder(order: VectorTileRenderOrder): void;
-    setVectorTileEventListener(listener: VectorTileEventListener, projection?: Projection): void;
+    setVectorTileEventListener<T = DefaultLatLonKeys>(listener: VectorTileEventListener<T>, projection?: Projection): void;
     getTileDecoder(): MBVectorTileDecoder;
 }
 
 export abstract class BaseVectorLayer<T, U extends VectorLayerOptions> extends Layer<T, U> {
-    setVectorElementEventListener(listener: VectorElementEventListener, projection?: Projection): void;
+    setVectorElementEventListener<T = DefaultLatLonKeys>(listener: VectorElementEventListener<T>, projection?: Projection): void;
 }
 
 export class VectorLayer extends BaseVectorLayer<any, VectorLayerOptions> {}

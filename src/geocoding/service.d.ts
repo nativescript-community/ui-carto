@@ -1,19 +1,19 @@
 import { BaseNative } from '..';
 import { IProjection } from '../projections';
-import { MapBounds, MapPos, NativeVector } from '../core';
+import { DefaultLatLonKeys, MapBounds, MapPos, NativeVector } from '../core';
 import { FeatureCollection } from '../geometry/feature';
 import { CartoPackageManager } from '../packagemanager';
 
-export interface GeocodingRequest {
+export interface GeocodingRequest<T = DefaultLatLonKeys> {
     projection: IProjection;
-    location?: MapPos;
+    location?: MapPos<T>;
     locationRadius?: number;
     query: string;
 }
 
-export interface ReverseGeocodingRequest {
+export interface ReverseGeocodingRequest<T = DefaultLatLonKeys> {
     projection: IProjection;
-    location?: MapPos;
+    location?: MapPos<T>;
     searchRadius?: number;
 }
 

@@ -13,7 +13,7 @@ export type GenericMapPos<T = DefaultLatLonKeys> = {
 } & {
     speed?: number;
 };
-export type MapPos = GenericMapPos<DefaultLatLonKeys>;
+export type MapPos<T = DefaultLatLonKeys> = GenericMapPos<T>;
 
 export interface ScreenPos {
     x: number;

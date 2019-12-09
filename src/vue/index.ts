@@ -1,6 +1,6 @@
 const Plugin = {
     install(Vue) {
-        Vue.registerElement('CartoMap', () => require('../ui/ui').CartoMap, {});
+        Vue.registerElement('CartoMap', () => require('../ui').CartoMap, {});
     }
 };
 
