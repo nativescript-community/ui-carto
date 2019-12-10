@@ -218,7 +218,6 @@ export abstract class CartoViewBase extends ContentView {
             this.mapReady = true;
             this.sendEvent(MapReadyEvent);
         }
-        console.log('onLoaded', MapReadyEvent);
     }
 
     [focusPosProperty.setNative](value: MapPos) {
