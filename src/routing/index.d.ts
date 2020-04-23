@@ -1,11 +1,7 @@
 import { BaseNative } from '..';
-import { VectorTileLayer } from '../layers/vector';
-import { TileDataSource } from '../datasources';
-import { VectorTileDecoder } from '../vectortiles';
 import { Projection } from '../projections';
-import { Geometry } from '../geometry';
-import { Feature, FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
-import { DefaultLatLonKeys, MapPos, MapPosVector, NativeVector, GenericMapPos } from '../core';
+import { FeatureCollection } from '../geometry/feature';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, NativeVector } from '../core';
 import { CartoPackageManager } from 'nativescript-carto/packagemanager';
 
 declare enum RoutingAction {
@@ -25,7 +21,7 @@ declare enum RoutingAction {
     LEAVE_AGAINST_ALLOWED_DIRECTION,
     GO_UP,
     GO_DOWN,
-    WAIT
+    WAIT,
 }
 export interface RoutingRequest<T = DefaultLatLonKeys> {
     projection: Projection;
@@ -82,6 +78,7 @@ export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaO
     profile: ValhallaProfile;
 
     matchRoute(options: RouteMatchingRequest, callback?: (error: Error, res: RouteMatchingResult) => void): RouteMatchingResult;
+    // rawCall(option: string, request: string, callback: (err: Error, res: string) => void): string;
 }
 
 export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
@@ -100,7 +97,6 @@ export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServ
 export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {
     profile: ValhallaProfile;
     matchRoute(options: RouteMatchingRequest, callback?: (error: Error, res: RouteMatchingResult) => void): RouteMatchingResult;
-
 }
 
 export interface SGREOfflineRoutingServiceOptions {

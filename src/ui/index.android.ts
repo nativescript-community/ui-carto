@@ -18,7 +18,7 @@ export const RenderProjectionMode = {
     },
     get RENDER_PROJECTION_MODE_SPHERICAL() {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_SPHERICAL;
-    }
+    },
 };
 
 let licenseKey: string;
@@ -33,13 +33,13 @@ export const registerLicense = profile('registerLicense', (value: string, callba
             value,
             context,
             new com.akylas.carto.additions.RegisterLicenseCallback({
-                onLicenseRegistered: result => {
+                onLicenseRegistered: (result) => {
                     if (result) {
                         licenseKey = value;
                     }
                     setLicenseKeyRegistered(result);
                     callback(result);
-                }
+                },
             })
         );
     } else {
@@ -132,49 +132,19 @@ function initMapViewClass() {
             super(context);
             return global.__native(this);
         }
-        public onMapIdle() {
-            // console.log('onMapIdle');
-            const owner = this.owner;
-            if (owner && owner.hasListeners(MapIdleEvent)) {
-                owner.sendEvent(MapIdleEvent);
-            }
-        }
-        public onMapMoved(userAction: boolean) {
-            const owner = this.owner;
-            if (owner && owner.hasListeners(MapMovedEvent)) {
-                owner.sendEvent(MapMovedEvent, { userAction });
-            }
-        }
-        public onMapStable(userAction: boolean) {
-            // console.log('onMapStable');
-            const owner = this.owner;
-            if (owner) {
-                if (owner.hasListeners(MapStableEvent)) {
-                    owner.sendEvent(MapStableEvent, { userAction });
-                }
-            }
-        }
-        public onMapClicked(mapClickInfo: com.carto.ui.MapClickInfo) {
-            // console.log('onMapClicked', mapClickInfo);
-            const owner = this.owner;
-            if (owner && owner.hasListeners(MapClickedEvent)) {
-                owner.sendEvent(MapClickedEvent, {
-                    clickType: mapClickInfo.getClickType().swigValue(),
-                    position: this.owner.fromNativeMapPos(mapClickInfo.getClickPos())
-                });
-            }
-        }
     }
     MapView = MapViewImpl as any;
 }
 export class CartoMap extends CartoViewBase {
-    nativeViewProtected: MapView;
+    nativeViewProtected: com.akylas.carto.additions.AKMapView & {
+        listener: com.akylas.carto.additions.AKMapEventListener;
+    };
     static projection = new EPSG4326();
     nativeProjection: com.carto.projections.Projection;
     _projection: IProjection;
 
     get mapView() {
-        return this.nativeViewProtected as com.carto.ui.MapView;
+        return this.nativeViewProtected;
     }
     get projection() {
         return this._projection;
@@ -189,7 +159,7 @@ export class CartoMap extends CartoViewBase {
         }
     }
     public createNativeView(): Object {
-        initMapViewClass();
+        // initMapViewClass();
         if (!isLicenseKeyRegistered()) {
             // this.log('need MapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
@@ -198,7 +168,7 @@ export class CartoMap extends CartoViewBase {
             }
         }
         // Create new instance
-        return new MapView(this._context, new WeakRef(this));
+        return new com.akylas.carto.additions.AKMapView(this._context);
     }
 
     getOptions() {
@@ -213,16 +183,50 @@ export class CartoMap extends CartoViewBase {
     initNativeView(): void {
         // Attach the owner to nativeView.
         // When nativeView is tapped we get the owning JS object through this field.
-        this.nativeView.owner = this;
+        // this.nativeView.owner = this;
         super.initNativeView();
         if (!this.projection) {
             this.projection = CartoMap.projection;
         }
+        const listener = new com.akylas.carto.additions.AKMapEventListener({
+            onMapIdle: () => {
+                // console.log('onMapIdle');
+                if (this.hasListeners(MapIdleEvent)) {
+                    this.sendEvent(MapIdleEvent);
+                }
+            },
+            onMapMoved: (userAction: boolean) => {
+                if (this.hasListeners(MapMovedEvent)) {
+                    this.sendEvent(MapMovedEvent, { userAction });
+                }
+            },
+            onMapStable: (userAction: boolean) => {
+                // console.log('onMapStable');
+                if (this.hasListeners(MapStableEvent)) {
+                    this.sendEvent(MapStableEvent, { userAction });
+                }
+            },
+            onMapClicked: (mapClickInfo: com.carto.ui.MapClickInfo) => {
+                // console.log('onMapClicked', mapClickInfo);
+                if (this.hasListeners(MapClickedEvent)) {
+                    this.sendEvent(MapClickedEvent, {
+                        clickType: mapClickInfo.getClickType().swigValue(),
+                        position: fromNativeMapPos(mapClickInfo.getClickPos()),
+                    });
+                }
+            },
+        });
+        this.nativeViewProtected.listener = listener;
+        this.nativeViewProtected.setMapEventListener(listener);
     }
 
     disposeNativeView(): void {
         this._projection = null;
         this.nativeProjection = null;
+        if (this.nativeViewProtected.listener) {
+            this.nativeViewProtected.listener = null;
+            this.nativeViewProtected.setMapEventListener(null);
+        }
         this.nativeView.owner = null;
         super.disposeNativeView();
     }
@@ -240,28 +244,28 @@ export class CartoMap extends CartoViewBase {
         return new com.carto.core.MapBounds(toNativeMapPos(position.southwest), toNativeMapPos(position.northeast));
     }
 
-    setFocusPos(value: MapPos, duration: number) {
+    setFocusPos(value: MapPos, duration: number = 0) {
         this.mapView.setFocusPos(toNativeMapPos(value), duration / 1000);
     }
 
-    setMapRotation(value: number, targetPos: MapPos | number, duration: number) {
+    setMapRotation(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setMapRotation(value, targetPos / 1000);
         } else {
             this.mapView.setMapRotation(value, toNativeMapPos(targetPos), duration / 1000);
         }
     }
-    setZoom(value: number, targetPos: MapPos | number, duration: number) {
+    setZoom(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setZoom(value, targetPos / 1000);
         } else {
             this.mapView.setZoom(value, toNativeMapPos(targetPos), duration / 1000);
         }
     }
-    setTilt(value: number, duration: number) {
+    setTilt(value: number, duration: number = 0) {
         this.mapView.setTilt(value, duration / 1000);
     }
-    setBearing(value: number, duration: number) {
+    setBearing(value: number, duration: number = 0) {
         this.mapView.setMapRotation(value, duration / 1000);
     }
     moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
@@ -303,7 +307,7 @@ export class CartoMap extends CartoViewBase {
     removeAllLayers(layers: Array<TileLayer<any, any>>) {
         if (this.mapView) {
             const vector = new com.carto.layers.LayerVector();
-            layers.forEach(l => vector.add(l.getNative()));
+            layers.forEach((l) => vector.add(l.getNative()));
             this.mapView.getLayers().removeAll(vector);
         }
     }
@@ -339,11 +343,11 @@ export class CartoMap extends CartoViewBase {
     }
 
     captureRendering(wait = false) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             initRendererCaptureListener();
             this.mapView.getMapRenderer().captureRendering(
                 new RendererCaptureListener(
-                    new WeakRef(function(bitmap) {
+                    new WeakRef(function (bitmap) {
                         resolve(fromNativeSource(bitmap));
                     })
                 ),

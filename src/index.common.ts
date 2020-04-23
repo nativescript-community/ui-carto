@@ -1,26 +1,14 @@
 import { Observable } from '@nativescript/core/data/observable';
-import { fromAsset, fromNativeSource, fromUrl, ImageSource } from '@nativescript/core/image-source';
+import { ImageSource, fromNativeSource } from '@nativescript/core/image-source';
 import { ImageAsset } from '@nativescript/core/image-asset';
-import { isDataURI, isFileOrResourcePath, RESOURCE_PREFIX } from '@nativescript/core/utils/utils';
+import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/core/utils/utils';
 import { isAndroid } from '@nativescript/core/platform';
-
-// export interface CreatMarkerOptions extends Location {
-//     title: string;
-//     subtitle: string;
-//     selected: boolean;
-// }
-
-// export interface CreatRouteOptions {
-//     points: Location[];
-// }
-
-// type Options<T> = { [P in keyof T]: any };
 
 function createGetter(key: string, options: NativePropertyOptions) {
     // console.log('createGetter', key, options);
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
-    return function() {
+    return function () {
         let result;
         // console.log('getter', key, nativeGetterName);
         if (this.native && this.native[nativeGetterName]) {
@@ -35,7 +23,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
 }
 function createSetter(key, options: NativePropertyOptions) {
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
-    return function(newVal) {
+    return function (newVal) {
         // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal, nativeSetterName, options.converter);
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
@@ -56,7 +44,7 @@ function nativePropertyGenerator(target: Object, key: string, options?: NativePr
         get: createGetter(key, options),
         set: createSetter(key, options),
         enumerable: true,
-        configurable: true
+        configurable: true,
     });
 }
 export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -64,7 +52,7 @@ export function nativeProperty(options: NativePropertyOptions): (target: any, k?
 export function nativeProperty(...args) {
     if (args.length === 1) {
         /// this must be a factory
-        return function(target: any, key?: string, descriptor?: PropertyDescriptor) {
+        return function (target: any, key?: string, descriptor?: PropertyDescriptor) {
             return nativePropertyGenerator(target, key, args[0] || {});
         };
     } else {
@@ -200,10 +188,7 @@ export function getFileName(str: string): string {
 
 export function getRelativePathToApp(str: string) {
     const filePath = getFileName(str);
-    const toReplace = currentAppFolder
-        .split('/')
-        .slice(0, -1)
-        .join('/');
+    const toReplace = currentAppFolder.split('/').slice(0, -1).join('/');
     if (filePath.indexOf(toReplace) === 0) {
         return filePath.replace(toReplace, '').slice(1);
     }

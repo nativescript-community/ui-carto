@@ -1,0 +1,5 @@
+package com.akylas.carto.additions;
+
+public interface RoutingServiceRawCallCallback {
+    void onRoutingResult(Exception e, String result);
+}

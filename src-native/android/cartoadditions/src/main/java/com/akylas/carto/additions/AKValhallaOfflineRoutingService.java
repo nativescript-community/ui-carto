@@ -16,4 +16,7 @@ public class AKValhallaOfflineRoutingService extends ValhallaOfflineRoutingServi
     public void matchRouteCallback (final RouteMatchingRequest request, final RoutingServiceRouteMatchingCallback callback  ) {
         AKRoutingServiceAdditions.matchRoute(this, request, callback);
     }
+    // public void rawCallCallback (final String option, final String request, final RoutingServiceRawCallCallback callback  ) {
+    //     AKRoutingServiceAdditions.rawCall(this, option, request, callback);
+    // }
 }

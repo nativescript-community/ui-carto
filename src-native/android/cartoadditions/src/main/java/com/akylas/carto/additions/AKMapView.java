@@ -14,12 +14,24 @@ public class AKMapView extends MapView {
     static final String TAG = "AKMapView";
     Handler mainHandler = null;
     public boolean userAction = false;
+    private AKMapEventListener listener = null;
+
+    static boolean RUN_ON_MAIN_THREAD = true;
+
+
+    public void setMapEventListener(AKMapEventListener listener) {
+        this.listener = listener;
+        if (listener != null) {
+            super.setMapEventListener(mapEventListener);
+        } else {
+            super.setMapEventListener(null);
+        }
+    }
 
     
     public AKMapView(Context context) {
         super(context);
         this.mainHandler = new Handler(context.getMainLooper());
-        this.setMapEventListener(mapEventListener);
     }
 
     @Override
@@ -50,57 +62,61 @@ public class AKMapView extends MapView {
     private final MapEventListener mapEventListener = new MapEventListener() {
         @Override
         public void onMapMoved() {
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    AKMapView.this.onMapMoved(userAction);
-                }
-            });
+            if (AKMapView.RUN_ON_MAIN_THREAD) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AKMapView.this.listener.onMapMoved(userAction);
+                    }
+                });
+            } else {
+                AKMapView.this.listener.onMapMoved(userAction);
+            }
         }
 
         @Override
         public void onMapIdle() {
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    AKMapView.this.onMapIdle();
-                }
-            });
+            if (AKMapView.RUN_ON_MAIN_THREAD) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AKMapView.this.listener.onMapIdle();
+                    }
+                });
+            } else {
+                AKMapView.this.listener.onMapIdle();
+            }
+            
         }
 
         @Override
         public void onMapStable() {
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    AKMapView.this.onMapStable(AKMapView.this.userAction);
-                    AKMapView.this.userAction = false;
-                }
-            });
+            if (AKMapView.RUN_ON_MAIN_THREAD) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AKMapView.this.listener.onMapStable(AKMapView.this.userAction);
+                        AKMapView.this.userAction = false;
+                    }
+                });
+            } else {
+                AKMapView.this.listener.onMapStable(AKMapView.this.userAction);
+                AKMapView.this.userAction = false;
+            }
         }
 
         @Override
         public void onMapClicked(final MapClickInfo mapClickInfo) {
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    AKMapView.this.onMapClicked(mapClickInfo);
-                }
-            });
+            if (AKMapView.RUN_ON_MAIN_THREAD) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AKMapView.this.listener.onMapClicked(mapClickInfo);
+                    }
+                });
+            } else {
+                AKMapView.this.listener.onMapClicked(mapClickInfo);
+            }
         }
     };
-    public void onMapMoved(boolean userAction) {
-
-    }
-
-    public void onMapIdle() {
-
-    }
-
-    public void onMapStable(boolean userAction) {
-
-    }
-
-    public void onMapClicked(MapClickInfo mapClickInfo) {
-    }
 }

@@ -1,7 +1,6 @@
-import { _createImageSourceFromSrc, BaseNative, nativeProperty } from './index.common';
+import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
 import { Color } from '@nativescript/core';
 import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
-import { Projection } from './projections';
 import { NativePropertyOptions } from '.';
 export { BaseNative, nativeProperty };
 

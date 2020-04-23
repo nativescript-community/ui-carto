@@ -3,6 +3,7 @@ import { TileDataSource } from '.';
 
 export class MBTilesTileDataSource extends TileDataSource<NTMBTilesTileDataSource, MBTilesTileDataSourceOptions> {
     createNative(options: MBTilesTileDataSourceOptions) {
-        return NTMBTilesTileDataSource.alloc().initWithMinZoomMaxZoomPath(options.minZoom, options.maxZoom, options.databasePath);
+        return NTMBTilesTileDataSource.alloc().initWithPath(options.databasePath);
+        // return NTMBTilesTileDataSource.alloc().initWithMinZoomMaxZoomPath(options.minZoom, options.maxZoom, options.databasePath);
     }
 }

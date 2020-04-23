@@ -209,9 +209,9 @@ export class CartoMap<T = DefaultLatLonKeys> extends View {
 
     setZoom(value: number, target: number | GenericMapPos<T>, duration?: number);
     setMapRotation(value: number, target: number | GenericMapPos<T>, duration?: number);
-    setBearing(value: number, duration: number);
-    setTilt(value: number, duration: number);
-    setFocusPos(value: GenericMapPos<T>, duration: number);
+    setBearing(value: number, duration?: number);
+    setTilt(value: number, duration?: number);
+    setFocusPos(value: GenericMapPos<T>, duration?: number);
 
     moveToFitBounds(mapBounds: MapBounds<T>, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number);
 

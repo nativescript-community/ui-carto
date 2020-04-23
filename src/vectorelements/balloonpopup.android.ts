@@ -1,8 +1,6 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
 import { BasePointVectorElement, BillboardStyleBuilder } from '.';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from '@nativescript/core/color/color';
-import { toNativeMapPos } from '../core';
 import { nativeCartoImageProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 
@@ -65,11 +63,11 @@ export class BalloonPopup extends BasePointVectorElement<com.carto.vectorelement
         return style;
     }
     get styleBuilder() {
-        return this.native ? (this.native.getStyle() as com.carto.styles.BalloonPopupStyle) : this.options.styleBuilder;
+        return this.native ? (this.native.getStyle() as any) : (this.options.styleBuilder as any);
     }
     set styleBuilder(value: BalloonPopupStyleBuilder | com.carto.styles.BalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
         if (this.native && !this.duringInit) {
-            this.options.styleBuilder = value as any;
+            this.options.styleBuilder = value;
             this.native.setStyle(this.buildStyle());
         }
     }

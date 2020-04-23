@@ -1,4 +1,4 @@
-import { DirAssetPackage, nativeVectorToArray } from 'nativescript-carto/utils';
+import { DirAssetPackage } from 'nativescript-carto/utils';
 import { File } from '@nativescript/core/file-system';
 import { getFileName, getRelativePathToApp } from '../index.common';
 import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
@@ -46,7 +46,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
     }
 
     set style(style: string) {
-        console.log('setting style', style, this.options.style);
+        // console.log('setting style', style, this.options.style);
         if (style !== this.options.style) {
             this.options.style = style;
             if (this.native) {

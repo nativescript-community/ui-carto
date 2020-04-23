@@ -60,12 +60,12 @@ export class BalloonPopup extends BasePointVectorElement<NTBalloonPopup, Balloon
         } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
             style = styleBuilder.buildStyle();
         } else if (styleBuilder.hasOwnProperty) {
-            style = new BalloonPopupStyleBuilder(styleBuilder).buildStyle();
+            style = new BalloonPopupStyleBuilder(styleBuilder as BalloonPopupStyleBuilderOptions).buildStyle();
         }
         return style;
     }
     get styleBuilder() {
-        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+        return this.native ? this.native.getStyle() as any : this.options.styleBuilder;
     }
     set styleBuilder(value: BalloonPopupStyleBuilder | NTBalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
         if (this.native && !this.duringInit) {

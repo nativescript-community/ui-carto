@@ -9,10 +9,10 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
         return new com.carto.styles.MarkerStyleBuilder();
     }
     @nativeProperty width: number;
-    @nativeProperty hideIfOverlapped: boolean;
-    @nativeProperty scaleWithDPI: boolean;
+    // @nativeProperty hideIfOverlapped: boolean;
+    // @nativeProperty scaleWithDPI: boolean;
     @nativeProperty size: number;
-    @nativeProperty placementPriority: number;
+    // @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;
     @nativeCartoImageProperty bitmap: string;
     @nativeProperty anchorPointX: number;

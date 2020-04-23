@@ -157,13 +157,16 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
         this.loadUsingNS = !!options.loadUsingNS;
         this.dirPath = getFileName(dirPath);
         this.cartoDirPath = getRelativePathToApp(dirPath);
-        console.log('DirAssetPackageNativeImpl', dirPath, this.dirPath, this.cartoDirPath, this.loadUsingNS);
+        // console.log('DirAssetPackageNativeImpl', dirPath, this.dirPath, this.cartoDirPath, this.loadUsingNS);
         // this.dirPath = dirPath;
     }
     public loadAsset(name) {
+        if (!name) {
+            return null;
+        }
         const startTime = Date.now();
         let result: NTBinaryData;
-        console.log(`loadAsset ${name}`, this.loadUsingNS);
+        // console.log(`loadAsset ${name}`, this.loadUsingNS);
         if (this.loadUsingNS) {
             const data = File.fromPath(path.join(this.dirPath, name)).readSync() as NSData;
             const arr = new ArrayBuffer(data.length);
@@ -172,7 +175,7 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
         } else {
             result = NTAssetUtils.loadAsset(path.join(this.cartoDirPath, name));
         }
-        console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
+        // console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
         return result;
     }
     public getAssetNames() {
@@ -186,8 +189,8 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
                     test.push(fileRelPath);
                 });
 
-                console.log(`getAssetNames done ${this.assetNames.size()}: ${test}`);
-                console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
+                // console.log(`getAssetNames done ${this.assetNames.size()}: ${test}`);
+                // console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
                 // }
             } catch (e) {}
         }
@@ -197,7 +200,7 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
 
 export class DirAssetPackage extends BaseNative<NTDirAssetPackageImpl, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
-        this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
+        // this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
             // this.log('intDirAssetPackageClass done');
             const result = NTDirAssetPackageImpl.new();

@@ -7,12 +7,10 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileLayerOptions
 } from './vector';
-import { TileDataSource } from '../datasources';
 import { Layer, TileLayer } from '.';
 import { BaseNative } from '..';
 import { VectorDataSource } from '../datasources/vector';
-import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
-import { CartoPackageManager } from '../packagemanager';
+import { MBVectorTileDecoder } from '../vectortiles';
 import { nativeProperty } from '../index.common';
 import { fromNativeMapPos } from '../core';
 import { Projection } from '../projections';
@@ -44,8 +42,7 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
         delegate.projection = projection;
         return delegate;
     }
-    public onClicked(info: com.carto.ui.VectorElementClickInfo) {
-        console.log('VectorElementEventListener', 'onClicked', info);
+    public onVectorElementClicked(info: NTVectorElementClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.onVectorElementClicked) {
             const element = new VectorElement(undefined, info.getVectorElement());
@@ -87,8 +84,8 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
         delegate.projection = projection;
         return delegate;
     }
-    public onClicked(info: com.carto.ui.VectorTileClickInfo) {
-        console.log('VectorTileEventListener', 'onClicked', info);
+    public onVectorTileClicked(info: NTVectorTileClickInfo) {
+        console.log('onVectorTileClicked', info);
         const owner = this._owner.get();
         if (owner && owner.onVectorTileClicked) {
             // const featureData = {};
@@ -137,7 +134,6 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
         this.getNative().setLabelRenderOrder(order);
     }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
-        // this.log('setVectorTileEventListener', !!listener);
         if (listener) {
             this.getNative().setVectorTileEventListener(NTVectorTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
         } else {

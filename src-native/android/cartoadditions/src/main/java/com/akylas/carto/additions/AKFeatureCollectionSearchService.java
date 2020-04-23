@@ -25,16 +25,19 @@ public class AKFeatureCollectionSearchService extends FeatureCollectionSearchSer
             @Override
             public void run() {
                 final FeatureCollection results = AKFeatureCollectionSearchService.this.findFeatures(request);
-                if (mainHandler == null) {
-                    mainHandler = new Handler(android.os.Looper.getMainLooper());
-                }
-                // final PackageInfo[] fRa = resultArray;
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onFindFeatures(results);
+                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (mainHandler == null) {
+                        mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
-                });
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onFindFeatures(results);
+                        }
+                    });
+                } else {
+                    callback.onFindFeatures(results);
+                }
 
             }
         }).start();

@@ -1,8 +1,5 @@
 import { Observable } from '@nativescript/core/data/observable';
-import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector } from './core';
-import { Projection } from './projections';
-import { ImageSource } from '@nativescript/core/image-source';
-import { ImageAsset } from '@nativescript/core/image-asset';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from './core';
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
     options: U;

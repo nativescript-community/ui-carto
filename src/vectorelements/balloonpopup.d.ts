@@ -1,6 +1,4 @@
-import { IProjection } from '../projections';
-import { MapPos } from '../core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions, VectorElementOptions, BillboardStyleBuilderOptions } from '.';
+import { BasePointVectorElement, BillboardStyleBuilderOptions, PointVectorElementOptions } from '.';
 import { Color } from '@nativescript/core/color/color';
 import { Marker } from './marker';
 import { BillboardStyleBuilder } from './index.ios';
@@ -37,7 +35,7 @@ export class BalloonPopupOptions<T = DefaultLatLonKeys> extends PointVectorEleme
     marker?: Marker<T>;
     title?: string;
     description?: string;
-    styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;
+    styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions | com.carto.styles.BalloonPopupStyle;
 }
 export class BalloonPopup<T = DefaultLatLonKeys> extends BasePointVectorElement<any, BalloonPopupOptions<T>, T> {
     styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;

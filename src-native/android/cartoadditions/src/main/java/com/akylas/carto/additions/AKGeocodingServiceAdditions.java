@@ -20,30 +20,42 @@ public class AKGeocodingServiceAdditions {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                if (mainHandler == null) {
-                    mainHandler = new Handler(android.os.Looper.getMainLooper());
-                }
+                
                 GeocodingResultVector results = null;
                 try {
                     results = service.calculateAddresses(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            callback.onGeoCodingResult(e, null);
+                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                        if (mainHandler == null) {
+                            mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
-                    });
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onGeoCodingResult(e, null);
+                            }
+                        });
+                    } else {
+                        callback.onGeoCodingResult(e, null);
+                    }
                     return;
                 }
                 
                 final GeocodingResultVector fRa = results;
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onGeoCodingResult(null, fRa);
+                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (mainHandler == null) {
+                        mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
-                });
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onGeoCodingResult(null, fRa);
+                        }
+                    });
+                } else {
+                    callback.onGeoCodingResult(null, fRa);
+                }
 
             }
         });
@@ -53,30 +65,42 @@ public class AKGeocodingServiceAdditions {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                if (mainHandler == null) {
-                    mainHandler = new Handler(android.os.Looper.getMainLooper());
-                }
+          
                 GeocodingResultVector results = null;
                 try {
                     results = service.calculateAddresses(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            callback.onGeoCodingResult(e, null);
+                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                        if (mainHandler == null) {
+                            mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
-                    });
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onGeoCodingResult(e, null);
+                            }
+                        });
+                    } else {
+                        callback.onGeoCodingResult(e, null);
+                    }
                     return;
                 }
                 
                 final GeocodingResultVector fRa = results;
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onGeoCodingResult(null, fRa);
+                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (mainHandler == null) {
+                        mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
-                });
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onGeoCodingResult(null, fRa);
+                        }
+                    });
+                } else {
+                    callback.onGeoCodingResult(null, fRa);
+                }
 
             }
         });

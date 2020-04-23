@@ -192,27 +192,27 @@ export class CartoMap extends CartoViewBase {
     fromNativeMapPos(position: NTMapPos) {
         return fromNativeMapPos(position);
     }
-    setFocusPos(value: MapPos, duration: number) {
+    setFocusPos(value: MapPos, duration: number = 0) {
         this.mapView.setFocusPosDurationSeconds(toNativeMapPos(value), duration / 1000);
     }
-    setZoom(value: number, targetPos: MapPos | number, duration: number) {
+    setZoom(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setZoomDurationSeconds(value, targetPos / 1000);
         } else {
             this.mapView.setZoomTargetPosDurationSeconds(value, toNativeMapPos(targetPos), duration / 1000);
         }
     }
-    setMapRotation(value: number, targetPos: MapPos | number, duration: number) {
+    setMapRotation(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setRotationDurationSeconds(value, targetPos / 1000);
         } else {
             this.mapView.setRotationTargetPosDurationSeconds(value, toNativeMapPos(targetPos), duration / 1000);
         }
     }
-    setTilt(value: number, duration: number) {
+    setTilt(value: number, duration: number = 0) {
         this.mapView.setTiltDurationSeconds(value, duration / 1000);
     }
-    setBearing(value: number, duration: number) {
+    setBearing(value: number, duration: number = 0) {
         this.mapView.setRotationDurationSeconds(value, duration / 1000);
     }
     [restrictedPanningProperty.setNative](value: boolean) {
