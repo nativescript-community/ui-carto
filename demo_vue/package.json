@@ -8,6 +8,9 @@
         "id": "com.akylas.nativescript.cartodemo",
         "tns-ios": {
             "version": "6.2.0"
+        },
+        "tns-android": {
+            "version": "6.4.1"
         }
     },
     "dependencies": {
