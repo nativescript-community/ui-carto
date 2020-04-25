@@ -16,7 +16,7 @@ public class AKMapView extends MapView {
     public boolean userAction = false;
     private AKMapEventListener listener = null;
 
-      static boolean RUN_ON_MAIN_THREAD = tru
+      static boolean RUN_ON_MAIN_THREAD = true;
 
     public void setMapEventListener(AKMapEventListener listener) {
         this.listener = listener;
