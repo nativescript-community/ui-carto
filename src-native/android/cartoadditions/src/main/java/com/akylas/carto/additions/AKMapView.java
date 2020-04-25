@@ -16,8 +16,7 @@ public class AKMapView extends MapView {
     public boolean userAction = false;
     private AKMapEventListener listener = null;
 
-    static boolean RUN_ON_MAIN_THREAD = true;
-
+      static boolean RUN_ON_MAIN_THREAD = tru
 
     public void setMapEventListener(AKMapEventListener listener) {
         this.listener = listener;
@@ -25,18 +24,17 @@ public class AKMapView extends MapView {
             super.setMapEventListener(mapEventListener);
         } else {
             super.setMapEventListener(null);
-        }
+                    }
     }
 
-    
-    public AKMapView(Context context) {
+
         super(context);
         this.mainHandler = new Handler(context.getMainLooper());
     }
 
     @Override
     public  boolean onTouchEvent(MotionEvent event) {
-
+ 
         boolean clickable = isClickable() || isLongClickable();
         if (!isEnabled() || !clickable) {
             return clickable;
@@ -66,11 +64,15 @@ public class AKMapView extends MapView {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        AKMapView.this.listener.onMapMoved(userAction);
+                        if (AKMapView.this.listener != null) {
+                            AKMapView.this.listener.onMapMoved(userAction);
+                        }
                     }
                 });
             } else {
-                AKMapView.this.listener.onMapMoved(userAction);
+                if (AKMapView.this.listener != null) {
+                    AKMapView.this.listener.onMapMoved(userAction);
+                }
             }
         }
 
@@ -80,11 +82,15 @@ public class AKMapView extends MapView {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        AKMapView.this.listener.onMapIdle();
+                        if (AKMapView.this.listener != null) {
+                            AKMapView.this.listener.onMapIdle();
+                        }
                     }
                 });
             } else {
-                AKMapView.this.listener.onMapIdle();
+                if (AKMapView.this.listener != null) {
+                    AKMapView.this.listener.onMapIdle();
+                }
             }
             
         }
@@ -95,12 +101,16 @@ public class AKMapView extends MapView {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        AKMapView.this.listener.onMapStable(AKMapView.this.userAction);
+                        if (AKMapView.this.listener != null) {
+                            AKMapView.this.listener.onMapStable(AKMapView.this.userAction);
+                        }
                         AKMapView.this.userAction = false;
                     }
                 });
             } else {
-                AKMapView.this.listener.onMapStable(AKMapView.this.userAction);
+                if (AKMapView.this.listener != null) {
+                    AKMapView.this.listener.onMapStable(AKMapView.this.userAction);
+                }
                 AKMapView.this.userAction = false;
             }
         }
@@ -111,12 +121,17 @@ public class AKMapView extends MapView {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        AKMapView.this.listener.onMapClicked(mapClickInfo);
+                        if (AKMapView.this.listener != null) {
+                            AKMapView.this.listener.onMapClicked(mapClickInfo);
+                        }
                     }
                 });
             } else {
-                AKMapView.this.listener.onMapClicked(mapClickInfo);
+                if (AKMapView.this.listener != null) {
+                    AKMapView.this.listener.onMapClicked(mapClickInfo);
+                }
             }
         }
     };
 }
+
