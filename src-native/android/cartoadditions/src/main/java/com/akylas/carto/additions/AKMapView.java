@@ -16,7 +16,8 @@ public class AKMapView extends MapView {
     public boolean userAction = false;
     private AKMapEventListener listener = null;
 
-      static boolean RUN_ON_MAIN_THREAD = true;
+    static boolean RUN_ON_MAIN_THREAD = true;
+
 
     public void setMapEventListener(AKMapEventListener listener) {
         this.listener = listener;
@@ -24,17 +25,18 @@ public class AKMapView extends MapView {
             super.setMapEventListener(mapEventListener);
         } else {
             super.setMapEventListener(null);
-                    }
+        }
     }
 
-
+    
+    public AKMapView(Context context) {
         super(context);
         this.mainHandler = new Handler(context.getMainLooper());
     }
 
     @Override
     public  boolean onTouchEvent(MotionEvent event) {
- 
+
         boolean clickable = isClickable() || isLongClickable();
         if (!isEnabled() || !clickable) {
             return clickable;
@@ -134,4 +136,3 @@ public class AKMapView extends MapView {
         }
     };
 }
-
