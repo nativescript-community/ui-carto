@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.39](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.38...v1.2.39) (2020-04-25)
+
+
+### Bug Fixes
+
+* typo fix ([b72995b](https://github.com/farfromrefug/nativescript-carto/commit/b72995b612d468589f71524baa3489180b173194))
+* **android:** crash on mapListener ([8879eae](https://github.com/farfromrefug/nativescript-carto/commit/8879eae42c88badf7c04b5c8addb689deabbdd4d))
+* prevent crash when no options are passed ([71bb9fe](https://github.com/farfromrefug/nativescript-carto/commit/71bb9fe8ccfe1620480799f5c03d810d32bb5000))
+
+
+
+
+
 ## [1.2.38](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.37...v1.2.38) (2020-04-23)
 
 
