@@ -3,7 +3,7 @@ import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions,
 import { BaseNative, nativeProperty } from '../index.common';
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
-import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core';
+import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
 
@@ -16,7 +16,7 @@ export const BillboardOrientation = {
     },
     get GROUND() {
         return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.swigValue();
-    }
+    },
 };
 
 export const BillboardScaling = {
@@ -28,7 +28,7 @@ export const BillboardScaling = {
     },
     get WORLD_SIZE() {
         return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE.swigValue();
-    }
+    },
 };
 
 export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
@@ -77,10 +77,7 @@ export abstract class BasePointVectorElement<
     }
 
     getNativePos(pos: MapPos): com.carto.core.MapPos {
-        let nativePos;
-        nativePos = toNativeMapPos(pos);
-        // console.log('getNativePos', pos, nativePos);
-        return nativePos;
+        return toNativeMapPos(pos);
     }
 }
 
@@ -121,12 +118,12 @@ export class VectorElement extends BaseVectorElement<com.carto.vectorelements.Ve
 }
 
 export class VectorElementVector extends BaseNative<com.carto.vectorelements.VectorElementVector, any> {
-    elements: Array<BaseVectorElement<any, any>> = [];
+    elements: BaseVectorElement<any, any>[] = [];
     createNative() {
         const result = new com.carto.vectorelements.VectorElementVector();
         // this.log('create native VectorElementVector', this.elements.length);
         if (this.elements.length > 0) {
-            this.elements.forEach(element => {
+            this.elements.forEach((element) => {
                 result.add(element.getNative());
             });
         }
