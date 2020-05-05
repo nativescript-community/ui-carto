@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.40](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.39...v1.2.40) (2020-05-05)
+
+
+### Bug Fixes
+
+* memory leaks fixed by using weak refs for native objects ([300e181](https://github.com/farfromrefug/nativescript-carto/commit/300e181a567ac64d97df8365226241f524fc551c))
+
+
+
+
+
 ## [1.2.39](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.38...v1.2.39) (2020-04-25)
 
 
