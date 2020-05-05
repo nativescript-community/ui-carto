@@ -24,6 +24,11 @@ import Component from 'vue-class-component';
 
 const samples = [
     {
+        component: 'FragmentBase',
+        title: 'Fragment Base',
+        description: 'Fragment Base',
+        image: '~/assets/images/image_base_maps.png'
+    },{
         component: 'BaseMaps',
         title: 'Online Base Maps',
         description: 'Choice between different base maps, styles, languages',
