@@ -66,10 +66,10 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
     constructor(public options: U = {} as any, native?: T) {
         super();
         if (native) {
-            this.native = native;
+            this._native = new WeakRef(native);
         }
     }
-    native: T;
+    _native: WeakRef<T>;
     duringInit = false;
     initNativeView(native: T, options: U) {
         this.duringInit = true;
@@ -79,11 +79,14 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         this.duringInit = false;
     }
     getNative() {
-        if (!this.native) {
-            this.native = this.createNative(this.options);
-            this.initNativeView(this.native, this.options);
+        if (!this._native || !this._native.get()) {
+            this._native = new WeakRef(this.createNative(this.options));
+            this.initNativeView(this._native.get(), this.options);
         }
-        return this.native;
+        return this._native.get();
+    }
+    get native() {
+        return this._native && this._native.get();
     }
     abstract createNative(options: U): T;
 

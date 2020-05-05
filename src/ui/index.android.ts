@@ -139,8 +139,8 @@ export class CartoMap extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;
     };
-    static projection = new EPSG4326();
-    nativeProjection: com.carto.projections.Projection;
+    // static projection = new EPSG4326();
+    // nativeProjection: com.carto.projections.Projection;
     _projection: IProjection;
 
     get mapView() {
@@ -150,12 +150,11 @@ export class CartoMap extends CartoViewBase {
         return this._projection;
     }
     set projection(proj: IProjection) {
-        // this.log('set projection', proj);
         this._projection = proj;
-        this.nativeProjection = this._projection.getNative();
+        // this.nativeProjection = this._projection.getNative();
         if (this.nativeViewProtected) {
             // this.log('set native projection', this.nativeProjection);
-            this.mapView.getOptions().setBaseProjection(this.nativeProjection);
+            this.mapView.getOptions().setBaseProjection(this._projection.getNative());
         }
     }
     public createNativeView(): Object {
@@ -186,7 +185,7 @@ export class CartoMap extends CartoViewBase {
         // this.nativeView.owner = this;
         super.initNativeView();
         if (!this.projection) {
-            this.projection = CartoMap.projection;
+            this.projection = new EPSG4326();
         }
         const listener = new com.akylas.carto.additions.AKMapEventListener({
             onMapIdle: () => {
@@ -228,6 +227,7 @@ export class CartoMap extends CartoViewBase {
             this.nativeViewProtected.setMapEventListener(null);
         }
         this.nativeView.owner = null;
+        // this.nativeView.delete();
         super.disposeNativeView();
     }
 
