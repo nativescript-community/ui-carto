@@ -1,7 +1,7 @@
-import { CartoViewBase, isLicenseKeyRegistered, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './index.common';
+import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import * as application from '@nativescript/core/application';
 import { profile } from '@nativescript/core/profiling';
-import { fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, MapBounds, MapPos, ScreenBounds, ScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core';
+import { MapBounds, MapPos, ScreenBounds, ScreenPos, fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core';
 import { TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
@@ -132,6 +132,15 @@ function initMapViewClass() {
             super(context);
             return global.__native(this);
         }
+
+        onAttachedToWindow() {
+            console.log('onAttachedToWindow', this.getParent(), new java.lang.Exception().printStackTrace());
+            super.onAttachedToWindow();
+        }
+        onDetachedFromWindow() {
+            console.log('onDetachedFromWindow', this.getParent());
+            super.onDetachedFromWindow();
+        }
     }
     MapView = MapViewImpl as any;
 }
@@ -139,8 +148,8 @@ export class CartoMap extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;
     };
-    static projection = new EPSG4326();
-    nativeProjection: com.carto.projections.Projection;
+    // static projection = new EPSG4326();
+    // nativeProjection: com.carto.projections.Projection;
     _projection: IProjection;
 
     get mapView() {
@@ -150,12 +159,11 @@ export class CartoMap extends CartoViewBase {
         return this._projection;
     }
     set projection(proj: IProjection) {
-        // this.log('set projection', proj);
         this._projection = proj;
-        this.nativeProjection = this._projection.getNative();
+        // this.nativeProjection = this._projection.getNative();
         if (this.nativeViewProtected) {
             // this.log('set native projection', this.nativeProjection);
-            this.mapView.getOptions().setBaseProjection(this.nativeProjection);
+            this.mapView.getOptions().setBaseProjection(this._projection.getNative());
         }
     }
     public createNativeView(): Object {
@@ -169,6 +177,7 @@ export class CartoMap extends CartoViewBase {
         }
         // Create new instance
         return new com.akylas.carto.additions.AKMapView(this._context);
+        // return new MapView(this._context, new WeakRef(this));
     }
 
     getOptions() {
@@ -184,9 +193,10 @@ export class CartoMap extends CartoViewBase {
         // Attach the owner to nativeView.
         // When nativeView is tapped we get the owning JS object through this field.
         // this.nativeView.owner = this;
+        console.log('initNativeView');
         super.initNativeView();
         if (!this.projection) {
-            this.projection = CartoMap.projection;
+            this.projection = new EPSG4326();
         }
         const listener = new com.akylas.carto.additions.AKMapEventListener({
             onMapIdle: () => {
@@ -221,6 +231,7 @@ export class CartoMap extends CartoViewBase {
     }
 
     disposeNativeView(): void {
+        console.log('disposeNativeView');
         this._projection = null;
         this.nativeProjection = null;
         if (this.nativeViewProtected.listener) {
@@ -228,6 +239,7 @@ export class CartoMap extends CartoViewBase {
             this.nativeViewProtected.setMapEventListener(null);
         }
         this.nativeView.owner = null;
+        // this.nativeView.delete();
         super.disposeNativeView();
     }
 
@@ -304,7 +316,7 @@ export class CartoMap extends CartoViewBase {
             this.mapView.getLayers().remove(layer.getNative());
         }
     }
-    removeAllLayers(layers: Array<TileLayer<any, any>>) {
+    removeAllLayers(layers: TileLayer<any, any>[]) {
         if (this.mapView) {
             const vector = new com.carto.layers.LayerVector();
             layers.forEach((l) => vector.add(l.getNative()));
