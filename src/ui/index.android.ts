@@ -193,7 +193,6 @@ export class CartoMap extends CartoViewBase {
         // Attach the owner to nativeView.
         // When nativeView is tapped we get the owning JS object through this field.
         // this.nativeView.owner = this;
-        console.log('initNativeView');
         super.initNativeView();
         if (!this.projection) {
             this.projection = new EPSG4326();
@@ -231,7 +230,6 @@ export class CartoMap extends CartoViewBase {
     }
 
     disposeNativeView(): void {
-        console.log('disposeNativeView');
         this._projection = null;
         this.nativeProjection = null;
         if (this.nativeViewProtected.listener) {
