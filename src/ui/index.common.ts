@@ -1,5 +1,5 @@
 import { CSSType, View } from '@nativescript/core/ui/core/view';
-import { fromNativeMapPos, LatitudeKey, MapPos } from '../core';
+import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { isAndroid } from '@nativescript/core/platform/platform';
 import { Layer } from 'nativescript-carto/layers';
@@ -134,7 +134,7 @@ export class Layers<T extends any> {
     set(index: number, layer: Layer<any, any>) {
         return this.native.set(index, layer.getNative());
     }
-    removeAll(layers: Array<Layer<any, any>>) {
+    removeAll(layers: Layer<any, any>[]) {
         layers.forEach(this.remove);
     }
     remove(layer: Layer<any, any>) {
@@ -146,10 +146,10 @@ export class Layers<T extends any> {
     get(index: number) {
         return this.native.get(index);
     }
-    addAll(layers: Array<Layer<any, any>>) {
+    addAll(layers: Layer<any, any>[]) {
         layers.forEach(this.add);
     }
-    setAll(layers: Array<Layer<any, any>>) {
+    setAll(layers: Layer<any, any>[]) {
         this.clear();
         this.addAll(layers);
     }
