@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.42](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.41...v1.2.42) (2020-05-10)
+
+
+### Bug Fixes
+
+* **android:** allow overriding version of sdk ([aea2624](https://github.com/farfromrefug/nativescript-carto/commit/aea26245c1b6b0a057c04dc0fc3e931547ea5838))
+
+
+
+
+
 ## [1.2.41](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.39...v1.2.41) (2020-05-07)
 
 
