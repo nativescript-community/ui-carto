@@ -148,8 +148,6 @@ export class CartoMap extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;
     };
-    // static projection = new EPSG4326();
-    // nativeProjection: com.carto.projections.Projection;
     _projection: IProjection;
 
     get mapView() {
@@ -160,24 +158,18 @@ export class CartoMap extends CartoViewBase {
     }
     set projection(proj: IProjection) {
         this._projection = proj;
-        // this.nativeProjection = this._projection.getNative();
         if (this.nativeViewProtected) {
-            // this.log('set native projection', this.nativeProjection);
-            this.mapView.getOptions().setBaseProjection(this._projection.getNative());
+            this.mapView.getOptions().setBaseProjection(proj ? proj.getNative() : null);
         }
     }
     public createNativeView(): Object {
-        // initMapViewClass();
         if (!isLicenseKeyRegistered()) {
-            // this.log('need MapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);
             }
         }
-        // Create new instance
         return new com.akylas.carto.additions.AKMapView(this._context);
-        // return new MapView(this._context, new WeakRef(this));
     }
 
     getOptions() {
@@ -186,20 +178,13 @@ export class CartoMap extends CartoViewBase {
         }
         return null;
     }
-    /**
-     * Initializes properties/listeners of the native view.
-     */
     initNativeView(): void {
-        // Attach the owner to nativeView.
-        // When nativeView is tapped we get the owning JS object through this field.
-        // this.nativeView.owner = this;
         super.initNativeView();
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
         const listener = new com.akylas.carto.additions.AKMapEventListener({
             onMapIdle: () => {
-                // console.log('onMapIdle');
                 if (this.hasListeners(MapIdleEvent)) {
                     this.sendEvent(MapIdleEvent);
                 }
@@ -210,13 +195,11 @@ export class CartoMap extends CartoViewBase {
                 }
             },
             onMapStable: (userAction: boolean) => {
-                // console.log('onMapStable');
                 if (this.hasListeners(MapStableEvent)) {
                     this.sendEvent(MapStableEvent, { userAction });
                 }
             },
             onMapClicked: (mapClickInfo: com.carto.ui.MapClickInfo) => {
-                // console.log('onMapClicked', mapClickInfo);
                 if (this.hasListeners(MapClickedEvent)) {
                     this.sendEvent(MapClickedEvent, {
                         clickType: mapClickInfo.getClickType().swigValue(),
@@ -237,7 +220,6 @@ export class CartoMap extends CartoViewBase {
             this.nativeViewProtected.setMapEventListener(null);
         }
         this.nativeView.owner = null;
-        // this.nativeView.delete();
         super.disposeNativeView();
     }
 
