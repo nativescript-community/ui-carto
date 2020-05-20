@@ -1,4 +1,4 @@
-import { fromNativeMapPos, MapPos, toNativeMapPos } from '../core';
+import { MapPos, fromNativeMapPos, toNativeMapPos } from '../core';
 import { ProjectionOptions } from '.';
 import { BaseProjection } from './index.common';
 
@@ -8,6 +8,12 @@ export abstract class ProjectionClass<T extends com.carto.projections.Projection
     }
     toWgs84(position: MapPos) {
         return fromNativeMapPos(this.getNative().toWgs84(toNativeMapPos(position)));
+    }
+    fromLatLong(latitude, longitude) {
+        return fromNativeMapPos(this.getNative().fromLatLong(latitude, longitude));
+    }
+    toLatLong(x, y) {
+        return fromNativeMapPos(this.getNative().toLatLong(x, y));
     }
 }
 

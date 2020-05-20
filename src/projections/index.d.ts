@@ -7,8 +7,8 @@ export abstract class BaseProjection<T, U extends ProjectionOptions> extends Bas
 export abstract class ProjectionClass<T, U extends ProjectionOptions> extends BaseProjection<T, U> {
     fromWgs84(position: MapPos): MapPos;
     toWgs84(position: MapPos): MapPos;
-    fromLatLong(position: MapPos): MapPos;
-    toLatLong(position: MapPos): MapPos;
+    fromLatLong(lat, lon): MapPos;
+    toLatLong(x, y): MapPos;
 }
 export declare class Projection extends ProjectionClass<any, ProjectionOptions> {
     createNative(): any;
