@@ -121,7 +121,7 @@ export function mapProperty(...args) {
 // };
 
 export class Layers<T extends any> {
-    constructor(private native: T) {}
+    constructor(private native: any) {}
     // constructor(size?: number) {
     //     this.native = new T(size);
     // }
