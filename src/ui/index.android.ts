@@ -20,6 +20,17 @@ export const RenderProjectionMode = {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_SPHERICAL;
     },
 };
+export const PanningMode = {
+    get PANNING_MODE_FREE() {
+        return com.carto.components.PanningMode.PANNING_MODE_FREE;
+    },
+    get PANNING_MODE_STICKY() {
+        return com.carto.components.PanningMode.PANNING_MODE_STICKY;
+    },
+    get PANNING_MODE_STICKY_FINAL() {
+        return com.carto.components.PanningMode.PANNING_MODE_STICKY_FINAL;
+    },
+};
 
 let licenseKey: string;
 
@@ -83,67 +94,7 @@ function initRendererCaptureListener() {
     RendererCaptureListener = RendererCaptureListenerImpl as any;
 }
 
-export interface MapView extends com.akylas.carto.additions.AKMapView {
-    // tslint:disable-next-line:no-misused-new
-    new (context, owner: WeakRef<CartoMap>): MapView;
-}
 
-let MapView: MapView;
-
-// interface MapEventListener extends com.carto.ui.MapEventListener {
-//     // tslint:disable-next-line:no-misused-new
-//     new (owner: WeakRef<CartoMap>): MapEventListener;
-// }
-
-// let MapEventListener: MapEventListener;
-
-function initMapViewClass() {
-    if (MapView) {
-        return;
-    }
-
-    // @Interfaces([com.carto.ui.MapEventListener])
-    // class MapEventListenerImpl extends com.carto.ui.MapEventListener {
-    //     constructor(private owner: WeakRef<CartoMap>) {
-    //         super();
-    //         return global.__native(this);
-    //     }
-    //     public onMapIdle() {
-    //         this.owner && this.owner.get().sendEvent(MapIdleEvent);
-    //     }
-    //     public onMapMoved() {
-    //         this.owner && this.owner.get().sendEvent(MapMovedEvent);
-    //     }
-    //     public onMapStable() {
-    //         this.owner && this.owner.get().sendEvent(MapStableEvent);
-    //     }
-    //     public onMapClicked(mapClickInfo: com.carto.ui.MapClickInfo) {
-    //         this.owner &&
-    //             this.owner.get().sendEvent(MapClickedEvent, {
-    //                 clickType: mapClickInfo.getClickType(),
-    //                 position: this.owner.get().fromNativeMapPos(mapClickInfo.getClickPos())
-    //             });
-    //     }
-    // }
-    // MapEventListener = MapEventListenerImpl as any;
-
-    class MapViewImpl extends com.akylas.carto.additions.AKMapView {
-        constructor(context, private owner: CartoMap) {
-            super(context);
-            return global.__native(this);
-        }
-
-        onAttachedToWindow() {
-            console.log('onAttachedToWindow', this.getParent(), new java.lang.Exception().printStackTrace());
-            super.onAttachedToWindow();
-        }
-        onDetachedFromWindow() {
-            console.log('onDetachedFromWindow', this.getParent());
-            super.onDetachedFromWindow();
-        }
-    }
-    MapView = MapViewImpl as any;
-}
 export class CartoMap extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;

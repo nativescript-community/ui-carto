@@ -1,11 +1,11 @@
 import { View } from '@nativescript/core/ui/core/view';
 import { EventData } from '@nativescript/core/data/observable';
-import { IProjection, Projection } from '../projections';
+import { Projection } from '../projections';
 import { Layer } from '../layers';
-import { MapBounds, MapPos, ScreenBounds, ScreenPos } from '../core';
+import { MapBounds, ScreenBounds, ScreenPos } from '../core';
 import { Layers } from './index.common';
 import { ImageSource } from '@nativescript/core/image-source';
-import { GenericMapPos, DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
+import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
 export { Layers };
 import { Style } from '@nativescript/core/ui/styling/style';
 export function registerLicense(key: string, callback?: (result: boolean) => void);
@@ -14,7 +14,11 @@ export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR,
     RENDER_PROJECTION_MODE_SPHERICAL
 }
-
+export enum PanningMode {
+    PANNING_MODE_FREE,
+    PANNING_MODE_STICKY,
+    PANNING_MODE_STICKY_FINAL
+}
 export const MapReadyEvent: string;
 /**
  * Listener method that gets called when map is in 'stable' state - map animations have finished,

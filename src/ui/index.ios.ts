@@ -1,10 +1,10 @@
-import { fromNativeMapPos, fromNativeScreenPos, MapPos, ScreenPos, toNativeMapPos, toNativeScreenPos } from '../core';
+import { MapPos, ScreenPos, fromNativeMapPos, fromNativeScreenPos, toNativeMapPos, toNativeScreenPos } from '../core';
 import { TileLayer } from '../layers';
 import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
-import { CartoViewBase, isLicenseKeyRegistered, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered } from './index.common';
+import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import { NativeVector } from 'nativescript-carto/core/index.android';
 import { fromNativeSource } from '@nativescript/core/image-source/image-source';
 
@@ -13,6 +13,11 @@ export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableE
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
     RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL
+}
+export enum PanningMode {
+    PANNING_MODE_FREE = NTPanningMode.T_PANNING_MODE_FREE,
+    PANNING_MODE_STICKY = NTPanningMode.T_PANNING_MODE_STICKY,
+    PANNING_MODE_STICKY_FINAL = NTPanningMode.T_PANNING_MODE_STICKY_FINAL,
 }
 
 let licenseKey: string;
@@ -247,7 +252,7 @@ export class CartoMap extends CartoViewBase {
             this.mapView.getLayers().remove(layer.getNative());
         }
     }
-    removeAllLayers(layers: Array<TileLayer<any, any>>) {
+    removeAllLayers(layers: TileLayer<any, any>[]) {
         if (this.mapView) {
             const vector = NTLayerVector.alloc().init();
             layers.forEach(l => vector.add(l.getNative()));
