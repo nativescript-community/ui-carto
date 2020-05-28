@@ -9,7 +9,7 @@
         "build.android": "bash src-native/android/build.sh",
         "build.ios": "bash src-native/ios/build.sh",
         "build.native": "npm run build.android && npm run build.ios",
-        "build": "npm run build.native && rm -f .tsbuildinfo && npm run tsc && npm run build.plugin.esm",
+        "build": "npm run build.native && rm -f .tsbuildinfo && npm run tsc && npm run build.esm",
         "build.esm": "tsc -skipLibCheck --target es2015 --module esnext --removeComments --outDir build/esm && node ./build.esm.js",
         "demo.ios": "npm i && npm run tsc && cd demo && tns run ios",
         "demo.android": "npm i && npm run tsc && cd demo && tns run android",
