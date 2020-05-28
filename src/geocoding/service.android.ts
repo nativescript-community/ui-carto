@@ -2,8 +2,8 @@ import { NativeVector, toNativeMapPos } from '../core';
 import { FeatureCollection } from '../geometry/feature';
 import {
     GeocodingRequest,
-    GeocodingResult as IGeocodingResult,
     GeocodingServiceOptions,
+    GeocodingResult as IGeocodingResult,
     MapBoxOnlineGeocodingServiceOptions,
     MapBoxOnlineReverseGeocodingServiceOptions,
     PackageManagerGeocodingServiceOptions,
@@ -22,7 +22,7 @@ import { BaseGeocodingService } from './service.common';
 
 export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
 
-    public calculateAddresses(options: GeocodingRequest, callback: (err: Error, res: GeocodingResultVector) => void) {
+    public calculateAddresses(options: GeocodingRequest, callback: (err: any, res: GeocodingResultVector) => void) {
         const nRequest = new com.carto.geocoding.GeocodingRequest(options.projection.getNative(), options.query);
         if (options.locationRadius !== undefined) {
             nRequest.setLocationRadius(options.locationRadius);
@@ -42,7 +42,7 @@ export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGe
 }
 export abstract class ReverseGeocodingService<T extends com.akylas.carto.additions.AKReverseGeocodingService, U extends ReverseGeocodingServiceOptions> extends BaseGeocodingService<T, U> {
 
-    public calculateAddresses(options: ReverseGeocodingRequest, callback: (err: Error, res: GeocodingResultVector) => void) {
+    public calculateAddresses(options: ReverseGeocodingRequest, callback: (err: any, res: GeocodingResultVector) => void) {
         const nRequest = new com.carto.geocoding.ReverseGeocodingRequest(options.projection.getNative(), toNativeMapPos(options.location));
         if (options.searchRadius !== undefined) {
             nRequest.setSearchRadius(options.searchRadius);

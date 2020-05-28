@@ -1,4 +1,4 @@
-import { BaseNative, getFileName, getRelativePathToApp } from '../index.common';
+import { BaseNative, getFileName, getRelativePathToApp, nonenumerable } from '../index.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
 
@@ -58,7 +58,7 @@ export function JSVariantToNative(variant: any) {
         return builder.buildVariant();
     } else if (typeof variant === 'object') {
         const builder = new com.carto.core.VariantObjectBuilder();
-        Object.keys(variant).forEach(k => {
+        Object.keys(variant).forEach((k) => {
             const obj = variant[k];
             if (typeof obj === 'boolean') {
                 builder.setBool(k, obj);
@@ -176,107 +176,81 @@ export class ZippedAssetPackage extends BaseNative<com.carto.utils.ZippedAssetPa
     }
 }
 
-export interface DirAssetPackageNative extends com.carto.utils.AssetPackage {
-    // tslint:disable-next-line:no-misused-new
-    new (): DirAssetPackageNative;
-    initialize(options: DirAssetPackageOptions);
-    // owner: LogEventListener;
+function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
+    const folder = Folder.fromPath(dirPath);
+    // console.log('walkDir', dirPath, folder, folder.getEntitiesSync());
+    folder.eachEntity((entity: FileSystemEntity) => {
+        // console.log('entity', entity.path, Folder.exists(entity.path));
+        if (Folder.exists(entity.path)) {
+            walkDir(entity.path, cb, currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
+        } else {
+            cb(currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
+        }
+        return true;
+    });
 }
-
-let DirAssetPackageNative: DirAssetPackageNative;
-
-// Full DirAssetPackage written in TS for live sync
-function intDirAssetPackageClass() {
-    if (DirAssetPackageNative) {
-        return;
-    }
-
-    const AssetUtils = com.carto.utils.AssetUtils;
-
-    function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
-        // console.log('walkDir', dirPath);
-        const folder = Folder.fromPath(dirPath);
-        folder.eachEntity((entity: FileSystemEntity) => {
-            if (Folder.exists(entity.path)) {
-                walkDir(entity.path, cb, currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
-            } else {
-                cb(currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
-            }
-            return true;
-        });
-    }
-
-    class DirAssetPackageNativeImpl extends com.akylas.carto.additions.AssetPackage {
-        assetNames: com.carto.core.StringVector;
-        // context: android.content.Context;
-        dirPath: string;
-        cartoDirPath: string;
-        loadUsingNS = false;
-        constructor() {
-            super();
-            return global.__native(this);
-        }
-        public initialize(options: DirAssetPackageOptions) {
-            const dirPath = options.dirPath;
-            // this.context = context;
-            this.loadUsingNS = !!options.loadUsingNS;
-            this.dirPath = getFileName(dirPath);
-            this.cartoDirPath = getRelativePathToApp(dirPath);
-            // console.log('DirAssetPackageNativeImpl', dirPath, this.dirPath, this.cartoDirPath, this.loadUsingNS);
-            // this.dirPath = dirPath;
-        }
-        public loadAsset(name) {
-            if (showDebug) {
-                console.log(`loadAsset ${this.dirPath} "${name}"`);
-            }
-            if (!name) {
-                return null;
-            }
-            // const startTime = Date.now();
-            let result: com.carto.core.BinaryData;
-            if (this.loadUsingNS) {
-                result = new com.carto.core.BinaryData(File.fromPath(path.join(this.dirPath, name)).readSync());
-            } else {
-                result = AssetUtils.loadAsset(path.join(this.cartoDirPath, name));
-            }
-            // console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
-            return result;
-        }
-        public getAssetNames() {
-            if (this.assetNames == null) {
-                try {
-                    // const startTime = Date.now();
-                    this.assetNames = new com.carto.core.StringVector();
-                    // const test = [];
-                    walkDir(this.dirPath, (fileRelPath: string) => {
-                        this.assetNames.add(fileRelPath);
-                        // test.push(fileRelPath);
-                    });
-
-                    // console.log(`getAssetNames done ${this.assetNames.size()}: ${test}`);
-                    // console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
-                    // }
-                } catch (e) {}
-            }
-            return this.assetNames;
-        }
-    }
-    DirAssetPackageNative = DirAssetPackageNativeImpl as any;
-}
-
-export class DirAssetPackage extends BaseNative<DirAssetPackageNative, DirAssetPackageOptions> {
+export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAssetPackage, DirAssetPackageOptions> {
+    assetNames: com.carto.core.StringVector;
+    // context: android.content.Context;
+    _dirPath: string;
+    _cartoDirPath: string;
+    loadUsingNS = false;
+    @nonenumerable _nInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
     createNative(options: DirAssetPackageOptions) {
         // this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
-            intDirAssetPackageClass();
             // this.log('intDirAssetPackageClass done');
-            const result = new DirAssetPackageNative();
-            // this.log('about to initialize');
-            result.initialize(options);
+            this._nInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
+                getAssetNames: this.getAssetNames.bind(this),
+                loadAsset: this.loadAsset.bind(this),
+            });
+            const result = new com.akylas.carto.additions.AKAssetPackage(this._nInterface);
+
+            const dirPath = options.dirPath;
+            // this.context = context;
+            this.loadUsingNS = !!options.loadUsingNS;
+            this._dirPath = getFileName(dirPath);
+            this._cartoDirPath = getRelativePathToApp(dirPath);
+            // this.log('about to initialize', this.loadUsingNS, this._dirPath, this._cartoDirPath);
             return result;
         } else {
             console.error(`could not find dir: ${options.dirPath}`);
             return null;
         }
+    }
+    public loadAsset(name) {
+        // if (showDebug) {
+        // console.log(`loadAsset ${this._dirPath} "${name}"`);
+        // }
+        if (!name) {
+            return null;
+        }
+        // const startTime = Date.now();
+        let result: com.carto.core.BinaryData;
+        if (this.loadUsingNS) {
+            result = new com.carto.core.BinaryData(File.fromPath(path.join(this._dirPath, name)).readSync());
+        } else {
+            result = com.carto.utils.AssetUtils.loadAsset(path.join(this._cartoDirPath, name));
+        }
+        // console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
+        return result;
+    }
+    public getAssetNames() {
+        // console.log('getAssetNames');
+        if (!this.assetNames) {
+            try {
+                // const startTime = Date.now();
+                this.assetNames = new com.carto.core.StringVector();
+                // const test = [];
+                walkDir(this._dirPath, (fileRelPath: string) => {
+                    this.assetNames.add(fileRelPath);
+                    // test.push(fileRelPath);
+                });
+
+                // console.log(`getAssetNames done ${this.assetNames.size()}: ${this.dirPath}`);
+                // }
+            } catch (e) {}
+        }
+        return this.assetNames;
     }
 }

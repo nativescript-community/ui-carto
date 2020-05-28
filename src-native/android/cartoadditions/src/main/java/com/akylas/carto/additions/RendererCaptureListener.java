@@ -1,29 +1,26 @@
 package com.akylas.carto.additions;
 
 import android.os.Handler;
-import android.util.Log;
 
-import com.carto.layers.VectorElementEventListener;
-import com.carto.ui.VectorElementClickInfo;
+import com.carto.graphics.Bitmap;
 
-public class AKVectorElementEventListener extends VectorElementEventListener {
+public class RendererCaptureListener extends com.carto.renderers.RendererCaptureListener {
     Handler mainHandler = null;
-
     public interface Listener {
-        boolean onVectorElementClicked(final VectorElementClickInfo clickInfo);
+        void onMapRendered(Bitmap bitmap);
     }
     Listener listener = null;
     public void setListener(Listener listener) {
         this.listener = listener;
     }
 
-    public AKVectorElementEventListener(Listener listener) {
+    public RendererCaptureListener(Listener listener) {
         super();
         setListener(listener);
     }
 
     @Override
-    public boolean onVectorElementClicked(final VectorElementClickInfo clickInfo) {
+    public void onMapRendered(final Bitmap bitmap) {
         if (AKMapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -33,19 +30,18 @@ public class AKVectorElementEventListener extends VectorElementEventListener {
                 @Override
                 public void run() {
                     if (listener != null) {
-                        arr[0] = new Boolean(listener.onVectorElementClicked(clickInfo));
+                        listener.onMapRendered(bitmap);
                     } else {
-                        arr[0] = new Boolean(AKVectorElementEventListener.super.onVectorElementClicked(clickInfo));
+                        RendererCaptureListener.super.onMapRendered(bitmap);
                     }
                 }
             });
 
-            return (Boolean)arr[0];
         } else {
             if (listener != null) {
-                return new Boolean(listener.onVectorElementClicked(clickInfo));
+                listener.onMapRendered(bitmap);
             } else {
-                return new Boolean(super.onVectorElementClicked(clickInfo));
+                super.onMapRendered(bitmap);
             }
         }
     }

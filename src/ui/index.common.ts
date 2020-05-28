@@ -41,7 +41,7 @@ function createGetter(key: string, options: MapPropertyOptions) {
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const getConverter = options.getConverter;
     // console.log('createGetter', key, options, nativeGetterName, !!getConverter);
-    return function() {
+    return function () {
         let result;
         if (this.nativeViewProtected && this.nativeViewProtected[nativeGetterName]) {
             result = this.nativeViewProtected[nativeGetterName]();
@@ -55,7 +55,7 @@ function createGetter(key: string, options: MapPropertyOptions) {
 }
 function createSetter(key, options: MapPropertyOptions) {
     // console.log('createSetter', key, options);
-    return function(newVal) {
+    return function (newVal) {
         // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
         const actualVal = options.converter ? options.converter(newVal) : newVal;
         this.style[key] = actualVal;
@@ -73,7 +73,7 @@ function mapPropertyGenerator(target: Object, key: string, options?: MapProperty
         get: createGetter(key, options),
         set: createSetter(key, options),
         enumerable: true,
-        configurable: true
+        configurable: true,
     });
 }
 export function mapProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -82,7 +82,7 @@ export function mapProperty(...args) {
     const options = args[0];
     // console.log('test deco', typeof options, args[0], args[1]);
     if (args[1] === undefined) {
-        return function(target: any, key?: string, descriptor?: PropertyDescriptor) {
+        return function (target: any, key?: string, descriptor?: PropertyDescriptor) {
             return mapPropertyGenerator(target, key, options);
         };
     } else {
@@ -176,17 +176,17 @@ export abstract class CartoViewBase extends ContentView {
     @mapProperty({
         getConverter(value) {
             return fromNativeMapPos(value);
-        }
+        },
     })
     focusPos: MapPos;
     @mapProperty zoom: number;
     @mapProperty({
         ios: {
-            nativeGetterName: 'getRotation'
+            nativeGetterName: 'getRotation',
         },
         android: {
-            nativeGetterName: 'getMapRotation'
-        }
+            nativeGetterName: 'getMapRotation',
+        },
     })
     bearing: number;
     @mapProperty tilt: number;
@@ -199,7 +199,7 @@ export abstract class CartoViewBase extends ContentView {
             this.notify({
                 eventName,
                 object: this,
-                data
+                data,
             });
         }
     }
@@ -216,7 +216,7 @@ export abstract class CartoViewBase extends ContentView {
         super.onLoaded();
         if (!this.mapReady) {
             this.mapReady = true;
-            this.sendEvent(MapReadyEvent);
+            setTimeout(() => this.sendEvent(MapReadyEvent), 0);
         }
     }
 

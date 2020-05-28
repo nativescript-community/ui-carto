@@ -1,7 +1,8 @@
 import { MapBounds, MapPos, toNativeMapBounds, toNativeMapPos } from '../core';
 import { DataSource, TileDataSource } from '../datasources';
 import { Projection } from '../projections';
-import { CartoPackageManagerListener, CartoPackageManagerOptions, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from '.';
+import { CartoPackageManagerOptions, CartoPackageManagerListener as ICartoPackageManagerListener, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from '.';
+import { nonenumerable } from 'nativescript-carto/index.common';
 
 export const PackageType = {
     get MAP() {
@@ -15,7 +16,7 @@ export const PackageType = {
     },
     get VALHALLA_ROUTING() {
         return com.carto.packagemanager.PackageType.PACKAGE_TYPE_VALHALLA_ROUTING;
-    }
+    },
 };
 
 export const PackageErrorType = {
@@ -33,7 +34,7 @@ export const PackageErrorType = {
     },
     get SYSTEM() {
         return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_SYSTEM;
-    }
+    },
 };
 // export enum PackageAction {
 //     READY = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_READY.ordinal(),
@@ -57,73 +58,8 @@ export const PackageAction = {
     },
     get REMOVING() {
         return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_REMOVING;
-    }
+    },
 };
-
-class PackageManagerListenerImpl extends com.carto.packagemanager.PackageManagerListener {
-    private _owner: WeakRef<CartoPackageManagerListener>;
-
-    public static initWithOwner(owner: WeakRef<CartoPackageManagerListener>): PackageManagerListenerImpl {
-        const delegate = new PackageManagerListenerImpl();
-        delegate._owner = owner;
-        return delegate;
-    }
-    onPackageCancelled(id: string, version: number): void {
-        const owner = this._owner.get();
-        if (owner && owner.onPackageCancelled) {
-            owner.onPackageCancelled(id, version);
-        }
-    }
-
-    onPackageFailed(id: string, version: number, errorType: com.carto.packagemanager.PackageErrorType): void {
-        const owner = this._owner.get();
-        if (owner && owner.onPackageFailed) {
-            owner.onPackageFailed(id, version, errorType as any);
-        }
-    }
-
-    onPackageListFailed(): void {
-        const owner = this._owner.get();
-        if (owner && owner.onPackageListFailed) {
-            owner.onPackageListFailed();
-        }
-    }
-
-    onPackageListUpdated(): void {
-        const owner = this._owner.get();
-        if (owner && owner.onPackageListUpdated) {
-            owner.onPackageListUpdated();
-        }
-    }
-
-    onPackageStatusChanged(id: string, version: number, status: com.carto.packagemanager.PackageStatus): void {
-        const owner = this._owner.get();
-        if (owner && owner.onPackageStatusChanged) {
-            owner.onPackageStatusChanged(id, version, status as any);
-        }
-    }
-
-    onPackageUpdated(id: string, version: number): void {
-        const owner = this._owner.get();
-        if (owner && owner.onPackageUpdated) {
-            owner.onPackageUpdated(id, version);
-        }
-    }
-
-    onStyleFailed(styleName: string): void {
-        const owner = this._owner.get();
-        if (owner && owner.onStyleFailed) {
-            owner.onStyleFailed(styleName);
-        }
-    }
-
-    onStyleUpdated(styleName: string): void {
-        const owner = this._owner.get();
-        if (owner && owner.onStyleUpdated) {
-            owner.onStyleUpdated(styleName);
-        }
-    }
-}
 
 export function fromVariant(variant: com.carto.core.Variant) {
     switch (variant.getType()) {
@@ -166,7 +102,7 @@ function fromNativeackageInfo(packageInfo: com.carto.packagemanager.PackageInfo)
         packageType: packageInfo.getPackageType(),
         size: packageInfo.getSize(),
         tileMask: packageInfo.getTileMask(),
-        version: packageInfo.getVersion()
+        version: packageInfo.getVersion(),
     };
 }
 
@@ -174,13 +110,80 @@ export class CartoPackageManager extends DataSource<com.akylas.carto.additions.A
     createNative(options: CartoPackageManagerOptions) {
         return new com.akylas.carto.additions.AKCartoPackageManager(options.source, options.dataFolder);
     }
-    set listener(listener: CartoPackageManagerListener) {
+    @nonenumerable _nListener: com.akylas.carto.additions.AKPackageManagerListener;
+    @nonenumerable _listener: ICartoPackageManagerListener;
+    set listener(listener: ICartoPackageManagerListener) {
         if (this.native) {
             if (listener) {
-                this.native.setPackageManagerListener(PackageManagerListenerImpl.initWithOwner(new WeakRef(listener)));
+                this._listener = listener;
+                if (!this._nListener) {
+                    this._nListener = new com.akylas.carto.additions.AKPackageManagerListener(
+                        new com.akylas.carto.additions.AKPackageManagerListener.Listener({
+                            onPackageCancelled: this.onPackageCancelled.bind(this),
+                            onPackageFailed: this.onPackageFailed.bind(this),
+                            onPackageListFailed: this.onPackageListFailed.bind(this),
+                            onPackageListUpdated: this.onPackageListUpdated.bind(this),
+                            onPackageStatusChanged: this.onPackageStatusChanged.bind(this),
+                            onPackageUpdated: this.onPackageUpdated.bind(this),
+                            onStyleFailed: this.onStyleFailed.bind(this),
+                            onStyleUpdated: this.onStyleUpdated.bind(this),
+                        })
+                    );
+                }
+                this.native.setPackageManagerListener(this._nListener);
             } else {
                 this.native.setPackageManagerListener(null);
+                this._nListener = null;
+                this._listener = null;
             }
+        }
+    }
+
+    onPackageCancelled(id: string, version: number): void {
+        if (this._listener && this._listener.onPackageCancelled) {
+            this._listener.onPackageCancelled(id, version);
+        }
+    }
+
+    onPackageFailed(id: string, version: number, errorType: com.carto.packagemanager.PackageErrorType): void {
+        if (this._listener && this._listener.onPackageFailed) {
+            this._listener.onPackageFailed(id, version, errorType as any);
+        }
+    }
+
+    onPackageListFailed(): void {
+        if (this._listener && this._listener.onPackageListFailed) {
+            this._listener.onPackageListFailed();
+        }
+    }
+
+    onPackageListUpdated(): void {
+        if (this._listener && this._listener.onPackageListUpdated) {
+            this._listener.onPackageListUpdated();
+        }
+    }
+
+    onPackageStatusChanged(id: string, version: number, status: com.carto.packagemanager.PackageStatus): void {
+        if (this._listener && this._listener.onPackageStatusChanged) {
+            this._listener.onPackageStatusChanged(id, version, status as any);
+        }
+    }
+
+    onPackageUpdated(id: string, version: number): void {
+        if (this._listener && this._listener.onPackageUpdated) {
+            this._listener.onPackageUpdated(id, version);
+        }
+    }
+
+    onStyleFailed(styleName: string): void {
+        if (this._listener && this._listener.onStyleFailed) {
+            this._listener.onStyleFailed(styleName);
+        }
+    }
+
+    onStyleUpdated(styleName: string): void {
+        if (this._listener && this._listener.onStyleUpdated) {
+            this._listener.onStyleUpdated(styleName);
         }
     }
     start() {

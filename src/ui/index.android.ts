@@ -44,7 +44,7 @@ export const registerLicense = profile('registerLicense', (value: string, callba
             value,
             context,
             new com.akylas.carto.additions.RegisterLicenseCallback({
-                onLicenseRegistered: (result) => {
+                onLicenseRegistered: (result: any) => {
                     if (result) {
                         licenseKey = value;
                     }
@@ -66,34 +66,6 @@ export const registerLicense = profile('registerLicense', (value: string, callba
 export function getLicenseKey() {
     return licenseKey;
 }
-
-interface RendererCaptureListener extends com.carto.renderers.RendererCaptureListener {
-    // tslint:disable-next-line:no-misused-new
-    new (callback: WeakRef<Function>): RendererCaptureListener;
-}
-let RendererCaptureListener: RendererCaptureListener;
-function initRendererCaptureListener() {
-    if (RendererCaptureListener) {
-        return;
-    }
-    class RendererCaptureListenerImpl extends com.carto.renderers.RendererCaptureListener {
-        private _callback: WeakRef<Function>;
-
-        constructor(callback: WeakRef<Function>) {
-            super();
-            this._callback = callback;
-        }
-
-        onMapRendered(param0: com.carto.graphics.Bitmap) {
-            const callback = this._callback.get();
-            if (callback) {
-                callback(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(param0));
-            }
-        }
-    }
-    RendererCaptureListener = RendererCaptureListenerImpl as any;
-}
-
 
 export class CartoMap extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
@@ -287,11 +259,12 @@ export class CartoMap extends CartoViewBase {
 
     captureRendering(wait = false) {
         return new Promise((resolve) => {
-            initRendererCaptureListener();
             this.mapView.getMapRenderer().captureRendering(
-                new RendererCaptureListener(
-                    new WeakRef(function (bitmap) {
-                        resolve(fromNativeSource(bitmap));
+                new com.akylas.carto.additions.RendererCaptureListener(
+                    new com.akylas.carto.additions.RendererCaptureListener.Listener({
+                        onMapRendered (bitmap) {
+                            resolve(fromNativeSource(bitmap));
+                        },
                     })
                 ),
                 wait

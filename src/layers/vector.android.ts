@@ -1,5 +1,5 @@
 import { BaseNative } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty, nonenumerable } from '../index.common';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections';
@@ -9,13 +9,13 @@ import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
 import { Layer, TileLayer } from '.';
 import {
     CartoOfflineVectorTileLayerOptions,
-    CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
+    CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,
     VectorEditEventListener as IVectorEditEventListener,
     VectorElementEventListener as IVectorElementEventListener,
-    VectorLayerOptions,
     VectorTileEventListener as IVectorTileEventListener,
-    VectorTileLayerOptions
+    VectorLayerOptions,
+    VectorTileLayerOptions,
 } from './vector';
 
 export { VectorTileDecoder };
@@ -33,7 +33,7 @@ export const VectorTileRenderOrder = {
     },
     get LAST() {
         return com.carto.layers.VectorTileRenderOrder.VECTOR_TILE_RENDER_ORDER_LAST;
-    }
+    },
 };
 
 export const VectorElementDragResult = {
@@ -48,126 +48,60 @@ export const VectorElementDragResult = {
     },
     get STOP() {
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_STOP;
-    }
+    },
 };
-
-interface VectorTileEventListener extends com.akylas.carto.additions.AKVectorTileEventListener {
-    // tslint:disable-next-line:no-misused-new
-    new (owner: WeakRef<IVectorTileEventListener>, layer: WeakRef<BaseVectorTileLayer<any, any>>, projection?: Projection): VectorTileEventListener;
-}
-let VectorTileEventListener: VectorTileEventListener;
-function initVectorTileEventListener() {
-    if (VectorTileEventListener) {
-        return;
-    }
-    class VectorTileEventListenerImpl extends com.akylas.carto.additions.AKVectorTileEventListener {
-        private _owner: WeakRef<IVectorTileEventListener>;
-        private _layer: WeakRef<BaseVectorTileLayer<any, any>>;
-
-        constructor(owner: WeakRef<IVectorTileEventListener>, layer: WeakRef<BaseVectorTileLayer<any, any>>, private projection?: Projection) {
-            super();
-            this._owner = owner;
-            this._layer = layer;
-        }
-        public onClicked(info: com.carto.ui.VectorTileClickInfo) {
-            const owner = this._owner.get();
-            if (owner && owner.onVectorTileClicked) {
-                const feature = info.getFeature();
-                const geometry = feature.getGeometry();
-                let position = info.getClickPos();
-                let featurePos = geometry.getCenterPos();
-
-                if (this.projection) {
-                    const layerProj = this._layer
-                        .get()
-                        .getNative()
-                        .getDataSource()
-                        .getProjection();
-                    const nProj = this.projection.getNative();
-                    featurePos = nProj.fromWgs84(layerProj.toWgs84(featurePos));
-                    position = nProj.fromWgs84(layerProj.toWgs84(position));
-                }
-                return (
-                    owner.onVectorTileClicked.call(owner, {
-                        clickType: info.getClickType().swigValue(),
-                        layer: this._layer.get() as any,
-                        featureId: info.getFeatureId(),
-                        featureData: nativeVariantToJS(info.getFeature().getProperties()),
-                        featureLayerName: info.getFeatureLayerName(),
-                        featureGeometry: geometry,
-                        featurePosition: fromNativeMapPos(featurePos),
-                        position: fromNativeMapPos(position)
-                    }) || false
-                );
-            }
-            return false;
-        }
-    }
-    VectorTileEventListener = VectorTileEventListenerImpl as any;
-}
-
-interface VectorElementEventListener extends com.akylas.carto.additions.AKVectorElementEventListener {
-    // tslint:disable-next-line:no-misused-new
-    new (owner: WeakRef<IVectorElementEventListener>, layer: WeakRef<BaseVectorLayer<any, any>>, projection?: Projection): VectorElementEventListener;
-}
-let VectorElementEventListener: VectorElementEventListener;
-function initVectorElementEventListener() {
-    if (VectorElementEventListener) {
-        return;
-    }
-    class VectorElementEventListenerImpl extends com.akylas.carto.additions.AKVectorElementEventListener {
-        private _owner: WeakRef<IVectorElementEventListener>;
-        private _layer: WeakRef<BaseVectorLayer<any, any>>;
-
-        constructor(owner: WeakRef<IVectorElementEventListener>, layer: WeakRef<BaseVectorLayer<any, any>>, private projection?: Projection) {
-            super();
-            this._owner = owner;
-            this._layer = layer;
-        }
-        public onClicked(info: com.carto.ui.VectorElementClickInfo) {
-            const owner = this._owner.get();
-            if (owner && owner.onVectorElementClicked) {
-                const element = new VectorElement(undefined, info.getVectorElement());
-                let position = info.getClickPos();
-                let elementPos = info.getElementClickPos();
-                if (this.projection) {
-                    const layerProj = this._layer
-                        .get()
-                        .getNative()
-                        .getDataSource()
-                        .getProjection();
-                    const nProj = this.projection.getNative();
-                    elementPos = nProj.fromWgs84(layerProj.toWgs84(elementPos));
-                    position = nProj.fromWgs84(layerProj.toWgs84(position));
-                }
-                return (
-                    owner.onVectorElementClicked.call(owner, {
-                        clickType: info.getClickType().swigValue(),
-                        layer: this._layer.get() as any,
-                        element,
-                        metaData: element.metaData,
-                        position: fromNativeMapPos(position),
-                        elementPos: fromNativeMapPos(elementPos)
-                    }) || false
-                );
-            }
-            return false;
-        }
-    }
-    VectorElementEventListener = VectorElementEventListenerImpl as any;
-}
 
 export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
     setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
     }
+    projection?: Projection;
+    @nonenumerable listener?: IVectorTileEventListener;
+    @nonenumerable nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
+        this.listener = listener;
+        this.projection = projection;
         if (listener) {
-            initVectorTileEventListener();
-            this.getNative().setVectorTileEventListener(new VectorTileEventListener(new WeakRef(listener), new WeakRef(this), projection));
+            if (!this.nListener) {
+                this.nListener = new com.akylas.carto.additions.AKVectorTileEventListener(
+                    new com.akylas.carto.additions.AKVectorTileEventListener.Listener({
+                        onVectorTileClicked: this.onTileClicked.bind(this),
+                    })
+                );
+            }
+            this.getNative().setVectorTileEventListener(this.nListener);
         } else {
+            this.nListener = null;
             this.getNative().setVectorTileEventListener(null);
         }
+    }
+    onTileClicked(info: com.carto.ui.VectorTileClickInfo) {
+        if (this.listener && this.listener.onVectorTileClicked) {
+            const feature = info.getFeature();
+            const geometry = feature.getGeometry();
+            let position = info.getClickPos();
+            let featurePos = geometry.getCenterPos();
+
+            if (this.projection) {
+                const layerProj = this.getNative().getDataSource().getProjection();
+                const nProj = this.projection.getNative();
+                featurePos = nProj.fromWgs84(layerProj.toWgs84(featurePos));
+                position = nProj.fromWgs84(layerProj.toWgs84(position));
+            }
+            return (
+                this.listener.onVectorTileClicked.call(this.listener, {
+                    clickType: info.getClickType().swigValue(),
+                    layer: this,
+                    featureId: info.getFeatureId(),
+                    featureData: nativeVariantToJS(info.getFeature().getProperties()),
+                    featureLayerName: info.getFeatureLayerName(),
+                    featureGeometry: geometry,
+                    featurePosition: fromNativeMapPos(featurePos),
+                    position: fromNativeMapPos(position),
+                }) || false
+            );
+        }
+        return false;
     }
     getTileDecoder() {
         if (this.options.decoder) {
@@ -203,13 +137,49 @@ export class CartoOfflineVectorTileLayer extends TileLayer<com.carto.layers.Cart
 }
 
 export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
+    projection?: Projection;
+    @nonenumerable elementListener?: IVectorElementEventListener;
+    @nonenumerable nElementListener?: com.akylas.carto.additions.AKVectorElementEventListener;
     setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection) {
+        this.elementListener = listener;
+        this.projection = projection;
         if (listener) {
-            initVectorElementEventListener();
-            this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this), projection));
+            if (!this.nElementListener) {
+                this.nElementListener = new com.akylas.carto.additions.AKVectorElementEventListener(
+                    new com.akylas.carto.additions.AKVectorElementEventListener.Listener({
+                        onVectorElementClicked: this.onElementClicked.bind(this),
+                    })
+                );
+            }
+            this.getNative().setVectorElementEventListener(this.nElementListener);
         } else {
+            this.nElementListener = null;
             this.getNative().setVectorElementEventListener(null);
         }
+    }
+    onElementClicked(info: com.carto.ui.VectorElementClickInfo) {
+        if (this.elementListener && this.elementListener.onVectorElementClicked) {
+            const element = new VectorElement(undefined, info.getVectorElement());
+            let position = info.getClickPos();
+            let elementPos = info.getElementClickPos();
+            if (this.projection) {
+                const layerProj = this.getNative().getDataSource().getProjection();
+                const nProj = this.projection.getNative();
+                elementPos = nProj.fromWgs84(layerProj.toWgs84(elementPos));
+                position = nProj.fromWgs84(layerProj.toWgs84(position));
+            }
+            return (
+                this.elementListener.onVectorElementClicked.call(this.elementListener, {
+                    clickType: info.getClickType().swigValue(),
+                    layer: this,
+                    element,
+                    metaData: element.metaData,
+                    position: fromNativeMapPos(position),
+                    elementPos: fromNativeMapPos(elementPos),
+                }) || false
+            );
+        }
+        return false;
     }
 }
 
@@ -225,132 +195,6 @@ export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, V
     }
 }
 
-interface VectorEditEventListener extends com.carto.layers.VectorEditEventListener {
-    // tslint:disable-next-line:no-misused-new
-    new (owner: WeakRef<IVectorEditEventListener>, layer: WeakRef<EditableVectorLayer>, projection?: Projection): VectorEditEventListener;
-}
-let VectorEditEventListener: VectorEditEventListener;
-function initVectorEditEventListener() {
-    if (VectorTileEventListener) {
-        return;
-    }
-    class VectorEditEventListenerImpl extends com.carto.layers.VectorEditEventListener {
-        private _owner: WeakRef<IVectorEditEventListener>;
-        private _layer: WeakRef<EditableVectorLayer>;
-
-        constructor(owner: WeakRef<IVectorEditEventListener>, layer: WeakRef<EditableVectorLayer>, private projection?: Projection) {
-            super();
-            this._owner = owner;
-            this._layer = layer;
-        }
-
-        onDragEnd(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
-            const owner = this._owner.get();
-            if (owner && owner.onDragEnd) {
-                return owner.onDragEnd.call(owner, {
-                    layer: this._layer.get() as any,
-                    element: new VectorElement(undefined, dragInfo.getVectorElement()),
-                    position: fromNativeMapPos(dragInfo.getMapPos()),
-                    screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                    dragMode: dragInfo.getDragMode().swigValue()
-                });
-            }
-            return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
-        }
-
-        onDragMove(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
-            const owner = this._owner.get();
-            if (owner && owner.onDragMove) {
-                return owner.onDragMove.call(owner, {
-                    layer: this._layer.get() as any,
-                    element: new VectorElement(undefined, dragInfo.getVectorElement()),
-                    position: fromNativeMapPos(dragInfo.getMapPos()),
-                    screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                    dragMode: dragInfo.getDragMode().swigValue()
-                });
-            }
-            return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
-        }
-
-        onDragStart(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
-            const owner = this._owner.get();
-            if (owner && owner.onDragStart) {
-                return owner.onDragStart.call(owner, {
-                    layer: this._layer.get() as any,
-                    element: new VectorElement(undefined, dragInfo.getVectorElement()),
-                    position: fromNativeMapPos(dragInfo.getMapPos()),
-                    screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                    dragMode: dragInfo.getDragMode().swigValue()
-                });
-            }
-            return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
-        }
-
-        onElementDelete(element: com.carto.vectorelements.VectorElement) {
-            const owner = this._owner.get();
-            if (owner && owner.onElementDelete) {
-                const el = new VectorElement(undefined, element);
-                owner.onElementDelete.call(owner, el);
-            }
-        }
-
-        onElementDeselected(element: com.carto.vectorelements.VectorElement) {
-            const owner = this._owner.get();
-            if (owner && owner.onElementDelete) {
-                const el = new VectorElement(undefined, element);
-                owner.onElementDelete.call(owner, el);
-            }
-        }
-
-        onElementModify(element: com.carto.vectorelements.VectorElement, geometry: com.carto.geometry.Geometry) {
-            const owner = this._owner.get();
-            if (owner && owner.onElementModify) {
-                const el = new VectorElement(undefined, element);
-                owner.onElementModify.call(owner, el, geometry);
-            }
-        }
-
-        onElementSelect(element: com.carto.vectorelements.VectorElement) {
-            const owner = this._owner.get();
-            if (owner && owner.onElementSelect) {
-                const el = new VectorElement(undefined, element);
-                return owner.onElementSelect.call(owner, el);
-            }
-            return true;
-        }
-
-        onSelectDragPointStyle(element: com.carto.vectorelements.VectorElement, dragPointStyle: com.carto.layers.VectorElementDragPointStyle) {
-            const owner = this._owner.get();
-            if (owner && owner.onElementSelect) {
-                const el = new VectorElement(undefined, element);
-                const styleBuilder = owner.onSelectDragPointStyle.call(owner, el);
-                return styleBuilder ? styleBuilder.buildStyle() : null;
-            }
-            return null;
-        }
-    }
-    VectorEditEventListener = VectorEditEventListenerImpl as any;
-}
-// class VectorElementEventListenerImpl extends com.akylas.carto.additions.AKVectorElementEventListener {
-//     private _owner: WeakRef<VectorLayer>;
-
-//     public static initWithOwner(owner: WeakRef<EditableVectorLayer>): VectorElementEventListenerImpl {
-//         const delegate = new VectorElementEventListenerImpl() as VectorElementEventListenerImpl;
-//         delegate._owner = owner;
-//         return delegate;
-//     }
-
-//     onVectorElementClicked(clickInfo: com.carto.ui.VectorElementClickInfo): boolean {
-//         const owner = this._owner.get();
-//         console.log('onVectorElementClicked', clickInfo, owner);
-//         if (owner) {
-//             owner.setSelectedVectorElement(clickInfo.getVectorElement());
-//         }
-
-//         return true;
-//         // return super.onVectorElementClicked(clickInfo);
-//     }
-// }
 export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.EditableVectorLayer, VectorLayerOptions> {
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {
@@ -369,14 +213,109 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
         }
     }
-
+    @nonenumerable editListener?: IVectorEditEventListener;
+    @nonenumerable nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
+    projection?: Projection;
     setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection) {
+        this.editListener = listener;
+        this.projection = projection;
         if (listener) {
-            initVectorEditEventListener();
-            this.getNative().setVectorEditEventListener(new VectorEditEventListener(new WeakRef(listener), new WeakRef(this), projection));
+            if (!this.nEditListener) {
+                this.nEditListener = new com.akylas.carto.additions.AKVectorEditEventListener(
+                    new com.akylas.carto.additions.AKVectorEditEventListener.Listener({
+                        onDragEnd: this.onDragEnd.bind(this),
+                        onDragMove: this.onDragMove.bind(this),
+                        onDragStart: this.onDragStart.bind(this),
+                        onElementDelete: this.onElementDelete.bind(this),
+                        onElementDeselected: this.onElementDeselected.bind(this),
+                        onElementModify: this.onElementModify.bind(this),
+                        onElementSelect: this.onElementSelect.bind(this),
+                        onSelectDragPointStyle: this.onSelectDragPointStyle.bind(this),
+                    })
+                );
+            }
+            this.getNative().setVectorEditEventListener(this.nEditListener);
         } else {
+            this.nEditListener = null;
             this.getNative().setVectorEditEventListener(null);
         }
+    }
+
+    onDragEnd(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
+        if (this.editListener && this.editListener.onDragEnd) {
+            return this.editListener.onDragEnd.call(this.editListener, {
+                layer: this,
+                element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                position: fromNativeMapPos(dragInfo.getMapPos()),
+                screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                dragMode: dragInfo.getDragMode().swigValue(),
+            });
+        }
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+    }
+
+    onDragMove(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
+        if (this.editListener && this.editListener.onDragMove) {
+            return this.editListener.onDragMove.call(this.editListener, {
+                layer: this,
+                element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                position: fromNativeMapPos(dragInfo.getMapPos()),
+                screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                dragMode: dragInfo.getDragMode().swigValue(),
+            });
+        }
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+    }
+
+    onDragStart(dragInfo: com.carto.ui.VectorElementDragInfo): com.carto.layers.VectorElementDragResult {
+        if (this.editListener && this.editListener.onDragStart) {
+            return this.editListener.onDragStart.call(this.editListener, {
+                layer: this,
+                element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                position: fromNativeMapPos(dragInfo.getMapPos()),
+                screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                dragMode: dragInfo.getDragMode().swigValue(),
+            });
+        }
+        return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+    }
+
+    onElementDelete(element: com.carto.vectorelements.VectorElement) {
+        if (this.editListener && this.editListener.onElementDelete) {
+            const el = new VectorElement(undefined, element);
+            this.editListener.onElementDelete.call(this.editListener, el);
+        }
+    }
+
+    onElementDeselected(element: com.carto.vectorelements.VectorElement) {
+        if (this.editListener && this.editListener.onElementDelete) {
+            const el = new VectorElement(undefined, element);
+            this.editListener.onElementDelete.call(this.editListener, el);
+        }
+    }
+
+    onElementModify(element: com.carto.vectorelements.VectorElement, geometry: com.carto.geometry.Geometry) {
+        if (this.editListener && this.editListener.onElementModify) {
+            const el = new VectorElement(undefined, element);
+            this.editListener.onElementModify.call(this.editListener, el, geometry);
+        }
+    }
+
+    onElementSelect(element: com.carto.vectorelements.VectorElement) {
+        if (this.editListener && this.editListener.onElementSelect) {
+            const el = new VectorElement(undefined, element);
+            return this.editListener.onElementSelect.call(this.editListener, el);
+        }
+        return true;
+    }
+
+    onSelectDragPointStyle(element: com.carto.vectorelements.VectorElement, dragPointStyle: com.carto.layers.VectorElementDragPointStyle) {
+        if (this.editListener && this.editListener.onElementSelect) {
+            const el = new VectorElement(undefined, element);
+            const styleBuilder = this.editListener.onSelectDragPointStyle.call(this.editListener, el);
+            return styleBuilder ? styleBuilder.buildStyle() : null;
+        }
+        return null;
     }
 }
 
@@ -390,7 +329,7 @@ export class ClusteredVectorLayer extends BaseVectorLayer<com.carto.layers.Clust
     @nativeProperty
     maximumClusterZoom: number;
     @nativeProperty({
-        nativeGetterName: 'isAnimatedClusters'
+        nativeGetterName: 'isAnimatedClusters',
     })
     animatedClusters: boolean;
 }

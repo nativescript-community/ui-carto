@@ -73,7 +73,7 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
     // createNative(options: RoutingServiceOptions) {
     //     return new com.carto.geocoding.RoutingService();
     // }
-    public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
+    public calculateRoute(options: RoutingRequest, callback: (err: any, res: RoutingResult) => void) {
         const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
         this.getNative().calculateRouteCallback(
             nRequest,
@@ -122,7 +122,7 @@ class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.addi
     createNative(options: ValhallaOfflineRoutingServiceOptions) {
         return new com.akylas.carto.additions.AKValhallaOfflineRoutingService(options.path);
     }
-    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+    public matchRoute(options: RouteMatchingRequest, callback: (err: any, res: RouteMatchingResult) => void) {
         const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
         this.getNative().matchRouteCallback(
             nRequest,
@@ -160,7 +160,7 @@ class PackageManagerValhallaRoutingService extends RoutingService<com.akylas.car
     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
         return new com.akylas.carto.additions.AKPackageManagerValhallaRoutingService(options.packageManager.getNative());
     }
-    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+    public matchRoute(options: RouteMatchingRequest, callback: (err: any, res: RouteMatchingResult) => void) {
         const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
         this.getNative().matchRouteCallback(
             nRequest,

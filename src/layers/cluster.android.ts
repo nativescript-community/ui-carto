@@ -1,72 +1,37 @@
 import { Color } from '@nativescript/core/color';
 import { nativeColorProperty, nativeImageProperty } from '..';
 import { BaseNative, nativeProperty } from '../index.common';
-import { fromNativeMapPos, MapPos } from '../core';
+import { MapPos, fromNativeMapPos } from '../core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 
-let ClusterElementBuilderNative: ClusterElementBuilderNative;
-
-export interface ClusterElementBuilderNative extends com.akylas.carto.additions.AKClusterElementBuilder {
-    // tslint:disable-next-line:no-misused-new
-    new (owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderNative;
-}
-
-// let MapEventListener: MapEventListener;
-
-function initClusterElementBuilderNative() {
-    if (ClusterElementBuilderNative) {
-        return;
-    }
-    class ClusterElementBuilderImpl extends com.akylas.carto.additions.AKClusterElementBuilder {
-        constructor(private owner: WeakRef<ClusterElementBuilder>) {
-            super();
-            return global.__native(this);
-        }
-        // buildClusterElement( position: com.carto.core.MapPos, nElements: any) {
-        //     const owner = this.owner.get();
-        //     if (owner.buildClusterElement) {
-        //         const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
-        //         if (result instanceof BaseVectorElement) {
-        //             return result.getNative();
-        //         } else if (result) {
-        //             return result;
-        //         }
-        //     }
-        //     return super.buildClusterElement(position, nElements);
-        // }
-        buildCluster(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
-            const owner = this.owner.get();
-            if (owner.buildClusterElement) {
-                const result = owner.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
-                if (result instanceof BaseVectorElement) {
-                    return result.getNative();
-                } else if (result) {
-                    return result;
-                }
-            }
-            return super.buildCluster(position, nElements);
-        }
-    }
-    ClusterElementBuilderNative = ClusterElementBuilderImpl as any;
-}
-
 export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
     @nativeImageProperty bitmap: string;
-    @nativeColorProperty color: string | Color ;
+    @nativeColorProperty color: string | Color;
     @nativeProperty size: number;
-    createNative(options: ClusterElementBuilderOptions) {
-        initClusterElementBuilderNative();
-        const result = new ClusterElementBuilderNative(new WeakRef(this));
-        if (!!options.buildClusterElement) {
-            result.setUseNativeBuilder(false);
-        }
-        // result.setUseNativeBuilder(false);
-        return result;
-        // return new com.carto.layers.ClusterElementBuilder();
-    }
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
+    createNative(options: ClusterElementBuilderOptions) {
+        // initClusterElementBuilderNative();
+        const result = new com.akylas.carto.additions.AKClusterElementBuilder();
+        if (!!options.buildClusterElement) {
+            result.setInterface(
+                new com.akylas.carto.additions.AKClusterElementBuilder.Interface({
+                    buildClusterElement: this.nBuildClusterElement.bind(this),
+                })
+            );
+        } else {
+        }
 
+        return result;
+    }
+    nBuildClusterElement (position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
+        const result = this.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
+        if (result instanceof BaseVectorElement) {
+            return result.getNative();
+        } else if (result) {
+            return result;
+        }
+    }
     // private setImageFromSource(value: string | ImageSource | ImageAsset) {
     //     console.log('setImageFromSource', value);
     //     const source = _createImageSourceFromSrc(value);

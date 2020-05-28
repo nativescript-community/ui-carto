@@ -3,8 +3,8 @@ import {
     CartoOnlineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
     VectorElementEventListener as IVectorElementEventListener,
-    VectorLayerOptions,
     VectorTileEventListener as IVectorTileEventListener,
+    VectorLayerOptions,
     VectorTileLayerOptions
 } from './vector';
 import { Layer, TileLayer } from '.';

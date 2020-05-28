@@ -1,9 +1,8 @@
 import { Layer, LayerOptions, TileLayer, TileLayerOptions } from '.';
 import { TileDataSource } from '../datasources';
-import { VectorTileDecoder } from '../vectortiles';
+import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
 import { CartoPackageManager } from '../packagemanager';
 import { CartoMapStyle, ClickType, DefaultLatLonKeys, GenericMapPos, MapPos } from '../core';
-import { MBVectorTileDecoder } from '../vectortiles';
 import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements';
 import { Projection } from '../projections';

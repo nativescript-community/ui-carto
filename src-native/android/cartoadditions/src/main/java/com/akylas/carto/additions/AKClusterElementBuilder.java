@@ -21,6 +21,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AKClusterElementBuilder extends ClusterElementBuilder {
+
+    public interface Interface {
+        VectorElement buildClusterElement(MapPos pos, VectorElementVector nElements);
+    }
+    Interface inter = null;
+    public void setInterface(Interface inter) {
+        this.inter = inter;
+        this.useNativeBuilder = false;
+    }
     Handler mainHandler = null;
 
     private Map<Integer, MarkerStyle> markerStyles = new HashMap<>();
@@ -44,28 +53,36 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         markerSize = value;
     }
 
-    public VectorElement buildCluster(MapPos pos, VectorElementVector nElements) {
-        return super.buildClusterElement(pos, nElements);
-    }
-
     @Override
     public VectorElement buildClusterElement(final MapPos pos, final VectorElementVector elements) {
         if (useNativeBuilder) {
             return nativeBuildClusterElement(pos, elements);
         }
-        final Object[] arr = new Object[1];
-        // Log.d("AKCartoAdditions", "buildClusterElement: " + elements.size());
-        if (mainHandler == null) {
-            mainHandler = new Handler(android.os.Looper.getMainLooper());
-        }
-
-        SynchronousHandler.postAndWait(mainHandler, new Runnable() {
-            @Override
-            public void run() {
-                // Log.d("AKCartoAdditions", "buildClusterElement runnable");
-                arr[0] = AKClusterElementBuilder.this.buildCluster(pos, elements);
+        if (AKMapView.RUN_ON_MAIN_THREAD) {
+            final Object[] arr = new Object[1];
+            if (mainHandler == null) {
+                mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
-        });
+
+            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
+                @Override
+                public void run() {
+                    // Log.d("AKCartoAdditions", "buildClusterElement runnable");
+                    if (inter != null) {
+                        arr[0] = inter.buildClusterElement(pos, elements);
+                    } else {
+                        arr[0] = AKClusterElementBuilder.super.buildClusterElement(pos, elements);
+                    }
+                }
+            });
+            return (VectorElement) arr[0];
+        } else {
+            if (inter != null) {
+                return this.inter.buildClusterElement(pos, elements);
+            } else {
+                return super.buildClusterElement(pos, elements);
+            }
+        }
         // Log.d("AKCartoAdditions", "buildClusterElement4: done");
         // Runnable r = new Runnable() {
         // @Override
@@ -108,7 +125,6 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         // }
         // Log.d("AKCartoAdditions", "buildClusterElement4: done");
 
-        return (VectorElement) arr[0];
     }
 
     public VectorElement nativeBuildClusterElement(MapPos pos, VectorElementVector elements) {

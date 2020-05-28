@@ -1,7 +1,5 @@
-import { BaseNative } from '..';
-import { TileDataSource, TileDataSourceOptions } from '../datasources';
-import { DataSource } from '../datasources';
-import { MapPos, MapBounds, NativeVector } from '../core';
+import { DataSource, TileDataSource, TileDataSourceOptions } from '../datasources';
+import { MapBounds, MapPos, NativeVector } from '../core';
 import { Projection } from '../projections';
 
 declare enum PackageErrorType {
@@ -72,7 +70,6 @@ export class CartoPackageManager extends DataSource<any, CartoPackageManagerOpti
     getServerPackageListAge(): number;
     getServerPackageListMetaInfo(): PackageMetaInfo;
     stop(wait: boolean): boolean;
-    startPackageListDownload(): boolean;
     startPackageDownload(id: string): boolean;
     cancelPackageTasks(id: string);
     startPackageRemove(id: string): boolean;
