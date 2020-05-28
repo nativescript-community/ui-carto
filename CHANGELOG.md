@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.42...v1.3.1) (2020-05-28)
+
+
+### Bug Fixes
+
+* missing projection methods ([053fc04](https://github.com/farfromrefug/nativescript-carto/commit/053fc04923c8e297637b68625568a3cceed627cc))
+
+
+### Features
+
+* added HillshadeRasterTileLayer on android ([8a047e4](https://github.com/farfromrefug/nativescript-carto/commit/8a047e43d00721292657ce39a93ccf7bc57d1482))
+* added PanningMode enum ([27a0d1a](https://github.com/farfromrefug/nativescript-carto/commit/27a0d1abeba8570acb3f837081a02752fe172153))
+
+
+
+
+
 ## [1.2.42](https://github.com/farfromrefug/nativescript-carto/compare/v1.2.41...v1.2.42) (2020-05-10)
 
 

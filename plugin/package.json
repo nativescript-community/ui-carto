@@ -1,6 +1,6 @@
 {
     "name": "nativescript-carto",
-    "version": "1.2.42",
+    "version": "1.3.1",
     "description": "Nativescript plugin for Carto Mobile SDK",
     "main": "index",
     "typings": "index.d.ts",
