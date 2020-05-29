@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/adjacent-overload-signatures */
+/* eslint-disable no-redeclare */
+/* eslint-disable @typescript-eslint/unified-signatures */
+/* eslint-disable @typescript-eslint/no-unnecessary-qualifier */
 
 declare namespace com {
     export namespace carto {
@@ -14,9 +18,9 @@ declare namespace com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class Layers extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.Layers>;
                 public swigCMemOwn: boolean;
@@ -43,9 +47,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class LayersModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.LayersModuleJNI>;
                 public static Layers_swigGetRawPtr(param0: number, param1: com.carto.components.Layers): number;
@@ -67,9 +71,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class LicenseManager extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.LicenseManager>;
                 public swigCMemOwn: boolean;
@@ -82,9 +86,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class LicenseManagerListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.LicenseManagerListener>;
                 public swigCMemOwn: boolean;
@@ -106,9 +110,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class LicenseManagerListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.LicenseManagerListenerModuleJNI>;
                 public static LicenseManagerListener_change_ownership(param0: com.carto.components.LicenseManagerListener, param1: number, param2: boolean): void;
@@ -126,9 +130,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class LicenseManagerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.LicenseManagerModuleJNI>;
                 public constructor();
@@ -138,9 +142,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class Options extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.Options>;
                 public swigCMemOwn: boolean;
@@ -226,9 +230,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class OptionsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.components.OptionsModuleJNI>;
                 public static Options_getPanningMode(param0: number, param1: com.carto.components.Options): number;
@@ -309,9 +313,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class PanningMode {
                 public static class: java.lang.Class<com.carto.components.PanningMode>;
                 public static PANNING_MODE_FREE: com.carto.components.PanningMode;
@@ -323,7 +327,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.components.PanningMode;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module PanningMode {
+            export namespace PanningMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.components.PanningMode.SwigNext>;
                 }
@@ -332,9 +336,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class PivotMode {
                 public static class: java.lang.Class<com.carto.components.PivotMode>;
                 public static PIVOT_MODE_TOUCHPOINT: com.carto.components.PivotMode;
@@ -345,7 +349,7 @@ declare module com {
                 public static values(): native.Array<com.carto.components.PivotMode>;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module PivotMode {
+            export namespace PivotMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.components.PivotMode.SwigNext>;
                 }
@@ -354,9 +358,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace components {
             export class RenderProjectionMode {
                 public static class: java.lang.Class<com.carto.components.RenderProjectionMode>;
                 public static RENDER_PROJECTION_MODE_PLANAR: com.carto.components.RenderProjectionMode;
@@ -367,7 +371,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static swigToEnum(param0: number): com.carto.components.RenderProjectionMode;
             }
-            export module RenderProjectionMode {
+            export namespace RenderProjectionMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.components.RenderProjectionMode.SwigNext>;
                 }
@@ -376,13 +380,24 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class Address extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.Address>;
                 public swigCMemOwn: boolean;
-                public constructor(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: string, param7: string, param8: string, param9: com.carto.core.StringVector);
+                public constructor(
+                    param0: string,
+                    param1: string,
+                    param2: string,
+                    param3: string,
+                    param4: string,
+                    param5: string,
+                    param6: string,
+                    param7: string,
+                    param8: string,
+                    param9: com.carto.core.StringVector
+                );
                 public getStreet(): string;
                 public getCountry(): string;
                 public finalize(): void;
@@ -407,9 +422,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class AddressModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.AddressModuleJNI>;
                 public static Address_swigGetRawPtr(param0: number, param1: com.carto.core.Address): number;
@@ -425,7 +440,19 @@ declare module com {
                 public constructor();
                 public static Address_getHouseNumber(param0: number, param1: com.carto.core.Address): string;
                 public static Address_getName(param0: number, param1: com.carto.core.Address): string;
-                public static new_Address__SWIG_1(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: string, param7: string, param8: string, param9: number, param10: com.carto.core.StringVector): number;
+                public static new_Address__SWIG_1(
+                    param0: string,
+                    param1: string,
+                    param2: string,
+                    param3: string,
+                    param4: string,
+                    param5: string,
+                    param6: string,
+                    param7: string,
+                    param8: string,
+                    param9: number,
+                    param10: com.carto.core.StringVector
+                ): number;
                 public static Address_getCounty(param0: number, param1: com.carto.core.Address): string;
                 public static Address_equalsInternal(param0: number, param1: com.carto.core.Address, param2: number, param3: com.carto.core.Address): boolean;
                 public static new_Address__SWIG_0(): number;
@@ -435,9 +462,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class BinaryData extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.BinaryData>;
                 public swigCMemOwn: boolean;
@@ -458,9 +485,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class BinaryDataModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.BinaryDataModuleJNI>;
                 public static BinaryData_swigGetRawPtr(param0: number, param1: com.carto.core.BinaryData): number;
@@ -476,9 +503,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class IntVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.IntVector>;
                 public swigCMemOwn: boolean;
@@ -502,9 +529,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class IntVectorModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.IntVectorModuleJNI>;
                 public static IntVector_add(param0: number, param1: com.carto.core.IntVector, param2: number): void;
@@ -525,9 +552,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapBounds extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapBounds>;
                 public swigCMemOwn: boolean;
@@ -554,9 +581,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapBoundsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapBoundsModuleJNI>;
                 public static MapBounds_contains__SWIG_1(param0: number, param1: com.carto.core.MapBounds, param2: number, param3: com.carto.core.MapBounds): boolean;
@@ -580,9 +607,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapEnvelope extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapEnvelope>;
                 public swigCMemOwn: boolean;
@@ -606,9 +633,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapEnvelopeModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapEnvelopeModuleJNI>;
                 public static MapEnvelope_equalsInternal(param0: number, param1: com.carto.core.MapEnvelope, param2: number, param3: com.carto.core.MapEnvelope): boolean;
@@ -629,9 +656,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapPos extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapPos>;
                 public swigCMemOwn: boolean;
@@ -657,9 +684,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapPosModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapPosModuleJNI>;
                 public static MapPos_add(param0: number, param1: com.carto.core.MapPos, param2: number, param3: com.carto.core.MapVec): number;
@@ -706,9 +733,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapPosVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapPosVector>;
                 public swigCMemOwn: boolean;
@@ -732,9 +759,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapPosVectorVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapPosVectorVector>;
                 public swigCMemOwn: boolean;
@@ -758,9 +785,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapRange extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapRange>;
                 public swigCMemOwn: boolean;
@@ -784,9 +811,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapRangeModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapRangeModuleJNI>;
                 public static MapRange_getMin(param0: number, param1: com.carto.core.MapRange): number;
@@ -807,9 +834,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapTile extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapTile>;
                 public swigCMemOwn: boolean;
@@ -833,9 +860,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapTileModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapTileModuleJNI>;
                 public static delete_MapTile(param0: number): void;
@@ -856,9 +883,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapVec extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapVec>;
                 public swigCMemOwn: boolean;
@@ -890,9 +917,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class MapVecModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.MapVecModuleJNI>;
                 public static MapVec_getNormalized(param0: number, param1: com.carto.core.MapVec): number;
@@ -921,9 +948,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class ScreenBounds extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.ScreenBounds>;
                 public swigCMemOwn: boolean;
@@ -950,9 +977,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class ScreenBoundsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.ScreenBoundsModuleJNI>;
                 public static new_ScreenBounds__SWIG_0(): number;
@@ -976,9 +1003,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class ScreenPos extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.ScreenPos>;
                 public swigCMemOwn: boolean;
@@ -999,9 +1026,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class ScreenPosModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.ScreenPosModuleJNI>;
                 public static new_ScreenPos__SWIG_0(): number;
@@ -1031,9 +1058,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class ScreenPosVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.ScreenPosVector>;
                 public swigCMemOwn: boolean;
@@ -1057,9 +1084,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class StringMap extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.StringMap>;
                 public swigCMemOwn: boolean;
@@ -1082,9 +1109,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class StringMapModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.StringMapModuleJNI>;
                 public static StringMap_get(param0: number, param1: com.carto.core.StringMap, param2: string): string;
@@ -1104,9 +1131,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class StringVariantMap extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.StringVariantMap>;
                 public swigCMemOwn: boolean;
@@ -1130,9 +1157,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class StringVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.StringVector>;
                 public swigCMemOwn: boolean;
@@ -1156,9 +1183,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class StringVectorModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.StringVectorModuleJNI>;
                 public static StringVector_add(param0: number, param1: com.carto.core.StringVector, param2: string): void;
@@ -1179,9 +1206,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class Variant extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.Variant>;
                 public swigCMemOwn: boolean;
@@ -1215,9 +1242,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantArrayBuilder extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.VariantArrayBuilder>;
                 public swigCMemOwn: boolean;
@@ -1241,9 +1268,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantArrayBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.VariantArrayBuilderModuleJNI>;
                 public static VariantArrayBuilder_clear(param0: number, param1: com.carto.core.VariantArrayBuilder): void;
@@ -1262,9 +1289,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.VariantModuleJNI>;
                 public static VariantVector_size(param0: number, param1: com.carto.core.VariantVector): number;
@@ -1320,9 +1347,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantObjectBuilder extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.VariantObjectBuilder>;
                 public swigCMemOwn: boolean;
@@ -1346,9 +1373,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantObjectBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.VariantObjectBuilderModuleJNI>;
                 public static VariantObjectBuilder_setBool(param0: number, param1: com.carto.core.VariantObjectBuilder, param2: string, param3: boolean): void;
@@ -1367,9 +1394,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantType {
                 public static class: java.lang.Class<com.carto.core.VariantType>;
                 public static VARIANT_TYPE_NULL: com.carto.core.VariantType;
@@ -1385,7 +1412,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static swigToEnum(param0: number): com.carto.core.VariantType;
             }
-            export module VariantType {
+            export namespace VariantType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.core.VariantType.SwigNext>;
                 }
@@ -1394,9 +1421,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module core {
+declare namespace com {
+    export namespace carto {
+        export namespace core {
             export class VariantVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.core.VariantVector>;
                 public swigCMemOwn: boolean;
@@ -1420,9 +1447,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class AssetTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.AssetTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -1448,13 +1475,18 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class AssetTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.AssetTileDataSourceModuleJNI>;
                 public static SwigDirector_AssetTileDataSource_notifyTilesChanged(param0: com.carto.datasources.AssetTileDataSource, param1: boolean): void;
-                public static AssetTileDataSource_loadTileSwigExplicitAssetTileDataSource(param0: number, param1: com.carto.datasources.AssetTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static AssetTileDataSource_loadTileSwigExplicitAssetTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.AssetTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static SwigDirector_AssetTileDataSource_loadTile(param0: com.carto.datasources.AssetTileDataSource, param1: number): number;
                 public static delete_AssetTileDataSource(param0: number): void;
                 public static AssetTileDataSource_director_connect(param0: com.carto.datasources.AssetTileDataSource, param1: number, param2: boolean, param3: boolean): void;
@@ -1466,8 +1498,20 @@ declare module com {
                 public static AssetTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.AssetTileDataSource): string;
                 public static AssetTileDataSource_change_ownership(param0: com.carto.datasources.AssetTileDataSource, param1: number, param2: boolean): void;
                 public static AssetTileDataSource_loadTile(param0: number, param1: com.carto.datasources.AssetTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
-                public static AssetTileDataSource_buildAssetPath(param0: number, param1: com.carto.datasources.AssetTileDataSource, param2: string, param3: number, param4: com.carto.core.MapTile): string;
-                public static AssetTileDataSource_buildAssetPathSwigExplicitAssetTileDataSource(param0: number, param1: com.carto.datasources.AssetTileDataSource, param2: string, param3: number, param4: com.carto.core.MapTile): string;
+                public static AssetTileDataSource_buildAssetPath(
+                    param0: number,
+                    param1: com.carto.datasources.AssetTileDataSource,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.MapTile
+                ): string;
+                public static AssetTileDataSource_buildAssetPathSwigExplicitAssetTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.AssetTileDataSource,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.MapTile
+                ): string;
                 public static SwigDirector_AssetTileDataSource_getMinZoom(param0: com.carto.datasources.AssetTileDataSource): number;
                 public static AssetTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.AssetTileDataSource): any;
                 public static AssetTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.AssetTileDataSource): number;
@@ -1477,15 +1521,22 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class BitmapOverlayRasterTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.BitmapOverlayRasterTileDataSource>;
                 public constructor(param0: number, param1: number);
                 public swigReleaseOwnership(): void;
                 public swigDirectorDisconnect(): void;
-                public constructor(param0: number, param1: number, param2: com.carto.graphics.Bitmap, param3: com.carto.projections.Projection, param4: com.carto.core.MapPosVector, param5: com.carto.core.ScreenPosVector);
+                public constructor(
+                    param0: number,
+                    param1: number,
+                    param2: com.carto.graphics.Bitmap,
+                    param3: com.carto.projections.Projection,
+                    param4: com.carto.core.MapPosVector,
+                    param5: com.carto.core.ScreenPosVector
+                );
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.BitmapOverlayRasterTileDataSource;
                 public finalize(): void;
                 public constructor(param0: number, param1: boolean);
@@ -1505,18 +1556,39 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class BitmapOverlayRasterTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.BitmapOverlayRasterTileDataSourceModuleJNI>;
                 public static SwigDirector_BitmapOverlayRasterTileDataSource_getMaxZoom(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
-                public static new_BitmapOverlayRasterTileDataSource(param0: number, param1: number, param2: number, param3: com.carto.graphics.Bitmap, param4: number, param5: com.carto.projections.Projection, param6: number, param7: com.carto.core.MapPosVector, param8: number, param9: com.carto.core.ScreenPosVector): number;
-                public static BitmapOverlayRasterTileDataSource_loadTile(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static new_BitmapOverlayRasterTileDataSource(
+                    param0: number,
+                    param1: number,
+                    param2: number,
+                    param3: com.carto.graphics.Bitmap,
+                    param4: number,
+                    param5: com.carto.projections.Projection,
+                    param6: number,
+                    param7: com.carto.core.MapPosVector,
+                    param8: number,
+                    param9: com.carto.core.ScreenPosVector
+                ): number;
+                public static BitmapOverlayRasterTileDataSource_loadTile(
+                    param0: number,
+                    param1: com.carto.datasources.BitmapOverlayRasterTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static BitmapOverlayRasterTileDataSource_change_ownership(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource, param1: number, param2: boolean): void;
                 public static BitmapOverlayRasterTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): string;
                 public static SwigDirector_BitmapOverlayRasterTileDataSource_loadTile(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource, param1: number): number;
-                public static BitmapOverlayRasterTileDataSource_loadTileSwigExplicitBitmapOverlayRasterTileDataSource(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static BitmapOverlayRasterTileDataSource_loadTileSwigExplicitBitmapOverlayRasterTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.BitmapOverlayRasterTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public constructor();
                 public static BitmapOverlayRasterTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
                 public static delete_BitmapOverlayRasterTileDataSource(param0: number): void;
@@ -1524,18 +1596,26 @@ declare module com {
                 public static BitmapOverlayRasterTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public static SwigDirector_BitmapOverlayRasterTileDataSource_getMinZoom(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
                 public static BitmapOverlayRasterTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
-                public static BitmapOverlayRasterTileDataSource_getDataExtentSwigExplicitBitmapOverlayRasterTileDataSource(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
+                public static BitmapOverlayRasterTileDataSource_getDataExtentSwigExplicitBitmapOverlayRasterTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.BitmapOverlayRasterTileDataSource
+                ): number;
                 public static BitmapOverlayRasterTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): any;
-                public static BitmapOverlayRasterTileDataSource_director_connect(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource, param1: number, param2: boolean, param3: boolean): void;
+                public static BitmapOverlayRasterTileDataSource_director_connect(
+                    param0: com.carto.datasources.BitmapOverlayRasterTileDataSource,
+                    param1: number,
+                    param2: boolean,
+                    param3: boolean
+                ): void;
                 public static SwigDirector_BitmapOverlayRasterTileDataSource_notifyTilesChanged(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource, param1: boolean): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class CacheTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.CacheTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -1567,9 +1647,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class CacheTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.CacheTileDataSourceModuleJNI>;
                 public static CacheTileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.CacheTileDataSource): number;
@@ -1606,9 +1686,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class CartoOnlineTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.CartoOnlineTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -1633,9 +1713,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class CartoOnlineTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.CartoOnlineTileDataSourceModuleJNI>;
                 public static delete_CartoOnlineTileDataSource(param0: number): void;
@@ -1648,7 +1728,12 @@ declare module com {
                 public constructor();
                 public static CartoOnlineTileDataSource_director_connect(param0: com.carto.datasources.CartoOnlineTileDataSource, param1: number, param2: boolean, param3: boolean): void;
                 public static CartoOnlineTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource): number;
-                public static CartoOnlineTileDataSource_loadTileSwigExplicitCartoOnlineTileDataSource(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static CartoOnlineTileDataSource_loadTileSwigExplicitCartoOnlineTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.CartoOnlineTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static CartoOnlineTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource): string;
                 public static SwigDirector_CartoOnlineTileDataSource_notifyTilesChanged(param0: com.carto.datasources.CartoOnlineTileDataSource, param1: boolean): void;
                 public static CartoOnlineTileDataSource_loadTile(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
@@ -1659,9 +1744,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class CombinedTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.CombinedTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -1689,9 +1774,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class CombinedTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.CombinedTileDataSourceModuleJNI>;
                 public static SwigDirector_CombinedTileDataSource_getMinZoom(param0: com.carto.datasources.CombinedTileDataSource): number;
@@ -1702,7 +1787,13 @@ declare module com {
                 public static CombinedTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.CombinedTileDataSource): string;
                 public static CombinedTileDataSource_getMinZoomSwigExplicitCombinedTileDataSource(param0: number, param1: com.carto.datasources.CombinedTileDataSource): number;
                 public constructor();
-                public static new_CombinedTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.datasources.TileDataSource, param4: number): number;
+                public static new_CombinedTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.TileDataSource,
+                    param2: number,
+                    param3: com.carto.datasources.TileDataSource,
+                    param4: number
+                ): number;
                 public static CombinedTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.CombinedTileDataSource): any;
                 public static SwigDirector_CombinedTileDataSource_notifyTilesChanged(param0: com.carto.datasources.CombinedTileDataSource, param1: boolean): void;
                 public static SwigDirector_CombinedTileDataSource_getMaxZoom(param0: com.carto.datasources.CombinedTileDataSource): number;
@@ -1712,7 +1803,12 @@ declare module com {
                 public static CombinedTileDataSource_change_ownership(param0: com.carto.datasources.CombinedTileDataSource, param1: number, param2: boolean): void;
                 public static delete_CombinedTileDataSource(param0: number): void;
                 public static CombinedTileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.CombinedTileDataSource): number;
-                public static CombinedTileDataSource_loadTileSwigExplicitCombinedTileDataSource(param0: number, param1: com.carto.datasources.CombinedTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static CombinedTileDataSource_loadTileSwigExplicitCombinedTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.CombinedTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static CombinedTileDataSource_loadTile(param0: number, param1: com.carto.datasources.CombinedTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
                 public static CombinedTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.CombinedTileDataSource): number;
                 public static SwigDirector_CombinedTileDataSource_getDataExtent(param0: com.carto.datasources.CombinedTileDataSource): number;
@@ -1721,9 +1817,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class GDALRasterTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.GDALRasterTileDataSourceModuleJNI>;
                 public constructor();
@@ -1732,9 +1828,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class GeoJSONVectorTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.GeoJSONVectorTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -1763,9 +1859,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class GeoJSONVectorTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.GeoJSONVectorTileDataSourceModuleJNI>;
                 public static SwigDirector_GeoJSONVectorTileDataSource_getMaxZoom(param0: com.carto.datasources.GeoJSONVectorTileDataSource): number;
@@ -1778,26 +1874,45 @@ declare module com {
                 public static GeoJSONVectorTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource): number;
                 public static GeoJSONVectorTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource): string;
                 public static delete_GeoJSONVectorTileDataSource(param0: number): void;
-                public static GeoJSONVectorTileDataSource_loadTileSwigExplicitGeoJSONVectorTileDataSource(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static GeoJSONVectorTileDataSource_loadTileSwigExplicitGeoJSONVectorTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.GeoJSONVectorTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static new_GeoJSONVectorTileDataSource(param0: number, param1: number): number;
                 public static GeoJSONVectorTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public constructor();
                 public static SwigDirector_GeoJSONVectorTileDataSource_loadTile(param0: com.carto.datasources.GeoJSONVectorTileDataSource, param1: number): number;
                 public static GeoJSONVectorTileDataSource_getDataExtentSwigExplicitGeoJSONVectorTileDataSource(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource): number;
                 public static SwigDirector_GeoJSONVectorTileDataSource_notifyTilesChanged(param0: com.carto.datasources.GeoJSONVectorTileDataSource, param1: boolean): void;
-                public static GeoJSONVectorTileDataSource_setLayerGeoJSON(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource, param2: number, param3: number, param4: com.carto.core.Variant): void;
+                public static GeoJSONVectorTileDataSource_setLayerGeoJSON(
+                    param0: number,
+                    param1: com.carto.datasources.GeoJSONVectorTileDataSource,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.core.Variant
+                ): void;
                 public static GeoJSONVectorTileDataSource_createLayer(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource, param2: string): number;
                 public static GeoJSONVectorTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource): any;
                 public static GeoJSONVectorTileDataSource_director_connect(param0: com.carto.datasources.GeoJSONVectorTileDataSource, param1: number, param2: boolean, param3: boolean): void;
-                public static GeoJSONVectorTileDataSource_setLayerFeatureCollection(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource, param2: number, param3: number, param4: com.carto.projections.Projection, param5: number, param6: com.carto.geometry.FeatureCollection): void;
+                public static GeoJSONVectorTileDataSource_setLayerFeatureCollection(
+                    param0: number,
+                    param1: com.carto.datasources.GeoJSONVectorTileDataSource,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.projections.Projection,
+                    param5: number,
+                    param6: com.carto.geometry.FeatureCollection
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class HTTPTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.HTTPTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -1833,9 +1948,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class HTTPTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.HTTPTileDataSourceModuleJNI>;
                 public static HTTPTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.HTTPTileDataSource): string;
@@ -1858,23 +1973,34 @@ declare module com {
                 public static HTTPTileDataSource_loadTile(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
                 public static HTTPTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.HTTPTileDataSource): any;
                 public static SwigDirector_HTTPTileDataSource_loadTile(param0: com.carto.datasources.HTTPTileDataSource, param1: number): number;
-                public static HTTPTileDataSource_loadTileSwigExplicitHTTPTileDataSource(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static HTTPTileDataSource_loadTileSwigExplicitHTTPTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.HTTPTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static HTTPTileDataSource_buildTileURL(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: string, param3: number, param4: com.carto.core.MapTile): string;
                 public static HTTPTileDataSource_isTMSScheme(param0: number, param1: com.carto.datasources.HTTPTileDataSource): boolean;
                 public static HTTPTileDataSource_setBaseURL(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: string): void;
                 public static SwigDirector_HTTPTileDataSource_getDataExtent(param0: com.carto.datasources.HTTPTileDataSource): number;
                 public static HTTPTileDataSource_getSubdomains(param0: number, param1: com.carto.datasources.HTTPTileDataSource): number;
                 public static HTTPTileDataSource_change_ownership(param0: com.carto.datasources.HTTPTileDataSource, param1: number, param2: boolean): void;
-                public static HTTPTileDataSource_buildTileURLSwigExplicitHTTPTileDataSource(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: string, param3: number, param4: com.carto.core.MapTile): string;
+                public static HTTPTileDataSource_buildTileURLSwigExplicitHTTPTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.HTTPTileDataSource,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.MapTile
+                ): string;
                 public static HTTPTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.HTTPTileDataSource): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class LocalSpatialIndexType {
                 public static class: java.lang.Class<com.carto.datasources.LocalSpatialIndexType>;
                 public static LOCAL_SPATIAL_INDEX_TYPE_NULL: com.carto.datasources.LocalSpatialIndexType;
@@ -1885,7 +2011,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.datasources.LocalSpatialIndexType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module LocalSpatialIndexType {
+            export namespace LocalSpatialIndexType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.datasources.LocalSpatialIndexType.SwigNext>;
                 }
@@ -1894,9 +2020,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class LocalVectorDataSource extends com.carto.datasources.VectorDataSource {
                 public static class: java.lang.Class<com.carto.datasources.LocalVectorDataSource>;
                 public swigDirectorDisconnect(): void;
@@ -1932,29 +2058,66 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class LocalVectorDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.LocalVectorDataSourceModuleJNI>;
-                public static LocalVectorDataSource_setGeometrySimplifier(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.geometry.GeometrySimplifier): void;
+                public static LocalVectorDataSource_setGeometrySimplifier(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.geometry.GeometrySimplifier
+                ): void;
                 public static LocalVectorDataSource_getDataExtent(param0: number, param1: com.carto.datasources.LocalVectorDataSource): number;
                 public static new_LocalVectorDataSource__SWIG_0(param0: number, param1: com.carto.projections.Projection): number;
-                public static LocalVectorDataSource_loadElementsSwigExplicitLocalVectorDataSource(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.renderers.components.CullState): number;
-                public static LocalVectorDataSource_addFeatureCollection(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.geometry.FeatureCollection, param4: number, param5: com.carto.styles.Style): void;
+                public static LocalVectorDataSource_loadElementsSwigExplicitLocalVectorDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.renderers.components.CullState
+                ): number;
+                public static LocalVectorDataSource_addFeatureCollection(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.geometry.FeatureCollection,
+                    param4: number,
+                    param5: com.carto.styles.Style
+                ): void;
                 public constructor();
-                public static LocalVectorDataSource_addAll(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.vectorelements.VectorElementVector): void;
+                public static LocalVectorDataSource_addAll(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElementVector
+                ): void;
                 public static LocalVectorDataSource_director_connect(param0: com.carto.datasources.LocalVectorDataSource, param1: number, param2: boolean, param3: boolean): void;
                 public static LocalVectorDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public static LocalVectorDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.LocalVectorDataSource): any;
-                public static LocalVectorDataSource_setAll(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.vectorelements.VectorElementVector): void;
+                public static LocalVectorDataSource_setAll(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElementVector
+                ): void;
                 public static LocalVectorDataSource_change_ownership(param0: com.carto.datasources.LocalVectorDataSource, param1: number, param2: boolean): void;
                 public static LocalVectorDataSource_add(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.vectorelements.VectorElement): void;
                 public static LocalVectorDataSource_clear(param0: number, param1: com.carto.datasources.LocalVectorDataSource): void;
-                public static LocalVectorDataSource_loadElements(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.renderers.components.CullState): number;
+                public static LocalVectorDataSource_loadElements(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.renderers.components.CullState
+                ): number;
                 public static LocalVectorDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.LocalVectorDataSource): string;
                 public static LocalVectorDataSource_getDataExtentSwigExplicitLocalVectorDataSource(param0: number, param1: com.carto.datasources.LocalVectorDataSource): number;
-                public static LocalVectorDataSource_removeAll(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.vectorelements.VectorElementVector): boolean;
+                public static LocalVectorDataSource_removeAll(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElementVector
+                ): boolean;
                 public static SwigDirector_LocalVectorDataSource_getDataExtent(param0: com.carto.datasources.LocalVectorDataSource): number;
                 public static delete_LocalVectorDataSource(param0: number): void;
                 public static SwigDirector_LocalVectorDataSource_loadElements(param0: com.carto.datasources.LocalVectorDataSource, param1: number): number;
@@ -1963,15 +2126,20 @@ declare module com {
                 public static LocalVectorDataSource_getAll(param0: number, param1: com.carto.datasources.LocalVectorDataSource): number;
                 public static LocalVectorDataSource_getGeometrySimplifier(param0: number, param1: com.carto.datasources.LocalVectorDataSource): number;
                 public static LocalVectorDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.LocalVectorDataSource): number;
-                public static LocalVectorDataSource_remove(param0: number, param1: com.carto.datasources.LocalVectorDataSource, param2: number, param3: com.carto.vectorelements.VectorElement): boolean;
+                public static LocalVectorDataSource_remove(
+                    param0: number,
+                    param1: com.carto.datasources.LocalVectorDataSource,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): boolean;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MBTilesScheme {
                 public static class: java.lang.Class<com.carto.datasources.MBTilesScheme>;
                 public static MBTILES_SCHEME_TMS: com.carto.datasources.MBTilesScheme;
@@ -1982,7 +2150,7 @@ declare module com {
                 public swigValue(): number;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module MBTilesScheme {
+            export namespace MBTilesScheme {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.datasources.MBTilesScheme.SwigNext>;
                 }
@@ -1991,9 +2159,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MBTilesTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.MBTilesTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2022,9 +2190,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MBTilesTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.MBTilesTileDataSourceModuleJNI>;
                 public static new_MBTilesTileDataSource__SWIG_1(param0: number, param1: number, param2: string): number;
@@ -2042,7 +2210,12 @@ declare module com {
                 public constructor();
                 public static new_MBTilesTileDataSource__SWIG_2(param0: number, param1: number, param2: string, param3: number): number;
                 public static SwigDirector_MBTilesTileDataSource_getMinZoom(param0: com.carto.datasources.MBTilesTileDataSource): number;
-                public static MBTilesTileDataSource_loadTileSwigExplicitMBTilesTileDataSource(param0: number, param1: com.carto.datasources.MBTilesTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static MBTilesTileDataSource_loadTileSwigExplicitMBTilesTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.MBTilesTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static MBTilesTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MBTilesTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
                 public static MBTilesTileDataSource_change_ownership(param0: com.carto.datasources.MBTilesTileDataSource, param1: number, param2: boolean): void;
                 public static MBTilesTileDataSource_director_connect(param0: com.carto.datasources.MBTilesTileDataSource, param1: number, param2: boolean, param3: boolean): void;
@@ -2053,9 +2226,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MapTilerOnlineTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.MapTilerOnlineTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2082,14 +2255,19 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MapTilerOnlineTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.MapTilerOnlineTileDataSourceModuleJNI>;
                 public static delete_MapTilerOnlineTileDataSource(param0: number): void;
                 public static MapTilerOnlineTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource): any;
-                public static MapTilerOnlineTileDataSource_loadTileSwigExplicitMapTilerOnlineTileDataSource(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static MapTilerOnlineTileDataSource_loadTileSwigExplicitMapTilerOnlineTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.MapTilerOnlineTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static MapTilerOnlineTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public static MapTilerOnlineTileDataSource_setCustomServiceURL(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource, param2: string): void;
                 public static SwigDirector_MapTilerOnlineTileDataSource_getMaxZoom(param0: com.carto.datasources.MapTilerOnlineTileDataSource): number;
@@ -2110,9 +2288,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MemoryCacheTileDataSource extends com.carto.datasources.CacheTileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.MemoryCacheTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2142,9 +2320,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MemoryCacheTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.MemoryCacheTileDataSourceModuleJNI>;
                 public static SwigDirector_MemoryCacheTileDataSource_getDataExtent(param0: com.carto.datasources.MemoryCacheTileDataSource): number;
@@ -2168,7 +2346,12 @@ declare module com {
                 public static MemoryCacheTileDataSource_setCapacity(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource, param2: number): void;
                 public static MemoryCacheTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
                 public static MemoryCacheTileDataSource_director_connect(param0: com.carto.datasources.MemoryCacheTileDataSource, param1: number, param2: boolean, param3: boolean): void;
-                public static MemoryCacheTileDataSource_loadTileSwigExplicitMemoryCacheTileDataSource(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static MemoryCacheTileDataSource_loadTileSwigExplicitMemoryCacheTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.MemoryCacheTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static MemoryCacheTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource): number;
                 public static MemoryCacheTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource): string;
                 public static MemoryCacheTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource): any;
@@ -2177,9 +2360,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MergedMBVTTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2207,9 +2390,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class MergedMBVTTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSourceModuleJNI>;
                 public static MergedMBVTTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
@@ -2217,7 +2400,12 @@ declare module com {
                 public static MergedMBVTTileDataSource_change_ownership(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: number, param2: boolean): void;
                 public static SwigDirector_MergedMBVTTileDataSource_loadTile(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: number): number;
                 public static SwigDirector_MergedMBVTTileDataSource_notifyTilesChanged(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: boolean): void;
-                public static MergedMBVTTileDataSource_loadTileSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static MergedMBVTTileDataSource_loadTileSwigExplicitMergedMBVTTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.MergedMBVTTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static SwigDirector_MergedMBVTTileDataSource_getMaxZoom(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
                 public constructor();
                 public static MergedMBVTTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): any;
@@ -2239,9 +2427,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class NMLModelLODTreeDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.NMLModelLODTreeDataSourceModuleJNI>;
                 public constructor();
@@ -2250,9 +2438,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class OGRVectorDataBaseModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.OGRVectorDataBaseModuleJNI>;
                 public constructor();
@@ -2261,9 +2449,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class OGRVectorDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.OGRVectorDataSourceModuleJNI>;
                 public constructor();
@@ -2272,9 +2460,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class OfflineNMLModelLODTreeDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.OfflineNMLModelLODTreeDataSourceModuleJNI>;
                 public constructor();
@@ -2283,9 +2471,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class OnlineNMLModelLODTreeDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.OnlineNMLModelLODTreeDataSourceModuleJNI>;
                 public constructor();
@@ -2294,9 +2482,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class OrderedTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.OrderedTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2324,9 +2512,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class OrderedTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.OrderedTileDataSourceModuleJNI>;
                 public static OrderedTileDataSource_getDataExtentSwigExplicitOrderedTileDataSource(param0: number, param1: com.carto.datasources.OrderedTileDataSource): number;
@@ -2340,7 +2528,12 @@ declare module com {
                 public static SwigDirector_OrderedTileDataSource_loadTile(param0: com.carto.datasources.OrderedTileDataSource, param1: number): number;
                 public static OrderedTileDataSource_loadTile(param0: number, param1: com.carto.datasources.OrderedTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
                 public constructor();
-                public static OrderedTileDataSource_loadTileSwigExplicitOrderedTileDataSource(param0: number, param1: com.carto.datasources.OrderedTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static OrderedTileDataSource_loadTileSwigExplicitOrderedTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.OrderedTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static OrderedTileDataSource_director_connect(param0: com.carto.datasources.OrderedTileDataSource, param1: number, param2: boolean, param3: boolean): void;
                 public static OrderedTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public static OrderedTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.OrderedTileDataSource): number;
@@ -2356,9 +2549,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class PackageManagerTileDataSource extends com.carto.datasources.TileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.PackageManagerTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2384,9 +2577,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class PackageManagerTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.PackageManagerTileDataSourceModuleJNI>;
                 public static PackageManagerTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.PackageManagerTileDataSource): string;
@@ -2398,7 +2591,12 @@ declare module com {
                 public static PackageManagerTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public constructor();
                 public static SwigDirector_PackageManagerTileDataSource_getDataExtent(param0: com.carto.datasources.PackageManagerTileDataSource): number;
-                public static PackageManagerTileDataSource_loadTileSwigExplicitPackageManagerTileDataSource(param0: number, param1: com.carto.datasources.PackageManagerTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static PackageManagerTileDataSource_loadTileSwigExplicitPackageManagerTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.PackageManagerTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static new_PackageManagerTileDataSource(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static SwigDirector_PackageManagerTileDataSource_getMinZoom(param0: com.carto.datasources.PackageManagerTileDataSource): number;
                 public static PackageManagerTileDataSource_director_connect(param0: com.carto.datasources.PackageManagerTileDataSource, param1: number, param2: boolean, param3: boolean): void;
@@ -2411,9 +2609,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class PersistentCacheTileDataSource extends com.carto.datasources.CacheTileDataSource {
                 public static class: java.lang.Class<com.carto.datasources.PersistentCacheTileDataSource>;
                 public constructor(param0: number, param1: number);
@@ -2450,9 +2648,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class PersistentCacheTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.PersistentCacheTileDataSourceModuleJNI>;
                 public static PersistentCacheTileDataSource_stopAllDownloads(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): void;
@@ -2460,7 +2658,11 @@ declare module com {
                 public static PersistentCacheTileDataSource_setCacheOnlyMode(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: boolean): void;
                 public static SwigDirector_PersistentCacheTileDataSource_getMaxZoom(param0: com.carto.datasources.PersistentCacheTileDataSource): number;
                 public static PersistentCacheTileDataSource_close(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): void;
-                public static PersistentCacheTileDataSource_setCapacitySwigExplicitPersistentCacheTileDataSource(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: number): void;
+                public static PersistentCacheTileDataSource_setCapacitySwigExplicitPersistentCacheTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.PersistentCacheTileDataSource,
+                    param2: number
+                ): void;
                 public static PersistentCacheTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): any;
                 public static PersistentCacheTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public static PersistentCacheTileDataSource_isOpen(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): boolean;
@@ -2469,17 +2671,36 @@ declare module com {
                 public constructor();
                 public static PersistentCacheTileDataSource_clear(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): void;
                 public static PersistentCacheTileDataSource_getCapacitySwigExplicitPersistentCacheTileDataSource(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): number;
-                public static PersistentCacheTileDataSource_startDownloadArea(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: number, param3: com.carto.core.MapBounds, param4: number, param5: number, param6: number, param7: com.carto.datasources.TileDownloadListener): void;
+                public static PersistentCacheTileDataSource_startDownloadArea(
+                    param0: number,
+                    param1: com.carto.datasources.PersistentCacheTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapBounds,
+                    param4: number,
+                    param5: number,
+                    param6: number,
+                    param7: com.carto.datasources.TileDownloadListener
+                ): void;
                 public static SwigDirector_PersistentCacheTileDataSource_getCapacity(param0: com.carto.datasources.PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_setCapacity(param0: com.carto.datasources.PersistentCacheTileDataSource, param1: number): void;
                 public static PersistentCacheTileDataSource_clearSwigExplicitPersistentCacheTileDataSource(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): void;
                 public static SwigDirector_PersistentCacheTileDataSource_getDataExtent(param0: com.carto.datasources.PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_loadTile(param0: com.carto.datasources.PersistentCacheTileDataSource, param1: number): number;
                 public static PersistentCacheTileDataSource_isCacheOnlyMode(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): boolean;
-                public static PersistentCacheTileDataSource_loadTileSwigExplicitPersistentCacheTileDataSource(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static PersistentCacheTileDataSource_loadTileSwigExplicitPersistentCacheTileDataSource(
+                    param0: number,
+                    param1: com.carto.datasources.PersistentCacheTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static PersistentCacheTileDataSource_getCapacity(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_clear(param0: com.carto.datasources.PersistentCacheTileDataSource): void;
-                public static PersistentCacheTileDataSource_loadTile(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+                public static PersistentCacheTileDataSource_loadTile(
+                    param0: number,
+                    param1: com.carto.datasources.PersistentCacheTileDataSource,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): number;
                 public static PersistentCacheTileDataSource_setCapacity(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: number): void;
                 public static PersistentCacheTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_notifyTilesChanged(param0: com.carto.datasources.PersistentCacheTileDataSource, param1: boolean): void;
@@ -2491,9 +2712,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class TileDataSource extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.TileDataSource>;
                 public swigCMemOwn: boolean;
@@ -2521,9 +2742,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class TileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.TileDataSourceModuleJNI>;
                 public static TileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.TileDataSource): any;
@@ -2555,9 +2776,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class TileDownloadListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.TileDownloadListener>;
                 public swigCMemOwn: boolean;
@@ -2582,9 +2803,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class TileDownloadListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.TileDownloadListenerModuleJNI>;
                 public static TileDownloadListener_onDownloadCompletedSwigExplicitTileDownloadListener(param0: number, param1: com.carto.datasources.TileDownloadListener): void;
@@ -2604,7 +2825,12 @@ declare module com {
                 public constructor();
                 public static TileDownloadListener_swigGetRawPtr(param0: number, param1: com.carto.datasources.TileDownloadListener): number;
                 public static SwigDirector_TileDownloadListener_onDownloadProgress(param0: com.carto.datasources.TileDownloadListener, param1: number): void;
-                public static TileDownloadListener_onDownloadFailedSwigExplicitTileDownloadListener(param0: number, param1: com.carto.datasources.TileDownloadListener, param2: number, param3: com.carto.core.MapTile): void;
+                public static TileDownloadListener_onDownloadFailedSwigExplicitTileDownloadListener(
+                    param0: number,
+                    param1: com.carto.datasources.TileDownloadListener,
+                    param2: number,
+                    param3: com.carto.core.MapTile
+                ): void;
                 public static TileDownloadListener_onDownloadCompleted(param0: number, param1: com.carto.datasources.TileDownloadListener): void;
                 public static TileDownloadListener_director_connect(param0: com.carto.datasources.TileDownloadListener, param1: number, param2: boolean, param3: boolean): void;
             }
@@ -2612,9 +2838,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class VectorDataSource extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.VectorDataSource>;
                 public swigCMemOwn: boolean;
@@ -2639,9 +2865,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
             export class VectorDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.datasources.VectorDataSourceModuleJNI>;
                 public static VectorDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.VectorDataSource): number;
@@ -2664,10 +2890,10 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
-            export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
+            export namespace components {
                 export class TileData extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.datasources.components.TileData>;
                     public swigCMemOwn: boolean;
@@ -2690,10 +2916,10 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
-            export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
+            export namespace components {
                 export class TileDataModuleJNI extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.datasources.components.TileDataModuleJNI>;
                     public static TileData_setReplaceWithParent(param0: number, param1: com.carto.datasources.components.TileData, param2: boolean): void;
@@ -2711,10 +2937,10 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
-            export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
+            export namespace components {
                 export class VectorData extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.datasources.components.VectorData>;
                     public swigCMemOwn: boolean;
@@ -2733,10 +2959,10 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module datasources {
-            export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace datasources {
+            export namespace components {
                 export class VectorDataModuleJNI extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.datasources.components.VectorDataModuleJNI>;
                     public constructor();
@@ -2750,9 +2976,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingRequest extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingRequest>;
                 public swigCMemOwn: boolean;
@@ -2761,6 +2987,8 @@ declare module com {
                 public finalize(): void;
                 public constructor(param0: number, param1: boolean);
                 public setLocation(param0: com.carto.core.MapPos): void;
+                public getCustomParameter(param0: string): com.carto.core.Variant;
+                public setCustomParameter(param0: string, param1: com.carto.core.Variant): void;
                 public toString(): string;
                 public getLocationRadius(): number;
                 public swigGetRawPtr(): number;
@@ -2776,30 +3004,32 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingRequestModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingRequestModuleJNI>;
                 public static GeocodingRequest_swigGetRawPtr(param0: number, param1: com.carto.geocoding.GeocodingRequest): number;
                 public static GeocodingRequest_setLocationRadius(param0: number, param1: com.carto.geocoding.GeocodingRequest, param2: number): void;
                 public static GeocodingRequest_toString(param0: number, param1: com.carto.geocoding.GeocodingRequest): string;
+                public static GeocodingRequest_getCustomParameter(param0: number, param1: com.carto.geocoding.GeocodingRequest, param2: string): number;
+                public constructor();
+                public static GeocodingRequest_getProjection(param0: number, param1: com.carto.geocoding.GeocodingRequest): number;
+                public static GeocodingRequest_getLocationRadius(param0: number, param1: com.carto.geocoding.GeocodingRequest): number;
+                public static GeocodingRequest_setCustomParameter(param0: number, param1: com.carto.geocoding.GeocodingRequest, param2: string, param3: number, param4: com.carto.core.Variant): void;
                 public static GeocodingRequest_getQuery(param0: number, param1: com.carto.geocoding.GeocodingRequest): string;
                 public static new_GeocodingRequest(param0: number, param1: com.carto.projections.Projection, param2: string): number;
                 public static GeocodingRequest_getLocation(param0: number, param1: com.carto.geocoding.GeocodingRequest): number;
                 public static GeocodingRequest_setLocation(param0: number, param1: com.carto.geocoding.GeocodingRequest, param2: number, param3: com.carto.core.MapPos): void;
                 public static delete_GeocodingRequest(param0: number): void;
-                public constructor();
-                public static GeocodingRequest_getProjection(param0: number, param1: com.carto.geocoding.GeocodingRequest): number;
-                public static GeocodingRequest_getLocationRadius(param0: number, param1: com.carto.geocoding.GeocodingRequest): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingResult extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingResult>;
                 public swigCMemOwn: boolean;
@@ -2821,17 +3051,31 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingResultModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingResultModuleJNI>;
                 public static GeocodingResultVector_capacity(param0: number, param1: com.carto.geocoding.GeocodingResultVector): number;
                 public static GeocodingResult_getFeatureCollection(param0: number, param1: com.carto.geocoding.GeocodingResult): number;
-                public static GeocodingResultVector_set(param0: number, param1: com.carto.geocoding.GeocodingResultVector, param2: number, param3: number, param4: com.carto.geocoding.GeocodingResult): void;
+                public static GeocodingResultVector_set(
+                    param0: number,
+                    param1: com.carto.geocoding.GeocodingResultVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.geocoding.GeocodingResult
+                ): void;
                 public static GeocodingResultVector_add(param0: number, param1: com.carto.geocoding.GeocodingResultVector, param2: number, param3: com.carto.geocoding.GeocodingResult): void;
                 public static GeocodingResult_getRank(param0: number, param1: com.carto.geocoding.GeocodingResult): number;
-                public static new_GeocodingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.Address, param4: number, param5: number, param6: com.carto.geometry.FeatureCollection): number;
+                public static new_GeocodingResult(
+                    param0: number,
+                    param1: com.carto.projections.Projection,
+                    param2: number,
+                    param3: com.carto.core.Address,
+                    param4: number,
+                    param5: number,
+                    param6: com.carto.geometry.FeatureCollection
+                ): number;
                 public static GeocodingResult_swigGetRawPtr(param0: number, param1: com.carto.geocoding.GeocodingResult): number;
                 public static GeocodingResult_getProjection(param0: number, param1: com.carto.geocoding.GeocodingResult): number;
                 public static GeocodingResultVector_isEmpty(param0: number, param1: com.carto.geocoding.GeocodingResultVector): boolean;
@@ -2851,9 +3095,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingResultVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingResultVector>;
                 public swigCMemOwn: boolean;
@@ -2876,9 +3120,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingService>;
                 public swigCMemOwn: boolean;
@@ -2906,9 +3150,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class GeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.GeocodingServiceModuleJNI>;
                 public static GeocodingService_setAutocomplete(param0: number, param1: com.carto.geocoding.GeocodingService, param2: boolean): void;
@@ -2938,9 +3182,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class MapBoxOnlineGeocodingService extends com.carto.geocoding.GeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.MapBoxOnlineGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -2972,9 +3216,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class MapBoxOnlineGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.MapBoxOnlineGeocodingServiceModuleJNI>;
                 public static MapBoxOnlineGeocodingService_getLanguageSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService): string;
@@ -2991,9 +3235,22 @@ declare module com {
                 public static MapBoxOnlineGeocodingService_setMaxResults(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService, param2: number): void;
                 public static SwigDirector_MapBoxOnlineGeocodingService_isAutocomplete(param0: com.carto.geocoding.MapBoxOnlineGeocodingService): boolean;
                 public static MapBoxOnlineGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService): string;
-                public static MapBoxOnlineGeocodingService_setAutocompleteSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService, param2: boolean): void;
-                public static MapBoxOnlineGeocodingService_setMaxResultsSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService, param2: number): void;
-                public static MapBoxOnlineGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static MapBoxOnlineGeocodingService_setAutocompleteSwigExplicitMapBoxOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineGeocodingService,
+                    param2: boolean
+                ): void;
+                public static MapBoxOnlineGeocodingService_setMaxResultsSwigExplicitMapBoxOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineGeocodingService,
+                    param2: number
+                ): void;
+                public static MapBoxOnlineGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static MapBoxOnlineGeocodingService_isAutocomplete(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService): boolean;
                 public static SwigDirector_MapBoxOnlineGeocodingService_setLanguage(param0: com.carto.geocoding.MapBoxOnlineGeocodingService, param1: string): void;
                 public static MapBoxOnlineGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService): number;
@@ -3006,17 +3263,26 @@ declare module com {
                 public static MapBoxOnlineGeocodingService_getMaxResults(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService): number;
                 public static SwigDirector_MapBoxOnlineGeocodingService_setMaxResults(param0: com.carto.geocoding.MapBoxOnlineGeocodingService, param1: number): void;
                 public static MapBoxOnlineGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService): string;
-                public static MapBoxOnlineGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static MapBoxOnlineGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static SwigDirector_MapBoxOnlineGeocodingService_setAutocomplete(param0: com.carto.geocoding.MapBoxOnlineGeocodingService, param1: boolean): void;
-                public static MapBoxOnlineGeocodingService_setLanguageSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineGeocodingService, param2: string): void;
+                public static MapBoxOnlineGeocodingService_setLanguageSwigExplicitMapBoxOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineGeocodingService,
+                    param2: string
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class MapBoxOnlineReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.MapBoxOnlineReverseGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3044,15 +3310,20 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class MapBoxOnlineReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.MapBoxOnlineReverseGeocodingServiceModuleJNI>;
                 public static MapBoxOnlineReverseGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param2: string): void;
                 public static MapBoxOnlineReverseGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
                 public static SwigDirector_MapBoxOnlineReverseGeocodingService_getLanguage(param0: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
-                public static MapBoxOnlineReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static MapBoxOnlineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_MapBoxOnlineReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param1: number): number;
                 public static MapBoxOnlineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static MapBoxOnlineReverseGeocodingService_setCustomServiceURL(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param2: string): void;
@@ -3063,20 +3334,37 @@ declare module com {
                 public static MapBoxOnlineReverseGeocodingService_change_ownership(param0: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param1: number, param2: boolean): void;
                 public constructor();
                 public static MapBoxOnlineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): any;
-                public static MapBoxOnlineReverseGeocodingService_director_connect(param0: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
-                public static MapBoxOnlineReverseGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static MapBoxOnlineReverseGeocodingService_director_connect(
+                    param0: com.carto.geocoding.MapBoxOnlineReverseGeocodingService,
+                    param1: number,
+                    param2: boolean,
+                    param3: boolean
+                ): void;
+                public static MapBoxOnlineReverseGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static MapBoxOnlineReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
-                public static MapBoxOnlineReverseGeocodingService_setLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param2: string): void;
+                public static MapBoxOnlineReverseGeocodingService_setLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static MapBoxOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
-                public static MapBoxOnlineReverseGeocodingService_getLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
+                public static MapBoxOnlineReverseGeocodingService_getLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService
+                ): string;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class OSMOfflineGeocodingService extends com.carto.geocoding.GeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.OSMOfflineGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3106,12 +3394,17 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class OSMOfflineGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.OSMOfflineGeocodingServiceModuleJNI>;
-                public static OSMOfflineGeocodingService_calculateAddressesSwigExplicitOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static OSMOfflineGeocodingService_calculateAddressesSwigExplicitOSMOfflineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static OSMOfflineGeocodingService_getMaxResultsSwigExplicitOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService): number;
                 public static OSMOfflineGeocodingService_getMaxResults(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService): number;
                 public static SwigDirector_OSMOfflineGeocodingService_setAutocomplete(param0: com.carto.geocoding.OSMOfflineGeocodingService, param1: boolean): void;
@@ -3129,16 +3422,33 @@ declare module com {
                 public static OSMOfflineGeocodingService_getLanguageSwigExplicitOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService): string;
                 public static OSMOfflineGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: string): void;
                 public static delete_OSMOfflineGeocodingService(param0: number): void;
-                public static OSMOfflineGeocodingService_setAutocompleteSwigExplicitOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: boolean): void;
+                public static OSMOfflineGeocodingService_setAutocompleteSwigExplicitOSMOfflineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineGeocodingService,
+                    param2: boolean
+                ): void;
                 public static OSMOfflineGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService): number;
                 public static OSMOfflineGeocodingService_setMaxResults(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: number): void;
                 public static OSMOfflineGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static OSMOfflineGeocodingService_isAutocomplete(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService): boolean;
-                public static OSMOfflineGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static OSMOfflineGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static OSMOfflineGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService): any;
                 public static new_OSMOfflineGeocodingService(param0: string): number;
-                public static OSMOfflineGeocodingService_setLanguageSwigExplicitOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: string): void;
-                public static OSMOfflineGeocodingService_setMaxResultsSwigExplicitOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineGeocodingService, param2: number): void;
+                public static OSMOfflineGeocodingService_setLanguageSwigExplicitOSMOfflineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineGeocodingService,
+                    param2: string
+                ): void;
+                public static OSMOfflineGeocodingService_setMaxResultsSwigExplicitOSMOfflineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineGeocodingService,
+                    param2: number
+                ): void;
                 public static SwigDirector_OSMOfflineGeocodingService_setLanguage(param0: com.carto.geocoding.OSMOfflineGeocodingService, param1: string): void;
                 public static SwigDirector_OSMOfflineGeocodingService_getMaxResults(param0: com.carto.geocoding.OSMOfflineGeocodingService): number;
             }
@@ -3146,9 +3456,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class OSMOfflineReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.OSMOfflineReverseGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3174,12 +3484,15 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class OSMOfflineReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.OSMOfflineReverseGeocodingServiceModuleJNI>;
-                public static OSMOfflineReverseGeocodingService_getLanguageSwigExplicitOSMOfflineReverseGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService): string;
+                public static OSMOfflineReverseGeocodingService_getLanguageSwigExplicitOSMOfflineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineReverseGeocodingService
+                ): string;
                 public static OSMOfflineReverseGeocodingService_change_ownership(param0: com.carto.geocoding.OSMOfflineReverseGeocodingService, param1: number, param2: boolean): void;
                 public static OSMOfflineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static OSMOfflineReverseGeocodingService_director_connect(param0: com.carto.geocoding.OSMOfflineReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
@@ -3191,20 +3504,34 @@ declare module com {
                 public static SwigDirector_OSMOfflineReverseGeocodingService_setLanguage(param0: com.carto.geocoding.OSMOfflineReverseGeocodingService, param1: string): void;
                 public static SwigDirector_OSMOfflineReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.OSMOfflineReverseGeocodingService, param1: number): number;
                 public static OSMOfflineReverseGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService): string;
-                public static OSMOfflineReverseGeocodingService_calculateAddressesSwigExplicitOSMOfflineReverseGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static OSMOfflineReverseGeocodingService_calculateAddressesSwigExplicitOSMOfflineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static OSMOfflineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService): any;
                 public static OSMOfflineReverseGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService, param2: string): void;
-                public static OSMOfflineReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
-                public static OSMOfflineReverseGeocodingService_setLanguageSwigExplicitOSMOfflineReverseGeocodingService(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService, param2: string): void;
+                public static OSMOfflineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
+                public static OSMOfflineReverseGeocodingService_setLanguageSwigExplicitOSMOfflineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.OSMOfflineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static OSMOfflineReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.OSMOfflineReverseGeocodingService): string;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PackageManagerGeocodingService extends com.carto.geocoding.GeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.PackageManagerGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3234,49 +3561,77 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PackageManagerGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.PackageManagerGeocodingServiceModuleJNI>;
                 public static PackageManagerGeocodingService_getLanguageSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): string;
                 public static PackageManagerGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: string): void;
-                public static PackageManagerGeocodingService_getMaxResultsSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): number;
+                public static PackageManagerGeocodingService_getMaxResultsSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService
+                ): number;
                 public static PackageManagerGeocodingService_change_ownership(param0: com.carto.geocoding.PackageManagerGeocodingService, param1: number, param2: boolean): void;
-                public static PackageManagerGeocodingService_setMaxResultsSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: number): void;
-                public static PackageManagerGeocodingService_isAutocompleteSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): boolean;
+                public static PackageManagerGeocodingService_setMaxResultsSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService,
+                    param2: number
+                ): void;
+                public static PackageManagerGeocodingService_isAutocompleteSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService
+                ): boolean;
                 public static PackageManagerGeocodingService_director_connect(param0: com.carto.geocoding.PackageManagerGeocodingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): string;
                 public static SwigDirector_PackageManagerGeocodingService_getMaxResults(param0: com.carto.geocoding.PackageManagerGeocodingService): number;
                 public static new_PackageManagerGeocodingService(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static SwigDirector_PackageManagerGeocodingService_isAutocomplete(param0: com.carto.geocoding.PackageManagerGeocodingService): boolean;
                 public constructor();
-                public static PackageManagerGeocodingService_calculateAddressesSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static PackageManagerGeocodingService_calculateAddressesSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static PackageManagerGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): number;
                 public static PackageManagerGeocodingService_isAutocomplete(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): boolean;
                 public static PackageManagerGeocodingService_setAutocomplete(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: boolean): void;
                 public static PackageManagerGeocodingService_setMaxResults(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: number): void;
-                public static PackageManagerGeocodingService_setAutocompleteSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: boolean): void;
+                public static PackageManagerGeocodingService_setAutocompleteSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService,
+                    param2: boolean
+                ): void;
                 public static PackageManagerGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static PackageManagerGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): string;
                 public static delete_PackageManagerGeocodingService(param0: number): void;
                 public static SwigDirector_PackageManagerGeocodingService_calculateAddresses(param0: com.carto.geocoding.PackageManagerGeocodingService, param1: number): number;
                 public static SwigDirector_PackageManagerGeocodingService_setAutocomplete(param0: com.carto.geocoding.PackageManagerGeocodingService, param1: boolean): void;
                 public static PackageManagerGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): any;
-                public static PackageManagerGeocodingService_setLanguageSwigExplicitPackageManagerGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: string): void;
+                public static PackageManagerGeocodingService_setLanguageSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService,
+                    param2: string
+                ): void;
                 public static PackageManagerGeocodingService_getMaxResults(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService): number;
                 public static SwigDirector_PackageManagerGeocodingService_setLanguage(param0: com.carto.geocoding.PackageManagerGeocodingService, param1: string): void;
                 public static SwigDirector_PackageManagerGeocodingService_setMaxResults(param0: com.carto.geocoding.PackageManagerGeocodingService, param1: number): void;
                 public static SwigDirector_PackageManagerGeocodingService_getLanguage(param0: com.carto.geocoding.PackageManagerGeocodingService): string;
-                public static PackageManagerGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.PackageManagerGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static PackageManagerGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PackageManagerReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.PackageManagerReverseGeocodingService>;
                 public static getCPtr(param0: com.carto.geocoding.PackageManagerReverseGeocodingService): number;
@@ -3302,24 +3657,46 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PackageManagerReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.PackageManagerReverseGeocodingServiceModuleJNI>;
-                public static PackageManagerReverseGeocodingService_calculateAddressesSwigExplicitPackageManagerReverseGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
-                public static PackageManagerReverseGeocodingService_director_connect(param0: com.carto.geocoding.PackageManagerReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
+                public static PackageManagerReverseGeocodingService_calculateAddressesSwigExplicitPackageManagerReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
+                public static PackageManagerReverseGeocodingService_director_connect(
+                    param0: com.carto.geocoding.PackageManagerReverseGeocodingService,
+                    param1: number,
+                    param2: boolean,
+                    param3: boolean
+                ): void;
                 public static PackageManagerReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService): string;
-                public static PackageManagerReverseGeocodingService_setLanguageSwigExplicitPackageManagerReverseGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService, param2: string): void;
+                public static PackageManagerReverseGeocodingService_setLanguageSwigExplicitPackageManagerReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static PackageManagerReverseGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService): string;
-                public static PackageManagerReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static PackageManagerReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static PackageManagerReverseGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService): number;
                 public constructor();
                 public static PackageManagerReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService): any;
                 public static new_PackageManagerReverseGeocodingService(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static SwigDirector_PackageManagerReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.PackageManagerReverseGeocodingService, param1: number): number;
                 public static SwigDirector_PackageManagerReverseGeocodingService_getLanguage(param0: com.carto.geocoding.PackageManagerReverseGeocodingService): string;
-                public static PackageManagerReverseGeocodingService_getLanguageSwigExplicitPackageManagerReverseGeocodingService(param0: number, param1: com.carto.geocoding.PackageManagerReverseGeocodingService): string;
+                public static PackageManagerReverseGeocodingService_getLanguageSwigExplicitPackageManagerReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PackageManagerReverseGeocodingService
+                ): string;
                 public static PackageManagerReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static PackageManagerReverseGeocodingService_change_ownership(param0: com.carto.geocoding.PackageManagerReverseGeocodingService, param1: number, param2: boolean): void;
                 public static SwigDirector_PackageManagerReverseGeocodingService_setLanguage(param0: com.carto.geocoding.PackageManagerReverseGeocodingService, param1: string): void;
@@ -3330,9 +3707,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PeliasOnlineGeocodingService extends com.carto.geocoding.GeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.PeliasOnlineGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3364,24 +3741,38 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PeliasOnlineGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.PeliasOnlineGeocodingServiceModuleJNI>;
-                public static PeliasOnlineGeocodingService_setMaxResultsSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: number): void;
+                public static PeliasOnlineGeocodingService_setMaxResultsSwigExplicitPeliasOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineGeocodingService,
+                    param2: number
+                ): void;
                 public static delete_PeliasOnlineGeocodingService(param0: number): void;
                 public static PeliasOnlineGeocodingService_change_ownership(param0: com.carto.geocoding.PeliasOnlineGeocodingService, param1: number, param2: boolean): void;
                 public static PeliasOnlineGeocodingService_isAutocomplete(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): boolean;
                 public static PeliasOnlineGeocodingService_getCustomServiceURL(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): string;
                 public static PeliasOnlineGeocodingService_setMaxResults(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: number): void;
-                public static PeliasOnlineGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static PeliasOnlineGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static new_PeliasOnlineGeocodingService(param0: string): number;
                 public constructor();
                 public static PeliasOnlineGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): any;
                 public static PeliasOnlineGeocodingService_setAutocomplete(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: boolean): void;
                 public static SwigDirector_PeliasOnlineGeocodingService_isAutocomplete(param0: com.carto.geocoding.PeliasOnlineGeocodingService): boolean;
-                public static PeliasOnlineGeocodingService_calculateAddressesSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static PeliasOnlineGeocodingService_calculateAddressesSwigExplicitPeliasOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static PeliasOnlineGeocodingService_director_connect(param0: com.carto.geocoding.PeliasOnlineGeocodingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PeliasOnlineGeocodingService_getLanguageSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): string;
                 public static SwigDirector_PeliasOnlineGeocodingService_setMaxResults(param0: com.carto.geocoding.PeliasOnlineGeocodingService, param1: number): void;
@@ -3396,19 +3787,27 @@ declare module com {
                 public static PeliasOnlineGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): number;
                 public static PeliasOnlineGeocodingService_isAutocompleteSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): boolean;
                 public static SwigDirector_PeliasOnlineGeocodingService_getLanguage(param0: com.carto.geocoding.PeliasOnlineGeocodingService): string;
-                public static PeliasOnlineGeocodingService_setAutocompleteSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: boolean): void;
+                public static PeliasOnlineGeocodingService_setAutocompleteSwigExplicitPeliasOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineGeocodingService,
+                    param2: boolean
+                ): void;
                 public static SwigDirector_PeliasOnlineGeocodingService_calculateAddresses(param0: com.carto.geocoding.PeliasOnlineGeocodingService, param1: number): number;
                 public static PeliasOnlineGeocodingService_getMaxResults(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService): number;
                 public static PeliasOnlineGeocodingService_setCustomServiceURL(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: string): void;
-                public static PeliasOnlineGeocodingService_setLanguageSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineGeocodingService, param2: string): void;
+                public static PeliasOnlineGeocodingService_setLanguageSwigExplicitPeliasOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineGeocodingService,
+                    param2: string
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PeliasOnlineReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.PeliasOnlineReverseGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3436,39 +3835,61 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class PeliasOnlineReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.PeliasOnlineReverseGeocodingServiceModuleJNI>;
-                public static PeliasOnlineReverseGeocodingService_setLanguageSwigExplicitPeliasOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param2: string): void;
+                public static PeliasOnlineReverseGeocodingService_setLanguageSwigExplicitPeliasOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static PeliasOnlineReverseGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService): number;
                 public static SwigDirector_PeliasOnlineReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param1: number): number;
                 public static PeliasOnlineReverseGeocodingService_change_ownership(param0: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param1: number, param2: boolean): void;
                 public static PeliasOnlineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static delete_PeliasOnlineReverseGeocodingService(param0: number): void;
-                public static PeliasOnlineReverseGeocodingService_calculateAddressesSwigExplicitPeliasOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static PeliasOnlineReverseGeocodingService_calculateAddressesSwigExplicitPeliasOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_PeliasOnlineReverseGeocodingService_getLanguage(param0: com.carto.geocoding.PeliasOnlineReverseGeocodingService): string;
-                public static PeliasOnlineReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static PeliasOnlineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public constructor();
                 public static PeliasOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService): string;
                 public static new_PeliasOnlineReverseGeocodingService(param0: string): number;
-                public static PeliasOnlineReverseGeocodingService_director_connect(param0: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
+                public static PeliasOnlineReverseGeocodingService_director_connect(
+                    param0: com.carto.geocoding.PeliasOnlineReverseGeocodingService,
+                    param1: number,
+                    param2: boolean,
+                    param3: boolean
+                ): void;
                 public static PeliasOnlineReverseGeocodingService_setCustomServiceURL(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param2: string): void;
                 public static PeliasOnlineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService): any;
                 public static PeliasOnlineReverseGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param2: string): void;
                 public static SwigDirector_PeliasOnlineReverseGeocodingService_setLanguage(param0: com.carto.geocoding.PeliasOnlineReverseGeocodingService, param1: string): void;
                 public static PeliasOnlineReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService): string;
                 public static PeliasOnlineReverseGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService): string;
-                public static PeliasOnlineReverseGeocodingService_getLanguageSwigExplicitPeliasOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService): string;
+                public static PeliasOnlineReverseGeocodingService_getLanguageSwigExplicitPeliasOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.PeliasOnlineReverseGeocodingService
+                ): string;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class ReverseGeocodingRequest extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.ReverseGeocodingRequest>;
                 public swigCMemOwn: boolean;
@@ -3477,6 +3898,8 @@ declare module com {
                 public finalize(): void;
                 public constructor(param0: number, param1: boolean);
                 public setSearchRadius(param0: number): void;
+                public getCustomParameter(param0: string): com.carto.core.Variant;
+                public setCustomParameter(param0: string, param1: com.carto.core.Variant): void;
                 public toString(): string;
                 public swigGetRawPtr(): number;
                 public delete(): void;
@@ -3490,17 +3913,25 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class ReverseGeocodingRequestModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.ReverseGeocodingRequestModuleJNI>;
                 public static delete_ReverseGeocodingRequest(param0: number): void;
                 public static ReverseGeocodingRequest_setSearchRadius(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest, param2: number): void;
                 public static ReverseGeocodingRequest_toString(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest): string;
                 public static ReverseGeocodingRequest_swigGetRawPtr(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static ReverseGeocodingRequest_setCustomParameter(
+                    param0: number,
+                    param1: com.carto.geocoding.ReverseGeocodingRequest,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.Variant
+                ): void;
                 public static new_ReverseGeocodingRequest(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPos): number;
                 public static ReverseGeocodingRequest_getLocation(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static ReverseGeocodingRequest_getCustomParameter(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest, param2: string): number;
                 public static ReverseGeocodingRequest_getProjection(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest): number;
                 public constructor();
                 public static ReverseGeocodingRequest_getSearchRadius(param0: number, param1: com.carto.geocoding.ReverseGeocodingRequest): number;
@@ -3509,9 +3940,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class ReverseGeocodingService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.ReverseGeocodingService>;
                 public swigCMemOwn: boolean;
@@ -3535,9 +3966,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class ReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.ReverseGeocodingServiceModuleJNI>;
                 public static ReverseGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.ReverseGeocodingService): number;
@@ -3550,7 +3981,12 @@ declare module com {
                 public static ReverseGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.ReverseGeocodingService, param2: string): void;
                 public static delete_ReverseGeocodingService(param0: number): void;
                 public static ReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.ReverseGeocodingService): any;
-                public static ReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.ReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static ReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.ReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_ReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.ReverseGeocodingService, param1: number): number;
                 public static ReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.ReverseGeocodingService): string;
                 public static new_ReverseGeocodingService(): number;
@@ -3559,9 +3995,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class TomTomOnlineGeocodingService extends com.carto.geocoding.GeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.TomTomOnlineGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3593,9 +4029,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class TomTomOnlineGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.TomTomOnlineGeocodingServiceModuleJNI>;
                 public static new_TomTomOnlineGeocodingService(param0: string): number;
@@ -3605,7 +4041,12 @@ declare module com {
                 public static SwigDirector_TomTomOnlineGeocodingService_getMaxResults(param0: com.carto.geocoding.TomTomOnlineGeocodingService): number;
                 public static TomTomOnlineGeocodingService_getMaxResults(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): number;
                 public static SwigDirector_TomTomOnlineGeocodingService_getLanguage(param0: com.carto.geocoding.TomTomOnlineGeocodingService): string;
-                public static TomTomOnlineGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static TomTomOnlineGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
                 public static TomTomOnlineGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): any;
                 public constructor();
                 public static SwigDirector_TomTomOnlineGeocodingService_setMaxResults(param0: com.carto.geocoding.TomTomOnlineGeocodingService, param1: number): void;
@@ -3616,28 +4057,45 @@ declare module com {
                 public static SwigDirector_TomTomOnlineGeocodingService_setAutocomplete(param0: com.carto.geocoding.TomTomOnlineGeocodingService, param1: boolean): void;
                 public static TomTomOnlineGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): string;
                 public static TomTomOnlineGeocodingService_change_ownership(param0: com.carto.geocoding.TomTomOnlineGeocodingService, param1: number, param2: boolean): void;
-                public static TomTomOnlineGeocodingService_setMaxResultsSwigExplicitTomTomOnlineGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: number): void;
+                public static TomTomOnlineGeocodingService_setMaxResultsSwigExplicitTomTomOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineGeocodingService,
+                    param2: number
+                ): void;
                 public static TomTomOnlineGeocodingService_isAutocomplete(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): boolean;
                 public static TomTomOnlineGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): number;
                 public static TomTomOnlineGeocodingService_setCustomServiceURL(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: string): void;
                 public static TomTomOnlineGeocodingService_setAutocomplete(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: boolean): void;
                 public static delete_TomTomOnlineGeocodingService(param0: number): void;
                 public static TomTomOnlineGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
-                public static TomTomOnlineGeocodingService_setAutocompleteSwigExplicitTomTomOnlineGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: boolean): void;
-                public static TomTomOnlineGeocodingService_setLanguageSwigExplicitTomTomOnlineGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: string): void;
+                public static TomTomOnlineGeocodingService_setAutocompleteSwigExplicitTomTomOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineGeocodingService,
+                    param2: boolean
+                ): void;
+                public static TomTomOnlineGeocodingService_setLanguageSwigExplicitTomTomOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineGeocodingService,
+                    param2: string
+                ): void;
                 public static TomTomOnlineGeocodingService_getLanguageSwigExplicitTomTomOnlineGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): string;
                 public static TomTomOnlineGeocodingService_getCustomServiceURL(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService): string;
                 public static SwigDirector_TomTomOnlineGeocodingService_setLanguage(param0: com.carto.geocoding.TomTomOnlineGeocodingService, param1: string): void;
                 public static TomTomOnlineGeocodingService_setMaxResults(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: number): void;
-                public static TomTomOnlineGeocodingService_calculateAddressesSwigExplicitTomTomOnlineGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+                public static TomTomOnlineGeocodingService_calculateAddressesSwigExplicitTomTomOnlineGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.GeocodingRequest
+                ): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class TomTomOnlineReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
                 public static class: java.lang.Class<com.carto.geocoding.TomTomOnlineReverseGeocodingService>;
                 public swigReleaseOwnership(): void;
@@ -3665,39 +4123,61 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geocoding {
+declare namespace com {
+    export namespace carto {
+        export namespace geocoding {
             export class TomTomOnlineReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geocoding.TomTomOnlineReverseGeocodingServiceModuleJNI>;
                 public static SwigDirector_TomTomOnlineReverseGeocodingService_setLanguage(param0: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param1: string): void;
-                public static TomTomOnlineReverseGeocodingService_getLanguageSwigExplicitTomTomOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService): string;
+                public static TomTomOnlineReverseGeocodingService_getLanguageSwigExplicitTomTomOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService
+                ): string;
                 public static TomTomOnlineReverseGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService): number;
                 public static TomTomOnlineReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService): string;
-                public static TomTomOnlineReverseGeocodingService_calculateAddressesSwigExplicitTomTomOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static TomTomOnlineReverseGeocodingService_calculateAddressesSwigExplicitTomTomOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static TomTomOnlineReverseGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param2: string): void;
                 public static TomTomOnlineReverseGeocodingService_setCustomServiceURL(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param2: string): void;
                 public static TomTomOnlineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static new_TomTomOnlineReverseGeocodingService(param0: string): number;
                 public constructor();
                 public static SwigDirector_TomTomOnlineReverseGeocodingService_getLanguage(param0: com.carto.geocoding.TomTomOnlineReverseGeocodingService): string;
-                public static TomTomOnlineReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+                public static TomTomOnlineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: com.carto.geocoding.ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_TomTomOnlineReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param1: number): number;
                 public static delete_TomTomOnlineReverseGeocodingService(param0: number): void;
-                public static TomTomOnlineReverseGeocodingService_setLanguageSwigExplicitTomTomOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param2: string): void;
+                public static TomTomOnlineReverseGeocodingService_setLanguageSwigExplicitTomTomOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static TomTomOnlineReverseGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService): string;
                 public static TomTomOnlineReverseGeocodingService_change_ownership(param0: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param1: number, param2: boolean): void;
                 public static TomTomOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService): string;
                 public static TomTomOnlineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.TomTomOnlineReverseGeocodingService): any;
-                public static TomTomOnlineReverseGeocodingService_director_connect(param0: com.carto.geocoding.TomTomOnlineReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
+                public static TomTomOnlineReverseGeocodingService_director_connect(
+                    param0: com.carto.geocoding.TomTomOnlineReverseGeocodingService,
+                    param1: number,
+                    param2: boolean,
+                    param3: boolean
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class DouglasPeuckerGeometrySimplifier extends com.carto.geometry.GeometrySimplifier {
                 public static class: java.lang.Class<com.carto.geometry.DouglasPeuckerGeometrySimplifier>;
                 public swigGetRawPtr(): number;
@@ -3716,9 +4196,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class DouglasPeuckerGeometrySimplifierModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.DouglasPeuckerGeometrySimplifierModuleJNI>;
                 public static delete_DouglasPeuckerGeometrySimplifier(param0: number): void;
@@ -3733,9 +4213,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class Feature extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.Feature>;
                 public swigCMemOwn: boolean;
@@ -3757,9 +4237,57 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
+            export class FeatureBuilder extends java.lang.Object {
+                public static class: java.lang.Class<com.carto.geometry.FeatureBuilder>;
+                public swigCMemOwn: boolean;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.FeatureBuilder;
+                public finalize(): void;
+                public constructor(param0: number, param1: boolean);
+                public swigGetClassName(): string;
+                public static getCPtr(param0: com.carto.geometry.FeatureBuilder): number;
+                public swigGetDirectorObject(): any;
+                public constructor();
+                public swigGetRawPtr(): number;
+                public getPropertyValue(param0: string): com.carto.core.Variant;
+                public delete(): void;
+                public setGeometry(param0: com.carto.geometry.Geometry): void;
+                public hashCode(): number;
+                public equals(param0: any): boolean;
+                public setPropertyValue(param0: string, param1: com.carto.core.Variant): void;
+                public buildFeature(): com.carto.geometry.Feature;
+                public getGeometry(): com.carto.geometry.Geometry;
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
+            export class FeatureBuilderModuleJNI extends java.lang.Object {
+                public static class: java.lang.Class<com.carto.geometry.FeatureBuilderModuleJNI>;
+                public static delete_FeatureBuilder(param0: number): void;
+                public static new_FeatureBuilder(): number;
+                public static FeatureBuilder_swigGetClassName(param0: number, param1: com.carto.geometry.FeatureBuilder): string;
+                public static FeatureBuilder_setGeometry(param0: number, param1: com.carto.geometry.FeatureBuilder, param2: number, param3: com.carto.geometry.Geometry): void;
+                public static FeatureBuilder_getGeometry(param0: number, param1: com.carto.geometry.FeatureBuilder): number;
+                public static FeatureBuilder_swigGetRawPtr(param0: number, param1: com.carto.geometry.FeatureBuilder): number;
+                public static FeatureBuilder_getPropertyValue(param0: number, param1: com.carto.geometry.FeatureBuilder, param2: string): number;
+                public static FeatureBuilder_swigGetDirectorObject(param0: number, param1: com.carto.geometry.FeatureBuilder): any;
+                public static FeatureBuilder_setPropertyValue(param0: number, param1: com.carto.geometry.FeatureBuilder, param2: string, param3: number, param4: com.carto.core.Variant): void;
+                public static FeatureBuilder_buildFeature(param0: number, param1: com.carto.geometry.FeatureBuilder): number;
+                public constructor();
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class FeatureCollection extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.FeatureCollection>;
                 public swigCMemOwn: boolean;
@@ -3779,9 +4307,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class FeatureCollectionModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.FeatureCollectionModuleJNI>;
                 public static delete_FeatureCollection(param0: number): void;
@@ -3797,9 +4325,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class FeatureModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.FeatureModuleJNI>;
                 public static new_FeatureVector__SWIG_1(param0: number): number;
@@ -3827,9 +4355,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class FeatureVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.FeatureVector>;
                 public swigCMemOwn: boolean;
@@ -3853,9 +4381,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeoJSONGeometryReader extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeoJSONGeometryReader>;
                 public swigCMemOwn: boolean;
@@ -3874,14 +4402,19 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeoJSONGeometryReaderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeoJSONGeometryReaderModuleJNI>;
                 public static delete_GeoJSONGeometryReader(param0: number): void;
                 public static GeoJSONGeometryReader_readFeature(param0: number, param1: com.carto.geometry.GeoJSONGeometryReader, param2: string): number;
-                public static GeoJSONGeometryReader_setTargetProjection(param0: number, param1: com.carto.geometry.GeoJSONGeometryReader, param2: number, param3: com.carto.projections.Projection): void;
+                public static GeoJSONGeometryReader_setTargetProjection(
+                    param0: number,
+                    param1: com.carto.geometry.GeoJSONGeometryReader,
+                    param2: number,
+                    param3: com.carto.projections.Projection
+                ): void;
                 public static GeoJSONGeometryReader_readGeometry(param0: number, param1: com.carto.geometry.GeoJSONGeometryReader, param2: string): number;
                 public static GeoJSONGeometryReader_readFeatureCollection(param0: number, param1: com.carto.geometry.GeoJSONGeometryReader, param2: string): number;
                 public static new_GeoJSONGeometryReader(): number;
@@ -3892,9 +4425,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeoJSONGeometryWriter extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeoJSONGeometryWriter>;
                 public swigCMemOwn: boolean;
@@ -3915,15 +4448,25 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeoJSONGeometryWriterModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeoJSONGeometryWriterModuleJNI>;
-                public static GeoJSONGeometryWriter_setSourceProjection(param0: number, param1: com.carto.geometry.GeoJSONGeometryWriter, param2: number, param3: com.carto.projections.Projection): void;
+                public static GeoJSONGeometryWriter_setSourceProjection(
+                    param0: number,
+                    param1: com.carto.geometry.GeoJSONGeometryWriter,
+                    param2: number,
+                    param3: com.carto.projections.Projection
+                ): void;
                 public static GeoJSONGeometryWriter_getSourceProjection(param0: number, param1: com.carto.geometry.GeoJSONGeometryWriter): number;
                 public static GeoJSONGeometryWriter_writeFeature(param0: number, param1: com.carto.geometry.GeoJSONGeometryWriter, param2: number, param3: com.carto.geometry.Feature): string;
-                public static GeoJSONGeometryWriter_writeFeatureCollection(param0: number, param1: com.carto.geometry.GeoJSONGeometryWriter, param2: number, param3: com.carto.geometry.FeatureCollection): string;
+                public static GeoJSONGeometryWriter_writeFeatureCollection(
+                    param0: number,
+                    param1: com.carto.geometry.GeoJSONGeometryWriter,
+                    param2: number,
+                    param3: com.carto.geometry.FeatureCollection
+                ): string;
                 public static delete_GeoJSONGeometryWriter(param0: number): void;
                 public static new_GeoJSONGeometryWriter(): number;
                 public static GeoJSONGeometryWriter_getZ(param0: number, param1: com.carto.geometry.GeoJSONGeometryWriter): boolean;
@@ -3935,9 +4478,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class Geometry extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.Geometry>;
                 public swigCMemOwn: boolean;
@@ -3958,9 +4501,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeometryModuleJNI>;
                 public static Geometry_swigGetClassName(param0: number, param1: com.carto.geometry.Geometry): string;
@@ -3987,9 +4530,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeometrySimplifier extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeometrySimplifier>;
                 public swigCMemOwn: boolean;
@@ -4008,9 +4551,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeometrySimplifierModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeometrySimplifierModuleJNI>;
                 public static GeometrySimplifier_swigGetRawPtr(param0: number, param1: com.carto.geometry.GeometrySimplifier): number;
@@ -4023,9 +4566,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class GeometryVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.GeometryVector>;
                 public swigCMemOwn: boolean;
@@ -4049,9 +4592,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class LineGeometry extends com.carto.geometry.Geometry {
                 public static class: java.lang.Class<com.carto.geometry.LineGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.Geometry;
@@ -4072,9 +4615,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class LineGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.LineGeometryModuleJNI>;
                 public static new_LineGeometry(param0: number, param1: com.carto.core.MapPosVector): number;
@@ -4103,9 +4646,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class LineGeometryVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.LineGeometryVector>;
                 public swigCMemOwn: boolean;
@@ -4129,9 +4672,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiGeometry extends com.carto.geometry.Geometry {
                 public static class: java.lang.Class<com.carto.geometry.MultiGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.Geometry;
@@ -4153,9 +4696,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.MultiGeometryModuleJNI>;
                 public static MultiGeometry_swigGetClassName(param0: number, param1: com.carto.geometry.MultiGeometry): string;
@@ -4173,9 +4716,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiLineGeometry extends com.carto.geometry.MultiGeometry {
                 public static class: java.lang.Class<com.carto.geometry.MultiLineGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.Geometry;
@@ -4199,9 +4742,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiLineGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.MultiLineGeometryModuleJNI>;
                 public static delete_MultiLineGeometry(param0: number): void;
@@ -4217,9 +4760,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiPointGeometry extends com.carto.geometry.MultiGeometry {
                 public static class: java.lang.Class<com.carto.geometry.MultiPointGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.Geometry;
@@ -4243,9 +4786,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiPointGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.MultiPointGeometryModuleJNI>;
                 public static new_MultiPointGeometry(param0: number, param1: com.carto.geometry.PointGeometryVector): number;
@@ -4261,9 +4804,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiPolygonGeometry extends com.carto.geometry.MultiGeometry {
                 public static class: java.lang.Class<com.carto.geometry.MultiPolygonGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.Geometry;
@@ -4287,9 +4830,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class MultiPolygonGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.MultiPolygonGeometryModuleJNI>;
                 public static MultiPolygonGeometry_swigGetDirectorObject(param0: number, param1: com.carto.geometry.MultiPolygonGeometry): any;
@@ -4305,9 +4848,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class PointGeometry extends com.carto.geometry.Geometry {
                 public static class: java.lang.Class<com.carto.geometry.PointGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.Geometry;
@@ -4328,9 +4871,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class PointGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.PointGeometryModuleJNI>;
                 public static PointGeometry_getPos(param0: number, param1: com.carto.geometry.PointGeometry): number;
@@ -4359,9 +4902,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class PointGeometryVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.PointGeometryVector>;
                 public swigCMemOwn: boolean;
@@ -4385,9 +4928,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class PolygonGeometry extends com.carto.geometry.Geometry {
                 public static class: java.lang.Class<com.carto.geometry.PolygonGeometry>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.PolygonGeometry;
@@ -4412,9 +4955,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class PolygonGeometryModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.PolygonGeometryModuleJNI>;
                 public static PolygonGeometry_getHoles(param0: number, param1: com.carto.geometry.PolygonGeometry): number;
@@ -4422,7 +4965,13 @@ declare module com {
                 public static PolygonGeometryVector_capacity(param0: number, param1: com.carto.geometry.PolygonGeometryVector): number;
                 public static delete_PolygonGeometry(param0: number): void;
                 public static PolygonGeometry_swigGetRawPtr(param0: number, param1: com.carto.geometry.PolygonGeometry): number;
-                public static PolygonGeometryVector_set(param0: number, param1: com.carto.geometry.PolygonGeometryVector, param2: number, param3: number, param4: com.carto.geometry.PolygonGeometry): void;
+                public static PolygonGeometryVector_set(
+                    param0: number,
+                    param1: com.carto.geometry.PolygonGeometryVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.geometry.PolygonGeometry
+                ): void;
                 public constructor();
                 public static new_PolygonGeometry__SWIG_1(param0: number, param1: com.carto.core.MapPosVector, param2: number, param3: com.carto.core.MapPosVectorVector): number;
                 public static PolygonGeometry_getCenterPos(param0: number, param1: com.carto.geometry.PolygonGeometry): number;
@@ -4447,9 +4996,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class PolygonGeometryVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.PolygonGeometryVector>;
                 public swigCMemOwn: boolean;
@@ -4473,9 +5022,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class VectorTileFeature extends com.carto.geometry.Feature {
                 public static class: java.lang.Class<com.carto.geometry.VectorTileFeature>;
                 public getId(): number;
@@ -4500,9 +5049,63 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
+            export class VectorTileFeatureBuilder extends com.carto.geometry.FeatureBuilder {
+                public static class: java.lang.Class<com.carto.geometry.VectorTileFeatureBuilder>;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.VectorTileFeatureBuilder;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.FeatureBuilder;
+                public getId(): number;
+                public finalize(): void;
+                public constructor(param0: number, param1: boolean);
+                public buildVectorTileFeature(): com.carto.geometry.VectorTileFeature;
+                public getLayerName(): string;
+                public swigGetClassName(): string;
+                public static getCPtr(param0: com.carto.geometry.FeatureBuilder): number;
+                public static getCPtr(param0: com.carto.geometry.VectorTileFeatureBuilder): number;
+                public swigGetDirectorObject(): any;
+                public constructor();
+                public swigGetRawPtr(): number;
+                public delete(): void;
+                public hashCode(): number;
+                public getMapTile(): com.carto.core.MapTile;
+                public setMapTile(param0: com.carto.core.MapTile): void;
+                public equals(param0: any): boolean;
+                public setId(param0: number): void;
+                public setLayerName(param0: string): void;
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
+            export class VectorTileFeatureBuilderModuleJNI extends java.lang.Object {
+                public static class: java.lang.Class<com.carto.geometry.VectorTileFeatureBuilderModuleJNI>;
+                public static VectorTileFeatureBuilder_getMapTile(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): number;
+                public static VectorTileFeatureBuilder_SWIGSmartPtrUpcast(param0: number): number;
+                public static VectorTileFeatureBuilder_setMapTile(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder, param2: number, param3: com.carto.core.MapTile): void;
+                public static VectorTileFeatureBuilder_setLayerName(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder, param2: string): void;
+                public static VectorTileFeatureBuilder_swigGetDirectorObject(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): any;
+                public constructor();
+                public static VectorTileFeatureBuilder_swigGetClassName(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): string;
+                public static new_VectorTileFeatureBuilder(): number;
+                public static VectorTileFeatureBuilder_swigGetRawPtr(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): number;
+                public static VectorTileFeatureBuilder_buildVectorTileFeature(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): number;
+                public static delete_VectorTileFeatureBuilder(param0: number): void;
+                public static VectorTileFeatureBuilder_setId(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder, param2: number): void;
+                public static VectorTileFeatureBuilder_getId(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): number;
+                public static VectorTileFeatureBuilder_getLayerName(param0: number, param1: com.carto.geometry.VectorTileFeatureBuilder): string;
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class VectorTileFeatureCollection extends com.carto.geometry.FeatureCollection {
                 public static class: java.lang.Class<com.carto.geometry.VectorTileFeatureCollection>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geometry.FeatureCollection;
@@ -4524,9 +5127,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class VectorTileFeatureCollectionModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.VectorTileFeatureCollectionModuleJNI>;
                 public static VectorTileFeatureCollection_getFeature(param0: number, param1: com.carto.geometry.VectorTileFeatureCollection, param2: number): number;
@@ -4542,15 +5145,24 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class VectorTileFeatureModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.VectorTileFeatureModuleJNI>;
                 public static VectorTileFeature_getMapTile(param0: number, param1: com.carto.geometry.VectorTileFeature): number;
                 public static VectorTileFeatureVector_size(param0: number, param1: com.carto.geometry.VectorTileFeatureVector): number;
                 public static delete_VectorTileFeatureVector(param0: number): void;
-                public static new_VectorTileFeature(param0: number, param1: number, param2: com.carto.core.MapTile, param3: string, param4: number, param5: com.carto.geometry.Geometry, param6: number, param7: com.carto.core.Variant): number;
+                public static new_VectorTileFeature(
+                    param0: number,
+                    param1: number,
+                    param2: com.carto.core.MapTile,
+                    param3: string,
+                    param4: number,
+                    param5: com.carto.geometry.Geometry,
+                    param6: number,
+                    param7: com.carto.core.Variant
+                ): number;
                 public static VectorTileFeature_getLayerName(param0: number, param1: com.carto.geometry.VectorTileFeature): string;
                 public static new_VectorTileFeatureVector__SWIG_1(param0: number): number;
                 public static VectorTileFeatureVector_swigGetRawPtr(param0: number, param1: com.carto.geometry.VectorTileFeatureVector): number;
@@ -4559,7 +5171,13 @@ declare module com {
                 public static VectorTileFeatureVector_capacity(param0: number, param1: com.carto.geometry.VectorTileFeatureVector): number;
                 public constructor();
                 public static VectorTileFeature_swigGetDirectorObject(param0: number, param1: com.carto.geometry.VectorTileFeature): any;
-                public static VectorTileFeatureVector_set(param0: number, param1: com.carto.geometry.VectorTileFeatureVector, param2: number, param3: number, param4: com.carto.geometry.VectorTileFeature): void;
+                public static VectorTileFeatureVector_set(
+                    param0: number,
+                    param1: com.carto.geometry.VectorTileFeatureVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.geometry.VectorTileFeature
+                ): void;
                 public static VectorTileFeature_SWIGSmartPtrUpcast(param0: number): number;
                 public static VectorTileFeature_swigGetRawPtr(param0: number, param1: com.carto.geometry.VectorTileFeature): number;
                 public static VectorTileFeatureVector_reserve(param0: number, param1: com.carto.geometry.VectorTileFeatureVector, param2: number): void;
@@ -4574,9 +5192,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class VectorTileFeatureVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.VectorTileFeatureVector>;
                 public swigCMemOwn: boolean;
@@ -4600,9 +5218,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKBGeometryReader extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKBGeometryReader>;
                 public swigCMemOwn: boolean;
@@ -4617,9 +5235,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKBGeometryReaderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKBGeometryReaderModuleJNI>;
                 public static new_WKBGeometryReader(): number;
@@ -4631,9 +5249,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKBGeometryWriter extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKBGeometryWriter>;
                 public swigCMemOwn: boolean;
@@ -4652,9 +5270,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKBGeometryWriterModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKBGeometryWriterModuleJNI>;
                 public static WKBGeometryWriter_setBigEndian(param0: number, param1: com.carto.geometry.WKBGeometryWriter, param2: boolean): void;
@@ -4670,9 +5288,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKTGeometryReader extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKTGeometryReader>;
                 public swigCMemOwn: boolean;
@@ -4687,9 +5305,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKTGeometryReaderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKTGeometryReaderModuleJNI>;
                 public static new_WKTGeometryReader(): number;
@@ -4701,9 +5319,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKTGeometryWriter extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKTGeometryWriter>;
                 public swigCMemOwn: boolean;
@@ -4720,9 +5338,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module geometry {
+declare namespace com {
+    export namespace carto {
+        export namespace geometry {
             export class WKTGeometryWriterModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.geometry.WKTGeometryWriterModuleJNI>;
                 public static WKTGeometryWriter_getZ(param0: number, param1: com.carto.geometry.WKTGeometryWriter): boolean;
@@ -4736,9 +5354,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class Bitmap extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.graphics.Bitmap>;
                 public swigCMemOwn: boolean;
@@ -4767,9 +5385,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class BitmapModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.graphics.BitmapModuleJNI>;
                 public static COLOR_FORMAT_RGB_565_get(): number;
@@ -4801,9 +5419,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class Color extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.graphics.Color>;
                 public swigCMemOwn: boolean;
@@ -4828,9 +5446,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class ColorFormat {
                 public static class: java.lang.Class<com.carto.graphics.ColorFormat>;
                 public static COLOR_FORMAT_UNSUPPORTED: com.carto.graphics.ColorFormat;
@@ -4847,7 +5465,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.graphics.ColorFormat;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module ColorFormat {
+            export namespace ColorFormat {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.graphics.ColorFormat.SwigNext>;
                 }
@@ -4856,9 +5474,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class ColorModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.graphics.ColorModuleJNI>;
                 public static new_Color__SWIG_2(param0: number): number;
@@ -4880,9 +5498,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class ViewState extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.graphics.ViewState>;
                 public swigCMemOwn: boolean;
@@ -4915,9 +5533,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module graphics {
+declare namespace com {
+    export namespace carto {
+        export namespace graphics {
             export class ViewStateModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.graphics.ViewStateModuleJNI>;
                 public static ViewState_getRotation(param0: number, param1: com.carto.graphics.ViewState): number;
@@ -4945,9 +5563,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoBaseMapBuildingRenderMode {
                 public static class: java.lang.Class<com.carto.layers.CartoBaseMapBuildingRenderMode>;
                 public static CARTO_BASEMAP_BUILDING_RENDER_MODE_NONE: com.carto.layers.CartoBaseMapBuildingRenderMode;
@@ -4959,7 +5577,7 @@ declare module com {
                 public static values(): native.Array<com.carto.layers.CartoBaseMapBuildingRenderMode>;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module CartoBaseMapBuildingRenderMode {
+            export namespace CartoBaseMapBuildingRenderMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.CartoBaseMapBuildingRenderMode.SwigNext>;
                 }
@@ -4968,9 +5586,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoBaseMapPOIRenderMode {
                 public static class: java.lang.Class<com.carto.layers.CartoBaseMapPOIRenderMode>;
                 public static CARTO_BASEMAP_POI_RENDER_MODE_NONE: com.carto.layers.CartoBaseMapPOIRenderMode;
@@ -4982,7 +5600,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static valueOf(param0: string): com.carto.layers.CartoBaseMapPOIRenderMode;
             }
-            export module CartoBaseMapPOIRenderMode {
+            export namespace CartoBaseMapPOIRenderMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.CartoBaseMapPOIRenderMode.SwigNext>;
                 }
@@ -4991,9 +5609,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoBaseMapStyle {
                 public static class: java.lang.Class<com.carto.layers.CartoBaseMapStyle>;
                 public static CARTO_BASEMAP_STYLE_POSITRON: com.carto.layers.CartoBaseMapStyle;
@@ -5005,7 +5623,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.layers.CartoBaseMapStyle;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module CartoBaseMapStyle {
+            export namespace CartoBaseMapStyle {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.CartoBaseMapStyle.SwigNext>;
                 }
@@ -5014,9 +5632,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoOfflineVectorTileLayer extends com.carto.layers.CartoVectorTileLayer {
                 public static class: java.lang.Class<com.carto.layers.CartoOfflineVectorTileLayer>;
                 public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage);
@@ -5046,13 +5664,18 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoOfflineVectorTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.CartoOfflineVectorTileLayerModuleJNI>;
                 public static new_CartoOfflineVectorTileLayer__SWIG_0(param0: number, param1: com.carto.packagemanager.CartoPackageManager, param2: number): number;
-                public static new_CartoOfflineVectorTileLayer__SWIG_1(param0: number, param1: com.carto.packagemanager.CartoPackageManager, param2: number, param3: com.carto.utils.AssetPackage): number;
+                public static new_CartoOfflineVectorTileLayer__SWIG_1(
+                    param0: number,
+                    param1: com.carto.packagemanager.CartoPackageManager,
+                    param2: number,
+                    param3: com.carto.utils.AssetPackage
+                ): number;
                 public static CartoOfflineVectorTileLayer_swigGetRawPtr(param0: number, param1: com.carto.layers.CartoOfflineVectorTileLayer): number;
                 public static CartoOfflineVectorTileLayer_SWIGSmartPtrUpcast(param0: number): number;
                 public static delete_CartoOfflineVectorTileLayer(param0: number): void;
@@ -5064,9 +5687,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoOnlineRasterTileLayer extends com.carto.layers.RasterTileLayer {
                 public static class: java.lang.Class<com.carto.layers.CartoOnlineRasterTileLayer>;
                 public static getCPtr(param0: com.carto.layers.TileLayer): number;
@@ -5090,9 +5713,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoOnlineRasterTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.CartoOnlineRasterTileLayerModuleJNI>;
                 public static delete_CartoOnlineRasterTileLayer(param0: number): void;
@@ -5107,9 +5730,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoOnlineVectorTileLayer extends com.carto.layers.CartoVectorTileLayer {
                 public static class: java.lang.Class<com.carto.layers.CartoOnlineVectorTileLayer>;
                 public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage);
@@ -5141,9 +5764,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoOnlineVectorTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.CartoOnlineVectorTileLayerModuleJNI>;
                 public static CartoOnlineVectorTileLayer_swigGetRawPtr(param0: number, param1: com.carto.layers.CartoOnlineVectorTileLayer): number;
@@ -5161,9 +5784,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoVectorTileLayer extends com.carto.layers.VectorTileLayer {
                 public static class: java.lang.Class<com.carto.layers.CartoVectorTileLayer>;
                 public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage);
@@ -5200,9 +5823,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class CartoVectorTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.CartoVectorTileLayerModuleJNI>;
                 public static CartoVectorTileLayer_getBuildingRenderMode(param0: number, param1: com.carto.layers.CartoVectorTileLayer): number;
@@ -5221,7 +5844,13 @@ declare module com {
                 public static CartoVectorTileLayer_getPOIRenderMode(param0: number, param1: com.carto.layers.CartoVectorTileLayer): number;
                 public static delete_CartoVectorTileLayer(param0: number): void;
                 public static CartoVectorTileLayer_swigGetDirectorObject(param0: number, param1: com.carto.layers.CartoVectorTileLayer): any;
-                public static new_CartoVectorTileLayer__SWIG_2(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.utils.AssetPackage, param4: string): number;
+                public static new_CartoVectorTileLayer__SWIG_2(
+                    param0: number,
+                    param1: com.carto.datasources.TileDataSource,
+                    param2: number,
+                    param3: com.carto.utils.AssetPackage,
+                    param4: string
+                ): number;
                 public static CartoVectorTileLayer_setLanguage(param0: number, param1: com.carto.layers.CartoVectorTileLayer, param2: string): void;
                 public static CartoVectorTileLayer_getFallbackLanguage(param0: number, param1: com.carto.layers.CartoVectorTileLayer): string;
                 public static CartoVectorTileLayer_setFallbackLanguage(param0: number, param1: com.carto.layers.CartoVectorTileLayer, param2: string): void;
@@ -5230,9 +5859,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class ClusterBuilderMode {
                 public static class: java.lang.Class<com.carto.layers.ClusterBuilderMode>;
                 public static CLUSTER_BUILDER_MODE_ELEMENTS: com.carto.layers.ClusterBuilderMode;
@@ -5243,7 +5872,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static valueOf(param0: string): com.carto.layers.ClusterBuilderMode;
             }
-            export module ClusterBuilderMode {
+            export namespace ClusterBuilderMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.ClusterBuilderMode.SwigNext>;
                 }
@@ -5252,9 +5881,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class ClusterElementBuilder extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.ClusterElementBuilder>;
                 public swigCMemOwn: boolean;
@@ -5278,26 +5907,52 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class ClusterElementBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.ClusterElementBuilderModuleJNI>;
                 public static ClusterElementBuilder_getBuilderMode(param0: number, param1: com.carto.layers.ClusterElementBuilder): number;
                 public static ClusterElementBuilder_change_ownership(param0: com.carto.layers.ClusterElementBuilder, param1: number, param2: boolean): void;
                 public static ClusterElementBuilder_swigGetDirectorObject(param0: number, param1: com.carto.layers.ClusterElementBuilder): any;
-                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_1(param0: number, param1: com.carto.layers.ClusterElementBuilder, param2: number, param3: com.carto.core.MapPos, param4: number, param5: com.carto.vectorelements.VectorElementVector): number;
+                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_1(
+                    param0: number,
+                    param1: com.carto.layers.ClusterElementBuilder,
+                    param2: number,
+                    param3: com.carto.core.MapPos,
+                    param4: number,
+                    param5: com.carto.vectorelements.VectorElementVector
+                ): number;
                 public static SwigDirector_ClusterElementBuilder_buildClusterElement__SWIG_0(param0: com.carto.layers.ClusterElementBuilder, param1: number, param2: number): number;
                 public static delete_ClusterElementBuilder(param0: number): void;
-                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_0(param0: number, param1: com.carto.layers.ClusterElementBuilder, param2: number, param3: com.carto.core.MapPos, param4: number): number;
+                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_0(
+                    param0: number,
+                    param1: com.carto.layers.ClusterElementBuilder,
+                    param2: number,
+                    param3: com.carto.core.MapPos,
+                    param4: number
+                ): number;
                 public static ClusterElementBuilder_getBuilderModeSwigExplicitClusterElementBuilder(param0: number, param1: com.carto.layers.ClusterElementBuilder): number;
-                public static ClusterElementBuilder_buildClusterElement__SWIG_1(param0: number, param1: com.carto.layers.ClusterElementBuilder, param2: number, param3: com.carto.core.MapPos, param4: number, param5: com.carto.vectorelements.VectorElementVector): number;
+                public static ClusterElementBuilder_buildClusterElement__SWIG_1(
+                    param0: number,
+                    param1: com.carto.layers.ClusterElementBuilder,
+                    param2: number,
+                    param3: com.carto.core.MapPos,
+                    param4: number,
+                    param5: com.carto.vectorelements.VectorElementVector
+                ): number;
                 public constructor();
                 public static ClusterElementBuilder_swigGetRawPtr(param0: number, param1: com.carto.layers.ClusterElementBuilder): number;
                 public static ClusterElementBuilder_swigGetClassName(param0: number, param1: com.carto.layers.ClusterElementBuilder): string;
                 public static SwigDirector_ClusterElementBuilder_buildClusterElement__SWIG_1(param0: com.carto.layers.ClusterElementBuilder, param1: number, param2: number): number;
                 public static SwigDirector_ClusterElementBuilder_getBuilderMode(param0: com.carto.layers.ClusterElementBuilder): number;
-                public static ClusterElementBuilder_buildClusterElement__SWIG_0(param0: number, param1: com.carto.layers.ClusterElementBuilder, param2: number, param3: com.carto.core.MapPos, param4: number): number;
+                public static ClusterElementBuilder_buildClusterElement__SWIG_0(
+                    param0: number,
+                    param1: com.carto.layers.ClusterElementBuilder,
+                    param2: number,
+                    param3: com.carto.core.MapPos,
+                    param4: number
+                ): number;
                 public static new_ClusterElementBuilder(): number;
                 public static ClusterElementBuilder_director_connect(param0: com.carto.layers.ClusterElementBuilder, param1: number, param2: boolean, param3: boolean): void;
             }
@@ -5305,9 +5960,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class ClusteredVectorLayer extends com.carto.layers.VectorLayer {
                 public static class: java.lang.Class<com.carto.layers.ClusteredVectorLayer>;
                 public expandCluster(param0: com.carto.vectorelements.VectorElement, param1: number): boolean;
@@ -5338,9 +5993,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class ClusteredVectorLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.ClusteredVectorLayerModuleJNI>;
                 public static ClusteredVectorLayer_swigGetDirectorObject(param0: number, param1: com.carto.layers.ClusteredVectorLayer): any;
@@ -5358,15 +6013,21 @@ declare module com {
                 public static ClusteredVectorLayer_getMinimumClusterDistance(param0: number, param1: com.carto.layers.ClusteredVectorLayer): number;
                 public static ClusteredVectorLayer_SWIGSmartPtrUpcast(param0: number): number;
                 public static ClusteredVectorLayer_getMaximumClusterZoom(param0: number, param1: com.carto.layers.ClusteredVectorLayer): number;
-                public static ClusteredVectorLayer_expandCluster(param0: number, param1: com.carto.layers.ClusteredVectorLayer, param2: number, param3: com.carto.vectorelements.VectorElement, param4: number): boolean;
+                public static ClusteredVectorLayer_expandCluster(
+                    param0: number,
+                    param1: com.carto.layers.ClusteredVectorLayer,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement,
+                    param4: number
+                ): boolean;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class EditableVectorLayer extends com.carto.layers.VectorLayer {
                 public static class: java.lang.Class<com.carto.layers.EditableVectorLayer>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.EditableVectorLayer;
@@ -5391,13 +6052,18 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class EditableVectorLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.EditableVectorLayerModuleJNI>;
                 public static delete_EditableVectorLayer(param0: number): void;
-                public static EditableVectorLayer_setVectorEditEventListener(param0: number, param1: com.carto.layers.EditableVectorLayer, param2: number, param3: com.carto.layers.VectorEditEventListener): void;
+                public static EditableVectorLayer_setVectorEditEventListener(
+                    param0: number,
+                    param1: com.carto.layers.EditableVectorLayer,
+                    param2: number,
+                    param3: com.carto.layers.VectorEditEventListener
+                ): void;
                 public static EditableVectorLayer_swigGetDirectorObject(param0: number, param1: com.carto.layers.EditableVectorLayer): any;
                 public static EditableVectorLayer_getSelectedVectorElement(param0: number, param1: com.carto.layers.EditableVectorLayer): number;
                 public static EditableVectorLayer_SWIGSmartPtrUpcast(param0: number): number;
@@ -5405,16 +6071,71 @@ declare module com {
                 public static EditableVectorLayer_swigGetClassName(param0: number, param1: com.carto.layers.EditableVectorLayer): string;
                 public static new_EditableVectorLayer(param0: number, param1: com.carto.datasources.VectorDataSource): number;
                 public static EditableVectorLayer_getVectorEditEventListener(param0: number, param1: com.carto.layers.EditableVectorLayer): number;
-                public static EditableVectorLayer_setSelectedVectorElement(param0: number, param1: com.carto.layers.EditableVectorLayer, param2: number, param3: com.carto.vectorelements.VectorElement): void;
+                public static EditableVectorLayer_setSelectedVectorElement(
+                    param0: number,
+                    param1: com.carto.layers.EditableVectorLayer,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): void;
                 public constructor();
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
+            export class HillshadeRasterTileLayer extends com.carto.layers.RasterTileLayer {
+                public static class: java.lang.Class<com.carto.layers.HillshadeRasterTileLayer>;
+                public static getCPtr(param0: com.carto.layers.TileLayer): number;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.RasterTileLayer;
+                public finalize(): void;
+                public constructor(param0: number, param1: boolean);
+                public swigGetClassName(): string;
+                public getContrast(): number;
+                public static getCPtr(param0: com.carto.layers.RasterTileLayer): number;
+                public swigGetDirectorObject(): any;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.TileLayer;
+                public swigGetRawPtr(): number;
+                public constructor(param0: com.carto.datasources.TileDataSource);
+                public static getCPtr(param0: com.carto.layers.Layer): number;
+                public delete(): void;
+                public getHeightScale(): number;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.HillshadeRasterTileLayer;
+                public setContrast(param0: number): void;
+                public setHeightScale(param0: number): void;
+                public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.Layer;
+                public static getCPtr(param0: com.carto.layers.HillshadeRasterTileLayer): number;
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
+            export class HillshadeRasterTileLayerModuleJNI extends java.lang.Object {
+                public static class: java.lang.Class<com.carto.layers.HillshadeRasterTileLayerModuleJNI>;
+                public static HillshadeRasterTileLayer_getHeightScale(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer): number;
+                public static HillshadeRasterTileLayer_SWIGSmartPtrUpcast(param0: number): number;
+                public static new_HillshadeRasterTileLayer(param0: number, param1: com.carto.datasources.TileDataSource): number;
+                public static delete_HillshadeRasterTileLayer(param0: number): void;
+                public static HillshadeRasterTileLayer_swigGetClassName(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer): string;
+                public static HillshadeRasterTileLayer_setHeightScale(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer, param2: number): void;
+                public static HillshadeRasterTileLayer_getContrast(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer): number;
+                public static HillshadeRasterTileLayer_swigGetDirectorObject(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer): any;
+                public static HillshadeRasterTileLayer_setContrast(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer, param2: number): void;
+                public static HillshadeRasterTileLayer_swigGetRawPtr(param0: number, param1: com.carto.layers.HillshadeRasterTileLayer): number;
+                public constructor();
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class Layer extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.Layer>;
                 public swigCMemOwn: boolean;
@@ -5451,9 +6172,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class LayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.LayerModuleJNI>;
                 public static LayerVector_get(param0: number, param1: com.carto.layers.LayerVector, param2: number): number;
@@ -5474,7 +6195,15 @@ declare module com {
                 public static Layer_swigGetClassName(param0: number, param1: com.carto.layers.Layer): string;
                 public static Layer_getMetaData(param0: number, param1: com.carto.layers.Layer): number;
                 public static LayerVector_reserve(param0: number, param1: com.carto.layers.LayerVector, param2: number): void;
-                public static Layer_simulateClick(param0: number, param1: com.carto.layers.Layer, param2: number, param3: number, param4: com.carto.core.ScreenPos, param5: number, param6: com.carto.graphics.ViewState): void;
+                public static Layer_simulateClick(
+                    param0: number,
+                    param1: com.carto.layers.Layer,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.core.ScreenPos,
+                    param5: number,
+                    param6: com.carto.graphics.ViewState
+                ): void;
                 public static Layer_getMetaDataElement(param0: number, param1: com.carto.layers.Layer, param2: string): number;
                 public static Layer_setVisibleZoomRange(param0: number, param1: com.carto.layers.Layer, param2: number, param3: com.carto.core.MapRange): void;
                 public static LayerVector_size(param0: number, param1: com.carto.layers.LayerVector): number;
@@ -5496,9 +6225,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class LayerVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.LayerVector>;
                 public swigCMemOwn: boolean;
@@ -5522,9 +6251,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class NMLModelLODTreeEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.NMLModelLODTreeEventListenerModuleJNI>;
                 public constructor();
@@ -5533,9 +6262,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class NMLModelLODTreeLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.NMLModelLODTreeLayerModuleJNI>;
                 public constructor();
@@ -5544,9 +6273,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class RasterTileEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.RasterTileEventListener>;
                 public swigCMemOwn: boolean;
@@ -5568,16 +6297,26 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class RasterTileEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.RasterTileEventListenerModuleJNI>;
-                public static RasterTileEventListener_onRasterTileClicked(param0: number, param1: com.carto.layers.RasterTileEventListener, param2: number, param3: com.carto.ui.RasterTileClickInfo): boolean;
+                public static RasterTileEventListener_onRasterTileClicked(
+                    param0: number,
+                    param1: com.carto.layers.RasterTileEventListener,
+                    param2: number,
+                    param3: com.carto.ui.RasterTileClickInfo
+                ): boolean;
                 public static RasterTileEventListener_swigGetClassName(param0: number, param1: com.carto.layers.RasterTileEventListener): string;
                 public static RasterTileEventListener_swigGetDirectorObject(param0: number, param1: com.carto.layers.RasterTileEventListener): any;
                 public static RasterTileEventListener_swigGetRawPtr(param0: number, param1: com.carto.layers.RasterTileEventListener): number;
-                public static RasterTileEventListener_onRasterTileClickedSwigExplicitRasterTileEventListener(param0: number, param1: com.carto.layers.RasterTileEventListener, param2: number, param3: com.carto.ui.RasterTileClickInfo): boolean;
+                public static RasterTileEventListener_onRasterTileClickedSwigExplicitRasterTileEventListener(
+                    param0: number,
+                    param1: com.carto.layers.RasterTileEventListener,
+                    param2: number,
+                    param3: com.carto.ui.RasterTileClickInfo
+                ): boolean;
                 public static SwigDirector_RasterTileEventListener_onRasterTileClicked(param0: com.carto.layers.RasterTileEventListener, param1: number): boolean;
                 public static new_RasterTileEventListener(): number;
                 public static RasterTileEventListener_director_connect(param0: com.carto.layers.RasterTileEventListener, param1: number, param2: boolean, param3: boolean): void;
@@ -5589,17 +6328,42 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
+            export class RasterTileFilterMode {
+                public static class: java.lang.Class<com.carto.layers.RasterTileFilterMode>;
+                public static RASTER_TILE_FILTER_MODE_NEAREST: com.carto.layers.RasterTileFilterMode;
+                public static RASTER_TILE_FILTER_MODE_BILINEAR: com.carto.layers.RasterTileFilterMode;
+                public static RASTER_TILE_FILTER_MODE_BICUBIC: com.carto.layers.RasterTileFilterMode;
+                public swigValue(): number;
+                public static values(): native.Array<com.carto.layers.RasterTileFilterMode>;
+                public static swigToEnum(param0: number): com.carto.layers.RasterTileFilterMode;
+                public static valueOf(param0: string): com.carto.layers.RasterTileFilterMode;
+                public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
+            }
+            export namespace RasterTileFilterMode {
+                export class SwigNext extends java.lang.Object {
+                    public static class: java.lang.Class<com.carto.layers.RasterTileFilterMode.SwigNext>;
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class RasterTileLayer extends com.carto.layers.TileLayer {
                 public static class: java.lang.Class<com.carto.layers.RasterTileLayer>;
+                public getTileFilterMode(): com.carto.layers.RasterTileFilterMode;
                 public getTextureCacheCapacity(): number;
                 public static getCPtr(param0: com.carto.layers.TileLayer): number;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.layers.RasterTileLayer;
                 public finalize(): void;
                 public constructor(param0: number, param1: boolean);
                 public swigGetClassName(): string;
+                public setTileFilterMode(param0: com.carto.layers.RasterTileFilterMode): void;
                 public getRasterTileEventListener(): com.carto.layers.RasterTileEventListener;
                 public static getCPtr(param0: com.carto.layers.RasterTileLayer): number;
                 public swigGetDirectorObject(): any;
@@ -5616,9 +6380,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class RasterTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.RasterTileLayerModuleJNI>;
                 public static RasterTileLayer_SWIGSmartPtrUpcast(param0: number): number;
@@ -5626,20 +6390,27 @@ declare module com {
                 public static RasterTileLayer_swigGetDirectorObject(param0: number, param1: com.carto.layers.RasterTileLayer): any;
                 public static RasterTileLayer_swigGetClassName(param0: number, param1: com.carto.layers.RasterTileLayer): string;
                 public static RasterTileLayer_setTextureCacheCapacity(param0: number, param1: com.carto.layers.RasterTileLayer, param2: number): void;
+                public static RasterTileLayer_setRasterTileEventListener(
+                    param0: number,
+                    param1: com.carto.layers.RasterTileLayer,
+                    param2: number,
+                    param3: com.carto.layers.RasterTileEventListener
+                ): void;
+                public constructor();
+                public static RasterTileLayer_setTileFilterMode(param0: number, param1: com.carto.layers.RasterTileLayer, param2: number): void;
                 public static RasterTileLayer_swigGetRawPtr(param0: number, param1: com.carto.layers.RasterTileLayer): number;
                 public static RasterTileLayer_getTextureCacheCapacity(param0: number, param1: com.carto.layers.RasterTileLayer): number;
+                public static RasterTileLayer_getTileFilterMode(param0: number, param1: com.carto.layers.RasterTileLayer): number;
                 public static RasterTileLayer_getRasterTileEventListener(param0: number, param1: com.carto.layers.RasterTileLayer): number;
                 public static delete_RasterTileLayer(param0: number): void;
-                public static RasterTileLayer_setRasterTileEventListener(param0: number, param1: com.carto.layers.RasterTileLayer, param2: number, param3: com.carto.layers.RasterTileEventListener): void;
-                public constructor();
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class SolidLayer extends com.carto.layers.Layer {
                 public static class: java.lang.Class<com.carto.layers.SolidLayer>;
                 public setBitmap(param0: com.carto.graphics.Bitmap): void;
@@ -5666,9 +6437,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class SolidLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.SolidLayerModuleJNI>;
                 public static SolidLayer_swigGetRawPtr(param0: number, param1: com.carto.layers.SolidLayer): number;
@@ -5691,9 +6462,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TileLayer extends com.carto.layers.Layer {
                 public static class: java.lang.Class<com.carto.layers.TileLayer>;
                 public setUTFGridEventListener(param0: com.carto.layers.UTFGridEventListener): void;
@@ -5737,9 +6508,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.TileLayerModuleJNI>;
                 public static TileLayer_clearTileCaches(param0: number, param1: com.carto.layers.TileLayer, param2: boolean): void;
@@ -5779,9 +6550,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TileLoadListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.TileLoadListener>;
                 public swigCMemOwn: boolean;
@@ -5804,9 +6575,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TileLoadListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.TileLoadListenerModuleJNI>;
                 public static TileLoadListener_onPreloadingTilesLoadedSwigExplicitTileLoadListener(param0: number, param1: com.carto.layers.TileLoadListener): void;
@@ -5828,9 +6599,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TileSubstitutionPolicy {
                 public static class: java.lang.Class<com.carto.layers.TileSubstitutionPolicy>;
                 public static TILE_SUBSTITUTION_POLICY_ALL: com.carto.layers.TileSubstitutionPolicy;
@@ -5842,7 +6613,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.layers.TileSubstitutionPolicy;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module TileSubstitutionPolicy {
+            export namespace TileSubstitutionPolicy {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.TileSubstitutionPolicy.SwigNext>;
                 }
@@ -5851,9 +6622,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TorqueTileLayer extends com.carto.layers.VectorTileLayer {
                 public static class: java.lang.Class<com.carto.layers.TorqueTileLayer>;
                 public static getCPtr(param0: com.carto.layers.TorqueTileLayer): number;
@@ -5878,9 +6649,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class TorqueTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.TorqueTileLayerModuleJNI>;
                 public static TorqueTileLayer_swigGetClassName(param0: number, param1: com.carto.layers.TorqueTileLayer): string;
@@ -5896,9 +6667,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class UTFGridEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.UTFGridEventListener>;
                 public swigCMemOwn: boolean;
@@ -5920,9 +6691,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class UTFGridEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.UTFGridEventListenerModuleJNI>;
                 public static UTFGridEventListener_swigGetRawPtr(param0: number, param1: com.carto.layers.UTFGridEventListener): number;
@@ -5933,7 +6704,12 @@ declare module com {
                 public static UTFGridEventListener_onUTFGridClicked(param0: number, param1: com.carto.layers.UTFGridEventListener, param2: number, param3: com.carto.ui.UTFGridClickInfo): boolean;
                 public static UTFGridEventListener_change_ownership(param0: com.carto.layers.UTFGridEventListener, param1: number, param2: boolean): void;
                 public static UTFGridEventListener_director_connect(param0: com.carto.layers.UTFGridEventListener, param1: number, param2: boolean, param3: boolean): void;
-                public static UTFGridEventListener_onUTFGridClickedSwigExplicitUTFGridEventListener(param0: number, param1: com.carto.layers.UTFGridEventListener, param2: number, param3: com.carto.ui.UTFGridClickInfo): boolean;
+                public static UTFGridEventListener_onUTFGridClickedSwigExplicitUTFGridEventListener(
+                    param0: number,
+                    param1: com.carto.layers.UTFGridEventListener,
+                    param2: number,
+                    param3: com.carto.ui.UTFGridClickInfo
+                ): boolean;
                 public constructor();
                 public static new_UTFGridEventListener(): number;
             }
@@ -5941,9 +6717,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorEditEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorEditEventListener>;
                 public swigCMemOwn: boolean;
@@ -5972,9 +6748,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorEditEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorEditEventListenerModuleJNI>;
                 public static VectorEditEventListener_onDragStart(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.ui.VectorElementDragInfo): number;
@@ -5984,36 +6760,89 @@ declare module com {
                 public static VectorEditEventListener_onDragMove(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.ui.VectorElementDragInfo): number;
                 public constructor();
                 public static SwigDirector_VectorEditEventListener_onDragEnd(param0: com.carto.layers.VectorEditEventListener, param1: number): number;
-                public static VectorEditEventListener_onDragMoveSwigExplicitVectorEditEventListener(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.ui.VectorElementDragInfo): number;
+                public static VectorEditEventListener_onDragMoveSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorElementDragInfo
+                ): number;
                 public static SwigDirector_VectorEditEventListener_onElementDelete(param0: com.carto.layers.VectorEditEventListener, param1: number): void;
                 public static SwigDirector_VectorEditEventListener_onElementSelect(param0: com.carto.layers.VectorEditEventListener, param1: number): boolean;
-                public static VectorEditEventListener_onElementSelect(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement): boolean;
-                public static VectorEditEventListener_onElementSelectSwigExplicitVectorEditEventListener(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement): boolean;
+                public static VectorEditEventListener_onElementSelect(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): boolean;
+                public static VectorEditEventListener_onElementSelectSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): boolean;
                 public static new_VectorEditEventListener(): number;
                 public static SwigDirector_VectorEditEventListener_onDragMove(param0: com.carto.layers.VectorEditEventListener, param1: number): number;
                 public static VectorEditEventListener_swigGetClassName(param0: number, param1: com.carto.layers.VectorEditEventListener): string;
-                public static VectorEditEventListener_onElementModify(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement, param4: number, param5: com.carto.geometry.Geometry): void;
+                public static VectorEditEventListener_onElementModify(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement,
+                    param4: number,
+                    param5: com.carto.geometry.Geometry
+                ): void;
                 public static VectorEditEventListener_director_connect(param0: com.carto.layers.VectorEditEventListener, param1: number, param2: boolean, param3: boolean): void;
                 public static SwigDirector_VectorEditEventListener_onSelectDragPointStyle(param0: com.carto.layers.VectorEditEventListener, param1: number, param2: number): number;
-                public static VectorEditEventListener_onElementDeselectedSwigExplicitVectorEditEventListener(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement): void;
-                public static VectorEditEventListener_onElementDeselected(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement): void;
+                public static VectorEditEventListener_onElementDeselectedSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): void;
+                public static VectorEditEventListener_onElementDeselected(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): void;
                 public static VectorEditEventListener_onDragEnd(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.ui.VectorElementDragInfo): number;
-                public static VectorEditEventListener_onSelectDragPointStyle(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement, param4: number): number;
+                public static VectorEditEventListener_onSelectDragPointStyle(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement,
+                    param4: number
+                ): number;
                 public static SwigDirector_VectorEditEventListener_onElementModify(param0: com.carto.layers.VectorEditEventListener, param1: number, param2: number): void;
                 public static VectorEditEventListener_change_ownership(param0: com.carto.layers.VectorEditEventListener, param1: number, param2: boolean): void;
-                public static VectorEditEventListener_onElementDelete(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.vectorelements.VectorElement): void;
+                public static VectorEditEventListener_onElementDelete(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.vectorelements.VectorElement
+                ): void;
                 public static delete_VectorEditEventListener(param0: number): void;
                 public static VectorEditEventListener_swigGetDirectorObject(param0: number, param1: com.carto.layers.VectorEditEventListener): any;
-                public static VectorEditEventListener_onDragStartSwigExplicitVectorEditEventListener(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.ui.VectorElementDragInfo): number;
-                public static VectorEditEventListener_onDragEndSwigExplicitVectorEditEventListener(param0: number, param1: com.carto.layers.VectorEditEventListener, param2: number, param3: com.carto.ui.VectorElementDragInfo): number;
+                public static VectorEditEventListener_onDragStartSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorElementDragInfo
+                ): number;
+                public static VectorEditEventListener_onDragEndSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorEditEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorElementDragInfo
+                ): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorElementDragPointStyle {
                 public static class: java.lang.Class<com.carto.layers.VectorElementDragPointStyle>;
                 public static VECTOR_ELEMENT_DRAG_POINT_STYLE_NORMAL: com.carto.layers.VectorElementDragPointStyle;
@@ -6025,7 +6854,7 @@ declare module com {
                 public static values(): native.Array<com.carto.layers.VectorElementDragPointStyle>;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module VectorElementDragPointStyle {
+            export namespace VectorElementDragPointStyle {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.VectorElementDragPointStyle.SwigNext>;
                 }
@@ -6034,9 +6863,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorElementDragResult {
                 public static class: java.lang.Class<com.carto.layers.VectorElementDragResult>;
                 public static VECTOR_ELEMENT_DRAG_RESULT_IGNORE: com.carto.layers.VectorElementDragResult;
@@ -6049,7 +6878,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.layers.VectorElementDragResult;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module VectorElementDragResult {
+            export namespace VectorElementDragResult {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.VectorElementDragResult.SwigNext>;
                 }
@@ -6058,9 +6887,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorElementEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorElementEventListener>;
                 public swigCMemOwn: boolean;
@@ -6082,17 +6911,27 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorElementEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorElementEventListenerModuleJNI>;
                 public static new_VectorElementEventListener(): number;
                 public static SwigDirector_VectorElementEventListener_onVectorElementClicked(param0: com.carto.layers.VectorElementEventListener, param1: number): boolean;
                 public static VectorElementEventListener_swigGetClassName(param0: number, param1: com.carto.layers.VectorElementEventListener): string;
                 public static delete_VectorElementEventListener(param0: number): void;
-                public static VectorElementEventListener_onVectorElementClicked(param0: number, param1: com.carto.layers.VectorElementEventListener, param2: number, param3: com.carto.ui.VectorElementClickInfo): boolean;
-                public static VectorElementEventListener_onVectorElementClickedSwigExplicitVectorElementEventListener(param0: number, param1: com.carto.layers.VectorElementEventListener, param2: number, param3: com.carto.ui.VectorElementClickInfo): boolean;
+                public static VectorElementEventListener_onVectorElementClicked(
+                    param0: number,
+                    param1: com.carto.layers.VectorElementEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorElementClickInfo
+                ): boolean;
+                public static VectorElementEventListener_onVectorElementClickedSwigExplicitVectorElementEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorElementEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorElementClickInfo
+                ): boolean;
                 public static VectorElementEventListener_director_connect(param0: com.carto.layers.VectorElementEventListener, param1: number, param2: boolean, param3: boolean): void;
                 public static VectorElementEventListener_swigGetRawPtr(param0: number, param1: com.carto.layers.VectorElementEventListener): number;
                 public static VectorElementEventListener_swigGetDirectorObject(param0: number, param1: com.carto.layers.VectorElementEventListener): any;
@@ -6103,9 +6942,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorLayer extends com.carto.layers.Layer {
                 public static class: java.lang.Class<com.carto.layers.VectorLayer>;
                 public static getCPtr(param0: com.carto.layers.VectorLayer): number;
@@ -6130,14 +6969,19 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorLayerModuleJNI>;
                 public static VectorLayer_swigGetClassName(param0: number, param1: com.carto.layers.VectorLayer): string;
                 public static delete_VectorLayer(param0: number): void;
-                public static VectorLayer_setVectorElementEventListener(param0: number, param1: com.carto.layers.VectorLayer, param2: number, param3: com.carto.layers.VectorElementEventListener): void;
+                public static VectorLayer_setVectorElementEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorLayer,
+                    param2: number,
+                    param3: com.carto.layers.VectorElementEventListener
+                ): void;
                 public static new_VectorLayer(param0: number, param1: com.carto.datasources.VectorDataSource): number;
                 public static VectorLayer_swigGetDirectorObject(param0: number, param1: com.carto.layers.VectorLayer): any;
                 public static VectorLayer_setZBuffering(param0: number, param1: com.carto.layers.VectorLayer, param2: boolean): void;
@@ -6153,9 +6997,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorTileEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorTileEventListener>;
                 public swigCMemOwn: boolean;
@@ -6177,16 +7021,26 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorTileEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorTileEventListenerModuleJNI>;
-                public static VectorTileEventListener_onVectorTileClickedSwigExplicitVectorTileEventListener(param0: number, param1: com.carto.layers.VectorTileEventListener, param2: number, param3: com.carto.ui.VectorTileClickInfo): boolean;
+                public static VectorTileEventListener_onVectorTileClickedSwigExplicitVectorTileEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorTileEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorTileClickInfo
+                ): boolean;
                 public static VectorTileEventListener_director_connect(param0: com.carto.layers.VectorTileEventListener, param1: number, param2: boolean, param3: boolean): void;
                 public static VectorTileEventListener_swigGetDirectorObject(param0: number, param1: com.carto.layers.VectorTileEventListener): any;
                 public static VectorTileEventListener_swigGetClassName(param0: number, param1: com.carto.layers.VectorTileEventListener): string;
-                public static VectorTileEventListener_onVectorTileClicked(param0: number, param1: com.carto.layers.VectorTileEventListener, param2: number, param3: com.carto.ui.VectorTileClickInfo): boolean;
+                public static VectorTileEventListener_onVectorTileClicked(
+                    param0: number,
+                    param1: com.carto.layers.VectorTileEventListener,
+                    param2: number,
+                    param3: com.carto.ui.VectorTileClickInfo
+                ): boolean;
                 public static delete_VectorTileEventListener(param0: number): void;
                 public static VectorTileEventListener_swigGetRawPtr(param0: number, param1: com.carto.layers.VectorTileEventListener): number;
                 public static new_VectorTileEventListener(): number;
@@ -6198,9 +7052,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorTileLayer extends com.carto.layers.TileLayer {
                 public static class: java.lang.Class<com.carto.layers.VectorTileLayer>;
                 public getTileCacheCapacity(): number;
@@ -6232,9 +7086,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorTileLayerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.layers.VectorTileLayerModuleJNI>;
                 public static VectorTileLayer_swigGetClassName(param0: number, param1: com.carto.layers.VectorTileLayer): string;
@@ -6256,16 +7110,21 @@ declare module com {
                 public static VectorTileLayer_getTileDecoder(param0: number, param1: com.carto.layers.VectorTileLayer): number;
                 public static VectorTileLayer_setLabelRenderOrder(param0: number, param1: com.carto.layers.VectorTileLayer, param2: number): void;
                 public static VectorTileLayer_setClickRadius(param0: number, param1: com.carto.layers.VectorTileLayer, param2: number): void;
-                public static VectorTileLayer_setVectorTileEventListener(param0: number, param1: com.carto.layers.VectorTileLayer, param2: number, param3: com.carto.layers.VectorTileEventListener): void;
+                public static VectorTileLayer_setVectorTileEventListener(
+                    param0: number,
+                    param1: com.carto.layers.VectorTileLayer,
+                    param2: number,
+                    param3: com.carto.layers.VectorTileEventListener
+                ): void;
                 public static VectorTileLayer_swigGetRawPtr(param0: number, param1: com.carto.layers.VectorTileLayer): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module layers {
+declare namespace com {
+    export namespace carto {
+        export namespace layers {
             export class VectorTileRenderOrder {
                 public static class: java.lang.Class<com.carto.layers.VectorTileRenderOrder>;
                 public static VECTOR_TILE_RENDER_ORDER_HIDDEN: com.carto.layers.VectorTileRenderOrder;
@@ -6277,7 +7136,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.layers.VectorTileRenderOrder;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module VectorTileRenderOrder {
+            export namespace VectorTileRenderOrder {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.layers.VectorTileRenderOrder.SwigNext>;
                 }
@@ -6286,9 +7145,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class CartoPackageManager extends com.carto.packagemanager.PackageManager {
                 public static class: java.lang.Class<com.carto.packagemanager.CartoPackageManager>;
                 public finalize(): void;
@@ -6310,9 +7169,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class CartoPackageManagerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.CartoPackageManagerModuleJNI>;
                 public static CartoPackageManager_swigGetClassName(param0: number, param1: com.carto.packagemanager.CartoPackageManager): string;
@@ -6329,9 +7188,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageAction {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageAction>;
                 public static PACKAGE_ACTION_READY: com.carto.packagemanager.PackageAction;
@@ -6345,7 +7204,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.packagemanager.PackageAction;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module PackageAction {
+            export namespace PackageAction {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.packagemanager.PackageAction.SwigNext>;
                 }
@@ -6354,9 +7213,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageErrorType {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageErrorType>;
                 public static PACKAGE_ERROR_TYPE_SYSTEM: com.carto.packagemanager.PackageErrorType;
@@ -6370,7 +7229,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.packagemanager.PackageErrorType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module PackageErrorType {
+            export namespace PackageErrorType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.packagemanager.PackageErrorType.SwigNext>;
                 }
@@ -6379,9 +7238,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageInfo>;
                 public swigCMemOwn: boolean;
@@ -6391,7 +7250,15 @@ declare module com {
                 public constructor(param0: number, param1: boolean);
                 public getName(): string;
                 public static getCPtr(param0: com.carto.packagemanager.PackageInfo): number;
-                public constructor(param0: string, param1: com.carto.packagemanager.PackageType, param2: number, param3: java.math.BigInteger, param4: string, param5: com.carto.packagemanager.PackageTileMask, param6: com.carto.packagemanager.PackageMetaInfo);
+                public constructor(
+                    param0: string,
+                    param1: com.carto.packagemanager.PackageType,
+                    param2: number,
+                    param3: java.math.BigInteger,
+                    param4: string,
+                    param5: com.carto.packagemanager.PackageTileMask,
+                    param6: com.carto.packagemanager.PackageMetaInfo
+                );
                 public getPackageType(): com.carto.packagemanager.PackageType;
                 public swigGetRawPtr(): number;
                 public getNames(param0: string): com.carto.core.StringVector;
@@ -6406,9 +7273,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageInfoModuleJNI>;
                 public static PackageInfoVector_add(param0: number, param1: com.carto.packagemanager.PackageInfoVector, param2: number, param3: com.carto.packagemanager.PackageInfo): void;
@@ -6426,11 +7293,27 @@ declare module com {
                 public static PackageInfoVector_clear(param0: number, param1: com.carto.packagemanager.PackageInfoVector): void;
                 public static PackageInfo_getVersion(param0: number, param1: com.carto.packagemanager.PackageInfo): number;
                 public static new_PackageInfoVector__SWIG_1(param0: number): number;
-                public static new_PackageInfo(param0: string, param1: number, param2: number, param3: java.math.BigInteger, param4: string, param5: number, param6: com.carto.packagemanager.PackageTileMask, param7: number, param8: com.carto.packagemanager.PackageMetaInfo): number;
+                public static new_PackageInfo(
+                    param0: string,
+                    param1: number,
+                    param2: number,
+                    param3: java.math.BigInteger,
+                    param4: string,
+                    param5: number,
+                    param6: com.carto.packagemanager.PackageTileMask,
+                    param7: number,
+                    param8: com.carto.packagemanager.PackageMetaInfo
+                ): number;
                 public static PackageInfo_getPackageId(param0: number, param1: com.carto.packagemanager.PackageInfo): string;
                 public static delete_PackageInfo(param0: number): void;
                 public static new_PackageInfoVector__SWIG_0(): number;
-                public static PackageInfoVector_set(param0: number, param1: com.carto.packagemanager.PackageInfoVector, param2: number, param3: number, param4: com.carto.packagemanager.PackageInfo): void;
+                public static PackageInfoVector_set(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageInfoVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.packagemanager.PackageInfo
+                ): void;
                 public static PackageInfo_getPackageType(param0: number, param1: com.carto.packagemanager.PackageInfo): number;
                 public static PackageInfoVector_capacity(param0: number, param1: com.carto.packagemanager.PackageInfoVector): number;
                 public static PACKAGE_TYPE_MAP_get(): number;
@@ -6444,9 +7327,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageInfoVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageInfoVector>;
                 public swigCMemOwn: boolean;
@@ -6470,9 +7353,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageManager extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageManager>;
                 public swigCMemOwn: boolean;
@@ -6511,9 +7394,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageManagerListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageManagerListener>;
                 public swigCMemOwn: boolean;
@@ -6542,9 +7425,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageManagerListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageManagerListenerModuleJNI>;
                 public static PackageManagerListener_swigGetDirectorObject(param0: number, param1: com.carto.packagemanager.PackageManagerListener): any;
@@ -6559,20 +7442,50 @@ declare module com {
                 public static PackageManagerListener_onPackageListFailedSwigExplicitPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManagerListener): void;
                 public static SwigDirector_PackageManagerListener_onPackageUpdated(param0: com.carto.packagemanager.PackageManagerListener, param1: string, param2: number): void;
                 public static SwigDirector_PackageManagerListener_onPackageListUpdated(param0: com.carto.packagemanager.PackageManagerListener): void;
-                public static PackageManagerListener_onPackageFailedSwigExplicitPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number, param4: number): void;
+                public static PackageManagerListener_onPackageFailedSwigExplicitPackageManagerListener(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManagerListener,
+                    param2: string,
+                    param3: number,
+                    param4: number
+                ): void;
                 public static PackageManagerListener_change_ownership(param0: com.carto.packagemanager.PackageManagerListener, param1: number, param2: boolean): void;
                 public static PackageManagerListener_onStyleFailed(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string): void;
                 public static delete_PackageManagerListener(param0: number): void;
-                public static PackageManagerListener_onPackageCancelledSwigExplicitPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number): void;
+                public static PackageManagerListener_onPackageCancelledSwigExplicitPackageManagerListener(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManagerListener,
+                    param2: string,
+                    param3: number
+                ): void;
                 public static SwigDirector_PackageManagerListener_onPackageListFailed(param0: com.carto.packagemanager.PackageManagerListener): void;
                 public static PackageManagerListener_onPackageCancelled(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number): void;
                 public static SwigDirector_PackageManagerListener_onPackageStatusChanged(param0: com.carto.packagemanager.PackageManagerListener, param1: string, param2: number, param3: number): void;
                 public static PackageManagerListener_director_connect(param0: com.carto.packagemanager.PackageManagerListener, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerListener_onStyleFailedSwigExplicitPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string): void;
-                public static PackageManagerListener_onPackageStatusChanged(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number, param4: number, param5: com.carto.packagemanager.PackageStatus): void;
-                public static PackageManagerListener_onPackageUpdatedSwigExplicitPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number): void;
+                public static PackageManagerListener_onPackageStatusChanged(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManagerListener,
+                    param2: string,
+                    param3: number,
+                    param4: number,
+                    param5: com.carto.packagemanager.PackageStatus
+                ): void;
+                public static PackageManagerListener_onPackageUpdatedSwigExplicitPackageManagerListener(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManagerListener,
+                    param2: string,
+                    param3: number
+                ): void;
                 public static PackageManagerListener_onPackageListFailed(param0: number, param1: com.carto.packagemanager.PackageManagerListener): void;
-                public static PackageManagerListener_onPackageStatusChangedSwigExplicitPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number, param4: number, param5: com.carto.packagemanager.PackageStatus): void;
+                public static PackageManagerListener_onPackageStatusChangedSwigExplicitPackageManagerListener(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManagerListener,
+                    param2: string,
+                    param3: number,
+                    param4: number,
+                    param5: com.carto.packagemanager.PackageStatus
+                ): void;
                 public static SwigDirector_PackageManagerListener_onStyleUpdated(param0: com.carto.packagemanager.PackageManagerListener, param1: string): void;
                 public static PackageManagerListener_swigGetRawPtr(param0: number, param1: com.carto.packagemanager.PackageManagerListener): number;
                 public static PackageManagerListener_onPackageUpdated(param0: number, param1: com.carto.packagemanager.PackageManagerListener, param2: string, param3: number): void;
@@ -6584,14 +7497,19 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageManagerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageManagerModuleJNI>;
                 public static PackageManager_getServerPackage(param0: number, param1: com.carto.packagemanager.PackageManager, param2: string): number;
                 public static PackageManager_swigGetDirectorObject(param0: number, param1: com.carto.packagemanager.PackageManager): any;
-                public static PackageManager_setPackageManagerListener(param0: number, param1: com.carto.packagemanager.PackageManager, param2: number, param3: com.carto.packagemanager.PackageManagerListener): void;
+                public static PackageManager_setPackageManagerListener(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManager,
+                    param2: number,
+                    param3: com.carto.packagemanager.PackageManagerListener
+                ): void;
                 public static new_PackageManager(param0: string, param1: string, param2: string, param3: string): number;
                 public static PackageManager_getServerPackageListMetaInfo(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static PackageManager_getLocalPackage(param0: number, param1: com.carto.packagemanager.PackageManager, param2: string): number;
@@ -6602,10 +7520,25 @@ declare module com {
                 public static PackageManager_getServerPackages(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static PackageManager_startPackageRemove(param0: number, param1: com.carto.packagemanager.PackageManager, param2: string): boolean;
                 public static PackageManager_startPackageDownload(param0: number, param1: com.carto.packagemanager.PackageManager, param2: string): boolean;
-                public static PackageManager_isAreaDownloaded(param0: number, param1: com.carto.packagemanager.PackageManager, param2: number, param3: com.carto.core.MapBounds, param4: number, param5: number, param6: com.carto.projections.Projection): boolean;
+                public static PackageManager_isAreaDownloaded(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManager,
+                    param2: number,
+                    param3: com.carto.core.MapBounds,
+                    param4: number,
+                    param5: number,
+                    param6: com.carto.projections.Projection
+                ): boolean;
                 public static delete_PackageManager(param0: number): void;
                 public static PackageManager_swigGetRawPtr(param0: number, param1: com.carto.packagemanager.PackageManager): number;
-                public static PackageManager_suggestPackages(param0: number, param1: com.carto.packagemanager.PackageManager, param2: number, param3: com.carto.core.MapPos, param4: number, param5: com.carto.projections.Projection): number;
+                public static PackageManager_suggestPackages(
+                    param0: number,
+                    param1: com.carto.packagemanager.PackageManager,
+                    param2: number,
+                    param3: com.carto.core.MapPos,
+                    param4: number,
+                    param5: com.carto.projections.Projection
+                ): number;
                 public static PackageManager_setPackagePriority(param0: number, param1: com.carto.packagemanager.PackageManager, param2: string, param3: number): void;
                 public static PackageManager_getLocalPackages(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static PackageManager_getLocalPackageStatus(param0: number, param1: com.carto.packagemanager.PackageManager, param2: string, param3: number): number;
@@ -6619,9 +7552,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageMetaInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageMetaInfo>;
                 public swigCMemOwn: boolean;
@@ -6639,9 +7572,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageMetaInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageMetaInfoModuleJNI>;
                 public static delete_PackageMetaInfo(param0: number): void;
@@ -6654,9 +7587,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageStatus extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageStatus>;
                 public swigCMemOwn: boolean;
@@ -6676,9 +7609,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageStatusModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageStatusModuleJNI>;
                 public static PACKAGE_ACTION_WAITING_get(): number;
@@ -6698,9 +7631,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageTileMask extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageTileMask>;
                 public swigCMemOwn: boolean;
@@ -6720,9 +7653,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageTileMaskModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageTileMaskModuleJNI>;
                 public static PackageTileMask_getStringValue(param0: number, param1: com.carto.packagemanager.PackageTileMask): string;
@@ -6737,9 +7670,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageTileStatus {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageTileStatus>;
                 public static PACKAGE_TILE_STATUS_MISSING: com.carto.packagemanager.PackageTileStatus;
@@ -6751,7 +7684,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static swigToEnum(param0: number): com.carto.packagemanager.PackageTileStatus;
             }
-            export module PackageTileStatus {
+            export namespace PackageTileStatus {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.packagemanager.PackageTileStatus.SwigNext>;
                 }
@@ -6760,9 +7693,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module packagemanager {
+declare namespace com {
+    export namespace carto {
+        export namespace packagemanager {
             export class PackageType {
                 public static class: java.lang.Class<com.carto.packagemanager.PackageType>;
                 public static PACKAGE_TYPE_MAP: com.carto.packagemanager.PackageType;
@@ -6775,7 +7708,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.packagemanager.PackageType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module PackageType {
+            export namespace PackageType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.packagemanager.PackageType.SwigNext>;
                 }
@@ -6784,9 +7717,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module projections {
+declare namespace com {
+    export namespace carto {
+        export namespace projections {
             export class EPSG3857 extends com.carto.projections.Projection {
                 public static class: java.lang.Class<com.carto.projections.EPSG3857>;
                 public toWgs84(param0: com.carto.core.MapPos): com.carto.core.MapPos;
@@ -6808,9 +7741,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module projections {
+declare namespace com {
+    export namespace carto {
+        export namespace projections {
             export class EPSG3857ModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.projections.EPSG3857ModuleJNI>;
                 public static EPSG3857_swigGetDirectorObject(param0: number, param1: com.carto.projections.EPSG3857): any;
@@ -6828,9 +7761,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module projections {
+declare namespace com {
+    export namespace carto {
+        export namespace projections {
             export class EPSG4326 extends com.carto.projections.Projection {
                 public static class: java.lang.Class<com.carto.projections.EPSG4326>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.projections.EPSG4326;
@@ -6852,9 +7785,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module projections {
+declare namespace com {
+    export namespace carto {
+        export namespace projections {
             export class EPSG4326ModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.projections.EPSG4326ModuleJNI>;
                 public static EPSG4326_swigGetDirectorObject(param0: number, param1: com.carto.projections.EPSG4326): any;
@@ -6872,9 +7805,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module projections {
+declare namespace com {
+    export namespace carto {
+        export namespace projections {
             export class Projection extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.projections.Projection>;
                 public swigCMemOwn: boolean;
@@ -6899,9 +7832,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module projections {
+declare namespace com {
+    export namespace carto {
+        export namespace projections {
             export class ProjectionModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.projections.ProjectionModuleJNI>;
                 public static Projection_toWgs84(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPos): number;
@@ -6920,9 +7853,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class MapRenderer extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.MapRenderer>;
                 public swigCMemOwn: boolean;
@@ -6943,9 +7876,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class MapRendererListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.MapRendererListener>;
                 public swigCMemOwn: boolean;
@@ -6968,9 +7901,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class MapRendererListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.MapRendererListenerModuleJNI>;
                 public static MapRendererListener_onBeforeDrawFrameSwigExplicitMapRendererListener(param0: number, param1: com.carto.renderers.MapRendererListener): void;
@@ -6992,9 +7925,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class MapRendererModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.MapRendererModuleJNI>;
                 public static MapRenderer_setMapRendererListener(param0: number, param1: com.carto.renderers.MapRenderer, param2: number, param3: com.carto.renderers.MapRendererListener): void;
@@ -7002,7 +7935,13 @@ declare module com {
                 public static MapRenderer_getMapRendererListener(param0: number, param1: com.carto.renderers.MapRenderer): number;
                 public static MapRenderer_requestRedraw(param0: number, param1: com.carto.renderers.MapRenderer): void;
                 public static MapRenderer_getViewState(param0: number, param1: com.carto.renderers.MapRenderer): number;
-                public static MapRenderer_captureRendering(param0: number, param1: com.carto.renderers.MapRenderer, param2: number, param3: com.carto.renderers.RendererCaptureListener, param4: boolean): void;
+                public static MapRenderer_captureRendering(
+                    param0: number,
+                    param1: com.carto.renderers.MapRenderer,
+                    param2: number,
+                    param3: com.carto.renderers.RendererCaptureListener,
+                    param4: boolean
+                ): void;
                 public static MapRenderer_swigGetRawPtr(param0: number, param1: com.carto.renderers.MapRenderer): number;
                 public constructor();
             }
@@ -7010,9 +7949,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class RedrawRequestListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.RedrawRequestListener>;
                 public swigCMemOwn: boolean;
@@ -7034,9 +7973,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class RedrawRequestListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.RedrawRequestListenerModuleJNI>;
                 public static SwigDirector_RedrawRequestListener_onRedrawRequested(param0: com.carto.renderers.RedrawRequestListener): void;
@@ -7055,9 +7994,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class RendererCaptureListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.RendererCaptureListener>;
                 public swigCMemOwn: boolean;
@@ -7079,9 +8018,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
             export class RendererCaptureListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.renderers.RendererCaptureListenerModuleJNI>;
                 public static delete_RendererCaptureListener(param0: number): void;
@@ -7090,7 +8029,12 @@ declare module com {
                 public static new_RendererCaptureListener(): number;
                 public static RendererCaptureListener_swigGetClassName(param0: number, param1: com.carto.renderers.RendererCaptureListener): string;
                 public static RendererCaptureListener_swigGetRawPtr(param0: number, param1: com.carto.renderers.RendererCaptureListener): number;
-                public static RendererCaptureListener_onMapRenderedSwigExplicitRendererCaptureListener(param0: number, param1: com.carto.renderers.RendererCaptureListener, param2: number, param3: com.carto.graphics.Bitmap): void;
+                public static RendererCaptureListener_onMapRenderedSwigExplicitRendererCaptureListener(
+                    param0: number,
+                    param1: com.carto.renderers.RendererCaptureListener,
+                    param2: number,
+                    param3: com.carto.graphics.Bitmap
+                ): void;
                 public static RendererCaptureListener_director_connect(param0: com.carto.renderers.RendererCaptureListener, param1: number, param2: boolean, param3: boolean): void;
                 public static RendererCaptureListener_swigGetDirectorObject(param0: number, param1: com.carto.renderers.RendererCaptureListener): any;
                 public static SwigDirector_RendererCaptureListener_onMapRendered(param0: com.carto.renderers.RendererCaptureListener, param1: number): void;
@@ -7100,10 +8044,10 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
-            export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
+            export namespace components {
                 export class CullState extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.renderers.components.CullState>;
                     public swigCMemOwn: boolean;
@@ -7123,10 +8067,10 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module renderers {
-            export module components {
+declare namespace com {
+    export namespace carto {
+        export namespace renderers {
+            export namespace components {
                 export class CullStateModuleJNI extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.renderers.components.CullStateModuleJNI>;
                     public static new_CullState(param0: number, param1: com.carto.core.MapEnvelope, param2: number, param3: com.carto.graphics.ViewState): number;
@@ -7141,9 +8085,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class CartoOnlineRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.CartoOnlineRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -7170,18 +8114,33 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class CartoOnlineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.CartoOnlineRoutingServiceModuleJNI>;
                 public static SwigDirector_CartoOnlineRoutingService_getProfile(param0: com.carto.routing.CartoOnlineRoutingService): string;
-                public static CartoOnlineRoutingService_matchRouteSwigExplicitCartoOnlineRoutingService(param0: number, param1: com.carto.routing.CartoOnlineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static CartoOnlineRoutingService_matchRouteSwigExplicitCartoOnlineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.CartoOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static CartoOnlineRoutingService_director_connect(param0: com.carto.routing.CartoOnlineRoutingService, param1: number, param2: boolean, param3: boolean): void;
-                public static CartoOnlineRoutingService_calculateRoute(param0: number, param1: com.carto.routing.CartoOnlineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static CartoOnlineRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.CartoOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static CartoOnlineRoutingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static delete_CartoOnlineRoutingService(param0: number): void;
-                public static CartoOnlineRoutingService_matchRoute(param0: number, param1: com.carto.routing.CartoOnlineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static CartoOnlineRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.CartoOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static CartoOnlineRoutingService_swigGetClassName(param0: number, param1: com.carto.routing.CartoOnlineRoutingService): string;
                 public static CartoOnlineRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.CartoOnlineRoutingService): number;
                 public constructor();
@@ -7190,7 +8149,12 @@ declare module com {
                 public static new_CartoOnlineRoutingService(param0: string): number;
                 public static CartoOnlineRoutingService_setProfile(param0: number, param1: com.carto.routing.CartoOnlineRoutingService, param2: string): void;
                 public static CartoOnlineRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.CartoOnlineRoutingService): any;
-                public static CartoOnlineRoutingService_calculateRouteSwigExplicitCartoOnlineRoutingService(param0: number, param1: com.carto.routing.CartoOnlineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static CartoOnlineRoutingService_calculateRouteSwigExplicitCartoOnlineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.CartoOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static SwigDirector_CartoOnlineRoutingService_calculateRoute(param0: com.carto.routing.CartoOnlineRoutingService, param1: number): number;
                 public static CartoOnlineRoutingService_setProfileSwigExplicitCartoOnlineRoutingService(param0: number, param1: com.carto.routing.CartoOnlineRoutingService, param2: string): void;
                 public static SwigDirector_CartoOnlineRoutingService_setProfile(param0: com.carto.routing.CartoOnlineRoutingService, param1: string): void;
@@ -7201,9 +8165,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class OSRMOfflineRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.OSRMOfflineRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -7230,18 +8194,28 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class OSRMOfflineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.OSRMOfflineRoutingServiceModuleJNI>;
                 public static OSRMOfflineRoutingService_getProfile(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService): string;
-                public static OSRMOfflineRoutingService_matchRouteSwigExplicitOSRMOfflineRoutingService(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static OSRMOfflineRoutingService_matchRouteSwigExplicitOSRMOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.OSRMOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static SwigDirector_OSRMOfflineRoutingService_getProfile(param0: com.carto.routing.OSRMOfflineRoutingService): string;
                 public static SwigDirector_OSRMOfflineRoutingService_matchRoute(param0: com.carto.routing.OSRMOfflineRoutingService, param1: number): number;
                 public static OSRMOfflineRoutingService_getProfileSwigExplicitOSRMOfflineRoutingService(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService): string;
                 public static OSRMOfflineRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService): number;
-                public static OSRMOfflineRoutingService_calculateRoute(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static OSRMOfflineRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.OSRMOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static OSRMOfflineRoutingService_change_ownership(param0: com.carto.routing.OSRMOfflineRoutingService, param1: number, param2: boolean): void;
                 public static SwigDirector_OSRMOfflineRoutingService_calculateRoute(param0: com.carto.routing.OSRMOfflineRoutingService, param1: number): number;
                 public constructor();
@@ -7252,8 +8226,18 @@ declare module com {
                 public static new_OSRMOfflineRoutingService(param0: string): number;
                 public static OSRMOfflineRoutingService_director_connect(param0: com.carto.routing.OSRMOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static delete_OSRMOfflineRoutingService(param0: number): void;
-                public static OSRMOfflineRoutingService_matchRoute(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
-                public static OSRMOfflineRoutingService_calculateRouteSwigExplicitOSRMOfflineRoutingService(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static OSRMOfflineRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.OSRMOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
+                public static OSRMOfflineRoutingService_calculateRouteSwigExplicitOSRMOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.OSRMOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static SwigDirector_OSRMOfflineRoutingService_setProfile(param0: com.carto.routing.OSRMOfflineRoutingService, param1: string): void;
                 public static OSRMOfflineRoutingService_setProfileSwigExplicitOSRMOfflineRoutingService(param0: number, param1: com.carto.routing.OSRMOfflineRoutingService, param2: string): void;
             }
@@ -7261,9 +8245,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class PackageManagerRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.PackageManagerRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -7290,30 +8274,54 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class PackageManagerRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.PackageManagerRoutingServiceModuleJNI>;
                 public static PackageManagerRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.PackageManagerRoutingService): any;
                 public static SwigDirector_PackageManagerRoutingService_getProfile(param0: com.carto.routing.PackageManagerRoutingService): string;
                 public static PackageManagerRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.PackageManagerRoutingService): number;
                 public static SwigDirector_PackageManagerRoutingService_matchRoute(param0: com.carto.routing.PackageManagerRoutingService, param1: number): number;
-                public static PackageManagerRoutingService_matchRoute(param0: number, param1: com.carto.routing.PackageManagerRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static PackageManagerRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static PackageManagerRoutingService_setProfile(param0: number, param1: com.carto.routing.PackageManagerRoutingService, param2: string): void;
-                public static PackageManagerRoutingService_calculateRouteSwigExplicitPackageManagerRoutingService(param0: number, param1: com.carto.routing.PackageManagerRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static PackageManagerRoutingService_calculateRouteSwigExplicitPackageManagerRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static new_PackageManagerRoutingService(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public constructor();
-                public static PackageManagerRoutingService_matchRouteSwigExplicitPackageManagerRoutingService(param0: number, param1: com.carto.routing.PackageManagerRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static PackageManagerRoutingService_matchRouteSwigExplicitPackageManagerRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static PackageManagerRoutingService_swigGetClassName(param0: number, param1: com.carto.routing.PackageManagerRoutingService): string;
                 public static PackageManagerRoutingService_director_connect(param0: com.carto.routing.PackageManagerRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerRoutingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static PackageManagerRoutingService_getProfile(param0: number, param1: com.carto.routing.PackageManagerRoutingService): string;
                 public static PackageManagerRoutingService_getProfileSwigExplicitPackageManagerRoutingService(param0: number, param1: com.carto.routing.PackageManagerRoutingService): string;
-                public static PackageManagerRoutingService_setProfileSwigExplicitPackageManagerRoutingService(param0: number, param1: com.carto.routing.PackageManagerRoutingService, param2: string): void;
+                public static PackageManagerRoutingService_setProfileSwigExplicitPackageManagerRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerRoutingService,
+                    param2: string
+                ): void;
                 public static delete_PackageManagerRoutingService(param0: number): void;
                 public static PackageManagerRoutingService_change_ownership(param0: com.carto.routing.PackageManagerRoutingService, param1: number, param2: boolean): void;
-                public static PackageManagerRoutingService_calculateRoute(param0: number, param1: com.carto.routing.PackageManagerRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static PackageManagerRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static SwigDirector_PackageManagerRoutingService_calculateRoute(param0: com.carto.routing.PackageManagerRoutingService, param1: number): number;
                 public static SwigDirector_PackageManagerRoutingService_setProfile(param0: com.carto.routing.PackageManagerRoutingService, param1: string): void;
             }
@@ -7321,9 +8329,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class PackageManagerValhallaRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.PackageManagerValhallaRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -7352,26 +8360,60 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class PackageManagerValhallaRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.PackageManagerValhallaRoutingServiceModuleJNI>;
-                public static PackageManagerValhallaRoutingService_getProfileSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService): string;
+                public static PackageManagerValhallaRoutingService_getProfileSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService
+                ): string;
                 public static PackageManagerValhallaRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService): any;
-                public static PackageManagerValhallaRoutingService_setConfigurationParameter(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: string, param3: number, param4: com.carto.core.Variant): void;
+                public static PackageManagerValhallaRoutingService_setConfigurationParameter(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.Variant
+                ): void;
                 public static SwigDirector_PackageManagerValhallaRoutingService_getProfile(param0: com.carto.routing.PackageManagerValhallaRoutingService): string;
                 public static PackageManagerValhallaRoutingService_getConfigurationParameter(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: string): number;
                 public static SwigDirector_PackageManagerValhallaRoutingService_matchRoute(param0: com.carto.routing.PackageManagerValhallaRoutingService, param1: number): number;
-                public static PackageManagerValhallaRoutingService_calculateRoute(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
-                public static PackageManagerValhallaRoutingService_calculateRouteSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
-                public static PackageManagerValhallaRoutingService_director_connect(param0: com.carto.routing.PackageManagerValhallaRoutingService, param1: number, param2: boolean, param3: boolean): void;
+                public static PackageManagerValhallaRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
+                public static PackageManagerValhallaRoutingService_calculateRouteSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
+                public static PackageManagerValhallaRoutingService_director_connect(
+                    param0: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param1: number,
+                    param2: boolean,
+                    param3: boolean
+                ): void;
                 public static PackageManagerValhallaRoutingService_getProfile(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService): string;
-                public static PackageManagerValhallaRoutingService_matchRoute(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static PackageManagerValhallaRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static delete_PackageManagerValhallaRoutingService(param0: number): void;
                 public constructor();
                 public static PackageManagerValhallaRoutingService_swigGetClassName(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService): string;
-                public static PackageManagerValhallaRoutingService_matchRouteSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static PackageManagerValhallaRoutingService_matchRouteSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static PackageManagerValhallaRoutingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static SwigDirector_PackageManagerValhallaRoutingService_setProfile(param0: com.carto.routing.PackageManagerValhallaRoutingService, param1: string): void;
                 public static SwigDirector_PackageManagerValhallaRoutingService_calculateRoute(param0: com.carto.routing.PackageManagerValhallaRoutingService, param1: number): number;
@@ -7379,15 +8421,19 @@ declare module com {
                 public static PackageManagerValhallaRoutingService_change_ownership(param0: com.carto.routing.PackageManagerValhallaRoutingService, param1: number, param2: boolean): void;
                 public static new_PackageManagerValhallaRoutingService(param0: number, param1: com.carto.packagemanager.PackageManager): number;
                 public static PackageManagerValhallaRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService): number;
-                public static PackageManagerValhallaRoutingService_setProfileSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: com.carto.routing.PackageManagerValhallaRoutingService, param2: string): void;
+                public static PackageManagerValhallaRoutingService_setProfileSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.PackageManagerValhallaRoutingService,
+                    param2: string
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingEdge extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingEdge>;
                 public swigCMemOwn: boolean;
@@ -7408,9 +8454,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingEdgeModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingEdgeModuleJNI>;
                 public static RouteMatchingEdgeVector_isEmpty(param0: number, param1: com.carto.routing.RouteMatchingEdgeVector): boolean;
@@ -7419,7 +8465,13 @@ declare module com {
                 public static RouteMatchingEdgeVector_reserve(param0: number, param1: com.carto.routing.RouteMatchingEdgeVector, param2: number): void;
                 public static RouteMatchingEdgeVector_capacity(param0: number, param1: com.carto.routing.RouteMatchingEdgeVector): number;
                 public static RouteMatchingEdge_toString(param0: number, param1: com.carto.routing.RouteMatchingEdge): string;
-                public static RouteMatchingEdgeVector_set(param0: number, param1: com.carto.routing.RouteMatchingEdgeVector, param2: number, param3: number, param4: com.carto.routing.RouteMatchingEdge): void;
+                public static RouteMatchingEdgeVector_set(
+                    param0: number,
+                    param1: com.carto.routing.RouteMatchingEdgeVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.routing.RouteMatchingEdge
+                ): void;
                 public static new_RouteMatchingEdge__SWIG_0(): number;
                 public static RouteMatchingEdgeVector_clear(param0: number, param1: com.carto.routing.RouteMatchingEdgeVector): void;
                 public static RouteMatchingEdgeVector_get(param0: number, param1: com.carto.routing.RouteMatchingEdgeVector, param2: number): number;
@@ -7438,9 +8490,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingEdgeVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingEdgeVector>;
                 public swigCMemOwn: boolean;
@@ -7464,9 +8516,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingPoint extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingPoint>;
                 public swigCMemOwn: boolean;
@@ -7488,16 +8540,22 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingPointModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingPointModuleJNI>;
                 public static RouteMatchingPoint_getType(param0: number, param1: com.carto.routing.RouteMatchingPoint): number;
                 public static RouteMatchingPointVector_isEmpty(param0: number, param1: com.carto.routing.RouteMatchingPointVector): boolean;
                 public static RouteMatchingPointVector_swigGetRawPtr(param0: number, param1: com.carto.routing.RouteMatchingPointVector): number;
                 public static RouteMatchingPointVector_size(param0: number, param1: com.carto.routing.RouteMatchingPointVector): number;
-                public static RouteMatchingPointVector_set(param0: number, param1: com.carto.routing.RouteMatchingPointVector, param2: number, param3: number, param4: com.carto.routing.RouteMatchingPoint): void;
+                public static RouteMatchingPointVector_set(
+                    param0: number,
+                    param1: com.carto.routing.RouteMatchingPointVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.routing.RouteMatchingPoint
+                ): void;
                 public static new_RouteMatchingPoint__SWIG_0(): number;
                 public static RouteMatchingPointVector_reserve(param0: number, param1: com.carto.routing.RouteMatchingPointVector, param2: number): void;
                 public static RouteMatchingPoint_getEdgeIndex(param0: number, param1: com.carto.routing.RouteMatchingPoint): number;
@@ -7519,9 +8577,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingPointType {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingPointType>;
                 public static ROUTE_MATCHING_POINT_UNMATCHED: com.carto.routing.RouteMatchingPointType;
@@ -7533,7 +8591,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.routing.RouteMatchingPointType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module RouteMatchingPointType {
+            export namespace RouteMatchingPointType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.routing.RouteMatchingPointType.SwigNext>;
                 }
@@ -7542,9 +8600,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingPointVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingPointVector>;
                 public swigCMemOwn: boolean;
@@ -7568,9 +8626,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingRequest extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingRequest>;
                 public swigCMemOwn: boolean;
@@ -7595,9 +8653,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingRequestModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingRequestModuleJNI>;
                 public static new_RouteMatchingRequest(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPosVector, param4: number): number;
@@ -7605,21 +8663,34 @@ declare module com {
                 public static RouteMatchingRequest_getPointParameter(param0: number, param1: com.carto.routing.RouteMatchingRequest, param2: number, param3: string): number;
                 public static RouteMatchingRequest_swigGetRawPtr(param0: number, param1: com.carto.routing.RouteMatchingRequest): number;
                 public static RouteMatchingRequest_toString(param0: number, param1: com.carto.routing.RouteMatchingRequest): string;
-                public static RouteMatchingRequest_setCustomParameter(param0: number, param1: com.carto.routing.RouteMatchingRequest, param2: string, param3: number, param4: com.carto.core.Variant): void;
+                public static RouteMatchingRequest_setCustomParameter(
+                    param0: number,
+                    param1: com.carto.routing.RouteMatchingRequest,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.Variant
+                ): void;
                 public static delete_RouteMatchingRequest(param0: number): void;
                 public static RouteMatchingRequest_getProjection(param0: number, param1: com.carto.routing.RouteMatchingRequest): number;
                 public static RouteMatchingRequest_getAccuracy(param0: number, param1: com.carto.routing.RouteMatchingRequest): number;
                 public constructor();
                 public static RouteMatchingRequest_getPoints(param0: number, param1: com.carto.routing.RouteMatchingRequest): number;
-                public static RouteMatchingRequest_setPointParameter(param0: number, param1: com.carto.routing.RouteMatchingRequest, param2: number, param3: string, param4: number, param5: com.carto.core.Variant): void;
+                public static RouteMatchingRequest_setPointParameter(
+                    param0: number,
+                    param1: com.carto.routing.RouteMatchingRequest,
+                    param2: number,
+                    param3: string,
+                    param4: number,
+                    param5: com.carto.core.Variant
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingResult extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingResult>;
                 public swigCMemOwn: boolean;
@@ -7641,9 +8712,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RouteMatchingResultModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RouteMatchingResultModuleJNI>;
                 public static RouteMatchingResult_getPoints(param0: number, param1: com.carto.routing.RouteMatchingResult): number;
@@ -7652,7 +8723,14 @@ declare module com {
                 public static delete_RouteMatchingResult(param0: number): void;
                 public static RouteMatchingResult_swigGetRawPtr(param0: number, param1: com.carto.routing.RouteMatchingResult): number;
                 public static RouteMatchingResult_toString(param0: number, param1: com.carto.routing.RouteMatchingResult): string;
-                public static new_RouteMatchingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.routing.RouteMatchingPointVector, param4: number, param5: com.carto.routing.RouteMatchingEdgeVector): number;
+                public static new_RouteMatchingResult(
+                    param0: number,
+                    param1: com.carto.projections.Projection,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingPointVector,
+                    param4: number,
+                    param5: com.carto.routing.RouteMatchingEdgeVector
+                ): number;
                 public static RouteMatchingResult_getMatchingPoints(param0: number, param1: com.carto.routing.RouteMatchingResult): number;
                 public constructor();
             }
@@ -7660,9 +8738,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingAction {
                 public static class: java.lang.Class<com.carto.routing.RoutingAction>;
                 public static ROUTING_ACTION_HEAD_ON: com.carto.routing.RoutingAction;
@@ -7690,7 +8768,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.routing.RoutingAction;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module RoutingAction {
+            export namespace RoutingAction {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.routing.RoutingAction.SwigNext>;
                 }
@@ -7699,9 +8777,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingInstruction extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingInstruction>;
                 public swigCMemOwn: boolean;
@@ -7728,16 +8806,22 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingInstructionModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingInstructionModuleJNI>;
                 public static RoutingInstructionVector_swigGetRawPtr(param0: number, param1: com.carto.routing.RoutingInstructionVector): number;
                 public static RoutingInstructionVector_size(param0: number, param1: com.carto.routing.RoutingInstructionVector): number;
                 public static RoutingInstruction_getTurnAngle(param0: number, param1: com.carto.routing.RoutingInstruction): number;
                 public static RoutingInstruction_getAzimuth(param0: number, param1: com.carto.routing.RoutingInstruction): number;
-                public static RoutingInstructionVector_set(param0: number, param1: com.carto.routing.RoutingInstructionVector, param2: number, param3: number, param4: com.carto.routing.RoutingInstruction): void;
+                public static RoutingInstructionVector_set(
+                    param0: number,
+                    param1: com.carto.routing.RoutingInstructionVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.routing.RoutingInstruction
+                ): void;
                 public static new_RoutingInstruction__SWIG_1(param0: number, param1: number, param2: string, param3: number, param4: number, param5: number, param6: number): number;
                 public static RoutingInstruction_getPointIndex(param0: number, param1: com.carto.routing.RoutingInstruction): number;
                 public static RoutingInstruction_getAction(param0: number, param1: com.carto.routing.RoutingInstruction): number;
@@ -7764,9 +8848,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingInstructionVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingInstructionVector>;
                 public swigCMemOwn: boolean;
@@ -7790,9 +8874,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingRequest extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingRequest>;
                 public swigCMemOwn: boolean;
@@ -7820,9 +8904,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingRequestModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingRequestModuleJNI>;
                 public static RoutingRequest_getPoints(param0: number, param1: com.carto.routing.RoutingRequest): number;
@@ -7837,15 +8921,22 @@ declare module com {
                 public static new_RoutingRequest(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPosVector): number;
                 public static RoutingRequest_getCustomParameter(param0: number, param1: com.carto.routing.RoutingRequest, param2: string): number;
                 public static RoutingRequest_getGeometryTagFilters(param0: number, param1: com.carto.routing.RoutingRequest): number;
-                public static RoutingRequest_setPointParameter(param0: number, param1: com.carto.routing.RoutingRequest, param2: number, param3: string, param4: number, param5: com.carto.core.Variant): void;
+                public static RoutingRequest_setPointParameter(
+                    param0: number,
+                    param1: com.carto.routing.RoutingRequest,
+                    param2: number,
+                    param3: string,
+                    param4: number,
+                    param5: com.carto.core.Variant
+                ): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingResult extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingResult>;
                 public swigCMemOwn: boolean;
@@ -7868,9 +8959,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingResultModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingResultModuleJNI>;
                 public static RoutingResult_toString(param0: number, param1: com.carto.routing.RoutingResult): string;
@@ -7879,7 +8970,14 @@ declare module com {
                 public static delete_RoutingResult(param0: number): void;
                 public static RoutingResult_getProjection(param0: number, param1: com.carto.routing.RoutingResult): number;
                 public static RoutingResult_getTotalTime(param0: number, param1: com.carto.routing.RoutingResult): number;
-                public static new_RoutingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPosVector, param4: number, param5: com.carto.routing.RoutingInstructionVector): number;
+                public static new_RoutingResult(
+                    param0: number,
+                    param1: com.carto.projections.Projection,
+                    param2: number,
+                    param3: com.carto.core.MapPosVector,
+                    param4: number,
+                    param5: com.carto.routing.RoutingInstructionVector
+                ): number;
                 public constructor();
                 public static RoutingResult_getInstructions(param0: number, param1: com.carto.routing.RoutingResult): number;
                 public static RoutingResult_getTotalDistance(param0: number, param1: com.carto.routing.RoutingResult): number;
@@ -7888,9 +8986,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingService>;
                 public swigCMemOwn: boolean;
@@ -7915,9 +9013,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class RoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.RoutingServiceModuleJNI>;
                 public static RoutingService_change_ownership(param0: com.carto.routing.RoutingService, param1: number, param2: boolean): void;
@@ -7941,9 +9039,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class SGREOfflineRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.SGREOfflineRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -7971,26 +9069,53 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class SGREOfflineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.SGREOfflineRoutingServiceModuleJNI>;
                 public static SwigDirector_SGREOfflineRoutingService_setProfile(param0: com.carto.routing.SGREOfflineRoutingService, param1: string): void;
-                public static SGREOfflineRoutingService_matchRouteSwigExplicitSGREOfflineRoutingService(param0: number, param1: com.carto.routing.SGREOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
-                public static SGREOfflineRoutingService_matchRoute(param0: number, param1: com.carto.routing.SGREOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static SGREOfflineRoutingService_matchRouteSwigExplicitSGREOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.SGREOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
+                public static SGREOfflineRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.SGREOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static SGREOfflineRoutingService_getProfile(param0: number, param1: com.carto.routing.SGREOfflineRoutingService): string;
                 public static SGREOfflineRoutingService_getProfileSwigExplicitSGREOfflineRoutingService(param0: number, param1: com.carto.routing.SGREOfflineRoutingService): string;
-                public static new_SGREOfflineRoutingService__SWIG_1(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.geometry.FeatureCollection, param4: number, param5: com.carto.core.Variant): number;
+                public static new_SGREOfflineRoutingService__SWIG_1(
+                    param0: number,
+                    param1: com.carto.projections.Projection,
+                    param2: number,
+                    param3: com.carto.geometry.FeatureCollection,
+                    param4: number,
+                    param5: com.carto.core.Variant
+                ): number;
                 public static SGREOfflineRoutingService_setProfile(param0: number, param1: com.carto.routing.SGREOfflineRoutingService, param2: string): void;
                 public static SGREOfflineRoutingService_change_ownership(param0: com.carto.routing.SGREOfflineRoutingService, param1: number, param2: boolean): void;
                 public static SGREOfflineRoutingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static SwigDirector_SGREOfflineRoutingService_matchRoute(param0: com.carto.routing.SGREOfflineRoutingService, param1: number): number;
                 public static delete_SGREOfflineRoutingService(param0: number): void;
                 public constructor();
-                public static SGREOfflineRoutingService_calculateRoute(param0: number, param1: com.carto.routing.SGREOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static SGREOfflineRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.SGREOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static SGREOfflineRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.SGREOfflineRoutingService): any;
-                public static SGREOfflineRoutingService_calculateRouteSwigExplicitSGREOfflineRoutingService(param0: number, param1: com.carto.routing.SGREOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static SGREOfflineRoutingService_calculateRouteSwigExplicitSGREOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.SGREOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static SwigDirector_SGREOfflineRoutingService_getProfile(param0: com.carto.routing.SGREOfflineRoutingService): string;
                 public static SGREOfflineRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.SGREOfflineRoutingService): number;
                 public static SGREOfflineRoutingService_director_connect(param0: com.carto.routing.SGREOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
@@ -8003,9 +9128,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class ValhallaOfflineRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.ValhallaOfflineRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -8034,9 +9159,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class ValhallaOfflineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.ValhallaOfflineRoutingServiceModuleJNI>;
                 public static ValhallaOfflineRoutingService_getProfileSwigExplicitValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService): string;
@@ -8047,29 +9172,59 @@ declare module com {
                 public static ValhallaOfflineRoutingService_swigGetClassName(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService): string;
                 public static ValhallaOfflineRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService): number;
                 public constructor();
-                public static ValhallaOfflineRoutingService_setProfileSwigExplicitValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: string): void;
-                public static ValhallaOfflineRoutingService_calculateRouteSwigExplicitValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static ValhallaOfflineRoutingService_setProfileSwigExplicitValhallaOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOfflineRoutingService,
+                    param2: string
+                ): void;
+                public static ValhallaOfflineRoutingService_calculateRouteSwigExplicitValhallaOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static ValhallaOfflineRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService): any;
                 public static SwigDirector_ValhallaOfflineRoutingService_matchRoute(param0: com.carto.routing.ValhallaOfflineRoutingService, param1: number): number;
                 public static ValhallaOfflineRoutingService_director_connect(param0: com.carto.routing.ValhallaOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static ValhallaOfflineRoutingService_change_ownership(param0: com.carto.routing.ValhallaOfflineRoutingService, param1: number, param2: boolean): void;
                 public static new_ValhallaOfflineRoutingService(param0: string): number;
                 public static ValhallaOfflineRoutingService_getConfigurationParameter(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: string): number;
-                public static ValhallaOfflineRoutingService_matchRouteSwigExplicitValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static ValhallaOfflineRoutingService_matchRouteSwigExplicitValhallaOfflineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static SwigDirector_ValhallaOfflineRoutingService_setProfile(param0: com.carto.routing.ValhallaOfflineRoutingService, param1: string): void;
                 public static ValhallaOfflineRoutingService_getProfile(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService): string;
                 public static ValhallaOfflineRoutingService_setProfile(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: string): void;
-                public static ValhallaOfflineRoutingService_calculateRoute(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
-                public static ValhallaOfflineRoutingService_setConfigurationParameter(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: string, param3: number, param4: com.carto.core.Variant): void;
-                public static ValhallaOfflineRoutingService_matchRoute(param0: number, param1: com.carto.routing.ValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static ValhallaOfflineRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
+                public static ValhallaOfflineRoutingService_setConfigurationParameter(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOfflineRoutingService,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.Variant
+                ): void;
+                public static ValhallaOfflineRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class ValhallaOnlineRoutingService extends com.carto.routing.RoutingService {
                 public static class: java.lang.Class<com.carto.routing.ValhallaOnlineRoutingService>;
                 public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -8098,42 +9253,66 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module routing {
+declare namespace com {
+    export namespace carto {
+        export namespace routing {
             export class ValhallaOnlineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.routing.ValhallaOnlineRoutingServiceModuleJNI>;
                 public static SwigDirector_ValhallaOnlineRoutingService_getProfile(param0: com.carto.routing.ValhallaOnlineRoutingService): string;
-                public static ValhallaOnlineRoutingService_calculateRouteSwigExplicitValhallaOnlineRoutingService(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static ValhallaOnlineRoutingService_calculateRouteSwigExplicitValhallaOnlineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static ValhallaOnlineRoutingService_change_ownership(param0: com.carto.routing.ValhallaOnlineRoutingService, param1: number, param2: boolean): void;
                 public static ValhallaOnlineRoutingService_getProfile(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService): string;
-                public static ValhallaOnlineRoutingService_setProfileSwigExplicitValhallaOnlineRoutingService(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: string): void;
+                public static ValhallaOnlineRoutingService_setProfileSwigExplicitValhallaOnlineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOnlineRoutingService,
+                    param2: string
+                ): void;
                 public static ValhallaOnlineRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService): number;
                 public static new_ValhallaOnlineRoutingService(param0: string): number;
-                public static ValhallaOnlineRoutingService_matchRoute(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static ValhallaOnlineRoutingService_matchRoute(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static ValhallaOnlineRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService): any;
                 public static ValhallaOnlineRoutingService_setProfile(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: string): void;
                 public static SwigDirector_ValhallaOnlineRoutingService_setProfile(param0: com.carto.routing.ValhallaOnlineRoutingService, param1: string): void;
                 public constructor();
                 public static delete_ValhallaOnlineRoutingService(param0: number): void;
                 public static ValhallaOnlineRoutingService_director_connect(param0: com.carto.routing.ValhallaOnlineRoutingService, param1: number, param2: boolean, param3: boolean): void;
-                public static ValhallaOnlineRoutingService_matchRouteSwigExplicitValhallaOnlineRoutingService(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+                public static ValhallaOnlineRoutingService_matchRouteSwigExplicitValhallaOnlineRoutingService(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RouteMatchingRequest
+                ): number;
                 public static SwigDirector_ValhallaOnlineRoutingService_matchRoute(param0: com.carto.routing.ValhallaOnlineRoutingService, param1: number): number;
                 public static ValhallaOnlineRoutingService_getCustomServiceURL(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService): string;
                 public static ValhallaOnlineRoutingService_getProfileSwigExplicitValhallaOnlineRoutingService(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService): string;
                 public static ValhallaOnlineRoutingService_setCustomServiceURL(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: string): void;
                 public static ValhallaOnlineRoutingService_swigGetClassName(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService): string;
                 public static SwigDirector_ValhallaOnlineRoutingService_calculateRoute(param0: com.carto.routing.ValhallaOnlineRoutingService, param1: number): number;
-                public static ValhallaOnlineRoutingService_calculateRoute(param0: number, param1: com.carto.routing.ValhallaOnlineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+                public static ValhallaOnlineRoutingService_calculateRoute(
+                    param0: number,
+                    param1: com.carto.routing.ValhallaOnlineRoutingService,
+                    param2: number,
+                    param3: com.carto.routing.RoutingRequest
+                ): number;
                 public static ValhallaOnlineRoutingService_SWIGSmartPtrUpcast(param0: number): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class FeatureCollectionSearchService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.FeatureCollectionSearchService>;
                 public swigCMemOwn: boolean;
@@ -8159,9 +9338,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class FeatureCollectionSearchServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.FeatureCollectionSearchServiceModuleJNI>;
                 public static FeatureCollectionSearchService_setMaxResults(param0: number, param1: com.carto.search.FeatureCollectionSearchService, param2: number): void;
@@ -8173,20 +9352,30 @@ declare module com {
                 public constructor();
                 public static new_FeatureCollectionSearchService(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.geometry.FeatureCollection): number;
                 public static FeatureCollectionSearchService_getProjection(param0: number, param1: com.carto.search.FeatureCollectionSearchService): number;
-                public static FeatureCollectionSearchService_findFeaturesSwigExplicitFeatureCollectionSearchService(param0: number, param1: com.carto.search.FeatureCollectionSearchService, param2: number, param3: com.carto.search.SearchRequest): number;
+                public static FeatureCollectionSearchService_findFeaturesSwigExplicitFeatureCollectionSearchService(
+                    param0: number,
+                    param1: com.carto.search.FeatureCollectionSearchService,
+                    param2: number,
+                    param3: com.carto.search.SearchRequest
+                ): number;
                 public static FeatureCollectionSearchService_swigGetRawPtr(param0: number, param1: com.carto.search.FeatureCollectionSearchService): number;
                 public static FeatureCollectionSearchService_swigGetClassName(param0: number, param1: com.carto.search.FeatureCollectionSearchService): string;
                 public static delete_FeatureCollectionSearchService(param0: number): void;
                 public static FeatureCollectionSearchService_getFeatureCollection(param0: number, param1: com.carto.search.FeatureCollectionSearchService): number;
-                public static FeatureCollectionSearchService_findFeatures(param0: number, param1: com.carto.search.FeatureCollectionSearchService, param2: number, param3: com.carto.search.SearchRequest): number;
+                public static FeatureCollectionSearchService_findFeatures(
+                    param0: number,
+                    param1: com.carto.search.FeatureCollectionSearchService,
+                    param2: number,
+                    param3: com.carto.search.SearchRequest
+                ): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class SearchRequest extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.SearchRequest>;
                 public swigCMemOwn: boolean;
@@ -8214,9 +9403,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class SearchRequestModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.SearchRequestModuleJNI>;
                 public static SearchRequest_setRegexFilter(param0: number, param1: com.carto.search.SearchRequest, param2: string): void;
@@ -8239,9 +9428,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class VectorElementSearchService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.VectorElementSearchService>;
                 public swigCMemOwn: boolean;
@@ -8266,17 +9455,27 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class VectorElementSearchServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.VectorElementSearchServiceModuleJNI>;
                 public static VectorElementSearchService_director_connect(param0: com.carto.search.VectorElementSearchService, param1: number, param2: boolean, param3: boolean): void;
                 public static VectorElementSearchService_swigGetClassName(param0: number, param1: com.carto.search.VectorElementSearchService): string;
                 public static delete_VectorElementSearchService(param0: number): void;
                 public static VectorElementSearchService_getDataSource(param0: number, param1: com.carto.search.VectorElementSearchService): number;
-                public static VectorElementSearchService_findElements(param0: number, param1: com.carto.search.VectorElementSearchService, param2: number, param3: com.carto.search.SearchRequest): number;
-                public static VectorElementSearchService_findElementsSwigExplicitVectorElementSearchService(param0: number, param1: com.carto.search.VectorElementSearchService, param2: number, param3: com.carto.search.SearchRequest): number;
+                public static VectorElementSearchService_findElements(
+                    param0: number,
+                    param1: com.carto.search.VectorElementSearchService,
+                    param2: number,
+                    param3: com.carto.search.SearchRequest
+                ): number;
+                public static VectorElementSearchService_findElementsSwigExplicitVectorElementSearchService(
+                    param0: number,
+                    param1: com.carto.search.VectorElementSearchService,
+                    param2: number,
+                    param3: com.carto.search.SearchRequest
+                ): number;
                 public static VectorElementSearchService_getMaxResults(param0: number, param1: com.carto.search.VectorElementSearchService): number;
                 public constructor();
                 public static new_VectorElementSearchService(param0: number, param1: com.carto.datasources.VectorDataSource): number;
@@ -8290,9 +9489,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class VectorTileSearchService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.VectorTileSearchService>;
                 public swigCMemOwn: boolean;
@@ -8322,9 +9521,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module search {
+declare namespace com {
+    export namespace carto {
+        export namespace search {
             export class VectorTileSearchServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.search.VectorTileSearchServiceModuleJNI>;
                 public static delete_VectorTileSearchService(param0: number): void;
@@ -8338,7 +9537,12 @@ declare module com {
                 public static VectorTileSearchService_director_connect(param0: com.carto.search.VectorTileSearchService, param1: number, param2: boolean, param3: boolean): void;
                 public static VectorTileSearchService_setMaxZoom(param0: number, param1: com.carto.search.VectorTileSearchService, param2: number): void;
                 public static new_VectorTileSearchService(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.vectortiles.VectorTileDecoder): number;
-                public static VectorTileSearchService_findFeaturesSwigExplicitVectorTileSearchService(param0: number, param1: com.carto.search.VectorTileSearchService, param2: number, param3: com.carto.search.SearchRequest): number;
+                public static VectorTileSearchService_findFeaturesSwigExplicitVectorTileSearchService(
+                    param0: number,
+                    param1: com.carto.search.VectorTileSearchService,
+                    param2: number,
+                    param3: com.carto.search.SearchRequest
+                ): number;
                 public static VectorTileSearchService_swigGetDirectorObject(param0: number, param1: com.carto.search.VectorTileSearchService): any;
                 public static VectorTileSearchService_findFeatures(param0: number, param1: com.carto.search.VectorTileSearchService, param2: number, param3: com.carto.search.SearchRequest): number;
                 public static VectorTileSearchService_getMaxZoom(param0: number, param1: com.carto.search.VectorTileSearchService): number;
@@ -8351,9 +9555,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module services {
+declare namespace com {
+    export namespace carto {
+        export namespace services {
             export class CartoMapsService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.services.CartoMapsService>;
                 public swigCMemOwn: boolean;
@@ -8392,9 +9596,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module services {
+declare namespace com {
+    export namespace carto {
+        export namespace services {
             export class CartoMapsServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.services.CartoMapsServiceModuleJNI>;
                 public static CartoMapsService_getUsername(param0: number, param1: com.carto.services.CartoMapsService): string;
@@ -8412,7 +9616,13 @@ declare module com {
                 public static CartoMapsService_getLayerIndices(param0: number, param1: com.carto.services.CartoMapsService): number;
                 public static CartoMapsService_setAuthTokens(param0: number, param1: com.carto.services.CartoMapsService, param2: number, param3: com.carto.core.StringVector): void;
                 public static CartoMapsService_setAPIKey(param0: number, param1: com.carto.services.CartoMapsService, param2: string): void;
-                public static CartoMapsService_buildNamedMap(param0: number, param1: com.carto.services.CartoMapsService, param2: string, param3: number, param4: com.carto.core.StringVariantMap): number;
+                public static CartoMapsService_buildNamedMap(
+                    param0: number,
+                    param1: com.carto.services.CartoMapsService,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.core.StringVariantMap
+                ): number;
                 public static CartoMapsService_setStrictMode(param0: number, param1: com.carto.services.CartoMapsService, param2: boolean): void;
                 public static CartoMapsService_setDefaultVectorLayerMode(param0: number, param1: com.carto.services.CartoMapsService, param2: boolean): void;
                 public static CartoMapsService_setAPITemplate(param0: number, param1: com.carto.services.CartoMapsService, param2: string): void;
@@ -8428,9 +9638,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module services {
+declare namespace com {
+    export namespace carto {
+        export namespace services {
             export class CartoSQLService extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.services.CartoSQLService>;
                 public swigCMemOwn: boolean;
@@ -8455,9 +9665,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module services {
+declare namespace com {
+    export namespace carto {
+        export namespace services {
             export class CartoSQLServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.services.CartoSQLServiceModuleJNI>;
                 public static CartoSQLService_setUsername(param0: number, param1: com.carto.services.CartoSQLService, param2: string): void;
@@ -8469,7 +9679,13 @@ declare module com {
                 public static delete_CartoSQLService(param0: number): void;
                 public static CartoSQLService_swigGetRawPtr(param0: number, param1: com.carto.services.CartoSQLService): number;
                 public static CartoSQLService_setAPITemplate(param0: number, param1: com.carto.services.CartoSQLService, param2: string): void;
-                public static CartoSQLService_queryFeatures(param0: number, param1: com.carto.services.CartoSQLService, param2: string, param3: number, param4: com.carto.projections.Projection): number;
+                public static CartoSQLService_queryFeatures(
+                    param0: number,
+                    param1: com.carto.services.CartoSQLService,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.projections.Projection
+                ): number;
                 public constructor();
                 public static CartoSQLService_getAPIKey(param0: number, param1: com.carto.services.CartoSQLService): string;
             }
@@ -8477,9 +9693,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class AnimationStyle extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.AnimationStyle>;
                 public swigCMemOwn: boolean;
@@ -8503,9 +9719,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class AnimationStyleBuilder extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.AnimationStyleBuilder>;
                 public swigCMemOwn: boolean;
@@ -8534,9 +9750,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class AnimationStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.AnimationStyleBuilderModuleJNI>;
                 public static new_AnimationStyleBuilder(): number;
@@ -8561,9 +9777,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class AnimationStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.AnimationStyleModuleJNI>;
                 public static AnimationStyle_getSizeAnimationType(param0: number, param1: com.carto.styles.AnimationStyle): number;
@@ -8581,9 +9797,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class AnimationType {
                 public static class: java.lang.Class<com.carto.styles.AnimationType>;
                 public static ANIMATION_TYPE_NONE: com.carto.styles.AnimationType;
@@ -8597,7 +9813,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.styles.AnimationType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module AnimationType {
+            export namespace AnimationType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.styles.AnimationType.SwigNext>;
                 }
@@ -8606,9 +9822,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupButtonStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupButtonStyle>;
                 public getTextColor(): com.carto.graphics.Color;
@@ -8635,9 +9851,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupButtonStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupButtonStyleBuilder>;
                 public getTextColor(): com.carto.graphics.Color;
@@ -8673,16 +9889,21 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupButtonStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupButtonStyleBuilderModuleJNI>;
                 public static BalloonPopupButtonStyleBuilder_getTextFontSize(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
                 public static BalloonPopupButtonStyleBuilder_getStrokeWidth(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
                 public static BalloonPopupButtonStyleBuilder_setButtonWidth(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder, param2: number): void;
                 public static BalloonPopupButtonStyleBuilder_getButtonWidth(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
-                public static BalloonPopupButtonStyleBuilder_setTextColor(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder, param2: number, param3: com.carto.graphics.Color): void;
+                public static BalloonPopupButtonStyleBuilder_setTextColor(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupButtonStyleBuilder,
+                    param2: number,
+                    param3: com.carto.graphics.Color
+                ): void;
                 public static BalloonPopupButtonStyleBuilder_getTextMargins(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
                 public static BalloonPopupButtonStyleBuilder_swigGetRawPtr(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
                 public static BalloonPopupButtonStyleBuilder_getCornerRadius(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
@@ -8694,9 +9915,19 @@ declare module com {
                 public static BalloonPopupButtonStyleBuilder_setStrokeWidth(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder, param2: number): void;
                 public static BalloonPopupButtonStyleBuilder_swigGetClassName(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): string;
                 public static BalloonPopupButtonStyleBuilder_SWIGSmartPtrUpcast(param0: number): number;
-                public static BalloonPopupButtonStyleBuilder_setTextMargins(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder, param2: number, param3: com.carto.styles.BalloonPopupMargins): void;
+                public static BalloonPopupButtonStyleBuilder_setTextMargins(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupButtonStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupMargins
+                ): void;
                 public static BalloonPopupButtonStyleBuilder_setTextFontName(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder, param2: string): void;
-                public static BalloonPopupButtonStyleBuilder_setStrokeColor(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder, param2: number, param3: com.carto.graphics.Color): void;
+                public static BalloonPopupButtonStyleBuilder_setStrokeColor(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupButtonStyleBuilder,
+                    param2: number,
+                    param3: com.carto.graphics.Color
+                ): void;
                 public static new_BalloonPopupButtonStyleBuilder(): number;
                 public static delete_BalloonPopupButtonStyleBuilder(param0: number): void;
                 public static BalloonPopupButtonStyleBuilder_getTextColor(param0: number, param1: com.carto.styles.BalloonPopupButtonStyleBuilder): number;
@@ -8707,9 +9938,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupButtonStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupButtonStyleModuleJNI>;
                 public static BalloonPopupButtonStyle_getTextColor(param0: number, param1: com.carto.styles.BalloonPopupButtonStyle): number;
@@ -8732,9 +9963,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupMargins extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupMargins>;
                 public swigCMemOwn: boolean;
@@ -8753,9 +9984,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupStyle extends com.carto.styles.PopupStyle {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupStyle>;
                 public getStrokeWidth(): number;
@@ -8802,9 +10033,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupStyleBuilder extends com.carto.styles.PopupStyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupStyleBuilder>;
                 public setLeftColor(param0: com.carto.graphics.Color): void;
@@ -8877,9 +10108,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupStyleBuilderModuleJNI>;
                 public static BalloonPopupStyleBuilder_setRightImage(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.graphics.Bitmap): void;
@@ -8893,7 +10124,12 @@ declare module com {
                 public static BalloonPopupStyleBuilder_setRightColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.graphics.Color): void;
                 public static BalloonPopupStyleBuilder_getLeftColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
                 public static BalloonPopupStyleBuilder_getDescriptionFontName(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): string;
-                public static BalloonPopupStyleBuilder_setDescriptionMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.styles.BalloonPopupMargins): void;
+                public static BalloonPopupStyleBuilder_setDescriptionMargins(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupMargins
+                ): void;
                 public static BalloonPopupStyleBuilder_getRightColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
                 public static BalloonPopupStyleBuilder_setDescriptionColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.graphics.Color): void;
                 public static BalloonPopupStyleBuilder_isDescriptionWrap(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): boolean;
@@ -8902,9 +10138,19 @@ declare module com {
                 public static BalloonPopupStyleBuilder_swigGetClassName(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): string;
                 public static BalloonPopupStyleBuilder_setTriangleWidth(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number): void;
                 public static BalloonPopupStyleBuilder_getLeftMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
-                public static BalloonPopupStyleBuilder_setLeftMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.styles.BalloonPopupMargins): void;
+                public static BalloonPopupStyleBuilder_setLeftMargins(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupMargins
+                ): void;
                 public static BalloonPopupStyleBuilder_getTitleColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
-                public static BalloonPopupStyleBuilder_setTitleMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.styles.BalloonPopupMargins): void;
+                public static BalloonPopupStyleBuilder_setTitleMargins(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupMargins
+                ): void;
                 public static BalloonPopupStyleBuilder_isTitleWrap(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): boolean;
                 public static BalloonPopupStyleBuilder_getTitleFontName(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): string;
                 public static BalloonPopupStyleBuilder_getDescriptionField(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): string;
@@ -8912,7 +10158,12 @@ declare module com {
                 public static BalloonPopupStyleBuilder_getRightMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
                 public static BalloonPopupStyleBuilder_setStrokeWidth(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number): void;
                 public static BalloonPopupStyleBuilder_setTitleField(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: string): void;
-                public static BalloonPopupStyleBuilder_setButtonMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.styles.BalloonPopupMargins): void;
+                public static BalloonPopupStyleBuilder_setButtonMargins(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupMargins
+                ): void;
                 public static BalloonPopupStyleBuilder_setStrokeColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.graphics.Color): void;
                 public static BalloonPopupStyleBuilder_getStrokeWidth(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
                 public static BalloonPopupStyleBuilder_getDescriptionMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
@@ -8927,7 +10178,12 @@ declare module com {
                 public static BalloonPopupStyleBuilder_setDescriptionFontName(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: string): void;
                 public static BalloonPopupStyleBuilder_SWIGSmartPtrUpcast(param0: number): number;
                 public static BalloonPopupStyleBuilder_getLeftImage(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
-                public static BalloonPopupStyleBuilder_setRightMargins(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: number, param3: com.carto.styles.BalloonPopupMargins): void;
+                public static BalloonPopupStyleBuilder_setRightMargins(
+                    param0: number,
+                    param1: com.carto.styles.BalloonPopupStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupMargins
+                ): void;
                 public static BalloonPopupStyleBuilder_swigGetDirectorObject(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): any;
                 public static BalloonPopupStyleBuilder_setTitleWrap(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder, param2: boolean): void;
                 public static BalloonPopupStyleBuilder_getDescriptionColor(param0: number, param1: com.carto.styles.BalloonPopupStyleBuilder): number;
@@ -8943,9 +10199,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BalloonPopupStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BalloonPopupStyleModuleJNI>;
                 public static BalloonPopupStyle_getRightMargins(param0: number, param1: com.carto.styles.BalloonPopupStyle): number;
@@ -8991,9 +10247,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BillboardOrientation {
                 public static class: java.lang.Class<com.carto.styles.BillboardOrientation>;
                 public static BILLBOARD_ORIENTATION_FACE_CAMERA: com.carto.styles.BillboardOrientation;
@@ -9005,7 +10261,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.styles.BillboardOrientation;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module BillboardOrientation {
+            export namespace BillboardOrientation {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.styles.BillboardOrientation.SwigNext>;
                 }
@@ -9014,9 +10270,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BillboardScaling {
                 public static class: java.lang.Class<com.carto.styles.BillboardScaling>;
                 public static BILLBOARD_SCALING_WORLD_SIZE: com.carto.styles.BillboardScaling;
@@ -9028,7 +10284,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static valueOf(param0: string): com.carto.styles.BillboardScaling;
             }
-            export module BillboardScaling {
+            export namespace BillboardScaling {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.styles.BillboardScaling.SwigNext>;
                 }
@@ -9037,9 +10293,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BillboardStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.BillboardStyle>;
                 public isHideIfOverlapped(): boolean;
@@ -9066,9 +10322,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BillboardStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.BillboardStyleBuilder>;
                 public setVerticalOffset(param0: number): void;
@@ -9105,9 +10361,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BillboardStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BillboardStyleBuilderModuleJNI>;
                 public static BillboardStyleBuilder_isScaleWithDPI(param0: number, param1: com.carto.styles.BillboardStyleBuilder): boolean;
@@ -9140,9 +10396,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class BillboardStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.BillboardStyleModuleJNI>;
                 public static delete_BillboardStyle(param0: number): void;
@@ -9165,9 +10421,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class CartoCSSStyleSet extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.CartoCSSStyleSet>;
                 public swigCMemOwn: boolean;
@@ -9187,9 +10443,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class CartoCSSStyleSetModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.CartoCSSStyleSetModuleJNI>;
                 public static new_StringCartoCSSStyleSetMap__SWIG_0(): number;
@@ -9208,16 +10464,22 @@ declare module com {
                 public static CartoCSSStyleSet_getCartoCSS(param0: number, param1: com.carto.styles.CartoCSSStyleSet): string;
                 public static CartoCSSStyleSet_getAssetPackage(param0: number, param1: com.carto.styles.CartoCSSStyleSet): number;
                 public static CartoCSSStyleSet_swigGetRawPtr(param0: number, param1: com.carto.styles.CartoCSSStyleSet): number;
-                public static StringCartoCSSStyleSetMap_set(param0: number, param1: com.carto.styles.StringCartoCSSStyleSetMap, param2: string, param3: number, param4: com.carto.styles.CartoCSSStyleSet): void;
+                public static StringCartoCSSStyleSetMap_set(
+                    param0: number,
+                    param1: com.carto.styles.StringCartoCSSStyleSetMap,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.styles.CartoCSSStyleSet
+                ): void;
                 public static StringCartoCSSStyleSetMap_size(param0: number, param1: com.carto.styles.StringCartoCSSStyleSetMap): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class CompiledStyleSet extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.CompiledStyleSet>;
                 public swigCMemOwn: boolean;
@@ -9238,9 +10500,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class CompiledStyleSetModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.CompiledStyleSetModuleJNI>;
                 public static delete_CompiledStyleSet(param0: number): void;
@@ -9256,9 +10518,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class GeometryCollectionStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.GeometryCollectionStyle>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.GeometryCollectionStyle;
@@ -9279,9 +10541,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class GeometryCollectionStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.GeometryCollectionStyleBuilder>;
                 public setPolygonStyle(param0: com.carto.styles.PolygonStyle): void;
@@ -9307,9 +10569,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class GeometryCollectionStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.GeometryCollectionStyleBuilderModuleJNI>;
                 public static GeometryCollectionStyleBuilder_getPolygonStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder): number;
@@ -9319,11 +10581,26 @@ declare module com {
                 public static GeometryCollectionStyleBuilder_swigGetClassName(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder): string;
                 public static GeometryCollectionStyleBuilder_SWIGSmartPtrUpcast(param0: number): number;
                 public constructor();
-                public static GeometryCollectionStyleBuilder_setPolygonStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder, param2: number, param3: com.carto.styles.PolygonStyle): void;
+                public static GeometryCollectionStyleBuilder_setPolygonStyle(
+                    param0: number,
+                    param1: com.carto.styles.GeometryCollectionStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.PolygonStyle
+                ): void;
                 public static GeometryCollectionStyleBuilder_swigGetRawPtr(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder): number;
                 public static GeometryCollectionStyleBuilder_getPointStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder): number;
-                public static GeometryCollectionStyleBuilder_setPointStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder, param2: number, param3: com.carto.styles.PointStyle): void;
-                public static GeometryCollectionStyleBuilder_setLineStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder, param2: number, param3: com.carto.styles.LineStyle): void;
+                public static GeometryCollectionStyleBuilder_setPointStyle(
+                    param0: number,
+                    param1: com.carto.styles.GeometryCollectionStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.PointStyle
+                ): void;
+                public static GeometryCollectionStyleBuilder_setLineStyle(
+                    param0: number,
+                    param1: com.carto.styles.GeometryCollectionStyleBuilder,
+                    param2: number,
+                    param3: com.carto.styles.LineStyle
+                ): void;
                 public static delete_GeometryCollectionStyleBuilder(param0: number): void;
                 public static GeometryCollectionStyleBuilder_buildStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyleBuilder): number;
             }
@@ -9331,9 +10608,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class GeometryCollectionStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.GeometryCollectionStyleModuleJNI>;
                 public static GeometryCollectionStyle_getPolygonStyle(param0: number, param1: com.carto.styles.GeometryCollectionStyle): number;
@@ -9350,9 +10627,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LabelStyle extends com.carto.styles.BillboardStyle {
                 public static class: java.lang.Class<com.carto.styles.LabelStyle>;
                 public isFlippable(): boolean;
@@ -9378,9 +10655,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LabelStyleBuilder extends com.carto.styles.BillboardStyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.LabelStyleBuilder>;
                 public setScalingMode(param0: com.carto.styles.BillboardScaling): void;
@@ -9415,9 +10692,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LabelStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.LabelStyleBuilderModuleJNI>;
                 public static LabelStyleBuilder_setAnchorPoint(param0: number, param1: com.carto.styles.LabelStyleBuilder, param2: number, param3: number): void;
@@ -9446,9 +10723,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LabelStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.LabelStyleModuleJNI>;
                 public static LabelStyle_getRenderScale(param0: number, param1: com.carto.styles.LabelStyle): number;
@@ -9468,9 +10745,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LineEndType {
                 public static class: java.lang.Class<com.carto.styles.LineEndType>;
                 public static LINE_END_TYPE_NONE: com.carto.styles.LineEndType;
@@ -9482,7 +10759,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.styles.LineEndType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module LineEndType {
+            export namespace LineEndType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.styles.LineEndType.SwigNext>;
                 }
@@ -9491,9 +10768,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LineJoinType {
                 public static class: java.lang.Class<com.carto.styles.LineJoinType>;
                 public static LINE_JOIN_TYPE_NONE: com.carto.styles.LineJoinType;
@@ -9506,7 +10783,7 @@ declare module com {
                 public static valueOf(param0: string): com.carto.styles.LineJoinType;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module LineJoinType {
+            export namespace LineJoinType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.styles.LineJoinType.SwigNext>;
                 }
@@ -9515,9 +10792,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LineStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.LineStyle>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.styles.LineStyle;
@@ -9541,9 +10818,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LineStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.LineStyleBuilder>;
                 public setBitmap(param0: com.carto.graphics.Bitmap): void;
@@ -9575,9 +10852,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LineStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.LineStyleBuilderModuleJNI>;
                 public static LineStyleBuilder_setWidth(param0: number, param1: com.carto.styles.LineStyleBuilder, param2: number): void;
@@ -9605,9 +10882,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class LineStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.LineStyleModuleJNI>;
                 public static LineStyle_SWIGSmartPtrUpcast(param0: number): number;
@@ -9627,9 +10904,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class MarkerStyle extends com.carto.styles.BillboardStyle {
                 public static class: java.lang.Class<com.carto.styles.MarkerStyle>;
                 public getScalingMode(): com.carto.styles.BillboardScaling;
@@ -9656,9 +10933,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class MarkerStyleBuilder extends com.carto.styles.BillboardStyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.MarkerStyleBuilder>;
                 public setScalingMode(param0: com.carto.styles.BillboardScaling): void;
@@ -9695,9 +10972,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class MarkerStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.MarkerStyleBuilderModuleJNI>;
                 public static MarkerStyleBuilder_setAnchorPointY(param0: number, param1: com.carto.styles.MarkerStyleBuilder, param2: number): void;
@@ -9728,9 +11005,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class MarkerStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.MarkerStyleModuleJNI>;
                 public static MarkerStyle_swigGetClassName(param0: number, param1: com.carto.styles.MarkerStyle): string;
@@ -9751,9 +11028,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class NMLModelStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.NMLModelStyle>;
                 public swigGetRawPtr(): number;
@@ -9771,9 +11048,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class NMLModelStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.NMLModelStyleBuilder>;
                 public getModelAsset(): com.carto.core.BinaryData;
@@ -9795,9 +11072,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class NMLModelStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.NMLModelStyleBuilderModuleJNI>;
                 public static new_NMLModelStyleBuilder(): number;
@@ -9815,9 +11092,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class NMLModelStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.NMLModelStyleModuleJNI>;
                 public static NMLModelStyle_swigGetDirectorObject(param0: number, param1: com.carto.styles.NMLModelStyle): any;
@@ -9831,9 +11108,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PointStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.PointStyle>;
                 public static getCPtr(param0: com.carto.styles.PointStyle): number;
@@ -9854,9 +11131,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PointStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.PointStyleBuilder>;
                 public setBitmap(param0: com.carto.graphics.Bitmap): void;
@@ -9882,9 +11159,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PointStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.PointStyleBuilderModuleJNI>;
                 public static new_PointStyleBuilder(): number;
@@ -9906,9 +11183,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PointStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.PointStyleModuleJNI>;
                 public static PointStyle_swigGetRawPtr(param0: number, param1: com.carto.styles.PointStyle): number;
@@ -9925,9 +11202,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class Polygon3DStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.Polygon3DStyle>;
                 public getSideColor(): com.carto.graphics.Color;
@@ -9946,9 +11223,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class Polygon3DStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.Polygon3DStyleBuilder>;
                 public setSideColor(param0: com.carto.graphics.Color): void;
@@ -9970,9 +11247,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class Polygon3DStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.Polygon3DStyleBuilderModuleJNI>;
                 public static Polygon3DStyleBuilder_swigGetClassName(param0: number, param1: com.carto.styles.Polygon3DStyleBuilder): string;
@@ -9990,9 +11267,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class Polygon3DStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.Polygon3DStyleModuleJNI>;
                 public static delete_Polygon3DStyle(param0: number): void;
@@ -10007,9 +11284,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PolygonStyle extends com.carto.styles.Style {
                 public static class: java.lang.Class<com.carto.styles.PolygonStyle>;
                 public swigGetRawPtr(): number;
@@ -10028,9 +11305,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PolygonStyleBuilder extends com.carto.styles.StyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.PolygonStyleBuilder>;
                 public static getCPtr(param0: com.carto.styles.StyleBuilder): number;
@@ -10052,9 +11329,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PolygonStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.PolygonStyleBuilderModuleJNI>;
                 public static PolygonStyleBuilder_swigGetClassName(param0: number, param1: com.carto.styles.PolygonStyleBuilder): string;
@@ -10072,9 +11349,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PolygonStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.PolygonStyleModuleJNI>;
                 public static delete_PolygonStyle(param0: number): void;
@@ -10089,9 +11366,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PopupStyle extends com.carto.styles.BillboardStyle {
                 public static class: java.lang.Class<com.carto.styles.PopupStyle>;
                 public static getCPtr(param0: com.carto.styles.BillboardStyle): number;
@@ -10111,9 +11388,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PopupStyleBuilder extends com.carto.styles.BillboardStyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.PopupStyleBuilder>;
                 public static getCPtr(param0: com.carto.styles.StyleBuilder): number;
@@ -10135,9 +11412,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PopupStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.PopupStyleBuilderModuleJNI>;
                 public static PopupStyleBuilder_buildStyle(param0: number, param1: com.carto.styles.PopupStyleBuilder): number;
@@ -10153,9 +11430,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class PopupStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.PopupStyleModuleJNI>;
                 public static delete_PopupStyle(param0: number): void;
@@ -10169,9 +11446,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class StringCartoCSSStyleSetMap extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.StringCartoCSSStyleSetMap>;
                 public swigCMemOwn: boolean;
@@ -10194,9 +11471,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class Style extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.Style>;
                 public swigCMemOwn: boolean;
@@ -10216,9 +11493,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class StyleBuilder extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.StyleBuilder>;
                 public swigCMemOwn: boolean;
@@ -10239,9 +11516,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class StyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.StyleBuilderModuleJNI>;
                 public static StyleBuilder_swigGetDirectorObject(param0: number, param1: com.carto.styles.StyleBuilder): any;
@@ -10256,9 +11533,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class StyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.StyleModuleJNI>;
                 public static Style_getColor(param0: number, param1: com.carto.styles.Style): number;
@@ -10272,9 +11549,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class StyleSelectorBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.StyleSelectorBuilderModuleJNI>;
                 public constructor();
@@ -10283,9 +11560,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class StyleSelectorModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.StyleSelectorModuleJNI>;
                 public constructor();
@@ -10294,9 +11571,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class TextMargins extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.TextMargins>;
                 public swigCMemOwn: boolean;
@@ -10315,9 +11592,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class TextStyle extends com.carto.styles.LabelStyle {
                 public static class: java.lang.Class<com.carto.styles.TextStyle>;
                 public getStrokeWidth(): number;
@@ -10350,9 +11627,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class TextStyleBuilder extends com.carto.styles.LabelStyleBuilder {
                 public static class: java.lang.Class<com.carto.styles.TextStyleBuilder>;
                 public getStrokeWidth(): number;
@@ -10397,9 +11674,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class TextStyleBuilderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.TextStyleBuilderModuleJNI>;
                 public static TextStyleBuilder_setFontSize(param0: number, param1: com.carto.styles.TextStyleBuilder, param2: number): void;
@@ -10435,9 +11712,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module styles {
+declare namespace com {
+    export namespace carto {
+        export namespace styles {
             export class TextStyleModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.styles.TextStyleModuleJNI>;
                 public static TextStyle_getFontSize(param0: number, param1: com.carto.styles.TextStyle): number;
@@ -10469,9 +11746,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class BalloonPopupButtonClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.BalloonPopupButtonClickInfo>;
                 public swigCMemOwn: boolean;
@@ -10490,9 +11767,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class BalloonPopupButtonClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.BalloonPopupButtonClickInfoModuleJNI>;
                 public static BalloonPopupButtonClickInfo_getClickType(param0: number, param1: com.carto.ui.BalloonPopupButtonClickInfo): number;
@@ -10506,9 +11783,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class BaseMapView extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.BaseMapView>;
                 public swigCMemOwn: boolean;
@@ -10561,9 +11838,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class BaseMapViewModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.BaseMapViewModuleJNI>;
                 public static BaseMapView_onSurfaceChanged(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: number): void;
@@ -10590,12 +11867,32 @@ declare module com {
                 public static BaseMapView_onSurfaceDestroyed(param0: number, param1: com.carto.ui.BaseMapView): void;
                 public static BaseMapView_setTilt(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: number): void;
                 public static BaseMapView_clearPreloadingCaches(param0: number, param1: com.carto.ui.BaseMapView): void;
-                public static BaseMapView_moveToFitBounds__SWIG_0(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: com.carto.core.MapBounds, param4: number, param5: com.carto.core.ScreenBounds, param6: boolean, param7: number): void;
+                public static BaseMapView_moveToFitBounds__SWIG_0(
+                    param0: number,
+                    param1: com.carto.ui.BaseMapView,
+                    param2: number,
+                    param3: com.carto.core.MapBounds,
+                    param4: number,
+                    param5: com.carto.core.ScreenBounds,
+                    param6: boolean,
+                    param7: number
+                ): void;
                 public static BaseMapView_zoom__SWIG_0(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: number): void;
                 public static BaseMapView_zoom__SWIG_1(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number): void;
                 public static BaseMapView_setMapEventListener(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: com.carto.ui.MapEventListener): void;
                 public static BaseMapView_onInputEvent(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: number, param4: number, param5: number, param6: number): void;
-                public static BaseMapView_moveToFitBounds__SWIG_1(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: com.carto.core.MapBounds, param4: number, param5: com.carto.core.ScreenBounds, param6: boolean, param7: boolean, param8: boolean, param9: number): void;
+                public static BaseMapView_moveToFitBounds__SWIG_1(
+                    param0: number,
+                    param1: com.carto.ui.BaseMapView,
+                    param2: number,
+                    param3: com.carto.core.MapBounds,
+                    param4: number,
+                    param5: com.carto.core.ScreenBounds,
+                    param6: boolean,
+                    param7: boolean,
+                    param8: boolean,
+                    param9: number
+                ): void;
                 public static BaseMapView_setRotation__SWIG_1(param0: number, param1: com.carto.ui.BaseMapView, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number): void;
                 public static BaseMapView_onDrawFrame(param0: number, param1: com.carto.ui.BaseMapView): void;
                 public static BaseMapView_getSDKVersion(): string;
@@ -10613,9 +11910,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class ClickType {
                 public static class: java.lang.Class<com.carto.ui.ClickType>;
                 public static CLICK_TYPE_SINGLE: com.carto.ui.ClickType;
@@ -10628,7 +11925,7 @@ declare module com {
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
                 public static swigToEnum(param0: number): com.carto.ui.ClickType;
             }
-            export module ClickType {
+            export namespace ClickType {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.ui.ClickType.SwigNext>;
                 }
@@ -10637,9 +11934,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class ClickTypeModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.ClickTypeModuleJNI>;
                 public constructor();
@@ -10648,9 +11945,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class ConfigChooser extends java.lang.Object implements globalAndroid.opengl.GLSurfaceView.EGLConfigChooser {
                 public static class: java.lang.Class<com.carto.ui.ConfigChooser>;
                 public chooseConfig(param0: javax.microedition.khronos.egl.EGL10, param1: javax.microedition.khronos.egl.EGLDisplay): javax.microedition.khronos.egl.EGLConfig;
@@ -10660,9 +11957,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class MapClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.MapClickInfo>;
                 public swigCMemOwn: boolean;
@@ -10680,9 +11977,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class MapClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.MapClickInfoModuleJNI>;
                 public static delete_MapClickInfo(param0: number): void;
@@ -10695,9 +11992,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class MapEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.MapEventListener>;
                 public swigCMemOwn: boolean;
@@ -10722,9 +12019,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class MapEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.MapEventListenerModuleJNI>;
                 public static MapEventListener_onMapIdle(param0: number, param1: com.carto.ui.MapEventListener): void;
@@ -10752,9 +12049,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class MapRedrawRequestListener extends com.carto.renderers.RedrawRequestListener {
                 public static class: java.lang.Class<com.carto.ui.MapRedrawRequestListener>;
                 public constructor(param0: number, param1: boolean);
@@ -10766,9 +12063,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class MapView extends globalAndroid.opengl.GLSurfaceView implements globalAndroid.opengl.GLSurfaceView.Renderer {
                 public static class: java.lang.Class<com.carto.ui.MapView>;
                 public surfaceRedrawNeededAsync(param0: globalAndroid.view.SurfaceHolder, param1: java.lang.Runnable): void;
@@ -10828,9 +12125,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class NMLModelLODTreeClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.NMLModelLODTreeClickInfoModuleJNI>;
                 public constructor();
@@ -10839,9 +12136,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class PopupClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.PopupClickInfo>;
                 public swigCMemOwn: boolean;
@@ -10861,9 +12158,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class PopupClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.PopupClickInfoModuleJNI>;
                 public static PopupClickInfo_getClickPos(param0: number, param1: com.carto.ui.PopupClickInfo): number;
@@ -10878,9 +12175,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class PopupDrawInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.PopupDrawInfo>;
                 public swigCMemOwn: boolean;
@@ -10901,16 +12198,24 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class PopupDrawInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.PopupDrawInfoModuleJNI>;
                 public static delete_PopupDrawInfo(param0: number): void;
                 public static PopupDrawInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.PopupDrawInfo): number;
                 public static PopupDrawInfo_getDPToPX(param0: number, param1: com.carto.ui.PopupDrawInfo): number;
                 public static PopupDrawInfo_getPopup(param0: number, param1: com.carto.ui.PopupDrawInfo): number;
-                public static new_PopupDrawInfo(param0: number, param1: com.carto.core.ScreenPos, param2: number, param3: com.carto.core.ScreenBounds, param4: number, param5: com.carto.vectorelements.Popup, param6: number): number;
+                public static new_PopupDrawInfo(
+                    param0: number,
+                    param1: com.carto.core.ScreenPos,
+                    param2: number,
+                    param3: com.carto.core.ScreenBounds,
+                    param4: number,
+                    param5: com.carto.vectorelements.Popup,
+                    param6: number
+                ): number;
                 public constructor();
                 public static PopupDrawInfo_getAnchorScreenPos(param0: number, param1: com.carto.ui.PopupDrawInfo): number;
                 public static PopupDrawInfo_getScreenBounds(param0: number, param1: com.carto.ui.PopupDrawInfo): number;
@@ -10919,9 +12224,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class RasterTileClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.RasterTileClickInfo>;
                 public swigCMemOwn: boolean;
@@ -10943,9 +12248,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class RasterTileClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.RasterTileClickInfoModuleJNI>;
                 public static RasterTileClickInfo_getMapTile(param0: number, param1: com.carto.ui.RasterTileClickInfo): number;
@@ -10962,9 +12267,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class UTFGridClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.UTFGridClickInfo>;
                 public swigCMemOwn: boolean;
@@ -10984,9 +12289,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class UTFGridClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.UTFGridClickInfoModuleJNI>;
                 public static UTFGridClickInfo_getClickPos(param0: number, param1: com.carto.ui.UTFGridClickInfo): number;
@@ -11001,9 +12306,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorElementClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.VectorElementClickInfo>;
                 public swigCMemOwn: boolean;
@@ -11024,9 +12329,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorElementClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.VectorElementClickInfoModuleJNI>;
                 public static delete_VectorElementClickInfo(param0: number): void;
@@ -11042,9 +12347,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorElementDragInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.VectorElementDragInfo>;
                 public swigCMemOwn: boolean;
@@ -11064,9 +12369,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorElementDragInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.VectorElementDragInfoModuleJNI>;
                 public static VectorElementDragInfo_getVectorElement(param0: number, param1: com.carto.ui.VectorElementDragInfo): number;
@@ -11081,9 +12386,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorElementDragMode {
                 public static class: java.lang.Class<com.carto.ui.VectorElementDragMode>;
                 public static VECTOR_ELEMENT_DRAG_MODE_VERTEX: com.carto.ui.VectorElementDragMode;
@@ -11094,7 +12399,7 @@ declare module com {
                 public static swigToEnum(param0: number): com.carto.ui.VectorElementDragMode;
                 public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
             }
-            export module VectorElementDragMode {
+            export namespace VectorElementDragMode {
                 export class SwigNext extends java.lang.Object {
                     public static class: java.lang.Class<com.carto.ui.VectorElementDragMode.SwigNext>;
                 }
@@ -11103,9 +12408,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorTileClickInfo extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.VectorTileClickInfo>;
                 public swigCMemOwn: boolean;
@@ -11129,9 +12434,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module ui {
+declare namespace com {
+    export namespace carto {
+        export namespace ui {
             export class VectorTileClickInfoModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.ui.VectorTileClickInfoModuleJNI>;
                 public static VectorTileClickInfo_getClickPos(param0: number, param1: com.carto.ui.VectorTileClickInfo): number;
@@ -11150,9 +12455,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class AndroidUtils extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.AndroidUtils>;
                 public swigCMemOwn: boolean;
@@ -11169,9 +12474,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class AndroidUtilsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.AndroidUtilsModuleJNI>;
                 public static AndroidUtils_setContext(param0: globalAndroid.content.Context): void;
@@ -11185,9 +12490,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class AssetPackage extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.AssetPackage>;
                 public swigCMemOwn: boolean;
@@ -11212,9 +12517,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class AssetPackageModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.AssetPackageModuleJNI>;
                 public static new_AssetPackage(): number;
@@ -11234,9 +12539,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class AssetUtils extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.AssetUtils>;
                 public swigCMemOwn: boolean;
@@ -11251,9 +12556,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class AssetUtilsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.AssetUtilsModuleJNI>;
                 public static AssetUtils_setAssetManagerPointer(param0: globalAndroid.content.res.AssetManager): void;
@@ -11265,9 +12570,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class BitmapUtils extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.BitmapUtils>;
                 public swigCMemOwn: boolean;
@@ -11284,9 +12589,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class BitmapUtilsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.BitmapUtilsModuleJNI>;
                 public static BitmapUtils_loadBitmapFromFile(param0: string): number;
@@ -11300,9 +12605,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class Log extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.Log>;
                 public swigCMemOwn: boolean;
@@ -11332,9 +12637,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class LogEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.LogEventListener>;
                 public swigCMemOwn: boolean;
@@ -11360,9 +12665,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class LogEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.LogEventListenerModuleJNI>;
                 public static SwigDirector_LogEventListener_onDebugEvent(param0: com.carto.utils.LogEventListener, param1: string): boolean;
@@ -11393,9 +12698,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class LogModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.LogModuleJNI>;
                 public static Log_fatal(param0: string): void;
@@ -11422,9 +12727,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class TileUtils extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.TileUtils>;
                 public swigCMemOwn: boolean;
@@ -11440,9 +12745,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class TileUtilsModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.TileUtilsModuleJNI>;
                 public static TileUtils_calculateMapTile(param0: number, param1: com.carto.core.MapPos, param2: number, param3: number, param4: com.carto.projections.Projection): number;
@@ -11455,9 +12760,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class ZippedAssetPackage extends com.carto.utils.AssetPackage {
                 public static class: java.lang.Class<com.carto.utils.ZippedAssetPackage>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.utils.ZippedAssetPackage;
@@ -11481,9 +12786,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module utils {
+declare namespace com {
+    export namespace carto {
+        export namespace utils {
             export class ZippedAssetPackageModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.utils.ZippedAssetPackageModuleJNI>;
                 public static new_ZippedAssetPackage__SWIG_0(param0: number, param1: com.carto.core.BinaryData): number;
@@ -11502,9 +12807,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BalloonPopup extends com.carto.vectorelements.Popup {
                 public static class: java.lang.Class<com.carto.vectorelements.BalloonPopup>;
                 public static getCPtr(param0: com.carto.vectorelements.Popup): number;
@@ -11545,9 +12850,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BalloonPopupButton extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.BalloonPopupButton>;
                 public swigCMemOwn: boolean;
@@ -11569,9 +12874,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BalloonPopupButtonModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.BalloonPopupButtonModuleJNI>;
                 public static new_BalloonPopupButton(param0: number, param1: com.carto.styles.BalloonPopupButtonStyle, param2: string): number;
@@ -11589,9 +12894,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BalloonPopupEventListener extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.BalloonPopupEventListener>;
                 public swigCMemOwn: boolean;
@@ -11613,9 +12918,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BalloonPopupEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.BalloonPopupEventListenerModuleJNI>;
                 public static BalloonPopupEventListener_director_connect(param0: com.carto.vectorelements.BalloonPopupEventListener, param1: number, param2: boolean, param3: boolean): void;
@@ -11624,8 +12929,18 @@ declare module com {
                 public static delete_BalloonPopupEventListener(param0: number): void;
                 public static BalloonPopupEventListener_swigGetRawPtr(param0: number, param1: com.carto.vectorelements.BalloonPopupEventListener): number;
                 public static BalloonPopupEventListener_change_ownership(param0: com.carto.vectorelements.BalloonPopupEventListener, param1: number, param2: boolean): void;
-                public static BalloonPopupEventListener_onButtonClickedSwigExplicitBalloonPopupEventListener(param0: number, param1: com.carto.vectorelements.BalloonPopupEventListener, param2: number, param3: com.carto.ui.BalloonPopupButtonClickInfo): boolean;
-                public static BalloonPopupEventListener_onButtonClicked(param0: number, param1: com.carto.vectorelements.BalloonPopupEventListener, param2: number, param3: com.carto.ui.BalloonPopupButtonClickInfo): boolean;
+                public static BalloonPopupEventListener_onButtonClickedSwigExplicitBalloonPopupEventListener(
+                    param0: number,
+                    param1: com.carto.vectorelements.BalloonPopupEventListener,
+                    param2: number,
+                    param3: com.carto.ui.BalloonPopupButtonClickInfo
+                ): boolean;
+                public static BalloonPopupEventListener_onButtonClicked(
+                    param0: number,
+                    param1: com.carto.vectorelements.BalloonPopupEventListener,
+                    param2: number,
+                    param3: com.carto.ui.BalloonPopupButtonClickInfo
+                ): boolean;
                 public static BalloonPopupEventListener_swigGetDirectorObject(param0: number, param1: com.carto.vectorelements.BalloonPopupEventListener): any;
                 public static new_BalloonPopupEventListener(): number;
                 public constructor();
@@ -11634,42 +12949,91 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BalloonPopupModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.BalloonPopupModuleJNI>;
                 public static BalloonPopup_removeButton(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.vectorelements.BalloonPopupButton): void;
                 public static BalloonPopup_swigGetDirectorObject(param0: number, param1: com.carto.vectorelements.BalloonPopup): any;
                 public static BalloonPopup_getTitle(param0: number, param1: com.carto.vectorelements.BalloonPopup): string;
                 public static BalloonPopup_clearButtons(param0: number, param1: com.carto.vectorelements.BalloonPopup): void;
-                public static BalloonPopup_replaceButton(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.vectorelements.BalloonPopupButton, param4: number, param5: com.carto.vectorelements.BalloonPopupButton): void;
-                public static new_BalloonPopup__SWIG_1(param0: number, param1: com.carto.geometry.Geometry, param2: number, param3: com.carto.styles.BalloonPopupStyle, param4: string, param5: string): number;
+                public static BalloonPopup_replaceButton(
+                    param0: number,
+                    param1: com.carto.vectorelements.BalloonPopup,
+                    param2: number,
+                    param3: com.carto.vectorelements.BalloonPopupButton,
+                    param4: number,
+                    param5: com.carto.vectorelements.BalloonPopupButton
+                ): void;
+                public static new_BalloonPopup__SWIG_1(
+                    param0: number,
+                    param1: com.carto.geometry.Geometry,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupStyle,
+                    param4: string,
+                    param5: string
+                ): number;
                 public static delete_BalloonPopup(param0: number): void;
-                public static new_BalloonPopup__SWIG_0(param0: number, param1: com.carto.vectorelements.Billboard, param2: number, param3: com.carto.styles.BalloonPopupStyle, param4: string, param5: string): number;
+                public static new_BalloonPopup__SWIG_0(
+                    param0: number,
+                    param1: com.carto.vectorelements.Billboard,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupStyle,
+                    param4: string,
+                    param5: string
+                ): number;
                 public static BalloonPopup_getStyle(param0: number, param1: com.carto.vectorelements.BalloonPopup): number;
                 public static BalloonPopup_SWIGSmartPtrUpcast(param0: number): number;
                 public static BalloonPopup_getBalloonPopupEventListener(param0: number, param1: com.carto.vectorelements.BalloonPopup): number;
                 public static BalloonPopup_addButton(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.vectorelements.BalloonPopupButton): void;
                 public constructor();
-                public static new_BalloonPopup__SWIG_2(param0: number, param1: com.carto.core.MapPos, param2: number, param3: com.carto.styles.BalloonPopupStyle, param4: string, param5: string): number;
+                public static new_BalloonPopup__SWIG_2(
+                    param0: number,
+                    param1: com.carto.core.MapPos,
+                    param2: number,
+                    param3: com.carto.styles.BalloonPopupStyle,
+                    param4: string,
+                    param5: string
+                ): number;
                 public static BalloonPopup_getDescription(param0: number, param1: com.carto.vectorelements.BalloonPopup): string;
                 public static BalloonPopup_swigGetRawPtr(param0: number, param1: com.carto.vectorelements.BalloonPopup): number;
                 public static BalloonPopup_setTitle(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: string): void;
                 public static BalloonPopup_setDescription(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: string): void;
                 public static BalloonPopup_setStyle(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.styles.BalloonPopupStyle): void;
-                public static BalloonPopup_setBalloonPopupEventListener(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.vectorelements.BalloonPopupEventListener): void;
+                public static BalloonPopup_setBalloonPopupEventListener(
+                    param0: number,
+                    param1: com.carto.vectorelements.BalloonPopup,
+                    param2: number,
+                    param3: com.carto.vectorelements.BalloonPopupEventListener
+                ): void;
                 public static BalloonPopup_swigGetClassName(param0: number, param1: com.carto.vectorelements.BalloonPopup): string;
-                public static BalloonPopup_processClick(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number, param6: com.carto.core.ScreenPos): boolean;
-                public static BalloonPopup_drawBitmap(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.core.ScreenPos, param4: number, param5: number, param6: number): number;
+                public static BalloonPopup_processClick(
+                    param0: number,
+                    param1: com.carto.vectorelements.BalloonPopup,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.core.MapPos,
+                    param5: number,
+                    param6: com.carto.core.ScreenPos
+                ): boolean;
+                public static BalloonPopup_drawBitmap(
+                    param0: number,
+                    param1: com.carto.vectorelements.BalloonPopup,
+                    param2: number,
+                    param3: com.carto.core.ScreenPos,
+                    param4: number,
+                    param5: number,
+                    param6: number
+                ): number;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Billboard extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.Billboard>;
                 public getRootGeometry(): com.carto.geometry.Geometry;
@@ -11696,9 +13060,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class BillboardModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.BillboardModuleJNI>;
                 public static Billboard_setGeometry(param0: number, param1: com.carto.vectorelements.Billboard, param2: number, param3: com.carto.geometry.Geometry): void;
@@ -11721,9 +13085,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class CustomPopup extends com.carto.vectorelements.Popup {
                 public static class: java.lang.Class<com.carto.vectorelements.CustomPopup>;
                 public static getCPtr(param0: com.carto.vectorelements.CustomPopup): number;
@@ -11751,9 +13115,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class CustomPopupHandler extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.CustomPopupHandler>;
                 public swigCMemOwn: boolean;
@@ -11776,9 +13140,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class CustomPopupHandlerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.CustomPopupHandlerModuleJNI>;
                 public static CustomPopupHandler_onDrawPopup(param0: number, param1: com.carto.vectorelements.CustomPopupHandler, param2: number, param3: com.carto.ui.PopupDrawInfo): number;
@@ -11792,29 +13156,76 @@ declare module com {
                 public static CustomPopupHandler_change_ownership(param0: com.carto.vectorelements.CustomPopupHandler, param1: number, param2: boolean): void;
                 public static CustomPopupHandler_swigGetClassName(param0: number, param1: com.carto.vectorelements.CustomPopupHandler): string;
                 public static delete_CustomPopupHandler(param0: number): void;
-                public static CustomPopupHandler_onDrawPopupSwigExplicitCustomPopupHandler(param0: number, param1: com.carto.vectorelements.CustomPopupHandler, param2: number, param3: com.carto.ui.PopupDrawInfo): number;
-                public static CustomPopupHandler_onPopupClickedSwigExplicitCustomPopupHandler(param0: number, param1: com.carto.vectorelements.CustomPopupHandler, param2: number, param3: com.carto.ui.PopupClickInfo): boolean;
+                public static CustomPopupHandler_onDrawPopupSwigExplicitCustomPopupHandler(
+                    param0: number,
+                    param1: com.carto.vectorelements.CustomPopupHandler,
+                    param2: number,
+                    param3: com.carto.ui.PopupDrawInfo
+                ): number;
+                public static CustomPopupHandler_onPopupClickedSwigExplicitCustomPopupHandler(
+                    param0: number,
+                    param1: com.carto.vectorelements.CustomPopupHandler,
+                    param2: number,
+                    param3: com.carto.ui.PopupClickInfo
+                ): boolean;
                 public static CustomPopupHandler_director_connect(param0: com.carto.vectorelements.CustomPopupHandler, param1: number, param2: boolean, param3: boolean): void;
             }
         }
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class CustomPopupModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.CustomPopupModuleJNI>;
                 public static CustomPopup_swigGetClassName(param0: number, param1: com.carto.vectorelements.CustomPopup): string;
-                public static new_CustomPopup__SWIG_0(param0: number, param1: com.carto.vectorelements.Billboard, param2: number, param3: com.carto.styles.PopupStyle, param4: number, param5: com.carto.vectorelements.CustomPopupHandler): number;
-                public static new_CustomPopup__SWIG_1(param0: number, param1: com.carto.geometry.Geometry, param2: number, param3: com.carto.styles.PopupStyle, param4: number, param5: com.carto.vectorelements.CustomPopupHandler): number;
+                public static new_CustomPopup__SWIG_0(
+                    param0: number,
+                    param1: com.carto.vectorelements.Billboard,
+                    param2: number,
+                    param3: com.carto.styles.PopupStyle,
+                    param4: number,
+                    param5: com.carto.vectorelements.CustomPopupHandler
+                ): number;
+                public static new_CustomPopup__SWIG_1(
+                    param0: number,
+                    param1: com.carto.geometry.Geometry,
+                    param2: number,
+                    param3: com.carto.styles.PopupStyle,
+                    param4: number,
+                    param5: com.carto.vectorelements.CustomPopupHandler
+                ): number;
                 public static delete_CustomPopup(param0: number): void;
-                public static CustomPopup_processClick(param0: number, param1: com.carto.vectorelements.CustomPopup, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number, param6: com.carto.core.ScreenPos): boolean;
+                public static CustomPopup_processClick(
+                    param0: number,
+                    param1: com.carto.vectorelements.CustomPopup,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.core.MapPos,
+                    param5: number,
+                    param6: com.carto.core.ScreenPos
+                ): boolean;
                 public static CustomPopup_swigGetRawPtr(param0: number, param1: com.carto.vectorelements.CustomPopup): number;
                 public static CustomPopup_swigGetDirectorObject(param0: number, param1: com.carto.vectorelements.CustomPopup): any;
                 public static CustomPopup_SWIGSmartPtrUpcast(param0: number): number;
-                public static CustomPopup_drawBitmap(param0: number, param1: com.carto.vectorelements.CustomPopup, param2: number, param3: com.carto.core.ScreenPos, param4: number, param5: number, param6: number): number;
-                public static new_CustomPopup__SWIG_2(param0: number, param1: com.carto.core.MapPos, param2: number, param3: com.carto.styles.PopupStyle, param4: number, param5: com.carto.vectorelements.CustomPopupHandler): number;
+                public static CustomPopup_drawBitmap(
+                    param0: number,
+                    param1: com.carto.vectorelements.CustomPopup,
+                    param2: number,
+                    param3: com.carto.core.ScreenPos,
+                    param4: number,
+                    param5: number,
+                    param6: number
+                ): number;
+                public static new_CustomPopup__SWIG_2(
+                    param0: number,
+                    param1: com.carto.core.MapPos,
+                    param2: number,
+                    param3: com.carto.styles.PopupStyle,
+                    param4: number,
+                    param5: com.carto.vectorelements.CustomPopupHandler
+                ): number;
                 public static CustomPopup_getPopupHandler(param0: number, param1: com.carto.vectorelements.CustomPopup): number;
                 public constructor();
             }
@@ -11822,9 +13233,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class GeometryCollection extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.GeometryCollection>;
                 public setGeometry(param0: com.carto.geometry.MultiGeometry): void;
@@ -11848,9 +13259,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class GeometryCollectionModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.GeometryCollectionModuleJNI>;
                 public static delete_GeometryCollection(param0: number): void;
@@ -11869,9 +13280,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Label extends com.carto.vectorelements.Billboard {
                 public static class: java.lang.Class<com.carto.vectorelements.Label>;
                 public static getCPtr(param0: com.carto.vectorelements.Billboard): number;
@@ -11894,9 +13305,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class LabelModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.LabelModuleJNI>;
                 public static delete_Label(param0: number): void;
@@ -11913,9 +13324,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Line extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.Line>;
                 public constructor(param0: com.carto.core.MapPosVector, param1: com.carto.styles.LineStyle);
@@ -11942,9 +13353,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class LineModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.LineModuleJNI>;
                 public static new_Line__SWIG_0(param0: number, param1: com.carto.geometry.LineGeometry, param2: number, param3: com.carto.styles.LineStyle): number;
@@ -11966,9 +13377,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Marker extends com.carto.vectorelements.Billboard {
                 public static class: java.lang.Class<com.carto.vectorelements.Marker>;
                 public constructor(param0: com.carto.geometry.Geometry, param1: com.carto.styles.MarkerStyle);
@@ -11993,9 +13404,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class MarkerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.MarkerModuleJNI>;
                 public static new_Marker__SWIG_1(param0: number, param1: com.carto.geometry.Geometry, param2: number, param3: com.carto.styles.MarkerStyle): number;
@@ -12014,9 +13425,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class NMLModel extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.NMLModel>;
                 public getStyle(): com.carto.styles.NMLModelStyle;
@@ -12049,9 +13460,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class NMLModelModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.NMLModelModuleJNI>;
                 public static NMLModel_swigGetRawPtr(param0: number, param1: com.carto.vectorelements.NMLModel): number;
@@ -12078,9 +13489,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Point extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.Point>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.Point;
@@ -12107,9 +13518,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class PointModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.PointModuleJNI>;
                 public static Point_getPos(param0: number, param1: com.carto.vectorelements.Point): number;
@@ -12131,9 +13542,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Polygon extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.Polygon>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.Polygon;
@@ -12163,9 +13574,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Polygon3D extends com.carto.vectorelements.VectorElement {
                 public static class: java.lang.Class<com.carto.vectorelements.Polygon3D>;
                 public setHeight(param0: number): void;
@@ -12197,9 +13608,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Polygon3DModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.Polygon3DModuleJNI>;
                 public static Polygon3D_getGeometry(param0: number, param1: com.carto.vectorelements.Polygon3D): number;
@@ -12218,7 +13629,15 @@ declare module com {
                 public static Polygon3D_SWIGSmartPtrUpcast(param0: number): number;
                 public static Polygon3D_getStyle(param0: number, param1: com.carto.vectorelements.Polygon3D): number;
                 public static Polygon3D_setGeometry(param0: number, param1: com.carto.vectorelements.Polygon3D, param2: number, param3: com.carto.geometry.PolygonGeometry): void;
-                public static new_Polygon3D__SWIG_2(param0: number, param1: com.carto.core.MapPosVector, param2: number, param3: com.carto.core.MapPosVectorVector, param4: number, param5: com.carto.styles.Polygon3DStyle, param6: number): number;
+                public static new_Polygon3D__SWIG_2(
+                    param0: number,
+                    param1: com.carto.core.MapPosVector,
+                    param2: number,
+                    param3: com.carto.core.MapPosVectorVector,
+                    param4: number,
+                    param5: com.carto.styles.Polygon3DStyle,
+                    param6: number
+                ): number;
                 public static Polygon3D_setHeight(param0: number, param1: com.carto.vectorelements.Polygon3D, param2: number): void;
                 public static Polygon3D_getHeight(param0: number, param1: com.carto.vectorelements.Polygon3D): number;
             }
@@ -12226,9 +13645,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class PolygonModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.PolygonModuleJNI>;
                 public static Polygon_getHoles(param0: number, param1: com.carto.vectorelements.Polygon): number;
@@ -12237,7 +13656,14 @@ declare module com {
                 public static Polygon_SWIGSmartPtrUpcast(param0: number): number;
                 public static Polygon_getPoses(param0: number, param1: com.carto.vectorelements.Polygon): number;
                 public static new_Polygon__SWIG_1(param0: number, param1: com.carto.core.MapPosVector, param2: number, param3: com.carto.styles.PolygonStyle): number;
-                public static new_Polygon__SWIG_2(param0: number, param1: com.carto.core.MapPosVector, param2: number, param3: com.carto.core.MapPosVectorVector, param4: number, param5: com.carto.styles.PolygonStyle): number;
+                public static new_Polygon__SWIG_2(
+                    param0: number,
+                    param1: com.carto.core.MapPosVector,
+                    param2: number,
+                    param3: com.carto.core.MapPosVectorVector,
+                    param4: number,
+                    param5: com.carto.styles.PolygonStyle
+                ): number;
                 public static Polygon_getStyle(param0: number, param1: com.carto.vectorelements.Polygon): number;
                 public static Polygon_swigGetClassName(param0: number, param1: com.carto.vectorelements.Polygon): string;
                 public constructor();
@@ -12253,9 +13679,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Popup extends com.carto.vectorelements.Billboard {
                 public static class: java.lang.Class<com.carto.vectorelements.Popup>;
                 public static getCPtr(param0: com.carto.vectorelements.Popup): number;
@@ -12284,9 +13710,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class PopupModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.PopupModuleJNI>;
                 public static Popup_swigGetRawPtr(param0: number, param1: com.carto.vectorelements.Popup): number;
@@ -12296,11 +13722,27 @@ declare module com {
                 public static Popup_SWIGSmartPtrUpcast(param0: number): number;
                 public constructor();
                 public static Popup_setStyle(param0: number, param1: com.carto.vectorelements.Popup, param2: number, param3: com.carto.styles.PopupStyle): void;
-                public static Popup_drawBitmap(param0: number, param1: com.carto.vectorelements.Popup, param2: number, param3: com.carto.core.ScreenPos, param4: number, param5: number, param6: number): number;
+                public static Popup_drawBitmap(
+                    param0: number,
+                    param1: com.carto.vectorelements.Popup,
+                    param2: number,
+                    param3: com.carto.core.ScreenPos,
+                    param4: number,
+                    param5: number,
+                    param6: number
+                ): number;
                 public static Popup_swigGetDirectorObject(param0: number, param1: com.carto.vectorelements.Popup): any;
                 public static Popup_getStyle(param0: number, param1: com.carto.vectorelements.Popup): number;
                 public static Popup_getAnchorPointY(param0: number, param1: com.carto.vectorelements.Popup): number;
-                public static Popup_processClick(param0: number, param1: com.carto.vectorelements.Popup, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number, param6: com.carto.core.ScreenPos): boolean;
+                public static Popup_processClick(
+                    param0: number,
+                    param1: com.carto.vectorelements.Popup,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.core.MapPos,
+                    param5: number,
+                    param6: com.carto.core.ScreenPos
+                ): boolean;
                 public static delete_Popup(param0: number): void;
                 public static Popup_setAnchorPointY(param0: number, param1: com.carto.vectorelements.Popup, param2: number): void;
                 public static Popup_swigGetClassName(param0: number, param1: com.carto.vectorelements.Popup): string;
@@ -12309,9 +13751,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class Text extends com.carto.vectorelements.Label {
                 public static class: java.lang.Class<com.carto.vectorelements.Text>;
                 public constructor(param0: com.carto.vectorelements.Billboard, param1: com.carto.styles.TextStyle, param2: string);
@@ -12343,9 +13785,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class TextModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.TextModuleJNI>;
                 public static Text_setStyle(param0: number, param1: com.carto.vectorelements.Text, param2: number, param3: com.carto.styles.TextStyle): void;
@@ -12367,9 +13809,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class VectorElement extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.VectorElement>;
                 public swigCMemOwn: boolean;
@@ -12400,9 +13842,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class VectorElementModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.VectorElementModuleJNI>;
                 public static VectorElement_getId(param0: number, param1: com.carto.vectorelements.VectorElement): number;
@@ -12426,7 +13868,13 @@ declare module com {
                 public static delete_VectorElementVector(param0: number): void;
                 public static VectorElement_setVisible(param0: number, param1: com.carto.vectorelements.VectorElement, param2: boolean): void;
                 public static VectorElement_setId(param0: number, param1: com.carto.vectorelements.VectorElement, param2: number): void;
-                public static VectorElementVector_set(param0: number, param1: com.carto.vectorelements.VectorElementVector, param2: number, param3: number, param4: com.carto.vectorelements.VectorElement): void;
+                public static VectorElementVector_set(
+                    param0: number,
+                    param1: com.carto.vectorelements.VectorElementVector,
+                    param2: number,
+                    param3: number,
+                    param4: com.carto.vectorelements.VectorElement
+                ): void;
                 public static VectorElement_setMetaDataElement(param0: number, param1: com.carto.vectorelements.VectorElement, param2: string, param3: number, param4: com.carto.core.Variant): void;
                 public static VectorElement_getMetaDataElement(param0: number, param1: com.carto.vectorelements.VectorElement, param2: string): number;
                 public static VectorElement_swigGetClassName(param0: number, param1: com.carto.vectorelements.VectorElement): string;
@@ -12439,9 +13887,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectorelements {
+declare namespace com {
+    export namespace carto {
+        export namespace vectorelements {
             export class VectorElementVector extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectorelements.VectorElementVector>;
                 public swigCMemOwn: boolean;
@@ -12465,9 +13913,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class CartoVectorTileDecoder extends com.carto.vectortiles.VectorTileDecoder {
                 public static class: java.lang.Class<com.carto.vectortiles.CartoVectorTileDecoder>;
                 public addFallbackFont(param0: com.carto.core.BinaryData): void;
@@ -12494,12 +13942,18 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class CartoVectorTileDecoderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectortiles.CartoVectorTileDecoderModuleJNI>;
-                public static CartoVectorTileDecoder_setLayerStyleSet(param0: number, param1: com.carto.vectortiles.CartoVectorTileDecoder, param2: string, param3: number, param4: com.carto.styles.CartoCSSStyleSet): void;
+                public static CartoVectorTileDecoder_setLayerStyleSet(
+                    param0: number,
+                    param1: com.carto.vectortiles.CartoVectorTileDecoder,
+                    param2: string,
+                    param3: number,
+                    param4: com.carto.styles.CartoCSSStyleSet
+                ): void;
                 public static CartoVectorTileDecoder_swigGetRawPtr(param0: number, param1: com.carto.vectortiles.CartoVectorTileDecoder): number;
                 public constructor();
                 public static CartoVectorTileDecoder_swigGetDirectorObject(param0: number, param1: com.carto.vectortiles.CartoVectorTileDecoder): any;
@@ -12519,9 +13973,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class MBVectorTileDecoder extends com.carto.vectortiles.VectorTileDecoder {
                 public static class: java.lang.Class<com.carto.vectortiles.MBVectorTileDecoder>;
                 public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectortiles.MBVectorTileDecoder;
@@ -12551,18 +14005,28 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class MBVectorTileDecoderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectortiles.MBVectorTileDecoderModuleJNI>;
                 public static MBVectorTileDecoder_getCartoCSSStyleSet(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder): number;
-                public static MBVectorTileDecoder_setCartoCSSStyleSet(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder, param2: number, param3: com.carto.styles.CartoCSSStyleSet): void;
+                public static MBVectorTileDecoder_setCartoCSSStyleSet(
+                    param0: number,
+                    param1: com.carto.vectortiles.MBVectorTileDecoder,
+                    param2: number,
+                    param3: com.carto.styles.CartoCSSStyleSet
+                ): void;
                 public static new_MBVectorTileDecoder__SWIG_0(param0: number, param1: com.carto.styles.CompiledStyleSet): number;
                 public static MBVectorTileDecoder_SWIGSmartPtrUpcast(param0: number): number;
                 public static MBVectorTileDecoder_swigGetRawPtr(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder): number;
                 public static MBVectorTileDecoder_addFallbackFont(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder, param2: number, param3: com.carto.core.BinaryData): void;
-                public static MBVectorTileDecoder_setCompiledStyleSet(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder, param2: number, param3: com.carto.styles.CompiledStyleSet): void;
+                public static MBVectorTileDecoder_setCompiledStyleSet(
+                    param0: number,
+                    param1: com.carto.vectortiles.MBVectorTileDecoder,
+                    param2: number,
+                    param3: com.carto.styles.CompiledStyleSet
+                ): void;
                 public constructor();
                 public static MBVectorTileDecoder_getStyleParameters(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder): number;
                 public static MBVectorTileDecoder_swigGetDirectorObject(param0: number, param1: com.carto.vectortiles.MBVectorTileDecoder): any;
@@ -12579,9 +14043,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class TorqueTileDecoder extends com.carto.vectortiles.VectorTileDecoder {
                 public static class: java.lang.Class<com.carto.vectortiles.TorqueTileDecoder>;
                 public constructor(param0: com.carto.styles.CartoCSSStyleSet);
@@ -12608,9 +14072,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class TorqueTileDecoderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectortiles.TorqueTileDecoderModuleJNI>;
                 public static TorqueTileDecoder_setStyleSet(param0: number, param1: com.carto.vectortiles.TorqueTileDecoder, param2: number, param3: com.carto.styles.CartoCSSStyleSet): void;
@@ -12633,9 +14097,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class VectorTileDecoder extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectortiles.VectorTileDecoder>;
                 public swigCMemOwn: boolean;
@@ -12658,9 +14122,9 @@ declare module com {
     }
 }
 
-declare module com {
-    export module carto {
-        export module vectortiles {
+declare namespace com {
+    export namespace carto {
+        export namespace vectortiles {
             export class VectorTileDecoderModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<com.carto.vectortiles.VectorTileDecoderModuleJNI>;
                 public static delete_VectorTileDecoder(param0: number): void;
@@ -12678,4 +14142,3 @@ declare module com {
 }
 
 //Generics information:
-

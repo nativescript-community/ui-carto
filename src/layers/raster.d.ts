@@ -1,7 +1,14 @@
 import { TileLayer, TileLayerOptions } from '.';
 import { TileDataSource } from '../datasources';
 
+export enum RasterTileFilterMode {
+    RASTER_TILE_FILTER_MODE_NEAREST,
+    RASTER_TILE_FILTER_MODE_BILINEAR,
+    RASTER_TILE_FILTER_MODE_BICUBIC,
+}
+
 export interface RasterTileLayerOptions extends TileLayerOptions {
+    tileFilterMode?: RasterTileFilterMode;
     dataSource?: TileDataSource<any, any>;
 }
 export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {

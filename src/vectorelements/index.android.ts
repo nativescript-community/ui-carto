@@ -76,7 +76,7 @@ export abstract class BasePointVectorElement<
         }
     }
 
-    getNativePos(pos: MapPos): com.carto.core.MapPos {
+    getNativePos(pos: MapPos, projection?: Projection): com.carto.core.MapPos {
         return toNativeMapPos(pos);
     }
 }

@@ -75,6 +75,11 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
     // }
     public calculateRoute(options: RoutingRequest, callback: (err: any, res: RoutingResult) => void) {
         const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
+        if (options.customOptions) {
+            Object.keys(options.customOptions).forEach((k) => {
+                nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
+            });
+        }
         this.getNative().calculateRouteCallback(
             nRequest,
             new com.akylas.carto.additions.RoutingServiceRouteCallback({

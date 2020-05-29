@@ -3,6 +3,7 @@ import { DataSource } from '.';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { GeometrySimplifier } from '../geometry/simplifier';
 import { FeatureCollection } from '../geometry/feature';
+import { fromNativeMapBounds } from '../core';
 
 export abstract class VectorDataSource<T extends NTVectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
@@ -43,5 +44,9 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
     }
     setGeometrySimplifier(simplifier: GeometrySimplifier<any, any>) {
         this.getNative().setGeometrySimplifier(simplifier.getNative());
+    }
+
+    getDataExtent() {
+        return fromNativeMapBounds(this.getNative().getDataExtent());
     }
 }

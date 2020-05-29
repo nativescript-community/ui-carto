@@ -2,7 +2,6 @@ package com.akylas.carto.additions;
 
 import android.os.Handler;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.util.Log;
@@ -13,9 +12,16 @@ import com.carto.vectorelements.VectorElement;
 import com.carto.vectorelements.VectorElementVector;
 import com.carto.layers.ClusterElementBuilder;
 import com.carto.styles.MarkerStyle;
+import com.carto.styles.Style;
+import com.carto.styles.BillboardStyle;
+import com.carto.styles.PointStyle;
 import com.carto.vectorelements.Marker;
+import com.carto.vectorelements.Point;
 import com.carto.utils.BitmapUtils;
+import com.carto.styles.StyleBuilder;
+import com.carto.styles.PointStyleBuilder;
 import com.carto.styles.MarkerStyleBuilder;
+import com.carto.graphics.Bitmap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,10 +38,13 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     }
     Handler mainHandler = null;
 
-    private Map<Integer, MarkerStyle> markerStyles = new HashMap<>();
+    private Map<Integer, Style> markerStyles = new HashMap<>();
     private android.graphics.Bitmap markerBitmap = null;
     private com.carto.graphics.Color markerColor = null;
     private int markerSize = 20;
+
+    private String shape = "marker";
+    private final String TAG = "AKClusterElementBuilder";
 
     boolean useNativeBuilder = true;
 
@@ -51,6 +60,10 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     }
     public void setSize(int value) {
         markerSize = value;
+    }
+    public void setShape(String value) {
+        Log.d(TAG, "setShape " + value);
+        shape = value;
     }
 
     @Override
@@ -130,16 +143,17 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     public VectorElement nativeBuildClusterElement(MapPos pos, VectorElementVector elements) {
 
         // Try to reuse existing marker styles
-        MarkerStyle style = markerStyles.get((int) elements.size());
+        Style style = markerStyles.get((int) elements.size());
 
         if (elements.size() == 1) {
             style = ((Marker) elements.get(0)).getStyle();
         }
 
         if (style == null) {
-            MarkerStyleBuilder styleBuilder = new MarkerStyleBuilder();
+            StyleBuilder styleBuilder = null;
+            Bitmap cBitmap = null;
             if (markerBitmap != null) {
-                Bitmap canvasBitmap = markerBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                android.graphics.Bitmap canvasBitmap = markerBitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
 
                 android.graphics.Paint paint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
@@ -152,22 +166,43 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                 float y = markerBitmap.getHeight() / 2 - 5;
 
                 canvas.drawText(Integer.toString((int) elements.size()), x, y, paint);
-
-                styleBuilder.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap));
+                cBitmap = BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap);
             }
+            if (shape.equals("point")) {
+                styleBuilder = new PointStyleBuilder();
+                ((PointStyleBuilder)styleBuilder).setSize(markerSize);
+                if (cBitmap != null) {
+                    ((PointStyleBuilder)styleBuilder).setBitmap(cBitmap);
+                }
+            } else {
+                styleBuilder = new MarkerStyleBuilder();
+                ((MarkerStyleBuilder)styleBuilder).setSize(markerSize);
+                ((MarkerStyleBuilder)styleBuilder).setPlacementPriority((int) elements.size());
+                if (cBitmap != null) {
+                    ((MarkerStyleBuilder)styleBuilder).setBitmap(cBitmap);
 
-            styleBuilder.setSize(markerSize);
-            styleBuilder.setPlacementPriority((int) elements.size());
+                }
+            }
+            
+
             if (markerColor != null) {
                 styleBuilder.setColor(markerColor);
             }
-            style = styleBuilder.buildStyle();
-
+            if (styleBuilder instanceof PointStyleBuilder) {
+                style = ((PointStyleBuilder)styleBuilder).buildStyle();
+            } else if (styleBuilder instanceof MarkerStyleBuilder) {
+                style = ((MarkerStyleBuilder)styleBuilder).buildStyle();
+            }
             markerStyles.put((int) elements.size(), style);
         }
 
         // Create marker for the cluster
-        Marker marker = new Marker(pos, style);
-        return marker;
+        if (style instanceof PointStyle) {
+            return new Point(pos, (PointStyle)style); 
+        }
+        if (style instanceof MarkerStyle) {
+            return new Marker(pos, (MarkerStyle)style); 
+        }
+        return null;
     }
 }

@@ -1,4 +1,16 @@
-import { MapPos, ScreenPos, fromNativeMapPos, fromNativeScreenPos, toNativeMapPos, toNativeScreenPos } from '../core';
+import {
+    DefaultLatLonKeys,
+    MapBounds,
+    MapPos,
+    ScreenBounds,
+    ScreenPos,
+    fromNativeMapBounds,
+    fromNativeMapPos,
+    fromNativeScreenPos,
+    toNativeMapPos,
+    toNativeScreenBounds,
+    toNativeScreenPos,
+} from '../core';
 import { TileLayer } from '../layers';
 import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
@@ -12,7 +24,7 @@ export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableE
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
-    RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL
+    RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL,
 }
 export enum PanningMode {
     PANNING_MODE_FREE = NTPanningMode.T_PANNING_MODE_FREE,
@@ -36,9 +48,9 @@ export function getLicenseKey() {
 }
 
 class NTMapEventListenerImpl extends NTMapEventListener {
-    private _owner: WeakRef<CartoMap>;
+    private _owner: WeakRef<CartoMap<any>>;
 
-    public static initWithOwner(owner: WeakRef<CartoMap>): NTMapEventListenerImpl {
+    public static initWithOwner(owner: WeakRef<CartoMap<any>>): NTMapEventListenerImpl {
         const delegate = NTMapEventListenerImpl.new() as NTMapEventListenerImpl;
         delegate._owner = owner;
         return delegate;
@@ -57,7 +69,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
             owner.notify({
                 eventName: MapMovedEvent,
                 object: owner,
-                data: { userAction: owner.userAction }
+                data: { userAction: owner.userAction },
             });
         }
     }
@@ -79,8 +91,8 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                 object: owner,
                 data: {
                     clickType: mapClickInfo.getClickType(),
-                    position: owner.fromNativeMapPos(mapClickInfo.getClickPos())
-                }
+                    position: owner.fromNativeMapPos(mapClickInfo.getClickPos()),
+                },
             });
         }
     }
@@ -131,7 +143,7 @@ class MapView extends NTMapView {
     // }
 }
 
-export class CartoMap extends CartoViewBase {
+export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     static projection = new EPSG4326();
     nativeProjection: NTProjection;
     _projection: IProjection;
@@ -194,9 +206,20 @@ export class CartoMap extends CartoViewBase {
         this.nativeView.owner = null;
         super.disposeNativeView();
     }
+
     fromNativeMapPos(position: NTMapPos) {
         return fromNativeMapPos(position);
     }
+    fromNativeMapBounds(position: NTMapBounds) {
+        return fromNativeMapBounds(NTMapBounds.alloc().initWithMinMax(position.getMin(), position.getMax()));
+    }
+    toNativeMapPos(position: MapPos) {
+        return toNativeMapPos(position);
+    }
+    toNativeMapBounds(position: MapBounds<T>) {
+        return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(position.southwest), toNativeMapPos(position.northeast));
+    }
+
     setFocusPos(value: MapPos, duration: number = 0) {
         this.mapView.setFocusPosDurationSeconds(toNativeMapPos(value), duration / 1000);
     }
@@ -219,6 +242,19 @@ export class CartoMap extends CartoViewBase {
     }
     setBearing(value: number, duration: number = 0) {
         this.mapView.setRotationDurationSeconds(value, duration / 1000);
+    }
+    moveToFitBounds(mapBounds: MapBounds<T>, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
+        if (!screenBounds) {
+            screenBounds = { min: { x: 0, y: 0 }, max: { x: this.getMeasuredWidth(), y: this.getMeasuredHeight() } };
+        }
+        this.mapView.moveToFitBoundsScreenBoundsIntegerZoomResetRotationResetTiltDurationSeconds(
+            this.toNativeMapBounds(mapBounds),
+            toNativeScreenBounds(screenBounds),
+            integerZoom,
+            resetRotation,
+            resetTilt,
+            durationSeconds / 1000
+        );
     }
     [restrictedPanningProperty.setNative](value: boolean) {
         if (!this.nativeViewProtected) {
@@ -255,7 +291,7 @@ export class CartoMap extends CartoViewBase {
     removeAllLayers(layers: TileLayer<any, any>[]) {
         if (this.mapView) {
             const vector = NTLayerVector.alloc().init();
-            layers.forEach(l => vector.add(l.getNative()));
+            layers.forEach((l) => vector.add(l.getNative()));
             this.mapView.getLayers().removeAll(vector);
         }
     }
@@ -291,10 +327,10 @@ export class CartoMap extends CartoViewBase {
     }
 
     captureRendering(wait = false) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             this.mapView.getMapRenderer().captureRenderingWaitWhileUpdating(
                 NTRendererCaptureListenerImpl.initWithCallback(
-                    new WeakRef(function(bitmap) {
+                    new WeakRef(function (bitmap) {
                         resolve(fromNativeSource(bitmap));
                     })
                 ),

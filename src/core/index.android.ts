@@ -1,4 +1,4 @@
-import { AltitudeKey, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys, DefaultLatLonKeys } from './index.common';
+import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
 import { BaseNative } from '../index.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
@@ -54,12 +54,6 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.
     }
 }
 
-// export enum ClickType {
-//     SINGLE = com.carto.ui.ClickType.CLICK_TYPE_SINGLE.ordinal(),
-//     LONG = com.carto.ui.ClickType.CLICK_TYPE_LONG.ordinal(),
-//     DOUBLE = com.carto.ui.ClickType.CLICK_TYPE_DOUBLE.ordinal(),
-//     DUAL = com.carto.ui.ClickType.CLICK_TYPE_DUAL.ordinal()
-// }
 
 export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core.MapPos) {
     if (!position) {
@@ -202,7 +196,7 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.
     public add(position: com.carto.core.MapPos | GenericMapPos<T>) {
         if (position instanceof com.carto.core.MapPos) {
             position = toNativeMapPos<T>(position);
-            return this.native.add(position as com.carto.core.MapPos);
+            return this.native.add(position);
         }
         return this.native.add(toNativeMapPos(position));
     }

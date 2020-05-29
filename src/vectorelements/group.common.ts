@@ -7,7 +7,7 @@ import { Projection } from 'nativescript-carto/projections';
 export abstract class GroupBase extends VectorElementVector implements BasePointVectorElement<any, GroupOptions> {
     position: MapPos;
     projection?: Projection;
-    elements: Array<BasePointVectorElement<any, any>>;
+    elements: BasePointVectorElement<any, any>[];
     getNativePos(pos: MapPos, projection: Projection) {
         throw new Error('Method not implemented.');
     }

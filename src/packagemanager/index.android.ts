@@ -36,13 +36,6 @@ export const PackageErrorType = {
         return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_SYSTEM;
     },
 };
-// export enum PackageAction {
-//     READY = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_READY.ordinal(),
-//     WAITING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_WAITING.ordinal(),
-//     DOWNLOADING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_DOWNLOADING.ordinal(),
-//     COPYING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_COPYING.ordinal(),
-//     REMOVING = com.carto.packagemanager.PackageAction.PACKAGE_ACTION_REMOVING.ordinal()
-// }
 export const PackageAction = {
     get READY() {
         return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_READY;

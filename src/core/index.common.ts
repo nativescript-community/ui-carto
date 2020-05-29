@@ -2,11 +2,11 @@ export type LatitudeKeys = 'latitude' | 'lat';
 export type LongitudeKeys = 'longitude' | 'lon' | 'lng';
 export type AltitudeKeys = 'altitude' | 'alt' | 'ele';
 
-export type DefaultLatLonKeys = {
+export interface DefaultLatLonKeys {
     latitude: number;
     longitude: number;
     altitude?: number;
-};
+}
 
 export type GenericMapPos<T = DefaultLatLonKeys> = {
     [P in keyof T]: number;

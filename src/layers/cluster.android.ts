@@ -9,6 +9,7 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
     @nativeImageProperty bitmap: string;
     @nativeColorProperty color: string | Color;
     @nativeProperty size: number;
+    @nativeProperty shape: string;
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
     createNative(options: ClusterElementBuilderOptions) {
         // initClusterElementBuilderNative();
@@ -19,7 +20,6 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
                     buildClusterElement: this.nBuildClusterElement.bind(this),
                 })
             );
-        } else {
         }
 
         return result;

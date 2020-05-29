@@ -80,6 +80,7 @@ declare namespace com {
                     public constructor(param0: number, param1: boolean);
                     public setBitmap(param0: globalAndroid.graphics.Bitmap): void;
                     public setColor(param0: com.carto.graphics.Color): void;
+                    public setShape(param0: string): void;
                 }
                 export namespace AKClusterElementBuilder {
                     export class Interface extends java.lang.Object {

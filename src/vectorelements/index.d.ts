@@ -6,13 +6,13 @@ import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.
 declare enum BillboardOrientation {
     FACE_CAMERA,
     FACE_CAMERA_GROUND,
-    GROUND
+    GROUND,
 }
 
 declare enum BillboardScaling {
     CONST_SCREEN_SIZE,
     SCREEN_SIZE,
-    WORLD_SIZE
+    WORLD_SIZE,
 }
 
 export class AnimationStyle {
@@ -39,7 +39,7 @@ export class BillboardVectorElementOptions<K = DefaultLatLonKeys> extends PointV
 export class LineVectorElementOptions<T = DefaultLatLonKeys> extends VectorElementOptions {
     positions: MapPosVector<T> | GenericMapPos<T>[];
     projection?: Projection;
-    ignoreAltitude?:boolean
+    ignoreAltitude?: boolean;
 }
 export class VectorElementStyleBuilderOptions extends VectorElementOptions {}
 export class BillboardStyleBuilderOptions extends VectorElementStyleBuilderOptions {
@@ -61,7 +61,7 @@ export abstract class BaseVectorElement<T, U extends VectorElementOptions> exten
 export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
     position: GenericMapPos<K>;
     projection?: Projection;
-    getNativePos(pos: GenericMapPos<K>, projection: Projection): any;
+    getNativePos(pos: GenericMapPos<K>, projection?: Projection): any;
 }
 export abstract class BaseBillboardVectorElement<T, U extends BillboardVectorElementOptions<K>, K = DefaultLatLonKeys> extends BasePointVectorElement<T, U, K> {
     rotation?: number;
@@ -76,7 +76,7 @@ export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementSt
 export abstract class BillboardStyleBuilder<T, U extends BillboardStyleBuilderOptions> extends BaseVectorElementStyleBuilder<T, U> {}
 
 export class VectorElementVector extends BaseNative<any, any> {
-    elements: Array<BaseVectorElement<any, any>>;
+    elements: BaseVectorElement<any, any>[];
     size();
     getElement(index: number): VectorElement<any, any>;
     add(element: VectorElement<any, any>);

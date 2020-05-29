@@ -26,6 +26,7 @@ declare enum RoutingAction {
 export interface RoutingRequest<T = DefaultLatLonKeys> {
     projection: Projection;
     points: GenericMapPos<T>[];
+    customOptions: any;
 }
 
 export interface RouteMatchingRequest<T = DefaultLatLonKeys> {

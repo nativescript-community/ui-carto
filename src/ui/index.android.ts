@@ -1,7 +1,7 @@
 import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import * as application from '@nativescript/core/application';
 import { profile } from '@nativescript/core/profiling';
-import { MapBounds, MapPos, ScreenBounds, ScreenPos, fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core';
+import { DefaultLatLonKeys, MapBounds, MapPos, ScreenBounds, ScreenPos, fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core';
 import { TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
@@ -67,7 +67,7 @@ export function getLicenseKey() {
     return licenseKey;
 }
 
-export class CartoMap extends CartoViewBase {
+export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;
     };
@@ -155,7 +155,7 @@ export class CartoMap extends CartoViewBase {
     toNativeMapPos(position: MapPos) {
         return toNativeMapPos(position);
     }
-    toNativeMapBounds(position: MapBounds) {
+    toNativeMapBounds(position: MapBounds<T>) {
         return new com.carto.core.MapBounds(toNativeMapPos(position.southwest), toNativeMapPos(position.northeast));
     }
 
@@ -183,8 +183,11 @@ export class CartoMap extends CartoViewBase {
     setBearing(value: number, duration: number = 0) {
         this.mapView.setMapRotation(value, duration / 1000);
     }
-    moveToFitBounds(mapBounds: MapBounds, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
-        this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds);
+    moveToFitBounds(mapBounds: MapBounds<T>, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
+        if (!screenBounds) {
+            screenBounds = {min:{x:0,y:0},max:{x:this.getMeasuredWidth(),y:this.getMeasuredHeight()}};
+        }
+        this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds / 1000);
     }
     [restrictedPanningProperty.setNative](value: boolean) {
         if (!this.nativeViewProtected) {
@@ -262,8 +265,8 @@ export class CartoMap extends CartoViewBase {
             this.mapView.getMapRenderer().captureRendering(
                 new com.akylas.carto.additions.RendererCaptureListener(
                     new com.akylas.carto.additions.RendererCaptureListener.Listener({
-                        onMapRendered (bitmap) {
-                            resolve(fromNativeSource(bitmap));
+                        onMapRendered (bitmap: com.carto.graphics.Bitmap) {
+                            resolve(fromNativeSource(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(bitmap)));
                         },
                     })
                 ),

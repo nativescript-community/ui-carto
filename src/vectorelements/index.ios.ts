@@ -2,7 +2,7 @@ import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions,
 import { BaseNative, nativeProperty } from '../index.common';
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
-import { fromNativeMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core';
+import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
 
@@ -124,7 +124,7 @@ export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElem
     }
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {
-    elements: Array<BaseVectorElement<any, any>>;
+    elements: BaseVectorElement<any, any>[];
     createNative() {
         const result = NTVectorElementVector.alloc().init();
         if (this.elements.length > 0) {
