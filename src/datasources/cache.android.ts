@@ -28,7 +28,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
         return this.native && this.native.stopAllDownloads();
     }
     loaderListener: com.akylas.carto.additions.AKTileDownloadListener;
-    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: ITileDownloadListener) {
+    startDownloadArea(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: ITileDownloadListener) {
         const loaderListener = new com.akylas.carto.additions.AKTileDownloadListener(
             new com.akylas.carto.additions.AKTileDownloadListener.Listener({
                 onDownloadCompleted() {

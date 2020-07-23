@@ -18,7 +18,7 @@ import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
 import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import { NativeVector } from 'nativescript-carto/core/index.android';
-import { fromNativeSource } from '@nativescript/core/image-source/image-source';
+import { fromNativeSource } from '@nativescript/core/image-source';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -222,6 +222,14 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 
     setFocusPos(value: MapPos, duration: number = 0) {
         this.mapView.setFocusPosDurationSeconds(toNativeMapPos(value), duration / 1000);
+    }
+
+    getFocusPos() {
+        return fromNativeMapPos<T>(this.mapView.getFocusPos());
+    }
+    getMapBounds() {
+        const screenBounds = toNativeScreenBounds({ min: { x: 0, y: 0 }, max: { x: this.getMeasuredWidth(), y: this.getMeasuredHeight() } }) as NTScreenBounds;
+        return new MapBounds<T>(fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMin())), fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMax())));
     }
     setZoom(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {

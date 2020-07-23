@@ -133,6 +133,9 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
     setLabelRenderOrder(order: NTVectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
     }
+    setBuildingRenderOrder(order: NTVectorTileRenderOrder) {
+        this.getNative().setBuildingRenderOrder(order);
+    }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
         if (listener) {
             this.getNative().setVectorTileEventListener(NTVectorTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));

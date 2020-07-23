@@ -67,7 +67,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<NTPersistentCa
     stopAllDownloads() {
         return this.native && this.native.stopAllDownloads();
     }
-    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
+    startDownloadArea(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
         this.getNative().startDownloadAreaMinZoomMaxZoomTileDownloadListener(
             toNativeMapBounds(mapBounds),
             minZoom,

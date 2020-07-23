@@ -1,5 +1,6 @@
-import { CartoOnlineRasterTileLayerOptions, RasterTileLayerOptions } from './raster';
+import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
+import { nativeProperty } from '../';
 
 export class RasterTileLayer extends RasterTileLayerBase<NTRasterTileLayer, RasterTileLayerOptions> {
     createNative(options: RasterTileLayerOptions) {
@@ -12,3 +13,17 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlin
         return NTCartoOnlineRasterTileLayer.alloc().initWithSource(options.source);
     }
 }
+
+// export class HillshadeRasterTileLayer extends RasterTileLayerBase<NTHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
+//     @nativeProperty heightScale: number;
+//     @nativeProperty contrast: number;
+//     createNative(options) {
+//         if (options.decoder) {
+//             return new NTHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());
+
+//         } else {
+//             return new NTHillshadeRasterTileLayer(options.dataSource.getNative());
+
+//         }
+//     }
+// }

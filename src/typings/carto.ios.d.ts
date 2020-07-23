@@ -230,7 +230,7 @@ declare class NTBalloonPopup extends NTPopup {
 
     getBalloonPopupEventListener(): NTBalloonPopupEventListener;
 
-    // get description(): string;
+    getDescription(): string;
 
     getStyle(): NTBalloonPopupStyle;
 

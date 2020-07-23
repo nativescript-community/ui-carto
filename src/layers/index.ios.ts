@@ -39,16 +39,4 @@ export abstract class TileLayer<T extends NTTileLayer, U extends TileLayerOption
             this.native.clearTileCaches( all);
         }
     }
-    getDataSource() {
-        if (this['datasource']) {
-            return this['datasource'];
-        }
-        return new TileDataSource<any, any>(undefined, this.getNative().getDataSource());
-    }
-    getProjection() {
-        if (this['projection']) {
-            return this['projection'];
-        }
-        return new Projection(undefined, this.getNative().getDataSource().getProjection());
-    }
 }

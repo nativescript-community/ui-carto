@@ -4,8 +4,15 @@ import { JSVariantToNative } from 'nativescript-carto/utils';
 import { FeatureCollection } from 'nativescript-carto/geometry/feature.ios';
 import { Projection } from 'nativescript-carto/projections';
 
-export abstract class DataSource<T extends NTTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {}
-export class TileDataSource<T extends NTTileDataSource, U extends TileDataSourceOptions> extends BaseNative<T, U> {
+export abstract class DataSource<T extends NTTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
+    getProjection() {
+        if (this['projection']) {
+            return this['projection'];
+        }
+        return new Projection(undefined, this.getNative().getProjection());
+    }
+}
+export class TileDataSource<T extends NTTileDataSource, U extends TileDataSourceOptions> extends DataSource<T, U> {
     createNative(options) {
         return null;
     }

@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';

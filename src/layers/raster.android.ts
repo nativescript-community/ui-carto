@@ -1,7 +1,8 @@
 import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, RasterTileFilterMode as IRasterTileFilterMode, RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
-import { nativeAndroidEnumProperty, nativeProperty } from '../';
-
+import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeProperty } from '../';
+import { Color } from '@nativescript/core/color';
+import { IntVector, MapPos, MapPosVector, toNativeMapPos } from '../core';
 
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {
@@ -23,16 +24,48 @@ export class RasterTileLayer extends RasterTileLayerBase<com.carto.layers.Raster
 }
 
 export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<com.carto.layers.CartoOnlineRasterTileLayer, CartoOnlineRasterTileLayerOptions> {
-    createNative(options) {
+    createNative(options: CartoOnlineRasterTileLayerOptions) {
         return new com.carto.layers.CartoOnlineRasterTileLayer(options.source);
     }
 }
 
-export class HillshadeRasterTileLayer extends RasterTileLayerBase<com.carto.layers.RasterTileLayer, HillshadeRasterTileLayerOptions> {
+export class HillshadeRasterTileLayer extends RasterTileLayerBase<com.akylas.carto.additions.AKHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
     @nativeProperty heightScale: number;
     @nativeProperty contrast: number;
-    createNative(options) {
-        console.log('HillshadeRasterTileLayer', options);
-        return new com.carto.layers.HillshadeRasterTileLayer(options.dataSource.getNative());
+    @nativeProperty illuminationDirection: number;
+    @nativeColorProperty highlightColor: string | Color;
+    createNative(options: HillshadeRasterTileLayerOptions) {
+        if (options.decoder) {
+            return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());
+        } else {
+            return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative());
+        }
+    }
+    public getElevation(pos: MapPos): number {
+        return this.getNative().getElevation(toNativeMapPos(pos));
+    }
+    public getElevations(pos: MapPosVector | MapPos[]): IntVector {
+        return new IntVector(this.getNative().getElevations(mapPosVectorFromArgs(pos)));
+    }
+
+    public getElevationAsync(pos: MapPos, callback: (error: any, res: number) => void) {
+        this.getNative().getElevationCallback(
+            toNativeMapPos(pos),
+            new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationCallback({
+                onElevation(err, res) {
+                    callback(err, res as any);
+                },
+            })
+        );
+    }
+    public getElevationsAsync(pos: MapPosVector | MapPos[], callback: (error: any, res: IntVector) => void) {
+        this.getNative().getElevationsCallback(
+            mapPosVectorFromArgs(pos),
+            new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationsCallback({
+                onElevations(err, res) {
+                    callback(err, new IntVector(res));
+                },
+            })
+        );
     }
 }

@@ -42,6 +42,7 @@ export interface RoutingInstruction {
     getTurnAngle(): number;
     getTime(): number;
     getStreetName(): string;
+    getInstruction(): string;
     getDistance(): number;
     getAzimuth(): number;
     getAction(): RoutingAction;

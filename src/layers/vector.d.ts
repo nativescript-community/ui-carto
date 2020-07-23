@@ -12,13 +12,13 @@ import { PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
 export enum VectorTileRenderOrder {
     HIDDEN,
     LAYER,
-    LAST
+    LAST,
 }
 export enum VectorElementDragResult {
     IGNORE,
     STOP,
     MODIFY,
-    DELETE
+    DELETE,
 }
 
 export interface VectorTileEventData<T = DefaultLatLonKeys> {
@@ -88,8 +88,8 @@ export interface ClusteredVectorLayerLayerOptions extends VectorTileLayerOptions
 }
 
 export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends TileLayer<T, U> {
-    dataSource?: TileDataSource<any, any>;
     setLabelRenderOrder(order: VectorTileRenderOrder): void;
+    setBuildingRenderOrder(order: VectorTileRenderOrder);
     setVectorTileEventListener<T = DefaultLatLonKeys>(listener: VectorTileEventListener<T>, projection?: Projection): void;
     getTileDecoder(): MBVectorTileDecoder;
 }

@@ -12,12 +12,12 @@ export function registerLicense(key: string, callback?: (result: boolean) => voi
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR,
-    RENDER_PROJECTION_MODE_SPHERICAL
+    RENDER_PROJECTION_MODE_SPHERICAL,
 }
 export enum PanningMode {
     PANNING_MODE_FREE,
     PANNING_MODE_STICKY,
-    PANNING_MODE_STICKY_FINAL
+    PANNING_MODE_STICKY_FINAL,
 }
 export const MapReadyEvent: string;
 /**
@@ -216,7 +216,8 @@ export class CartoMap<T = DefaultLatLonKeys> extends View {
     setBearing(value: number, duration?: number);
     setTilt(value: number, duration?: number);
     setFocusPos(value: GenericMapPos<T>, duration?: number);
-
+    getFocusPos(): GenericMapPos<T>;
+    getMapBounds(): MapBounds<T>;
     moveToFitBounds(mapBounds: MapBounds<T>, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number);
 
     requestRedraw();

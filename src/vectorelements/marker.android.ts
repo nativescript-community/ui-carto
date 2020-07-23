@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';

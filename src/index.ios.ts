@@ -1,5 +1,5 @@
 import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
-import { Color } from '@nativescript/core';
+import { Color } from '@nativescript/core/color';
 import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
 import { NativePropertyOptions } from '.';
 export { BaseNative, nativeProperty };

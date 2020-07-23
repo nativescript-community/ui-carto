@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';

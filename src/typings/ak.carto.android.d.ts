@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 /* eslint-disable no-redeclare */
 /* eslint-disable @typescript-eslint/unified-signatures */
+
 declare namespace com {
     export namespace akylas {
         export namespace carto {
@@ -71,6 +72,7 @@ declare namespace com {
                 export class AKClusterElementBuilder extends com.carto.layers.ClusterElementBuilder {
                     public static class: java.lang.Class<AKClusterElementBuilder>;
                     public buildClusterElement(param0: com.carto.core.MapPos, param1: com.carto.vectorelements.VectorElementVector): com.carto.vectorelements.VectorElement;
+                    public setShape(param0: string): void;
                     public setUseNativeBuilder(param0: boolean): void;
                     public setSize(param0: number): void;
                     public constructor();
@@ -80,7 +82,6 @@ declare namespace com {
                     public constructor(param0: number, param1: boolean);
                     public setBitmap(param0: globalAndroid.graphics.Bitmap): void;
                     public setColor(param0: com.carto.graphics.Color): void;
-                    public setShape(param0: string): void;
                 }
                 export namespace AKClusterElementBuilder {
                     export class Interface extends java.lang.Object {
@@ -164,6 +165,43 @@ declare namespace com {
                         param1: com.carto.geocoding.GeocodingRequest,
                         param2: GeocodingServiceAddressCallback
                     ): void;
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace akylas {
+        export namespace carto {
+            export namespace additions {
+                export class AKHillshadeRasterTileLayer extends com.carto.layers.HillshadeRasterTileLayer {
+                    public static class: java.lang.Class<AKHillshadeRasterTileLayer>;
+                    public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.rastertiles.ElevationDecoder);
+                    public getElevationCallback(param0: com.carto.core.MapPos, param1: AKHillshadeRasterTileLayer.ElevationCallback): void;
+                    public constructor(param0: com.carto.datasources.TileDataSource);
+                    public getElevationsCallback(param0: com.carto.core.MapPosVector, param1: AKHillshadeRasterTileLayer.ElevationsCallback): void;
+                    public constructor(param0: number, param1: boolean);
+                }
+                export namespace AKHillshadeRasterTileLayer {
+                    export class ElevationCallback extends java.lang.Object {
+                        public static class: java.lang.Class<ElevationCallback>;
+                        /**
+                         * Constructs a new instance of the com.akylas.carto.additions.AKHillshadeRasterTileLayer$ElevationCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                         */
+                        public constructor(implementation: { onElevation(param0: java.lang.Exception, param1: java.lang.Integer): void });
+                        public constructor();
+                        public onElevation(param0: java.lang.Exception, param1: java.lang.Integer): void;
+                    }
+                    export class ElevationsCallback extends java.lang.Object {
+                        public static class: java.lang.Class<ElevationsCallback>;
+                        /**
+                         * Constructs a new instance of the com.akylas.carto.additions.AKHillshadeRasterTileLayer$ElevationsCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                         */
+                        public constructor(implementation: { onElevations(param0: java.lang.Exception, param1: com.carto.core.IntVector): void });
+                        public constructor();
+                        public onElevations(param0: java.lang.Exception, param1: com.carto.core.IntVector): void;
+                    }
                 }
             }
         }
@@ -317,6 +355,38 @@ declare namespace com {
                     public scheduleDrawable(param0: globalAndroid.graphics.drawable.Drawable, param1: java.lang.Runnable, param2: number): void;
                     public sendAccessibilityEvent(param0: number): void;
                     public onSurfaceChanged(param0: javax.microedition.khronos.opengles.GL10, param1: number, param2: number): void;
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace akylas {
+        export namespace carto {
+            export namespace additions {
+                export class AKOSMOfflineGeocodingService extends com.carto.geocoding.OSMOfflineGeocodingService {
+                    public static class: java.lang.Class<AKOSMOfflineGeocodingService>;
+                    public calculateAddressCallback(param0: com.carto.geocoding.GeocodingRequest, param1: GeocodingServiceAddressCallback): void;
+                    public constructor(param0: string);
+                    public constructor();
+                    public constructor(param0: number, param1: boolean);
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace akylas {
+        export namespace carto {
+            export namespace additions {
+                export class AKOSMOfflineReverseGeocodingService extends com.carto.geocoding.OSMOfflineReverseGeocodingService {
+                    public static class: java.lang.Class<AKOSMOfflineReverseGeocodingService>;
+                    public constructor(param0: string);
+                    public constructor();
+                    public calculateAddressCallback(param0: com.carto.geocoding.ReverseGeocodingRequest, param1: GeocodingServiceAddressCallback): void;
+                    public constructor(param0: number, param1: boolean);
                 }
             }
         }
@@ -997,3 +1067,4 @@ declare namespace com {
     }
 }
 
+//Generics information:

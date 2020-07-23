@@ -1,10 +1,12 @@
 import {
     Address,
     GeocodingRequest,
-    GeocodingResult as IGeocodingResult,
     GeocodingServiceOptions,
+    GeocodingResult as IGeocodingResult,
     MapBoxOnlineGeocodingServiceOptions,
     MapBoxOnlineReverseGeocodingServiceOptions,
+    OSMOfflineGeocodingServiceOptions,
+    OSMOfflineReverseGeocodingServiceOptions,
     PackageManagerGeocodingServiceOptions,
     PackageManagerReverseGeocodingServiceOptions,
     PeliasOnlineGeocodingServiceOptions,
@@ -12,7 +14,7 @@ import {
     ReverseGeocodingRequest,
     ReverseGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions,
-    TomTomOnlineReverseGeocodingServiceOptions
+    TomTomOnlineReverseGeocodingServiceOptions,
 } from './service';
 import { BaseGeocodingService } from './service.common';
 import { NativeVector, toNativeMapPos } from '../core';
@@ -78,7 +80,7 @@ export class GeocodingResultVector extends NativeVector<GeocodingResult> {
     constructor(public native: NTGeocodingResultVector) {
         super();
     }
-    public get(index: number)  {
+    public get(index: number) {
         return new GeocodingResult(this.native.get(index));
     }
 }
@@ -92,6 +94,15 @@ export class PackageManagerGeocodingService extends GeocodingService<NTPackageMa
         return new NTPackageManagerGeocodingService(options.packageManager.getNative());
     }
 }
+
+export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<NTPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
+        return NTPackageManagerReverseGeocodingService.alloc().initWithPackageManager(options.packageManager.getNative());
+    }
+}
+
 export class PeliasOnlineGeocodingService extends GeocodingService<NTPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
@@ -101,6 +112,15 @@ export class PeliasOnlineGeocodingService extends GeocodingService<NTPeliasOnlin
     customServiceURL: string;
     createNative(options: PeliasOnlineGeocodingServiceOptions) {
         return NTPeliasOnlineGeocodingService.alloc().initWithApiKey(options.apiKey);
+    }
+}
+export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<NTPeliasOnlineReverseGeocodingService, PeliasOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
+        return NTPeliasOnlineReverseGeocodingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 
@@ -115,6 +135,15 @@ export class TomTomOnlineGeocodingService extends GeocodingService<NTTomTomOnlin
         return NTTomTomOnlineGeocodingService.alloc().initWithApiKey(options.apiKey);
     }
 }
+export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<NTTomTomOnlineReverseGeocodingService, TomTomOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: TomTomOnlineReverseGeocodingServiceOptions) {
+        return NTTomTomOnlineReverseGeocodingService.alloc().initWithApiKey(options.apiKey);
+    }
+}
 
 export class MapBoxOnlineGeocodingService extends GeocodingService<NTMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
     @nativeProperty
@@ -127,34 +156,6 @@ export class MapBoxOnlineGeocodingService extends GeocodingService<NTMapBoxOnlin
         return NTMapBoxOnlineGeocodingService.alloc().initWithAccessToken(options.apiKey);
     }
 }
-
-export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<NTPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
-        return NTPackageManagerReverseGeocodingService.alloc().initWithPackageManager(options.packageManager.getNative());
-    }
-}
-export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<NTPeliasOnlineReverseGeocodingService, PeliasOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
-    createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
-        return NTPeliasOnlineReverseGeocodingService.alloc().initWithApiKey(options.apiKey);
-    }
-}
-
-export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<NTTomTomOnlineReverseGeocodingService, TomTomOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
-    createNative(options: TomTomOnlineReverseGeocodingServiceOptions) {
-        return NTTomTomOnlineReverseGeocodingService.alloc().initWithApiKey(options.apiKey);
-    }
-}
-
 export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService<NTMapBoxOnlineReverseGeocodingService, MapBoxOnlineReverseGeocodingServiceOptions> {
     @nativeProperty
     language: string;
@@ -165,3 +166,22 @@ export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService
     }
 }
 
+export class OSMOfflineGeocodingService extends GeocodingService<NTOSMOfflineGeocodingService, OSMOfflineGeocodingServiceOptions> {
+    @nativeProperty
+    autoComplete: boolean;
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    maxResults: number;
+    createNative(options: OSMOfflineGeocodingServiceOptions) {
+        return NTOSMOfflineGeocodingService.alloc().initWithPath(options.path);
+    }
+}
+
+export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<NTOSMOfflineReverseGeocodingService, OSMOfflineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    createNative(options: OSMOfflineReverseGeocodingServiceOptions) {
+        return NTOSMOfflineReverseGeocodingService.alloc().initWithPath(options.path);
+    }
+}

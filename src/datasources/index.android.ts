@@ -4,10 +4,30 @@ import { Projection } from 'nativescript-carto/projections';
 import { FeatureCollection } from '../geometry/feature';
 import { JSVariantToNative } from '../utils';
 
-export abstract class DataSource<T extends com.carto.datasources.TileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {}
-export class TileDataSource<T extends com.carto.datasources.TileDataSource, U extends TileDataSourceOptions> extends BaseNative<T, U> {
+export abstract class DataSource<T extends com.carto.datasources.TileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
+    getProjection() {
+        if (this['projection']) {
+            return this['projection'];
+        }
+        return new Projection(undefined, this.getNative().getProjection());
+    }
+}
+export class TileDataSource<T extends com.carto.datasources.TileDataSource, U extends TileDataSourceOptions> extends DataSource<T, U> {
     createNative(options) {
         return null;
+    }
+
+    get minZoom() {
+        if (this.native) {
+            return this.native.getMinZoom();
+        }
+        return this.options.minZoom;
+    }
+    get maxZoom() {
+        if (this.native) {
+            return this.native.getMaxZoom();
+        }
+        return this.options.maxZoom;
     }
 }
 

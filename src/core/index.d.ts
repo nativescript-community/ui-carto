@@ -48,6 +48,7 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<GenericMap
     toArray(): GenericMapPos<T>[];
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NativeVector<GenericMapPos<T>>> {}
+export class IntVector extends NativeVector<number> {}
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<any, {}> {
     public northeast: GenericMapPos<T>;

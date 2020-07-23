@@ -46,8 +46,8 @@ export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends 
     }
 
     getDataSource() {
-        if (this['datasource']) {
-            return this['datasource'];
+        if (this['dataSource']) {
+            return this['dataSource'];
         }
         return new TileDataSource<any, any>(undefined, this.getNative().getDataSource());
     }

@@ -32,7 +32,6 @@ export abstract class ReverseGeocodingService<T, U extends ReverseGeocodingServi
     public calculateAddresses(options: ReverseGeocodingRequest, callback: (error: Error, res: GeocodingResultVector) => void);
 }
 
-
 export interface Address {
     // street: string;
     // country: string;
@@ -68,7 +67,6 @@ export interface PackageManagerGeocodingServiceOptions extends GeocodingServiceO
 }
 export class PackageManagerGeocodingService extends GeocodingService<any, PackageManagerGeocodingServiceOptions> {
     language: string;
-
 }
 export interface PackageManagerReverseGeocodingServiceOptions extends ReverseGeocodingServiceOptions {
     language?: string;
@@ -76,11 +74,27 @@ export interface PackageManagerReverseGeocodingServiceOptions extends ReverseGeo
 }
 export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<any, PackageManagerReverseGeocodingServiceOptions> {
     language: string;
-
 }
 
-export interface OSMOfflineGeocodingServiceOptions {}
-export class OSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {}
+export interface OSMOfflineGeocodingServiceOptions {
+    maxResults?: number;
+    autoComplete?: boolean;
+    language?: string;
+    path?: string;
+}
+export class OSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {
+    maxResults?: number;
+    autoComplete?: boolean;
+    language?: string;
+}
+
+export interface OSMOfflineReverseGeocodingServiceOptions {
+    language?: string;
+    path?: string;
+}
+export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<any, OSMOfflineReverseGeocodingServiceOptions> {
+    language?: string;
+}
 
 export interface PeliasOnlineGeocodingServiceOptions {
     autoComplete?: boolean;

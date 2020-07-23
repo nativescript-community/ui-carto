@@ -55,6 +55,9 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
     setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
     }
+    setBuildingRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
+        this.getNative().setBuildingRenderOrder(order);
+    }
     projection?: Projection;
     @nonenumerable listener?: IVectorTileEventListener;
     @nonenumerable nListener?: com.akylas.carto.additions.AKVectorTileEventListener;

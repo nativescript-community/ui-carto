@@ -1,4 +1,5 @@
 import { DataSource, TileDataSource, TileDataSourceOptions } from '.';
+import { DefaultLatLonKeys, MapBounds } from '../core';
 
 export interface TileDownloadListener {
     onDownloadCompleted();
@@ -13,10 +14,11 @@ export interface PersistentCacheTileDataSourceOptions extends TileDataSourceOpti
     capacity?: number;
     cacheOnlyMode?: boolean;
 }
-export class PersistentCacheTileDataSource extends DataSource<any, PersistentCacheTileDataSourceOptions> {
+export class PersistentCacheTileDataSource extends TileDataSource<any, PersistentCacheTileDataSourceOptions> {
     capacity: number;
     cacheOnlyMode: boolean;
     clear();
+    startDownloadArea<T = DefaultLatLonKeys>(mapBounds: MapBounds<T>, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener);
 }
 
 export interface MemoryCacheTileDataSourceOptions extends TileDataSourceOptions {

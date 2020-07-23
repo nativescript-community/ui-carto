@@ -15,8 +15,8 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
         return new com.carto.datasources.LocalVectorDataSource(options.projection.getNative());
     }
     add(element: BaseVectorElement<any, any>) {
-        const nativeObj = element.getNative();
-
+        // a native element could have been passed
+        const nativeObj = element.getNative ? element.getNative(): element;
         if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
             this.getNative().addAll(nativeObj);
         } else {
@@ -25,7 +25,8 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
         }
     }
     remove(element: BaseVectorElement<any, any>) {
-        const nativeObj = element.getNative();
+        // a native element could have been passed
+        const nativeObj = element.getNative ? element.getNative(): element;
         if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
             this.getNative().removeAll(nativeObj);
         } else {

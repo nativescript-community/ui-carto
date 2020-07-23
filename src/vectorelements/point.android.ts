@@ -1,7 +1,7 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { BasePointVectorElement } from '.';
 import { PointOptions, PointStyleBuilderOptions } from './point';
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { toNativeMapPos } from '../core';
 import { nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';

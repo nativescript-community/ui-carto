@@ -5,7 +5,7 @@ import { isAndroid } from '@nativescript/core/platform/platform';
 import { Layer } from 'nativescript-carto/layers';
 import { NativeVector } from 'nativescript-carto/core/index.android';
 import { nativeVectorToArray } from 'nativescript-carto/utils';
-import { ContentView } from '@nativescript/core/ui/page/page';
+import { ContentView } from '@nativescript/core/ui/page';
 
 let licenseKeyRegistered = false;
 export function setLicenseKeyRegistered(value: boolean) {

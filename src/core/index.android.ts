@@ -186,6 +186,13 @@ export abstract class NativeVector<T> {
     public getNative() {
         return this.native;
     }
+    toArray(): any[] {
+        const result: T[] = [];
+        for (let i = 0; i < this.size(); i++) {
+            result.push(this.get(i));
+        }
+        return result;
+    }
 }
 export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPos> {
     native: com.carto.core.MapPosVector;
@@ -207,6 +214,13 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.
             result.push(fromNativeMapPos<T>(this.get(i)));
         }
         return result;
+    }
+}
+export class IntVector extends NativeVector<com.carto.core.IntVector> {
+    native: com.carto.core.IntVector;
+    constructor(native?) {
+        super();
+        this.native = native || new com.carto.core.IntVector();
     }
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPosVector> {

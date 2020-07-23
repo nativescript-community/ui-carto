@@ -1,6 +1,6 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { mapPosVectorFromArgs, nativeColorProperty } from '..';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from '.';

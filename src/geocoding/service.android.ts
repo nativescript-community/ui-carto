@@ -6,6 +6,8 @@ import {
     GeocodingResult as IGeocodingResult,
     MapBoxOnlineGeocodingServiceOptions,
     MapBoxOnlineReverseGeocodingServiceOptions,
+    OSMOfflineGeocodingServiceOptions,
+    OSMOfflineReverseGeocodingServiceOptions,
     PackageManagerGeocodingServiceOptions,
     PackageManagerReverseGeocodingServiceOptions,
     PeliasOnlineGeocodingServiceOptions,
@@ -110,6 +112,23 @@ export class PeliasOnlineGeocodingService extends GeocodingService<com.akylas.ca
         return new com.akylas.carto.additions.AKPeliasOnlineGeocodingService(options.apiKey);
     }
 }
+export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKPeliasOnlineReverseGeocodingService, PeliasOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKPeliasOnlineReverseGeocodingService(options.apiKey);
+    }
+}
+
+export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKPackageManagerReverseGeocodingService(options.packageManager.getNative());
+    }
+}
 
 export class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
     @nativeProperty
@@ -123,6 +142,15 @@ export class TomTomOnlineGeocodingService extends GeocodingService<com.akylas.ca
     }
 }
 
+export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKTomTomOnlineReverseGeocodingService, TomTomOnlineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    customServiceURL: string;
+    createNative(options: TomTomOnlineReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKTomTomOnlineReverseGeocodingService(options.apiKey);
+    }
+}
 export class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
     @nativeProperty
     autoComplete: boolean;
@@ -135,33 +163,6 @@ export class MapBoxOnlineGeocodingService extends GeocodingService<com.akylas.ca
     }
 }
 
-export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
-        return new com.akylas.carto.additions.AKPackageManagerReverseGeocodingService(options.packageManager.getNative());
-    }
-}
-export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKPeliasOnlineReverseGeocodingService, PeliasOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
-    createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
-        return new com.akylas.carto.additions.AKPeliasOnlineReverseGeocodingService(options.apiKey);
-    }
-}
-
-export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKTomTomOnlineReverseGeocodingService, TomTomOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
-    createNative(options: TomTomOnlineReverseGeocodingServiceOptions) {
-        return new com.akylas.carto.additions.AKTomTomOnlineReverseGeocodingService(options.apiKey);
-    }
-}
-
 export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKMapBoxOnlineReverseGeocodingService, MapBoxOnlineReverseGeocodingServiceOptions> {
     @nativeProperty
     language: string;
@@ -169,6 +170,26 @@ export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService
     customServiceURL: string;
     createNative(options: MapBoxOnlineReverseGeocodingServiceOptions) {
         return new com.akylas.carto.additions.AKMapBoxOnlineReverseGeocodingService(options.apiKey);
+    }
+}
+
+export class OSMOfflineGeocodingService extends GeocodingService<com.akylas.carto.additions.AKOSMOfflineGeocodingService, OSMOfflineGeocodingServiceOptions> {
+    @nativeProperty
+    autoComplete: boolean;
+    @nativeProperty
+    language: string;
+    @nativeProperty
+    maxResults: number;
+    createNative(options: OSMOfflineGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKOSMOfflineGeocodingService(options.path);
+    }
+}
+
+export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<com.akylas.carto.additions.AKOSMOfflineReverseGeocodingService, OSMOfflineReverseGeocodingServiceOptions> {
+    @nativeProperty
+    language: string;
+    createNative(options: OSMOfflineReverseGeocodingServiceOptions) {
+        return new com.akylas.carto.additions.AKOSMOfflineReverseGeocodingService(options.path);
     }
 }
 

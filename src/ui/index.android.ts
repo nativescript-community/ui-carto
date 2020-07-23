@@ -1,7 +1,19 @@
 import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
-import * as application from '@nativescript/core/application';
+import { android as androidApp } from '@nativescript/core/application';
 import { profile } from '@nativescript/core/profiling';
-import { DefaultLatLonKeys, MapBounds, MapPos, ScreenBounds, ScreenPos, fromNativeMapBounds, fromNativeMapPos, fromNativeScreenPos, toNativeMapPos, toNativeScreenBounds, toNativeScreenPos } from '../core';
+import {
+    DefaultLatLonKeys,
+    MapBounds,
+    MapPos,
+    ScreenBounds,
+    ScreenPos,
+    fromNativeMapBounds,
+    fromNativeMapPos,
+    fromNativeScreenPos,
+    toNativeMapPos,
+    toNativeScreenBounds,
+    toNativeScreenPos,
+} from '../core';
 import { TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
@@ -35,7 +47,7 @@ export const PanningMode = {
 let licenseKey: string;
 
 export const registerLicense = profile('registerLicense', (value: string, callback?: (result: boolean) => void) => {
-    const context = application.android.context;
+    const context = androidApp.context;
     if (!context) {
         throw new Error('application context not initialized!');
     }
@@ -163,6 +175,14 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         this.mapView.setFocusPos(toNativeMapPos(value), duration / 1000);
     }
 
+    getFocusPos() {
+        return fromNativeMapPos<T>(this.mapView.getFocusPos());
+    }
+    getMapBounds() {
+        const screenBounds = toNativeScreenBounds({ min: { x: this.getMeasuredWidth(), y: 0 }, max: { x: 0, y: this.getMeasuredHeight() } }) as  com.carto.core.ScreenBounds;
+        return new MapBounds<T>(fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMin())), fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMax())));
+    }
+
     setMapRotation(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setMapRotation(value, targetPos / 1000);
@@ -185,7 +205,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     }
     moveToFitBounds(mapBounds: MapBounds<T>, screenBounds: ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number) {
         if (!screenBounds) {
-            screenBounds = {min:{x:0,y:0},max:{x:this.getMeasuredWidth(),y:this.getMeasuredHeight()}};
+            screenBounds = { min: { x: 0, y: 0 }, max: { x: this.getMeasuredWidth(), y: this.getMeasuredHeight() } };
         }
         this.mapView.moveToFitBounds(this.toNativeMapBounds(mapBounds), toNativeScreenBounds(screenBounds), integerZoom, resetRotation, resetTilt, durationSeconds / 1000);
     }
@@ -265,7 +285,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
             this.mapView.getMapRenderer().captureRendering(
                 new com.akylas.carto.additions.RendererCaptureListener(
                     new com.akylas.carto.additions.RendererCaptureListener.Listener({
-                        onMapRendered (bitmap: com.carto.graphics.Bitmap) {
+                        onMapRendered(bitmap: com.carto.graphics.Bitmap) {
                             resolve(fromNativeSource(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(bitmap)));
                         },
                     })
