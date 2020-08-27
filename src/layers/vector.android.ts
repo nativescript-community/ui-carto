@@ -17,6 +17,7 @@ import {
     VectorLayerOptions,
     VectorTileLayerOptions,
 } from './vector';
+import { Line } from 'nativescript-carto/vectorelements/line';
 
 export { VectorTileDecoder };
 
@@ -162,7 +163,13 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
     }
     onElementClicked(info: com.carto.ui.VectorElementClickInfo) {
         if (this.elementListener && this.elementListener.onVectorElementClicked) {
-            const element = new VectorElement(undefined, info.getVectorElement());
+            let element: VectorElement<any, any>;
+            const nElement = info.getVectorElement();
+            if (nElement instanceof com.carto.vectorelements.Line) {
+                element = new Line(undefined, nElement);
+            } else {
+                element = new VectorElement(undefined, nElement);
+            }
             let position = info.getClickPos();
             let elementPos = info.getElementClickPos();
             if (this.projection) {

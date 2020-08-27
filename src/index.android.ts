@@ -12,14 +12,16 @@ export function nativeColorProperty(...args) {
         {
             converter: {
                 fromNative(value) {
-                    return new Color(value.getARGB() as number).hex;
+                    if (typeof value === 'string') {
+                        return value;
+                    }
+                    return new Color((value as com.carto.graphics.Color).getARGB()).hex;
                 },
                 toNative(value) {
-                    // console.log('nativeColorProperty', 'toNative', value, new Error().stack);
                     const theColor = typeof value === 'string' ? new Color(value) : value;
                     return new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a);
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -41,8 +43,8 @@ export function nativeAndroidEnumProperty(androidEnum, options: NativePropertyOp
                 toNative(value: any) {
                     // console.log('nativeAndroidEnumProperty', 'fromNtoNativeative', value, androidEnum, androidEnum.swigToEnum(value));
                     return androidEnum.swigToEnum(value);
-                }
-            }
+                },
+            },
         })
     );
 }
@@ -59,8 +61,8 @@ export function nativeCartoImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(value.android as android.graphics.Bitmap);
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -78,8 +80,8 @@ export function nativeImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return value.android as android.graphics.Bitmap;
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -97,7 +99,7 @@ export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVec
         //         nativePoses.add(projection.getNative().fromWgs84(toNativeMapPos(p)));
         //     });
         // } else {
-        arrayPoses.forEach(p => {
+        arrayPoses.forEach((p) => {
             nativePoses.add(toNativeMapPos<T>(p, ignoreAltitude));
         });
         // }
@@ -112,7 +114,7 @@ export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPo
     } else {
         const arrayPoses = positions as MapPos[][];
         nativePoses = new com.carto.core.MapPosVectorVector();
-        arrayPoses.forEach(p => {
+        arrayPoses.forEach((p) => {
             nativePoses.add(mapPosVectorFromArgs(p, ignoreAltitude));
         });
     }
