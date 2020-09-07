@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.3.1...v1.4.0) (2020-09-07)
+
+
+### Features
+
+* N7 and new plugin name ([4da5b91](https://github.com/farfromrefug/nativescript-carto/commit/4da5b91ed09be326ca85d580289c1aa3dad69738))
+
+
+
+
+
 ## [1.3.1](https://github.com/nativescript-community/ui-carto/compare/v1.2.42...v1.3.1) (2020-05-28)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto
