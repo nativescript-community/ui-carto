@@ -1,5 +1,5 @@
 import { Observable } from '@nativescript/core/data/observable';
-import { ImageSource, fromNativeSource } from '@nativescript/core/image-source';
+import { ImageSource } from '@nativescript/core/image-source';
 import { ImageAsset } from '@nativescript/core/image-asset';
 import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/core/utils/utils';
 import { isAndroid } from '@nativescript/core/platform';
@@ -182,7 +182,7 @@ export function _createImageSourceFromSrc(value: string | ImageSource | ImageAss
         // const result = await fromAsset(value);
         return null;
     } else {
-        return fromNativeSource(value);
+        return new ImageSource(value);
         // return Promise.resolve(fromNativeSource(value));
     }
 }

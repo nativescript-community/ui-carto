@@ -1,20 +1,20 @@
 import { Projection } from '../projections';
 import { MapBounds, MapPos, MapPosVector } from '../core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core';
 import { Geometry } from '../geometry';
-import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
+import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 
 declare enum LineJointType {
     FaceCamera,
     BEVEL,
     MITER,
-    ROUND
+    ROUND,
 }
 declare enum LineEndType {
     ROUND,
     SQUARE,
-    NONE
+    NONE,
 }
 export class LineStyleBuilderOptions extends VectorElementOptions {
     color?: string | Color;
@@ -40,7 +40,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<any, LineSty
 
 export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, LineOptions<T>, T> {
     styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions | any;
-    ignoreAltitude?:boolean
+    ignoreAltitude?: boolean;
     style?: any;
     color?: string | Color;
     width?: number;

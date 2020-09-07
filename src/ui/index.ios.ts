@@ -17,8 +17,7 @@ import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
 import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
-import { NativeVector } from 'nativescript-carto/core/index.android';
-import { fromNativeSource } from '@nativescript/core/image-source';
+import { ImageSource } from '@nativescript/core';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -47,6 +46,7 @@ export function getLicenseKey() {
     return licenseKey;
 }
 
+@NativeClass
 class NTMapEventListenerImpl extends NTMapEventListener {
     private _owner: WeakRef<CartoMap<any>>;
 
@@ -98,6 +98,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
     }
 }
 
+@NativeClass
 class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
     private _callback: WeakRef<Function>;
     public static initWithCallback(callback: WeakRef<Function>): NTRendererCaptureListenerImpl {
@@ -339,7 +340,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
             this.mapView.getMapRenderer().captureRenderingWaitWhileUpdating(
                 NTRendererCaptureListenerImpl.initWithCallback(
                     new WeakRef(function (bitmap) {
-                        resolve(fromNativeSource(bitmap));
+                        resolve(new ImageSource(bitmap));
                     })
                 ),
                 wait

@@ -30,6 +30,7 @@ export enum VectorElementDragResult {
     DELETE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_DELETE
 }
 
+@NativeClass
 export class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorElementEventListener>;
@@ -72,6 +73,8 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
         return false;
     }
 }
+
+@NativeClass
 export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorTileEventListener>;
@@ -200,6 +203,7 @@ export class VectorLayer extends BaseVectorLayer<NTVectorLayer, VectorLayerOptio
     }
 }
 
+@NativeClass
 class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
     private _owner: WeakRef<EditableVectorLayer>;
 
@@ -246,6 +250,7 @@ class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
         return null;
     }
 }
+// @NativeClass
 // class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
 //     private _owner: WeakRef<EditableVectorLayer>;
 

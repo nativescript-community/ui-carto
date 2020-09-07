@@ -1,0 +1,7 @@
+﻿@import '~nativescript-theme-core/css/core.light.css';
+
+
+CartoMap {
+    width:100%;
+    height:100%;
+}

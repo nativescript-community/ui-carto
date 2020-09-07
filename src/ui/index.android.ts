@@ -20,9 +20,9 @@ import { restrictedPanningProperty } from './cssproperties';
 
 import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
+import { ImageSource } from '@nativescript/core';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
-import { fromNativeSource } from '@nativescript/core/image-source';
 
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {
@@ -286,7 +286,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                 new com.akylas.carto.additions.RendererCaptureListener(
                     new com.akylas.carto.additions.RendererCaptureListener.Listener({
                         onMapRendered(bitmap: com.carto.graphics.Bitmap) {
-                            resolve(fromNativeSource(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(bitmap)));
+                            resolve(new ImageSource(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(bitmap)));
                         },
                     })
                 ),

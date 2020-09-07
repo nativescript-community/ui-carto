@@ -1,6 +1,6 @@
 import { BaseNative } from '..';
-import { Projection } from 'nativescript-carto/projections';
-import { FeatureCollection } from 'nativescript-carto/geometry/feature';
+import { Projection } from '../projections';
+import { FeatureCollection } from '../geometry/feature';
 
 export interface DataSourceOptions {
     minZoom?: number;

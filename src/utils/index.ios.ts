@@ -60,7 +60,7 @@ export function JSVariantToNative(variant: any) {
         return builder.buildVariant();
     } else if (typeof variant === 'object') {
         const builder = NTVariantObjectBuilder.alloc().init();
-        Object.keys(variant).forEach(k => {
+        Object.keys(variant).forEach((k) => {
             const obj = variant[k];
             if (typeof obj === 'boolean') {
                 builder.setBoolVal(k, obj);
@@ -138,6 +138,7 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
     });
 }
 
+@NativeClass
 export class NTDirAssetPackageImpl extends NTAssetPackage {
     assetNames: NTStringVector;
     // context: android.content.Context;

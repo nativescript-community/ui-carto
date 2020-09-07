@@ -1,4 +1,4 @@
-import { MapPos } from 'nativescript-carto/core';
+import { MapPos } from '../core';
 import { GroupBase } from './group.common';
 
 export class Group extends GroupBase {

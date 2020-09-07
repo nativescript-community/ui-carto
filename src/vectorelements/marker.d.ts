@@ -1,17 +1,9 @@
-import { Color } from '@nativescript/core/color/color';
-import { ImageAsset } from '@nativescript/core/image-asset/image-asset';
-import { ImageSource } from '@nativescript/core/image-source/image-source';
+import { Color } from '@nativescript/core/color';
+import { ImageAsset } from '@nativescript/core/image-asset';
+import { ImageSource } from '@nativescript/core/image-source';
 import { Geometry } from '../geometry';
-import {
-    BaseBillboardVectorElement,
-    BillboardOrientation,
-    BillboardScaling,
-    BillboardStyleBuilder,
-    BillboardStyleBuilderOptions,
-    PointVectorElementOptions,
-    BillboardVectorElementOptions
-} from '.';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder, BillboardStyleBuilderOptions, BillboardVectorElementOptions, PointVectorElementOptions } from '.';
+import { DefaultLatLonKeys } from '../core';
 
 export class MarkerStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;

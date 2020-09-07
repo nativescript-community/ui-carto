@@ -39,7 +39,7 @@ export class VectorTileSearchService extends BaseNative<any, VectorTileSearchSer
 
 export interface FeatureCollectionSearchServiceOptions {
     projection: Projection;
-    features: FeatureCollection
+    features: FeatureCollection;
 }
 export class FeatureCollectionSearchService<U extends FeatureCollectionSearchServiceOptions>   extends BaseNative<any, U> {
     findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void): FeatureCollection;

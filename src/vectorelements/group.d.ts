@@ -1,10 +1,10 @@
 import { BasePointVectorElement, PointVectorElementOptions, VectorElement, VectorElementVector } from '.';
-import { MapPos } from 'nativescript-carto/core';
-import { Projection } from 'nativescript-carto/projections';
-import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
+import { MapPos } from '../core';
+import { Projection } from '../projections';
+import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 
 export class GroupOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
-    elements: Array<{ id: string; element: VectorElement<any, any> }>;
+    elements: { id: string; element: VectorElement<any, any> }[];
 }
 
 export class Group<T = DefaultLatLonKeys> extends VectorElementVector implements BasePointVectorElement<any, GroupOptions<T>, T> {

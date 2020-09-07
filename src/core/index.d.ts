@@ -31,6 +31,12 @@ export enum ClickType {
     DUAL
 }
 
+export class NMapPos {
+    getX()
+    getY()
+    getZ()
+}
+
 export abstract class NativeVector<T> {
     constructor(native?);
     native: any;
@@ -44,7 +50,7 @@ export abstract class NativeVector<T> {
     public isEmpty(): boolean;
     public set(index: number, value: T);
 }
-export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<GenericMapPos<T>> {
+export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NMapPos> {
     toArray(): GenericMapPos<T>[];
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NativeVector<GenericMapPos<T>>> {}

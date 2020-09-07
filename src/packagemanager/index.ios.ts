@@ -26,6 +26,7 @@ export enum PackageType {
     VALHALLA_ROUTING = NTPackageType.T_PACKAGE_TYPE_VALHALLA_ROUTING
 }
 
+@NativeClass
 class NTPackageManagerListenerImpl extends NTPackageManagerListener {
     private _owner: WeakRef<CartoPackageManagerListener>;
 

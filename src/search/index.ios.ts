@@ -1,7 +1,7 @@
 import { BaseNative, nativeProperty } from '../index.common';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
-import { toNativeMapPos } from 'nativescript-carto/core';
+import { toNativeMapPos } from '../core';
 
 export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;

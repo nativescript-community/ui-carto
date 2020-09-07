@@ -1,13 +1,12 @@
-import { View } from '@nativescript/core/ui/core/view';
 import { EventData } from '@nativescript/core/data/observable';
-import { Projection } from '../projections';
-import { Layer } from '../layers';
-import { MapBounds, ScreenBounds, ScreenPos } from '../core';
-import { Layers } from './index.common';
 import { ImageSource } from '@nativescript/core/image-source';
-import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
-export { Layers };
+import { View } from '@nativescript/core/ui/core/view';
 import { Style } from '@nativescript/core/ui/styling/style';
+import { DefaultLatLonKeys, GenericMapPos, MapBounds, ScreenBounds, ScreenPos } from '../core';
+import { Layer } from '../layers';
+import { Projection } from '../projections';
+import { Layers } from './index.common';
+export { Layers };
 export function registerLicense(key: string, callback?: (result: boolean) => void);
 
 export enum RenderProjectionMode {

@@ -1,8 +1,5 @@
-import { IProjection } from '../projections';
-import { MapPos } from '../core';
-import { BasePointVectorElement, BaseVectorElementStyleBuilder, PointVectorElementOptions } from '.';
-import { Color } from '@nativescript/core/color/color';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
+import { BasePointVectorElement, PointVectorElementOptions } from '.';
+import { DefaultLatLonKeys } from '../core';
 
 // export class NMLModelStyleBuilderOptions extends VectorElementOptions {
 

@@ -5,7 +5,7 @@ import './styles.scss';
 import { registerLicense } from 'nativescript-carto/ui';
 import { setShowDebug } from 'nativescript-carto/utils';
 import * as application from '@nativescript/core/application';
-import { isAndroid } from '@nativescript/core/ui/page/page';
+import { isAndroid } from '@nativescript/core/ui/page';
 import { knownFolders } from '@nativescript/core/file-system';
 
 const currentApp = knownFolders.currentApp();

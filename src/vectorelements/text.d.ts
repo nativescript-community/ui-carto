@@ -1,6 +1,6 @@
-import { Color } from '@nativescript/core/color/color';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions, BillboardVectorElementOptions } from '.';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
+import { Color } from '@nativescript/core/color';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder, BillboardStyleBuilderOptions, BillboardVectorElementOptions } from '.';
+import { DefaultLatLonKeys } from '../core';
 
 export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: Color | string;

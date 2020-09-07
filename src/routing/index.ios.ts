@@ -5,16 +5,16 @@ import {
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
     PackageManagerValhallaRoutingServiceOptions,
+    RouteMatchingRequest,
     RoutingInstruction,
     RoutingRequest,
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
     ValhallaOnlineRoutingServiceOptions,
-    RouteMatchingRequest
 } from '.';
-import { BaseRoutingService, RoutingResult, RouteMatchingResult } from './index.common';
-import { JSVariantToNative } from 'nativescript-carto/utils';
+import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
+import { JSVariantToNative } from '../utils';
 
 export enum RoutingAction {
     HEAD_ON = NTRoutingAction.T_ROUTING_ACTION_HEAD_ON,
@@ -33,7 +33,7 @@ export enum RoutingAction {
     LEAVE_AGAINST_ALLOWED_DIRECTION = NTRoutingAction.T_ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION,
     GO_UP = NTRoutingAction.T_ROUTING_ACTION_GO_UP,
     GO_DOWN = NTRoutingAction.T_ROUTING_ACTION_GO_DOWN,
-    WAIT = NTRoutingAction.T_ROUTING_ACTION_WAIT
+    WAIT = NTRoutingAction.T_ROUTING_ACTION_WAIT,
 }
 abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
@@ -120,5 +120,5 @@ export {
     CartoOnlineRoutingService,
     ValhallaOfflineRoutingService,
     ValhallaOnlineRoutingService,
-    PackageManagerValhallaRoutingService
+    PackageManagerValhallaRoutingService,
 };

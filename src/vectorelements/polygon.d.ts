@@ -1,9 +1,8 @@
-import { Projection } from '../projections';
-import { MapPos, MapPosVector, MapPosVectorVector } from '../core';
+import { Color } from '@nativescript/core/color';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVectorVector } from '../core';
+import { Projection } from '../projections';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
-import { Color } from '@nativescript/core/color/color';
-import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
 export class PolygonStyleBuilderOptions extends VectorElementOptions {
     size?: number;
     color?: string | Color;

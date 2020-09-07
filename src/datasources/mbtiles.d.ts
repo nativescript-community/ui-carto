@@ -1,4 +1,4 @@
-import { DataSource, TileDataSourceOptions, TileDataSource } from '.';
+import { DataSource, TileDataSource, TileDataSourceOptions } from '.';
 
 export interface MBTilesTileDataSourceOptions extends TileDataSourceOptions {
     databasePath?: string;

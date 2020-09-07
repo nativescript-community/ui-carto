@@ -2,7 +2,7 @@ import { CssProperty } from '@nativescript/core/ui/core/properties';
 import { Style } from '@nativescript/core/ui/styling/style';
 import { LatitudeKey, LongitudeKey, MapPos } from '../core';
 import { booleanConverter } from '@nativescript/core/ui/core/view-base';
-import { GenericMapPos } from 'nativescript-carto/core/index.common';
+import { GenericMapPos } from '../core/index.common';
 
 
 export const licenseKeyProperty = new CssProperty<Style, string>({

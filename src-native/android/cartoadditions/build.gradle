@@ -64,8 +64,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // compile 'com.android.support:support-v4:' + computeSupportVersion()
     // compile 'com.akylas:carto-mobile-sdk:4.2.1@aar'
-	implementation 'com.carto:carto-mobile-sdk:4.3.0-rc.2@aar'
-    // implementation files('../../../plugin/platforms/android/carto-mobile-sdk-4.3.0RC1.aar')
+	// implementation 'com.carto:carto-mobile-sdk:4.3.0-rc.2@aar'
+    implementation files('../../../plugin/platforms/android/carto-mobile-sdk-4.4.0RC1.aar')
 }
 
 task cleanBuildDir (type: Delete) {

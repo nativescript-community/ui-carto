@@ -2,7 +2,7 @@ import { BaseNative } from '..';
 import { Projection } from '../projections';
 import { FeatureCollection } from '../geometry/feature';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, NativeVector } from '../core';
-import { CartoPackageManager } from 'nativescript-carto/packagemanager';
+import { CartoPackageManager } from '../packagemanager';
 
 declare enum RoutingAction {
     HEAD_ON,

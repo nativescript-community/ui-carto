@@ -14,7 +14,7 @@ import {
     ValhallaOnlineRoutingServiceOptions,
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
-import { JSVariantToNative } from 'nativescript-carto/utils';
+import { JSVariantToNative } from '../utils';
 
 export const RoutingAction = {
     get HEAD_ON() {

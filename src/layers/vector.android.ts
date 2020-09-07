@@ -17,7 +17,7 @@ import {
     VectorLayerOptions,
     VectorTileLayerOptions,
 } from './vector';
-import { Line } from 'nativescript-carto/vectorelements/line';
+import { Line } from '../vectorelements/line';
 
 export { VectorTileDecoder };
 

@@ -1,8 +1,7 @@
-import { applyMixins } from 'nativescript-carto/core/index.common';
-import { GroupOptions } from './group';
 import { BasePointVectorElement, VectorElementVector } from '.';
-import { MapPos } from 'nativescript-carto/core';
-import { Projection } from 'nativescript-carto/projections';
+import { MapPos } from '../core';
+import { Projection } from '../projections';
+import { GroupOptions } from './group';
 
 export abstract class GroupBase extends VectorElementVector implements BasePointVectorElement<any, GroupOptions> {
     position: MapPos;

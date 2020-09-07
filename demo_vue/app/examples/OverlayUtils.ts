@@ -1,7 +1,7 @@
 import { Marker, MarkerStyleBuilder } from 'nativescript-carto/vectorelements/marker';
 import { Point, PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
 import { MapPos, MapPosVector, MapPosVectorVector } from 'nativescript-carto/core';
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { CartoMap } from 'nativescript-carto/ui';
 import { Line, LineStyleBuilder } from 'nativescript-carto/vectorelements/line';
 import { Projection } from 'nativescript-carto/projections';

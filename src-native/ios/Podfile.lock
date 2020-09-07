@@ -1,0 +1,16 @@
+PODS:
+  - Akylas-CartoMobileSDK (4.2.1)
+
+DEPENDENCIES:
+  - Akylas-CartoMobileSDK (= 4.2.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Akylas-CartoMobileSDK
+
+SPEC CHECKSUMS:
+  Akylas-CartoMobileSDK: 793bc7db73b09e8d2cb938651f1192b737f21cfc
+
+PODFILE CHECKSUM: 3e5c6f6209ae5deb7a360fe7a07ab63706f56b6a
+
+COCOAPODS: 1.5.3

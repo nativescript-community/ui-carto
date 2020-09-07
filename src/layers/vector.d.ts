@@ -7,7 +7,7 @@ import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements';
 import { Projection } from '../projections';
 import { Geometry } from '../geometry';
-import { PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
+import { PointStyleBuilder } from '../vectorelements/point';
 
 export enum VectorTileRenderOrder {
     HIDDEN,

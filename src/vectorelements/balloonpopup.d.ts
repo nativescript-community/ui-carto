@@ -1,8 +1,8 @@
 import { BasePointVectorElement, BillboardStyleBuilderOptions, PointVectorElementOptions } from '.';
-import { Color } from '@nativescript/core/color/color';
+import { Color } from '@nativescript/core/color';
 import { Marker } from './marker';
 import { BillboardStyleBuilder } from './index.ios';
-import { DefaultLatLonKeys } from 'nativescript-carto/core/index.common';
+import { DefaultLatLonKeys } from '../core';
 
 export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: string | Color;

@@ -1,7 +1,7 @@
 import { BaseNative } from '..';
 import { MapPos, MapPosVector } from '../core';
 import { Projection } from '../projections';
-import { DefaultLatLonKeys, GenericMapPos } from 'nativescript-carto/core/index.common';
+import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 
 declare enum BillboardOrientation {
     FACE_CAMERA,

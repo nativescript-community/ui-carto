@@ -1,7 +1,7 @@
 import { BaseNative } from '../index.common';
 import { RouteMatchingResult as IRouteMatchingResult, RoutingResult as IRoutingResult, RoutingInstructionVector, RoutingServiceOptions } from '.';
-import { Projection } from 'nativescript-carto/projections';
-import { MapPosVector } from 'nativescript-carto/core';
+import { Projection } from '../projections';
+import { MapPosVector } from '../core';
 export abstract class BaseRoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {}
 
 export class RoutingResult implements IRoutingResult {

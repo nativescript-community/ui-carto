@@ -2,7 +2,7 @@ import { MapBounds, MapPos, toNativeMapBounds, toNativeMapPos } from '../core';
 import { DataSource, TileDataSource } from '../datasources';
 import { Projection } from '../projections';
 import { CartoPackageManagerOptions, CartoPackageManagerListener as ICartoPackageManagerListener, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from '.';
-import { nonenumerable } from 'nativescript-carto/index.common';
+import { nonenumerable } from '../index.common';
 
 export const PackageType = {
     get MAP() {

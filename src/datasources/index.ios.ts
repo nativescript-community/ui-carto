@@ -1,8 +1,8 @@
 import { BaseNative } from '../index.common';
 import { DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
-import { JSVariantToNative } from 'nativescript-carto/utils';
-import { FeatureCollection } from 'nativescript-carto/geometry/feature.ios';
-import { Projection } from 'nativescript-carto/projections';
+import { JSVariantToNative } from '../utils';
+import { FeatureCollection } from '../geometry/feature.ios';
+import { Projection } from '../projections';
 
 export abstract class DataSource<T extends NTTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {

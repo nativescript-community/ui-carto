@@ -1,5 +1,5 @@
 {
-    "name": "nativescript-carto",
+    "name": "@nativescript-community/ui-carto",
     "version": "1.3.1",
     "description": "Nativescript plugin for Carto Mobile SDK",
     "main": "index",
@@ -20,9 +20,9 @@
         "email": "martin.guillon@akylas.fr"
     },
     "bugs": {
-        "url": "https://github.com/farfromrefug/nativescript-carto/issues"
+        "url": "https://github.com/nativescript-community/ui-carto/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/farfromrefug/nativescript-carto",
+    "homepage": "https://github.com/nativescript-community/ui-carto",
     "bootstrapper": "nativescript-plugin-seed"
 }

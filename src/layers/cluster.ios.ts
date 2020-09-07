@@ -1,8 +1,9 @@
 import { BaseNative } from '../index.common';
-import { fromNativeMapPos, MapPos } from '../core';
+import { MapPos, fromNativeMapPos } from '../core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 
+@NativeClass
 export class ClusterElementBuilderImpl extends NTClusterElementBuilder {
     private _owner: WeakRef<ClusterElementBuilder>;
     public static initWithOwner(owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderImpl {

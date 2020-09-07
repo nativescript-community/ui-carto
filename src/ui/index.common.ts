@@ -1,11 +1,10 @@
 import { CSSType, View } from '@nativescript/core/ui/core/view';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
-import { isAndroid } from '@nativescript/core/platform/platform';
-import { Layer } from 'nativescript-carto/layers';
-import { NativeVector } from 'nativescript-carto/core/index.android';
-import { nativeVectorToArray } from 'nativescript-carto/utils';
-import { ContentView } from '@nativescript/core/ui/page';
+import { Layer } from '../layers';
+// import { NativeVector } from '../index';
+import { nativeVectorToArray } from '../utils';
+import { ContentView } from '@nativescript/core';
 
 let licenseKeyRegistered = false;
 export function setLicenseKeyRegistered(value: boolean) {
@@ -38,7 +37,7 @@ export interface MapPropertyOptions {
 }
 
 function createGetter(key: string, options: MapPropertyOptions) {
-    const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeGetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const getConverter = options.getConverter;
     // console.log('createGetter', key, options, nativeGetterName, !!getConverter);
     return function () {

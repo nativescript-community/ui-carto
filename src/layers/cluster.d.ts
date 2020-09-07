@@ -1,10 +1,9 @@
+import { Color } from '@nativescript/core/color';
+import { ImageAsset } from '@nativescript/core/image-asset';
+import { ImageSource } from '@nativescript/core/image-source';
 import { BaseNative } from '..';
 import { MapPos } from '../core';
-import { VectorElement, VectorElementVector } from '../vectorelements';
-import { BaseVectorElement } from '../vectorelements';
-import { ImageSource } from '@nativescript/core/image-source';
-import { ImageAsset } from '@nativescript/core/image-asset';
-import { Color } from '@nativescript/core/color';
+import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 
 export interface ClusterElementBuilderOptions {
     image?: string | ImageSource | ImageAsset;

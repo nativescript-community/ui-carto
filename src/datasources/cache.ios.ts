@@ -3,6 +3,7 @@ import { TileDataSource } from '.';
 import { MapBounds, toNativeMapBounds } from '../core';
 import { nativeProperty } from '../index.common';
 
+@NativeClass
 class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     private _owner: WeakRef<TileDownloadListener>;
 
