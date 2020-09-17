@@ -115,6 +115,7 @@ class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
     }
 }
 
+@NativeClass
 class MapView extends NTMapView {
     owner: CartoMap;
 
