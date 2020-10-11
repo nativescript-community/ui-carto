@@ -88,7 +88,6 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
         return delegate;
     }
     public onVectorTileClicked(info: NTVectorTileClickInfo) {
-        console.log('onVectorTileClicked', info);
         const owner = this._owner.get();
         if (owner && owner.onVectorTileClicked) {
             // const featureData = {};
