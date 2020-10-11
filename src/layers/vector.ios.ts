@@ -214,26 +214,21 @@ class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
     }
 
     onDragEnd(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
-        console.log('onDragEnd', dragInfo);
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
     onDragMove(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
-        console.log('onDragMove', dragInfo);
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
     onDragStart(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
-        console.log('onDragStart', dragInfo);
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
     onElementDelete(element: NTVectorElement) {
-        console.log('onElementDelete', element);
     }
 
     onElementDeselected(element: NTVectorElement) {
-        console.log('onElementDeselected', element);
     }
 
     // onElementModifyGeometry(element: NTVectorElement, geometry: NTGeometry) {
@@ -241,12 +236,10 @@ class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
     // }
 
     onElementSelect(element: NTVectorElement) {
-        console.log('onElementSelect', element);
         return true;
     }
 
     onSelectDragPointStyleDragPointStyle(element: NTVectorElement, dragPointStyle: NTVectorElementDragPointStyle) {
-        console.log('onSelectDragPointStyleDragPointStyle', element, dragPointStyle);
         return null;
     }
 }
