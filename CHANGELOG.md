@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.6](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.5...v1.4.6) (2020-10-23)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
 ## [1.4.5](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.4...v1.4.5) (2020-10-23)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto
