@@ -17,18 +17,18 @@ export class TileDataSource<T extends com.carto.datasources.TileDataSource, U ex
         return null;
     }
 
-    get minZoom() {
-        if (this.native) {
-            return this.native.getMinZoom();
-        }
-        return this.options.minZoom;
-    }
-    get maxZoom() {
-        if (this.native) {
-            return this.native.getMaxZoom();
-        }
-        return this.options.maxZoom;
-    }
+    // get minZoom() {
+    //     if (this.native) {
+    //         return this.native.getMinZoom();
+    //     }
+    //     return this.options.minZoom;
+    // }
+    // get maxZoom() {
+    //     if (this.native) {
+    //         return this.native.getMaxZoom();
+    //     }
+    //     return this.options.maxZoom;
+    // }
 }
 
 export class OrderedTileDataSource extends TileDataSource<com.carto.datasources.OrderedTileDataSource, OrderedTileDataSourceOptions> {
