@@ -1,5 +1,5 @@
 import { MapPos, fromNativeMapPos, toNativeMapPos } from '../core';
-import {ProjectionOptions } from '.';
+import { ProjectionOptions } from '.';
 import { BaseProjection } from './index.common';
 
 export abstract class ProjectionClass<T extends NTProjection, U extends ProjectionOptions> extends BaseProjection<T, U> {

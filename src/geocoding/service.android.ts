@@ -15,15 +15,12 @@ import {
     ReverseGeocodingRequest,
     ReverseGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions,
-    TomTomOnlineReverseGeocodingServiceOptions
+    TomTomOnlineReverseGeocodingServiceOptions,
 } from './service';
 import { nativeProperty } from '..';
 import { BaseGeocodingService } from './service.common';
 
-
-
 export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
-
     public calculateAddresses(options: GeocodingRequest, callback: (err: any, res: GeocodingResultVector) => void) {
         const nRequest = new com.carto.geocoding.GeocodingRequest(options.projection.getNative(), options.query);
         if (options.locationRadius !== undefined) {
@@ -37,13 +34,12 @@ export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGe
             new com.akylas.carto.additions.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
-                }
+                },
             })
         );
     }
 }
 export abstract class ReverseGeocodingService<T extends com.akylas.carto.additions.AKReverseGeocodingService, U extends ReverseGeocodingServiceOptions> extends BaseGeocodingService<T, U> {
-
     public calculateAddresses(options: ReverseGeocodingRequest, callback: (err: any, res: GeocodingResultVector) => void) {
         const nRequest = new com.carto.geocoding.ReverseGeocodingRequest(options.projection.getNative(), toNativeMapPos(options.location));
         if (options.searchRadius !== undefined) {
@@ -54,7 +50,7 @@ export abstract class ReverseGeocodingService<T extends com.akylas.carto.additio
             new com.akylas.carto.additions.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
-                }
+                },
             })
         );
     }
@@ -88,7 +84,7 @@ export class GeocodingResultVector extends NativeVector<GeocodingResult> {
     constructor(public native: com.carto.geocoding.GeocodingResultVector) {
         super();
     }
-    public get(index: number)  {
+    public get(index: number) {
         return new GeocodingResult(this.native.get(index));
     }
 }
@@ -192,4 +188,3 @@ export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<c
         return new com.akylas.carto.additions.AKOSMOfflineReverseGeocodingService(options.path);
     }
 }
-

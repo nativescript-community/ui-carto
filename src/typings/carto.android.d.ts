@@ -384,7 +384,18 @@ declare namespace com {
             export class Address extends java.lang.Object {
                 public static class: java.lang.Class<Address>;
                 public swigCMemOwn: boolean;
-                public constructor(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: string, param7: string, param8: string, param9: StringVector);
+                public constructor(
+                    param0: string,
+                    param1: string,
+                    param2: string,
+                    param3: string,
+                    param4: string,
+                    param5: string,
+                    param6: string,
+                    param7: string,
+                    param8: string,
+                    param9: StringVector
+                );
                 public getStreet(): string;
                 public getCountry(): string;
                 public finalize(): void;
@@ -427,7 +438,19 @@ declare namespace com {
                 public constructor();
                 public static Address_getHouseNumber(param0: number, param1: Address): string;
                 public static Address_getName(param0: number, param1: Address): string;
-                public static new_Address__SWIG_1(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: string, param7: string, param8: string, param9: number, param10: StringVector): number;
+                public static new_Address__SWIG_1(
+                    param0: string,
+                    param1: string,
+                    param2: string,
+                    param3: string,
+                    param4: string,
+                    param5: string,
+                    param6: string,
+                    param7: string,
+                    param8: string,
+                    param9: number,
+                    param10: StringVector
+                ): number;
                 public static Address_getCounty(param0: number, param1: Address): string;
                 public static Address_equalsInternal(param0: number, param1: Address, param2: number, param3: Address): boolean;
                 public static new_Address__SWIG_0(): number;
@@ -488,6 +511,25 @@ declare namespace com {
                 public constructor(param0: number, param1: boolean);
                 public get(param0: number): number;
                 public static getCPtr(param0: IntVector): number;
+                public constructor();
+                public size(): number;
+                public reserve(param0: number): void;
+                public swigGetRawPtr(): number;
+                public delete(): void;
+                public capacity(): number;
+                public set(param0: number, param1: number): void;
+                public clear(): void;
+                public add(param0: number): void;
+                public constructor(param0: number);
+                public isEmpty(): boolean;
+            }
+            export class DoubleVector extends java.lang.Object {
+                public static class: java.lang.Class<DoubleVector>;
+                public swigCMemOwn: boolean;
+                public finalize(): void;
+                public constructor(param0: number, param1: boolean);
+                public get(param0: number): number;
+                public static getCPtr(param0: DoubleVector): number;
                 public constructor();
                 public size(): number;
                 public reserve(param0: number): void;
@@ -1469,7 +1511,13 @@ declare namespace com {
                 public static AssetTileDataSource_change_ownership(param0: AssetTileDataSource, param1: number, param2: boolean): void;
                 public static AssetTileDataSource_loadTile(param0: number, param1: AssetTileDataSource, param2: number, param3: core.MapTile): number;
                 public static AssetTileDataSource_buildAssetPath(param0: number, param1: AssetTileDataSource, param2: string, param3: number, param4: core.MapTile): string;
-                public static AssetTileDataSource_buildAssetPathSwigExplicitAssetTileDataSource(param0: number, param1: AssetTileDataSource, param2: string, param3: number, param4: core.MapTile): string;
+                public static AssetTileDataSource_buildAssetPathSwigExplicitAssetTileDataSource(
+                    param0: number,
+                    param1: AssetTileDataSource,
+                    param2: string,
+                    param3: number,
+                    param4: core.MapTile
+                ): string;
                 public static SwigDirector_AssetTileDataSource_getMinZoom(param0: AssetTileDataSource): number;
                 public static AssetTileDataSource_swigGetDirectorObject(param0: number, param1: AssetTileDataSource): any;
                 public static AssetTileDataSource_swigGetRawPtr(param0: number, param1: AssetTileDataSource): number;
@@ -1513,12 +1561,28 @@ declare namespace com {
             export class BitmapOverlayRasterTileDataSourceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<BitmapOverlayRasterTileDataSourceModuleJNI>;
                 public static SwigDirector_BitmapOverlayRasterTileDataSource_getMaxZoom(param0: BitmapOverlayRasterTileDataSource): number;
-                public static new_BitmapOverlayRasterTileDataSource(param0: number, param1: number, param2: number, param3: graphics.Bitmap, param4: number, param5: projections.Projection, param6: number, param7: core.MapPosVector, param8: number, param9: core.ScreenPosVector): number;
+                public static new_BitmapOverlayRasterTileDataSource(
+                    param0: number,
+                    param1: number,
+                    param2: number,
+                    param3: graphics.Bitmap,
+                    param4: number,
+                    param5: projections.Projection,
+                    param6: number,
+                    param7: core.MapPosVector,
+                    param8: number,
+                    param9: core.ScreenPosVector
+                ): number;
                 public static BitmapOverlayRasterTileDataSource_loadTile(param0: number, param1: BitmapOverlayRasterTileDataSource, param2: number, param3: core.MapTile): number;
                 public static BitmapOverlayRasterTileDataSource_change_ownership(param0: BitmapOverlayRasterTileDataSource, param1: number, param2: boolean): void;
                 public static BitmapOverlayRasterTileDataSource_swigGetClassName(param0: number, param1: BitmapOverlayRasterTileDataSource): string;
                 public static SwigDirector_BitmapOverlayRasterTileDataSource_loadTile(param0: BitmapOverlayRasterTileDataSource, param1: number): number;
-                public static BitmapOverlayRasterTileDataSource_loadTileSwigExplicitBitmapOverlayRasterTileDataSource(param0: number, param1: BitmapOverlayRasterTileDataSource, param2: number, param3: core.MapTile): number;
+                public static BitmapOverlayRasterTileDataSource_loadTileSwigExplicitBitmapOverlayRasterTileDataSource(
+                    param0: number,
+                    param1: BitmapOverlayRasterTileDataSource,
+                    param2: number,
+                    param3: core.MapTile
+                ): number;
                 public constructor();
                 public static BitmapOverlayRasterTileDataSource_swigGetRawPtr(param0: number, param1: BitmapOverlayRasterTileDataSource): number;
                 public static delete_BitmapOverlayRasterTileDataSource(param0: number): void;
@@ -1780,7 +1844,12 @@ declare namespace com {
                 public static GeoJSONVectorTileDataSource_swigGetRawPtr(param0: number, param1: GeoJSONVectorTileDataSource): number;
                 public static GeoJSONVectorTileDataSource_swigGetClassName(param0: number, param1: GeoJSONVectorTileDataSource): string;
                 public static delete_GeoJSONVectorTileDataSource(param0: number): void;
-                public static GeoJSONVectorTileDataSource_loadTileSwigExplicitGeoJSONVectorTileDataSource(param0: number, param1: GeoJSONVectorTileDataSource, param2: number, param3: core.MapTile): number;
+                public static GeoJSONVectorTileDataSource_loadTileSwigExplicitGeoJSONVectorTileDataSource(
+                    param0: number,
+                    param1: GeoJSONVectorTileDataSource,
+                    param2: number,
+                    param3: core.MapTile
+                ): number;
                 public static new_GeoJSONVectorTileDataSource(param0: number, param1: number): number;
                 public static GeoJSONVectorTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public constructor();
@@ -1791,7 +1860,15 @@ declare namespace com {
                 public static GeoJSONVectorTileDataSource_createLayer(param0: number, param1: GeoJSONVectorTileDataSource, param2: string): number;
                 public static GeoJSONVectorTileDataSource_swigGetDirectorObject(param0: number, param1: GeoJSONVectorTileDataSource): any;
                 public static GeoJSONVectorTileDataSource_director_connect(param0: GeoJSONVectorTileDataSource, param1: number, param2: boolean, param3: boolean): void;
-                public static GeoJSONVectorTileDataSource_setLayerFeatureCollection(param0: number, param1: GeoJSONVectorTileDataSource, param2: number, param3: number, param4: projections.Projection, param5: number, param6: geometry.FeatureCollection): void;
+                public static GeoJSONVectorTileDataSource_setLayerFeatureCollection(
+                    param0: number,
+                    param1: GeoJSONVectorTileDataSource,
+                    param2: number,
+                    param3: number,
+                    param4: projections.Projection,
+                    param5: number,
+                    param6: geometry.FeatureCollection
+                ): void;
             }
         }
     }
@@ -1942,8 +2019,20 @@ declare namespace com {
                 public static LocalVectorDataSource_setGeometrySimplifier(param0: number, param1: LocalVectorDataSource, param2: number, param3: geometry.GeometrySimplifier): void;
                 public static LocalVectorDataSource_getDataExtent(param0: number, param1: LocalVectorDataSource): number;
                 public static new_LocalVectorDataSource__SWIG_0(param0: number, param1: projections.Projection): number;
-                public static LocalVectorDataSource_loadElementsSwigExplicitLocalVectorDataSource(param0: number, param1: LocalVectorDataSource, param2: number, param3: renderers.components.CullState): number;
-                public static LocalVectorDataSource_addFeatureCollection(param0: number, param1: LocalVectorDataSource, param2: number, param3: geometry.FeatureCollection, param4: number, param5: styles.Style): void;
+                public static LocalVectorDataSource_loadElementsSwigExplicitLocalVectorDataSource(
+                    param0: number,
+                    param1: LocalVectorDataSource,
+                    param2: number,
+                    param3: renderers.components.CullState
+                ): number;
+                public static LocalVectorDataSource_addFeatureCollection(
+                    param0: number,
+                    param1: LocalVectorDataSource,
+                    param2: number,
+                    param3: geometry.FeatureCollection,
+                    param4: number,
+                    param5: styles.Style
+                ): void;
                 public constructor();
                 public static LocalVectorDataSource_addAll(param0: number, param1: LocalVectorDataSource, param2: number, param3: vectorelements.VectorElementVector): void;
                 public static LocalVectorDataSource_director_connect(param0: LocalVectorDataSource, param1: number, param2: boolean, param3: boolean): void;
@@ -2091,7 +2180,12 @@ declare namespace com {
                 public static class: java.lang.Class<MapTilerOnlineTileDataSourceModuleJNI>;
                 public static delete_MapTilerOnlineTileDataSource(param0: number): void;
                 public static MapTilerOnlineTileDataSource_swigGetDirectorObject(param0: number, param1: MapTilerOnlineTileDataSource): any;
-                public static MapTilerOnlineTileDataSource_loadTileSwigExplicitMapTilerOnlineTileDataSource(param0: number, param1: MapTilerOnlineTileDataSource, param2: number, param3: core.MapTile): number;
+                public static MapTilerOnlineTileDataSource_loadTileSwigExplicitMapTilerOnlineTileDataSource(
+                    param0: number,
+                    param1: MapTilerOnlineTileDataSource,
+                    param2: number,
+                    param3: core.MapTile
+                ): number;
                 public static MapTilerOnlineTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public static MapTilerOnlineTileDataSource_setCustomServiceURL(param0: number, param1: MapTilerOnlineTileDataSource, param2: string): void;
                 public static SwigDirector_MapTilerOnlineTileDataSource_getMaxZoom(param0: MapTilerOnlineTileDataSource): number;
@@ -2400,7 +2494,12 @@ declare namespace com {
                 public static PackageManagerTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
                 public constructor();
                 public static SwigDirector_PackageManagerTileDataSource_getDataExtent(param0: PackageManagerTileDataSource): number;
-                public static PackageManagerTileDataSource_loadTileSwigExplicitPackageManagerTileDataSource(param0: number, param1: PackageManagerTileDataSource, param2: number, param3: core.MapTile): number;
+                public static PackageManagerTileDataSource_loadTileSwigExplicitPackageManagerTileDataSource(
+                    param0: number,
+                    param1: PackageManagerTileDataSource,
+                    param2: number,
+                    param3: core.MapTile
+                ): number;
                 public static new_PackageManagerTileDataSource(param0: number, param1: packagemanager.PackageManager): number;
                 public static SwigDirector_PackageManagerTileDataSource_getMinZoom(param0: PackageManagerTileDataSource): number;
                 public static PackageManagerTileDataSource_director_connect(param0: PackageManagerTileDataSource, param1: number, param2: boolean, param3: boolean): void;
@@ -2471,14 +2570,28 @@ declare namespace com {
                 public constructor();
                 public static PersistentCacheTileDataSource_clear(param0: number, param1: PersistentCacheTileDataSource): void;
                 public static PersistentCacheTileDataSource_getCapacitySwigExplicitPersistentCacheTileDataSource(param0: number, param1: PersistentCacheTileDataSource): number;
-                public static PersistentCacheTileDataSource_startDownloadArea(param0: number, param1: PersistentCacheTileDataSource, param2: number, param3: core.MapBounds, param4: number, param5: number, param6: number, param7: TileDownloadListener): void;
+                public static PersistentCacheTileDataSource_startDownloadArea(
+                    param0: number,
+                    param1: PersistentCacheTileDataSource,
+                    param2: number,
+                    param3: core.MapBounds,
+                    param4: number,
+                    param5: number,
+                    param6: number,
+                    param7: TileDownloadListener
+                ): void;
                 public static SwigDirector_PersistentCacheTileDataSource_getCapacity(param0: PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_setCapacity(param0: PersistentCacheTileDataSource, param1: number): void;
                 public static PersistentCacheTileDataSource_clearSwigExplicitPersistentCacheTileDataSource(param0: number, param1: PersistentCacheTileDataSource): void;
                 public static SwigDirector_PersistentCacheTileDataSource_getDataExtent(param0: PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_loadTile(param0: PersistentCacheTileDataSource, param1: number): number;
                 public static PersistentCacheTileDataSource_isCacheOnlyMode(param0: number, param1: PersistentCacheTileDataSource): boolean;
-                public static PersistentCacheTileDataSource_loadTileSwigExplicitPersistentCacheTileDataSource(param0: number, param1: PersistentCacheTileDataSource, param2: number, param3: core.MapTile): number;
+                public static PersistentCacheTileDataSource_loadTileSwigExplicitPersistentCacheTileDataSource(
+                    param0: number,
+                    param1: PersistentCacheTileDataSource,
+                    param2: number,
+                    param3: core.MapTile
+                ): number;
                 public static PersistentCacheTileDataSource_getCapacity(param0: number, param1: PersistentCacheTileDataSource): number;
                 public static SwigDirector_PersistentCacheTileDataSource_clear(param0: PersistentCacheTileDataSource): void;
                 public static PersistentCacheTileDataSource_loadTile(param0: number, param1: PersistentCacheTileDataSource, param2: number, param3: core.MapTile): number;
@@ -2837,7 +2950,15 @@ declare namespace com {
                 public static GeocodingResultVector_set(param0: number, param1: GeocodingResultVector, param2: number, param3: number, param4: GeocodingResult): void;
                 public static GeocodingResultVector_add(param0: number, param1: GeocodingResultVector, param2: number, param3: GeocodingResult): void;
                 public static GeocodingResult_getRank(param0: number, param1: GeocodingResult): number;
-                public static new_GeocodingResult(param0: number, param1: projections.Projection, param2: number, param3: core.Address, param4: number, param5: number, param6: geometry.FeatureCollection): number;
+                public static new_GeocodingResult(
+                    param0: number,
+                    param1: projections.Projection,
+                    param2: number,
+                    param3: core.Address,
+                    param4: number,
+                    param5: number,
+                    param6: geometry.FeatureCollection
+                ): number;
                 public static GeocodingResult_swigGetRawPtr(param0: number, param1: GeocodingResult): number;
                 public static GeocodingResult_getProjection(param0: number, param1: GeocodingResult): number;
                 public static GeocodingResultVector_isEmpty(param0: number, param1: GeocodingResultVector): boolean;
@@ -3012,7 +3133,12 @@ declare namespace com {
                 public static MapBoxOnlineGeocodingService_getMaxResults(param0: number, param1: MapBoxOnlineGeocodingService): number;
                 public static SwigDirector_MapBoxOnlineGeocodingService_setMaxResults(param0: MapBoxOnlineGeocodingService, param1: number): void;
                 public static MapBoxOnlineGeocodingService_swigGetClassName(param0: number, param1: MapBoxOnlineGeocodingService): string;
-                public static MapBoxOnlineGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: MapBoxOnlineGeocodingService, param2: number, param3: GeocodingRequest): number;
+                public static MapBoxOnlineGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineGeocodingService(
+                    param0: number,
+                    param1: MapBoxOnlineGeocodingService,
+                    param2: number,
+                    param3: GeocodingRequest
+                ): number;
                 public static SwigDirector_MapBoxOnlineGeocodingService_setAutocomplete(param0: MapBoxOnlineGeocodingService, param1: boolean): void;
                 public static MapBoxOnlineGeocodingService_setLanguageSwigExplicitMapBoxOnlineGeocodingService(param0: number, param1: MapBoxOnlineGeocodingService, param2: string): void;
             }
@@ -3058,7 +3184,12 @@ declare namespace com {
                 public static MapBoxOnlineReverseGeocodingService_setLanguage(param0: number, param1: MapBoxOnlineReverseGeocodingService, param2: string): void;
                 public static MapBoxOnlineReverseGeocodingService_swigGetClassName(param0: number, param1: MapBoxOnlineReverseGeocodingService): string;
                 public static SwigDirector_MapBoxOnlineReverseGeocodingService_getLanguage(param0: MapBoxOnlineReverseGeocodingService): string;
-                public static MapBoxOnlineReverseGeocodingService_calculateAddresses(param0: number, param1: MapBoxOnlineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static MapBoxOnlineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: MapBoxOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_MapBoxOnlineReverseGeocodingService_calculateAddresses(param0: MapBoxOnlineReverseGeocodingService, param1: number): number;
                 public static MapBoxOnlineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static MapBoxOnlineReverseGeocodingService_setCustomServiceURL(param0: number, param1: MapBoxOnlineReverseGeocodingService, param2: string): void;
@@ -3070,9 +3201,18 @@ declare namespace com {
                 public constructor();
                 public static MapBoxOnlineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: MapBoxOnlineReverseGeocodingService): any;
                 public static MapBoxOnlineReverseGeocodingService_director_connect(param0: MapBoxOnlineReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
-                public static MapBoxOnlineReverseGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: MapBoxOnlineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static MapBoxOnlineReverseGeocodingService_calculateAddressesSwigExplicitMapBoxOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: MapBoxOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static MapBoxOnlineReverseGeocodingService_getLanguage(param0: number, param1: MapBoxOnlineReverseGeocodingService): string;
-                public static MapBoxOnlineReverseGeocodingService_setLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: MapBoxOnlineReverseGeocodingService, param2: string): void;
+                public static MapBoxOnlineReverseGeocodingService_setLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: MapBoxOnlineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static MapBoxOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: MapBoxOnlineReverseGeocodingService): string;
                 public static MapBoxOnlineReverseGeocodingService_getLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: MapBoxOnlineReverseGeocodingService): string;
             }
@@ -3117,7 +3257,12 @@ declare namespace com {
         export namespace geocoding {
             export class OSMOfflineGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<OSMOfflineGeocodingServiceModuleJNI>;
-                public static OSMOfflineGeocodingService_calculateAddressesSwigExplicitOSMOfflineGeocodingService(param0: number, param1: OSMOfflineGeocodingService, param2: number, param3: GeocodingRequest): number;
+                public static OSMOfflineGeocodingService_calculateAddressesSwigExplicitOSMOfflineGeocodingService(
+                    param0: number,
+                    param1: OSMOfflineGeocodingService,
+                    param2: number,
+                    param3: GeocodingRequest
+                ): number;
                 public static OSMOfflineGeocodingService_getMaxResultsSwigExplicitOSMOfflineGeocodingService(param0: number, param1: OSMOfflineGeocodingService): number;
                 public static OSMOfflineGeocodingService_getMaxResults(param0: number, param1: OSMOfflineGeocodingService): number;
                 public static SwigDirector_OSMOfflineGeocodingService_setAutocomplete(param0: OSMOfflineGeocodingService, param1: boolean): void;
@@ -3197,11 +3342,20 @@ declare namespace com {
                 public static SwigDirector_OSMOfflineReverseGeocodingService_setLanguage(param0: OSMOfflineReverseGeocodingService, param1: string): void;
                 public static SwigDirector_OSMOfflineReverseGeocodingService_calculateAddresses(param0: OSMOfflineReverseGeocodingService, param1: number): number;
                 public static OSMOfflineReverseGeocodingService_swigGetClassName(param0: number, param1: OSMOfflineReverseGeocodingService): string;
-                public static OSMOfflineReverseGeocodingService_calculateAddressesSwigExplicitOSMOfflineReverseGeocodingService(param0: number, param1: OSMOfflineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static OSMOfflineReverseGeocodingService_calculateAddressesSwigExplicitOSMOfflineReverseGeocodingService(
+                    param0: number,
+                    param1: OSMOfflineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static OSMOfflineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: OSMOfflineReverseGeocodingService): any;
                 public static OSMOfflineReverseGeocodingService_setLanguage(param0: number, param1: OSMOfflineReverseGeocodingService, param2: string): void;
                 public static OSMOfflineReverseGeocodingService_calculateAddresses(param0: number, param1: OSMOfflineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
-                public static OSMOfflineReverseGeocodingService_setLanguageSwigExplicitOSMOfflineReverseGeocodingService(param0: number, param1: OSMOfflineReverseGeocodingService, param2: string): void;
+                public static OSMOfflineReverseGeocodingService_setLanguageSwigExplicitOSMOfflineReverseGeocodingService(
+                    param0: number,
+                    param1: OSMOfflineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static OSMOfflineReverseGeocodingService_getLanguage(param0: number, param1: OSMOfflineReverseGeocodingService): string;
             }
         }
@@ -3257,7 +3411,12 @@ declare namespace com {
                 public static new_PackageManagerGeocodingService(param0: number, param1: packagemanager.PackageManager): number;
                 public static SwigDirector_PackageManagerGeocodingService_isAutocomplete(param0: PackageManagerGeocodingService): boolean;
                 public constructor();
-                public static PackageManagerGeocodingService_calculateAddressesSwigExplicitPackageManagerGeocodingService(param0: number, param1: PackageManagerGeocodingService, param2: number, param3: GeocodingRequest): number;
+                public static PackageManagerGeocodingService_calculateAddressesSwigExplicitPackageManagerGeocodingService(
+                    param0: number,
+                    param1: PackageManagerGeocodingService,
+                    param2: number,
+                    param3: GeocodingRequest
+                ): number;
                 public static PackageManagerGeocodingService_swigGetRawPtr(param0: number, param1: PackageManagerGeocodingService): number;
                 public static PackageManagerGeocodingService_isAutocomplete(param0: number, param1: PackageManagerGeocodingService): boolean;
                 public static PackageManagerGeocodingService_setAutocomplete(param0: number, param1: PackageManagerGeocodingService, param2: boolean): void;
@@ -3313,12 +3472,26 @@ declare namespace com {
         export namespace geocoding {
             export class PackageManagerReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<PackageManagerReverseGeocodingServiceModuleJNI>;
-                public static PackageManagerReverseGeocodingService_calculateAddressesSwigExplicitPackageManagerReverseGeocodingService(param0: number, param1: PackageManagerReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static PackageManagerReverseGeocodingService_calculateAddressesSwigExplicitPackageManagerReverseGeocodingService(
+                    param0: number,
+                    param1: PackageManagerReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static PackageManagerReverseGeocodingService_director_connect(param0: PackageManagerReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerReverseGeocodingService_getLanguage(param0: number, param1: PackageManagerReverseGeocodingService): string;
-                public static PackageManagerReverseGeocodingService_setLanguageSwigExplicitPackageManagerReverseGeocodingService(param0: number, param1: PackageManagerReverseGeocodingService, param2: string): void;
+                public static PackageManagerReverseGeocodingService_setLanguageSwigExplicitPackageManagerReverseGeocodingService(
+                    param0: number,
+                    param1: PackageManagerReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static PackageManagerReverseGeocodingService_swigGetClassName(param0: number, param1: PackageManagerReverseGeocodingService): string;
-                public static PackageManagerReverseGeocodingService_calculateAddresses(param0: number, param1: PackageManagerReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static PackageManagerReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: PackageManagerReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static PackageManagerReverseGeocodingService_swigGetRawPtr(param0: number, param1: PackageManagerReverseGeocodingService): number;
                 public constructor();
                 public static PackageManagerReverseGeocodingService_swigGetDirectorObject(param0: number, param1: PackageManagerReverseGeocodingService): any;
@@ -3387,7 +3560,12 @@ declare namespace com {
                 public static PeliasOnlineGeocodingService_swigGetDirectorObject(param0: number, param1: PeliasOnlineGeocodingService): any;
                 public static PeliasOnlineGeocodingService_setAutocomplete(param0: number, param1: PeliasOnlineGeocodingService, param2: boolean): void;
                 public static SwigDirector_PeliasOnlineGeocodingService_isAutocomplete(param0: PeliasOnlineGeocodingService): boolean;
-                public static PeliasOnlineGeocodingService_calculateAddressesSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: PeliasOnlineGeocodingService, param2: number, param3: GeocodingRequest): number;
+                public static PeliasOnlineGeocodingService_calculateAddressesSwigExplicitPeliasOnlineGeocodingService(
+                    param0: number,
+                    param1: PeliasOnlineGeocodingService,
+                    param2: number,
+                    param3: GeocodingRequest
+                ): number;
                 public static PeliasOnlineGeocodingService_director_connect(param0: PeliasOnlineGeocodingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PeliasOnlineGeocodingService_getLanguageSwigExplicitPeliasOnlineGeocodingService(param0: number, param1: PeliasOnlineGeocodingService): string;
                 public static SwigDirector_PeliasOnlineGeocodingService_setMaxResults(param0: PeliasOnlineGeocodingService, param1: number): void;
@@ -3447,15 +3625,29 @@ declare namespace com {
         export namespace geocoding {
             export class PeliasOnlineReverseGeocodingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<PeliasOnlineReverseGeocodingServiceModuleJNI>;
-                public static PeliasOnlineReverseGeocodingService_setLanguageSwigExplicitPeliasOnlineReverseGeocodingService(param0: number, param1: PeliasOnlineReverseGeocodingService, param2: string): void;
+                public static PeliasOnlineReverseGeocodingService_setLanguageSwigExplicitPeliasOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: PeliasOnlineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static PeliasOnlineReverseGeocodingService_swigGetRawPtr(param0: number, param1: PeliasOnlineReverseGeocodingService): number;
                 public static SwigDirector_PeliasOnlineReverseGeocodingService_calculateAddresses(param0: PeliasOnlineReverseGeocodingService, param1: number): number;
                 public static PeliasOnlineReverseGeocodingService_change_ownership(param0: PeliasOnlineReverseGeocodingService, param1: number, param2: boolean): void;
                 public static PeliasOnlineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static delete_PeliasOnlineReverseGeocodingService(param0: number): void;
-                public static PeliasOnlineReverseGeocodingService_calculateAddressesSwigExplicitPeliasOnlineReverseGeocodingService(param0: number, param1: PeliasOnlineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static PeliasOnlineReverseGeocodingService_calculateAddressesSwigExplicitPeliasOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: PeliasOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_PeliasOnlineReverseGeocodingService_getLanguage(param0: PeliasOnlineReverseGeocodingService): string;
-                public static PeliasOnlineReverseGeocodingService_calculateAddresses(param0: number, param1: PeliasOnlineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static PeliasOnlineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: PeliasOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public constructor();
                 public static PeliasOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: PeliasOnlineReverseGeocodingService): string;
                 public static new_PeliasOnlineReverseGeocodingService(param0: string): number;
@@ -3639,7 +3831,12 @@ declare namespace com {
                 public static TomTomOnlineGeocodingService_getCustomServiceURL(param0: number, param1: TomTomOnlineGeocodingService): string;
                 public static SwigDirector_TomTomOnlineGeocodingService_setLanguage(param0: TomTomOnlineGeocodingService, param1: string): void;
                 public static TomTomOnlineGeocodingService_setMaxResults(param0: number, param1: TomTomOnlineGeocodingService, param2: number): void;
-                public static TomTomOnlineGeocodingService_calculateAddressesSwigExplicitTomTomOnlineGeocodingService(param0: number, param1: TomTomOnlineGeocodingService, param2: number, param3: GeocodingRequest): number;
+                public static TomTomOnlineGeocodingService_calculateAddressesSwigExplicitTomTomOnlineGeocodingService(
+                    param0: number,
+                    param1: TomTomOnlineGeocodingService,
+                    param2: number,
+                    param3: GeocodingRequest
+                ): number;
             }
         }
     }
@@ -3684,17 +3881,31 @@ declare namespace com {
                 public static TomTomOnlineReverseGeocodingService_getLanguageSwigExplicitTomTomOnlineReverseGeocodingService(param0: number, param1: TomTomOnlineReverseGeocodingService): string;
                 public static TomTomOnlineReverseGeocodingService_swigGetRawPtr(param0: number, param1: TomTomOnlineReverseGeocodingService): number;
                 public static TomTomOnlineReverseGeocodingService_getLanguage(param0: number, param1: TomTomOnlineReverseGeocodingService): string;
-                public static TomTomOnlineReverseGeocodingService_calculateAddressesSwigExplicitTomTomOnlineReverseGeocodingService(param0: number, param1: TomTomOnlineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static TomTomOnlineReverseGeocodingService_calculateAddressesSwigExplicitTomTomOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: TomTomOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static TomTomOnlineReverseGeocodingService_setLanguage(param0: number, param1: TomTomOnlineReverseGeocodingService, param2: string): void;
                 public static TomTomOnlineReverseGeocodingService_setCustomServiceURL(param0: number, param1: TomTomOnlineReverseGeocodingService, param2: string): void;
                 public static TomTomOnlineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static new_TomTomOnlineReverseGeocodingService(param0: string): number;
                 public constructor();
                 public static SwigDirector_TomTomOnlineReverseGeocodingService_getLanguage(param0: TomTomOnlineReverseGeocodingService): string;
-                public static TomTomOnlineReverseGeocodingService_calculateAddresses(param0: number, param1: TomTomOnlineReverseGeocodingService, param2: number, param3: ReverseGeocodingRequest): number;
+                public static TomTomOnlineReverseGeocodingService_calculateAddresses(
+                    param0: number,
+                    param1: TomTomOnlineReverseGeocodingService,
+                    param2: number,
+                    param3: ReverseGeocodingRequest
+                ): number;
                 public static SwigDirector_TomTomOnlineReverseGeocodingService_calculateAddresses(param0: TomTomOnlineReverseGeocodingService, param1: number): number;
                 public static delete_TomTomOnlineReverseGeocodingService(param0: number): void;
-                public static TomTomOnlineReverseGeocodingService_setLanguageSwigExplicitTomTomOnlineReverseGeocodingService(param0: number, param1: TomTomOnlineReverseGeocodingService, param2: string): void;
+                public static TomTomOnlineReverseGeocodingService_setLanguageSwigExplicitTomTomOnlineReverseGeocodingService(
+                    param0: number,
+                    param1: TomTomOnlineReverseGeocodingService,
+                    param2: string
+                ): void;
                 public static TomTomOnlineReverseGeocodingService_swigGetClassName(param0: number, param1: TomTomOnlineReverseGeocodingService): string;
                 public static TomTomOnlineReverseGeocodingService_change_ownership(param0: TomTomOnlineReverseGeocodingService, param1: number, param2: boolean): void;
                 public static TomTomOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: TomTomOnlineReverseGeocodingService): string;
@@ -4662,7 +4873,16 @@ declare namespace com {
                 public static VectorTileFeature_getMapTile(param0: number, param1: VectorTileFeature): number;
                 public static VectorTileFeatureVector_size(param0: number, param1: VectorTileFeatureVector): number;
                 public static delete_VectorTileFeatureVector(param0: number): void;
-                public static new_VectorTileFeature(param0: number, param1: number, param2: core.MapTile, param3: string, param4: number, param5: Geometry, param6: number, param7: core.Variant): number;
+                public static new_VectorTileFeature(
+                    param0: number,
+                    param1: number,
+                    param2: core.MapTile,
+                    param3: string,
+                    param4: number,
+                    param5: Geometry,
+                    param6: number,
+                    param7: core.Variant
+                ): number;
                 public static VectorTileFeature_getLayerName(param0: number, param1: VectorTileFeature): string;
                 public static new_VectorTileFeatureVector__SWIG_1(param0: number): number;
                 public static VectorTileFeatureVector_swigGetRawPtr(param0: number, param1: VectorTileFeatureVector): number;
@@ -5401,12 +5621,32 @@ declare namespace com {
                 public static ClusterElementBuilder_getBuilderMode(param0: number, param1: ClusterElementBuilder): number;
                 public static ClusterElementBuilder_change_ownership(param0: ClusterElementBuilder, param1: number, param2: boolean): void;
                 public static ClusterElementBuilder_swigGetDirectorObject(param0: number, param1: ClusterElementBuilder): any;
-                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_1(param0: number, param1: ClusterElementBuilder, param2: number, param3: core.MapPos, param4: number, param5: vectorelements.VectorElementVector): number;
+                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_1(
+                    param0: number,
+                    param1: ClusterElementBuilder,
+                    param2: number,
+                    param3: core.MapPos,
+                    param4: number,
+                    param5: vectorelements.VectorElementVector
+                ): number;
                 public static SwigDirector_ClusterElementBuilder_buildClusterElement__SWIG_0(param0: ClusterElementBuilder, param1: number, param2: number): number;
                 public static delete_ClusterElementBuilder(param0: number): void;
-                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_0(param0: number, param1: ClusterElementBuilder, param2: number, param3: core.MapPos, param4: number): number;
+                public static ClusterElementBuilder_buildClusterElementSwigExplicitClusterElementBuilder__SWIG_0(
+                    param0: number,
+                    param1: ClusterElementBuilder,
+                    param2: number,
+                    param3: core.MapPos,
+                    param4: number
+                ): number;
                 public static ClusterElementBuilder_getBuilderModeSwigExplicitClusterElementBuilder(param0: number, param1: ClusterElementBuilder): number;
-                public static ClusterElementBuilder_buildClusterElement__SWIG_1(param0: number, param1: ClusterElementBuilder, param2: number, param3: core.MapPos, param4: number, param5: vectorelements.VectorElementVector): number;
+                public static ClusterElementBuilder_buildClusterElement__SWIG_1(
+                    param0: number,
+                    param1: ClusterElementBuilder,
+                    param2: number,
+                    param3: core.MapPos,
+                    param4: number,
+                    param5: vectorelements.VectorElementVector
+                ): number;
                 public constructor();
                 public static ClusterElementBuilder_swigGetRawPtr(param0: number, param1: ClusterElementBuilder): number;
                 public static ClusterElementBuilder_swigGetClassName(param0: number, param1: ClusterElementBuilder): string;
@@ -5763,7 +6003,12 @@ declare namespace com {
                 public static RasterTileEventListener_swigGetClassName(param0: number, param1: RasterTileEventListener): string;
                 public static RasterTileEventListener_swigGetDirectorObject(param0: number, param1: RasterTileEventListener): any;
                 public static RasterTileEventListener_swigGetRawPtr(param0: number, param1: RasterTileEventListener): number;
-                public static RasterTileEventListener_onRasterTileClickedSwigExplicitRasterTileEventListener(param0: number, param1: RasterTileEventListener, param2: number, param3: ui.RasterTileClickInfo): boolean;
+                public static RasterTileEventListener_onRasterTileClickedSwigExplicitRasterTileEventListener(
+                    param0: number,
+                    param1: RasterTileEventListener,
+                    param2: number,
+                    param3: ui.RasterTileClickInfo
+                ): boolean;
                 public static SwigDirector_RasterTileEventListener_onRasterTileClicked(param0: RasterTileEventListener, param1: number): boolean;
                 public static new_RasterTileEventListener(): number;
                 public static RasterTileEventListener_director_connect(param0: RasterTileEventListener, param1: number, param2: boolean, param3: boolean): void;
@@ -6210,28 +6455,66 @@ declare namespace com {
                 public static VectorEditEventListener_onDragMove(param0: number, param1: VectorEditEventListener, param2: number, param3: ui.VectorElementDragInfo): number;
                 public constructor();
                 public static SwigDirector_VectorEditEventListener_onDragEnd(param0: VectorEditEventListener, param1: number): number;
-                public static VectorEditEventListener_onDragMoveSwigExplicitVectorEditEventListener(param0: number, param1: VectorEditEventListener, param2: number, param3: ui.VectorElementDragInfo): number;
+                public static VectorEditEventListener_onDragMoveSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: ui.VectorElementDragInfo
+                ): number;
                 public static SwigDirector_VectorEditEventListener_onElementDelete(param0: VectorEditEventListener, param1: number): void;
                 public static SwigDirector_VectorEditEventListener_onElementSelect(param0: VectorEditEventListener, param1: number): boolean;
                 public static VectorEditEventListener_onElementSelect(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement): boolean;
-                public static VectorEditEventListener_onElementSelectSwigExplicitVectorEditEventListener(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement): boolean;
+                public static VectorEditEventListener_onElementSelectSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: vectorelements.VectorElement
+                ): boolean;
                 public static new_VectorEditEventListener(): number;
                 public static SwigDirector_VectorEditEventListener_onDragMove(param0: VectorEditEventListener, param1: number): number;
                 public static VectorEditEventListener_swigGetClassName(param0: number, param1: VectorEditEventListener): string;
-                public static VectorEditEventListener_onElementModify(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement, param4: number, param5: geometry.Geometry): void;
+                public static VectorEditEventListener_onElementModify(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: vectorelements.VectorElement,
+                    param4: number,
+                    param5: geometry.Geometry
+                ): void;
                 public static VectorEditEventListener_director_connect(param0: VectorEditEventListener, param1: number, param2: boolean, param3: boolean): void;
                 public static SwigDirector_VectorEditEventListener_onSelectDragPointStyle(param0: VectorEditEventListener, param1: number, param2: number): number;
-                public static VectorEditEventListener_onElementDeselectedSwigExplicitVectorEditEventListener(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement): void;
+                public static VectorEditEventListener_onElementDeselectedSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: vectorelements.VectorElement
+                ): void;
                 public static VectorEditEventListener_onElementDeselected(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement): void;
                 public static VectorEditEventListener_onDragEnd(param0: number, param1: VectorEditEventListener, param2: number, param3: ui.VectorElementDragInfo): number;
-                public static VectorEditEventListener_onSelectDragPointStyle(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement, param4: number): number;
+                public static VectorEditEventListener_onSelectDragPointStyle(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: vectorelements.VectorElement,
+                    param4: number
+                ): number;
                 public static SwigDirector_VectorEditEventListener_onElementModify(param0: VectorEditEventListener, param1: number, param2: number): void;
                 public static VectorEditEventListener_change_ownership(param0: VectorEditEventListener, param1: number, param2: boolean): void;
                 public static VectorEditEventListener_onElementDelete(param0: number, param1: VectorEditEventListener, param2: number, param3: vectorelements.VectorElement): void;
                 public static delete_VectorEditEventListener(param0: number): void;
                 public static VectorEditEventListener_swigGetDirectorObject(param0: number, param1: VectorEditEventListener): any;
-                public static VectorEditEventListener_onDragStartSwigExplicitVectorEditEventListener(param0: number, param1: VectorEditEventListener, param2: number, param3: ui.VectorElementDragInfo): number;
-                public static VectorEditEventListener_onDragEndSwigExplicitVectorEditEventListener(param0: number, param1: VectorEditEventListener, param2: number, param3: ui.VectorElementDragInfo): number;
+                public static VectorEditEventListener_onDragStartSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: ui.VectorElementDragInfo
+                ): number;
+                public static VectorEditEventListener_onDragEndSwigExplicitVectorEditEventListener(
+                    param0: number,
+                    param1: VectorEditEventListener,
+                    param2: number,
+                    param3: ui.VectorElementDragInfo
+                ): number;
             }
         }
     }
@@ -6318,7 +6601,12 @@ declare namespace com {
                 public static VectorElementEventListener_swigGetClassName(param0: number, param1: VectorElementEventListener): string;
                 public static delete_VectorElementEventListener(param0: number): void;
                 public static VectorElementEventListener_onVectorElementClicked(param0: number, param1: VectorElementEventListener, param2: number, param3: ui.VectorElementClickInfo): boolean;
-                public static VectorElementEventListener_onVectorElementClickedSwigExplicitVectorElementEventListener(param0: number, param1: VectorElementEventListener, param2: number, param3: ui.VectorElementClickInfo): boolean;
+                public static VectorElementEventListener_onVectorElementClickedSwigExplicitVectorElementEventListener(
+                    param0: number,
+                    param1: VectorElementEventListener,
+                    param2: number,
+                    param3: ui.VectorElementClickInfo
+                ): boolean;
                 public static VectorElementEventListener_director_connect(param0: VectorElementEventListener, param1: number, param2: boolean, param3: boolean): void;
                 public static VectorElementEventListener_swigGetRawPtr(param0: number, param1: VectorElementEventListener): number;
                 public static VectorElementEventListener_swigGetDirectorObject(param0: number, param1: VectorElementEventListener): any;
@@ -6408,7 +6696,12 @@ declare namespace com {
         export namespace layers {
             export class VectorTileEventListenerModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<VectorTileEventListenerModuleJNI>;
-                public static VectorTileEventListener_onVectorTileClickedSwigExplicitVectorTileEventListener(param0: number, param1: VectorTileEventListener, param2: number, param3: ui.VectorTileClickInfo): boolean;
+                public static VectorTileEventListener_onVectorTileClickedSwigExplicitVectorTileEventListener(
+                    param0: number,
+                    param1: VectorTileEventListener,
+                    param2: number,
+                    param3: ui.VectorTileClickInfo
+                ): boolean;
                 public static VectorTileEventListener_director_connect(param0: VectorTileEventListener, param1: number, param2: boolean, param3: boolean): void;
                 public static VectorTileEventListener_swigGetDirectorObject(param0: number, param1: VectorTileEventListener): any;
                 public static VectorTileEventListener_swigGetClassName(param0: number, param1: VectorTileEventListener): string;
@@ -6652,7 +6945,17 @@ declare namespace com {
                 public static PackageInfoVector_clear(param0: number, param1: PackageInfoVector): void;
                 public static PackageInfo_getVersion(param0: number, param1: PackageInfo): number;
                 public static new_PackageInfoVector__SWIG_1(param0: number): number;
-                public static new_PackageInfo(param0: string, param1: number, param2: number, param3: java.math.BigInteger, param4: string, param5: number, param6: PackageTileMask, param7: number, param8: PackageMetaInfo): number;
+                public static new_PackageInfo(
+                    param0: string,
+                    param1: number,
+                    param2: number,
+                    param3: java.math.BigInteger,
+                    param4: string,
+                    param5: number,
+                    param6: PackageTileMask,
+                    param7: number,
+                    param8: PackageMetaInfo
+                ): number;
                 public static PackageInfo_getPackageId(param0: number, param1: PackageInfo): string;
                 public static delete_PackageInfo(param0: number): void;
                 public static new_PackageInfoVector__SWIG_0(): number;
@@ -6785,7 +7088,13 @@ declare namespace com {
                 public static PackageManagerListener_onPackageListFailedSwigExplicitPackageManagerListener(param0: number, param1: PackageManagerListener): void;
                 public static SwigDirector_PackageManagerListener_onPackageUpdated(param0: PackageManagerListener, param1: string, param2: number): void;
                 public static SwigDirector_PackageManagerListener_onPackageListUpdated(param0: PackageManagerListener): void;
-                public static PackageManagerListener_onPackageFailedSwigExplicitPackageManagerListener(param0: number, param1: PackageManagerListener, param2: string, param3: number, param4: number): void;
+                public static PackageManagerListener_onPackageFailedSwigExplicitPackageManagerListener(
+                    param0: number,
+                    param1: PackageManagerListener,
+                    param2: string,
+                    param3: number,
+                    param4: number
+                ): void;
                 public static PackageManagerListener_change_ownership(param0: PackageManagerListener, param1: number, param2: boolean): void;
                 public static PackageManagerListener_onStyleFailed(param0: number, param1: PackageManagerListener, param2: string): void;
                 public static delete_PackageManagerListener(param0: number): void;
@@ -6795,10 +7104,24 @@ declare namespace com {
                 public static SwigDirector_PackageManagerListener_onPackageStatusChanged(param0: PackageManagerListener, param1: string, param2: number, param3: number): void;
                 public static PackageManagerListener_director_connect(param0: PackageManagerListener, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerListener_onStyleFailedSwigExplicitPackageManagerListener(param0: number, param1: PackageManagerListener, param2: string): void;
-                public static PackageManagerListener_onPackageStatusChanged(param0: number, param1: PackageManagerListener, param2: string, param3: number, param4: number, param5: PackageStatus): void;
+                public static PackageManagerListener_onPackageStatusChanged(
+                    param0: number,
+                    param1: PackageManagerListener,
+                    param2: string,
+                    param3: number,
+                    param4: number,
+                    param5: PackageStatus
+                ): void;
                 public static PackageManagerListener_onPackageUpdatedSwigExplicitPackageManagerListener(param0: number, param1: PackageManagerListener, param2: string, param3: number): void;
                 public static PackageManagerListener_onPackageListFailed(param0: number, param1: PackageManagerListener): void;
-                public static PackageManagerListener_onPackageStatusChangedSwigExplicitPackageManagerListener(param0: number, param1: PackageManagerListener, param2: string, param3: number, param4: number, param5: PackageStatus): void;
+                public static PackageManagerListener_onPackageStatusChangedSwigExplicitPackageManagerListener(
+                    param0: number,
+                    param1: PackageManagerListener,
+                    param2: string,
+                    param3: number,
+                    param4: number,
+                    param5: PackageStatus
+                ): void;
                 public static SwigDirector_PackageManagerListener_onStyleUpdated(param0: PackageManagerListener, param1: string): void;
                 public static PackageManagerListener_swigGetRawPtr(param0: number, param1: PackageManagerListener): number;
                 public static PackageManagerListener_onPackageUpdated(param0: number, param1: PackageManagerListener, param2: string, param3: number): void;
@@ -6828,7 +7151,15 @@ declare namespace com {
                 public static PackageManager_getServerPackages(param0: number, param1: PackageManager): number;
                 public static PackageManager_startPackageRemove(param0: number, param1: PackageManager, param2: string): boolean;
                 public static PackageManager_startPackageDownload(param0: number, param1: PackageManager, param2: string): boolean;
-                public static PackageManager_isAreaDownloaded(param0: number, param1: PackageManager, param2: number, param3: core.MapBounds, param4: number, param5: number, param6: projections.Projection): boolean;
+                public static PackageManager_isAreaDownloaded(
+                    param0: number,
+                    param1: PackageManager,
+                    param2: number,
+                    param3: core.MapBounds,
+                    param4: number,
+                    param5: number,
+                    param6: projections.Projection
+                ): boolean;
                 public static delete_PackageManager(param0: number): void;
                 public static PackageManager_swigGetRawPtr(param0: number, param1: PackageManager): number;
                 public static PackageManager_suggestPackages(param0: number, param1: PackageManager, param2: number, param3: core.MapPos, param4: number, param5: projections.Projection): number;
@@ -7575,7 +7906,12 @@ declare namespace com {
             export class CartoOnlineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<CartoOnlineRoutingServiceModuleJNI>;
                 public static SwigDirector_CartoOnlineRoutingService_getProfile(param0: CartoOnlineRoutingService): string;
-                public static CartoOnlineRoutingService_matchRouteSwigExplicitCartoOnlineRoutingService(param0: number, param1: CartoOnlineRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static CartoOnlineRoutingService_matchRouteSwigExplicitCartoOnlineRoutingService(
+                    param0: number,
+                    param1: CartoOnlineRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static CartoOnlineRoutingService_director_connect(param0: CartoOnlineRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static CartoOnlineRoutingService_calculateRoute(param0: number, param1: CartoOnlineRoutingService, param2: number, param3: RoutingRequest): number;
                 public static CartoOnlineRoutingService_SWIGSmartPtrUpcast(param0: number): number;
@@ -7589,7 +7925,12 @@ declare namespace com {
                 public static new_CartoOnlineRoutingService(param0: string): number;
                 public static CartoOnlineRoutingService_setProfile(param0: number, param1: CartoOnlineRoutingService, param2: string): void;
                 public static CartoOnlineRoutingService_swigGetDirectorObject(param0: number, param1: CartoOnlineRoutingService): any;
-                public static CartoOnlineRoutingService_calculateRouteSwigExplicitCartoOnlineRoutingService(param0: number, param1: CartoOnlineRoutingService, param2: number, param3: RoutingRequest): number;
+                public static CartoOnlineRoutingService_calculateRouteSwigExplicitCartoOnlineRoutingService(
+                    param0: number,
+                    param1: CartoOnlineRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
                 public static SwigDirector_CartoOnlineRoutingService_calculateRoute(param0: CartoOnlineRoutingService, param1: number): number;
                 public static CartoOnlineRoutingService_setProfileSwigExplicitCartoOnlineRoutingService(param0: number, param1: CartoOnlineRoutingService, param2: string): void;
                 public static SwigDirector_CartoOnlineRoutingService_setProfile(param0: CartoOnlineRoutingService, param1: string): void;
@@ -7635,7 +7976,12 @@ declare namespace com {
             export class OSRMOfflineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<OSRMOfflineRoutingServiceModuleJNI>;
                 public static OSRMOfflineRoutingService_getProfile(param0: number, param1: OSRMOfflineRoutingService): string;
-                public static OSRMOfflineRoutingService_matchRouteSwigExplicitOSRMOfflineRoutingService(param0: number, param1: OSRMOfflineRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static OSRMOfflineRoutingService_matchRouteSwigExplicitOSRMOfflineRoutingService(
+                    param0: number,
+                    param1: OSRMOfflineRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static SwigDirector_OSRMOfflineRoutingService_getProfile(param0: OSRMOfflineRoutingService): string;
                 public static SwigDirector_OSRMOfflineRoutingService_matchRoute(param0: OSRMOfflineRoutingService, param1: number): number;
                 public static OSRMOfflineRoutingService_getProfileSwigExplicitOSRMOfflineRoutingService(param0: number, param1: OSRMOfflineRoutingService): string;
@@ -7652,7 +7998,12 @@ declare namespace com {
                 public static OSRMOfflineRoutingService_director_connect(param0: OSRMOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static delete_OSRMOfflineRoutingService(param0: number): void;
                 public static OSRMOfflineRoutingService_matchRoute(param0: number, param1: OSRMOfflineRoutingService, param2: number, param3: RouteMatchingRequest): number;
-                public static OSRMOfflineRoutingService_calculateRouteSwigExplicitOSRMOfflineRoutingService(param0: number, param1: OSRMOfflineRoutingService, param2: number, param3: RoutingRequest): number;
+                public static OSRMOfflineRoutingService_calculateRouteSwigExplicitOSRMOfflineRoutingService(
+                    param0: number,
+                    param1: OSRMOfflineRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
                 public static SwigDirector_OSRMOfflineRoutingService_setProfile(param0: OSRMOfflineRoutingService, param1: string): void;
                 public static OSRMOfflineRoutingService_setProfileSwigExplicitOSRMOfflineRoutingService(param0: number, param1: OSRMOfflineRoutingService, param2: string): void;
             }
@@ -7700,10 +8051,20 @@ declare namespace com {
                 public static SwigDirector_PackageManagerRoutingService_matchRoute(param0: PackageManagerRoutingService, param1: number): number;
                 public static PackageManagerRoutingService_matchRoute(param0: number, param1: PackageManagerRoutingService, param2: number, param3: RouteMatchingRequest): number;
                 public static PackageManagerRoutingService_setProfile(param0: number, param1: PackageManagerRoutingService, param2: string): void;
-                public static PackageManagerRoutingService_calculateRouteSwigExplicitPackageManagerRoutingService(param0: number, param1: PackageManagerRoutingService, param2: number, param3: RoutingRequest): number;
+                public static PackageManagerRoutingService_calculateRouteSwigExplicitPackageManagerRoutingService(
+                    param0: number,
+                    param1: PackageManagerRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
                 public static new_PackageManagerRoutingService(param0: number, param1: packagemanager.PackageManager): number;
                 public constructor();
-                public static PackageManagerRoutingService_matchRouteSwigExplicitPackageManagerRoutingService(param0: number, param1: PackageManagerRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static PackageManagerRoutingService_matchRouteSwigExplicitPackageManagerRoutingService(
+                    param0: number,
+                    param1: PackageManagerRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static PackageManagerRoutingService_swigGetClassName(param0: number, param1: PackageManagerRoutingService): string;
                 public static PackageManagerRoutingService_director_connect(param0: PackageManagerRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerRoutingService_SWIGSmartPtrUpcast(param0: number): number;
@@ -7757,22 +8118,45 @@ declare namespace com {
         export namespace routing {
             export class PackageManagerValhallaRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<PackageManagerValhallaRoutingServiceModuleJNI>;
-                public static PackageManagerValhallaRoutingService_connectElevationDataSource(param0: number, param1: PackageManagerValhallaRoutingService, param2: number, param3: datasources.TileDataSource, param4: number, param5: rastertiles.ElevationDecoder): void;
+                public static PackageManagerValhallaRoutingService_connectElevationDataSource(
+                    param0: number,
+                    param1: PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: datasources.TileDataSource,
+                    param4: number,
+                    param5: rastertiles.ElevationDecoder
+                ): void;
                 public static PackageManagerValhallaRoutingService_getProfileSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: PackageManagerValhallaRoutingService): string;
                 public static PackageManagerValhallaRoutingService_swigGetDirectorObject(param0: number, param1: PackageManagerValhallaRoutingService): any;
-                public static PackageManagerValhallaRoutingService_setConfigurationParameter(param0: number, param1: PackageManagerValhallaRoutingService, param2: string, param3: number, param4: core.Variant): void;
+                public static PackageManagerValhallaRoutingService_setConfigurationParameter(
+                    param0: number,
+                    param1: PackageManagerValhallaRoutingService,
+                    param2: string,
+                    param3: number,
+                    param4: core.Variant
+                ): void;
                 public static SwigDirector_PackageManagerValhallaRoutingService_getProfile(param0: PackageManagerValhallaRoutingService): string;
                 public static PackageManagerValhallaRoutingService_getConfigurationParameter(param0: number, param1: PackageManagerValhallaRoutingService, param2: string): number;
                 public static SwigDirector_PackageManagerValhallaRoutingService_matchRoute(param0: PackageManagerValhallaRoutingService, param1: number): number;
                 public static PackageManagerValhallaRoutingService_calculateRoute(param0: number, param1: PackageManagerValhallaRoutingService, param2: number, param3: RoutingRequest): number;
-                public static PackageManagerValhallaRoutingService_calculateRouteSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: PackageManagerValhallaRoutingService, param2: number, param3: RoutingRequest): number;
+                public static PackageManagerValhallaRoutingService_calculateRouteSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
                 public static PackageManagerValhallaRoutingService_director_connect(param0: PackageManagerValhallaRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static PackageManagerValhallaRoutingService_getProfile(param0: number, param1: PackageManagerValhallaRoutingService): string;
                 public static PackageManagerValhallaRoutingService_matchRoute(param0: number, param1: PackageManagerValhallaRoutingService, param2: number, param3: RouteMatchingRequest): number;
                 public static delete_PackageManagerValhallaRoutingService(param0: number): void;
                 public constructor();
                 public static PackageManagerValhallaRoutingService_swigGetClassName(param0: number, param1: PackageManagerValhallaRoutingService): string;
-                public static PackageManagerValhallaRoutingService_matchRouteSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: PackageManagerValhallaRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static PackageManagerValhallaRoutingService_matchRouteSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: PackageManagerValhallaRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static PackageManagerValhallaRoutingService_SWIGSmartPtrUpcast(param0: number): number;
                 public static SwigDirector_PackageManagerValhallaRoutingService_setProfile(param0: PackageManagerValhallaRoutingService, param1: string): void;
                 public static SwigDirector_PackageManagerValhallaRoutingService_calculateRoute(param0: PackageManagerValhallaRoutingService, param1: number): number;
@@ -7780,7 +8164,11 @@ declare namespace com {
                 public static PackageManagerValhallaRoutingService_change_ownership(param0: PackageManagerValhallaRoutingService, param1: number, param2: boolean): void;
                 public static new_PackageManagerValhallaRoutingService(param0: number, param1: packagemanager.PackageManager): number;
                 public static PackageManagerValhallaRoutingService_swigGetRawPtr(param0: number, param1: PackageManagerValhallaRoutingService): number;
-                public static PackageManagerValhallaRoutingService_setProfileSwigExplicitPackageManagerValhallaRoutingService(param0: number, param1: PackageManagerValhallaRoutingService, param2: string): void;
+                public static PackageManagerValhallaRoutingService_setProfileSwigExplicitPackageManagerValhallaRoutingService(
+                    param0: number,
+                    param1: PackageManagerValhallaRoutingService,
+                    param2: string
+                ): void;
             }
         }
     }
@@ -8053,7 +8441,14 @@ declare namespace com {
                 public static delete_RouteMatchingResult(param0: number): void;
                 public static RouteMatchingResult_swigGetRawPtr(param0: number, param1: RouteMatchingResult): number;
                 public static RouteMatchingResult_toString(param0: number, param1: RouteMatchingResult): string;
-                public static new_RouteMatchingResult(param0: number, param1: projections.Projection, param2: number, param3: RouteMatchingPointVector, param4: number, param5: RouteMatchingEdgeVector): number;
+                public static new_RouteMatchingResult(
+                    param0: number,
+                    param1: projections.Projection,
+                    param2: number,
+                    param3: RouteMatchingPointVector,
+                    param4: number,
+                    param5: RouteMatchingEdgeVector
+                ): number;
                 public static RouteMatchingResult_getMatchingPoints(param0: number, param1: RouteMatchingResult): number;
                 public constructor();
             }
@@ -8380,11 +8775,23 @@ declare namespace com {
             export class SGREOfflineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<SGREOfflineRoutingServiceModuleJNI>;
                 public static SwigDirector_SGREOfflineRoutingService_setProfile(param0: SGREOfflineRoutingService, param1: string): void;
-                public static SGREOfflineRoutingService_matchRouteSwigExplicitSGREOfflineRoutingService(param0: number, param1: SGREOfflineRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static SGREOfflineRoutingService_matchRouteSwigExplicitSGREOfflineRoutingService(
+                    param0: number,
+                    param1: SGREOfflineRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static SGREOfflineRoutingService_matchRoute(param0: number, param1: SGREOfflineRoutingService, param2: number, param3: RouteMatchingRequest): number;
                 public static SGREOfflineRoutingService_getProfile(param0: number, param1: SGREOfflineRoutingService): string;
                 public static SGREOfflineRoutingService_getProfileSwigExplicitSGREOfflineRoutingService(param0: number, param1: SGREOfflineRoutingService): string;
-                public static new_SGREOfflineRoutingService__SWIG_1(param0: number, param1: projections.Projection, param2: number, param3: geometry.FeatureCollection, param4: number, param5: core.Variant): number;
+                public static new_SGREOfflineRoutingService__SWIG_1(
+                    param0: number,
+                    param1: projections.Projection,
+                    param2: number,
+                    param3: geometry.FeatureCollection,
+                    param4: number,
+                    param5: core.Variant
+                ): number;
                 public static SGREOfflineRoutingService_setProfile(param0: number, param1: SGREOfflineRoutingService, param2: string): void;
                 public static SGREOfflineRoutingService_change_ownership(param0: SGREOfflineRoutingService, param1: number, param2: boolean): void;
                 public static SGREOfflineRoutingService_SWIGSmartPtrUpcast(param0: number): number;
@@ -8393,7 +8800,12 @@ declare namespace com {
                 public constructor();
                 public static SGREOfflineRoutingService_calculateRoute(param0: number, param1: SGREOfflineRoutingService, param2: number, param3: RoutingRequest): number;
                 public static SGREOfflineRoutingService_swigGetDirectorObject(param0: number, param1: SGREOfflineRoutingService): any;
-                public static SGREOfflineRoutingService_calculateRouteSwigExplicitSGREOfflineRoutingService(param0: number, param1: SGREOfflineRoutingService, param2: number, param3: RoutingRequest): number;
+                public static SGREOfflineRoutingService_calculateRouteSwigExplicitSGREOfflineRoutingService(
+                    param0: number,
+                    param1: SGREOfflineRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
                 public static SwigDirector_SGREOfflineRoutingService_getProfile(param0: SGREOfflineRoutingService): string;
                 public static SGREOfflineRoutingService_swigGetRawPtr(param0: number, param1: SGREOfflineRoutingService): number;
                 public static SGREOfflineRoutingService_director_connect(param0: SGREOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
@@ -8452,20 +8864,43 @@ declare namespace com {
                 public static ValhallaOfflineRoutingService_swigGetRawPtr(param0: number, param1: ValhallaOfflineRoutingService): number;
                 public constructor();
                 public static ValhallaOfflineRoutingService_setProfileSwigExplicitValhallaOfflineRoutingService(param0: number, param1: ValhallaOfflineRoutingService, param2: string): void;
-                public static ValhallaOfflineRoutingService_calculateRouteSwigExplicitValhallaOfflineRoutingService(param0: number, param1: ValhallaOfflineRoutingService, param2: number, param3: RoutingRequest): number;
-                public static ValhallaOfflineRoutingService_connectElevationDataSource(param0: number, param1: ValhallaOfflineRoutingService, param2: number, param3: datasources.TileDataSource, param4: number, param5: rastertiles.ElevationDecoder): void;
+                public static ValhallaOfflineRoutingService_calculateRouteSwigExplicitValhallaOfflineRoutingService(
+                    param0: number,
+                    param1: ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
+                public static ValhallaOfflineRoutingService_connectElevationDataSource(
+                    param0: number,
+                    param1: ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: datasources.TileDataSource,
+                    param4: number,
+                    param5: rastertiles.ElevationDecoder
+                ): void;
                 public static ValhallaOfflineRoutingService_swigGetDirectorObject(param0: number, param1: ValhallaOfflineRoutingService): any;
                 public static SwigDirector_ValhallaOfflineRoutingService_matchRoute(param0: ValhallaOfflineRoutingService, param1: number): number;
                 public static ValhallaOfflineRoutingService_director_connect(param0: ValhallaOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
                 public static ValhallaOfflineRoutingService_change_ownership(param0: ValhallaOfflineRoutingService, param1: number, param2: boolean): void;
                 public static new_ValhallaOfflineRoutingService(param0: string): number;
                 public static ValhallaOfflineRoutingService_getConfigurationParameter(param0: number, param1: ValhallaOfflineRoutingService, param2: string): number;
-                public static ValhallaOfflineRoutingService_matchRouteSwigExplicitValhallaOfflineRoutingService(param0: number, param1: ValhallaOfflineRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static ValhallaOfflineRoutingService_matchRouteSwigExplicitValhallaOfflineRoutingService(
+                    param0: number,
+                    param1: ValhallaOfflineRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static SwigDirector_ValhallaOfflineRoutingService_setProfile(param0: ValhallaOfflineRoutingService, param1: string): void;
                 public static ValhallaOfflineRoutingService_getProfile(param0: number, param1: ValhallaOfflineRoutingService): string;
                 public static ValhallaOfflineRoutingService_setProfile(param0: number, param1: ValhallaOfflineRoutingService, param2: string): void;
                 public static ValhallaOfflineRoutingService_calculateRoute(param0: number, param1: ValhallaOfflineRoutingService, param2: number, param3: RoutingRequest): number;
-                public static ValhallaOfflineRoutingService_setConfigurationParameter(param0: number, param1: ValhallaOfflineRoutingService, param2: string, param3: number, param4: core.Variant): void;
+                public static ValhallaOfflineRoutingService_setConfigurationParameter(
+                    param0: number,
+                    param1: ValhallaOfflineRoutingService,
+                    param2: string,
+                    param3: number,
+                    param4: core.Variant
+                ): void;
                 public static ValhallaOfflineRoutingService_matchRoute(param0: number, param1: ValhallaOfflineRoutingService, param2: number, param3: RouteMatchingRequest): number;
             }
         }
@@ -8509,7 +8944,12 @@ declare namespace com {
             export class ValhallaOnlineRoutingServiceModuleJNI extends java.lang.Object {
                 public static class: java.lang.Class<ValhallaOnlineRoutingServiceModuleJNI>;
                 public static SwigDirector_ValhallaOnlineRoutingService_getProfile(param0: ValhallaOnlineRoutingService): string;
-                public static ValhallaOnlineRoutingService_calculateRouteSwigExplicitValhallaOnlineRoutingService(param0: number, param1: ValhallaOnlineRoutingService, param2: number, param3: RoutingRequest): number;
+                public static ValhallaOnlineRoutingService_calculateRouteSwigExplicitValhallaOnlineRoutingService(
+                    param0: number,
+                    param1: ValhallaOnlineRoutingService,
+                    param2: number,
+                    param3: RoutingRequest
+                ): number;
                 public static ValhallaOnlineRoutingService_change_ownership(param0: ValhallaOnlineRoutingService, param1: number, param2: boolean): void;
                 public static ValhallaOnlineRoutingService_getProfile(param0: number, param1: ValhallaOnlineRoutingService): string;
                 public static ValhallaOnlineRoutingService_setProfileSwigExplicitValhallaOnlineRoutingService(param0: number, param1: ValhallaOnlineRoutingService, param2: string): void;
@@ -8522,7 +8962,12 @@ declare namespace com {
                 public constructor();
                 public static delete_ValhallaOnlineRoutingService(param0: number): void;
                 public static ValhallaOnlineRoutingService_director_connect(param0: ValhallaOnlineRoutingService, param1: number, param2: boolean, param3: boolean): void;
-                public static ValhallaOnlineRoutingService_matchRouteSwigExplicitValhallaOnlineRoutingService(param0: number, param1: ValhallaOnlineRoutingService, param2: number, param3: RouteMatchingRequest): number;
+                public static ValhallaOnlineRoutingService_matchRouteSwigExplicitValhallaOnlineRoutingService(
+                    param0: number,
+                    param1: ValhallaOnlineRoutingService,
+                    param2: number,
+                    param3: RouteMatchingRequest
+                ): number;
                 public static SwigDirector_ValhallaOnlineRoutingService_matchRoute(param0: ValhallaOnlineRoutingService, param1: number): number;
                 public static ValhallaOnlineRoutingService_getCustomServiceURL(param0: number, param1: ValhallaOnlineRoutingService): string;
                 public static ValhallaOnlineRoutingService_getProfileSwigExplicitValhallaOnlineRoutingService(param0: number, param1: ValhallaOnlineRoutingService): string;
@@ -8578,7 +9023,12 @@ declare namespace com {
                 public constructor();
                 public static new_FeatureCollectionSearchService(param0: number, param1: projections.Projection, param2: number, param3: geometry.FeatureCollection): number;
                 public static FeatureCollectionSearchService_getProjection(param0: number, param1: FeatureCollectionSearchService): number;
-                public static FeatureCollectionSearchService_findFeaturesSwigExplicitFeatureCollectionSearchService(param0: number, param1: FeatureCollectionSearchService, param2: number, param3: SearchRequest): number;
+                public static FeatureCollectionSearchService_findFeaturesSwigExplicitFeatureCollectionSearchService(
+                    param0: number,
+                    param1: FeatureCollectionSearchService,
+                    param2: number,
+                    param3: SearchRequest
+                ): number;
                 public static FeatureCollectionSearchService_swigGetRawPtr(param0: number, param1: FeatureCollectionSearchService): number;
                 public static FeatureCollectionSearchService_swigGetClassName(param0: number, param1: FeatureCollectionSearchService): string;
                 public static delete_FeatureCollectionSearchService(param0: number): void;
@@ -8681,7 +9131,12 @@ declare namespace com {
                 public static delete_VectorElementSearchService(param0: number): void;
                 public static VectorElementSearchService_getDataSource(param0: number, param1: VectorElementSearchService): number;
                 public static VectorElementSearchService_findElements(param0: number, param1: VectorElementSearchService, param2: number, param3: SearchRequest): number;
-                public static VectorElementSearchService_findElementsSwigExplicitVectorElementSearchService(param0: number, param1: VectorElementSearchService, param2: number, param3: SearchRequest): number;
+                public static VectorElementSearchService_findElementsSwigExplicitVectorElementSearchService(
+                    param0: number,
+                    param1: VectorElementSearchService,
+                    param2: number,
+                    param3: SearchRequest
+                ): number;
                 public static VectorElementSearchService_getMaxResults(param0: number, param1: VectorElementSearchService): number;
                 public constructor();
                 public static new_VectorElementSearchService(param0: number, param1: datasources.VectorDataSource): number;
@@ -10995,12 +11450,32 @@ declare namespace com {
                 public static BaseMapView_onSurfaceDestroyed(param0: number, param1: BaseMapView): void;
                 public static BaseMapView_setTilt(param0: number, param1: BaseMapView, param2: number, param3: number): void;
                 public static BaseMapView_clearPreloadingCaches(param0: number, param1: BaseMapView): void;
-                public static BaseMapView_moveToFitBounds__SWIG_0(param0: number, param1: BaseMapView, param2: number, param3: core.MapBounds, param4: number, param5: core.ScreenBounds, param6: boolean, param7: number): void;
+                public static BaseMapView_moveToFitBounds__SWIG_0(
+                    param0: number,
+                    param1: BaseMapView,
+                    param2: number,
+                    param3: core.MapBounds,
+                    param4: number,
+                    param5: core.ScreenBounds,
+                    param6: boolean,
+                    param7: number
+                ): void;
                 public static BaseMapView_zoom__SWIG_0(param0: number, param1: BaseMapView, param2: number, param3: number): void;
                 public static BaseMapView_zoom__SWIG_1(param0: number, param1: BaseMapView, param2: number, param3: number, param4: core.MapPos, param5: number): void;
                 public static BaseMapView_setMapEventListener(param0: number, param1: BaseMapView, param2: number, param3: MapEventListener): void;
                 public static BaseMapView_onInputEvent(param0: number, param1: BaseMapView, param2: number, param3: number, param4: number, param5: number, param6: number): void;
-                public static BaseMapView_moveToFitBounds__SWIG_1(param0: number, param1: BaseMapView, param2: number, param3: core.MapBounds, param4: number, param5: core.ScreenBounds, param6: boolean, param7: boolean, param8: boolean, param9: number): void;
+                public static BaseMapView_moveToFitBounds__SWIG_1(
+                    param0: number,
+                    param1: BaseMapView,
+                    param2: number,
+                    param3: core.MapBounds,
+                    param4: number,
+                    param5: core.ScreenBounds,
+                    param6: boolean,
+                    param7: boolean,
+                    param8: boolean,
+                    param9: number
+                ): void;
                 public static BaseMapView_setRotation__SWIG_1(param0: number, param1: BaseMapView, param2: number, param3: number, param4: core.MapPos, param5: number): void;
                 public static BaseMapView_onDrawFrame(param0: number, param1: BaseMapView): void;
                 public static BaseMapView_getSDKVersion(): string;
@@ -11315,7 +11790,15 @@ declare namespace com {
                 public static PopupDrawInfo_swigGetRawPtr(param0: number, param1: PopupDrawInfo): number;
                 public static PopupDrawInfo_getDPToPX(param0: number, param1: PopupDrawInfo): number;
                 public static PopupDrawInfo_getPopup(param0: number, param1: PopupDrawInfo): number;
-                public static new_PopupDrawInfo(param0: number, param1: core.ScreenPos, param2: number, param3: core.ScreenBounds, param4: number, param5: vectorelements.Popup, param6: number): number;
+                public static new_PopupDrawInfo(
+                    param0: number,
+                    param1: core.ScreenPos,
+                    param2: number,
+                    param3: core.ScreenBounds,
+                    param4: number,
+                    param5: vectorelements.Popup,
+                    param6: number
+                ): number;
                 public constructor();
                 public static PopupDrawInfo_getAnchorScreenPos(param0: number, param1: PopupDrawInfo): number;
                 public static PopupDrawInfo_getScreenBounds(param0: number, param1: PopupDrawInfo): number;
@@ -12029,7 +12512,12 @@ declare namespace com {
                 public static delete_BalloonPopupEventListener(param0: number): void;
                 public static BalloonPopupEventListener_swigGetRawPtr(param0: number, param1: BalloonPopupEventListener): number;
                 public static BalloonPopupEventListener_change_ownership(param0: BalloonPopupEventListener, param1: number, param2: boolean): void;
-                public static BalloonPopupEventListener_onButtonClickedSwigExplicitBalloonPopupEventListener(param0: number, param1: BalloonPopupEventListener, param2: number, param3: ui.BalloonPopupButtonClickInfo): boolean;
+                public static BalloonPopupEventListener_onButtonClickedSwigExplicitBalloonPopupEventListener(
+                    param0: number,
+                    param1: BalloonPopupEventListener,
+                    param2: number,
+                    param3: ui.BalloonPopupButtonClickInfo
+                ): boolean;
                 public static BalloonPopupEventListener_onButtonClicked(param0: number, param1: BalloonPopupEventListener, param2: number, param3: ui.BalloonPopupButtonClickInfo): boolean;
                 public static BalloonPopupEventListener_swigGetDirectorObject(param0: number, param1: BalloonPopupEventListener): any;
                 public static new_BalloonPopupEventListener(): number;
@@ -12623,7 +13111,15 @@ declare namespace com {
                 public static Polygon3D_SWIGSmartPtrUpcast(param0: number): number;
                 public static Polygon3D_getStyle(param0: number, param1: Polygon3D): number;
                 public static Polygon3D_setGeometry(param0: number, param1: Polygon3D, param2: number, param3: geometry.PolygonGeometry): void;
-                public static new_Polygon3D__SWIG_2(param0: number, param1: core.MapPosVector, param2: number, param3: core.MapPosVectorVector, param4: number, param5: styles.Polygon3DStyle, param6: number): number;
+                public static new_Polygon3D__SWIG_2(
+                    param0: number,
+                    param1: core.MapPosVector,
+                    param2: number,
+                    param3: core.MapPosVectorVector,
+                    param4: number,
+                    param5: styles.Polygon3DStyle,
+                    param6: number
+                ): number;
                 public static Polygon3D_setHeight(param0: number, param1: Polygon3D, param2: number): void;
                 public static Polygon3D_getHeight(param0: number, param1: Polygon3D): number;
             }
@@ -13083,4 +13579,3 @@ declare namespace com {
 }
 
 //Generics information:
-

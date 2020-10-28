@@ -9,7 +9,7 @@ export class FeatureCollection implements IFeatureCollection {
         const nResult = this.native.getFeature(index);
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: nResult.getGeometry() as Geometry
+            geometry: nResult.getGeometry() as Geometry,
         } as Feature;
     }
     getGeometry(index: number) {
@@ -37,7 +37,7 @@ export class VectorTileFeatureCollection extends FeatureCollection {
             properties: nativeVariantToJS(nResult.getProperties()),
             geometry: nResult.getGeometry() as Geometry,
             id: nResult.getId(),
-            layerName: nResult.getLayerName()
+            layerName: nResult.getLayerName(),
         } as VectorTileFeature;
     }
 }

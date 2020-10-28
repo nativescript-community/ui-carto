@@ -72,7 +72,7 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
         super(options, native);
         if (native && !options.styleBuilder) {
             const nStyle = native.getStyle();
-            const nStyleBuilder =  NTLineStyleBuilder.alloc().init();
+            const nStyleBuilder = NTLineStyleBuilder.alloc().init();
             nStyleBuilder.setBitmap(nStyle.getBitmap());
             nStyleBuilder.setColor(nStyle.getColor());
             nStyleBuilder.setWidth(nStyle.getWidth());

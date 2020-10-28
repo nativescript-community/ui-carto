@@ -11,7 +11,7 @@ export const CartoMapStyle = {
     },
     get DARKMATTER() {
         return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER;
-    }
+    },
 };
 
 export const ClickType = {
@@ -26,7 +26,7 @@ export const ClickType = {
     },
     get DUAL() {
         return com.carto.ui.ClickType.CLICK_TYPE_DUAL.swigValue();
-    }
+    },
 };
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.MapBounds, {}> {
@@ -54,7 +54,6 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.
     }
 }
 
-
 export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core.MapPos) {
     if (!position) {
         return null;
@@ -62,7 +61,7 @@ export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core
     return {
         [LatitudeKey]: position.getY(),
         [LongitudeKey]: position.getX(),
-        [AltitudeKey]: position.getZ()
+        [AltitudeKey]: position.getZ(),
     } as GenericMapPos<T>;
 }
 export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T> | com.carto.core.MapPos, ignoreAltitude = false) {
@@ -75,14 +74,14 @@ export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>
     if (position[LongitudeKey] === undefined || position[LatitudeKey] === undefined) {
         throw new Error(`toNativeMapPos: missing lat/lon parameters in ${position}`);
     }
-    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey],  (!ignoreAltitude && position[AltitudeKey] > 0) ? position[AltitudeKey] : 0);
+    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], !ignoreAltitude && position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
     //  ignore z for now as points can get under the map!
     return result;
 }
 export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
     return {
         x: position.getY(),
-        y: position.getX()
+        y: position.getX(),
     } as ScreenPos;
 }
 export function toNativeScreenPos(position: ScreenPos) {
@@ -94,7 +93,7 @@ export function toNativeScreenPos(position: ScreenPos) {
 export function fromNativeMapRange(value: com.carto.core.MapRange) {
     return {
         max: value.getMax(),
-        min: value.getMin()
+        min: value.getMin(),
     } as MapRange;
 }
 export function toNativeMapRange(value: MapRange) {
@@ -114,7 +113,7 @@ export function fromNativeMapVec(value: com.carto.core.MapVec) {
     return {
         x: value.getX(),
         y: value.getY(),
-        z: value.getZ()
+        z: value.getZ(),
     } as MapVec;
 }
 
@@ -141,7 +140,7 @@ export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
 export function fromNativeScreenBounds(bounds: com.carto.core.ScreenBounds) {
     return {
         min: fromNativeScreenPos(bounds.getMin()),
-        max: fromNativeScreenPos(bounds.getMax())
+        max: fromNativeScreenPos(bounds.getMax()),
     } as ScreenBounds;
 }
 export function toNativeScreenBounds(bounds: ScreenBounds) {
@@ -221,6 +220,13 @@ export class IntVector extends NativeVector<com.carto.core.IntVector> {
     constructor(native?) {
         super();
         this.native = native || new com.carto.core.IntVector();
+    }
+}
+export class DoubleVector extends NativeVector<com.carto.core.DoubleVector> {
+    native: com.carto.core.DoubleVector;
+    constructor(native?) {
+        super();
+        this.native = native || new com.carto.core.DoubleVector();
     }
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPosVector> {

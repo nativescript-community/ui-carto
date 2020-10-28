@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
 import { Color } from '@nativescript/core/color';
 import { MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
@@ -16,8 +17,8 @@ export function nativeColorProperty(...args) {
                 toNative(value) {
                     const theColor = typeof value === 'string' ? new Color(value) : value;
                     return NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a);
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -35,8 +36,8 @@ export function nativeEnumProperty(...args) {
                 toNative(value) {
                     return value;
                     // return enumType.values()[value];
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -54,8 +55,8 @@ export function nativeCartoImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return NTBitmapUtils.createBitmapFromUIImage(value.ios as UIImage);
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -73,8 +74,8 @@ export function nativeImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return value.ios as UIImage;
-                }
-            }
+                },
+            },
         },
         ...args
     );
@@ -128,7 +129,7 @@ export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], ignoreA
         //         nativePoses.add(projection.getNative().fromWgs84(toNativeMapPos(p, ignoreAltitude)));
         //     });
         // } else {
-        arrayPoses.forEach(p => {
+        arrayPoses.forEach((p) => {
             nativePoses.add(toNativeMapPos(p, ignoreAltitude));
         });
         // }
@@ -143,7 +144,7 @@ export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPo
     } else {
         const arrayPoses = positions as MapPos[][];
         nativePoses = NTMapPosVectorVector.alloc().init();
-        arrayPoses.forEach(p => {
+        arrayPoses.forEach((p) => {
             nativePoses.add(mapPosVectorFromArgs(p, ignoreAltitude));
         });
     }

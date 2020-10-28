@@ -2,7 +2,7 @@ import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, Ras
 import { RasterTileLayerBase } from './raster.common';
 import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeProperty } from '../';
 import { Color } from '@nativescript/core/color';
-import { IntVector, MapPos, MapPosVector, toNativeMapPos } from '../core';
+import { DoubleVector, IntVector, MapPos, MapPosVector, toNativeMapPos } from '../core';
 
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {
@@ -44,8 +44,8 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<com.akylas.car
     public getElevation(pos: MapPos): number {
         return this.getNative().getElevation(toNativeMapPos(pos));
     }
-    public getElevations(pos: MapPosVector | MapPos[]): IntVector {
-        return new IntVector(this.getNative().getElevations(mapPosVectorFromArgs(pos)));
+    public getElevations(pos: MapPosVector | MapPos[]): DoubleVector {
+        return new DoubleVector(this.getNative().getElevations(mapPosVectorFromArgs(pos)));
     }
 
     public getElevationAsync(pos: MapPos, callback: (error: any, res: number) => void) {
@@ -58,12 +58,12 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<com.akylas.car
             })
         );
     }
-    public getElevationsAsync(pos: MapPosVector | MapPos[], callback: (error: any, res: IntVector) => void) {
+    public getElevationsAsync(pos: MapPosVector | MapPos[], callback: (error: any, res: DoubleVector) => void) {
         this.getNative().getElevationsCallback(
             mapPosVectorFromArgs(pos),
             new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationsCallback({
                 onElevations(err, res) {
-                    callback(err, new IntVector(res));
+                    callback(err, new DoubleVector(res));
                 },
             })
         );

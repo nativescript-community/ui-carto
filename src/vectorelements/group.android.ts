@@ -10,20 +10,20 @@ export class Group extends GroupBase {
     }
     set position(pos: MapPos) {
         this.options.position = pos;
-        this.elements.forEach(el => (el.position = pos));
+        this.elements.forEach((el) => (el.position = pos));
     }
     get visible() {
         return this.options.visible;
     }
     set visible(value: boolean) {
         this.options.visible = value;
-        this.elements.forEach(el => (el.visible = value));
+        this.elements.forEach((el) => (el.visible = value));
     }
     get metaData(): { [k: string]: string } {
         return this.options.metaData;
     }
     set metaData(value: { [k: string]: string }) {
         this.options.metaData = value;
-        this.elements.forEach(el => (el.metaData = value));
+        this.elements.forEach((el) => (el.metaData = value));
     }
 }

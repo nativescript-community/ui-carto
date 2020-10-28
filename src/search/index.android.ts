@@ -43,7 +43,7 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
                 new com.akylas.carto.additions.VectorTileSearchServiceCallback({
                     onFindFeatures(res) {
                         callback(new VectorTileFeatureCollection(res));
-                    }
+                    },
                 })
             );
         }
@@ -82,7 +82,7 @@ export class FeatureCollectionSearchService extends BaseNative<com.akylas.carto.
                 new com.akylas.carto.additions.FeatureCollectionSearchServiceCallback({
                     onFindFeatures(res) {
                         callback(new VectorTileFeatureCollection(res));
-                    }
+                    },
                 })
             );
         }

@@ -2,7 +2,7 @@ import { TileLayer, TileLayerOptions } from '.';
 import { TileDataSource } from '../datasources';
 import { ElevationDataDecoder } from '../rastertiles';
 import { Color } from '@nativescript/core';
-import { DefaultLatLonKeys, GenericMapPos, IntVector, MapPos, MapPosVector } from '../core';
+import { DefaultLatLonKeys, DoubleVector, GenericMapPos, IntVector, MapPos, MapPosVector } from '../core';
 
 export enum RasterTileFilterMode {
     RASTER_TILE_FILTER_MODE_NEAREST,
@@ -37,6 +37,6 @@ export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTile
     highlightColor?: Color;
     public getElevation<T = DefaultLatLonKeys>(pos: GenericMapPos<T>): number;
     public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
-    public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): IntVector;
-    public getElevationsAsync<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[], callback: (error: Error, res: IntVector) => void);
+    public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): DoubleVector;
+    public getElevationsAsync<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[], callback: (error: Error, res: DoubleVector) => void);
 }

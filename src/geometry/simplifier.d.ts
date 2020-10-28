@@ -4,6 +4,6 @@ export interface DouglasPeuckerGeometrySimplifierOptions extends GeometrySimplif
     tolerance: number;
 }
 
-export abstract class GeometrySimplifier<T , U extends GeometrySimplifierOptions> extends BaseNative<T, U> {}
+export abstract class GeometrySimplifier<T, U extends GeometrySimplifierOptions> extends BaseNative<T, U> {}
 
 export class DouglasPeuckerGeometrySimplifier extends BaseNative<any, DouglasPeuckerGeometrySimplifierOptions> {}

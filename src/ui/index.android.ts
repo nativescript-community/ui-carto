@@ -23,7 +23,6 @@ import { EPSG4326 } from '../projections/epsg4326';
 import { ImageSource } from '@nativescript/core';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
-
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_PLANAR;
@@ -179,7 +178,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         return fromNativeMapPos<T>(this.mapView.getFocusPos());
     }
     getMapBounds() {
-        const screenBounds = toNativeScreenBounds({ min: { x: this.getMeasuredWidth(), y: 0 }, max: { x: 0, y: this.getMeasuredHeight() } }) as  com.carto.core.ScreenBounds;
+        const screenBounds = toNativeScreenBounds({ min: { x: this.getMeasuredWidth(), y: 0 }, max: { x: 0, y: this.getMeasuredHeight() } }) as com.carto.core.ScreenBounds;
         return new MapBounds<T>(fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMin())), fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMax())));
     }
 

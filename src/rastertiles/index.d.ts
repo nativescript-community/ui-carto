@@ -18,10 +18,7 @@ export interface MapBoxElevationDataDecoderOptions extends ElevationDataDecoderO
 
 export interface TerrariumElevationDataDecoderOptions extends ElevationDataDecoderOptions {}
 
-export abstract class ElevationDataDecoder<T, O extends ElevationDataDecoderOptions> extends BaseNative<T, O> {
-    public getElevation<T = DefaultLatLonKeys>(dataSource: TileDataSource<any, any>, pos: GenericMapPos<T>): number;
-    public getElevations<T = DefaultLatLonKeys>(dataSource: TileDataSource<any, any>, pos: MapPosVector<T> | GenericMapPos<T>[]): IntVector;
-}
+export abstract class ElevationDataDecoder<T, O extends ElevationDataDecoderOptions> extends BaseNative<T, O> {}
 
 export class MapBoxElevationDataDecoder extends ElevationDataDecoder<any, MapBoxElevationDataDecoderOptions> {}
 export class TerrariumElevationDataDecoder extends ElevationDataDecoder<any, MapBoxElevationDataDecoderOptions> {}

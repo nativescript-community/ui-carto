@@ -5,6 +5,6 @@ export abstract class GeometrySimplifier<T extends NTGeometrySimplifier, U exten
 
 export class DouglasPeuckerGeometrySimplifier extends BaseNative<NTGeometrySimplifier, DouglasPeuckerGeometrySimplifierOptions> {
     createNative(options: DouglasPeuckerGeometrySimplifierOptions) {
-        return  NTDouglasPeuckerGeometrySimplifier.alloc().initWithTolerance(options.tolerance);
+        return NTDouglasPeuckerGeometrySimplifier.alloc().initWithTolerance(options.tolerance);
     }
 }

@@ -7,13 +7,13 @@ declare enum PackageErrorType {
     DOWNLOAD_LIMIT_EXCEEDED,
     NO_OFFLINE_PLAN,
     PACKAGE_TOO_BIG,
-    SYSTEM
+    SYSTEM,
 }
 declare enum PackageType {
     MAP,
     ROUTING,
     GEOCODING,
-    VALHALLA_ROUTING
+    VALHALLA_ROUTING,
 }
 
 declare interface PackageInfo {
@@ -32,7 +32,7 @@ export enum PackageAction {
     WAITING,
     DOWNLOADING,
     COPYING,
-    REMOVING
+    REMOVING,
 }
 export interface PackageStatus {
     // currentAction: PackageAction;
@@ -80,7 +80,7 @@ export class CartoPackageManager extends DataSource<any, CartoPackageManagerOpti
     getLocalPackages(callback?: (result: PackageInfoVector) => void): PackageInfoVector;
     getServerPackage(packageId: string): PackageInfo;
     getServerPackages(callback?: (result: PackageInfoVector) => void): PackageInfoVector;
-    isAreaDownloaded(bounds: MapBounds, zoom: number, projection: Projection): boolean
+    isAreaDownloaded(bounds: MapBounds, zoom: number, projection: Projection): boolean;
     suggestPackages(position: MapPos, projection: Projection): PackageInfo[];
 }
 export interface PackageManagerTileDataSourceOptions extends TileDataSourceOptions {

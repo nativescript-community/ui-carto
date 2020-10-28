@@ -61,7 +61,6 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
     }
 }
 
-
 export class MemoryCacheTileDataSource extends TileDataSource<com.carto.datasources.MemoryCacheTileDataSource, MemoryCacheTileDataSourceOptions> {
     @nativeProperty capacity: number;
     createNative(options: MemoryCacheTileDataSourceOptions) {

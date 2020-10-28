@@ -65,7 +65,7 @@ export class BalloonPopup extends BasePointVectorElement<NTBalloonPopup, Balloon
         return style;
     }
     get styleBuilder() {
-        return this.native ? this.native.getStyle() as any : this.options.styleBuilder;
+        return this.native ? (this.native.getStyle() as any) : this.options.styleBuilder;
     }
     set styleBuilder(value: BalloonPopupStyleBuilder | NTBalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
         if (this.native && !this.duringInit) {

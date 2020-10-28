@@ -20,14 +20,14 @@ export class TileDataSource<T extends NTTileDataSource, U extends TileDataSource
 
 export class OrderedTileDataSource extends TileDataSource<NTOrderedTileDataSource, OrderedTileDataSourceOptions> {
     createNative(options: OrderedTileDataSourceOptions) {
-        const dataSources: NTTileDataSource[] = options.dataSources.map(d => d.getNative());
+        const dataSources: NTTileDataSource[] = options.dataSources.map((d) => d.getNative());
         return NTOrderedTileDataSource.alloc().initWithDataSource1DataSource2(dataSources[0], dataSources[1]);
     }
 }
 
 export class MergedMBVTTileDataSource extends TileDataSource<NTMergedMBVTTileDataSource, MergedMBVTTileDataSourceOptions> {
     createNative(options: MergedMBVTTileDataSourceOptions) {
-        const dataSources: NTTileDataSource[] = options.dataSources.map(d => d.getNative());
+        const dataSources: NTTileDataSource[] = options.dataSources.map((d) => d.getNative());
         return NTMergedMBVTTileDataSource.alloc().initWithDataSource1DataSource2(dataSources[0], dataSources[1]);
     }
 }

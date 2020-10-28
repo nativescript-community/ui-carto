@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { Color } from '@nativescript/core/color';
 import { NativePropertyOptions } from '.';
 import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
@@ -7,7 +8,7 @@ export { BaseNative, nativeProperty };
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeColorProperty(...args) {
-    const options = args[1] === undefined ? args[0] : undefined;
+    // const options = args[1] === undefined ? args[0] : undefined;
     return nativeProperty(
         {
             converter: {

@@ -14,5 +14,4 @@ export declare class Projection extends ProjectionClass<any, ProjectionOptions> 
     createNative(): any;
 }
 
-export interface IProjection extends ProjectionClass<any, any>  {
-}
+export interface IProjection extends ProjectionClass<any, any> {}

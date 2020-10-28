@@ -41,6 +41,6 @@ export interface FeatureCollectionSearchServiceOptions {
     projection: Projection;
     features: FeatureCollection;
 }
-export class FeatureCollectionSearchService<U extends FeatureCollectionSearchServiceOptions>   extends BaseNative<any, U> {
+export class FeatureCollectionSearchService<U extends FeatureCollectionSearchServiceOptions> extends BaseNative<any, U> {
     findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void): FeatureCollection;
 }

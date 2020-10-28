@@ -28,13 +28,13 @@ export enum ClickType {
     SINGLE,
     LONG,
     DOUBLE,
-    DUAL
+    DUAL,
 }
 
 export class NMapPos {
-    getX()
-    getY()
-    getZ()
+    getX();
+    getY();
+    getZ();
 }
 
 export abstract class NativeVector<T> {
@@ -55,6 +55,7 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NMapPos> {
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NativeVector<GenericMapPos<T>>> {}
 export class IntVector extends NativeVector<number> {}
+export class DoubleVector extends NativeVector<number> {}
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<any, {}> {
     public northeast: GenericMapPos<T>;
@@ -64,8 +65,4 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<any, {}> {
     intersects(position: MapBounds<T>): boolean;
     equals(position: MapBounds<T>): boolean;
     getCenter(): GenericMapPos<T>;
-}
-export interface MapBounds<T = DefaultLatLonKeys> {
-    northeast: GenericMapPos<T>;
-    southwest: GenericMapPos<T>;
 }

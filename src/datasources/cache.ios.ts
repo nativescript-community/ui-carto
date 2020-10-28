@@ -25,7 +25,7 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
             owner.onDownloadFailed({
                 tileId: tile.getTileId(),
                 x: tile.getX(),
-                y: tile.getY()
+                y: tile.getY(),
             });
         }
     }

@@ -24,7 +24,7 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
 
         return result;
     }
-    nBuildClusterElement (position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
+    nBuildClusterElement(position: com.carto.core.MapPos, nElements: com.carto.vectorelements.VectorElementVector) {
         const result = this.buildClusterElement(fromNativeMapPos(position), new VectorElementVector(undefined, nElements));
         if (result instanceof BaseVectorElement) {
             return result.getNative();

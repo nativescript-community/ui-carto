@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { CSSType, View } from '@nativescript/core/ui/core/view';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
