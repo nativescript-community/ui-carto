@@ -169,14 +169,8 @@ export class Layers<T extends any> {
 export abstract class CartoViewBase extends ContentView {
     public mapReady = false;
     nativeProjection: any;
-    // focusPos: MapPos;
-    // zoom: number;
-    // bearing: number;
-    // tilt: number;
     @mapProperty({
-        getConverter(value) {
-            return fromNativeMapPos(value);
-        },
+        getConverter: (value) => fromNativeMapPos(value),
     })
     focusPos: MapPos;
     @mapProperty zoom: number;
@@ -207,11 +201,6 @@ export abstract class CartoViewBase extends ContentView {
     log(...args) {
         console.log(`[${this.constructor.name}]`, ...args);
     }
-    // public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number): void {
-    //     console.log('onMeasure', widthMeasureSpec, heightMeasureSpec);
-    //     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    // }
-
     public onLoaded() {
         super.onLoaded();
         if (!this.mapReady) {
@@ -221,13 +210,9 @@ export abstract class CartoViewBase extends ContentView {
     }
 
     [focusPosProperty.setNative](value: MapPos) {
-        // console.log('focusPosProperty', 'setNative', !!this.nativeViewProtected, !!this.nativeProjection);
         if (!this.nativeViewProtected || !this.nativeProjection) {
             return;
         }
-        // if (Array.isArray(value)) {
-        //     value = { latitude: value[0], longitude: value[1] };
-        // }
         this.setFocusPos(value, 0);
     }
     [zoomProperty.setNative](value: number) {
