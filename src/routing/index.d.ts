@@ -62,7 +62,7 @@ export interface RouteMatchingResult<T = DefaultLatLonKeys> {
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
-    calculateRoute<T = DefaultLatLonKeys>(options: RoutingRequest<T>, callback?: (error: Error, res: RoutingResult<T>) => void): RoutingResult<T>;
+    calculateRoute<T = DefaultLatLonKeys>(options: RoutingRequest<T>): Promise<RoutingResult<T>>;
 }
 
 export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptions {
@@ -79,7 +79,7 @@ export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOpti
 export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
     profile: ValhallaProfile;
 
-    matchRoute(options: RouteMatchingRequest, callback?: (error: Error, res: RouteMatchingResult) => void): RouteMatchingResult;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
     // rawCall(option: string, request: string, callback: (err: Error, res: string) => void): string;
 }
 
@@ -98,7 +98,7 @@ export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServ
 }
 export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {
     profile: ValhallaProfile;
-    matchRoute(options: RouteMatchingRequest, callback?: (error: Error, res: RouteMatchingResult) => void): RouteMatchingResult;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
 }
 
 export interface SGREOfflineRoutingServiceOptions {

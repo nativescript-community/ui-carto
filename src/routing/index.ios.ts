@@ -37,12 +37,12 @@ export enum RoutingAction {
 }
 abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
-        const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
-
-        // this.log('calculateRoute', options);
-        const nRes = this.getNative().calculateRoute(nRequest);
-        const result = nRes ? new RoutingResult(nRes) : null;
-        callback(null, result);
+        return new Promise((resolve, reject) => {
+            const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
+            const nRes = this.getNative().calculateRoute(nRequest);
+            const result = nRes ? new RoutingResult(nRes) : null;
+            resolve(result);
+        });
     }
 }
 
@@ -82,12 +82,13 @@ class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRout
         return NTValhallaOfflineRoutingService.alloc().initWithPath(options.path);
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+        return new Promise((resolve, reject) => {
+            const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
 
-        const nRes = this.getNative().matchRoute(nRequest);
-        const result = nRes ? new RouteMatchingResult(nRes) : null;
-        callback(null, result);
-        return result;
+            const nRes = this.getNative().matchRoute(nRequest);
+            const result = nRes ? new RouteMatchingResult(nRes) : null;
+            resolve(result);
+        });
     }
 }
 
@@ -102,12 +103,13 @@ class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManag
         return NTPackageManagerValhallaRoutingService.alloc().initWithPackageManager(options.packageManager.getNative());
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+        return new Promise((resolve, reject) => {
+            const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
 
-        const nRes = this.getNative().matchRoute(nRequest);
-        const result = nRes ? new RouteMatchingResult(nRes) : null;
-        callback(null, result);
-        return result;
+            const nRes = this.getNative().matchRoute(nRequest);
+            const result = nRes ? new RouteMatchingResult(nRes) : null;
+            resolve(result);
+        });
     }
 }
 

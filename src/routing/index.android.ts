@@ -74,20 +74,26 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
     //     return new com.carto.geocoding.RoutingService();
     // }
     public calculateRoute(options: RoutingRequest, callback: (err: any, res: RoutingResult) => void) {
-        const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
-        if (options.customOptions) {
-            Object.keys(options.customOptions).forEach((k) => {
-                nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
-            });
-        }
-        this.getNative().calculateRouteCallback(
-            nRequest,
-            new com.akylas.carto.additions.RoutingServiceRouteCallback({
-                onRoutingResult: (err, res) => {
-                    callback(err, res ? new RoutingResult(res) : null);
-                },
-            })
-        );
+        return new Promise((resolve, reject) => {
+            const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
+            if (options.customOptions) {
+                Object.keys(options.customOptions).forEach((k) => {
+                    nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
+                });
+            }
+            this.getNative().calculateRouteCallback(
+                nRequest,
+                new com.akylas.carto.additions.RoutingServiceRouteCallback({
+                    onRoutingResult: (err, res) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(res ? new RoutingResult(res) : null);
+                        }
+                    },
+                })
+            );
+        });
     }
 }
 
@@ -128,28 +134,22 @@ class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.addi
         return new com.akylas.carto.additions.AKValhallaOfflineRoutingService(options.path);
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: any, res: RouteMatchingResult) => void) {
-        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
-        this.getNative().matchRouteCallback(
-            nRequest,
-            new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
-                onRouteMatchingResult: (err, res) => {
-                    callback(err, res ? new RouteMatchingResult(res) : null);
-                },
-            })
-        );
+        return new Promise((resolve, reject) => {
+            const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+            this.getNative().matchRouteCallback(
+                nRequest,
+                new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
+                    onRouteMatchingResult: (err, res) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(res ? new RouteMatchingResult(res) : null);
+                        }
+                    },
+                })
+            );
+        });
     }
-    // public rawCall(option: string, request: string, callback: (err: Error, res: string) => void) {
-    //     // const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
-    //     this.getNative().rawCallCallback(
-    //         option,
-    //         request,
-    //         new com.akylas.carto.additions.RoutingServiceRawCallCallback({
-    //             onRoutingResult: (err, res) => {
-    //                 callback(err, res);
-    //             },
-    //         })
-    //     );
-    // }
 }
 
 class ValhallaOnlineRoutingService extends RoutingService<com.akylas.carto.additions.AKValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
@@ -166,15 +166,21 @@ class PackageManagerValhallaRoutingService extends RoutingService<com.akylas.car
         return new com.akylas.carto.additions.AKPackageManagerValhallaRoutingService(options.packageManager.getNative());
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: any, res: RouteMatchingResult) => void) {
-        const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
-        this.getNative().matchRouteCallback(
-            nRequest,
-            new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
-                onRouteMatchingResult: (err, res) => {
-                    callback(err, res ? new RouteMatchingResult(res) : null);
-                },
-            })
-        );
+        return new Promise((resolve, reject) => {
+            const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
+            this.getNative().matchRouteCallback(
+                nRequest,
+                new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
+                    onRouteMatchingResult: (err, res) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(res ? new RouteMatchingResult(res) : null);
+                        }
+                    },
+                })
+            );
+        });
     }
 }
 
