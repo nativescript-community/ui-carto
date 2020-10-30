@@ -90,6 +90,9 @@ export function nativeImageProperty(...args) {
 
 export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[], ignoreAltitude = true) {
     let nativePoses: com.carto.core.MapPosVector;
+    if (!positions) {
+        return null;
+    }
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector<T>).getNative();
     } else {
