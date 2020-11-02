@@ -22,3 +22,7 @@ Pods
 /plugin/README.md
 plugin/**/*js.map
 plugin/**/*js
+pnpm-lock.yaml
+*.jar
+/.gradle
+/.settings
