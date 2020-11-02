@@ -51,6 +51,7 @@ export abstract class NativeVector<T> {
     public set(index: number, value: T);
 }
 export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NMapPos> {
+    getPos(index: number): GenericMapPos<T>;
     toArray(): GenericMapPos<T>[];
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NativeVector<GenericMapPos<T>>> {}

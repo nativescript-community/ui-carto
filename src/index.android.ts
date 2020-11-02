@@ -88,14 +88,17 @@ export function nativeImageProperty(...args) {
     );
 }
 
-export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[], ignoreAltitude = true) {
+export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[] | com.carto.core.MapPosVector, ignoreAltitude = true) {
+    if (!positions) {
+        return null;
+    }
     let nativePoses: com.carto.core.MapPosVector;
     if (!positions) {
         return null;
     }
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector<T>).getNative();
-    } else {
+    } else if (!(positions instanceof com.carto.core.MapPosVector)) {
         const arrayPoses = positions as GenericMapPos<T>[];
         nativePoses = new com.carto.core.MapPosVector();
         // if (projection) {

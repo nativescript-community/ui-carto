@@ -96,6 +96,7 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
             nStyleBuilder.setLineEndType(nStyle.getLineEndType());
             nStyleBuilder.setLineJoinType(nStyle.getLineJoinType());
             options.styleBuilder = new LineStyleBuilder(undefined, nStyleBuilder);
+            options.positions = new MapPosVector(native.getPoses());
         }
     }
     createNative(options: LineOptions) {
@@ -136,7 +137,7 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
         }
     }
     getPoses() {
-        return this.positions;
+        return this.positions || this.getNative().getPoses();
     }
     getGeometry() {
         return this.getNative().getGeometry();

@@ -79,6 +79,10 @@ export function getLicenseKey() {
 }
 
 export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
+    public static setRunOnMainThread(value: boolean) {
+        com.akylas.carto.additions.AKMapView.setRunOnMainThread(value);
+    }
+
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;
     };
