@@ -118,7 +118,7 @@ class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
 @NativeClass
 class MapView extends NTMapView {
     owner: CartoMap;
-
+    public static setRunOnMainThread(value: boolean) {}
     touchesBeganWithEvent(touches, event) {
         super.touchesBeganWithEvent(touches, event);
         if (this.owner) {

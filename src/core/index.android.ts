@@ -208,6 +208,10 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.
         return this.native.add(toNativeMapPos(position));
     }
 
+    getPos(index: number) {
+        return fromNativeMapPos<T>(this.get(index));
+    }
+
     toArray() {
         const result: GenericMapPos<T>[] = [];
         for (let i = 0; i < this.size(); i++) {

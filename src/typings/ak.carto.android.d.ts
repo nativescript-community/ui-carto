@@ -328,8 +328,24 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
+                export class Utils {
+                    static encodeMapPosVector(coordinates: com.carto.core.MapPosVector, includeElevation: boolean, precision: number): string;
+                    static decodeMapPosVector(str: string, includeElevation: boolean, precision: number): com.carto.core.MapPosVector;
+                    static distanceToEnd(index: number, coordinates: com.carto.core.MapPosVector): number;
+                    static isLocationOnPath(point: com.carto.core.MapPos, poly: com.carto.core.MapPosVector, closed?: boolean, geodesic?: boolean, toleranceEarth?: number): number;
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace akylas {
+        export namespace carto {
+            export namespace additions {
                 export class AKMapView extends com.carto.ui.MapView {
                     public static class: java.lang.Class<AKMapView>;
+                    public static setRunOnMainThread(value: boolean);
                     public userAction: boolean;
                     public onKeyDown(param0: number, param1: globalAndroid.view.KeyEvent): boolean;
                     public surfaceRedrawNeeded(param0: globalAndroid.view.SurfaceHolder): void;

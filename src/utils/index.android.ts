@@ -1,6 +1,8 @@
 import { BaseNative, getFileName, getRelativePathToApp, nonenumerable } from '../index.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
+import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core';
+import { mapPosVectorFromArgs } from '..';
 
 export function nativeVectorToArray(nVector: com.carto.core.StringVector) {
     const count = nVector.size();
@@ -253,4 +255,23 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
         }
         return this.assetNames;
     }
+}
+
+export function encodeMapPosVector<T = DefaultLatLonKeys>(coordinates: MapPosVector<T> | GenericMapPos<T>[], includeElevation: boolean, precision: number) {
+    return com.akylas.carto.additions.Utils.encodeMapPosVector(mapPosVectorFromArgs<T>(coordinates), includeElevation, precision);
+}
+export function decodeMapPosVector<T = DefaultLatLonKeys>(str: string, includeElevation: boolean, precision: number) {
+    return new MapPosVector<T>(com.akylas.carto.additions.Utils.decodeMapPosVector(str, includeElevation, precision));
+}
+export function distanceToEnd<T = DefaultLatLonKeys>(index: number, coordinates: MapPosVector<T> | GenericMapPos<T>[]) {
+    return com.akylas.carto.additions.Utils.distanceToEnd(index, mapPosVectorFromArgs<T>(coordinates));
+}
+export function isLocationOnPath<T = DefaultLatLonKeys>(
+    point: GenericMapPos<T>,
+    coordinates: MapPosVector<T> | GenericMapPos<T>[],
+    closed?: boolean,
+    geodesic?: boolean,
+    toleranceEarth?: number
+): number {
+    return com.akylas.carto.additions.Utils.isLocationOnPath(toNativeMapPos<T>(point), mapPosVectorFromArgs<T>(coordinates), closed, geodesic, toleranceEarth);
 }

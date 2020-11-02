@@ -116,11 +116,14 @@ export function nativeImageProperty(...args) {
 //     });
 // }
 
-export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[], ignoreAltitude = true) {
+export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[] | NTMapPosVector, ignoreAltitude = true) {
+    if (!positions) {
+        return null;
+    }
     let nativePoses: NTMapPosVector;
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector).getNative();
-    } else {
+    } else if (!(positions instanceof NTMapPosVector)) {
         const arrayPoses = positions as MapPos[];
         nativePoses = NTMapPosVector.alloc().init();
         // if (projection) {

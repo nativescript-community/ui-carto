@@ -80,6 +80,7 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
             nStyleBuilder.setLineEndType(nStyle.getLineEndType());
             nStyleBuilder.setLineJoinType(nStyle.getLineJoinType());
             options.styleBuilder = new LineStyleBuilder(undefined, nStyleBuilder) as any;
+            options.positions = new MapPosVector(native.getPoses());
         }
     }
 
