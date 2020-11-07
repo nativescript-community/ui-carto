@@ -12,6 +12,7 @@
         "pretty": true,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
+        "skipLibCheck": true,
         "noEmitHelpers": true,
         "noEmitOnError": false,
         "noImplicitAny": false,
