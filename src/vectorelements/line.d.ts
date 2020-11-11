@@ -2,7 +2,7 @@ import { Projection } from '../projections';
 import { MapBounds, MapPos, MapPosVector } from '../core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
 import { Color } from '@nativescript/core';
-import { Geometry } from '../geometry';
+import { Geometry, LineGeometry } from '../geometry';
 import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 
 declare enum LineJointType {
@@ -50,6 +50,6 @@ export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Line
     stretchFactor?: number;
     setPoses(positions: MapPosVector<T> | GenericMapPos<T>[]);
     getPoses(): MapPosVector<T> | GenericMapPos<T>[];
-    getGeometry(): Geometry;
+    getGeometry(): LineGeometry<T>;
     getBounds(): MapBounds<T>;
 }

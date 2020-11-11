@@ -31,7 +31,8 @@ export class Marker extends BaseBillboardVectorElement<NTMarker, MarkerOptions> 
         const style = this.buildStyle();
         let result: NTMarker;
         if (options.geometry) {
-            result = NTMarker.alloc().initWithGeometryStyle(options.geometry as NTGeometry, style);
+            const geometry = options.geometry.native ? options.geometry.getNative() : options.geometry;
+            result = NTMarker.alloc().initWithGeometryStyle(geometry, style);
         } else {
             const nativePos = this.getNativePos(options.position, options.projection);
             result = NTMarker.alloc().initWithPosStyle(nativePos, style);

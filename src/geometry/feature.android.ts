@@ -9,11 +9,11 @@ export class FeatureCollection implements IFeatureCollection {
         const nResult = this.native.getFeature(index);
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: nResult.getGeometry() as Geometry
+            geometry: nResult.getGeometry(),
         } as Feature;
     }
     getGeometry(index: number) {
-        return this.native.getFeature(index).getGeometry() as Geometry;
+        return this.native.getFeature(index).getGeometry();
     }
     getFeatureCount() {
         return this.native.getFeatureCount();
@@ -35,7 +35,7 @@ export class VectorTileFeatureCollection extends FeatureCollection {
         const nResult = this.native.getFeature(index) as com.carto.geometry.VectorTileFeature;
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: nResult.getGeometry() as Geometry,
+            geometry: nResult.getGeometry(),
             id: nResult.getId(),
             layerName: nResult.getLayerName()
         } as VectorTileFeature;
