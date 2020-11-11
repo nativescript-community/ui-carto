@@ -52,6 +52,9 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.
     getCenter() {
         return fromNativeMapPos(this.getNative().getCenter());
     }
+    toJSON() {
+        return { southwest: this.southwest, northeast: this.northeast };
+    }
 }
 
 export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core.MapPos) {
