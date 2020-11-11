@@ -92,10 +92,8 @@ export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVec
     if (!positions) {
         return null;
     }
-    let nativePoses: com.carto.core.MapPosVector;
-    if (!positions) {
-        return null;
-    }
+    let nativePoses: com.carto.core.MapPosVector = positions as any;
+
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector<T>).getNative();
     } else if (!(positions instanceof com.carto.core.MapPosVector)) {

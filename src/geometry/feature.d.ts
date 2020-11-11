@@ -1,8 +1,8 @@
 import { Geometry } from '.';
 
-export interface Feature {
+export interface Feature<T = DefaultLatLonKeys> {
     properties: {};
-    geometry: Geometry;
+    geometry: Geometry<T> | any;
     // getProperties(): any;
 
     // getGeometry(): Geometry;
@@ -14,14 +14,14 @@ export interface VectorTileFeature extends Feature {
     mapTile: any;
 }
 
-export class FeatureCollection {
+export class FeatureCollection<T = DefaultLatLonKeys> {
     constructor(native: any);
-    getFeature(index: number): Feature;
-    getGeometry(index: number): Geometry;
+    getFeature(index: number): Feature<T>;
+    getGeometry(index: number): Geometry<T> | any;
     getFeatureCount(): number;
     readonly featureCount: number;
     getNative();
 }
-export class VectorTileFeatureCollection extends FeatureCollection {
-    getFeature(index: number): VectorTileFeature;
+export class VectorTileFeatureCollection<T = DefaultLatLonKeys> extends FeatureCollection {
+    getFeature(index: number): VectorTileFeature<T>;
 }

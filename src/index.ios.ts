@@ -121,7 +121,7 @@ export function mapPosVectorFromArgs(positions: MapPosVector | MapPos[] | NTMapP
     if (!positions) {
         return null;
     }
-    let nativePoses: NTMapPosVector;
+    let nativePoses: NTMapPosVector = positions as any;
     if (typeof (positions as any).getNative === 'function') {
         nativePoses = (positions as MapPosVector).getNative();
     } else if (!(positions instanceof NTMapPosVector)) {

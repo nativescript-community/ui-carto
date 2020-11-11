@@ -1,6 +1,6 @@
 import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import { android as androidApp } from '@nativescript/core/application';
-import { profile } from '@nativescript/core/profiling';
+import { profile, trace } from '@nativescript/core/profiling';
 import {
     DefaultLatLonKeys,
     MapBounds,
@@ -22,6 +22,8 @@ import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
 import { ImageSource } from '@nativescript/core';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
+
+export const time = global.__time || Date.now;
 
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {

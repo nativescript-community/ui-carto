@@ -29,7 +29,7 @@ export interface VectorTileEventData<T = DefaultLatLonKeys> {
     featureLayerName: string;
     position: GenericMapPos<T>;
     featurePosition: GenericMapPos<T>;
-    featureGeometry: Geometry;
+    featureGeometry: Geometry | any;
 }
 export interface VectorElementEventData<T = DefaultLatLonKeys> {
     clickType: ClickType;
