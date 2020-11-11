@@ -232,27 +232,6 @@ class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
         return null;
     }
 }
-// @NativeClass
-// class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
-//     private _owner: WeakRef<EditableVectorLayer>;
-
-//     public static initWithOwner(owner: WeakRef<EditableVectorLayer>): NTVectorElementEventListenerImpl {
-//         const delegate = NTVectorElementEventListenerImpl.new() as NTVectorElementEventListenerImpl;
-//         delegate._owner = owner;
-//         return delegate;
-//     }
-
-//     onVectorElementClicked(clickInfo: NTVectorElementClickInfo): boolean {
-//         const owner = this._owner.get();
-//         console.log('onVectorElementClicked', clickInfo, owner);
-//         if (owner) {
-//             owner.setSelectedVectorElement(clickInfo.getVectorElement());
-//         }
-
-//         return true;
-//         // return super.onVectorElementClicked(clickInfo);
-//     }
-// }
 export class EditableVectorLayer extends BaseVectorLayer<NTEditableVectorLayer, VectorLayerOptions> {
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {

@@ -22,7 +22,6 @@ export class PointGeometry extends Geometry<com.carto.geometry.PointGeometry, Po
 }
 export class LineGeometry extends Geometry<com.carto.geometry.LineGeometry, LineGeometryOptions> {
     createNative(options: LineGeometryOptions) {
-        console.log('create native LineGeometry', options.poses, mapPosVectorFromArgs(options.poses));
         return new com.carto.geometry.LineGeometry(mapPosVectorFromArgs(options.poses));
     }
 

@@ -16,11 +16,8 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
         if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
             let vectorTileStyleSetData: com.carto.core.BinaryData;
-            // this.log('zipPath', zipPath, options.liveReload);
             if (options.liveReload === true) {
                 const data = File.fromPath(getFileName(options.zipPath)).readSync();
-                // const arr = new ArrayBuffer(data.length);
-                // data.getBytes(arr as any);
                 vectorTileStyleSetData = new com.carto.core.BinaryData(data);
             } else {
                 vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);

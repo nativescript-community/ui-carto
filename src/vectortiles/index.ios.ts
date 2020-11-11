@@ -45,7 +45,6 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
     }
 
     set style(style: string) {
-        // console.log('setting style', style, this.options.style);
         if (style !== this.options.style) {
             this.options.style = style;
             if (this.native) {

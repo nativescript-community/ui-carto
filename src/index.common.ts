@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { Observable } from '@nativescript/core/data/observable';
 import { ImageSource } from '@nativescript/core/image-source';
 import { ImageAsset } from '@nativescript/core/image-asset';
@@ -5,40 +6,31 @@ import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/
 import { isAndroid } from '@nativescript/core/platform';
 
 function createGetter(key: string, options: NativePropertyOptions) {
-    // console.log('createGetter', key, options);
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
         let result;
-        // console.log('getter', key, nativeGetterName);
         if (this.native && this.native[nativeGetterName]) {
             result = this.native[nativeGetterName]();
         } else {
             result = this.options[key] || options.defaultValue;
         }
         result = converter ? converter.fromNative.call(this, result, key) : result;
-        // console.log('getter', key, options, nativeGetterName, !!getConverter, result);
         return result;
     };
 }
 function createSetter(key, options: NativePropertyOptions) {
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function (newVal) {
-        // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal, nativeSetterName, options.converter);
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
             this.native[nativeSetterName](actualVal);
             this._buildStyle = null;
         }
-        // this.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: key, value: actualVal });
     };
 }
 
-// function hasSetter(obj, prop) {
-//     const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-//     return descriptor && !!descriptor['set'];
-// }
 function nativePropertyGenerator(target: Object, key: string, options?: NativePropertyOptions) {
     Object.defineProperty(target, key, {
         get: createGetter(key, options),
@@ -115,75 +107,28 @@ export function _createImageSourceFromSrc(value: string | ImageSource | ImageAss
     if (typeof value === 'string' || value instanceof String) {
         value = value.trim();
 
-        const source = new ImageSource();
+        let source: ImageSource;
         if (isDataURI(value)) {
             const base64Data = value.split(',')[1];
             if (base64Data !== undefined) {
-                // if (sync) {
-                source.loadFromBase64(base64Data);
-                // return source;
-                // imageLoaded();
-                // } else {
-                // return source.fromBase64(base64Data).then(() => source);
-                // .then(imageLoaded);
-                // }
+                source = ImageSource.fromBase64Sync(base64Data);
             }
         } else if (isFileOrResourcePath(value)) {
             if (value.indexOf(RESOURCE_PREFIX) === 0) {
                 const resPath = value.substr(RESOURCE_PREFIX.length);
-                // if (sync) {
-                source.loadFromResource(resPath);
-                // return source.fromResource(resPath).then(() => source);
-                // imageLoaded();
-                // } else {
-                //     this.imageSource = null;
-                //     source.fromResource(resPath)
-                //     // .then(imageLoaded);
-                // }
+                source = ImageSource.fromResourceSync(resPath);
             } else {
-                // if (sync) {
-                source.loadFromFile(value);
-                // return source.fromFile(value).then(() => source);
-                // imageLoaded();
-                // } else {
-                //     this.imageSource = null;
-                //     source.fromFile(value).then(imageLoaded);
-                // }
+                source = ImageSource.fromFileSync(value);
             }
         } else {
-            // this.imageSource = null;
-            // return fromUrl(value);
-            // fromUrl(value);
-            // .then(
-            //     r => {
-            //         if (this['_url'] === value) {
-            //             this.imageSource = r;
-            //             this.isLoading = false;
-            //         }
-            //     },
-            //     err => {
-            //         // catch: Response content may not be converted to an Image
-            //         this.isLoading = false;
-            //         if (traceEnabled()) {
-            //             if (typeof err === 'object' && err.message) {
-            //                 err = err.message;
-            //             }
-            //             traceWrite(err, traceCategories.Debug);
-            //         }
-            //     }
-            // );
         }
         return source;
     } else if (value instanceof ImageSource) {
-        // Support binding the imageSource trough the src property
-        // return Promise.resolve(value);
         return value;
     } else if (value instanceof ImageAsset) {
-        // const result = await fromAsset(value);
-        return null;
+        return new ImageSource(value.nativeImage);
     } else {
         return new ImageSource(value);
-        // return Promise.resolve(fromNativeSource(value));
     }
 }
 export function capitalize(s) {

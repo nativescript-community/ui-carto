@@ -36,7 +36,6 @@ export class Marker extends BaseBillboardVectorElement<NTMarker, MarkerOptions> 
             const nativePos = this.getNativePos(options.position, options.projection);
             result = NTMarker.alloc().initWithPosStyle(nativePos, style);
         }
-        // result['owner'] = new WeakRef(this);
         return result;
     }
     buildStyle() {

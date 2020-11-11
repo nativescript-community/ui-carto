@@ -153,7 +153,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     constructor() {
         super();
         if (!isLicenseKeyRegistered()) {
-            // this.log('need NTMapView register', this.style['licenseKey'], getLicenseKey());
             const license = this.style['licenseKey'] || getLicenseKey();
             if (license) {
                 registerLicense(license);

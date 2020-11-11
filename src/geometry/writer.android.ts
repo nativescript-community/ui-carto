@@ -28,7 +28,6 @@ export class WKBGeometryWriter extends BaseNative<com.carto.geometry.WKBGeometry
     }
     writeGeometry(value: Geometry<any, any>) {
         const geometry = value.getNative ? value.getNative() : value;
-        console.log('writeGeometry', value, geometry);
         return this.getNative().writeGeometry(geometry);
     }
 }

@@ -228,12 +228,6 @@ export class CartoPackageManager extends DataSource<com.akylas.carto.additions.A
             return this.getNative().getServerPackagesCallback(new com.akylas.carto.additions.ServerPackagesCallback({ onServerPackages: callback as any }));
         }
         return this.getNative().getServerPackages();
-        // console.log('getServerPackages', vector.size());
-        // const result = [];
-        // for (let index = 0; index < vector.size(); index++) {
-        //     result[index] = vector.get(index);
-        // }
-        // return result as PackageInfo[];
     }
     setPackagePriority(id: string, priority: number) {
         this.getNative().setPackagePriority(id, priority);
@@ -246,7 +240,6 @@ export class CartoPackageManager extends DataSource<com.akylas.carto.additions.A
     }
     suggestPackages(position: MapPos, projection: Projection) {
         const vector = this.getNative().suggestPackages(toNativeMapPos(position), projection.getNative());
-        // console.log('getServerPackages', vector.size());
         const result = [];
         for (let index = 0; index < vector.size(); index++) {
             result[index] = vector.get(index);

@@ -126,7 +126,6 @@ export class ZippedAssetPackage extends BaseNative<NTZippedAssetPackage, ZippedA
 }
 
 function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
-    // console.log('walkDir', dirPath);
     const folder = Folder.fromPath(dirPath);
     folder.eachEntity((entity: FileSystemEntity) => {
         if (Folder.exists(entity.path)) {
@@ -141,33 +140,25 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
 @NativeClass
 export class NTDirAssetPackageImpl extends NTAssetPackage {
     assetNames: NTStringVector;
-    // context: android.content.Context;
     dirPath: string;
     cartoDirPath: string;
     loadUsingNS = false;
-    // private _owner: WeakRef<CartoPackageManagerListener>;
 
     public static new(): NTDirAssetPackageImpl {
         const result = NTDirAssetPackageImpl.alloc().init() as any;
-        // delegate._owner = owner;
         return result;
     }
     public initialize(options: DirAssetPackageOptions) {
         const dirPath = options.dirPath;
-        // this.context = context;
         this.loadUsingNS = !!options.loadUsingNS;
         this.dirPath = getFileName(dirPath);
         this.cartoDirPath = getRelativePathToApp(dirPath);
-        // console.log('DirAssetPackageNativeImpl', dirPath, this.dirPath, this.cartoDirPath, this.loadUsingNS);
-        // this.dirPath = dirPath;
     }
     public loadAsset(name) {
         if (!name) {
             return null;
         }
-        const startTime = Date.now();
         let result: NTBinaryData;
-        // console.log(`loadAsset ${name}`, this.loadUsingNS);
         if (this.loadUsingNS) {
             const data = File.fromPath(path.join(this.dirPath, name)).readSync() as NSData;
             const arr = new ArrayBuffer(data.length);
@@ -176,23 +167,17 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
         } else {
             result = NTAssetUtils.loadAsset(path.join(this.cartoDirPath, name));
         }
-        // console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
         return result;
     }
     public getAssetNames() {
         if (this.assetNames == null) {
             try {
-                const startTime = Date.now();
                 this.assetNames = NTStringVector.alloc().init();
                 const test = [];
                 walkDir(this.dirPath, (fileRelPath: string) => {
                     this.assetNames.add(fileRelPath);
                     test.push(fileRelPath);
                 });
-
-                // console.log(`getAssetNames done ${this.assetNames.size()}: ${test}`);
-                // console.log(`getAssetNames done in ${Date.now() - startTime} ms`);
-                // }
             } catch (e) {}
         }
         return this.assetNames;
@@ -201,11 +186,8 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
 
 export class DirAssetPackage extends BaseNative<NTDirAssetPackageImpl, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
-        // this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
-            // this.log('intDirAssetPackageClass done');
             const result = NTDirAssetPackageImpl.new();
-            // this.log('about to initialize');
             result.initialize(options);
             return result;
         } else {

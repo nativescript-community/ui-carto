@@ -25,7 +25,6 @@ export interface MapPropertyOptions {
     converter?: Function;
     defaultValue?: any;
     nativeGetterName?: string;
-    // nativeSetterName?: string;
     getConverter?: Function;
     ios?: {
         nativeGetterName?: string;
@@ -40,7 +39,6 @@ export interface MapPropertyOptions {
 function createGetter(key: string, options: MapPropertyOptions) {
     const nativeGetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const getConverter = options.getConverter;
-    // console.log('createGetter', key, options, nativeGetterName, !!getConverter);
     return function () {
         let result;
         if (this.nativeViewProtected && this.nativeViewProtected[nativeGetterName]) {
@@ -49,26 +47,17 @@ function createGetter(key: string, options: MapPropertyOptions) {
             result = this.style[key] || options.defaultValue;
         }
         result = getConverter ? getConverter.call(this, result) : result;
-        // console.log('getter', key, options, nativeGetterName, !!getConverter, result);
         return result;
     };
 }
 function createSetter(key, options: MapPropertyOptions) {
-    // console.log('createSetter', key, options);
     return function (newVal) {
-        // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal);
         const actualVal = options.converter ? options.converter(newVal) : newVal;
         this.style[key] = actualVal;
-        // this.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: key, value: actualVal });
     };
 }
 
-function hasSetter(obj, prop) {
-    const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-    return descriptor && !!descriptor['set'];
-}
 function mapPropertyGenerator(target: Object, key: string, options?: MapPropertyOptions) {
-    // console.log('mapPropertyGenerator', key, Object.keys(options));
     Object.defineProperty(target, key, {
         get: createGetter(key, options),
         set: createSetter(key, options),
@@ -80,7 +69,6 @@ export function mapProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function mapProperty(options: MapPropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function mapProperty(...args) {
     const options = args[0];
-    // console.log('test deco', typeof options, args[0], args[1]);
     if (args[1] === undefined) {
         return function (target: any, key?: string, descriptor?: PropertyDescriptor) {
             return mapPropertyGenerator(target, key, options);
@@ -90,41 +78,8 @@ export function mapProperty(...args) {
     }
 }
 
-// const mapProperty = (target: Object, key: string | symbol) => {
-//     // property value
-//     // let _val = this[key];
-
-//     // property getter
-//     const getter = function() {
-
-//         if (this.nativeViewProtected) {
-//             return (this as CartoViewBase)['getMap' + key.toString()]();
-//         }
-//         return this.style.key;
-//     };
-
-//     // property setter
-//     const setter = function(newVal) {
-//         this.style[key] = newVal;
-//     };
-
-//     // Delete property.
-//     // if (delete this[key]) {
-//     // Create new property with getter and setter
-//     Object.defineProperty(target, key, {
-//         get: getter,
-//         set: setter,
-//         enumerable: true,
-//         configurable: true
-//     });
-//     // }
-// };
-
 export class Layers<T extends any> {
     constructor(private native: any) {}
-    // constructor(size?: number) {
-    //     this.native = new T(size);
-    // }
     count() {
         return this.native.count();
     }
@@ -198,9 +153,6 @@ export abstract class CartoViewBase extends ContentView {
         }
     }
 
-    log(...args) {
-        console.log(`[${this.constructor.name}]`, ...args);
-    }
     public onLoaded() {
         super.onLoaded();
         if (!this.mapReady) {
