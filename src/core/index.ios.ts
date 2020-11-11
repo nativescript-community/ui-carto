@@ -39,6 +39,10 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}
     getCenter() {
         return fromNativeMapPos(this.getNative().getCenter());
     }
+
+    toJSON() {
+        return { southwest: this.southwest, northeast: this.northeast };
+    }
 }
 
 export function nativeVectorToArray<T>(vector: NativeVector<T>) {
