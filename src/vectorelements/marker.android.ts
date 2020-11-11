@@ -10,10 +10,7 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
         return new com.carto.styles.MarkerStyleBuilder();
     }
     @nativeProperty width: number;
-    // @nativeProperty hideIfOverlapped: boolean;
-    // @nativeProperty scaleWithDPI: boolean;
     @nativeProperty size: number;
-    // @nativeProperty placementPriority: number;
     @nativeColorProperty color: Color | string;
     @nativeCartoImageProperty bitmap: string;
     @nativeProperty anchorPointX: number;
@@ -34,7 +31,6 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
 export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
     createNative(options: MarkerOptions) {
         const style = this.buildStyle();
-        // this.log('creating marker', options.position, options.projection, options.geometry, options.styleBuilder);
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
             const geometry = options.geometry.native ? options.geometry.getNative() : options.geometry;
@@ -43,7 +39,6 @@ export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.
             const nativePos = this.getNativePos(options.position, options.projection);
             result = new com.carto.vectorelements.Marker(nativePos, style);
         }
-        // result['owner'] = new WeakRef(this);
         return result;
     }
     buildStyle() {

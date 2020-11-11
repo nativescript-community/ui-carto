@@ -232,7 +232,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
             const native: com.carto.layers.TileLayer = layer.getNative();
             if (!!native) {
                 const layers = this.mapView.getLayers();
-                // console.log('addLayer', index, layers.count(), native);
                 if (index !== undefined && index < layers.count()) {
                     layers.insert(index, native);
                 } else {

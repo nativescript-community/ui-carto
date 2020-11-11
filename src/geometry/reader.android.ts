@@ -37,7 +37,6 @@ export class WKBGeometryReader extends BaseNative<com.carto.geometry.WKBGeometry
         return new com.carto.geometry.WKBGeometryReader();
     }
     readGeometry(value: number[] | ArrayBuffer | com.carto.core.BinaryData) {
-        console.log('readGeometry', value instanceof com.carto.core.BinaryData);
         if (!(value instanceof com.carto.core.BinaryData)) {
             value = new com.carto.core.BinaryData(value as any);
         }

@@ -180,9 +180,7 @@ export class ZippedAssetPackage extends BaseNative<com.carto.utils.ZippedAssetPa
 
 function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
     const folder = Folder.fromPath(dirPath);
-    // console.log('walkDir', dirPath, folder, folder.getEntitiesSync());
     folder.eachEntity((entity: FileSystemEntity) => {
-        // console.log('entity', entity.path, Folder.exists(entity.path));
         if (Folder.exists(entity.path)) {
             walkDir(entity.path, cb, currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
         } else {
@@ -193,15 +191,12 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
 }
 export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAssetPackage, DirAssetPackageOptions> {
     assetNames: com.carto.core.StringVector;
-    // context: android.content.Context;
     _dirPath: string;
     _cartoDirPath: string;
     loadUsingNS = false;
     @nonenumerable _nInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
     createNative(options: DirAssetPackageOptions) {
-        // this.log('DirAssetPackage', options.dirPath, getFileName(options.dirPath), Folder.exists(getFileName(options.dirPath)));
         if (Folder.exists(getFileName(options.dirPath))) {
-            // this.log('intDirAssetPackageClass done');
             this._nInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
                 getAssetNames: this.getAssetNames.bind(this),
                 loadAsset: this.loadAsset.bind(this),
@@ -209,11 +204,9 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
             const result = new com.akylas.carto.additions.AKAssetPackage(this._nInterface);
 
             const dirPath = options.dirPath;
-            // this.context = context;
             this.loadUsingNS = !!options.loadUsingNS;
             this._dirPath = getFileName(dirPath);
             this._cartoDirPath = getRelativePathToApp(dirPath);
-            // this.log('about to initialize', this.loadUsingNS, this._dirPath, this._cartoDirPath);
             return result;
         } else {
             console.error(`could not find dir: ${options.dirPath}`);
@@ -221,36 +214,24 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
         }
     }
     public loadAsset(name) {
-        // if (showDebug) {
-        // console.log(`loadAsset ${this._dirPath} "${name}"`);
-        // }
         if (!name) {
             return null;
         }
-        // const startTime = Date.now();
         let result: com.carto.core.BinaryData;
         if (this.loadUsingNS) {
             result = new com.carto.core.BinaryData(File.fromPath(path.join(this._dirPath, name)).readSync());
         } else {
             result = com.carto.utils.AssetUtils.loadAsset(path.join(this._cartoDirPath, name));
         }
-        // console.log(`loadAsset done in ${Date.now() - startTime} ms for ${name}`);
         return result;
     }
     public getAssetNames() {
-        // console.log('getAssetNames');
         if (!this.assetNames) {
             try {
-                // const startTime = Date.now();
                 this.assetNames = new com.carto.core.StringVector();
-                // const test = [];
                 walkDir(this._dirPath, (fileRelPath: string) => {
                     this.assetNames.add(fileRelPath);
-                    // test.push(fileRelPath);
                 });
-
-                // console.log(`getAssetNames done ${this.assetNames.size()}: ${this.dirPath}`);
-                // }
             } catch (e) {}
         }
         return this.assetNames;

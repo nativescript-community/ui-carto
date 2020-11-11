@@ -8,7 +8,6 @@ export { BaseNative, nativeProperty };
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeColorProperty(...args) {
-    // const options = args[1] === undefined ? args[0] : undefined;
     return nativeProperty(
         {
             converter: {
@@ -33,16 +32,13 @@ export function nativeEnumProperty(...args) {
     return nativeProperty({}, ...args);
 }
 export function nativeAndroidEnumProperty(androidEnum, options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any {
-    // console.log('nativeAndroidEnumProperty', androidEnum, options);
     return nativeProperty(
         Object.assign(options || {}, {
             converter: {
                 fromNative(value: typeof androidEnum) {
-                    // console.log('nativeAndroidEnumProperty', 'fromNative', value, value.swigValue());
                     return value.swigValue();
                 },
                 toNative(value: any) {
-                    // console.log('nativeAndroidEnumProperty', 'fromNtoNativeative', value, androidEnum, androidEnum.swigToEnum(value));
                     return androidEnum.swigToEnum(value);
                 },
             },

@@ -153,11 +153,6 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     getLocalPackages() {
         const vector = this.getNative().getLocalPackages();
         return vector;
-        // const result = [];
-        // for (let index = 0; index < vector.size(); index++) {
-        //     result[index] = vector.get(index);
-        // }
-        // return result as PackageInfo[];
     }
     getServerPackage(packageId: string) {
         return this.getNative().getServerPackage(packageId);
@@ -165,11 +160,6 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     getServerPackages() {
         const vector = this.getNative().getServerPackages();
         return vector;
-        // const result = [];
-        // for (let index = 0; index < vector.size(); index++) {
-        //     result[index] = vector.get(index);
-        // }
-        // return result as PackageInfo[];
     }
     setPackagePriority(id: string, priority: number) {
         this.getNative().setPackagePriorityPriority(id, priority);
@@ -183,7 +173,6 @@ export class CartoPackageManager extends DataSource<NTCartoPackageManager, Carto
     }
     suggestPackages(position: MapPos, projection: Projection) {
         const vector = this.getNative().suggestPackagesProjection(toNativeMapPos(position), projection.getNative());
-        // console.log('getServerPackages', vector.size());
         const result = [];
         for (let index = 0; index < vector.size(); index++) {
             result[index] = vector.get(index);
