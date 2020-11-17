@@ -2,7 +2,6 @@ import { getRelativePathToApp, nativeProperty } from '../index.common';
 import { NMLModelOptions } from './nmlmodel';
 import { BasePointVectorElement } from './index.ios';
 
-
 export class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions> {
     @nativeProperty scale: number;
 
