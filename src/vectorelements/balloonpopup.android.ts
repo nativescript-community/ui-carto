@@ -1,4 +1,4 @@
-import { BasePointVectorElement, BillboardStyleBuilder } from '.';
+import { BasePointVectorElement, BillboardStyleBuilder } from './index.android';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from '@nativescript/core/color';
 import { nativeCartoImageProperty, nativeColorProperty } from '..';

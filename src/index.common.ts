@@ -89,7 +89,7 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         }
     }
     native: T;
-    duringInit = false;
+    protected duringInit = false;
     initNativeView(native: T, options: U) {
         this.duringInit = true;
         for (const key in options) {

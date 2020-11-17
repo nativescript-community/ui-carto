@@ -2,7 +2,8 @@ import { Color } from '@nativescript/core/color';
 import { nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
+import { BaseBillboardVectorElement, BillboardStyleBuilder } from './index.android';
+import { BillboardOrientation, BillboardScaling } from '.';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {

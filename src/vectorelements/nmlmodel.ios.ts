@@ -1,6 +1,6 @@
 import { getRelativePathToApp, nativeProperty } from '../index.common';
 import { NMLModelOptions } from './nmlmodel';
-import { BasePointVectorElement } from '.';
+import { BasePointVectorElement } from './index.ios';
 
 
 export class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions> {

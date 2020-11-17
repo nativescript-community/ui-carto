@@ -165,6 +165,6 @@ export abstract class BillboardStyleBuilder<T extends NTBillboardStyleBuilder, U
     @nativeProperty attachAnchorPointX: number;
     @nativeProperty attachAnchorPointY: number;
 
-    _buildStyle: NTStyleBuilder;
+    _buildStyle: NTStyle;
     abstract buildStyle();
 }

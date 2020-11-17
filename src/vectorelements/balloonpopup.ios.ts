@@ -1,10 +1,8 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
-import { BasePointVectorElement, BaseVectorElement, BillboardStyleBuilder, VectorElementOptions, VectorElementStyleBuilderOptions } from '.';
-import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from '@nativescript/core/color';
-import { toNativeMapPos } from '../core';
 import { nativeCartoImageProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
+import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
+import { BasePointVectorElement, BillboardStyleBuilder } from './index.ios';
 
 export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<NTBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {

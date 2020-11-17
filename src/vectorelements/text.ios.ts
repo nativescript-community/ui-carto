@@ -1,8 +1,9 @@
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder } from '.';
+import { BillboardOrientation, BillboardStyleBuilder } from '.';
+import { BaseBillboardVectorElement } from './index.ios';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {

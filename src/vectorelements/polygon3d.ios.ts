@@ -1,8 +1,8 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
-import { BaseLineVectorElement } from '.';
+import { BaseLineVectorElement } from './index.ios';
 
 export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon3DStyleBuilder, Polygon3DStyleBuilderOptions> {
     createNative(options: Polygon3DStyleBuilderOptions) {

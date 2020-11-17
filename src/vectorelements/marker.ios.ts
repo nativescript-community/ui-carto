@@ -2,7 +2,8 @@ import { Color } from '@nativescript/core/color';
 import { nativeCartoImageProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
+import { BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
+import { BaseBillboardVectorElement } from './index.ios';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
