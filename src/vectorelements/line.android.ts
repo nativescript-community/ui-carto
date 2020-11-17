@@ -3,7 +3,7 @@ import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty } 
 import { nativeProperty } from '../index.common';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
-import { BaseLineVectorElement } from '.';
+import { BaseLineVectorElement } from './index.android';
 import { BaseVectorElementStyleBuilder } from './index.common';
 export { MapBounds };
 

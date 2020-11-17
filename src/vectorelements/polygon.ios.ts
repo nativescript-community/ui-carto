@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { BaseLineVectorElement } from '.';
+import { BaseLineVectorElement } from './index.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from '@nativescript/core/color';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';

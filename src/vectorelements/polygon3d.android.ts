@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { BaseLineVectorElement } from '.';
+import { BaseLineVectorElement } from './index.android';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 import { Color } from '@nativescript/core/color';
 import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';

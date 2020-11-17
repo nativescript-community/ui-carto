@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { BasePointVectorElement } from '.';
+import { BasePointVectorElement } from './index.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
 import { toNativeMapPos } from '../core';

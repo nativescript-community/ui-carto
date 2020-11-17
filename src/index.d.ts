@@ -5,7 +5,6 @@ import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } fr
 export abstract class BaseNative<T, U extends {}> extends Observable {
     options: U;
     native: T;
-    duringInit: boolean;
     constructor(options?: U, native?: T);
     initNativeView(native: T, options: U): void;
     getNative(): T;

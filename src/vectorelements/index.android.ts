@@ -159,6 +159,6 @@ export abstract class BillboardStyleBuilder<T extends com.carto.styles.Billboard
     @nativeProperty attachAnchorPointX: number;
     @nativeProperty attachAnchorPointY: number;
 
-    _buildStyle: com.carto.styles.StyleBuilder;
+    _buildStyle: com.carto.styles.Style;
     abstract buildStyle();
 }

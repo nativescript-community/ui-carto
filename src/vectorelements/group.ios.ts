@@ -5,6 +5,7 @@ export class Group extends GroupBase {
     getNativePos(pos: MapPos) {
         return null;
     }
+    //@ts-ignore
     get position() {
         return this.options.position;
     }
@@ -12,6 +13,7 @@ export class Group extends GroupBase {
         this.options.position = pos;
         this.elements.forEach((el) => (el.position = pos));
     }
+    //@ts-ignore
     get visible() {
         return this.options.visible;
     }
@@ -19,6 +21,7 @@ export class Group extends GroupBase {
         this.options.visible = value;
         this.elements.forEach((el) => (el.visible = value));
     }
+    //@ts-ignore
     get metaData(): { [k: string]: string } {
         return this.options.metaData;
     }

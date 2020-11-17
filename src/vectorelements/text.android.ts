@@ -3,7 +3,8 @@ import { Color } from '@nativescript/core/color';
 import { nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardStyleBuilder } from '.';
+import { BillboardOrientation, BillboardStyleBuilder } from '.';
+import { BaseBillboardVectorElement } from './index.android';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {

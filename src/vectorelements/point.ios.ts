@@ -1,5 +1,5 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { BasePointVectorElement } from '.';
+import { BasePointVectorElement } from './index.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
 import { nativeColorProperty } from '..';
