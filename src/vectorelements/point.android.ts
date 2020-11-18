@@ -3,8 +3,9 @@ import { BasePointVectorElement } from './index.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
 import { toNativeMapPos } from '../core';
-import { nativeColorProperty } from '..';
+import { geometryFromArgs, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
+import { Geometry } from '../geometry';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
@@ -50,6 +51,11 @@ export class Point extends BasePointVectorElement<com.carto.vectorelements.Point
         if (this.native && !this.duringInit) {
             this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
+        }
+    }
+    set geometry(geometry: Geometry) {
+        if (this.native) {
+            this.native.setGeometry(geometryFromArgs(geometry));
         }
     }
 }

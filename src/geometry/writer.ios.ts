@@ -1,9 +1,10 @@
 import { BaseNative } from '../index.common';
 import { Projection } from '../projections';
 import { MapPosVector } from '../core';
-import { mapPosVectorFromArgs, nativeProperty } from '..';
+import { featureCollectionFromArgs, mapPosVectorFromArgs, nativeProperty } from '..';
 import { GeoJSONGeometryWriterOptions, WKBGeometryWriterOptions, WKTGeometryWriterOptions } from './writer';
 import { Geometry } from '.';
+import { FeatureCollection } from './feature';
 
 export class GeoJSONGeometryWriter extends BaseNative<NTGeoJSONGeometryWriter, GeoJSONGeometryWriterOptions> {
     createNative() {
@@ -11,6 +12,9 @@ export class GeoJSONGeometryWriter extends BaseNative<NTGeoJSONGeometryWriter, G
     }
     writePoses(value: MapPosVector) {
         this.getNative().writeGeometry(new NTLineGeometry(mapPosVectorFromArgs(value)));
+    }
+    writeFeatureCollection(value: FeatureCollection) {
+        this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
     }
     set sourceProjection(value: Projection) {
         this.native && this.native.setSourceProjection(value.getNative());

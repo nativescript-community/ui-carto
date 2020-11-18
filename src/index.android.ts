@@ -3,6 +3,8 @@ import { Color } from '@nativescript/core/color';
 import { NativePropertyOptions } from '.';
 import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
+import { FeatureCollection } from './geometry/feature';
+import { Geometry } from './geometry';
 export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -82,6 +84,29 @@ export function nativeImageProperty(...args) {
         },
         ...args
     );
+}
+export function featureCollectionFromArgs<T = DefaultLatLonKeys>(collection: FeatureCollection<T>) {
+    if (!collection) {
+        return null;
+    }
+    let nativeCollection: com.carto.geometry.FeatureCollection = collection as any;
+
+    if (typeof (collection as any).getNative === 'function') {
+        nativeCollection = collection.getNative();
+    }
+    return nativeCollection;
+}
+
+export function geometryFromArgs<T = DefaultLatLonKeys>(geometry: Geometry<T>) {
+    if (!geometry) {
+        return null;
+    }
+    let nativegeometry: com.carto.geometry.Geometry = geometry as any;
+
+    if (typeof (geometry as any).getNative === 'function') {
+        nativegeometry = geometry.getNative();
+    }
+    return nativegeometry;
 }
 
 export function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[] | com.carto.core.MapPosVector, ignoreAltitude = true) {

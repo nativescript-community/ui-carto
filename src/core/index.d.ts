@@ -61,7 +61,7 @@ export class DoubleVector extends NativeVector<number> {}
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<any, {}> {
     public northeast: GenericMapPos<T>;
     public southwest: GenericMapPos<T>;
-    constructor(northeast: GenericMapPos<T>, southwest: GenericMapPos<T>);
+    constructor(northeast?: GenericMapPos<T>, southwest?: GenericMapPos<T>);
     contains(position: GenericMapPos<T> | MapBounds): boolean;
     intersects(position: MapBounds<T>): boolean;
     equals(position: MapBounds<T>): boolean;

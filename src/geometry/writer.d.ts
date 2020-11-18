@@ -7,7 +7,8 @@ export interface GeoJSONGeometryWriterOptions {
 }
 export class GeoJSONGeometryWriter<T = DefaultLatLonKeys> extends BaseNative<any, GeoJSONGeometryWriterOptions> {
     targetProjection?: Projection;
-    writePoses(value: MapPosVector);
+    writePoses(value: MapPosVector): string;
+    writeFeatureCollection(value: FeatureCollection): string;
 }
 
 export interface WKBGeometryWriterOptions {

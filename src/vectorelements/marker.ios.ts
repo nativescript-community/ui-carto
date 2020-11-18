@@ -1,9 +1,10 @@
 import { Color } from '@nativescript/core/color';
-import { nativeCartoImageProperty, nativeColorProperty } from '..';
+import { geometryFromArgs, nativeCartoImageProperty, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.ios';
+import { Geometry } from '../geometry';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -58,6 +59,12 @@ export class Marker extends BaseBillboardVectorElement<NTMarker, MarkerOptions> 
         if (this.native && !this.duringInit) {
             this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
+        }
+    }
+
+    set geometry(geometry: Geometry) {
+        if (this.native) {
+            this.native.setGeometry(geometryFromArgs(geometry));
         }
     }
 }

@@ -1,6 +1,7 @@
 /* eslint-disable no-redeclare */
 import { Observable } from '@nativescript/core/data/observable';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from './core';
+import { FeatureCollection } from './geometry/feature';
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
     options: U;
@@ -34,6 +35,8 @@ export declare function nativeProperty(options: NativePropertyOptions): (target:
 export declare function nativeProperty(...args);
 
 export declare function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[], ignoreAltitude?: boolean): any;
+export declare function featureCollectionFromArgs<T = DefaultLatLonKeys>(positions: FeatureCollection<T>): any;
+export declare function geometryFromArgs<T = DefaultLatLonKeys>(geometry: Geometry<T>): any;
 export declare function mapPosVectorVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVectorVector<T> | GenericMapPos<T>[][], ignoreAltitude?: boolean): any;
 
 export declare function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;

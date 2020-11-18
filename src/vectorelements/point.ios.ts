@@ -2,8 +2,9 @@ import { BaseVectorElementStyleBuilder } from './index.common';
 import { BasePointVectorElement } from './index.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
-import { nativeColorProperty } from '..';
+import { geometryFromArgs, nativeColorProperty } from '..';
 import { nativeProperty } from '../index.common';
+import { Geometry } from '../geometry';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
@@ -49,6 +50,11 @@ export class Point extends BasePointVectorElement<NTPoint, PointOptions> {
         if (this.native && !this.duringInit) {
             this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
+        }
+    }
+    set geometry(geometry: Geometry) {
+        if (this.native) {
+            this.native.setGeometry(geometryFromArgs(geometry));
         }
     }
 }

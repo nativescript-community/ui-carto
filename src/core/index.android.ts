@@ -30,11 +30,15 @@ export const ClickType = {
 };
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.MapBounds, {}> {
-    constructor(public northeast: GenericMapPos<T>, public southwest: GenericMapPos<T>, native?: com.carto.core.MapBounds) {
+    constructor(public northeast?: GenericMapPos<T>, public southwest?: GenericMapPos<T>, native?: com.carto.core.MapBounds) {
         super(undefined, native);
     }
     createNative() {
-        return new com.carto.core.MapBounds(toNativeMapPos<T>(this.southwest), toNativeMapPos<T>(this.northeast));
+        if (this.southwest && this.northeast) {
+            return new com.carto.core.MapBounds(toNativeMapPos<T>(this.southwest), toNativeMapPos<T>(this.northeast));
+        } else {
+            return new com.carto.core.MapBounds();
+        }
     }
     contains(position: GenericMapPos<T> | MapBounds<T>) {
         if (position['southwest']) {
@@ -45,6 +49,9 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.
     }
     intersects(position: MapBounds) {
         return this.getNative().intersects(toNativeMapBounds(position));
+    }
+    shrinkToIntersection(position: MapBounds) {
+        return this.getNative().shrinkToIntersection(toNativeMapBounds(position));
     }
     equals(position: MapBounds) {
         return this.getNative().equals(toNativeMapBounds(position));

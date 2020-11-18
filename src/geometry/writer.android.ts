@@ -4,7 +4,7 @@ import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
 import { Geometry } from '.';
 import { MapPosVector } from '../core';
-import { mapPosVectorFromArgs, nativeProperty } from '..';
+import { featureCollectionFromArgs, mapPosVectorFromArgs, nativeProperty } from '..';
 
 export class GeoJSONGeometryWriter extends BaseNative<com.carto.geometry.GeoJSONGeometryWriter, GeoJSONGeometryWriterOptions> {
     createNative() {
@@ -12,6 +12,9 @@ export class GeoJSONGeometryWriter extends BaseNative<com.carto.geometry.GeoJSON
     }
     writePoses(value: MapPosVector) {
         this.getNative().writeGeometry(new com.carto.geometry.LineGeometry(mapPosVectorFromArgs(value)));
+    }
+    writeFeatureCollection(value: FeatureCollection) {
+        this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
     }
     set sourceProjection(value: Projection) {
         this.native && this.native.setSourceProjection(value.getNative());

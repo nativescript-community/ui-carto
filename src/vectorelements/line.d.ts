@@ -25,6 +25,7 @@ export class LineStyleBuilderOptions extends VectorElementOptions {
     stretchFactor?: number;
 }
 export class LineOptions<T = DefaultLatLonKeys> extends LineVectorElementOptions<T> {
+    geometry?: LineGeometry;
     styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions;
     projection?: Projection;
 }
@@ -48,6 +49,7 @@ export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Line
     endType?: LineEndType;
     clickWidth?: number;
     stretchFactor?: number;
+    geometry: LineGeometry<T>;
     setPoses(positions: MapPosVector<T> | GenericMapPos<T>[]);
     getPoses(): MapPosVector<T> | GenericMapPos<T>[];
     getGeometry(): LineGeometry<T>;

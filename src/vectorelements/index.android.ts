@@ -6,6 +6,7 @@ import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
+import { Geometry, LineGeometry } from '../geometry';
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {

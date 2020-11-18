@@ -3,7 +3,8 @@ import { BaseLineVectorElement } from './index.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from '@nativescript/core/color';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
-import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
+import { Geometry } from '../geometry';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {
@@ -75,6 +76,11 @@ export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
         if (this.native && !this.duringInit) {
             this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
+        }
+    }
+    set geometry(geometry: Geometry) {
+        if (this.native) {
+            this.native.setGeometry(geometryFromArgs(geometry));
         }
     }
 }

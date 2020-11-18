@@ -1,7 +1,7 @@
 import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
 import { nativeVariantToJS } from '../utils';
 import { Geometry } from '.';
-import { DefaultLatLonKeys } from '../core';
+import { DefaultLatLonKeys, fromNativeMapBounds, LatitudeKey, LongitudeKey, MapBounds } from '../core';
 
 export class FeatureCollection implements IFeatureCollection {
     constructor(protected native: NTFeatureCollection) {}
@@ -26,6 +26,31 @@ export class FeatureCollection implements IFeatureCollection {
     }
     getNative() {
         return this.native;
+    }
+    getBounds() {
+        let minLat = Number.MAX_SAFE_INTEGER;
+        let minLon = Number.MAX_SAFE_INTEGER;
+        let maxLat = -Number.MAX_SAFE_INTEGER;
+        let maxLon = -Number.MAX_SAFE_INTEGER;
+        const featureCount = this.featureCount;
+        for (let index = 0; index < featureCount; index++) {
+            const geometry = this.getGeometry(index);
+            const bounds = fromNativeMapBounds(geometry.getBounds());
+            minLat = Math.min(minLat, bounds.northeast[LatitudeKey]);
+            minLon = Math.min(minLon, bounds.northeast[LongitudeKey]);
+            maxLat = Math.max(maxLat, bounds.southwest[LatitudeKey]);
+            maxLon = Math.max(maxLon, bounds.southwest[LongitudeKey]);
+        }
+        return new MapBounds(
+            {
+                [LatitudeKey]: minLat,
+                [LongitudeKey]: minLon,
+            },
+            {
+                [LatitudeKey]: maxLat,
+                [LongitudeKey]: maxLon,
+            }
+        );
     }
 }
 
