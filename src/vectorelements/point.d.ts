@@ -1,6 +1,7 @@
 import { Color } from '@nativescript/core/color';
 import { BasePointVectorElement, BaseVectorElementStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions } from '.';
 import { DefaultLatLonKeys } from '../core';
+import { Geometry } from '../geometry';
 
 export class PointStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;
@@ -14,10 +15,12 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<any, PointS
 }
 
 export class PointOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
+    geometry?: Geometry;
     styleBuilder?: PointStyleBuilder | PointStyleBuilderOptions;
 }
 export class Point<T = DefaultLatLonKeys> extends BasePointVectorElement<any, PointOptions<T>, T> {
     styleBuilder?: PointStyleBuilder | PointStyleBuilderOptions;
+    geometry?: Geometry;
     style?: any;
     size?: number;
     color?: string | Color;

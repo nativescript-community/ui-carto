@@ -1,6 +1,7 @@
 import { Color } from '@nativescript/core/color';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVectorVector } from '../core';
+import { Geometry } from '../geometry';
 import { Projection } from '../projections';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
 export class PolygonStyleBuilderOptions extends VectorElementOptions {
@@ -18,6 +19,7 @@ export class PolygonOptions<T = DefaultLatLonKeys> extends LineVectorElementOpti
     holes?: GenericMapPos<T>[][] | MapPosVectorVector<T>;
     projection?: Projection;
     styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions;
+    geometry?: Geometry;
 }
 
 export class Polygon<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, PolygonOptions<T>, T> {

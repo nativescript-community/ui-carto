@@ -17,11 +17,15 @@ export enum ClickType {
 
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}> {
-    constructor(public northeast: GenericMapPos<T>, public southwest: GenericMapPos<T>, native?: NTMapBounds) {
+    constructor(public northeast?: GenericMapPos<T>, public southwest?: GenericMapPos<T>, native?: NTMapBounds) {
         super(undefined, native);
     }
     createNative() {
-        return NTMapBounds.alloc().initWithMinMax(toNativeMapPos(this.southwest), toNativeMapPos(this.northeast));
+        if (this.southwest && this.northeast) {
+            return NTMapBounds.alloc().initWithMinMax(toNativeMapPos<T>(this.southwest), toNativeMapPos<T>(this.northeast));
+        } else {
+            return NTMapBounds.alloc().init();
+        }
     }
     contains(position: GenericMapPos<T> | MapBounds<T>) {
         if (position['southwest']) {
@@ -32,6 +36,9 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}
     }
     intersects(position: MapBounds<T>) {
         return this.getNative().intersects(toNativeMapBounds<T>(position));
+    }
+    shrinkToIntersection(position: MapBounds) {
+        return this.getNative().shrinkToIntersection(toNativeMapBounds(position));
     }
     equals(position: MapBounds<T>) {
         return this.getNative().isEqualInternal(toNativeMapBounds<T>(position));
@@ -118,6 +125,9 @@ export function fromNativeMapBounds<T = DefaultLatLonKeys>(bounds: NTMapBounds) 
 export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
     if (bounds instanceof NTMapBounds) {
         return bounds;
+    }
+    if (typeof bounds.getNative === 'function') {
+        return bounds.getNative();
     }
     return NTMapBounds.alloc().initWithMinMax(toNativeMapPos<T>(bounds.southwest), toNativeMapPos<T>(bounds.northeast));
 }

@@ -1,10 +1,11 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { Color } from '@nativescript/core/color';
-import { mapPosVectorFromArgs, nativeColorProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty } from '..';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './index.ios';
 import { nativeProperty } from '../index.common';
+import { LineGeometry } from '../geometry';
 
 export { MapBounds };
 export enum LineJointType {
@@ -121,6 +122,11 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     }
     getPoses() {
         return this.positions;
+    }
+    set geometry(geometry: LineGeometry) {
+        if (this.native) {
+            this.native.setGeometry(geometryFromArgs(geometry));
+        }
     }
     getGeometry() {
         return this.getNative().getGeometry();

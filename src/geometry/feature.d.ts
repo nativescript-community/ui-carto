@@ -21,6 +21,7 @@ export class FeatureCollection<T = DefaultLatLonKeys> {
     getFeatureCount(): number;
     readonly featureCount: number;
     getNative();
+    getBounds(): MapBounds<T>
 }
 export class VectorTileFeatureCollection<T = DefaultLatLonKeys> extends FeatureCollection {
     getFeature(index: number): VectorTileFeature<T>;
