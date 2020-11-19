@@ -31,10 +31,11 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<any, MarkerStyleBu
 
 export class MarkerOptions<T = DefaultLatLonKeys> extends BillboardVectorElementOptions<T> {
     styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions;
-    geometry?: Geometry;
+    geometry?: Geometry<T>;
 }
 export class Marker<T = DefaultLatLonKeys> extends BaseBillboardVectorElement<any, MarkerOptions<T>, T> {
-    styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions | any;
+    styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions ;
+    geometry?: Geometry<T>;
     style?: any;
     size?: number;
     placementPriority?: number;

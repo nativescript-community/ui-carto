@@ -11,7 +11,7 @@ export class PolygonStyleBuilderOptions extends VectorElementOptions {
 }
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<any, PolygonStyleBuilderOptions> {
     color: Color | string;
-    lineStyleBuilder: LineStyleBuilder | LineStyleBuilderOptions | any;
+    lineStyleBuilder: LineStyleBuilder | LineStyleBuilderOptions ;
     buildStyle(): any;
 }
 
@@ -19,13 +19,14 @@ export class PolygonOptions<T = DefaultLatLonKeys> extends LineVectorElementOpti
     holes?: GenericMapPos<T>[][] | MapPosVectorVector<T>;
     projection?: Projection;
     styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions;
-    geometry?: Geometry;
+    geometry?: Geometry<T>;
 }
 
 export class Polygon<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, PolygonOptions<T>, T> {
-    styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions | any;
+    styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions ;
+    geometry?: Geometry<T>;
     style?: any;
     size?: number;
     color?: string | Color;
-    lineStyleBuilder?: LineStyleBuilder | LineStyleBuilderOptions | any;
+    lineStyleBuilder?: LineStyleBuilder | LineStyleBuilderOptions ;
 }

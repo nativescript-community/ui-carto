@@ -37,7 +37,7 @@ export class BillboardVectorElementOptions<K = DefaultLatLonKeys> extends PointV
     rotation?: number;
 }
 export class LineVectorElementOptions<T = DefaultLatLonKeys> extends VectorElementOptions {
-    positions: MapPosVector<T> | GenericMapPos<T>[];
+    positions?: MapPosVector<T> | GenericMapPos<T>[];
     projection?: Projection;
     ignoreAltitude?: boolean;
 }
@@ -59,7 +59,7 @@ export abstract class BaseVectorElement<T, U extends VectorElementOptions> exten
     metaData: { [k: string]: string };
 }
 export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
-    position: GenericMapPos<K>;
+    position?: GenericMapPos<K>;
     projection?: Projection;
     getNativePos(pos: GenericMapPos<K>, projection?: Projection): any;
 }
@@ -67,7 +67,7 @@ export abstract class BaseBillboardVectorElement<T, U extends BillboardVectorEle
     rotation?: number;
 }
 export abstract class BaseLineVectorElement<T, U extends LineVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
-    positions: MapPosVector<K> | GenericMapPos<K>[];
+    positions?: MapPosVector<K> | GenericMapPos<K>[];
     projection?: Projection;
 }
 export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {}

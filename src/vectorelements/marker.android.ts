@@ -34,8 +34,7 @@ export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.
         const style = this.buildStyle();
         let result: com.carto.vectorelements.Marker;
         if (options.geometry) {
-            const geometry = options.geometry.native ? options.geometry.getNative() : options.geometry;
-            result = new com.carto.vectorelements.Marker(geometry, style);
+            result = new com.carto.vectorelements.Marker(geometryFromArgs(options.geometry), style);
         } else {
             const nativePos = this.getNativePos(options.position, options.projection);
             result = new com.carto.vectorelements.Marker(nativePos, style);

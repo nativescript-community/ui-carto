@@ -2,7 +2,7 @@ import { DefaultLatLonKeys, GenericMapPos, MapBounds, MapPos, MapPosVector } fro
 import { BaseNative } from '../index.common';
 
 export interface GeometryOptions<T = DefaultLatLonKeys> {}
-export abstract class Geometry<T = DefaultLatLonKeys, U extends GeometryOptions = GeometryOptions> extends BaseNative<any, U> {
+export abstract class Geometry<T = DefaultLatLonKeys, U extends GeometryOptions = GeometryOptions<T>> extends BaseNative<any, U> {
     getCenterPos(): GenericMapPos<T>;
     getBounds(): MapBounds<T>;
 }

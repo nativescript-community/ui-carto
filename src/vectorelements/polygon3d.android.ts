@@ -2,7 +2,7 @@ import { BaseVectorElementStyleBuilder } from './index.common';
 import { BaseLineVectorElement } from './index.android';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 import { Color } from '@nativescript/core/color';
-import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 
 export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.Polygon3DStyleBuilder, Polygon3DStyleBuilderOptions> {
     createNative(options: Polygon3DStyleBuilderOptions) {
@@ -23,7 +23,12 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.car
 export class Polygon3D extends BaseLineVectorElement<com.carto.vectorelements.Polygon3D, Polygon3DOptions> {
     createNative(options: Polygon3DOptions) {
         const style = this.buildStyle();
-        const result = new com.carto.vectorelements.Polygon3D(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style, options.height);
+        let result: com.carto.vectorelements.Polygon3D;
+        if (options.positions) {
+            result = new com.carto.vectorelements.Polygon3D(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style, options.height);
+        } else if (options.geometry) {
+            result = new com.carto.vectorelements.Polygon3D(geometryFromArgs(options.geometry), style, options.height);
+        }
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.ignoreAltitude));
         }
