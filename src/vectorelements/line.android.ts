@@ -102,9 +102,12 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
     }
     createNative(options: LineOptions) {
         const style = this.buildStyle();
-        const result = new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
-        // result['owner'] = new WeakRef(this);
-        return result;
+        if (options.positions) {
+            return new com.carto.vectorelements.Line(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
+        } else if (options.geometry) {
+            return new com.carto.vectorelements.Line(geometryFromArgs(options.geometry), style);
+        }
+        return null;
     }
     buildStyle() {
         let style: com.carto.styles.LineStyle;

@@ -18,14 +18,16 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<any, Po
 
 export class Polygon3DOptions<T = DefaultLatLonKeys> extends LineVectorElementOptions<T> {
     height: number;
-    positions: MapPosVector<T> | GenericMapPos<T>[];
+    positions?: MapPosVector<T> | GenericMapPos<T>[];
+    geometry?: Geometry<T>;
     holes?: GenericMapPos<T>[][] | MapPosVectorVector<T>;
     projection?: Projection;
     styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions;
 }
 
 export class Polygon3D<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Polygon3DOptions<T>, T> {
-    styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions | any;
+    styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions ;
+    geometry?: Geometry<T>;
     style?: any;
     size?: number;
     color?: string | Color;

@@ -25,7 +25,7 @@ export class LineStyleBuilderOptions extends VectorElementOptions {
     stretchFactor?: number;
 }
 export class LineOptions<T = DefaultLatLonKeys> extends LineVectorElementOptions<T> {
-    geometry?: LineGeometry;
+    geometry?: LineGeometry<T>;
     styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions;
     projection?: Projection;
 }
@@ -40,7 +40,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<any, LineSty
 }
 
 export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, LineOptions<T>, T> {
-    styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions | any;
+    styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions ;
     ignoreAltitude?: boolean;
     style?: any;
     color?: string | Color;

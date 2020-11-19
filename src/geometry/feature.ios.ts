@@ -1,7 +1,6 @@
-import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
+import { LatitudeKey, LongitudeKey, MapBounds, fromNativeMapBounds } from '../core';
 import { nativeVariantToJS } from '../utils';
-import { Geometry } from '.';
-import { DefaultLatLonKeys, fromNativeMapBounds, LatitudeKey, LongitudeKey, MapBounds } from '../core';
+import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
 
 export class FeatureCollection implements IFeatureCollection {
     constructor(protected native: NTFeatureCollection) {}
@@ -63,7 +62,7 @@ export class VectorTileFeatureCollection extends FeatureCollection {
         const nResult = this.native.getFeature(index);
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: nResult.getGeometry(),
+            geometry: nResult.getGeometry() as any,
             id: nResult.getId(),
             layerName: nResult.getLayerName(),
         } as VectorTileFeature;

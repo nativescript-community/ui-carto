@@ -50,11 +50,15 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto
 export class Polygon extends BaseLineVectorElement<com.carto.vectorelements.Polygon, PolygonOptions> {
     createNative(options: PolygonOptions) {
         const style = this.buildStyle();
-        const result = new com.carto.vectorelements.Polygon(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
+        let result: com.carto.vectorelements.Polygon;
+        if (options.positions) {
+            result = new com.carto.vectorelements.Polygon(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style);
+        } else if (options.geometry) {
+            result = new com.carto.vectorelements.Polygon(geometryFromArgs(options.geometry), style);
+        }
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.ignoreAltitude));
         }
-        result['owner'] = new WeakRef(this);
         return result;
     }
     buildStyle() {

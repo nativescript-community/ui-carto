@@ -11,10 +11,10 @@ export class GeoJSONGeometryWriter extends BaseNative<com.carto.geometry.GeoJSON
         return new com.carto.geometry.GeoJSONGeometryWriter();
     }
     writePoses(value: MapPosVector) {
-        this.getNative().writeGeometry(new com.carto.geometry.LineGeometry(mapPosVectorFromArgs(value)));
+        return this.getNative().writeGeometry(new com.carto.geometry.LineGeometry(mapPosVectorFromArgs(value)));
     }
     writeFeatureCollection(value: FeatureCollection) {
-        this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
+        return this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
     }
     set sourceProjection(value: Projection) {
         this.native && this.native.setSourceProjection(value.getNative());

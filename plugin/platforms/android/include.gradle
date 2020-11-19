@@ -9,7 +9,8 @@ repositories {
 	}
 }
 dependencies {
-	def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.3.1"
-	compile(name:'carto-mobile-sdk-4.3.3.rc1', ext:'aar')
+	// def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.3.3"
 	// implementation "com.carto:carto-mobile-sdk:$cartoMobileVersion@aar"
+    compile(name:'carto-mobile-sdk-4.3.3.rc1', ext:'aar')
+
 }

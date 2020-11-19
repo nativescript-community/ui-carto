@@ -1,6 +1,6 @@
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { Color } from '@nativescript/core';
-import { mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 import { BaseLineVectorElement } from './index.ios';
 
@@ -23,11 +23,15 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolyg
 export class Polygon3D extends BaseLineVectorElement<NTPolygon3D, Polygon3DOptions> {
     createNative(options: Polygon3DOptions) {
         const style = this.buildStyle();
-        const result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style, options.height);
+        let result: NTPolygon3D;
+        if (options.positions) {
+            result = NTPolygon3D.alloc().initWithPosesStyleHeight(mapPosVectorFromArgs(options.positions, options.ignoreAltitude), style, options.height);
+        } else if (options.geometry) {
+            result = NTPolygon3D.alloc().initWithGeometryStyleHeight(geometryFromArgs(options.geometry), style, options.height);
+        }
         if (options.holes) {
             result.setHoles(mapPosVectorVectorFromArgs(options.holes, options.ignoreAltitude));
         }
-        // result['owner'] = new WeakRef(this);
         return result;
     }
     buildStyle() {
