@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.9](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.8...v1.4.9) (2020-11-20)
+
+
+### Bug Fixes
+
+* toJSON for MapBounds ([c52ce64](https://github.com/farfromrefug/nativescript-carto/commit/c52ce6435dd8f7c9e3c690453f8a1c392855c0e3))
+
+
+### Features
+
+* geometry features ([c818cec](https://github.com/farfromrefug/nativescript-carto/commit/c818cec62e22684e3f860346f73bc4f7744a7b99))
+
+
+
+
+
 ## [1.4.8](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.7...v1.4.8) (2020-11-02)
 
 
