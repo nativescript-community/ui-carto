@@ -30,7 +30,7 @@ export const BillboardScaling = {
     },
 };
 
-export class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
+export abstract class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
     @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
@@ -51,6 +51,10 @@ export class BaseVectorElement<T extends NTVectorElement, U extends VectorElemen
             }
             this.native.setMetaData(theMap);
         }
+    }
+    abstract buildStyle();
+    rebuildStyle() {
+        (this.native as any).setStyle(this.buildStyle());
     }
 }
 
@@ -121,6 +125,7 @@ export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElem
     createNative() {
         return null;
     }
+    buildStyle() {}
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {
     elements: BaseVectorElement<any, any>[];
@@ -140,7 +145,7 @@ export class VectorElementVector extends BaseNative<NTVectorElementVector, any> 
         return this.elements.length;
     }
     getElement(index: number): BaseVectorElement<any, any> {
-        return this.elements[index] || new BaseVectorElement(undefined, this.native.get(index));
+        return this.elements[index] || new VectorElement(undefined, this.native.get(index));
     }
     add(element: BaseVectorElement<any, any>) {
         this.elements.push(element);

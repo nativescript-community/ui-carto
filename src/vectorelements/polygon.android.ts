@@ -2,7 +2,7 @@ import { Color } from '@nativescript/core/color';
 import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 import { Geometry } from '../geometry';
 import { BaseLineVectorElement } from './index.android';
-import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseVectorElementStyleBuilder, lineStyleBuilderProperty, styleBuilderProperty } from './index.common';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 
@@ -48,6 +48,10 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto
 }
 
 export class Polygon extends BaseLineVectorElement<com.carto.vectorelements.Polygon, PolygonOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty width: number;
+    @lineStyleBuilderProperty lineColor: Color | string;
+    @lineStyleBuilderProperty lineWidth: number;
     createNative(options: PolygonOptions) {
         const style = this.buildStyle();
         let result: com.carto.vectorelements.Polygon;
@@ -81,6 +85,11 @@ export class Polygon extends BaseLineVectorElement<com.carto.vectorelements.Poly
             this.options.styleBuilder = value as any;
             this.native.setStyle(this.buildStyle());
         }
+    }
+
+    rebuildLineStyle() {
+        this.options.styleBuilder.lineStyleBuilder = this.options.styleBuilder.lineStyleBuilder;
+        this.rebuildStyle();
     }
     set geometry(geometry: Geometry) {
         if (this.native) {

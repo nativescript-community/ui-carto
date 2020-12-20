@@ -20,7 +20,7 @@ export function nativeColorProperty(...args) {
                     return new Color((value as com.carto.graphics.Color).getARGB()).hex;
                 },
                 toNative(value) {
-                    const theColor = typeof value === 'string' ? new Color(value) : value;
+                    const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a);
                 },
             },

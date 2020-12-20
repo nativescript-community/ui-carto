@@ -17,7 +17,7 @@ export function nativeColorProperty(...args) {
                     return new Color(value.getARGB() as number).hex;
                 },
                 toNative(value) {
-                    const theColor = typeof value === 'string' ? new Color(value) : value;
+                    const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a);
                 },
             },

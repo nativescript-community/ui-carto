@@ -1,4 +1,4 @@
-import { GeometryOptions, LineGeometryOptions, PointGeometryOptions } from '.';
+import { GeometryOptions, LineGeometryOptions, PointGeometryOptions, PolygonGeometryOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { MapPosVector, fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core';
 import { BaseNative } from '../index.common';
@@ -23,6 +23,15 @@ export class PointGeometry extends Geometry<com.carto.geometry.PointGeometry, Po
 export class LineGeometry extends Geometry<com.carto.geometry.LineGeometry, LineGeometryOptions> {
     createNative(options: LineGeometryOptions) {
         return new com.carto.geometry.LineGeometry(mapPosVectorFromArgs(options.poses));
+    }
+
+    getPoses() {
+        return new MapPosVector(this.getNative().getPoses());
+    }
+}
+export class PolygonGeometry extends Geometry<com.carto.geometry.PolygonGeometry, PolygonGeometryOptions> {
+    createNative(options: PolygonGeometryOptions) {
+        return new com.carto.geometry.PolygonGeometry(mapPosVectorFromArgs(options.poses));
     }
 
     getPoses() {

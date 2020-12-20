@@ -115,9 +115,6 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
             this.native.setStyle(this.buildStyle());
         }
     }
-    rebuildStyle() {
-        this.native.setStyle(this.buildStyle());
-    }
     setPoses(positions: MapPosVector | MapPos[]) {
         this.positions = positions;
         if (this.native) {
