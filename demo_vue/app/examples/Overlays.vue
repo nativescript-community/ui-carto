@@ -54,7 +54,7 @@ export default class OverlaysExample extends BaseMaps {
         // Initialize a vector layer with the previous data source
         const vectorLayer = new VectorLayer({
             dataSource: source,
-            visibleZoomRange: [10, 24]
+            visibleZoomRange: [10, 24],
         });
         vectorLayer.setVectorElementEventListener(this as any, projection);
         // Add the previous vector layer to the map
@@ -107,22 +107,22 @@ export default class OverlaysExample extends BaseMaps {
         switch (id) {
             case 'voyager':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.VOYAGER
+                    style: CartoMapStyle.VOYAGER,
                 });
                 break;
             case 'positron':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.POSITRON
+                    style: CartoMapStyle.POSITRON,
                 });
                 break;
             case 'darkmatter':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.DARKMATTER
+                    style: CartoMapStyle.DARKMATTER,
                 });
                 break;
             default: {
                 this.currentLayer = new CartoOnlineRasterTileLayer({
-                    source: id + '@2x'
+                    source: id + '@2x',
                 });
             }
         }
@@ -147,8 +147,8 @@ export default class OverlaysExample extends BaseMaps {
         action({
             title: 'Layer',
             message: 'Select Layer',
-            actions: this.layerTypes
-        }).then(result => {
+            actions: this.layerTypes,
+        }).then((result) => {
             result && this.setCurrentLayer(result);
         });
     }
@@ -156,8 +156,8 @@ export default class OverlaysExample extends BaseMaps {
         action({
             title: 'Language',
             message: 'Select Language',
-            actions: this.languages
-        }).then(result => {
+            actions: this.languages,
+        }).then((result) => {
             result && this.updateLanguage(result);
         });
     }

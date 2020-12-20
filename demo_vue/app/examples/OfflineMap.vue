@@ -8,7 +8,7 @@
             <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
                 <Button text="Download" @tap="onDownloadClick"></Button>
                 <Button text="Language" @tap="onSelectLanguage"></Button>
-                <Button text="Network" @tap="onNetworkSwitch" :color="online?'green':'gray'"></Button>
+                <Button text="Network" @tap="onNetworkSwitch" :color="online ? 'green' : 'gray'"></Button>
             </StackLayout>
         </GridLayout>
     </Page>
@@ -27,9 +27,7 @@ import { File, Folder, knownFolders, path } from '@nativescript/core/file-system
 import { isAndroid } from '@nativescript/core/platform';
 import { CartoOfflineVectorTileLayer } from 'nativescript-carto/layers/vector';
 import * as permissions from 'nativescript-perms';
-import { Feedback } from 'nativescript-feedback';
 import * as dialogs from '@nativescript/core/ui/dialogs';
-var feedback = new Feedback();
 import { Component, Prop } from 'vue-property-decorator';
 import BaseMaps from './BaseMaps';
 
@@ -40,11 +38,11 @@ export default class OfflineMap extends BaseMaps {
     currentLayerType = 'voyager';
     languages = ['Local', 'en', 'de', 'es', 'it', 'fr', 'ru'];
     online = true;
-    packageManager: CartoPackageManager
-    mapView: CartoMap
-    onlineLayer
-    offlineLayer
-    currentLayer
+    packageManager: CartoPackageManager;
+    mapView: CartoMap;
+    onlineLayer;
+    offlineLayer;
+    currentLayer;
     destroyed() {
         console.log('OfflineMap destroyed');
         this.packageManager.stop(false);
@@ -56,14 +54,12 @@ export default class OfflineMap extends BaseMaps {
         super.onMapReady(e);
         permissions
             .request('storage')
-            .then(result => {
+            .then((result) => {
                 // that.set('message', 'WooHoo you granted me all the permissions!');
                 const mapView = (this.mapView = e.object as CartoMap);
                 let dataFolder;
                 if (isAndroid) {
-                    dataFolder = android.os.Environment.getExternalStorageDirectory()
-                        .getAbsolutePath()
-                        .toString();
+                    dataFolder = android.os.Environment.getExternalStorageDirectory().getAbsolutePath().toString();
                 } else {
                     dataFolder = knownFolders.documents().path;
                 }
@@ -71,7 +67,7 @@ export default class OfflineMap extends BaseMaps {
                 const packageManager = (this.packageManager = new CartoPackageManager({
                     source: 'carto.streets',
                     dataFolder: Folder.fromPath(path.join(dataFolder, 'com.carto.mappackages')).path,
-                    listener: this
+                    listener: this,
                 }));
                 packageManager.start();
                 packageManager.startPackageListDownload();
@@ -82,7 +78,7 @@ export default class OfflineMap extends BaseMaps {
                     this.setOfflineMap();
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
                 // that.set('message', "Oops, I'm so sad, I was only granted " + count + ' of 4 permissions!');
             });
@@ -91,7 +87,7 @@ export default class OfflineMap extends BaseMaps {
     setOnlineMap() {
         if (this.onlineLayer == null) {
             this.onlineLayer = new CartoOnlineVectorTileLayer({
-                style: CartoMapStyle.VOYAGER
+                style: CartoMapStyle.VOYAGER,
             });
         }
 
@@ -110,7 +106,7 @@ export default class OfflineMap extends BaseMaps {
             this.offlineLayer = new CartoOfflineVectorTileLayer({
                 preloading: true,
                 packageManager: this.packageManager,
-                style: CartoMapStyle.VOYAGER
+                style: CartoMapStyle.VOYAGER,
             });
         }
         this.mapView.addLayer(this.offlineLayer);
@@ -128,40 +124,36 @@ export default class OfflineMap extends BaseMaps {
         // contentView.updatePackages();
         const message = 'Packages list updated';
         console.log(message);
-        feedback.show({ message });
     }
 
     onPackageListFailed() {
         // contentView.updatePackages();
         const message = 'Packages list failed';
         console.log(message);
-        feedback.show({ message });
     }
 
     onPackageStatusChanged(id, version, status) {
         const message = `Packages status changed ${id} ${status}`;
         console.log(message);
-        feedback.show({ message });
         // contentView.onStatusChange(id, status);
     }
     onPackageUpdated(id, version) {
         const message = `Packages updated ${id} ${version}`;
         console.log(message);
-        feedback.show({ message });
         // contentView.downloadComplete();
     }
 
     onDownloadClick() {
         const packages = nativeVectorToArray<PackageInfo>(this.packageManager.getServerPackages());
-        const list = packages.map(p => p.getName()).sort();
+        const list = packages.map((p) => p.getName()).sort();
         dialogs
             .action({
                 message: 'Download',
                 cancelButtonText: 'Cancel',
-                actions: list
+                actions: list,
             })
-            .then(selected => {
-                const packageIndex = packages.findIndex(p => p.getName() === selected);
+            .then((selected) => {
+                const packageIndex = packages.findIndex((p) => p.getName() === selected);
                 if (packageIndex !== -1) {
                     const result = this.packageManager.startPackageDownload(packages[packageIndex].getPackageId());
                     console.log('selected', selected, packages[packageIndex].getPackageId(), result);
@@ -181,8 +173,8 @@ export default class OfflineMap extends BaseMaps {
         action({
             title: 'Language',
             message: 'Select Language',
-            actions: this.languages
-        }).then(result => {
+            actions: this.languages,
+        }).then((result) => {
             result && this.updateLanguage(result);
         });
     }

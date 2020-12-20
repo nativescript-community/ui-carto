@@ -27,109 +27,109 @@ const samples = [
         component: 'BaseMaps',
         title: 'Online Base Maps',
         description: 'Choice between different base maps, styles, languages',
-        image: '~/assets/images/image_base_maps.png'
+        image: '~/assets/images/image_base_maps.png',
     },
     {
         component: 'CustomDev',
         title: 'Dev example',
-        description: 'live dev example'
+        description: 'live dev example',
     },
     {
         component: 'ReverseGeocoding',
         title: 'Reverse Geocoding',
         description: 'Coding of a point location to a readable address',
-        image: '~/assets/images/icon_sample_reverse_geocoding.png'
+        image: '~/assets/images/icon_sample_reverse_geocoding.png',
     },
     {
         component: 'Geocoding',
         title: 'Geocoding',
         description: 'Converting addresses into geographic coordinates',
-        image: '~/assets/images/icon_sample_geocoding.png'
+        image: '~/assets/images/icon_sample_geocoding.png',
     },
     {
         component: 'CustomRasterDatasource',
         title: 'Custom Raster Data',
         description: 'Customized raster tile data source',
-        image: '~/assets/images/image_custom_raster.png'
+        image: '~/assets/images/image_custom_raster.png',
     },
     {
         component: 'RouteSearch',
         title: 'Search API',
         description: 'Finds points of interest near a route',
-        image: '~/assets/images/icon_sample_route_search.png'
+        image: '~/assets/images/icon_sample_route_search.png',
     },
     {
         component: 'GroundOverlay',
         title: 'Ground Overlays',
         description: 'Shows a non-tiled Bitmap on ground',
-        image: '~/assets/images/image_ground_overlays.png'
+        image: '~/assets/images/image_ground_overlays.png',
     },
     {
         component: 'WmsMap',
         title: 'WMS Map',
         description: 'Use external WMS service for raster tile overlay',
-        image: '~/assets/images/image_wms.png'
+        image: '~/assets/images/image_wms.png',
     },
     {
         component: 'OfflineRouting',
         title: 'Routing',
         description: 'Valhalla Routing and Route Package download',
-        image: '~/assets/images/image_offline_routing.png'
+        image: '~/assets/images/image_offline_routing.png',
     },
     {
         component: 'VectorObjectEditing',
         title: 'Vector Object Editing',
         description: 'Shows usage of an editable vector layer',
-        image: '~/assets/images/image_object_editing.png'
+        image: '~/assets/images/image_object_editing.png',
     },
     {
         component: 'Overlays',
         title: '2D & 3D Overlays',
         description: 'Shows lines, points, polygons, texts, pop-ups and a NMLModel',
-        image: '~/assets/images/image_overlays.png'
+        image: '~/assets/images/image_overlays.png',
     },
     {
         component: 'ClusteredMarkers',
         title: 'Clustered Markers',
         description: 'Shows 20,000 points from bundled geojson',
-        image: '~/assets/images/image_clustered_markers.png'
+        image: '~/assets/images/image_clustered_markers.png',
     },
     {
         component: 'BundledMap',
         title: 'Bundled Map',
         description: 'Offline map of Rome bundled with the app',
-        image: '~/assets/images/image_bundled.png'
+        image: '~/assets/images/image_bundled.png',
     },
     {
         component: 'OfflineMap',
         title: 'Offline Map',
         description: 'Map package download',
-        image: '~/assets/images/image_city_package.png'
+        image: '~/assets/images/image_city_package.png',
     },
     {
         component: 'Capture',
         title: 'Screencapture',
         description: 'Capture rendered mapView as a Bitmap',
-        image: '~/assets/images/image_screencapture.png'
+        image: '~/assets/images/image_screencapture.png',
     },
     {
         component: 'CustomPopup',
         title: 'Custom Popup',
         description: 'Creates a Custom Popup',
-        image: '~/assets/images/image_custom_popup.png'
+        image: '~/assets/images/image_custom_popup.png',
     },
     {
         component: 'GpsLocation',
         title: 'GPS Location',
         description: 'Shows user GPS location on the map',
-        image: '~/assets/images/image_gps_location.png'
+        image: '~/assets/images/image_gps_location.png',
     },
     {
         component: 'BundledPackageData',
         title: 'Package Data',
         description: 'Displays available CARTO Mobile packages',
-        image: '~/assets/images/icon_sample_user_data.png'
-    }
+        image: '~/assets/images/icon_sample_user_data.png',
+    },
 ];
 @Component({})
 export default class App extends BaseVueComponent {
@@ -145,8 +145,8 @@ export default class App extends BaseVueComponent {
         this.$navigateTo(module, {
             props: {
                 title: item.title,
-                description: item.description
-            }
+                description: item.description,
+            },
         } as any);
     }
 }
