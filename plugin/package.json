@@ -24,7 +24,11 @@
         "url": "https://github.com/nativescript-community/ui-carto/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/nativescript-community/ui-carto",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nativescript-community/ui-carto.git"
+    },
+    "homepage": "https://nativescript-community.github.io/ui-carto/",
     "bootstrapper": "nativescript-plugin-seed",
     "gitHead": "b6e046978275bbdf14f2de501e9d3d208ae9e15e"
 }
