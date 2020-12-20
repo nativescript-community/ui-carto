@@ -1,4 +1,4 @@
-import { GeometryOptions, LineGeometryOptions, PointGeometryOptions } from '.';
+import { GeometryOptions, LineGeometryOptions, PointGeometryOptions, PolygonGeometryOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { MapPosVector, fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core';
 import { BaseNative } from '../index.common';
@@ -23,6 +23,16 @@ export class PointGeometry extends Geometry<NTPointGeometry, PointGeometryOption
 export class LineGeometry extends Geometry<NTLineGeometry, LineGeometryOptions> {
     createNative(options: LineGeometryOptions) {
         return NTLineGeometry.alloc().initWithPoses(mapPosVectorFromArgs(options.poses));
+    }
+
+    getPoses() {
+        return new MapPosVector(this.getNative().getPoses());
+    }
+}
+
+export class PolygonGeometry extends Geometry<NTLineGeometry, PolygonGeometryOptions> {
+    createNative(options: PolygonGeometryOptions) {
+        return NTPolygonGeometry.alloc().initWithPoses(mapPosVectorFromArgs(options.poses));
     }
 
     getPoses() {

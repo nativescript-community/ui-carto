@@ -4,7 +4,7 @@ import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
 import { nativeProperty } from '..';
 import { MapPosVector } from '../core';
-import { Geometry } from '.';
+import { Geometry, PolygonGeometry } from '.';
 import { LineGeometry, PointGeometry } from './index.android';
 
 export class GeoJSONGeometryReader extends BaseNative<com.carto.geometry.GeoJSONGeometryReader, GeoJSONGeometryReaderOptions> {
@@ -20,8 +20,10 @@ export class GeoJSONGeometryReader extends BaseNative<com.carto.geometry.GeoJSON
             return new LineGeometry(null, result);
         } else if (result instanceof com.carto.geometry.PointGeometry) {
             return new PointGeometry(null, result);
+        } else if (result instanceof com.carto.geometry.PolygonGeometry) {
+            return new PolygonGeometry(null, result);
         }
-        return null;
+        return result;
     }
     set targetProjection(value: Projection) {
         this.native && this.native.setTargetProjection(value.getNative());

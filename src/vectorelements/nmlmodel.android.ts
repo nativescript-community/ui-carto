@@ -18,4 +18,5 @@ export class NMLModel extends BasePointVectorElement<com.carto.vectorelements.NM
             return null;
         }
     }
+    buildStyle() {}
 }

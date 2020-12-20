@@ -2,7 +2,7 @@ import { BaseNative } from '../index.common';
 import { GeoJSONGeometryReaderOptions, WKBGeometryReaderOptions, WKTGeometryReaderOptions } from './reader';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
-import { Geometry } from '.';
+import { Geometry, PolygonGeometry } from '.';
 import { nativeProperty } from '..';
 import { LineGeometry, PointGeometry } from './index.ios';
 
@@ -19,8 +19,10 @@ export class GeoJSONGeometryReader extends BaseNative<NTGeoJSONGeometryReader, G
             return new LineGeometry(null, result);
         } else if (result instanceof NTPointGeometry) {
             return new PointGeometry(null, result);
+        } else if (result instanceof NTPolygonGeometry) {
+            return new PolygonGeometry(null, result);
         }
-        return null;
+        return result;
     }
     set targetProjection(value: Projection) {
         this.native && this.native.setTargetProjection(value.getNative());

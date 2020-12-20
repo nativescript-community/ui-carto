@@ -5,6 +5,7 @@ import { nativeProperty } from '../index.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { BillboardOrientation, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.android';
+import { styleBuilderProperty } from './index.common';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
@@ -35,6 +36,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.Tex
 
 export class Text extends BaseBillboardVectorElement<com.carto.vectorelements.Text, TextOptions> {
     @nativeProperty text: string;
+    @styleBuilderProperty color: Color | string;
     createNative(options: TextOptions) {
         const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);

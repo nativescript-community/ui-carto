@@ -1,4 +1,4 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
 import { BasePointVectorElement } from './index.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
@@ -24,6 +24,8 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyl
 }
 
 export class Point extends BasePointVectorElement<NTPoint, PointOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty size: number;
     createNative(options: PointOptions) {
         const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);

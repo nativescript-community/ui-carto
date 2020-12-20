@@ -1,4 +1,4 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseVectorElementStyleBuilder, lineStyleBuilderProperty, styleBuilderProperty } from './index.common';
 import { BaseLineVectorElement } from './index.ios';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 import { Color } from '@nativescript/core/color';
@@ -48,6 +48,10 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygon
 }
 
 export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty width: number;
+    @lineStyleBuilderProperty lineColor: Color | string;
+    @lineStyleBuilderProperty lineWidth: number;
     createNative(options: PolygonOptions) {
         const style = this.buildStyle();
 
@@ -87,5 +91,9 @@ export class Polygon extends BaseLineVectorElement<NTPolygon, PolygonOptions> {
         if (this.native) {
             this.native.setGeometry(geometryFromArgs(geometry));
         }
+    }
+    rebuildLineStyle() {
+        this.options.styleBuilder.lineStyleBuilder = this.options.styleBuilder.lineStyleBuilder;
+        this.rebuildStyle();
     }
 }

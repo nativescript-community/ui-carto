@@ -13,10 +13,17 @@ export interface PointGeometryOptions<T = DefaultLatLonKeys> extends GeometryOpt
 export interface LineGeometryOptions<T = DefaultLatLonKeys> extends GeometryOptions<T> {
     poses: MapPosVector<T>;
 }
+export interface PolygonGeometryOptions<T = DefaultLatLonKeys> extends GeometryOptions<T> {
+    poses: MapPosVector<T>;
+}
 export class PointGeometry<T = DefaultLatLonKeys> extends Geometry<T, PointGeometryOptions<T>> {
     getPos(): GenericMapPos<T>;
 }
 
 export class LineGeometry<T = DefaultLatLonKeys> extends Geometry<T, LineGeometryOptions<T>> {
+    getPoses(): MapPosVector<T>;
+}
+
+export class PolygonGeometry<T = DefaultLatLonKeys> extends Geometry<T, PolygonGeometryOptions<T>> {
     getPoses(): MapPosVector<T>;
 }

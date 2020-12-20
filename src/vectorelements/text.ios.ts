@@ -4,6 +4,7 @@ import { nativeProperty } from '../index.common';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { BillboardOrientation, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.ios';
+import { styleBuilderProperty } from './index.common';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {
@@ -34,6 +35,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, 
 
 export class Text extends BaseBillboardVectorElement<NTText, TextOptions> {
     @nativeProperty text: string;
+    @styleBuilderProperty color: Color | string;
     createNative(options: TextOptions) {
         const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);

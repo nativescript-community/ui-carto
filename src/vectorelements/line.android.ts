@@ -4,7 +4,7 @@ import { nativeProperty } from '../index.common';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './index.android';
-import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
 import { LineGeometry } from '../geometry';
 export { MapBounds };
 
@@ -63,18 +63,6 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     }
 }
 
-function styleBuilderProperty(target: Line, propertyKey?, desc?: PropertyDescriptor): any {
-    Object.defineProperty(target, propertyKey, {
-        get() {
-            return this.options.styleBuilder[propertyKey];
-        },
-        set(value) {
-            this.options.styleBuilder[propertyKey] = value;
-            this.rebuildStyle();
-        },
-    });
-}
-
 export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, LineOptions> {
     @styleBuilderProperty color: Color | string;
     @styleBuilderProperty width: number;
@@ -129,9 +117,6 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
             this.options.styleBuilder = value as any;
             this.rebuildStyle();
         }
-    }
-    rebuildStyle() {
-        this.native.setStyle(this.buildStyle());
     }
 
     setPoses(positions: MapPosVector | MapPos[]) {

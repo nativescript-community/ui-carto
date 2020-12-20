@@ -32,7 +32,7 @@ export const BillboardScaling = {
     },
 };
 
-export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
+export abstract class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
     @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
@@ -53,6 +53,10 @@ export class BaseVectorElement<T extends com.carto.vectorelements.VectorElement,
             }
             this.native.setMetaData(theMap);
         }
+    }
+    abstract buildStyle();
+    rebuildStyle() {
+        (this.native as any).setStyle(this.buildStyle());
     }
 }
 export abstract class BasePointVectorElement<
@@ -116,6 +120,7 @@ export class VectorElement extends BaseVectorElement<com.carto.vectorelements.Ve
     createNative() {
         return null;
     }
+    buildStyle() {}
 }
 
 export class VectorElementVector extends BaseNative<com.carto.vectorelements.VectorElementVector, any> {
@@ -130,7 +135,7 @@ export class VectorElementVector extends BaseNative<com.carto.vectorelements.Vec
         return result;
     }
     getElement(index: number): BaseVectorElement<any, any> {
-        return this.elements[index] || new BaseVectorElement(undefined, this.native.get(index));
+        return this.elements[index] || new VectorElement(undefined, this.native.get(index));
     }
     size() {
         if (this.native) {

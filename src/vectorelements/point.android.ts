@@ -1,4 +1,4 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
 import { BasePointVectorElement } from './index.android';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
@@ -25,6 +25,8 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.s
 }
 
 export class Point extends BasePointVectorElement<com.carto.vectorelements.Point, PointOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty size: number;
     createNative(options: PointOptions) {
         const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);

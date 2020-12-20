@@ -18,4 +18,5 @@ export class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions
             return null;
         }
     }
+    buildStyle() {}
 }
