@@ -16,18 +16,18 @@
 <script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseMaps from './BaseMaps';
-import { CartoOnlineVectorTileLayer, ClusteredVectorLayer, VectorLayer, VectorTileEventData } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
-import { CartoMap, MapStableEvent } from 'nativescript-carto/ui';
-import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
+import { CartoOnlineVectorTileLayer, ClusteredVectorLayer, VectorLayer, VectorTileEventData } from '@nativescript-community/ui-carto/layers/vector';
+import { CartoMapStyle, MapPos } from '@nativescript-community/ui-carto/core';
+import { CartoMap, MapStableEvent } from '@nativescript-community/ui-carto/ui';
+import { CartoOnlineRasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
 import { action } from '@nativescript/core/ui/dialogs';
 import { Folder, knownFolders, path } from '@nativescript/core/file-system';
-import { ClusterElementBuilder } from 'nativescript-carto/layers/cluster';
-import { GeoJSONGeometryReader } from 'nativescript-carto/geometry/geojsonreader';
-import { MarkerStyleBuilder, Marker } from 'nativescript-carto/vectorelements/marker';
-import { VectorElementVector } from 'nativescript-carto/vectorelements';
-import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
-import { Projection } from 'nativescript-carto/projections';
+import { ClusterElementBuilder } from '@nativescript-community/ui-carto/layers/cluster';
+import { GeoJSONGeometryReader } from '@nativescript-community/ui-carto/geometry/geojsonreader';
+import { MarkerStyleBuilder, Marker } from '@nativescript-community/ui-carto/vectorelements/marker';
+import { VectorElementVector } from '@nativescript-community/ui-carto/vectorelements';
+import { LocalVectorDataSource } from '@nativescript-community/ui-carto/datasources/vector';
+import { Projection } from '@nativescript-community/ui-carto/projections';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component({})

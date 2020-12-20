@@ -1,5 +1,5 @@
-﻿import { registerLicense } from 'nativescript-carto/ui';
-import { setShowDebug } from 'nativescript-carto/utils';
+﻿import { registerLicense } from '@nativescript-community/ui-carto/ui';
+import { setShowDebug } from '@nativescript-community/ui-carto/utils';
 import * as application from '@nativescript/core/application';
 import { isAndroid } from '@nativescript/core/ui/page';
 

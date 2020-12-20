@@ -3,7 +3,6 @@
         "schema": true
     },
     "search.exclude": {
-        "**/*demo*": true,
         "src/**/*.js": true,
         "src/**/*.js.map": true
     },

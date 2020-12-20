@@ -1,7 +1,7 @@
 // require('./ts_helpers');
 import Vue from 'nativescript-vue';
 import App from './App.vue';
-import { registerLicense } from 'nativescript-carto/ui';
+import { registerLicense } from '@nativescript-community/ui-carto/ui';
 import * as application from '@nativescript/core/application';
 import { knownFolders } from '@nativescript/core/file-system';
 
@@ -24,7 +24,7 @@ require('source-map-support').install({
 import CollectionView from '@nativescript-community/ui-collectionview/vue';
 Vue.use(CollectionView);
 
-import CartoPlugin from 'nativescript-carto/vue';
+import CartoPlugin from '@nativescript-community/ui-carto/vue';
 Vue.use(CartoPlugin);
 
 // Prints Vue logs when --env.production is *NOT* set while building

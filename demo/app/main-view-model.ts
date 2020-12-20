@@ -1,5 +1,5 @@
 import { Observable } from '@nativescript/core/data/observable';
-import { CartoMap } from 'nativescript-carto/ui';
+import { CartoMap } from '@nativescript-community/ui-carto/ui';
 import { Zip } from 'nativescript-zip2';
 import * as fs from '@nativescript/core/file-system';
 

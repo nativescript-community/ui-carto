@@ -19,26 +19,26 @@
 <script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseMaps from './BaseMaps';
-import { CartoMap, MapEventData } from 'nativescript-carto/ui';
+import { CartoMap, MapEventData } from '@nativescript-community/ui-carto/ui';
 import { action } from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
 import { Folder, path, knownFolders } from '@nativescript/core/file-system';
 import * as dialogs from '@nativescript/core/ui/dialogs';
-import { CartoOnlineRasterTileLayer, RasterTileLayer } from 'nativescript-carto/layers/raster';
-import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core';
-import { CartoPackageManager, PackageManagerTileDataSource, PackageStatus, PackageInfo, PackageErrorType } from 'nativescript-carto/packagemanager';
-import { OrderedTileDataSource, MergedMBVTTileDataSource } from 'nativescript-carto/datasources';
-import { PersistentCacheTileDataSource } from 'nativescript-carto/datasources/cache';
-import { CartoOnlineTileDataSource } from 'nativescript-carto/datasources/cartoonline';
-import { MBVectorTileDecoder } from 'nativescript-carto/vectortiles';
-import { HTTPTileDataSource } from 'nativescript-carto/datasources/http';
-import { MarkerStyleBuilder, Marker } from 'nativescript-carto/vectorelements/marker';
-import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
-import { Point, PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
-import { LineStyleBuilder, Line, LineJointType, LineEndType } from 'nativescript-carto/vectorelements/line';
-import { MapClickedEvent, MapStableEvent, MapReadyEvent, MapMovedEvent } from 'nativescript-carto/ui';
-import { Projection } from 'nativescript-carto/projections';
+import { CartoOnlineRasterTileLayer, RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
+import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
+import { CartoMapStyle, MapPos, nativeVectorToArray } from '@nativescript-community/ui-carto/core';
+import { CartoPackageManager, PackageManagerTileDataSource, PackageStatus, PackageInfo, PackageErrorType } from '@nativescript-community/ui-carto/packagemanager';
+import { OrderedTileDataSource, MergedMBVTTileDataSource } from '@nativescript-community/ui-carto/datasources';
+import { PersistentCacheTileDataSource } from '@nativescript-community/ui-carto/datasources/cache';
+import { CartoOnlineTileDataSource } from '@nativescript-community/ui-carto/datasources/cartoonline';
+import { MBVectorTileDecoder } from '@nativescript-community/ui-carto/vectortiles';
+import { HTTPTileDataSource } from '@nativescript-community/ui-carto/datasources/http';
+import { MarkerStyleBuilder, Marker } from '@nativescript-community/ui-carto/vectorelements/marker';
+import { LocalVectorDataSource } from '@nativescript-community/ui-carto/datasources/vector';
+import { Point, PointStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/point';
+import { LineStyleBuilder, Line, LineJointType, LineEndType } from '@nativescript-community/ui-carto/vectorelements/line';
+import { MapClickedEvent, MapStableEvent, MapReadyEvent, MapMovedEvent } from '@nativescript-community/ui-carto/ui';
+import { Projection } from '@nativescript-community/ui-carto/projections';
 import BaseVueComponent from './BaseVueComponent';
 
 @Component({})

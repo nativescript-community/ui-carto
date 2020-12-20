@@ -1,18 +1,18 @@
-import { Marker, MarkerStyleBuilder } from 'nativescript-carto/vectorelements/marker';
-import { Point, PointStyleBuilder } from 'nativescript-carto/vectorelements/point';
-import { MapPos, MapPosVector, MapPosVectorVector } from 'nativescript-carto/core';
+import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/marker';
+import { Point, PointStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/point';
+import { MapPos, MapPosVector, MapPosVectorVector } from '@nativescript-community/ui-carto/core';
 import { Color } from '@nativescript/core/color';
-import { CartoMap } from 'nativescript-carto/ui';
-import { Line, LineStyleBuilder } from 'nativescript-carto/vectorelements/line';
-import { Projection } from 'nativescript-carto/projections';
-import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
-import { Polygon, PolygonStyleBuilder } from 'nativescript-carto/vectorelements/polygon';
-import { Text, TextStyleBuilder } from 'nativescript-carto/vectorelements/text';
-import { VectorLayer } from 'nativescript-carto/layers/vector';
-import { BillboardOrientation } from 'nativescript-carto/vectorelements';
-import { BalloonPopup, BalloonPopupStyleBuilder } from 'nativescript-carto/vectorelements/balloonpopup';
-import { NMLModel } from 'nativescript-carto/vectorelements/nmlmodel';
-import { Polygon3D, Polygon3DStyleBuilder } from 'nativescript-carto/vectorelements/polygon3d';
+import { CartoMap } from '@nativescript-community/ui-carto/ui';
+import { Line, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
+import { Projection } from '@nativescript-community/ui-carto/projections';
+import { LocalVectorDataSource } from '@nativescript-community/ui-carto/datasources/vector';
+import { Polygon, PolygonStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/polygon';
+import { Text, TextStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/text';
+import { VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
+import { BillboardOrientation } from '@nativescript-community/ui-carto/vectorelements';
+import { BalloonPopup, BalloonPopupStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/balloonpopup';
+import { NMLModel } from '@nativescript-community/ui-carto/vectorelements/nmlmodel';
+import { Polygon3D, Polygon3DStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/polygon3d';
 
 export function addPoint1(source: LocalVectorDataSource, projection: Projection) {
     const green = new Color(255, 0, 255, 0);
