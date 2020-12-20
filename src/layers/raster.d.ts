@@ -29,12 +29,14 @@ export interface HillshadeRasterTileLayerOptions extends RasterTileLayerOptions 
     contrast?: number;
     illuminationDirection?: number;
     highlightColor?: Color;
+    shadowColor?: Color;
 }
 export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTileLayerOptions> {
     heightScale?: number;
     contrast?: number;
     illuminationDirection?: number;
     highlightColor?: Color;
+    shadowColor?: Color;
     public getElevation<T = DefaultLatLonKeys>(pos: GenericMapPos<T>): number;
     public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
     public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): DoubleVector;

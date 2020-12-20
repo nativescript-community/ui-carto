@@ -34,6 +34,7 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<com.akylas.car
     @nativeProperty contrast: number;
     @nativeProperty illuminationDirection: number;
     @nativeColorProperty highlightColor: string | Color;
+    @nativeColorProperty shadowColor: string | Color;
     createNative(options: HillshadeRasterTileLayerOptions) {
         if (options.decoder) {
             return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());
