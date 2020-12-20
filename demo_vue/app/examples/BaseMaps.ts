@@ -49,7 +49,7 @@ export default class BaseMaps extends BaseVueComponent {
         if (this.currentLayer) {
             if (this.currentLayer instanceof CartoOnlineVectorTileLayer) {
                 console.log('clearing listener');
-                (this.currentLayer as CartoOnlineVectorTileLayer).setVectorTileEventListener(null);
+                this.currentLayer.setVectorTileEventListener(null);
             }
             mapView.removeLayer(this.currentLayer);
             this.currentLayer = null;
@@ -59,27 +59,27 @@ export default class BaseMaps extends BaseVueComponent {
         switch (id) {
             case 'voyager':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.VOYAGER
+                    style: CartoMapStyle.VOYAGER,
                 });
                 break;
             case 'positron':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.POSITRON
+                    style: CartoMapStyle.POSITRON,
                 });
                 break;
             case 'darkmatter':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.DARKMATTER
+                    style: CartoMapStyle.DARKMATTER,
                 });
                 break;
             default: {
                 this.currentLayer = new CartoOnlineRasterTileLayer({
-                    source: id + '@2x'
+                    source: id + '@2x',
                 });
             }
         }
         if (this.currentLayer instanceof CartoOnlineVectorTileLayer) {
-            (this.currentLayer as CartoOnlineVectorTileLayer).setVectorTileEventListener(this, mapView.projection);
+            this.currentLayer.setVectorTileEventListener(this, mapView.projection);
         }
 
         mapView.addLayer(this.currentLayer);
@@ -99,8 +99,8 @@ export default class BaseMaps extends BaseVueComponent {
         action({
             title: 'Layer',
             message: 'Select Layer',
-            actions: this.layerTypes
-        }).then(result => {
+            actions: this.layerTypes,
+        }).then((result) => {
             result && this.setCurrentLayer(result);
         });
     }
@@ -108,8 +108,8 @@ export default class BaseMaps extends BaseVueComponent {
         action({
             title: 'Language',
             message: 'Select Language',
-            actions: this.languages
-        }).then(result => {
+            actions: this.languages,
+        }).then((result) => {
             result && this.updateLanguage(result);
         });
     }

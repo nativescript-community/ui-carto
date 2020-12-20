@@ -47,21 +47,25 @@ export function addOverlyingLines(map: CartoMap, source: LocalVectorDataSource, 
         { latitude: 59.420502, longitude: 24.643076 },
         { latitude: 59.419149, longitude: 24.645351 },
         { latitude: 59.420393, longitude: 24.648956 },
-        { latitude: 59.422707, longitude: 24.650887 }
+        { latitude: 59.422707, longitude: 24.650887 },
     ];
 
     // .add first line
-    const line1 = new Line({ projection, positions: linePoses, styleBuilder: {
-        color: new Color(255, 255, 255, 255),
-        width: 8
-    } });
+    const line1 = new Line({
+        projection,
+        positions: linePoses,
+        styleBuilder: {
+            color: new Color(255, 255, 255, 255),
+            width: 8,
+        },
+    });
     line1.metaData = { ClickText: 'Line nr 1' };
     source2.add(line1);
 
     // Create another line style, use the same lines positions
     const lineStyleBuilder = new LineStyleBuilder({
         color: new Color(255, 204, 15, 0),
-        width: 12
+        width: 12,
     });
 
     // .add second line to the second layer.
@@ -74,7 +78,7 @@ export function addText1(source: LocalVectorDataSource, projection: Projection) 
     // Create text style
     const builder = new TextStyleBuilder({
         color: new Color(255, 255, 0, 0), // Red
-        orientationMode: BillboardOrientation.FACE_CAMERA
+        orientationMode: BillboardOrientation.FACE_CAMERA,
         // scaleWithDPI: false // This enables higher resolution texts for retina devices, but consumes more memory and is slower
     });
 
@@ -86,7 +90,7 @@ export function addText1(source: LocalVectorDataSource, projection: Projection) 
 
 export function addText2(source: LocalVectorDataSource, projection: Projection) {
     const builder = new TextStyleBuilder({
-        orientationMode: BillboardOrientation.FACE_CAMERA_GROUND
+        orientationMode: BillboardOrientation.FACE_CAMERA_GROUND,
     });
 
     const popup = new Text({ projection, position: { latitude: 59.426869, longitude: 24.633216 }, styleBuilder: builder, text: 'Face camera ground text' });
@@ -98,7 +102,7 @@ export function addText2(source: LocalVectorDataSource, projection: Projection) 
 export function addText3(source: LocalVectorDataSource, projection: Projection) {
     const builder = new TextStyleBuilder({
         fontSize: 22,
-        orientationMode: BillboardOrientation.GROUND
+        orientationMode: BillboardOrientation.GROUND,
     });
 
     const popup = new Text({ projection, position: { latitude: 59.420839, longitude: 24.646457 }, styleBuilder: builder, text: 'Ground text' });
@@ -121,7 +125,7 @@ export function addBalloonPopup1(source: LocalVectorDataSource, projection: Proj
         cornerRadius: 20,
         placementPriority: 1,
         titleFontSize: 10,
-        descriptionFontSize: 10
+        descriptionFontSize: 10,
     });
     // builder.LeftMargins = new BalloonPopupMargins(6, 6, 6, 6);
 
@@ -149,7 +153,7 @@ export function addBalloonPopup2(source: LocalVectorDataSource, projection: Proj
         descriptionFontSize: 11,
         strokeColor: new Color(255, 255, 0, 120),
         strokeWidth: 0,
-        placementPriority: 1
+        placementPriority: 1,
     });
     const marker = GetMarker(projection, { latitude: 59.426939, longitude: 24.646469 }, markerImage);
     source.add(marker);
@@ -166,7 +170,7 @@ export function addBalloonPopup3(source: LocalVectorDataSource, projection: Proj
         descriptionWrap: false,
         placementPriority: 1,
         titleFontSize: 14,
-        descriptionFontSize: 12
+        descriptionFontSize: 12,
     });
 
     const title = "This title will be wrapped if there's not enough space on the screen.";
@@ -179,13 +183,13 @@ export function addBalloonPopup3(source: LocalVectorDataSource, projection: Proj
 export function add2DPolygon(source: LocalVectorDataSource, projection: Projection) {
     const lineBuilder = new LineStyleBuilder({
         width: 1,
-        color: new Color(255, 0, 0, 0)
+        color: new Color(255, 0, 0, 0),
     });
 
     // Create polygon style and positions
     const polygonBuilder = new PolygonStyleBuilder({
         color: new Color(255, 255, 0, 0),
-        lineStyleBuilder: lineBuilder
+        lineStyleBuilder: lineBuilder,
     });
 
     const polygonPoses = [
@@ -197,7 +201,7 @@ export function add2DPolygon(source: LocalVectorDataSource, projection: Projecti
         { latitude: 59.421245, longitude: 24.661444 },
         { latitude: 59.420677, longitude: 24.660199 },
         { latitude: 59.420175, longitude: 24.656552 },
-        { latitude: 59.421472, longitude: 24.65401 }
+        { latitude: 59.421472, longitude: 24.65401 },
     ];
 
     // Create 2 polygon holes
@@ -207,9 +211,13 @@ export function add2DPolygon(source: LocalVectorDataSource, projection: Projecti
             { latitude: 59.418896, longitude: 24.662207 },
             { latitude: 59.417411, longitude: 24.662207 },
             { latitude: 59.417171, longitude: 24.659524 },
-            { latitude: 59.419834, longitude: 24.657615 }
+            { latitude: 59.419834, longitude: 24.657615 },
         ],
-        [{ latitude: 59.421243, longitude: 24.66564 }, { latitude: 59.419463, longitude: 24.668923 }, { latitude: 59.419365, longitude: 24.662893 }]
+        [
+            { latitude: 59.421243, longitude: 24.66564 },
+            { latitude: 59.419463, longitude: 24.668923 },
+            { latitude: 59.419365, longitude: 24.662893 },
+        ],
     ];
 
     // .add polygon
@@ -230,7 +238,7 @@ export function add3DCar(source: LocalVectorDataSource, projection: Projection) 
 export function add3DPolygon(source: LocalVectorDataSource, projection: Projection) {
     // Create 3d polygon style and positions
     const polygon3DStyleBuilder = new Polygon3DStyleBuilder({
-        color: new Color(255, 51, 51, 255)
+        color: new Color(255, 51, 51, 255),
     });
     const polygon3DPoses = new MapPosVector();
     polygon3DPoses.add(projection.fromWgs84({ latitude: 59.416659, longitude: 24.63593 }));
@@ -260,7 +268,7 @@ export function GetMarker(projection: Projection, position: MapPos, image: any) 
     // Create marker style
     const builder = new MarkerStyleBuilder({
         bitmap: image,
-        size: 30
+        size: 30,
     });
 
     // Create and return marker
@@ -270,7 +278,7 @@ export function GetMarker(projection: Projection, position: MapPos, image: any) 
 export function GetPoint(projection: Projection, position: MapPos, color) {
     const pointStyleBuilder = new PointStyleBuilder({
         color,
-        size: 16
+        size: 16,
     });
 
     return new Point({ projection, position, styleBuilder: pointStyleBuilder });

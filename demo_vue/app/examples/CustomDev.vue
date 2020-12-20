@@ -22,7 +22,7 @@ import BaseMaps from './BaseMaps';
 import { CartoMap, MapEventData } from 'nativescript-carto/ui';
 import { action } from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
-import { Folder, path, knownFolders } from '@nativescript/core/file-system/file-system';
+import { Folder, path, knownFolders } from '@nativescript/core/file-system';
 import * as dialogs from '@nativescript/core/ui/dialogs';
 import { CartoOnlineRasterTileLayer, RasterTileLayer } from 'nativescript-carto/layers/raster';
 import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from 'nativescript-carto/layers/vector';
@@ -48,8 +48,8 @@ export default class Example extends BaseMaps {
 
     constructor() {
         super();
-           console.log('constructor');
- }
+        console.log('constructor');
+    }
 
     mounted() {
         console.log('mounted');
@@ -79,7 +79,7 @@ export default class Example extends BaseMaps {
         console.log(e.eventName, e.data);
     };
     onMapMoved = (e: MapEventData) => {
-        const map = (e.object as CartoMap)
+        const map = e.object as CartoMap;
         // console.log('zoom', map.zoom);
         // console.log('bearing', map.bearing);
         // console.log('tilt', map.tilt);
@@ -89,11 +89,10 @@ export default class Example extends BaseMaps {
         console.log('on vector click', info.featureId, info.featureLayerName, info.position);
         return true; // event only for first detected  layer
     };
-    mapProjection: Projection
+    mapProjection: Projection;
     onMapReady(e: MapEventData) {
         console.log('onMapReady');
-        super.onMapReady(e
-        );
+        super.onMapReady(e);
         const mapView = this.mapView;
 
         mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
@@ -110,7 +109,7 @@ export default class Example extends BaseMaps {
         this.packageManager = new CartoPackageManager({
             source: 'carto.streets',
             dataFolder: dataFolder.path,
-            listener: this
+            listener: this,
         });
 
         this.packageManager.start();
@@ -124,7 +123,7 @@ export default class Example extends BaseMaps {
         //         new PackageManagerTileDataSource({ packageManager: this.packageManager }),
         //         new PersistentCacheTileDataSource({
         //             dataSource: new CartoOnlineTileDataSource({ source: 'carto.streets' }),
-            // databasePath: path.join(cacheFolder.path, 'source1')
+        // databasePath: path.join(cacheFolder.path, 'source1')
         //         })
         //     ]
         // });
@@ -135,19 +134,19 @@ export default class Example extends BaseMaps {
                         minZoom: 0,
                         maxZoom: 14,
                         httpHeaders: {
-                            Referer: 'app://com.akylas.nativescript.cartodemo'
+                            Referer: 'app://com.akylas.nativescript.cartodemo',
                         },
-                        url: `http://tiles.basemaps.cartocdn.com/vectortiles/carto.streets/v1/{z}/{x}/{y}.mvt?appToken=e934fef8-6841-4f53-9999-ac579c41e695`
+                        url: `http://tiles.basemaps.cartocdn.com/vectortiles/carto.streets/v1/{z}/{x}/{y}.mvt?appToken=e934fef8-6841-4f53-9999-ac579c41e695`,
                     }),
                     new HTTPTileDataSource({
                         minZoom: 0,
                         maxZoom: 14,
-                        url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`
-                    })
-                ]
+                        url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`,
+                    }),
+                ],
             }),
-            databasePath: path.join(cacheFolder.path, 'source2')
-        }); 
+            databasePath: path.join(cacheFolder.path, 'source2'),
+        });
 
         try {
             this.cartoLayer = new VectorTileLayer({
@@ -155,16 +154,15 @@ export default class Example extends BaseMaps {
                 decoder: new MBVectorTileDecoder({
                     zipPath: '~/assets/cartostyles-v1.zip',
                     style: 'voyager',
-                    liveReload: true
+                    liveReload: true,
                 }),
-                opacity: 1
+                opacity: 1,
             });
             this.cartoLayer.setVectorTileEventListener(this, this.mapProjection);
             mapView.addLayer(this.cartoLayer);
-        } catch(err) {
+        } catch (err) {
             alert(err);
         }
-        
 
         // const dataSource1 = new HTTPTileDataSource({
         //     minZoom: 0,
@@ -198,38 +196,38 @@ export default class Example extends BaseMaps {
         // mapView.addLayer(this.rasterLayer);
 
         const localDataSource = new LocalVectorDataSource({
-            projection: mapView.projection
+            projection: mapView.projection,
         });
         const vectorLayer = new VectorLayer({
             dataSource: localDataSource,
-            visibleZoomRange: [0, 24]
+            visibleZoomRange: [0, 24],
         });
         mapView.addLayer(vectorLayer);
         const markerStyleBuilder = new MarkerStyleBuilder({
             size: 30,
-            color: '#00FF00'
+            color: '#00FF00',
         });
         const marker = new Marker({
             projection: mapView.projection,
             styleBuilder: markerStyleBuilder,
             position: {
                 latitude: 45.1887104,
-                longitude: 5.7013257
-            }
+                longitude: 5.7013257,
+            },
         });
         localDataSource.add(marker);
 
         const pointStyleBuilder = new PointStyleBuilder({
             size: 30,
-            color: '#ff0000'
+            color: '#ff0000',
         });
         const point = new Point({
             projection: mapView.projection,
             styleBuilder: pointStyleBuilder,
             position: {
                 latitude: 45.1887104,
-                longitude: 5.6813257
-            }
+                longitude: 5.6813257,
+            },
         });
         localDataSource.add(point);
 
@@ -237,7 +235,7 @@ export default class Example extends BaseMaps {
             width: 6,
             endType: LineEndType.SQUARE,
             joinType: LineJointType.ROUND,
-            color: '#0000ff'
+            color: '#0000ff',
         });
         const line = new Line({
             projection: mapView.projection,
@@ -245,17 +243,17 @@ export default class Example extends BaseMaps {
             positions: [
                 {
                     latitude: 45.1187104,
-                    longitude: 5.6813257
+                    longitude: 5.6813257,
                 },
                 {
                     latitude: 45.1287104,
-                    longitude: 5.3813257
+                    longitude: 5.3813257,
                 },
                 {
                     latitude: 45.1887104,
-                    longitude: 5.6813257
-                }
-            ]
+                    longitude: 5.6813257,
+                },
+            ],
         });
         localDataSource.add(line);
 
@@ -286,15 +284,15 @@ export default class Example extends BaseMaps {
 
     onDownloadClick() {
         const packages = nativeVectorToArray<PackageInfo>(this.packageManager.getServerPackages());
-        const list = packages.map(p => p.getName()).sort();
+        const list = packages.map((p) => p.getName()).sort();
         dialogs
             .action({
                 message: 'Download',
                 cancelButtonText: 'Cancel',
-                actions: list
+                actions: list,
             })
-            .then(selected => {
-                const packageIndex = packages.findIndex(p => p.getName() === selected);
+            .then((selected) => {
+                const packageIndex = packages.findIndex((p) => p.getName() === selected);
                 if (packageIndex !== -1) {
                     const result = this.packageManager.startPackageDownload(packages[packageIndex].getPackageId());
                     console.log('selected', selected, packages[packageIndex].getPackageId(), result);

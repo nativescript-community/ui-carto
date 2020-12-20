@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2017",
         "module": "esnext",
         "moduleResolution": "node",
         "removeComments": false,
@@ -14,13 +14,30 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "noImplicitUseStrict": true,
-        "lib": ["es6", "dom", "es2015.iterable"],
+        "lib": [
+            "es6",
+            "dom",
+            "es2015.iterable",
+            "es2017"
+        ],
         "baseUrl": ".",
         "paths": {
-            "~/*": ["app/*"],
-            "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"]
+            "~/*": [
+                "app/*"
+            ],
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
         }
     },
-    "include": ["app/**/*", "references.d.ts"],
-    "exclude": ["node_modules", "platforms", "**/angular"]
+    "include": [
+        "app/**/*",
+        "references.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "platforms",
+        "**/angular"
+    ]
 }

@@ -1,11 +1,8 @@
 // require('./ts_helpers');
 import Vue from 'nativescript-vue';
 import App from './App.vue';
-import './styles.scss';
 import { registerLicense } from 'nativescript-carto/ui';
-import { setShowDebug } from 'nativescript-carto/utils';
 import * as application from '@nativescript/core/application';
-import { isAndroid } from '@nativescript/core/ui/page';
 import { knownFolders } from '@nativescript/core/file-system';
 
 const currentApp = knownFolders.currentApp();
@@ -18,13 +15,13 @@ require('source-map-support').install({
 
         return {
             url: sourceMapRelativePath + '/',
-            map: currentApp.getFile(sourceMapRelativePath).readTextSync()
+            map: currentApp.getFile(sourceMapRelativePath).readTextSync(),
         };
-    }
+    },
 });
 // setShowDebug(true);
 
-import CollectionView from 'nativescript-collectionview/vue';
+import CollectionView from '@nativescript-community/ui-collectionview/vue';
 Vue.use(CollectionView);
 
 import CartoPlugin from 'nativescript-carto/vue';
@@ -35,12 +32,12 @@ Vue.config.silent = true;
 // setShowDebug(true)
 // Vue.config.silent = (TNS_ENV === 'production')
 
-if (isAndroid) {
+if (global.isAndroid) {
     application.on(application.launchEvent, () => {
         console.log('launchEvent', !!application.android.context);
         registerLicense(
             'XTUN3Q0ZGSjlTY054SWd2N2NpMTlmdW5LZ3B6OG5NWEhBaFFoSXd5RU9TZnlYd0htWm1SUDF2SjBiR25VUUE9PQoKYXBwVG9rZW49NWI5MTdkMTAtOThhYy00YjU2LTk1NGEtMzYxYWFhNzE4ZjQ3CnBhY2thZ2VOYW1lPWNvbS5ha3lsYXMubmF0aXZlc2NyaXB0LmNhcnRvZGVtbwpvbmxpbmVMaWNlbnNlPTEKcHJvZHVjdHM9c2RrLWFuZHJvaWQtNC4qCndhdGVybWFyaz1jYXJ0b2RiCg==',
-            result => {
+            (result) => {
                 console.log('registeredLicense', result);
             }
         );
@@ -52,5 +49,5 @@ if (isAndroid) {
 }
 
 new Vue({
-    render: h => h('frame', [h(App)])
+    render: (h) => h('frame', [h(App)]),
 }).$start();

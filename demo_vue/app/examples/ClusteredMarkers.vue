@@ -21,7 +21,7 @@ import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
 import { CartoMap, MapStableEvent } from 'nativescript-carto/ui';
 import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
 import { action } from '@nativescript/core/ui/dialogs';
-import { Folder, knownFolders, path } from '@nativescript/core/file-system/file-system';
+import { Folder, knownFolders, path } from '@nativescript/core/file-system';
 import { ClusterElementBuilder } from 'nativescript-carto/layers/cluster';
 import { GeoJSONGeometryReader } from 'nativescript-carto/geometry/geojsonreader';
 import { MarkerStyleBuilder, Marker } from 'nativescript-carto/vectorelements/marker';
@@ -69,7 +69,7 @@ export default class Example extends BaseMaps {
             console.log('read geojson');
             const styleBuilder = new MarkerStyleBuilder({
                 size: 14,
-                bitmap: '~/assets/images/marker_black.png'
+                bitmap: '~/assets/images/marker_black.png',
             });
             // mBuilder.bitmap = BitmapUtils.createBitmapFromAndroidBitmap(cBuilder.image)
             // mBuilder.size = 30.0;
@@ -79,7 +79,7 @@ export default class Example extends BaseMaps {
             // Read GeoJSON, parse it using SDK GeoJSON parser
             // console.log('test projection', this.mapView.projection, (this.mapView.projection as Projection).getNative())
             const reader = new GeoJSONGeometryReader({
-                targetProjection: this.mapView.projection
+                targetProjection: this.mapView.projection,
             });
             console.log('reader created');
             // reader.targetProjection = contentView?.projection
@@ -96,7 +96,7 @@ export default class Example extends BaseMaps {
                 // This data set features point geometry, however, it can also be LineGeometry or PolygonGeometry
                 const geometry = features.getGeometry(i);
                 // console.log('feature geometry', geometry.getCenterPos().getX());
-                elements.add(new Marker({ geometry, styleBuilder, metaData: { index: i+'' } }));
+                elements.add(new Marker({ geometry, styleBuilder, metaData: { index: i + '' } }));
             }
             console.log('elements', elements.size());
             this.initializeClusterLayer();
@@ -120,14 +120,14 @@ export default class Example extends BaseMaps {
                 let styleBuilder = this.findByKey(count);
 
                 if (count <= 1.0) {
-                    styleBuilder = (elements.getElement(0) as Marker).styleBuilder;
+                    styleBuilder = (elements.getElement(0) as Marker).styleBuilder as any;
                 }
 
                 if (styleBuilder == null) {
                     styleBuilder = new MarkerStyleBuilder({
                         size: 30,
                         placementPriority: -count,
-                        bitmap: '~/assets/images/marker_black.png'
+                        bitmap: '~/assets/images/marker_black.png',
                     });
                     // builder.bitmap = BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap)
 
@@ -136,7 +136,7 @@ export default class Example extends BaseMaps {
                 // console.log('buildClusterElement', pos, count, !!styleBuilder);
                 return new Marker({ position, styleBuilder });
             },
-            bitmap: '~/assets/images/marker_black.png'
+            bitmap: '~/assets/images/marker_black.png',
         });
         const dataSource = (this.dataSource = new LocalVectorDataSource({ projection: this.mapView.projection }));
         const layer = new ClusteredVectorLayer({ dataSource, builder, minimumClusterDistance: 50 });
@@ -154,22 +154,22 @@ export default class Example extends BaseMaps {
         switch (id) {
             case 'voyager':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.VOYAGER
+                    style: CartoMapStyle.VOYAGER,
                 });
                 break;
             case 'positron':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.POSITRON
+                    style: CartoMapStyle.POSITRON,
                 });
                 break;
             case 'darkmatter':
                 this.currentLayer = new CartoOnlineVectorTileLayer({
-                    style: CartoMapStyle.DARKMATTER
+                    style: CartoMapStyle.DARKMATTER,
                 });
                 break;
             default: {
                 this.currentLayer = new CartoOnlineRasterTileLayer({
-                    source: id + '@2x'
+                    source: id + '@2x',
                 });
             }
         }
@@ -200,8 +200,8 @@ export default class Example extends BaseMaps {
         action({
             title: 'Layer',
             message: 'Select Layer',
-            actions: this.layerTypes
-        }).then(result => {
+            actions: this.layerTypes,
+        }).then((result) => {
             result && this.setCurrentLayer(result);
         });
     }
@@ -209,8 +209,8 @@ export default class Example extends BaseMaps {
         action({
             title: 'Language',
             message: 'Select Language',
-            actions: this.languages
-        }).then(result => {
+            actions: this.languages,
+        }).then((result) => {
             result && this.updateLanguage(result);
         });
     }

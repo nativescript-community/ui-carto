@@ -19,7 +19,7 @@ import BaseMaps from './BaseMaps';
 import { CartoMap, MapEventData } from 'nativescript-carto/ui';
 import { action } from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
-import { Folder, path, knownFolders } from '@nativescript/core/file-system/file-system';
+import { Folder, path, knownFolders } from '@nativescript/core/file-system';
 import * as dialogs from '@nativescript/core/ui/dialogs';
 import { CartoOnlineRasterTileLayer, RasterTileLayer } from 'nativescript-carto/layers/raster';
 import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorTileLayer, VectorLayer } from 'nativescript-carto/layers/vector';
@@ -82,15 +82,15 @@ export default class FragmentBase extends BaseVueComponent {
                 minZoom: 1,
                 subdomains: 'abc',
                 maxZoom: 20,
-                url: 'http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
+                url: 'http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
             }),
             capacity: 300 * 1024 * 1024,
-            databasePath: path.join(cacheFolder.path, 'cache.db')
+            databasePath: path.join(cacheFolder.path, 'cache.db'),
         });
         const rasterLayer = new RasterTileLayer({
             zoomLevelBias: 1,
             opacity: 1,
-            dataSource
+            dataSource,
         });
         cartoMap.addLayer(rasterLayer);
     }
