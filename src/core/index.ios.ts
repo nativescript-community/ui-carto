@@ -105,7 +105,10 @@ export function toNativeMapRange(value: MapRange) {
     //  ignore z for now as points can get under the map!
     return NTMapRange.alloc().initWithMinMax(value.min, value.max);
 }
-export function toNativeMapVec(value: MapVec) {
+export function toNativeMapVec(value: MapVec | [number, number, number]) {
+    if (Array.isArray(value)) {
+        return NTMapVec.alloc().initWithXYZ(value[0], value[1], value[2]);
+    }
     if (value instanceof NTMapVec) {
         return value;
     }

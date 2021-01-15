@@ -55,3 +55,7 @@ export declare function nativeCartoImageProperty(...args);
 export declare function nativeImageProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export declare function nativeImageProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export declare function nativeImageProperty(...args);
+
+export declare function nativeMapVecProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeMapVecProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeMapVecProperty(...args);

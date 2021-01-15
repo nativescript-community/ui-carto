@@ -18,12 +18,17 @@ export class TileDataSource<T, U extends TileDataSourceOptions> extends DataSour
 export interface OrderedTileDataSourceOptions extends DataSourceOptions {
     dataSources: TileDataSource<any, any>[];
 }
+export interface CombinedTileDataSourceOptions extends DataSourceOptions {
+    dataSources: TileDataSource<any, any>[];
+    zoomLevel: number;
+}
 export class OrderedTileDataSource<T, U extends OrderedTileDataSourceOptions> extends TileDataSource<T, U> {}
 
 export interface MergedMBVTTileDataSourceOptions extends DataSourceOptions {
     dataSources: TileDataSource<any, any>[];
 }
 export class MergedMBVTTileDataSource<T, U extends MergedMBVTTileDataSourceOptions> extends TileDataSource<T, U> {}
+export class CombinedTileDataSource<T, U extends CombinedTileDataSourceOptions> extends TileDataSource<T, U> {}
 
 export interface GeoJSONVectorTileDataSourceOptions extends TileDataSourceOptions {}
 export class GeoJSONVectorTileDataSource extends TileDataSource<any, GeoJSONVectorTileDataSourceOptions> {

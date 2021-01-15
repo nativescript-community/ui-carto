@@ -5,6 +5,7 @@ import { Geometry } from '../geometry';
 
 export class PointStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;
+    clickSize?: number;
     color?: string | Color;
 }
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<any, PointStyleBuilderOptions> {

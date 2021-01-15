@@ -2,6 +2,7 @@ import { BaseNative, nativeProperty } from '../index.common';
 import { toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
+import { geometryFromArgs } from '..';
 
 export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty
@@ -31,11 +32,9 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
             nRequest.setRegexFilter(options.regexFilter);
         }
         if (options.geometry) {
-            nRequest.setGeometry(options.geometry as any);
-        } else {
-            if (options.position) {
-                nRequest.setGeometry(new com.carto.geometry.PointGeometry(toNativeMapPos(options.position)));
-            }
+            nRequest.setGeometry(geometryFromArgs(options.geometry));
+        } else if (options.position) {
+            nRequest.setGeometry(new com.carto.geometry.PointGeometry(toNativeMapPos(options.position)));
         }
         if (callback) {
             this.getNative().findFeaturesCallback(
@@ -46,6 +45,7 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
                     }
                 })
             );
+            return null;
         }
         return new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
     }
@@ -85,6 +85,7 @@ export class FeatureCollectionSearchService extends BaseNative<com.akylas.carto.
                     }
                 })
             );
+            return null;
         }
         return new FeatureCollection(this.getNative().findFeatures(nRequest));
     }

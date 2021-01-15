@@ -114,7 +114,10 @@ export function toNativeMapRange(value: MapRange) {
     //  ignore z for now as points can get under the map!
     return new com.carto.core.MapRange(value.min, value.max);
 }
-export function toNativeMapVec(value: MapVec) {
+export function toNativeMapVec(value: MapVec | [number, number, number]) {
+    if (Array.isArray(value)) {
+        return new com.carto.core.MapVec(value[0], value[1], value[2]);
+    }
     if (value instanceof com.carto.core.MapVec) {
         return value;
     }

@@ -4,15 +4,14 @@ import { MapPos } from '../core';
 
 export class ProjectionOptions {}
 export abstract class BaseProjection<T, U extends ProjectionOptions> extends BaseNative<T, U> {}
-export abstract class ProjectionClass<T, U extends ProjectionOptions> extends BaseProjection<T, U> {
-    fromWgs84(position: MapPos): MapPos;
-    toWgs84(position: MapPos): MapPos;
-    fromLatLong(lat, lon): MapPos;
-    toLatLong(x, y): MapPos;
+export abstract class ProjectionClass<G = DefaultLatLonKeys, T, U extends ProjectionOptions> extends BaseProjection<T, U> {
+    fromWgs84<U = G>(position: GenericMapPos<U>): GenericMapPos<U>;
+    toWgs84<U = G>(position: GenericMapPos<U>): GenericMapPos<U>;
+    fromLatLong<U = G>(lat, lon): GenericMapPos<U>;
+    toLatLong<U = G>(x, y): GenericMapPos<U>;
 }
-export declare class Projection extends ProjectionClass<any, ProjectionOptions> {
+export declare class Projection extends ProjectionClass<DefaultLatLonKeys, any, ProjectionOptions> {
     createNative(): any;
 }
 
-export interface IProjection extends ProjectionClass<any, any>  {
-}
+export interface IProjection extends ProjectionClass<any, any, any> {}

@@ -34,19 +34,19 @@ export class FeatureCollection implements IFeatureCollection {
         for (let index = 0; index < featureCount; index++) {
             const geometry = this.getGeometry(index);
             const bounds = fromNativeMapBounds(geometry.getBounds());
-            minLat = Math.min(minLat, bounds.northeast[LatitudeKey]);
-            minLon = Math.min(minLon, bounds.northeast[LongitudeKey]);
-            maxLat = Math.max(maxLat, bounds.southwest[LatitudeKey]);
-            maxLon = Math.max(maxLon, bounds.southwest[LongitudeKey]);
+            minLat = Math.min(minLat, bounds.southwest[LatitudeKey]);
+            minLon = Math.min(minLon, bounds.southwest[LongitudeKey]);
+            maxLat = Math.max(maxLat, bounds.northeast[LatitudeKey]);
+            maxLon = Math.max(maxLon, bounds.northeast[LongitudeKey]);
         }
         return new MapBounds(
             {
-                [LatitudeKey]: minLat,
-                [LongitudeKey]: minLon,
-            },
-            {
                 [LatitudeKey]: maxLat,
                 [LongitudeKey]: maxLon,
+            },
+            {
+                [LatitudeKey]: minLat,
+                [LongitudeKey]: minLon,
             }
         );
     }
