@@ -1,11 +1,11 @@
 /* eslint-disable no-redeclare */
 import { Color } from '@nativescript/core/color';
 import { NativePropertyOptions } from '.';
-import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
+import { BaseNative, _createImageSourceFromSrc, nativeMapVecProperty, nativeProperty } from './index.common';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
 import { FeatureCollection } from './geometry/feature';
 import { Geometry } from './geometry';
-export { BaseNative, nativeProperty };
+export { BaseNative, nativeProperty, nativeMapVecProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;

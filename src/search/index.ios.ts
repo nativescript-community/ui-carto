@@ -2,6 +2,7 @@ import { BaseNative, nativeProperty } from '../index.common';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
 import { toNativeMapPos } from '../core';
+import { geometryFromArgs } from '..';
 
 export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
@@ -54,7 +55,7 @@ export class FeatureCollectionSearchService extends BaseNative<NTFeatureCollecti
             nRequest.setRegexFilter(options.regexFilter);
         }
         if (options.geometry) {
-            nRequest.setGeometry(options.geometry as any);
+            nRequest.setGeometry(geometryFromArgs(options.geometry));
         } else {
             if (options.position) {
                 nRequest.setGeometry(NTPointGeometry.alloc().initWithPos(toNativeMapPos(options.position)));
@@ -62,7 +63,9 @@ export class FeatureCollectionSearchService extends BaseNative<NTFeatureCollecti
         }
         if (callback) {
             callback(new FeatureCollection(this.getNative().findFeatures(nRequest)));
+            return null;
+        } else {
+            return new FeatureCollection(this.getNative().findFeatures(nRequest));
         }
-        return new FeatureCollection(this.getNative().findFeatures(nRequest));
     }
 }

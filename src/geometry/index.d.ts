@@ -11,10 +11,10 @@ export interface PointGeometryOptions<T = DefaultLatLonKeys> extends GeometryOpt
     pos: GenericMapPos<T>;
 }
 export interface LineGeometryOptions<T = DefaultLatLonKeys> extends GeometryOptions<T> {
-    poses: MapPosVector<T>;
+    poses: MapPosVector<T> | GenericMapPos<T>[];
 }
 export interface PolygonGeometryOptions<T = DefaultLatLonKeys> extends GeometryOptions<T> {
-    poses: MapPosVector<T>;
+    poses: MapPosVector<T> | GenericMapPos<T>[];
 }
 export class PointGeometry<T = DefaultLatLonKeys> extends Geometry<T, PointGeometryOptions<T>> {
     getPos(): GenericMapPos<T>;

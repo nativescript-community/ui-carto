@@ -1,5 +1,5 @@
 import { BaseNative } from '../index.common';
-import { DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
+import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
 import { JSVariantToNative } from '../utils';
 import { FeatureCollection } from '../geometry/feature.ios';
 import { Projection } from '../projections';
@@ -25,6 +25,12 @@ export class OrderedTileDataSource extends TileDataSource<NTOrderedTileDataSourc
     }
 }
 
+export class CombinedTileDataSource extends TileDataSource<NTCombinedTileDataSource, CombinedTileDataSourceOptions> {
+    createNative(options: CombinedTileDataSourceOptions) {
+        const dataSources: NTTileDataSource[] = options.dataSources.map((d) => d.getNative());
+        return NTCombinedTileDataSource.alloc().initWithDataSource1DataSource2ZoomLevel(dataSources[0], dataSources[1], options.zoomLevel);
+    }
+}
 export class MergedMBVTTileDataSource extends TileDataSource<NTMergedMBVTTileDataSource, MergedMBVTTileDataSourceOptions> {
     createNative(options: MergedMBVTTileDataSourceOptions) {
         const dataSources: NTTileDataSource[] = options.dataSources.map((d) => d.getNative());

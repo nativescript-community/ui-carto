@@ -24,13 +24,13 @@ declare enum RoutingAction {
     WAIT,
 }
 export interface RoutingRequest<T = DefaultLatLonKeys> {
-    projection: Projection;
+    projection: Projection<T>;
     points: GenericMapPos<T>[];
     customOptions: any;
 }
 
 export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
-    projection: Projection;
+    projection: Projection<T>;
     points: GenericMapPos<T>[];
     accuracy: number;
 }

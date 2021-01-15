@@ -22,10 +22,11 @@ public class AKVectorTileSearchService extends VectorTileSearchService {
     static Handler mainHandler = null;
 
     public void findFeaturesCallback(final SearchRequest request, final VectorTileSearchServiceCallback callback) {
+        final AKVectorTileSearchService that = this;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final VectorTileFeatureCollection results = AKVectorTileSearchService.this.findFeatures(request);
+                final VectorTileFeatureCollection results = that.findFeatures(request);
                 if (AKMapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());

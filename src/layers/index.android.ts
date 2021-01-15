@@ -37,7 +37,7 @@ export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends 
     @nativeProperty zoomLevelBias: number;
     @nativeProperty maxOverzoomLevel: number;
     @nativeProperty maxUnderzoomLevel: number;
-    @nativeAndroidEnumProperty(com.carto.layers.TileSubstitutionPolicy, {}) tileSubstitutionPolicy;
+    @nativeProperty tileSubstitutionPolicy;
 
     clearTileCaches(all: boolean) {
         if (this.native) {

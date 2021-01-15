@@ -1,4 +1,4 @@
-import { DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
+import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
 import { BaseNative } from '../index.common';
 import { Projection } from '../projections';
 import { FeatureCollection } from '../geometry/feature';
@@ -33,17 +33,21 @@ export class TileDataSource<T extends com.carto.datasources.TileDataSource, U ex
 
 export class OrderedTileDataSource extends TileDataSource<com.carto.datasources.OrderedTileDataSource, OrderedTileDataSourceOptions> {
     createNative(options: OrderedTileDataSourceOptions) {
-        const array: com.carto.datasources.TileDataSource[] = Array.create(com.carto.datasources.TileDataSource, options.dataSources.length);
-        options.dataSources.forEach((d, i) => (array[i] = d.getNative()));
-        return new com.carto.datasources.OrderedTileDataSource(array[0], array[1]);
+        const dataSources: com.carto.datasources.TileDataSource[] = options.dataSources.map((d) => d.getNative());
+        return new com.carto.datasources.OrderedTileDataSource(dataSources[0], dataSources[1]);
+    }
+}
+export class CombinedTileDataSource extends TileDataSource<com.carto.datasources.CombinedTileDataSource, CombinedTileDataSourceOptions> {
+    createNative(options: CombinedTileDataSourceOptions) {
+        const dataSources: com.carto.datasources.TileDataSource[] = options.dataSources.map((d) => d.getNative());
+        return new com.carto.datasources.CombinedTileDataSource(dataSources[0], dataSources[1], options.zoomLevel);
     }
 }
 
 export class MergedMBVTTileDataSource extends TileDataSource<com.carto.datasources.MergedMBVTTileDataSource, MergedMBVTTileDataSourceOptions> {
     createNative(options: MergedMBVTTileDataSourceOptions) {
-        const array: com.carto.datasources.TileDataSource[] = Array.create(com.carto.datasources.TileDataSource, options.dataSources.length);
-        options.dataSources.forEach((d, i) => (array[i] = d.getNative()));
-        return new com.carto.datasources.MergedMBVTTileDataSource(array[0], array[1]);
+        const dataSources: com.carto.datasources.TileDataSource[] = options.dataSources.map((d) => d.getNative());
+        return new com.carto.datasources.MergedMBVTTileDataSource(dataSources[0], dataSources[1]);
     }
 }
 

@@ -5,15 +5,15 @@ import { VectorTileDecoder } from '../vectortiles';
 import { Projection } from '../projections';
 import { Geometry } from '../geometry';
 import { Feature, FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
-import { MapPos } from '../core';
+import { GenericMapPos, MapPos } from '../core';
 
-export interface SearchRequest {
-    projection?: Projection;
+export interface SearchRequest<T = DefaultLatLonKeys> {
+    projection?: Projection<T>;
     regexFilter?: string;
     filterExpression?: string;
     searchRadius?: number;
-    geometry?: Geometry;
-    position?: MapPos;
+    geometry?: Geometry<T>;
+    position?: GenericMapPos<T>;
 }
 
 export interface SearchServiceOptions {
@@ -34,7 +34,7 @@ export interface VectorTileSearchServiceOptions extends SearchServiceOptions {
 export class VectorTileSearchService extends BaseNative<any, VectorTileSearchServiceOptions> {
     minZoom?: number;
     maxZoom?: number;
-    findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void): VectorTileFeatureCollection;
+    findFeatures<T = DefaultLatLonKeys>(options: SearchRequest<T>, callback?: (res: VectorTileFeatureCollection<T>) => void): VectorTileFeatureCollection<T>;
 }
 
 export interface FeatureCollectionSearchServiceOptions {
@@ -42,5 +42,5 @@ export interface FeatureCollectionSearchServiceOptions {
     features: FeatureCollection;
 }
 export class FeatureCollectionSearchService<U extends FeatureCollectionSearchServiceOptions> extends BaseNative<any, U> {
-    findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void): FeatureCollection;
+    findFeatures<T = DefaultLatLonKeys>(options: SearchRequest<T>, callback?: (res: FeatureCollection<T>) => void): FeatureCollection<T>;
 }
