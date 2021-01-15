@@ -53,7 +53,18 @@ export function nativeProperty(...args) {
         return nativePropertyGenerator(args[startIndex], args[startIndex + 1], options || {});
     }
 }
+export function nativeMapVecProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeMapVecProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeMapVecProperty(...args) {
+    return nativeProperty(
+        {
+            converter: {
+                fromNative: fromNativeMapVec,
+                toNative: toNativeMapVec,
+            },
         },
+        ...args
+    );
 }
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
