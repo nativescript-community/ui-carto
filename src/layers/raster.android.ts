@@ -1,8 +1,8 @@
 import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, RasterTileFilterMode as IRasterTileFilterMode, RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
-import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeProperty } from '../';
+import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeMapVecProperty, nativeProperty } from '../';
 import { Color } from '@nativescript/core/color';
-import { DoubleVector, IntVector, MapPos, MapPosVector, toNativeMapPos } from '../core';
+import { DoubleVector, IntVector, MapPos, MapPosVector, MapVec, toNativeMapPos } from '../core';
 
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {
@@ -17,7 +17,7 @@ export const RasterTileFilterMode = {
 };
 
 export class RasterTileLayer extends RasterTileLayerBase<com.carto.layers.RasterTileLayer, RasterTileLayerOptions> {
-    @nativeAndroidEnumProperty(com.carto.layers.RasterTileFilterMode, {}) tileFilterMode: IRasterTileFilterMode;
+    @nativeProperty tileFilterMode: IRasterTileFilterMode;
     createNative(options: RasterTileLayerOptions) {
         return new com.carto.layers.RasterTileLayer(options.dataSource.getNative());
     }
@@ -32,9 +32,13 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<com.carto.la
 export class HillshadeRasterTileLayer extends RasterTileLayerBase<com.akylas.carto.additions.AKHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
     @nativeProperty heightScale: number;
     @nativeProperty contrast: number;
-    @nativeProperty illuminationDirection: number;
+    @nativeProperty exagerateHeightScaleEnabled: boolean;
+    @nativeProperty normalMapLightingShader: string;
+    @nativeMapVecProperty illuminationDirection: MapVec | [number, number, number];
     @nativeColorProperty highlightColor: string | Color;
     @nativeColorProperty shadowColor: string | Color;
+    @nativeColorProperty accentColor: string | Color;
+    @nativeProperty tileFilterMode: IRasterTileFilterMode;
     createNative(options: HillshadeRasterTileLayerOptions) {
         if (options.decoder) {
             return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());

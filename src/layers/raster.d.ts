@@ -16,6 +16,7 @@ export interface RasterTileLayerOptions extends TileLayerOptions {
 }
 export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {
     // dataSource?: TileDataSource<any, any>;
+    tileFilterMode?: RasterTileFilterMode;
 }
 
 export interface CartoOnlineRasterTileLayerOptions extends RasterTileLayerOptions {
@@ -27,16 +28,23 @@ export interface HillshadeRasterTileLayerOptions extends RasterTileLayerOptions 
     decoder?: ElevationDataDecoder<any, any>;
     heightScale?: number;
     contrast?: number;
-    illuminationDirection?: number;
+    illuminationDirection?: MapVec | [number, number, number];
     highlightColor?: Color;
+    accentColor?: Color;
     shadowColor?: Color;
+    exagerateHeightScaleEnabled?: boolean;
+    normalMapLightingShader?: string;
 }
 export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTileLayerOptions> {
     heightScale?: number;
     contrast?: number;
-    illuminationDirection?: number;
+    illuminationDirection?: MapVec | [number, number, number];
     highlightColor?: Color;
     shadowColor?: Color;
+    accentColor?: Color;
+    exagerateHeightScaleEnabled?: boolean;
+    normalMapLightingShader?: string;
+    tileFilterMode?: RasterTileFilterMode;
     public getElevation<T = DefaultLatLonKeys>(pos: GenericMapPos<T>): number;
     public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
     public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): DoubleVector;

@@ -17,6 +17,7 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlin
 // export class HillshadeRasterTileLayer extends RasterTileLayerBase<NTHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
 //     @nativeProperty heightScale: number;
 //     @nativeProperty contrast: number;
+//      @nativeMapVecProperty illuminationDirection: MapVec | [number, number, number];
 //     createNative(options) {
 //         if (options.decoder) {
 //             return new NTHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());
