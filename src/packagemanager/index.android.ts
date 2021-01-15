@@ -2,7 +2,6 @@ import { MapBounds, MapPos, toNativeMapBounds, toNativeMapPos } from '../core';
 import { DataSource, TileDataSource } from '../datasources';
 import { Projection } from '../projections';
 import { CartoPackageManagerOptions, CartoPackageManagerListener as ICartoPackageManagerListener, PackageInfo, PackageInfoVector, PackageManagerTileDataSourceOptions } from '.';
-import { nonenumerable } from '../index.common';
 
 export const PackageType = {
     get MAP() {
@@ -100,11 +99,20 @@ function fromNativeackageInfo(packageInfo: com.carto.packagemanager.PackageInfo)
 }
 
 export class CartoPackageManager extends DataSource<com.akylas.carto.additions.AKCartoPackageManager, CartoPackageManagerOptions> {
+    _nListener: com.akylas.carto.additions.AKPackageManagerListener;
+    _listener: ICartoPackageManagerListener;
+    constructor(options) {
+        super(options);
+        for (const property of ['_nListener', '_listener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(CartoPackageManager.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
     createNative(options: CartoPackageManagerOptions) {
         return new com.akylas.carto.additions.AKCartoPackageManager(options.source, options.dataFolder);
     }
-    @nonenumerable _nListener: com.akylas.carto.additions.AKPackageManagerListener;
-    @nonenumerable _listener: ICartoPackageManagerListener;
     set listener(listener: ICartoPackageManagerListener) {
         if (this.native) {
             if (listener) {
