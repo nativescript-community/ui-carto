@@ -1,11 +1,11 @@
 /* eslint-disable no-redeclare */
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
-import { BaseNative, _createImageSourceFromSrc, nativeMapVecProperty, nativeProperty } from './index.common';
-import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, toNativeMapPos } from './core';
-import { FeatureCollection } from './geometry/feature';
+import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, fromNativeMapVec, toNativeMapPos, toNativeMapVec } from './core';
 import { Geometry } from './geometry';
-export { BaseNative, nativeProperty, nativeMapVecProperty };
+import { FeatureCollection } from './geometry/feature';
+import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
+export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
@@ -145,4 +145,18 @@ export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPo
         });
     }
     return nativePoses;
+}
+
+export function nativeMapVecProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeMapVecProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeMapVecProperty(...args) {
+    return nativeProperty(
+        {
+            converter: {
+                fromNative: fromNativeMapVec,
+                toNative: toNativeMapVec,
+            },
+        },
+        ...args
+    );
 }
