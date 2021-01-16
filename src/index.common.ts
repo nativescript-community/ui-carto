@@ -4,6 +4,8 @@ import { ImageSource } from '@nativescript/core/image-source';
 import { ImageAsset } from '@nativescript/core/image-asset';
 import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/core/utils/utils';
 import { isAndroid } from '@nativescript/core/platform';
+import { knownFolders, path } from '@nativescript/core/file-system';
+import { NativePropertyOptions } from '.';
 
 function createGetter(key: string, options: NativePropertyOptions) {
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
@@ -52,19 +54,6 @@ export function nativeProperty(...args) {
         const startIndex = !!options ? 1 : 0;
         return nativePropertyGenerator(args[startIndex], args[startIndex + 1], options || {});
     }
-}
-export function nativeMapVecProperty(target: any, k?, desc?: PropertyDescriptor): any;
-export function nativeMapVecProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
-export function nativeMapVecProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative: fromNativeMapVec,
-                toNative: toNativeMapVec,
-            },
-        },
-        ...args
-    );
 }
 
 export function nonenumerable(target: any, name: string): void;
@@ -148,9 +137,6 @@ export function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-import { knownFolders, path } from '@nativescript/core/file-system';
-import { NativePropertyOptions } from '.';
-import { fromNativeMapVec, toNativeMapVec } from './core';
 let currentAppFolder: string;
 
 export function getFileName(str: string): string {
