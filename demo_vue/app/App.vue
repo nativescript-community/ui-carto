@@ -1,8 +1,8 @@
 <template>
-    <Page @navigatedTo="onNavigatedTo">
+    <Page @navigatedTo="onNavigatedTo" backgroundColor="red">
         <ActionBar title="Carto Samples" />
         <StackLayout>
-            <CollectionView width="100%" height="100%" colWidth="50%" rowHeight="200" ref="listView" for="item in itemList" backgroundColor="#ECECEC">
+            <CollectionView width="100%" height="100%" colWidth="50%" rowHeight="200" ref="listView" for="item in itemList" backgroundColor="red">
                 <v-template>
                     <GridLayout width="100%" height="100%" rows="*" columns="*" padding="10">
                         <StackLayout padding="5" width="100%" height="100%" backgroundColor="white" orientation="vertical" @tap="onItemTap(item)">

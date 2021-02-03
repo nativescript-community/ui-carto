@@ -64,6 +64,8 @@ module.exports = env => {
     if (!!development) {
         const srcFullPath = resolve(projectRoot, '..', 'src');
         aliases = Object.assign(aliases, {
+            'tns-core-modules': '@nativescript/core',
+            'tns-core-modules/*': '@nativescript/core/*',
             '#': srcFullPath,
             'nativescript-carto/vue$': '#/vue/index',
             'nativescript-carto$': '#/carto.' + platform,
