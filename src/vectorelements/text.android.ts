@@ -17,6 +17,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.Tex
     @nativeProperty breakLines: boolean;
     @nativeProperty textField: string;
     @nativeProperty strokeWidth: number;
+    @nativeProperty borderWidth: number;
     @nativeColorProperty color: Color | string;
     @nativeColorProperty strokeColor: Color | string;
     @nativeColorProperty borderColor: Color | string;

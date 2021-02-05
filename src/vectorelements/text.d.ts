@@ -11,6 +11,7 @@ export class TextStyleBuilderOptions extends BillboardStyleBuilderOptions {
     fontName?: string;
     breakLines?: boolean;
     textField?: string;
+    borderWidth?: number;
     strokeWidth?: number;
     strokeColor?: Color | string;
     borderColor?: Color | string;
@@ -27,6 +28,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<any, TextStyleBuilde
     color?: Color | string;
     strokeColor?: Color | string;
     borderColor?: Color | string;
+    borderWidth?: number;
     backgroundColor?: Color | string;
     orientationMode?: BillboardOrientation;
     fontSize?: number;

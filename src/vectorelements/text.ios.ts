@@ -18,6 +18,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, 
     @nativeProperty orientationMode: BillboardOrientation;
     @nativeProperty breakLines: boolean;
     @nativeProperty strokeWidth: number;
+    @nativeProperty borderWidth: number;
     @nativeColorProperty color: Color | string;
     @nativeColorProperty strokeColor: Color | string;
     @nativeColorProperty borderColor: Color | string;
