@@ -20,7 +20,7 @@ import { restrictedPanningProperty } from './cssproperties';
 
 import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
-import { ImageSource } from '@nativescript/core';
+import { ImageSource, Property, booleanConverter } from '@nativescript/core';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
 export const time = global.__time || Date.now;
@@ -81,6 +81,7 @@ export function getLicenseKey() {
 }
 
 export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
+    public useTextureView: boolean;
     public static setRunOnMainThread(value: boolean) {
         com.akylas.carto.additions.AKMapView.setRunOnMainThread(value);
     }
@@ -109,7 +110,14 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                 registerLicense(license);
             }
         }
-        return new com.akylas.carto.additions.AKMapView(this._context);
+        let view;
+        if (this.useTextureView) {
+            view = new com.akylas.carto.additions.AKTextureMapView(this._context);
+        } else {
+            view = new com.akylas.carto.additions.AKMapView(this._context);
+        }
+        // view.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
+        return view;
     }
 
     getOptions() {
@@ -302,3 +310,10 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         });
     }
 }
+
+export const useTextureViewProperty = new Property<CartoMap, boolean>({
+    defaultValue: false,
+    name: 'useTextureView',
+    valueConverter: booleanConverter,
+});
+useTextureViewProperty.register(CartoMap);
