@@ -368,6 +368,7 @@ declare namespace com {
                     public sendAccessibilityEvent(param0: number): void;
                     public onSurfaceChanged(param0: javax.microedition.khronos.opengles.GL10, param1: number, param2: number): void;
                 }
+                export class AKTextureMapView extends AKMapView {}
             }
         }
     }
