@@ -8,6 +8,7 @@ import { VectorElement } from '../vectorelements';
 import { Projection } from '../projections';
 import { Geometry } from '../geometry';
 import { PointStyleBuilder } from '../vectorelements/point';
+import { VectorDataSource } from '../datasources/vector';
 
 export enum VectorTileRenderOrder {
     HIDDEN,
@@ -46,11 +47,11 @@ export interface VectorElementEventData<T = DefaultLatLonKeys> {
 export interface VectorElementDragInfo {}
 
 export interface VectorTileEventListener<T = DefaultLatLonKeys> {
-    onVectorTileClicked(info: VectorTileEventData<T>);
+    onVectorTileClicked(info: VectorTileEventData<T>): boolean;
 }
 
 export interface VectorElementEventListener<T = DefaultLatLonKeys> {
-    onVectorElementClicked(info: VectorElementEventData<T>);
+    onVectorElementClicked(info: VectorElementEventData<T>): boolean;
 }
 export interface VectorEditEventListener {
     onElementModify(param0: VectorElement<any, any>, param1: Geometry): void;
@@ -64,7 +65,7 @@ export interface VectorEditEventListener {
 }
 
 export interface VectorLayerOptions extends LayerOptions {
-    dataSource: TileDataSource<any, any>;
+    dataSource: VectorDataSource<any, any>;
 }
 export interface VectorTileLayerOptions extends TileLayerOptions {
     dataSource?: TileDataSource<any, any>;
