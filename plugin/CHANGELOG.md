@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/nativescript-community/ui-carto/compare/v1.4.11...v1.5.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* **ios:** missing build flag ([d491e11](https://github.com/nativescript-community/ui-carto/commit/d491e118ff885024430d24571cbb638a0bb426c2))
+
+
+### Features
+
+* raster layer click ([951e2d0](https://github.com/nativescript-community/ui-carto/commit/951e2d03df0073d7d387120215a325ef07d459d9))
+
+
+
+
+
 ## [1.4.11](https://github.com/nativescript-community/ui-carto/compare/v1.4.10...v1.4.11) (2021-01-16)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto

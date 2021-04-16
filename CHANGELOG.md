@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.11...v1.5.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* getter fix ([d9acc61](https://github.com/farfromrefug/nativescript-carto/commit/d9acc6114132445efc007c1649ec5308e6fbbe56))
+* HTTPTileDataSource inheritance ([fd4e37f](https://github.com/farfromrefug/nativescript-carto/commit/fd4e37fb202a9c7c5f34e309154b10daa9056403))
+* raster fix ([10e80f5](https://github.com/farfromrefug/nativescript-carto/commit/10e80f59c469bab442b6beb589a20eb8fb953200))
+* return colors as Color ([bc41a60](https://github.com/farfromrefug/nativescript-carto/commit/bc41a600baffb4e60adc6fd3e84d3882486a04b6))
+* typings fix ([e63c0f9](https://github.com/farfromrefug/nativescript-carto/commit/e63c0f9e59134a117342f519394252b294806930))
+* wrong MBTilesTileDataSource parent class ([672289f](https://github.com/farfromrefug/nativescript-carto/commit/672289fa3655caa9f89bba6c601f3ed2d637206f))
+* **ios:** missing build flag ([d491e11](https://github.com/farfromrefug/nativescript-carto/commit/d491e118ff885024430d24571cbb638a0bb426c2))
+
+
+### Features
+
+* loadTile method ([23cb150](https://github.com/farfromrefug/nativescript-carto/commit/23cb150febe045623457db5d90e458abe7aeb0b6))
+* map getZoom ([3b497d6](https://github.com/farfromrefug/nativescript-carto/commit/3b497d68422075a91522f2b873c51fabbb4762dd))
+* raster layer click ([951e2d0](https://github.com/farfromrefug/nativescript-carto/commit/951e2d03df0073d7d387120215a325ef07d459d9))
+* stopAllDownloads ([22e6a96](https://github.com/farfromrefug/nativescript-carto/commit/22e6a967a4ea5f0bfe1bf98f6bd08033c0ddd0ea))
+
+
+
+
+
 ## [1.4.11](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.10...v1.4.11) (2021-01-16)
 
 
