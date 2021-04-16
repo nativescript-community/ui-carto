@@ -828,6 +828,34 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
+                export class AKRasterTileEventListener extends com.carto.layers.RasterTileEventListener {
+                    public static class: java.lang.Class<AKRasterTileEventListener>;
+                    public constructor();
+                    public setListener(param0: AKRasterTileEventListener.Listener): void;
+                    public onRasterTileClicked(param0: com.carto.ui.RasterTileClickInfo): boolean;
+                    public constructor(param0: AKRasterTileEventListener.Listener);
+                    public constructor(param0: number, param1: boolean);
+                }
+                export namespace AKRasterTileEventListener {
+                    export class Listener extends java.lang.Object {
+                        public static class: java.lang.Class<Listener>;
+                        /**
+                         * Constructs a new instance of the com.akylas.carto.additions.AKVectorElementEventListener$Listener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                         */
+                        public constructor(implementation: { onRasterTileClicked(param0: com.carto.ui.RasterTileClickInfo): boolean });
+                        public constructor();
+                        public onRasterTileClicked(param0: com.carto.ui.RasterTileClickInfo): boolean;
+                    }
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace akylas {
+        export namespace carto {
+            export namespace additions {
                 export class AKVectorTileEventListener extends com.carto.layers.VectorTileEventListener {
                     public static class: java.lang.Class<AKVectorTileEventListener>;
                     public setListener(param0: AKVectorTileEventListener.Listener): void;
