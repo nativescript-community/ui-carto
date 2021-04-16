@@ -13,10 +13,10 @@ export function nativeColorProperty(...args) {
     return nativeProperty(
         {
             converter: {
-                fromNative(value) {
-                    return new Color(value.getARGB() as number).hex;
+                fromNative(value: NTColor) {
+                    return new Color(value.getARGB());
                 },
-                toNative(value) {
+                toNative(value): NTColor {
                     const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a);
                 }
