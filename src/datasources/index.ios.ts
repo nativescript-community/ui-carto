@@ -16,6 +16,11 @@ export class TileDataSource<T extends NTTileDataSource, U extends TileDataSource
     createNative(options) {
         return null;
     }
+
+    loadTile(x, y, z) {
+        return this.getNative().loadTile(NTMapTile.alloc().initWithXYZoomFrameNr(x, y, z, 0));
+        // return interop.bufferFromData(NSData.dataWithBytesLength(data.getData().getData() as any, data.getData().size()));
+    }
 }
 
 export class OrderedTileDataSource extends TileDataSource<NTOrderedTileDataSource, OrderedTileDataSourceOptions> {
