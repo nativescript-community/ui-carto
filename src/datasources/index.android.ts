@@ -17,6 +17,11 @@ export class TileDataSource<T extends com.carto.datasources.TileDataSource, U ex
         return null;
     }
 
+    loadTile(x, y, z): com.carto.datasources.components.TileData {
+        return this.getNative().loadTile(new com.carto.core.MapTile(x, y, z, 0));
+        // return (ArrayBuffer as any).from(java.nio.ByteBuffer.wrap(data.getData().getData()));
+    }
+
     // get minZoom() {
     //     if (this.native) {
     //         return this.native.getMinZoom();

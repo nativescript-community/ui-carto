@@ -13,6 +13,8 @@ export abstract class DataSource<T, U extends DataSourceOptions> extends BaseNat
 export class TileDataSource<T, U extends TileDataSourceOptions> extends DataSource<T, U> {
     minZoom?: number;
     maxZoom?: number;
+
+    loadTile(x, y, z): any;
 }
 
 export interface OrderedTileDataSourceOptions extends DataSourceOptions {
