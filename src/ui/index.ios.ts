@@ -232,6 +232,9 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         const screenBounds = toNativeScreenBounds({ min: { x: 0, y: 0 }, max: { x: this.getMeasuredWidth(), y: this.getMeasuredHeight() } }) as NTScreenBounds;
         return new MapBounds<T>(fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMin())), fromNativeMapPos(this.mapView.screenToMap(screenBounds.getMax())));
     }
+    getZoom() {
+        return this.mapView.getZoom();
+    }
     setZoom(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setZoomDurationSeconds(value, targetPos / 1000);

@@ -195,6 +195,9 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
             this.mapView.setMapRotation(value, toNativeMapPos(targetPos), duration / 1000);
         }
     }
+    getZoom() {
+        return this.mapView.getZoom();
+    }
     setZoom(value: number, targetPos: MapPos | number, duration: number = 0) {
         if (typeof targetPos === 'number') {
             this.mapView.setZoom(value, targetPos / 1000);
