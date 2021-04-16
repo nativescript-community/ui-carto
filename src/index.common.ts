@@ -12,19 +12,25 @@ function createGetter(key: string, options: NativePropertyOptions) {
     const converter = options.converter;
     return function () {
         let result;
+        if (this['_' + key]) {
+            return this['_' + key];
+        }
         if (this.native && this.native[nativeGetterName]) {
             result = this.native[nativeGetterName]();
+            result = converter ? converter.fromNative.call(this, result, key) : result;
         } else {
             result = this.options[key] || options.defaultValue;
         }
-        result = converter ? converter.fromNative.call(this, result, key) : result;
         return result;
     };
 }
 function createSetter(key, options: NativePropertyOptions) {
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function (newVal) {
-        this.options[key] = newVal;
+        if (this['_' + key] === newVal) {
+            return;
+        }
+        this['_' + key] = this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
             this.native[nativeSetterName](actualVal);
