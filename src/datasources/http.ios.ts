@@ -1,8 +1,8 @@
 import { HTTPTileDataSourceOptions } from './http';
-import { DataSource } from '.';
+import { TileDataSource } from '.';
 import { nativeProperty } from '../index.common';
 
-export class HTTPTileDataSource extends DataSource<NTHTTPTileDataSource, HTTPTileDataSourceOptions> {
+export class HTTPTileDataSource extends TileDataSource<NTHTTPTileDataSource, HTTPTileDataSourceOptions> {
     @nativeProperty({
         nativeGetterName: 'isTMSScheme',
     })

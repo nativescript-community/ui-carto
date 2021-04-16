@@ -1,8 +1,8 @@
 import { HTTPTileDataSourceOptions } from './http';
-import { DataSource } from '.';
+import { TileDataSource } from '.';
 import { nativeProperty } from '../index.common';
 
-export class HTTPTileDataSource extends DataSource<com.carto.datasources.HTTPTileDataSource, HTTPTileDataSourceOptions> {
+export class HTTPTileDataSource extends TileDataSource<com.carto.datasources.HTTPTileDataSource, HTTPTileDataSourceOptions> {
     @nativeProperty({
         nativeGetterName: 'isTMSScheme',
     })
