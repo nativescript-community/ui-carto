@@ -19,6 +19,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<any, Persisten
     cacheOnlyMode: boolean;
     clear();
     startDownloadArea<T = DefaultLatLonKeys>(mapBounds: MapBounds<T>, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener);
+    stopAllDownloads();
 }
 
 export interface MemoryCacheTileDataSourceOptions extends TileDataSourceOptions {
