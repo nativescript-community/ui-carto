@@ -211,6 +211,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends View {
     fromNativeMapPos(position: any): GenericMapPos<T>;
     getOptions(): MapOptions;
 
+    getZoom(): number;
     setZoom(value: number, target: number | GenericMapPos<T>, duration?: number);
     setMapRotation(value: number, target: number | GenericMapPos<T>, duration?: number);
     setBearing(value: number, duration?: number);
