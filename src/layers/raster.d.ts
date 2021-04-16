@@ -10,6 +10,17 @@ export enum RasterTileFilterMode {
     RASTER_TILE_FILTER_MODE_BICUBIC,
 }
 
+export interface RasterTileClickInfo<T = DefaultLatLonKeys> {
+    clickType: ClickType;
+    layer: BaseVectorTileLayer<any, any>;
+    position: GenericMapPos<T>;
+    nearestColor: Color;
+    interpolatedColor: Color;
+}
+export interface RasterTileEventListener<T = DefaultLatLonKeys> {
+    onRasterTileClicked(info: RasterTileClickInfo<T>): boolean;
+}
+
 export interface RasterTileLayerOptions extends TileLayerOptions {
     tileFilterMode?: RasterTileFilterMode;
     dataSource?: TileDataSource<any, any>;
@@ -17,6 +28,7 @@ export interface RasterTileLayerOptions extends TileLayerOptions {
 export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {
     // dataSource?: TileDataSource<any, any>;
     tileFilterMode?: RasterTileFilterMode;
+    setRasterTileEventListener<T = DefaultLatLonKeys>(listener: RasterTileEventListener<T>, projection?: Projection): void;
 }
 
 export interface CartoOnlineRasterTileLayerOptions extends RasterTileLayerOptions {
@@ -49,4 +61,5 @@ export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTile
     public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
     public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): DoubleVector;
     public getElevationsAsync<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[], callback: (error: Error, res: DoubleVector) => void);
+    setRasterTileEventListener<T = DefaultLatLonKeys>(listener: RasterTileEventListener<T>, projection?: Projection): void;
 }
