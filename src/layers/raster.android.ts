@@ -88,43 +88,12 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<com.carto.la
     }
 }
 
-export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.akylas.carto.additions.AKHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
+export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.carto.layers.HillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
     @nativeProperty heightScale: number;
     @nativeProperty contrast: number;
     @nativeProperty illuminationDirection: number;
     @nativeColorProperty highlightColor: string | Color;
     createNative(options: HillshadeRasterTileLayerOptions) {
-        if (options.decoder) {
-            return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());
-        } else {
-            return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative());
-        }
-    }
-    public getElevation(pos: MapPos): number {
-        return this.getNative().getElevation(toNativeMapPos(pos));
-    }
-    public getElevations(pos: MapPosVector | MapPos[]): IntVector {
-        return new IntVector(this.getNative().getElevations(mapPosVectorFromArgs(pos)));
-    }
-
-    public getElevationAsync(pos: MapPos, callback: (error: any, res: number) => void) {
-        this.getNative().getElevationCallback(
-            toNativeMapPos(pos),
-            new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationCallback({
-                onElevation(err, res) {
-                    callback(err, res as any);
-                },
-            })
-        );
-    }
-    public getElevationsAsync(pos: MapPosVector | MapPos[], callback: (error: any, res: IntVector) => void) {
-        this.getNative().getElevationsCallback(
-            mapPosVectorFromArgs(pos),
-            new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationsCallback({
-                onElevations(err, res) {
-                    callback(err, new IntVector(res));
-                },
-            })
-        );
+        return new com.carto.layers.HillshadeRasterTileLayer(options.dataSource.getNative());
     }
 }
