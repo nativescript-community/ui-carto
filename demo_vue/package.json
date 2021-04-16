@@ -6,20 +6,21 @@
     "license": "MIT",
     "dependencies": {
         "@akylas/nativescript": "7.0.14",
-        "@nativescript-community/ui-collectionview": "^4.0.16",
         "@nativescript-community/ui-carto": "file:../plugin",
+        "@nativescript-community/ui-collectionview": "^4.0.16",
         "nativescript-perms": "2.0.11",
         "nativescript-vue": "^2.8.3"
     },
     "devDependencies": {
         "@babel/core": "~7.12.10",
         "@nativescript/core": "7.0.13",
+        "@nativescript/ios": "8.0.0",
         "@nativescript/types": "7.0.4",
         "@nativescript/webpack": "3.0.8",
         "babel-loader": "~8.2.2",
         "nativescript-vue-template-compiler": "~2.8.3",
         "node-sass": "^5.0.0",
-        "tns-android":"6.5.3",
+        "tns-android": "6.5.3",
         "tslib": "^2.0.3",
         "typescript": "3.9.7",
         "vue": "^2.6.12",
