@@ -39,6 +39,11 @@ abstract class RoutingService<T extends NTRoutingService, U extends RoutingServi
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
+            if (options.customOptions) {
+                Object.keys(options.customOptions).forEach((k) => {
+                    nRequest.setCustomParameterValue(k, JSVariantToNative(options.customOptions[k]));
+                });
+            }
             const nRes = this.getNative().calculateRoute(nRequest);
             const result = nRes ? new RoutingResult(nRes) : null;
             resolve(result);
