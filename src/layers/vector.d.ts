@@ -25,6 +25,7 @@ export enum VectorElementDragResult {
 export interface VectorTileEventData<T = DefaultLatLonKeys> {
     clickType: ClickType;
     layer: BaseVectorTileLayer<any, any>;
+    feature: any; // geojson object
     featureId: number;
     featureData: { [k: string]: string };
     featureLayerName: string;

@@ -52,6 +52,14 @@ export const VectorElementDragResult = {
     },
 };
 
+let geojsonWriter: com.carto.geometry.GeoJSONGeometryWriter;
+function getGeojsonWriter() {
+    if (!geojsonWriter) {
+        geojsonWriter = new com.carto.geometry.GeoJSONGeometryWriter();
+    }
+    return geojsonWriter;
+}
+
 export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
     setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
@@ -85,20 +93,31 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             const geometry = feature.getGeometry();
             let position = info.getClickPos();
             let featurePos = geometry.getCenterPos();
-
+            let projection: com.carto.projections.Projection;
+            const dataSourceProjection = this.getNative().getDataSource().getProjection();
             if (this.projection) {
-                const layerProj = this.getNative().getDataSource().getProjection();
-                const nProj = this.projection.getNative();
-                featurePos = nProj.fromWgs84(layerProj.toWgs84(featurePos));
-                position = nProj.fromWgs84(layerProj.toWgs84(position));
+                projection = this.projection.getNative();
+                featurePos = projection.fromWgs84(dataSourceProjection.toWgs84(featurePos));
+                position = projection.fromWgs84(dataSourceProjection.toWgs84(position));
             }
+            const geoFeature = {
+                id: info.getFeatureId(),
+                layer: info.getFeatureLayerName(),
+                get geometry() {
+                    const writer = getGeojsonWriter();
+                    writer.setSourceProjection(dataSourceProjection);
+                    return JSON.parse(getGeojsonWriter().writeGeometry(geometry));
+                },
+                properties: nativeVariantToJS(info.getFeature().getProperties()),
+            };
             return (
                 this.listener.onVectorTileClicked.call(this.listener, {
                     clickType: info.getClickType().swigValue(),
                     layer: this,
-                    featureId: info.getFeatureId(),
-                    featureData: nativeVariantToJS(info.getFeature().getProperties()),
-                    featureLayerName: info.getFeatureLayerName(),
+                    feature: geoFeature,
+                    featureId: geoFeature.id,
+                    featureData: geoFeature.properties,
+                    featureLayerName: geoFeature.layer,
                     featureGeometry: geometry,
                     featurePosition: fromNativeMapPos(featurePos),
                     position: fromNativeMapPos(position),
