@@ -15,7 +15,7 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
             return NTVectorTileSearchService.alloc().initWithDataSourceTileDecoder(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
-    public findFeatures(options: SearchRequest) {
+    public findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void) {
         const nRequest = NTSearchRequest.alloc().init();
         if (options.projection) {
             nRequest.setProjection(options.projection.getNative());
@@ -30,9 +30,15 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
             nRequest.setRegexFilter(options.regexFilter);
         }
         if (options.geometry) {
-            nRequest.setGeometry(options.geometry as any);
+            nRequest.setGeometry(geometryFromArgs(options.geometry));
         }
-        return new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
+        const result = new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
+        if (callback) {
+            callback(result);
+            return null;
+        } else {
+            return result;
+        }
     }
 }
 
