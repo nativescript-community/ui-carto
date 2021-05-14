@@ -198,7 +198,7 @@ export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, V
         if (!!options.dataSource) {
             const dataSource = options.dataSource.getNative();
             if (dataSource) {
-                return new com.carto.layers.VectorLayer((options.dataSource as VectorDataSource<any, any>).getNative());
+                return new com.carto.layers.VectorLayer(options.dataSource.getNative());
             }
         }
         return null;
@@ -210,7 +210,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
         if (!!options.dataSource) {
             const dataSource = options.dataSource.getNative();
             if (dataSource) {
-                const result = new com.carto.layers.EditableVectorLayer((options.dataSource as VectorDataSource<any, any>).getNative());
+                const result = new com.carto.layers.EditableVectorLayer(options.dataSource.getNative());
                 // result.setVectorEditEventListener(VectorEditEventListenerImpl.initWithOwner(new WeakRef(this)));
                 // result.setVectorElementEventListener(VectorElementEventListenerImpl.initWithOwner(new WeakRef(this)));
                 return result;
