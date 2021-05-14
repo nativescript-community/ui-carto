@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.5.0...v1.5.1) (2021-05-14)
+
+
+### Bug Fixes
+
+* **ios:** calculateRoute customOptions ([4c13d1b](https://github.com/farfromrefug/nativescript-carto/commit/4c13d1b5b4832522711a1c2d52238990330751b8))
+* faster variant from and to ([53a418c](https://github.com/farfromrefug/nativescript-carto/commit/53a418c9d0d8d80d3e2fbbe0525b2e1ae9013685))
+* **ios:** findFeatures callback fix ([33bfab2](https://github.com/farfromrefug/nativescript-carto/commit/33bfab2ab1c17433cc66b79503105c166f5038ef))
+
+
+### Features
+
+* feature as geojson ([a6fd597](https://github.com/farfromrefug/nativescript-carto/commit/a6fd59731726e5a20eb5f82e9dacff58d96d039d))
+* maptiler online source ([274f6b8](https://github.com/farfromrefug/nativescript-carto/commit/274f6b8d02a24c30ed727faa44b06b5bd1a01345))
+
+
+
+
+
 # [1.5.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.11...v1.5.0) (2021-04-16)
 
 
