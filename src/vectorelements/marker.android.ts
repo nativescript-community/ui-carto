@@ -5,6 +5,7 @@ import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BaseBillboardVectorElement, BillboardStyleBuilder } from './index.android';
 import { BillboardOrientation, BillboardScaling } from '.';
 import { Geometry } from '../geometry';
+import { styleBuilderProperty } from './index.common';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -30,6 +31,13 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
 }
 
 export class Marker extends BaseBillboardVectorElement<com.carto.vectorelements.Marker, MarkerOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty bitmap: string;
+    @styleBuilderProperty size: number;
+    @styleBuilderProperty width: number;
+    @styleBuilderProperty clickSize: number;
+    @styleBuilderProperty anchorPointX: number;
+    @styleBuilderProperty anchorPointY: number;
     createNative(options: MarkerOptions) {
         const style = this.buildStyle();
         let result: com.carto.vectorelements.Marker;
