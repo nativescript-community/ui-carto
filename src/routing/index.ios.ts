@@ -1,4 +1,4 @@
-import { mapPosVectorFromArgs } from '..';
+import { mapPosVectorFromArgs, nativeProperty } from '..';
 import { NativeVector } from '../core';
 import {
     CartoOnlineRoutingServiceOptions,
@@ -36,6 +36,7 @@ export enum RoutingAction {
     WAIT = NTRoutingAction.T_ROUTING_ACTION_WAIT,
 }
 abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
+    @nativeProperty profile: string;
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
@@ -44,6 +45,9 @@ abstract class RoutingService<T extends NTRoutingService, U extends RoutingServi
                     nRequest.setCustomParameterValue(k, JSVariantToNative(options.customOptions[k]));
                 });
             }
+
+            // ensure the profile is set
+            this.getNative().setProfile(this.profile);
             const nRes = this.getNative().calculateRoute(nRequest);
             const result = nRes ? new RoutingResult(nRes) : null;
             resolve(result);
@@ -110,7 +114,8 @@ class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManag
     public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
-
+            // ensure the profile is set
+            this.getNative().setProfile(this.profile);
             const nRes = this.getNative().matchRoute(nRequest);
             const result = nRes ? new RouteMatchingResult(nRes) : null;
             resolve(result);
