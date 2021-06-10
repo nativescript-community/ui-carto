@@ -5,6 +5,7 @@ import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.ios';
 import { Geometry } from '../geometry';
+import { styleBuilderProperty } from './index.common';
 
 export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuilder, MarkerStyleBuilderOptions> {
     createNative(options: MarkerStyleBuilderOptions) {
@@ -28,6 +29,13 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuild
 }
 
 export class Marker extends BaseBillboardVectorElement<NTMarker, MarkerOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty bitmap: string;
+    @styleBuilderProperty size: number;
+    @styleBuilderProperty width: number;
+    @styleBuilderProperty clickSize: number;
+    @styleBuilderProperty anchorPointX: number;
+    @styleBuilderProperty anchorPointY: number;
     createNative(options: MarkerOptions) {
         const style = this.buildStyle();
         let result: NTMarker;
