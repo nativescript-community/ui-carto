@@ -70,12 +70,15 @@ export const RoutingAction = {
     },
 };
 abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
+    @nativeProperty profile: string;
     // createNative(options: RoutingServiceOptions) {
     //     return new com.carto.geocoding.RoutingService();
     // }
     public calculateRoute(options: RoutingRequest, callback: (err: any, res: RoutingResult) => void) {
         return new Promise((resolve, reject) => {
             const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
+            // ensure the profile is set
+            this.getNative().setProfile(this.profile);
             if (options.customOptions) {
                 Object.keys(options.customOptions).forEach((k) => {
                     nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
@@ -129,13 +132,14 @@ class OSRMOfflineRoutingService extends RoutingService<com.akylas.carto.addition
 }
 
 class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.additions.AKValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
-    @nativeProperty profile: string;
     createNative(options: ValhallaOfflineRoutingServiceOptions) {
         return new com.akylas.carto.additions.AKValhallaOfflineRoutingService(options.path);
     }
     public matchRoute(options: RouteMatchingRequest, callback: (err: any, res: RouteMatchingResult) => void) {
         return new Promise((resolve, reject) => {
             const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+            // ensure the profile is set
+            this.getNative().setProfile(this.profile);
             this.getNative().matchRouteCallback(
                 nRequest,
                 new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
