@@ -82,7 +82,7 @@ export interface CartoOfflineVectorTileLayerOptions extends VectorTileLayerOptio
 }
 
 export interface ClusteredVectorLayerLayerOptions extends VectorTileLayerOptions {
-    dataSource: TileDataSource<any, any>;
+    dataSource: VectorDataSource<any, any>;
     builder: ClusterElementBuilder<any, any>;
     minimumClusterDistance?: number;
     maximumClusterZoom?: number;
