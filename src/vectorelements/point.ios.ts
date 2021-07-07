@@ -3,7 +3,7 @@ import { BasePointVectorElement } from './index.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
 import { Color } from '@nativescript/core/color';
 import { geometryFromArgs, nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { Geometry } from '../geometry';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {

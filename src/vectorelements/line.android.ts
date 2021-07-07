@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color';
 import { geometryFromArgs, mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './index.android';

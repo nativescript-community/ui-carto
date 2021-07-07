@@ -1,6 +1,6 @@
 import { BaseLayer } from './index.common';
 import { LayerOptions, TileLayerOptions } from '.';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { TileDataSource } from '../datasources';
 import { Projection } from '../projections';
 

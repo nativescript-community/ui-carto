@@ -5,13 +5,14 @@ import {
     VectorElementEventListener as IVectorElementEventListener,
     VectorTileEventListener as IVectorTileEventListener,
     VectorLayerOptions,
-    VectorTileLayerOptions
+    VectorTileRenderOrder as IVectorTileRenderOrder, 
+    VectorTileLayerOptions,
 } from './vector';
 import { Layer, TileLayer } from '.';
 import { BaseNative } from '..';
 import { VectorDataSource } from '../datasources/vector';
 import { MBVectorTileDecoder } from '../vectortiles';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { fromNativeMapPos } from '../core';
 import { Projection } from '../projections';
 import { VectorElement } from '../vectorelements';
@@ -148,6 +149,13 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
 }
 
 export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
+
+    @nativeProperty layerBlendingSpeed:number
+    @nativeProperty labelBlendingSpeed:number
+    @nativeProperty tileCacheCapacity:number
+    @nativeProperty clickRadius:number
+    @nativeProperty labelRenderOrder: IVectorTileRenderOrder
+    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder
     setLabelRenderOrder(order: NTVectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
     }

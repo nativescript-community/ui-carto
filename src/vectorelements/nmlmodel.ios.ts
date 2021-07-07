@@ -1,22 +1,49 @@
-import { getRelativePathToApp, nativeProperty } from '../index.common';
-import { NMLModelOptions } from './nmlmodel';
-import { BasePointVectorElement } from './index.ios';
+import { BasePointVectorElement, BaseVectorElementStyleBuilder } from '.';
+import { nativeProperty } from '..';
+import { NMLModelOptions, NMLModelStyleBuilderOptions } from './nmlmodel';
+
+export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<NTNMLModelStyleBuilder, NMLModelStyleBuilderOptions> {
+    createNative(options: NMLModelStyleBuilderOptions) {
+        return NTBalloonPopupStyleBuilder.alloc().init();
+    }
+
+    _buildStyle: NTNMLModelStyle;
+    buildStyle() {
+        if (!this._buildStyle) {
+            this._buildStyle = this.getNative().buildStyle();
+        }
+        return this._buildStyle;
+    }
+}
 
 export class NMLModel extends BasePointVectorElement<NTNMLModel, NMLModelOptions> {
     @nativeProperty scale: number;
 
     createNative(options: NMLModelOptions) {
-        // const style: NTNMLModelStyle = options.style || options.styleBuilder.buildStyle();
-        const modelPath = getRelativePathToApp(options.name);
-        if (modelPath) {
-            const nativePos = this.getNativePos(options.position, options.projection);
-            const result = NTNMLModel.alloc().initWithPosSourceModelData(nativePos, NTAssetUtils.loadAsset(modelPath));
-            // result['owner'] = new WeakRef(this);
-            return result;
-        } else {
-            console.error(`could not find model file: ${options.name}`);
-            return null;
+        const style = this.buildStyle();
+        const nativePos = this.getNativePos(options.position, options.projection);
+        const result = NTNMLModel.alloc().initWithPosStyle(nativePos, style);
+        return result;
+    }
+    buildStyle() {
+        let style: NTNMLModelStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof NTNMLModelStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof NMLModelStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new NMLModelStyleBuilder(styleBuilder).buildStyle();
+        }
+        return style;
+    }
+    get styleBuilder() {
+        return this.native ? (this.native.getStyle() as any) : (this.options.styleBuilder as any);
+    }
+    set styleBuilder(value: NMLModelStyleBuilder | NTBalloonPopupStyle | NMLModelStyleBuilderOptions) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value;
+            this.native.setStyle(this.buildStyle());
         }
     }
-    buildStyle() {}
 }

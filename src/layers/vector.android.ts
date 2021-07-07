@@ -1,5 +1,5 @@
 import { BaseNative } from '..';
-import { nativeProperty, nonenumerable } from '../index.common';
+import { nativeProperty } from '..';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections';
@@ -16,6 +16,7 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorLayerOptions,
     VectorTileLayerOptions,
+    VectorTileRenderOrder as IVectorTileRenderOrder,
 } from './vector';
 import { Line } from '../vectorelements/line';
 
@@ -61,15 +62,31 @@ function getGeojsonWriter() {
 }
 
 export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
+    projection?: Projection;
+    listener?: IVectorTileEventListener;
+    nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
+    
+    @nativeProperty layerBlendingSpeed:number
+    @nativeProperty labelBlendingSpeed:number
+    @nativeProperty tileCacheCapacity:number
+    @nativeProperty clickRadius:number
+    @nativeProperty labelRenderOrder: IVectorTileRenderOrder
+    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder
+    constructor(options) {
+        super(options);
+        for (const property of ['listener', 'nListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(BaseVectorTileLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
     setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
     }
     setBuildingRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
         this.getNative().setBuildingRenderOrder(order);
     }
-    projection?: Projection;
-    @nonenumerable listener?: IVectorTileEventListener;
-    @nonenumerable nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
         this.listener = listener;
         this.projection = projection;
@@ -161,8 +178,8 @@ export class CartoOfflineVectorTileLayer extends TileLayer<com.carto.layers.Cart
 
 export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
     projection?: Projection;
-    @nonenumerable elementListener?: IVectorElementEventListener;
-    @nonenumerable nElementListener?: com.akylas.carto.additions.AKVectorElementEventListener;
+    elementListener?: IVectorElementEventListener;
+    nElementListener?: com.akylas.carto.additions.AKVectorElementEventListener;
     setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection) {
         this.elementListener = listener;
         this.projection = projection;
@@ -242,8 +259,8 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
         }
     }
-    @nonenumerable editListener?: IVectorEditEventListener;
-    @nonenumerable nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
+    editListener?: IVectorEditEventListener;
+    nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
     projection?: Projection;
     setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection) {
         this.editListener = listener;

@@ -4,7 +4,7 @@ import { Color } from '@nativescript/core/color';
 import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty } from '..';
 import { LineOptions, LineStyleBuilderOptions } from './line';
 import { BaseLineVectorElement } from './index.ios';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { LineGeometry } from '../geometry';
 
 export { MapBounds };

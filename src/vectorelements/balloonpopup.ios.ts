@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color';
 import { nativeCartoImageProperty, nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { BasePointVectorElement, BillboardStyleBuilder } from './index.ios';
 
