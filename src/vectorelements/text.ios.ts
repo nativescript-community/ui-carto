@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core';
 import { nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { BillboardOrientation, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.ios';

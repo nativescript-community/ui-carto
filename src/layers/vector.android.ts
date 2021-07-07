@@ -1,5 +1,5 @@
 import { BaseNative } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections';
@@ -16,6 +16,7 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorLayerOptions,
     VectorTileLayerOptions,
+    VectorTileRenderOrder as IVectorTileRenderOrder,
 } from './vector';
 import { Line } from '../vectorelements/line';
 
@@ -64,6 +65,13 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
     projection?: Projection;
     listener?: IVectorTileEventListener;
     nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
+    
+    @nativeProperty layerBlendingSpeed:number
+    @nativeProperty labelBlendingSpeed:number
+    @nativeProperty tileCacheCapacity:number
+    @nativeProperty clickRadius:number
+    @nativeProperty labelRenderOrder: IVectorTileRenderOrder
+    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder
     constructor(options) {
         super(options);
         for (const property of ['listener', 'nListener']) {

@@ -1,7 +1,7 @@
 import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions, TileDownloadListener } from './cache';
 import { TileDataSource } from '.';
 import { MapBounds, toNativeMapBounds } from '../core';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 
 @NativeClass
 class NTTileDownloadListenerImpl extends NTTileDownloadListener {

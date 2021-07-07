@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core/color';
 import { geometryFromArgs, nativeCartoImageProperty, nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
 import { BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.ios';

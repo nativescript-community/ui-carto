@@ -1,7 +1,7 @@
 import { nativeAndroidEnumProperty } from '../index.android';
 import { Color } from '@nativescript/core/color';
 import { nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeProperty } from '..';
 import { TextOptions, TextStyleBuilderOptions } from './text';
 import { BillboardOrientation, BillboardStyleBuilder } from '.';
 import { BaseBillboardVectorElement } from './index.android';

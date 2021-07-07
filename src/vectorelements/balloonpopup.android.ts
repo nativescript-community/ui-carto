@@ -1,8 +1,7 @@
-import { BasePointVectorElement, BillboardStyleBuilder } from './index.android';
-import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
 import { Color } from '@nativescript/core/color';
-import { nativeCartoImageProperty, nativeColorProperty } from '..';
-import { nativeProperty } from '../index.common';
+import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '..';
+import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
+import { BasePointVectorElement, BillboardStyleBuilder } from '.';
 
 export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<com.carto.styles.BalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {
