@@ -86,101 +86,79 @@ export class GeocodingResultVector extends NativeVector<GeocodingResult> {
 }
 
 export class PackageManagerGeocodingService extends GeocodingService<NTPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
-    @nativeProperty
-    autoComplete: boolean;
-    @nativeProperty
-    language: string;
+    @nativeProperty autocomplete: boolean;
+    @nativeProperty language: string;
     createNative(options: PackageManagerGeocodingServiceOptions) {
         return new NTPackageManagerGeocodingService(options.packageManager.getNative());
     }
 }
 
 export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<NTPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
+    @nativeProperty language: string;
     createNative(options: PackageManagerReverseGeocodingServiceOptions) {
         return NTPackageManagerReverseGeocodingService.alloc().initWithPackageManager(options.packageManager.getNative());
     }
 }
 
 export class PeliasOnlineGeocodingService extends GeocodingService<NTPeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
-    @nativeProperty
-    autoComplete: boolean;
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
+    @nativeProperty autocomplete: boolean;
+    @nativeProperty language: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: PeliasOnlineGeocodingServiceOptions) {
         return NTPeliasOnlineGeocodingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService<NTPeliasOnlineReverseGeocodingService, PeliasOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
+    @nativeProperty language: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
         return NTPeliasOnlineReverseGeocodingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 
 export class TomTomOnlineGeocodingService extends GeocodingService<NTTomTomOnlineGeocodingService, TomTomOnlineGeocodingServiceOptions> {
-    @nativeProperty
-    autoComplete: boolean;
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
+    @nativeProperty autocomplete: boolean;
+    @nativeProperty language: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: TomTomOnlineGeocodingServiceOptions) {
         return NTTomTomOnlineGeocodingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService<NTTomTomOnlineReverseGeocodingService, TomTomOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
+    @nativeProperty language: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: TomTomOnlineReverseGeocodingServiceOptions) {
         return NTTomTomOnlineReverseGeocodingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 
 export class MapBoxOnlineGeocodingService extends GeocodingService<NTMapBoxOnlineGeocodingService, MapBoxOnlineGeocodingServiceOptions> {
-    @nativeProperty
-    autoComplete: boolean;
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
+    @nativeProperty autocomplete: boolean;
+    @nativeProperty language: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: MapBoxOnlineGeocodingServiceOptions) {
         return NTMapBoxOnlineGeocodingService.alloc().initWithAccessToken(options.apiKey);
     }
 }
 export class MapBoxOnlineReverseGeocodingService extends ReverseGeocodingService<NTMapBoxOnlineReverseGeocodingService, MapBoxOnlineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    customServiceURL: string;
+    @nativeProperty language: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: MapBoxOnlineReverseGeocodingServiceOptions) {
         return NTMapBoxOnlineReverseGeocodingService.alloc().initWithAccessToken(options.apiKey);
     }
 }
 
 export class OSMOfflineGeocodingService extends GeocodingService<NTOSMOfflineGeocodingService, OSMOfflineGeocodingServiceOptions> {
-    @nativeProperty
-    autoComplete: boolean;
-    @nativeProperty
-    language: string;
-    @nativeProperty
-    maxResults: number;
+    @nativeProperty autocomplete: boolean;
+    @nativeProperty language: string;
+    @nativeProperty maxResults: number;
     createNative(options: OSMOfflineGeocodingServiceOptions) {
         return NTOSMOfflineGeocodingService.alloc().initWithPath(options.path);
     }
 }
 
 export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<NTOSMOfflineReverseGeocodingService, OSMOfflineReverseGeocodingServiceOptions> {
-    @nativeProperty
-    language: string;
+    @nativeProperty language: string;
     createNative(options: OSMOfflineReverseGeocodingServiceOptions) {
         return NTOSMOfflineReverseGeocodingService.alloc().initWithPath(options.path);
     }
