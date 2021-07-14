@@ -78,13 +78,13 @@ export class PackageManagerReverseGeocodingService extends ReverseGeocodingServi
 
 export interface OSMOfflineGeocodingServiceOptions {
     maxResults?: number;
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     path?: string;
 }
 export class OSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {
     maxResults?: number;
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
 }
 
@@ -97,13 +97,13 @@ export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<a
 }
 
 export interface PeliasOnlineGeocodingServiceOptions {
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     customServiceURL?: string;
     apiKey: string;
 }
 export class PeliasOnlineGeocodingService extends GeocodingService<any, PeliasOnlineGeocodingServiceOptions> {
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     customServiceURL?: string;
 }
@@ -119,13 +119,13 @@ export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService
 }
 
 export interface TomTomOnlineGeocodingServiceOptions {
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     customServiceURL?: string;
     apiKey: string;
 }
 export class TomTomOnlineGeocodingService extends GeocodingService<any, TomTomOnlineGeocodingServiceOptions> {
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     customServiceURL?: string;
 }
@@ -141,13 +141,13 @@ export class TomTomOnlineReverseGeocodingService extends ReverseGeocodingService
 }
 
 export interface MapBoxOnlineGeocodingServiceOptions {
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     customServiceURL?: string;
     apiKey: string;
 }
 export class MapBoxOnlineGeocodingService extends GeocodingService<any, MapBoxOnlineGeocodingServiceOptions> {
-    autoComplete?: boolean;
+    autocomplete?: boolean;
     language?: string;
     customServiceURL?: string;
 }
