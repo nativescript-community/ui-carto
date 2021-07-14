@@ -1,12 +1,11 @@
-import { BaseNative } from '..';
-import { nativeProperty } from '..';
+import { Layer, TileLayer } from '.';
+import { BaseNative, nativeProperty } from '..';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
-import { VectorDataSource } from '../datasources/vector';
 import { Projection } from '../projections';
 import { nativeVariantToJS } from '../utils';
 import { VectorElement } from '../vectorelements';
+import { Line } from '../vectorelements/line';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
-import { Layer, TileLayer } from '.';
 import {
     CartoOfflineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
@@ -14,11 +13,10 @@ import {
     VectorEditEventListener as IVectorEditEventListener,
     VectorElementEventListener as IVectorElementEventListener,
     VectorTileEventListener as IVectorTileEventListener,
+    VectorTileRenderOrder as IVectorTileRenderOrder,
     VectorLayerOptions,
     VectorTileLayerOptions,
-    VectorTileRenderOrder as IVectorTileRenderOrder,
 } from './vector';
-import { Line } from '../vectorelements/line';
 
 export { VectorTileDecoder };
 
@@ -65,13 +63,13 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
     projection?: Projection;
     listener?: IVectorTileEventListener;
     nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
-    
-    @nativeProperty layerBlendingSpeed:number
-    @nativeProperty labelBlendingSpeed:number
-    @nativeProperty tileCacheCapacity:number
-    @nativeProperty clickRadius:number
-    @nativeProperty labelRenderOrder: IVectorTileRenderOrder
-    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder
+
+    @nativeProperty layerBlendingSpeed: number;
+    @nativeProperty labelBlendingSpeed: number;
+    @nativeProperty tileCacheCapacity: number;
+    @nativeProperty clickRadius: number;
+    @nativeProperty labelRenderOrder: IVectorTileRenderOrder;
+    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder;
     constructor(options) {
         super(options);
         for (const property of ['listener', 'nListener']) {
@@ -80,12 +78,6 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                 descriptor.enumerable = false;
             }
         }
-    }
-    setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
-        this.getNative().setLabelRenderOrder(order);
-    }
-    setBuildingRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
-        this.getNative().setBuildingRenderOrder(order);
     }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
         this.listener = listener;
