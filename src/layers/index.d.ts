@@ -11,6 +11,7 @@ export interface LayerOptions {
 
 export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
     constructor(options: U);
+    refresh();
 
     updatePriority: number;
     opacity: number;
