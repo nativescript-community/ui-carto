@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/nativescript-community/ui-carto/compare/v1.5.1...v1.6.0) (2021-07-19)
+
+
+### Features
+
+* **android:** support for GLTextureView ([1d7838d](https://github.com/nativescript-community/ui-carto/commit/1d7838d82eb6d324ad3b2baeb0dd0bb8f7c05ad7))
+
+
+
+
+
 ## [1.5.1](https://github.com/nativescript-community/ui-carto/compare/v1.5.0...v1.5.1) (2021-05-14)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto

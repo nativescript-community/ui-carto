@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.5.1...v1.6.0) (2021-07-19)
+
+
+### Bug Fixes
+
+* geocoding autocomplete fix ([8f2a5e5](https://github.com/farfromrefug/nativescript-carto/commit/8f2a5e5942a1e1bc7bbd7f10a7683fb54727cc75))
+* marker allow dynamic values change ([cf97f06](https://github.com/farfromrefug/nativescript-carto/commit/cf97f064cc2c9602c16ca6c1e05394cb7c6b7d7c))
+* missing refresh signature ([38210be](https://github.com/farfromrefug/nativescript-carto/commit/38210be1a79cb97498a653c19cd774d7bb1aa7d8))
+* routing ensure we use the correct profile ([4fcdd42](https://github.com/farfromrefug/nativescript-carto/commit/4fcdd42d5b09804bd466cd4a76a3894f621eebfc))
+
+
+### Features
+
+* **android:** support for GLTextureView ([1d7838d](https://github.com/farfromrefug/nativescript-carto/commit/1d7838d82eb6d324ad3b2baeb0dd0bb8f7c05ad7))
+* borderWidth for text ([c3085dc](https://github.com/farfromrefug/nativescript-carto/commit/c3085dc356cc70fecce7941db82553c20aa5bc86))
+
+
+
+
+
 ## [1.5.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.5.0...v1.5.1) (2021-05-14)
 
 
