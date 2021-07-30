@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/nativescript-community/ui-carto/compare/v1.6.1...v1.6.2) (2021-07-30)
+
+
+### Bug Fixes
+
+* update ios dep ([737f5f7](https://github.com/nativescript-community/ui-carto/commit/737f5f739318175fbc678f371fa6284673af2c9e))
+* updated version ([66c36df](https://github.com/nativescript-community/ui-carto/commit/66c36df0886d8ede04f21403125b5d33643bb6a3))
+
+
+
+
+
 ## [1.6.1](https://github.com/nativescript-community/ui-carto/compare/v1.6.0...v1.6.1) (2021-07-21)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto
