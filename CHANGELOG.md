@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.3](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.2...v1.6.3) (2021-08-16)
+
+
+### Bug Fixes
+
+* update for latest sdk ([a70a592](https://github.com/farfromrefug/nativescript-carto/commit/a70a59230d63da42921803f9b676130ad791c548))
+* update to latest native SDK ([e6fa7a6](https://github.com/farfromrefug/nativescript-carto/commit/e6fa7a6b2d0ec0b921e3dd532008623e9686b42d))
+
+
+
+
+
 ## [1.6.2](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.1...v1.6.2) (2021-07-30)
 
 
