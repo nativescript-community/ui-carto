@@ -90,8 +90,20 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                 eventName: MapClickedEvent,
                 object: owner,
                 data: {
-                    clickType: mapClickInfo.getClickType(),
-                    position: owner.fromNativeMapPos(mapClickInfo.getClickPos()),
+                    get clickInfo() {
+                        return {
+                            get duration() {
+                                return (mapClickInfo as any).getClickInfo().getDuration();
+                            },
+                        };
+                    },
+                    get clickType() {
+                        return mapClickInfo.getClickType();
+                    },
+                    get position() {
+                        return fromNativeMapPos(mapClickInfo.getClickPos());
+                    },
+                    ios: mapClickInfo,
                 },
             });
         }

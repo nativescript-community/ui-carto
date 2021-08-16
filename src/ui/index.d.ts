@@ -179,6 +179,12 @@ export class MapOptions {
      * @param zoomRange native Carto  MapRange
      */
     setZoomRange(zoomRange: any);
+
+    setDoubleClickDetection(param0: boolean): void;
+    isDoubleClickDetection(): boolean;
+    getLongClickDuration(): number;
+    setLongClickDuration(param0: number): void;
+
 }
 
 interface CartoMapStyle extends Style {

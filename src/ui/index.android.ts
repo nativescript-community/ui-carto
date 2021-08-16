@@ -150,8 +150,20 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
             onMapClicked: (mapClickInfo: com.carto.ui.MapClickInfo) => {
                 if (this.hasListeners(MapClickedEvent)) {
                     this.sendEvent(MapClickedEvent, {
-                        clickType: mapClickInfo.getClickType().swigValue(),
-                        position: fromNativeMapPos(mapClickInfo.getClickPos()),
+                        android: mapClickInfo,
+                        get clickInfo(){
+                            return {
+                                get duration() {
+                                    return mapClickInfo.getClickInfo().getDuration()
+                                }
+                            }
+                        },
+                        get clickType () {
+                            return  mapClickInfo.getClickType().swigValue()
+                        },
+                        get position () {
+                            return  fromNativeMapPos(mapClickInfo.getClickPos())
+                        }
                     });
                 }
             },
