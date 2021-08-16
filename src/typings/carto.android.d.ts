@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
 /* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 /* eslint-disable no-redeclare */
-
 declare module com {
 	export module carto {
 		export class BuildConfig extends java.lang.Object {
@@ -74,21 +73,6 @@ declare module com {
 declare module com {
 	export module carto {
 		export module components {
-			export class LicenseManager extends java.lang.Object {
-				public static class: java.lang.Class<com.carto.components.LicenseManager>;
-				public swigCMemOwn: boolean;
-				public static getCPtr(param0: com.carto.components.LicenseManager): number;
-				public delete(): void;
-				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
-			}
-		}
-	}
-}
-
-declare module com {
-	export module carto {
-		export module components {
 			export class LicenseManagerListener extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.components.LicenseManagerListener>;
 				public swigCMemOwn: boolean;
@@ -133,24 +117,13 @@ declare module com {
 declare module com {
 	export module carto {
 		export module components {
-			export class LicenseManagerModuleJNI extends java.lang.Object {
-				public static class: java.lang.Class<com.carto.components.LicenseManagerModuleJNI>;
-				public constructor();
-				public static delete_LicenseManager(param0: number): void;
-			}
-		}
-	}
-}
-
-declare module com {
-	export module carto {
-		export module components {
 			export class Options extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.components.Options>;
 				public swigCMemOwn: boolean;
 				public setTileThreadPoolSize(param0: number): void;
 				public setRenderProjectionMode(param0: com.carto.components.RenderProjectionMode): void;
 				public setDPI(param0: number): void;
+				public isDoubleClickDetection(): boolean;
 				public setWatermarkAlignmentY(param0: number): void;
 				public setUserInput(param0: boolean): void;
 				public getPivotMode(): com.carto.components.PivotMode;
@@ -175,11 +148,13 @@ declare module com {
 				public setMainLightDirection(param0: com.carto.core.MapVec): void;
 				public setTileDrawSize(param0: number): void;
 				public setClickTypeDetection(param0: boolean): void;
+				public getLongClickDuration(): number;
 				public setRotatable(param0: boolean): void;
 				public isSeamlessPanning(): boolean;
 				public setWatermarkBitmap(param0: com.carto.graphics.Bitmap): void;
 				public setTiltGestureReversed(param0: boolean): void;
 				public isClickTypeDetection(): boolean;
+				public setDoubleClickDetection(param0: boolean): void;
 				public setRestrictedPanning(param0: boolean): void;
 				public setBaseProjection(param0: com.carto.projections.Projection): void;
 				public setFieldOfViewY(param0: number): void;
@@ -191,6 +166,7 @@ declare module com {
 				public isTiltGestureReversed(): boolean;
 				public setSeamlessPanning(param0: boolean): void;
 				public getRenderProjectionMode(): com.carto.components.RenderProjectionMode;
+				public setLongClickDuration(param0: number): void;
 				public getWatermarkScale(): number;
 				public isKineticRotation(): boolean;
 				public finalize(): void;
@@ -281,7 +257,9 @@ declare module com {
 				public static Options_getPanBounds(param0: number, param1: com.carto.components.Options): number;
 				public static Options_setWatermarkAlignmentY(param0: number, param1: com.carto.components.Options, param2: number): void;
 				public static Options_getWatermarkScale(param0: number, param1: com.carto.components.Options): number;
+				public static Options_setLongClickDuration(param0: number, param1: com.carto.components.Options, param2: number): void;
 				public static Options_setRenderProjectionMode(param0: number, param1: com.carto.components.Options, param2: number): void;
+				public static Options_isDoubleClickDetection(param0: number, param1: com.carto.components.Options): boolean;
 				public static Options_isSeamlessPanning(param0: number, param1: com.carto.components.Options): boolean;
 				public static Options_getWatermarkBitmap(param0: number, param1: com.carto.components.Options): number;
 				public static Options_getFocusPointOffset(param0: number, param1: com.carto.components.Options): number;
@@ -295,6 +273,7 @@ declare module com {
 				public static Options_setPivotMode(param0: number, param1: com.carto.components.Options, param2: number): void;
 				public static Options_getAmbientLightColor(param0: number, param1: com.carto.components.Options): number;
 				public static Options_setEnvelopeThreadPoolSize(param0: number, param1: com.carto.components.Options, param2: number): void;
+				public static Options_setDoubleClickDetection(param0: number, param1: com.carto.components.Options, param2: boolean): void;
 				public static Options_setPanningMode(param0: number, param1: com.carto.components.Options, param2: number): void;
 				public static Options_getEnvelopeThreadPoolSize(param0: number, param1: com.carto.components.Options): number;
 				public static Options_setKineticPan(param0: number, param1: com.carto.components.Options, param2: boolean): void;
@@ -306,6 +285,7 @@ declare module com {
 				public static Options_setClickTypeDetection(param0: number, param1: com.carto.components.Options, param2: boolean): void;
 				public static Options_setClearColor(param0: number, param1: com.carto.components.Options, param2: number, param3: com.carto.graphics.Color): void;
 				public static Options_getZoomRange(param0: number, param1: com.carto.components.Options): number;
+				public static Options_getLongClickDuration(param0: number, param1: com.carto.components.Options): number;
 				public static Options_getWatermarkAlignmentY(param0: number, param1: com.carto.components.Options): number;
 				public static Options_setMainLightColor(param0: number, param1: com.carto.components.Options, param2: number, param3: com.carto.graphics.Color): void;
 			}
@@ -1126,6 +1106,7 @@ declare module com {
 				public constructor();
 				public size(): number;
 				public get_key(param0: number): string;
+				public swigGetRawPtr(): number;
 				public delete(): void;
 				public clear(): void;
 				public has_key(param0: string): boolean;
@@ -1140,18 +1121,19 @@ declare module com {
 		export module core {
 			export class StringMapModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.core.StringMapModuleJNI>;
-				public static StringMap_get(param0: number, param1: com.carto.core.StringMap, param2: string): string;
 				public static StringMap_get_key(param0: number, param1: com.carto.core.StringMap, param2: number): string;
+				public static StringMap_swigGetRawPtr(param0: number, param1: com.carto.core.StringMap): number;
 				public static StringMap_set(param0: number, param1: com.carto.core.StringMap, param2: string, param3: string): void;
-				public static StringMap_del(param0: number, param1: com.carto.core.StringMap, param2: string): void;
-				public static StringMap_empty(param0: number, param1: com.carto.core.StringMap): boolean;
 				public static StringMap_size(param0: number, param1: com.carto.core.StringMap): number;
 				public static delete_StringMap(param0: number): void;
 				public static new_StringMap__SWIG_0(): number;
 				public static new_StringMap__SWIG_1(param0: number, param1: com.carto.core.StringMap): number;
+				public constructor();
+				public static StringMap_get(param0: number, param1: com.carto.core.StringMap, param2: string): string;
+				public static StringMap_del(param0: number, param1: com.carto.core.StringMap, param2: string): void;
+				public static StringMap_empty(param0: number, param1: com.carto.core.StringMap): boolean;
 				public static StringMap_has_key(param0: number, param1: com.carto.core.StringMap, param2: string): boolean;
 				public static StringMap_clear(param0: number, param1: com.carto.core.StringMap): void;
-				public constructor();
 			}
 		}
 	}
@@ -10977,6 +10959,7 @@ declare module com {
 				public finalize(): void;
 				public equals(param0: any): boolean;
 				public constructor(param0: number, param1: boolean);
+				public getClickInfo(): com.carto.ui.ClickInfo;
 				public getVectorElement(): com.carto.vectorelements.VectorElement;
 			}
 		}
@@ -10989,6 +10972,7 @@ declare module com {
 			export class BalloonPopupButtonClickInfoModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.ui.BalloonPopupButtonClickInfoModuleJNI>;
 				public static BalloonPopupButtonClickInfo_getClickType(param0: number, param1: com.carto.ui.BalloonPopupButtonClickInfo): number;
+				public static BalloonPopupButtonClickInfo_getClickInfo(param0: number, param1: com.carto.ui.BalloonPopupButtonClickInfo): number;
 				public static BalloonPopupButtonClickInfo_getButton(param0: number, param1: com.carto.ui.BalloonPopupButtonClickInfo): number;
 				public static BalloonPopupButtonClickInfo_getVectorElement(param0: number, param1: com.carto.ui.BalloonPopupButtonClickInfo): number;
 				public static BalloonPopupButtonClickInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.BalloonPopupButtonClickInfo): number;
@@ -11109,6 +11093,47 @@ declare module com {
 declare module com {
 	export module carto {
 		export module ui {
+			export class ClickInfo extends java.lang.Object {
+				public static class: java.lang.Class<com.carto.ui.ClickInfo>;
+				public swigCMemOwn: boolean;
+				public getClickType(): com.carto.ui.ClickType;
+				public swigGetRawPtr(): number;
+				public constructor(param0: com.carto.ui.ClickType, param1: number);
+				public delete(): void;
+				public hashCode(): number;
+				public getDuration(): number;
+				public finalize(): void;
+				public equals(param0: any): boolean;
+				public constructor(param0: number, param1: boolean);
+				public toString(): string;
+				public static getCPtr(param0: com.carto.ui.ClickInfo): number;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module ui {
+			export class ClickInfoModuleJNI extends java.lang.Object {
+				public static class: java.lang.Class<com.carto.ui.ClickInfoModuleJNI>;
+				public static ClickInfo_hashCodeInternal(param0: number, param1: com.carto.ui.ClickInfo): number;
+				public static delete_ClickInfo(param0: number): void;
+				public static ClickInfo_getClickType(param0: number, param1: com.carto.ui.ClickInfo): number;
+				public static new_ClickInfo(param0: number, param1: number): number;
+				public static ClickInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.ClickInfo): number;
+				public static ClickInfo_toString(param0: number, param1: com.carto.ui.ClickInfo): string;
+				public static ClickInfo_getDuration(param0: number, param1: com.carto.ui.ClickInfo): number;
+				public static ClickInfo_equalsInternal(param0: number, param1: com.carto.ui.ClickInfo, param2: number, param3: com.carto.ui.ClickInfo): boolean;
+				public constructor();
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module ui {
 			export class ClickType {
 				public static class: java.lang.Class<com.carto.ui.ClickType>;
 				public static CLICK_TYPE_SINGLE: com.carto.ui.ClickType;
@@ -11125,17 +11150,6 @@ declare module com {
 				export class SwigNext extends java.lang.Object {
 					public static class: java.lang.Class<com.carto.ui.ClickType.SwigNext>;
 				}
-			}
-		}
-	}
-}
-
-declare module com {
-	export module carto {
-		export module ui {
-			export class ClickTypeModuleJNI extends java.lang.Object {
-				public static class: java.lang.Class<com.carto.ui.ClickTypeModuleJNI>;
-				public constructor();
 			}
 		}
 	}
@@ -11316,6 +11330,7 @@ declare module com {
 				public equals(param0: any): boolean;
 				public constructor(param0: number, param1: boolean);
 				public static getCPtr(param0: com.carto.ui.MapClickInfo): number;
+				public getClickInfo(): com.carto.ui.ClickInfo;
 			}
 		}
 	}
@@ -11327,6 +11342,7 @@ declare module com {
 			export class MapClickInfoModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.ui.MapClickInfoModuleJNI>;
 				public static delete_MapClickInfo(param0: number): void;
+				public static MapClickInfo_getClickInfo(param0: number, param1: com.carto.ui.MapClickInfo): number;
 				public static MapClickInfo_getClickPos(param0: number, param1: com.carto.ui.MapClickInfo): number;
 				public static MapClickInfo_getClickType(param0: number, param1: com.carto.ui.MapClickInfo): number;
 				public static MapClickInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.MapClickInfo): number;
@@ -11612,6 +11628,7 @@ declare module com {
 				public equals(param0: any): boolean;
 				public constructor(param0: number, param1: boolean);
 				public static getCPtr(param0: com.carto.ui.PopupClickInfo): number;
+				public getClickInfo(): com.carto.ui.ClickInfo;
 			}
 		}
 	}
@@ -11624,6 +11641,7 @@ declare module com {
 				public static class: java.lang.Class<com.carto.ui.PopupClickInfoModuleJNI>;
 				public static PopupClickInfo_getClickPos(param0: number, param1: com.carto.ui.PopupClickInfo): number;
 				public static delete_PopupClickInfo(param0: number): void;
+				public static PopupClickInfo_getClickInfo(param0: number, param1: com.carto.ui.PopupClickInfo): number;
 				public static PopupClickInfo_getPopup(param0: number, param1: com.carto.ui.PopupClickInfo): number;
 				public static PopupClickInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.PopupClickInfo): number;
 				public static PopupClickInfo_getClickType(param0: number, param1: com.carto.ui.PopupClickInfo): number;
@@ -11688,6 +11706,7 @@ declare module com {
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);
 				public getInterpolatedColor(): com.carto.graphics.Color;
+				public getClickInfo(): com.carto.ui.ClickInfo;
 				public swigGetRawPtr(): number;
 				public delete(): void;
 				public hashCode(): number;
@@ -11705,6 +11724,7 @@ declare module com {
 			export class RasterTileClickInfoModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.ui.RasterTileClickInfoModuleJNI>;
 				public static RasterTileClickInfo_getMapTile(param0: number, param1: com.carto.ui.RasterTileClickInfo): number;
+				public static RasterTileClickInfo_getClickInfo(param0: number, param1: com.carto.ui.RasterTileClickInfo): number;
 				public static RasterTileClickInfo_getInterpolatedColor(param0: number, param1: com.carto.ui.RasterTileClickInfo): number;
 				public static RasterTileClickInfo_getLayer(param0: number, param1: com.carto.ui.RasterTileClickInfo): number;
 				public static RasterTileClickInfo_getClickPos(param0: number, param1: com.carto.ui.RasterTileClickInfo): number;
@@ -11812,6 +11832,7 @@ declare module com {
 				public constructor(param0: number, param1: boolean);
 				public static getCPtr(param0: com.carto.ui.UTFGridClickInfo): number;
 				public getElementInfo(): com.carto.core.Variant;
+				public getClickInfo(): com.carto.ui.ClickInfo;
 			}
 		}
 	}
@@ -11826,6 +11847,7 @@ declare module com {
 				public static delete_UTFGridClickInfo(param0: number): void;
 				public static UTFGridClickInfo_getClickType(param0: number, param1: com.carto.ui.UTFGridClickInfo): number;
 				public static UTFGridClickInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.UTFGridClickInfo): number;
+				public static UTFGridClickInfo_getClickInfo(param0: number, param1: com.carto.ui.UTFGridClickInfo): number;
 				public static UTFGridClickInfo_getElementInfo(param0: number, param1: com.carto.ui.UTFGridClickInfo): number;
 				public static UTFGridClickInfo_getLayer(param0: number, param1: com.carto.ui.UTFGridClickInfo): number;
 				public constructor();
@@ -11841,16 +11863,17 @@ declare module com {
 				public static class: java.lang.Class<com.carto.ui.VectorElementClickInfo>;
 				public swigCMemOwn: boolean;
 				public getClickType(): com.carto.ui.ClickType;
-				public swigGetRawPtr(): number;
 				public getClickPos(): com.carto.core.MapPos;
 				public getElementClickPos(): com.carto.core.MapPos;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public static getCPtr(param0: com.carto.ui.VectorElementClickInfo): number;
+				public getClickInfo(): com.carto.ui.ClickInfo;
+				public swigGetRawPtr(): number;
 				public delete(): void;
 				public hashCode(): number;
 				public getLayer(): com.carto.layers.Layer;
-				public finalize(): void;
 				public equals(param0: any): boolean;
-				public constructor(param0: number, param1: boolean);
-				public static getCPtr(param0: com.carto.ui.VectorElementClickInfo): number;
 				public getVectorElement(): com.carto.vectorelements.VectorElement;
 			}
 		}
@@ -11864,6 +11887,7 @@ declare module com {
 				public static class: java.lang.Class<com.carto.ui.VectorElementClickInfoModuleJNI>;
 				public static delete_VectorElementClickInfo(param0: number): void;
 				public static VectorElementClickInfo_getVectorElement(param0: number, param1: com.carto.ui.VectorElementClickInfo): number;
+				public static VectorElementClickInfo_getClickInfo(param0: number, param1: com.carto.ui.VectorElementClickInfo): number;
 				public static VectorElementClickInfo_getElementClickPos(param0: number, param1: com.carto.ui.VectorElementClickInfo): number;
 				public static VectorElementClickInfo_getClickPos(param0: number, param1: com.carto.ui.VectorElementClickInfo): number;
 				public static VectorElementClickInfo_getLayer(param0: number, param1: com.carto.ui.VectorElementClickInfo): number;
@@ -11948,6 +11972,7 @@ declare module com {
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);
 				public getFeatureClickPos(): com.carto.core.MapPos;
+				public getClickInfo(): com.carto.ui.ClickInfo;
 				public swigGetRawPtr(): number;
 				public delete(): void;
 				public hashCode(): number;
@@ -11977,6 +12002,7 @@ declare module com {
 				public static delete_VectorTileClickInfo(param0: number): void;
 				public static VectorTileClickInfo_getClickType(param0: number, param1: com.carto.ui.VectorTileClickInfo): number;
 				public static VectorTileClickInfo_swigGetRawPtr(param0: number, param1: com.carto.ui.VectorTileClickInfo): number;
+				public static VectorTileClickInfo_getClickInfo(param0: number, param1: com.carto.ui.VectorTileClickInfo): number;
 				public constructor();
 			}
 		}
@@ -12128,6 +12154,30 @@ declare module com {
 				public static BitmapUtils_loadBitmapFromAssets(param0: string): number;
 				public static delete_BitmapUtils(param0: number): void;
 				public constructor();
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module utils {
+			export class DontObfuscate extends java.lang.Object implements java.lang.annotation.Annotation {
+				public static class: java.lang.Class<com.carto.utils.DontObfuscate>;
+				/**
+				 * Constructs a new instance of the com.carto.utils.DontObfuscate interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+				 */
+				public constructor(implementation: {
+					equals(param0: any): boolean;
+					hashCode(): number;
+					toString(): string;
+					annotationType(): java.lang.Class<any>;
+				});
+				public constructor();
+				public hashCode(): number;
+				public equals(param0: any): boolean;
+				public annotationType(): java.lang.Class<any>;
+				public toString(): string;
 			}
 		}
 	}
@@ -12369,10 +12419,10 @@ declare module com {
 				public setStyle(param0: com.carto.styles.PopupStyle): void;
 				public swigGetRawPtr(): number;
 				public replaceButton(param0: com.carto.vectorelements.BalloonPopupButton, param1: com.carto.vectorelements.BalloonPopupButton): void;
+				public processClick(param0: com.carto.ui.ClickInfo, param1: com.carto.core.MapPos, param2: com.carto.core.ScreenPos): boolean;
 				public setDescription(param0: string): void;
 				public getStyle(): com.carto.styles.BalloonPopupStyle;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.BalloonPopup;
-				public processClick(param0: com.carto.ui.ClickType, param1: com.carto.core.MapPos, param2: com.carto.core.ScreenPos): boolean;
 			}
 		}
 	}
@@ -12483,6 +12533,7 @@ declare module com {
 				public static BalloonPopup_getStyle(param0: number, param1: com.carto.vectorelements.BalloonPopup): number;
 				public static BalloonPopup_SWIGSmartPtrUpcast(param0: number): number;
 				public static BalloonPopup_getBalloonPopupEventListener(param0: number, param1: com.carto.vectorelements.BalloonPopup): number;
+				public static BalloonPopup_processClick(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.ui.ClickInfo, param4: number, param5: com.carto.core.MapPos, param6: number, param7: com.carto.core.ScreenPos): boolean;
 				public static BalloonPopup_addButton(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.vectorelements.BalloonPopupButton): void;
 				public constructor();
 				public static new_BalloonPopup__SWIG_2(param0: number, param1: com.carto.core.MapPos, param2: number, param3: com.carto.styles.BalloonPopupStyle, param4: string, param5: string): number;
@@ -12493,7 +12544,6 @@ declare module com {
 				public static BalloonPopup_setStyle(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.styles.BalloonPopupStyle): void;
 				public static BalloonPopup_setBalloonPopupEventListener(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.vectorelements.BalloonPopupEventListener): void;
 				public static BalloonPopup_swigGetClassName(param0: number, param1: com.carto.vectorelements.BalloonPopup): string;
-				public static BalloonPopup_processClick(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number, param6: com.carto.core.ScreenPos): boolean;
 				public static BalloonPopup_drawBitmap(param0: number, param1: com.carto.vectorelements.BalloonPopup, param2: number, param3: com.carto.core.ScreenPos, param4: number, param5: number, param6: number): number;
 			}
 		}
@@ -12573,11 +12623,11 @@ declare module com {
 				public drawBitmap(param0: com.carto.core.ScreenPos, param1: number, param2: number, param3: number): com.carto.graphics.Bitmap;
 				public swigGetDirectorObject(): any;
 				public swigGetRawPtr(): number;
+				public processClick(param0: com.carto.ui.ClickInfo, param1: com.carto.core.MapPos, param2: com.carto.core.ScreenPos): boolean;
 				public delete(): void;
 				public constructor(param0: com.carto.geometry.Geometry, param1: com.carto.styles.PopupStyle, param2: com.carto.vectorelements.CustomPopupHandler);
 				public static getCPtr(param0: com.carto.vectorelements.VectorElement): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.Billboard;
-				public processClick(param0: com.carto.ui.ClickType, param1: com.carto.core.MapPos, param2: com.carto.core.ScreenPos): boolean;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.VectorElement;
 			}
 		}
@@ -12642,8 +12692,8 @@ declare module com {
 				public static new_CustomPopup__SWIG_0(param0: number, param1: com.carto.vectorelements.Billboard, param2: number, param3: com.carto.styles.PopupStyle, param4: number, param5: com.carto.vectorelements.CustomPopupHandler): number;
 				public static new_CustomPopup__SWIG_1(param0: number, param1: com.carto.geometry.Geometry, param2: number, param3: com.carto.styles.PopupStyle, param4: number, param5: com.carto.vectorelements.CustomPopupHandler): number;
 				public static delete_CustomPopup(param0: number): void;
-				public static CustomPopup_processClick(param0: number, param1: com.carto.vectorelements.CustomPopup, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number, param6: com.carto.core.ScreenPos): boolean;
 				public static CustomPopup_swigGetRawPtr(param0: number, param1: com.carto.vectorelements.CustomPopup): number;
+				public static CustomPopup_processClick(param0: number, param1: com.carto.vectorelements.CustomPopup, param2: number, param3: com.carto.ui.ClickInfo, param4: number, param5: com.carto.core.MapPos, param6: number, param7: com.carto.core.ScreenPos): boolean;
 				public static CustomPopup_swigGetDirectorObject(param0: number, param1: com.carto.vectorelements.CustomPopup): any;
 				public static CustomPopup_SWIGSmartPtrUpcast(param0: number): number;
 				public static CustomPopup_drawBitmap(param0: number, param1: com.carto.vectorelements.CustomPopup, param2: number, param3: com.carto.core.ScreenPos, param4: number, param5: number, param6: number): number;
@@ -13106,11 +13156,11 @@ declare module com {
 				public swigGetDirectorObject(): any;
 				public setStyle(param0: com.carto.styles.PopupStyle): void;
 				public swigGetRawPtr(): number;
+				public processClick(param0: com.carto.ui.ClickInfo, param1: com.carto.core.MapPos, param2: com.carto.core.ScreenPos): boolean;
 				public delete(): void;
 				public static getCPtr(param0: com.carto.vectorelements.VectorElement): number;
 				public setAnchorPoint(param0: number, param1: number): void;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.Billboard;
-				public processClick(param0: com.carto.ui.ClickType, param1: com.carto.core.MapPos, param2: com.carto.core.ScreenPos): boolean;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.vectorelements.VectorElement;
 				public getAnchorPointX(): number;
 			}
@@ -13134,9 +13184,9 @@ declare module com {
 				public static Popup_swigGetDirectorObject(param0: number, param1: com.carto.vectorelements.Popup): any;
 				public static Popup_getStyle(param0: number, param1: com.carto.vectorelements.Popup): number;
 				public static Popup_getAnchorPointY(param0: number, param1: com.carto.vectorelements.Popup): number;
-				public static Popup_processClick(param0: number, param1: com.carto.vectorelements.Popup, param2: number, param3: number, param4: com.carto.core.MapPos, param5: number, param6: com.carto.core.ScreenPos): boolean;
 				public static delete_Popup(param0: number): void;
 				public static Popup_setAnchorPointY(param0: number, param1: com.carto.vectorelements.Popup, param2: number): void;
+				public static Popup_processClick(param0: number, param1: com.carto.vectorelements.Popup, param2: number, param3: com.carto.ui.ClickInfo, param4: number, param5: com.carto.core.MapPos, param6: number, param7: com.carto.core.ScreenPos): boolean;
 				public static Popup_swigGetClassName(param0: number, param1: com.carto.vectorelements.Popup): string;
 			}
 		}
@@ -13510,6 +13560,3 @@ declare module com {
 		}
 	}
 }
-
-//Generics information:
-
