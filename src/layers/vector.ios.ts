@@ -1,34 +1,32 @@
+import { Layer, TileLayer } from '.';
+import { BaseNative, nativeProperty } from '..';
+import { fromNativeMapPos } from '../core';
+import { Projection } from '../projections';
+import { nativeVariantToJS } from '../utils';
+import { VectorElement } from '../vectorelements';
+import { MBVectorTileDecoder } from '../vectortiles';
 import {
     CartoOfflineVectorTileLayerOptions,
     CartoOnlineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
     VectorElementEventListener as IVectorElementEventListener,
     VectorTileEventListener as IVectorTileEventListener,
+    VectorTileRenderOrder as IVectorTileRenderOrder,
     VectorLayerOptions,
-    VectorTileRenderOrder as IVectorTileRenderOrder, 
     VectorTileLayerOptions,
 } from './vector';
-import { Layer, TileLayer } from '.';
-import { BaseNative } from '..';
-import { VectorDataSource } from '../datasources/vector';
-import { MBVectorTileDecoder } from '../vectortiles';
-import { nativeProperty } from '..';
-import { fromNativeMapPos } from '../core';
-import { Projection } from '../projections';
-import { VectorElement } from '../vectorelements';
-import { nativeVariantToJS } from '../utils';
 
 export enum VectorTileRenderOrder {
     HIDDEN = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_HIDDEN,
     LAYER = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAYER,
-    LAST = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAST
+    LAST = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAST,
 }
 
 export enum VectorElementDragResult {
     IGNORE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE,
     STOP = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_STOP,
     MODIFY = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_MODIFY,
-    DELETE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_DELETE
+    DELETE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_DELETE,
 }
 
 @NativeClass
@@ -51,11 +49,7 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
             let position = info.getClickPos();
             let elementPos = info.getElementClickPos();
             if (this.projection) {
-                const layerProj = this._layer
-                    .get()
-                    .getNative()
-                    .getDataSource()
-                    .getProjection();
+                const layerProj = this._layer.get().getNative().getDataSource().getProjection();
                 const nProj = this.projection.getNative();
                 elementPos = nProj.fromWgs84(layerProj.toWgs84(elementPos));
                 position = nProj.fromWgs84(layerProj.toWgs84(position));
@@ -67,7 +61,7 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
                     element,
                     metaData: element.metaData,
                     position: fromNativeMapPos(position),
-                    elementPos: fromNativeMapPos(elementPos)
+                    elementPos: fromNativeMapPos(elementPos),
                 }) || false
             );
         }
@@ -140,7 +134,7 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
                     featureLayerName: geoFeature.layer,
                     featureGeometry: geometry,
                     featurePosition: fromNativeMapPos(featurePos),
-                    position: fromNativeMapPos(position)
+                    position: fromNativeMapPos(position),
                 }) || false
             );
         }
@@ -149,13 +143,12 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
 }
 
 export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
-
-    @nativeProperty layerBlendingSpeed:number
-    @nativeProperty labelBlendingSpeed:number
-    @nativeProperty tileCacheCapacity:number
-    @nativeProperty clickRadius:number
-    @nativeProperty labelRenderOrder: IVectorTileRenderOrder
-    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder
+    @nativeProperty layerBlendingSpeed: number;
+    @nativeProperty labelBlendingSpeed: number;
+    @nativeProperty tileCacheCapacity: number;
+    @nativeProperty clickRadius: number;
+    @nativeProperty labelRenderOrder: IVectorTileRenderOrder;
+    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder;
     setLabelRenderOrder(order: NTVectorTileRenderOrder) {
         this.getNative().setLabelRenderOrder(order);
     }
@@ -248,11 +241,9 @@ class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
-    onElementDelete(element: NTVectorElement) {
-    }
+    onElementDelete(element: NTVectorElement) {}
 
-    onElementDeselected(element: NTVectorElement) {
-    }
+    onElementDeselected(element: NTVectorElement) {}
 
     // onElementModifyGeometry(element: NTVectorElement, geometry: NTGeometry) {
     //     console.log('onElementModifyGeometry', element);
@@ -294,7 +285,7 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
     @nativeProperty minimumClusterDistance: number;
     @nativeProperty maximumClusterZoom: number;
     @nativeProperty({
-        nativeGetterName: 'isAnimatedClusters'
+        nativeGetterName: 'isAnimatedClusters',
     })
     animatedClusters: boolean;
 }
