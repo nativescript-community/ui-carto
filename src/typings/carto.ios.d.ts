@@ -1,9 +1,3 @@
-/* eslint-disable id-blacklist */
-/* eslint-disable @typescript-eslint/member-delimiter-style */
-/* eslint-disable @typescript-eslint/indent */
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/unified-signatures */
-
 
 declare class NTAddress extends NSObject {
 
@@ -2533,7 +2527,11 @@ declare class NTMBTilesTileDataSource extends NTTileDataSource {
 
 	getDataExtentSwigExplicitNTMBTilesTileDataSource(): NTMapBounds;
 
+	getMaxZoomSwigExplicitNTMBTilesTileDataSource(): number;
+
 	getMetaData(): NTStringMap;
+
+	getMinZoomSwigExplicitNTMBTilesTileDataSource(): number;
 
 	initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
 
@@ -3631,6 +3629,8 @@ declare class NTOptions extends NSObject {
 
 	getDPI(): number;
 
+	getDoubleClickMaxDuration(): number;
+
 	getDrawDistance(): number;
 
 	getEnvelopeThreadPoolSize(): number;
@@ -3712,6 +3712,8 @@ declare class NTOptions extends NSObject {
 	setDPI(dpi: number): void;
 
 	setDoubleClickDetection(enabled: boolean): void;
+
+	setDoubleClickMaxDuration(duration: number): void;
 
 	setDrawDistance(drawDistance: number): void;
 
@@ -4124,7 +4126,7 @@ declare class NTPackageMetaInfo extends NSObject {
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithVar(variant: NTVariant): this;
+	initWithVar(var: NTVariant): this;
 
 	swigGetRawPtr(): number;
 }
@@ -6314,7 +6316,7 @@ declare class NTVariant extends NSObject {
 
 	initWithString(string: string): this;
 
-	isEqualInternal(variant: NTVariant): boolean;
+	isEqualInternal(var: NTVariant): boolean;
 
 	swigGetRawPtr(): number;
 }
@@ -6335,7 +6337,7 @@ declare class NTVariantArrayBuilder extends NSObject {
 
 	addString(str: string): void;
 
-	addVariant(variant: NTVariant): void;
+	addVariant(var: NTVariant): void;
 
 	buildVariant(): NTVariant;
 
@@ -6376,7 +6378,7 @@ declare class NTVariantObjectBuilder extends NSObject {
 
 	setStringStr(key: string, str: string): void;
 
-	setVariantVar(key: string, variant: NTVariant): void;
+	setVariantVar(key: string, var: NTVariant): void;
 
 	swigGetRawPtr(): number;
 }
