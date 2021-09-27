@@ -274,7 +274,7 @@ public class Utils {
             double maxAcceptable = lat3 + tolerance;
             double y1 = mercator(lat1);
             double y3 = mercator(lat3);
-            double[] xTry = {};
+            double[] xTry = new double[3];
             for (int index = 0; index < size; index++) {
                 MapPos point2 = poly.get(index);
                 double lat2 = toRadians(point2.getY());
