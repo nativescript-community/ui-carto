@@ -184,6 +184,8 @@ export class MapOptions {
     isDoubleClickDetection(): boolean;
     getLongClickDuration(): number;
     setLongClickDuration(param0: number): void;
+    getDoubleClickMaxDuration(): number;
+    setDoubleClickMaxDuration(param0: number): void;
 
 }
 
