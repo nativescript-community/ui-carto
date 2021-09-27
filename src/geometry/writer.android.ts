@@ -13,6 +13,10 @@ export class GeoJSONGeometryWriter extends BaseNative<com.carto.geometry.GeoJSON
     writePoses(value: MapPosVector) {
         return this.getNative().writeGeometry(new com.carto.geometry.LineGeometry(mapPosVectorFromArgs(value)));
     }
+    writeGeometry(value: Geometry) {
+        const geometry = value.getNative ? value.getNative() : value;
+        return this.getNative().writeGeometry(geometry);
+    }
     writeFeatureCollection(value: FeatureCollection) {
         return this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
     }

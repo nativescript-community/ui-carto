@@ -8,6 +8,7 @@ export interface GeoJSONGeometryWriterOptions {
 export class GeoJSONGeometryWriter<T = DefaultLatLonKeys> extends BaseNative<any, GeoJSONGeometryWriterOptions> {
     targetProjection?: Projection;
     writePoses(value: MapPosVector): string;
+    writeGeometry(value: Geometry<T, any>);
     writeFeatureCollection(value: FeatureCollection): string;
 }
 
