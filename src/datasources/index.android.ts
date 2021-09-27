@@ -1,9 +1,9 @@
 import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
+import { nativeProperty } from '..';
+import { FeatureCollection } from '../geometry/feature';
 import { BaseNative } from '../index.common';
 import { Projection } from '../projections';
-import { FeatureCollection } from '../geometry/feature';
 import { JSVariantToNative, jsonVariant } from '../utils';
-import { nativeProperty } from '..';
 
 export abstract class DataSource<T extends com.carto.datasources.TileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {

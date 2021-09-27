@@ -1,9 +1,9 @@
-import { BaseNative } from '../index.common';
 import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
-import { jsonVariant, JSVariantToNative } from '../utils';
-import { FeatureCollection } from '../geometry/feature.ios';
-import { Projection } from '../projections';
 import { nativeProperty } from '..';
+import { FeatureCollection } from '../geometry/feature.ios';
+import { BaseNative } from '../index.common';
+import { Projection } from '../projections';
+import { JSVariantToNative, jsonVariant } from '../utils';
 
 export abstract class DataSource<T extends NTTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {
@@ -26,7 +26,7 @@ export class TileDataSource<T extends NTTileDataSource, U extends TileDataSource
 
 export class OrderedTileDataSource extends TileDataSource<NTOrderedTileDataSource, OrderedTileDataSourceOptions> {
     createNative(options: OrderedTileDataSourceOptions) {
-        const dataSources: NTTileDataSource[] = options.dataSources.map(d => d.getNative());
+        const dataSources: NTTileDataSource[] = options.dataSources.map((d) => d.getNative());
         return NTOrderedTileDataSource.alloc().initWithDataSource1DataSource2(dataSources[0], dataSources[1]);
     }
 }
@@ -39,7 +39,7 @@ export class CombinedTileDataSource extends TileDataSource<NTCombinedTileDataSou
 }
 export class MergedMBVTTileDataSource extends TileDataSource<NTMergedMBVTTileDataSource, MergedMBVTTileDataSourceOptions> {
     createNative(options: MergedMBVTTileDataSourceOptions) {
-        const dataSources: NTTileDataSource[] = options.dataSources.map(d => d.getNative());
+        const dataSources: NTTileDataSource[] = options.dataSources.map((d) => d.getNative());
         return NTMergedMBVTTileDataSource.alloc().initWithDataSource1DataSource2(dataSources[0], dataSources[1]);
     }
 }
