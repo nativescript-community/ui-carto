@@ -122,7 +122,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 
     getOptions() {
         if (this.mapReady) {
-            return this.mapView.getOptions() as MapOptions;
+            return this.mapView.getOptions() as any as MapOptions;
         }
         return null;
     }
@@ -151,19 +151,19 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                 if (this.hasListeners(MapClickedEvent)) {
                     this.sendEvent(MapClickedEvent, {
                         android: mapClickInfo,
-                        get clickInfo(){
+                        get clickInfo() {
                             return {
                                 get duration() {
-                                    return mapClickInfo.getClickInfo().getDuration()
-                                }
-                            }
+                                    return mapClickInfo.getClickInfo().getDuration();
+                                },
+                            };
                         },
-                        get clickType () {
-                            return  mapClickInfo.getClickType().swigValue()
+                        get clickType() {
+                            return mapClickInfo.getClickType().swigValue();
                         },
-                        get position () {
-                            return  fromNativeMapPos(mapClickInfo.getClickPos())
-                        }
+                        get position() {
+                            return fromNativeMapPos(mapClickInfo.getClickPos());
+                        },
                     });
                 }
             },

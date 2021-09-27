@@ -117,12 +117,25 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
             const geoFeature = {
                 id: info.getFeatureId(),
                 layer: info.getFeatureLayerName(),
+                _nativeGeometry: geometry,
                 get geometry() {
-                    const writer = getGeojsonWriter();
-                    writer.setSourceProjection(dataSourceProjection);
-                    return JSON.parse(getGeojsonWriter().writeGeometry(geometry));
+                    if (!this._parsedGeometry) {
+                        const writer = getGeojsonWriter();
+                        writer.setSourceProjection(dataSourceProjection);
+                        this._geometry = getGeojsonWriter().writeGeometry(this._nativeGeometry);
+                        this._parsedGeometry = JSON.parse(this._geometry);
+                    }
+                    return this._parsedGeometry;
                 },
-                properties: nativeVariantToJS(info.getFeature().getProperties()),
+                get _properties() {
+                    return info.getFeature().getProperties().toString();
+                },
+                get properties() {
+                    if (!this._parsedProperties) {
+                        this._parsedProperties = JSON.parse(this._properties);
+                    }
+                    return this._parsedProperties;
+                },
             };
             return (
                 owner.onVectorTileClicked({
