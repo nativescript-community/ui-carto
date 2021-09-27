@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/nativescript-community/ui-carto/compare/v1.6.4...v1.7.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* **android:** isLocationOnPath fix ([6f205ae](https://github.com/nativescript-community/ui-carto/commit/6f205ae17d12e35f7f3803293ca0b96f5e4fa9ad))
+
+
+### Features
+
+* **ios:** isLocationOnPath ([a51f8b1](https://github.com/nativescript-community/ui-carto/commit/a51f8b173008b41577037f51f54a872403d82496))
+
+
+
+
+
 ## [1.6.4](https://github.com/nativescript-community/ui-carto/compare/v1.6.3...v1.6.4) (2021-08-16)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto

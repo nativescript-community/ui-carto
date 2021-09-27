@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.4...v1.7.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* events update ([18c7345](https://github.com/farfromrefug/nativescript-carto/commit/18c73452e99e6c2ab082df2daa26b960b2b5d393))
+* **android:** isLocationOnPath fix ([6f205ae](https://github.com/farfromrefug/nativescript-carto/commit/6f205ae17d12e35f7f3803293ca0b96f5e4fa9ad))
+
+
+### Features
+
+* GeoJSONVectorTileDataSource.setLayerGeoJSONString ([9aef5eb](https://github.com/farfromrefug/nativescript-carto/commit/9aef5eb971bf8d471340604f1375bec5f03abc60))
+* GeoJSONVectorTileDataSource.simplifyTolerance ([fcec86d](https://github.com/farfromrefug/nativescript-carto/commit/fcec86d4918a8968173835191a43abe181403fe2))
+* Geometry.writeGeometry ([d589f10](https://github.com/farfromrefug/nativescript-carto/commit/d589f1092e86130a0cbf9e221592e8e3f5d5a417))
+* **ios:** isLocationOnPath ([a51f8b1](https://github.com/farfromrefug/nativescript-carto/commit/a51f8b173008b41577037f51f54a872403d82496))
+
+
+
+
+
 ## [1.6.4](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.3...v1.6.4) (2021-08-16)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto
