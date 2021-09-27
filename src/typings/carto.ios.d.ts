@@ -4116,7 +4116,7 @@ declare class NTPackageMetaInfo extends NSObject {
 
 	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-	constructor(o: { var: NTVariant; });
+	constructor(o: { variant: NTVariant; });
 
 	getCptr(): interop.Pointer | interop.Reference<any>;
 
@@ -4126,7 +4126,7 @@ declare class NTPackageMetaInfo extends NSObject {
 
 	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithVar(var: NTVariant): this;
+	initWithVar(variant: NTVariant): this;
 
 	swigGetRawPtr(): number;
 }
@@ -6316,7 +6316,7 @@ declare class NTVariant extends NSObject {
 
 	initWithString(string: string): this;
 
-	isEqualInternal(var: NTVariant): boolean;
+	isEqualInternal(variant: NTVariant): boolean;
 
 	swigGetRawPtr(): number;
 }
@@ -6337,7 +6337,7 @@ declare class NTVariantArrayBuilder extends NSObject {
 
 	addString(str: string): void;
 
-	addVariant(var: NTVariant): void;
+	addVariant(variant: NTVariant): void;
 
 	buildVariant(): NTVariant;
 
@@ -6378,7 +6378,7 @@ declare class NTVariantObjectBuilder extends NSObject {
 
 	setStringStr(key: string, str: string): void;
 
-	setVariantVar(key: string, var: NTVariant): void;
+	setVariantVar(key: string, variant: NTVariant): void;
 
 	swigGetRawPtr(): number;
 }
