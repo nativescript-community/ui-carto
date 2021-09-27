@@ -32,7 +32,9 @@ export interface MergedMBVTTileDataSourceOptions extends DataSourceOptions {
 export class MergedMBVTTileDataSource<T, U extends MergedMBVTTileDataSourceOptions> extends TileDataSource<T, U> {}
 export class CombinedTileDataSource<T, U extends CombinedTileDataSourceOptions> extends TileDataSource<T, U> {}
 
-export interface GeoJSONVectorTileDataSourceOptions extends TileDataSourceOptions {}
+export interface GeoJSONVectorTileDataSourceOptions extends TileDataSourceOptions {
+    simplifyTolerance?: number;
+}
 export class GeoJSONVectorTileDataSource extends TileDataSource<any, GeoJSONVectorTileDataSourceOptions> {
     createLayer(name: string): number;
     deleteLayer(index: number);
