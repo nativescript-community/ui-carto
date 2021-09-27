@@ -1,6 +1,6 @@
 import { BaseNative } from '../index.common';
 import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
-import { JSVariantToNative } from '../utils';
+import { jsonVariant, JSVariantToNative } from '../utils';
 import { FeatureCollection } from '../geometry/feature.ios';
 import { Projection } from '../projections';
 import { nativeProperty } from '..';
@@ -61,5 +61,8 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorT
     }
     setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
         this.getNative().setLayerGeoJSONGeoJSON(layerIndex, JSVariantToNative(geoJSON));
+    }
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string) {
+        this.getNative().setLayerGeoJSONGeoJSON(layerIndex, jsonVariant(geoJSON));
     }
 }

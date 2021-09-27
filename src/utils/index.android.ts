@@ -16,6 +16,9 @@ export function nativeVectorToArray(nVector: com.carto.core.StringVector) {
 export function nativeVariantToJS(variant: com.carto.core.Variant) {
     return JSON.parse(variant.toString());
 }
+export function jsonVariant(str: string) {
+    return com.carto.core.Variant.fromString(str);
+}
 export function JSVariantToNative(variant: any) {
     if (Array.isArray(variant)) {
         return com.carto.core.Variant.fromString(JSON.stringify(variant));
