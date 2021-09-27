@@ -13,6 +13,10 @@ export class GeoJSONGeometryWriter extends BaseNative<NTGeoJSONGeometryWriter, G
     writePoses(value: MapPosVector) {
         return this.getNative().writeGeometry(new NTLineGeometry(mapPosVectorFromArgs(value)));
     }
+    writeGeometry(value: Geometry) {
+        const geometry = value.getNative ? value.getNative() : value;
+        return this.getNative().writeGeometry(geometry);
+    }
     writeFeatureCollection(value: FeatureCollection) {
         return this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
     }
