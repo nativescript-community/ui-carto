@@ -3,6 +3,7 @@ import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileData
 import { JSVariantToNative } from '../utils';
 import { FeatureCollection } from '../geometry/feature.ios';
 import { Projection } from '../projections';
+import { nativeProperty } from '..';
 
 export abstract class DataSource<T extends NTTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {
@@ -44,6 +45,7 @@ export class MergedMBVTTileDataSource extends TileDataSource<NTMergedMBVTTileDat
 }
 
 export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorTileDataSource, GeoJSONVectorTileDataSourceOptions> {
+    @nativeProperty simplifyTolerance: number;
     createNative(options: GeoJSONVectorTileDataSourceOptions) {
         return NTGeoJSONVectorTileDataSource.alloc().initWithMinZoomMaxZoom(options.minZoom, options.maxZoom);
     }
