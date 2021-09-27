@@ -14,6 +14,9 @@ export function nativeVectorToArray(nVector: NTStringVector) {
 export function nativeVariantToJS(variant: NTVariant) {
     return JSON.parse(variant.toString());
 }
+export function jsonVariant(str: string) {
+    return NTVariant.fromString(str);
+}
 export function JSVariantToNative(variant: any) {
     if (Array.isArray(variant)) {
         return NTVariant.fromString(JSON.stringify(variant));

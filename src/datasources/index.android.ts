@@ -2,7 +2,8 @@ import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileData
 import { BaseNative } from '../index.common';
 import { Projection } from '../projections';
 import { FeatureCollection } from '../geometry/feature';
-import { JSVariantToNative } from '../utils';
+import { JSVariantToNative, jsonVariant } from '../utils';
+import { nativeProperty } from '..';
 
 export abstract class DataSource<T extends com.carto.datasources.TileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {
@@ -68,6 +69,9 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<com.carto.dataso
     }
     setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
         this.getNative().setLayerGeoJSON(layerIndex, JSVariantToNative(geoJSON));
+    }
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string) {
+        this.getNative().setLayerGeoJSON(layerIndex, jsonVariant(geoJSON));
     }
     deleteLayer(index: number) {
         this.getNative().deleteLayer(index);

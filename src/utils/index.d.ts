@@ -5,6 +5,7 @@ export function nativeVectorToArray(nVector): any[];
 export function nativeMapToJS(nMap): {};
 export function nativeVariantToJS(nMap): any;
 export function JSVariantToNative(nMap): any;
+export function jsonVariant(str: string): any;
 
 export function setShowDebug(value: boolean);
 export function setShowWarn(value: boolean);
