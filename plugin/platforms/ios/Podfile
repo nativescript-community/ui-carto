@@ -1,1 +1,1 @@
-pod 'CartoMobileSDK', '>=4.4.0'
+pod 'CartoMobileSDK'

@@ -1,4 +1,4 @@
 dependencies {
-	def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.4.0"
+	def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.4.1"
 	implementation "com.carto:carto-mobile-sdk:$cartoMobileVersion@aar"
 }
