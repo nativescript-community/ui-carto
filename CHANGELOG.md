@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.0...v1.7.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* **ios:** fixed isLocationOnPath and distanceToEnd ([bc61e1b](https://github.com/farfromrefug/nativescript-carto/commit/bc61e1bab2300cfdd3b34d61c5cffc8258122946))
+* **ios:** support setRunOnMainThread (true by default) ([db7fde9](https://github.com/farfromrefug/nativescript-carto/commit/db7fde903b7386228404ba5ba46d031cb9d5a7d9))
+
+
+
+
+
 # [1.7.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.4...v1.7.0) (2021-09-27)
 
 
