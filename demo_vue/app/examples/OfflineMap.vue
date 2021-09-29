@@ -17,16 +17,16 @@
 <script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
-import { CartoOnlineVectorTileLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos, nativeVectorToArray } from 'nativescript-carto/core';
-import { CartoMap } from 'nativescript-carto/ui';
-import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
+import { CartoOnlineVectorTileLayer } from '@nativescript-community/ui-carto/layers/vector';
+import { CartoMapStyle, MapPos, nativeVectorToArray } from '@nativescript-community/ui-carto/core';
+import { CartoMap } from '@nativescript-community/ui-carto/ui';
+import { CartoOnlineRasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
 import { action } from '@nativescript/core/ui/dialogs';
-import { CartoPackageManager, PackageInfo } from 'nativescript-carto/packagemanager';
+import { CartoPackageManager, PackageInfo } from '@nativescript-community/ui-carto/packagemanager';
 import { File, Folder, knownFolders, path } from '@nativescript/core/file-system';
 import { isAndroid } from '@nativescript/core/platform';
-import { CartoOfflineVectorTileLayer } from 'nativescript-carto/layers/vector';
-import * as permissions from 'nativescript-perms';
+import { CartoOfflineVectorTileLayer } from '@nativescript-community/ui-carto/layers/vector';
+import * as permissions from '@nativescript-community/perms';
 import * as dialogs from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
 import BaseMaps from './BaseMaps';
@@ -39,7 +39,6 @@ export default class OfflineMap extends BaseMaps {
     languages = ['Local', 'en', 'de', 'es', 'it', 'fr', 'ru'];
     online = true;
     packageManager: CartoPackageManager;
-    mapView: CartoMap;
     onlineLayer;
     offlineLayer;
     currentLayer;
@@ -56,7 +55,7 @@ export default class OfflineMap extends BaseMaps {
             .request('storage')
             .then((result) => {
                 // that.set('message', 'WooHoo you granted me all the permissions!');
-                const mapView = (this.mapView = e.object as CartoMap);
+                const mapView = ( e.object as CartoMap);
                 let dataFolder;
                 if (isAndroid) {
                     dataFolder = android.os.Environment.getExternalStorageDirectory().getAbsolutePath().toString();

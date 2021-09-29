@@ -1,6 +1,6 @@
 import Vue from 'nativescript-vue';
 import { Page } from '@nativescript/core/ui/page';
-import { CartoMap } from 'nativescript-carto/ui';
+import { CartoMap } from '@nativescript-community/ui-carto/ui';
 
 export default class BaseVueComponent extends Vue {
     get page() {

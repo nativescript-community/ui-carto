@@ -16,12 +16,12 @@
 <script lang="ts">
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
-import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorLayer } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
-import { CartoMap } from 'nativescript-carto/ui';
-import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
+import { CartoOnlineVectorTileLayer, VectorTileEventData, VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
+import { CartoMapStyle, MapPos } from '@nativescript-community/ui-carto/core';
+import { CartoMap } from '@nativescript-community/ui-carto/ui';
+import { CartoOnlineRasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
 import { action } from '@nativescript/core/ui/dialogs';
-import { LocalVectorDataSource } from 'nativescript-carto/datasources/vector';
+import { LocalVectorDataSource } from '@nativescript-community/ui-carto/datasources/vector';
 
 import * as Overlays from './OverlayUtils';
 import { Component, Prop } from 'vue-property-decorator';

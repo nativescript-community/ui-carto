@@ -1,9 +1,9 @@
 import Vue from 'nativescript-vue';
 import BaseVueComponent from './BaseVueComponent';
-import { CartoOnlineVectorTileLayer, VectorTileEventData } from 'nativescript-carto/layers/vector';
-import { CartoMapStyle, MapPos } from 'nativescript-carto/core';
-import { CartoMap } from 'nativescript-carto/ui';
-import { CartoOnlineRasterTileLayer } from 'nativescript-carto/layers/raster';
+import { CartoOnlineVectorTileLayer, VectorTileEventData } from '@nativescript-community/ui-carto/layers/vector';
+import { CartoMapStyle, MapPos } from '@nativescript-community/ui-carto/core';
+import { CartoMap } from '@nativescript-community/ui-carto/ui';
+import { CartoOnlineRasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
 import { action } from '@nativescript/core/ui/dialogs';
 import { Component, Prop } from 'vue-property-decorator';
 
