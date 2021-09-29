@@ -1,6 +1,8 @@
 import { BaseNative, getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, toNativeMapPos } from '../core';
+import { mapPosVectorFromArgs } from '..';
 
 export function nativeVectorToArray(nVector: NTStringVector) {
     const count = nVector.size();
@@ -144,4 +146,16 @@ export class DirAssetPackage extends BaseNative<NTDirAssetPackageImpl, DirAssetP
             return null;
         }
     }
+}
+export function distanceToEnd<T = DefaultLatLonKeys>(index: number, coordinates: MapPosVector<T> | GenericMapPos<T>[]) {
+    return CartoAdditionsUtils.distanceToEndWithIntPoly(index, mapPosVectorFromArgs<T>(coordinates));
+}
+export function isLocationOnPath<T = DefaultLatLonKeys>(
+    point: GenericMapPos<T>,
+    coordinates: MapPosVector<T> | GenericMapPos<T>[],
+    closed?: boolean,
+    geodesic?: boolean,
+    toleranceEarth?: number
+): number {
+    return CartoAdditionsUtils.isLocationOnPolyClosedGeodesicToleranceEarth(toNativeMapPos<T>(point), mapPosVectorFromArgs<T>(coordinates), closed, geodesic, toleranceEarth);
 }
