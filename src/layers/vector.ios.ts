@@ -220,7 +220,7 @@ export class VectorLayer extends BaseVectorLayer<NTVectorLayer, VectorLayerOptio
         if (!!options.dataSource) {
             const dataSource = options.dataSource.getNative();
             if (dataSource) {
-                return NTVectorLayer.alloc().initWithDataSource(options.dataSource.getNative());
+                return NTVectorLayer.alloc().initWithDataSource(dataSource);
             }
         }
         return null;
