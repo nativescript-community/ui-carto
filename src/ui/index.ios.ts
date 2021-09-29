@@ -18,6 +18,7 @@ import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
 import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import { ImageSource } from '@nativescript/core';
+import { executeOnMainThread } from '@nativescript/core/utils';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
@@ -46,6 +47,21 @@ export function getLicenseKey() {
     return licenseKey;
 }
 
+let runOnMainThread = true;
+function mainThread(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    //wrapping the original method
+    descriptor.value = function (...args: any[]) {
+        if (runOnMainThread) {
+            executeOnMainThread(() => {
+                originalMethod.apply(this, args);
+            });
+        } else {
+            originalMethod.apply(this, args);
+        }
+    };
+}
+
 @NativeClass
 class NTMapEventListenerImpl extends NTMapEventListener {
     private _owner: WeakRef<CartoMap<any>>;
@@ -56,6 +72,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
         return delegate;
     }
 
+    @mainThread
     public onMapIdle() {
         const owner = this._owner.get();
         if (owner && owner.hasListeners(MapIdleEvent)) {
@@ -63,6 +80,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
         }
     }
 
+    @mainThread
     public onMapMoved() {
         const owner = this._owner.get();
         if (owner && owner.hasListeners(MapMovedEvent)) {
@@ -73,6 +91,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
             });
         }
     }
+    @mainThread
     public onMapStable() {
         const owner = this._owner.get();
 
@@ -83,6 +102,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
             owner.userAction = false;
         }
     }
+    @mainThread
     public onMapClicked(mapClickInfo: NTMapClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.hasListeners(MapClickedEvent)) {
@@ -126,11 +146,9 @@ class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
         }
     }
 }
-
 @NativeClass
 class MapView extends NTMapView {
     owner: CartoMap;
-    public static setRunOnMainThread(value: boolean) {}
     touchesBeganWithEvent(touches, event) {
         super.touchesBeganWithEvent(touches, event);
         if (this.owner) {
@@ -172,6 +190,9 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         }
     }
 
+    public static setRunOnMainThread(value: boolean) {
+        runOnMainThread = value;
+    }
     get mapView() {
         return this.nativeViewProtected as NTMapView;
     }
@@ -205,12 +226,12 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         // When nativeView is tapped we get the owning JS object through this field.
         this.nativeView.owner = this;
         super.initNativeView();
+        if (!this.projection) {
+            this.projection = new EPSG4326();
+        }
         this.mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
 
         // const options = this.nativeViewProtected.getOptions();
-        if (!this.projection) {
-            this.projection = CartoMap.projection;
-        }
     }
 
     disposeNativeView(): void {
