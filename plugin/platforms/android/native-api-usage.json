@@ -1,0 +1,5 @@
+{
+    "uses": [
+        "com.akylas.carto.additions*:*", "com.carto*:*"
+    ]
+}
