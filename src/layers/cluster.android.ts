@@ -10,6 +10,8 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
     @nativeColorProperty color: string | Color;
     @nativeProperty size: number;
     @nativeProperty shape: string;
+    @nativeProperty textSize: number;
+    @nativeColorProperty textColor: string | Color;
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
     createNative(options: ClusterElementBuilderOptions) {
         // initClusterElementBuilderNative();

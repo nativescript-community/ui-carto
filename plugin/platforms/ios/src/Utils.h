@@ -5,6 +5,8 @@
 
 #pragma mark Public
 
++(NTColor*) toNTColor: (UIColor*)color;
+
 + (long)isLocationOn:(NTMapPos *)point
                  poly:(NTMapPosVector *)poly;
 
