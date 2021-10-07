@@ -286,8 +286,9 @@ export class EditableVectorLayer extends BaseVectorLayer<NTEditableVectorLayer, 
 }
 
 export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer, ClusteredVectorLayerLayerOptions> {
-    createNative(options: VectorLayerOptions) {
-        return NTClusteredVectorLayer.alloc().initWithDataSource(options.dataSource.getNative());
+    createNative(options: ClusteredVectorLayerLayerOptions) {
+        console.log('ClusteredVectorLayer1', options.builder.getNative());
+        return NTClusteredVectorLayer.alloc().initWithDataSourceClusterElementBuilder(options.dataSource.getNative(), options.builder.getNative());
     }
 
     @nativeProperty minimumClusterDistance: number;

@@ -1,9 +1,10 @@
 import { Color } from '@nativescript/core/color';
-import { nativeColorProperty, nativeImageProperty } from '..';
+import { nativeColorProperty, nativeFontProperty, nativeImageProperty } from '..';
 import { BaseNative, nativeProperty } from '../index.common';
 import { MapPos, fromNativeMapPos } from '../core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
+import { Font } from '@nativescript/core';
 
 export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
     @nativeImageProperty bitmap: string;
@@ -12,6 +13,7 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
     @nativeProperty shape: string;
     @nativeProperty textSize: number;
     @nativeColorProperty textColor: string | Color;
+    @nativeFontProperty font: Font;
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
     createNative(options: ClusterElementBuilderOptions) {
         // initClusterElementBuilderNative();

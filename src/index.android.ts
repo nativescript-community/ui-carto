@@ -1,10 +1,11 @@
 /* eslint-disable no-redeclare */
-import { Color } from '@nativescript/core';
+import { Color, Font } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, fromNativeMapVec, toNativeMapPos, toNativeMapVec } from './core';
 import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';
 import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
+import { BaseVectorElementStyleBuilder } from './vectorelements';
 export { BaseNative, nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -22,6 +23,42 @@ export function nativeColorProperty(...args) {
                 toNative(value) {
                     const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a);
+                },
+            },
+        },
+        ...args
+    );
+}
+export function nativeNColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeNColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeNColorProperty(...args) {
+    return nativeProperty(
+        {
+            converter: {
+                fromNative(value: android.graphics.Color) {
+                    return new Color(value as any);
+                },
+                toNative(value): android.graphics.Color {
+                    const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
+                    return theColor.android as any;
+                },
+            },
+        },
+        ...args
+    );
+}
+export function nativeFontProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeFontProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeFontProperty(...args) {
+    return nativeProperty(
+        {
+            converter: {
+                fromNative(value) {
+                    // no easy from typeface to Font
+                    return value;
+                },
+                toNative(value: Font) {
+                    return value?.getAndroidTypeface();
                 },
             },
         },
@@ -95,6 +132,17 @@ export function featureCollectionFromArgs<T = DefaultLatLonKeys>(collection: Fea
         nativeCollection = collection.getNative();
     }
     return nativeCollection;
+}
+export function styleFromArgs(style: BaseVectorElementStyleBuilder<any, any>) {
+    if (!style) {
+        return null;
+    }
+    let nativeStyle: com.carto.styles.Style = style as any;
+
+    if (typeof (style as any).buildStyle === 'function') {
+        nativeStyle = style.buildStyle();
+    }
+    return nativeStyle;
 }
 
 export function geometryFromArgs<T = DefaultLatLonKeys>(geometry: Geometry<T>) {

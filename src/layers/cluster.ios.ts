@@ -2,11 +2,11 @@ import { BaseNative } from '../index.common';
 import { MapPos, fromNativeMapPos } from '../core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
-import { nativeColorProperty, nativeImageProperty, nativeProperty } from '..';
-import { Color } from '@nativescript/core';
+import { nativeColorProperty, nativeFontProperty, nativeImageProperty, nativeNColorProperty, nativeProperty } from '..';
+import { Color, Font, Utils } from '@nativescript/core';
 
 @NativeClass
-export class ClusterElementBuilderImpl extends AkMarkerClusterElementBuilder {
+export class ClusterElementBuilderImpl extends AkClusterElementBuilder {
     private _owner: WeakRef<ClusterElementBuilder>;
 
     public static initWithOwner(owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderImpl {
@@ -34,12 +34,13 @@ export class ClusterElementBuilder extends BaseNative<NTClusterElementBuilder, C
     @nativeProperty size: number;
     @nativeProperty shape: string;
     @nativeProperty textSize: number;
-    @nativeColorProperty textColor: string | Color;
+    @nativeNColorProperty textColor: string | Color;
+    @nativeFontProperty font: Font;
     createNative(options) {
         if (!!options.buildClusterElement) {
             return ClusterElementBuilderImpl.initWithOwner(new WeakRef(this));
         } else {
-            return AkMarkerClusterElementBuilder.new();
+            return AkClusterElementBuilder.alloc().init();
         }
     }
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | NTVectorElement;

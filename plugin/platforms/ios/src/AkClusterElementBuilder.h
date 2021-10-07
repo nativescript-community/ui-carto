@@ -7,6 +7,7 @@
 - (void) setSize: (NSUInteger)value;
 - (void) setTextSize: (NSUInteger)value;
 - (void) setShape: (NSString *)value;
+- (void) setFont: (UIFont *)value;
 
 
 @end

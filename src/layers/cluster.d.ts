@@ -9,6 +9,9 @@ export interface ClusterElementBuilderOptions {
     image?: string | ImageSource | ImageAsset;
     color?: string | Color;
     size?: number;
+    shape?: string;
+    textColor?: string | Color;
+    textSize?: number;
 
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any>;
 }
@@ -19,4 +22,7 @@ export class ClusterElementBuilder<T, U extends ClusterElementBuilderOptions> ex
     image?: string | ImageSource | ImageAsset;
     color?: string | Color;
     size?: number;
+    shape?: string;
+    textColor?: string | Color;
+    textSize?: number;
 }
