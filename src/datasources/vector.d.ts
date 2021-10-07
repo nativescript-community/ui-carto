@@ -18,5 +18,5 @@ export class LocalVectorDataSource<T = DefaultLatLonKeys> extends VectorDataSour
     setGeometrySimplifier(simplifier: GeometrySimplifier<any, any>);
     clear();
     addFeatureCollection(featureCollection: FeatureCollection, style: any);
-    getDataExtent(): MapBounds<T>
+    getDataExtent(): MapBounds<T>;
 }

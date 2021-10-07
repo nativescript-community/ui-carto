@@ -4,6 +4,7 @@ import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { GeometrySimplifier } from '../geometry/simplifier';
 import { FeatureCollection } from '../geometry/feature';
 import { fromNativeMapBounds } from '../core';
+import { featureCollectionFromArgs, styleFromArgs } from '..';
 
 export abstract class VectorDataSource<T extends com.carto.datasources.VectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
@@ -16,22 +17,20 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
     }
     add(element: BaseVectorElement<any, any>) {
         // a native element could have been passed
-        const nativeObj = element.getNative ? element.getNative(): element;
+        const nativeObj = element.getNative ? element.getNative() : element;
         if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
             this.getNative().addAll(nativeObj);
         } else {
             this.getNative().add(nativeObj as com.carto.vectorelements.VectorElement);
-
         }
     }
     remove(element: BaseVectorElement<any, any>) {
         // a native element could have been passed
-        const nativeObj = element.getNative ? element.getNative(): element;
+        const nativeObj = element.getNative ? element.getNative() : element;
         if (nativeObj instanceof com.carto.vectorelements.VectorElementVector) {
             this.getNative().removeAll(nativeObj);
         } else {
             this.getNative().remove(nativeObj as com.carto.vectorelements.VectorElement);
-
         }
     }
     addAll(elements: VectorElementVector) {
@@ -46,8 +45,8 @@ export class LocalVectorDataSource extends VectorDataSource<com.carto.datasource
     clear() {
         this.getNative().clear();
     }
-    addFeatureCollection(featureCollection: FeatureCollection, style: com.carto.styles.Style) {
-        this.getNative().addFeatureCollection(featureCollection.getNative(), style);
+    addFeatureCollection(featureCollection: FeatureCollection, style: any) {
+        this.getNative().addFeatureCollection(featureCollectionFromArgs(featureCollection), styleFromArgs(style));
     }
 
     getDataExtent() {
