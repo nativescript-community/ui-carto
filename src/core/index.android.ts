@@ -1,5 +1,6 @@
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
-import { BaseNative } from '../index.common';
+import { BaseNative, _createImageSourceFromSrc } from '../index.common';
+import { Color } from '@nativescript/core';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export const CartoMapStyle = {
@@ -11,7 +12,7 @@ export const CartoMapStyle = {
     },
     get DARKMATTER() {
         return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER;
-    }
+    },
 };
 
 export const ClickType = {
@@ -26,7 +27,7 @@ export const ClickType = {
     },
     get DUAL() {
         return com.carto.ui.ClickType.CLICK_TYPE_DUAL.swigValue();
-    }
+    },
 };
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.MapBounds, {}> {
@@ -64,7 +65,6 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.
     }
 }
 
-
 export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core.MapPos) {
     if (!position) {
         return null;
@@ -72,7 +72,7 @@ export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core
     return {
         [LatitudeKey]: position.getY(),
         [LongitudeKey]: position.getX(),
-        [AltitudeKey]: position.getZ()
+        [AltitudeKey]: position.getZ(),
     } as GenericMapPos<T>;
 }
 export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T> | com.carto.core.MapPos, ignoreAltitude = false) {
@@ -85,14 +85,14 @@ export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>
     if (position[LongitudeKey] === undefined || position[LatitudeKey] === undefined) {
         throw new Error(`toNativeMapPos: missing lat/lon parameters in ${position}`);
     }
-    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey],  (!ignoreAltitude && position[AltitudeKey] > 0) ? position[AltitudeKey] : 0);
+    const result = new com.carto.core.MapPos(position[LongitudeKey], position[LatitudeKey], !ignoreAltitude && position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
     //  ignore z for now as points can get under the map!
     return result;
 }
 export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
     return {
         x: position.getY(),
-        y: position.getX()
+        y: position.getX(),
     } as ScreenPos;
 }
 export function toNativeScreenPos(position: ScreenPos) {
@@ -101,6 +101,72 @@ export function toNativeScreenPos(position: ScreenPos) {
     }
     return new com.carto.core.ScreenPos(position.x, position.y);
 }
+
+// export class Converter {
+//     NColor = {
+//         fromNative(value) {
+//             if (typeof value === 'string') {
+//                 return value;
+//             }
+//             return value;
+//         },
+//         toNative(value): android.graphics.Color {
+//             const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
+//             return theColor.ios;
+//         },
+//     };
+//     Color = {
+//         fromNative(value) {
+//             if (typeof value === 'string') {
+//                 return value;
+//             }
+//             return new Color((value as com.carto.graphics.Color).getARGB());
+//         },
+//         toNative(value) {
+//             const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
+//             return new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a);
+//         },
+//     };
+//     MapRange = {
+//         fromNative(value) {
+//             return value;
+//         },
+//         toNative(value) {
+//             const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
+//             return theColor.ios;
+//         },
+//     };
+//     Font = {
+//         fromNative(value) {
+//             // no easy from typeface to Font
+//             return value;
+//         },
+//         toNative(value) {
+//             return value?.getAndroidTypeface();
+//         },
+//     };
+//     CartoImage = {
+//         fromNative(value) {
+//             // no easy from typeface to Font
+//             return value;
+//         },
+//         toNative(value) {
+//             value = _createImageSourceFromSrc(value);
+//             return com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(value.android as android.graphics.Bitmap);
+//         },
+//     };
+//     AndroidEnum(androidEnum) {
+//         return {
+//             fromNative(value) {
+//                 // no easy from typeface to Font
+//                 return value.swigValue();
+//             },
+//             toNative(value) {
+//                 return androidEnum.swigToEnum(value);
+//             },
+//         };
+//     }
+// }
 export function fromNativeMapRange(value: NTMapRange) {
     return [value.getMax(), value.getMin()] as MapRange;
 }
@@ -111,6 +177,7 @@ export function toNativeMapRange(value: MapRange) {
     //  ignore z for now as points can get under the map!
     return new com.carto.core.MapRange(value[0], value[1]);
 }
+
 export function toNativeMapVec(value: MapVec | [number, number, number]) {
     if (Array.isArray(value)) {
         return new com.carto.core.MapVec(value[0], value[1], value[2]);
@@ -120,11 +187,12 @@ export function toNativeMapVec(value: MapVec | [number, number, number]) {
     }
     return new com.carto.core.MapVec(value.x, value.y, value.z);
 }
+
 export function fromNativeMapVec(value: com.carto.core.MapVec) {
     return {
         x: value.getX(),
         y: value.getY(),
-        z: value.getZ()
+        z: value.getZ(),
     } as MapVec;
 }
 
@@ -151,7 +219,7 @@ export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
 export function fromNativeScreenBounds(bounds: com.carto.core.ScreenBounds) {
     return {
         min: fromNativeScreenPos(bounds.getMin()),
-        max: fromNativeScreenPos(bounds.getMax())
+        max: fromNativeScreenPos(bounds.getMax()),
     } as ScreenBounds;
 }
 export function toNativeScreenBounds(bounds: ScreenBounds) {

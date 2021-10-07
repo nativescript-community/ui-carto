@@ -1,20 +1,19 @@
+import { BaseNative } from '../index.common';
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
-import { BaseNative } from '../index.common';
 
 export enum CartoMapStyle {
     VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
     POSITRON = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_POSITRON,
-    DARKMATTER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_DARKMATTER
+    DARKMATTER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_DARKMATTER,
 }
 
 export enum ClickType {
     SINGLE = NTClickType.T_CLICK_TYPE_SINGLE,
     LONG = NTClickType.T_CLICK_TYPE_LONG,
     DOUBLE = NTClickType.T_CLICK_TYPE_DOUBLE,
-    DUAL = NTClickType.T_CLICK_TYPE_DUAL
+    DUAL = NTClickType.T_CLICK_TYPE_DUAL,
 }
-
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}> {
     constructor(public northeast?: GenericMapPos<T>, public southwest?: GenericMapPos<T>, native?: NTMapBounds) {
@@ -66,7 +65,7 @@ export function fromNativeMapPos<T = DefaultLatLonKeys>(position: NTMapPos) {
     return {
         [LatitudeKey]: position.getY(),
         [LongitudeKey]: position.getX(),
-        [AltitudeKey]: position.getZ()
+        [AltitudeKey]: position.getZ(),
     } as GenericMapPos<T>;
 }
 export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T> | NTMapPos, ignoreAltitude = false) {
@@ -77,12 +76,12 @@ export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>
         return position;
     }
     //  ignore z for now as points can get under the map!
-    return NTMapPos.alloc().initWithXYZ(position[LongitudeKey], position[LatitudeKey],  (!ignoreAltitude && position[AltitudeKey] > 0) ? position[AltitudeKey] : 0);
+    return NTMapPos.alloc().initWithXYZ(position[LongitudeKey], position[LatitudeKey], !ignoreAltitude && position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
 }
 export function fromNativeScreenPos(position: NTScreenPos) {
     return {
         x: position.getY(),
-        y: position.getX()
+        y: position.getX(),
     } as ScreenPos;
 }
 export function toNativeScreenPos(position: ScreenPos | NTScreenPos) {
@@ -115,7 +114,7 @@ export function fromNativeMapVec(value: NTMapVec) {
     return {
         x: value.getX(),
         y: value.getY(),
-        z: value.getZ()
+        z: value.getZ(),
     } as MapVec;
 }
 
@@ -135,7 +134,7 @@ export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
 export function fromNativeScreenBounds(bounds: NTScreenBounds) {
     return {
         min: fromNativeScreenPos(bounds.getMin()),
-        max: fromNativeScreenPos(bounds.getMax())
+        max: fromNativeScreenPos(bounds.getMax()),
     } as ScreenBounds;
 }
 export function toNativeScreenBounds(bounds: ScreenBounds) {

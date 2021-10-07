@@ -46,13 +46,13 @@ export function setMapPosKeys(latitude: LatitudeKeys, longitude: LongitudeKeys, 
 }
 
 export function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+    baseCtors.forEach((baseCtor) => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
             if (name !== 'constructor') {
                 derivedCtor.prototype[name] = baseCtor.prototype[name];
             }
         });
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
             const descriptor = Object.getOwnPropertyDescriptor(baseCtor.prototype, name);
 
             if (name === 'constructor') return;
@@ -62,7 +62,7 @@ export function applyMixins(derivedCtor: any, baseCtors: any[]) {
                 derivedCtor.prototype[name] = baseCtor.prototype[name];
             }
         });
-        Object.getOwnPropertySymbols(baseCtor.prototype).forEach(symbol => {
+        Object.getOwnPropertySymbols(baseCtor.prototype).forEach((symbol) => {
             derivedCtor.prototype[symbol] = baseCtor.prototype[symbol];
         });
     });
