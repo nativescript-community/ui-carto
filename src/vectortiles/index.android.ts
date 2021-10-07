@@ -3,6 +3,7 @@ import { File } from '@nativescript/core/file-system';
 import { BaseVectorTileDecoder } from './index.common';
 import { getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackage } from '../utils';
+import { profile } from '@nativescript/core';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
     createNative(options: VectorTileDecoderOptions) {
@@ -12,6 +13,8 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortil
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: com.carto.utils.AssetPackage;
+
+    @profile
     createNative(options: MBVectorTileDecoderOptions) {
         if (!!options.zipPath) {
             const zipPath = getRelativePathToApp(options.zipPath);
