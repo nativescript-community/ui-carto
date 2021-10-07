@@ -101,18 +101,15 @@ export function toNativeScreenPos(position: ScreenPos) {
     }
     return new com.carto.core.ScreenPos(position.x, position.y);
 }
-export function fromNativeMapRange(value: com.carto.core.MapRange) {
-    return {
-        max: value.getMax(),
-        min: value.getMin()
-    } as MapRange;
+export function fromNativeMapRange(value: NTMapRange) {
+    return [value.getMax(), value.getMin()] as MapRange;
 }
 export function toNativeMapRange(value: MapRange) {
-    if (value instanceof com.carto.core.MapRange) {
+    if (value instanceof NTMapRange) {
         return value;
     }
     //  ignore z for now as points can get under the map!
-    return new com.carto.core.MapRange(value.min, value.max);
+    return new com.carto.core.MapRange(value[0], value[1]);
 }
 export function toNativeMapVec(value: MapVec | [number, number, number]) {
     if (Array.isArray(value)) {

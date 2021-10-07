@@ -24,10 +24,7 @@ export interface MapVec {
     y: number;
     z: number;
 }
-export interface MapRange {
-    min: number;
-    max: number;
-}
+export type MapRange = [number, number];
 
 export class ScreenBounds {
     min: ScreenPos;

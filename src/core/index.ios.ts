@@ -93,17 +93,14 @@ export function toNativeScreenPos(position: ScreenPos | NTScreenPos) {
     return NTScreenPos.alloc().initWithXY(position.x, position.y);
 }
 export function fromNativeMapRange(value: NTMapRange) {
-    return {
-        max: value.getMax(),
-        min: value.getMin()
-    } as MapRange;
+    return [value.getMax(), value.getMin()] as MapRange;
 }
 export function toNativeMapRange(value: MapRange) {
     if (value instanceof NTMapRange) {
         return value;
     }
     //  ignore z for now as points can get under the map!
-    return NTMapRange.alloc().initWithMinMax(value.min, value.max);
+    return NTMapRange.alloc().initWithMinMax(value[0], value[1]);
 }
 export function toNativeMapVec(value: MapVec | [number, number, number]) {
     if (Array.isArray(value)) {
