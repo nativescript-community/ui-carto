@@ -30,7 +30,6 @@ export class LineOptions<T = DefaultLatLonKeys> extends LineVectorElementOptions
     projection?: Projection;
 }
 export class LineStyleBuilder extends BaseVectorElementStyleBuilder<any, LineStyleBuilderOptions> {
-    buildStyle(): any;
     color?: string | Color;
     width?: number;
     joinType?: LineJointType;
@@ -40,7 +39,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<any, LineSty
 }
 
 export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, LineOptions<T>, T> {
-    styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions ;
+    styleBuilder?: LineStyleBuilder | LineStyleBuilderOptions;
     ignoreAltitude?: boolean;
     style?: any;
     color?: string | Color;

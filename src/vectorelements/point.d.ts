@@ -9,7 +9,6 @@ export class PointStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: string | Color;
 }
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<any, PointStyleBuilderOptions> {
-    buildStyle(): any;
     size?: number;
     color?: string | Color;
     clickSize?: number;

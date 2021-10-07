@@ -26,7 +26,6 @@ export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOption
 }
 export class BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends BillboardStyleBuilder<any, BalloonPopupStyleBuilderOptions> {
     constructor(options: U);
-    buildStyle(): any;
     size?: number;
     color?: string | Color;
 }

@@ -24,7 +24,6 @@ export class TextOptions<T = DefaultLatLonKeys> extends BillboardVectorElementOp
 }
 
 export class TextStyleBuilder extends BillboardStyleBuilder<any, TextStyleBuilderOptions> {
-    buildStyle(): any;
     color?: Color | string;
     strokeColor?: Color | string;
     borderColor?: Color | string;

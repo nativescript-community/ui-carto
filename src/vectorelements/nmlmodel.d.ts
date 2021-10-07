@@ -4,7 +4,6 @@ import { DefaultLatLonKeys } from '../core';
 export class NMLModelStyleBuilderOptions extends VectorElementOptions {}
 export class NMLModelStyleBuilder<T, U extends NMLModelStyleBuilderOptions> extends BaseVectorElementStyleBuilder<any, NMLModelStyleBuilderOptions> {
     constructor(options: U);
-    buildStyle(): any;
 }
 
 export class NMLModelOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {

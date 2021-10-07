@@ -7,10 +7,8 @@ export class Polygon3DStyleBuilderOptions extends VectorElementOptions {
     size?: number;
     color?: string | Color;
     sideColor?: Color | string;
-    // lineStyleBuilder?:LineStyleBuilder<any, any>
 }
 export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<any, Polygon3DStyleBuilderOptions> {
-    buildStyle(): any;
     size?: number;
     color?: string | Color;
     sideColor?: Color | string;
@@ -26,7 +24,7 @@ export class Polygon3DOptions<T = DefaultLatLonKeys> extends LineVectorElementOp
 }
 
 export class Polygon3D<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Polygon3DOptions<T>, T> {
-    styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions ;
+    styleBuilder?: Polygon3DStyleBuilder | Polygon3DStyleBuilderOptions;
     geometry?: Geometry<T>;
     style?: any;
     size?: number;

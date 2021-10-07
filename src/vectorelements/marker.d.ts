@@ -14,7 +14,6 @@ export class MarkerStyleBuilderOptions extends BillboardStyleBuilderOptions {
     orientationMode?: BillboardOrientation;
 }
 export class MarkerStyleBuilder extends BillboardStyleBuilder<any, MarkerStyleBuilderOptions> {
-    buildStyle(): any;
     width: number;
     hideIfOverlapped: boolean;
     scaleWithDPI: boolean;
@@ -34,7 +33,7 @@ export class MarkerOptions<T = DefaultLatLonKeys> extends BillboardVectorElement
     geometry?: Geometry<T>;
 }
 export class Marker<T = DefaultLatLonKeys> extends BaseBillboardVectorElement<any, MarkerOptions<T>, T> {
-    styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions ;
+    styleBuilder?: MarkerStyleBuilder | MarkerStyleBuilderOptions;
     geometry?: Geometry<T>;
     style?: any;
     size?: number;
