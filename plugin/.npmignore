@@ -1,3 +1,4 @@
 sync
-*.aar
-platforms/ios/CartoMobileSDK.framework
+*.old
+*.aar*
+*.framework*
