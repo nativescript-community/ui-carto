@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.1...v1.7.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* fully working clusters ([119dc16](https://github.com/farfromrefug/nativescript-carto/commit/119dc16e8fa83967a8a778441bb198a5587e8b6a))
+* LocalVectorLayer addFeatureCollection fix ([48d5fea](https://github.com/farfromrefug/nativescript-carto/commit/48d5fead8d39d2c6efe17ee508b81eb169a374c2))
+* use MapRange as array everywhere ([d9adf2b](https://github.com/farfromrefug/nativescript-carto/commit/d9adf2be393f7cced339c381be0ae8c291a6fea8))
+* **android:** native-api-usage ([c67b863](https://github.com/farfromrefug/nativescript-carto/commit/c67b863e7e67d9a9760436ecab807b836064c818))
+* **ios:** cluster layer in pair with android ([65f5990](https://github.com/farfromrefug/nativescript-carto/commit/65f59901684a8c7b72504f2cca654fab2082d6cf))
+
+
+
+
+
 ## [1.7.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.0...v1.7.1) (2021-09-29)
 
 
