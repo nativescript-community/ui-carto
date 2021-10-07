@@ -71,7 +71,9 @@ export abstract class BaseLineVectorElement<T, U extends LineVectorElementOption
     projection?: Projection;
 }
 export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {}
-export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementStyleBuilderOptions> extends BaseNative<T, U> {}
+export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementStyleBuilderOptions> extends BaseNative<T, U> {
+    buildStyle(): any;
+}
 
 export abstract class BillboardStyleBuilder<T, U extends BillboardStyleBuilderOptions> extends BaseVectorElementStyleBuilder<T, U> {}
 

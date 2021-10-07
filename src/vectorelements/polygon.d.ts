@@ -11,8 +11,7 @@ export class PolygonStyleBuilderOptions extends VectorElementOptions {
 }
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<any, PolygonStyleBuilderOptions> {
     color: Color | string;
-    lineStyleBuilder: LineStyleBuilder | LineStyleBuilderOptions ;
-    buildStyle(): any;
+    lineStyleBuilder: LineStyleBuilder | LineStyleBuilderOptions;
 }
 
 export class PolygonOptions<T = DefaultLatLonKeys> extends LineVectorElementOptions<T> {
@@ -23,10 +22,10 @@ export class PolygonOptions<T = DefaultLatLonKeys> extends LineVectorElementOpti
 }
 
 export class Polygon<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, PolygonOptions<T>, T> {
-    styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions ;
+    styleBuilder?: PolygonStyleBuilder | PolygonStyleBuilderOptions;
     geometry?: Geometry<T>;
     style?: any;
     size?: number;
     color?: string | Color;
-    lineStyleBuilder?: LineStyleBuilder | LineStyleBuilderOptions ;
+    lineStyleBuilder?: LineStyleBuilder | LineStyleBuilderOptions;
 }
