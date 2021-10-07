@@ -4,6 +4,7 @@ import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { GeometrySimplifier } from '../geometry/simplifier';
 import { FeatureCollection } from '../geometry/feature';
 import { fromNativeMapBounds } from '../core';
+import { featureCollectionFromArgs, styleFromArgs } from '..';
 
 export abstract class VectorDataSource<T extends NTVectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
@@ -33,8 +34,8 @@ export class LocalVectorDataSource extends VectorDataSource<NTLocalVectorDataSou
     clear() {
         this.getNative().clear();
     }
-    addFeatureCollection(featureCollection: FeatureCollection, style: NTStyle) {
-        this.getNative().addFeatureCollectionStyle(featureCollection.getNative(), style);
+    addFeatureCollection(featureCollection: FeatureCollection, style: any) {
+        this.getNative().addFeatureCollectionStyle(featureCollectionFromArgs(featureCollection), styleFromArgs(style));
     }
     addAll(elements: VectorElementVector) {
         this.getNative().addAll(elements.getNative() as NTVectorElementVector);
