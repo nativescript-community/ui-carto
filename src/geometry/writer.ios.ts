@@ -10,15 +10,15 @@ export class GeoJSONGeometryWriter extends BaseNative<NTGeoJSONGeometryWriter, G
     createNative() {
         return NTGeoJSONGeometryWriter.alloc().init();
     }
-    writePoses(value: MapPosVector) {
+    writePoses<T>(value: MapPosVector<T>) {
         return this.getNative().writeGeometry(new NTLineGeometry(mapPosVectorFromArgs(value)));
     }
-    writeGeometry(value: Geometry) {
+    writeGeometry<T>(value: Geometry<T>) {
         const geometry = value.getNative ? value.getNative() : value;
         return this.getNative().writeGeometry(geometry);
     }
-    writeFeatureCollection(value: FeatureCollection) {
-        return this.getNative().writeFeatureCollection(featureCollectionFromArgs(value));
+    writeFeatureCollection<T>(value: FeatureCollection<T>) {
+        return this.getNative().writeFeatureCollection(featureCollectionFromArgs<T>(value));
     }
     set sourceProjection(value: Projection) {
         this.native && this.native.setSourceProjection(value.getNative());
