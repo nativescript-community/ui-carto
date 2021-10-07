@@ -167,11 +167,11 @@ export function toNativeScreenPos(position: ScreenPos) {
 //         };
 //     }
 // }
-export function fromNativeMapRange(value: NTMapRange) {
+export function fromNativeMapRange(value: com.carto.core.MapRange) {
     return [value.getMax(), value.getMin()] as MapRange;
 }
 export function toNativeMapRange(value: MapRange) {
-    if (value instanceof NTMapRange) {
+    if (value instanceof com.carto.core.MapRange) {
         return value;
     }
     //  ignore z for now as points can get under the map!
