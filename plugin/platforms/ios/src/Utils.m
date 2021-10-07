@@ -10,6 +10,17 @@ double TO_RAD = 0.017453292519943295;
 
 @implementation CartoAdditionsUtils
 
++(NTColor*) toNTColor: (UIColor*)color {
+  CGFloat fRed  = 0;
+  CGFloat fGreen = 0;
+  CGFloat fBlue = 0;
+  CGFloat fAlpha = 0;
+        
+  [color getRed:&fRed green:&fGreen blue:&fBlue alpha:&fAlpha];
+  
+  return [[NTColor alloc] initWithR:(int)(fRed * 255.0) g:(int)(fRed * 255.0) b:(int)(fRed * 255.0) a:(int)(fRed * 255.0)];
+}
+
 + (long)isLocationOn:(NTMapPos *)point
                  poly:(NTMapPosVector *)poly {
   return [CartoAdditionsUtils isLocationOn:point poly:poly closed:false];

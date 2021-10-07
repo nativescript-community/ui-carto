@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
+import android.graphics.Color;
 import android.util.Log;
 
 // import com.carto.layers.VectorLayer;
@@ -41,7 +42,9 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     private Map<Integer, Style> markerStyles = new HashMap<>();
     private android.graphics.Bitmap markerBitmap = null;
     private com.carto.graphics.Color markerColor = null;
+    private com.carto.graphics.Color textColor = null;
     private int markerSize = 20;
+    private float textSize = 12;
 
     private String shape = "marker";
     private final String TAG = "AKClusterElementBuilder";
@@ -62,8 +65,14 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         markerSize = value;
     }
     public void setShape(String value) {
-        Log.d(TAG, "setShape " + value);
         shape = value;
+    }
+
+    public void setTextSize(float value) {
+        textSize = value;
+    }
+    public void setTextColor(Color value) {
+        textColor = value;
     }
 
     @Override
@@ -159,11 +168,15 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                 android.graphics.Paint paint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
 
                 paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(12);
-                paint.setColor(android.graphics.Color.argb(255, 0, 0, 0));
+                paint.setTextSize(textSize);
+                if (textColor != null) {
+                    paint.setColor(textColor.getARGB());
+                } else {
+                    paint.setColor(Color.WHITE);
+                }
 
                 float x = markerBitmap.getWidth() / 2;
-                float y = markerBitmap.getHeight() / 2 - 5;
+                float y = markerBitmap.getHeight() / 2 - textSize/2;
 
                 canvas.drawText(Integer.toString((int) elements.size()), x, y, paint);
                 cBitmap = BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap);
