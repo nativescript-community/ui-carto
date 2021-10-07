@@ -6,6 +6,7 @@ import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/
 import { isAndroid } from '@nativescript/core/platform';
 import { knownFolders, path } from '@nativescript/core/file-system';
 import { NativePropertyOptions } from '.';
+import { fromNativeMapRange, toNativeMapRange } from './core';
 
 function createGetter(key: string, options: NativePropertyOptions) {
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
@@ -62,6 +63,20 @@ export function nativeProperty(...args) {
     }
 }
 
+export function nativeMapRangeProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeMapRangeProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeMapRangeProperty(...args) {
+    return nativeProperty(
+        {
+            converter: {
+                fromNative: fromNativeMapRange,
+                toNative: toNativeMapRange,
+            },
+        },
+        ...args
+    );
+}
+
 export function nonenumerable(target: any, name: string): void;
 export function nonenumerable(target: any, name: string, desc: PropertyDescriptor): PropertyDescriptor;
 export function nonenumerable(target: any, name: string, desc?: any) {
@@ -105,10 +120,6 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         return this.native;
     }
     abstract createNative(options: U): T;
-
-    log(...args) {
-        console.log(`[${this.constructor.name}]`, ...args);
-    }
 }
 
 export function _createImageSourceFromSrc(value: string | ImageSource | ImageAsset): ImageSource {

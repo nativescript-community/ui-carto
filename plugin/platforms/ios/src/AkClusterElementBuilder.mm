@@ -5,11 +5,12 @@
 
 @property NSMutableDictionary* markerStyles;
 @property (nonatomic) UIImage *markerImage;
-@property (nonatomic) UIColor *markerColor;
+@property (nonatomic) NTColor *markerColor;
 @property (nonatomic) UIColor *textColor;
 @property (nonatomic) NSUInteger markerSize;
 @property (nonatomic) NSUInteger textSize;
 @property (nonatomic) NSString* shape;
+@property (nonatomic) UIFont* font;
 
 @end
 @implementation AkClusterElementBuilder : NTClusterElementBuilder
@@ -25,21 +26,25 @@
 - (void) setBitmap: (UIImage *)value {
     self.markerImage = value;
 }
-- (void) setColor: (UIColor *)value{
+- (void) setColor: (NTColor *)value{
         self.markerColor = value;
     }
-- (void) setTextColor: (UIColor *)value{
-    self.textColor = value;
-}
+// - (void) setTextColor: (UIColor *)value{
+//     self.textColor = value;
+// }
 - (void) setSize: (NSUInteger)value{
     self.markerSize = value;
 }
-- (void) setTextSize: (NSUInteger)value{
-    self.textSize = value;
-}
-- (void) setShape: (NSString *)value {
-    self.shape = value;
-}
+// - (void) setTextSize: (NSUInteger)value{
+//     self.textSize = value;
+// }
+// - (void) setShape: (NSString *)value {
+//     self.shape = value;
+// }
+
+// - (void) setFont: (UIFont *)value {
+//     self.font = value;
+// }
 
 
 
@@ -63,20 +68,34 @@
             self.markerImage = [UIImage imageNamed:@"marker_black.png"];
         }
         
-        UIGraphicsBeginImageContext(self.markerImage.size);
+        CGSize size = self.markerImage.size;
+        UIGraphicsBeginImageContext(size);
         [self.markerImage drawAtPoint:CGPointMake(0, 0)];
+
         
-        CGRect rect = CGRectMake(0, 15, self.markerImage.size.width, self.markerImage.size.height);
-        if(self.textColor) {
-            [self.textColor set];
-        } else {
-            [[UIColor whiteColor] set];
-        }
         
         NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         [style setAlignment:NSTextAlignmentCenter];
         
-        NSDictionary* attr = [NSDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+        NSMutableDictionary* attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+        UIFont* font;
+        if(self.font) {
+            font = [self.font fontWithSize:self.textSize];
+        } else {
+            font = [UIFont systemFontOfSize:self.textSize];
+        }
+        UIColor* color = [UIColor whiteColor];
+        if(self.textColor) {
+            color = self.textColor;
+        }
+        [attr setObject:color forKey:NSForegroundColorAttributeName];
+        [attr setObject:font forKey:NSFontAttributeName];
+
+        CGSize textSize = [styleKey sizeWithFont:font
+                     constrainedToSize:size
+                         lineBreakMode:(NSLineBreakByWordWrapping)];
+
+        CGRect rect = CGRectMake(0, size.height/2 - textSize.height/2, size.width, size.height);
         [styleKey drawInRect:CGRectIntegral(rect) withAttributes:attr];
         
         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -92,7 +111,7 @@
             [styleBuilder setSize:self.markerSize];
             
             if (self.markerColor != nil) {
-                [styleBuilder setColor:[CartoAdditionsUtils toNTColor:self.markerColor]];
+                [styleBuilder setColor:self.markerColor];
             }
             markerStyle = [styleBuilder buildStyle];
         } else {
@@ -104,7 +123,7 @@
             [styleBuilder setPlacementPriority:(int)[elements size]];
             
             if (self.markerColor != nil) {
-              [styleBuilder setColor:[CartoAdditionsUtils toNTColor:self.markerColor]];
+              [styleBuilder setColor:self.markerColor];
             }
             markerStyle = [styleBuilder buildStyle];
         }

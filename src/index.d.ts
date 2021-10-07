@@ -11,7 +11,6 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
     constructor(options?: U, native?: T);
     initNativeView(native: T, options: U): void;
     getNative(): T;
-    log(...args);
 }
 export interface NativePropertyOptions {
     converter?: {
@@ -38,12 +37,23 @@ export declare function nativeProperty(...args);
 
 export declare function mapPosVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVector<T> | GenericMapPos<T>[], ignoreAltitude?: boolean): any;
 export declare function featureCollectionFromArgs<T = DefaultLatLonKeys>(positions: FeatureCollection<T>): any;
+export function styleFromArgs(style: BaseVectorElementStyleBuilder<any, any>): any;
 export declare function geometryFromArgs<T = DefaultLatLonKeys>(geometry: Geometry<T>): any;
 export declare function mapPosVectorVectorFromArgs<T = DefaultLatLonKeys>(positions: MapPosVectorVector<T> | GenericMapPos<T>[][], ignoreAltitude?: boolean): any;
 
 export declare function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export declare function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export declare function nativeColorProperty(...args);
+
+
+export declare function nativeNColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeNColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeNColorProperty(...args);
+
+export declare function nativeFontProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export declare function nativeFontProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export declare function nativeFontProperty(...args);
+
 export declare function nativeEnumProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export declare function nativeEnumProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export declare function nativeEnumProperty(...args);
