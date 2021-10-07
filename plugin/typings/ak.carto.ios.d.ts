@@ -22,4 +22,4 @@ declare class CartoAdditionsUtils extends NSObject {
     static new(): CartoAdditionsUtils; // inherited from NSObject
 }
 
-declare class AkMarkerClusterElementBuilder extends NTClusterElementBuilder {}
+declare class AkClusterElementBuilder extends NTClusterElementBuilder {}
