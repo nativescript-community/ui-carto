@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.3...v1.8.0) (2021-10-08)
+
+
+### Bug Fixes
+
+* **android:** regression fix ([5e36f77](https://github.com/farfromrefug/nativescript-carto/commit/5e36f77732a541bfa1bc3bef3c011c0aef2463a0))
+
+
+### Features
+
+* cluster support for reporting cluster bbox ([a9e536d](https://github.com/farfromrefug/nativescript-carto/commit/a9e536dd86cbf9981438e5e19b0068d9c62ab703))
+
+
+
+
+
 ## [1.7.3](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.2...v1.7.3) (2021-10-07)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto
