@@ -17,13 +17,14 @@ bin
 build
 Pods
 !plugin/platforms
-/plugin/platforms/android/*.aar
 *.xcuserdatad
 /plugin/README.md
 plugin/**/*js.map
 plugin/**/*js
 pnpm-lock.yaml
 *.jar
+*.aar
+*.old
 /.gradle
 /.settings
 /.history
