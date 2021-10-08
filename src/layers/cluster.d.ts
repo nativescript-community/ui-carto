@@ -12,6 +12,7 @@ export interface ClusterElementBuilderOptions {
     shape?: string;
     textColor?: string | Color;
     textSize?: number;
+    bbox?: boolean;
 
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any>;
 }
@@ -25,4 +26,5 @@ export class ClusterElementBuilder<T, U extends ClusterElementBuilderOptions> ex
     shape?: string;
     textColor?: string | Color;
     textSize?: number;
+    bbox?: boolean;
 }

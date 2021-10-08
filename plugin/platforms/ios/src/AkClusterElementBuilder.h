@@ -8,6 +8,6 @@
 - (void) setTextSize: (NSUInteger)value;
 - (void) setShape: (NSString *)value;
 - (void) setFont: (UIFont *)value;
-
+- (void) setBbox: (BOOL)value;
 
 @end
