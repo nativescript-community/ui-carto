@@ -9,7 +9,9 @@ import android.graphics.Rect;
 import android.util.Log;
 
 // import com.carto.layers.VectorLayer;
+import com.carto.core.VariantArrayBuilder;
 import com.carto.core.MapPos;
+import com.carto.core.MapBounds;
 import com.carto.vectorelements.VectorElement;
 import com.carto.vectorelements.VectorElementVector;
 import com.carto.layers.ClusterElementBuilder;
@@ -19,12 +21,16 @@ import com.carto.styles.BillboardStyle;
 import com.carto.styles.PointStyle;
 import com.carto.vectorelements.Marker;
 import com.carto.vectorelements.Point;
+import com.carto.vectorelements.VectorElement;
 import com.carto.utils.BitmapUtils;
 import com.carto.styles.StyleBuilder;
 import com.carto.styles.PointStyleBuilder;
 import com.carto.styles.MarkerStyleBuilder;
 import com.carto.graphics.Bitmap;
 import android.graphics.Typeface;
+import com.carto.geometry.PointGeometryVector;
+import com.carto.geometry.PointGeometry;
+import com.carto.geometry.MultiPointGeometry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +54,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     private com.carto.graphics.Color textColor = null;
     private int markerSize = 20;
     private float textSize = 12;
+    private boolean setBbox = false;
     private Typeface typeface = null;
 
     private String shape = "marker";
@@ -81,6 +88,9 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     public void setTextColor(com.carto.graphics.Color value) {
         textColor = value;
     }
+    public void setBbox(boolean value) {
+        setBbox = value;
+    }
 
     @Override
     public VectorElement buildClusterElement(final MapPos pos, final VectorElementVector elements) {
@@ -96,7 +106,6 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             SynchronousHandler.postAndWait(mainHandler, new Runnable() {
                 @Override
                 public void run() {
-                    // Log.d("AKCartoAdditions", "buildClusterElement runnable");
                     if (inter != null) {
                         arr[0] = inter.buildClusterElement(pos, elements);
                     } else {
@@ -112,64 +121,31 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                 return super.buildClusterElement(pos, elements);
             }
         }
-        // Log.d("AKCartoAdditions", "buildClusterElement4: done");
-        // Runnable r = new Runnable() {
-        // @Override
-        // public void run() {
-        // Log.d("AKCartoAdditions", "buildClusterElement runnable1 " );
-        // synchronized (this) {
-        // try {
-        // Log.d("AKCartoAdditions", "buildClusterElement runnable2 " );
-        // arr[0] = AKClusterElementBuilder.this.buildCluster(pos, nElements);
-        // } catch (Exception e) {
-        // // if (discardUncaughtJsExceptions) {
-        // Log.e("AKCartoAdditions", "Error off currentThread for callJSMethodNative: "
-        // + e.getMessage());
-        // e.printStackTrace();
-        // // } else {
-        // throw e;
-        // // }
-        // } finally {
-        // Log.d("AKCartoAdditions", "buildClusterElement runnable done " );
-        // arr[1] = Boolean.TRUE;
-        // this.notify();
-        // }
-        // }
-        // }
-        // };
-        // boolean success = mainHandler.post(r);
-        // Log.d("AKCartoAdditions", "buildClusterElement2: " + (success ? "1" : "0"));
-
-        // if (success) {
-        // synchronized (r) {
-        // try {
-        // if (arr[1] == null) {
-        // Log.d("AKCartoAdditions", "buildClusterElement3: waiting");
-        // r.wait();
-        // }
-        // } catch (InterruptedException e) {
-        // Log.e("AKCartoAdditions", "InterruptedException: " + e.getMessage());
-        // }
-        // }
-        // }
-        // Log.d("AKCartoAdditions", "buildClusterElement4: done");
-
     }
 
     public VectorElement nativeBuildClusterElement(MapPos pos, VectorElementVector elements) {
 
         // Try to reuse existing marker styles
-        Style style = markerStyles.get((int) elements.size());
-
-        if (elements.size() == 1) {
-            style = ((Marker) elements.get(0)).getStyle();
+        int nbElements = (int) elements.size();
+        Style style = markerStyles.get(nbElements);
+        if (nbElements == 1) {
+            if (elements.get(0) instanceof Marker) {
+                style = ((Marker) elements.get(0)).getStyle();
+            } else if (elements.get(0) instanceof  Point) {
+                style = ((Point) elements.get(0)).getStyle();
+            }
         }
 
         if (style == null) {
             StyleBuilder styleBuilder = null;
             Bitmap cBitmap = null;
-            if (markerBitmap != null) {
-                android.graphics.Bitmap canvasBitmap = markerBitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
+            if (markerBitmap != null || textColor != null) {
+                 android.graphics.Bitmap canvasBitmap;
+                if (markerBitmap != null) {
+                    canvasBitmap = markerBitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
+                } else {
+                    canvasBitmap = android.graphics.Bitmap.createBitmap(markerSize, markerSize, android.graphics.Bitmap.Config.ARGB_8888);
+                }
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
 
                 Paint paint = AKClusterElementBuilder.paint;
@@ -180,7 +156,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                     paint.setTypeface(typeface);
                 }
                 Typeface typeface = paint.getTypeface();
-                String text = Integer.toString((int) elements.size());
+                String text = Integer.toString(nbElements);
                 Rect bounds = AKClusterElementBuilder.tempRect;
                 paint.getTextBounds(text, 0, text.length(), bounds);
 
@@ -190,8 +166,8 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                     paint.setColor(Color.WHITE);
                 }
 
-                float x = markerBitmap.getWidth() / 2;
-                float y = markerBitmap.getHeight() / 2 + bounds.height()/2;
+                float x = canvasBitmap.getWidth() / 2;
+                float y = canvasBitmap.getHeight() / 2 + bounds.height()/2;
 
                 canvas.drawText(text, x, y, paint);
                 cBitmap = BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap);
@@ -205,7 +181,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             } else {
                 styleBuilder = new MarkerStyleBuilder();
                 ((MarkerStyleBuilder)styleBuilder).setSize(markerSize);
-                ((MarkerStyleBuilder)styleBuilder).setPlacementPriority((int) elements.size());
+                ((MarkerStyleBuilder)styleBuilder).setPlacementPriority(nbElements);
                 if (cBitmap != null) {
                     ((MarkerStyleBuilder)styleBuilder).setBitmap(cBitmap);
 
@@ -221,16 +197,35 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             } else if (styleBuilder instanceof MarkerStyleBuilder) {
                 style = ((MarkerStyleBuilder)styleBuilder).buildStyle();
             }
-            markerStyles.put((int) elements.size(), style);
+            markerStyles.put(nbElements, style);
         }
 
         // Create marker for the cluster
+        VectorElement marker = null;
         if (style instanceof PointStyle) {
-            return new Point(pos, (PointStyle)style); 
+            marker = new Point(pos, (PointStyle)style); 
         }
         if (style instanceof MarkerStyle) {
-            return new Marker(pos, (MarkerStyle)style); 
+            marker = new Marker(pos, (MarkerStyle)style); 
         }
-        return null;
+        if (marker != null) {
+            marker.setMetaDataElement("elements", new com.carto.core.Variant((long)nbElements));
+            if (setBbox) {
+                PointGeometryVector vector = new PointGeometryVector();
+                for (int i = 0; i<nbElements; i++) {
+                    vector.add((PointGeometry)elements.get(i).getGeometry());
+                }
+                MapBounds mapBounds = new MultiPointGeometry(vector).getBounds();
+                VariantArrayBuilder builder = new VariantArrayBuilder();
+                builder.addDouble(mapBounds.getMin().getX());
+                builder.addDouble(mapBounds.getMin().getY());
+                builder.addDouble(mapBounds.getMax().getX());
+                builder.addDouble(mapBounds.getMax().getY());
+                marker.setMetaDataElement("bbox", builder.buildVariant());
+            }
+            
+        }
+
+        return marker;
     }
 }

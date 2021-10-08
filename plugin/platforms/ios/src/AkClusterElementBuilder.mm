@@ -7,6 +7,7 @@
 @property (nonatomic) UIImage *markerImage;
 @property (nonatomic) NTColor *markerColor;
 @property (nonatomic) UIColor *textColor;
+@property (nonatomic) BOOL bbox;
 @property (nonatomic) NSUInteger markerSize;
 @property (nonatomic) NSUInteger textSize;
 @property (nonatomic) NSString* shape;
@@ -28,24 +29,10 @@
 }
 - (void) setColor: (NTColor *)value{
         self.markerColor = value;
-    }
-// - (void) setTextColor: (UIColor *)value{
-//     self.textColor = value;
-// }
+}
 - (void) setSize: (NSUInteger)value{
     self.markerSize = value;
 }
-// - (void) setTextSize: (NSUInteger)value{
-//     self.textSize = value;
-// }
-// - (void) setShape: (NSString *)value {
-//     self.shape = value;
-// }
-
-// - (void) setFont: (UIFont *)value {
-//     self.font = value;
-// }
-
 
 
 -(NTVectorElement*)buildClusterElement:(NTMapPos *)mapPos elements:(NTVectorElementVector *)elements
@@ -53,76 +40,88 @@
     if (!self.markerStyles) {
         self.markerStyles = [NSMutableDictionary new];
     }
-    
-    NSString* styleKey = [NSString stringWithFormat:@"%d",(int)[elements size]];
+    NSInteger nbElements = (int)[elements size];
+    NSString* styleKey = [NSString stringWithFormat:@"%d",nbElements];
     
     NTStyle* markerStyle = [self.markerStyles valueForKey:styleKey];
     
-    if ([elements size] == 1) {
-        markerStyle = [(NTMarker*)[elements get:0] getStyle];
+    if (nbElements == 1) {
+       if( [markerStyle isKindOfClass:[NTMarker class]]) {
+            markerStyle = [(NTMarker*)[elements get:0] getStyle];
+       } else if( [markerStyle isKindOfClass:[NTPoint class]]){
+            markerStyle = [(NTPoint*)[elements get:0] getStyle];
+       }
     }
     
     if (!markerStyle) {
-        
-        if (!self.markerImage) {
-            self.markerImage = [UIImage imageNamed:@"marker_black.png"];
+        NTBitmap* markerBitmap;
+        if (self.markerImage || self.textColor) {
+            CGSize size;
+            if(self.markerImage) {
+                size = self.markerImage.size;
+            } else {
+                size = CGSizeMake(self.markerSize, self.markerSize);
+            }
+            UIGraphicsBeginImageContext(size);
+            if(self.markerImage) {
+                [self.markerImage drawAtPoint:CGPointMake(0, 0)];
+            }
+            
+            NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+            [style setAlignment:NSTextAlignmentCenter];
+            
+            NSMutableDictionary* attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+            UIFont* font;
+            if(self.font) {
+                font = [self.font fontWithSize:self.textSize];
+            } else {
+                font = [UIFont systemFontOfSize:self.textSize];
+            }
+            UIColor* color = [UIColor whiteColor];
+            if(self.textColor) {
+                color = self.textColor;
+            }
+            [attr setObject:color forKey:NSForegroundColorAttributeName];
+            [attr setObject:font forKey:NSFontAttributeName];
+
+            CGSize textSize = [styleKey sizeWithFont:font
+                        constrainedToSize:size
+                            lineBreakMode:(NSLineBreakByWordWrapping)];
+
+            CGRect rect = CGRectMake(0, size.height/2 - textSize.height/2, size.width, size.height);
+            [styleKey drawInRect:CGRectIntegral(rect) withAttributes:attr];
+            
+            UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            markerBitmap = [NTBitmapUtils createBitmapFromUIImage:newImage];
         }
         
-        CGSize size = self.markerImage.size;
-        UIGraphicsBeginImageContext(size);
-        [self.markerImage drawAtPoint:CGPointMake(0, 0)];
-
-        
-        
-        NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        [style setAlignment:NSTextAlignmentCenter];
-        
-        NSMutableDictionary* attr = [NSMutableDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
-        UIFont* font;
-        if(self.font) {
-            font = [self.font fontWithSize:self.textSize];
-        } else {
-            font = [UIFont systemFontOfSize:self.textSize];
-        }
-        UIColor* color = [UIColor whiteColor];
-        if(self.textColor) {
-            color = self.textColor;
-        }
-        [attr setObject:color forKey:NSForegroundColorAttributeName];
-        [attr setObject:font forKey:NSFontAttributeName];
-
-        CGSize textSize = [styleKey sizeWithFont:font
-                     constrainedToSize:size
-                         lineBreakMode:(NSLineBreakByWordWrapping)];
-
-        CGRect rect = CGRectMake(0, size.height/2 - textSize.height/2, size.width, size.height);
-        [styleKey drawInRect:CGRectIntegral(rect) withAttributes:attr];
-        
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        NTBitmap* markerBitmap = [NTBitmapUtils createBitmapFromUIImage:newImage];
 
 
         if ([self.shape isEqualToString:@"point"]) {
             NTPointStyleBuilder* styleBuilder = [[NTPointStyleBuilder alloc] init];
             
-            [styleBuilder setBitmap:markerBitmap];
+            if (markerBitmap) {
+                [styleBuilder setBitmap:markerBitmap];
+            }
             [styleBuilder setSize:self.markerSize];
             
-            if (self.markerColor != nil) {
+            if (self.markerColor) {
                 [styleBuilder setColor:self.markerColor];
             }
             markerStyle = [styleBuilder buildStyle];
         } else {
             NTMarkerStyleBuilder* styleBuilder = [[NTMarkerStyleBuilder alloc] init];
             
-            [styleBuilder setBitmap:markerBitmap];
+            if (markerBitmap) {
+                [styleBuilder setBitmap:markerBitmap];
+            }
             [styleBuilder setSize:self.markerSize];
             [styleBuilder setHideIfOverlapped:NO];
-            [styleBuilder setPlacementPriority:(int)[elements size]];
+            [styleBuilder setPlacementPriority:(int)nbElements];
             
-            if (self.markerColor != nil) {
+            if (self.markerColor) {
               [styleBuilder setColor:self.markerColor];
             }
             markerStyle = [styleBuilder buildStyle];
@@ -130,17 +129,29 @@
         [self.markerStyles setValue:markerStyle forKey:styleKey];
        
     }
-
+    NTVectorElement* marker;
     if( [markerStyle isKindOfClass:[NTPointStyle class]]) {
-        NTPoint* marker = [[NTPoint alloc] initWithPos:mapPos style:(NTPointStyle*)markerStyle];
-        [marker setMetaDataElement:@"elements" element:[[NTVariant alloc] initWithLongVal:[elements size]]];
-        return marker;
+        marker = [[NTPoint alloc] initWithPos:mapPos style:(NTPointStyle*)markerStyle];
     }
     if( [markerStyle isKindOfClass:[NTMarkerStyle class]]) {
-        NTMarker* marker = [[NTMarker alloc] initWithPos:mapPos style:(NTMarkerStyle*)markerStyle];
-        [marker setMetaDataElement:@"elements" element:[[NTVariant alloc] initWithLongVal:[elements size]]];
-        return marker;
+        marker = [[NTMarker alloc] initWithPos:mapPos style:(NTMarkerStyle*)markerStyle];
     }
-    return nil;
+    if (marker) {
+        [marker setMetaDataElement:@"elements" element:[[NTVariant alloc] initWithLongVal:nbElements]];
+        if (self.bbox) {
+            NTPointGeometryVector* vector =  [[NTPointGeometryVector alloc] init];
+            for (NSInteger i = 0; i < nbElements; i++) {
+                [vector add:(NTPointGeometry*)[[elements get:i] getGeometry]];
+            }
+            NTMapBounds* mapBounds = [[[NTMultiPointGeometry alloc] initWithGeometries:vector] getBounds];
+            NTVariantArrayBuilder* builder = [[NTVariantArrayBuilder alloc] init];
+            [builder addDouble:[[mapBounds getMin] getX]];
+            [builder addDouble:[[mapBounds getMin] getY]];
+            [builder addDouble:[[mapBounds getMax] getX]];
+            [builder addDouble:[[mapBounds getMax] getY]];
+            [marker setMetaDataElement:@"bbox" element:[builder buildVariant]];
+        }
+    }
+    return marker;
 }
 @end

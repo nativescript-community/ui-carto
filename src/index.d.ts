@@ -1,8 +1,14 @@
 /* eslint-disable no-redeclare */
 import { Observable } from '@nativescript/core/data/observable';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from './core';
+import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';
+import { BaseVectorElementStyleBuilder } from './vectorelements';
 
+// type BaseInterface<T> = {
+//     [K in keyof T]: T[K];
+// };
+// interface BaseNative<T, U> extends BaseInterface<U> {}
 export abstract class BaseNative<T, U extends {}> extends Observable {
     options: U;
     native: T;
@@ -44,7 +50,6 @@ export declare function mapPosVectorVectorFromArgs<T = DefaultLatLonKeys>(positi
 export declare function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export declare function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export declare function nativeColorProperty(...args);
-
 
 export declare function nativeNColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export declare function nativeNColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
