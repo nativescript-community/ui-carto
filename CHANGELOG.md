@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.0...v1.8.1) (2021-10-09)
+
+
+### Features
+
+* ClusteredVectorLayer `expandCluster` ([ac43e41](https://github.com/farfromrefug/nativescript-carto/commit/ac43e41124b8128997bd1d197edf930ce15d211d))
+
+
+
+
+
 # [1.8.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.3...v1.8.0) (2021-10-08)
 
 
