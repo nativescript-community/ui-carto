@@ -301,4 +301,8 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
         nativeGetterName: 'isAnimatedClusters',
     })
     animatedClusters: boolean;
+
+    expandCluster(element: VectorElement<any, any>, px: number) {
+        this.getNative().expandClusterPx(element.getNative(), px);
+    }
 }

@@ -389,4 +389,8 @@ export class ClusteredVectorLayer extends BaseVectorLayer<com.carto.layers.Clust
         nativeGetterName: 'isAnimatedClusters',
     })
     animatedClusters: boolean;
+
+    expandCluster(element: VectorElement<any, any>, px: number) {
+        this.getNative().expandCluster(element.getNative(), px);
+    }
 }

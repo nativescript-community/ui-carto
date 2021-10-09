@@ -179,4 +179,5 @@ export class ClusteredVectorLayer extends BaseVectorLayer<any, ClusteredVectorLa
     minimumClusterDistance?: number;
     maximumClusterZoom?: number;
     animatedClusters?: boolean;
+    expandCluster(element: VectorElement<any, any>, px: number);
 }
