@@ -70,6 +70,7 @@ declare namespace com {
         export namespace carto {
             export namespace additions {
                 export class AKClusterElementBuilder extends com.carto.layers.ClusterElementBuilder {
+                    public constructor(screenScale: number);
                     public static class: java.lang.Class<AKClusterElementBuilder>;
                     public buildClusterElement(param0: com.carto.core.MapPos, param1: com.carto.vectorelements.VectorElementVector): com.carto.vectorelements.VectorElement;
                     public setShape(param0: string): void;
@@ -160,11 +161,7 @@ declare namespace com {
                         param2: GeocodingServiceAddressCallback
                     ): void;
                     public constructor();
-                    public static calculateAddress(
-                        param0: com.carto.geocoding.GeocodingService,
-                        param1: com.carto.geocoding.GeocodingRequest,
-                        param2: GeocodingServiceAddressCallback
-                    ): void;
+                    public static calculateAddress(param0: com.carto.geocoding.GeocodingService, param1: com.carto.geocoding.GeocodingRequest, param2: GeocodingServiceAddressCallback): void;
                 }
             }
         }
@@ -621,11 +618,7 @@ declare namespace com {
                         param1: com.carto.routing.RouteMatchingRequest,
                         param2: RoutingServiceRouteMatchingCallback
                     ): void;
-                    public static calculateRoute(
-                        param0: com.carto.routing.RoutingService,
-                        param1: com.carto.routing.RoutingRequest,
-                        param2: RoutingServiceRouteCallback
-                    ): void;
+                    public static calculateRoute(param0: com.carto.routing.RoutingService, param1: com.carto.routing.RoutingRequest, param2: RoutingServiceRouteCallback): void;
                 }
             }
         }

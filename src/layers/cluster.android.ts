@@ -1,4 +1,4 @@
-import { Font } from '@nativescript/core';
+import { Font, Screen } from '@nativescript/core';
 import { Color } from '@nativescript/core/color';
 import { nativeColorProperty, nativeFontProperty, nativeImageProperty } from '..';
 import { MapPos, fromNativeMapPos } from '../core';
@@ -17,7 +17,7 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
     @nativeProperty bbox: boolean;
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.carto.vectorelements.VectorElement;
     createNative(options: ClusterElementBuilderOptions) {
-        const result = new com.akylas.carto.additions.AKClusterElementBuilder();
+        const result = new com.akylas.carto.additions.AKClusterElementBuilder(Screen.mainScreen.scale);
         if (!!options.buildClusterElement) {
             result.setInterface(
                 new com.akylas.carto.additions.AKClusterElementBuilder.Interface({

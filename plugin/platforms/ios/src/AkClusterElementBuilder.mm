@@ -56,15 +56,10 @@
     if (!markerStyle) {
         NTBitmap* markerBitmap;
         if (self.markerImage || self.textColor) {
-            CGSize size;
+            CGSize size = CGSizeMake(self.markerSize, self.markerSize);
+            UIGraphicsBeginImageContextWithOptions(size, false, 0);
             if(self.markerImage) {
-                size = self.markerImage.size;
-            } else {
-                size = CGSizeMake(self.markerSize, self.markerSize);
-            }
-            UIGraphicsBeginImageContext(size);
-            if(self.markerImage) {
-                [self.markerImage drawAtPoint:CGPointMake(0, 0)];
+                [self.markerImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
             }
             
             NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
