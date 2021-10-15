@@ -37,6 +37,7 @@ import java.util.Map;
 
 public class AKClusterElementBuilder extends ClusterElementBuilder {
     static final Rect tempRect = new Rect();
+    static final Rect tempRect2 = new Rect();
     static final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public interface Interface {
         VectorElement buildClusterElement(MapPos pos, VectorElementVector nElements);
@@ -146,7 +147,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             StyleBuilder styleBuilder = null;
             Bitmap cBitmap = null;
             if (markerBitmap != null || textColor != null) {
-                int size = int)(markerSize * screenScale);
+                int size = (int)(markerSize * screenScale);
                 android.graphics.Bitmap canvasBitmap = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888);
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
                 canvas.scale(screenScale, screenScale);
