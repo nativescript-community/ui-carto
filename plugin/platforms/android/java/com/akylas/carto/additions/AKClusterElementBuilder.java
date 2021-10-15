@@ -41,6 +41,12 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     public interface Interface {
         VectorElement buildClusterElement(MapPos pos, VectorElementVector nElements);
     }
+
+    public AKClusterElementBuilder(float screenScale) {
+        super();
+        this.screenScale = screenScale;
+    }
+    private float screenScale;
     Interface inter = null;
     public void setInterface(Interface inter) {
         this.inter = inter;
@@ -140,24 +146,25 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             StyleBuilder styleBuilder = null;
             Bitmap cBitmap = null;
             if (markerBitmap != null || textColor != null) {
-                 android.graphics.Bitmap canvasBitmap;
-                if (markerBitmap != null) {
-                    canvasBitmap = markerBitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
-                } else {
-                    canvasBitmap = android.graphics.Bitmap.createBitmap(markerSize, markerSize, android.graphics.Bitmap.Config.ARGB_8888);
-                }
+                int size = int)(markerSize * scale);
+                android.graphics.Bitmap canvasBitmap = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888);
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
-
+                canvas.scale(screenScale, screenScale);
                 Paint paint = AKClusterElementBuilder.paint;
+                Rect bounds = AKClusterElementBuilder.tempRect;
+                if (markerBitmap != null) {
+                    bounds.set(0,0, markerBitmap.getWidth(), markerBitmap.getHeight());
+                    Rect dst = AKClusterElementBuilder.tempRect2;
+                    dst.set(0,0, markerSize, markerSize);
+                    canvas.drawBitmap(markerBitmap, bounds, dst, paint);
+                }
 
                 paint.setTextAlign(Paint.Align.CENTER);
                 paint.setTextSize(textSize);
                 if (typeface != null) {
                     paint.setTypeface(typeface);
                 }
-                Typeface typeface = paint.getTypeface();
                 String text = Integer.toString(nbElements);
-                Rect bounds = AKClusterElementBuilder.tempRect;
                 paint.getTextBounds(text, 0, text.length(), bounds);
 
                 if (textColor != null) {
@@ -166,8 +173,8 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                     paint.setColor(Color.WHITE);
                 }
 
-                float x = canvasBitmap.getWidth() / 2;
-                float y = canvasBitmap.getHeight() / 2 + bounds.height()/2;
+                float x = markerSize / 2;
+                float y = markerSize / 2 + bounds.height()/2;
 
                 canvas.drawText(text, x, y, paint);
                 cBitmap = BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap);

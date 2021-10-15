@@ -70,6 +70,7 @@ declare namespace com {
         export namespace carto {
             export namespace additions {
                 export class AKClusterElementBuilder extends com.carto.layers.ClusterElementBuilder {
+                    public constructor(screenScale: number);
                     public static class: java.lang.Class<AKClusterElementBuilder>;
                     public buildClusterElement(param0: com.carto.core.MapPos, param1: com.carto.vectorelements.VectorElementVector): com.carto.vectorelements.VectorElement;
                     public setShape(param0: string): void;
