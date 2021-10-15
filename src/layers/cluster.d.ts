@@ -1,3 +1,4 @@
+import { Font } from '@nativescript/core';
 import { Color } from '@nativescript/core/color';
 import { ImageAsset } from '@nativescript/core/image-asset';
 import { ImageSource } from '@nativescript/core/image-source';
@@ -12,6 +13,7 @@ export interface ClusterElementBuilderOptions {
     shape?: string;
     textColor?: string | Color;
     textSize?: number;
+    font?: Font;
     bbox?: boolean;
 
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any>;
@@ -26,5 +28,6 @@ export class ClusterElementBuilder<T, U extends ClusterElementBuilderOptions> ex
     shape?: string;
     textColor?: string | Color;
     textSize?: number;
+    font?: Font;
     bbox?: boolean;
 }
