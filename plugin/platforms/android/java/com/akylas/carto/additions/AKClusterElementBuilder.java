@@ -146,7 +146,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
             StyleBuilder styleBuilder = null;
             Bitmap cBitmap = null;
             if (markerBitmap != null || textColor != null) {
-                int size = int)(markerSize * scale);
+                int size = int)(markerSize * screenScale);
                 android.graphics.Bitmap canvasBitmap = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888);
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
                 canvas.scale(screenScale, screenScale);
