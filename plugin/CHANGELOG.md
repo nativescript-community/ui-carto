@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/nativescript-community/ui-carto/compare/v1.8.2...v1.8.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* **android:** cluster fix ([0874974](https://github.com/nativescript-community/ui-carto/commit/0874974616dfa653d82431d4590fb6cad88841a7))
+
+
+
+
+
 ## [1.8.2](https://github.com/nativescript-community/ui-carto/compare/v1.8.1...v1.8.2) (2021-10-15)
 
 
