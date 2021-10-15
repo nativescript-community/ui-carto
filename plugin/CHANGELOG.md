@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/nativescript-community/ui-carto/compare/v1.8.1...v1.8.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* cluster images fix (scale) ([a3934ca](https://github.com/nativescript-community/ui-carto/commit/a3934cae28dfb98f825a79288f5893f86de1ccda))
+
+
+
+
+
 ## [1.8.1](https://github.com/nativescript-community/ui-carto/compare/v1.8.0...v1.8.1) (2021-10-09)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto

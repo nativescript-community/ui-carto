@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.1...v1.8.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* cluster images fix (scale) ([a3934ca](https://github.com/farfromrefug/nativescript-carto/commit/a3934cae28dfb98f825a79288f5893f86de1ccda))
+* missing font typing for ClusterElementBuilderOptions ([84dc4cf](https://github.com/farfromrefug/nativescript-carto/commit/84dc4cfbff78278bb5a10f23dde58cb30a67c675))
+* prevent error on null image proeprties ([8ba8d92](https://github.com/farfromrefug/nativescript-carto/commit/8ba8d925ca709c0fa5b6b78148e79e8f0e47657b))
+
+
+
+
+
 ## [1.8.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.0...v1.8.1) (2021-10-09)
 
 
