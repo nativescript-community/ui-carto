@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.3...v1.8.4) (2021-10-15)
+
+
+### Bug Fixes
+
+* **android:** another cluster fix ([cc6ac56](https://github.com/farfromrefug/nativescript-carto/commit/cc6ac56b83ec54039a234a96119fe380440a9cec))
+
+
+
+
+
 ## [1.8.3](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.2...v1.8.3) (2021-10-15)
 
 
