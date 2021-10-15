@@ -115,7 +115,7 @@ export function nativeImageProperty(...args) {
                 },
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
-                    return value.android as android.graphics.Bitmap;
+                    return value?.android as android.graphics.Bitmap;
                 },
             },
         },

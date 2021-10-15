@@ -112,7 +112,7 @@ export function nativeImageProperty(...args) {
                 },
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
-                    return value.ios as UIImage;
+                    return value?.ios as UIImage;
                 },
             },
         },
