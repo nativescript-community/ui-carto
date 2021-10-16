@@ -1,9 +1,9 @@
 import { BaseNative } from '../index.common';
 import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
-import { jsonVariant, JSVariantToNative } from '../utils';
+import { featureCollectionFromArgs, nativeProperty } from '..';
 import { FeatureCollection } from '../geometry/feature.ios';
 import { Projection } from '../projections';
-import { nativeProperty } from '..';
+import { JSVariantToNative, jsonVariant } from '../utils';
 
 export abstract class DataSource<T extends NTTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {
@@ -57,7 +57,7 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorT
         this.getNative().deleteLayer(index);
     }
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection) {
-        this.getNative().setLayerFeatureCollectionProjectionFeatureCollection(layerIndex, projection ? projection.getNative() : null, featureCollection.getNative());
+        this.getNative().setLayerFeatureCollectionProjectionFeatureCollection(layerIndex, projection?.getNative(), featureCollectionFromArgs(featureCollection));
     }
     setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
         this.getNative().setLayerGeoJSONGeoJSON(layerIndex, JSVariantToNative(geoJSON));
