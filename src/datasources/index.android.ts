@@ -1,5 +1,5 @@
 import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
-import { nativeProperty } from '..';
+import { featureCollectionFromArgs, nativeProperty } from '..';
 import { FeatureCollection } from '../geometry/feature';
 import { BaseNative } from '../index.common';
 import { Projection } from '../projections';
@@ -66,7 +66,7 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<com.carto.dataso
         return this.getNative().createLayer(name);
     }
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection) {
-        this.getNative().setLayerFeatureCollection(layerIndex, projection ? projection.getNative() : null, featureCollection.getNative());
+        this.getNative().setLayerFeatureCollection(layerIndex, projection?.getNative(), featureCollectionFromArgs(featureCollection));
     }
     setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
         this.getNative().setLayerGeoJSON(layerIndex, JSVariantToNative(geoJSON));
