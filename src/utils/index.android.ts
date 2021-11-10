@@ -1,4 +1,5 @@
-import { BaseNative, getFileName, getRelativePathToApp, nonenumerable } from '../index.common';
+import { getFileName, getRelativePathToApp, nonenumerable } from '../index.common';
+import { BaseNative } from "../BaseNative";
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';

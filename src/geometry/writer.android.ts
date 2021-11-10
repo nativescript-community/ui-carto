@@ -1,4 +1,4 @@
-import { BaseNative } from '../index.common';
+import { BaseNative } from "../BaseNative";
 import { GeoJSONGeometryWriterOptions, WKBGeometryWriterOptions, WKTGeometryWriterOptions } from './writer';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';

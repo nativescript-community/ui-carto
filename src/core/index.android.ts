@@ -1,4 +1,4 @@
-import { BaseNative } from '../index.common';
+import { BaseNative } from '../BaseNative';
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
