@@ -142,8 +142,8 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
 }
 export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAssetPackage, DirAssetPackageOptions> {
     assetNames: com.carto.core.StringVector;
-    _dirPath: string;
-    _cartoDirPath: string;
+    mDirPath: string;
+    mCartoDirPath: string;
     loadUsingNS = false;
     _nInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
     constructor(options) {
@@ -157,16 +157,16 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
     }
     createNative(options: DirAssetPackageOptions) {
         if (Folder.exists(getFileName(options.dirPath))) {
+            const dirPath = options.dirPath;
+            this.mDirPath = getFileName(dirPath);
+            this.mCartoDirPath = getRelativePathToApp(dirPath);
             this._nInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
                 getAssetNames: this.getAssetNames.bind(this),
                 loadAsset: this.loadAsset.bind(this),
             });
             const result = new com.akylas.carto.additions.AKAssetPackage(this._nInterface);
 
-            const dirPath = options.dirPath;
             this.loadUsingNS = !!options.loadUsingNS;
-            this._dirPath = getFileName(dirPath);
-            this._cartoDirPath = getRelativePathToApp(dirPath);
             return result;
         } else {
             console.error(`could not find dir: ${options.dirPath}`);
@@ -179,9 +179,9 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
         }
         let result: com.carto.core.BinaryData;
         if (this.loadUsingNS) {
-            result = new com.carto.core.BinaryData(File.fromPath(path.join(this._dirPath, name)).readSync());
+            result = new com.carto.core.BinaryData(File.fromPath(path.join(this.mDirPath, name)).readSync());
         } else {
-            result = com.carto.utils.AssetUtils.loadAsset(path.join(this._cartoDirPath, name));
+            result = com.carto.utils.AssetUtils.loadAsset(path.join(this.mCartoDirPath, name));
         }
         return result;
     }
@@ -189,7 +189,7 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
         if (!this.assetNames) {
             try {
                 this.assetNames = new com.carto.core.StringVector();
-                walkDir(this._dirPath, (fileRelPath: string) => {
+                walkDir(this.mDirPath, (fileRelPath: string) => {
                     this.assetNames.add(fileRelPath);
                 });
             } catch (e) {}
