@@ -33,3 +33,6 @@ export function isLocationOnPath<T = DefaultLatLonKeys>(
     geodesic?: boolean,
     toleranceEarth?: number
 ): number;
+
+export declare function fromNativeMapRange(value): MapRange;
+export declare function toNativeMapRange(value: MapRange): any;

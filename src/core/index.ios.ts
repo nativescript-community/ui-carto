@@ -1,5 +1,5 @@
 import { BaseNative } from '../index.common';
-import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
+import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
 export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
 
 export enum CartoMapStyle {
@@ -90,16 +90,6 @@ export function toNativeScreenPos(position: ScreenPos | NTScreenPos) {
     }
     //  ignore z for now as points can get under the map!
     return NTScreenPos.alloc().initWithXY(position.x, position.y);
-}
-export function fromNativeMapRange(value: NTMapRange) {
-    return [value.getMax(), value.getMin()] as MapRange;
-}
-export function toNativeMapRange(value: MapRange) {
-    if (value instanceof NTMapRange) {
-        return value;
-    }
-    //  ignore z for now as points can get under the map!
-    return NTMapRange.alloc().initWithMinMax(value[0], value[1]);
 }
 export function toNativeMapVec(value: MapVec | [number, number, number]) {
     if (Array.isArray(value)) {

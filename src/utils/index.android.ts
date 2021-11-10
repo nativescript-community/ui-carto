@@ -1,7 +1,7 @@
 import { BaseNative, getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
-import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, toNativeMapPos } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 
 export function nativeVectorToArray(nVector: com.carto.core.StringVector) {
@@ -215,4 +215,15 @@ export function isLocationOnPath<T = DefaultLatLonKeys>(
     toleranceEarth?: number
 ): number {
     return com.akylas.carto.additions.Utils.isLocationOnPath(toNativeMapPos<T>(point), mapPosVectorFromArgs<T>(coordinates), closed, geodesic, toleranceEarth);
+}
+
+export function fromNativeMapRange(value: com.carto.core.MapRange) {
+    return [value.getMax(), value.getMin()] as MapRange;
+}
+export function toNativeMapRange(value: MapRange) {
+    if (value instanceof com.carto.core.MapRange) {
+        return value;
+    }
+    //  ignore z for now as points can get under the map!
+    return new com.carto.core.MapRange(value[0], value[1]);
 }

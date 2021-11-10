@@ -1,7 +1,7 @@
 import { BaseNative, getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
-import { DefaultLatLonKeys, GenericMapPos, MapPosVector, toNativeMapPos } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 
 export function nativeVectorToArray(nVector: NTStringVector) {
@@ -158,4 +158,15 @@ export function isLocationOnPath<T = DefaultLatLonKeys>(
     toleranceEarth?: number
 ): number {
     return CartoAdditionsUtils.isLocationOnPolyClosedGeodesicToleranceEarth(toNativeMapPos<T>(point), mapPosVectorFromArgs<T>(coordinates), closed, geodesic, toleranceEarth);
+}
+
+export function fromNativeMapRange(value: NTMapRange) {
+    return [value.getMax(), value.getMin()] as MapRange;
+}
+export function toNativeMapRange(value: MapRange) {
+    if (value instanceof NTMapRange) {
+        return value;
+    }
+    //  ignore z for now as points can get under the map!
+    return NTMapRange.alloc().initWithMinMax(value[0], value[1]);
 }
