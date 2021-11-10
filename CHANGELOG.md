@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.4...v1.8.5) (2021-11-10)
+
+
+### Bug Fixes
+
+* fix for circular reference (this time working) ([9f5a986](https://github.com/farfromrefug/nativescript-carto/commit/9f5a9861aec3b1ebaecbe6f7ae4ec808a761a7f7))
+* refactor to avoid import circular references ([546852b](https://github.com/farfromrefug/nativescript-carto/commit/546852b939e2d1d8f2e932e8638cd93ea676edeb))
+* **android:** native-api-usage optimisation ([177576b](https://github.com/farfromrefug/nativescript-carto/commit/177576babe8c12c95f068bf6dd42ef5a53533bc3))
+
+
+
+
+
 ## [1.8.4](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.3...v1.8.4) (2021-10-15)
 
 
