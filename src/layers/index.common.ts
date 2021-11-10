@@ -1,4 +1,4 @@
-import { BaseNative, nativeProperty } from '../index.common';
+import { BaseNative, nativeProperty } from '..';
 import { LayerOptions, TileSubstitutionPolicy } from '.';
 import { TileDataSource } from '../datasources';
 import { Projection } from '../projections';

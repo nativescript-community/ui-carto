@@ -14,8 +14,6 @@ export declare function fromNativeScreenBounds(pos): ScreenBounds;
 export declare function toNativeScreenBounds(position: ScreenBounds): any;
 export declare function fromNativeMapVec(value): MapVec;
 export declare function toNativeMapVec(value: MapVec | [number, number, number]): any;
-export declare function fromNativeMapRange(value): MapRange;
-export declare function toNativeMapRange(value: MapRange): any;
 export declare function setMapPosKeys(latitude: LatitudeKeys, longitude: LongitudeKeys, altitude?: AltitudeKeys);
 
 export class CartoMapStyle {

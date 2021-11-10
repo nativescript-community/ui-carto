@@ -6,7 +6,7 @@ import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/
 import { isAndroid } from '@nativescript/core/platform';
 import { knownFolders, path } from '@nativescript/core/file-system';
 import { NativePropertyOptions } from '.';
-import { fromNativeMapRange, toNativeMapRange } from './core';
+import { fromNativeMapRange, toNativeMapRange } from './utils';
 
 function createGetter(key: string, options: NativePropertyOptions) {
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
