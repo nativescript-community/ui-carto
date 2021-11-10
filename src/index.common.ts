@@ -1,5 +1,4 @@
 /* eslint-disable no-redeclare */
-import { Observable } from '@nativescript/core/data/observable';
 import { ImageSource } from '@nativescript/core/image-source';
 import { ImageAsset } from '@nativescript/core/image-asset';
 import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/core/utils/utils';
@@ -94,32 +93,6 @@ export function nonenumerable(target: any, name: string, desc?: any) {
         },
         configurable: true,
     });
-}
-
-export abstract class BaseNative<T, U extends {}> extends Observable {
-    constructor(public options: U = {} as any, native?: T) {
-        super();
-        if (native) {
-            this.native = native;
-        }
-    }
-    native: T;
-    protected duringInit = false;
-    initNativeView(native: T, options: U) {
-        this.duringInit = true;
-        for (const key in options) {
-            (this as any)[key] = options[key];
-        }
-        this.duringInit = false;
-    }
-    getNative() {
-        if (!this.native) {
-            this.native = this.createNative(this.options);
-            this.initNativeView(this.native, this.options);
-        }
-        return this.native;
-    }
-    abstract createNative(options: U): T;
 }
 
 export function _createImageSourceFromSrc(value: string | ImageSource | ImageAsset): ImageSource {

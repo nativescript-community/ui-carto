@@ -4,9 +4,10 @@ import { NativePropertyOptions } from '.';
 import { DefaultLatLonKeys, MapPos, MapPosVector, MapPosVectorVector, fromNativeMapVec, toNativeMapPos, toNativeMapVec } from './core';
 import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';
-import { BaseNative, _createImageSourceFromSrc, nativeProperty } from './index.common';
+import { _createImageSourceFromSrc, nativeProperty } from './index.common';
+export { BaseNative } from './BaseNative';
 import { BaseVectorElementStyleBuilder } from './vectorelements';
-export { BaseNative, nativeProperty };
+export { nativeProperty };
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;

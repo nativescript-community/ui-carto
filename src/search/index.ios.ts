@@ -1,4 +1,5 @@
-import { BaseNative, nativeProperty } from '../index.common';
+import { nativeProperty } from '../index.common';
+import { BaseNative } from "../BaseNative";
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
 import { toNativeMapPos } from '../core';

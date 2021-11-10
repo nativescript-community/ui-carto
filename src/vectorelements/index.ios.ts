@@ -1,5 +1,6 @@
 import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from '.';
-import { BaseNative, nativeProperty } from '../index.common';
+import { nativeProperty } from '../index.common';
+import { BaseNative } from "../BaseNative";
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';

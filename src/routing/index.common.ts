@@ -1,4 +1,4 @@
-import { BaseNative } from '../index.common';
+import { BaseNative } from "../BaseNative";
 import { RouteMatchingResult as IRouteMatchingResult, RoutingResult as IRoutingResult, RoutingInstructionVector, RoutingServiceOptions } from '.';
 import { Projection } from '../projections';
 import { MapPosVector } from '../core';

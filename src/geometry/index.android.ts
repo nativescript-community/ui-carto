@@ -1,7 +1,7 @@
 import { GeometryOptions, LineGeometryOptions, PointGeometryOptions, PolygonGeometryOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { MapPosVector, fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core';
-import { BaseNative } from '../index.common';
+import { BaseNative } from "../BaseNative";
 
 export abstract class Geometry<T extends com.carto.geometry.Geometry, U extends GeometryOptions> extends BaseNative<T, U> {
     getCenterPos() {

@@ -1,5 +1,5 @@
 import { DefaultLatLonKeys, GenericMapPos, MapBounds, MapPos, MapPosVector } from '../core';
-import { BaseNative } from '../index.common';
+import { BaseNative } from "../BaseNative";
 
 export interface GeometryOptions<T = DefaultLatLonKeys> {}
 export abstract class Geometry<T = DefaultLatLonKeys, U extends GeometryOptions = GeometryOptions<T>> extends BaseNative<any, U> {

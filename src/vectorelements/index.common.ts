@@ -1,4 +1,4 @@
-import { BaseNative } from '../index.common';
+import { BaseNative } from "../BaseNative";
 import { VectorElementStyleBuilderOptions } from '.';
 
 export function styleBuilderProperty(target: any, propertyKey?, desc?: PropertyDescriptor): any {
