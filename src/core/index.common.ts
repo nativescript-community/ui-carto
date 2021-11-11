@@ -1,3 +1,5 @@
+export { toNativeMapRange, fromNativeMapRange } from '../utils';
+
 export type LatitudeKeys = 'latitude' | 'lat';
 export type LongitudeKeys = 'longitude' | 'lon' | 'lng';
 export type AltitudeKeys = 'altitude' | 'alt' | 'ele';

@@ -1,6 +1,6 @@
 import { BaseNative } from '../BaseNative';
-import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapPos, MapVec, ScreenBounds, ScreenPos, setMapPosKeys } from './index.common';
-export { LatitudeKey, LongitudeKey, MapPos, ScreenBounds, ScreenPos, setMapPosKeys };
+import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapVec, ScreenBounds, ScreenPos } from './index.common';
+export * from './index.common';
 
 export const CartoMapStyle = {
     get VOYAGER() {
