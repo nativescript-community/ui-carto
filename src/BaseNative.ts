@@ -23,5 +23,7 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         }
         return this.native;
     }
-    abstract createNative(options: U): T;
+    createNative(options: U): T {
+        return null;
+    }
 }

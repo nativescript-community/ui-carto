@@ -1,10 +1,12 @@
+import { BaseNative } from '../BaseNative';
 import { LatitudeKey, LongitudeKey, MapBounds, fromNativeMapBounds } from '../core';
 import { nativeVariantToJS } from '../utils';
 import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
 
-export class FeatureCollection implements IFeatureCollection {
-    constructor(protected native: NTFeatureCollection) {}
-
+export class FeatureCollection<T extends NTFeatureCollection> extends BaseNative<T, {}> implements IFeatureCollection {
+    constructor(native) {
+        super(null, native);
+    }
     getFeature(index: number) {
         const nResult = this.native.getFeature(index);
         // const nGeo = nResult.getGeometry();
@@ -22,9 +24,6 @@ export class FeatureCollection implements IFeatureCollection {
     }
     get featureCount() {
         return this.native.getFeatureCount();
-    }
-    getNative() {
-        return this.native;
     }
     getBounds() {
         let minLat = Number.MAX_SAFE_INTEGER;
@@ -53,11 +52,7 @@ export class FeatureCollection implements IFeatureCollection {
     }
 }
 
-export class VectorTileFeatureCollection extends FeatureCollection {
-    constructor(protected native: NTVectorTileFeatureCollection) {
-        super(native);
-    }
-
+export class VectorTileFeatureCollection extends FeatureCollection<NTVectorTileFeatureCollection> {
     getFeature(index: number) {
         const nResult = this.native.getFeature(index);
         return {

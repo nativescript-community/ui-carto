@@ -1,5 +1,4 @@
 import { mapPosVectorFromArgs, nativeProperty } from '..';
-import { NativeVector } from '../core';
 import {
     CartoOnlineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
@@ -15,6 +14,7 @@ import {
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
+import { NativeVector } from '../core/index.android';
 
 export const RoutingAction = {
     get HEAD_ON() {
@@ -100,13 +100,7 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
     }
 }
 
-export class RoutingInstructionVector extends NativeVector<RoutingInstruction> {
-    native: com.carto.routing.RoutingInstructionVector;
-    constructor(native: com.carto.routing.RoutingInstructionVector) {
-        super();
-        this.native = native;
-    }
-}
+export class RoutingInstructionVector extends NativeVector<RoutingInstruction, com.carto.routing.RoutingInstructionVector> {}
 
 class PackageManagerRoutingService extends RoutingService<com.akylas.carto.additions.AKPackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
     createNative(options: PackageManagerRoutingServiceOptions) {
