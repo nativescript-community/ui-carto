@@ -27,12 +27,12 @@ export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<NTBalloonPop
     @nativeProperty triangleHeight: number;
     @nativeProperty triangleWidth: number;
 
-    _buildStyle: NTBalloonPopupStyle;
+    mBuildStyle: NTBalloonPopupStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

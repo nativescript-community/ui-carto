@@ -21,12 +21,12 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
     @nativeAndroidEnumProperty(com.carto.styles.BillboardScaling, {}) scalingMode: BillboardScaling;
     @nativeAndroidEnumProperty(com.carto.styles.BillboardOrientation, {}) orientationMode: BillboardOrientation;
 
-    _buildStyle: com.carto.styles.MarkerStyle;
+    mBuildStyle: com.carto.styles.MarkerStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

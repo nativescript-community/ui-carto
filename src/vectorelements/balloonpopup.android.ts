@@ -27,12 +27,12 @@ export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<com.carto.st
     @nativeProperty triangleWidth: number;
     @nativeProperty placementPriority: number;
 
-    _buildStyle: com.carto.styles.BalloonPopupStyle;
+    mBuildStyle: com.carto.styles.BalloonPopupStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

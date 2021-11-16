@@ -54,12 +54,12 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     @nativeProperty clickWidth: number;
     @nativeProperty stretchFactor: number;
 
-    _buildStyle: com.carto.styles.LineStyle;
+    mBuildStyle: com.carto.styles.LineStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 
@@ -71,7 +71,7 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
     @styleBuilderProperty clickWidth: number;
     @styleBuilderProperty stretchFactor: number;
 
-    _buildStyle: com.carto.styles.LineStyle;
+    mBuildStyle: com.carto.styles.LineStyle;
 
     constructor(public options: LineOptions = {} as any, native?: com.carto.vectorelements.Line) {
         super(options, native);

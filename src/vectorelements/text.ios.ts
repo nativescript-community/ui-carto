@@ -25,12 +25,12 @@ export class TextStyleBuilder extends BillboardStyleBuilder<NTTextStyleBuilder, 
     @nativeColorProperty backgroundColor: Color | string;
     @nativeProperty flippable: boolean;
 
-    _buildStyle: NTTextStyle;
+    mBuildStyle: NTTextStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

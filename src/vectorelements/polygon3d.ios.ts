@@ -11,12 +11,12 @@ export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<NTPolyg
     @nativeColorProperty color: Color | string;
     @nativeColorProperty sideColor: Color | string;
 
-    _buildStyle: NTPolygon3DStyle;
+    mBuildStyle: NTPolygon3DStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

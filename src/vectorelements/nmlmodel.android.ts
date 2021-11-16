@@ -7,12 +7,12 @@ export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<com.cart
         return new com.carto.styles.BalloonPopupStyleBuilder();
     }
 
-    _buildStyle: com.carto.styles.NMLModelStyle;
+    mBuildStyle: com.carto.styles.NMLModelStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

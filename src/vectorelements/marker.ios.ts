@@ -18,12 +18,12 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<NTMarkerStyleBuild
     @nativeProperty scalingMode: BillboardScaling;
     @nativeProperty orientationMode: BillboardOrientation;
 
-    _buildStyle: NTMarkerStyle;
+    mBuildStyle: NTMarkerStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 
