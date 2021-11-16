@@ -105,17 +105,17 @@ export default class Example extends BaseMaps {
         mapView.on(MapClickedEvent, this.onMapClicked);
         mapView.on(MapMovedEvent, this.onMapMoved);
 
-        const dataFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'packaged'));
-        this.packageManager = new CartoPackageManager({
-            source: 'carto.streets',
-            dataFolder: dataFolder.path,
-            listener: this,
-        });
+        // const dataFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'packaged'));
+        // this.packageManager = new CartoPackageManager({
+        //     source: 'carto.streets',
+        //     dataFolder: dataFolder.path,
+        //     listener: this,
+        // });
 
-        this.packageManager.start();
-        // console.log('packageManager local packages', this.packageManager.getLocalPackages().size());
-        // console.log('packageManager server packages', this.packageManager.getServerPackages().map(p => p.getName()));
-        this.packageManager.startPackageListDownload();
+        // this.packageManager.start();
+        // // console.log('packageManager local packages', this.packageManager.getLocalPackages().size());
+        // // console.log('packageManager server packages', this.packageManager.getServerPackages().map(p => p.getName()));
+        // this.packageManager.startPackageListDownload();
 
         const cacheFolder = Folder.fromPath(path.join(knownFolders.documents().path, 'carto_cache'));
         // const source2 = new OrderedTileDataSource({
@@ -127,42 +127,53 @@ export default class Example extends BaseMaps {
         //         })
         //     ]
         // });
-        const source2 = new PersistentCacheTileDataSource({
-            dataSource: new MergedMBVTTileDataSource({
-                dataSources: [
-                    new HTTPTileDataSource({
-                        minZoom: 0,
-                        maxZoom: 14,
-                        httpHeaders: {
-                            Referer: 'app://com.akylas.nativescript.cartodemo',
-                        },
-                        url: `http://tiles.basemaps.cartocdn.com/vectortiles/carto.streets/v1/{z}/{x}/{y}.mvt?appToken=e934fef8-6841-4f53-9999-ac579c41e695`,
-                    }),
-                    new HTTPTileDataSource({
-                        minZoom: 0,
-                        maxZoom: 14,
-                        url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`,
-                    }),
-                ],
-            }),
-            databasePath: path.join(cacheFolder.path, 'source2'),
-        });
+        // const source2 = new PersistentCacheTileDataSource({
+        //     dataSource:
+        //     //  new MergedMBVTTileDataSource({
+        //         // dataSources: [
+        //             new HTTPTileDataSource({
+        //                 minZoom: 0,
+        //                 maxZoom: 14,
+        //                 httpHeaders: {
+        //                     Referer: 'app://com.akylas.nativescript.cartodemo',
+        //                 },
+        //                 url: `http://tiles.basemaps.cartocdn.com/vectortiles/carto.streets/v1/{z}/{x}/{y}.mvt?appToken=e934fef8-6841-4f53-9999-ac579c41e695`,
+        //             }),
+        //             // new HTTPTileDataSource({
+        //             //     minZoom: 0,
+        //             //     maxZoom: 14,
 
-        try {
-            this.cartoLayer = new VectorTileLayer({
-                dataSource: source2,
-                decoder: new MBVectorTileDecoder({
-                    zipPath: '~/assets/cartostyles-v1.zip',
-                    style: 'voyager',
-                    liveReload: true,
-                }),
-                opacity: 1,
-            });
-            this.cartoLayer.setVectorTileEventListener(this, this.mapProjection);
-            mapView.addLayer(this.cartoLayer);
-        } catch (err) {
-            alert(err);
-        }
+        //             //     url: `https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2/{zoom}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYWt5bGFzIiwiYSI6IkVJVFl2OXMifQ.TGtrEmByO3-99hA0EI44Ew`,
+        //             // }),
+        //         // ],
+        //     // }),
+        //     databasePath: path.join(cacheFolder.path, 'source2.db'),
+        // });
+        // const layer = new RasterTileLayer({
+                // dataSource: source2,
+            //     decoder: new MBVectorTileDecoder({
+            //         zipPath: '~/assets/cartostyles-v1.zip',
+            //         style: 'voyager',
+            //         liveReload: true,
+            //     }),
+            //     opacity: 1,
+            // });
+// mapView.addLayer(layer);
+        // try {
+            // this.cartoLayer = new VectorTileLayer({
+            //     dataSource: source2,
+            //     decoder: new MBVectorTileDecoder({
+            //         zipPath: '~/assets/cartostyles-v1.zip',
+            //         style: 'voyager',
+            //         liveReload: true,
+            //     }),
+            //     opacity: 1,
+            // });
+            // this.cartoLayer.setVectorTileEventListener(this, this.mapProjection);
+            // mapView.addLayer(this.cartoLayer);
+        // } catch (err) {
+        //     alert(err);
+        // }
 
         // const dataSource1 = new HTTPTileDataSource({
         //     minZoom: 0,
@@ -183,79 +194,79 @@ export default class Example extends BaseMaps {
         // });
         // mapView.addLayer(testLayer);
 
-        // const dataSource = new HTTPTileDataSource({
-        //     minZoom: 0,
-        //     maxZoom: 22,
-        //     subdomains: 'abc',
-        //     url: `http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+        const dataSource = new HTTPTileDataSource({
+            minZoom: 0,
+            maxZoom: 22,
+            subdomains: 'abc',
+            url: `http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+        });
+        this.rasterLayer = new RasterTileLayer({
+            dataSource,
+            // opacity: 0.5
+        });
+        mapView.addLayer(this.rasterLayer);
+
+        // const localDataSource = new LocalVectorDataSource({
+        //     projection: mapView.projection,
         // });
-        // this.rasterLayer = new RasterTileLayer({
-        //     dataSource,
-        //     opacity: 0.5
+        // const vectorLayer = new VectorLayer({
+        //     dataSource: localDataSource,
+        //     visibleZoomRange: [0, 24],
         // });
-        // mapView.addLayer(this.rasterLayer);
+        // mapView.addLayer(vectorLayer);
+        // const markerStyleBuilder = new MarkerStyleBuilder({
+        //     size: 30,
+        //     color: '#00FF00',
+        // });
+        // const marker = new Marker({
+        //     projection: mapView.projection,
+        //     styleBuilder: markerStyleBuilder,
+        //     position: {
+        //         latitude: 45.1887104,
+        //         longitude: 5.7013257,
+        //     },
+        // });
+        // localDataSource.add(marker);
 
-        const localDataSource = new LocalVectorDataSource({
-            projection: mapView.projection,
-        });
-        const vectorLayer = new VectorLayer({
-            dataSource: localDataSource,
-            visibleZoomRange: [0, 24],
-        });
-        mapView.addLayer(vectorLayer);
-        const markerStyleBuilder = new MarkerStyleBuilder({
-            size: 30,
-            color: '#00FF00',
-        });
-        const marker = new Marker({
-            projection: mapView.projection,
-            styleBuilder: markerStyleBuilder,
-            position: {
-                latitude: 45.1887104,
-                longitude: 5.7013257,
-            },
-        });
-        localDataSource.add(marker);
+        // const pointStyleBuilder = new PointStyleBuilder({
+        //     size: 30,
+        //     color: '#ff0000',
+        // });
+        // const point = new Point({
+        //     projection: mapView.projection,
+        //     styleBuilder: pointStyleBuilder,
+        //     position: {
+        //         latitude: 45.1887104,
+        //         longitude: 5.6813257,
+        //     },
+        // });
+        // localDataSource.add(point);
 
-        const pointStyleBuilder = new PointStyleBuilder({
-            size: 30,
-            color: '#ff0000',
-        });
-        const point = new Point({
-            projection: mapView.projection,
-            styleBuilder: pointStyleBuilder,
-            position: {
-                latitude: 45.1887104,
-                longitude: 5.6813257,
-            },
-        });
-        localDataSource.add(point);
-
-        const lineStyleBuilder = new LineStyleBuilder({
-            width: 6,
-            endType: LineEndType.SQUARE,
-            joinType: LineJointType.ROUND,
-            color: '#0000ff',
-        });
-        const line = new Line({
-            projection: mapView.projection,
-            styleBuilder: lineStyleBuilder,
-            positions: [
-                {
-                    latitude: 45.1187104,
-                    longitude: 5.6813257,
-                },
-                {
-                    latitude: 45.1287104,
-                    longitude: 5.3813257,
-                },
-                {
-                    latitude: 45.1887104,
-                    longitude: 5.6813257,
-                },
-            ],
-        });
-        localDataSource.add(line);
+        // const lineStyleBuilder = new LineStyleBuilder({
+        //     width: 6,
+        //     endType: LineEndType.SQUARE,
+        //     joinType: LineJointType.ROUND,
+        //     color: '#0000ff',
+        // });
+        // const line = new Line({
+        //     projection: mapView.projection,
+        //     styleBuilder: lineStyleBuilder,
+        //     positions: [
+        //         {
+        //             latitude: 45.1187104,
+        //             longitude: 5.6813257,
+        //         },
+        //         {
+        //             latitude: 45.1287104,
+        //             longitude: 5.3813257,
+        //         },
+        //         {
+        //             latitude: 45.1887104,
+        //             longitude: 5.6813257,
+        //         },
+        //     ],
+        // });
+        // localDataSource.add(line);
 
         // console.log("layer2 opacity", layer2.opacity);
     }

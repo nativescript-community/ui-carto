@@ -5,25 +5,31 @@
     "author": "Martin Guillon <martin.guillon@akylas.fr>",
     "license": "MIT",
     "dependencies": {
-        "@nativescript/core": "8.0.8",
+        "@nativescript-community/perms": "2.2.0",
         "@nativescript-community/ui-carto": "file:../plugin",
-        "@nativescript-community/ui-collectionview": "^4.0.42",
-        "nativescript-perms": "2.0.11",
+        "@nativescript-community/ui-collectionview": "^4.0.47",
+        "@nativescript/core": "8.1.5",
         "nativescript-vue": "^2.9.0"
     },
     "devDependencies": {
-        "@babel/core": "~7.15.0",
-        "@nativescript/android": "8.0.0",
-        "@nativescript/ios": "8.0.0",
-        "@nativescript/types": "8.0.1",
-        "@nativescript/webpack": "beta",
-        "babel-loader": "~8.2.2",
+        "@babel/core": "~7.16.0",
+        "@nativescript/android": "8.1.1",
+        "@nativescript/ios": "6.5.4",
+        "@nativescript/types": "8.1.1",
+        "@nativescript/webpack": "5.0.1",
+        "babel-loader": "~8.2.3",
+        "eslint": "^8.2.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-vue": "^8.0.3",
         "nativescript-vue-template-compiler": "~2.9.0",
-        "typescript": "4.3.5",
+        "prettier": "^2.4.1",
+        "sass": "^1.43.4",
+        "tslib": "^2.3.1",
+        "typescript": "4.4.4",
         "vue": "^2.6.14",
         "vue-loader": "~15.9.8",
-        "vue-class-component": "^7.2.6",
-        "vue-property-decorator": "^9.1.2"
+        "vue-property-decorator": "^8.5.1"
     },
     "main": "app/main"
 }
