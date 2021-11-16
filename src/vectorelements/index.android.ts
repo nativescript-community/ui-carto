@@ -118,9 +118,7 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<com.carto.vectorelements.VectorElement, VectorElementOptions> {
-    createNative() {
-        return null;
-    }
+    
     buildStyle() {}
 }
 

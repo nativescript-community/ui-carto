@@ -125,9 +125,7 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElementOptions> {
-    createNative() {
-        return null;
-    }
+    
     buildStyle() {}
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {

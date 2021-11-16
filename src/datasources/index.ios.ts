@@ -1,7 +1,7 @@
 import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
 import { featureCollectionFromArgs, nativeProperty } from '..';
-import { FeatureCollection } from '../geometry/feature.ios';
-import { BaseNative } from "../BaseNative";
+import { FeatureCollection } from '../geometry/feature';
+import { BaseNative } from '../BaseNative';
 import { Projection } from '../projections';
 import { JSVariantToNative, jsonVariant } from '../utils';
 

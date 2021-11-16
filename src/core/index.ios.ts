@@ -137,41 +137,51 @@ export function toNativeScreenBounds(bounds: ScreenBounds) {
     return NTScreenBounds.alloc().init();
 }
 
-export abstract class NativeVector<T> {
-    native: any;
+export abstract class NativeVector<T, U = any> extends BaseNative<U, {}> {
+    constructor(native) {
+        super(null, native);
+    }
+    createNative(options) {
+        return null;
+    }
     size() {
+        //@ts-ignore
         return this.native.size();
     }
     public reserve(size: number) {
+        //@ts-ignore
         return this.native.reserve(size);
     }
+    //@ts-ignore
     public get(index: number): T {
+        //@ts-ignore
         return this.native.get(index);
     }
     public add(position: T) {
+        //@ts-ignore
         return this.native.add(position);
     }
     public capacity() {
+        //@ts-ignore
         return this.native.capacity();
     }
     public clear() {
+        //@ts-ignore
         return this.native.clear();
     }
     public isEmpty() {
+        //@ts-ignore
         return this.native.isEmpty();
     }
+    //@ts-ignore
     public set(index: number, position: T) {
+        //@ts-ignore
         return this.native.setVal(index, position);
     }
-    public getNative() {
-        return this.native;
-    }
 }
-export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos> {
-    native: NTMapPosVector;
-    constructor(native?) {
-        super();
-        this.native = native || NTMapPosVector.alloc().init();
+export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos, NTMapPosVector> {
+    createNativeView() {
+        return NTMapPosVector.alloc().init();
     }
 
     public add(position: NTMapPos | GenericMapPos<T>) {
@@ -194,11 +204,9 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos> 
         return result;
     }
 }
-export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPosVector> {
-    native: NTMapPosVectorVector;
-    constructor(native?) {
-        super();
-        this.native = native || NTMapPosVectorVector.alloc().init();
+export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPosVector, NTMapPosVectorVector> {
+    createNativeView() {
+        return NTMapPosVectorVector.alloc().init();
     }
     public add(position: NTMapPosVector | MapPosVector<T>) {
         if (position instanceof MapPosVector) {

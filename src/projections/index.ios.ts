@@ -18,7 +18,5 @@ export abstract class ProjectionClass<T extends NTProjection, U extends Projecti
 }
 
 export class Projection extends ProjectionClass<NTProjection, ProjectionOptions> {
-    createNative() {
-        return null;
-    }
+    
 }

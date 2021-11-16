@@ -5,6 +5,7 @@ import { Layer } from '../layers';
 // import { NativeVector } from '../index';
 import { nativeVectorToArray } from '../utils';
 import { ContentView } from '@nativescript/core';
+import { BaseNative } from '../BaseNative';
 
 let licenseKeyRegistered = false;
 export function setLicenseKeyRegistered(value: boolean) {
@@ -77,14 +78,14 @@ export function mapProperty(...args) {
     }
 }
 
-export class Layers<T extends any> {
-    constructor(private native: any) {}
+export class Layers<T extends any> extends BaseNative<any, {}> {
     count() {
         return this.native.count();
     }
     insert(index: number, layer: Layer<any, any>) {
         return this.native.insert(index, layer.getNative());
     }
+    //@ts-ignore
     set(index: number, layer: Layer<any, any>) {
         return this.native.set(index, layer.getNative());
     }
@@ -97,6 +98,7 @@ export class Layers<T extends any> {
     add(layer: Layer<any, any>) {
         return this.native.add(layer.getNative());
     }
+    //@ts-ignore
     get(index: number) {
         return this.native.get(index);
     }
@@ -114,9 +116,9 @@ export class Layers<T extends any> {
         return this.native.clear();
     }
 
-    public getNative() {
-        return this.native;
-    }
+    // public getNative() {
+    //     return this.native;
+    // }
 }
 
 @CSSType('CartoMap')

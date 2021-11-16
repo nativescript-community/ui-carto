@@ -234,6 +234,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 
     disposeNativeView(): void {
         this.mapView.setMapEventListener(null);
+        this.mapView.getLayers().clear();
         this.nativeProjection = null;
         super.disposeNativeView();
     }

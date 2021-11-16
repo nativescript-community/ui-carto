@@ -155,37 +155,44 @@ export function toNativeScreenBounds(bounds: ScreenBounds) {
     return new com.carto.core.ScreenBounds();
 }
 
-export abstract class NativeVector<T> {
-    native: any;
-    // constructor(size?: number) {
-    //     this.native = new T(size);
-    // }
+export abstract class NativeVector<T, U = T> extends BaseNative<U, {}> {
+    constructor(native) {
+        super(null, native);
+    }
+
     size() {
+        //@ts-ignore
         return this.native.size();
     }
     public reserve(size: number) {
+        //@ts-ignore
         return this.native.reserve(size);
     }
+    //@ts-ignore
     public get(index: number): T {
+        //@ts-ignore
         return this.native.get(index);
     }
     public add(position: T) {
+        //@ts-ignore
         return this.native.add(position);
     }
     public capacity() {
+        //@ts-ignore
         return this.native.capacity();
     }
     public clear() {
+        //@ts-ignore
         return this.native.clear();
     }
     public isEmpty() {
+        //@ts-ignore
         return this.native.isEmpty();
     }
+    //@ts-ignore
     public set(index: number, position: T) {
+        //@ts-ignore
         return this.native.set(index, position);
-    }
-    public getNative() {
-        return this.native;
     }
     toArray(): any[] {
         const result: T[] = [];
@@ -195,11 +202,9 @@ export abstract class NativeVector<T> {
         return result;
     }
 }
-export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPos> {
-    native: com.carto.core.MapPosVector;
-    constructor(native?) {
-        super();
-        this.native = native || new com.carto.core.MapPosVector();
+export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPos, com.carto.core.MapPosVector> {
+    createNative() {
+        return new com.carto.core.MapPosVector();
     }
     public add(position: com.carto.core.MapPos | GenericMapPos<T>) {
         if (position instanceof com.carto.core.MapPos) {
@@ -221,18 +226,19 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.
         return result;
     }
 }
-export class IntVector extends NativeVector<com.carto.core.IntVector> {
-    native: com.carto.core.IntVector;
-    constructor(native?) {
-        super();
-        this.native = native || new com.carto.core.IntVector();
+export class IntVector extends NativeVector<com.carto.core.IntVector, com.carto.core.IntVector> {
+    createNative() {
+        return new com.carto.core.IntVector();
     }
 }
-export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPosVector> {
-    native: com.carto.core.MapPosVectorVector;
-    constructor(native?) {
-        super();
-        this.native = native || new com.carto.core.MapPosVectorVector();
+export class DoubleVector extends NativeVector<com.carto.core.DoubleVector, com.carto.core.DoubleVector> {
+    createNative() {
+        return new com.carto.core.DoubleVector();
+    }
+}
+export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.core.MapPosVector, com.carto.core.MapPosVectorVector> {
+    createNative() {
+        return new com.carto.core.MapPosVectorVector();
     }
     public add(position: com.carto.core.MapPosVector | MapPosVector<T>) {
         if (position instanceof MapPosVector) {

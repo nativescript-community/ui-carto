@@ -18,7 +18,5 @@ export abstract class ProjectionClass<T extends com.carto.projections.Projection
 }
 
 export class Projection extends ProjectionClass<com.carto.projections.Projection, ProjectionOptions> {
-    createNative() {
-        return null;
-    }
+    
 }

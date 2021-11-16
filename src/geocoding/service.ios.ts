@@ -17,9 +17,11 @@ import {
     TomTomOnlineReverseGeocodingServiceOptions,
 } from './service';
 import { BaseGeocodingService } from './service.common';
-import { NativeVector, toNativeMapPos } from '../core';
+import { toNativeMapPos } from '../core';
 import { FeatureCollection } from '../geometry/feature';
 import { nativeProperty } from '..';
+import { BaseNative } from '../BaseNative';
+import { NativeVector } from '../core/index.ios';
 
 export abstract class GeocodingService<T extends NTGeocodingService, U extends GeocodingServiceOptions> extends BaseGeocodingService<T, U> {
     createNative(options: GeocodingServiceOptions) {
@@ -52,8 +54,10 @@ export abstract class ReverseGeocodingService<T extends NTReverseGeocodingServic
         callback(null, result);
     }
 }
-export class GeocodingResult implements IGeocodingResult {
-    constructor(private native: NTGeocodingResult) {}
+export class GeocodingResult extends BaseNative<NTGeocodingResult, {}> implements IGeocodingResult {
+    constructor(native) {
+        super(null, native);
+    }
     getAddress() {
         return this.native.getAddress();
         // return {
@@ -76,10 +80,7 @@ export class GeocodingResult implements IGeocodingResult {
     }
 }
 
-export class GeocodingResultVector extends NativeVector<GeocodingResult> {
-    constructor(public native: NTGeocodingResultVector) {
-        super();
-    }
+export class GeocodingResultVector extends NativeVector<GeocodingResult, NTGeocodingResultVector> {
     public get(index: number) {
         return new GeocodingResult(this.native.get(index));
     }

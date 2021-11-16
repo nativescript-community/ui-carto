@@ -1,5 +1,4 @@
 import { mapPosVectorFromArgs, nativeProperty } from '..';
-import { NativeVector } from '../core';
 import {
     CartoOnlineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
@@ -15,6 +14,7 @@ import {
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
+import { NativeVector } from '../core/index.ios';
 
 export enum RoutingAction {
     HEAD_ON = NTRoutingAction.T_ROUTING_ACTION_HEAD_ON,
@@ -55,13 +55,7 @@ abstract class RoutingService<T extends NTRoutingService, U extends RoutingServi
     }
 }
 
-export class RoutingInstructionVector extends NativeVector<RoutingInstruction> {
-    native: NTRoutingInstructionVector;
-    constructor(native: NTRoutingInstructionVector) {
-        super();
-        this.native = native;
-    }
-}
+export class RoutingInstructionVector extends NativeVector<RoutingInstruction, NTRoutingInstructionVector> {}
 
 class PackageManagerRoutingService extends RoutingService<NTPackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
     createNative(options: PackageManagerRoutingServiceOptions) {

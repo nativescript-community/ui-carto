@@ -1,4 +1,4 @@
-import { NativeVector, toNativeMapPos } from '../core';
+import { toNativeMapPos } from '../core';
 import { FeatureCollection } from '../geometry/feature';
 import {
     GeocodingRequest,
@@ -19,6 +19,8 @@ import {
 } from './service';
 import { nativeProperty } from '..';
 import { BaseGeocodingService } from './service.common';
+import { BaseNative } from '../BaseNative';
+import { NativeVector } from '../core/index.android';
 
 
 
@@ -60,8 +62,10 @@ export abstract class ReverseGeocodingService<T extends com.akylas.carto.additio
     }
 }
 
-export class GeocodingResult implements IGeocodingResult {
-    constructor(private native: com.carto.geocoding.GeocodingResult) {}
+export class GeocodingResult extends BaseNative<com.carto.geocoding.GeocodingResult, {}> implements IGeocodingResult {
+    constructor(native) {
+        super(null, native);
+    }
     getAddress() {
         return this.native.getAddress();
         // return {
@@ -84,11 +88,8 @@ export class GeocodingResult implements IGeocodingResult {
     }
 }
 
-export class GeocodingResultVector extends NativeVector<GeocodingResult> {
-    constructor(public native: com.carto.geocoding.GeocodingResultVector) {
-        super();
-    }
-    public get(index: number)  {
+export class GeocodingResultVector extends NativeVector<GeocodingResult, com.carto.geocoding.GeocodingResultVector> {
+    public get(index: number) {
         return new GeocodingResult(this.native.get(index));
     }
 }

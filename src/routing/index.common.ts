@@ -1,11 +1,13 @@
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { RouteMatchingResult as IRouteMatchingResult, RoutingResult as IRoutingResult, RoutingInstructionVector, RoutingServiceOptions } from '.';
 import { Projection } from '../projections';
 import { MapPosVector } from '../core';
 export abstract class BaseRoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {}
 
-export class RoutingResult implements IRoutingResult {
-    constructor(private native: any) {}
+export class RoutingResult extends BaseNative<any, {}> implements IRoutingResult {
+    constructor(native) {
+        super(null, native);
+    }
     getProjection() {
         return new Projection(this.native.getProjection());
     }
@@ -23,8 +25,10 @@ export class RoutingResult implements IRoutingResult {
     }
 }
 
-export class RouteMatchingResult implements IRouteMatchingResult {
-    constructor(private native: any) {}
+export class RouteMatchingResult extends BaseNative<any, {}> implements IRouteMatchingResult {
+    constructor(native) {
+        super(null, native);
+    }
     getProjection() {
         return new Projection(this.native.getProjection());
     }
