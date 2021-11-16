@@ -14,12 +14,12 @@ export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyl
     @nativeColorProperty color: Color | string;
     @nativeProperty clickSize: number;
 
-    _buildStyle: NTPointStyle;
+    mBuildStyle: NTPointStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

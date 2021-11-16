@@ -7,7 +7,7 @@ import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { Geometry, LineGeometry } from '../geometry';
+export { BaseVectorElementStyleBuilder };
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {
@@ -166,6 +166,6 @@ export abstract class BillboardStyleBuilder<T extends com.carto.styles.Billboard
     @nativeProperty attachAnchorPointX: number;
     @nativeProperty attachAnchorPointY: number;
 
-    _buildStyle: com.carto.styles.Style;
+    mBuildStyle: com.carto.styles.Style;
     abstract buildStyle();
 }

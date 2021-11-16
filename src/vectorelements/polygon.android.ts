@@ -19,7 +19,7 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto
         this.options.lineStyleBuilder = value;
         if (this.native) {
             this.native.setLineStyle(this.buildLineStyle());
-            this._buildStyle = null;
+            this.mBuildStyle = null;
         }
     }
     buildLineStyle() {
@@ -38,12 +38,12 @@ export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<com.carto
         return style;
     }
 
-    _buildStyle: com.carto.styles.PolygonStyle;
+    mBuildStyle: com.carto.styles.PolygonStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

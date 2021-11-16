@@ -7,12 +7,12 @@ export class NMLModelStyleBuilder extends BaseVectorElementStyleBuilder<NTNMLMod
         return NTBalloonPopupStyleBuilder.alloc().init();
     }
 
-    _buildStyle: NTNMLModelStyle;
+    mBuildStyle: NTNMLModelStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

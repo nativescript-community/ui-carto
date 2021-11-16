@@ -40,12 +40,12 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
     @nativeProperty clickWidth: number;
     @nativeProperty stretchFactor: number;
 
-    _buildStyle: NTLineStyle;
+    mBuildStyle: NTLineStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle();
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

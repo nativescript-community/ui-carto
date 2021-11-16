@@ -6,6 +6,7 @@ import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
+export { BaseVectorElementStyleBuilder };
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {
@@ -171,6 +172,6 @@ export abstract class BillboardStyleBuilder<T extends NTBillboardStyleBuilder, U
     @nativeProperty attachAnchorPointX: number;
     @nativeProperty attachAnchorPointY: number;
 
-    _buildStyle: NTStyle;
+    mBuildStyle: NTStyle;
     abstract buildStyle();
 }

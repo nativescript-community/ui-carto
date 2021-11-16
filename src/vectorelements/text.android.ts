@@ -26,12 +26,12 @@ export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.Tex
     @nativeProperty anchorPointY: number;
     @nativeProperty flippable: boolean;
 
-    _buildStyle: com.carto.styles.TextStyle;
+    mBuildStyle: com.carto.styles.TextStyle;
     buildStyle() {
-        if (!this._buildStyle) {
-            this._buildStyle = this.getNative().buildStyle() as com.carto.styles.TextStyle;
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle() as com.carto.styles.TextStyle;
         }
-        return this._buildStyle;
+        return this.mBuildStyle;
     }
 }
 

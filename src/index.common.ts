@@ -34,7 +34,7 @@ function createSetter(key, options: NativePropertyOptions) {
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
             this.native[nativeSetterName](actualVal);
-            this._buildStyle = null;
+            this.mBuildStyle = null;
         }
     };
 }
