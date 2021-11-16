@@ -26,7 +26,7 @@ export default class BaseMaps extends BaseVueComponent {
         const mapView = e.object as CartoMap;
         console.log('map ready!', this.currentLayerType);
 
-        this.setCurrentLayer(this.currentLayerType);
+        // this.setCurrentLayer(this.currentLayerType);
         const options = mapView.getOptions();
         // options.setWatermarkPadding(toNativeScreenPos({ x: 80, y: 0 }));
         options.setRestrictedPanning(true);
