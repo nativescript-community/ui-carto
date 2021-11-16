@@ -147,18 +147,25 @@ class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
     }
 }
 @NativeClass
-class MapView extends NTMapView {
-    owner: CartoMap;
+class NCartoMapView<T = DefaultLatLonKeys> extends NTMapView {
+    owner: WeakRef<CartoMap<T>>;
+    public static initWithOwner<T = DefaultLatLonKeys>(owner: WeakRef<CartoMap<T>>): NCartoMapView<T> {
+        const view = NCartoMapView.new() as NCartoMapView<T>;
+        view.owner = owner;
+        return view;
+    }
     touchesBeganWithEvent(touches, event) {
         super.touchesBeganWithEvent(touches, event);
-        if (this.owner) {
-            this.owner.userAction = false;
+        const owner = this.owner?.get();
+        if (owner) {
+            owner.userAction = false;
         }
     }
     touchesMovedWithEvent(touches, event) {
         super.touchesMovedWithEvent(touches, event);
-        if (this.owner) {
-            this.owner.userAction = true;
+        const owner = this.owner?.get();
+        if (owner) {
+            owner.userAction = true;
         }
     }
     // touchesCancelledWithEvent(touches, event) {
@@ -178,7 +185,7 @@ class MapView extends NTMapView {
 export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     static projection = new EPSG4326();
     nativeProjection: NTProjection;
-    _projection: IProjection;
+    mProjection: IProjection;
     userAction = false;
     constructor() {
         super();
@@ -197,18 +204,18 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         return this.nativeViewProtected as NTMapView;
     }
     get projection() {
-        return this._projection;
+        return this.mProjection;
     }
     set projection(proj: IProjection) {
-        this._projection = proj;
-        this.nativeProjection = this._projection.getNative();
+        this.mProjection = proj;
+        this.nativeProjection = this.mProjection.getNative();
         if (this.nativeViewProtected) {
             this.mapView.getOptions().setBaseProjection(this.nativeProjection);
         }
     }
 
     public createNativeView(): Object {
-        return MapView.alloc().init();
+        return NCartoMapView.initWithOwner<T>(new WeakRef(this));
     }
 
     getOptions() {
@@ -217,27 +224,17 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         }
         return null;
     }
-
-    /**
-     * Initializes properties/listeners of the native view.
-     */
     initNativeView(): void {
-        // Attach the owner to nativeView.
-        // When nativeView is tapped we get the owning JS object through this field.
-        this.nativeView.owner = this;
         super.initNativeView();
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
         this.mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
-
-        // const options = this.nativeViewProtected.getOptions();
     }
 
     disposeNativeView(): void {
-        // Remove reference from native listener to this instance.
         this.mapView.setMapEventListener(null);
-        this.nativeView.owner = null;
+        this.nativeProjection = null;
         super.disposeNativeView();
     }
 
