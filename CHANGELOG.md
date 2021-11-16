@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.6](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.5...v1.8.6) (2021-11-16)
+
+
+### Bug Fixes
+
+* regression fix ([ec6b7b7](https://github.com/farfromrefug/nativescript-carto/commit/ec6b7b7745e47edac4823dfe7298085d51be609e))
+
+
+
+
+
 ## [1.8.5](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.4...v1.8.5) (2021-11-10)
 
 
