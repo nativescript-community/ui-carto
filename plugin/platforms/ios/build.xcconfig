@@ -1,1 +1,1 @@
-OTHER_LDFLAGS=$(inherited) -framework GLKit -framework OpenGLES
+OTHER_LDFLAGS=$(inherited) -framework GLKit -framework OpenGLES -framework CoreText
