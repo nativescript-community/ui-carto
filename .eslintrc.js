@@ -1,20 +1,22 @@
 module.exports = {
     extends: ['plugin:prettier/recommended', 'plugin:vue/essential'],
-
+    plugins: ['prettier', '@typescript-eslint', '@nativescript'],
     parser: 'vue-eslint-parser',
     parserOptions: {
         ecmaVersion: 2019,
         sourceType: 'module',
+        extraFileExtensions: ['.vue', '.svelte'],
         parser: '@typescript-eslint/parser',
         project: 'tsconfig.eslint.json',
-        extraFileExtensions: ['.vue'],
         warnOnUnsupportedTypeScriptVersion: false,
         tsconfigRootDir: __dirname
     },
-    plugins: ['prettier', '@typescript-eslint'],
     rules: {
         'prettier/prettier': 'warn',
         'vue/custom-event-name-casing': 'off',
+        '@nativescript/no-nativescript-angular-imports': 'warn',
+        '@nativescript/no-tns-core-modules-imports': 'warn',
+        '@nativescript/no-duplicate-ns-imports': 'warn',
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/array-type': 'error',
         '@typescript-eslint/await-thenable': 'error',
@@ -28,7 +30,19 @@ module.exports = {
                 accessibility: 'explicit'
             }
         ],
-        '@typescript-eslint/indent': 'off',
+        '@typescript-eslint/indent': [
+            'error',
+            4,
+            {
+                FunctionDeclaration: {
+                    parameters: 'first'
+                },
+                FunctionExpression: {
+                    parameters: 'first'
+                },
+                SwitchCase: 1
+            }
+        ],
         '@typescript-eslint/interface-name-prefix': 'off',
         '@typescript-eslint/member-delimiter-style': 'error',
         '@typescript-eslint/member-ordering': 'off',
@@ -114,7 +128,7 @@ module.exports = {
                     'debug',
                     'dirxml',
                     'error',
-                    'groupcollapse',
+                    'groupCollapsed',
                     'Console',
                     'profile',
                     'profileEnd',

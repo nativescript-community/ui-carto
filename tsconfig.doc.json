@@ -1,7 +1,6 @@
 {
     "extends": "./tsconfig",
     "compilerOptions": {
-        "sourceRoot": null,
         "sourceMap": false,
         "plugins": []
     },

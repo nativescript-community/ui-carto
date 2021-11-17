@@ -1,6 +1,0 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-  xmlns:carto="nativescript-carto">
-  <GridLayout backgroundColor="red">
-    <carto:CartoMap id="mapView" backgroundColor="green" zoom="14" center="45.012486,6.116902"/>
-  </GridLayout>
-</Page>

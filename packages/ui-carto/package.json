@@ -1,0 +1,54 @@
+{
+    "name": "@nativescript-community/ui-carto",
+    "version": "1.4.8",
+    "description": "Nativescript plugin for Carto Mobile SDK",
+    "main": "index",
+    "typings": "index.d.ts",
+    "sideEffects": false,
+    "scripts": {
+        "build": "npm run tsc && npm run readme",
+        "build.all": "npm run build && npm run build.angular",
+        "readme": "../../node_modules/.bin/readme generate -c ../../tools/readme/blueprint.json",
+        "tsc": "../../node_modules/.bin/cpy '**/*.d.ts' '../../packages/ui-carto' --parents --cwd=../../src/ui-carto && ../../node_modules/.bin/tsc -skipLibCheck -d",
+        "clean": "../../node_modules/.bin/rimraf ./*.d.ts ./*.js ./*.js.map"
+    },
+    "nativescript": {
+        "platforms": {
+            "android": "6.0.0",
+            "ios": "6.0.0"
+        }
+    },
+    "keywords": [
+        "NativeScript",
+        "JavaScript",
+        "Android",
+        "iOS",
+        "map",
+        "carto",
+        "ng",
+        "angular",
+        "vue",
+        "vue.js",
+        "react",
+        "svelte",
+        "nativescript-angular",
+        "nativescript-vue",
+        "preview|https://raw.githubusercontent.com/nativescript-community/ui-carto/master/images/demo-ios.gif|iOS Demo",
+        "preview|https://raw.githubusercontent.com/nativescript-community/ui-carto/master/images/demo-android.gif|Android Demo"
+    ],
+    "author": {
+        "name": "Martin Guillon",
+        "email": "martin@akylas.fr"
+    },
+    "contributors": [
+    ],
+    "bugs": {
+        "url": "https://github.com/nativescript-community/ui-carto/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nativescript-community/ui-carto"
+    },
+    "license": "Apache-2.0",
+    "readmeFilename": "README.md"
+}

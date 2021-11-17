@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "../../src/ui-carto",
+        "outDir": "./"
+    },
+    "include": ["../../src/ui-carto/**/*", "../../references.d.ts", "../../src/references.d.ts"],
+    "exclude": ["../../src/ui-pager/angular/**"]
+}
