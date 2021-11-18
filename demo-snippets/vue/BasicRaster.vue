@@ -5,8 +5,8 @@
         </ActionBar>
         <GridLayout orientation="vertical" rows="*,50">
             <!-- <BottomSheet :steps="[0, 100]"> -->
-                <CartoMap ref="mapView" row="0" zoom="15" width="100%" height="100%" @mapReady="onMapReady" focusPos="45.19199, 5.7190" />
-                <!-- <GridLayout ref="bottomSheet" :height="100" /> -->
+            <CartoMap ref="mapView" row="0" zoom="15" width="100%" height="100%" @mapReady="onMapReady" focusPos="45.19199, 5.7190" />
+            <!-- <GridLayout ref="bottomSheet" :height="100" /> -->
             <!-- </BottomSheet> -->
         </GridLayout>
     </Page>
@@ -24,9 +24,9 @@ export default class BasicRaster extends Vue {
     title: string;
 
     destroyed() {
-        setTimeout(function(){
+        setTimeout(function () {
             __collect();
-        }, 2000)
+        }, 2000);
     }
     onMapReady(e: MapEventData) {
         const mapView = e.object as CartoMap;

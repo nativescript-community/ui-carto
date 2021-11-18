@@ -9,7 +9,7 @@ import {
     fromNativeScreenPos,
     toNativeMapPos,
     toNativeScreenBounds,
-    toNativeScreenPos,
+    toNativeScreenPos
 } from '../core';
 import { TileLayer } from '../layers';
 import { EPSG4326 } from '../projections/epsg4326';
@@ -24,12 +24,12 @@ export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableE
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
-    RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL,
+    RENDER_PROJECTION_MODE_SPHERICAL = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL
 }
 export enum PanningMode {
     PANNING_MODE_FREE = NTPanningMode.T_PANNING_MODE_FREE,
     PANNING_MODE_STICKY = NTPanningMode.T_PANNING_MODE_STICKY,
-    PANNING_MODE_STICKY_FINAL = NTPanningMode.T_PANNING_MODE_STICKY_FINAL,
+    PANNING_MODE_STICKY_FINAL = NTPanningMode.T_PANNING_MODE_STICKY_FINAL
 }
 
 let licenseKey: string;
@@ -87,7 +87,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
             owner.notify({
                 eventName: MapMovedEvent,
                 object: owner,
-                data: { userAction: owner.userAction },
+                data: { userAction: owner.userAction }
             });
         }
     }
@@ -114,7 +114,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                         return {
                             get duration() {
                                 return (mapClickInfo as any).getClickInfo().getDuration();
-                            },
+                            }
                         };
                     },
                     get clickType() {
@@ -123,8 +123,8 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                     get position() {
                         return fromNativeMapPos(mapClickInfo.getClickPos());
                     },
-                    ios: mapClickInfo,
-                },
+                    ios: mapClickInfo
+                }
             });
         }
     }

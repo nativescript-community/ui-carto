@@ -12,7 +12,7 @@ import {
     fromNativeScreenPos,
     toNativeMapPos,
     toNativeScreenBounds,
-    toNativeScreenPos,
+    toNativeScreenPos
 } from '../core';
 import { TileLayer } from '../layers';
 import { IProjection } from '../projections';
@@ -31,7 +31,7 @@ export const RenderProjectionMode = {
     },
     get RENDER_PROJECTION_MODE_SPHERICAL() {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_SPHERICAL;
-    },
+    }
 };
 export const PanningMode = {
     get PANNING_MODE_FREE() {
@@ -42,7 +42,7 @@ export const PanningMode = {
     },
     get PANNING_MODE_STICKY_FINAL() {
         return com.carto.components.PanningMode.PANNING_MODE_STICKY_FINAL;
-    },
+    }
 };
 
 let licenseKey: string;
@@ -63,7 +63,7 @@ export const registerLicense = profile('registerLicense', (value: string, callba
                     }
                     setLicenseKeyRegistered(result);
                     callback(result);
-                },
+                }
             })
         );
     } else {
@@ -155,7 +155,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                             return {
                                 get duration() {
                                     return mapClickInfo.getClickInfo().getDuration();
-                                },
+                                }
                             };
                         },
                         get clickType() {
@@ -163,10 +163,10 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                         },
                         get position() {
                             return fromNativeMapPos(mapClickInfo.getClickPos());
-                        },
+                        }
                     });
                 }
-            },
+            }
         });
         this.nativeViewProtected.listener = listener;
         this.nativeViewProtected.setMapEventListener(listener);
@@ -314,7 +314,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                     new com.akylas.carto.additions.RendererCaptureListener.Listener({
                         onMapRendered(bitmap: com.carto.graphics.Bitmap) {
                             resolve(new ImageSource(com.carto.utils.BitmapUtils.createAndroidBitmapFromBitmap(bitmap)));
-                        },
+                        }
                     })
                 ),
                 wait
@@ -326,6 +326,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 export const useTextureViewProperty = new Property<CartoMap, boolean>({
     defaultValue: false,
     name: 'useTextureView',
-    valueConverter: booleanConverter,
+    valueConverter: booleanConverter
 });
 useTextureViewProperty.register(CartoMap);
