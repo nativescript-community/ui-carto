@@ -11,7 +11,7 @@ export const CartoMapStyle = {
     },
     get DARKMATTER() {
         return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER;
-    },
+    }
 };
 
 export const ClickType = {
@@ -26,7 +26,7 @@ export const ClickType = {
     },
     get DUAL() {
         return com.carto.ui.ClickType.CLICK_TYPE_DUAL.swigValue();
-    },
+    }
 };
 
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.MapBounds, {}> {
@@ -71,7 +71,7 @@ export function fromNativeMapPos<T = DefaultLatLonKeys>(position: com.carto.core
     return {
         [LatitudeKey]: position.getY(),
         [LongitudeKey]: position.getX(),
-        [AltitudeKey]: position.getZ(),
+        [AltitudeKey]: position.getZ()
     } as GenericMapPos<T>;
 }
 export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T> | com.carto.core.MapPos, ignoreAltitude = false) {
@@ -91,7 +91,7 @@ export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>
 export function fromNativeScreenPos(position: com.carto.core.ScreenPos) {
     return {
         x: position.getY(),
-        y: position.getX(),
+        y: position.getX()
     } as ScreenPos;
 }
 export function toNativeScreenPos(position: ScreenPos) {
@@ -115,7 +115,7 @@ export function fromNativeMapVec(value: com.carto.core.MapVec) {
     return {
         x: value.getX(),
         y: value.getY(),
-        z: value.getZ(),
+        z: value.getZ()
     } as MapVec;
 }
 
@@ -142,7 +142,7 @@ export function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>) {
 export function fromNativeScreenBounds(bounds: com.carto.core.ScreenBounds) {
     return {
         min: fromNativeScreenPos(bounds.getMin()),
-        max: fromNativeScreenPos(bounds.getMax()),
+        max: fromNativeScreenPos(bounds.getMax())
     } as ScreenBounds;
 }
 export function toNativeScreenBounds(bounds: ScreenBounds) {

@@ -12,7 +12,7 @@ export class FeatureCollection<T extends NTFeatureCollection> extends BaseNative
         // const nGeo = nResult.getGeometry();
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: nResult.getGeometry() as any,
+            geometry: nResult.getGeometry() as any
         } as Feature;
     }
     getGeometry(index: number) {
@@ -42,11 +42,11 @@ export class FeatureCollection<T extends NTFeatureCollection> extends BaseNative
         return new MapBounds(
             {
                 [LatitudeKey]: minLat,
-                [LongitudeKey]: minLon,
+                [LongitudeKey]: minLon
             },
             {
                 [LatitudeKey]: maxLat,
-                [LongitudeKey]: maxLon,
+                [LongitudeKey]: maxLon
             }
         );
     }
@@ -59,7 +59,7 @@ export class VectorTileFeatureCollection extends FeatureCollection<NTVectorTileF
             properties: nativeVariantToJS(nResult.getProperties()),
             geometry: nResult.getGeometry() as any,
             id: nResult.getId(),
-            layerName: nResult.getLayerName(),
+            layerName: nResult.getLayerName()
         } as VectorTileFeature;
     }
 }

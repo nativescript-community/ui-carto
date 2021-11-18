@@ -9,12 +9,12 @@ declare enum LineJointType {
     FaceCamera,
     BEVEL,
     MITER,
-    ROUND,
+    ROUND
 }
 declare enum LineEndType {
     ROUND,
     SQUARE,
-    NONE,
+    NONE
 }
 export class LineStyleBuilderOptions extends VectorElementOptions {
     color?: string | Color;

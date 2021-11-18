@@ -21,8 +21,8 @@ export function nativeColorProperty(...args) {
                 toNative(value): NTColor {
                     const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return NTColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a);
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -39,8 +39,8 @@ export function nativeNColorProperty(...args) {
                 toNative(value): UIColor {
                     const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return theColor.ios;
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -58,8 +58,8 @@ export function nativeFontProperty(...args) {
                 },
                 toNative(value: Font) {
                     return value?.getUIFont(UIFont.systemFontOfSize(17));
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -76,8 +76,8 @@ export function nativeEnumProperty(...args) {
                 },
                 toNative(value) {
                     return value;
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -95,8 +95,8 @@ export function nativeCartoImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return NTBitmapUtils.createBitmapFromUIImage(value.ios as UIImage);
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -114,8 +114,8 @@ export function nativeImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return value?.ios as UIImage;
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -195,8 +195,8 @@ export function nativeMapVecProperty(...args) {
         {
             converter: {
                 fromNative: fromNativeMapVec,
-                toNative: toNativeMapVec,
-            },
+                toNative: toNativeMapVec
+            }
         },
         ...args
     );

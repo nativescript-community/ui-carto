@@ -7,7 +7,7 @@ import { DefaultLatLonKeys, GenericMapPos, IntVector, MapPos, MapPosVector } fro
 export enum RasterTileFilterMode {
     RASTER_TILE_FILTER_MODE_NEAREST,
     RASTER_TILE_FILTER_MODE_BILINEAR,
-    RASTER_TILE_FILTER_MODE_BICUBIC,
+    RASTER_TILE_FILTER_MODE_BICUBIC
 }
 
 export interface RasterTileClickInfo<T = DefaultLatLonKeys> {

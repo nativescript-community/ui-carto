@@ -1,7 +1,7 @@
 import { Geometry } from '.';
 
 export interface Feature<T = DefaultLatLonKeys> {
-    properties: {[k: string]: any};
+    properties: { [k: string]: any };
     geometry: Geometry<T>;
     // getProperties(): any;
 
@@ -21,7 +21,7 @@ export class FeatureCollection<T = DefaultLatLonKeys> {
     getFeatureCount(): number;
     readonly featureCount: number;
     getNative();
-    getBounds(): MapBounds<T>
+    getBounds(): MapBounds<T>;
 }
 export class VectorTileFeatureCollection<T = DefaultLatLonKeys> extends FeatureCollection {
     getFeature(index: number): VectorTileFeature<T>;

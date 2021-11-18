@@ -14,7 +14,7 @@ import {
     ReverseGeocodingRequest,
     ReverseGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions,
-    TomTomOnlineReverseGeocodingServiceOptions,
+    TomTomOnlineReverseGeocodingServiceOptions
 } from './service';
 import { BaseGeocodingService } from './service.common';
 import { toNativeMapPos } from '../core';

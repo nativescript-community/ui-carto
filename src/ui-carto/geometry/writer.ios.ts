@@ -1,4 +1,4 @@
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { Projection } from '../projections';
 import { MapPosVector } from '../core';
 import { featureCollectionFromArgs, mapPosVectorFromArgs, nativeProperty } from '..';

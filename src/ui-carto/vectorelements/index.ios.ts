@@ -1,6 +1,6 @@
 import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from '.';
 import { nativeProperty } from '../index.common';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
@@ -125,7 +125,6 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElementOptions> {
-    
     buildStyle() {}
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {

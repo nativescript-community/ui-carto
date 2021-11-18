@@ -1,7 +1,7 @@
 import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from '.';
 // import { BaseVectorElement } from './vectorelements.common';
 import { nativeProperty } from '../index.common';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
@@ -18,7 +18,7 @@ export const BillboardOrientation = {
     },
     get GROUND() {
         return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.swigValue();
-    },
+    }
 };
 
 export const BillboardScaling = {
@@ -30,7 +30,7 @@ export const BillboardScaling = {
     },
     get WORLD_SIZE() {
         return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE.swigValue();
-    },
+    }
 };
 
 export abstract class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
@@ -118,7 +118,6 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<com.carto.vectorelements.VectorElement, VectorElementOptions> {
-    
     buildStyle() {}
 }
 

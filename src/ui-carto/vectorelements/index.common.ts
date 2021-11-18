@@ -1,4 +1,4 @@
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { VectorElementStyleBuilderOptions } from '.';
 
 export function styleBuilderProperty(target: any, propertyKey?, desc?: PropertyDescriptor): any {
@@ -9,7 +9,7 @@ export function styleBuilderProperty(target: any, propertyKey?, desc?: PropertyD
         set(value) {
             this.options.styleBuilder[propertyKey] = value;
             this.rebuildStyle();
-        },
+        }
     });
 }
 
@@ -22,7 +22,7 @@ export function lineStyleBuilderProperty(target: any, propertyKey?, desc?: Prope
         set(value) {
             this.options.styleBuilder.lineStyleBuilder[realKey] = value;
             this.rebuildLineStyle();
-        },
+        }
     });
 }
 

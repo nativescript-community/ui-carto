@@ -6,13 +6,13 @@ import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 declare enum BillboardOrientation {
     FACE_CAMERA,
     FACE_CAMERA_GROUND,
-    GROUND,
+    GROUND
 }
 
 declare enum BillboardScaling {
     CONST_SCREEN_SIZE,
     SCREEN_SIZE,
-    WORLD_SIZE,
+    WORLD_SIZE
 }
 
 export class AnimationStyle {

@@ -62,7 +62,7 @@ function mapPropertyGenerator(target: Object, key: string, options?: MapProperty
         get: createGetter(key, options),
         set: createSetter(key, options),
         enumerable: true,
-        configurable: true,
+        configurable: true
     });
 }
 export function mapProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -126,17 +126,17 @@ export abstract class CartoViewBase extends ContentView {
     public mapReady = false;
     nativeProjection: any;
     @mapProperty({
-        getConverter: (value) => fromNativeMapPos(value),
+        getConverter: (value) => fromNativeMapPos(value)
     })
     focusPos: MapPos;
     @mapProperty zoom: number;
     @mapProperty({
         ios: {
-            nativeGetterName: 'getRotation',
+            nativeGetterName: 'getRotation'
         },
         android: {
-            nativeGetterName: 'getMapRotation',
-        },
+            nativeGetterName: 'getMapRotation'
+        }
     })
     bearing: number;
     @mapProperty tilt: number;
@@ -149,7 +149,7 @@ export abstract class CartoViewBase extends ContentView {
             this.notify({
                 eventName,
                 object: this,
-                data,
+                data
             });
         }
     }

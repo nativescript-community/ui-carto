@@ -11,7 +11,7 @@ export class FeatureCollection<T extends com.carto.geometry.FeatureCollection> e
         const nResult = this.native.getFeature(index);
         return {
             properties: nativeVariantToJS(nResult.getProperties()),
-            geometry: nResult.getGeometry() as any,
+            geometry: nResult.getGeometry() as any
         } as Feature;
     }
     getGeometry(index: number) {
@@ -40,11 +40,11 @@ export class FeatureCollection<T extends com.carto.geometry.FeatureCollection> e
         return new MapBounds(
             {
                 [LatitudeKey]: maxLat,
-                [LongitudeKey]: maxLon,
+                [LongitudeKey]: maxLon
             },
             {
                 [LatitudeKey]: minLat,
-                [LongitudeKey]: minLon,
+                [LongitudeKey]: minLon
             }
         );
     }

@@ -4,7 +4,7 @@ import { nativeProperty } from '..';
 
 export class HTTPTileDataSource extends TileDataSource<NTHTTPTileDataSource, HTTPTileDataSourceOptions> {
     @nativeProperty({
-        nativeGetterName: 'isTMSScheme',
+        nativeGetterName: 'isTMSScheme'
     })
     TMSScheme: boolean;
     @nativeProperty maxAgeHeaderCheck: boolean;

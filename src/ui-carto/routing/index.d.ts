@@ -21,7 +21,7 @@ declare enum RoutingAction {
     LEAVE_AGAINST_ALLOWED_DIRECTION,
     GO_UP,
     GO_DOWN,
-    WAIT,
+    WAIT
 }
 export interface RoutingRequest<T = DefaultLatLonKeys> {
     projection: Projection<T>;

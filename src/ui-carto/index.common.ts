@@ -44,7 +44,7 @@ function nativePropertyGenerator(target: Object, key: string, options?: NativePr
         get: createGetter(key, options),
         set: createSetter(key, options),
         enumerable: true,
-        configurable: true,
+        configurable: true
     });
 }
 export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -69,8 +69,8 @@ export function nativeMapRangeProperty(...args) {
         {
             converter: {
                 fromNative: fromNativeMapRange,
-                toNative: toNativeMapRange,
-            },
+                toNative: toNativeMapRange
+            }
         },
         ...args
     );
@@ -88,10 +88,10 @@ export function nonenumerable(target: any, name: string, desc?: any) {
             Object.defineProperty(this, name, {
                 value,
                 writable: true,
-                configurable: true,
+                configurable: true
             });
         },
-        configurable: true,
+        configurable: true
     });
 }
 

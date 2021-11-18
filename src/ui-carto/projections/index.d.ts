@@ -1,4 +1,4 @@
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { EPSG3857Options } from './epsg3857';
 import { MapPos } from '../core';
 

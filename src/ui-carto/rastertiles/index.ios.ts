@@ -1,5 +1,5 @@
 import { nativeProperty } from '../index.common';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { MapPos, toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 // import { MapBoxElevationDataDecoderOptions, TerrariumElevationDataDecoderOptions } from '.';
