@@ -7,7 +7,7 @@ import { Projection } from '../projections';
 export enum TileSubstitutionPolicy {
     TILE_SUBSTITUTION_POLICY_ALL = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_ALL,
     TILE_SUBSTITUTION_POLICY_VISIBLE = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_VISIBLE,
-    TILE_SUBSTITUTION_POLICY_NONE = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_NONE,
+    TILE_SUBSTITUTION_POLICY_NONE = NTTileSubstitutionPolicy.T_TILE_SUBSTITUTION_POLICY_NONE
 }
 export abstract class Layer<T extends NTLayer, U extends LayerOptions> extends BaseLayer<T, U> {
     get visibleZoomRange() {
@@ -32,6 +32,22 @@ export abstract class TileLayer<T extends NTTileLayer, U extends TileLayerOption
     @nativeProperty maxUnderzoomLevel: number;
     @nativeProperty tileSubstitutionPolicy: TileSubstitutionPolicy;
 
+    get dataSource() {
+        if (this.options.dataSource) {
+            return this.options.dataSource;
+        }
+        return new TileDataSource<any, any>(undefined, this.getNative().getDataSource());
+    }
+    set dataSource(value) {
+        // no op cant change!
+    }
+
+    get projection() {
+        if (this.options['projection']) {
+            return this.options['projection'];
+        }
+        return new Projection(undefined, this.getNative().getDataSource().getProjection());
+    }
     clearTileCaches(all: boolean) {
         if (this.native) {
             this.native.clearTileCaches(all);

@@ -13,7 +13,7 @@ export const TileSubstitutionPolicy = {
     },
     get TILE_SUBSTITUTION_POLICY_NONE() {
         return com.carto.layers.TileSubstitutionPolicy.TILE_SUBSTITUTION_POLICY_NONE;
-    },
+    }
 };
 
 export abstract class Layer<T extends com.carto.layers.Layer, U extends LayerOptions> extends BaseLayer<T, U> {
@@ -45,15 +45,19 @@ export abstract class TileLayer<T extends com.carto.layers.TileLayer, U extends 
         }
     }
 
-    getDataSource() {
-        if (this['dataSource']) {
-            return this['dataSource'];
+    get dataSource() {
+        if (this.options.dataSource) {
+            return this.options.dataSource;
         }
         return new TileDataSource<any, any>(undefined, this.getNative().getDataSource());
     }
-    getProjection() {
-        if (this['projection']) {
-            return this['projection'];
+    set dataSource(value) {
+        // no op cant change!
+    }
+
+    get projection() {
+        if (this.options['projection']) {
+            return this.options['projection'];
         }
         return new Projection(undefined, this.getNative().getDataSource().getProjection());
     }

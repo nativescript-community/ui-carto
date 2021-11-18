@@ -3,7 +3,7 @@ import {
     HillshadeRasterTileLayerOptions,
     RasterTileEventListener as IRasterTileEventListener,
     RasterTileFilterMode as IRasterTileFilterMode,
-    RasterTileLayerOptions,
+    RasterTileLayerOptions
 } from './raster';
 import { RasterTileLayerBase } from './raster.common';
 import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeMapVecProperty, nativeProperty } from '../';
@@ -20,7 +20,7 @@ export const RasterTileFilterMode = {
     },
     get RASTER_TILE_FILTER_MODE_BICUBIC() {
         return com.carto.layers.RasterTileFilterMode.RASTER_TILE_FILTER_MODE_BICUBIC;
-    },
+    }
 };
 
 export abstract class RasterTileLayerCommon<NativeClass extends com.carto.layers.RasterTileLayer, U extends RasterTileLayerOptions> extends RasterTileLayerBase<NativeClass, U> {
@@ -43,7 +43,7 @@ export abstract class RasterTileLayerCommon<NativeClass extends com.carto.layers
             if (!this.nClickListener) {
                 this.nClickListener = new com.akylas.carto.additions.AKRasterTileEventListener(
                     new com.akylas.carto.additions.AKRasterTileEventListener.Listener({
-                        onRasterTileClicked: this.onRasterTileClicked.bind(this),
+                        onRasterTileClicked: this.onRasterTileClicked.bind(this)
                     })
                 );
             }
@@ -67,7 +67,7 @@ export abstract class RasterTileLayerCommon<NativeClass extends com.carto.layers
                     layer: this,
                     nearestColor: new Color(info.getNearestColor().getARGB()),
                     interpolatedColor: new Color(info.getInterpolatedColor().getARGB()),
-                    position: fromNativeMapPos(position),
+                    position: fromNativeMapPos(position)
                 }) || false
             );
         }
@@ -118,7 +118,7 @@ export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.akylas.c
             new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationCallback({
                 onElevation(err, res) {
                     callback(err, res as any);
-                },
+                }
             })
         );
     }
@@ -128,7 +128,7 @@ export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.akylas.c
             new com.akylas.carto.additions.AKHillshadeRasterTileLayer.ElevationsCallback({
                 onElevations(err, res) {
                     callback(err, new DoubleVector(res));
-                },
+                }
             })
         );
     }

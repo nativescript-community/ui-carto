@@ -15,7 +15,7 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileRenderOrder as IVectorTileRenderOrder,
     VectorLayerOptions,
-    VectorTileLayerOptions,
+    VectorTileLayerOptions
 } from './vector';
 
 export { VectorTileDecoder };
@@ -33,7 +33,7 @@ export const VectorTileRenderOrder = {
     },
     get LAST() {
         return com.carto.layers.VectorTileRenderOrder.VECTOR_TILE_RENDER_ORDER_LAST;
-    },
+    }
 };
 
 export const VectorElementDragResult = {
@@ -48,7 +48,7 @@ export const VectorElementDragResult = {
     },
     get STOP() {
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_STOP;
-    },
+    }
 };
 
 let geojsonWriter: com.carto.geometry.GeoJSONGeometryWriter;
@@ -60,7 +60,7 @@ function getGeojsonWriter() {
 }
 
 export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
-    projection?: Projection;
+    listenerProjection?: Projection;
     listener?: IVectorTileEventListener;
     nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
 
@@ -81,12 +81,12 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
     }
     setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
         this.listener = listener;
-        this.projection = projection;
+        this.listenerProjection = projection;
         if (listener) {
             if (!this.nListener) {
                 this.nListener = new com.akylas.carto.additions.AKVectorTileEventListener(
                     new com.akylas.carto.additions.AKVectorTileEventListener.Listener({
-                        onVectorTileClicked: this.onTileClicked.bind(this),
+                        onVectorTileClicked: this.onTileClicked.bind(this)
                     })
                 );
             }
@@ -104,8 +104,8 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             let featurePos = geometry.getCenterPos();
             let projection: com.carto.projections.Projection;
             const dataSourceProjection = this.getNative().getDataSource().getProjection();
-            if (this.projection) {
-                projection = this.projection.getNative();
+            if (this.listenerProjection) {
+                projection = this.listenerProjection.getNative();
                 featurePos = projection.fromWgs84(dataSourceProjection.toWgs84(featurePos));
                 position = projection.fromWgs84(dataSourceProjection.toWgs84(position));
             }
@@ -130,7 +130,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                         this._parsedProperties = JSON.parse(this._properties);
                     }
                     return this._parsedProperties;
-                },
+                }
             };
             return (
                 this.listener.onVectorTileClicked.call(this.listener, {
@@ -142,7 +142,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                     featureLayerName: geoFeature.layer,
                     featureGeometry: geometry,
                     featurePosition: fromNativeMapPos(featurePos),
-                    position: fromNativeMapPos(position),
+                    position: fromNativeMapPos(position)
                 }) || false
             );
         }
@@ -201,7 +201,7 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
             if (!this.nElementListener) {
                 this.nElementListener = new com.akylas.carto.additions.AKVectorElementEventListener(
                     new com.akylas.carto.additions.AKVectorElementEventListener.Listener({
-                        onVectorElementClicked: this.onElementClicked.bind(this),
+                        onVectorElementClicked: this.onElementClicked.bind(this)
                     })
                 );
             }
@@ -235,7 +235,7 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
                     element,
                     metaData: element.metaData,
                     position: fromNativeMapPos(position),
-                    elementPos: fromNativeMapPos(elementPos),
+                    elementPos: fromNativeMapPos(elementPos)
                 }) || false
             );
         }
@@ -299,7 +299,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                         onElementDeselected: this.onElementDeselected.bind(this),
                         onElementModify: this.onElementModify.bind(this),
                         onElementSelect: this.onElementSelect.bind(this),
-                        onSelectDragPointStyle: this.onSelectDragPointStyle.bind(this),
+                        onSelectDragPointStyle: this.onSelectDragPointStyle.bind(this)
                     })
                 );
             }
@@ -317,7 +317,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue(),
+                dragMode: dragInfo.getDragMode().swigValue()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -330,7 +330,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue(),
+                dragMode: dragInfo.getDragMode().swigValue()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -343,7 +343,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue(),
+                dragMode: dragInfo.getDragMode().swigValue()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -393,14 +393,11 @@ export class ClusteredVectorLayer extends BaseVectorLayer<com.carto.layers.Clust
         return new com.carto.layers.ClusteredVectorLayer(options.dataSource.getNative(), options.builder.getNative());
     }
 
-    @nativeProperty
-    minimumClusterDistance: number;
-    @nativeProperty
-    maximumClusterZoom: number;
+    @nativeProperty minimumClusterDistance: number;
+    @nativeProperty maximumClusterZoom: number;
     @nativeProperty({
-        nativeGetterName: 'isAnimatedClusters',
-    })
-    animatedClusters: boolean;
+        nativeGetterName: 'isAnimatedClusters'
+    }) animatedClusters: boolean;
 
     expandCluster(element: VectorElement<any, any>, px: number) {
         this.getNative().expandCluster(element.getNative(), px);

@@ -89,16 +89,16 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     nativeViewProtected: com.akylas.carto.additions.AKMapView & {
         listener: com.akylas.carto.additions.AKMapEventListener;
     };
-    _projection: IProjection;
+    mProjection: IProjection;
 
     get mapView() {
         return this.nativeViewProtected;
     }
     get projection() {
-        return this._projection;
+        return this.mProjection;
     }
     set projection(proj: IProjection) {
-        this._projection = proj;
+        this.mProjection = proj;
         if (this.nativeViewProtected) {
             this.mapView.getOptions().setBaseProjection(proj ? proj.getNative() : null);
         }
@@ -173,7 +173,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     }
 
     disposeNativeView(): void {
-        this._projection = null;
+        this.mProjection = null;
         this.nativeProjection = null;
         if (this.nativeViewProtected.listener) {
             this.nativeViewProtected.listener = null;
