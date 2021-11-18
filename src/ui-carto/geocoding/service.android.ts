@@ -15,7 +15,7 @@ import {
     ReverseGeocodingRequest,
     ReverseGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions,
-    TomTomOnlineReverseGeocodingServiceOptions,
+    TomTomOnlineReverseGeocodingServiceOptions
 } from './service';
 import { nativeProperty } from '..';
 import { BaseGeocodingService } from './service.common';
@@ -36,7 +36,7 @@ export abstract class GeocodingService<T extends com.akylas.carto.additions.AKGe
             new com.akylas.carto.additions.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
-                },
+                }
             })
         );
     }
@@ -52,7 +52,7 @@ export abstract class ReverseGeocodingService<T extends com.akylas.carto.additio
             new com.akylas.carto.additions.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
-                },
+                }
             })
         );
     }

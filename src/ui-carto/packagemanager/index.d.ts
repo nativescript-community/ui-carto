@@ -7,13 +7,13 @@ declare enum PackageErrorType {
     DOWNLOAD_LIMIT_EXCEEDED,
     NO_OFFLINE_PLAN,
     PACKAGE_TOO_BIG,
-    SYSTEM,
+    SYSTEM
 }
 declare enum PackageType {
     MAP,
     ROUTING,
     GEOCODING,
-    VALHALLA_ROUTING,
+    VALHALLA_ROUTING
 }
 
 declare interface PackageInfo {
@@ -32,7 +32,7 @@ export enum PackageAction {
     WAITING,
     DOWNLOADING,
     COPYING,
-    REMOVING,
+    REMOVING
 }
 export interface PackageStatus {
     // currentAction: PackageAction;

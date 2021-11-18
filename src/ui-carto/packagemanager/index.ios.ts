@@ -9,21 +9,21 @@ export enum PackageErrorType {
     DOWNLOAD_LIMIT_EXCEEDED = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED,
     NO_OFFLINE_PLAN = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN,
     PACKAGE_TOO_BIG = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG,
-    SYSTEM = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_SYSTEM,
+    SYSTEM = NTPackageErrorType.T_PACKAGE_ERROR_TYPE_SYSTEM
 }
 export enum PackageAction {
     READY = NTPackageAction.T_PACKAGE_ACTION_READY,
     WAITING = NTPackageAction.T_PACKAGE_ACTION_WAITING,
     DOWNLOADING = NTPackageAction.T_PACKAGE_ACTION_DOWNLOADING,
     COPYING = NTPackageAction.T_PACKAGE_ACTION_COPYING,
-    REMOVING = NTPackageAction.T_PACKAGE_ACTION_REMOVING,
+    REMOVING = NTPackageAction.T_PACKAGE_ACTION_REMOVING
 }
 
 export enum PackageType {
     MAP = NTPackageType.T_PACKAGE_TYPE_MAP,
     ROUTING = NTPackageType.T_PACKAGE_TYPE_ROUTING,
     GEOCODING = NTPackageType.T_PACKAGE_TYPE_GEOCODING,
-    VALHALLA_ROUTING = NTPackageType.T_PACKAGE_TYPE_VALHALLA_ROUTING,
+    VALHALLA_ROUTING = NTPackageType.T_PACKAGE_TYPE_VALHALLA_ROUTING
 }
 
 @NativeClass
@@ -101,7 +101,7 @@ function fromNTPackageInfo(packageInfo: NTPackageInfo) {
         packageType: packageInfo.getPackageType(),
         size: packageInfo.getSize(),
         tileMask: packageInfo.getTileMask(),
-        version: packageInfo.getVersion(),
+        version: packageInfo.getVersion()
     };
 }
 

@@ -15,7 +15,7 @@ export const PackageType = {
     },
     get VALHALLA_ROUTING() {
         return com.carto.packagemanager.PackageType.PACKAGE_TYPE_VALHALLA_ROUTING;
-    },
+    }
 };
 
 export const PackageErrorType = {
@@ -33,7 +33,7 @@ export const PackageErrorType = {
     },
     get SYSTEM() {
         return com.carto.packagemanager.PackageErrorType.PACKAGE_ERROR_TYPE_SYSTEM;
-    },
+    }
 };
 export const PackageAction = {
     get READY() {
@@ -50,7 +50,7 @@ export const PackageAction = {
     },
     get REMOVING() {
         return com.carto.packagemanager.PackageAction.PACKAGE_ACTION_REMOVING;
-    },
+    }
 };
 
 export function fromVariant(variant: com.carto.core.Variant) {
@@ -94,7 +94,7 @@ function fromNativeackageInfo(packageInfo: com.carto.packagemanager.PackageInfo)
         packageType: packageInfo.getPackageType(),
         size: packageInfo.getSize(),
         tileMask: packageInfo.getTileMask(),
-        version: packageInfo.getVersion(),
+        version: packageInfo.getVersion()
     };
 }
 
@@ -127,7 +127,7 @@ export class CartoPackageManager extends DataSource<com.akylas.carto.additions.A
                             onPackageStatusChanged: this.onPackageStatusChanged.bind(this),
                             onPackageUpdated: this.onPackageUpdated.bind(this),
                             onStyleFailed: this.onStyleFailed.bind(this),
-                            onStyleUpdated: this.onStyleUpdated.bind(this),
+                            onStyleUpdated: this.onStyleUpdated.bind(this)
                         })
                     );
                 }

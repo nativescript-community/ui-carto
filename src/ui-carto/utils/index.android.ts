@@ -1,5 +1,5 @@
 import { getFileName, getRelativePathToApp } from '../index.common';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
@@ -163,7 +163,7 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
             this.mCartoDirPath = getRelativePathToApp(dirPath);
             this._nInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
                 getAssetNames: this.getAssetNames.bind(this),
-                loadAsset: this.loadAsset.bind(this),
+                loadAsset: this.loadAsset.bind(this)
             });
             const result = new com.akylas.carto.additions.AKAssetPackage(this._nInterface);
 

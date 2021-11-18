@@ -12,13 +12,13 @@ export enum LineJointType {
     BEVEL = NTLineJoinType.T_LINE_JOIN_TYPE_BEVEL,
     MITER = NTLineJoinType.T_LINE_JOIN_TYPE_MITER,
     NONE = NTLineJoinType.T_LINE_JOIN_TYPE_NONE,
-    ROUND = NTLineJoinType.T_LINE_JOIN_TYPE_ROUND,
+    ROUND = NTLineJoinType.T_LINE_JOIN_TYPE_ROUND
 }
 
 export enum LineEndType {
     ROUND = NTLineEndType.T_LINE_END_TYPE_ROUND,
     SQUARE = NTLineEndType.T_LINE_END_TYPE_SQUARE,
-    NONE = NTLineEndType.T_LINE_END_TYPE_NONE,
+    NONE = NTLineEndType.T_LINE_END_TYPE_NONE
 }
 
 export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleBuilder, LineStyleBuilderOptions> {
@@ -29,12 +29,12 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<NTLineStyleB
     @nativeColorProperty color: Color | string;
     @nativeProperty({
         nativeSetterName: 'setLineJoinType',
-        nativeGetterName: 'getLineJoinType',
+        nativeGetterName: 'getLineJoinType'
     })
     joinType: LineJointType;
     @nativeProperty({
         nativeSetterName: 'setLineEndType',
-        nativeGetterName: 'getLineEndType',
+        nativeGetterName: 'getLineEndType'
     })
     endType: LineEndType;
     @nativeProperty clickWidth: number;
@@ -57,7 +57,7 @@ function styleBuilderProperty(target: Line, propertyKey?, desc?: PropertyDescrip
         set(value) {
             this.options.styleBuilder[propertyKey] = value;
             this.rebuildStyle();
-        },
+        }
     });
 }
 

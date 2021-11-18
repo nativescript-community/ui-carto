@@ -13,13 +13,13 @@ import { VectorDataSource } from '../datasources/vector';
 export enum VectorTileRenderOrder {
     HIDDEN,
     LAYER,
-    LAST,
+    LAST
 }
 export enum VectorElementDragResult {
     IGNORE,
     STOP,
     MODIFY,
-    DELETE,
+    DELETE
 }
 
 export interface VectorTileEventData<T = DefaultLatLonKeys> {

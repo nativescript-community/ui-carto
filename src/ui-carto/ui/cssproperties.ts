@@ -6,14 +6,14 @@ import { GenericMapPos } from '../core/index.common';
 
 export const licenseKeyProperty = new CssProperty<Style, string>({
     name: 'licenseKey',
-    cssName: 'license-key',
+    cssName: 'license-key'
 });
 licenseKeyProperty.register(Style);
 
 export const zoomProperty = new CssProperty<Style, number>({
     name: 'zoom',
     cssName: 'zoom',
-    valueConverter: (v) => parseFloat(v),
+    valueConverter: (v) => parseFloat(v)
 });
 zoomProperty.register(Style);
 
@@ -27,7 +27,7 @@ export const focusPosProperty = new CssProperty<Style, GenericMapPos>({
             return { [LatitudeKey]: MapPoss[0], [LongitudeKey]: MapPoss[1] } as any;
         }
         return v;
-    },
+    }
 });
 focusPosProperty.register(Style);
 

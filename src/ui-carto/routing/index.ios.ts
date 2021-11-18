@@ -10,7 +10,7 @@ import {
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
-    ValhallaOnlineRoutingServiceOptions,
+    ValhallaOnlineRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
@@ -33,7 +33,7 @@ export enum RoutingAction {
     LEAVE_AGAINST_ALLOWED_DIRECTION = NTRoutingAction.T_ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION,
     GO_UP = NTRoutingAction.T_ROUTING_ACTION_GO_UP,
     GO_DOWN = NTRoutingAction.T_ROUTING_ACTION_GO_DOWN,
-    WAIT = NTRoutingAction.T_ROUTING_ACTION_WAIT,
+    WAIT = NTRoutingAction.T_ROUTING_ACTION_WAIT
 }
 abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
@@ -126,5 +126,5 @@ export {
     CartoOnlineRoutingService,
     ValhallaOfflineRoutingService,
     ValhallaOnlineRoutingService,
-    PackageManagerValhallaRoutingService,
+    PackageManagerValhallaRoutingService
 };

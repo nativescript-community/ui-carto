@@ -41,7 +41,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
                         tileDownloadListener.onDownloadFailed({
                             tileId: tile.getTileId(),
                             x: tile.getX(),
-                            y: tile.getY(),
+                            y: tile.getY()
                         });
                     }
                 },
@@ -54,7 +54,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
                     if (tileDownloadListener && tileDownloadListener.onDownloadStarting) {
                         tileDownloadListener.onDownloadProgress(tileCount);
                     }
-                },
+                }
             })
         );
         this.getNative().startDownloadArea(toNativeMapBounds(mapBounds), minZoom, maxZoom, loaderListener);

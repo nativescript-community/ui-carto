@@ -11,12 +11,12 @@ export function registerLicense(key: string, callback?: (result: boolean) => voi
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR,
-    RENDER_PROJECTION_MODE_SPHERICAL,
+    RENDER_PROJECTION_MODE_SPHERICAL
 }
 export enum PanningMode {
     PANNING_MODE_FREE,
     PANNING_MODE_STICKY,
-    PANNING_MODE_STICKY_FINAL,
+    PANNING_MODE_STICKY_FINAL
 }
 export const MapReadyEvent: string;
 /**
@@ -186,7 +186,6 @@ export class MapOptions {
     setLongClickDuration(param0: number): void;
     getDoubleClickMaxDuration(): number;
     setDoubleClickMaxDuration(param0: number): void;
-
 }
 
 interface CartoMapStyle extends Style {

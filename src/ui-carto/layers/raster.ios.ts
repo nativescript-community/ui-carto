@@ -33,7 +33,7 @@ export class NTRasterTileEventListenerImpl extends NTRasterTileEventListener {
                     layer: this._layer.get() as any,
                     nearestColor: new Color(info.getNearestColor().getARGB()),
                     interpolatedColor: new Color(info.getInterpolatedColor().getARGB()),
-                    position: fromNativeMapPos(position),
+                    position: fromNativeMapPos(position)
                 }) || false
             );
         }

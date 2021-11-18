@@ -26,7 +26,7 @@ export enum ClickType {
     SINGLE,
     LONG,
     DOUBLE,
-    DUAL,
+    DUAL
 }
 
 export class NMapPos {

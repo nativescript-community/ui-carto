@@ -1,4 +1,4 @@
 import { VectorTileDecoderOptions } from '.';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 
 export abstract class BaseVectorTileDecoder<T, U extends VectorTileDecoderOptions> extends BaseNative<T, U> {}

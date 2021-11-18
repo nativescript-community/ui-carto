@@ -1,6 +1,6 @@
 import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions, PointVectorElementOptions, VectorElementOptions } from '.';
 import { nativeProperty } from '../index.common';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { nativeMapToJS } from '../utils';
 import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
@@ -17,7 +17,7 @@ export const BillboardOrientation = {
     },
     get GROUND() {
         return NTBillboardOrientation.T_BILLBOARD_ORIENTATION_GROUND;
-    },
+    }
 };
 
 export const BillboardScaling = {
@@ -29,7 +29,7 @@ export const BillboardScaling = {
     },
     get WORLD_SIZE() {
         return NTBillboardScaling.T_BILLBOARD_SCALING_WORLD_SIZE;
-    },
+    }
 };
 
 export abstract class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
@@ -124,7 +124,6 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElementOptions> {
-    
     buildStyle() {}
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {

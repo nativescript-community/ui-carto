@@ -13,20 +13,20 @@ import {
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileRenderOrder as IVectorTileRenderOrder,
     VectorLayerOptions,
-    VectorTileLayerOptions,
+    VectorTileLayerOptions
 } from './vector';
 
 export enum VectorTileRenderOrder {
     HIDDEN = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_HIDDEN,
     LAYER = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAYER,
-    LAST = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAST,
+    LAST = NTVectorTileRenderOrder.T_VECTOR_TILE_RENDER_ORDER_LAST
 }
 
 export enum VectorElementDragResult {
     IGNORE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE,
     STOP = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_STOP,
     MODIFY = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_MODIFY,
-    DELETE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_DELETE,
+    DELETE = NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_DELETE
 }
 
 @NativeClass
@@ -61,7 +61,7 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
                     element,
                     metaData: element.metaData,
                     position: fromNativeMapPos(position),
-                    elementPos: fromNativeMapPos(elementPos),
+                    elementPos: fromNativeMapPos(elementPos)
                 }) || false
             );
         }
@@ -135,7 +135,7 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
                         this._parsedProperties = JSON.parse(this._properties);
                     }
                     return this._parsedProperties;
-                },
+                }
             };
             return (
                 owner.onVectorTileClicked({
@@ -147,7 +147,7 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
                     featureLayerName: geoFeature.layer,
                     featureGeometry: geometry,
                     featurePosition: fromNativeMapPos(featurePos),
-                    position: fromNativeMapPos(position),
+                    position: fromNativeMapPos(position)
                 }) || false
             );
         }
@@ -293,7 +293,7 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
     @nativeProperty minimumClusterDistance: number;
     @nativeProperty maximumClusterZoom: number;
     @nativeProperty({
-        nativeGetterName: 'isAnimatedClusters',
+        nativeGetterName: 'isAnimatedClusters'
     })
     animatedClusters: boolean;
 

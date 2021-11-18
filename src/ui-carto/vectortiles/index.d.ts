@@ -20,7 +20,6 @@ export class MBVectorTileDecoder extends BaseNative<any, MBVectorTileDecoderOpti
     setStyleParameter(param: string, value: string);
 }
 
-
 // export interface CartoVectorTileDecoderOptions extends VectorTileDecoderOptions {
 //     zipPath?: string;
 //     dirPath?: string;

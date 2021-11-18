@@ -10,7 +10,7 @@ import {
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
-    ValhallaOnlineRoutingServiceOptions,
+    ValhallaOnlineRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
@@ -67,7 +67,7 @@ export const RoutingAction = {
     },
     get WAIT() {
         return com.carto.routing.RoutingAction.ROUTING_ACTION_WAIT;
-    },
+    }
 };
 abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
@@ -93,7 +93,7 @@ abstract class RoutingService<T extends com.akylas.carto.additions.AKRoutingServ
                         } else {
                             resolve(res ? new RoutingResult(res) : null);
                         }
-                    },
+                    }
                 })
             );
         });
@@ -143,7 +143,7 @@ class ValhallaOfflineRoutingService extends RoutingService<com.akylas.carto.addi
                         } else {
                             resolve(res ? new RouteMatchingResult(res) : null);
                         }
-                    },
+                    }
                 })
             );
         });
@@ -175,7 +175,7 @@ class PackageManagerValhallaRoutingService extends RoutingService<com.akylas.car
                         } else {
                             resolve(res ? new RouteMatchingResult(res) : null);
                         }
-                    },
+                    }
                 })
             );
         });
@@ -191,5 +191,5 @@ export {
     CartoOnlineRoutingService,
     ValhallaOfflineRoutingService,
     ValhallaOnlineRoutingService,
-    PackageManagerValhallaRoutingService,
+    PackageManagerValhallaRoutingService
 };

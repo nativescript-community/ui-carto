@@ -3,7 +3,7 @@ import { Color } from '@nativescript/core/color';
 import { nativeColorProperty, nativeFontProperty, nativeImageProperty } from '..';
 import { MapPos, fromNativeMapPos } from '../core';
 import { nativeProperty } from '../index.common';
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 
@@ -22,7 +22,7 @@ export class ClusterElementBuilder extends BaseNative<com.akylas.carto.additions
         if (!!options.buildClusterElement) {
             result.setInterface(
                 new com.akylas.carto.additions.AKClusterElementBuilder.Interface({
-                    buildClusterElement: this.nBuildClusterElement.bind(this),
+                    buildClusterElement: this.nBuildClusterElement.bind(this)
                 })
             );
         }

@@ -1,4 +1,4 @@
-import { BaseNative } from "../BaseNative";
+import { BaseNative } from '../BaseNative';
 import { GeoJSONGeometryReaderOptions, WKBGeometryReaderOptions, WKTGeometryReaderOptions } from './reader';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
