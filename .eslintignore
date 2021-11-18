@@ -1,8 +1,8 @@
-package-lock.json
+*-lock.json
+*-lock.yaml
 node_modules/
-plugin/
-demo-ng/
-demo-react/
-demo-svelte/
-demo-vue/
+# demo-ng/
+# demo-react/
+# demo-svelte/
+# demo-vue/
 docs/
