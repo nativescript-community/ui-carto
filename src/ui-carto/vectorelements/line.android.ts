@@ -1,11 +1,10 @@
 import { Color } from '@nativescript/core/color';
-import { geometryFromArgs, mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty } from '..';
-import { nativeProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeProperty } from '..';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
-import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
+import { LineGeometry } from '../geometry';
 import { BaseLineVectorElement } from './index.android';
 import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
-import { LineGeometry } from '../geometry';
+import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
 export { MapBounds };
 
 export const LineJointType = {
@@ -20,7 +19,7 @@ export const LineJointType = {
     },
     get ROUND() {
         return com.carto.styles.LineJoinType.LINE_JOIN_TYPE_ROUND.swigValue();
-    },
+    }
 };
 
 export const LineEndType = {
@@ -32,7 +31,7 @@ export const LineEndType = {
     },
     get NONE() {
         return com.carto.styles.LineEndType.LINE_END_TYPE_NONE.swigValue();
-    },
+    }
 };
 export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.LineStyleBuilder, LineStyleBuilderOptions> {
     createNative(options: LineStyleBuilderOptions) {
@@ -43,12 +42,12 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.st
     @nativeColorProperty color: Color | string;
     @nativeAndroidEnumProperty(com.carto.styles.LineJoinType, {
         nativeSetterName: 'setLineJoinType',
-        nativeGetterName: 'getLineJoinType',
+        nativeGetterName: 'getLineJoinType'
     })
     joinType: ILineJointType;
     @nativeAndroidEnumProperty(com.carto.styles.LineEndType, {
         nativeSetterName: 'setLineEndType',
-        nativeGetterName: 'getLineEndType',
+        nativeGetterName: 'getLineEndType'
     })
     endType: ILineEndType;
     @nativeProperty clickWidth: number;
