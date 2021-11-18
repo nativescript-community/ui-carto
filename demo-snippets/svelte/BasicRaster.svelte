@@ -1,17 +1,13 @@
-<script lang="typescript">
-    import { DefaultLatLonKeys } from '@nativescript-community/ui-carto/core';
+<script lang="ts">
     import { HTTPTileDataSource } from '@nativescript-community/ui-carto/datasources/http';
     import { LocalVectorDataSource } from '@nativescript-community/ui-carto/datasources/vector';
     import { RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
     import { VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
-
     import { CartoMap } from '@nativescript-community/ui-carto/ui';
     import { setShowDebug, setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-carto/utils';
-    import { Line, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
-    import { LineEndType, LineJointType } from '@nativescript-community/ui-carto/vectorelements/line.android';
+    import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
     import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/marker';
     import { Point, PointStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/point';
-
     import { goBack } from 'svelte-native';
 
     let cartoMap: CartoMap;
@@ -31,7 +27,8 @@
             url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         });
         rasterLayer = new RasterTileLayer({
-            dataSource
+            dataSource,
+            zoomLevelBias:1
             // opacity: 0.5
         });
         cartoMap.addLayer(rasterLayer);
@@ -102,9 +99,9 @@
 
 <page>
     <actionBar title="Basic Pager">
-        <navigationButton text="Go back" on:tap={goBack} />
+        <navigationButton text="Go back" on:tap={() => goBack()} />
     </actionBar>
-    <stackLayout class="page">
-        <cartomap zoom="16" on:mapReady={onMainMapReady} />
-    </stackLayout>
+    <gridLayout class="page">
+        <cartomap zoom="10" on:mapReady={onMainMapReady} />
+    </gridLayout>
 </page>
