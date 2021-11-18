@@ -24,8 +24,8 @@ export function nativeColorProperty(...args) {
                 toNative(value) {
                     const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return new com.carto.graphics.Color(theColor.r, theColor.g, theColor.b, theColor.a);
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -42,8 +42,8 @@ export function nativeNColorProperty(...args) {
                 toNative(value): android.graphics.Color {
                     const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
                     return theColor.android as any;
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -60,8 +60,8 @@ export function nativeFontProperty(...args) {
                 },
                 toNative(value: Font) {
                     return value?.getAndroidTypeface();
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -80,8 +80,8 @@ export function nativeAndroidEnumProperty(androidEnum, options: NativePropertyOp
                 },
                 toNative(value: any) {
                     return androidEnum.swigToEnum(value);
-                },
-            },
+                }
+            }
         })
     );
 }
@@ -98,8 +98,8 @@ export function nativeCartoImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(value.android as android.graphics.Bitmap);
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -117,8 +117,8 @@ export function nativeImageProperty(...args) {
                 toNative(value) {
                     value = _createImageSourceFromSrc(value);
                     return value?.android as android.graphics.Bitmap;
-                },
-            },
+                }
+            }
         },
         ...args
     );
@@ -203,8 +203,8 @@ export function nativeMapVecProperty(...args) {
         {
             converter: {
                 fromNative: fromNativeMapVec,
-                toNative: toNativeMapVec,
-            },
+                toNative: toNativeMapVec
+            }
         },
         ...args
     );

@@ -21,7 +21,7 @@ export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
 export enum TileSubstitutionPolicy {
     TILE_SUBSTITUTION_POLICY_ALL,
     TILE_SUBSTITUTION_POLICY_VISIBLE,
-    TILE_SUBSTITUTION_POLICY_NONE,
+    TILE_SUBSTITUTION_POLICY_NONE
 }
 export interface TileLayerOptions extends LayerOptions {
     /**
@@ -62,8 +62,8 @@ export class TileLayer<T, U extends TileLayerOptions> extends Layer<T, U> {
     maxOverzoomLevel: number;
     maxUnderzoomLevel: number;
     tileSubstitutionPolicy?: TileSubstitutionPolicy;
-    readonly dataSource: TileDataSource<any, any>;
+    dataSource: TileDataSource<any, any>;
     clearTileCaches(all: boolean);
-    getDataSource(): TileDataSource<any, any>;
-    getProjection(): Projection;
+    readonly dataSource: TileDataSource<any, any>;
+    projection?: Projection;
 }

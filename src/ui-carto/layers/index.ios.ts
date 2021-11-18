@@ -34,9 +34,25 @@ export abstract class TileLayer<T extends NTTileLayer, U extends TileLayerOption
     @nativeProperty maxUnderzoomLevel: number;
     @nativeProperty tileSubstitutionPolicy: TileSubstitutionPolicy;
 
-    clearTileCaches( all: boolean) {
+    get dataSource() {
+        if (this.options.dataSource) {
+            return this.options.dataSource;
+        }
+        return new TileDataSource<any, any>(undefined, this.getNative().getDataSource());
+    }
+    set dataSource(value) {
+        // no op cant change!
+    }
+
+    get projection() {
+        if (this.options['projection']) {
+            return this.options['projection'];
+        }
+        return new Projection(undefined, this.getNative().getDataSource().getProjection());
+    }
+    clearTileCaches(all: boolean) {
         if (this.native) {
-            this.native.clearTileCaches( all);
+            this.native.clearTileCaches(all);
         }
     }
 }
