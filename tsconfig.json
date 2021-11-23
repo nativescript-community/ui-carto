@@ -2,7 +2,7 @@
     "extends": "./tools/tsconfig",
     "compilerOptions": {
         "paths": {
-            "@nativescript-community/ui-pacartoger": ["src/ui-carto"],
+            "@nativescript-community/ui-carto": ["src/ui-carto"],
             "@nativescript-community/ui-carto/*": ["src/ui-carto/*"]
         }
     }
