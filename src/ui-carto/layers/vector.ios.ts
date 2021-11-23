@@ -162,15 +162,14 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
     @nativeProperty clickRadius: number;
     @nativeProperty labelRenderOrder: IVectorTileRenderOrder;
     @nativeProperty buildingRenderOrder: IVectorTileRenderOrder;
-    setLabelRenderOrder(order: NTVectorTileRenderOrder) {
-        this.getNative().setLabelRenderOrder(order);
-    }
-    setBuildingRenderOrder(order: NTVectorTileRenderOrder) {
-        this.getNative().setBuildingRenderOrder(order);
-    }
-    setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
+
+    setVectorTileEventListener(listener: IVectorTileEventListener | any, projection?: Projection, nativeClass = NTVectorTileEventListenerImpl) {
         if (listener) {
-            this.getNative().setVectorTileEventListener(NTVectorTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+            if (listener instanceof NTVectorTileEventListener) {
+                this.getNative().setVectorTileEventListener(listener);
+            } else {
+                this.getNative().setVectorTileEventListener(nativeClass.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+            }
         } else {
             this.getNative().setVectorTileEventListener(null);
         }
@@ -212,9 +211,9 @@ export abstract class BaseVectorLayer<T extends NTVectorLayer, U extends VectorL
     // initVectorElementEventListener();
     // this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this)));
     // }
-    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection) {
+    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection, nativeClass = NTVectorElementEventListenerImpl) {
         if (listener) {
-            this.getNative().setVectorElementEventListener(NTVectorElementEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+            this.getNative().setVectorElementEventListener(nativeClass.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
         } else {
             this.getNative().setVectorElementEventListener(null);
         }
@@ -299,8 +298,7 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
     @nativeProperty maximumClusterZoom: number;
     @nativeProperty({
         nativeGetterName: 'isAnimatedClusters'
-    })
-    animatedClusters: boolean;
+    }) animatedClusters: boolean;
 
     expandCluster(element: VectorElement<any, any>, px: number) {
         this.getNative().expandClusterPx(element.getNative(), px);

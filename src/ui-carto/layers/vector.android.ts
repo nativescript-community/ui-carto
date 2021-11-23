@@ -62,7 +62,7 @@ function getGeojsonWriter() {
 export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
     listenerProjection?: Projection;
     listener?: IVectorTileEventListener;
-    nListener?: com.akylas.carto.additions.AKVectorTileEventListener;
+    nListener?: com.akylas.carto.additions.AKVectorTileEventListener | com.carto.layers.VectorTileEventListener;
 
     @nativeProperty layerBlendingSpeed: number;
     @nativeProperty labelBlendingSpeed: number;
@@ -79,22 +79,20 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             }
         }
     }
-    setLabelRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
-        this.getNative().setLabelRenderOrder(order);
-    }
-    setBuildingRenderOrder(order: com.carto.layers.VectorTileRenderOrder) {
-        this.getNative().setBuildingRenderOrder(order);
-    }
-    setVectorTileEventListener(listener: IVectorTileEventListener, projection?: Projection) {
+    setVectorTileEventListener(listener: IVectorTileEventListener | any, projection?: Projection, nativeClass = com.akylas.carto.additions.AKVectorTileEventListener) {
         this.listener = listener;
         this.listenerProjection = projection;
         if (listener) {
-            if (!this.nListener) {
-                this.nListener = new com.akylas.carto.additions.AKVectorTileEventListener(
-                    new com.akylas.carto.additions.AKVectorTileEventListener.Listener({
-                        onVectorTileClicked: this.onTileClicked.bind(this)
-                    })
-                );
+            if (listener instanceof com.carto.layers.VectorTileEventListener) {
+                this.nListener = listener;
+            } else {
+                if (!this.nListener) {
+                    this.nListener = new nativeClass(
+                        new com.akylas.carto.additions.AKVectorTileEventListener.Listener({
+                            onVectorTileClicked: this.onTileClicked.bind(this)
+                        })
+                    );
+                }
             }
             this.getNative().setVectorTileEventListener(this.nListener);
         } else {
@@ -191,12 +189,21 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
     projection?: Projection;
     elementListener?: IVectorElementEventListener;
     nElementListener?: com.akylas.carto.additions.AKVectorElementEventListener;
-    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection) {
+    constructor(options) {
+        super(options);
+        for (const property of ['elementListener', 'nElementListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(BaseVectorLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
+    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection, nativeClass = com.akylas.carto.additions.AKVectorElementEventListener) {
         this.elementListener = listener;
         this.projection = projection;
         if (listener) {
             if (!this.nElementListener) {
-                this.nElementListener = new com.akylas.carto.additions.AKVectorElementEventListener(
+                this.nElementListener = new nativeClass(
                     new com.akylas.carto.additions.AKVectorElementEventListener.Listener({
                         onVectorElementClicked: this.onElementClicked.bind(this)
                     })
@@ -253,6 +260,18 @@ export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, V
 }
 
 export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.EditableVectorLayer, VectorLayerOptions> {
+    editListener?: IVectorEditEventListener;
+    nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
+    projection?: Projection;
+    constructor(options) {
+        super(options);
+        for (const property of ['editListener', 'nEditListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(EditableVectorLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {
             const dataSource = options.dataSource.getNative();
@@ -270,15 +289,12 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
         }
     }
-    editListener?: IVectorEditEventListener;
-    nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
-    projection?: Projection;
-    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection) {
+    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection, nativeClass = com.akylas.carto.additions.AKVectorEditEventListener) {
         this.editListener = listener;
         this.projection = projection;
         if (listener) {
             if (!this.nEditListener) {
-                this.nEditListener = new com.akylas.carto.additions.AKVectorEditEventListener(
+                this.nEditListener = new nativeClass(
                     new com.akylas.carto.additions.AKVectorEditEventListener.Listener({
                         onDragEnd: this.onDragEnd.bind(this),
                         onDragMove: this.onDragMove.bind(this),
@@ -385,8 +401,7 @@ export class ClusteredVectorLayer extends BaseVectorLayer<com.carto.layers.Clust
     @nativeProperty maximumClusterZoom: number;
     @nativeProperty({
         nativeGetterName: 'isAnimatedClusters'
-    })
-        animatedClusters: boolean;
+    }) animatedClusters: boolean;
 
     expandCluster(element: VectorElement<any, any>, px: number) {
         this.getNative().expandCluster(element.getNative(), px);
