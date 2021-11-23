@@ -1,70 +1,132 @@
-# Your Plugin Name
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
+<!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      DO NOT EDIT THIS READEME DIRECTLY! Edit "bluesprint.md" instead.
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<h1 align="center">@nativescript-community/ui-carto</h1>
+<p align="center">
+		<a href="https://npmcharts.com/compare/@nativescript-community/ui-carto?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/@nativescript-community/ui-carto.svg" height="20"/></a>
+<a href="https://www.npmjs.com/package/@nativescript-community/ui-carto"><img alt="NPM Version" src="https://img.shields.io/npm/v/@nativescript-community/ui-carto.svg" height="20"/></a>
+	</p>
 
-Add your plugin badges here. See [nativescript-urlhandler](https://github.com/hypery2k/nativescript-urlhandler) for example.
+<p align="center">
+  <b>Nativescript plugin for Carto Mobile SDK</b></br>
+  <sub><sub>
+</p>
 
-Then describe what's the purpose of your plugin. 
+<br />
 
-In case you develop UI plugin, this is where you can add some screenshots.
 
-## (Optional) Prerequisites / Requirements
+| <img src="https://github.com/nativescript-community/ui-carto/raw/master/images/demo-ios.gif" height="500" /> | <img src="https://github.com/nativescript-community/ui-carto/raw/master/images/demo-android.gif" height="500" /> |
+| --- | ----------- |
+| iOS Demo | Android Demo |
 
-Describe the prerequisites that the user need to have installed before using your plugin. See [nativescript-firebase plugin](https://github.com/eddyverbruggen/nativescript-plugin-firebase) for example.
+
+[](#table-of-contents)
+
+## Table of Contents
+
+* [Installation](#installation)
+* [API](#api)
+	* [Properties](#properties)
+	* [Examples](#examples)
+* [Usage in React](#usage-in-react)
+* [Usage in Svelte](#usage-in-svelte)
+* [Usage in Vue](#usage-in-vue)
+* [Demos and Development](#demos-and-development)
+	* [Setup](#setup)
+	* [Build](#build)
+	* [Demos](#demos)
+* [Questions](#questions)
+
+
+[](#installation)
 
 ## Installation
+Run the following command from the root of your project:
 
-Describe your plugin installation steps. Ideally it would be something like:
+`ns plugin add @nativescript-community/ui-carto`
 
-```javascript
-tns plugin add <your-plugin-name>
-```
 
-## Usage 
-
-Describe any usage specifics for your plugin. Give examples for Android, iOS, Angular if needed. See [nativescript-drop-down](https://www.npmjs.com/package/nativescript-drop-down) for example.
-	
-	```javascript
-    Usage code snippets here
-    ```)
-
-### Android 
-o do this in Android 9 Pie you will have to set a networkSecurityConfig in your Manifest application tag like this:
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest ... >
-    <application android:networkSecurityConfig="@xml/network_security_config">
-    </application>
-</manifest>
-```
-Then in your xml folder you now have to create a file named network_security_config just like the way you have named it in the Manifest and from there the content of your file should be like this to enable all requests without encryptions:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
-</network-security-config>
-```
-From there you are good to go. Now your app will make requests for all types of connections. For additional information read here.
-
-## Generate typings
-
-### Android
-```
-
-### iOS
+[](#api)
 
 ## API
 
-Describe your plugin methods and properties here. See [nativescript-feedback](https://github.com/EddyVerbruggen/nativescript-feedback) for example.
-    
-| Property | Default | Description |
-| --- | --- | --- |
-| some property | property default value | property description, default values, etc.. |
-| another property | property default value | property description, default values, etc.. |
-    
-## License
+### Properties
 
-Apache License Version 2.0, January 2004
+### Examples
+
+
+[](#usage-in-react)
+
+## Usage in React
+
+
+[](#usage-in-svelte)
+
+## Usage in Svelte
+
+
+[](#usage-in-vue)
+
+## Usage in Vue
+
+
+[](#demos-and-development)
+
+## Demos and Development
+
+
+### Setup
+
+To run the demos, you must clone this repo **recursively**.
+
+```
+git clone https://github.com/@nativescript-community/ui-carto.git --recursive
+```
+
+**Install Dependencies:**
+```bash
+npm i # or 'yarn install' or 'pnpm install'
+```
+
+**Interactive Menu:**
+
+To start the interactive menu, run `npm start` (or `yarn start` or `pnpm start`). This will list all of the commonly used scripts.
+
+### Build
+
+```bash
+npm run build
+
+npm run build.angular # or for Angular
+```
+
+### Demos
+
+```bash
+npm run demo.[ng|react|svelte|vue].[ios|android]
+
+npm run demo.svelte.ios # Example
+```
+
+[](#questions)
+
+## Questions
+
+If you have any questions/issues/comments please feel free to create an issue or start a conversation in the [NativeScript Community Discord](https://nativescript.org/discord).
