@@ -161,12 +161,12 @@ export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends
     tileCacheCapacity: number;
     setLabelRenderOrder(order: VectorTileRenderOrder): void;
     setBuildingRenderOrder(order: VectorTileRenderOrder);
-    setVectorTileEventListener<T = DefaultLatLonKeys>(listener: VectorTileEventListener<T>, projection?: Projection): void;
+    setVectorTileEventListener<T = DefaultLatLonKeys>(listener: VectorTileEventListener<T>, projection?: Projection, nativeClass?: any): void;
     getTileDecoder(): MBVectorTileDecoder;
 }
 
 export abstract class BaseVectorLayer<T, U extends VectorLayerOptions> extends Layer<T, U> {
-    setVectorElementEventListener<T = DefaultLatLonKeys>(listener: VectorElementEventListener<T>, projection?: Projection): void;
+    setVectorElementEventListener<T = DefaultLatLonKeys>(listener: VectorElementEventListener<T>, projection?: Projection, nativeClass?: any): void;
 }
 
 export class VectorLayer extends BaseVectorLayer<any, VectorLayerOptions> {}
