@@ -9,7 +9,7 @@ public class RendererCaptureListener extends com.carto.renderers.RendererCapture
     public interface Listener {
         void onMapRendered(Bitmap bitmap);
     }
-    Listener listener = null;
+    protected Listener listener = null;
     public void setListener(Listener listener) {
         this.listener = listener;
     }

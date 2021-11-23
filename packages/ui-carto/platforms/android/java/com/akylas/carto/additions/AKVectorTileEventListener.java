@@ -13,7 +13,7 @@ public class AKVectorTileEventListener extends VectorTileEventListener {
         boolean onVectorTileClicked(final VectorTileClickInfo clickInfo);
     }
 
-    Listener listener = null;
+    protected Listener listener = null;
 
     public void setListener(Listener listener) {
         this.listener = listener;

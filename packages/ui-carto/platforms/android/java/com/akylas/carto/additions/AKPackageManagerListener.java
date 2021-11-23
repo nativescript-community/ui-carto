@@ -27,7 +27,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
         void onStyleUpdated(String styleName);
     }
 
-    Listener listener = null;
+    protected Listener listener = null;
 
     public void setListener(Listener listener) {
         this.listener = listener;

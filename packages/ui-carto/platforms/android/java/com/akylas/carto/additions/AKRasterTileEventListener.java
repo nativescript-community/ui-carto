@@ -13,7 +13,7 @@ public class AKRasterTileEventListener extends RasterTileEventListener {
         boolean onRasterTileClicked(final RasterTileClickInfo clickInfo);
     }
 
-    Listener listener = null;
+    protected Listener listener = null;
 
     public void setListener(Listener listener) {
         this.listener = listener;

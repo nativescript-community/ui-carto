@@ -33,7 +33,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
         void onElementModify(VectorElement element, Geometry geometry);
     }
 
-    Listener listener = null;
+    protected Listener listener = null;
 
     public void setListener(Listener listener) {
         this.listener = listener;
