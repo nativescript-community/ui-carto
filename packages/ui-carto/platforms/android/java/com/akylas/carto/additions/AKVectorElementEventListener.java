@@ -12,7 +12,7 @@ public class AKVectorElementEventListener extends VectorElementEventListener {
     public interface Listener {
         boolean onVectorElementClicked(final VectorElementClickInfo clickInfo);
     }
-    Listener listener = null;
+    protected Listener listener = null;
     public void setListener(Listener listener) {
         this.listener = listener;
     }

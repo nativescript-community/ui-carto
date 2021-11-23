@@ -19,7 +19,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
         void onDownloadStarting(int tileCount);
     }
 
-    Listener listener = null;
+    protected Listener listener = null;
 
     public void setListener(Listener listener) {
         this.listener = listener;
