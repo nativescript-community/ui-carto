@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.7](https://github.com/nativescript-community/ui-carto/compare/v1.8.6...v1.8.7) (2021-11-24)
+
+
+### Bug Fixes
+
+* allow vector listeners custom native class ([259ddcb](https://github.com/nativescript-community/ui-carto/commit/259ddcb57599c8cc8f923c820e73a70c37345d25))
+* **ios:**  VectorElementVector fix ([8b13e98](https://github.com/nativescript-community/ui-carto/commit/8b13e98818d6e144317a181046aa5152673c7503))
+* protect against memory leaks ([288bd5c](https://github.com/nativescript-community/ui-carto/commit/288bd5c8fdcd897406944f8d804b0aaa10219040))
+
+
+
+
+
 ## [1.8.6](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.5...v1.8.6) (2021-11-16)
 
 
