@@ -127,7 +127,7 @@ export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElem
     buildStyle() {}
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {
-    elements: BaseVectorElement<any, any>[];
+    elements: BaseVectorElement<any, any>[] = [];
     createNative() {
         const result = NTVectorElementVector.alloc().init();
         if (this.elements.length > 0) {
