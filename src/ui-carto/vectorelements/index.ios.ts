@@ -93,7 +93,6 @@ export abstract class BasePointVectorElement<
     }
 }
 
-
 export abstract class BaseBillboardVectorElement<T extends NTBillboard, U extends PointVectorElementOptions> extends BasePointVectorElement<T, U> {
     @nativeProperty rotation: number;
 }
@@ -132,7 +131,7 @@ export class VectorElementVector extends BaseNative<NTVectorElementVector, any> 
     createNative() {
         const result = NTVectorElementVector.alloc().init();
         if (this.elements.length > 0) {
-            this.elements.forEach(element => {
+            this.elements.forEach((element) => {
                 result.add(element.getNative());
             });
         }
