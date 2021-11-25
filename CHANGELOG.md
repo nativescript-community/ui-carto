@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.9](https://github.com/nativescript-community/ui-carto/compare/v1.8.8...v1.8.9) (2021-11-25)
+
+
+### Bug Fixes
+
+* ensure we create the nativeView if not created ([9a56ab1](https://github.com/nativescript-community/ui-carto/commit/9a56ab19ce82bc0d1eca3517498d5c1e8a583d08))
+
+
+
+
+
 ## [1.8.8](https://github.com/nativescript-community/ui-carto/compare/v1.8.7...v1.8.8) (2021-11-25)
 
 
