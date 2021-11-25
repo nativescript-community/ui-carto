@@ -150,33 +150,33 @@ export abstract class NativeVector<T, U = any> extends BaseNative<U, {}> {
     }
     public reserve(size: number) {
         //@ts-ignore
-        return this.native.reserve(size);
+        return this.getNative().reserve(size);
     }
     //@ts-ignore
     public get(index: number): T {
         //@ts-ignore
-        return this.native.get(index);
+        return this.getNative().get(index);
     }
     public add(position: T) {
         //@ts-ignore
-        return this.native.add(position);
+        return this.getNative().add(position);
     }
     public capacity() {
         //@ts-ignore
-        return this.native.capacity();
+        return this.getNative().capacity();
     }
     public clear() {
         //@ts-ignore
-        return this.native.clear();
+        return this.getNative().clear();
     }
     public isEmpty() {
         //@ts-ignore
-        return this.native.isEmpty();
+        return this.getNative().isEmpty();
     }
     //@ts-ignore
     public set(index: number, position: T) {
         //@ts-ignore
-        return this.native.setVal(index, position);
+        return this.getNative().setVal(index, position);
     }
 }
 export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos, NTMapPosVector> {
@@ -187,9 +187,9 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos, 
     public add(position: NTMapPos | GenericMapPos<T>) {
         if (position instanceof NTMapPos) {
             position = toNativeMapPos<T>(position);
-            return this.native.add(position);
+            return this.getNative().add(position);
         }
-        return this.native.add(toNativeMapPos(position));
+        return this.getNative().add(toNativeMapPos(position));
     }
 
     getPos(index: number) {
@@ -210,8 +210,8 @@ export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NTMa
     }
     public add(position: NTMapPosVector | MapPosVector<T>) {
         if (position instanceof MapPosVector) {
-            return this.native.add(position.getNative());
+            return this.getNative().add(position.getNative());
         }
-        return this.native.add(position);
+        return this.getNative().add(position);
     }
 }

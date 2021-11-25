@@ -162,37 +162,37 @@ export abstract class NativeVector<T, U = T> extends BaseNative<U, {}> {
 
     size() {
         //@ts-ignore
-        return this.native.size();
+        return this.getNative().size();
     }
     public reserve(size: number) {
         //@ts-ignore
-        return this.native.reserve(size);
+        return this.getNative().reserve(size);
     }
     //@ts-ignore
     public get(index: number): T {
         //@ts-ignore
-        return this.native.get(index);
+        return this.getNative().get(index);
     }
     public add(position: T) {
         //@ts-ignore
-        return this.native.add(position);
+        return this.getNative().add(position);
     }
     public capacity() {
         //@ts-ignore
-        return this.native.capacity();
+        return this.getNative().capacity();
     }
     public clear() {
         //@ts-ignore
-        return this.native.clear();
+        return this.getNative().clear();
     }
     public isEmpty() {
         //@ts-ignore
-        return this.native.isEmpty();
+        return this.getNative().isEmpty();
     }
     //@ts-ignore
     public set(index: number, position: T) {
         //@ts-ignore
-        return this.native.set(index, position);
+        return this.getNative().set(index, position);
     }
     toArray(): any[] {
         const result: T[] = [];
@@ -209,9 +209,9 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<com.carto.
     public add(position: com.carto.core.MapPos | GenericMapPos<T>) {
         if (position instanceof com.carto.core.MapPos) {
             position = toNativeMapPos<T>(position);
-            return this.native.add(position);
+            return this.getNative().add(position);
         }
-        return this.native.add(toNativeMapPos(position));
+        return this.getNative().add(toNativeMapPos(position));
     }
 
     getPos(index: number) {
@@ -242,8 +242,8 @@ export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<com.
     }
     public add(position: com.carto.core.MapPosVector | MapPosVector<T>) {
         if (position instanceof MapPosVector) {
-            return this.native.add(position.getNative());
+            return this.getNative().add(position.getNative());
         }
-        return this.native.add(position);
+        return this.getNative().add(position);
     }
 }
