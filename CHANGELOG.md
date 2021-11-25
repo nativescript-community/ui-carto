@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.8](https://github.com/nativescript-community/ui-carto/compare/v1.8.7...v1.8.8) (2021-11-25)
+
+
+### Bug Fixes
+
+* **ios:** typo error on MapPosVector and MapPosVectorVector ([9376ca2](https://github.com/nativescript-community/ui-carto/commit/9376ca2fc2a3b3cae6c603456f782e38820b5db7))
+* typings fix ([ba5d68f](https://github.com/nativescript-community/ui-carto/commit/ba5d68fe069282e846e5a105f651a56a5934a065))
+
+
+
+
+
 ## [1.8.7](https://github.com/nativescript-community/ui-carto/compare/v1.8.6...v1.8.7) (2021-11-24)
 
 
