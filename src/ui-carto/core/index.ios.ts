@@ -180,7 +180,7 @@ export abstract class NativeVector<T, U = any> extends BaseNative<U, {}> {
     }
 }
 export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos, NTMapPosVector> {
-    createNativeView() {
+    createNative() {
         return NTMapPosVector.alloc().init();
     }
 
@@ -205,7 +205,7 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos, 
     }
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPosVector, NTMapPosVectorVector> {
-    createNativeView() {
+    createNative() {
         return NTMapPosVectorVector.alloc().init();
     }
     public add(position: NTMapPosVector | MapPosVector<T>) {
