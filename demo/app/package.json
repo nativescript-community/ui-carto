@@ -1,9 +1,0 @@
-{
-  "android": {
-    "markingMode": "none",
-    "v8Flags": "--expose_gc"
-  },
-  "main": "app.js",
-  "name": "com.akylas.nativescript.cartodemo",
-  "version": "1.0.0"
-}
