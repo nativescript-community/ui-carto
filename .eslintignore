@@ -1,8 +1,0 @@
-*-lock.json
-*-lock.yaml
-node_modules/
-# demo-ng/
-# demo-react/
-# demo-svelte/
-# demo-vue/
-docs/
