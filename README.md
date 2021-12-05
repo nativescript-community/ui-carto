@@ -1,4 +1,4 @@
-<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️--><!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
 <!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -25,16 +25,15 @@
 	</p>
 
 <p align="center">
-  <b>Nativescript plugin for Carto Mobile SDK</b></br>
+  <b>NativeScript plugin for CARTO Mobile SDK</b></br>
   <sub><sub>
 </p>
 
 <br />
 
 
-| <img src="https://github.com/nativescript-community/ui-carto/raw/master/images/demo-ios.gif" height="500" /> | <img src="https://github.com/nativescript-community/ui-carto/raw/master/images/demo-android.gif" height="500" /> |
-| --- | ----------- |
-| iOS Demo | Android Demo |
+
+[](#table-of-contents)
 
 
 [](#table-of-contents)
@@ -43,16 +42,18 @@
 
 * [Installation](#installation)
 * [API](#api)
-	* [Properties](#properties)
-	* [Examples](#examples)
-* [Usage in React](#usage-in-react)
 * [Usage in Svelte](#usage-in-svelte)
+	* [Examples](#examples)
 * [Usage in Vue](#usage-in-vue)
+	* [Examples](#examples-1)
 * [Demos and Development](#demos-and-development)
 	* [Setup](#setup)
 	* [Build](#build)
 	* [Demos](#demos)
 * [Questions](#questions)
+
+
+[](#installation)
 
 
 [](#installation)
@@ -65,26 +66,39 @@ Run the following command from the root of your project:
 
 [](#api)
 
+
+[](#api)
+
 ## API
 
-### Properties
-
-### Examples
+The API documentation for this plugin is available [here](https://nativescript-community.github.io/ui-carto/).
 
 
-[](#usage-in-react)
-
-## Usage in React
+[](#usage-in-svelte)
 
 
 [](#usage-in-svelte)
 
 ## Usage in Svelte
 
+### Examples
+
+- [Basic Raster](demo-snippets/svelte/BasicRaster.svelte)
+
+
+[](#usage-in-vue)
+
 
 [](#usage-in-vue)
 
 ## Usage in Vue
+
+### Examples
+
+- [Basic Raster](demo-snippets/vue/BasicRaster.vue)
+
+
+[](#demos-and-development)
 
 
 [](#demos-and-development)
@@ -124,6 +138,9 @@ npm run demo.[ng|react|svelte|vue].[ios|android]
 
 npm run demo.svelte.ios # Example
 ```
+
+[](#questions)
+
 
 [](#questions)
 
