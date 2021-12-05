@@ -3,10 +3,6 @@
 {{ template:badges }}
 {{ template:description }}
 
-| <img src="https://github.com/nativescript-community/ui-carto/raw/master/images/demo-ios.gif" height="500" /> | <img src="https://github.com/nativescript-community/ui-carto/raw/master/images/demo-android.gif" height="500" /> |
-| --- | ----------- |
-| iOS Demo | Android Demo |
-
 {{ template:toc }}
 
 ## Installation
@@ -16,15 +12,19 @@ Run the following command from the root of your project:
 
 ## API
 
-### Properties
-
-### Examples
-
-## Usage in React
+The API documentation for this plugin is available [here](https://nativescript-community.github.io/ui-carto/).
 
 ## Usage in Svelte
 
+### Examples
+
+- [Basic Raster](demo-snippets/svelte/BasicRaster.svelte)
+
 ## Usage in Vue
+
+### Examples
+
+- [Basic Raster](demo-snippets/vue/BasicRaster.vue)
 
 {{ load:../../tools/readme/demos-and-development.md }}
 {{ load:../../tools/readme/questions.md }}
