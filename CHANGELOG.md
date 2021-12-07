@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.10](https://github.com/nativescript-community/ui-carto/compare/v1.8.9...v1.8.10) (2021-12-07)
+
+
+### Bug Fixes
+
+* don't commit lock file ([70fb58f](https://github.com/nativescript-community/ui-carto/commit/70fb58f3d6d6cdf1f24bb138e1781397035a4077))
+* download listener fix ([4a11674](https://github.com/nativescript-community/ui-carto/commit/4a1167470c82306b5d94256b67b01cae67cc18e0))
+* refactoring and cleanup of the routing services ([40d7c09](https://github.com/nativescript-community/ui-carto/commit/40d7c09278e25a14a0cfc4f10c628a0da617611b))
+* submodules remote location ([473a2e8](https://github.com/nativescript-community/ui-carto/commit/473a2e8e8c1c1252a9f3e0947372fd0194fc4e95))
+* support for rendererLayerFilter and clickHandlerLayerFilter ([12c133c](https://github.com/nativescript-community/ui-carto/commit/12c133c9d641e61382be87f7a47f93b5d61eec76))
+
+
+
+
+
 ## [1.8.9](https://github.com/nativescript-community/ui-carto/compare/v1.8.8...v1.8.9) (2021-11-25)
 
 

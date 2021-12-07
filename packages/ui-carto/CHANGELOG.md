@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.10](https://github.com/nativescript-community/ui-carto/compare/v1.8.9...v1.8.10) (2021-12-07)
+
+
+### Bug Fixes
+
+* refactoring and cleanup of the routing services ([40d7c09](https://github.com/nativescript-community/ui-carto/commit/40d7c09278e25a14a0cfc4f10c628a0da617611b))
+
+
+
+
+
 ## [1.8.9](https://github.com/nativescript-community/ui-carto/compare/v1.8.8...v1.8.9) (2021-11-25)
 
 **Note:** Version bump only for package @nativescript-community/ui-carto
