@@ -104,6 +104,17 @@ export interface VectorTileLayerOptions extends TileLayerOptions {
      * Default is VECTOR_TILE_RENDER_ORDER_LAYER.
      */
     buildingRenderOrder?: VectorTileRenderOrder;
+    /**
+     * Sets the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names.
+     * If non-empty, then only layers that pass the filter are rendered.
+     */
+    rendererLayerFilter?: string;
+
+    /**
+     * Sets the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names.
+     * If non-empty, then only layers that pass the filter are tested when handling clicks.
+     */
+    clickHandlerLayerFilter?: string;
 }
 
 export interface CartoOnlineVectorTileLayerOptions extends VectorTileLayerOptions {
@@ -159,6 +170,18 @@ export abstract class BaseVectorTileLayer<T, U extends TileLayerOptions> extends
      * disabled, the cache size should be reduced by the user to conserve memory.
      */
     tileCacheCapacity: number;
+
+    /**
+     * Sets the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names.
+     * If non-empty, then only layers that pass the filter are rendered.
+     */
+    rendererLayerFilter: string;
+
+    /**
+     * Sets the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names.
+     * If non-empty, then only layers that pass the filter are tested when handling clicks.
+     */
+    clickHandlerLayerFilter: string;
     setLabelRenderOrder(order: VectorTileRenderOrder): void;
     setBuildingRenderOrder(order: VectorTileRenderOrder);
     setVectorTileEventListener<T = DefaultLatLonKeys>(listener: VectorTileEventListener<T>, projection?: Projection, nativeClass?: any): void;
