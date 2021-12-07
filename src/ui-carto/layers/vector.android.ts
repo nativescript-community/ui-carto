@@ -70,6 +70,8 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
     @nativeProperty clickRadius: number;
     @nativeProperty labelRenderOrder: IVectorTileRenderOrder;
     @nativeProperty buildingRenderOrder: IVectorTileRenderOrder;
+    @nativeProperty rendererLayerFilter: string;
+    @nativeProperty clickHandlerLayerFilter: string;
     constructor(options) {
         super(options);
         for (const property of ['listener', 'nListener']) {

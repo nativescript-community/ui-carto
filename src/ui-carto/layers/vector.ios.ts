@@ -162,6 +162,8 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
     @nativeProperty clickRadius: number;
     @nativeProperty labelRenderOrder: IVectorTileRenderOrder;
     @nativeProperty buildingRenderOrder: IVectorTileRenderOrder;
+    @nativeProperty rendererLayerFilter: string;
+    @nativeProperty clickHandlerLayerFilter: string;
 
     setVectorTileEventListener(listener: IVectorTileEventListener | any, projection?: Projection, nativeClass = NTVectorTileEventListenerImpl) {
         if (listener) {
