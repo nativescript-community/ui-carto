@@ -40,7 +40,7 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
     onDownloadStarting(tileCount: number) {
         const owner = this._owner.get();
         if (owner && owner.onDownloadStarting) {
-            owner.onDownloadProgress(tileCount);
+            owner.onDownloadStarting(tileCount);
         }
     }
 }

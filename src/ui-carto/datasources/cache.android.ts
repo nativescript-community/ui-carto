@@ -52,7 +52,7 @@ export class PersistentCacheTileDataSource extends TileDataSource<com.carto.data
                 },
                 onDownloadStarting(tileCount: number) {
                     if (tileDownloadListener && tileDownloadListener.onDownloadStarting) {
-                        tileDownloadListener.onDownloadProgress(tileCount);
+                        tileDownloadListener.onDownloadStarting(tileCount);
                     }
                 }
             })
