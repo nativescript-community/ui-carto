@@ -1,8 +1,11 @@
+import type { RouteMatchingResult as IRouteMatchingResult, RoutingResult as IRoutingResult, RoutingInstruction, RoutingServiceOptions } from '.';
 import { BaseNative } from '../BaseNative';
-import { RouteMatchingResult as IRouteMatchingResult, RoutingResult as IRoutingResult, RoutingInstructionVector, RoutingServiceOptions } from '.';
+import { MapPosVector, NativeVector } from '../core';
 import { Projection } from '../projections';
-import { MapPosVector } from '../core';
+
 export abstract class BaseRoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {}
+
+export class RoutingInstructionVector extends NativeVector<RoutingInstruction> {}
 
 export class RoutingResult extends BaseNative<any, {}> implements IRoutingResult {
     constructor(native) {
