@@ -5,7 +5,6 @@ import {
     PackageManagerRoutingServiceOptions,
     PackageManagerValhallaRoutingServiceOptions,
     RouteMatchingRequest,
-    RoutingInstruction,
     RoutingRequest,
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
@@ -14,7 +13,8 @@ import {
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
-import { NativeVector } from '../core/index.ios';
+
+export * from './index.common';
 
 export enum RoutingAction {
     HEAD_ON = NTRoutingAction.T_ROUTING_ACTION_HEAD_ON,
@@ -35,7 +35,7 @@ export enum RoutingAction {
     GO_DOWN = NTRoutingAction.T_ROUTING_ACTION_GO_DOWN,
     WAIT = NTRoutingAction.T_ROUTING_ACTION_WAIT
 }
-abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
+export abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
     public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
         return new Promise((resolve, reject) => {
@@ -55,32 +55,30 @@ abstract class RoutingService<T extends NTRoutingService, U extends RoutingServi
     }
 }
 
-export class RoutingInstructionVector extends NativeVector<RoutingInstruction, NTRoutingInstructionVector> {}
-
-class PackageManagerRoutingService extends RoutingService<NTPackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
+export class PackageManagerRoutingService extends RoutingService<NTPackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
     createNative(options: PackageManagerRoutingServiceOptions) {
         return NTPackageManagerRoutingService.alloc().initWithPackageManager(options.packageManager.getNative());
     }
 }
 
-class SGREOfflineRoutingService extends RoutingService<NTSGREOfflineRoutingService, SGREOfflineRoutingServiceOptions> {
+export class SGREOfflineRoutingService extends RoutingService<NTSGREOfflineRoutingService, SGREOfflineRoutingServiceOptions> {
     createNative(options: SGREOfflineRoutingServiceOptions) {
         return NTSGREOfflineRoutingService.alloc().initWithProjectionFeatureCollectionConfig(options.projection.getNative(), options.features.getNative(), JSVariantToNative(options.config));
     }
 }
 
-class CartoOnlineRoutingService extends RoutingService<NTCartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
+export class CartoOnlineRoutingService extends RoutingService<NTCartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
     createNative(options: CartoOnlineRoutingServiceOptions) {
         return NTCartoOnlineRoutingService.alloc().initWithSource(options.source);
     }
 }
-class OSRMOfflineRoutingService extends RoutingService<NTOSRMOfflineRoutingService, OSRMOfflineRoutingServiceOptions> {
+export class OSRMOfflineRoutingService extends RoutingService<NTOSRMOfflineRoutingService, OSRMOfflineRoutingServiceOptions> {
     createNative(options: OSRMOfflineRoutingServiceOptions) {
         return NTOSRMOfflineRoutingService.alloc().initWithPath(options.path);
     }
 }
 
-class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
+export class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
     createNative(options: ValhallaOfflineRoutingServiceOptions) {
         return NTValhallaOfflineRoutingService.alloc().initWithPath(options.path);
     }
@@ -95,13 +93,13 @@ class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRout
     }
 }
 
-class ValhallaOnlineRoutingService extends RoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+export class ValhallaOnlineRoutingService extends RoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
         return NTValhallaOnlineRoutingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 
-class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
+export class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
         return NTPackageManagerValhallaRoutingService.alloc().initWithPackageManager(options.packageManager.getNative());
     }
@@ -116,15 +114,3 @@ class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManag
         });
     }
 }
-
-export {
-    RoutingService,
-    RoutingResult,
-    PackageManagerRoutingService,
-    SGREOfflineRoutingService,
-    OSRMOfflineRoutingService,
-    CartoOnlineRoutingService,
-    ValhallaOfflineRoutingService,
-    ValhallaOnlineRoutingService,
-    PackageManagerValhallaRoutingService
-};

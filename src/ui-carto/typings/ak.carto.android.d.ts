@@ -36,22 +36,6 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
-                export class AKCartoOnlineRoutingService extends com.carto.routing.CartoOnlineRoutingService {
-                    public static class: java.lang.Class<AKCartoOnlineRoutingService>;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor(param0: string);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
                 export class AKCartoPackageManager extends com.carto.packagemanager.CartoPackageManager {
                     public static class: java.lang.Class<AKCartoPackageManager>;
                     public constructor(param0: string, param1: string);
@@ -374,71 +358,6 @@ declare namespace com {
         }
     }
 }
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKOSMOfflineGeocodingService extends com.carto.geocoding.OSMOfflineGeocodingService {
-                    public static class: java.lang.Class<AKOSMOfflineGeocodingService>;
-                    public calculateAddressCallback(param0: com.carto.geocoding.GeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: string);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKOSMOfflineReverseGeocodingService extends com.carto.geocoding.OSMOfflineReverseGeocodingService {
-                    public static class: java.lang.Class<AKOSMOfflineReverseGeocodingService>;
-                    public constructor(param0: string);
-                    public constructor();
-                    public calculateAddressCallback(param0: com.carto.geocoding.ReverseGeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKOSRMOfflineRoutingService extends com.carto.routing.OSRMOfflineRoutingService {
-                    public static class: java.lang.Class<AKOSRMOfflineRoutingService>;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor(param0: string);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKPackageManagerGeocodingService extends com.carto.geocoding.PackageManagerGeocodingService {
-                    public static class: java.lang.Class<AKPackageManagerGeocodingService>;
-                    public calculateAddressCallback(param0: com.carto.geocoding.GeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: com.carto.packagemanager.PackageManager);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
 declare namespace com {
     export namespace akylas {
         export namespace carto {
@@ -494,148 +413,17 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
-                export class AKPackageManagerReverseGeocodingService extends com.carto.geocoding.PackageManagerReverseGeocodingService {
-                    public static class: java.lang.Class<AKPackageManagerReverseGeocodingService>;
-                    public constructor(param0: com.carto.packagemanager.PackageManager);
-                    public constructor();
-                    public calculateAddressCallback(param0: com.carto.geocoding.ReverseGeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKPackageManagerRoutingService extends com.carto.routing.PackageManagerRoutingService {
-                    public static class: java.lang.Class<AKPackageManagerRoutingService>;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor(param0: com.carto.packagemanager.PackageManager);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKPackageManagerValhallaRoutingService extends com.carto.routing.PackageManagerValhallaRoutingService {
-                    public static class: java.lang.Class<AKPackageManagerValhallaRoutingService>;
-                    public matchRouteCallback(param0: com.carto.routing.RouteMatchingRequest, param1: RoutingServiceRouteMatchingCallback): void;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor(param0: com.carto.packagemanager.PackageManager);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKPeliasOnlineGeocodingService extends com.carto.geocoding.PeliasOnlineGeocodingService {
-                    public static class: java.lang.Class<AKPeliasOnlineGeocodingService>;
-                    public calculateAddressCallback(param0: com.carto.geocoding.GeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: string);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKPeliasOnlineReverseGeocodingService extends com.carto.geocoding.PeliasOnlineReverseGeocodingService {
-                    public static class: java.lang.Class<AKPeliasOnlineReverseGeocodingService>;
-                    public constructor(param0: string);
-                    public constructor();
-                    public calculateAddressCallback(param0: com.carto.geocoding.ReverseGeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
-                    public static class: java.lang.Class<AKReverseGeocodingService>;
-                    public constructor();
-                    public calculateAddressCallback(param0: com.carto.geocoding.ReverseGeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKRoutingService extends com.carto.routing.RoutingService {
-                    public static class: java.lang.Class<AKRoutingService>;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
                 export class AKRoutingServiceAdditions extends java.lang.Object {
                     public static class: java.lang.Class<AKRoutingServiceAdditions>;
                     public constructor();
                     public static matchRoute(
-                        param0: com.carto.routing.ValhallaOfflineRoutingService,
-                        param1: com.carto.routing.RouteMatchingRequest,
-                        param2: RoutingServiceRouteMatchingCallback
+                        service: com.carto.routing.PackageManagerValhallaRoutingService | com.carto.routing.ValhallaOfflineRoutingService,
+                        request: com.carto.routing.RouteMatchingRequest,
+                        profile: string,
+                        callback: RoutingServiceRouteMatchingCallback
                     ): void;
-                    public static matchRoute(
-                        param0: com.carto.routing.PackageManagerValhallaRoutingService,
-                        param1: com.carto.routing.RouteMatchingRequest,
-                        param2: RoutingServiceRouteMatchingCallback
-                    ): void;
-                    public static calculateRoute(param0: com.carto.routing.RoutingService, param1: com.carto.routing.RoutingRequest, param2: RoutingServiceRouteCallback): void;
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKSGREOfflineRoutingService extends com.carto.routing.SGREOfflineRoutingService {
-                    public static class: java.lang.Class<AKSGREOfflineRoutingService>;
-                    public constructor(param0: com.carto.core.Variant, param1: com.carto.core.Variant);
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor();
-                    public constructor(param0: com.carto.projections.Projection, param1: com.carto.geometry.FeatureCollection, param2: com.carto.core.Variant);
-                    public constructor(param0: number, param1: boolean);
+                    public static calculateRoute(param0: com.carto.routing.RoutingService, param1: com.carto.routing.RoutingRequest, profile: string, param2: RoutingServiceRouteCallback): void;
+                    public static routingResultToJSON(param0: com.carto.routing.RoutingResult, param2: RoutingResultToJSONCallback): void;
                 }
             }
         }
@@ -706,39 +494,6 @@ declare namespace com {
                     public constructor(param0: string);
                     public constructor();
                     public calculateAddressCallback(param0: com.carto.geocoding.ReverseGeocodingRequest, param1: GeocodingServiceAddressCallback): void;
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKValhallaOfflineRoutingService extends com.carto.routing.ValhallaOfflineRoutingService {
-                    public static class: java.lang.Class<AKValhallaOfflineRoutingService>;
-                    public matchRouteCallback(param0: com.carto.routing.RouteMatchingRequest, param1: RoutingServiceRouteMatchingCallback): void;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor(param0: string);
-                    public constructor();
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKValhallaOnlineRoutingService extends com.carto.routing.ValhallaOnlineRoutingService {
-                    public static class: java.lang.Class<AKValhallaOnlineRoutingService>;
-                    public calculateRouteCallback(param0: com.carto.routing.RoutingRequest, param1: RoutingServiceRouteCallback): void;
-                    public constructor(param0: string);
-                    public constructor();
                     public constructor(param0: number, param1: boolean);
                 }
             }
@@ -1023,6 +778,15 @@ declare namespace com {
                     public constructor(implementation: { onRoutingResult(param0: java.lang.Exception, param1: com.carto.routing.RoutingResult): void });
                     public constructor();
                     public onRoutingResult(param0: java.lang.Exception, param1: com.carto.routing.RoutingResult): void;
+                }
+                export class RoutingResultToJSONCallback extends java.lang.Object {
+                    public static class: java.lang.Class<RoutingResultToJSONCallback>;
+                    /**
+                     * Constructs a new instance of the com.akylas.carto.additions.RoutingResultToJSONCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                     */
+                    public constructor(implementation: { onJSON(param0: java.lang.Exception, param1: string): void });
+                    public constructor();
+                    public onJSON(param0: java.lang.Exception, param1: string): void;
                 }
             }
         }
