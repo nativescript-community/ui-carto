@@ -49,9 +49,7 @@ public class AKRoutingServiceAdditions {
             public void run() {
                 RoutingResult result = null;
                 try {
-                    Log.d("JS", "setProfile " + profile);
                     service.setProfile(profile);
-                    Log.d("JS", "calculateRoute " + request);
                     result = service.calculateRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
