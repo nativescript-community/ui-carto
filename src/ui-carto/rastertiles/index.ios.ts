@@ -2,7 +2,7 @@ import { nativeProperty } from '../index.common';
 import { BaseNative } from '../BaseNative';
 import { MapPos, toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
-import { MapBoxElevationDataDecoderOptions, TerrariumElevationDataDecoderOptions } from '.';
+// import { MapBoxElevationDataDecoderOptions, TerrariumElevationDataDecoderOptions } from '.';
 
 // export class MapBoxElevationDataDecoder extends BaseNative<com.carto.rastertiles.MapBoxElevationDataDecoder, MapBoxElevationDataDecoderOptions> {
 //     createNative(options: MapBoxElevationDataDecoderOptions) {

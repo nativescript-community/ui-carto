@@ -3,6 +3,359 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.11](https://github.com/nativescript-community/ui-carto/compare/v1.8.10...v1.8.11) (2022-01-20)
+
+
+### Bug Fixes
+
+* `Layers` fix ([38f1065](https://github.com/nativescript-community/ui-carto/commit/38f1065f863e56b569456ce344ed49e4a8605742))
+* `reloadStyle` and missing `MBVectorTileDecoder` ([7b054f9](https://github.com/nativescript-community/ui-carto/commit/7b054f93c556d609af731aba46c0a7eb61bd6736))
+* scheme ([d748bcf](https://github.com/nativescript-community/ui-carto/commit/d748bcf3e9531c1165dbbc8de185494a53977b97))
+* scheme support for `MBTilesTileDataSource` ([6643e78](https://github.com/nativescript-community/ui-carto/commit/6643e78b1d30c5f8df6550a8f9de12e4b9bed85e))
+
+
+### Features
+
+* `defaultLayerBuffer` support for `GeoJSONVectorTileDataSource` ([a9428ee](https://github.com/nativescript-community/ui-carto/commit/a9428ee979a08a1a02cec5d227087b9d1dbfc16c))
+
+
+
+
+
+## [1.8.10](https://github.com/nativescript-community/ui-carto/compare/v1.8.9...v1.8.10) (2021-12-07)
+
+
+### Bug Fixes
+
+* don't commit lock file ([70fb58f](https://github.com/nativescript-community/ui-carto/commit/70fb58f3d6d6cdf1f24bb138e1781397035a4077))
+* download listener fix ([4a11674](https://github.com/nativescript-community/ui-carto/commit/4a1167470c82306b5d94256b67b01cae67cc18e0))
+* refactoring and cleanup of the routing services ([40d7c09](https://github.com/nativescript-community/ui-carto/commit/40d7c09278e25a14a0cfc4f10c628a0da617611b))
+* submodules remote location ([473a2e8](https://github.com/nativescript-community/ui-carto/commit/473a2e8e8c1c1252a9f3e0947372fd0194fc4e95))
+* support for rendererLayerFilter and clickHandlerLayerFilter ([12c133c](https://github.com/nativescript-community/ui-carto/commit/12c133c9d641e61382be87f7a47f93b5d61eec76))
+
+
+
+
+
+## [1.8.9](https://github.com/nativescript-community/ui-carto/compare/v1.8.8...v1.8.9) (2021-11-25)
+
+
+### Bug Fixes
+
+* ensure we create the nativeView if not created ([9a56ab1](https://github.com/nativescript-community/ui-carto/commit/9a56ab19ce82bc0d1eca3517498d5c1e8a583d08))
+
+
+
+
+
+## [1.8.8](https://github.com/nativescript-community/ui-carto/compare/v1.8.7...v1.8.8) (2021-11-25)
+
+
+### Bug Fixes
+
+* **ios:** typo error on MapPosVector and MapPosVectorVector ([9376ca2](https://github.com/nativescript-community/ui-carto/commit/9376ca2fc2a3b3cae6c603456f782e38820b5db7))
+* typings fix ([ba5d68f](https://github.com/nativescript-community/ui-carto/commit/ba5d68fe069282e846e5a105f651a56a5934a065))
+
+
+
+
+
+## [1.8.7](https://github.com/nativescript-community/ui-carto/compare/v1.8.6...v1.8.7) (2021-11-24)
+
+
+### Bug Fixes
+
+* allow vector listeners custom native class ([259ddcb](https://github.com/nativescript-community/ui-carto/commit/259ddcb57599c8cc8f923c820e73a70c37345d25))
+* **ios:**  VectorElementVector fix ([8b13e98](https://github.com/nativescript-community/ui-carto/commit/8b13e98818d6e144317a181046aa5152673c7503))
+* protect against memory leaks ([288bd5c](https://github.com/nativescript-community/ui-carto/commit/288bd5c8fdcd897406944f8d804b0aaa10219040))
+
+
+
+
+
+## [1.8.6](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.5...v1.8.6) (2021-11-16)
+
+
+### Bug Fixes
+
+* regression fix ([ec6b7b7](https://github.com/farfromrefug/nativescript-carto/commit/ec6b7b7745e47edac4823dfe7298085d51be609e))
+
+
+
+
+
+## [1.8.5](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.4...v1.8.5) (2021-11-10)
+
+
+### Bug Fixes
+
+* fix for circular reference (this time working) ([9f5a986](https://github.com/farfromrefug/nativescript-carto/commit/9f5a9861aec3b1ebaecbe6f7ae4ec808a761a7f7))
+* refactor to avoid import circular references ([546852b](https://github.com/farfromrefug/nativescript-carto/commit/546852b939e2d1d8f2e932e8638cd93ea676edeb))
+* **android:** native-api-usage optimisation ([177576b](https://github.com/farfromrefug/nativescript-carto/commit/177576babe8c12c95f068bf6dd42ef5a53533bc3))
+
+
+
+
+
+## [1.8.4](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.3...v1.8.4) (2021-10-15)
+
+
+### Bug Fixes
+
+* **android:** another cluster fix ([cc6ac56](https://github.com/farfromrefug/nativescript-carto/commit/cc6ac56b83ec54039a234a96119fe380440a9cec))
+
+
+
+
+
+## [1.8.3](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.2...v1.8.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* **android:** cluster fix ([0874974](https://github.com/farfromrefug/nativescript-carto/commit/0874974616dfa653d82431d4590fb6cad88841a7))
+
+
+
+
+
+## [1.8.2](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.1...v1.8.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* cluster images fix (scale) ([a3934ca](https://github.com/farfromrefug/nativescript-carto/commit/a3934cae28dfb98f825a79288f5893f86de1ccda))
+* missing font typing for ClusterElementBuilderOptions ([84dc4cf](https://github.com/farfromrefug/nativescript-carto/commit/84dc4cfbff78278bb5a10f23dde58cb30a67c675))
+* prevent error on null image proeprties ([8ba8d92](https://github.com/farfromrefug/nativescript-carto/commit/8ba8d925ca709c0fa5b6b78148e79e8f0e47657b))
+
+
+
+
+
+## [1.8.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.8.0...v1.8.1) (2021-10-09)
+
+
+### Features
+
+* ClusteredVectorLayer `expandCluster` ([ac43e41](https://github.com/farfromrefug/nativescript-carto/commit/ac43e41124b8128997bd1d197edf930ce15d211d))
+
+
+
+
+
+# [1.8.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.3...v1.8.0) (2021-10-08)
+
+
+### Bug Fixes
+
+* **android:** regression fix ([5e36f77](https://github.com/farfromrefug/nativescript-carto/commit/5e36f77732a541bfa1bc3bef3c011c0aef2463a0))
+
+
+### Features
+
+* cluster support for reporting cluster bbox ([a9e536d](https://github.com/farfromrefug/nativescript-carto/commit/a9e536dd86cbf9981438e5e19b0068d9c62ab703))
+
+
+
+
+
+## [1.7.3](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.2...v1.7.3) (2021-10-07)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.7.2](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.1...v1.7.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* fully working clusters ([119dc16](https://github.com/farfromrefug/nativescript-carto/commit/119dc16e8fa83967a8a778441bb198a5587e8b6a))
+* LocalVectorLayer addFeatureCollection fix ([48d5fea](https://github.com/farfromrefug/nativescript-carto/commit/48d5fead8d39d2c6efe17ee508b81eb169a374c2))
+* use MapRange as array everywhere ([d9adf2b](https://github.com/farfromrefug/nativescript-carto/commit/d9adf2be393f7cced339c381be0ae8c291a6fea8))
+* **android:** native-api-usage ([c67b863](https://github.com/farfromrefug/nativescript-carto/commit/c67b863e7e67d9a9760436ecab807b836064c818))
+* **ios:** cluster layer in pair with android ([65f5990](https://github.com/farfromrefug/nativescript-carto/commit/65f59901684a8c7b72504f2cca654fab2082d6cf))
+
+
+
+
+
+## [1.7.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.7.0...v1.7.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* **ios:** fixed isLocationOnPath and distanceToEnd ([bc61e1b](https://github.com/farfromrefug/nativescript-carto/commit/bc61e1bab2300cfdd3b34d61c5cffc8258122946))
+* **ios:** support setRunOnMainThread (true by default) ([db7fde9](https://github.com/farfromrefug/nativescript-carto/commit/db7fde903b7386228404ba5ba46d031cb9d5a7d9))
+
+
+
+
+
+# [1.7.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.4...v1.7.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* events update ([18c7345](https://github.com/farfromrefug/nativescript-carto/commit/18c73452e99e6c2ab082df2daa26b960b2b5d393))
+* **android:** isLocationOnPath fix ([6f205ae](https://github.com/farfromrefug/nativescript-carto/commit/6f205ae17d12e35f7f3803293ca0b96f5e4fa9ad))
+
+
+### Features
+
+* GeoJSONVectorTileDataSource.setLayerGeoJSONString ([9aef5eb](https://github.com/farfromrefug/nativescript-carto/commit/9aef5eb971bf8d471340604f1375bec5f03abc60))
+* GeoJSONVectorTileDataSource.simplifyTolerance ([fcec86d](https://github.com/farfromrefug/nativescript-carto/commit/fcec86d4918a8968173835191a43abe181403fe2))
+* Geometry.writeGeometry ([d589f10](https://github.com/farfromrefug/nativescript-carto/commit/d589f1092e86130a0cbf9e221592e8e3f5d5a417))
+* **ios:** isLocationOnPath ([a51f8b1](https://github.com/farfromrefug/nativescript-carto/commit/a51f8b173008b41577037f51f54a872403d82496))
+
+
+
+
+
+## [1.6.4](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.3...v1.6.4) (2021-08-16)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.6.3](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.2...v1.6.3) (2021-08-16)
+
+
+### Bug Fixes
+
+* update for latest sdk ([a70a592](https://github.com/farfromrefug/nativescript-carto/commit/a70a59230d63da42921803f9b676130ad791c548))
+* update to latest native SDK ([e6fa7a6](https://github.com/farfromrefug/nativescript-carto/commit/e6fa7a6b2d0ec0b921e3dd532008623e9686b42d))
+
+
+
+
+
+## [1.6.2](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.1...v1.6.2) (2021-07-30)
+
+
+### Bug Fixes
+
+* update ios dep ([737f5f7](https://github.com/farfromrefug/nativescript-carto/commit/737f5f739318175fbc678f371fa6284673af2c9e))
+* updated version ([66c36df](https://github.com/farfromrefug/nativescript-carto/commit/66c36df0886d8ede04f21403125b5d33643bb6a3))
+
+
+
+
+
+## [1.6.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.6.0...v1.6.1) (2021-07-21)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+# [1.6.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.5.1...v1.6.0) (2021-07-19)
+
+
+### Bug Fixes
+
+* geocoding autocomplete fix ([8f2a5e5](https://github.com/farfromrefug/nativescript-carto/commit/8f2a5e5942a1e1bc7bbd7f10a7683fb54727cc75))
+* marker allow dynamic values change ([cf97f06](https://github.com/farfromrefug/nativescript-carto/commit/cf97f064cc2c9602c16ca6c1e05394cb7c6b7d7c))
+* missing refresh signature ([38210be](https://github.com/farfromrefug/nativescript-carto/commit/38210be1a79cb97498a653c19cd774d7bb1aa7d8))
+* routing ensure we use the correct profile ([4fcdd42](https://github.com/farfromrefug/nativescript-carto/commit/4fcdd42d5b09804bd466cd4a76a3894f621eebfc))
+
+
+### Features
+
+* **android:** support for GLTextureView ([1d7838d](https://github.com/farfromrefug/nativescript-carto/commit/1d7838d82eb6d324ad3b2baeb0dd0bb8f7c05ad7))
+* borderWidth for text ([c3085dc](https://github.com/farfromrefug/nativescript-carto/commit/c3085dc356cc70fecce7941db82553c20aa5bc86))
+
+
+
+
+
+## [1.5.1](https://github.com/farfromrefug/nativescript-carto/compare/v1.5.0...v1.5.1) (2021-05-14)
+
+
+### Bug Fixes
+
+* **ios:** calculateRoute customOptions ([4c13d1b](https://github.com/farfromrefug/nativescript-carto/commit/4c13d1b5b4832522711a1c2d52238990330751b8))
+* faster variant from and to ([53a418c](https://github.com/farfromrefug/nativescript-carto/commit/53a418c9d0d8d80d3e2fbbe0525b2e1ae9013685))
+* **ios:** findFeatures callback fix ([33bfab2](https://github.com/farfromrefug/nativescript-carto/commit/33bfab2ab1c17433cc66b79503105c166f5038ef))
+
+
+### Features
+
+* feature as geojson ([a6fd597](https://github.com/farfromrefug/nativescript-carto/commit/a6fd59731726e5a20eb5f82e9dacff58d96d039d))
+* maptiler online source ([274f6b8](https://github.com/farfromrefug/nativescript-carto/commit/274f6b8d02a24c30ed727faa44b06b5bd1a01345))
+
+
+
+
+
+# [1.5.0](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.11...v1.5.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* getter fix ([d9acc61](https://github.com/farfromrefug/nativescript-carto/commit/d9acc6114132445efc007c1649ec5308e6fbbe56))
+* HTTPTileDataSource inheritance ([fd4e37f](https://github.com/farfromrefug/nativescript-carto/commit/fd4e37fb202a9c7c5f34e309154b10daa9056403))
+* raster fix ([10e80f5](https://github.com/farfromrefug/nativescript-carto/commit/10e80f59c469bab442b6beb589a20eb8fb953200))
+* return colors as Color ([bc41a60](https://github.com/farfromrefug/nativescript-carto/commit/bc41a600baffb4e60adc6fd3e84d3882486a04b6))
+* typings fix ([e63c0f9](https://github.com/farfromrefug/nativescript-carto/commit/e63c0f9e59134a117342f519394252b294806930))
+* wrong MBTilesTileDataSource parent class ([672289f](https://github.com/farfromrefug/nativescript-carto/commit/672289fa3655caa9f89bba6c601f3ed2d637206f))
+* **ios:** missing build flag ([d491e11](https://github.com/farfromrefug/nativescript-carto/commit/d491e118ff885024430d24571cbb638a0bb426c2))
+
+
+### Features
+
+* loadTile method ([23cb150](https://github.com/farfromrefug/nativescript-carto/commit/23cb150febe045623457db5d90e458abe7aeb0b6))
+* map getZoom ([3b497d6](https://github.com/farfromrefug/nativescript-carto/commit/3b497d68422075a91522f2b873c51fabbb4762dd))
+* raster layer click ([951e2d0](https://github.com/farfromrefug/nativescript-carto/commit/951e2d03df0073d7d387120215a325ef07d459d9))
+* stopAllDownloads ([22e6a96](https://github.com/farfromrefug/nativescript-carto/commit/22e6a967a4ea5f0bfe1bf98f6bd08033c0ddd0ea))
+
+
+
+
+
+## [1.4.11](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.10...v1.4.11) (2021-01-16)
+
+
+### Bug Fixes
+
+* prevent errors in production ([dde312f](https://github.com/farfromrefug/nativescript-carto/commit/dde312f5ed6993d3a15fa85f709447eca3e725d0))
+
+
+
+
+
+## [1.4.10](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.9...v1.4.10) (2021-01-15)
+
+
+### Bug Fixes
+
+* a lot of fixes and improvements ([c35ecb1](https://github.com/farfromrefug/nativescript-carto/commit/c35ecb112d8c44b11f8471051b2ae64c6bacb526))
+
+
+
+
+
+## [1.4.9](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.8...v1.4.9) (2020-11-20)
+
+
+### Bug Fixes
+
+* toJSON for MapBounds ([c52ce64](https://github.com/farfromrefug/nativescript-carto/commit/c52ce6435dd8f7c9e3c690453f8a1c392855c0e3))
+
+
+### Features
+
+* geometry features ([c818cec](https://github.com/farfromrefug/nativescript-carto/commit/c818cec62e22684e3f860346f73bc4f7744a7b99))
+
+
+
+
+
 ## [1.4.8](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.7...v1.4.8) (2020-11-02)
 
 

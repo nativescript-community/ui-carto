@@ -3,6 +3,263 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.11](https://github.com/nativescript-community/ui-carto/compare/v1.8.10...v1.8.11) (2022-01-20)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.8.10](https://github.com/nativescript-community/ui-carto/compare/v1.8.9...v1.8.10) (2021-12-07)
+
+
+### Bug Fixes
+
+* refactoring and cleanup of the routing services ([40d7c09](https://github.com/nativescript-community/ui-carto/commit/40d7c09278e25a14a0cfc4f10c628a0da617611b))
+
+
+
+
+
+## [1.8.9](https://github.com/nativescript-community/ui-carto/compare/v1.8.8...v1.8.9) (2021-11-25)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.8.8](https://github.com/nativescript-community/ui-carto/compare/v1.8.7...v1.8.8) (2021-11-25)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.8.7](https://github.com/nativescript-community/ui-carto/compare/v1.8.6...v1.8.7) (2021-11-24)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.8.6](https://github.com/nativescript-community/ui-carto/compare/v1.8.5...v1.8.6) (2021-11-16)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.8.5](https://github.com/nativescript-community/ui-carto/compare/v1.8.4...v1.8.5) (2021-11-10)
+
+
+### Bug Fixes
+
+* **android:** native-api-usage optimisation ([177576b](https://github.com/nativescript-community/ui-carto/commit/177576babe8c12c95f068bf6dd42ef5a53533bc3))
+
+
+
+
+
+## [1.8.4](https://github.com/nativescript-community/ui-carto/compare/v1.8.3...v1.8.4) (2021-10-15)
+
+
+### Bug Fixes
+
+* **android:** another cluster fix ([cc6ac56](https://github.com/nativescript-community/ui-carto/commit/cc6ac56b83ec54039a234a96119fe380440a9cec))
+
+
+
+
+
+## [1.8.3](https://github.com/nativescript-community/ui-carto/compare/v1.8.2...v1.8.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* **android:** cluster fix ([0874974](https://github.com/nativescript-community/ui-carto/commit/0874974616dfa653d82431d4590fb6cad88841a7))
+
+
+
+
+
+## [1.8.2](https://github.com/nativescript-community/ui-carto/compare/v1.8.1...v1.8.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* cluster images fix (scale) ([a3934ca](https://github.com/nativescript-community/ui-carto/commit/a3934cae28dfb98f825a79288f5893f86de1ccda))
+
+
+
+
+
+## [1.8.1](https://github.com/nativescript-community/ui-carto/compare/v1.8.0...v1.8.1) (2021-10-09)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+# [1.8.0](https://github.com/nativescript-community/ui-carto/compare/v1.7.3...v1.8.0) (2021-10-08)
+
+
+### Features
+
+* cluster support for reporting cluster bbox ([a9e536d](https://github.com/nativescript-community/ui-carto/commit/a9e536dd86cbf9981438e5e19b0068d9c62ab703))
+
+
+
+
+
+## [1.7.3](https://github.com/nativescript-community/ui-carto/compare/v1.7.2...v1.7.3) (2021-10-07)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.7.2](https://github.com/nativescript-community/ui-carto/compare/v1.7.1...v1.7.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* fully working clusters ([119dc16](https://github.com/nativescript-community/ui-carto/commit/119dc16e8fa83967a8a778441bb198a5587e8b6a))
+* **android:** native-api-usage ([c67b863](https://github.com/nativescript-community/ui-carto/commit/c67b863e7e67d9a9760436ecab807b836064c818))
+* **ios:** cluster layer in pair with android ([65f5990](https://github.com/nativescript-community/ui-carto/commit/65f59901684a8c7b72504f2cca654fab2082d6cf))
+
+
+
+
+
+## [1.7.1](https://github.com/nativescript-community/ui-carto/compare/v1.7.0...v1.7.1) (2021-09-29)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+# [1.7.0](https://github.com/nativescript-community/ui-carto/compare/v1.6.4...v1.7.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* **android:** isLocationOnPath fix ([6f205ae](https://github.com/nativescript-community/ui-carto/commit/6f205ae17d12e35f7f3803293ca0b96f5e4fa9ad))
+
+
+### Features
+
+* **ios:** isLocationOnPath ([a51f8b1](https://github.com/nativescript-community/ui-carto/commit/a51f8b173008b41577037f51f54a872403d82496))
+
+
+
+
+
+## [1.6.4](https://github.com/nativescript-community/ui-carto/compare/v1.6.3...v1.6.4) (2021-08-16)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.6.3](https://github.com/nativescript-community/ui-carto/compare/v1.6.2...v1.6.3) (2021-08-16)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.6.2](https://github.com/nativescript-community/ui-carto/compare/v1.6.1...v1.6.2) (2021-07-30)
+
+
+### Bug Fixes
+
+* update ios dep ([737f5f7](https://github.com/nativescript-community/ui-carto/commit/737f5f739318175fbc678f371fa6284673af2c9e))
+* updated version ([66c36df](https://github.com/nativescript-community/ui-carto/commit/66c36df0886d8ede04f21403125b5d33643bb6a3))
+
+
+
+
+
+## [1.6.1](https://github.com/nativescript-community/ui-carto/compare/v1.6.0...v1.6.1) (2021-07-21)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+# [1.6.0](https://github.com/nativescript-community/ui-carto/compare/v1.5.1...v1.6.0) (2021-07-19)
+
+
+### Features
+
+* **android:** support for GLTextureView ([1d7838d](https://github.com/nativescript-community/ui-carto/commit/1d7838d82eb6d324ad3b2baeb0dd0bb8f7c05ad7))
+
+
+
+
+
+## [1.5.1](https://github.com/nativescript-community/ui-carto/compare/v1.5.0...v1.5.1) (2021-05-14)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+# [1.5.0](https://github.com/nativescript-community/ui-carto/compare/v1.4.11...v1.5.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* **ios:** missing build flag ([d491e11](https://github.com/nativescript-community/ui-carto/commit/d491e118ff885024430d24571cbb638a0bb426c2))
+
+
+### Features
+
+* raster layer click ([951e2d0](https://github.com/nativescript-community/ui-carto/commit/951e2d03df0073d7d387120215a325ef07d459d9))
+
+
+
+
+
+## [1.4.11](https://github.com/nativescript-community/ui-carto/compare/v1.4.10...v1.4.11) (2021-01-16)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
+## [1.4.10](https://github.com/nativescript-community/ui-carto/compare/v1.4.9...v1.4.10) (2021-01-15)
+
+
+### Bug Fixes
+
+* a lot of fixes and improvements ([c35ecb1](https://github.com/nativescript-community/ui-carto/commit/c35ecb112d8c44b11f8471051b2ae64c6bacb526))
+
+
+
+
+
+## [1.4.9](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.8...v1.4.9) (2020-11-20)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
 ## [1.4.8](https://github.com/farfromrefug/nativescript-carto/compare/v1.4.7...v1.4.8) (2020-11-02)
 
 

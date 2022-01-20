@@ -4,6 +4,7 @@ import { nativeProperty } from '../';
 import { Projection } from '../projections';
 import { fromNativeMapPos } from '../core';
 import { Color } from '@nativescript/core';
+import { nativeColorProperty } from '../index.ios';
 
 @NativeClass
 export class NTRasterTileEventListenerImpl extends NTRasterTileEventListener {
@@ -70,17 +71,12 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlin
     }
 }
 
-// export class HillshadeRasterTileLayer extends RasterTileLayerBase<NTHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
-//     @nativeProperty heightScale: number;
-//     @nativeProperty contrast: number;
-//      @nativeMapVecProperty illuminationDirection: MapVec | [number, number, number];
-//     createNative(options) {
-//         if (options.decoder) {
-//             return new NTHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());
-
-//         } else {
-//             return new NTHillshadeRasterTileLayer(options.dataSource.getNative());
-
-//         }
-//     }
-// }
+export class HillshadeRasterTileLayer extends RasterTileLayerBase<NTHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
+    @nativeProperty heightScale: number;
+    @nativeProperty contrast: number;
+    @nativeProperty illuminationDirection: number;
+    @nativeColorProperty highlightColor: string | Color;
+    createNative(options) {
+        return new NTHillshadeRasterTileLayer(options.dataSource.getNative());
+    }
+}
