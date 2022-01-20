@@ -34,8 +34,11 @@ export class CombinedTileDataSource<T, U extends CombinedTileDataSourceOptions> 
 
 export interface GeoJSONVectorTileDataSourceOptions extends TileDataSourceOptions {
     simplifyTolerance?: number;
+    defaultLayerBuffer?: number;
 }
 export class GeoJSONVectorTileDataSource extends TileDataSource<any, GeoJSONVectorTileDataSourceOptions> {
+    simplifyTolerance: number;
+    defaultLayerBuffer: number;
     createLayer(name: string): number;
     deleteLayer(index: number);
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection);
