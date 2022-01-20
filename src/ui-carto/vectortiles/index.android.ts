@@ -2,7 +2,7 @@ import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
 import { File } from '@nativescript/core/file-system';
 import { BaseVectorTileDecoder } from './index.common';
 import { getFileName, getRelativePathToApp } from '../index.common';
-import { DirAssetPackage } from '../utils';
+import { DirAssetPackage, nativeVectorToArray } from '../utils';
 import { profile } from '@nativescript/core';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
@@ -55,7 +55,52 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
         return this.options.style;
     }
 
+    reloadStyle() {
+        if (this.native) {
+            if (this.pack) {
+                if (this.options.style) {
+                    this.getNative().setCompiledStyleSet(new com.carto.styles.CompiledStyleSet(this.pack, this.options.style));
+                } else if (this.options.cartoCss) {
+                    this.getNative().setCartoCSSStyleSet(new com.carto.styles.CartoCSSStyleSet(this.options.cartoCss, this.pack));
+                }
+            } else if (this.options.cartoCss) {
+                this.getNative().setCartoCSSStyleSet(new com.carto.styles.CartoCSSStyleSet(this.options.cartoCss));
+            }
+        }
+    }
+
     setStyleParameter(param: string, value: string) {
         this.getNative().setStyleParameter(param, value);
+    }
+    setCartoCSSStyleSet(cartoCss: string) {
+        if (this.pack) {
+            this.getNative().setCartoCSSStyleSet(new com.carto.styles.CartoCSSStyleSet(cartoCss, this.pack));
+        } else {
+            this.getNative().setCartoCSSStyleSet(new com.carto.styles.CartoCSSStyleSet(cartoCss));
+        }
+    }
+    setCompiledStyleSet(param0: com.carto.styles.CompiledStyleSet) {
+        this.getNative().setCompiledStyleSet(param0);
+    }
+    getCompiledStyleSet() {
+        return this.getNative().getCompiledStyleSet();
+    }
+    getCartoCSSStyleSet() {
+        return this.getNative().getCartoCSSStyleSet();
+    }
+    getStyleParameter(param0: string) {
+        return this.getNative().getStyleParameter(param0);
+    }
+    getStyleParameters() {
+        return nativeVectorToArray(this.getNative().getStyleParameters());
+    }
+    addFallbackFont(param0: com.carto.core.BinaryData) {
+        return this.getNative().addFallbackFont(param0);
+    }
+    getMinZoom() {
+        return this.getNative().getMinZoom();
+    }
+    getMaxZoom() {
+        return this.getNative().getMaxZoom();
     }
 }

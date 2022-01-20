@@ -1,4 +1,4 @@
-import { DirAssetPackage } from '../utils';
+import { DirAssetPackage, nativeVectorToArray } from '../utils';
 import { File } from '@nativescript/core/file-system';
 import { getFileName, getRelativePathToApp } from '../index.common';
 import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
@@ -57,7 +57,53 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
         return this.options.style;
     }
 
+    reloadStyle() {
+        if (this.native) {
+            if (this.pack) {
+                if (this.options.style) {
+                    this.getNative().setCompiledStyleSet(NTCompiledStyleSet.alloc().initWithAssetPackageStyleName(this.pack, this.options.style));
+                } else if (this.options.cartoCss) {
+                    this.getNative().setCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSSAssetPackage(this.options.cartoCss, this.pack));
+                }
+            } else if (this.options.cartoCss) {
+                this.getNative().setCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSS(this.options.cartoCss));
+            }
+        }
+    }
+
     setStyleParameter(param: string, value: string) {
         this.getNative().setStyleParameterValue(param, value);
+    }
+    setCartoCSSStyleSet(cartoCss: string) {
+        this.options.cartoCss = cartoCss;
+        if (this.pack) {
+            this.getNative().setCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSSAssetPackage(cartoCss, this.pack));
+        } else {
+            this.getNative().setCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSS(cartoCss));
+        }
+    }
+    setCompiledStyleSet(param0: NTCompiledStyleSet) {
+        this.getNative().setCompiledStyleSet(param0);
+    }
+    getCompiledStyleSet() {
+        return this.getNative().getCompiledStyleSet();
+    }
+    getCartoCSSStyleSet() {
+        return this.getNative().getCartoCSSStyleSet();
+    }
+    getStyleParameter(param0: string) {
+        return this.getNative().getStyleParameter(param0);
+    }
+    getStyleParameters() {
+        return nativeVectorToArray(this.getNative().getStyleParameters());
+    }
+    addFallbackFont(param0: NTBinaryData) {
+        return this.getNative().addFallbackFont(param0);
+    }
+    getMinZoom() {
+        return this.getNative().getMinZoom();
+    }
+    getMaxZoom() {
+        return this.getNative().getMaxZoom();
     }
 }
