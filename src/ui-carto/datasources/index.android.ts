@@ -59,6 +59,7 @@ export class MergedMBVTTileDataSource extends TileDataSource<com.carto.datasourc
 
 export class GeoJSONVectorTileDataSource extends TileDataSource<com.carto.datasources.GeoJSONVectorTileDataSource, GeoJSONVectorTileDataSourceOptions> {
     @nativeProperty simplifyTolerance: number;
+    @nativeProperty defaultLayerBuffer: number;
     createNative(options: GeoJSONVectorTileDataSourceOptions) {
         return new com.carto.datasources.GeoJSONVectorTileDataSource(options.minZoom, options.maxZoom);
     }
