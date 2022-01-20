@@ -130,8 +130,7 @@ export abstract class CartoViewBase extends ContentView {
     nativeProjection: any;
     @mapProperty({
         getConverter: (value) => fromNativeMapPos(value)
-    })
-    focusPos: MapPos;
+    }) focusPos: MapPos;
     @mapProperty zoom: number;
     @mapProperty({
         ios: {
@@ -140,8 +139,7 @@ export abstract class CartoViewBase extends ContentView {
         android: {
             nativeGetterName: 'getMapRotation'
         }
-    })
-    bearing: number;
+    }) bearing: number;
     @mapProperty tilt: number;
     @mapProperty minZoom: number;
     @mapProperty maxZoom: number;
