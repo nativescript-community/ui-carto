@@ -80,6 +80,9 @@ export function mapProperty(...args) {
 }
 
 export class Layers<T extends any> extends BaseNative<any, {}> {
+    constructor(native) {
+        super(null, native);
+    }
     count() {
         return this.native.count();
     }
