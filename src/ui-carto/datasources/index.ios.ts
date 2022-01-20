@@ -46,6 +46,7 @@ export class MergedMBVTTileDataSource extends TileDataSource<NTMergedMBVTTileDat
 
 export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorTileDataSource, GeoJSONVectorTileDataSourceOptions> {
     @nativeProperty simplifyTolerance: number;
+    @nativeProperty defaultLayerBuffer: number;
     createNative(options: GeoJSONVectorTileDataSourceOptions) {
         return NTGeoJSONVectorTileDataSource.alloc().initWithMinZoomMaxZoom(options.minZoom, options.maxZoom);
     }
