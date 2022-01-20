@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.11](https://github.com/nativescript-community/ui-carto/compare/v1.8.10...v1.8.11) (2022-01-20)
+
+**Note:** Version bump only for package @nativescript-community/ui-carto
+
+
+
+
+
 ## [1.8.10](https://github.com/nativescript-community/ui-carto/compare/v1.8.9...v1.8.10) (2021-12-07)
 
 

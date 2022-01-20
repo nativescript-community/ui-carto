@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.11](https://github.com/nativescript-community/ui-carto/compare/v1.8.10...v1.8.11) (2022-01-20)
+
+
+### Bug Fixes
+
+* `Layers` fix ([38f1065](https://github.com/nativescript-community/ui-carto/commit/38f1065f863e56b569456ce344ed49e4a8605742))
+* `reloadStyle` and missing `MBVectorTileDecoder` ([7b054f9](https://github.com/nativescript-community/ui-carto/commit/7b054f93c556d609af731aba46c0a7eb61bd6736))
+* scheme ([d748bcf](https://github.com/nativescript-community/ui-carto/commit/d748bcf3e9531c1165dbbc8de185494a53977b97))
+* scheme support for `MBTilesTileDataSource` ([6643e78](https://github.com/nativescript-community/ui-carto/commit/6643e78b1d30c5f8df6550a8f9de12e4b9bed85e))
+
+
+### Features
+
+* `defaultLayerBuffer` support for `GeoJSONVectorTileDataSource` ([a9428ee](https://github.com/nativescript-community/ui-carto/commit/a9428ee979a08a1a02cec5d227087b9d1dbfc16c))
+
+
+
+
+
 ## [1.8.10](https://github.com/nativescript-community/ui-carto/compare/v1.8.9...v1.8.10) (2021-12-07)
 
 
