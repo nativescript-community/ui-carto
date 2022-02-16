@@ -1,4 +1,4 @@
-import { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
+import type { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
 import { File } from '@nativescript/core/file-system';
 import { BaseVectorTileDecoder } from './index.common';
 import { getFileName, getRelativePathToApp } from '../index.common';
