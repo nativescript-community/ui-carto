@@ -1,11 +1,10 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
-import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { Color } from '@nativescript/core/color';
-import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty } from '..';
-import { LineOptions, LineStyleBuilderOptions } from './line';
-import { BaseLineVectorElement } from './index.ios';
-import { nativeProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '..';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core';
 import { LineGeometry } from '../geometry';
+import { BaseVectorElementStyleBuilder } from './index.common';
+import { BaseLineVectorElement } from './index.ios';
+import { LineOptions, LineStyleBuilderOptions } from './line';
 
 export { MapBounds };
 export enum LineJointType {
