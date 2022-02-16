@@ -4,6 +4,7 @@
     import { RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
     import { VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
     import { CartoMap } from '@nativescript-community/ui-carto/ui';
+import { PanningMode } from '@nativescript-community/ui-carto/ui/index.android';
     import { setShowDebug, setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-carto/utils';
     import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
     import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/marker';
@@ -15,20 +16,29 @@
 
     function onMainMapReady(e) {
         cartoMap = e.object as CartoMap;
-        setShowDebug(true);
-        setShowInfo(true);
-        setShowWarn(true);
-        setShowError(true);
+        const options = cartoMap.getOptions();
+        options.setWatermarkScale(0);
+        options.setRestrictedPanning(true);
+        options.setPanningMode(PanningMode.PANNING_MODE_STICKY_FINAL);
+        options.setEnvelopeThreadPoolSize(2);
+        options.setTileThreadPoolSize(2);
+
+        options.setZoomGestures(true);
+        options.setDoubleClickMaxDuration(0.3);
+        options.setLongClickDuration(0.5);
+        options.setKineticRotation(false);
         cartoMap.setFocusPos({ longitude: 6, latitude: 45 }, 0);
         const dataSource = new HTTPTileDataSource({
             minZoom: 0,
             maxZoom: 22,
-            subdomains: 'abc',
-            url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            httpHeaders: {
+                'User-Agent': 'NSvelteDemo'
+            }
         });
         rasterLayer = new RasterTileLayer({
             dataSource,
-            zoomLevelBias:1
+            zoomLevelBias: 1
             // opacity: 0.5
         });
         cartoMap.addLayer(rasterLayer);
