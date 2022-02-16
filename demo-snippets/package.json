@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "dependencies": {
         "@nativescript-community/ui-carto": "file:../packages/ui-carto",
-        "@nativescript-community/ui-persistent-bottomsheet": "0.0.17",
         "vue-property-decorator": "9.1.2"
     }
 }
