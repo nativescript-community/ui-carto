@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.13](https://github.com/nativescript-community/ui-carto/compare/v1.8.12...v1.8.13) (2022-02-17)
+
+
+### Bug Fixes
+
+* **android:** correctly pause resume map ([d144f14](https://github.com/nativescript-community/ui-carto/commit/d144f1497fa65aae386cf6dd051301ac77fd4a94))
+
+
+
+
+
 ## [1.8.12](https://github.com/nativescript-community/ui-carto/compare/v1.8.11...v1.8.12) (2022-01-20)
 
 
