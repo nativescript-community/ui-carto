@@ -38,6 +38,16 @@ public class AKTextureMapView extends TextureMapView {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public  boolean onTouchEvent(MotionEvent event) {
 
         boolean clickable = isClickable() || isLongClickable();
