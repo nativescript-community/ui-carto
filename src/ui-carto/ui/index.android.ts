@@ -120,6 +120,19 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         return view;
     }
 
+    onLoaded() {
+        super.onLoaded();
+        if (this.nativeViewProtected) {
+            this.nativeViewProtected.onResume();
+        }
+    }
+    onUnloaded() {
+        super.onUnloaded();
+        if (this.nativeViewProtected) {
+            this.nativeViewProtected.onPause();
+        }
+    }
+
     getOptions() {
         if (this.mapReady) {
             return this.mapView.getOptions() as any as MapOptions;
