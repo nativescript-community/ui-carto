@@ -5,12 +5,12 @@ repositories {
 	// }
 	def projectRoot = "$rootDir/../../.."
 	flatDir {
-		dirs "$projectRoot/node_modules/@nativescript-community/ui-carto/platforms/android"
+		dirs "$projectRoot/node_modules/@nativescript-community/ui-carto/platforms/android", "$projectRoot/node_modules/@nativescript-community/template-snippet/node_modules/@nativescript-community/ui-carto/platforms/android"
 	}
 }
 dependencies {
 	// def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.3.3"
 	// implementation "com.carto:carto-mobile-sdk:$cartoMobileVersion@aar"
-    implementation(name:'carto-mobile-sdk-4.4.3', ext:'aar')
+    implementation(name:'carto-mobile-sdk-4.4.4', ext:'aar')
 
 }
