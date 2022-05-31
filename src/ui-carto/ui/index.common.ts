@@ -1,9 +1,8 @@
 import { CSSType, View } from '@nativescript/core/ui/core/view';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
+import { nativeVectorToArray } from '../utils';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { Layer } from '../layers';
-// import { NativeVector } from '../index';
-import { nativeVectorToArray } from '../utils';
 import { ContentView } from '@nativescript/core';
 import { BaseNative } from '../BaseNative';
 

@@ -67,13 +67,17 @@ const currentAppFolder = knownFolders.currentApp();
 
 export class ZippedAssetPackage extends BaseNative<NTZippedAssetPackage, ZippedAssetPackageOptions> {
     createNative(options: ZippedAssetPackageOptions) {
-        if (File.exists(path.join(currentAppFolder.path, '..', options.zipPath))) {
-            const vectorTileStyleSetData = NTAssetUtils.loadAsset(options.zipPath);
+        const zipPath = getRelativePathToApp(options.zipPath);
+        if (File.exists(zipPath)) {
+            const vectorTileStyleSetData = NTAssetUtils.loadAsset(zipPath);
             return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
         } else {
             console.error(`could not find zip file: ${options.zipPath}`);
             return null;
         }
+    }
+    getAssetNames() {
+        return this.getNative().getAssetNames();
     }
 }
 

@@ -1,11 +1,11 @@
 import { BaseNative } from '..';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector } from '../core';
 
-export function nativeVectorToArray(nVector): any[];
-export function nativeMapToJS(nMap): {};
-export function nativeVariantToJS(nMap): any;
-export function JSVariantToNative(nMap): any;
-export function jsonVariant(str: string): any;
+export function nativeVectorToArray<T = any>(nVector): T[];
+export function nativeMapToJS<T = Record<string, string>>(nMap): T;
+export function nativeVariantToJS<T = any>(nMap): T;
+export function JSVariantToNative<T = any>(nMap): T;
+export function jsonVariant<T = any>(str: string): T;
 
 export function setShowDebug(value: boolean);
 export function setShowWarn(value: boolean);
@@ -16,7 +16,9 @@ export interface ZippedAssetPackageOptions {
     zipPath: string;
 }
 
-export abstract class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {}
+export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {
+    getAssetNames(): any; //NTStringVector | com.carto.core.StringVector
+}
 export interface DirAssetPackageOptions {
     dirPath: string;
     loadUsingNS?: boolean;
