@@ -20,13 +20,11 @@ public class SynchronousHandler {
 
         @Override
         public void run() {
-            Log.d("NotifyRunnable", "run");
             synchronized (this) {
                 try {
                     mRunnable.run();
                 } catch (Exception e) {
                     // if (discardUncaughtJsExceptions) {
-                    Log.e("SynchronousHandler", "Error off currentThread for callJSMethodNative: " + e.getMessage());
                     e.printStackTrace();
                     // } else {
                     throw e;
