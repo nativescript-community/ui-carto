@@ -4,5 +4,6 @@ export interface HTTPTileDataSourceOptions extends TileDataSourceOptions {
     httpHeaders?: { [k: string]: string };
     // autoHD?: boolean;
     subdomains?: string;
+    timeout?: number;
 }
 export class HTTPTileDataSource extends TileDataSource<any, HTTPTileDataSourceOptions> {}
