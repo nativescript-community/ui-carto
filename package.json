@@ -39,11 +39,6 @@
     "dependencies": {
         "@nativescript-community/plugin-seed-tools": "file:tools"
     },
-    "dependenciesMeta": {
-        "@nativescript-community/plugin-seed-tools": {
-            "injected": true
-        }
-    },
     "ntl": {
         "descriptions": {
             "build": "Build the plugin",
