@@ -9,6 +9,7 @@ export class HTTPTileDataSource extends TileDataSource<com.carto.datasources.HTT
     TMSScheme: boolean;
     @nativeProperty maxAgeHeaderCheck: boolean;
     @nativeProperty baseUrl: string;
+    @nativeProperty timeout: number;
     createNative(options: HTTPTileDataSourceOptions) {
         return new com.carto.datasources.HTTPTileDataSource(options.minZoom, options.maxZoom, options.url);
     }

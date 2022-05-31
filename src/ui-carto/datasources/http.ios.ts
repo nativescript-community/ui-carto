@@ -9,6 +9,7 @@ export class HTTPTileDataSource extends TileDataSource<NTHTTPTileDataSource, HTT
     TMSScheme: boolean;
     @nativeProperty maxAgeHeaderCheck: boolean;
     @nativeProperty baseUrl: string;
+    @nativeProperty timeout: number;
     createNative(options: HTTPTileDataSourceOptions) {
         return NTHTTPTileDataSource.alloc().initWithMinZoomMaxZoomBaseURL(options.minZoom, options.maxZoom, options.url);
     }
