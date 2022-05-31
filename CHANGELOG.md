@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.14](https://github.com/nativescript-community/ui-carto/compare/v1.8.13...v1.8.14) (2022-05-31)
+
+
+### Features
+
+* new `timeout` prop for http data sources ([ea14b1b](https://github.com/nativescript-community/ui-carto/commit/ea14b1bd7b1e29482a9e3bc82987eef204501ff7))
+
+
+
+
+
 ## [1.8.13](https://github.com/nativescript-community/ui-carto/compare/v1.8.12...v1.8.13) (2022-02-17)
 
 
