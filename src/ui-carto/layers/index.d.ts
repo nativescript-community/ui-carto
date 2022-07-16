@@ -7,6 +7,8 @@ export interface LayerOptions {
     opacity?: number;
     visible?: boolean;
     visibleZoomRange?: [number, number];
+    minVisibleZoom?: number;
+    maxVisibleZoom?: number;
 }
 
 export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
@@ -17,6 +19,8 @@ export class Layer<T, U extends LayerOptions> extends BaseNative<T, U> {
     opacity: number;
     visible: boolean;
     visibleZoomRange: [number, number];
+    minVisibleZoom?: number;
+    maxVisibleZoom?: number;
 }
 export enum TileSubstitutionPolicy {
     TILE_SUBSTITUTION_POLICY_ALL,

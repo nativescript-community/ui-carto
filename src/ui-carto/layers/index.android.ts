@@ -27,6 +27,32 @@ export abstract class Layer<T extends com.carto.layers.Layer, U extends LayerOpt
     set visibleZoomRange(value: [number, number]) {
         this.native && this.native.setVisibleZoomRange(new com.carto.core.MapRange(value[0], value[1]));
     }
+    get minVisibleZoom() {
+        if (this.native) {
+            const zoomRange = this.native.getVisibleZoomRange();
+            return zoomRange.getMin();
+        }
+        return this.options.visibleZoomRange?.[0];
+    }
+    set minVisibleZoom(value: number) {
+        if (this.native) {
+            const zoomRange = this.native.getVisibleZoomRange();
+            this.native.setVisibleZoomRange(new com.carto.core.MapRange(value, zoomRange.getMax()));
+        }
+    }
+    get maxVisibleZoom() {
+        if (this.native) {
+            const zoomRange = this.native.getVisibleZoomRange();
+            return zoomRange.getMax();
+        }
+        return this.options.visibleZoomRange?.[1];
+    }
+    set maxVisibleZoom(value: number) {
+        if (this.native) {
+            const zoomRange = this.native.getVisibleZoomRange();
+            this.native.setVisibleZoomRange(new com.carto.core.MapRange(zoomRange.getMin(), value));
+        }
+    }
     refresh() {
         this.native && this.native.refresh();
     }
