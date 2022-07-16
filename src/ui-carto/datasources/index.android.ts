@@ -32,6 +32,24 @@ export class TileDataSource<T extends com.carto.datasources.TileDataSource, U ex
         // return (ArrayBuffer as any).from(java.nio.ByteBuffer.wrap(data.getData().getData()));
     }
 
+    get minZoom() {
+        if (this.options.minZoom) {
+            return this.options.minZoom;
+        }
+        return this.getNative().getMinZoom();
+    }
+    set minZoom(value) {
+        this.options.minZoom = value;
+    }
+    get maxZoom() {
+        if (this.options.maxZoom) {
+            return this.options.maxZoom;
+        }
+        return this.getNative().getMaxZoom();
+    }
+    set maxZoom(value) {
+        this.options.maxZoom = value;
+    }
     // get minZoom() {
     //     if (this.native) {
     //         return this.native.getMinZoom();

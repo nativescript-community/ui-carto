@@ -31,6 +31,24 @@ export class TileDataSource<T extends NTTileDataSource, U extends TileDataSource
         return this.getNative().loadTile(NTMapTile.alloc().initWithXYZoomFrameNr(x, y, z, 0));
         // return interop.bufferFromData(NSData.dataWithBytesLength(data.getData().getData() as any, data.getData().size()));
     }
+    get minZoom() {
+        if (this.options.minZoom) {
+            return this.options.minZoom;
+        }
+        return this.getNative().getMinZoom();
+    }
+    set minZoom(value) {
+        this.options.minZoom = value;
+    }
+    get maxZoom() {
+        if (this.options.maxZoom) {
+            return this.options.maxZoom;
+        }
+        return this.getNative().getMaxZoom();
+    }
+    set maxZoom(value) {
+        this.options.maxZoom = value;
+    }
 }
 
 export class OrderedTileDataSource extends TileDataSource<NTOrderedTileDataSource, OrderedTileDataSourceOptions> {
