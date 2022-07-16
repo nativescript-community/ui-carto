@@ -1296,6 +1296,28 @@ declare class NTCombinedTileDataSource extends NTTileDataSource {
 
     loadTileSwigExplicitNTCombinedTileDataSource(tile: NTMapTile): NTTileData;
 }
+declare class NTMultiTileDataSource extends NTTileDataSource {
+    static alloc(): NTMultiTileDataSource; // inherited from NSObject
+
+    static new(): NTMultiTileDataSource; // inherited from NSObject
+
+    constructor(o: { maxOpenedPackages: number });
+
+    getDataExtentSwigExplicitNTMultiTileDataSource(): NTMapBounds;
+
+    getMaxZoomSwigExplicitNTMultiTileDataSource(): number;
+
+    getMinZoomSwigExplicitNTMultiTileDataSource(): number;
+
+    init(): this;
+    initWithMaxOpenedPackages(maxOpenedPackages: number): this;
+
+    loadTileSwigExplicitNTMultiTileDataSource(tile: NTMapTile): NTTileData;
+
+    add(datasource: NTTileDataSource);
+    addTileMask(datasource: NTTileDataSource, tileMask: string);
+    remove(datasource: NTTileDataSource);
+}
 
 declare class NTCompiledStyleSet extends NSObject {
     static alloc(): NTCompiledStyleSet; // inherited from NSObject
