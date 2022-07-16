@@ -33,6 +33,7 @@ export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
     projection: Projection<T>;
     points: GenericMapPos<T>[];
     accuracy: number;
+    customOptions: any;
 }
 
 export interface RoutingServiceOptions {}
