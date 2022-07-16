@@ -41,7 +41,7 @@
         self.markerStyles = [NSMutableDictionary new];
     }
     NSInteger nbElements = (int)[elements size];
-    NSString* styleKey = [NSString stringWithFormat:@"%d",nbElements];
+    NSString* styleKey = [NSString stringWithFormat:@"%d",(long)nbElements];
     
     NTStyle* markerStyle = [self.markerStyles valueForKey:styleKey];
     
