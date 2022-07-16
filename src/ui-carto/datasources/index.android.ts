@@ -22,6 +22,7 @@ export abstract class DataSource<T extends com.carto.datasources.TileDataSource,
     }
 }
 export class TileDataSource<T extends com.carto.datasources.TileDataSource, U extends TileDataSourceOptions> extends DataSource<T, U> {
+    @nativeProperty maxOverzoomLevel: number;
     createNative(options) {
         return null;
     }

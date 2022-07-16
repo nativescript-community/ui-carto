@@ -22,6 +22,7 @@ export abstract class DataSource<T extends NTTileDataSource, U extends DataSourc
     }
 }
 export class TileDataSource<T extends NTTileDataSource, U extends TileDataSourceOptions> extends DataSource<T, U> {
+    @nativeProperty maxOverzoomLevel: number;
     createNative(options) {
         return null;
     }

@@ -6,13 +6,16 @@ export interface DataSourceOptions {
     minZoom?: number;
     maxZoom?: number;
 }
-export interface TileDataSourceOptions extends DataSourceOptions {}
+export interface TileDataSourceOptions extends DataSourceOptions {
+    maxOverzoomLevel?: number;
+}
 export abstract class DataSource<T, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection(): Projection;
 }
 export class TileDataSource<T, U extends TileDataSourceOptions> extends DataSource<T, U> {
     minZoom?: number;
     maxZoom?: number;
+    maxOverzoomLevel: number;
 
     loadTile(x, y, z): any;
 }
