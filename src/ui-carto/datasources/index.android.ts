@@ -1,4 +1,12 @@
-import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
+import {
+    CombinedTileDataSourceOptions,
+    DataSourceOptions,
+    GeoJSONVectorTileDataSourceOptions,
+    MergedMBVTTileDataSourceOptions,
+    MultiTileDataSourceOptions,
+    OrderedTileDataSourceOptions,
+    TileDataSourceOptions
+} from '.';
 import { featureCollectionFromArgs, nativeProperty } from '..';
 import { FeatureCollection } from '../geometry/feature';
 import { BaseNative } from '../BaseNative';
@@ -77,5 +85,27 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<com.carto.dataso
     }
     deleteLayer(index: number) {
         this.getNative().deleteLayer(index);
+    }
+}
+
+export class MultiTileDataSource extends TileDataSource<com.carto.datasources.MultiTileDataSource, MultiTileDataSourceOptions> {
+    createNative(options: MultiTileDataSourceOptions) {
+        if (options.maxOpenedPackages) {
+            return new com.carto.datasources.MultiTileDataSource(options.maxOpenedPackages);
+        } else {
+            return new com.carto.datasources.MultiTileDataSource();
+        }
+    }
+    add(source: TileDataSource<any, any>, tileMask?: string) {
+        if (tileMask) {
+            this.getNative().add(source.getNative(), tileMask);
+        } else {
+            this.getNative().add(source.getNative());
+        }
+    }
+    remove(source: TileDataSource<any, any>) {
+        if (this.native) {
+            this.getNative().remove(source.getNative());
+        }
     }
 }

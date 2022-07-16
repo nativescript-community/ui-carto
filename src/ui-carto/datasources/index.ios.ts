@@ -1,4 +1,12 @@
-import { CombinedTileDataSourceOptions, DataSourceOptions, GeoJSONVectorTileDataSourceOptions, MergedMBVTTileDataSourceOptions, OrderedTileDataSourceOptions, TileDataSourceOptions } from '.';
+import {
+    CombinedTileDataSourceOptions,
+    DataSourceOptions,
+    GeoJSONVectorTileDataSourceOptions,
+    MergedMBVTTileDataSourceOptions,
+    MultiTileDataSourceOptions,
+    OrderedTileDataSourceOptions,
+    TileDataSourceOptions
+} from '.';
 import { featureCollectionFromArgs, nativeProperty } from '..';
 import { FeatureCollection } from '../geometry/feature';
 import { BaseNative } from '../BaseNative';
@@ -65,5 +73,27 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorT
     }
     setLayerGeoJSONString(layerIndex: number, geoJSON: string) {
         this.getNative().setLayerGeoJSONGeoJSON(layerIndex, jsonVariant(geoJSON));
+    }
+}
+
+export class MultiTileDataSource extends TileDataSource<NTMultiTileDataSource, MultiTileDataSourceOptions> {
+    createNative(options: MultiTileDataSourceOptions) {
+        if (options.maxOpenedPackages) {
+            return NTMultiTileDataSource.alloc().initWithMaxOpenedPackages(options.maxOpenedPackages);
+        } else {
+            return NTMultiTileDataSource.alloc().init();
+        }
+    }
+    add(source: TileDataSource<any, any>, tileMask?: string) {
+        if (tileMask) {
+            this.getNative().addTileMask(source.getNative(), tileMask);
+        } else {
+            this.getNative().add(source.getNative());
+        }
+    }
+    remove(source: TileDataSource<any, any>) {
+        if (this.native) {
+            this.getNative().remove(source.getNative());
+        }
     }
 }
