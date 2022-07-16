@@ -71,7 +71,7 @@ export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptio
 }
 export class PackageManagerRoutingService extends RoutingService<any, PackageManagerRoutingServiceOptions> {}
 
-export type ValhallaProfile = 'car' | 'auto' | 'bus' | 'bicycle' | 'pedestrian' | 'truck';
+export type ValhallaProfile = 'car' | 'auto' | 'bus' | 'bicycle' | 'pedestrian' | 'truck' | 'motorcycle';
 
 export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOptions {
     path: string;
