@@ -38,4 +38,7 @@ export class RouteMatchingResult extends BaseNative<any, {}> implements IRouteMa
     getPoints() {
         return new MapPosVector(this.native.getPoints());
     }
+    getRawResult() {
+        return this.native.getRawResult();
+    }
 }
