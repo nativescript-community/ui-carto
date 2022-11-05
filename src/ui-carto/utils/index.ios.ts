@@ -21,9 +21,7 @@ export function jsonVariant(str: string) {
     return NTVariant.fromString(str);
 }
 export function JSVariantToNative(variant: any) {
-    if (Array.isArray(variant)) {
-        return NTVariant.fromString(JSON.stringify(variant));
-    } else if (typeof variant === 'object') {
+    if (Array.isArray(variant) || typeof variant === 'object') {
         return NTVariant.fromString(JSON.stringify(variant));
     } else if (variant) {
         if (typeof variant === 'boolean') {

@@ -21,9 +21,7 @@ export function jsonVariant(str: string) {
     return com.carto.core.Variant.fromString(str);
 }
 export function JSVariantToNative(variant: any) {
-    if (Array.isArray(variant)) {
-        return com.carto.core.Variant.fromString(JSON.stringify(variant));
-    } else if (typeof variant === 'object') {
+    if (Array.isArray(variant) || typeof variant === 'object') {
         return com.carto.core.Variant.fromString(JSON.stringify(variant));
     } else if (variant) {
         return new com.carto.core.Variant(variant);

@@ -32,8 +32,8 @@ export interface RoutingRequest<T = DefaultLatLonKeys> {
 export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
     projection: Projection<T>;
     points: GenericMapPos<T>[];
-    accuracy: number;
-    customOptions: any;
+    accuracy?: number;
+    customOptions?: any;
 }
 
 export interface RoutingServiceOptions {}
@@ -60,6 +60,7 @@ export interface RoutingResult<T = DefaultLatLonKeys> {
 export interface RouteMatchingResult<T = DefaultLatLonKeys> {
     getPoints(): MapPosVector<T>;
     getProjection(): Projection;
+    getRawResult(): string;
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {

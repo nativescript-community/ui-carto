@@ -125,6 +125,11 @@ class ValhallaOfflineRoutingService extends RoutingService<com.carto.routing.Val
     public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
         return new Promise((resolve, reject) => {
             const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+            if (options.customOptions) {
+                Object.keys(options.customOptions).forEach((k) => {
+                    nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
+                });
+            }
             const callback = new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
                 onRouteMatchingResult: (err, res) => (err ? reject(err) : resolve(res ? new RouteMatchingResult(res) : null))
             });
