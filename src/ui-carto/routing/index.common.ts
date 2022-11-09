@@ -26,6 +26,9 @@ export class RoutingResult extends BaseNative<any, {}> implements IRoutingResult
     getInstructions() {
         return new RoutingInstructionVector(this.native.getInstructions());
     }
+    getRawResult() {
+        return this.native.getRawResult();
+    }
 }
 
 export class RouteMatchingResult extends BaseNative<any, {}> implements IRouteMatchingResult {

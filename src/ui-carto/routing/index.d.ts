@@ -55,6 +55,7 @@ export interface RoutingResult<T = DefaultLatLonKeys> {
     getTotalTime(): number;
     getTotalDistance(): number;
     getInstructions(): RoutingInstructionVector;
+    getRawResult(): string;
 }
 
 export interface RouteMatchingResult<T = DefaultLatLonKeys> {
@@ -81,9 +82,7 @@ export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOpti
 }
 export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
     profile: ValhallaProfile;
-
     matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
-    // rawCall(option: string, request: string, callback: (err: Error, res: string) => void): string;
 }
 
 export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
@@ -93,6 +92,7 @@ export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptio
 }
 export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {
     profile: ValhallaProfile;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
 }
 
 export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
