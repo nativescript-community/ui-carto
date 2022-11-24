@@ -37,6 +37,9 @@ export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
 }
 
 export interface RoutingServiceOptions {}
+export interface ValhallaRoutingServiceOptions {
+    profile: ValhallaProfile;
+}
 
 export interface RoutingInstruction {
     getPointIndex(): number;
@@ -68,6 +71,10 @@ export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNati
     calculateRoute<T = DefaultLatLonKeys>(options: RoutingRequest<T>, profile?: string): Promise<RoutingResult<T>>;
     routingResultToJSON<T = DefaultLatLonKeys>(options: RoutingResult<T>): Promise<string>;
 }
+export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
+    profile: ValhallaProfile;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: string): Promise<RouteMatchingResult<T>>;
+}
 
 export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptions {
     packageManager: CartoPackageManager;
@@ -76,33 +83,32 @@ export class PackageManagerRoutingService extends RoutingService<any, PackageMan
 
 export type ValhallaProfile = 'car' | 'auto' | 'bus' | 'bicycle' | 'pedestrian' | 'truck' | 'motorcycle';
 
-export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOptions {
+export interface ValhallaOfflineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     path: string;
-    profile?: ValhallaProfile;
 }
 export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
     profile: ValhallaProfile;
-    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
 }
 
-export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
+export interface MultiValhallaOfflineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
+}
+export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<any, MultiValhallaOfflineRoutingServiceOptions> {
+    add(database: string);
+    remove(database: string);
+}
+
+export interface ValhallaOnlineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     apiKey: string;
-    profile?: ValhallaProfile;
     customServiceURL?: string;
 }
-export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {
+export class ValhallaOnlineRoutingService extends ValhallaRoutingService<any, ValhallaOnlineRoutingServiceOptions> {
     profile: ValhallaProfile;
-    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
 }
 
-export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
+export interface PackageManagerValhallaRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     packageManager: CartoPackageManager;
-    profile?: ValhallaProfile;
 }
-export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {
-    profile: ValhallaProfile;
-    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
-}
+export class PackageManagerValhallaRoutingService extends ValhallaRoutingService<any, PackageManagerValhallaRoutingServiceOptions> {}
 
 export interface SGREOfflineRoutingServiceOptions {
     projection: Projection;

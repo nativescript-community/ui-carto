@@ -14,7 +14,9 @@ import {
     ReverseGeocodingRequest,
     ReverseGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions,
-    TomTomOnlineReverseGeocodingServiceOptions
+    TomTomOnlineReverseGeocodingServiceOptions,
+    MultiOSMOfflineGeocodingServiceOptions,
+    MultiOSMOfflineReverseGeocodingServiceOptions
 } from './service';
 import { BaseGeocodingService } from './service.common';
 import { toNativeMapPos } from '../core';
@@ -162,5 +164,29 @@ export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<N
     @nativeProperty language: string;
     createNative(options: OSMOfflineReverseGeocodingServiceOptions) {
         return NTOSMOfflineReverseGeocodingService.alloc().initWithPath(options.path);
+    }
+}
+
+export class MultiOSMOfflineGeocodingService extends GeocodingService<NTMultiOSMOfflineGeocodingService, MultiOSMOfflineGeocodingServiceOptions> {
+    createNative(options: MultiOSMOfflineGeocodingServiceOptions) {
+        return  NTMultiOSMOfflineGeocodingService.alloc().init();
+    }
+    add(database: string) {
+        this.getNative().add(database);
+    }
+    remove(database: string) {
+        this.getNative().remove(database);
+    }
+}
+
+export class MultiOSMOfflineReverseGeocodingService extends ReverseGeocodingService<NTMultiOSMOfflineReverseGeocodingService, MultiOSMOfflineReverseGeocodingServiceOptions> {
+    createNative(options: MultiOSMOfflineReverseGeocodingServiceOptions) {
+        return  NTMultiOSMOfflineReverseGeocodingService.alloc().init();
+    }
+    add(database: string) {
+        this.getNative().add(database);
+    }
+    remove(database: string) {
+        this.getNative().remove(database);
     }
 }

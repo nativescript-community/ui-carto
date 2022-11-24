@@ -75,26 +75,41 @@ export interface PackageManagerReverseGeocodingServiceOptions extends ReverseGeo
 export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<any, PackageManagerReverseGeocodingServiceOptions> {
     language: string;
 }
-
-export interface OSMOfflineGeocodingServiceOptions {
-    maxResults?: number;
-    autocomplete?: boolean;
-    language?: string;
-    path?: string;
-}
-export class OSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {
+export interface BaseOSMOfflineGeocodingServiceOptions {
     maxResults?: number;
     autocomplete?: boolean;
     language?: string;
 }
 
-export interface OSMOfflineReverseGeocodingServiceOptions {
-    language?: string;
+export interface OSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodingServiceOptions {
     path?: string;
 }
-export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<any, OSMOfflineReverseGeocodingServiceOptions> {
+
+export abstract class BaseOSMOfflineGeocodingService extends GeocodingService<any, BaseOSMOfflineGeocodingServiceOptions> {
+    maxResults?: number;
+    autocomplete?: boolean;
     language?: string;
 }
+export class OSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, OSMOfflineGeocodingServiceOptions> {}
+
+export interface BaseOSMOfflineRevesreGeocodingServiceOptions {
+    language?: string;
+}
+
+export interface OSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineRevesreGeocodingServiceOptions {
+    path?: string;
+}
+export interface MultiOSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodingServiceOptions {}
+export class MultiOSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, MultiOSMOfflineGeocodingServiceOptions> {}
+
+export abstract class BaseOSMOfflineReverseGeocodingService extends GeocodingService<any, BaseOSMOfflineReverseGeocodingServiceOptions> {
+    language?: string;
+}
+
+export class OSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, OSMOfflineReverseGeocodingServiceOptions> {}
+
+export interface MultiOSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineReverseGeocodingServiceOptions {}
+export class MultiOSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, MultiOSMOfflineReverseGeocodingServiceOptions> {}
 
 export interface PeliasOnlineGeocodingServiceOptions {
     autocomplete?: boolean;

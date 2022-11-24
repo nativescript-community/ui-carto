@@ -1,6 +1,7 @@
 import { mapPosVectorFromArgs, nativeProperty } from '..';
 import {
     CartoOnlineRoutingServiceOptions,
+    MultiValhallaOfflineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
     PackageManagerValhallaRoutingServiceOptions,
@@ -9,7 +10,8 @@ import {
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
-    ValhallaOnlineRoutingServiceOptions
+    ValhallaOnlineRoutingServiceOptions,
+    ValhallaRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
@@ -54,6 +56,17 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
         });
     }
 }
+abstract class ValhallaRoutingService<T extends NTRoutingService, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
+    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+        return new Promise((resolve, reject) => {
+            const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+
+            const nRes = this.getNative().matchRoute(nRequest);
+            const result = nRes ? new RouteMatchingResult(nRes) : null;
+            resolve(result);
+        });
+    }
+}
 
 export class PackageManagerRoutingService extends RoutingService<NTPackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
     createNative(options: PackageManagerRoutingServiceOptions) {
@@ -78,18 +91,21 @@ export class OSRMOfflineRoutingService extends RoutingService<NTOSRMOfflineRouti
     }
 }
 
-export class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
+export class ValhallaOfflineRoutingService extends ValhallaRoutingService<NTValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
     createNative(options: ValhallaOfflineRoutingServiceOptions) {
         return NTValhallaOfflineRoutingService.alloc().initWithPath(options.path);
     }
-    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        return new Promise((resolve, reject) => {
-            const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+}
 
-            const nRes = this.getNative().matchRoute(nRequest);
-            const result = nRes ? new RouteMatchingResult(nRes) : null;
-            resolve(result);
-        });
+export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<NTMultiValhallaOfflineRoutingService, MultiValhallaOfflineRoutingServiceOptions> {
+    createNative(options: ValhallaOfflineRoutingServiceOptions) {
+        return NTMultiValhallaOfflineRoutingService.alloc().init();
+    }
+    add(database: string) {
+        this.getNative().add(database);
+    }
+    remove(database: string) {
+        this.getNative().remove(database);
     }
 }
 
