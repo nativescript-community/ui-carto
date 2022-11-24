@@ -85,24 +85,24 @@ export interface OSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodi
     path?: string;
 }
 
-export abstract class BaseOSMOfflineGeocodingService extends GeocodingService<any, BaseOSMOfflineGeocodingServiceOptions> {
+export abstract class BaseOSMOfflineGeocodingService<T, U extends BaseOSMOfflineGeocodingServiceOptions> extends GeocodingService<T, U> {
     maxResults?: number;
     autocomplete?: boolean;
     language?: string;
 }
 export class OSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, OSMOfflineGeocodingServiceOptions> {}
 
-export interface BaseOSMOfflineRevesreGeocodingServiceOptions {
+export interface BaseOSMOfflineReverseGeocodingServiceOptions {
     language?: string;
 }
 
-export interface OSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineRevesreGeocodingServiceOptions {
+export interface OSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineReverseGeocodingServiceOptions {
     path?: string;
 }
 export interface MultiOSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodingServiceOptions {}
 export class MultiOSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, MultiOSMOfflineGeocodingServiceOptions> {}
 
-export abstract class BaseOSMOfflineReverseGeocodingService extends GeocodingService<any, BaseOSMOfflineReverseGeocodingServiceOptions> {
+export abstract class BaseOSMOfflineReverseGeocodingService<T, U extends BaseOSMOfflineReverseGeocodingServiceOptions> extends GeocodingService<T, U> {
     language?: string;
 }
 
