@@ -38,7 +38,7 @@ export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
 
 export interface RoutingServiceOptions {}
 export interface ValhallaRoutingServiceOptions {
-    profile: ValhallaProfile;
+    profile?: ValhallaProfile;
 }
 
 export interface RoutingInstruction {
@@ -86,7 +86,7 @@ export type ValhallaProfile = 'car' | 'auto' | 'bus' | 'bicycle' | 'pedestrian' 
 export interface ValhallaOfflineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     path: string;
 }
-export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
+export class ValhallaOfflineRoutingService extends ValhallaRoutingService<any, ValhallaOfflineRoutingServiceOptions> {
     profile: ValhallaProfile;
 }
 
