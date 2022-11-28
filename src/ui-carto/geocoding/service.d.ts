@@ -100,7 +100,10 @@ export interface OSMOfflineReverseGeocodingServiceOptions extends BaseOSMOffline
     path?: string;
 }
 export interface MultiOSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodingServiceOptions {}
-export class MultiOSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, MultiOSMOfflineGeocodingServiceOptions> {}
+export class MultiOSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, MultiOSMOfflineGeocodingServiceOptions> {
+    add(database: string);
+    remove(database: string);
+}
 
 export abstract class BaseOSMOfflineReverseGeocodingService<T, U extends BaseOSMOfflineReverseGeocodingServiceOptions> extends GeocodingService<T, U> {
     language?: string;
@@ -109,7 +112,10 @@ export abstract class BaseOSMOfflineReverseGeocodingService<T, U extends BaseOSM
 export class OSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, OSMOfflineReverseGeocodingServiceOptions> {}
 
 export interface MultiOSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineReverseGeocodingServiceOptions {}
-export class MultiOSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, MultiOSMOfflineReverseGeocodingServiceOptions> {}
+export class MultiOSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, MultiOSMOfflineReverseGeocodingServiceOptions> {
+    add(database: string);
+    remove(database: string);
+}
 
 export interface PeliasOnlineGeocodingServiceOptions {
     autocomplete?: boolean;
