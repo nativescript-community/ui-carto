@@ -1,5 +1,4 @@
 {
-    "name": "@nativescript-community/ui-carto",
     "version": "1.4.8",
     "homepage": "https://github.com/nativescript-community/ui-carto#readme",
     "bugs": {
@@ -14,7 +13,7 @@
     "scripts": {
         "build": "lerna run build",
         "build.all": "npm run build",
-        "clean": "rimraf 'packages/**/*.d.ts' 'packages/**/*.js' 'packages/**/*.js.map' 'packages/**/*.metadata.json' 'packages/**/*.ngsummary.json' 'packages/**/*.mjs' 'packages/**/*.mjs.map' 'packages/**/node_modules' 'packages/**/angular/package.json' 'package-lock.json' 'pnpm-lock.yaml' 'node_modules'",
+        "clean": "rimraf 'packages/**/*.d.ts' 'packages/**/*.js' 'packages/**/*.js.map' 'packages/**/*.metada 'packages/**/angular/ng-package.json'",
         "commitmsg": "commitlint -e $GIT_PARAMS",
         "demo.svelte.android": "cd ./demo-svelte && ns run android --no-hmr",
         "demo.svelte.ios": "cd ./demo-svelte && ns run ios --no-hmr",
@@ -23,13 +22,15 @@
         "demo.vue.ios": "cd ./demo-vue && ns run ios --no-hmr",
         "demo.vue.clean": "cd ./demo-vue && ns clean",
         "postinstall": "npm run setup",
-        "publish": "npm run setup && npm run build.all && lerna publish --create-release=github --force-publish",
+        "publish": "npm run setup && npm run clean && npm run build.all && lerna publish --create-release=github --force-publish",
         "readme": "node ./tools/readme.js",
         "setup": "npm run submodules && ts-patch install",
         "start": "./node_modules/.bin/ntl -A -s 15 -o",
         "submodules": "git submodule update --init",
         "sync": "node ./tools/sync.js",
-        "update": "node ./tools/update.js"
+        "update": "node ./tools/update.js",
+        "fullclean": "npm run clean && rimraf 'packages/**/node_modules' 'package-lock.json' 'pnpm-lock.yaml' 'node_modules'",
+        "doc": "node tools/builddoc.mjs && git add docs/* && git commit -m \"chore:doc\""
     },
     "commitlint": {
         "extends": [
@@ -50,5 +51,13 @@
             "demo.vue.ios": "Runs the Vue demo on iOS.",
             "watch": "Watch for changes in the plugin source and re-build."
         }
-    }
+    },
+    "engines": {
+        "npm": "please use yarn or pnpm",
+        "yarn": ">= 1.19.1",
+        "pnpm": ">= 7.0.0"
+    },
+    "workspaces": [
+        "packages/*"
+    ]
 }
