@@ -6,6 +6,8 @@ import {
     GeocodingResult as IGeocodingResult,
     MapBoxOnlineGeocodingServiceOptions,
     MapBoxOnlineReverseGeocodingServiceOptions,
+    MultiOSMOfflineGeocodingServiceOptions,
+    MultiOSMOfflineReverseGeocodingServiceOptions,
     OSMOfflineGeocodingServiceOptions,
     OSMOfflineReverseGeocodingServiceOptions,
     PackageManagerGeocodingServiceOptions,
@@ -167,5 +169,28 @@ export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<c
     @nativeProperty language: string;
     createNative(options: OSMOfflineReverseGeocodingServiceOptions) {
         return new com.carto.geocoding.OSMOfflineReverseGeocodingService(options.path);
+    }
+}
+export class MultiOSMOfflineGeocodingService extends GeocodingService<com.carto.geocoding.MultiOSMOfflineGeocodingService, MultiOSMOfflineGeocodingServiceOptions> {
+    createNative(options: MultiOSMOfflineGeocodingServiceOptions) {
+        return new com.carto.geocoding.MultiOSMOfflineGeocodingService();
+    }
+    add(database: string) {
+        this.getNative().add(database);
+    }
+    remove(database: string) {
+        this.getNative().remove(database);
+    }
+}
+
+export class MultiOSMOfflineReverseGeocodingService extends ReverseGeocodingService<com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, MultiOSMOfflineReverseGeocodingServiceOptions> {
+    createNative(options: MultiOSMOfflineReverseGeocodingServiceOptions) {
+        return new com.carto.geocoding.MultiOSMOfflineReverseGeocodingService();
+    }
+    add(database: string) {
+        this.getNative().add(database);
+    }
+    remove(database: string) {
+        this.getNative().remove(database);
     }
 }

@@ -3475,6 +3475,16 @@ declare class NTOSMOfflineGeocodingService extends NTGeocodingService {
 
     setMaxResultsSwigExplicitNTOSMOfflineGeocodingService(maxResults: number): void;
 }
+declare class NTMultiOSMOfflineGeocodingService extends NTGeocodingService {
+    static alloc(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
+
+    static new(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
+
+    constructor();
+    init(): this;
+    add(database: string);
+    remove(database: string);
+}
 
 declare class NTOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
     static alloc(): NTOSMOfflineReverseGeocodingService; // inherited from NSObject
@@ -3490,6 +3500,16 @@ declare class NTOSMOfflineReverseGeocodingService extends NTReverseGeocodingServ
     initWithPath(path: string): this;
 
     setLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(lang: string): void;
+}
+declare class NTMultiOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
+
+    static new(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
+
+    constructor();
+    init(): this;
+    add(database: string);
+    remove(database: string);
 }
 
 declare class NTOSRMOfflineRoutingService extends NTRoutingService {
@@ -6082,6 +6102,16 @@ declare class NTValhallaOfflineRoutingService extends NTRoutingService {
     setConfigurationParameterValue(param: string, value: NTVariant): void;
 
     setProfileSwigExplicitNTValhallaOfflineRoutingService(profile: string): void;
+}
+declare class NTMultiValhallaOfflineRoutingService extends NTRoutingService {
+    static alloc(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
+
+    static new(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
+
+    constructor();
+    init(): this;
+    add(database: string);
+    remove(database: string);
 }
 
 declare class NTValhallaOnlineRoutingService extends NTRoutingService {

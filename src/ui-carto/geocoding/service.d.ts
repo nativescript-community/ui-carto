@@ -75,25 +75,46 @@ export interface PackageManagerReverseGeocodingServiceOptions extends ReverseGeo
 export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<any, PackageManagerReverseGeocodingServiceOptions> {
     language: string;
 }
-
-export interface OSMOfflineGeocodingServiceOptions {
-    maxResults?: number;
-    autocomplete?: boolean;
-    language?: string;
-    path?: string;
-}
-export class OSMOfflineGeocodingService extends GeocodingService<any, OSMOfflineGeocodingServiceOptions> {
+export interface BaseOSMOfflineGeocodingServiceOptions {
     maxResults?: number;
     autocomplete?: boolean;
     language?: string;
 }
 
-export interface OSMOfflineReverseGeocodingServiceOptions {
-    language?: string;
+export interface OSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodingServiceOptions {
     path?: string;
 }
-export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<any, OSMOfflineReverseGeocodingServiceOptions> {
+
+export abstract class BaseOSMOfflineGeocodingService<T, U extends BaseOSMOfflineGeocodingServiceOptions> extends GeocodingService<T, U> {
+    maxResults?: number;
+    autocomplete?: boolean;
     language?: string;
+}
+export class OSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, OSMOfflineGeocodingServiceOptions> {}
+
+export interface BaseOSMOfflineReverseGeocodingServiceOptions {
+    language?: string;
+}
+
+export interface OSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineReverseGeocodingServiceOptions {
+    path?: string;
+}
+export interface MultiOSMOfflineGeocodingServiceOptions extends BaseOSMOfflineGeocodingServiceOptions {}
+export class MultiOSMOfflineGeocodingService extends BaseOSMOfflineGeocodingService<any, MultiOSMOfflineGeocodingServiceOptions> {
+    add(database: string);
+    remove(database: string);
+}
+
+export abstract class BaseOSMOfflineReverseGeocodingService<T, U extends BaseOSMOfflineReverseGeocodingServiceOptions> extends GeocodingService<T, U> {
+    language?: string;
+}
+
+export class OSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, OSMOfflineReverseGeocodingServiceOptions> {}
+
+export interface MultiOSMOfflineReverseGeocodingServiceOptions extends BaseOSMOfflineReverseGeocodingServiceOptions {}
+export class MultiOSMOfflineReverseGeocodingService extends BaseOSMOfflineReverseGeocodingService<any, MultiOSMOfflineReverseGeocodingServiceOptions> {
+    add(database: string);
+    remove(database: string);
 }
 
 export interface PeliasOnlineGeocodingServiceOptions {

@@ -6,11 +6,7 @@ declare module com {
 			public static class: java.lang.Class<com.carto.BuildConfig>;
 			public static DEBUG: boolean;
 			public static LIBRARY_PACKAGE_NAME: string;
-			public static APPLICATION_ID: string;
 			public static BUILD_TYPE: string;
-			public static FLAVOR: string;
-			public static VERSION_CODE: number;
-			public static VERSION_NAME: string;
 			public constructor();
 		}
 	}
@@ -1497,6 +1493,7 @@ declare module com {
 				public static delete_AssetTileDataSource(param0: number): void;
 				public static AssetTileDataSource_director_connect(param0: com.carto.datasources.AssetTileDataSource, param1: number, param2: boolean, param3: boolean): void;
 				public static new_AssetTileDataSource(param0: number, param1: number, param2: string): number;
+				public static SwigDirector_AssetTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.AssetTileDataSource): number;
 				public static AssetTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
 				public static SwigDirector_AssetTileDataSource_getMaxZoom(param0: com.carto.datasources.AssetTileDataSource): number;
 				public static SwigDirector_AssetTileDataSource_getDataExtent(param0: com.carto.datasources.AssetTileDataSource): number;
@@ -1555,6 +1552,7 @@ declare module com {
 				public static BitmapOverlayRasterTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): string;
 				public static SwigDirector_BitmapOverlayRasterTileDataSource_loadTile(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource, param1: number): number;
 				public static BitmapOverlayRasterTileDataSource_loadTileSwigExplicitBitmapOverlayRasterTileDataSource(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+				public static SwigDirector_BitmapOverlayRasterTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
 				public constructor();
 				public static BitmapOverlayRasterTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.BitmapOverlayRasterTileDataSource): number;
 				public static delete_BitmapOverlayRasterTileDataSource(param0: number): void;
@@ -1615,6 +1613,7 @@ declare module com {
 				public static CacheTileDataSource_getMinZoomSwigExplicitCacheTileDataSource(param0: number, param1: com.carto.datasources.CacheTileDataSource): number;
 				public static CacheTileDataSource_clear(param0: number, param1: com.carto.datasources.CacheTileDataSource): void;
 				public static CacheTileDataSource_director_connect(param0: com.carto.datasources.CacheTileDataSource, param1: number, param2: boolean, param3: boolean): void;
+				public static SwigDirector_CacheTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.CacheTileDataSource): number;
 				public static CacheTileDataSource_change_ownership(param0: com.carto.datasources.CacheTileDataSource, param1: number, param2: boolean): void;
 				public constructor();
 				public static CacheTileDataSource_notifyTilesChanged(param0: number, param1: com.carto.datasources.CacheTileDataSource, param2: boolean): void;
@@ -1655,7 +1654,9 @@ declare module com {
 				public static getCPtr(param0: com.carto.datasources.CartoOnlineTileDataSource): number;
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);
+				public getTimeout(): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
+				public setTimeout(param0: number): void;
 				public swigGetClassName(): string;
 				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
 				public constructor(param0: string);
@@ -1676,9 +1677,12 @@ declare module com {
 		export module datasources {
 			export class CartoOnlineTileDataSourceModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.datasources.CartoOnlineTileDataSourceModuleJNI>;
+				public static CartoOnlineTileDataSource_setTimeout(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource, param2: number): void;
 				public static delete_CartoOnlineTileDataSource(param0: number): void;
+				public static CartoOnlineTileDataSource_getTimeout(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource): number;
 				public static CartoOnlineTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.CartoOnlineTileDataSource): any;
 				public static SwigDirector_CartoOnlineTileDataSource_getDataExtent(param0: com.carto.datasources.CartoOnlineTileDataSource): number;
+				public static SwigDirector_CartoOnlineTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.CartoOnlineTileDataSource): number;
 				public static SwigDirector_CartoOnlineTileDataSource_getMinZoom(param0: com.carto.datasources.CartoOnlineTileDataSource): number;
 				public static new_CartoOnlineTileDataSource(param0: string): number;
 				public static CartoOnlineTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
@@ -1738,6 +1742,7 @@ declare module com {
 				public static CombinedTileDataSource_getMaxZoom(param0: number, param1: com.carto.datasources.CombinedTileDataSource): number;
 				public static CombinedTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.CombinedTileDataSource): number;
 				public static CombinedTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.CombinedTileDataSource): string;
+				public static SwigDirector_CombinedTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.CombinedTileDataSource): number;
 				public static CombinedTileDataSource_getMinZoomSwigExplicitCombinedTileDataSource(param0: number, param1: com.carto.datasources.CombinedTileDataSource): number;
 				public constructor();
 				public static new_CombinedTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.datasources.TileDataSource, param4: number): number;
@@ -1832,6 +1837,7 @@ declare module com {
 				public static GeoJSONVectorTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource): string;
 				public static new_GeoJSONVectorTileDataSource(param0: number, param1: number): number;
 				public static GeoJSONVectorTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
+				public static SwigDirector_GeoJSONVectorTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.GeoJSONVectorTileDataSource): number;
 				public static SwigDirector_GeoJSONVectorTileDataSource_notifyTilesChanged(param0: com.carto.datasources.GeoJSONVectorTileDataSource, param1: boolean): void;
 				public static GeoJSONVectorTileDataSource_createLayer(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource, param2: string): number;
 				public static GeoJSONVectorTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.GeoJSONVectorTileDataSource): any;
@@ -1863,6 +1869,8 @@ declare module com {
 				public isTMSScheme(): boolean;
 				public constructor(param0: number, param1: number, param2: string);
 				public constructor(param0: number, param1: boolean);
+				public getTimeout(): number;
+				public setTimeout(param0: number): void;
 				public swigGetClassName(): string;
 				public getHTTPHeaders(): com.carto.core.StringMap;
 				public swigGetDirectorObject(): any;
@@ -1887,6 +1895,7 @@ declare module com {
 				public static HTTPTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.HTTPTileDataSource): string;
 				public static HTTPTileDataSource_setMaxAgeHeaderCheck(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: boolean): void;
 				public static HTTPTileDataSource_director_connect(param0: com.carto.datasources.HTTPTileDataSource, param1: number, param2: boolean, param3: boolean): void;
+				public static HTTPTileDataSource_getTimeout(param0: number, param1: com.carto.datasources.HTTPTileDataSource): number;
 				public constructor();
 				public static HTTPTileDataSource_getHTTPHeaders(param0: number, param1: com.carto.datasources.HTTPTileDataSource): number;
 				public static delete_HTTPTileDataSource(param0: number): void;
@@ -1909,9 +1918,11 @@ declare module com {
 				public static HTTPTileDataSource_isTMSScheme(param0: number, param1: com.carto.datasources.HTTPTileDataSource): boolean;
 				public static HTTPTileDataSource_setBaseURL(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: string): void;
 				public static SwigDirector_HTTPTileDataSource_getDataExtent(param0: com.carto.datasources.HTTPTileDataSource): number;
+				public static SwigDirector_HTTPTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.HTTPTileDataSource): number;
 				public static HTTPTileDataSource_getSubdomains(param0: number, param1: com.carto.datasources.HTTPTileDataSource): number;
 				public static HTTPTileDataSource_change_ownership(param0: com.carto.datasources.HTTPTileDataSource, param1: number, param2: boolean): void;
 				public static HTTPTileDataSource_buildTileURLSwigExplicitHTTPTileDataSource(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: string, param3: number, param4: com.carto.core.MapTile): string;
+				public static HTTPTileDataSource_setTimeout(param0: number, param1: com.carto.datasources.HTTPTileDataSource, param2: number): void;
 				public static HTTPTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.HTTPTileDataSource): number;
 			}
 		}
@@ -2043,28 +2054,29 @@ declare module com {
 			export class MBTilesTileDataSource extends com.carto.datasources.TileDataSource {
 				public static class: java.lang.Class<com.carto.datasources.MBTilesTileDataSource>;
 				public constructor(param0: number, param1: number);
-				public swigReleaseOwnership(): void;
+				public getTileMask(): string;
 				public swigDirectorDisconnect(): void;
-				public getMetaData(): com.carto.core.StringMap;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.MBTilesTileDataSource;
-				public constructor(param0: number, param1: number, param2: string);
 				public finalize(): void;
-				public constructor(param0: number, param1: boolean);
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
-				public swigGetClassName(): string;
 				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
-				public getMetaData(param0: string): string;
 				public constructor(param0: string);
-				public getMaxZoom(): number;
-				public swigGetDirectorObject(): any;
 				public constructor();
 				public static getCPtr(param0: com.carto.datasources.MBTilesTileDataSource): number;
-				public swigGetRawPtr(): number;
 				public delete(): void;
-				public swigTakeOwnership(): void;
 				public getDataExtent(): com.carto.core.MapBounds;
-				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
 				public constructor(param0: number, param1: number, param2: string, param3: com.carto.datasources.MBTilesScheme);
+				public swigReleaseOwnership(): void;
+				public getMetaData(): com.carto.core.StringMap;
+				public constructor(param0: number, param1: number, param2: string);
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public getMetaData(param0: string): string;
+				public getMaxZoom(): number;
+				public swigGetDirectorObject(): any;
+				public swigGetRawPtr(): number;
+				public swigTakeOwnership(): void;
+				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
 				public getMinZoom(): number;
 			}
 		}
@@ -2087,6 +2099,8 @@ declare module com {
 				public static SwigDirector_MBTilesTileDataSource_loadTile(param0: com.carto.datasources.MBTilesTileDataSource, param1: number): number;
 				public constructor();
 				public static new_MBTilesTileDataSource__SWIG_2(param0: number, param1: number, param2: string, param3: number): number;
+				public static SwigDirector_MBTilesTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.MBTilesTileDataSource): number;
+				public static MBTilesTileDataSource_getTileMaskSwigExplicitMBTilesTileDataSource(param0: number, param1: com.carto.datasources.MBTilesTileDataSource): string;
 				public static MBTilesTileDataSource_change_ownership(param0: com.carto.datasources.MBTilesTileDataSource, param1: number, param2: boolean): void;
 				public static MBTilesTileDataSource_getMaxZoom(param0: number, param1: com.carto.datasources.MBTilesTileDataSource): number;
 				public static MBTilesTileDataSource_getMaxZoomSwigExplicitMBTilesTileDataSource(param0: number, param1: com.carto.datasources.MBTilesTileDataSource): number;
@@ -2099,7 +2113,9 @@ declare module com {
 				public static MBTilesTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
 				public static MBTilesTileDataSource_getMetaData__SWIG_1(param0: number, param1: com.carto.datasources.MBTilesTileDataSource, param2: string): string;
 				public static MBTilesTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.MBTilesTileDataSource): number;
+				public static SwigDirector_MBTilesTileDataSource_getTileMask(param0: com.carto.datasources.MBTilesTileDataSource): string;
 				public static SwigDirector_MBTilesTileDataSource_getMinZoom(param0: com.carto.datasources.MBTilesTileDataSource): number;
+				public static MBTilesTileDataSource_getTileMask(param0: number, param1: com.carto.datasources.MBTilesTileDataSource): string;
 				public static MBTilesTileDataSource_loadTileSwigExplicitMBTilesTileDataSource(param0: number, param1: com.carto.datasources.MBTilesTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
 				public static MBTilesTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MBTilesTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
 			}
@@ -2118,7 +2134,9 @@ declare module com {
 				public finalize(): void;
 				public getCustomServiceURL(): string;
 				public constructor(param0: number, param1: boolean);
+				public getTimeout(): number;
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
+				public setTimeout(param0: number): void;
 				public swigGetClassName(): string;
 				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
 				public constructor(param0: string);
@@ -2147,6 +2165,7 @@ declare module com {
 				public static MapTilerOnlineTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
 				public static MapTilerOnlineTileDataSource_setCustomServiceURL(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource, param2: string): void;
 				public static SwigDirector_MapTilerOnlineTileDataSource_getMaxZoom(param0: com.carto.datasources.MapTilerOnlineTileDataSource): number;
+				public static MapTilerOnlineTileDataSource_getTimeout(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource): number;
 				public static MapTilerOnlineTileDataSource_director_connect(param0: com.carto.datasources.MapTilerOnlineTileDataSource, param1: number, param2: boolean, param3: boolean): void;
 				public static SwigDirector_MapTilerOnlineTileDataSource_getDataExtent(param0: com.carto.datasources.MapTilerOnlineTileDataSource): number;
 				public constructor();
@@ -2155,6 +2174,8 @@ declare module com {
 				public static new_MapTilerOnlineTileDataSource(param0: string): number;
 				public static MapTilerOnlineTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource): number;
 				public static MapTilerOnlineTileDataSource_change_ownership(param0: com.carto.datasources.MapTilerOnlineTileDataSource, param1: number, param2: boolean): void;
+				public static MapTilerOnlineTileDataSource_setTimeout(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource, param2: number): void;
+				public static SwigDirector_MapTilerOnlineTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.MapTilerOnlineTileDataSource): number;
 				public static MapTilerOnlineTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.MapTilerOnlineTileDataSource): string;
 				public static SwigDirector_MapTilerOnlineTileDataSource_notifyTilesChanged(param0: com.carto.datasources.MapTilerOnlineTileDataSource, param1: boolean): void;
 				public static SwigDirector_MapTilerOnlineTileDataSource_getMinZoom(param0: com.carto.datasources.MapTilerOnlineTileDataSource): number;
@@ -2223,6 +2244,7 @@ declare module com {
 				public static MemoryCacheTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
 				public static MemoryCacheTileDataSource_director_connect(param0: com.carto.datasources.MemoryCacheTileDataSource, param1: number, param2: boolean, param3: boolean): void;
 				public static MemoryCacheTileDataSource_loadTileSwigExplicitMemoryCacheTileDataSource(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+				public static SwigDirector_MemoryCacheTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.MemoryCacheTileDataSource): number;
 				public static MemoryCacheTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource): number;
 				public static MemoryCacheTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource): string;
 				public static MemoryCacheTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MemoryCacheTileDataSource): any;
@@ -2237,6 +2259,7 @@ declare module com {
 			export class MergedMBVTTileDataSource extends com.carto.datasources.TileDataSource {
 				public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSource>;
 				public constructor(param0: number, param1: number);
+				public getTileMask(): string;
 				public swigReleaseOwnership(): void;
 				public swigDirectorDisconnect(): void;
 				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.datasources.TileDataSource);
@@ -2266,28 +2289,32 @@ declare module com {
 		export module datasources {
 			export class MergedMBVTTileDataSourceModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.datasources.MergedMBVTTileDataSourceModuleJNI>;
-				public static MergedMBVTTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static MergedMBVTTileDataSource_getTileMask(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): string;
 				public static MergedMBVTTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
+				public static SwigDirector_MergedMBVTTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static SwigDirector_MergedMBVTTileDataSource_getTileMask(param0: com.carto.datasources.MergedMBVTTileDataSource): string;
+				public static MergedMBVTTileDataSource_getTileMaskSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): string;
+				public constructor();
+				public static MergedMBVTTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): any;
+				public static MergedMBVTTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
+				public static MergedMBVTTileDataSource_getDataExtentSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static MergedMBVTTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static new_MergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.datasources.TileDataSource): number;
+				public static MergedMBVTTileDataSource_getMinZoomSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static MergedMBVTTileDataSource_director_connect(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: number, param2: boolean, param3: boolean): void;
+				public static MergedMBVTTileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static MergedMBVTTileDataSource_getMaxZoom(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
+				public static MergedMBVTTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
 				public static MergedMBVTTileDataSource_change_ownership(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: number, param2: boolean): void;
 				public static SwigDirector_MergedMBVTTileDataSource_loadTile(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: number): number;
 				public static SwigDirector_MergedMBVTTileDataSource_notifyTilesChanged(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: boolean): void;
 				public static MergedMBVTTileDataSource_loadTileSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
 				public static SwigDirector_MergedMBVTTileDataSource_getMaxZoom(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public constructor();
-				public static MergedMBVTTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): any;
 				public static SwigDirector_MergedMBVTTileDataSource_getDataExtent(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public static MergedMBVTTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
-				public static MergedMBVTTileDataSource_getDataExtentSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public static MergedMBVTTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public static new_MergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.datasources.TileDataSource): number;
 				public static delete_MergedMBVTTileDataSource(param0: number): void;
-				public static MergedMBVTTileDataSource_getMinZoomSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public static MergedMBVTTileDataSource_director_connect(param0: com.carto.datasources.MergedMBVTTileDataSource, param1: number, param2: boolean, param3: boolean): void;
 				public static SwigDirector_MergedMBVTTileDataSource_getMinZoom(param0: com.carto.datasources.MergedMBVTTileDataSource): number;
-				public static MergedMBVTTileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
 				public static MergedMBVTTileDataSource_getMaxZoomSwigExplicitMergedMBVTTileDataSource(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
 				public static MergedMBVTTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): string;
-				public static MergedMBVTTileDataSource_getMaxZoom(param0: number, param1: com.carto.datasources.MergedMBVTTileDataSource): number;
 			}
 		}
 	}
@@ -2306,6 +2333,7 @@ declare module com {
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
 				public swigGetClassName(): string;
 				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
+				public getMaxZoom(): number;
 				public swigGetDirectorObject(): any;
 				public constructor();
 				public add(param0: com.carto.datasources.TileDataSource, param1: string): void;
@@ -2314,10 +2342,12 @@ declare module com {
 				public delete(): void;
 				public swigTakeOwnership(): void;
 				public constructor(param0: number);
+				public getDataExtent(): com.carto.core.MapBounds;
 				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
 				public static getCPtr(param0: com.carto.datasources.MultiTileDataSource): number;
 				public remove(param0: com.carto.datasources.TileDataSource): boolean;
 				public add(param0: com.carto.datasources.TileDataSource): void;
+				public getMinZoom(): number;
 			}
 		}
 	}
@@ -2328,26 +2358,33 @@ declare module com {
 		export module datasources {
 			export class MultiTileDataSourceModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.datasources.MultiTileDataSourceModuleJNI>;
-				public static MultiTileDataSource_change_ownership(param0: com.carto.datasources.MultiTileDataSource, param1: number, param2: boolean): void;
 				public static MultiTileDataSource_remove(param0: number, param1: com.carto.datasources.MultiTileDataSource, param2: number, param3: com.carto.datasources.TileDataSource): boolean;
 				public static new_MultiTileDataSource__SWIG_1(param0: number): number;
 				public static MultiTileDataSource_add__SWIG_1(param0: number, param1: com.carto.datasources.MultiTileDataSource, param2: number, param3: com.carto.datasources.TileDataSource, param4: string): void;
-				public static SwigDirector_MultiTileDataSource_getDataExtent(param0: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_getMinZoomSwigExplicitMultiTileDataSource(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_getDataExtentSwigExplicitMultiTileDataSource(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
 				public static SwigDirector_MultiTileDataSource_getMaxZoom(param0: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_getMaxZoom(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_getMaxZoomSwigExplicitMultiTileDataSource(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
 				public static MultiTileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.MultiTileDataSource): any;
 				public constructor();
-				public static delete_MultiTileDataSource(param0: number): void;
-				public static MultiTileDataSource_add__SWIG_0(param0: number, param1: com.carto.datasources.MultiTileDataSource, param2: number, param3: com.carto.datasources.TileDataSource): void;
-				public static SwigDirector_MultiTileDataSource_loadTile(param0: com.carto.datasources.MultiTileDataSource, param1: number): number;
 				public static SwigDirector_MultiTileDataSource_notifyTilesChanged(param0: com.carto.datasources.MultiTileDataSource, param1: boolean): void;
 				public static MultiTileDataSource_director_connect(param0: com.carto.datasources.MultiTileDataSource, param1: number, param2: boolean, param3: boolean): void;
 				public static new_MultiTileDataSource__SWIG_0(): number;
+				public static SwigDirector_MultiTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.MultiTileDataSource): number;
 				public static SwigDirector_MultiTileDataSource_getMinZoom(param0: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.MultiTileDataSource): string;
+				public static MultiTileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
+				public static MultiTileDataSource_change_ownership(param0: com.carto.datasources.MultiTileDataSource, param1: number, param2: boolean): void;
+				public static SwigDirector_MultiTileDataSource_getDataExtent(param0: com.carto.datasources.MultiTileDataSource): number;
+				public static MultiTileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
+				public static delete_MultiTileDataSource(param0: number): void;
+				public static MultiTileDataSource_add__SWIG_0(param0: number, param1: com.carto.datasources.MultiTileDataSource, param2: number, param3: com.carto.datasources.TileDataSource): void;
+				public static SwigDirector_MultiTileDataSource_loadTile(param0: com.carto.datasources.MultiTileDataSource, param1: number): number;
 				public static MultiTileDataSource_loadTile(param0: number, param1: com.carto.datasources.MultiTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
 				public static MultiTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.MultiTileDataSource): number;
-				public static MultiTileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.MultiTileDataSource): string;
 				public static MultiTileDataSource_loadTileSwigExplicitMultiTileDataSource(param0: number, param1: com.carto.datasources.MultiTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
-				public static MultiTileDataSource_SWIGSmartPtrUpcast(param0: number): number;
 			}
 		}
 	}
@@ -2462,6 +2499,7 @@ declare module com {
 				public static OrderedTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.OrderedTileDataSource): number;
 				public static OrderedTileDataSource_change_ownership(param0: com.carto.datasources.OrderedTileDataSource, param1: number, param2: boolean): void;
 				public static OrderedTileDataSource_getMaxZoomSwigExplicitOrderedTileDataSource(param0: number, param1: com.carto.datasources.OrderedTileDataSource): number;
+				public static SwigDirector_OrderedTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.OrderedTileDataSource): number;
 				public static OrderedTileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.OrderedTileDataSource): number;
 				public static new_OrderedTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: number, param3: com.carto.datasources.TileDataSource): number;
 				public static delete_OrderedTileDataSource(param0: number): void;
@@ -2518,6 +2556,7 @@ declare module com {
 				public static PackageManagerTileDataSource_director_connect(param0: com.carto.datasources.PackageManagerTileDataSource, param1: number, param2: boolean, param3: boolean): void;
 				public static PackageManagerTileDataSource_getPackageManager(param0: number, param1: com.carto.datasources.PackageManagerTileDataSource): number;
 				public static SwigDirector_PackageManagerTileDataSource_loadTile(param0: com.carto.datasources.PackageManagerTileDataSource, param1: number): number;
+				public static SwigDirector_PackageManagerTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.PackageManagerTileDataSource): number;
 				public static PackageManagerTileDataSource_loadTile(param0: number, param1: com.carto.datasources.PackageManagerTileDataSource, param2: number, param3: com.carto.core.MapTile): number;
 				public static PackageManagerTileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.PackageManagerTileDataSource): number;
 			}
@@ -2584,6 +2623,7 @@ declare module com {
 				public static PersistentCacheTileDataSource_clear(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): void;
 				public static PersistentCacheTileDataSource_getCapacitySwigExplicitPersistentCacheTileDataSource(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): number;
 				public static PersistentCacheTileDataSource_startDownloadArea(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource, param2: number, param3: com.carto.core.MapBounds, param4: number, param5: number, param6: number, param7: com.carto.datasources.TileDownloadListener): void;
+				public static SwigDirector_PersistentCacheTileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.PersistentCacheTileDataSource): number;
 				public static SwigDirector_PersistentCacheTileDataSource_getCapacity(param0: com.carto.datasources.PersistentCacheTileDataSource): number;
 				public static SwigDirector_PersistentCacheTileDataSource_setCapacity(param0: com.carto.datasources.PersistentCacheTileDataSource, param1: number): void;
 				public static PersistentCacheTileDataSource_clearSwigExplicitPersistentCacheTileDataSource(param0: number, param1: com.carto.datasources.PersistentCacheTileDataSource): void;
@@ -2615,6 +2655,7 @@ declare module com {
 				public swigReleaseOwnership(): void;
 				public swigDirectorDisconnect(): void;
 				public getProjection(): com.carto.projections.Projection;
+				public getMaxOverzoomLevel(): number;
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);
 				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.datasources.TileDataSource;
@@ -2628,6 +2669,9 @@ declare module com {
 				public swigTakeOwnership(): void;
 				public getDataExtent(): com.carto.core.MapBounds;
 				public static getCPtr(param0: com.carto.datasources.TileDataSource): number;
+				public getMaxZoomWithOverzoom(): number;
+				public setMaxOverzoomLevel(param0: number): void;
+				public isMaxOverzoomLevelSet(): boolean;
 				public notifyTilesChanged(param0: boolean): void;
 				public getMinZoom(): number;
 			}
@@ -2640,25 +2684,31 @@ declare module com {
 		export module datasources {
 			export class TileDataSourceModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.datasources.TileDataSourceModuleJNI>;
-				public static TileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.TileDataSource): any;
-				public static TileDataSource_getMinZoomSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static SwigDirector_TileDataSource_getMinZoom(param0: com.carto.datasources.TileDataSource): number;
+				public static SwigDirector_TileDataSource_getMaxZoomWithOverzoom(param0: com.carto.datasources.TileDataSource): number;
+				public static TileDataSource_getMaxOverzoomLevel(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static TileDataSource_change_ownership(param0: com.carto.datasources.TileDataSource, param1: number, param2: boolean): void;
 				public static TileDataSource_getMinZoom(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static TileDataSource_getProjection(param0: number, param1: com.carto.datasources.TileDataSource): number;
-				public static SwigDirector_TileDataSource_loadTile(param0: com.carto.datasources.TileDataSource, param1: number): number;
-				public static TileDataSource_notifyTilesChangedSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: boolean): void;
 				public static TileDataSource_swigGetRawPtr(param0: number, param1: com.carto.datasources.TileDataSource): number;
+				public static TileDataSource_getMaxZoomWithOverzoomSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static SwigDirector_TileDataSource_getDataExtent(param0: com.carto.datasources.TileDataSource): number;
 				public constructor();
 				public static TileDataSource_getMaxZoom(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static TileDataSource_getMaxZoomSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource): number;
-				public static new_TileDataSource__SWIG_0(): number;
 				public static TileDataSource_director_connect(param0: com.carto.datasources.TileDataSource, param1: number, param2: boolean, param3: boolean): void;
-				public static SwigDirector_TileDataSource_notifyTilesChanged(param0: com.carto.datasources.TileDataSource, param1: boolean): void;
-				public static TileDataSource_getDataExtentSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static new_TileDataSource__SWIG_1(param0: number, param1: number): number;
 				public static delete_TileDataSource(param0: number): void;
+				public static TileDataSource_swigGetDirectorObject(param0: number, param1: com.carto.datasources.TileDataSource): any;
+				public static TileDataSource_getMinZoomSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource): number;
+				public static TileDataSource_isMaxOverzoomLevelSet(param0: number, param1: com.carto.datasources.TileDataSource): boolean;
+				public static SwigDirector_TileDataSource_loadTile(param0: com.carto.datasources.TileDataSource, param1: number): number;
+				public static TileDataSource_notifyTilesChangedSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource, param2: boolean): void;
+				public static new_TileDataSource__SWIG_0(): number;
+				public static SwigDirector_TileDataSource_notifyTilesChanged(param0: com.carto.datasources.TileDataSource, param1: boolean): void;
+				public static TileDataSource_setMaxOverzoomLevel(param0: number, param1: com.carto.datasources.TileDataSource, param2: number): void;
+				public static TileDataSource_getDataExtentSwigExplicitTileDataSource(param0: number, param1: com.carto.datasources.TileDataSource): number;
+				public static TileDataSource_getMaxZoomWithOverzoom(param0: number, param1: com.carto.datasources.TileDataSource): number;
 				public static TileDataSource_swigGetClassName(param0: number, param1: com.carto.datasources.TileDataSource): string;
 				public static SwigDirector_TileDataSource_getMaxZoom(param0: com.carto.datasources.TileDataSource): number;
 				public static TileDataSource_getDataExtent(param0: number, param1: com.carto.datasources.TileDataSource): number;
@@ -2786,6 +2836,7 @@ declare module com {
 					public static class: java.lang.Class<com.carto.datasources.components.TileData>;
 					public swigCMemOwn: boolean;
 					public delete(): void;
+					public isOverZoom(): boolean;
 					public finalize(): void;
 					public getData(): com.carto.core.BinaryData;
 					public constructor(param0: com.carto.core.BinaryData);
@@ -2796,6 +2847,7 @@ declare module com {
 					public equals(param0: any): boolean;
 					public setMaxAge(param0: number): void;
 					public setReplaceWithParent(param0: boolean): void;
+					public setIsOverZoom(param0: boolean): void;
 					public static getCPtr(param0: com.carto.datasources.components.TileData): number;
 					public hashCode(): number;
 				}
@@ -2812,12 +2864,14 @@ declare module com {
 					public static class: java.lang.Class<com.carto.datasources.components.TileDataModuleJNI>;
 					public static TileData_setReplaceWithParent(param0: number, param1: com.carto.datasources.components.TileData, param2: boolean): void;
 					public static TileData_swigGetRawPtr(param0: number, param1: com.carto.datasources.components.TileData): number;
+					public static TileData_setIsOverZoom(param0: number, param1: com.carto.datasources.components.TileData, param2: boolean): void;
 					public constructor();
 					public static TileData_getData(param0: number, param1: com.carto.datasources.components.TileData): number;
 					public static TileData_setMaxAge(param0: number, param1: com.carto.datasources.components.TileData, param2: number): void;
 					public static new_TileData(param0: number, param1: com.carto.core.BinaryData): number;
 					public static delete_TileData(param0: number): void;
 					public static TileData_getMaxAge(param0: number, param1: com.carto.datasources.components.TileData): number;
+					public static TileData_isOverZoom(param0: number, param1: com.carto.datasources.components.TileData): boolean;
 					public static TileData_isReplaceWithParent(param0: number, param1: com.carto.datasources.components.TileData): boolean;
 				}
 			}
@@ -3221,6 +3275,140 @@ declare module com {
 				public static MapBoxOnlineReverseGeocodingService_setLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService, param2: string): void;
 				public static MapBoxOnlineReverseGeocodingService_getCustomServiceURL(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
 				public static MapBoxOnlineReverseGeocodingService_getLanguageSwigExplicitMapBoxOnlineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MapBoxOnlineReverseGeocodingService): string;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module geocoding {
+			export class MultiOSMOfflineGeocodingService extends com.carto.geocoding.GeocodingService {
+				public static class: java.lang.Class<com.carto.geocoding.MultiOSMOfflineGeocodingService>;
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public remove(param0: string): boolean;
+				public static getCPtr(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService): number;
+				public setAutocomplete(param0: boolean): void;
+				public isAutocomplete(): boolean;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public calculateAddresses(param0: com.carto.geocoding.GeocodingRequest): com.carto.geocoding.GeocodingResultVector;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public add(param0: string): void;
+				public swigGetRawPtr(): number;
+				public static getCPtr(param0: com.carto.geocoding.GeocodingService): number;
+				public setLanguage(param0: string): void;
+				public setMaxResults(param0: number): void;
+				public delete(): void;
+				public getMaxResults(): number;
+				public getLanguage(): string;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geocoding.GeocodingService;
+				public swigTakeOwnership(): void;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geocoding.MultiOSMOfflineGeocodingService;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module geocoding {
+			export class MultiOSMOfflineGeocodingServiceModuleJNI extends java.lang.Object {
+				public static class: java.lang.Class<com.carto.geocoding.MultiOSMOfflineGeocodingServiceModuleJNI>;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_setAutocomplete(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService, param1: boolean): void;
+				public static MultiOSMOfflineGeocodingService_getLanguageSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): string;
+				public static new_MultiOSMOfflineGeocodingService(): number;
+				public static MultiOSMOfflineGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): any;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_calculateAddresses(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService, param1: number): number;
+				public static MultiOSMOfflineGeocodingService_setAutocompleteSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: boolean): void;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_getMaxResults(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService): number;
+				public static MultiOSMOfflineGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): number;
+				public static MultiOSMOfflineGeocodingService_setAutocomplete(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: boolean): void;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_setMaxResults(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService, param1: number): void;
+				public static MultiOSMOfflineGeocodingService_change_ownership(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService, param1: number, param2: boolean): void;
+				public constructor();
+				public static MultiOSMOfflineGeocodingService_calculateAddressesSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+				public static MultiOSMOfflineGeocodingService_add(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: string): void;
+				public static MultiOSMOfflineGeocodingService_isAutocompleteSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): boolean;
+				public static MultiOSMOfflineGeocodingService_getMaxResults(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): number;
+				public static MultiOSMOfflineGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: number, param3: com.carto.geocoding.GeocodingRequest): number;
+				public static MultiOSMOfflineGeocodingService_director_connect(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService, param1: number, param2: boolean, param3: boolean): void;
+				public static MultiOSMOfflineGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): string;
+				public static MultiOSMOfflineGeocodingService_isAutocomplete(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): boolean;
+				public static MultiOSMOfflineGeocodingService_remove(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: string): boolean;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_isAutocomplete(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService): boolean;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_setLanguage(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService, param1: string): void;
+				public static MultiOSMOfflineGeocodingService_getMaxResultsSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): number;
+				public static MultiOSMOfflineGeocodingService_setMaxResultsSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: number): void;
+				public static MultiOSMOfflineGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: string): void;
+				public static MultiOSMOfflineGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService): string;
+				public static SwigDirector_MultiOSMOfflineGeocodingService_getLanguage(param0: com.carto.geocoding.MultiOSMOfflineGeocodingService): string;
+				public static MultiOSMOfflineGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
+				public static delete_MultiOSMOfflineGeocodingService(param0: number): void;
+				public static MultiOSMOfflineGeocodingService_setLanguageSwigExplicitMultiOSMOfflineGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: string): void;
+				public static MultiOSMOfflineGeocodingService_setMaxResults(param0: number, param1: com.carto.geocoding.MultiOSMOfflineGeocodingService, param2: number): void;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module geocoding {
+			export class MultiOSMOfflineReverseGeocodingService extends com.carto.geocoding.ReverseGeocodingService {
+				public static class: java.lang.Class<com.carto.geocoding.MultiOSMOfflineReverseGeocodingService>;
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public remove(param0: string): boolean;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geocoding.MultiOSMOfflineReverseGeocodingService;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public add(param0: string): void;
+				public static getCPtr(param0: com.carto.geocoding.ReverseGeocodingService): number;
+				public swigGetRawPtr(): number;
+				public setLanguage(param0: string): void;
+				public static getCPtr(param0: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): number;
+				public delete(): void;
+				public getLanguage(): string;
+				public swigTakeOwnership(): void;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.geocoding.ReverseGeocodingService;
+				public calculateAddresses(param0: com.carto.geocoding.ReverseGeocodingRequest): com.carto.geocoding.GeocodingResultVector;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module geocoding {
+			export class MultiOSMOfflineReverseGeocodingServiceModuleJNI extends java.lang.Object {
+				public static class: java.lang.Class<com.carto.geocoding.MultiOSMOfflineReverseGeocodingServiceModuleJNI>;
+				public static delete_MultiOSMOfflineReverseGeocodingService(param0: number): void;
+				public static MultiOSMOfflineReverseGeocodingService_calculateAddressesSwigExplicitMultiOSMOfflineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+				public static SwigDirector_MultiOSMOfflineReverseGeocodingService_calculateAddresses(param0: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param1: number): number;
+				public static MultiOSMOfflineReverseGeocodingService_setLanguage(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param2: string): void;
+				public static MultiOSMOfflineReverseGeocodingService_director_connect(param0: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param1: number, param2: boolean, param3: boolean): void;
+				public static MultiOSMOfflineReverseGeocodingService_swigGetClassName(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): string;
+				public static MultiOSMOfflineReverseGeocodingService_SWIGSmartPtrUpcast(param0: number): number;
+				public static MultiOSMOfflineReverseGeocodingService_remove(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param2: string): boolean;
+				public static SwigDirector_MultiOSMOfflineReverseGeocodingService_getLanguage(param0: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): string;
+				public constructor();
+				public static MultiOSMOfflineReverseGeocodingService_getLanguage(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): string;
+				public static MultiOSMOfflineReverseGeocodingService_setLanguageSwigExplicitMultiOSMOfflineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param2: string): void;
+				public static MultiOSMOfflineReverseGeocodingService_add(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param2: string): void;
+				public static MultiOSMOfflineReverseGeocodingService_change_ownership(param0: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param1: number, param2: boolean): void;
+				public static MultiOSMOfflineReverseGeocodingService_swigGetRawPtr(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): number;
+				public static SwigDirector_MultiOSMOfflineReverseGeocodingService_setLanguage(param0: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param1: string): void;
+				public static MultiOSMOfflineReverseGeocodingService_getLanguageSwigExplicitMultiOSMOfflineReverseGeocodingService(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): string;
+				public static MultiOSMOfflineReverseGeocodingService_calculateAddresses(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService, param2: number, param3: com.carto.geocoding.ReverseGeocodingRequest): number;
+				public static new_MultiOSMOfflineReverseGeocodingService(): number;
+				public static MultiOSMOfflineReverseGeocodingService_swigGetDirectorObject(param0: number, param1: com.carto.geocoding.MultiOSMOfflineReverseGeocodingService): any;
 			}
 		}
 	}
@@ -7748,6 +7936,73 @@ declare module com {
 declare module com {
 	export module carto {
 		export module routing {
+			export class MultiValhallaOfflineRoutingService extends com.carto.routing.RoutingService {
+				public static class: java.lang.Class<com.carto.routing.MultiValhallaOfflineRoutingService>;
+				public static getCPtr(param0: com.carto.routing.RoutingService): number;
+				public swigReleaseOwnership(): void;
+				public swigDirectorDisconnect(): void;
+				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
+				public remove(param0: string): boolean;
+				public getConfigurationParameter(param0: string): com.carto.core.Variant;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.RoutingService;
+				public finalize(): void;
+				public constructor(param0: number, param1: boolean);
+				public swigGetClassName(): string;
+				public swigGetDirectorObject(): any;
+				public constructor();
+				public setProfile(param0: string): void;
+				public add(param0: string): void;
+				public static swigCreatePolymorphicInstance(param0: number, param1: boolean): com.carto.routing.MultiValhallaOfflineRoutingService;
+				public setConfigurationParameter(param0: string, param1: com.carto.core.Variant): void;
+				public swigGetRawPtr(): number;
+				public delete(): void;
+				public getProfile(): string;
+				public swigTakeOwnership(): void;
+				public static getCPtr(param0: com.carto.routing.MultiValhallaOfflineRoutingService): number;
+				public matchRoute(param0: com.carto.routing.RouteMatchingRequest): com.carto.routing.RouteMatchingResult;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module routing {
+			export class MultiValhallaOfflineRoutingServiceModuleJNI extends java.lang.Object {
+				public static class: java.lang.Class<com.carto.routing.MultiValhallaOfflineRoutingServiceModuleJNI>;
+				public static delete_MultiValhallaOfflineRoutingService(param0: number): void;
+				public static MultiValhallaOfflineRoutingService_getProfile(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService): string;
+				public static MultiValhallaOfflineRoutingService_setConfigurationParameter(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: string, param3: number, param4: com.carto.core.Variant): void;
+				public static SwigDirector_MultiValhallaOfflineRoutingService_getProfile(param0: com.carto.routing.MultiValhallaOfflineRoutingService): string;
+				public static MultiValhallaOfflineRoutingService_swigGetRawPtr(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService): number;
+				public constructor();
+				public static MultiValhallaOfflineRoutingService_calculateRouteSwigExplicitMultiValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+				public static MultiValhallaOfflineRoutingService_director_connect(param0: com.carto.routing.MultiValhallaOfflineRoutingService, param1: number, param2: boolean, param3: boolean): void;
+				public static new_MultiValhallaOfflineRoutingService(): number;
+				public static SwigDirector_MultiValhallaOfflineRoutingService_calculateRoute(param0: com.carto.routing.MultiValhallaOfflineRoutingService, param1: number): number;
+				public static SwigDirector_MultiValhallaOfflineRoutingService_setProfile(param0: com.carto.routing.MultiValhallaOfflineRoutingService, param1: string): void;
+				public static MultiValhallaOfflineRoutingService_getConfigurationParameter(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: string): number;
+				public static MultiValhallaOfflineRoutingService_setProfile(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: string): void;
+				public static MultiValhallaOfflineRoutingService_change_ownership(param0: com.carto.routing.MultiValhallaOfflineRoutingService, param1: number, param2: boolean): void;
+				public static SwigDirector_MultiValhallaOfflineRoutingService_matchRoute(param0: com.carto.routing.MultiValhallaOfflineRoutingService, param1: number): number;
+				public static MultiValhallaOfflineRoutingService_swigGetDirectorObject(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService): any;
+				public static MultiValhallaOfflineRoutingService_calculateRoute(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RoutingRequest): number;
+				public static MultiValhallaOfflineRoutingService_add(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: string): void;
+				public static MultiValhallaOfflineRoutingService_swigGetClassName(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService): string;
+				public static MultiValhallaOfflineRoutingService_matchRouteSwigExplicitMultiValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+				public static MultiValhallaOfflineRoutingService_setProfileSwigExplicitMultiValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: string): void;
+				public static MultiValhallaOfflineRoutingService_remove(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: string): boolean;
+				public static MultiValhallaOfflineRoutingService_matchRoute(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService, param2: number, param3: com.carto.routing.RouteMatchingRequest): number;
+				public static MultiValhallaOfflineRoutingService_getProfileSwigExplicitMultiValhallaOfflineRoutingService(param0: number, param1: com.carto.routing.MultiValhallaOfflineRoutingService): string;
+				public static MultiValhallaOfflineRoutingService_SWIGSmartPtrUpcast(param0: number): number;
+			}
+		}
+	}
+}
+
+declare module com {
+	export module carto {
+		export module routing {
 			export class OSRMOfflineRoutingService extends com.carto.routing.RoutingService {
 				public static class: java.lang.Class<com.carto.routing.OSRMOfflineRoutingService>;
 				public static getCPtr(param0: com.carto.routing.RoutingService): number;
@@ -8167,8 +8422,10 @@ declare module com {
 			export class RouteMatchingResult extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.routing.RouteMatchingResult>;
 				public swigCMemOwn: boolean;
+				public getRawResult(): string;
 				public getProjection(): com.carto.projections.Projection;
 				public finalize(): void;
+				public constructor(param0: com.carto.projections.Projection, param1: com.carto.routing.RouteMatchingPointVector, param2: com.carto.routing.RouteMatchingEdgeVector, param3: string);
 				public constructor(param0: number, param1: boolean);
 				public static getCPtr(param0: com.carto.routing.RouteMatchingResult): number;
 				public toString(): string;
@@ -8179,7 +8436,6 @@ declare module com {
 				public hashCode(): number;
 				public equals(param0: any): boolean;
 				public getMatchingEdges(): com.carto.routing.RouteMatchingEdgeVector;
-				public constructor(param0: com.carto.projections.Projection, param1: com.carto.routing.RouteMatchingPointVector, param2: com.carto.routing.RouteMatchingEdgeVector);
 			}
 		}
 	}
@@ -8195,8 +8451,9 @@ declare module com {
 				public static RouteMatchingResult_getProjection(param0: number, param1: com.carto.routing.RouteMatchingResult): number;
 				public static delete_RouteMatchingResult(param0: number): void;
 				public static RouteMatchingResult_swigGetRawPtr(param0: number, param1: com.carto.routing.RouteMatchingResult): number;
+				public static RouteMatchingResult_getRawResult(param0: number, param1: com.carto.routing.RouteMatchingResult): string;
 				public static RouteMatchingResult_toString(param0: number, param1: com.carto.routing.RouteMatchingResult): string;
-				public static new_RouteMatchingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.routing.RouteMatchingPointVector, param4: number, param5: com.carto.routing.RouteMatchingEdgeVector): number;
+				public static new_RouteMatchingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.routing.RouteMatchingPointVector, param4: number, param5: com.carto.routing.RouteMatchingEdgeVector, param6: string): number;
 				public static RouteMatchingResult_getMatchingPoints(param0: number, param1: com.carto.routing.RouteMatchingResult): number;
 				public constructor();
 			}
@@ -8390,6 +8647,7 @@ declare module com {
 				public static class: java.lang.Class<com.carto.routing.RoutingResult>;
 				public swigCMemOwn: boolean;
 				public static getCPtr(param0: com.carto.routing.RoutingResult): number;
+				public getRawResult(): string;
 				public getProjection(): com.carto.projections.Projection;
 				public getInstructions(): com.carto.routing.RoutingInstructionVector;
 				public getTotalTime(): number;
@@ -8402,7 +8660,7 @@ declare module com {
 				public delete(): void;
 				public hashCode(): number;
 				public equals(param0: any): boolean;
-				public constructor(param0: com.carto.projections.Projection, param1: com.carto.core.MapPosVector, param2: com.carto.routing.RoutingInstructionVector);
+				public constructor(param0: com.carto.projections.Projection, param1: com.carto.core.MapPosVector, param2: com.carto.routing.RoutingInstructionVector, param3: string);
 			}
 		}
 	}
@@ -8413,13 +8671,14 @@ declare module com {
 		export module routing {
 			export class RoutingResultModuleJNI extends java.lang.Object {
 				public static class: java.lang.Class<com.carto.routing.RoutingResultModuleJNI>;
+				public static new_RoutingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPosVector, param4: number, param5: com.carto.routing.RoutingInstructionVector, param6: string): number;
 				public static RoutingResult_toString(param0: number, param1: com.carto.routing.RoutingResult): string;
 				public static RoutingResult_getPoints(param0: number, param1: com.carto.routing.RoutingResult): number;
 				public static RoutingResult_swigGetRawPtr(param0: number, param1: com.carto.routing.RoutingResult): number;
 				public static delete_RoutingResult(param0: number): void;
 				public static RoutingResult_getProjection(param0: number, param1: com.carto.routing.RoutingResult): number;
+				public static RoutingResult_getRawResult(param0: number, param1: com.carto.routing.RoutingResult): string;
 				public static RoutingResult_getTotalTime(param0: number, param1: com.carto.routing.RoutingResult): number;
-				public static new_RoutingResult(param0: number, param1: com.carto.projections.Projection, param2: number, param3: com.carto.core.MapPosVector, param4: number, param5: com.carto.routing.RoutingInstructionVector): number;
 				public constructor();
 				public static RoutingResult_getInstructions(param0: number, param1: com.carto.routing.RoutingResult): number;
 				public static RoutingResult_getTotalDistance(param0: number, param1: com.carto.routing.RoutingResult): number;
@@ -12407,6 +12666,7 @@ declare module com {
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);
 				public static calculateMapTileBounds(param0: com.carto.core.MapTile, param1: com.carto.projections.Projection): com.carto.core.MapBounds;
+				public static calculateClippedMapTile(param0: com.carto.core.MapPos, param1: number, param2: com.carto.projections.Projection): com.carto.core.MapTile;
 			}
 		}
 	}
@@ -12419,6 +12679,7 @@ declare module com {
 				public static class: java.lang.Class<com.carto.utils.TileUtilsModuleJNI>;
 				public static TileUtils_calculateMapTile(param0: number, param1: com.carto.core.MapPos, param2: number, param3: number, param4: com.carto.projections.Projection): number;
 				public static TileUtils_calculateMapTileOrigin(param0: number, param1: com.carto.core.MapTile, param2: number, param3: com.carto.projections.Projection): number;
+				public static TileUtils_calculateClippedMapTile(param0: number, param1: com.carto.core.MapPos, param2: number, param3: number, param4: com.carto.projections.Projection): number;
 				public static delete_TileUtils(param0: number): void;
 				public static TileUtils_calculateMapTileBounds(param0: number, param1: com.carto.core.MapTile, param2: number, param3: com.carto.projections.Projection): number;
 				public constructor();

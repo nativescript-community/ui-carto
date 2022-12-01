@@ -1,6 +1,7 @@
 import { mapPosVectorFromArgs, nativeProperty } from '..';
 import {
     CartoOnlineRoutingServiceOptions,
+    MultiValhallaOfflineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
     PackageManagerValhallaRoutingServiceOptions,
@@ -9,7 +10,8 @@ import {
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
-    ValhallaOnlineRoutingServiceOptions
+    ValhallaOnlineRoutingServiceOptions,
+    ValhallaRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative } from '../utils';
@@ -94,34 +96,7 @@ abstract class RoutingService<T extends com.carto.routing.RoutingService, U exte
         });
     }
 }
-
-class PackageManagerRoutingService extends RoutingService<com.carto.routing.PackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
-    createNative(options: PackageManagerRoutingServiceOptions) {
-        return new com.carto.routing.PackageManagerRoutingService(options.packageManager.getNative());
-    }
-}
-
-class SGREOfflineRoutingService extends RoutingService<com.carto.routing.SGREOfflineRoutingService, SGREOfflineRoutingServiceOptions> {
-    createNative(options: SGREOfflineRoutingServiceOptions) {
-        return new com.carto.routing.SGREOfflineRoutingService(options.projection.getNative(), options.features.getNative(), JSVariantToNative(options.config));
-    }
-}
-
-class CartoOnlineRoutingService extends RoutingService<com.carto.routing.CartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
-    createNative(options: CartoOnlineRoutingServiceOptions) {
-        return new com.carto.routing.CartoOnlineRoutingService(options.source);
-    }
-}
-class OSRMOfflineRoutingService extends RoutingService<com.carto.routing.OSRMOfflineRoutingService, OSRMOfflineRoutingServiceOptions> {
-    createNative(options: OSRMOfflineRoutingServiceOptions) {
-        return new com.carto.routing.OSRMOfflineRoutingService(options.path);
-    }
-}
-
-class ValhallaOfflineRoutingService extends RoutingService<com.carto.routing.ValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
-    createNative(options: ValhallaOfflineRoutingServiceOptions) {
-        return new com.carto.routing.ValhallaOfflineRoutingService(options.path);
-    }
+abstract class ValhallaRoutingService<T extends com.carto.routing.PackageManagerValhallaRoutingService | com.carto.routing.ValhallaOfflineRoutingService | com.carto.routing.MultiValhallaOfflineRoutingService, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
     public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
         return new Promise((resolve, reject) => {
             const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
@@ -140,7 +115,47 @@ class ValhallaOfflineRoutingService extends RoutingService<com.carto.routing.Val
     }
 }
 
-class ValhallaOnlineRoutingService extends RoutingService<com.carto.routing.ValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+export class PackageManagerRoutingService extends RoutingService<com.carto.routing.PackageManagerRoutingService, PackageManagerRoutingServiceOptions> {
+    createNative(options: PackageManagerRoutingServiceOptions) {
+        return new com.carto.routing.PackageManagerRoutingService(options.packageManager.getNative());
+    }
+}
+
+export class SGREOfflineRoutingService extends RoutingService<com.carto.routing.SGREOfflineRoutingService, SGREOfflineRoutingServiceOptions> {
+    createNative(options: SGREOfflineRoutingServiceOptions) {
+        return new com.carto.routing.SGREOfflineRoutingService(options.projection.getNative(), options.features.getNative(), JSVariantToNative(options.config));
+    }
+}
+
+export class CartoOnlineRoutingService extends RoutingService<com.carto.routing.CartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
+    createNative(options: CartoOnlineRoutingServiceOptions) {
+        return new com.carto.routing.CartoOnlineRoutingService(options.source);
+    }
+}
+export class OSRMOfflineRoutingService extends RoutingService<com.carto.routing.OSRMOfflineRoutingService, OSRMOfflineRoutingServiceOptions> {
+    createNative(options: OSRMOfflineRoutingServiceOptions) {
+        return new com.carto.routing.OSRMOfflineRoutingService(options.path);
+    }
+}
+
+export class ValhallaOfflineRoutingService extends ValhallaRoutingService<com.carto.routing.ValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
+    createNative(options: ValhallaOfflineRoutingServiceOptions) {
+        return new com.carto.routing.ValhallaOfflineRoutingService(options.path);
+    }
+}
+export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<com.carto.routing.MultiValhallaOfflineRoutingService, ValhallaOfflineRoutingServiceOptions> {
+    createNative(options: MultiValhallaOfflineRoutingServiceOptions) {
+        return new com.carto.routing.MultiValhallaOfflineRoutingService();
+    }
+    add(database: string) {
+        this.getNative().add(database);
+    }
+    remove(database: string) {
+        this.getNative().remove(database);
+    }
+}
+
+export class ValhallaOnlineRoutingService extends RoutingService<com.carto.routing.ValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
     @nativeProperty profile: string;
     @nativeProperty customServiceURL: string;
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
@@ -148,7 +163,7 @@ class ValhallaOnlineRoutingService extends RoutingService<com.carto.routing.Valh
     }
 }
 
-class PackageManagerValhallaRoutingService extends RoutingService<com.carto.routing.PackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
+export class PackageManagerValhallaRoutingService extends RoutingService<com.carto.routing.PackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
     @nativeProperty profile: string;
     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
         return new com.carto.routing.PackageManagerValhallaRoutingService(options.packageManager.getNative());
@@ -165,15 +180,3 @@ class PackageManagerValhallaRoutingService extends RoutingService<com.carto.rout
         });
     }
 }
-
-export {
-    RoutingService,
-    RoutingResult,
-    PackageManagerRoutingService,
-    SGREOfflineRoutingService,
-    OSRMOfflineRoutingService,
-    CartoOnlineRoutingService,
-    ValhallaOfflineRoutingService,
-    ValhallaOnlineRoutingService,
-    PackageManagerValhallaRoutingService
-};
