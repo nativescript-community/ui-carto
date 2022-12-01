@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 import { ImageSource } from '@nativescript/core/image-source';
 import { ImageAsset } from '@nativescript/core/image-asset';
-import { RESOURCE_PREFIX, isDataURI, isFileOrResourcePath } from '@nativescript/core/utils/utils';
+import { Utils } from '@nativescript/core';
 import { isAndroid } from '@nativescript/core/platform';
 import { knownFolders, path } from '@nativescript/core/file-system';
 import { NativePropertyOptions } from '.';
@@ -100,14 +100,14 @@ export function _createImageSourceFromSrc(value: string | ImageSource | ImageAss
         value = value.trim();
 
         let source: ImageSource;
-        if (isDataURI(value)) {
+        if (Utils.isDataURI(value)) {
             const base64Data = value.split(',')[1];
             if (base64Data !== undefined) {
                 source = ImageSource.fromBase64Sync(base64Data);
             }
-        } else if (isFileOrResourcePath(value)) {
-            if (value.indexOf(RESOURCE_PREFIX) === 0) {
-                const resPath = value.substr(RESOURCE_PREFIX.length);
+        } else if (Utils.isFileOrResourcePath(value)) {
+            if (value.indexOf(Utils.RESOURCE_PREFIX) === 0) {
+                const resPath = value.substr(Utils.RESOURCE_PREFIX.length);
                 source = ImageSource.fromResourceSync(resPath);
             } else {
                 source = ImageSource.fromFileSync(value);
