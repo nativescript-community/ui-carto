@@ -37,7 +37,7 @@ export enum RoutingAction {
 }
 export abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
-    public calculateRoute(options: RoutingRequest, callback: (err: Error, res: RoutingResult) => void) {
+    public calculateRoute(options: RoutingRequest, profile = this.profile) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
             if (options.customOptions) {
@@ -47,7 +47,7 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
             }
 
             // ensure the profile is set
-            this.getNative().setProfile(this.profile);
+            this.getNative().setProfile(profile);
             const nRes = this.getNative().calculateRoute(nRequest);
             const result = nRes ? new RoutingResult(nRes) : null;
             resolve(result);
@@ -82,10 +82,11 @@ export class ValhallaOfflineRoutingService extends RoutingService<NTValhallaOffl
     createNative(options: ValhallaOfflineRoutingServiceOptions) {
         return NTValhallaOfflineRoutingService.alloc().initWithPath(options.path);
     }
-    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+    public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
 
+            this.getNative().setProfile(profile);
             const nRes = this.getNative().matchRoute(nRequest);
             const result = nRes ? new RouteMatchingResult(nRes) : null;
             resolve(result);
