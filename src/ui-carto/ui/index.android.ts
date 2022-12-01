@@ -116,7 +116,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         } else {
             view = new com.akylas.carto.additions.AKMapView(this._context);
         }
-        // view.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
         return view;
     }
 

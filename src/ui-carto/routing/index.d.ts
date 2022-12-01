@@ -79,9 +79,7 @@ export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOpti
 }
 export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
     profile: ValhallaProfile;
-
-    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
-    // rawCall(option: string, request: string, callback: (err: Error, res: string) => void): string;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: ValhallaProfile): Promise<RouteMatchingResult<T>>;
 }
 
 export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
@@ -91,6 +89,7 @@ export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptio
 }
 export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {
     profile: ValhallaProfile;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: ValhallaProfile): Promise<RouteMatchingResult<T>>;
 }
 
 export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
@@ -99,7 +98,7 @@ export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServ
 }
 export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {
     profile: ValhallaProfile;
-    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest): Promise<RouteMatchingResult<T>>;
+    matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: ValhallaProfile): Promise<RouteMatchingResult<T>>;
 }
 
 export interface SGREOfflineRoutingServiceOptions {
