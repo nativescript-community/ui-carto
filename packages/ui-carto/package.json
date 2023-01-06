@@ -6,7 +6,7 @@
     "typings": "index.d.ts",
     "sideEffects": false,
     "scripts": {
-        "build": "npm run tsc && npm run readme",
+        "build": "npm run tsc",
         "build.all": "npm run build && npm run build.angular",
         "readme": "../../node_modules/.bin/readme generate -c ../../tools/readme/blueprint.json",
         "tsc": "../../node_modules/.bin/cpy '**/*.d.ts' '../../packages/ui-carto' --parents --cwd=../../src/ui-carto && ../../node_modules/.bin/tsc -skipLibCheck -d",
