@@ -65,9 +65,16 @@
 </ul>
 </li>
 <li><a href="#demos-and-development">Demos and Development</a><ul>
-<li><a href="#setup">Setup</a></li>
+<li><a href="#repo-setup">Repo Setup</a></li>
 <li><a href="#build">Build</a></li>
 <li><a href="#demos">Demos</a></li>
+</ul>
+</li>
+<li><a href="#contributing">Contributing</a><ul>
+<li><a href="#update-repo-">Update repo </a></li>
+<li><a href="#update-readme-">Update readme </a></li>
+<li><a href="#update-doc-">Update doc </a></li>
+<li><a href="#publish">Publish</a></li>
 </ul>
 </li>
 <li><a href="#questions">Questions</a></li>
@@ -120,28 +127,68 @@
   <h2>Demos and Development</h2>
 </a>
 
-<a href="#setup" id="setup" style="color: inherit; text-decoration: none;">
-  <h3>Setup</h3>
+<a href="#repo-setup" id="repo-setup" style="color: inherit; text-decoration: none;">
+  <h3>Repo Setup</h3>
 </a>
-<p>To run the demos, you must clone this repo <strong>recursively</strong>.</p>
-<pre><code><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-0">clone</span><span class="hl-1"> </span><span class="hl-2">https</span><span class="hl-1">:</span><span class="hl-3">//github.com/@nativescript-community/ui-carto.git --recursive</span>
+<p>The repo uses submodules. If you did not clone with <code> --recursive</code> then you need to call</p>
+<pre><code><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-0">submodule</span><span class="hl-1"> </span><span class="hl-0">update</span><span class="hl-1"> --</span><span class="hl-0">init</span>
 </code></pre>
-<p><strong>Install Dependencies:</strong></p>
-<pre><code class="language-bash"><span class="hl-1">npm i </span><span class="hl-3"># or &#39;yarn install&#39; or &#39;pnpm install&#39;</span>
-</code></pre>
+<p>The package manager used to install and link dependencies must be <code>pnpm</code> or <code>yarn</code>. <code>npm</code> wont work.</p>
+<p>To develop and test:
+if you use <code>yarn</code> then run <code>yarn</code>
+if you use <code>pnpm</code> then run <code>pnpm i</code></p>
 <p><strong>Interactive Menu:</strong></p>
 <p>To start the interactive menu, run <code>npm start</code> (or <code>yarn start</code> or <code>pnpm start</code>). This will list all of the commonly used scripts.</p>
 
 <a href="#build" id="build" style="color: inherit; text-decoration: none;">
   <h3>Build</h3>
 </a>
-<pre><code class="language-bash"><span class="hl-1">npm run build</span><br/><br/><span class="hl-1">npm run build.angular </span><span class="hl-3"># or for Angular</span>
+<pre><code class="language-bash"><span class="hl-1">npm run build.all</span>
 </code></pre>
 
 <a href="#demos" id="demos" style="color: inherit; text-decoration: none;">
   <h3>Demos</h3>
 </a>
-<pre><code class="language-bash"><span class="hl-1">npm run demo.[ng|react|svelte|vue].[ios|android]</span><br/><br/><span class="hl-1">npm run demo.svelte.ios </span><span class="hl-3"># Example</span>
+<pre><code class="language-bash"><span class="hl-1">npm run demo.[ng|react|svelte|vue].[ios|android]</span><br/><br/><span class="hl-1">npm run demo.svelte.ios </span><span class="hl-2"># Example</span>
+</code></pre>
+<p><a href="#contributing"></a></p>
+<p><a href="#contributing"></a></p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+
+<a href="#update-repo" id="update-repo" style="color: inherit; text-decoration: none;">
+  <h3>Update repo</h3>
+</a>
+<p>You can update the repo files quite easily</p>
+<p>First update the submodules</p>
+<pre><code class="language-bash"><span class="hl-1">npm run update</span>
+</code></pre>
+<p>Then commit the changes
+Then update common files</p>
+<pre><code class="language-bash"><span class="hl-1">npm run sync</span>
+</code></pre>
+<p>Then you can run <code>yarn|pnpm</code>, commit changed files if any</p>
+
+<a href="#update-readme" id="update-readme" style="color: inherit; text-decoration: none;">
+  <h3>Update readme</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run readme</span>
+</code></pre>
+
+<a href="#update-doc" id="update-doc" style="color: inherit; text-decoration: none;">
+  <h3>Update doc</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run doc</span>
+</code></pre>
+
+<a href="#publish" id="publish" style="color: inherit; text-decoration: none;">
+  <h3>Publish</h3>
+</a>
+<p>The publishing is completely handled by <code>lerna</code> (you can add <code>-- --bump major</code> to force a major release)
+Simply run </p>
+<pre><code class="language-shell"><span class="hl-1">npm run publish</span>
 </code></pre>
 <p><a href="#questions"></a></p>
 <p><a href="#questions"></a></p>
