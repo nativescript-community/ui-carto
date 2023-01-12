@@ -1,5 +1,7 @@
 
 dependencies {
+	// implementation project(':carto_mobile_sdk')
+
 	// def root = file('.').toString();
 	// def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.3.3"
     // implementation (files("${root}/carto-mobile-sdk-4.4.7-rc.1.aar"))
