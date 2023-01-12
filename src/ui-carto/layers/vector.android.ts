@@ -116,6 +116,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                 position = projection.fromWgs84(dataSourceProjection.toWgs84(position));
             }
             const geoFeature = {
+                feature,
                 id: info.getFeatureId(),
                 layer: info.getFeatureLayerName(),
                 _nativeGeometry: geometry,
@@ -129,7 +130,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                     return this._parsedGeometry;
                 },
                 get _properties() {
-                    return info.getFeature().getProperties().toString();
+                    return feature.getProperties().toString();
                 },
                 get properties() {
                     if (!this._parsedProperties) {
