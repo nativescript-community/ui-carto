@@ -117,6 +117,7 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
                 position = projection.fromWgs84(dataSourceProjection.toWgs84(position));
             }
             const geoFeature = {
+                feature,
                 id: info.getFeatureId(),
                 layer: info.getFeatureLayerName(),
                 _nativeGeometry: geometry,
