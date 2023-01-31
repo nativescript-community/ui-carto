@@ -14,7 +14,7 @@ import {
     ValhallaRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
-import { JSVariantToNative } from '../utils';
+import { JSVariantToNative, nativeVariantToJS } from '../utils';
 
 const AKRoutingServiceAdditions = com.akylas.carto.additions.AKRoutingServiceAdditions;
 
@@ -96,7 +96,14 @@ abstract class RoutingService<T extends com.carto.routing.RoutingService, U exte
         });
     }
 }
-abstract class ValhallaRoutingService<T extends com.carto.routing.PackageManagerValhallaRoutingService | com.carto.routing.ValhallaOfflineRoutingService | com.carto.routing.MultiValhallaOfflineRoutingService, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
+abstract class ValhallaRoutingService<
+    T extends
+        | com.carto.routing.PackageManagerValhallaRoutingService
+        | com.carto.routing.ValhallaOfflineRoutingService
+        | com.carto.routing.MultiValhallaOfflineRoutingService
+        | com.carto.routing.ValhallaOnlineRoutingService,
+    U extends ValhallaRoutingServiceOptions
+> extends RoutingService<T, U> {
     public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
         return new Promise((resolve, reject) => {
             const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
@@ -112,6 +119,19 @@ abstract class ValhallaRoutingService<T extends com.carto.routing.PackageManager
             const test = profile;
             AKRoutingServiceAdditions.matchRoute(this.getNative(), nRequest, test, callback);
         });
+    }
+
+    public setConfigurationParameter(param: string, value: any) {
+        const native = this.getNative();
+        if (!(native instanceof com.carto.routing.ValhallaOnlineRoutingService)) {
+            native.setConfigurationParameter(param, JSVariantToNative(value));
+        }
+    }
+    public getConfigurationParameter(param: string) {
+        const native = this.getNative();
+        if (!(native instanceof com.carto.routing.ValhallaOnlineRoutingService)) {
+            return nativeVariantToJS(native.getConfigurationParameter(param));
+        }
     }
 }
 
@@ -155,7 +175,7 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<c
     }
 }
 
-export class ValhallaOnlineRoutingService extends RoutingService<com.carto.routing.ValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+export class ValhallaOnlineRoutingService extends ValhallaRoutingService<com.carto.routing.ValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
     @nativeProperty profile: string;
     @nativeProperty customServiceURL: string;
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
@@ -163,20 +183,9 @@ export class ValhallaOnlineRoutingService extends RoutingService<com.carto.routi
     }
 }
 
-export class PackageManagerValhallaRoutingService extends RoutingService<com.carto.routing.PackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
+export class PackageManagerValhallaRoutingService extends ValhallaRoutingService<com.carto.routing.PackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
     @nativeProperty profile: string;
     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
         return new com.carto.routing.PackageManagerValhallaRoutingService(options.packageManager.getNative());
-    }
-    public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
-        return new Promise<RouteMatchingResult>((resolve, reject) => {
-            const nRequest = new com.carto.routing.RouteMatchingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
-            const callback = new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
-                onRouteMatchingResult: (err, res) => (err ? reject(err) : resolve(res ? new RouteMatchingResult(res) : null))
-            });
-            // TODO: passing profile directly seems to break terser :s Find out why
-            const test = profile;
-            AKRoutingServiceAdditions.matchRoute(this.getNative(), nRequest, test, callback);
-        });
     }
 }

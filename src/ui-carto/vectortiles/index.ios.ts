@@ -1,7 +1,7 @@
-import { DirAssetPackage, nativeVectorToArray } from '../utils';
-import { File } from '@nativescript/core/file-system';
-import { getFileName, getRelativePathToApp } from '../index.common';
+import { File } from '@nativescript/core';
 import type { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
+import { getFileName, getRelativePathToApp } from '../index.common';
+import { DirAssetPackage, nativeVectorToArray } from '../utils';
 import { BaseVectorTileDecoder } from './index.common';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTileDecoder, VectorTileDecoderOptions> {

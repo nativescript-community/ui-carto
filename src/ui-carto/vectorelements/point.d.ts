@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { BasePointVectorElement, BaseVectorElementStyleBuilder, BillboardStyleBuilderOptions, PointVectorElementOptions } from '.';
 import { DefaultLatLonKeys } from '../core';
 import { Geometry } from '../geometry';

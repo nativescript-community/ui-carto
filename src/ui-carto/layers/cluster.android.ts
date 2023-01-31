@@ -1,9 +1,8 @@
-import { Font, Screen } from '@nativescript/core';
-import { Color } from '@nativescript/core/color';
+import { Color, Font, Screen } from '@nativescript/core';
 import { nativeColorProperty, nativeFontProperty, nativeImageProperty } from '..';
+import { BaseNative } from '../BaseNative';
 import { MapPos, fromNativeMapPos } from '../core';
 import { nativeProperty } from '../index.common';
-import { BaseNative } from '../BaseNative';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 

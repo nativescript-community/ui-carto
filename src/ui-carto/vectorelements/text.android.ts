@@ -1,11 +1,10 @@
-import { nativeAndroidEnumProperty } from '../index.android';
-import { Color } from '@nativescript/core/color';
-import { nativeColorProperty } from '..';
-import { nativeProperty } from '..';
-import { TextOptions, TextStyleBuilderOptions } from './text';
+import { Color } from '@nativescript/core';
 import { BillboardOrientation, BillboardStyleBuilder } from '.';
+import { nativeColorProperty, nativeProperty } from '..';
+import { nativeAndroidEnumProperty } from '../index.android';
 import { BaseBillboardVectorElement } from './index.android';
 import { styleBuilderProperty } from './index.common';
+import { TextOptions, TextStyleBuilderOptions } from './text';
 
 export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.TextStyleBuilder, TextStyleBuilderOptions> {
     createNative(options: TextStyleBuilderOptions) {

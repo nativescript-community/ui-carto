@@ -1,7 +1,4 @@
-import { Font } from '@nativescript/core';
-import { Color } from '@nativescript/core/color';
-import { ImageAsset } from '@nativescript/core/image-asset';
-import { ImageSource } from '@nativescript/core/image-source';
+import { Color, Font, ImageAsset, ImageSource } from '@nativescript/core';
 import { BaseNative } from '..';
 import { MapPos } from '../core';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';

@@ -1,9 +1,9 @@
-import { getFileName, getRelativePathToApp } from '../index.common';
-import { BaseNative } from '../BaseNative';
+import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
-import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core/file-system';
-import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
+import { BaseNative } from '../BaseNative';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
+import { getFileName, getRelativePathToApp } from '../index.common';
 
 export function nativeVectorToArray(nVector: NTStringVector) {
     const count = nVector.size();

@@ -14,7 +14,7 @@ import {
     ValhallaRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
-import { JSVariantToNative } from '../utils';
+import { JSVariantToNative, nativeVariantToJS } from '../utils';
 
 export * from './index.common';
 
@@ -56,15 +56,39 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
         });
     }
 }
-abstract class ValhallaRoutingService<T extends NTRoutingService, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
-    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
+abstract class ValhallaRoutingService<
+    T extends NTPackageManagerValhallaRoutingService | NTValhallaOfflineRoutingService | NTMultiValhallaOfflineRoutingService | NTValhallaOnlineRoutingService,
+    U extends ValhallaRoutingServiceOptions
+> extends RoutingService<T, U> {
+    public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+            if (options.customOptions) {
+                Object.keys(options.customOptions).forEach((k) => {
+                    nRequest.setCustomParameterValue(k, JSVariantToNative(options.customOptions[k]));
+                });
+            }
 
+            // ensure the profile is set
+            this.getNative().setProfile(this.profile);
             const nRes = this.getNative().matchRoute(nRequest);
             const result = nRes ? new RouteMatchingResult(nRes) : null;
             resolve(result);
         });
+    }
+    public setConfigurationParameter(param: string, value: any) {
+        const native = this.getNative();
+        if (!(native instanceof NTValhallaOnlineRoutingService)) {
+            //@ts-ignore
+            native.setConfigurationParameterValue(param, JSVariantToNative(value));
+        }
+    }
+    public getConfigurationParameter(param: string) {
+        const native = this.getNative();
+        if (!(native instanceof NTValhallaOnlineRoutingService)) {
+            //@ts-ignore
+            return nativeVariantToJS(native.getConfigurationParameter(param));
+        }
     }
 }
 
@@ -109,24 +133,14 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<N
     }
 }
 
-export class ValhallaOnlineRoutingService extends RoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+export class ValhallaOnlineRoutingService extends ValhallaRoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
         return NTValhallaOnlineRoutingService.alloc().initWithApiKey(options.apiKey);
     }
 }
 
-export class PackageManagerValhallaRoutingService extends RoutingService<NTPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
+export class PackageManagerValhallaRoutingService extends ValhallaRoutingService<NTPackageManagerValhallaRoutingService, PackageManagerValhallaRoutingServiceOptions> {
     createNative(options: PackageManagerValhallaRoutingServiceOptions) {
         return NTPackageManagerValhallaRoutingService.alloc().initWithPackageManager(options.packageManager.getNative());
-    }
-    public matchRoute(options: RouteMatchingRequest, callback: (err: Error, res: RouteMatchingResult) => void) {
-        return new Promise((resolve, reject) => {
-            const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
-            // ensure the profile is set
-            this.getNative().setProfile(this.profile);
-            const nRes = this.getNative().matchRoute(nRequest);
-            const result = nRes ? new RouteMatchingResult(nRes) : null;
-            resolve(result);
-        });
     }
 }

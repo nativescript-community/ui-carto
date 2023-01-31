@@ -74,6 +74,8 @@ export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNati
 export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
     profile: ValhallaProfile;
     matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: string): Promise<RouteMatchingResult<T>>;
+    public setConfigurationParameter(param: string, value: any);
+    public getConfigurationParameter(param: string): any;
 }
 
 export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptions {
@@ -90,8 +92,7 @@ export class ValhallaOfflineRoutingService extends ValhallaRoutingService<any, V
     profile: ValhallaProfile;
 }
 
-export interface MultiValhallaOfflineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
-}
+export interface MultiValhallaOfflineRoutingServiceOptions extends ValhallaRoutingServiceOptions {}
 export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<any, MultiValhallaOfflineRoutingServiceOptions> {
     add(database: string);
     remove(database: string);

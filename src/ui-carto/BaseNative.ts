@@ -1,4 +1,4 @@
-import { Observable } from '@nativescript/core/data/observable';
+import { Observable } from '@nativescript/core';
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
     constructor(public options: U = {} as any, native?: T) {

@@ -1,6 +1,3 @@
-import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
-import { android as androidApp } from '@nativescript/core/application';
-import { profile, trace } from '@nativescript/core/profiling';
 import {
     DefaultLatLonKeys,
     MapBounds,
@@ -17,10 +14,11 @@ import {
 import { TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
+import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 
+import { ImageSource, Property, Utils, booleanConverter } from '@nativescript/core';
 import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
-import { ImageSource, Property, booleanConverter } from '@nativescript/core';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
 export const time = global.__time || Date.now;
@@ -47,8 +45,8 @@ export const PanningMode = {
 
 let licenseKey: string;
 
-export const registerLicense = profile('registerLicense', (value: string, callback?: (result: boolean) => void) => {
-    const context = androidApp.context;
+export function registerLicense(value: string, callback?: (result: boolean) => void) {
+    const context = Utils.android.getApplicationContext();
     if (!context) {
         throw new Error('application context not initialized!');
     }
@@ -75,7 +73,7 @@ export const registerLicense = profile('registerLicense', (value: string, callba
         setLicenseKeyRegistered(result);
         return result;
     }
-});
+}
 export function getLicenseKey() {
     return licenseKey;
 }

@@ -1,9 +1,7 @@
-import { Color } from '@nativescript/core/color';
-import { ImageAsset } from '@nativescript/core/image-asset';
-import { ImageSource } from '@nativescript/core/image-source';
-import { Geometry } from '../geometry';
-import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder, BillboardStyleBuilderOptions, BillboardVectorElementOptions, PointVectorElementOptions } from '.';
+import { Color, ImageAsset, ImageSource } from '@nativescript/core';
+import { BaseBillboardVectorElement, BillboardOrientation, BillboardScaling, BillboardStyleBuilder, BillboardStyleBuilderOptions, BillboardVectorElementOptions } from '.';
 import { DefaultLatLonKeys } from '../core';
+import { Geometry } from '../geometry';
 
 export class MarkerStyleBuilderOptions extends BillboardStyleBuilderOptions {
     size?: number;

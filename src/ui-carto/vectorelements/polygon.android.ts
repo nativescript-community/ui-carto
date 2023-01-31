@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 import { Geometry } from '../geometry';
 import { BaseLineVectorElement } from './index.android';

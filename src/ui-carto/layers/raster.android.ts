@@ -1,3 +1,7 @@
+import { Color } from '@nativescript/core';
+import { mapPosVectorFromArgs, nativeColorProperty, nativeMapVecProperty, nativeProperty } from '../';
+import { DoubleVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
+import { Projection } from '../projections';
 import {
     CartoOnlineRasterTileLayerOptions,
     HillshadeRasterTileLayerOptions,
@@ -6,10 +10,6 @@ import {
     RasterTileLayerOptions
 } from './raster';
 import { RasterTileLayerBase } from './raster.common';
-import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeMapVecProperty, nativeProperty } from '../';
-import { Color } from '@nativescript/core/color';
-import { DoubleVector, IntVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
-import { Projection } from '../projections';
 
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {

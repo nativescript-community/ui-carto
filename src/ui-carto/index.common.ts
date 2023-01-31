@@ -1,14 +1,10 @@
 /* eslint-disable no-redeclare */
-import { ImageSource } from '@nativescript/core/image-source';
-import { ImageAsset } from '@nativescript/core/image-asset';
-import { Utils } from '@nativescript/core';
-import { isAndroid } from '@nativescript/core/platform';
-import { knownFolders, path } from '@nativescript/core/file-system';
+import { ImageAsset, ImageSource, Utils, knownFolders, path } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { fromNativeMapRange, toNativeMapRange } from './utils';
 
 function createGetter(key: string, options: NativePropertyOptions) {
-    const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
         let result;
@@ -25,7 +21,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
     };
 }
 function createSetter(key, options: NativePropertyOptions) {
-    const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeSetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function (newVal) {
         if (this['_' + key] === newVal) {
             return;

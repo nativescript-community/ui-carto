@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeProperty } from '..';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineGeometry } from '../geometry';
