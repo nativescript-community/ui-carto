@@ -45,7 +45,8 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
     public onVectorElementClicked(info: NTVectorElementClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.onVectorElementClicked) {
-            const element = new VectorElement(undefined, info.getVectorElement());
+            const nElement = info.getVectorElement();
+            const element = new VectorElement(undefined, nElement);
             let position = info.getClickPos();
             let elementPos = info.getElementClickPos();
             if (this.projection) {
@@ -59,6 +60,7 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
                     clickType: info.getClickType() as any,
                     layer: this._layer.get() as any,
                     element,
+                    native: nElement,
                     metaData: element.metaData,
                     position: fromNativeMapPos(position),
                     elementPos: fromNativeMapPos(elementPos)
@@ -300,7 +302,8 @@ export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer
     @nativeProperty maximumClusterZoom: number;
     @nativeProperty({
         nativeGetterName: 'isAnimatedClusters'
-    }) animatedClusters: boolean;
+    })
+    animatedClusters: boolean;
 
     expandCluster(element: VectorElement<any, any>, px: number) {
         this.getNative().expandClusterPx(element.getNative(), px);

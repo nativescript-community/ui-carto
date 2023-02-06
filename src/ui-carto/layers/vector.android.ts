@@ -2,9 +2,7 @@ import { Layer, TileLayer } from '.';
 import { BaseNative, nativeProperty } from '..';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { Projection } from '../projections';
-import { nativeVariantToJS } from '../utils';
 import { VectorElement } from '../vectorelements';
-import { Line } from '../vectorelements/line';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
 import {
     CartoOfflineVectorTileLayerOptions,
@@ -219,13 +217,9 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
     }
     onElementClicked(info: com.carto.ui.VectorElementClickInfo) {
         if (this.elementListener && this.elementListener.onVectorElementClicked) {
-            let element: VectorElement<any, any>;
             const nElement = info.getVectorElement();
-            if (nElement instanceof com.carto.vectorelements.Line) {
-                element = new Line(undefined, nElement);
-            } else {
-                element = new VectorElement(undefined, nElement);
-            }
+            const element = new VectorElement(undefined, nElement);
+
             let position = info.getClickPos();
             let elementPos = info.getElementClickPos();
             if (this.projection) {
@@ -239,6 +233,7 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
                     clickType: info.getClickType(),
                     layer: this,
                     element,
+                    native: nElement,
                     metaData: element.metaData,
                     position: fromNativeMapPos(position),
                     elementPos: fromNativeMapPos(elementPos)
