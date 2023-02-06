@@ -28,9 +28,7 @@ export class Point extends BasePointVectorElement<com.carto.vectorelements.Point
     createNative(options: PointOptions) {
         const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);
-        const result = new com.carto.vectorelements.Point(nativePos, style);
-        // result['owner'] = new WeakRef(this);
-        return result;
+        return new com.carto.vectorelements.Point(nativePos, style);
     }
     buildStyle() {
         let style: com.carto.styles.PointStyle;
