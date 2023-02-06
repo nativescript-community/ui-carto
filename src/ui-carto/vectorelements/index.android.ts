@@ -11,25 +11,25 @@ export { BaseVectorElementStyleBuilder };
 
 export const BillboardOrientation = {
     get FACE_CAMERA() {
-        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA.swigValue();
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA;
     },
     get FACE_CAMERA_GROUND() {
-        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND.swigValue();
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND;
     },
     get GROUND() {
-        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND.swigValue();
+        return com.carto.styles.BillboardOrientation.BILLBOARD_ORIENTATION_GROUND;
     }
 };
 
 export const BillboardScaling = {
     get CONST_SCREEN_SIZE() {
-        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE.swigValue();
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_CONST_SCREEN_SIZE;
     },
     get SCREEN_SIZE() {
-        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE.swigValue();
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_SCREEN_SIZE;
     },
     get WORLD_SIZE() {
-        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE.swigValue();
+        return com.carto.styles.BillboardScaling.BILLBOARD_SCALING_WORLD_SIZE;
     }
 };
 

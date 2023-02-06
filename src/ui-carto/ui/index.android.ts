@@ -169,7 +169,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                             };
                         },
                         get clickType() {
-                            return mapClickInfo.getClickType().swigValue();
+                            return mapClickInfo.getClickType();
                         },
                         get position() {
                             return fromNativeMapPos(mapClickInfo.getClickPos());
