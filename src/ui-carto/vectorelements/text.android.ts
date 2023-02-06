@@ -13,7 +13,7 @@ export class TextStyleBuilder extends BillboardStyleBuilder<com.carto.styles.Tex
     }
     @nativeProperty fontSize: number;
     @nativeProperty fontName: string;
-    @nativeAndroidEnumProperty(com.carto.styles.BillboardOrientation, {}) orientationMode: BillboardOrientation;
+    @nativeProperty orientationMode: BillboardOrientation;
     @nativeProperty breakLines: boolean;
     @nativeProperty textField: string;
     @nativeProperty strokeWidth: number;

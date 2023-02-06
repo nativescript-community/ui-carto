@@ -16,16 +16,16 @@ export const CartoMapStyle = {
 
 export const ClickType = {
     get SINGLE() {
-        return com.carto.ui.ClickType.CLICK_TYPE_SINGLE.swigValue();
+        return com.carto.ui.ClickType.CLICK_TYPE_SINGLE;
     },
     get LONG() {
-        return com.carto.ui.ClickType.CLICK_TYPE_LONG.swigValue();
+        return com.carto.ui.ClickType.CLICK_TYPE_LONG;
     },
     get DOUBLE() {
-        return com.carto.ui.ClickType.CLICK_TYPE_DOUBLE.swigValue();
+        return com.carto.ui.ClickType.CLICK_TYPE_DOUBLE;
     },
     get DUAL() {
-        return com.carto.ui.ClickType.CLICK_TYPE_DUAL.swigValue();
+        return com.carto.ui.ClickType.CLICK_TYPE_DUAL;
     }
 };
 

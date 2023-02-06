@@ -140,7 +140,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             };
             return (
                 this.listener.onVectorTileClicked.call(this.listener, {
-                    clickType: info.getClickType().swigValue(),
+                    clickType: info.getClickType(),
                     layer: this,
                     feature: geoFeature,
                     featureId: geoFeature.id,
@@ -236,7 +236,7 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
             }
             return (
                 this.elementListener.onVectorElementClicked.call(this.elementListener, {
-                    clickType: info.getClickType().swigValue(),
+                    clickType: info.getClickType(),
                     layer: this,
                     element,
                     metaData: element.metaData,
@@ -323,7 +323,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue()
+                dragMode: dragInfo.getDragMode()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -336,7 +336,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue()
+                dragMode: dragInfo.getDragMode()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -349,7 +349,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue()
+                dragMode: dragInfo.getDragMode()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;

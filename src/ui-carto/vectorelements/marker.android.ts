@@ -18,8 +18,8 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
     @nativeProperty anchorPointX: number;
     @nativeProperty anchorPointY: number;
     @nativeProperty clickSize: number;
-    @nativeAndroidEnumProperty(com.carto.styles.BillboardScaling, {}) scalingMode: BillboardScaling;
-    @nativeAndroidEnumProperty(com.carto.styles.BillboardOrientation, {}) orientationMode: BillboardOrientation;
+    @nativeProperty scalingMode: BillboardScaling;
+    @nativeProperty orientationMode: BillboardOrientation;
 
     mBuildStyle: com.carto.styles.MarkerStyle;
     buildStyle() {
