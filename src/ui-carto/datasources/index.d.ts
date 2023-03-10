@@ -38,6 +38,7 @@ export interface MergedMBVTTileDataSourceOptions extends TileDataSourceOptions {
 export class MergedMBVTTileDataSource<T, U extends MergedMBVTTileDataSourceOptions> extends TileDataSource<T, U> {}
 export class CombinedTileDataSource<T, U extends CombinedTileDataSourceOptions> extends TileDataSource<T, U> {}
 export class MultiTileDataSource<T, U extends MultiTileDataSourceOptions> extends TileDataSource<T, U> {
+    maxOpenedPackages: number;
     add(source: TileDataSource<any, any>, tileMask?: string);
     remove(source: TileDataSource<any, any>);
 }
