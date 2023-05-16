@@ -1,10 +1,9 @@
+import { Color } from '@nativescript/core';
+import { geometryFromArgs, nativeColorProperty, nativeProperty } from '..';
+import { Geometry } from '../geometry';
 import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
 import { BasePointVectorElement } from './index.ios';
 import { PointOptions, PointStyleBuilderOptions } from './point';
-import { Color } from '@nativescript/core/color';
-import { geometryFromArgs, nativeColorProperty } from '..';
-import { nativeProperty } from '..';
-import { Geometry } from '../geometry';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<NTPointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {

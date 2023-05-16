@@ -1,11 +1,9 @@
-import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
-import { BasePointVectorElement } from './index.android';
-import { PointOptions, PointStyleBuilderOptions } from './point';
-import { Color } from '@nativescript/core/color';
-import { toNativeMapPos } from '../core';
-import { geometryFromArgs, nativeColorProperty } from '..';
-import { nativeProperty } from '..';
+import { Color } from '@nativescript/core';
+import { geometryFromArgs, nativeColorProperty, nativeProperty } from '..';
 import { Geometry } from '../geometry';
+import { BasePointVectorElement } from './index.android';
+import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
+import { PointOptions, PointStyleBuilderOptions } from './point';
 
 export class PointStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.PointStyleBuilder, PointStyleBuilderOptions> {
     createNative(options: PointStyleBuilderOptions) {
@@ -30,9 +28,7 @@ export class Point extends BasePointVectorElement<com.carto.vectorelements.Point
     createNative(options: PointOptions) {
         const style = this.buildStyle();
         const nativePos = this.getNativePos(options.position, options.projection);
-        const result = new com.carto.vectorelements.Point(nativePos, style);
-        // result['owner'] = new WeakRef(this);
-        return result;
+        return new com.carto.vectorelements.Point(nativePos, style);
     }
     buildStyle() {
         let style: com.carto.styles.PointStyle;

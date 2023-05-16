@@ -2,9 +2,7 @@ import { Layer, TileLayer } from '.';
 import { BaseNative, nativeProperty } from '..';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { Projection } from '../projections';
-import { nativeVariantToJS } from '../utils';
 import { VectorElement } from '../vectorelements';
-import { Line } from '../vectorelements/line';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
 import {
     CartoOfflineVectorTileLayerOptions,
@@ -116,6 +114,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                 position = projection.fromWgs84(dataSourceProjection.toWgs84(position));
             }
             const geoFeature = {
+                feature,
                 id: info.getFeatureId(),
                 layer: info.getFeatureLayerName(),
                 _nativeGeometry: geometry,
@@ -129,7 +128,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                     return this._parsedGeometry;
                 },
                 get _properties() {
-                    return info.getFeature().getProperties().toString();
+                    return feature.getProperties().toString();
                 },
                 get properties() {
                     if (!this._parsedProperties) {
@@ -140,7 +139,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             };
             return (
                 this.listener.onVectorTileClicked.call(this.listener, {
-                    clickType: info.getClickType().swigValue(),
+                    clickType: info.getClickType(),
                     layer: this,
                     feature: geoFeature,
                     featureId: geoFeature.id,
@@ -219,13 +218,9 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
     }
     onElementClicked(info: com.carto.ui.VectorElementClickInfo) {
         if (this.elementListener && this.elementListener.onVectorElementClicked) {
-            let element: VectorElement<any, any>;
             const nElement = info.getVectorElement();
-            if (nElement instanceof com.carto.vectorelements.Line) {
-                element = new Line(undefined, nElement);
-            } else {
-                element = new VectorElement(undefined, nElement);
-            }
+            const element = new VectorElement(undefined, nElement);
+
             let position = info.getClickPos();
             let elementPos = info.getElementClickPos();
             if (this.projection) {
@@ -236,9 +231,10 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
             }
             return (
                 this.elementListener.onVectorElementClicked.call(this.elementListener, {
-                    clickType: info.getClickType().swigValue(),
+                    clickType: info.getClickType(),
                     layer: this,
                     element,
+                    native: nElement,
                     metaData: element.metaData,
                     position: fromNativeMapPos(position),
                     elementPos: fromNativeMapPos(elementPos)
@@ -323,7 +319,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue()
+                dragMode: dragInfo.getDragMode()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -336,7 +332,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue()
+                dragMode: dragInfo.getDragMode()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
@@ -349,7 +345,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
                 position: fromNativeMapPos(dragInfo.getMapPos()),
                 screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
-                dragMode: dragInfo.getDragMode().swigValue()
+                dragMode: dragInfo.getDragMode()
             });
         }
         return com.carto.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;

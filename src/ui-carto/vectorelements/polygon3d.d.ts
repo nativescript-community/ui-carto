@@ -1,5 +1,4 @@
-// import { LineStyleBuilder } from './line';
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from '../core';
 import { Projection } from '../projections';

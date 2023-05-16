@@ -1,5 +1,5 @@
 /* eslint-disable no-redeclare */
-import { Observable } from '@nativescript/core/data/observable';
+import { Observable } from '@nativescript/core';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from './core';
 import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';

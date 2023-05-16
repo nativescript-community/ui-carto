@@ -15,6 +15,7 @@ import com.carto.routing.RoutingInstruction;
 import com.carto.routing.RoutingService;
 import com.carto.routing.PackageManagerValhallaRoutingService;
 import com.carto.routing.ValhallaOfflineRoutingService;
+import com.carto.routing.ValhallaOnlineRoutingService;
 import com.carto.routing.MultiValhallaOfflineRoutingService;
 
 import java.io.IOException;
@@ -214,6 +215,52 @@ public class AKRoutingServiceAdditions {
     }
 
     public static void matchRoute (final ValhallaOfflineRoutingService service, final RouteMatchingRequest request, final String profile, final RoutingServiceRouteMatchingCallback callback  ) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                RouteMatchingResult result = null;
+                try {
+                    service.setProfile(profile);
+                    result = service.matchRoute(request);
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                        if (mainHandler == null) {
+                            mainHandler = new Handler(android.os.Looper.getMainLooper());
+                        }
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onRouteMatchingResult(e, null);
+                            }
+                        });
+                    } else {
+                        callback.onRouteMatchingResult(e, null);
+                    }
+                    return;
+                }
+                
+                final RouteMatchingResult fRa = result;
+                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (mainHandler == null) {
+                        mainHandler = new Handler(android.os.Looper.getMainLooper());
+                    }
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onRouteMatchingResult(null, fRa);
+                        }
+                    });
+                } else {
+                    callback.onRouteMatchingResult(null, fRa);
+                }
+
+            }
+        });
+        thread.start();
+    }
+
+    public static void matchRoute (final ValhallaOnlineRoutingService service, final RouteMatchingRequest request, final String profile, final RoutingServiceRouteMatchingCallback callback  ) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

@@ -1,8 +1,8 @@
-import { BaseVectorElementStyleBuilder } from './index.common';
-import { BaseLineVectorElement } from './index.android';
-import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
+import { BaseLineVectorElement } from './index.android';
+import { BaseVectorElementStyleBuilder } from './index.common';
+import { Polygon3DOptions, Polygon3DStyleBuilderOptions } from './polygon3d';
 
 export class Polygon3DStyleBuilder extends BaseVectorElementStyleBuilder<com.carto.styles.Polygon3DStyleBuilder, Polygon3DStyleBuilderOptions> {
     createNative(options: Polygon3DStyleBuilderOptions) {

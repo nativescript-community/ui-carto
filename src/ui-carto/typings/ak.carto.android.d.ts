@@ -417,7 +417,11 @@ declare namespace com {
                     public static class: java.lang.Class<AKRoutingServiceAdditions>;
                     public constructor();
                     public static matchRoute(
-                        service: com.carto.routing.PackageManagerValhallaRoutingService | com.carto.routing.ValhallaOfflineRoutingService | com.carto.routing.MultiValhallaOfflineRoutingService,
+                        service:
+                            | com.carto.routing.PackageManagerValhallaRoutingService
+                            | com.carto.routing.ValhallaOfflineRoutingService
+                            | com.carto.routing.MultiValhallaOfflineRoutingService
+                            | com.carto.routing.ValhallaOnlineRoutingService,
                         request: com.carto.routing.RouteMatchingRequest,
                         profile: string,
                         callback: RoutingServiceRouteMatchingCallback

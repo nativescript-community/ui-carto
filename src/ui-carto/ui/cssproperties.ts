@@ -1,7 +1,5 @@
-import { CssProperty } from '@nativescript/core/ui/core/properties';
-import { Style } from '@nativescript/core/ui/styling/style';
-import { LatitudeKey, LongitudeKey, MapPos } from '../core';
-import { booleanConverter } from '@nativescript/core/ui/core/view-base';
+import { CssProperty, Style, booleanConverter } from '@nativescript/core';
+import { LatitudeKey, LongitudeKey } from '../core';
 import { GenericMapPos } from '../core/index.common';
 
 export const licenseKeyProperty = new CssProperty<Style, string>({

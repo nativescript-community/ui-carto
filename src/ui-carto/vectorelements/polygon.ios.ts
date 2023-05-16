@@ -1,10 +1,10 @@
-import { BaseVectorElementStyleBuilder, lineStyleBuilderProperty, styleBuilderProperty } from './index.common';
-import { BaseLineVectorElement } from './index.ios';
-import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
-import { Color } from '@nativescript/core/color';
-import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
+import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, mapPosVectorVectorFromArgs, nativeColorProperty } from '..';
 import { Geometry } from '../geometry';
+import { BaseVectorElementStyleBuilder, lineStyleBuilderProperty, styleBuilderProperty } from './index.common';
+import { BaseLineVectorElement } from './index.ios';
+import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
+import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<NTPolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {

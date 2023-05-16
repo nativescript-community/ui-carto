@@ -1,7 +1,4 @@
-import { EventData } from '@nativescript/core/data/observable';
-import { ImageSource } from '@nativescript/core/image-source';
-import { View } from '@nativescript/core/ui/core/view';
-import { Style } from '@nativescript/core/ui/styling/style';
+import { EventData, ImageSource, Style, View } from '@nativescript/core';
 import { DefaultLatLonKeys, GenericMapPos, MapBounds, ScreenBounds, ScreenPos } from '../core';
 import { Layer } from '../layers';
 import { Projection } from '../projections';

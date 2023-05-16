@@ -4,5 +4,8 @@
     "demos": [
         "svelte",
         "vue"
-    ]
+    ],
+    "doc": {
+        "includeSubDirDefinitions": true
+    }
 }

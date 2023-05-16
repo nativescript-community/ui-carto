@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVectorVector } from '../core';
 import { Geometry } from '../geometry';

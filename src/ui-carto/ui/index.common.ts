@@ -1,11 +1,10 @@
 /* eslint-disable no-redeclare */
-import { CSSType, View } from '@nativescript/core/ui/core/view';
+import { CSSType, ContentView } from '@nativescript/core';
+import { BaseNative } from '../BaseNative';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
+import { Layer } from '../layers';
 import { nativeVectorToArray } from '../utils';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
-import { Layer } from '../layers';
-import { ContentView } from '@nativescript/core';
-import { BaseNative } from '../BaseNative';
 
 let licenseKeyRegistered = false;
 export function setLicenseKeyRegistered(value: boolean) {
@@ -130,7 +129,8 @@ export abstract class CartoViewBase extends ContentView {
     nativeProjection: any;
     @mapProperty({
         getConverter: (value) => fromNativeMapPos(value)
-    }) focusPos: MapPos;
+    })
+    focusPos: MapPos;
     @mapProperty zoom: number;
     @mapProperty({
         ios: {
@@ -139,7 +139,8 @@ export abstract class CartoViewBase extends ContentView {
         android: {
             nativeGetterName: 'getMapRotation'
         }
-    }) bearing: number;
+    })
+    bearing: number;
     @mapProperty tilt: number;
     @mapProperty minZoom: number;
     @mapProperty maxZoom: number;

@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core/color';
+import { Color } from '@nativescript/core';
 import { BillboardOrientation, BillboardScaling, BillboardStyleBuilder } from '.';
 import { geometryFromArgs, nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '..';
 import { Geometry } from '../geometry';
