@@ -134,6 +134,7 @@ export class MapOptions {
     setKineticPan(enabled: boolean): void;
     setKineticRotation(enabled: boolean): void;
     setKineticZoom(enabled: boolean): void;
+    setRotationGestures(enabled: boolean): void;
     /**
      * @param color  native Carto Color
      */

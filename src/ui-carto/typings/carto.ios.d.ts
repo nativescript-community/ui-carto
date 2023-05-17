@@ -3670,6 +3670,7 @@ declare class NTOptions extends NSObject {
     setKineticZoom(enabled: boolean): void;
 
     setLongClickDuration(duration: number): void;
+    setRotationGestures(enabled: boolean): void;
 
     setMainLightColor(color: NTColor): void;
 
