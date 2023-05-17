@@ -108,6 +108,7 @@ export class MapOptions {
     isTiltGestureReversed(): boolean;
     isUserInput(): boolean;
     isZoomGestures(): boolean;
+    isRotationGestures(): boolean;
     /**
      * @param color native Carto Color
      */
@@ -172,6 +173,7 @@ export class MapOptions {
 
     setWatermarkScale(scale: number): void;
     setZoomGestures(enabled: boolean): void;
+    setRotationGestures(enabled: boolean): void;
     /**
      * @param zoomRange native Carto  MapRange
      */
