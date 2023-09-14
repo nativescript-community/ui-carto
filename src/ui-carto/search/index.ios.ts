@@ -41,6 +41,15 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
             return result;
         }
     }
+    set layers(value: string | string[]) {
+        const array = Array.isArray(value) ? value : value.split('');
+        const vector = NTStringVector.alloc().init();
+        for (let index = 0; index < array.length; index++) {
+            vector.add(array[index]);
+        }
+        //@ts-ignore
+        this.native.setLayers(vector);
+    }
 }
 
 export class FeatureCollectionSearchService extends BaseNative<NTFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {

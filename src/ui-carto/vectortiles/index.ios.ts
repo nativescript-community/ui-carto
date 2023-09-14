@@ -1,7 +1,7 @@
 import { File } from '@nativescript/core';
 import type { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
 import { getFileName, getRelativePathToApp } from '../index.common';
-import { DirAssetPackage, nativeVectorToArray } from '../utils';
+import { DirAssetPackage, ZippedAssetPackage, nativeVectorToArray } from '../utils';
 import { BaseVectorTileDecoder } from './index.common';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTileDecoder, VectorTileDecoderOptions> {
@@ -15,17 +15,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
     pack: NTZippedAssetPackage;
     createNative(options: MBVectorTileDecoderOptions) {
         if (!!options.zipPath) {
-            const zipPath = getRelativePathToApp(options.zipPath);
-            let vectorTileStyleSetData: NTBinaryData;
-            if (options.liveReload === true) {
-                const data = File.fromPath(getFileName(options.zipPath)).readSync() as NSData;
-                const arr = new ArrayBuffer(data.length);
-                data.getBytes(arr as any);
-                vectorTileStyleSetData = NTBinaryData.alloc().initWithDataPtrSize(arr as any, data.length);
-            } else {
-                vectorTileStyleSetData = NTAssetUtils.loadAsset(zipPath);
-            }
-            this.pack = NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
+            this.pack = new ZippedAssetPackage(options as any).getNative();
         } else if (!!options.dirPath) {
             this.pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
         }
@@ -72,6 +62,21 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
 
     setStyleParameter(param: string, value: string) {
         this.getNative().setStyleParameterValue(param, value);
+    }
+    setStyleParameters(value: Record<string, string> | NTStringMap) {
+        let map: NTStringMap = value as any;
+        if (!(value instanceof NTStringMap)) {
+            map = NTStringMap.new();
+            Object.keys(value).forEach((k) => {
+                map.setX(k, value[k]);
+            });
+        }
+        //@ts-ignore
+        this.getNative().setStyleParameters(map);
+    }
+    setJSONStyleParameters(value: Record<string, string> | string) {
+        //@ts-ignore
+        this.getNative().setJSONStyleParameters(typeof value === 'string' ? value : JSON.stringify(value));
     }
     setCartoCSSStyleSet(cartoCss: string) {
         this.options.cartoCss = cartoCss;

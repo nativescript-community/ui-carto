@@ -7,8 +7,8 @@ export interface GeoJSONGeometryReaderOptions {
 }
 export class GeoJSONGeometryReader extends BaseNative<any, GeoJSONGeometryReaderOptions> {
     targetProjection?: Projection;
-    readGeometry(value: any): Geometry<T>;
-    readFeatureCollection(str: string): FeatureCollection;
+    readGeometry(value: string | Object): Geometry<T>;
+    readFeatureCollection(str: string | Object): FeatureCollection;
 }
 
 export interface WKBGeometryReaderOptions {

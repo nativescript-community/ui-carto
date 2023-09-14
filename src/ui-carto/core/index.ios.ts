@@ -51,13 +51,6 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}
     }
 }
 
-export function nativeVectorToArray<T>(vector: NativeVector<T>) {
-    const result: T[] = [];
-    for (let index = 0; index < vector.size(); index++) {
-        result[index] = vector.get(index);
-    }
-    return result;
-}
 export function fromNativeMapPos<T = DefaultLatLonKeys>(position: NTMapPos) {
     if (!position) {
         return null;

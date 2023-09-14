@@ -1,4 +1,4 @@
-export { toNativeMapRange, fromNativeMapRange } from '../utils';
+export { toNativeMapRange, fromNativeMapRange, nativeVectorToArray, arrayToNativeVector } from '../utils';
 
 export type LatitudeKeys = 'latitude' | 'lat';
 export type LongitudeKeys = 'longitude' | 'lon' | 'lng';

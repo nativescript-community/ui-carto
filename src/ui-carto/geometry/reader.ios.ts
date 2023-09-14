@@ -10,11 +10,11 @@ export class GeoJSONGeometryReader extends BaseNative<NTGeoJSONGeometryReader, G
     createNative() {
         return NTGeoJSONGeometryReader.alloc().init();
     }
-    readFeatureCollection(str: string) {
-        return new FeatureCollection(this.getNative().readFeatureCollection(str));
+    readFeatureCollection(str: string | Object) {
+        return new FeatureCollection(this.getNative().readFeatureCollection(typeof str === 'string' ? str : JSON.stringify(str)));
     }
-    readGeometry(value: string) {
-        const result = this.getNative().readGeometry(value);
+    readGeometry(value: string | Object) {
+        const result = this.getNative().readGeometry(typeof value === 'string' ? value : JSON.stringify(value));
         if (result instanceof NTLineGeometry) {
             return new LineGeometry(null, result);
         } else if (result instanceof NTPointGeometry) {

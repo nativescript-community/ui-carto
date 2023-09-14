@@ -54,5 +54,10 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<any, GeoJSONVect
     deleteLayer(index: number);
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection);
     setLayerGeoJSON(layerIndex: number, geoJSON: Object);
-    setLayerGeoJSONString(layerIndex: number, geoJSON: string);
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string | Object);
+    addGeoJSONFeature(layerIndex: number, geoJSON: Object);
+    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object);
+    updateGeoJSONFeature(layerIndex: number, geoJSON: Object);
+    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object);
+    removeGeoJSONFeature(layerIndex: number, id: string | number);
 }

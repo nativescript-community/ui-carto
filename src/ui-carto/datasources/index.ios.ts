@@ -90,8 +90,26 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorT
     setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
         this.getNative().setLayerGeoJSONGeoJSON(layerIndex, JSVariantToNative(geoJSON));
     }
-    setLayerGeoJSONString(layerIndex: number, geoJSON: string) {
-        this.getNative().setLayerGeoJSONGeoJSON(layerIndex, jsonVariant(geoJSON));
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string | Object) {
+        //@ts-ignore
+        this.getNative().setLayerGeoJSONString(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
+    }
+
+    addGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+        //@ts-ignore
+        this.getNative().addGeoJSONFeature(layerIndex, JSVariantToNative(geoJSON));
+    }
+    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+        //@ts-ignore
+        this.getNative().addGeoJSONStringFeature(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
+    }
+    updateGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+        //@ts-ignore
+        this.getNative().updateGeoJSONFeature(layerIndex, JSVariantToNative(geoJSON));
+    }
+    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+        //@ts-ignore
+        this.getNative().updateGeoJSONStringFeature(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
 }
 

@@ -127,10 +127,10 @@ let currentAppFolder: string;
 
 export function getFileName(str: string): string {
     let fileName = typeof str === 'string' ? str.trim() : '';
-    if (!currentAppFolder) {
-        currentAppFolder = knownFolders.currentApp().path;
-    }
     if (fileName.indexOf('~/') === 0) {
+        if (!currentAppFolder) {
+            currentAppFolder = knownFolders.currentApp().path;
+        }
         fileName = path.join(currentAppFolder, fileName.replace('~/', ''));
     }
     return fileName;

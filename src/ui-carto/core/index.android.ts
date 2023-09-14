@@ -59,6 +59,12 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.
     getCenter() {
         return fromNativeMapPos(this.getNative().getCenter());
     }
+    getMin() {
+        return fromNativeMapPos(this.getNative().getMin());
+    }
+    getMax() {
+        return fromNativeMapPos(this.getNative().getMax());
+    }
     toJSON() {
         return { southwest: this.southwest, northeast: this.northeast };
     }
@@ -117,14 +123,6 @@ export function fromNativeMapVec(value: com.carto.core.MapVec) {
         y: value.getY(),
         z: value.getZ()
     } as MapVec;
-}
-
-export function nativeVectorToArray<T>(vector: NativeVector<T>) {
-    const result: T[] = [];
-    for (let index = 0; index < vector.size(); index++) {
-        result[index] = vector.get(index);
-    }
-    return result;
 }
 
 export function fromNativeMapBounds<T = DefaultLatLonKeys>(bounds: com.carto.core.MapBounds) {

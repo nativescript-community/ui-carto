@@ -27,6 +27,9 @@ export interface VectorTileSearchServiceOptions extends SearchServiceOptions {
     decoder?: VectorTileDecoder;
     minZoom?: number;
     maxZoom?: number;
+    layers?: string[];
+    preventDuplicates?: boolean;
+    sortByDistance?: boolean;
 }
 
 // export abstract class BaseSearchService<T, U extends SearchServiceOptions> extends BaseNative<T, U> {}
@@ -34,6 +37,9 @@ export interface VectorTileSearchServiceOptions extends SearchServiceOptions {
 export class VectorTileSearchService extends BaseNative<any, VectorTileSearchServiceOptions> {
     minZoom?: number;
     maxZoom?: number;
+    layers: string[];
+    preventDuplicates: boolean;
+    sortByDistance: boolean;
     findFeatures<T = DefaultLatLonKeys>(options: SearchRequest<T>, callback?: (res: VectorTileFeatureCollection<T>) => void): VectorTileFeatureCollection<T>;
 }
 

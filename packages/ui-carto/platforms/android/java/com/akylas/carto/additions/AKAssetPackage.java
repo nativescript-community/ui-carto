@@ -10,6 +10,7 @@ public class AKAssetPackage extends AssetPackage {
         StringVector getAssetNames();
     }
     Interface inter = null;
+    AssetPackage basePackage = null;
     public void setInterface(Interface inter) {
         this.inter = inter;
     }
@@ -18,20 +19,43 @@ public class AKAssetPackage extends AssetPackage {
         super();
         setInterface(inter);
     }
+    public AKAssetPackage(Interface inter, AssetPackage bPackage){
+        super();
+        setInterface(inter);
+        basePackage = bPackage;
+    }
 
     @Override
     public BinaryData loadAsset(String name) {
-        if (inter != null) {
-            return inter.loadAsset(name);
+        BinaryData result = null;
+        if (basePackage != null) {
+                result = basePackage.loadAsset(name);
+            }
+        if (result == null && inter != null) {
+            result = inter.loadAsset(name);
+            // if (result == null && basePackage != null) {
+            //     result = basePackage.loadAsset(name);
+            // }
         }
-        return super.loadAsset(name);
+        return result;
     }
 
     @Override
     public StringVector getAssetNames() {
+        StringVector result = null;
         if (inter != null) {
-            return inter.getAssetNames();
+            result = inter.getAssetNames();
         }
-        return super.getAssetNames();
+        if (result == null) {
+            result = new StringVector();
+        }
+        if (basePackage != null) {
+            StringVector result2 = basePackage.getAssetNames();
+            for (int i = 0; i < result2.size(); i++) {
+                result.add(result2.get(i));
+            }
+        }
+
+        return result;
     }
 }

@@ -11,11 +11,11 @@ export class GeoJSONGeometryReader extends BaseNative<com.carto.geometry.GeoJSON
     createNative() {
         return new com.carto.geometry.GeoJSONGeometryReader();
     }
-    readFeatureCollection(str: string) {
-        return new FeatureCollection(this.getNative().readFeatureCollection(str));
+    readFeatureCollection(str: string | Object) {
+        return new FeatureCollection(this.getNative().readFeatureCollection(typeof str === 'string' ? str : JSON.stringify(str)));
     }
-    readGeometry(value: string) {
-        const result = this.getNative().readGeometry(value);
+    readGeometry(value: string | Object) {
+        const result = this.getNative().readGeometry(typeof value === 'string' ? value : JSON.stringify(value));
         if (result instanceof com.carto.geometry.LineGeometry) {
             return new LineGeometry(null, result);
         } else if (result instanceof com.carto.geometry.PointGeometry) {

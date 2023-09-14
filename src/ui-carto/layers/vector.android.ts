@@ -392,7 +392,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
 
 export class ClusteredVectorLayer extends BaseVectorLayer<com.carto.layers.ClusteredVectorLayer, ClusteredVectorLayerLayerOptions> {
     createNative(options: ClusteredVectorLayerLayerOptions) {
-        return new com.carto.layers.ClusteredVectorLayer(options.dataSource.getNative(), options.builder.getNative());
+        return new com.carto.layers.ClusteredVectorLayer(options.dataSource.getNative(), options.builder.getNative?.() || options.builder);
     }
 
     @nativeProperty minimumClusterDistance: number;

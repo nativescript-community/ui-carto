@@ -1,4 +1,5 @@
 import { BaseNative } from '..';
+import { DirAssetPackage } from '../utils/index.ios';
 
 export interface VectorTileDecoderOptions {}
 
@@ -12,6 +13,9 @@ export interface MBVectorTileDecoderOptions extends VectorTileDecoderOptions {
     cartoCss?: string;
     style?: string;
     liveReload?: boolean;
+    pack?: ZippedAssetPackage | DirAssetPackage;
+    loadAsset?(param0: string): com.carto.core.BinaryData;
+    getAssetNames?(): com.carto.core.StringVector;
 }
 export class MBVectorTileDecoder extends BaseNative<any, MBVectorTileDecoderOptions> {
     style?: string;
@@ -19,6 +23,8 @@ export class MBVectorTileDecoder extends BaseNative<any, MBVectorTileDecoderOpti
     constructor(options: MBVectorTileDecoderOptions, native?: any);
     reloadStyle();
     setStyleParameter(param: string, value: string);
+    setStyleParameters(value: Record<string, string> | any);
+    setJSONStyleParameters(value: Record<string, string> | string);
     setCartoCSSStyleSet(param0: string): void;
 
     setCompiledStyleSet(param0: any): void;

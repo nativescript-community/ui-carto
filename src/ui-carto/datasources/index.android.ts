@@ -99,11 +99,27 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<com.carto.dataso
     setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
         this.getNative().setLayerGeoJSON(layerIndex, JSVariantToNative(geoJSON));
     }
-    setLayerGeoJSONString(layerIndex: number, geoJSON: string) {
-        this.getNative().setLayerGeoJSON(layerIndex, jsonVariant(geoJSON));
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string | Object) {
+        this.getNative().setLayerGeoJSONString(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
+    }
+
+    addGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+        this.getNative().addGeoJSONFeature(layerIndex, JSVariantToNative(geoJSON));
+    }
+    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+        this.getNative().addGeoJSONStringFeature(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
+    }
+    updateGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+        this.getNative().updateGeoJSONFeature(layerIndex, JSVariantToNative(geoJSON));
+    }
+    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+        this.getNative().updateGeoJSONStringFeature(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
     deleteLayer(index: number) {
         this.getNative().deleteLayer(index);
+    }
+    removeGeoJSONFeature(layerIndex: number, id: string | number) {
+        this.getNative().removeGeoJSONFeature(layerIndex, JSVariantToNative(id));
     }
 }
 

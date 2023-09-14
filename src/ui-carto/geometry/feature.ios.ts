@@ -59,7 +59,9 @@ export class VectorTileFeatureCollection extends FeatureCollection<NTVectorTileF
             properties: nativeVariantToJS(nResult.getProperties()),
             geometry: nResult.getGeometry() as any,
             id: nResult.getId(),
-            layerName: nResult.getLayerName()
+            layerName: nResult.getLayerName(),
+            //@ts-ignore
+            distance: nResult.getDistance()
         } as VectorTileFeature;
     }
 }

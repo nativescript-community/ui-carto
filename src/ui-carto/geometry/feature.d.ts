@@ -12,6 +12,7 @@ export interface VectorTileFeature extends Feature {
     id: number;
     layerName: string;
     mapTile: any;
+    distance: number;
 }
 
 export class FeatureCollection<T = DefaultLatLonKeys> {

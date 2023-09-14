@@ -2,6 +2,7 @@ import { BaseNative } from '..';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector } from '../core';
 
 export function nativeVectorToArray<T = any>(nVector): T[];
+export function arrayToNativeVector(array: T[]): NativeVector[T];
 export function nativeMapToJS<T = Record<string, string>>(nMap): T;
 export function nativeVariantToJS<T = any>(nMap): T;
 export function JSVariantToNative<T = any>(nMap): T;
@@ -14,6 +15,10 @@ export function setShowError(value: boolean);
 
 export interface ZippedAssetPackageOptions {
     zipPath: string;
+    liveReload?: boolean;
+    basePack?: DirAssetPackage | ZippedAssetPackage;
+    loadAsset?(param0: string): com.carto.core.BinaryData;
+    getAssetNames?(): com.carto.core.StringVector;
 }
 
 export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {

@@ -57,7 +57,8 @@ export class VectorTileFeatureCollection extends FeatureCollection<com.carto.geo
             properties: nativeVariantToJS(nResult.getProperties()),
             geometry: nResult.getGeometry() as any,
             id: nResult.getId(),
-            layerName: nResult.getLayerName()
+            layerName: nResult.getLayerName(),
+            distance: nResult.getDistance()
         } as VectorTileFeature;
     }
 }

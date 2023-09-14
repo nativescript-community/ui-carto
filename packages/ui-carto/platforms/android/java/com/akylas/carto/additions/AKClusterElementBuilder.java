@@ -158,6 +158,9 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                     Rect dst = AKClusterElementBuilder.tempRect2;
                     dst.set(0,0, markerSize, markerSize);
                     canvas.drawBitmap(markerBitmap, bounds, dst, paint);
+                } else {
+                    paint.setColor(markerColor.getARGB());
+                    canvas.drawCircle(markerSize / 2, markerSize / 2, markerSize / 2, paint);
                 }
 
                 paint.setTextAlign(Paint.Align.CENTER);

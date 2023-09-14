@@ -2,16 +2,23 @@ import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescrip
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { BaseNative } from '../BaseNative';
-import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, NativeVector, toNativeMapPos } from '../core';
 import { getFileName, getRelativePathToApp } from '../index.common';
 
-export function nativeVectorToArray(nVector: com.carto.core.StringVector) {
-    const count = nVector.size();
+export function nativeVectorToArray<T>(vector: NativeVector<T>) {
+    const count = vector.size();
     const result = [];
     for (let index = 0; index < count; index++) {
-        result[index] = nVector.get(index);
+        result[index] = vector.get(index);
     }
     return result;
+}
+export function arrayToNativeVector(array: any[]) {
+    const vector = new com.carto.core.StringVector();
+    for (let index = 0; index < array.length; index++) {
+        vector.add(array[index]);
+    }
+    return vector;
 }
 
 export function nativeVariantToJS(variant: com.carto.core.Variant) {
@@ -114,19 +121,48 @@ export function setShowError(value: boolean) {
     com.carto.utils.Log.setShowError(value);
 }
 
-const currentAppFolder = knownFolders.currentApp();
-
 export class ZippedAssetPackage extends BaseNative<com.carto.utils.ZippedAssetPackage, ZippedAssetPackageOptions> {
-    createNative(options: ZippedAssetPackageOptions) {
-        const zipPath = getRelativePathToApp(options.zipPath);
-        console.log('zipPath', zipPath, options.zipPath, File.exists(options.zipPath), File.exists(zipPath));
-        if (File.exists(options.zipPath)) {
-            const vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
-            return new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
-        } else {
-            console.error(`could not find zip file: ${options.zipPath}`);
-            return null;
+    mInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
+    constructor(options) {
+        super(options);
+        for (const property of ['mInterface']) {
+            const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
         }
+    }
+    createNative(options: ZippedAssetPackageOptions) {
+        // if (File.exists(options.zipPath)) {
+        let vectorTileStyleSetData: com.carto.core.BinaryData;
+        if (options.liveReload === true) {
+            const data = File.fromPath(getFileName(options.zipPath)).readSync();
+            vectorTileStyleSetData = new com.carto.core.BinaryData(data);
+        } else {
+            const zipPath = getRelativePathToApp(options.zipPath);
+            console.log('zipPath', zipPath);
+            vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
+        }
+        let assetPackage: com.akylas.carto.additions.AKAssetPackage;
+        if (options.basePack) {
+            assetPackage = options.basePack.getNative();
+        }
+        if (options.loadAsset && options.getAssetNames) {
+            this.mInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
+                getAssetNames: options.getAssetNames,
+                loadAsset: options.loadAsset
+            });
+            assetPackage = new com.akylas.carto.additions.AKAssetPackage(this.mInterface, assetPackage);
+        }
+        if (assetPackage) {
+            return new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData, assetPackage);
+        } else {
+            return new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
+        }
+        // } else {
+        //     console.error(`could not find zip file: ${options.zipPath}`);
+        //     return null;
+        // }
     }
 
     getAssetNames() {
@@ -150,10 +186,10 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
     mDirPath: string;
     mCartoDirPath: string;
     loadUsingNS = false;
-    _nInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
+    mInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
     constructor(options) {
         super(options);
-        for (const property of ['_nInterface']) {
+        for (const property of ['mInterface']) {
             const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
             if (descriptor) {
                 descriptor.enumerable = false;
@@ -165,11 +201,11 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
             const dirPath = options.dirPath;
             this.mDirPath = getFileName(dirPath);
             this.mCartoDirPath = getRelativePathToApp(dirPath);
-            this._nInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
+            this.mInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
                 getAssetNames: this.getAssetNames.bind(this),
                 loadAsset: this.loadAsset.bind(this)
             });
-            const result = new com.akylas.carto.additions.AKAssetPackage(this._nInterface);
+            const result = new com.akylas.carto.additions.AKAssetPackage(this.mInterface);
 
             this.loadUsingNS = !!options.loadUsingNS;
             return result;

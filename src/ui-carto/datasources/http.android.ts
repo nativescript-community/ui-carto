@@ -23,8 +23,8 @@ export class HTTPTileDataSource extends TileDataSource<com.carto.datasources.HTT
         }
         this.native.setHTTPHeaders(map);
     }
-    set subdomains(value: string) {
-        const array = value.split('');
+    set subdomains(value: string | string[]) {
+        const array = Array.isArray(value) ? value : value.split('');
         const vector = new com.carto.core.StringVector();
         for (let index = 0; index < array.length; index++) {
             vector.add(array[index]);

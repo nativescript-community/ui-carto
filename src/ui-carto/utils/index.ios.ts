@@ -2,16 +2,24 @@ import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescrip
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { BaseNative } from '../BaseNative';
-import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, toNativeMapPos } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, NativeVector, toNativeMapPos } from '../core';
 import { getFileName, getRelativePathToApp } from '../index.common';
 
-export function nativeVectorToArray(nVector: NTStringVector) {
-    const count = nVector.size();
+export function nativeVectorToArray<T>(vector: NativeVector<T>) {
+    const count = vector.size();
     const result = [];
     for (let index = 0; index < count; index++) {
-        result[index] = nVector.get(index);
+        result[index] = vector.get(index);
     }
     return result;
+}
+
+export function arrayToNativeVector<T>(array: any[]) {
+    const vector = NTStringVector.alloc().init();
+    for (let index = 0; index < array.length; index++) {
+        vector.add(array[index]);
+    }
+    return vector;
 }
 
 export function nativeVariantToJS(variant: NTVariant) {
@@ -67,8 +75,16 @@ export class ZippedAssetPackage extends BaseNative<NTZippedAssetPackage, ZippedA
     createNative(options: ZippedAssetPackageOptions) {
         const zipPath = getRelativePathToApp(options.zipPath);
         if (File.exists(zipPath)) {
+            let assetPackage: NTAssetPackage;
+            if (options.basePack) {
+                assetPackage = options.basePack.getNative();
+            }
             const vectorTileStyleSetData = NTAssetUtils.loadAsset(zipPath);
-            return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
+            if (assetPackage) {
+                return NTZippedAssetPackage.alloc().initWithZipDataBaseAssetPackage(vectorTileStyleSetData, assetPackage);
+            } else {
+                return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
+            }
         } else {
             console.error(`could not find zip file: ${options.zipPath}`);
             return null;

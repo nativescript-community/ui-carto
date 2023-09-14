@@ -1,12 +1,26 @@
-import { AltitudeKeys, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, MapPos, MapRange, MapVec, ScreenBounds, ScreenPos } from './index.common';
+import {
+    AltitudeKeys,
+    DefaultLatLonKeys,
+    GenericMapPos,
+    LatitudeKey,
+    LatitudeKeys,
+    LongitudeKey,
+    LongitudeKeys,
+    MapPos,
+    MapRange,
+    MapVec,
+    ScreenBounds,
+    ScreenPos,
+    arrayToNativeVector,
+    nativeVectorToArray
+} from './index.common';
 import { BaseNative } from '..';
-export { DefaultLatLonKeys, GenericMapPos, LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, ScreenPos, MapPos, ScreenBounds, MapVec, MapRange };
+export { DefaultLatLonKeys, GenericMapPos, LatitudeKey, LatitudeKeys, LongitudeKey, LongitudeKeys, ScreenPos, MapPos, ScreenBounds, MapVec, MapRange, nativeVectorToArray, arrayToNativeVector };
 
 export declare function fromNativeMapPos<T = DefaultLatLonKeys>(pos): GenericMapPos<T>;
 export declare function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>, ignoreAltitude?: boolean): any;
 export declare function fromNativeMapBounds<T = DefaultLatLonKeys>(bounds: any): MapBounds<T>;
 export declare function toNativeMapBounds<T = DefaultLatLonKeys>(bounds: MapBounds<T>): any;
-export declare function nativeVectorToArray<T>(vector: NativeVector<T>): T[];
 
 export declare function fromNativeScreenPos(pos): ScreenPos;
 export declare function toNativeScreenPos(position: ScreenPos): any;
@@ -66,6 +80,8 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<any, {}> {
     intersects(position: MapBounds<T>): boolean;
     equals(position: MapBounds<T>): boolean;
     getCenter(): GenericMapPos<T>;
+    getMin(): GenericMapPos<T>;
+    getMax(): GenericMapPos<T>;
 }
 // eslint-disable-next-line no-redeclare
 export interface MapBounds<T = DefaultLatLonKeys> {
