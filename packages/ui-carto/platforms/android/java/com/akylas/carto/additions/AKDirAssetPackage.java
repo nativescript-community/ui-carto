@@ -32,13 +32,13 @@ public class AKDirAssetPackage extends AssetPackage {
             try {
                 this.assetNames = new StringVector();
                 final String sourceDir = this.context.getApplicationContext().getApplicationInfo().sourceDir;
-                Log.d(TAG,  "sourceDir: " + sourceDir);
+                // Log.d(TAG,  "sourceDir: " + sourceDir);
                 ZipFile zf = new ZipFile(sourceDir);
                 try {
                     for (Enumeration<? extends ZipEntry> e = zf.entries(); e.hasMoreElements();) {
                         ZipEntry ze = e.nextElement();
                         String name = ze.getName();
-                        Log.d(TAG,  "entry: " + name + "," + name.replace(this.dirPath, ""));
+                        // Log.d(TAG,  "entry: " + name + "," + name.replace(this.dirPath, ""));
                         if (name.startsWith(this.dirPath)) {
                             this.assetNames.add(name.replace(this.dirPath, ""));
                         }
