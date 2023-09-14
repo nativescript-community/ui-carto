@@ -7,6 +7,7 @@ import {
     fromNativeMapBounds,
     fromNativeMapPos,
     fromNativeScreenPos,
+    toNativeMapBounds,
     toNativeMapPos,
     toNativeScreenBounds,
     toNativeScreenPos
@@ -14,7 +15,18 @@ import {
 import { TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
-import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
+import {
+    CartoViewBase,
+    Layers,
+    MapClickedEvent,
+    MapIdleEvent,
+    MapInteractionEvent,
+    MapMovedEvent,
+    MapReadyEvent,
+    MapStableEvent,
+    isLicenseKeyRegistered,
+    setLicenseKeyRegistered
+} from './index.common';
 
 import { ImageSource, Property, Utils, booleanConverter } from '@nativescript/core';
 import { MapOptions } from '.';
@@ -152,6 +164,30 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                     this.sendEvent(MapMovedEvent, { userAction });
                 }
             },
+            onMapInteraction: (interaction: com.carto.ui.MapInteractionInfo, userAction: boolean) => {
+                if (this.hasListeners(MapInteractionEvent)) {
+                    this.sendEvent(MapInteractionEvent, {
+                        interaction: {
+                            userAction,
+                            get isAnimationStarted() {
+                                return interaction.isAnimationStarted();
+                            },
+                            get isPanAction() {
+                                return interaction.isPanAction();
+                            },
+                            get isRotateAction() {
+                                return interaction.isRotateAction();
+                            },
+                            get isTiltAction() {
+                                return interaction.isTiltAction();
+                            },
+                            get isZoomAction() {
+                                return interaction.isZoomAction();
+                            }
+                        }
+                    });
+                }
+            },
             onMapStable: (userAction: boolean) => {
                 if (this.hasListeners(MapStableEvent)) {
                     this.sendEvent(MapStableEvent, { userAction });
@@ -203,7 +239,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         return toNativeMapPos(position);
     }
     toNativeMapBounds(position: MapBounds<T>) {
-        return new com.carto.core.MapBounds(toNativeMapPos(position.southwest), toNativeMapPos(position.northeast));
+        return toNativeMapBounds(position);
     }
 
     setFocusPos(value: MapPos, duration: number = 0) {

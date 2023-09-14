@@ -39,6 +39,17 @@ export interface MapPosEventData<T = DefaultLatLonKeys> extends EventData {
     MapPos: GenericMapPos<T>;
 }
 
+export interface MapClickInfo {}
+export interface MapInteractionInfo {
+    userAction: boolean;
+    isAnimationStarted: boolean;
+    isPanAction: boolean;
+    isRotateAction: boolean;
+    isTiltAction: boolean;
+    isZoomAction: boolean;
+}
+
+
 export class MapOptions {
     /**
      * @returns native Carto Color

@@ -16,7 +16,18 @@ import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
-import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
+import {
+    CartoViewBase,
+    Layers,
+    MapClickedEvent,
+    MapIdleEvent,
+    MapInteractionEvent,
+    MapMovedEvent,
+    MapReadyEvent,
+    MapStableEvent,
+    isLicenseKeyRegistered,
+    setLicenseKeyRegistered
+} from './index.common';
 import { ImageSource } from '@nativescript/core';
 import { executeOnMainThread } from '@nativescript/core/utils';
 
@@ -74,16 +85,16 @@ class NTMapEventListenerImpl extends NTMapEventListener {
 
     @mainThread
     public onMapIdle() {
-        const owner = this._owner.get();
-        if (owner && owner.hasListeners(MapIdleEvent)) {
+        const owner = this._owner?.get();
+        if (owner?.hasListeners(MapIdleEvent)) {
             owner.notify({ eventName: MapIdleEvent, object: owner });
         }
     }
 
     @mainThread
     public onMapMoved() {
-        const owner = this._owner.get();
-        if (owner && owner.hasListeners(MapMovedEvent)) {
+        const owner = this._owner?.get();
+        if (owner?.hasListeners(MapMovedEvent)) {
             owner.notify({
                 eventName: MapMovedEvent,
                 object: owner,
@@ -92,8 +103,39 @@ class NTMapEventListenerImpl extends NTMapEventListener {
         }
     }
     @mainThread
+    public onMapInteraction(interaction: NTMapInteractionInfo) {
+        const owner = this._owner?.get();
+        if (owner?.hasListeners(MapInteractionEvent)) {
+            owner.notify({
+                eventName: MapInteractionEvent,
+                object: owner,
+                data: {
+                    userAction: owner.userAction,
+                    interaction: {
+                        get isAnimationStarted() {
+                            //@ts-ignore
+                            return interaction.isAnimationStarted();
+                        },
+                        get isPanAction() {
+                            return interaction.isPanAction();
+                        },
+                        get isRotateAction() {
+                            return interaction.isRotateAction();
+                        },
+                        get isTiltAction() {
+                            return interaction.isTiltAction();
+                        },
+                        get isZoomAction() {
+                            return interaction.isZoomAction();
+                        }
+                    }
+                }
+            });
+        }
+    }
+    @mainThread
     public onMapStable() {
-        const owner = this._owner.get();
+        const owner = this._owner?.get();
 
         if (owner) {
             if (owner.hasListeners(MapStableEvent)) {
@@ -104,8 +146,8 @@ class NTMapEventListenerImpl extends NTMapEventListener {
     }
     @mainThread
     public onMapClicked(mapClickInfo: NTMapClickInfo) {
-        const owner = this._owner.get();
-        if (owner && owner.hasListeners(MapClickedEvent)) {
+        const owner = this._owner?.get();
+        if (owner?.hasListeners(MapClickedEvent)) {
             owner.notify({
                 eventName: MapClickedEvent,
                 object: owner,
@@ -220,7 +262,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 
     getOptions() {
         if (this.mapReady) {
-            return this.mapView.getOptions() as MapOptions;
+            return this.mapView.getOptions() as any as MapOptions;
         }
         return null;
     }

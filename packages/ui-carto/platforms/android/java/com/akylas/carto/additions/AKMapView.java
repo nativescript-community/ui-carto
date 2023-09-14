@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.carto.ui.MapInteractionInfo;
 import com.carto.ui.MapClickInfo;
 import com.carto.ui.MapEventListener;
 import com.carto.ui.MapView;
@@ -144,6 +145,24 @@ public class AKMapView extends MapView {
             } else {
                 if (AKMapView.this.listener != null) {
                     AKMapView.this.listener.onMapClicked(mapClickInfo);
+                }
+            }
+        }
+
+        @Override
+        public void onMapInteraction(final MapInteractionInfo interaction) {
+            if (AKMapView.RUN_ON_MAIN_THREAD) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (AKMapView.this.listener != null) {
+                            AKMapView.this.listener.onMapInteraction(interaction, AKMapView.this.userAction);
+                        }
+                    }
+                });
+            } else {
+                if (AKMapView.this.listener != null) {
+                    AKMapView.this.listener.onMapInteraction(interaction, AKMapView.this.userAction);
                 }
             }
         }

@@ -18,6 +18,7 @@ export const MapReadyEvent = 'mapReady';
 export const MapStableEvent = 'mapStable';
 export const MapIdleEvent = 'mapIdle';
 export const MapMovedEvent = 'mapMoved';
+export const MapInteractionEvent = 'mapInteraction';
 export const MapClickedEvent = 'mapClicked';
 
 export interface MapPropertyOptions {

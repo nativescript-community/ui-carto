@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.carto.ui.MapInteractionInfo;
 import com.carto.ui.MapClickInfo;
 import com.carto.ui.MapEventListener;
 import com.carto.ui.TextureMapView;
@@ -144,6 +145,23 @@ public class AKTextureMapView extends TextureMapView {
             } else {
                 if (AKTextureMapView.this.listener != null) {
                     AKTextureMapView.this.listener.onMapClicked(mapClickInfo);
+                }
+            }
+        }
+        @Override
+        public void onMapInteraction(final MapInteractionInfo interaction) {
+            if (AKTextureMapView.RUN_ON_MAIN_THREAD) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (AKTextureMapView.this.listener != null) {
+                            AKTextureMapView.this.listener.onMapInteraction(interaction, AKTextureMapView.this.userAction);
+                        }
+                    }
+                });
+            } else {
+                if (AKTextureMapView.this.listener != null) {
+                    AKTextureMapView.this.listener.onMapInteraction(interaction, AKTextureMapView.this.userAction);
                 }
             }
         }
