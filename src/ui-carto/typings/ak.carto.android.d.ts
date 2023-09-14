@@ -14,6 +14,7 @@ declare namespace com {
                     public setInterface(param0: AKAssetPackage.Interface): void;
                     public constructor(param0: number, param1: boolean);
                     public constructor(param0: AKAssetPackage.Interface);
+                    public constructor(param0: AKAssetPackage.Interface, param1: com.carto.utils.AssetPackage);
                 }
                 export namespace AKAssetPackage {
                     export class Interface extends java.lang.Object {
@@ -207,50 +208,6 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
-                export class AKMBTilesTileDataSource extends com.carto.datasources.MBTilesTileDataSource {
-                    public static class: java.lang.Class<AKMBTilesTileDataSource>;
-                    public mTileSizePixels: number;
-                    public mEnableSSL: boolean;
-                    public mDpi: number;
-                    public mShowTileAfterMaxZoom: boolean;
-                    public mShowTileBeforeMaxZoom: boolean;
-                    public mMinimumZoomLevel: number;
-                    public mMaximumZoomLevel: number;
-                    public shouldMergeIfNull: boolean;
-                    public getMetaData(): com.carto.core.StringMap;
-                    public setTileSize(param0: number): AKMBTilesTileDataSource;
-                    public getMinZoom(): number;
-                    public getMaximumZoomLevel(): number;
-                    public getCenterZoom(): number;
-                    public constructor(param0: string);
-                    public constructor(param0: number, param1: number, param2: string, param3: com.carto.datasources.MBTilesScheme);
-                    public setShowTileAfterMaxZoom(param0: boolean): AKMBTilesTileDataSource;
-                    public getDpi(): number;
-                    public actualLoadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
-                    public setAutoHD(param0: boolean): AKMBTilesTileDataSource;
-                    public constructor(param0: number, param1: boolean);
-                    public setMinimumZoomLevel(param0: number): AKMBTilesTileDataSource;
-                    public getMaxZoom(): number;
-                    public getTileFromNextZoomLevel(param0: com.carto.core.MapTile, param1: number, param2: number, param3: number): com.carto.datasources.components.TileData;
-                    public setDpi(param0: number): AKMBTilesTileDataSource;
-                    public constructor();
-                    public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
-                    public getMinimumZoomLevel(): number;
-                    public setMaximumZoomLevel(param0: number): AKMBTilesTileDataSource;
-                    public mergeTileDatas(param0: native.Array<com.carto.datasources.components.TileData>): com.carto.datasources.components.TileData;
-                    public constructor(param0: number, param1: number, param2: string);
-                    public constructor(param0: number, param1: number);
-                    public getTileSizePixels(): number;
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
                 export class AKMapBoxOnlineGeocodingService extends com.carto.geocoding.MapBoxOnlineGeocodingService {
                     public static class: java.lang.Class<AKMapBoxOnlineGeocodingService>;
                     public calculateAddressCallback(param0: com.carto.geocoding.GeocodingRequest, param1: GeocodingServiceAddressCallback): void;
@@ -293,12 +250,14 @@ declare namespace com {
                         onMapIdle(): void;
                         onMapStable(param0: boolean): void;
                         onMapClicked(param0: com.carto.ui.MapClickInfo): void;
+                        onMapInteraction(interaction: com.carto.ui.MapInteractionInfo, param0: boolean): void;
                     });
                     public constructor();
                     public onMapMoved(param0: boolean): void;
                     public onMapIdle(): void;
                     public onMapStable(param0: boolean): void;
                     public onMapClicked(param0: com.carto.ui.MapClickInfo): void;
+                    public onMapInteraction(interaction: com.carto.ui.MapInteractionInfo, param0: boolean): void;
                 }
             }
         }
