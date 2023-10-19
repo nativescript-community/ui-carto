@@ -38,6 +38,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
                 return new com.carto.vectortiles.MBVectorTileDecoder(new com.carto.styles.CartoCSSStyleSet(options.cartoCss));
             }
         } else if (pack) {
+            console.log('new com.carto.styles.CompiledStyleSet', pack, options.style, options);
             const vectorTileStyleSet = new com.carto.styles.CompiledStyleSet(pack, options.style);
             const result = new com.carto.vectortiles.MBVectorTileDecoder(vectorTileStyleSet);
             return result;

@@ -49,7 +49,6 @@ export interface MapInteractionInfo {
     isZoomAction: boolean;
 }
 
-
 export class MapOptions {
     /**
      * @returns native Carto Color
@@ -185,7 +184,6 @@ export class MapOptions {
 
     setWatermarkScale(scale: number): void;
     setZoomGestures(enabled: boolean): void;
-    setRotationGestures(enabled: boolean): void;
     /**
      * @param zoomRange native Carto  MapRange
      */

@@ -165,4 +165,9 @@ export abstract class BillboardStyleBuilder<T extends com.carto.styles.Billboard
 
     mBuildStyle: com.carto.styles.Style;
     abstract buildStyle();
+
+    dispose(): void {
+        this.mBuildStyle = null;
+        super.dispose();
+    }
 }

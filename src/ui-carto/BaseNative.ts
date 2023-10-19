@@ -26,4 +26,7 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
     createNative(options: U): T {
         return null;
     }
+    dispose() {
+        this.native = null;
+    }
 }

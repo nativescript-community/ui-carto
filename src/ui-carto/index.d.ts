@@ -17,6 +17,7 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
     constructor(options?: U, native?: T);
     initNativeView(native: T, options: U): void;
     getNative(): T;
+    dispose();
 }
 export interface NativePropertyOptions {
     converter?: {

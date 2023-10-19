@@ -123,41 +123,52 @@ export function setShowError(value: boolean) {
 
 export class ZippedAssetPackage extends BaseNative<com.carto.utils.ZippedAssetPackage, ZippedAssetPackageOptions> {
     mInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
+    mBaseAssetPackage: com.akylas.carto.additions.AKAssetPackage;
+    mAssetPackage: com.akylas.carto.additions.AKAssetPackage;
+    mVectorTileStyleSetData: com.carto.core.BinaryData;
     constructor(options) {
         super(options);
-        for (const property of ['mInterface']) {
-            const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
-            if (descriptor) {
-                descriptor.enumerable = false;
-            }
-        }
+        // Object.defineProperty(this, 'mInterface', { enumerable: false });
+        // Object.defineProperty(this, 'mBaseAssetPackage', { enumerable: false });
+        // Object.defineProperty(this, 'mAssetPackage', { enumerable: false });
+        // Object.defineProperty(this, 'mVectorTileStyleSetData', { enumerable: false });
+        // for (const property of ['mInterface']) {
+        //     const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
+        //     if (descriptor) {
+        //         descriptor.enumerable = false;
+        //     }
+        // }
+    }
+    dispose(): void {
+        super.dispose();
+        this.mInterface = null;
+        this.mBaseAssetPackage = null;
+        this.mAssetPackage = null;
+        this.mVectorTileStyleSetData = null;
     }
     createNative(options: ZippedAssetPackageOptions) {
         // if (File.exists(options.zipPath)) {
-        let vectorTileStyleSetData: com.carto.core.BinaryData;
         if (options.liveReload === true) {
             const data = File.fromPath(getFileName(options.zipPath)).readSync();
-            vectorTileStyleSetData = new com.carto.core.BinaryData(data);
+            this.mVectorTileStyleSetData = new com.carto.core.BinaryData(data);
         } else {
             const zipPath = getRelativePathToApp(options.zipPath);
-            console.log('zipPath', zipPath);
-            vectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
+            this.mVectorTileStyleSetData = com.carto.utils.AssetUtils.loadAsset(zipPath);
         }
-        let assetPackage: com.akylas.carto.additions.AKAssetPackage;
         if (options.basePack) {
-            assetPackage = options.basePack.getNative();
+            this.mBaseAssetPackage = options.basePack.getNative();
         }
         if (options.loadAsset && options.getAssetNames) {
             this.mInterface = new com.akylas.carto.additions.AKAssetPackage.Interface({
                 getAssetNames: options.getAssetNames,
                 loadAsset: options.loadAsset
             });
-            assetPackage = new com.akylas.carto.additions.AKAssetPackage(this.mInterface, assetPackage);
+            this.mAssetPackage = new com.akylas.carto.additions.AKAssetPackage(this.mInterface, this.mBaseAssetPackage);
         }
-        if (assetPackage) {
-            return new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData, assetPackage);
+        if (this.mBaseAssetPackage || this.mAssetPackage) {
+            return new com.carto.utils.ZippedAssetPackage(this.mVectorTileStyleSetData, this.mAssetPackage || this.mBaseAssetPackage);
         } else {
-            return new com.carto.utils.ZippedAssetPackage(vectorTileStyleSetData);
+            return new com.carto.utils.ZippedAssetPackage(this.mVectorTileStyleSetData);
         }
         // } else {
         //     console.error(`could not find zip file: ${options.zipPath}`);
@@ -182,19 +193,27 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
     });
 }
 export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAssetPackage, DirAssetPackageOptions> {
-    assetNames: com.carto.core.StringVector;
+    mAssetNames: com.carto.core.StringVector;
     mDirPath: string;
     mCartoDirPath: string;
     loadUsingNS = false;
     mInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
     constructor(options) {
         super(options);
+
+        // Object.defineProperty(this, 'mInterface', { enumerable: false });
+        // Object.defineProperty(this, 'mAssetNames', { enumerable: false });
         for (const property of ['mInterface']) {
             const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
             if (descriptor) {
                 descriptor.enumerable = false;
             }
         }
+    }
+    dispose(): void {
+        this.mInterface = null;
+        this.mAssetNames = null;
+        super.dispose();
     }
     createNative(options: DirAssetPackageOptions) {
         if (Folder.exists(getFileName(options.dirPath))) {
@@ -227,15 +246,15 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
         return result;
     }
     public getAssetNames() {
-        if (!this.assetNames) {
+        if (!this.mAssetNames) {
             try {
-                this.assetNames = new com.carto.core.StringVector();
+                this.mAssetNames = new com.carto.core.StringVector();
                 walkDir(this.mDirPath, (fileRelPath: string) => {
-                    this.assetNames.add(fileRelPath);
+                    this.mAssetNames.add(fileRelPath);
                 });
             } catch (e) {}
         }
-        return this.assetNames;
+        return this.mAssetNames;
     }
 }
 
