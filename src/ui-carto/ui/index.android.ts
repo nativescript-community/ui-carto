@@ -33,8 +33,6 @@ import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
-export const time = global.__time || Date.now;
-
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_PLANAR;
