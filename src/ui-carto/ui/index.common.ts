@@ -37,7 +37,7 @@ export interface MapPropertyOptions {
 }
 
 function createGetter(key: string, options: MapPropertyOptions) {
-    const nativeGetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const getConverter = options.getConverter;
     return function () {
         let result;
