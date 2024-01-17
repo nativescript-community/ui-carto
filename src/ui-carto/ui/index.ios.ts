@@ -113,7 +113,6 @@ class NTMapEventListenerImpl extends NTMapEventListener {
                     userAction: owner.userAction,
                     interaction: {
                         get isAnimationStarted() {
-                            //@ts-ignore
                             return interaction.isAnimationStarted();
                         },
                         get isPanAction() {

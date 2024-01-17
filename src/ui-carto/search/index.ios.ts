@@ -47,7 +47,6 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
         for (let index = 0; index < array.length; index++) {
             vector.add(array[index]);
         }
-        //@ts-ignore
         this.native.setLayers(vector);
     }
 }

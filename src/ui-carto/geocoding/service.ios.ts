@@ -5,6 +5,8 @@ import {
     GeocodingResult as IGeocodingResult,
     MapBoxOnlineGeocodingServiceOptions,
     MapBoxOnlineReverseGeocodingServiceOptions,
+    MultiOSMOfflineGeocodingServiceOptions,
+    MultiOSMOfflineReverseGeocodingServiceOptions,
     OSMOfflineGeocodingServiceOptions,
     OSMOfflineReverseGeocodingServiceOptions,
     PackageManagerGeocodingServiceOptions,
@@ -14,9 +16,7 @@ import {
     ReverseGeocodingRequest,
     ReverseGeocodingServiceOptions,
     TomTomOnlineGeocodingServiceOptions,
-    TomTomOnlineReverseGeocodingServiceOptions,
-    MultiOSMOfflineGeocodingServiceOptions,
-    MultiOSMOfflineReverseGeocodingServiceOptions
+    TomTomOnlineReverseGeocodingServiceOptions
 } from './service';
 import { BaseGeocodingService } from './service.common';
 import { toNativeMapPos } from '../core';
@@ -169,7 +169,7 @@ export class OSMOfflineReverseGeocodingService extends ReverseGeocodingService<N
 
 export class MultiOSMOfflineGeocodingService extends GeocodingService<NTMultiOSMOfflineGeocodingService, MultiOSMOfflineGeocodingServiceOptions> {
     createNative(options: MultiOSMOfflineGeocodingServiceOptions) {
-        return  NTMultiOSMOfflineGeocodingService.alloc().init();
+        return NTMultiOSMOfflineGeocodingService.alloc().init();
     }
     add(database: string) {
         this.getNative().add(database);
@@ -181,7 +181,7 @@ export class MultiOSMOfflineGeocodingService extends GeocodingService<NTMultiOSM
 
 export class MultiOSMOfflineReverseGeocodingService extends ReverseGeocodingService<NTMultiOSMOfflineReverseGeocodingService, MultiOSMOfflineReverseGeocodingServiceOptions> {
     createNative(options: MultiOSMOfflineReverseGeocodingServiceOptions) {
-        return  NTMultiOSMOfflineReverseGeocodingService.alloc().init();
+        return NTMultiOSMOfflineReverseGeocodingService.alloc().init();
     }
     add(database: string) {
         this.getNative().add(database);

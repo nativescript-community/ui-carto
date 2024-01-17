@@ -79,14 +79,12 @@ abstract class ValhallaRoutingService<
     public setConfigurationParameter(param: string, value: any) {
         const native = this.getNative();
         if (!(native instanceof NTValhallaOnlineRoutingService)) {
-            //@ts-ignore
             native.setConfigurationParameterValue(param, JSVariantToNative(value));
         }
     }
     public getConfigurationParameter(param: string) {
         const native = this.getNative();
         if (!(native instanceof NTValhallaOnlineRoutingService)) {
-            //@ts-ignore
             return nativeVariantToJS(native.getConfigurationParameter(param));
         }
     }

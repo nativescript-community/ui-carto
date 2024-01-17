@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unified-signatures */
 declare class NTAddress extends NSObject {
     static alloc(): NTAddress; // inherited from NSObject
 
@@ -986,9 +987,13 @@ declare class NTCartoOnlineTileDataSource extends NTTileDataSource {
 
     constructor(o: { source: string });
 
+    getTimeout(): number;
+
     initWithSource(source: string): this;
 
     loadTileSwigExplicitNTCartoOnlineTileDataSource(mapTile: NTMapTile): NTTileData;
+
+    setTimeout(timeout: number): void;
 }
 
 declare class NTCartoOnlineVectorTileLayer extends NTCartoVectorTileLayer {
@@ -1296,28 +1301,6 @@ declare class NTCombinedTileDataSource extends NTTileDataSource {
 
     loadTileSwigExplicitNTCombinedTileDataSource(tile: NTMapTile): NTTileData;
 }
-declare class NTMultiTileDataSource extends NTTileDataSource {
-    static alloc(): NTMultiTileDataSource; // inherited from NSObject
-
-    static new(): NTMultiTileDataSource; // inherited from NSObject
-
-    constructor(o: { maxOpenedPackages: number });
-
-    getDataExtentSwigExplicitNTMultiTileDataSource(): NTMapBounds;
-
-    getMaxZoomSwigExplicitNTMultiTileDataSource(): number;
-
-    getMinZoomSwigExplicitNTMultiTileDataSource(): number;
-
-    init(): this;
-    initWithMaxOpenedPackages(maxOpenedPackages: number): this;
-
-    loadTileSwigExplicitNTMultiTileDataSource(tile: NTMapTile): NTTileData;
-
-    add(datasource: NTTileDataSource);
-    addTileMask(datasource: NTTileDataSource, tileMask: string);
-    remove(datasource: NTTileDataSource);
-}
 
 declare class NTCompiledStyleSet extends NSObject {
     static alloc(): NTCompiledStyleSet; // inherited from NSObject
@@ -1421,6 +1404,36 @@ declare class NTCustomPopupHandler extends NSObject {
     swigGetRawPtr(): number;
 }
 
+declare class NTDoubleVector extends NSObject {
+    static alloc(): NTDoubleVector; // inherited from NSObject
+
+    static new(): NTDoubleVector; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+
+    add(x: number): void;
+
+    capacity(): number;
+
+    clear(): void;
+
+    get(i: number): number;
+
+    getCptr(): interop.Pointer | interop.Reference<any>;
+
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+
+    isEmpty(): boolean;
+
+    reserve(n: number): void;
+
+    setVal(i: number, val: number): void;
+
+    size(): number;
+
+    swigGetRawPtr(): number;
+}
+
 declare class NTDouglasPeuckerGeometrySimplifier extends NTGeometrySimplifier {
     static alloc(): NTDouglasPeuckerGeometrySimplifier; // inherited from NSObject
 
@@ -1455,6 +1468,28 @@ declare class NTEditableVectorLayer extends NTVectorLayer {
     setSelectedVectorElement(element: NTVectorElement): void;
 
     setVectorEditEventListener(listener: NTVectorEditEventListener): void;
+}
+
+declare class NTElevationDecoder extends NSObject {
+    static alloc(): NTElevationDecoder; // inherited from NSObject
+
+    static new(): NTElevationDecoder; // inherited from NSObject
+
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTElevationDecoder;
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+
+    getCptr(): interop.Pointer | interop.Reference<any>;
+
+    hash(): number;
+
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+
+    swigGetClassName(): string;
+
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+
+    swigGetRawPtr(): number;
 }
 
 declare class NTExceptionWrapper extends NSObject {
@@ -1642,17 +1677,37 @@ declare class NTGeoJSONVectorTileDataSource extends NTTileDataSource {
 
     static new(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
 
+    addGeoJSONFeatureGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
+
+    addGeoJSONStringFeatureGeoJSON(layerIndex: number, geoJSON: string): void;
+
     createLayer(name: string): number;
 
     deleteLayer(layerIndex: number): void;
 
     getDataExtentSwigExplicitNTGeoJSONVectorTileDataSource(): NTMapBounds;
 
+    getDefaultLayerBuffer(): number;
+
+    getSimplifyTolerance(): number;
+
     loadTileSwigExplicitNTGeoJSONVectorTileDataSource(mapTile: NTMapTile): NTTileData;
+
+    removeGeoJSONFeatureArg2(layerIndex: number, arg2: NTVariant): void;
+
+    setDefaultLayerBuffer(tolerance: number): void;
 
     setLayerFeatureCollectionProjectionFeatureCollection(layerIndex: number, projection: NTProjection, featureCollection: NTFeatureCollection): void;
 
     setLayerGeoJSONGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
+
+    setLayerGeoJSONStringGeoJSON(layerIndex: number, geoJSON: string): void;
+
+    setSimplifyTolerance(tolerance: number): void;
+
+    updateGeoJSONFeatureGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
+
+    updateGeoJSONStringFeatureGeoJSON(layerIndex: number, geoJSON: string): void;
 }
 
 declare class NTGeocodingAddress extends NTAddress {
@@ -1936,6 +1991,8 @@ declare class NTHTTPTileDataSource extends NTTileDataSource {
 
     getSubdomains(): NTStringVector;
 
+    getTimeout(): number;
+
     initWithMinZoomMaxZoomBaseURL(minZoom: number, maxZoom: number, baseURL: string): this;
 
     isMaxAgeHeaderCheck(): boolean;
@@ -1953,6 +2010,8 @@ declare class NTHTTPTileDataSource extends NTTileDataSource {
     setSubdomains(subdomains: NTStringVector): void;
 
     setTMSScheme(tmsScheme: boolean): void;
+
+    setTimeout(timeout: number): void;
 }
 
 declare class NTHillshadeRasterTileLayer extends NTRasterTileLayer {
@@ -1960,19 +2019,47 @@ declare class NTHillshadeRasterTileLayer extends NTRasterTileLayer {
 
     static new(): NTHillshadeRasterTileLayer; // inherited from NSObject
 
+    constructor(o: { dataSource: NTTileDataSource; elevationDecoder: NTElevationDecoder });
+
+    getAccentColor(): NTColor;
+
     getContrast(): number;
+
+    getElevation(pos: NTMapPos): number;
+
+    getElevations(poses: NTMapPosVector): NTDoubleVector;
+
+    getExagerateHeightScaleEnabled(): boolean;
 
     getHeightScale(): number;
 
     getHighlightColor(): NTColor;
 
+    getIlluminationDirection(): NTMapVec;
+
+    getIlluminationMapRotationEnabled(): boolean;
+
+    getNormalMapLightingShader(): string;
+
     getShadowColor(): NTColor;
 
+    initWithDataSourceElevationDecoder(dataSource: NTTileDataSource, elevationDecoder: NTElevationDecoder): this;
+
+    setAccentColor(color: NTColor): void;
+
     setContrast(contrast: number): void;
+
+    setExagerateHeightScaleEnabled(enabled: boolean): void;
 
     setHeightScale(heightScale: number): void;
 
     setHighlightColor(color: NTColor): void;
+
+    setIlluminationDirection(direction: NTMapVec): void;
+
+    setIlluminationMapRotationEnabled(enabled: boolean): void;
+
+    setNormalMapLightingShader(shader: string): void;
 
     setShadowColor(color: NTColor): void;
 }
@@ -2486,6 +2573,10 @@ declare class NTMBTilesTileDataSource extends NTTileDataSource {
 
     getMinZoomSwigExplicitNTMBTilesTileDataSource(): number;
 
+    getTileMask(): string;
+
+    getTileMaskSwigExplicitNTMBTilesTileDataSource(): string;
+
     initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
 
     initWithMinZoomMaxZoomPathScheme(minZoom: number, maxZoom: number, path: string, scheme: NTMBTilesScheme): this;
@@ -2516,11 +2607,19 @@ declare class NTMBVectorTileDecoder extends NTVectorTileDecoder {
 
     initWithCompiledStyleSet(compiledStyleSet: NTCompiledStyleSet): this;
 
+    isFeatureIdOverride(): boolean;
+
     setCartoCSSStyleSet(styleSet: NTCartoCSSStyleSet): void;
 
     setCompiledStyleSet(styleSet: NTCompiledStyleSet): void;
 
+    setFeatureIdOverride(idOverride: boolean): void;
+
+    setJSONStyleParameters(params: string): void;
+
     setStyleParameterValue(param: string, value: string): boolean;
+
+    setStyleParameters(params: NTStringMap): void;
 }
 
 declare class NTMapBounds extends NSObject {
@@ -2725,6 +2824,8 @@ declare class NTMapInteractionInfo extends NSObject {
     hash(): number;
 
     initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+
+    isAnimationStarted(): boolean;
 
     isPanAction(): boolean;
 
@@ -2978,11 +3079,15 @@ declare class NTMapTilerOnlineTileDataSource extends NTTileDataSource {
 
     getCustomServiceURL(): string;
 
+    getTimeout(): number;
+
     initWithKey(key: string): this;
 
     loadTileSwigExplicitNTMapTilerOnlineTileDataSource(mapTile: NTMapTile): NTTileData;
 
     setCustomServiceURL(serviceURL: string): void;
+
+    setTimeout(timeout: number): void;
 }
 
 declare class NTMapVec extends NSObject {
@@ -3048,17 +3153,15 @@ declare class NTMapView extends GLKView {
 
     static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): NTMapView; // inherited from UIAppearance
 
-    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): NTMapView; // inherited from UIAppearance
+    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | (typeof NSObject)[]): NTMapView; // inherited from UIAppearance
 
     static appearanceWhenContainedIn(ContainerClass: typeof NSObject): NTMapView; // inherited from UIAppearance
 
-    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): NTMapView; // inherited from UIAppearance
+    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | (typeof NSObject)[]): NTMapView; // inherited from UIAppearance
 
     static new(): NTMapView; // inherited from NSObject
 
     static registerLicense(licenseKey: string): boolean;
-
-    readonly nativeMapView: interop.Pointer | interop.Reference<any>;
 
     cancelAllTasks(): void;
 
@@ -3231,6 +3334,10 @@ declare class NTMergedMBVTTileDataSource extends NTTileDataSource {
 
     getMinZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
 
+    getTileMask(): string;
+
+    getTileMaskSwigExplicitNTMergedMBVTTileDataSource(): string;
+
     initWithDataSource1DataSource2(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource): this;
 
     loadTileSwigExplicitNTMergedMBVTTileDataSource(tile: NTMapTile): NTTileData;
@@ -3262,6 +3369,46 @@ declare class NTMultiLineGeometry extends NTMultiGeometry {
     initWithGeometries(geometries: NTLineGeometryVector): this;
 }
 
+declare class NTMultiOSMOfflineGeocodingService extends NTGeocodingService {
+    static alloc(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
+
+    static new(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
+
+    add(database: string): void;
+
+    calculateAddressesSwigExplicitNTMultiOSMOfflineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+
+    getLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(): string;
+
+    getMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(): number;
+
+    isAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(): boolean;
+
+    remove(database: string): boolean;
+
+    setAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(autocomplete: boolean): void;
+
+    setLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(lang: string): void;
+
+    setMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(maxResults: number): void;
+}
+
+declare class NTMultiOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
+
+    static new(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
+
+    add(database: string): void;
+
+    calculateAddressesSwigExplicitNTMultiOSMOfflineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+
+    getLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(): string;
+
+    remove(database: string): boolean;
+
+    setLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(lang: string): void;
+}
+
 declare class NTMultiPointGeometry extends NTMultiGeometry {
     static alloc(): NTMultiPointGeometry; // inherited from NSObject
 
@@ -3284,6 +3431,52 @@ declare class NTMultiPolygonGeometry extends NTMultiGeometry {
     getGeometry(index: number): NTPolygonGeometry;
 
     initWithGeometries(geometries: NTPolygonGeometryVector): this;
+}
+
+declare class NTMultiTileDataSource extends NTTileDataSource {
+    static alloc(): NTMultiTileDataSource; // inherited from NSObject
+
+    static new(): NTMultiTileDataSource; // inherited from NSObject
+
+    constructor(o: { maxOpenedPackages: number });
+
+    add(datasource: NTTileDataSource): void;
+
+    addTileMask(datasource: NTTileDataSource, tileMask: string): void;
+
+    getDataExtentSwigExplicitNTMultiTileDataSource(): NTMapBounds;
+
+    getMaxZoomSwigExplicitNTMultiTileDataSource(): number;
+
+    getMinZoomSwigExplicitNTMultiTileDataSource(): number;
+
+    initWithMaxOpenedPackages(maxOpenedPackages: number): this;
+
+    loadTileSwigExplicitNTMultiTileDataSource(mapTile: NTMapTile): NTTileData;
+
+    remove(datasource: NTTileDataSource): boolean;
+}
+
+declare class NTMultiValhallaOfflineRoutingService extends NTRoutingService {
+    static alloc(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
+
+    static new(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
+
+    add(database: string): void;
+
+    calculateRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+
+    getConfigurationParameter(param: string): NTVariant;
+
+    getProfileSwigExplicitNTMultiValhallaOfflineRoutingService(): string;
+
+    matchRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+
+    remove(database: string): boolean;
+
+    setConfigurationParameterValue(param: string, value: NTVariant): void;
+
+    setProfileSwigExplicitNTMultiValhallaOfflineRoutingService(profile: string): void;
 }
 
 declare class NTNMLModel extends NTBillboard {
@@ -3318,106 +3511,6 @@ declare class NTNMLModel extends NTBillboard {
     setScale(scale: number): void;
 
     setStyle(style: NTNMLModelStyle): void;
-}
-
-declare class NTNMLModelLODTreeClickInfo extends NSObject {
-    static alloc(): NTNMLModelLODTreeClickInfo; // inherited from NSObject
-
-    static new(): NTNMLModelLODTreeClickInfo; // inherited from NSObject
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getClickInfo(): NTClickInfo;
-
-    getClickPos(): NTMapPos;
-
-    getClickType(): NTClickType;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    getElementClickPos(): NTMapPos;
-
-    getLayer(): NTLayer;
-
-    getMetaData(): NTStringMap;
-
-    hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
-}
-
-declare class NTNMLModelLODTreeDataSource extends NSObject {
-    static alloc(): NTNMLModelLODTreeDataSource; // inherited from NSObject
-
-    static new(): NTNMLModelLODTreeDataSource; // inherited from NSObject
-
-    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTNMLModelLODTreeDataSource;
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    getDataExtent(): NTMapBounds;
-
-    getProjection(): NTProjection;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetClassName(): string;
-
-    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
-}
-
-declare class NTNMLModelLODTreeEventListener extends NSObject {
-    static alloc(): NTNMLModelLODTreeEventListener; // inherited from NSObject
-
-    static new(): NTNMLModelLODTreeEventListener; // inherited from NSObject
-
-    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTNMLModelLODTreeEventListener;
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    onNMLModelLODTreeClicked(clickInfo: NTNMLModelLODTreeClickInfo): boolean;
-
-    onNMLModelLODTreeClickedSwigExplicitNTNMLModelLODTreeEventListener(clickInfo: NTNMLModelLODTreeClickInfo): boolean;
-
-    swigGetClassName(): string;
-
-    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
-}
-
-declare class NTNMLModelLODTreeLayer extends NTLayer {
-    static alloc(): NTNMLModelLODTreeLayer; // inherited from NSObject
-
-    static new(): NTNMLModelLODTreeLayer; // inherited from NSObject
-
-    constructor(o: { dataSource: NTNMLModelLODTreeDataSource });
-
-    getDataSource(): NTNMLModelLODTreeDataSource;
-
-    getLODResolutionFactor(): number;
-
-    getMaxMemorySize(): number;
-
-    getNMLModelLODTreeEventListener(): NTNMLModelLODTreeEventListener;
-
-    initWithDataSource(dataSource: NTNMLModelLODTreeDataSource): this;
-
-    setLODResolutionFactor(factor: number): void;
-
-    setMaxMemorySize(size: number): void;
-
-    setNMLModelLODTreeEventListener(nmlModelLODTreeEventListener: NTNMLModelLODTreeEventListener): void;
 }
 
 declare class NTNMLModelStyle extends NTBillboardStyle {
@@ -3475,16 +3568,6 @@ declare class NTOSMOfflineGeocodingService extends NTGeocodingService {
 
     setMaxResultsSwigExplicitNTOSMOfflineGeocodingService(maxResults: number): void;
 }
-declare class NTMultiOSMOfflineGeocodingService extends NTGeocodingService {
-    static alloc(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
-
-    static new(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
-
-    constructor();
-    init(): this;
-    add(database: string);
-    remove(database: string);
-}
 
 declare class NTOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
     static alloc(): NTOSMOfflineReverseGeocodingService; // inherited from NSObject
@@ -3500,16 +3583,6 @@ declare class NTOSMOfflineReverseGeocodingService extends NTReverseGeocodingServ
     initWithPath(path: string): this;
 
     setLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(lang: string): void;
-}
-declare class NTMultiOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
-    static alloc(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
-
-    static new(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
-
-    constructor();
-    init(): this;
-    add(database: string);
-    remove(database: string);
 }
 
 declare class NTOSRMOfflineRoutingService extends NTRoutingService {
@@ -3528,26 +3601,6 @@ declare class NTOSRMOfflineRoutingService extends NTRoutingService {
     matchRouteSwigExplicitNTOSRMOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
     setProfileSwigExplicitNTOSRMOfflineRoutingService(profile: string): void;
-}
-
-declare class NTOfflineNMLModelLODTreeDataSource extends NTNMLModelLODTreeDataSource {
-    static alloc(): NTOfflineNMLModelLODTreeDataSource; // inherited from NSObject
-
-    static new(): NTOfflineNMLModelLODTreeDataSource; // inherited from NSObject
-
-    constructor(o: { path: string });
-
-    initWithPath(path: string): this;
-}
-
-declare class NTOnlineNMLModelLODTreeDataSource extends NTNMLModelLODTreeDataSource {
-    static alloc(): NTOnlineNMLModelLODTreeDataSource; // inherited from NSObject
-
-    static new(): NTOnlineNMLModelLODTreeDataSource; // inherited from NSObject
-
-    constructor(o: { serviceURL: string });
-
-    initWithServiceURL(serviceURL: string): this;
 }
 
 declare class NTOptions extends NSObject {
@@ -3627,9 +3680,13 @@ declare class NTOptions extends NSObject {
 
     isKineticZoom(): boolean;
 
+    isLayersLabelsProcessedInReverseOrder(): boolean;
+
     isRestrictedPanning(): boolean;
 
     isRotatable(): boolean;
+
+    isRotationGestures(): boolean;
 
     isSeamlessPanning(): boolean;
 
@@ -3669,8 +3726,9 @@ declare class NTOptions extends NSObject {
 
     setKineticZoom(enabled: boolean): void;
 
+    setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
+
     setLongClickDuration(duration: number): void;
-    setRotationGestures(enabled: boolean): void;
 
     setMainLightColor(color: NTColor): void;
 
@@ -3687,6 +3745,8 @@ declare class NTOptions extends NSObject {
     setRestrictedPanning(enabled: boolean): void;
 
     setRotatable(enabled: boolean): void;
+
+    setRotationGestures(enabled: boolean): void;
 
     setSeamlessPanning(enabled: boolean): void;
 
@@ -4986,7 +5046,7 @@ declare class NTRouteMatchingResult extends NSObject {
 
     constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-    constructor(o: { projection: NTProjection; matchingPoints: NTRouteMatchingPointVector; matchingEdges: NTRouteMatchingEdgeVector });
+    constructor(o: { projection: NTProjection; matchingPoints: NTRouteMatchingPointVector; matchingEdges: NTRouteMatchingEdgeVector; rawResult: string });
 
     description(): string;
 
@@ -5000,11 +5060,13 @@ declare class NTRouteMatchingResult extends NSObject {
 
     getProjection(): NTProjection;
 
+    getRawResult(): string;
+
     hash(): number;
 
     initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-    initWithProjectionMatchingPointsMatchingEdges(projection: NTProjection, matchingPoints: NTRouteMatchingPointVector, matchingEdges: NTRouteMatchingEdgeVector): this;
+    initWithProjectionMatchingPointsMatchingEdgesRawResult(projection: NTProjection, matchingPoints: NTRouteMatchingPointVector, matchingEdges: NTRouteMatchingEdgeVector, rawResult: string): this;
 
     swigGetRawPtr(): number;
 }
@@ -5180,7 +5242,7 @@ declare class NTRoutingResult extends NSObject {
 
     constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-    constructor(o: { projection: NTProjection; points: NTMapPosVector; instructions: NTRoutingInstructionVector });
+    constructor(o: { projection: NTProjection; points: NTMapPosVector; instructions: NTRoutingInstructionVector; rawResult: string });
 
     description(): string;
 
@@ -5192,6 +5254,8 @@ declare class NTRoutingResult extends NSObject {
 
     getProjection(): NTProjection;
 
+    getRawResult(): string;
+
     getTotalDistance(): number;
 
     getTotalTime(): number;
@@ -5200,7 +5264,7 @@ declare class NTRoutingResult extends NSObject {
 
     initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-    initWithProjectionPointsInstructions(projection: NTProjection, points: NTMapPosVector, instructions: NTRoutingInstructionVector): this;
+    initWithProjectionPointsInstructionsRawResult(projection: NTProjection, points: NTMapPosVector, instructions: NTRoutingInstructionVector, rawResult: string): this;
 
     swigGetRawPtr(): number;
 }
@@ -5754,7 +5818,11 @@ declare class NTTileData extends NSObject {
 
     initWithData(data: NTBinaryData): this;
 
+    isOverZoom(): boolean;
+
     isReplaceWithParent(): boolean;
+
+    setIsOverZoom(flag: boolean): void;
 
     setMaxAge(maxAge: number): void;
 
@@ -5780,9 +5848,15 @@ declare class NTTileDataSource extends NSObject {
 
     getDataExtentSwigExplicitNTTileDataSource(): NTMapBounds;
 
+    getMaxOverzoomLevel(): number;
+
     getMaxZoom(): number;
 
     getMaxZoomSwigExplicitNTTileDataSource(): number;
+
+    getMaxZoomWithOverzoom(): number;
+
+    getMaxZoomWithOverzoomSwigExplicitNTTileDataSource(): number;
 
     getMinZoom(): number;
 
@@ -5794,11 +5868,15 @@ declare class NTTileDataSource extends NSObject {
 
     initWithMinZoomMaxZoom(minZoom: number, maxZoom: number): this;
 
+    isMaxOverzoomLevelSet(): boolean;
+
     loadTile(tile: NTMapTile): NTTileData;
 
     notifyTilesChanged(removeTiles: boolean): void;
 
     notifyTilesChangedSwigExplicitNTTileDataSource(removeTiles: boolean): void;
+
+    setMaxOverzoomLevel(overzoomLevel: number): void;
 
     swigGetClassName(): string;
 
@@ -5937,6 +6015,8 @@ declare const enum NTTileSubstitutionPolicy {
 
 declare class NTTileUtils extends NSObject {
     static alloc(): NTTileUtils; // inherited from NSObject
+
+    static calculateClippedMapTileZoomProj(mapPos: NTMapPos, zoom: number, proj: NTProjection): NTMapTile;
 
     static calculateMapTileBoundsProj(mapTile: NTMapTile, proj: NTProjection): NTMapBounds;
 
@@ -6104,16 +6184,6 @@ declare class NTValhallaOfflineRoutingService extends NTRoutingService {
 
     setProfileSwigExplicitNTValhallaOfflineRoutingService(profile: string): void;
 }
-declare class NTMultiValhallaOfflineRoutingService extends NTRoutingService {
-    static alloc(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
-
-    static new(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
-
-    constructor();
-    init(): this;
-    add(database: string);
-    remove(database: string);
-}
 
 declare class NTValhallaOnlineRoutingService extends NTRoutingService {
     static alloc(): NTValhallaOnlineRoutingService; // inherited from NSObject
@@ -6156,7 +6226,7 @@ declare class NTVariant extends NSObject {
 
     constructor(o: { object: NTStringVariantMap });
 
-    constructor(o: { string: string });
+    constructor(o: { str: string });
 
     containsObjectKey(key: string): boolean;
 
@@ -6198,7 +6268,7 @@ declare class NTVariant extends NSObject {
 
     initWithObject(object: NTStringVariantMap): this;
 
-    initWithString(string: string): this;
+    initWithString(str: string): this;
 
     isEqualInternal(variant: NTVariant): boolean;
 
@@ -6738,6 +6808,8 @@ declare class NTVectorTileFeature extends NTFeature {
 
     constructor(o: { arg0: number; mapTile: NTMapTile; layerName: string; geometry: NTGeometry; properties: NTVariant });
 
+    getDistance(): number;
+
     getId(): number;
 
     getLayerName(): string;
@@ -6745,6 +6817,8 @@ declare class NTVectorTileFeature extends NTFeature {
     getMapTile(): NTMapTile;
 
     initWithArg0MapTileLayerNameGeometryProperties(arg0: number, mapTile: NTMapTile, layerName: string, geometry: NTGeometry, properties: NTVariant): this;
+
+    setDistance(value: number): void;
 }
 
 declare class NTVectorTileFeatureCollection extends NTFeatureCollection {
@@ -6798,6 +6872,8 @@ declare class NTVectorTileLayer extends NTTileLayer {
 
     getBuildingRenderOrder(): NTVectorTileRenderOrder;
 
+    getClickHandlerLayerFilter(): string;
+
     getClickRadius(): number;
 
     getLabelBlendingSpeed(): number;
@@ -6805,6 +6881,8 @@ declare class NTVectorTileLayer extends NTTileLayer {
     getLabelRenderOrder(): NTVectorTileRenderOrder;
 
     getLayerBlendingSpeed(): number;
+
+    getRendererLayerFilter(): string;
 
     getTileCacheCapacity(): number;
 
@@ -6816,6 +6894,8 @@ declare class NTVectorTileLayer extends NTTileLayer {
 
     setBuildingRenderOrder(renderOrder: NTVectorTileRenderOrder): void;
 
+    setClickHandlerLayerFilter(filter: string): void;
+
     setClickRadius(radius: number): void;
 
     setLabelBlendingSpeed(speed: number): void;
@@ -6823,6 +6903,8 @@ declare class NTVectorTileLayer extends NTTileLayer {
     setLabelRenderOrder(renderOrder: NTVectorTileRenderOrder): void;
 
     setLayerBlendingSpeed(speed: number): void;
+
+    setRendererLayerFilter(filter: string): void;
 
     setTileCacheCapacity(capacityInBytes: number): void;
 
@@ -6856,11 +6938,17 @@ declare class NTVectorTileSearchService extends NSObject {
 
     getDataSource(): NTTileDataSource;
 
+    getLayers(): NTStringVector;
+
     getMaxResults(): number;
 
     getMaxZoom(): number;
 
     getMinZoom(): number;
+
+    getPreventDuplicates(): boolean;
+
+    getSortByDistance(): boolean;
 
     getTileDecoder(): NTVectorTileDecoder;
 
@@ -6868,11 +6956,17 @@ declare class NTVectorTileSearchService extends NSObject {
 
     initWithDataSourceTileDecoder(dataSource: NTTileDataSource, tileDecoder: NTVectorTileDecoder): this;
 
+    setLayers(layers: NTStringVector): void;
+
     setMaxResults(maxResults: number): void;
 
     setMaxZoom(maxZoom: number): void;
 
     setMinZoom(minZoom: number): void;
+
+    setPreventDuplicates(preventDuplicates: boolean): void;
+
+    setSortByDistance(sortByDistance: boolean): void;
 
     swigGetClassName(): string;
 
