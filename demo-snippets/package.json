@@ -2,7 +2,7 @@
     "name": "@nativescript-community/template-snippet",
     "version": "0.0.1",
     "dependencies": {
-        "@nativescript-community/ui-carto": "file:../packages/ui-carto",
+        "@nativescript-community/ui-carto": "*",
         "vue-property-decorator": "9.1.2"
     }
 }
