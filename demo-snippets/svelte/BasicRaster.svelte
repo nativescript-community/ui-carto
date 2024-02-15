@@ -4,7 +4,7 @@
     import { RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
     import { VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
     import { CartoMap } from '@nativescript-community/ui-carto/ui';
-import { PanningMode } from '@nativescript-community/ui-carto/ui/index.android';
+import { PanningMode } from '@nativescript-community/ui-carto/ui';
     import { setShowDebug, setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-carto/utils';
     import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
     import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/marker';
@@ -14,8 +14,13 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui/index.android';
     let cartoMap: CartoMap;
     let rasterLayer: RasterTileLayer;
 
+    function logEvent(e) {
+        console.log(e.eventName, Object.keys(e))
+    }
+
     function onMainMapReady(e) {
         cartoMap = e.object as CartoMap;
+        console.log('onMainMapReady');
         const options = cartoMap.getOptions();
         options.setWatermarkScale(0);
         options.setRestrictedPanning(true);
@@ -112,6 +117,6 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui/index.android';
         <navigationButton text="Go back" on:tap={() => goBack()} />
     </actionBar>
     <gridLayout class="page">
-        <cartomap zoom="10" on:mapReady={onMainMapReady} />
+        <cartomap zoom="10" on:mapReady={onMainMapReady} on:mapMove={logEvent} on:mapStable={logEvent} on:mapIdle={logEvent} on:mapClicked={logEvent} on:mapInteraction={logEvent}/>
     </gridLayout>
 </page>
