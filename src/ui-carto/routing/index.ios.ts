@@ -9,10 +9,11 @@ import {
     RoutingServiceOptions,
     SGREOfflineRoutingServiceOptions,
     ValhallaOfflineRoutingServiceOptions,
-    ValhallaOnlineRoutingServiceOptions
+    ValhallaOnlineRoutingServiceOptions,
+    ValhallaRoutingServiceOptions
 } from '.';
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
-import { JSVariantToNative } from '../utils';
+import { JSVariantToNative, nativeVariantToJS } from '../utils';
 
 export * from './index.common';
 
@@ -37,7 +38,7 @@ export enum RoutingAction {
 }
 export abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
-    public calculateRoute(options: RoutingRequest, profile = this.profile) {
+    public calculateRoute(options: RoutingRequest, profile = this.profile, jsonStr = false) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
             if (options.customOptions) {
@@ -46,12 +47,47 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
                 });
             }
 
-            // ensure the profile is set
-            this.getNative().setProfile(profile);
-            const nRes = this.getNative().calculateRoute(nRequest);
-            const result = nRes ? new RoutingResult(nRes) : null;
-            resolve(result);
+            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, (res, strRes)=>{
+                resolve(strRes || (res ? new RoutingResult(res) : null))
+            })
         });
+    }
+    public routingResultToJSON(routingResult: RoutingResult) {
+        return new Promise<string>((resolve, reject) => {
+            try {
+                resolve(AKRoutingServiceAdditions.stringifyRouteResult(routingResult.getNative()));
+            } catch (error) {
+                reject(error)
+            }
+        });
+    }
+}
+abstract class ValhallaRoutingService<
+    T extends NTPackageManagerValhallaRoutingService | NTValhallaOfflineRoutingService | NTValhallaOnlineRoutingService,
+    U extends ValhallaRoutingServiceOptions
+> extends RoutingService<T, U> {
+    public matchRoute(options: RouteMatchingRequest, profile = this.profile) {
+        return new Promise((resolve, reject) => {
+            const nRequest = NTRouteMatchingRequest.alloc().initWithProjectionPointsAccuracy(options.projection.getNative(), mapPosVectorFromArgs(options.points), options.accuracy);
+            if (options.customOptions) {
+                Object.keys(options.customOptions).forEach((k) => {
+                    nRequest.setCustomParameterValue(k, JSVariantToNative(options.customOptions[k]));
+                });
+            }
+            AKRoutingServiceAdditions.matchRoute(this.getNative(), nRequest, this.profile, resolve);
+        });
+    }
+    public setConfigurationParameter(param: string, value: any) {
+        const native = this.getNative();
+        if (!(native instanceof NTValhallaOnlineRoutingService)) {
+            native.setConfigurationParameterValue(param, JSVariantToNative(value));
+        }
+    }
+    public getConfigurationParameter(param: string) {
+        const native = this.getNative();
+        if (!(native instanceof NTValhallaOnlineRoutingService)) {
+            return nativeVariantToJS(native.getConfigurationParameter(param));
+        }
     }
 }
 

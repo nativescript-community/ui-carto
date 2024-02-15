@@ -17,6 +17,7 @@ export function isLicenseKeyRegistered() {
 export const MapReadyEvent = 'mapReady';
 export const MapStableEvent = 'mapStable';
 export const MapIdleEvent = 'mapIdle';
+export const MapInteractionEvent = 'mapInteraction';
 export const MapMovedEvent = 'mapMoved';
 export const MapClickedEvent = 'mapClicked';
 

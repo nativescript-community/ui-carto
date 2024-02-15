@@ -1,15 +1,14 @@
+import { Color } from '@nativescript/core/color';
+import { nativeProperty } from '../';
+import { fromNativeMapPos } from '../core';
+import { Projection } from '../projections';
 import {
     CartoOnlineRasterTileLayerOptions,
-    HillshadeRasterTileLayerOptions,
     RasterTileEventListener as IRasterTileEventListener,
     RasterTileFilterMode as IRasterTileFilterMode,
     RasterTileLayerOptions
 } from './raster';
 import { RasterTileLayerBase } from './raster.common';
-import { mapPosVectorFromArgs, nativeAndroidEnumProperty, nativeColorProperty, nativeProperty } from '../';
-import { Color } from '@nativescript/core/color';
-import { IntVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
-import { Projection } from '../projections';
 
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {
@@ -88,12 +87,12 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<com.carto.la
     }
 }
 
-export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.carto.layers.HillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
-    @nativeProperty heightScale: number;
-    @nativeProperty contrast: number;
-    @nativeProperty illuminationDirection: number;
-    @nativeColorProperty highlightColor: string | Color;
-    createNative(options: HillshadeRasterTileLayerOptions) {
-        return new com.carto.layers.HillshadeRasterTileLayer(options.dataSource.getNative());
-    }
-}
+// export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.carto.layers.HillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
+//     @nativeProperty heightScale: number;
+//     @nativeProperty contrast: number;
+//     @nativeProperty illuminationDirection: number;
+//     @nativeColorProperty highlightColor: string | Color;
+//     createNative(options: HillshadeRasterTileLayerOptions) {
+//         return new com.carto.layers.HillshadeRasterTileLayer(options.dataSource.getNative());
+//     }
+// }

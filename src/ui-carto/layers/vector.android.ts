@@ -260,7 +260,6 @@ export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, V
 export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.EditableVectorLayer, VectorLayerOptions> {
     editListener?: IVectorEditEventListener;
     nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
-    projection?: Projection;
     constructor(options) {
         super(options);
         for (const property of ['editListener', 'nEditListener']) {

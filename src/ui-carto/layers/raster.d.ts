@@ -43,14 +43,14 @@ export interface HillshadeRasterTileLayerOptions extends RasterTileLayerOptions 
     illuminationDirection?: number;
     highlightColor?: Color;
 }
-export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTileLayerOptions> {
-    heightScale?: number;
-    contrast?: number;
-    illuminationDirection?: number;
-    highlightColor?: Color;
-    public getElevation<T = DefaultLatLonKeys>(pos: GenericMapPos<T>): number;
-    public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
-    public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): IntVector;
-    public getElevationsAsync<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[], callback: (error: Error, res: IntVector) => void);
-  setRasterTileEventListener<T = DefaultLatLonKeys>(listener: RasterTileEventListener<T>, projection?: Projection): void;
-}
+// export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTileLayerOptions> {
+//     heightScale?: number;
+//     contrast?: number;
+//     illuminationDirection?: number;
+//     highlightColor?: Color;
+//     public getElevation<T = DefaultLatLonKeys>(pos: GenericMapPos<T>): number;
+//     public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
+//     public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): IntVector;
+//     public getElevationsAsync<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[], callback: (error: Error, res: IntVector) => void);
+//   setRasterTileEventListener<T = DefaultLatLonKeys>(listener: RasterTileEventListener<T>, projection?: Projection): void;
+// }

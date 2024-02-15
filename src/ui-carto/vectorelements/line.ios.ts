@@ -99,7 +99,7 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
         if (styleBuilder instanceof NTLineStyle) {
             style = styleBuilder;
         } else if (styleBuilder instanceof LineStyleBuilder) {
-            style = styleBuilder.buildStyle();
+            style = (styleBuilder as LineStyleBuilder).buildStyle();
         } else if (styleBuilder.hasOwnProperty) {
             style = new LineStyleBuilder(styleBuilder).buildStyle();
         }

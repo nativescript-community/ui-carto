@@ -16,7 +16,7 @@ import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
-import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
+import { CartoViewBase, Layers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, isLicenseKeyRegistered, setLicenseKeyRegistered } from './index.common';
 import { ImageSource } from '@nativescript/core';
 import { executeOnMainThread } from '@nativescript/core/utils';
 
@@ -34,7 +34,7 @@ export enum PanningMode {
 
 let licenseKey: string;
 export function registerLicense(value: string, callback?: (result: boolean) => void) {
-    const result = NTMapView.registerLicense(value);
+    const result = AKMapView.registerLicense(value);
     if (result) {
         licenseKey = value;
     }
@@ -63,16 +63,16 @@ function mainThread(target: any, propertyKey: string, descriptor: PropertyDescri
 }
 
 @NativeClass
-class NTMapEventListenerImpl extends NTMapEventListener {
+class AKMapEventListenerImpl extends NSObject implements  AKMapEventListener {
+    public static ObjCProtocols = [AKMapEventListener];
     private _owner: WeakRef<CartoMap<any>>;
 
-    public static initWithOwner(owner: WeakRef<CartoMap<any>>): NTMapEventListenerImpl {
-        const delegate = NTMapEventListenerImpl.new() as NTMapEventListenerImpl;
+    public static initWithOwner(owner: WeakRef<CartoMap<any>>): AKMapEventListenerImpl {
+        const delegate = AKMapEventListenerImpl.new() as AKMapEventListenerImpl;
         delegate._owner = owner;
         return delegate;
     }
 
-    @mainThread
     public onMapIdle() {
         const owner = this._owner.get();
         if (owner && owner.hasListeners(MapIdleEvent)) {
@@ -80,29 +80,54 @@ class NTMapEventListenerImpl extends NTMapEventListener {
         }
     }
 
-    @mainThread
-    public onMapMoved() {
-        const owner = this._owner.get();
-        if (owner && owner.hasListeners(MapMovedEvent)) {
+    public onMapMoved(userAction: boolean) {
+        const owner = this._owner?.get();
+        if (owner?.hasListeners(MapMovedEvent)) {
             owner.notify({
                 eventName: MapMovedEvent,
                 object: owner,
-                data: { userAction: owner.userAction }
+                data: { userAction }
             });
         }
     }
-    @mainThread
-    public onMapStable() {
-        const owner = this._owner.get();
+    public onMapInteraction(interaction: NTMapInteractionInfo, userAction: boolean) {
+        const owner = this._owner?.get();
+        if (owner?.hasListeners(MapInteractionEvent)) {
+            owner.notify({
+                eventName: MapInteractionEvent,
+                object: owner,
+                data: {
+                    userAction,
+                    interaction: {
+                        get isAnimationStarted() {
+                            return interaction.isAnimationStarted();
+                        },
+                        get isPanAction() {
+                            return interaction.isPanAction();
+                        },
+                        get isRotateAction() {
+                            return interaction.isRotateAction();
+                        },
+                        get isTiltAction() {
+                            return interaction.isTiltAction();
+                        },
+                        get isZoomAction() {
+                            return interaction.isZoomAction();
+                        }
+                    }
+                }
+            });
+        }
+    }
+    public onMapStable(userAction: boolean) {
+        const owner = this._owner?.get();
 
         if (owner) {
             if (owner.hasListeners(MapStableEvent)) {
-                owner.notify({ eventName: MapStableEvent, object: owner, data: { userAction: owner.userAction } });
+                owner.notify({ eventName: MapStableEvent, object: owner, data: { userAction } });
             }
-            owner.userAction = false;
         }
     }
-    @mainThread
     public onMapClicked(mapClickInfo: NTMapClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.hasListeners(MapClickedEvent)) {
@@ -131,7 +156,7 @@ class NTMapEventListenerImpl extends NTMapEventListener {
 }
 
 @NativeClass
-class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
+class NTRendererCaptureListenerImpl extends AKRendererCaptureListener {
     private _callback: WeakRef<Function>;
     public static initWithCallback(callback: WeakRef<Function>): NTRendererCaptureListenerImpl {
         const delegate = NTRendererCaptureListenerImpl.new() as NTRendererCaptureListenerImpl;
@@ -139,54 +164,17 @@ class NTRendererCaptureListenerImpl extends NTRendererCaptureListener {
         return delegate;
     }
 
-    onMapRenderedSwigExplicitNTRendererCaptureListener(param0: NTBitmap) {
+    onMapRenderedThreaded(param0: NTBitmap) {
         const callback = this._callback.get();
         if (callback) {
             callback(NTBitmapUtils.createUIImageFromBitmap(param0));
         }
     }
 }
-@NativeClass
-class NCartoMapView<T = DefaultLatLonKeys> extends NTMapView {
-    owner: WeakRef<CartoMap<T>>;
-    public static initWithOwner<T = DefaultLatLonKeys>(owner: WeakRef<CartoMap<T>>): NCartoMapView<T> {
-        const view = NCartoMapView.new() as NCartoMapView<T>;
-        view.owner = owner;
-        return view;
-    }
-    touchesBeganWithEvent(touches, event) {
-        super.touchesBeganWithEvent(touches, event);
-        const owner = this.owner?.get();
-        if (owner) {
-            owner.userAction = false;
-        }
-    }
-    touchesMovedWithEvent(touches, event) {
-        super.touchesMovedWithEvent(touches, event);
-        const owner = this.owner?.get();
-        if (owner) {
-            owner.userAction = true;
-        }
-    }
-    // touchesCancelledWithEvent(touches, event) {
-    //     super.touchesCancelledWithEvent(touches, event);
-    //     if (this.owner) {
-    //         this.owner.userAction = false;
-    //     }
-    // }
-    // touchesEndedWithEvent(touches, event) {
-    //     super.touchesEndedWithEvent(touches, event);
-    //     if (this.owner) {
-    //         this.owner.userAction = false;
-    //     }
-    // }
-}
-
 export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     static projection = new EPSG4326();
     nativeProjection: NTProjection;
     mProjection: IProjection;
-    userAction = false;
     constructor() {
         super();
         if (!isLicenseKeyRegistered()) {
@@ -201,7 +189,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         runOnMainThread = value;
     }
     get mapView() {
-        return this.nativeViewProtected as NTMapView;
+        return this.nativeViewProtected as AKMapView;
     }
     get projection() {
         return this.mProjection;
@@ -215,7 +203,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     }
 
     public createNativeView(): Object {
-        return NCartoMapView.initWithOwner<T>(new WeakRef(this));
+        return AKMapView.alloc().init();
     }
 
     getOptions() {
@@ -229,7 +217,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
-        this.mapView.setMapEventListener(NTMapEventListenerImpl.initWithOwner(new WeakRef(this)));
+        this.mapView.setAKMapEventListener(AKMapEventListenerImpl.initWithOwner(new WeakRef(this)));
     }
 
     disposeNativeView(): void {

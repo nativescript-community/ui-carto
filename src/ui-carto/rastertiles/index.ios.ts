@@ -6,7 +6,7 @@ import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feat
 
 // export class MapBoxElevationDataDecoder extends BaseNative<com.carto.rastertiles.MapBoxElevationDataDecoder, MapBoxElevationDataDecoderOptions> {
 //     createNative(options: MapBoxElevationDataDecoderOptions) {
-//         return new com.carto.rastertiles.MapBoxElevationDataDecoder();
+//         return new NTMapBoxElevationDataDecoder();
 //     }
 //     public getElevation(pos: MapPos) {}
 // }

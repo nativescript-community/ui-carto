@@ -422,7 +422,8 @@ declare namespace com {
                         profile: string,
                         callback: RoutingServiceRouteMatchingCallback
                     ): void;
-                    public static calculateRoute(param0: com.carto.routing.RoutingService, param1: com.carto.routing.RoutingRequest, profile: string, param2: RoutingServiceRouteCallback): void;
+                    public static calculateRoute(param0: com.carto.routing.RoutingService, param1: com.carto.routing.RoutingRequest, profile: string, 
+                        stringify:boolean, param2: RoutingServiceRouteCallback): void;
                     public static routingResultToJSON(param0: com.carto.routing.RoutingResult, param2: RoutingResultToJSONCallback): void;
                 }
             }
@@ -775,7 +776,7 @@ declare namespace com {
                     /**
                      * Constructs a new instance of the com.akylas.carto.additions.RoutingServiceRouteCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
                      */
-                    public constructor(implementation: { onRoutingResult(param0: java.lang.Exception, param1: com.carto.routing.RoutingResult): void });
+                    public constructor(implementation: { onRoutingResult(param0: java.lang.Exception, param1: com.carto.routing.RoutingResult, param2: string): void });
                     public constructor();
                     public onRoutingResult(param0: java.lang.Exception, param1: com.carto.routing.RoutingResult): void;
                 }

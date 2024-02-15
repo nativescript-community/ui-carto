@@ -29,13 +29,14 @@ export interface RoutingRequest<T = DefaultLatLonKeys> {
     customOptions: any;
 }
 
-export interface RouteMatchingRequest<T = DefaultLatLonKeys> {
-    projection: Projection<T>;
-    points: GenericMapPos<T>[];
+export interface RouteMatchingRequest<T = DefaultLatLonKeys> extends RoutingRequest<T> {
     accuracy: number;
 }
 
 export interface RoutingServiceOptions {}
+export interface ValhallaRoutingServiceOptions {
+    profile?: ValhallaProfile;
+}
 
 export interface RoutingInstruction {
     getPointIndex(): number;
@@ -62,7 +63,7 @@ export interface RouteMatchingResult<T = DefaultLatLonKeys> {
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
-    calculateRoute<T = DefaultLatLonKeys>(options: RoutingRequest<T>, profile?: string): Promise<RoutingResult<T>>;
+    calculateRoute<T = DefaultLatLonKeys,U extends boolean = false>(options: RoutingRequest<T>, profile?: string, jsonStr?:U): Promise<U extends true ? String: RoutingResult<T>>;
     routingResultToJSON<T = DefaultLatLonKeys>(options: RoutingResult<T>): Promise<string>;
 }
 
@@ -73,18 +74,16 @@ export class PackageManagerRoutingService extends RoutingService<any, PackageMan
 
 export type ValhallaProfile = 'car' | 'auto' | 'bus' | 'bicycle' | 'pedestrian' | 'truck';
 
-export interface ValhallaOfflineRoutingServiceOptions extends RoutingServiceOptions {
+export interface ValhallaOfflineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     path: string;
-    profile?: ValhallaProfile;
 }
 export class ValhallaOfflineRoutingService extends RoutingService<any, ValhallaOfflineRoutingServiceOptions> {
     profile: ValhallaProfile;
     matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: ValhallaProfile): Promise<RouteMatchingResult<T>>;
 }
 
-export interface ValhallaOnlineRoutingServiceOptions extends RoutingServiceOptions {
+export interface ValhallaOnlineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     apiKey: string;
-    profile?: ValhallaProfile;
     customServiceURL?: string;
 }
 export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOnlineRoutingServiceOptions> {
@@ -92,9 +91,8 @@ export class ValhallaOnlineRoutingService extends RoutingService<any, ValhallaOn
     matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: ValhallaProfile): Promise<RouteMatchingResult<T>>;
 }
 
-export interface PackageManagerValhallaRoutingServiceOptions extends RoutingServiceOptions {
+export interface PackageManagerValhallaRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     packageManager: CartoPackageManager;
-    profile?: ValhallaProfile;
 }
 export class PackageManagerValhallaRoutingService extends RoutingService<any, PackageManagerValhallaRoutingServiceOptions> {
     profile: ValhallaProfile;
