@@ -60,7 +60,6 @@ export class VectorTileFeatureCollection extends FeatureCollection<NTVectorTileF
             geometry: nResult.getGeometry() as any,
             id: nResult.getId(),
             layerName: nResult.getLayerName(),
-            //@ts-ignore
             distance: nResult.getDistance()
         } as VectorTileFeature;
     }

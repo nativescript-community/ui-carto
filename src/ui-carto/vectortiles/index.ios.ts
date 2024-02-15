@@ -14,19 +14,22 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<NTVectorTileDecoder
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: NTZippedAssetPackage;
     createNative(options: MBVectorTileDecoderOptions) {
-        if (!!options.zipPath) {
-            this.pack = new ZippedAssetPackage(options as any).getNative();
+        let pack: NTAssetPackage;
+        if (options.pack) {
+            pack = this.pack = options.pack.getNative();
+        } else if (!!options.zipPath) {
+            pack = this.pack = new ZippedAssetPackage(options as any).getNative();
         } else if (!!options.dirPath) {
-            this.pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
+            pack = this.pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
         }
         if (options.cartoCss) {
-            if (this.pack) {
-                return NTMBVectorTileDecoder.alloc().initWithCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSSAssetPackage(options.cartoCss, this.pack));
+            if (pack) {
+                return NTMBVectorTileDecoder.alloc().initWithCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSSAssetPackage(options.cartoCss, pack));
             } else {
                 return NTMBVectorTileDecoder.alloc().initWithCartoCSSStyleSet(NTCartoCSSStyleSet.alloc().initWithCartoCSS(options.cartoCss));
             }
-        } else if (this.pack) {
-            const vectorTileStyleSet = NTCompiledStyleSet.alloc().initWithAssetPackageStyleName(this.pack, options.style);
+        } else if (pack) {
+            const vectorTileStyleSet = NTCompiledStyleSet.alloc().initWithAssetPackageStyleName(pack, options.style);
             return NTMBVectorTileDecoder.alloc().initWithCompiledStyleSet(vectorTileStyleSet);
         } else {
             console.error(`could not create MBVectorTileDecoder pack for options: ${options}`);
@@ -71,11 +74,9 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<NTMBVectorTileDec
                 map.setX(k, value[k]);
             });
         }
-        //@ts-ignore
         this.getNative().setStyleParameters(map);
     }
     setJSONStyleParameters(value: Record<string, string> | string) {
-        //@ts-ignore
         this.getNative().setJSONStyleParameters(typeof value === 'string' ? value : JSON.stringify(value));
     }
     setCartoCSSStyleSet(cartoCss: string) {

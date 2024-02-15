@@ -1,6 +1,6 @@
 import { Layer, TileLayer } from '.';
 import { BaseNative, nativeProperty } from '..';
-import { fromNativeMapPos } from '../core';
+import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { Projection } from '../projections';
 import { nativeVariantToJS } from '../utils';
 import { VectorElement } from '../vectorelements';
@@ -9,6 +9,7 @@ import {
     CartoOfflineVectorTileLayerOptions,
     CartoOnlineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
+    VectorEditEventListener as IVectorEditEventListener,
     VectorElementEventListener as IVectorElementEventListener,
     VectorTileEventListener as IVectorTileEventListener,
     VectorTileRenderOrder as IVectorTileRenderOrder,
@@ -30,7 +31,7 @@ export enum VectorElementDragResult {
 }
 
 @NativeClass
-export class NTVectorElementEventListenerImpl extends NTVectorElementEventListener {
+export class NTVectorElementEventListenerImpl extends AKVectorElementEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorElementEventListener>;
     private projection?: Projection;
@@ -40,9 +41,10 @@ export class NTVectorElementEventListenerImpl extends NTVectorElementEventListen
         delegate._owner = owner;
         delegate._layer = layer;
         delegate.projection = projection;
+
         return delegate;
     }
-    public onVectorElementClicked(info: NTVectorElementClickInfo) {
+    public onVectorElementClickedThreaded(info: NTVectorElementClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.onVectorElementClicked) {
             const nElement = info.getVectorElement();
@@ -80,7 +82,7 @@ function getGeojsonWriter() {
 }
 
 @NativeClass
-export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
+export class NTVectorTileEventListenerImpl extends AKVectorTileEventListener {
     private _layer: WeakRef<BaseVectorLayer<any, any>>;
     private _owner: WeakRef<IVectorTileEventListener>;
     private projection?: Projection;
@@ -92,18 +94,9 @@ export class NTVectorTileEventListenerImpl extends NTVectorTileEventListener {
         delegate.projection = projection;
         return delegate;
     }
-    public onVectorTileClicked(info: NTVectorTileClickInfo) {
+    public onVectorTileClickedThreaded(info: NTVectorTileClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.onVectorTileClicked) {
-            // const featureData = {};
-            // const feature = info.getFeature();
-            // const variant = feature.getProperties();
-            // const keys = variant.getObjectKeys();
-            // let key, i;
-            // for (i = 0; i < keys.size(); i++) {
-            //     key = keys.get(i);
-            //     featureData[key] = variant.getObjectElement(key).getString();
-            // }
             const feature = info.getFeature();
             const geometry = feature.getGeometry();
             let position = info.getClickPos();
@@ -168,14 +161,31 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
     @nativeProperty rendererLayerFilter: string;
     @nativeProperty clickHandlerLayerFilter: string;
 
+    listener?: IVectorTileEventListener;
+    nListener?: NTVectorTileEventListener
+    listenerProjection?: Projection;
+    constructor(options) {
+        super(options);
+        for (const property of ['listener', 'nListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(BaseVectorTileLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
     setVectorTileEventListener(listener: IVectorTileEventListener | any, projection?: Projection, nativeClass = NTVectorTileEventListenerImpl) {
+        this.listener = listener;
+        this.listenerProjection = projection;
         if (listener) {
             if (listener instanceof NTVectorTileEventListener) {
                 this.getNative().setVectorTileEventListener(listener);
+                this.nListener = listener as NTVectorTileEventListener;
             } else {
-                this.getNative().setVectorTileEventListener(nativeClass.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+                this.nListener = (nativeClass as typeof NTVectorTileEventListenerImpl).initWithOwner(new WeakRef(listener), new WeakRef(this), projection);
+                this.getNative().setVectorTileEventListener(this.nListener);
             }
         } else {
+            this.nListener = null;
             this.getNative().setVectorTileEventListener(null);
         }
     }
@@ -212,14 +222,30 @@ export class VectorTileLayer extends BaseVectorTileLayer<NTVectorTileLayer, Vect
     }
 }
 export abstract class BaseVectorLayer<T extends NTVectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
+    projection?: Projection;
+    elementListener?: IVectorElementEventListener;
+    nElementListener?: NTVectorElementEventListener;
+    constructor(options) {
+        super(options);
+        for (const property of ['elementListener', 'nElementListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(BaseVectorLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
     // setVectorElementEventListener(listener: IVectorElementEventListener) {
     // initVectorElementEventListener();
     // this.getNative().setVectorElementEventListener(new VectorElementEventListener(new WeakRef(listener), new WeakRef(this)));
     // }
     setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection, nativeClass = NTVectorElementEventListenerImpl) {
+        this.elementListener = listener;
+        this.projection = projection;
         if (listener) {
-            this.getNative().setVectorElementEventListener(nativeClass.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+            this.nElementListener = nativeClass.initWithOwner(new WeakRef(listener), new WeakRef(this), projection);
+            this.getNative().setVectorElementEventListener(this.nElementListener);
         } else {
+            this.nElementListener = null;
             this.getNative().setVectorElementEventListener(null);
         }
     }
@@ -237,44 +263,113 @@ export class VectorLayer extends BaseVectorLayer<NTVectorLayer, VectorLayerOptio
 }
 
 @NativeClass
-class NTVectorEditEventListenerImpl extends NTVectorEditEventListener {
-    private _owner: WeakRef<EditableVectorLayer>;
-
-    public static initWithOwner(owner: WeakRef<EditableVectorLayer>): NTVectorEditEventListenerImpl {
+class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
+    private _owner: WeakRef<IVectorEditEventListener>;
+    public static initWithOwner(owner: WeakRef<IVectorEditEventListener>): NTVectorEditEventListenerImpl {
         const delegate = NTVectorEditEventListenerImpl.new() as NTVectorEditEventListenerImpl;
         delegate._owner = owner;
+        
         return delegate;
     }
 
-    onDragEnd(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
+    
+    onDragEndThreaded(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
+    const owner = this._owner.get();  
+      if (owner && owner.onDragEnd) {
+            return owner.onDragEnd.call(owner, {
+                layer: this,
+                element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                position: fromNativeMapPos(dragInfo.getMapPos()),
+                screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                dragMode: dragInfo.getDragMode()
+            });
+        }
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
-    onDragMove(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
+    onDragMoveThreaded(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
+    const owner = this._owner.get();  
+    if (owner && owner.onDragMove) {
+            return owner.onDragMove.call(owner, {
+                layer: this,
+                element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                position: fromNativeMapPos(dragInfo.getMapPos()),
+                screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                dragMode: dragInfo.getDragMode()
+            });
+        }
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
-    onDragStart(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
+    onDragStartThreaded(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
+    const owner = this._owner.get();  
+    if (owner && owner.onDragStart) {
+            return owner.onDragStart.call(owner, {
+                layer: this,
+                element: new VectorElement(undefined, dragInfo.getVectorElement()),
+                position: fromNativeMapPos(dragInfo.getMapPos()),
+                screenPosition: fromNativeScreenPos(dragInfo.getScreenPos()),
+                dragMode: dragInfo.getDragMode()
+            });
+        }
         return NTVectorElementDragResult.T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
-    onElementDelete(element: NTVectorElement) {}
+    onElementDeleteThreaded(element: NTVectorElement) {
+    const owner = this._owner.get();  
+    if (owner && owner.onElementDelete) {
+            const el = new VectorElement(undefined, element);
+            owner.onElementDelete.call(owner, el);
+        }
+    }
 
-    onElementDeselected(element: NTVectorElement) {}
+    onElementDeselectedThreaded(element: NTVectorElement) {
+        const owner = this._owner.get();  
+        if (owner && owner.onElementDelete) {
+            const el = new VectorElement(undefined, element);
+            owner.onElementDelete.call(owner, el);
+        }
+    }
 
-    // onElementModifyGeometry(element: NTVectorElement, geometry: NTGeometry) {
-    //     console.log('onElementModifyGeometry', element);
-    // }
+    onElementModifyThreadedGeometry(element: NTVectorElement, geometry: NTGeometry) {
+        const owner = this._owner.get();  
+        if (owner && owner.onElementModify) {
+            const el = new VectorElement(undefined, element);
+            owner.onElementModify.call(owner, el, geometry);
+        }
+    }
 
-    onElementSelect(element: NTVectorElement) {
+    onElementSelectThreaded(element: NTVectorElement) {
+        const owner = this._owner.get();  
+        if (owner && owner.onElementSelect) {
+            const el = new VectorElement(undefined, element);
+            return owner.onElementSelect.call(owner, el);
+        }
         return true;
     }
 
-    onSelectDragPointStyleDragPointStyle(element: NTVectorElement, dragPointStyle: NTVectorElementDragPointStyle) {
+    onSelectDragPointStyleThreadedDragPointStyle(element: NTVectorElement, dragPointStyle: NTVectorElementDragPointStyle) {
+        const owner = this._owner.get();  
+        if (owner && owner.onElementSelect) {
+            const el = new VectorElement(undefined, element);
+            const styleBuilder = owner.onSelectDragPointStyle.call(owner, el);
+            return styleBuilder ? styleBuilder.buildStyle() : null;
+        }
         return null;
     }
 }
 export class EditableVectorLayer extends BaseVectorLayer<NTEditableVectorLayer, VectorLayerOptions> {
+    editListener?: IVectorEditEventListener;
+    nEditListener?: AKVectorEditEventListener;
+    constructor(options) {
+        super(options);
+        for (const property of ['editListener', 'nEditListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(EditableVectorLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
     createNative(options: VectorLayerOptions) {
         if (!!options.dataSource) {
             const dataSource = options.dataSource.getNative();
@@ -292,6 +387,19 @@ export class EditableVectorLayer extends BaseVectorLayer<NTEditableVectorLayer, 
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
         }
     }
+    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection) {
+        this.editListener = listener;
+        this.projection = projection;
+        if (listener) {
+            this.nEditListener = NTVectorEditEventListenerImpl.initWithOwner(new WeakRef(listener));
+            this.getNative().setVectorEditEventListener(this.nEditListener);
+        } else {
+            this.nEditListener = null;
+            this.getNative().setVectorEditEventListener(null);
+
+        }
+    }
+
 }
 
 export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer, ClusteredVectorLayerLayerOptions> {

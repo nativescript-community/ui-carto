@@ -1,0 +1,57 @@
+//
+//  AKTileDownloadListener.swift
+//  demosvelte
+//
+//  Created by Martin Guillon on 14/02/2024.
+//  Copyright © 2024 NativeScript. All rights reserved.
+//
+
+import CartoMobileSDK
+
+@objc(AKTileDownloadListener)
+@objcMembers
+class AKTileDownloadListener: NTTileDownloadListener {
+  
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  func onDownloadCompletedThreaded() {}
+  func onDownloadFailedThreaded(_ tile: NTMapTile!) {}
+  func onDownloadProgressThreaded(_ progress: Float) {}
+  func onDownloadStartingThreaded(_ tileCount: Int32) {}
+  
+  override func onDownloadFailed(_ tile: NTMapTile!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onDownloadFailedThreaded(tile)
+      }
+    } else {
+      onDownloadFailedThreaded(tile)
+    }
+  }
+  override func onDownloadCompleted() {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onDownloadCompletedThreaded()
+      }
+    } else {
+      onDownloadCompletedThreaded()
+    }
+  }
+  override func onDownloadProgress(_ progress: Float) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onDownloadProgressThreaded(progress)
+      }
+    } else {
+      onDownloadProgressThreaded(progress)
+    }
+  }
+  override func onDownloadStarting(_ tileCount: Int32) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onDownloadStartingThreaded(tileCount)
+      }
+    } else {
+      onDownloadStartingThreaded(tileCount)
+    }
+  }
+}

@@ -1,0 +1,31 @@
+//
+//  AKFeatureCollectionSearchService.swift
+//  demosvelte
+//
+//  Created by Martin Guillon on 14/02/2024.
+//  Copyright © 2024 NativeScript. All rights reserved.
+//
+import CartoMobileSDK
+
+@objc(AKRasterTileEventListener)
+@objcMembers
+class AKRasterTileEventListener: NTRasterTileEventListener {
+  
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  func onRasterTileClickedThreaded(_ clickInfo: NTRasterTileClickInfo!) -> Bool {
+    return false;
+  }
+  override func onRasterTileClicked(_ clickInfo: NTRasterTileClickInfo!) -> Bool {
+    if (runOnMainThread) {
+      var result = false;
+      DispatchQueue.main.sync() {
+        result = onRasterTileClickedThreaded(clickInfo)
+      }
+      return result
+    } else {
+      return onRasterTileClickedThreaded(clickInfo)
+    }
+  }
+}
+
+

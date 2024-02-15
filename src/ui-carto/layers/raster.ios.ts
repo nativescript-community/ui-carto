@@ -1,13 +1,29 @@
-import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, RasterTileLayerOptions } from './raster';
+import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, 
+    RasterTileFilterMode as IRasterTileFilterMode,
+    RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
-import { nativeProperty } from '../';
+import { mapPosVectorFromArgs, nativeMapVecProperty, nativeProperty } from '../';
 import { Projection } from '../projections';
-import { fromNativeMapPos } from '../core';
+import { DoubleVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
 import { Color } from '@nativescript/core';
 import { nativeColorProperty } from '../index.ios';
 
+
+export const RasterTileFilterMode = {
+    get RASTER_TILE_FILTER_MODE_NEAREST() {
+        return NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_NEAREST;
+    },
+    get RASTER_TILE_FILTER_MODE_BILINEAR() {
+        return  NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BILINEAR;
+    },
+    get RASTER_TILE_FILTER_MODE_BICUBIC() {
+        return  NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BICUBIC;
+    }
+};
+
+
 @NativeClass
-export class NTRasterTileEventListenerImpl extends NTRasterTileEventListener {
+export class NTRasterTileEventListenerImpl extends AKRasterTileEventListener {
     private _layer: WeakRef<RasterTileLayer>;
     private _owner: WeakRef<IRasterTileEventListener>;
     private projection?: Projection;
@@ -19,7 +35,7 @@ export class NTRasterTileEventListenerImpl extends NTRasterTileEventListener {
         delegate.projection = projection;
         return delegate;
     }
-    public onRasterTileClicked(info: NTRasterTileClickInfo) {
+    public onRasterTileClickedThreaded(info: NTRasterTileClickInfo) {
         const owner = this._owner.get();
         if (owner && owner.onRasterTileClicked) {
             let position = info.getClickPos();
@@ -43,10 +59,27 @@ export class NTRasterTileEventListenerImpl extends NTRasterTileEventListener {
 }
 
 export abstract class RasterTileLayerCommon<NativeClass extends NTRasterTileLayer, U extends RasterTileLayerOptions> extends RasterTileLayerBase<NativeClass, U> {
+    projection?: Projection;
+    clickListener?: IRasterTileEventListener;
+    nClickListener?:NTRasterTileEventListener;
+    constructor(options) {
+        super(options);
+        for (const property of ['elementListener', 'nElementListener']) {
+            const descriptor = Object.getOwnPropertyDescriptor(RasterTileLayer.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
+
     setRasterTileEventListener(listener: IRasterTileEventListener, projection?: Projection) {
+        this.clickListener = listener;
+        this.projection = projection;
         if (listener) {
-            this.getNative().setRasterTileEventListener(NTRasterTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
+            this.nClickListener = NTRasterTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection);
+            this.getNative().setRasterTileEventListener(this.nClickListener);
         } else {
+            this.nClickListener = null;
             this.getNative().setRasterTileEventListener(null);
         }
     }
@@ -56,13 +89,6 @@ export class RasterTileLayer extends RasterTileLayerCommon<NTRasterTileLayer, Ra
     createNative(options: RasterTileLayerOptions) {
         return NTRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative());
     }
-    setRasterTileEventListener(listener: IRasterTileEventListener, projection?: Projection) {
-        if (listener) {
-            this.getNative().setRasterTileEventListener(NTRasterTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection));
-        } else {
-            this.getNative().setRasterTileEventListener(null);
-        }
-    }
 }
 
 export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlineRasterTileLayer, CartoOnlineRasterTileLayerOptions> {
@@ -71,12 +97,41 @@ export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlin
     }
 }
 
-export class HillshadeRasterTileLayer extends RasterTileLayerBase<NTHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
+export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
     @nativeProperty heightScale: number;
     @nativeProperty contrast: number;
-    @nativeProperty illuminationDirection: number;
+    @nativeProperty exagerateHeightScaleEnabled: boolean;
+    @nativeProperty normalMapLightingShader: string;
+    @nativeMapVecProperty illuminationDirection: MapVec | [number, number, number];
     @nativeColorProperty highlightColor: string | Color;
+    @nativeColorProperty shadowColor: string | Color;
+    @nativeColorProperty accentColor: string | Color;
+    @nativeProperty tileFilterMode: IRasterTileFilterMode;
+
     createNative(options) {
-        return new NTHillshadeRasterTileLayer(options.dataSource.getNative());
+        if (options.decoder) {
+        return AKHillshadeRasterTileLayer.alloc().initWithDataSourceElevationDecoder(options.dataSource.getNative(), options.decoder.getNative()); 
+         } else {
+            return AKHillshadeRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative()); 
+        }
+    }
+    public getElevation(pos: MapPos): number {
+        return this.getNative().getElevation(toNativeMapPos(pos));
+    }
+    public getElevations(pos: MapPosVector | MapPos[]): DoubleVector {
+        return new DoubleVector(this.getNative().getElevations(mapPosVectorFromArgs(pos)));
+    }
+
+    public getElevationAsync(pos: MapPos, callback: (error: any, res: number) => void) {
+        this.getNative().getElevationCallback(
+            toNativeMapPos(pos),
+            (res) => callback(null, res as any)
+        );
+    }
+    public getElevationsAsync(pos: MapPosVector | MapPos[], callback: (error: any, res: DoubleVector) => void) {
+        this.getNative().getElevationsCallback(
+            mapPosVectorFromArgs(pos),
+            (res) => callback(null, res as any)
+        );
     }
 }

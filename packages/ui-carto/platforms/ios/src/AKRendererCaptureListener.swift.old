@@ -1,0 +1,18 @@
+import CartoMobileSDK
+
+@objc(AKRendererCaptureListener)
+@objcMembers
+class AKRendererCaptureListener: NTRendererCaptureListener {
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  func onMapRenderedThreaded(_ bitmap: NTBitmap!) {
+  }
+  override func onMapRendered(_ bitmap: NTBitmap!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onMapRenderedThreaded(bitmap)
+      }
+    } else {
+      return onMapRenderedThreaded(bitmap)
+    }
+  }
+}

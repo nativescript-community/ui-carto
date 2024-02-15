@@ -1,0 +1,21 @@
+import CartoMobileSDK
+
+@objc(AKVectorTileEventListener)
+@objcMembers
+class AKVectorTileEventListener: NTVectorTileEventListener {
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  func onVectorTileClickedThreaded(_ clickInfo: NTVectorTileClickInfo!) -> Bool {
+    return false;
+  }
+  override func onVectorTileClicked(_ clickInfo: NTVectorTileClickInfo!) -> Bool {
+    if (runOnMainThread) {
+      var result = false;
+      DispatchQueue.main.sync() {
+        result = self.onVectorTileClickedThreaded(clickInfo)
+      }
+      return result
+    } else {
+      return self.onVectorTileClickedThreaded( clickInfo)
+    }
+  }
+}

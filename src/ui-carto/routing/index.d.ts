@@ -68,7 +68,7 @@ export interface RouteMatchingResult<T = DefaultLatLonKeys> {
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
-    calculateRoute<T = DefaultLatLonKeys>(options: RoutingRequest<T>, profile?: string): Promise<RoutingResult<T>>;
+    calculateRoute<T = DefaultLatLonKeys,U extends boolean = false>(options: RoutingRequest<T>, profile?: string, jsonStr?:U): Promise<U extends true ? String: RoutingResult<T>>;
     routingResultToJSON<T = DefaultLatLonKeys>(options: RoutingResult<T>): Promise<string>;
 }
 export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {

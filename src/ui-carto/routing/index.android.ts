@@ -73,8 +73,8 @@ export const RoutingAction = {
 };
 abstract class RoutingService<T extends com.carto.routing.RoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
-    public calculateRoute(options: RoutingRequest, profile = this.profile) {
-        return new Promise<RoutingResult>((resolve, reject) => {
+    public calculateRoute(options: RoutingRequest, profile = this.profile, jsonStr = false) {
+        return new Promise((resolve, reject) => {
             const nRequest = new com.carto.routing.RoutingRequest(options.projection.getNative(), mapPosVectorFromArgs(options.points));
             if (options.customOptions) {
                 Object.keys(options.customOptions).forEach((k) => {
@@ -82,9 +82,9 @@ abstract class RoutingService<T extends com.carto.routing.RoutingService, U exte
                 });
             }
             const callback = new com.akylas.carto.additions.RoutingServiceRouteCallback({
-                onRoutingResult: (err, res) => (err ? reject(err) : resolve(res ? new RoutingResult(res) : null))
+                onRoutingResult: (err, res, strRes) => (err ? reject(err) : resolve(strRes || (res ? new RoutingResult(res) : null)))
             });
-            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, callback);
+            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, callback);
         });
     }
     public routingResultToJSON(routingResult: RoutingResult) {
