@@ -1,8 +1,8 @@
 {
     "name": "@nativescript-community/template-snippet",
-    "version": "1.8.16",
+    "version": "1.8.17",
     "dependencies": {
-        "@nativescript-community/ui-carto": "^1.8.16",
+        "@nativescript-community/ui-carto": "^1.8.17",
         "vue-property-decorator": "9.1.2"
     }
 }
