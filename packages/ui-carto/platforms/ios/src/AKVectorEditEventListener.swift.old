@@ -1,0 +1,114 @@
+//
+//  AKVectorEditEventListener.swift
+//  demosvelte
+//
+//  Created by Martin Guillon on 14/02/2024.
+//  Copyright © 2024 NativeScript. All rights reserved.
+//
+
+import CartoMobileSDK
+
+@objc(AKVectorEditEventListener)
+@objcMembers
+class AKVectorEditEventListener: NTVectorEditEventListener {
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  
+  func onDragStartThreaded(_ clickInfo: NTVectorElementDragInfo!) -> NTVectorElementDragResult {
+    return NTVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+  }
+  func onDragMoveThreaded(_ clickInfo: NTVectorElementDragInfo!) -> NTVectorElementDragResult {
+    return NTVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+  }
+  func onDragEndThreaded(_ clickInfo: NTVectorElementDragInfo!) -> NTVectorElementDragResult {
+    return NTVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+  }
+  func onSelectDragPointStyleThreaded(_  element: NTVectorElement!, dragPointStyle: NTVectorElementDragPointStyle) -> NTPointStyle? {
+    return nil;
+  }
+  override func onDragStart(_ dragInfo: NTVectorElementDragInfo!) -> NTVectorElementDragResult {
+    if (runOnMainThread) {
+      var result: NTVectorElementDragResult? = nil;
+      DispatchQueue.main.sync() {
+        result = onDragStartThreaded(dragInfo)
+      }
+      return result!
+    } else {
+      return onDragStartThreaded(dragInfo)
+    }
+  }
+  override func onDragEnd(_ dragInfo: NTVectorElementDragInfo!) -> NTVectorElementDragResult {
+    if (runOnMainThread) {
+      var result: NTVectorElementDragResult? = nil;
+      DispatchQueue.main.sync() {
+        result = onDragEndThreaded(dragInfo)
+      }
+      return result!
+    } else {
+      return onDragEndThreaded(dragInfo)
+    }
+  }
+  override func onDragMove(_ dragInfo: NTVectorElementDragInfo!) -> NTVectorElementDragResult {
+    if (runOnMainThread) {
+      var result: NTVectorElementDragResult? = nil;
+      DispatchQueue.main.sync() {
+        result = onDragMoveThreaded(dragInfo)
+      }
+      return result!
+    } else {
+      return onDragMoveThreaded(dragInfo)
+    }
+  }
+  override func onSelectDragPointStyle(_ element: NTVectorElement!, dragPointStyle: NTVectorElementDragPointStyle) -> NTPointStyle!{
+    if (runOnMainThread) {
+      var result: NTPointStyle? = nil;
+      DispatchQueue.main.sync() {
+        result = onSelectDragPointStyleThreaded(element, dragPointStyle: dragPointStyle)
+      }
+      return result!
+    } else {
+      return onSelectDragPointStyleThreaded(element, dragPointStyle: dragPointStyle)!
+    }
+  }
+  func onElementDeleteThreaded(_ element: NTVectorElement!) {}
+  override func onElementDelete(_ element: NTVectorElement!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onElementDeleteThreaded(element)
+      }
+    } else {
+      onElementDeleteThreaded(element)
+    }
+  }
+  func onElementSelectThreaded(_ element: NTVectorElement!) -> Bool { return false }
+  override func onElementSelect(_ element: NTVectorElement!) -> Bool {
+    if (runOnMainThread) {
+      var result = false
+      DispatchQueue.main.sync() {
+       result = self.onElementSelectThreaded(element)
+      }
+      return result
+    } else {
+      return onElementSelectThreaded(element)
+    }
+  }
+  func onElementDeselectedThreaded(_ element: NTVectorElement!) {}
+  override func onElementDeselected(_ element: NTVectorElement!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onElementDeselectedThreaded(element)
+      }
+    } else {
+      onElementDeselectedThreaded(element)
+    }
+  }
+  func onElementModifyThreaded(_ element: NTVectorElement!, geometry: NTGeometry!) {}
+  override func onElementModify(_ element: NTVectorElement!, geometry: NTGeometry!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onElementModifyThreaded(element, geometry: geometry)
+      }
+    } else {
+      onElementModifyThreaded(element, geometry: geometry)
+    }
+  }
+}

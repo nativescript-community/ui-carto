@@ -1,0 +1,30 @@
+//
+//  AKVectorElementEventListener.swift
+//  demosvelte
+//
+//  Created by Martin Guillon on 14/02/2024.
+//  Copyright © 2024 NativeScript. All rights reserved.
+//
+
+import CartoMobileSDK
+
+@objc(AKVectorElementEventListener)
+@objcMembers
+class AKVectorElementEventListener: NTVectorElementEventListener {
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  func onVectorElementClickedThreaded(_ clickInfo: NTVectorElementClickInfo!) -> Bool {
+    return false;
+  }
+  override func onVectorElementClicked(_ clickInfo: NTVectorElementClickInfo!) -> Bool {
+    if (runOnMainThread) {
+      var result = false;
+      DispatchQueue.main.sync() {
+        result = onVectorElementClickedThreaded(clickInfo)
+      }
+      return result
+    } else {
+      return onVectorElementClickedThreaded(clickInfo)
+    }
+  }
+}
+

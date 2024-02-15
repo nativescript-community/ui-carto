@@ -5,15 +5,15 @@ import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchS
 import { toNativeMapPos } from '../core';
 import { geometryFromArgs } from '..';
 
-export class VectorTileSearchService extends BaseNative<NTVectorTileSearchService, VectorTileSearchServiceOptions> {
+export class VectorTileSearchService extends BaseNative<AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
     @nativeProperty maxZoom: number;
     createNative(options: VectorTileSearchServiceOptions) {
         if (options.layer) {
             const layer = options.layer.getNative() as NTVectorTileLayer;
-            return NTVectorTileSearchService.alloc().initWithDataSourceTileDecoder(layer.getDataSource(), layer.getTileDecoder());
+            return AKVectorTileSearchService.alloc().initWithDataSourceTileDecoder(layer.getDataSource(), layer.getTileDecoder());
         } else {
-            return NTVectorTileSearchService.alloc().initWithDataSourceTileDecoder(options.dataSource.getNative(), options.decoder.getNative());
+            return AKVectorTileSearchService.alloc().initWithDataSourceTileDecoder(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
     public findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void) {
@@ -33,12 +33,10 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
         if (options.geometry) {
             nRequest.setGeometry(geometryFromArgs(options.geometry));
         }
-        const result = new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
         if (callback) {
-            callback(result);
-            return null;
+            this.getNative().findFeaturesCallback(nRequest, (r)=>new VectorTileFeatureCollection(r))
         } else {
-            return result;
+            return  new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
         }
     }
     set layers(value: string | string[]) {
@@ -51,9 +49,9 @@ export class VectorTileSearchService extends BaseNative<NTVectorTileSearchServic
     }
 }
 
-export class FeatureCollectionSearchService extends BaseNative<NTFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
+export class FeatureCollectionSearchService extends BaseNative<AKFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
     createNative(options: FeatureCollectionSearchServiceOptions) {
-        return NTFeatureCollectionSearchService.alloc().initWithProjectionFeatureCollection(options.projection.getNative(), options.features.getNative());
+        return AKFeatureCollectionSearchService.alloc().initWithProjectionFeatureCollection(options.projection.getNative(), options.features.getNative());
     }
     public findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void) {
         const nRequest = NTSearchRequest.alloc().init();
@@ -77,10 +75,9 @@ export class FeatureCollectionSearchService extends BaseNative<NTFeatureCollecti
             }
         }
         if (callback) {
-            callback(new FeatureCollection(this.getNative().findFeatures(nRequest)));
-            return null;
+            this.getNative().findFeaturesCallback(nRequest, (r)=>new FeatureCollection(r))
         } else {
-            return new FeatureCollection(this.getNative().findFeatures(nRequest));
+            return  new FeatureCollection(this.getNative().findFeatures(nRequest));
         }
     }
 }

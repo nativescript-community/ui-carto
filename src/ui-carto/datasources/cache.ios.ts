@@ -4,22 +4,24 @@ import { MapBounds, toNativeMapBounds } from '../core';
 import { nativeProperty } from '..';
 
 @NativeClass
-class NTTileDownloadListenerImpl extends NTTileDownloadListener {
+class NTTileDownloadListenerImpl extends AKTileDownloadListener {
     private _owner: WeakRef<TileDownloadListener>;
-
-    public static initWithOwner(owner: WeakRef<TileDownloadListener>): NTTileDownloadListenerImpl {
+    private mOnComplete;
+    public static initWithOwner(owner: WeakRef<TileDownloadListener>, onComplete): NTTileDownloadListenerImpl {
         const delegate = NTTileDownloadListenerImpl.new() as NTTileDownloadListenerImpl;
         delegate._owner = owner;
+        delegate.mOnComplete = onComplete;
         return delegate;
     }
-    onDownloadCompleted() {
+    onDownloadCompletedThreaded() {
         const owner = this._owner.get();
         if (owner && owner.onDownloadCompleted) {
             owner.onDownloadCompleted();
         }
+        this.mOnComplete?.();
     }
 
-    onDownloadFailed(tile: NTMapTile) {
+    onDownloadFailedThreaded(tile: NTMapTile) {
         const owner = this._owner.get();
         if (owner && owner.onDownloadFailed) {
             owner.onDownloadFailed({
@@ -30,14 +32,14 @@ class NTTileDownloadListenerImpl extends NTTileDownloadListener {
         }
     }
 
-    onDownloadProgress(progress: number) {
+    onDownloadProgressThreaded(progress: number) {
         const owner = this._owner.get();
         if (owner && owner.onDownloadProgress) {
             owner.onDownloadProgress(progress);
         }
     }
 
-    onDownloadStarting(tileCount: number) {
+    onDownloadStartingThreaded(tileCount: number) {
         const owner = this._owner.get();
         if (owner && owner.onDownloadStarting) {
             owner.onDownloadStarting(tileCount);
@@ -69,12 +71,18 @@ export class PersistentCacheTileDataSource extends TileDataSource<NTPersistentCa
         return this.native && this.native.stopAllDownloads();
     }
     startDownloadArea(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
-        this.getNative().startDownloadAreaMinZoomMaxZoomTileDownloadListener(
-            toNativeMapBounds(mapBounds),
-            minZoom,
-            maxZoom,
-            NTTileDownloadListenerImpl.initWithOwner(new WeakRef(tileDownloadListener))
-        );
+        return new Promise<void>((resolve,reject)=>{
+            let loaderListener = NTTileDownloadListenerImpl.initWithOwner(new WeakRef(tileDownloadListener), ()=>{
+                resolve();
+                loaderListener = null;
+            })
+            this.getNative().startDownloadAreaMinZoomMaxZoomTileDownloadListener(
+                toNativeMapBounds(mapBounds),
+                minZoom,
+                maxZoom,
+                loaderListener
+            );
+        })
     }
 }
 

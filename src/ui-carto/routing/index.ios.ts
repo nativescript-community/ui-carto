@@ -39,7 +39,7 @@ export enum RoutingAction {
 }
 export abstract class RoutingService<T extends NTRoutingService, U extends RoutingServiceOptions> extends BaseRoutingService<T, U> {
     @nativeProperty profile: string;
-    public calculateRoute(options: RoutingRequest, profile = this.profile) {
+    public calculateRoute(options: RoutingRequest, profile = this.profile, jsonStr = false) {
         return new Promise((resolve, reject) => {
             const nRequest = NTRoutingRequest.alloc().initWithProjectionPoints(options.projection.getNative(), mapPosVectorFromArgs(options.points));
             if (options.customOptions) {
@@ -48,11 +48,18 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
                 });
             }
 
-            // ensure the profile is set
-            this.getNative().setProfile(profile);
-            const nRes = this.getNative().calculateRoute(nRequest);
-            const result = nRes ? new RoutingResult(nRes) : null;
-            resolve(result);
+            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, (res, strRes)=>{
+                resolve(strRes || (res ? new RoutingResult(res) : null))
+            })
+        });
+    }
+    public routingResultToJSON(routingResult: RoutingResult) {
+        return new Promise<string>((resolve, reject) => {
+            try {
+                resolve(AKRoutingServiceAdditions.stringifyRouteResult(routingResult.getNative()));
+            } catch (error) {
+                reject(error)
+            }
         });
     }
 }
@@ -68,12 +75,7 @@ abstract class ValhallaRoutingService<
                     nRequest.setCustomParameterValue(k, JSVariantToNative(options.customOptions[k]));
                 });
             }
-
-            // ensure the profile is set
-            this.getNative().setProfile(this.profile);
-            const nRes = this.getNative().matchRoute(nRequest);
-            const result = nRes ? new RouteMatchingResult(nRes) : null;
-            resolve(result);
+            AKRoutingServiceAdditions.matchRoute(this.getNative(), nRequest, this.profile, resolve);
         });
     }
     public setConfigurationParameter(param: string, value: any) {

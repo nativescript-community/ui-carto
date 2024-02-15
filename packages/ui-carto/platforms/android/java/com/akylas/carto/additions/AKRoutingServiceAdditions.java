@@ -45,7 +45,7 @@ public class AKRoutingServiceAdditions {
     static final String TAG = "AKRoutingServiceAdditions";
     static Handler mainHandler = null;
 
-    public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final RoutingServiceRouteCallback callback  ) {
+    public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final Boolean stringify,  final RoutingServiceRouteCallback callback) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -62,16 +62,17 @@ public class AKRoutingServiceAdditions {
                         mainHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                callback.onRoutingResult(e, null);
+                                callback.onRoutingResult(e, null, null);
                             }
                         });
                     } else {
-                        callback.onRoutingResult(e, null);
+                        callback.onRoutingResult(e, null, null);
                     }
                     return;
                 }
                 
                 final RoutingResult fRa = result;
+                final String fStrResult = stringify ? stringifyRoutingResult(result) : null;
                 if (AKMapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -79,11 +80,11 @@ public class AKRoutingServiceAdditions {
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            callback.onRoutingResult(null, fRa);
+                            callback.onRoutingResult(null, fRa, fStrResult);
                         }
                     });
                 } else {
-                    callback.onRoutingResult(null, fRa);
+                    callback.onRoutingResult(null, fRa, fStrResult);
                 }
 
             }
