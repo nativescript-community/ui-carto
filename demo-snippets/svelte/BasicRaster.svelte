@@ -4,7 +4,7 @@
     import { RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
     import { VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
     import { CartoMap } from '@nativescript-community/ui-carto/ui';
-import { PanningMode } from '@nativescript-community/ui-carto/ui/index.android';
+import { PanningMode } from '@nativescript-community/ui-carto/ui/index';
     import { setShowDebug, setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-carto/utils';
     import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
     import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/marker';
