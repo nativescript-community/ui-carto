@@ -1682,12 +1682,12 @@ __metadata:
   linkType: hard
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=6a2e0e&locator=root-workspace-0b6124%40workspace%3A."
+  version: 1.8.16
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=13b102&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
-    "@nativescript-community/ui-carto": "npm:*"
+    "@nativescript-community/ui-carto": "npm:^1.8.16"
     vue-property-decorator: "npm:9.1.2"
-  checksum: 442efeec3aadb9acee7daa3f532b56e9f5516dff83401fe2aaf738d2b8b9f9e2b39742f49de73699a88451a9af771d4cb1531c82d319957115fbf4fd3357adaa
+  checksum: af5b1ce8695c100af09005bc67a58b228c544d5b43777e56641f8d2d9e8b218f2d4bc36bccb255db0f9185023dbabad3c552499f46f7e3288ea4cb56c7cdccfc
   languageName: node
   linkType: hard
 
@@ -1695,12 +1695,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nativescript-community/template-snippet@workspace:demo-snippets"
   dependencies:
-    "@nativescript-community/ui-carto": "npm:*"
+    "@nativescript-community/ui-carto": "npm:^1.8.16"
     vue-property-decorator: "npm:9.1.2"
   languageName: unknown
   linkType: soft
 
-"@nativescript-community/ui-carto@npm:*, @nativescript-community/ui-carto@workspace:packages/ui-carto":
+"@nativescript-community/ui-carto@npm:^1.8.16, @nativescript-community/ui-carto@workspace:packages/ui-carto":
   version: 0.0.0-use.local
   resolution: "@nativescript-community/ui-carto@workspace:packages/ui-carto"
   languageName: unknown
@@ -1791,7 +1791,7 @@ __metadata:
     nativescript-vue: "npm:~2.9.3"
     nativescript-vue-template-compiler: "npm:~2.9.3"
     typescript: "npm:5.3.3"
-    vue: "npm:~2.7.16"
+    vue: "npm:^2.7.16"
   languageName: unknown
   linkType: soft
 
@@ -14608,11 +14608,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
+  resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=29ae49"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c93786fcc9a70718ba1e3819bab56064ead5817004d1b8186f8ca66165f3a2d0100fee91fa64c840dcd45f994ca5d615d8e1f566d39a7470fc1e014dbb4cf15d
+  checksum: 57bf073a0b88f9bf76e5a24be3df864a8f9d0e70f8316969f4992ae26e30cb8d078708922da2ade1f2c8d1faee13b28bcb69876ebb1e37910e31c54aa9126aa2
   languageName: node
   linkType: hard
 
@@ -14998,7 +14998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^2.7.16, vue@npm:~2.7.16":
+"vue@npm:^2.7.16":
   version: 2.7.16
   resolution: "vue@npm:2.7.16"
   dependencies:
