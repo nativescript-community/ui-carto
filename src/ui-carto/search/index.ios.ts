@@ -34,9 +34,10 @@ export class VectorTileSearchService extends BaseNative<AKVectorTileSearchServic
             nRequest.setGeometry(geometryFromArgs(options.geometry));
         }
         if (callback) {
-            this.getNative().findFeaturesCallback(nRequest, (r)=>new VectorTileFeatureCollection(r))
+            this.getNative().findFeaturesCallback(nRequest, (r) => new VectorTileFeatureCollection(r));
+            return null;
         } else {
-            return  new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
+            return new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
         }
     }
     set layers(value: string | string[]) {
@@ -75,9 +76,10 @@ export class FeatureCollectionSearchService extends BaseNative<AKFeatureCollecti
             }
         }
         if (callback) {
-            this.getNative().findFeaturesCallback(nRequest, (r)=>new FeatureCollection(r))
+            this.getNative().findFeaturesCallback(nRequest, (r) => new FeatureCollection(r));
+            return null;
         } else {
-            return  new FeatureCollection(this.getNative().findFeatures(nRequest));
+            return new FeatureCollection(this.getNative().findFeatures(nRequest));
         }
     }
 }
