@@ -1682,12 +1682,12 @@ __metadata:
   linkType: hard
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 1.8.16
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=13b102&locator=root-workspace-0b6124%40workspace%3A."
+  version: 1.8.17
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=0a8244&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
-    "@nativescript-community/ui-carto": "npm:^1.8.16"
+    "@nativescript-community/ui-carto": "npm:^1.8.17"
     vue-property-decorator: "npm:9.1.2"
-  checksum: af5b1ce8695c100af09005bc67a58b228c544d5b43777e56641f8d2d9e8b218f2d4bc36bccb255db0f9185023dbabad3c552499f46f7e3288ea4cb56c7cdccfc
+  checksum: 7c67102df34c2404609dd133e1cfd6f271148ff13587b4e4e30b047ebfa0f436d17f20d71885e9064a7e3666f6360064fd782a5139ca94cf7626b3efe191423b
   languageName: node
   linkType: hard
 
@@ -1695,12 +1695,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nativescript-community/template-snippet@workspace:demo-snippets"
   dependencies:
-    "@nativescript-community/ui-carto": "npm:^1.8.16"
+    "@nativescript-community/ui-carto": "npm:^1.8.17"
     vue-property-decorator: "npm:9.1.2"
   languageName: unknown
   linkType: soft
 
-"@nativescript-community/ui-carto@npm:^1.8.16, @nativescript-community/ui-carto@workspace:packages/ui-carto":
+"@nativescript-community/ui-carto@npm:^1.8.17, @nativescript-community/ui-carto@workspace:packages/ui-carto":
   version: 0.0.0-use.local
   resolution: "@nativescript-community/ui-carto@workspace:packages/ui-carto"
   languageName: unknown
@@ -8181,9 +8181,9 @@ __metadata:
   linkType: hard
 
 "ip@npm:^1.1.5":
-  version: 1.1.8
-  resolution: "ip@npm:1.1.8"
-  checksum: 52975ebf84a090162d561fc6948fbc4c53775a8054c05371f09cfcb40e30a53aa225b4efb624f630cff5af2dd8124c82dd68e4df065dc1d1ca91d04e850e9cde
+  version: 1.1.9
+  resolution: "ip@npm:1.1.9"
+  checksum: 29261559b806f64929ada21e6d7e3bf4e67f2b43a4cb67500fdb72cead2e655ce97451a2e325eca3f404081c634ff5c3a68472814744b7f2148ddffc0fdfe66c
   languageName: node
   linkType: hard
 
