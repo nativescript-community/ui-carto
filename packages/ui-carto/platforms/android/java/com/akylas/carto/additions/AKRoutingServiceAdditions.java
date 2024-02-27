@@ -45,7 +45,7 @@ public class AKRoutingServiceAdditions {
     static final String TAG = "AKRoutingServiceAdditions";
     static Handler mainHandler = null;
 
-    public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final Boolean stringify,  final RoutingServiceRouteCallback callback) {
+    public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final boolean stringify,  final RoutingServiceRouteCallback callback) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
