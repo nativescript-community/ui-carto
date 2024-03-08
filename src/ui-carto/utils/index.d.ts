@@ -14,6 +14,7 @@ export function setShowError(value: boolean);
 
 export interface ZippedAssetPackageOptions {
     zipPath: string;
+    basePack?
 }
 
 export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {
