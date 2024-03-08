@@ -86,7 +86,7 @@ export class ZippedAssetPackage extends BaseNative<NTZippedAssetPackage, ZippedA
                 return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
             }
         } else {
-            console.error(`could not find zip file: ${options.zipPath}`);
+            console.error(`could not find zip file: ${options.zipPath}(${zipPath})`);
             return null;
         }
     }
