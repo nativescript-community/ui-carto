@@ -73,21 +73,27 @@ const currentAppFolder = knownFolders.currentApp();
 
 export class ZippedAssetPackage extends BaseNative<NTZippedAssetPackage, ZippedAssetPackageOptions> {
     createNative(options: ZippedAssetPackageOptions) {
-        const zipPath = getRelativePathToApp(options.zipPath);
-        if (File.exists(zipPath)) {
-            let assetPackage: NTAssetPackage;
-            if (options.basePack) {
-                assetPackage = options.basePack.getNative();
-            }
-            const vectorTileStyleSetData = NTAssetUtils.loadAsset(zipPath);
-            if (assetPackage) {
-                return NTZippedAssetPackage.alloc().initWithZipDataBaseAssetPackage(vectorTileStyleSetData, assetPackage);
+        let zipPath;
+        try {
+            const fullZipPath = getFileName(options.zipPath);
+            zipPath = getRelativePathToApp(options.zipPath);
+            if (File.exists(fullZipPath)) {
+                let assetPackage: NTAssetPackage;
+                if (options.basePack) {
+                    assetPackage = options.basePack.getNative();
+                }
+                const vectorTileStyleSetData = NTAssetUtils.loadAsset(zipPath);
+                if (assetPackage) {
+                    return NTZippedAssetPackage.alloc().initWithZipDataBaseAssetPackage(vectorTileStyleSetData, assetPackage);
+                } else {
+                    return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
+                }
             } else {
-                return NTZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
+                throw new Error(`could not find zip file: ${options.zipPath}(${zipPath})`)
             }
-        } else {
-            console.error(`could not find zip file: ${options.zipPath}(${zipPath})`);
-            return null;
+        } catch (error) {
+            console.error(`ZippedAssetPackage(${zipPath}, ${options.zipPath}): ${error}`);
+            throw error;
         }
     }
     getAssetNames() {
