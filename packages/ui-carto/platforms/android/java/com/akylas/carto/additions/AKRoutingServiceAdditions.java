@@ -45,14 +45,18 @@ public class AKRoutingServiceAdditions {
     static final String TAG = "AKRoutingServiceAdditions";
     static Handler mainHandler = null;
 
-    public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final Boolean stringify,  final RoutingServiceRouteCallback callback) {
+    public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final boolean stringify,  final RoutingServiceRouteCallback callback) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 RoutingResult result = null;
+                String strResult = null;
                 try {
                     service.setProfile(profile);
                     result = service.calculateRoute(request);
+                    if (stringify) {
+                        strResult = stringifyRoutingResult(result);
+                    }
                 } catch (final Exception e) {
                     e.printStackTrace();
                     if (AKMapView.RUN_ON_MAIN_THREAD) {
@@ -72,7 +76,7 @@ public class AKRoutingServiceAdditions {
                 }
                 
                 final RoutingResult fRa = result;
-                final String fStrResult = stringify ? stringifyRoutingResult(result) : null;
+                final String fStrResult = strResult;
                 if (AKMapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());

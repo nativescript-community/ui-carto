@@ -33,8 +33,6 @@ import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
 
-export const time = global.__time || Date.now;
-
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {
         return com.carto.components.RenderProjectionMode.RENDER_PROJECTION_MODE_PLANAR;
@@ -300,11 +298,15 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         if (this.mapView) {
             const native: com.carto.layers.TileLayer = layer.getNative();
             if (!!native) {
-                const layers = this.mapView.getLayers();
-                if (index !== undefined && index < layers.count()) {
-                    layers.insert(index, native);
-                } else {
-                    layers.add(native);
+                try {
+                    const layers = this.mapView.getLayers();
+                    if (index !== undefined && index < layers.count()) {
+                        layers.insert(index, native);
+                    } else {
+                        layers.add(native);
+                    }
+                } catch (error) {
+                    console.error(error)
                 }
             }
         }

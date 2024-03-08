@@ -4,16 +4,16 @@ import { MapPos, toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { MapBoxElevationDataDecoderOptions, TerrariumElevationDataDecoderOptions } from '.';
 
-export class MapBoxElevationDataDecoder extends BaseNative<com.carto.rastertiles.MapBoxElevationDataDecoder, MapBoxElevationDataDecoderOptions> {
+export class MapBoxElevationDataDecoder extends BaseNative<NTMapBoxElevationDataDecoder, MapBoxElevationDataDecoderOptions> {
     createNative(options: MapBoxElevationDataDecoderOptions) {
-        return new NTMapBoxElevationDataDecoder();
+        return NTMapBoxElevationDataDecoder.new();
     }
     public getElevation(pos: MapPos) {}
 }
 
-export class TerrariumElevationDataDecoder extends BaseNative<com.carto.rastertiles.TerrariumElevationDataDecoder, TerrariumElevationDataDecoderOptions> {
+export class TerrariumElevationDataDecoder extends BaseNative<NTTerrariumElevationDataDecoder, TerrariumElevationDataDecoderOptions> {
     createNative(options: TerrariumElevationDataDecoderOptions) {
-        return  NTTerrariumElevationDataDecoder.alloc.init();
+        return NTTerrariumElevationDataDecoder.new();
     }
     public getElevation(pos: MapPos) {}
 }

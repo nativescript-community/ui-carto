@@ -165,6 +165,11 @@ export abstract class CartoViewBase extends ContentView {
         }
     }
 
+    disposeNativeView() {
+        this.mapReady = false;
+        super.disposeNativeView();
+    }
+
     [focusPosProperty.setNative](value: MapPos) {
         if (!this.nativeViewProtected || !this.nativeProjection) {
             return;
