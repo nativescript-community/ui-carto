@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.18](https://github.com/nativescript-community/ui-carto/compare/v1.8.17...v1.8.18) (2024-03-27)
+
+### Bug Fixes
+
+* **ios:** resource loading fix ([da24a4d](https://github.com/nativescript-community/ui-carto/commit/da24a4d28ce975dbacd9ba053d97d5d9f241748b))
+
 ## [1.8.17](https://github.com/nativescript-community/ui-carto/compare/v1.8.16...v1.8.17) (2024-02-15)
 
 **Note:** Version bump only for package ui-carto
