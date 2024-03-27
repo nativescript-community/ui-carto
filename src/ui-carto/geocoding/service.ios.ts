@@ -9,8 +9,6 @@ import {
     MultiOSMOfflineReverseGeocodingServiceOptions,
     OSMOfflineGeocodingServiceOptions,
     OSMOfflineReverseGeocodingServiceOptions,
-    PackageManagerGeocodingServiceOptions,
-    PackageManagerReverseGeocodingServiceOptions,
     PeliasOnlineGeocodingServiceOptions,
     PeliasOnlineReverseGeocodingServiceOptions,
     ReverseGeocodingRequest,
@@ -85,21 +83,6 @@ export class GeocodingResult extends BaseNative<NTGeocodingResult, {}> implement
 export class GeocodingResultVector extends NativeVector<GeocodingResult, NTGeocodingResultVector> {
     public get(index: number) {
         return new GeocodingResult(this.native.get(index));
-    }
-}
-
-export class PackageManagerGeocodingService extends GeocodingService<NTPackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
-    @nativeProperty autocomplete: boolean;
-    @nativeProperty language: string;
-    createNative(options: PackageManagerGeocodingServiceOptions) {
-        return new NTPackageManagerGeocodingService(options.packageManager.getNative());
-    }
-}
-
-export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<NTPackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
-    @nativeProperty language: string;
-    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
-        return NTPackageManagerReverseGeocodingService.alloc().initWithPackageManager(options.packageManager.getNative());
     }
 }
 

@@ -32,12 +32,6 @@ export declare function setMapPosKeys(latitude: LatitudeKeys, longitude: Longitu
 export declare function fromNativeMapRange(value): MapRange;
 export declare function toNativeMapRange(value: MapRange): any;
 
-export class CartoMapStyle {
-    static VOYAGER: CartoMapStyle;
-    static POSITRON: CartoMapStyle;
-    static DARKMATTER: CartoMapStyle;
-}
-
 export enum ClickType {
     SINGLE,
     LONG,

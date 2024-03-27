@@ -31,11 +31,6 @@ export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {
     setRasterTileEventListener<T = DefaultLatLonKeys>(listener: RasterTileEventListener<T>, projection?: Projection): void;
 }
 
-export interface CartoOnlineRasterTileLayerOptions extends RasterTileLayerOptions {
-    source?: string;
-}
-export class CartoOnlineRasterTileLayer extends TileLayer<any, CartoOnlineRasterTileLayerOptions> {}
-
 export interface HillshadeRasterTileLayerOptions extends RasterTileLayerOptions {
     decoder?: ElevationDataDecoder<any, any>;
     heightScale?: number;

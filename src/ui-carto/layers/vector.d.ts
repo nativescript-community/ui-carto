@@ -1,8 +1,7 @@
 import { Layer, LayerOptions, TileLayer, TileLayerOptions } from '.';
 import { TileDataSource } from '../datasources';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
-import { CartoPackageManager } from '../packagemanager';
-import { CartoMapStyle, ClickType, DefaultLatLonKeys, GenericMapPos, MapPos } from '../core';
+import { ClickType, DefaultLatLonKeys, GenericMapPos, MapPos } from '../core';
 import { ClusterElementBuilder } from './cluster';
 import { VectorElement } from '../vectorelements';
 import { Projection } from '../projections';
@@ -118,14 +117,6 @@ export interface VectorTileLayerOptions extends TileLayerOptions {
     clickHandlerLayerFilter?: string;
 }
 
-export interface CartoOnlineVectorTileLayerOptions extends VectorTileLayerOptions {
-    style: CartoMapStyle;
-}
-export interface CartoOfflineVectorTileLayerOptions extends VectorTileLayerOptions {
-    packageManager: CartoPackageManager;
-    style: CartoMapStyle;
-}
-
 export interface ClusteredVectorLayerLayerOptions extends VectorTileLayerOptions {
     dataSource: VectorDataSource<any, any>;
     builder: ClusterElementBuilder<any, any>;
@@ -197,8 +188,6 @@ export class VectorLayer extends BaseVectorLayer<any, VectorLayerOptions> {}
 export class EditableVectorLayer extends VectorLayer {}
 
 export class VectorTileLayer extends BaseVectorTileLayer<any, VectorTileLayerOptions> {}
-export class CartoOnlineVectorTileLayer extends BaseVectorTileLayer<any, CartoOnlineVectorTileLayerOptions> {}
-export class CartoOfflineVectorTileLayer extends BaseVectorTileLayer<any, CartoOfflineVectorTileLayerOptions> {}
 export class ClusteredVectorLayer extends BaseVectorLayer<any, ClusteredVectorLayerLayerOptions> {
     minimumClusterDistance?: number;
     maximumClusterZoom?: number;

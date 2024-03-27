@@ -2,7 +2,6 @@ import { BaseNative } from '..';
 import { Projection } from '../projections';
 import { FeatureCollection } from '../geometry/feature';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, NativeVector } from '../core';
-import { CartoPackageManager } from '../packagemanager';
 
 declare enum RoutingAction {
     HEAD_ON,
@@ -68,7 +67,7 @@ export interface RouteMatchingResult<T = DefaultLatLonKeys> {
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
-    calculateRoute<T = DefaultLatLonKeys,U extends boolean = false>(options: RoutingRequest<T>, profile?: string, jsonStr?:U): Promise<U extends true ? String: RoutingResult<T>>;
+    calculateRoute<T = DefaultLatLonKeys, U extends boolean = false>(options: RoutingRequest<T>, profile?: string, jsonStr?: U): Promise<U extends true ? String : RoutingResult<T>>;
     routingResultToJSON<T = DefaultLatLonKeys>(options: RoutingResult<T>): Promise<string>;
 }
 export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
@@ -79,7 +78,7 @@ export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> 
 }
 
 export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptions {
-    packageManager: CartoPackageManager;
+    packageManager: PackageManager;
 }
 export class PackageManagerRoutingService extends RoutingService<any, PackageManagerRoutingServiceOptions> {}
 
@@ -117,11 +116,6 @@ export interface SGREOfflineRoutingServiceOptions {
     config: any;
 }
 export class SGREOfflineRoutingService extends RoutingService<any, SGREOfflineRoutingServiceOptions> {}
-
-export interface CartoOnlineRoutingServiceOptions {
-    source: string;
-}
-export class CartoOnlineRoutingService extends RoutingService<any, CartoOnlineRoutingServiceOptions> {}
 
 export interface OSRMOfflineRoutingServiceOptions {
     path?: string;

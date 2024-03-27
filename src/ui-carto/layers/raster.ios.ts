@@ -1,6 +1,4 @@
-import { CartoOnlineRasterTileLayerOptions, HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, 
-    RasterTileFilterMode as IRasterTileFilterMode,
-    RasterTileLayerOptions } from './raster';
+import { HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, RasterTileFilterMode as IRasterTileFilterMode, RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
 import { mapPosVectorFromArgs, nativeMapVecProperty, nativeProperty } from '../';
 import { Projection } from '../projections';
@@ -8,19 +6,17 @@ import { DoubleVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeM
 import { Color } from '@nativescript/core';
 import { nativeColorProperty } from '../index.ios';
 
-
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {
         return NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_NEAREST;
     },
     get RASTER_TILE_FILTER_MODE_BILINEAR() {
-        return  NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BILINEAR;
+        return NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BILINEAR;
     },
     get RASTER_TILE_FILTER_MODE_BICUBIC() {
-        return  NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BICUBIC;
+        return NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BICUBIC;
     }
 };
-
 
 @NativeClass
 export class NTRasterTileEventListenerImpl extends AKRasterTileEventListener {
@@ -61,7 +57,7 @@ export class NTRasterTileEventListenerImpl extends AKRasterTileEventListener {
 export abstract class RasterTileLayerCommon<NativeClass extends NTRasterTileLayer, U extends RasterTileLayerOptions> extends RasterTileLayerBase<NativeClass, U> {
     projection?: Projection;
     clickListener?: IRasterTileEventListener;
-    nClickListener?:NTRasterTileEventListener;
+    nClickListener?: NTRasterTileEventListener;
     constructor(options) {
         super(options);
         for (const property of ['elementListener', 'nElementListener']) {
@@ -91,12 +87,6 @@ export class RasterTileLayer extends RasterTileLayerCommon<NTRasterTileLayer, Ra
     }
 }
 
-export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<NTCartoOnlineRasterTileLayer, CartoOnlineRasterTileLayerOptions> {
-    createNative(options) {
-        return NTCartoOnlineRasterTileLayer.alloc().initWithSource(options.source);
-    }
-}
-
 export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
     @nativeProperty heightScale: number;
     @nativeProperty contrast: number;
@@ -110,9 +100,9 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRas
 
     createNative(options) {
         if (options.decoder) {
-        return AKHillshadeRasterTileLayer.alloc().initWithDataSourceElevationDecoder(options.dataSource.getNative(), options.decoder.getNative()); 
-         } else {
-            return AKHillshadeRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative()); 
+            return AKHillshadeRasterTileLayer.alloc().initWithDataSourceElevationDecoder(options.dataSource.getNative(), options.decoder.getNative());
+        } else {
+            return AKHillshadeRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative());
         }
     }
     public getElevation(pos: MapPos): number {
@@ -123,15 +113,9 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRas
     }
 
     public getElevationAsync(pos: MapPos, callback: (error: any, res: number) => void) {
-        this.getNative().getElevationCallback(
-            toNativeMapPos(pos),
-            (res) => callback(null, res as any)
-        );
+        this.getNative().getElevationCallback(toNativeMapPos(pos), (res) => callback(null, res as any));
     }
     public getElevationsAsync(pos: MapPosVector | MapPos[], callback: (error: any, res: DoubleVector) => void) {
-        this.getNative().getElevationsCallback(
-            mapPosVectorFromArgs(pos),
-            (res) => callback(null, res as any)
-        );
+        this.getNative().getElevationsCallback(mapPosVectorFromArgs(pos), (res) => callback(null, res as any));
     }
 }

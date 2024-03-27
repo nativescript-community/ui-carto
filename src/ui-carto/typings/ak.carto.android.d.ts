@@ -37,23 +37,6 @@ declare namespace com {
     export namespace akylas {
         export namespace carto {
             export namespace additions {
-                export class AKCartoPackageManager extends com.carto.packagemanager.CartoPackageManager {
-                    public static class: java.lang.Class<AKCartoPackageManager>;
-                    public constructor(param0: string, param1: string);
-                    public getLocalPackagesCallback(param0: ServerPackagesCallback): void;
-                    public constructor(param0: string, param1: string, param2: string, param3: string);
-                    public getServerPackagesCallback(param0: ServerPackagesCallback): void;
-                    public constructor(param0: number, param1: boolean);
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
                 export class AKClusterElementBuilder extends com.carto.layers.ClusterElementBuilder {
                     public constructor(screenScale: number);
                     public static class: java.lang.Class<AKClusterElementBuilder>;

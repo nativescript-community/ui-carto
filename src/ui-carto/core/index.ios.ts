@@ -2,12 +2,6 @@ import { BaseNative } from '../BaseNative';
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapVec, ScreenBounds, ScreenPos } from './index.common';
 export * from './index.common';
 
-export enum CartoMapStyle {
-    VOYAGER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_VOYAGER,
-    POSITRON = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_POSITRON,
-    DARKMATTER = NTCartoBaseMapStyle.T_CARTO_BASEMAP_STYLE_DARKMATTER
-}
-
 export enum ClickType {
     SINGLE = NTClickType.T_CLICK_TYPE_SINGLE,
     LONG = NTClickType.T_CLICK_TYPE_LONG,

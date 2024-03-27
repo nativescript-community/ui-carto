@@ -2,7 +2,6 @@ import { BaseNative } from '..';
 import { IProjection } from '../projections';
 import { DefaultLatLonKeys, MapBounds, MapPos, NativeVector } from '../core';
 import { FeatureCollection } from '../geometry/feature';
-import { CartoPackageManager } from '../packagemanager';
 
 export interface GeocodingRequest<T = DefaultLatLonKeys> {
     projection: IProjection;
@@ -61,20 +60,6 @@ export interface GeocodingResult {
 }
 export class GeocodingResultVector extends NativeVector<GeocodingResult> {}
 
-export interface PackageManagerGeocodingServiceOptions extends GeocodingServiceOptions {
-    language?: string;
-    packageManager: CartoPackageManager;
-}
-export class PackageManagerGeocodingService extends GeocodingService<any, PackageManagerGeocodingServiceOptions> {
-    language: string;
-}
-export interface PackageManagerReverseGeocodingServiceOptions extends ReverseGeocodingServiceOptions {
-    language?: string;
-    packageManager: CartoPackageManager;
-}
-export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<any, PackageManagerReverseGeocodingServiceOptions> {
-    language: string;
-}
 export interface BaseOSMOfflineGeocodingServiceOptions {
     maxResults?: number;
     autocomplete?: boolean;

@@ -1,6 +1,5 @@
 import { mapPosVectorFromArgs, nativeProperty } from '..';
 import {
-    CartoOnlineRoutingServiceOptions,
     MultiValhallaOfflineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
@@ -48,9 +47,9 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
                 });
             }
 
-            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, (res, strRes)=>{
-                resolve(strRes || (res ? new RoutingResult(res) : null))
-            })
+            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, (res, strRes) => {
+                resolve(strRes || (res ? new RoutingResult(res) : null));
+            });
         });
     }
     public routingResultToJSON(routingResult: RoutingResult) {
@@ -58,7 +57,7 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
             try {
                 resolve(AKRoutingServiceAdditions.stringifyRouteResult(routingResult.getNative()));
             } catch (error) {
-                reject(error)
+                reject(error);
             }
         });
     }
@@ -104,11 +103,6 @@ export class SGREOfflineRoutingService extends RoutingService<NTSGREOfflineRouti
     }
 }
 
-export class CartoOnlineRoutingService extends RoutingService<NTCartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
-    createNative(options: CartoOnlineRoutingServiceOptions) {
-        return NTCartoOnlineRoutingService.alloc().initWithSource(options.source);
-    }
-}
 export class OSRMOfflineRoutingService extends RoutingService<NTOSRMOfflineRoutingService, OSRMOfflineRoutingServiceOptions> {
     createNative(options: OSRMOfflineRoutingServiceOptions) {
         return NTOSRMOfflineRoutingService.alloc().initWithPath(options.path);

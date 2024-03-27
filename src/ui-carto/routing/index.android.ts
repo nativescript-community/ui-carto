@@ -1,6 +1,5 @@
 import { mapPosVectorFromArgs, nativeProperty } from '..';
 import {
-    CartoOnlineRoutingServiceOptions,
     MultiValhallaOfflineRoutingServiceOptions,
     OSRMOfflineRoutingServiceOptions,
     PackageManagerRoutingServiceOptions,
@@ -147,11 +146,6 @@ export class SGREOfflineRoutingService extends RoutingService<com.carto.routing.
     }
 }
 
-export class CartoOnlineRoutingService extends RoutingService<com.carto.routing.CartoOnlineRoutingService, CartoOnlineRoutingServiceOptions> {
-    createNative(options: CartoOnlineRoutingServiceOptions) {
-        return new com.carto.routing.CartoOnlineRoutingService(options.source);
-    }
-}
 export class OSRMOfflineRoutingService extends RoutingService<com.carto.routing.OSRMOfflineRoutingService, OSRMOfflineRoutingServiceOptions> {
     createNative(options: OSRMOfflineRoutingServiceOptions) {
         return new com.carto.routing.OSRMOfflineRoutingService(options.path);

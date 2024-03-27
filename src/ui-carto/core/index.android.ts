@@ -2,18 +2,6 @@ import { BaseNative } from '../BaseNative';
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapVec, ScreenBounds, ScreenPos } from './index.common';
 export * from './index.common';
 
-export const CartoMapStyle = {
-    get VOYAGER() {
-        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_VOYAGER;
-    },
-    get POSITRON() {
-        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_POSITRON;
-    },
-    get DARKMATTER() {
-        return com.carto.layers.CartoBaseMapStyle.CARTO_BASEMAP_STYLE_DARKMATTER;
-    }
-};
-
 export const ClickType = {
     get SINGLE() {
         return com.carto.ui.ClickType.CLICK_TYPE_SINGLE;

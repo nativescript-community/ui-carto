@@ -6,8 +6,6 @@ import { nativeVariantToJS } from '../utils';
 import { VectorElement } from '../vectorelements';
 import { MBVectorTileDecoder } from '../vectortiles';
 import {
-    CartoOfflineVectorTileLayerOptions,
-    CartoOnlineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
     VectorEditEventListener as IVectorEditEventListener,
     VectorElementEventListener as IVectorElementEventListener,
@@ -162,7 +160,7 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
     @nativeProperty clickHandlerLayerFilter: string;
 
     listener?: IVectorTileEventListener;
-    nListener?: NTVectorTileEventListener
+    nListener?: NTVectorTileEventListener;
     listenerProjection?: Projection;
     constructor(options) {
         super(options);
@@ -179,9 +177,9 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
         if (listener) {
             if (listener instanceof NTVectorTileEventListener) {
                 this.getNative().setVectorTileEventListener(listener);
-                this.nListener = listener as NTVectorTileEventListener;
+                this.nListener = listener;
             } else {
-                this.nListener = (nativeClass as typeof NTVectorTileEventListenerImpl).initWithOwner(new WeakRef(listener), new WeakRef(this), projection);
+                this.nListener = nativeClass.initWithOwner(new WeakRef(listener), new WeakRef(this), projection);
                 this.getNative().setVectorTileEventListener(this.nListener);
             }
         } else {
@@ -195,17 +193,6 @@ export abstract class BaseVectorTileLayer<T extends NTVectorTileLayer, U extends
         } else {
             return new MBVectorTileDecoder(undefined, this.getNative().getTileDecoder());
         }
-    }
-}
-
-export class CartoOnlineVectorTileLayer extends BaseVectorTileLayer<NTCartoOnlineVectorTileLayer, CartoOnlineVectorTileLayerOptions> {
-    createNative(options: CartoOnlineVectorTileLayerOptions) {
-        return NTCartoOnlineVectorTileLayer.alloc().initWithStyle(options.style as number);
-    }
-}
-export class CartoOfflineVectorTileLayer extends BaseVectorTileLayer<NTCartoOfflineVectorTileLayer, CartoOfflineVectorTileLayerOptions> {
-    createNative(options: CartoOfflineVectorTileLayerOptions) {
-        return NTCartoOfflineVectorTileLayer.alloc().initWithPackageManagerStyle(options.packageManager.getNative(), options.style as number);
     }
 }
 
@@ -268,14 +255,13 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     public static initWithOwner(owner: WeakRef<IVectorEditEventListener>): NTVectorEditEventListenerImpl {
         const delegate = NTVectorEditEventListenerImpl.new() as NTVectorEditEventListenerImpl;
         delegate._owner = owner;
-        
+
         return delegate;
     }
 
-    
     onDragEndThreaded(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
-    const owner = this._owner.get();  
-      if (owner && owner.onDragEnd) {
+        const owner = this._owner.get();
+        if (owner && owner.onDragEnd) {
             return owner.onDragEnd.call(owner, {
                 layer: this,
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
@@ -288,8 +274,8 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     }
 
     onDragMoveThreaded(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
-    const owner = this._owner.get();  
-    if (owner && owner.onDragMove) {
+        const owner = this._owner.get();
+        if (owner && owner.onDragMove) {
             return owner.onDragMove.call(owner, {
                 layer: this,
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
@@ -302,8 +288,8 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     }
 
     onDragStartThreaded(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult {
-    const owner = this._owner.get();  
-    if (owner && owner.onDragStart) {
+        const owner = this._owner.get();
+        if (owner && owner.onDragStart) {
             return owner.onDragStart.call(owner, {
                 layer: this,
                 element: new VectorElement(undefined, dragInfo.getVectorElement()),
@@ -316,15 +302,15 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     }
 
     onElementDeleteThreaded(element: NTVectorElement) {
-    const owner = this._owner.get();  
-    if (owner && owner.onElementDelete) {
+        const owner = this._owner.get();
+        if (owner && owner.onElementDelete) {
             const el = new VectorElement(undefined, element);
             owner.onElementDelete.call(owner, el);
         }
     }
 
     onElementDeselectedThreaded(element: NTVectorElement) {
-        const owner = this._owner.get();  
+        const owner = this._owner.get();
         if (owner && owner.onElementDelete) {
             const el = new VectorElement(undefined, element);
             owner.onElementDelete.call(owner, el);
@@ -332,7 +318,7 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     }
 
     onElementModifyThreadedGeometry(element: NTVectorElement, geometry: NTGeometry) {
-        const owner = this._owner.get();  
+        const owner = this._owner.get();
         if (owner && owner.onElementModify) {
             const el = new VectorElement(undefined, element);
             owner.onElementModify.call(owner, el, geometry);
@@ -340,7 +326,7 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     }
 
     onElementSelectThreaded(element: NTVectorElement) {
-        const owner = this._owner.get();  
+        const owner = this._owner.get();
         if (owner && owner.onElementSelect) {
             const el = new VectorElement(undefined, element);
             return owner.onElementSelect.call(owner, el);
@@ -349,7 +335,7 @@ class NTVectorEditEventListenerImpl extends AKVectorEditEventListener {
     }
 
     onSelectDragPointStyleThreadedDragPointStyle(element: NTVectorElement, dragPointStyle: NTVectorElementDragPointStyle) {
-        const owner = this._owner.get();  
+        const owner = this._owner.get();
         if (owner && owner.onElementSelect) {
             const el = new VectorElement(undefined, element);
             const styleBuilder = owner.onSelectDragPointStyle.call(owner, el);
@@ -396,10 +382,8 @@ export class EditableVectorLayer extends BaseVectorLayer<NTEditableVectorLayer, 
         } else {
             this.nEditListener = null;
             this.getNative().setVectorEditEventListener(null);
-
         }
     }
-
 }
 
 export class ClusteredVectorLayer extends BaseVectorLayer<NTClusteredVectorLayer, ClusteredVectorLayerLayerOptions> {

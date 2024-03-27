@@ -10,8 +10,6 @@ import {
     MultiOSMOfflineReverseGeocodingServiceOptions,
     OSMOfflineGeocodingServiceOptions,
     OSMOfflineReverseGeocodingServiceOptions,
-    PackageManagerGeocodingServiceOptions,
-    PackageManagerReverseGeocodingServiceOptions,
     PeliasOnlineGeocodingServiceOptions,
     PeliasOnlineReverseGeocodingServiceOptions,
     ReverseGeocodingRequest,
@@ -93,13 +91,6 @@ export class GeocodingResultVector extends NativeVector<GeocodingResult, com.car
         return new GeocodingResult(this.native.get(index));
     }
 }
-export class PackageManagerGeocodingService extends GeocodingService<com.carto.geocoding.PackageManagerGeocodingService, PackageManagerGeocodingServiceOptions> {
-    @nativeProperty autocomplete: boolean;
-    @nativeProperty language: string;
-    createNative(options: PackageManagerGeocodingServiceOptions) {
-        return new com.carto.geocoding.PackageManagerGeocodingService(options.packageManager.getNative());
-    }
-}
 export class PeliasOnlineGeocodingService extends GeocodingService<com.carto.geocoding.PeliasOnlineGeocodingService, PeliasOnlineGeocodingServiceOptions> {
     @nativeProperty autocomplete: boolean;
     @nativeProperty language: string;
@@ -113,13 +104,6 @@ export class PeliasOnlineReverseGeocodingService extends ReverseGeocodingService
     @nativeProperty customServiceURL: string;
     createNative(options: PeliasOnlineReverseGeocodingServiceOptions) {
         return new com.carto.geocoding.PeliasOnlineReverseGeocodingService(options.apiKey);
-    }
-}
-
-export class PackageManagerReverseGeocodingService extends ReverseGeocodingService<com.carto.geocoding.PackageManagerReverseGeocodingService, PackageManagerReverseGeocodingServiceOptions> {
-    @nativeProperty language: string;
-    createNative(options: PackageManagerReverseGeocodingServiceOptions) {
-        return new com.carto.geocoding.PackageManagerReverseGeocodingService(options.packageManager.getNative());
     }
 }
 

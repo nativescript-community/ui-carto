@@ -852,26 +852,6 @@ declare module com {
 declare module com {
 	export module carto {
 		export module datasources {
-			export class CartoOnlineTileDataSource extends com.carto.datasources.TileDataSource {
-				public static class: java.lang.Class<com.carto.datasources.CartoOnlineTileDataSource>;
-				public constructor(param0: number, param1: number);
-				public constructor(param0: number, param1: boolean);
-				public getTimeout(): number;
-				public setTimeout(param0: number): void;
-				public loadTile(param0: com.carto.core.MapTile): com.carto.datasources.components.TileData;
-				public constructor(param0: string);
-				public constructor();
-				public swigGetRawPtr(): number;
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module datasources {
 			export class CombinedTileDataSource extends com.carto.datasources.TileDataSource {
 				public static class: java.lang.Class<com.carto.datasources.CombinedTileDataSource>;
 				public constructor(param0: number, param1: number);
@@ -2443,117 +2423,6 @@ declare module com {
 		}
 	}
 }
-
-declare module com {
-	export module carto {
-		export module layers {
-			export class CartoBaseMapStyle {
-				public static class: java.lang.Class<com.carto.layers.CartoBaseMapStyle>;
-				public static CARTO_BASEMAP_STYLE_POSITRON: com.carto.layers.CartoBaseMapStyle;
-				public static CARTO_BASEMAP_STYLE_DARKMATTER: com.carto.layers.CartoBaseMapStyle;
-				public static CARTO_BASEMAP_STYLE_VOYAGER: com.carto.layers.CartoBaseMapStyle;
-				public static values(): androidNative.Array<com.carto.layers.CartoBaseMapStyle>;
-				public swigValue(): number;
-				public static swigToEnum(param0: number): com.carto.layers.CartoBaseMapStyle;
-				public static valueOf(param0: string): com.carto.layers.CartoBaseMapStyle;
-				public static valueOf(param0: java.lang.Class<any>, param1: string): java.lang.Enum<any>;
-			}
-			export module CartoBaseMapStyle {
-				export class SwigNext extends java.lang.Object {
-					public static class: java.lang.Class<com.carto.layers.CartoBaseMapStyle.SwigNext>;
-				}
-			}
-		}
-	}
-}
-
-declare module com {
-	export module carto {
-		export module layers {
-			export class CartoOfflineVectorTileLayer extends com.carto.layers.CartoVectorTileLayer {
-				public static class: java.lang.Class<com.carto.layers.CartoOfflineVectorTileLayer>;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage);
-				public constructor(param0: com.carto.packagemanager.CartoPackageManager, param1: com.carto.utils.AssetPackage);
-				public constructor(param0: com.carto.packagemanager.CartoPackageManager, param1: com.carto.layers.CartoBaseMapStyle);
-				public constructor(param0: number, param1: boolean);
-				public swigGetRawPtr(): number;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage, param2: string);
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.vectortiles.VectorTileDecoder);
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.layers.CartoBaseMapStyle);
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module layers {
-			export class CartoOnlineRasterTileLayer extends com.carto.layers.RasterTileLayer {
-				public static class: java.lang.Class<com.carto.layers.CartoOnlineRasterTileLayer>;
-				public constructor(param0: number, param1: boolean);
-				public constructor(param0: string);
-				public swigGetRawPtr(): number;
-				public constructor(param0: com.carto.datasources.TileDataSource);
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module layers {
-			export class CartoOnlineVectorTileLayer extends com.carto.layers.CartoVectorTileLayer {
-				public static class: java.lang.Class<com.carto.layers.CartoOnlineVectorTileLayer>;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage);
-				public static createDataSource(param0: com.carto.layers.CartoBaseMapStyle): com.carto.datasources.TileDataSource;
-				public constructor(param0: number, param1: boolean);
-				public constructor(param0: string, param1: com.carto.utils.AssetPackage);
-				public swigGetRawPtr(): number;
-				public constructor(param0: com.carto.layers.CartoBaseMapStyle);
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage, param2: string);
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.vectortiles.VectorTileDecoder);
-				public constructor(param0: string, param1: com.carto.layers.CartoBaseMapStyle);
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.layers.CartoBaseMapStyle);
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module layers {
-			export class CartoVectorTileLayer extends com.carto.layers.VectorTileLayer {
-				public static class: java.lang.Class<com.carto.layers.CartoVectorTileLayer>;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage);
-				public getPOIRenderMode(): com.carto.layers.CartoBaseMapPOIRenderMode;
-				public getBuildingRenderMode(): com.carto.layers.CartoBaseMapBuildingRenderMode;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.utils.AssetPackage, param2: string);
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.vectortiles.VectorTileDecoder);
-				public getFallbackLanguage(): string;
-				public setPOIRenderMode(param0: com.carto.layers.CartoBaseMapPOIRenderMode): void;
-				public constructor(param0: number, param1: boolean);
-				public static createTileDecoder(param0: com.carto.utils.AssetPackage): com.carto.vectortiles.VectorTileDecoder;
-				public swigGetRawPtr(): number;
-				public setLanguage(param0: string): void;
-				public static createTileDecoder(param0: com.carto.utils.AssetPackage, param1: string): com.carto.vectortiles.VectorTileDecoder;
-				public setBuildingRenderMode(param0: com.carto.layers.CartoBaseMapBuildingRenderMode): void;
-				public getLanguage(): string;
-				public static createTileDecoder(param0: com.carto.layers.CartoBaseMapStyle): com.carto.vectortiles.VectorTileDecoder;
-				public constructor(param0: com.carto.datasources.TileDataSource, param1: com.carto.layers.CartoBaseMapStyle);
-				public setFallbackLanguage(param0: string): void;
-			}
-		}
-	}
-}
-
-
-
 declare module com {
 	export module carto {
 		export module layers {
@@ -3112,23 +2981,6 @@ declare module com {
 	}
 }
 
-declare module com {
-	export module carto {
-		export module packagemanager {
-			export class CartoPackageManager extends com.carto.packagemanager.PackageManager {
-				public static class: java.lang.Class<com.carto.packagemanager.CartoPackageManager>;
-				public constructor(param0: number, param1: boolean);
-				public getStyleAssetPackage(param0: com.carto.layers.CartoBaseMapStyle): com.carto.utils.AssetPackage;
-				public swigGetRawPtr(): number;
-				public constructor(param0: string, param1: string, param2: string, param3: string);
-				public startStyleDownload(param0: com.carto.layers.CartoBaseMapStyle): boolean;
-				public constructor(param0: string, param1: string);
-			}
-		}
-	}
-}
-
-
 
 declare module com {
 	export module carto {
@@ -3612,28 +3464,6 @@ declare module com {
 		}
 	}
 }
-
-
-
-declare module com {
-	export module carto {
-		export module routing {
-			export class CartoOnlineRoutingService extends com.carto.routing.RoutingService {
-				public static class: java.lang.Class<com.carto.routing.CartoOnlineRoutingService>;
-				public calculateRoute(param0: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
-				public constructor(param0: number, param1: boolean);
-				public constructor(param0: string);
-				public constructor();
-				public setProfile(param0: string): void;
-				public swigGetRawPtr(): number;
-				public getProfile(): string;
-				public matchRoute(param0: com.carto.routing.RouteMatchingRequest): com.carto.routing.RouteMatchingResult;
-			}
-		}
-	}
-}
-
-
 
 declare module com {
 	export module carto {
@@ -4195,71 +4025,6 @@ declare module com {
 		}
 	}
 }
-
-
-
-declare module com {
-	export module carto {
-		export module services {
-			export class CartoMapsService extends java.lang.Object {
-				public static class: java.lang.Class<com.carto.services.CartoMapsService>;
-				public getAPIKey(): string;
-				public getVectorTileAssetPackage(): com.carto.utils.AssetPackage;
-				public isInteractive(): boolean;
-				public constructor();
-				public buildNamedMap(param0: string, param1: com.carto.core.StringVariantMap): com.carto.layers.LayerVector;
-				public setInteractive(param0: boolean): void;
-				public setDefaultVectorLayerMode(param0: boolean): void;
-				public hashCode(): number;
-				public setUsername(param0: string): void;
-				public equals(param0: any): boolean;
-				public getUsername(): string;
-				public setAPIKey(param0: string): void;
-				public getAPITemplate(): string;
-				public setVectorTileBufferSize(param0: number): void;
-				public getAuthTokens(): com.carto.core.StringVector;
-				public setVectorTileAssetPackage(param0: com.carto.utils.AssetPackage): void;
-				public constructor(param0: number, param1: boolean);
-				public isStrictMode(): boolean;
-				public setLayerIndices(param0: com.carto.core.IntVector): void;
-				public swigGetRawPtr(): number;
-				public setAuthTokens(param0: com.carto.core.StringVector): void;
-				public setAPITemplate(param0: string): void;
-				public getLayerIndices(): com.carto.core.IntVector;
-				public setStrictMode(param0: boolean): void;
-				public buildMap(param0: com.carto.core.Variant): com.carto.layers.LayerVector;
-				public isDefaultVectorLayerMode(): boolean;
-				public getVectorTileBufferSize(): number;
-			}
-		}
-	}
-}
-
-
-
-declare module com {
-	export module carto {
-		export module services {
-			export class CartoSQLService extends java.lang.Object {
-				public static class: java.lang.Class<com.carto.services.CartoSQLService>;
-				public setAPIKey(param0: string): void;
-				public getAPIKey(): string;
-				public getAPITemplate(): string;
-				public queryData(param0: string): com.carto.core.Variant;
-				public constructor(param0: number, param1: boolean);
-				public constructor();
-				public swigGetRawPtr(): number;
-				public setAPITemplate(param0: string): void;
-				public hashCode(): number;
-				public setUsername(param0: string): void;
-				public equals(param0: any): boolean;
-				public getUsername(): string;
-				public queryFeatures(param0: string, param1: com.carto.projections.Projection): com.carto.geometry.FeatureCollection;
-			}
-		}
-	}
-}
-
 
 
 declare module com {
@@ -6525,29 +6290,6 @@ declare module com {
 		}
 	}
 }
-
-declare module com {
-	export module carto {
-		export module vectortiles {
-			export class CartoVectorTileDecoder extends com.carto.vectortiles.VectorTileDecoder {
-				public static class: java.lang.Class<com.carto.vectortiles.CartoVectorTileDecoder>;
-				public addFallbackFont(param0: com.carto.core.BinaryData): void;
-				public setLayerStyleSet(param0: string, param1: com.carto.styles.CartoCSSStyleSet): void;
-				public constructor(param0: com.carto.core.StringVector, param1: com.carto.styles.StringCartoCSSStyleSetMap);
-				public setLayerVisible(param0: string, param1: boolean): void;
-				public constructor(param0: number, param1: boolean);
-				public getMaxZoom(): number;
-				public swigGetRawPtr(): number;
-				public isLayerVisible(param0: string): boolean;
-				public getLayerStyleSet(param0: string): com.carto.styles.CartoCSSStyleSet;
-				public getLayerIds(): com.carto.core.StringVector;
-				public getMinZoom(): number;
-			}
-		}
-	}
-}
-
-
 
 declare module com {
 	export module carto {

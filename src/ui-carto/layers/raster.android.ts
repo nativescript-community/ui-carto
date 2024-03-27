@@ -2,13 +2,7 @@ import { Color } from '@nativescript/core';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeMapVecProperty, nativeProperty } from '../';
 import { DoubleVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
 import { Projection } from '../projections';
-import {
-    CartoOnlineRasterTileLayerOptions,
-    HillshadeRasterTileLayerOptions,
-    RasterTileEventListener as IRasterTileEventListener,
-    RasterTileFilterMode as IRasterTileFilterMode,
-    RasterTileLayerOptions
-} from './raster';
+import { HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, RasterTileFilterMode as IRasterTileFilterMode, RasterTileLayerOptions } from './raster';
 import { RasterTileLayerBase } from './raster.common';
 
 export const RasterTileFilterMode = {
@@ -79,12 +73,6 @@ export class RasterTileLayer extends RasterTileLayerCommon<com.carto.layers.Rast
     @nativeProperty tileFilterMode: IRasterTileFilterMode;
     createNative(options: RasterTileLayerOptions) {
         return new com.carto.layers.RasterTileLayer(options.dataSource.getNative());
-    }
-}
-
-export class CartoOnlineRasterTileLayer extends RasterTileLayerBase<com.carto.layers.CartoOnlineRasterTileLayer, CartoOnlineRasterTileLayerOptions> {
-    createNative(options: CartoOnlineRasterTileLayerOptions) {
-        return new com.carto.layers.CartoOnlineRasterTileLayer(options.source);
     }
 }
 

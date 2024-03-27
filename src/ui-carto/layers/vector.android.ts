@@ -5,9 +5,7 @@ import { Projection } from '../projections';
 import { VectorElement } from '../vectorelements';
 import { MBVectorTileDecoder, VectorTileDecoder } from '../vectortiles';
 import {
-    CartoOfflineVectorTileLayerOptions,
     ClusteredVectorLayerLayerOptions,
-    CartoOnlineVectorTileLayerOptions as ICartoOnlineVectorTileLayerOptions,
     VectorEditEventListener as IVectorEditEventListener,
     VectorElementEventListener as IVectorElementEventListener,
     VectorTileEventListener as IVectorTileEventListener,
@@ -17,10 +15,6 @@ import {
 } from './vector';
 
 export { VectorTileDecoder };
-
-export interface CartoOnlineVectorTileLayerOptions extends ICartoOnlineVectorTileLayerOptions {
-    style: com.carto.layers.CartoBaseMapStyle;
-}
 
 export const VectorTileRenderOrder = {
     get HIDDEN() {
@@ -172,17 +166,6 @@ export class VectorTileLayer extends BaseVectorTileLayer<com.carto.layers.Vector
             }
         }
         return null;
-    }
-}
-
-export class CartoOnlineVectorTileLayer extends BaseVectorTileLayer<com.carto.layers.CartoOnlineVectorTileLayer, CartoOnlineVectorTileLayerOptions> {
-    createNative(options: CartoOnlineVectorTileLayerOptions) {
-        return new com.carto.layers.CartoOnlineVectorTileLayer(options.style as any);
-    }
-}
-export class CartoOfflineVectorTileLayer extends TileLayer<com.carto.layers.CartoOfflineVectorTileLayer, CartoOfflineVectorTileLayerOptions> {
-    createNative(options: CartoOfflineVectorTileLayerOptions) {
-        return new com.carto.layers.CartoOfflineVectorTileLayer(options.packageManager.getNative(), options.style as any);
     }
 }
 

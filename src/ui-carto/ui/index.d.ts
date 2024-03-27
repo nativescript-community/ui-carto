@@ -209,7 +209,6 @@ interface CartoMapStyle extends Style {
 
 export class CartoMap<T = DefaultLatLonKeys> extends View {
     public static setRunOnMainThread(value: boolean);
-    style: CartoMapStyle;
     public projection: Projection;
     focusPos: GenericMapPos<T>;
     zoom: number;
