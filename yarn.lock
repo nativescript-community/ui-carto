@@ -1682,12 +1682,12 @@ __metadata:
   linkType: hard
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 1.8.16
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=13b102&locator=root-workspace-0b6124%40workspace%3A."
+  version: 1.8.17
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=96ce77&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
-    "@nativescript-community/ui-carto": "npm:^1.8.16"
+    "@nativescript-community/ui-carto": "npm:^1.8.17"
     vue-property-decorator: "npm:9.1.2"
-  checksum: af5b1ce8695c100af09005bc67a58b228c544d5b43777e56641f8d2d9e8b218f2d4bc36bccb255db0f9185023dbabad3c552499f46f7e3288ea4cb56c7cdccfc
+  checksum: 53e2f5283427782ae72d8421923959d1781eee8a6063ef0c9668d3ff386d6ae1311ad650a88821caa878413d146371eeaa598f70da1b9d4f1e1d735331802fce
   languageName: node
   linkType: hard
 
@@ -1695,12 +1695,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nativescript-community/template-snippet@workspace:demo-snippets"
   dependencies:
-    "@nativescript-community/ui-carto": "npm:^1.8.16"
+    "@nativescript-community/ui-carto": "npm:^1.8.17"
     vue-property-decorator: "npm:9.1.2"
   languageName: unknown
   linkType: soft
 
-"@nativescript-community/ui-carto@npm:^1.8.16, @nativescript-community/ui-carto@workspace:packages/ui-carto":
+"@nativescript-community/ui-carto@npm:^1.8.17, @nativescript-community/ui-carto@workspace:packages/ui-carto":
   version: 0.0.0-use.local
   resolution: "@nativescript-community/ui-carto@workspace:packages/ui-carto"
   languageName: unknown

@@ -5,13 +5,6 @@
     "main": "index",
     "typings": "index.d.ts",
     "sideEffects": false,
-    "scripts": {
-        "build": "npm run tsc",
-        "build.all": "npm run build && npm run build.angular",
-        "readme": "../../node_modules/.bin/readme generate -c ../../tools/readme/blueprint.json",
-        "tsc": "../../node_modules/.bin/cpy '**/*.d.ts' '../../packages/ui-carto' --parents --cwd=../../src/ui-carto && ../../node_modules/.bin/tsc -skipLibCheck -d",
-        "clean": "../../node_modules/.bin/rimraf ./*.d.ts ./*.js ./*.js.map"
-    },
     "nativescript": {
         "platforms": {
             "android": "6.0.0",
@@ -44,5 +37,6 @@
         "url": "https://github.com/nativescript-community/ui-carto"
     },
     "license": "Apache-2.0",
-    "readmeFilename": "README.md"
+    "readmeFilename": "README.md",
+    "gitHead": "8988483bc6c84fcf0d4a60f240f39b810608f283"
 }
