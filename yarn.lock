@@ -1719,11 +1719,11 @@ __metadata:
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=337f53&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=6d53a6&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/ui-carto": "npm:*"
     vue-property-decorator: "npm:9.1.2"
-  checksum: edae3eb775ab609ce1912526059b1d0b21e87a1d6a88a8a0466d4c97c4e6c53eb4a20e8374ce2c39ed66d94b9ce2d22b05d6a21161cc7fd6c93538f6f73789de
+  checksum: 9581c8aa89be21e7e6c4f4e6581479c5fcf3f5d90cfc7af5b83fd4d3b61c0359482c09e22939d7e50463d2cec2acdd67e069033183a0affa0683067e36da20a0
   languageName: node
   linkType: hard
 
