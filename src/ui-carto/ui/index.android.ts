@@ -53,41 +53,6 @@ export const PanningMode = {
     }
 };
 
-let licenseKey: string;
-
-export function registerLicense(value: string, callback?: (result: boolean) => void) {
-    const context = Utils.android.getApplicationContext();
-    if (!context) {
-        throw new Error('application context not initialized!');
-    }
-    if (callback) {
-        return com.akylas.carto.additions.AKLicenseManager.registerLicenseCallback(
-            value,
-            context,
-            new com.akylas.carto.additions.RegisterLicenseCallback({
-                onLicenseRegistered: (result: any) => {
-                    if (result) {
-                        licenseKey = value;
-                    }
-                    setLicenseKeyRegistered(result);
-                    callback(result);
-                }
-            })
-        );
-    } else {
-        const result = com.carto.ui.MapView.registerLicense(value, context);
-
-        if (result) {
-            licenseKey = value;
-        }
-        setLicenseKeyRegistered(result);
-        return result;
-    }
-}
-export function getLicenseKey() {
-    return licenseKey;
-}
-
 export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     public useTextureView: boolean;
     public static setRunOnMainThread(value: boolean) {
@@ -112,12 +77,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         }
     }
     public createNativeView(): Object {
-        if (!isLicenseKeyRegistered()) {
-            const license = this.style['licenseKey'] || getLicenseKey();
-            if (license) {
-                registerLicense(license);
-            }
-        }
         let view;
         if (this.useTextureView) {
             view = new com.akylas.carto.additions.AKTextureMapView(this._context);
@@ -306,7 +265,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                         layers.add(native);
                     }
                 } catch (error) {
-                    console.error(error)
+                    console.error(error);
                 }
             }
         }

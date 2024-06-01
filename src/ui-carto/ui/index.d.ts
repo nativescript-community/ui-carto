@@ -39,7 +39,13 @@ export interface MapPosEventData<T = DefaultLatLonKeys> extends EventData {
     MapPos: GenericMapPos<T>;
 }
 
-export interface MapClickInfo {}
+export interface MapClickInfo<T = DefaultLatLonKeys> {
+    clickType: number,
+    clickInfo:{
+        duration:number
+    },
+    position: GenericMapPos<T>;
+}
 export interface MapInteractionInfo {
     userAction: boolean;
     isAnimationStarted: boolean;
@@ -96,17 +102,6 @@ export class MapOptions {
      * @returns native Carto MapRange
      */
     getTiltRange(): any;
-    getWatermarkAlignmentX(): number;
-    getWatermarkAlignmentY(): number;
-    /**
-     * @returns native Carto Bitmap
-     */
-    getWatermarkBitmap(): any;
-    /**
-     * @returns native ScreenPos padding
-     */
-    getWatermarkPadding(): any;
-    getWatermarkScale(): number;
     getZoomRange(): any;
     isClickTypeDetection(): boolean;
     isKineticPan(): boolean;
@@ -171,18 +166,6 @@ export class MapOptions {
      */
     setTiltRange(tiltRange: any): void;
     setUserInput(enabled: boolean): void;
-    setWatermarkAlignmentX(alignmentX: number): void;
-    setWatermarkAlignmentY(alignmentY: number): void;
-    /**
-     * @param watermarkBitmap  native Carto Bitmap
-     */
-    setWatermarkBitmap(watermarkBitmap: any): void;
-    /**
-     * @param padding:  native ScreenPos parameter
-     */
-    setWatermarkPadding(padding: any): void;
-
-    setWatermarkScale(scale: number): void;
     setZoomGestures(enabled: boolean): void;
     /**
      * @param zoomRange native Carto  MapRange
@@ -195,6 +178,8 @@ export class MapOptions {
     setLongClickDuration(param0: number): void;
     getDoubleClickMaxDuration(): number;
     setDoubleClickMaxDuration(param0: number): void;
+	setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
+    isLayersLabelsProcessedInReverseOrder(): boolean;
 }
 
 interface CartoMapStyle extends Style {
