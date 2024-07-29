@@ -1,5 +1,5 @@
 /* eslint-disable no-redeclare */
-import { Color, Font } from '@nativescript/core';
+import { Color, Font, ImageAsset, ImageSource } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { DefaultLatLonKeys, GenericMapPos, MapPos, MapPosVector, MapPosVectorVector, fromNativeMapVec, toNativeMapPos, toNativeMapVec } from './core';
 import { Geometry } from './geometry';
@@ -8,6 +8,13 @@ import { _createImageSourceFromSrc, nativeProperty } from './index.common';
 import { BaseVectorElementStyleBuilder } from './vectorelements';
 export { nativeProperty };
 export { BaseNative } from './BaseNative';
+
+export function getCartoBitmap(src: string | ImageSource | ImageAsset) {
+    const bitmap = _createImageSourceFromSrc(src);
+    const result = com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(bitmap.android as android.graphics.Bitmap);
+    (bitmap.android as android.graphics.Bitmap).recycle();
+    return result;
+}
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
@@ -96,8 +103,7 @@ export function nativeCartoImageProperty(...args) {
                     return this.options[key];
                 },
                 toNative(value) {
-                    value = _createImageSourceFromSrc(value);
-                    return com.carto.utils.BitmapUtils.createBitmapFromAndroidBitmap(value.android as android.graphics.Bitmap);
+                    return getCartoBitmap(value);
                 }
             }
         },

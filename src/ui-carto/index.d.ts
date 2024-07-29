@@ -1,9 +1,11 @@
 /* eslint-disable no-redeclare */
-import { Observable } from '@nativescript/core';
+import { ImageAsset, ImageSource, Observable } from '@nativescript/core';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from './core';
 import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';
 import { BaseVectorElementStyleBuilder } from './vectorelements';
+
+export function getCartoBitmap(src: string | ImageSource | ImageAsset): any;
 
 // type BaseInterface<T> = {
 //     [K in keyof T]: T[K];

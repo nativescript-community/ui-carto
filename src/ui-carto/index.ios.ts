@@ -1,5 +1,5 @@
 /* eslint-disable no-redeclare */
-import { Color, Font } from '@nativescript/core';
+import { Color, Font, ImageAsset, ImageSource } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { DefaultLatLonKeys, MapPos, MapPosVector, MapPosVectorVector, fromNativeMapVec, toNativeMapPos, toNativeMapVec } from './core';
 import { Geometry } from './geometry';
@@ -8,6 +8,11 @@ import { _createImageSourceFromSrc, nativeProperty } from './index.common';
 export { BaseNative } from './BaseNative';
 import { BaseVectorElementStyleBuilder } from './vectorelements';
 export { nativeProperty };
+
+export function getCartoBitmap(src: string | ImageSource | ImageAsset) {
+    const bitmap = _createImageSourceFromSrc(src);
+    return NTBitmapUtils.createBitmapFromUIImage(bitmap.ios as UIImage);
+}
 
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
@@ -93,8 +98,7 @@ export function nativeCartoImageProperty(...args) {
                     return this.options[key];
                 },
                 toNative(value) {
-                    value = _createImageSourceFromSrc(value);
-                    return NTBitmapUtils.createBitmapFromUIImage(value.ios as UIImage);
+                    return getCartoBitmap(value);
                 }
             }
         },
