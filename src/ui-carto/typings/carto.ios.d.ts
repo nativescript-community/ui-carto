@@ -6924,6 +6924,8 @@ declare class NTVectorTileClickInfo extends NSObject {
 	getClickInfo(): NTClickInfo;
 
 	getClickPos(): NTMapPos;
+	
+	getFeaturePosIndex(): number;
 
 	getClickType(): NTClickType;
 

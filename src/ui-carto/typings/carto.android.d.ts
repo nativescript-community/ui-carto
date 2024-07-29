@@ -11592,6 +11592,7 @@ declare namespace com {
 				public swigCMemOwn: boolean;
 				public getClickType(): com.carto.ui.ClickType;
 				public getClickPos(): com.carto.core.MapPos;
+				public getFeaturePosIndex(): number;
 				public static getCPtr(param0: com.carto.ui.VectorTileClickInfo): number;
 				public finalize(): void;
 				public constructor(param0: number, param1: boolean);

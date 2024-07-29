@@ -99,7 +99,8 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             const feature = info.getFeature();
             const geometry = feature.getGeometry();
             let position = info.getClickPos();
-            let featurePos = geometry.getCenterPos();
+            const geoPosIndex = info.getFeaturePosIndex();
+            let featurePos = geoPosIndex !== -1 && geometry instanceof com.carto.geometry.MultiPointGeometry ? geometry.getGeometry(geoPosIndex).getCenterPos() : geometry.getCenterPos();
             let projection: com.carto.projections.Projection;
             const dataSourceProjection = this.getNative().getDataSource().getProjection();
             if (this.listenerProjection) {
@@ -112,6 +113,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                 id: info.getFeatureId(),
                 layer: info.getFeatureLayerName(),
                 _nativeGeometry: geometry,
+                geoPosIndex,
                 get geometry() {
                     if (!this._parsedGeometry) {
                         const writer = getGeojsonWriter();
@@ -140,6 +142,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
                     featureData: geoFeature.properties,
                     featureLayerName: geoFeature.layer,
                     featureGeometry: geometry,
+                    featureGeometryPosIndex: geoPosIndex,
                     featurePosition: fromNativeMapPos(featurePos),
                     position: fromNativeMapPos(position)
                 }) || false

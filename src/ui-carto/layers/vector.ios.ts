@@ -98,7 +98,8 @@ export class NTVectorTileEventListenerImpl extends AKVectorTileEventListener {
             const feature = info.getFeature();
             const geometry = feature.getGeometry();
             let position = info.getClickPos();
-            let featurePos = geometry.getCenterPos();
+            const geoPosIndex = info.getFeaturePosIndex();
+            let featurePos = geoPosIndex !== -1 && geometry instanceof com.carto.geometry.MultiPointGeometry ? geometry.getGeometry(geoPosIndex).getCenterPos() : geometry.getCenterPos();
 
             let projection: NTProjection;
             const dataSourceProjection = this._layer.get().getNative().getDataSource().getProjection();
