@@ -98,7 +98,7 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<a
 }
 
 export interface ValhallaOnlineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
-    apiKey: string;
+    apiKey?: string;
     customServiceURL?: string;
 }
 export class ValhallaOnlineRoutingService extends ValhallaRoutingService<any, ValhallaOnlineRoutingServiceOptions> {

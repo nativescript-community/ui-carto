@@ -173,7 +173,11 @@ export class ValhallaOnlineRoutingService extends ValhallaRoutingService<com.car
     @nativeProperty profile: string;
     @nativeProperty customServiceURL: string;
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
-        return new com.carto.routing.ValhallaOnlineRoutingService(options.apiKey);
+        if (options.apiKey) {
+            return new com.carto.routing.ValhallaOnlineRoutingService(options.apiKey);
+        } else {
+            return new com.carto.routing.ValhallaOnlineRoutingService();
+        }
     }
 }
 
