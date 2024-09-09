@@ -100,7 +100,13 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             const geometry = feature.getGeometry();
             let position = info.getClickPos();
             const geoPosIndex = info.getFeaturePosIndex();
-            let featurePos = geoPosIndex !== -1 && geometry instanceof com.carto.geometry.MultiPointGeometry ? geometry.getGeometry(geoPosIndex).getCenterPos() : geometry.getCenterPos();
+            let featurePos: com.carto.core.MapPos;
+            if (geoPosIndex !== -1 && /MultiPoint/.test(geometry.constructor.name)) {
+                featurePos = (geometry as com.carto.geometry.MultiPointGeometry).getGeometry(geoPosIndex)?.getCenterPos();
+            }
+            if (!featurePos) {
+                featurePos = geometry.getCenterPos();
+            }
             let projection: com.carto.projections.Projection;
             const dataSourceProjection = this.getNative().getDataSource().getProjection();
             if (this.listenerProjection) {
