@@ -27,6 +27,7 @@ export interface VectorTileEventData<T = DefaultLatLonKeys> {
     feature: any; // geojson object
     featureId: number;
     featureData: { [k: string]: string };
+    featureGeometryPosIndex: number;
     featureLayerName: string;
     position: GenericMapPos<T>;
     featurePosition: GenericMapPos<T>;

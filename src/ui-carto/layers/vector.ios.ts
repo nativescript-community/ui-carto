@@ -99,7 +99,13 @@ export class NTVectorTileEventListenerImpl extends AKVectorTileEventListener {
             const geometry = feature.getGeometry();
             let position = info.getClickPos();
             const geoPosIndex = info.getFeaturePosIndex();
-            let featurePos = geoPosIndex !== -1 && geometry instanceof com.carto.geometry.MultiPointGeometry ? geometry.getGeometry(geoPosIndex).getCenterPos() : geometry.getCenterPos();
+            let featurePos: NTMapPos;
+            if (geoPosIndex !== -1 && /MultiPoint/.test(geometry.constructor.name)) {
+                featurePos = (geometry as NTMultiPointGeometry).getGeometry(geoPosIndex)?.getCenterPos();
+            }
+            if (!featurePos) {
+                featurePos = geometry.getCenterPos();
+            }
 
             let projection: NTProjection;
             const dataSourceProjection = this._layer.get().getNative().getDataSource().getProjection();
@@ -141,6 +147,7 @@ export class NTVectorTileEventListenerImpl extends AKVectorTileEventListener {
                     featureData: geoFeature.properties,
                     featureLayerName: geoFeature.layer,
                     featureGeometry: geometry,
+                    featureGeometryPosIndex: geoPosIndex,
                     featurePosition: fromNativeMapPos(featurePos),
                     position: fromNativeMapPos(position)
                 }) || false
