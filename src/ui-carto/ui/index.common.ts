@@ -78,46 +78,23 @@ export function mapProperty(...args) {
     }
 }
 
-export class Layers<T extends any> extends BaseNative<any, {}> {
+export abstract class Layers<T = any> extends BaseNative<T, {}> {
     constructor(native) {
         super(null, native);
     }
-    count() {
-        return this.native.count();
-    }
-    insert(index: number, layer: Layer<any, any>) {
-        return this.native.insert(index, layer.getNative());
-    }
+    abstract count(): number;
+    abstract insert(index: number, layer: Layer<any, any>);
+    abstract removeAll(layers: Layer<any, any>[]);
+    abstract remove(layer: Layer<any, any>);
+    abstract add(layer: Layer<any, any>);
     //@ts-ignore
-    set(index: number, layer: Layer<any, any>) {
-        return this.native.set(index, layer.getNative());
-    }
-    removeAll(layers: Layer<any, any>[]) {
-        layers.forEach(this.remove);
-    }
-    remove(layer: Layer<any, any>) {
-        return this.native.remove(layer.getNative());
-    }
-    add(layer: Layer<any, any>) {
-        return this.native.add(layer.getNative());
-    }
+    abstract set(index: number, layer: Layer<any, any>);
     //@ts-ignore
-    get(index: number) {
-        return this.native.get(index);
-    }
-    addAll(layers: Layer<any, any>[]) {
-        layers.forEach(this.add);
-    }
-    setAll(layers: Layer<any, any>[]) {
-        this.clear();
-        this.addAll(layers);
-    }
-    getAll() {
-        return nativeVectorToArray(this.native.getAll());
-    }
-    clear() {
-        return this.native.clear();
-    }
+    abstract get(index: number): Layer<any, any>;
+    abstract addAll(layers: Layer<any, any>[]);
+    abstract setAll(layers: Layer<any, any>[]);
+    abstract getAll(): Layer<any, any>[];
+    abstract clear();
 
     // public getNative() {
     //     return this.native;

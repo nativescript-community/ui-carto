@@ -7,18 +7,19 @@ import {
     fromNativeMapBounds,
     fromNativeMapPos,
     fromNativeScreenPos,
+    nativeVectorToArray,
     toNativeMapPos,
     toNativeScreenBounds,
     toNativeScreenPos
 } from '../core';
-import { TileLayer } from '../layers';
+import { Layer, TileLayer } from '../layers';
 import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
 import { MapOptions } from '.';
 import {
+    Layers as BaseLayers,
     CartoViewBase,
-    Layers,
     MapClickedEvent,
     MapIdleEvent,
     MapInteractionEvent,
@@ -74,7 +75,7 @@ function mainThread(target: any, propertyKey: string, descriptor: PropertyDescri
 }
 
 @NativeClass
-class AKMapEventListenerImpl extends NSObject implements  AKMapEventListener {
+class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
     public static ObjCProtocols = [AKMapEventListener];
     private _owner: WeakRef<CartoMap<any>>;
 
@@ -308,7 +309,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 
     getLayers() {
         if (this.mapView) {
-            return new Layers<NTLayers>(this.mapView.getLayers());
+            return new Layers(this.mapView.getLayers());
         }
         return null;
     }
@@ -380,5 +381,44 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
                 wait
             );
         });
+    }
+}
+
+export class Layers extends BaseLayers<NTLayers> {
+    count() {
+        return this.native.count();
+    }
+    insert(index: number, layer: Layer<any, any>) {
+        return this.native.insertLayer(index, layer.getNative());
+    }
+    //@ts-ignore
+    set(index: number, layer: Layer<any, any>) {
+        return this.native.setLayer(index, layer.getNative());
+    }
+    removeAll(layers: Layer<any, any>[]) {
+        layers.forEach(this.remove);
+    }
+    remove(layer: Layer<any, any>) {
+        return this.native.remove(layer.getNative());
+    }
+    add(layer: Layer<any, any>) {
+        return this.native.add(layer.getNative());
+    }
+    //@ts-ignore
+    get(index: number) {
+        return this.native.get(index);
+    }
+    addAll(layers: Layer<any, any>[]) {
+        layers.forEach(this.add);
+    }
+    setAll(layers: Layer<any, any>[]) {
+        this.clear();
+        this.addAll(layers);
+    }
+    getAll() {
+        return nativeVectorToArray(this.native.getAll());
+    }
+    clear() {
+        return this.native.clear();
     }
 }
