@@ -45,10 +45,6 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn config get globalFolder)"
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get globalFolder)"
-
 
       - name: Install deps
         if: steps.yarn-node_modules.outputs.cache-hit != 'true'
