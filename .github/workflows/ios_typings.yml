@@ -1,0 +1,79 @@
+name: 'release'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "0"
+          submodules: true
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
+
+      - name: Enable CorePack
+        run: |
+          corepack enable 
+          yarn config get globalFolder # the yarn command will ensure the correct yarn version is downloaded and installed
+
+      - name: Install NativeScript
+        run: |
+          python3 -m pip install --upgrade pip six
+          npm i -g @akylas/nativescript-cli --ignore-scripts --legacy-peer-deps
+          ns package-manager set yarn2
+          ns usage-reporting disable
+          ns error-reporting disable
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get globalFolder)"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get globalFolder)"
+
+
+      - name: Install deps
+        if: steps.yarn-node_modules.outputs.cache-hit != 'true'
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn install --silent
+        env: 
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+
+      - name: Run shell prepare script
+        if: ${{ hashFiles('scripts/ci.prepare.sh') != '' }}
+        run: |
+          sh scripts/ci.prepare.sh --platform ios
+
+      - name: build project
+        run: |
+          npm run build
+
+      - name: build typings
+        run: |
+          cd demo-svelte
+          TNS_TYPESCRIPT_DECLARATIONS_PATH="$(pwd)/typings" ns build ios
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios_typings
+          path: demo-svelte/typings/*
+      
