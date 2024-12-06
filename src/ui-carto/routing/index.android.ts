@@ -83,6 +83,7 @@ abstract class RoutingService<T extends com.carto.routing.RoutingService, U exte
             const callback = new com.akylas.carto.additions.RoutingServiceRouteCallback({
                 onRoutingResult: (err, res, strRes) => (err ? reject(err) : resolve(strRes || (res ? new RoutingResult(res) : null)))
             });
+            console.log('calculateRoute', jsonStr);
             AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, callback);
         });
     }
@@ -130,6 +131,13 @@ abstract class ValhallaRoutingService<
         const native = this.getNative();
         if (!(native instanceof com.carto.routing.ValhallaOnlineRoutingService)) {
             return nativeVariantToJS(native.getConfigurationParameter(param));
+        }
+    }
+
+    public addLocale(key: string, json: string) {
+        const native = this.getNative();
+        if (!(native instanceof com.carto.routing.ValhallaOnlineRoutingService)) {
+            native.addLocale(key, json);
         }
     }
 }

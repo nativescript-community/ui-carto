@@ -75,6 +75,7 @@ export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> 
     matchRoute<T = DefaultLatLonKeys>(options: RouteMatchingRequest, profile?: string): Promise<RouteMatchingResult<T>>;
     public setConfigurationParameter(param: string, value: any);
     public getConfigurationParameter(param: string): any;
+    public addLocale(key: string, json: string);
 }
 
 export interface PackageManagerRoutingServiceOptions extends RoutingServiceOptions {

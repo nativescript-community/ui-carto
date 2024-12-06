@@ -4,7 +4,6 @@ import { Layer } from '../layers';
 import { Projection } from '../projections';
 import { Layers } from './index.common';
 export { Layers };
-export function registerLicense(key: string, callback?: (result: boolean) => void);
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR,

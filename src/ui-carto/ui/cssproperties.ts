@@ -2,12 +2,6 @@ import { CssProperty, Style, booleanConverter } from '@nativescript/core';
 import { LatitudeKey, LongitudeKey } from '../core';
 import { GenericMapPos } from '../core/index.common';
 
-export const licenseKeyProperty = new CssProperty<Style, string>({
-    name: 'licenseKey',
-    cssName: 'license-key'
-});
-licenseKeyProperty.register(Style);
-
 export const zoomProperty = new CssProperty<Style, number>({
     name: 'zoom',
     cssName: 'zoom',

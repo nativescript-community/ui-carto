@@ -173,19 +173,6 @@ declare namespace com {
     }
 }
 
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class AKLicenseManager extends java.lang.Object {
-                    public static class: java.lang.Class<AKLicenseManager>;
-                    public static registerLicenseCallback(param0: string, param1: globalAndroid.content.Context, param2: RegisterLicenseCallback): void;
-                    public constructor();
-                }
-            }
-        }
-    }
-}
 
 declare namespace com {
     export namespace akylas {
@@ -667,23 +654,6 @@ declare namespace com {
     }
 }
 
-declare namespace com {
-    export namespace akylas {
-        export namespace carto {
-            export namespace additions {
-                export class RegisterLicenseCallback extends java.lang.Object {
-                    public static class: java.lang.Class<RegisterLicenseCallback>;
-                    /**
-                     * Constructs a new instance of the com.akylas.carto.additions.RegisterLicenseCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-                     */
-                    public constructor(implementation: { onLicenseRegistered(param0: java.lang.Boolean): void });
-                    public constructor();
-                    public onLicenseRegistered(param0: java.lang.Boolean): void;
-                }
-            }
-        }
-    }
-}
 
 declare namespace com {
     export namespace akylas {

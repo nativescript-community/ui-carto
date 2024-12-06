@@ -89,6 +89,12 @@ abstract class ValhallaRoutingService<
             return nativeVariantToJS(native.getConfigurationParameter(param));
         }
     }
+    public addLocale(key: string, json: string) {
+        const native = this.getNative();
+        if (!(native instanceof NTValhallaOnlineRoutingService)) {
+            native.addLocaleJson(key, json);
+        }
+    }
 }
 
 export class PackageManagerRoutingService extends RoutingService<NTPackageManagerRoutingService, PackageManagerRoutingServiceOptions> {

@@ -6,14 +6,6 @@ import { Layer } from '../layers';
 import { nativeVectorToArray } from '../utils';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 
-let licenseKeyRegistered = false;
-export function setLicenseKeyRegistered(value: boolean) {
-    licenseKeyRegistered = value;
-}
-export function isLicenseKeyRegistered() {
-    return licenseKeyRegistered;
-}
-
 export const MapReadyEvent = 'mapReady';
 export const MapStableEvent = 'mapStable';
 export const MapIdleEvent = 'mapIdle';

@@ -1,7327 +1,6813 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
+/* eslint-disable @typescript-eslint/adjacent-overload-signatures */
+/* eslint-disable no-redeclare */
 
 declare class NTAddress extends NSObject {
+    static alloc(): NTAddress; // inherited from NSObject
 
-	static alloc(): NTAddress; // inherited from NSObject
+    static new(): NTAddress; // inherited from NSObject
 
-	static new(): NTAddress; // inherited from NSObject
+    constructor(o: {
+        country: string;
+        region: string;
+        county: string;
+        locality: string;
+        neighbourhood: string;
+        street: string;
+        postcode: string;
+        houseNumber: string;
+        name: string;
+        categories: NTStringVector;
+    });
 
-	constructor(o: { country: string; region: string; county: string; locality: string; neighbourhood: string; street: string; postcode: string; houseNumber: string; name: string; categories: NTStringVector; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    description(): string;
 
-	description(): string;
+    getCategories(): NTStringVector;
 
-	getCategories(): NTStringVector;
+    getCountry(): string;
 
-	getCountry(): string;
+    getCounty(): string;
 
-	getCounty(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getHouseNumber(): string;
 
-	getHouseNumber(): string;
+    getLocality(): string;
 
-	getLocality(): string;
+    getName(): string;
 
-	getName(): string;
+    getNeighbourhood(): string;
 
-	getNeighbourhood(): string;
+    getPostcode(): string;
 
-	getPostcode(): string;
+    getRegion(): string;
 
-	getRegion(): string;
+    getStreet(): string;
 
-	getStreet(): string;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCountryRegionCountyLocalityNeighbourhoodStreetPostcodeHouseNumberNameCategories(
+        country: string,
+        region: string,
+        county: string,
+        locality: string,
+        neighbourhood: string,
+        street: string,
+        postcode: string,
+        houseNumber: string,
+        name: string,
+        categories: NTStringVector
+    ): this;
 
-	initWithCountryRegionCountyLocalityNeighbourhoodStreetPostcodeHouseNumberNameCategories(country: string, region: string, county: string, locality: string, neighbourhood: string, street: string, postcode: string, houseNumber: string, name: string, categories: NTStringVector): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEqualInternal(address: NTAddress): boolean;
 
-	isEqualInternal(address: NTAddress): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTAnimationStyle extends NSObject {
+    static alloc(): NTAnimationStyle; // inherited from NSObject
 
-	static alloc(): NTAnimationStyle; // inherited from NSObject
+    static new(): NTAnimationStyle; // inherited from NSObject
 
-	static new(): NTAnimationStyle; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTAnimationStyle;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTAnimationStyle;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFadeAnimationType(): NTAnimationType;
 
-	getFadeAnimationType(): NTAnimationType;
+    getPhaseInDuration(): number;
 
-	getPhaseInDuration(): number;
+    getPhaseOutDuration(): number;
 
-	getPhaseOutDuration(): number;
+    getRelativeSpeed(): number;
 
-	getRelativeSpeed(): number;
+    getSizeAnimationType(): NTAnimationType;
 
-	getSizeAnimationType(): NTAnimationType;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTAnimationStyleBuilder extends NSObject {
+    static alloc(): NTAnimationStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTAnimationStyleBuilder; // inherited from NSObject
+    static new(): NTAnimationStyleBuilder; // inherited from NSObject
 
-	static new(): NTAnimationStyleBuilder; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTAnimationStyleBuilder;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTAnimationStyleBuilder;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    buildStyle(): NTAnimationStyle;
 
-	buildStyle(): NTAnimationStyle;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFadeAnimationType(): NTAnimationType;
 
-	getFadeAnimationType(): NTAnimationType;
+    getPhaseInDuration(): number;
 
-	getPhaseInDuration(): number;
+    getPhaseOutDuration(): number;
 
-	getPhaseOutDuration(): number;
+    getRelativeSpeed(): number;
 
-	getRelativeSpeed(): number;
+    getSizeAnimationType(): NTAnimationType;
 
-	getSizeAnimationType(): NTAnimationType;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setFadeAnimationType(animType: NTAnimationType): void;
 
-	setFadeAnimationType(animType: NTAnimationType): void;
+    setPhaseInDuration(duration: number): void;
 
-	setPhaseInDuration(duration: number): void;
+    setPhaseOutDuration(duration: number): void;
 
-	setPhaseOutDuration(duration: number): void;
+    setRelativeSpeed(relativeSpeed: number): void;
 
-	setRelativeSpeed(relativeSpeed: number): void;
+    setSizeAnimationType(animType: NTAnimationType): void;
 
-	setSizeAnimationType(animType: NTAnimationType): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTAnimationType {
+    T_ANIMATION_TYPE_NONE = 0,
 
-	T_ANIMATION_TYPE_NONE = 0,
+    T_ANIMATION_TYPE_STEP = 1,
 
-	T_ANIMATION_TYPE_STEP = 1,
+    T_ANIMATION_TYPE_LINEAR = 2,
 
-	T_ANIMATION_TYPE_LINEAR = 2,
+    T_ANIMATION_TYPE_SMOOTHSTEP = 3,
 
-	T_ANIMATION_TYPE_SMOOTHSTEP = 3,
-
-	T_ANIMATION_TYPE_SPRING = 4
+    T_ANIMATION_TYPE_SPRING = 4
 }
 
 declare class NTAssetPackage extends NSObject {
+    static alloc(): NTAssetPackage; // inherited from NSObject
 
-	static alloc(): NTAssetPackage; // inherited from NSObject
+    static new(): NTAssetPackage; // inherited from NSObject
 
-	static new(): NTAssetPackage; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTAssetPackage;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTAssetPackage;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getAssetNames(): NTStringVector;
 
-	getAssetNames(): NTStringVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    loadAsset(name: string): NTBinaryData;
 
-	loadAsset(name: string): NTBinaryData;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTAssetTileDataSource extends NTTileDataSource {
+    static alloc(): NTAssetTileDataSource; // inherited from NSObject
 
-	static alloc(): NTAssetTileDataSource; // inherited from NSObject
+    static new(): NTAssetTileDataSource; // inherited from NSObject
 
-	static new(): NTAssetTileDataSource; // inherited from NSObject
+    constructor(o: { minZoom: number; maxZoom: number; basePath: string });
 
-	constructor(o: { minZoom: number; maxZoom: number; basePath: string; });
+    buildAssetPathSwigExplicitNTAssetTileDataSourceTile(basePath: string, tile: NTMapTile): string;
 
-	buildAssetPathSwigExplicitNTAssetTileDataSourceTile(basePath: string, tile: NTMapTile): string;
+    buildAssetPathTile(basePath: string, tile: NTMapTile): string;
 
-	buildAssetPathTile(basePath: string, tile: NTMapTile): string;
+    initWithMinZoomMaxZoomBasePath(minZoom: number, maxZoom: number, basePath: string): this;
 
-	initWithMinZoomMaxZoomBasePath(minZoom: number, maxZoom: number, basePath: string): this;
-
-	loadTileSwigExplicitNTAssetTileDataSource(tile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTAssetTileDataSource(tile: NTMapTile): NTTileData;
 }
 
 declare class NTAssetUtils extends NSObject {
+    static alloc(): NTAssetUtils; // inherited from NSObject
 
-	static alloc(): NTAssetUtils; // inherited from NSObject
+    static calculateResourcePath(resourceName: string): string;
 
-	static calculateResourcePath(resourceName: string): string;
+    static calculateWritablePath(fileName: string): string;
 
-	static calculateWritablePath(fileName: string): string;
+    static loadAsset(path: string): NTBinaryData;
 
-	static loadAsset(path: string): NTBinaryData;
+    static new(): NTAssetUtils; // inherited from NSObject
 
-	static new(): NTAssetUtils; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 }
 
 declare class NTBalloonPopup extends NTPopup {
+    static alloc(): NTBalloonPopup; // inherited from NSObject
 
-	static alloc(): NTBalloonPopup; // inherited from NSObject
+    static new(): NTBalloonPopup; // inherited from NSObject
 
-	static new(): NTBalloonPopup; // inherited from NSObject
+    constructor(o: { baseBillboard: NTBillboard; style: NTBalloonPopupStyle; title: string; desc: string });
 
-	constructor(o: { baseBillboard: NTBillboard; style: NTBalloonPopupStyle; title: string; desc: string; });
+    constructor(o: { geometry: NTGeometry; style: NTBalloonPopupStyle; title: string; desc: string });
 
-	constructor(o: { geometry: NTGeometry; style: NTBalloonPopupStyle; title: string; desc: string; });
+    constructor(o: { pos: NTMapPos; style: NTBalloonPopupStyle; title: string; desc: string });
 
-	constructor(o: { pos: NTMapPos; style: NTBalloonPopupStyle; title: string; desc: string; });
+    addButton(button: NTBalloonPopupButton): void;
 
-	addButton(button: NTBalloonPopupButton): void;
+    clearButtons(): void;
 
-	clearButtons(): void;
+    getBalloonPopupEventListener(): NTBalloonPopupEventListener;
 
-	getBalloonPopupEventListener(): NTBalloonPopupEventListener;
+    getDescription(): string;
 
-	getDescription(): string;
+    getStyle(): NTBalloonPopupStyle;
 
-	getStyle(): NTBalloonPopupStyle;
+    getTitle(): string;
 
-	getTitle(): string;
+    initWithBaseBillboardStyleTitleDesc(baseBillboard: NTBillboard, style: NTBalloonPopupStyle, title: string, desc: string): this;
 
-	initWithBaseBillboardStyleTitleDesc(baseBillboard: NTBillboard, style: NTBalloonPopupStyle, title: string, desc: string): this;
+    initWithGeometryStyleTitleDesc(geometry: NTGeometry, style: NTBalloonPopupStyle, title: string, desc: string): this;
 
-	initWithGeometryStyleTitleDesc(geometry: NTGeometry, style: NTBalloonPopupStyle, title: string, desc: string): this;
+    initWithPosStyleTitleDesc(pos: NTMapPos, style: NTBalloonPopupStyle, title: string, desc: string): this;
 
-	initWithPosStyleTitleDesc(pos: NTMapPos, style: NTBalloonPopupStyle, title: string, desc: string): this;
+    removeButton(button: NTBalloonPopupButton): void;
 
-	removeButton(button: NTBalloonPopupButton): void;
+    replaceButtonNewButton(oldButton: NTBalloonPopupButton, newButton: NTBalloonPopupButton): void;
 
-	replaceButtonNewButton(oldButton: NTBalloonPopupButton, newButton: NTBalloonPopupButton): void;
+    setBalloonPopupEventListener(eventListener: NTBalloonPopupEventListener): void;
 
-	setBalloonPopupEventListener(eventListener: NTBalloonPopupEventListener): void;
+    setDescription(desc: string): void;
 
-	setDescription(desc: string): void;
+    setStyle(style: NTBalloonPopupStyle): void;
 
-	setStyle(style: NTBalloonPopupStyle): void;
-
-	setTitle(title: string): void;
+    setTitle(title: string): void;
 }
 
 declare class NTBalloonPopupButton extends NSObject {
+    static alloc(): NTBalloonPopupButton; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupButton; // inherited from NSObject
+    static new(): NTBalloonPopupButton; // inherited from NSObject
 
-	static new(): NTBalloonPopupButton; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTBalloonPopupButton;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTBalloonPopupButton;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { style: NTBalloonPopupButtonStyle; text: string });
 
-	constructor(o: { style: NTBalloonPopupButtonStyle; text: string; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getStyle(): NTBalloonPopupButtonStyle;
 
-	getStyle(): NTBalloonPopupButtonStyle;
+    getTag(): NTVariant;
 
-	getTag(): NTVariant;
+    getText(): string;
 
-	getText(): string;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithStyleText(style: NTBalloonPopupButtonStyle, text: string): this;
 
-	initWithStyleText(style: NTBalloonPopupButtonStyle, text: string): this;
+    setTag(tag: NTVariant): void;
 
-	setTag(tag: NTVariant): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTBalloonPopupButtonClickInfo extends NSObject {
+    static alloc(): NTBalloonPopupButtonClickInfo; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupButtonClickInfo; // inherited from NSObject
+    static new(): NTBalloonPopupButtonClickInfo; // inherited from NSObject
 
-	static new(): NTBalloonPopupButtonClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getButton(): NTBalloonPopupButton;
 
-	getButton(): NTBalloonPopupButton;
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getVectorElement(): NTVectorElement;
 
-	getVectorElement(): NTVectorElement;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTBalloonPopupButtonStyle extends NTStyle {
+    static alloc(): NTBalloonPopupButtonStyle; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupButtonStyle; // inherited from NSObject
+    static new(): NTBalloonPopupButtonStyle; // inherited from NSObject
 
-	static new(): NTBalloonPopupButtonStyle; // inherited from NSObject
+    getBackgroundColor(): NTColor;
 
-	getBackgroundColor(): NTColor;
+    getButtonWidth(): number;
 
-	getButtonWidth(): number;
+    getCornerRadius(): number;
 
-	getCornerRadius(): number;
+    getStrokeColor(): NTColor;
 
-	getStrokeColor(): NTColor;
+    getStrokeWidth(): number;
 
-	getStrokeWidth(): number;
+    getTextColor(): NTColor;
 
-	getTextColor(): NTColor;
+    getTextFontName(): string;
 
-	getTextFontName(): string;
+    getTextFontSize(): number;
 
-	getTextFontSize(): number;
-
-	getTextMargins(): NTBalloonPopupMargins;
+    getTextMargins(): NTBalloonPopupMargins;
 }
 
 declare class NTBalloonPopupButtonStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTBalloonPopupButtonStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupButtonStyleBuilder; // inherited from NSObject
+    static new(): NTBalloonPopupButtonStyleBuilder; // inherited from NSObject
 
-	static new(): NTBalloonPopupButtonStyleBuilder; // inherited from NSObject
+    buildStyle(): NTBalloonPopupButtonStyle;
 
-	buildStyle(): NTBalloonPopupButtonStyle;
+    getButtonWidth(): number;
 
-	getButtonWidth(): number;
+    getCornerRadius(): number;
 
-	getCornerRadius(): number;
+    getStrokeColor(): NTColor;
 
-	getStrokeColor(): NTColor;
+    getStrokeWidth(): number;
 
-	getStrokeWidth(): number;
+    getTextColor(): NTColor;
 
-	getTextColor(): NTColor;
+    getTextFontName(): string;
 
-	getTextFontName(): string;
+    getTextFontSize(): number;
 
-	getTextFontSize(): number;
+    getTextMargins(): NTBalloonPopupMargins;
 
-	getTextMargins(): NTBalloonPopupMargins;
+    setButtonWidth(buttonWidth: number): void;
 
-	setButtonWidth(buttonWidth: number): void;
+    setCornerRadius(cornerRadius: number): void;
 
-	setCornerRadius(cornerRadius: number): void;
+    setStrokeColor(strokeColor: NTColor): void;
 
-	setStrokeColor(strokeColor: NTColor): void;
+    setStrokeWidth(strokeWidth: number): void;
 
-	setStrokeWidth(strokeWidth: number): void;
+    setTextColor(textColor: NTColor): void;
 
-	setTextColor(textColor: NTColor): void;
+    setTextFontName(textFontName: string): void;
 
-	setTextFontName(textFontName: string): void;
+    setTextFontSize(textFontSize: number): void;
 
-	setTextFontSize(textFontSize: number): void;
-
-	setTextMargins(textMargins: NTBalloonPopupMargins): void;
+    setTextMargins(textMargins: NTBalloonPopupMargins): void;
 }
 
 declare class NTBalloonPopupEventListener extends NSObject {
+    static alloc(): NTBalloonPopupEventListener; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupEventListener; // inherited from NSObject
+    static new(): NTBalloonPopupEventListener; // inherited from NSObject
 
-	static new(): NTBalloonPopupEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTBalloonPopupEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTBalloonPopupEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onButtonClicked(clickInfo: NTBalloonPopupButtonClickInfo): boolean;
 
-	onButtonClicked(clickInfo: NTBalloonPopupButtonClickInfo): boolean;
+    onButtonClickedSwigExplicitNTBalloonPopupEventListener(clickInfo: NTBalloonPopupButtonClickInfo): boolean;
 
-	onButtonClickedSwigExplicitNTBalloonPopupEventListener(clickInfo: NTBalloonPopupButtonClickInfo): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTBalloonPopupMargins extends NSObject {
+    static alloc(): NTBalloonPopupMargins; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupMargins; // inherited from NSObject
+    static new(): NTBalloonPopupMargins; // inherited from NSObject
 
-	static new(): NTBalloonPopupMargins; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { left: number; top: number; right: number; bottom: number });
 
-	constructor(o: { left: number; top: number; right: number; bottom: number; });
+    getBottom(): number;
 
-	getBottom(): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getLeft(): number;
 
-	getLeft(): number;
+    getRight(): number;
 
-	getRight(): number;
+    getTop(): number;
 
-	getTop(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithLeftTopRightBottom(left: number, top: number, right: number, bottom: number): this;
 
-	initWithLeftTopRightBottom(left: number, top: number, right: number, bottom: number): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTBalloonPopupStyle extends NTPopupStyle {
+    static alloc(): NTBalloonPopupStyle; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupStyle; // inherited from NSObject
+    static new(): NTBalloonPopupStyle; // inherited from NSObject
 
-	static new(): NTBalloonPopupStyle; // inherited from NSObject
+    getBackgroundColor(): NTColor;
 
-	getBackgroundColor(): NTColor;
+    getButtonMargins(): NTBalloonPopupMargins;
 
-	getButtonMargins(): NTBalloonPopupMargins;
+    getCornerRadius(): number;
 
-	getCornerRadius(): number;
+    getDescriptionColor(): NTColor;
 
-	getDescriptionColor(): NTColor;
+    getDescriptionField(): string;
 
-	getDescriptionField(): string;
+    getDescriptionFontName(): string;
 
-	getDescriptionFontName(): string;
+    getDescriptionFontSize(): number;
 
-	getDescriptionFontSize(): number;
+    getDescriptionMargins(): NTBalloonPopupMargins;
 
-	getDescriptionMargins(): NTBalloonPopupMargins;
+    getLeftColor(): NTColor;
 
-	getLeftColor(): NTColor;
+    getLeftImage(): NTBitmap;
 
-	getLeftImage(): NTBitmap;
+    getLeftMargins(): NTBalloonPopupMargins;
 
-	getLeftMargins(): NTBalloonPopupMargins;
+    getRightColor(): NTColor;
 
-	getRightColor(): NTColor;
+    getRightImage(): NTBitmap;
 
-	getRightImage(): NTBitmap;
+    getRightMargins(): NTBalloonPopupMargins;
 
-	getRightMargins(): NTBalloonPopupMargins;
+    getStrokeColor(): NTColor;
 
-	getStrokeColor(): NTColor;
+    getStrokeWidth(): number;
 
-	getStrokeWidth(): number;
+    getTitleColor(): NTColor;
 
-	getTitleColor(): NTColor;
+    getTitleField(): string;
 
-	getTitleField(): string;
+    getTitleFontName(): string;
 
-	getTitleFontName(): string;
+    getTitleFontSize(): number;
 
-	getTitleFontSize(): number;
+    getTitleMargins(): NTBalloonPopupMargins;
 
-	getTitleMargins(): NTBalloonPopupMargins;
+    getTriangleHeight(): number;
 
-	getTriangleHeight(): number;
+    getTriangleWidth(): number;
 
-	getTriangleWidth(): number;
+    isDescriptionWrap(): boolean;
 
-	isDescriptionWrap(): boolean;
-
-	isTitleWrap(): boolean;
+    isTitleWrap(): boolean;
 }
 
 declare class NTBalloonPopupStyleBuilder extends NTPopupStyleBuilder {
+    static alloc(): NTBalloonPopupStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTBalloonPopupStyleBuilder; // inherited from NSObject
+    static new(): NTBalloonPopupStyleBuilder; // inherited from NSObject
 
-	static new(): NTBalloonPopupStyleBuilder; // inherited from NSObject
+    buildStyle(): NTBalloonPopupStyle;
 
-	buildStyle(): NTBalloonPopupStyle;
+    getButtonMargins(): NTBalloonPopupMargins;
 
-	getButtonMargins(): NTBalloonPopupMargins;
+    getCornerRadius(): number;
 
-	getCornerRadius(): number;
+    getDescriptionColor(): NTColor;
 
-	getDescriptionColor(): NTColor;
+    getDescriptionField(): string;
 
-	getDescriptionField(): string;
+    getDescriptionFontName(): string;
 
-	getDescriptionFontName(): string;
+    getDescriptionFontSize(): number;
 
-	getDescriptionFontSize(): number;
+    getDescriptionMargins(): NTBalloonPopupMargins;
 
-	getDescriptionMargins(): NTBalloonPopupMargins;
+    getLeftColor(): NTColor;
 
-	getLeftColor(): NTColor;
+    getLeftImage(): NTBitmap;
 
-	getLeftImage(): NTBitmap;
+    getLeftMargins(): NTBalloonPopupMargins;
 
-	getLeftMargins(): NTBalloonPopupMargins;
+    getRightColor(): NTColor;
 
-	getRightColor(): NTColor;
+    getRightImage(): NTBitmap;
 
-	getRightImage(): NTBitmap;
+    getRightMargins(): NTBalloonPopupMargins;
 
-	getRightMargins(): NTBalloonPopupMargins;
+    getStrokeColor(): NTColor;
 
-	getStrokeColor(): NTColor;
+    getStrokeWidth(): number;
 
-	getStrokeWidth(): number;
+    getTitleColor(): NTColor;
 
-	getTitleColor(): NTColor;
+    getTitleField(): string;
 
-	getTitleField(): string;
+    getTitleFontName(): string;
 
-	getTitleFontName(): string;
+    getTitleFontSize(): number;
 
-	getTitleFontSize(): number;
+    getTitleMargins(): NTBalloonPopupMargins;
 
-	getTitleMargins(): NTBalloonPopupMargins;
+    getTriangleHeight(): number;
 
-	getTriangleHeight(): number;
+    getTriangleWidth(): number;
 
-	getTriangleWidth(): number;
+    isDescriptionWrap(): boolean;
 
-	isDescriptionWrap(): boolean;
+    isTitleWrap(): boolean;
 
-	isTitleWrap(): boolean;
+    setButtonMargins(buttonMargins: NTBalloonPopupMargins): void;
 
-	setButtonMargins(buttonMargins: NTBalloonPopupMargins): void;
+    setCornerRadius(cornerRadius: number): void;
 
-	setCornerRadius(cornerRadius: number): void;
+    setDescriptionColor(descColor: NTColor): void;
 
-	setDescriptionColor(descColor: NTColor): void;
+    setDescriptionField(field: string): void;
 
-	setDescriptionField(field: string): void;
+    setDescriptionFontName(descFontName: string): void;
 
-	setDescriptionFontName(descFontName: string): void;
+    setDescriptionFontSize(descFontSize: number): void;
 
-	setDescriptionFontSize(descFontSize: number): void;
+    setDescriptionMargins(descMargins: NTBalloonPopupMargins): void;
 
-	setDescriptionMargins(descMargins: NTBalloonPopupMargins): void;
+    setDescriptionWrap(descWrap: boolean): void;
 
-	setDescriptionWrap(descWrap: boolean): void;
+    setLeftColor(leftColor: NTColor): void;
 
-	setLeftColor(leftColor: NTColor): void;
+    setLeftImage(leftImage: NTBitmap): void;
 
-	setLeftImage(leftImage: NTBitmap): void;
+    setLeftMargins(leftMargins: NTBalloonPopupMargins): void;
 
-	setLeftMargins(leftMargins: NTBalloonPopupMargins): void;
+    setRightColor(rightColor: NTColor): void;
 
-	setRightColor(rightColor: NTColor): void;
+    setRightImage(rightImage: NTBitmap): void;
 
-	setRightImage(rightImage: NTBitmap): void;
+    setRightMargins(rightMargins: NTBalloonPopupMargins): void;
 
-	setRightMargins(rightMargins: NTBalloonPopupMargins): void;
+    setStrokeColor(strokeColor: NTColor): void;
 
-	setStrokeColor(strokeColor: NTColor): void;
+    setStrokeWidth(strokeWidth: number): void;
 
-	setStrokeWidth(strokeWidth: number): void;
+    setTitleColor(titleColor: NTColor): void;
 
-	setTitleColor(titleColor: NTColor): void;
+    setTitleField(field: string): void;
 
-	setTitleField(field: string): void;
+    setTitleFontName(titleFontName: string): void;
 
-	setTitleFontName(titleFontName: string): void;
+    setTitleFontSize(titleFontSize: number): void;
 
-	setTitleFontSize(titleFontSize: number): void;
+    setTitleMargins(titleMargins: NTBalloonPopupMargins): void;
 
-	setTitleMargins(titleMargins: NTBalloonPopupMargins): void;
+    setTitleWrap(titleWrap: boolean): void;
 
-	setTitleWrap(titleWrap: boolean): void;
+    setTriangleHeight(triangleHeight: number): void;
 
-	setTriangleHeight(triangleHeight: number): void;
-
-	setTriangleWidth(triangleWidth: number): void;
+    setTriangleWidth(triangleWidth: number): void;
 }
 
 declare class NTBillboard extends NTVectorElement {
+    static alloc(): NTBillboard; // inherited from NSObject
 
-	static alloc(): NTBillboard; // inherited from NSObject
+    static new(): NTBillboard; // inherited from NSObject
 
-	static new(): NTBillboard; // inherited from NSObject
+    getBaseBillboard(): NTBillboard;
 
-	getBaseBillboard(): NTBillboard;
+    getRootGeometry(): NTGeometry;
 
-	getRootGeometry(): NTGeometry;
+    getRotation(): number;
 
-	getRotation(): number;
+    setBaseBillboard(baseBillboard: NTBillboard): void;
 
-	setBaseBillboard(baseBillboard: NTBillboard): void;
+    setGeometry(geometry: NTGeometry): void;
 
-	setGeometry(geometry: NTGeometry): void;
+    setPos(pos: NTMapPos): void;
 
-	setPos(pos: NTMapPos): void;
-
-	setRotation(rotation: number): void;
+    setRotation(rotation: number): void;
 }
 
 declare const enum NTBillboardOrientation {
+    T_BILLBOARD_ORIENTATION_FACE_CAMERA = 0,
 
-	T_BILLBOARD_ORIENTATION_FACE_CAMERA = 0,
+    T_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND = 1,
 
-	T_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND = 1,
-
-	T_BILLBOARD_ORIENTATION_GROUND = 2
+    T_BILLBOARD_ORIENTATION_GROUND = 2
 }
 
 declare const enum NTBillboardScaling {
+    T_BILLBOARD_SCALING_WORLD_SIZE = 0,
 
-	T_BILLBOARD_SCALING_WORLD_SIZE = 0,
+    T_BILLBOARD_SCALING_SCREEN_SIZE = 1,
 
-	T_BILLBOARD_SCALING_SCREEN_SIZE = 1,
-
-	T_BILLBOARD_SCALING_CONST_SCREEN_SIZE = 2
+    T_BILLBOARD_SCALING_CONST_SCREEN_SIZE = 2
 }
 
 declare class NTBillboardStyle extends NTStyle {
+    static alloc(): NTBillboardStyle; // inherited from NSObject
 
-	static alloc(): NTBillboardStyle; // inherited from NSObject
+    static new(): NTBillboardStyle; // inherited from NSObject
 
-	static new(): NTBillboardStyle; // inherited from NSObject
+    getAnimationStyle(): NTAnimationStyle;
 
-	getAnimationStyle(): NTAnimationStyle;
+    getAttachAnchorPointX(): number;
 
-	getAttachAnchorPointX(): number;
+    getAttachAnchorPointY(): number;
 
-	getAttachAnchorPointY(): number;
+    getHorizontalOffset(): number;
 
-	getHorizontalOffset(): number;
+    getPlacementPriority(): number;
 
-	getPlacementPriority(): number;
+    getVerticalOffset(): number;
 
-	getVerticalOffset(): number;
+    isCausesOverlap(): boolean;
 
-	isCausesOverlap(): boolean;
+    isHideIfOverlapped(): boolean;
 
-	isHideIfOverlapped(): boolean;
-
-	isScaleWithDPI(): boolean;
+    isScaleWithDPI(): boolean;
 }
 
 declare class NTBillboardStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTBillboardStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTBillboardStyleBuilder; // inherited from NSObject
+    static new(): NTBillboardStyleBuilder; // inherited from NSObject
 
-	static new(): NTBillboardStyleBuilder; // inherited from NSObject
+    getAnimationStyle(): NTAnimationStyle;
 
-	getAnimationStyle(): NTAnimationStyle;
+    getAttachAnchorPointX(): number;
 
-	getAttachAnchorPointX(): number;
+    getAttachAnchorPointY(): number;
 
-	getAttachAnchorPointY(): number;
+    getHorizontalOffset(): number;
 
-	getHorizontalOffset(): number;
+    getPlacementPriority(): number;
 
-	getPlacementPriority(): number;
+    getVerticalOffset(): number;
 
-	getVerticalOffset(): number;
+    isCausesOverlap(): boolean;
 
-	isCausesOverlap(): boolean;
+    isHideIfOverlapped(): boolean;
 
-	isHideIfOverlapped(): boolean;
+    isScaleWithDPI(): boolean;
 
-	isScaleWithDPI(): boolean;
+    setAnimationStyle(animStyle: NTAnimationStyle): void;
 
-	setAnimationStyle(animStyle: NTAnimationStyle): void;
+    setAttachAnchorPointX(attachAnchorPointX: number): void;
 
-	setAttachAnchorPointX(attachAnchorPointX: number): void;
+    setAttachAnchorPointXAttachAnchorPointY(attachAnchorPointX: number, attachAnchorPointY: number): void;
 
-	setAttachAnchorPointXAttachAnchorPointY(attachAnchorPointX: number, attachAnchorPointY: number): void;
+    setAttachAnchorPointY(attachAnchorPointY: number): void;
 
-	setAttachAnchorPointY(attachAnchorPointY: number): void;
+    setCausesOverlap(causesOverlap: boolean): void;
 
-	setCausesOverlap(causesOverlap: boolean): void;
+    setHideIfOverlapped(hideIfOverlapped: boolean): void;
 
-	setHideIfOverlapped(hideIfOverlapped: boolean): void;
+    setHorizontalOffset(horizontalOffset: number): void;
 
-	setHorizontalOffset(horizontalOffset: number): void;
+    setPlacementPriority(placementPriority: number): void;
 
-	setPlacementPriority(placementPriority: number): void;
+    setScaleWithDPI(scaleWithDPI: boolean): void;
 
-	setScaleWithDPI(scaleWithDPI: boolean): void;
-
-	setVerticalOffset(verticalOffset: number): void;
+    setVerticalOffset(verticalOffset: number): void;
 }
 
 declare class NTBinaryData extends NSObject {
+    static alloc(): NTBinaryData; // inherited from NSObject
 
-	static alloc(): NTBinaryData; // inherited from NSObject
+    static new(): NTBinaryData; // inherited from NSObject
 
-	static new(): NTBinaryData; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { dataPtr: string | interop.Pointer | interop.Reference<any>; size: number });
 
-	constructor(o: { dataPtr: string | interop.Pointer | interop.Reference<any>; size: number; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getData(): string;
 
-	getData(): string;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithDataPtrSize(dataPtr: string | interop.Pointer | interop.Reference<any>, size: number): this;
 
-	initWithDataPtrSize(dataPtr: string | interop.Pointer | interop.Reference<any>, size: number): this;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTBitmap extends NSObject {
+    static alloc(): NTBitmap; // inherited from NSObject
 
-	static alloc(): NTBitmap; // inherited from NSObject
+    static createFromCompressed(compressedData: NTBinaryData): NTBitmap;
 
-	static createFromCompressed(compressedData: NTBinaryData): NTBitmap;
+    static new(): NTBitmap; // inherited from NSObject
 
-	static new(): NTBitmap; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { pixelData: NTBinaryData; width: number; height: number; colorFormat: NTColorFormat; bytesPerRow: number });
 
-	constructor(o: { pixelData: NTBinaryData; width: number; height: number; colorFormat: NTColorFormat; bytesPerRow: number; });
+    compressToInternal(): NTBinaryData;
 
-	compressToInternal(): NTBinaryData;
+    compressToPNG(): NTBinaryData;
 
-	compressToPNG(): NTBinaryData;
+    getBytesPerPixel(): number;
 
-	getBytesPerPixel(): number;
+    getColorFormat(): NTColorFormat;
 
-	getColorFormat(): NTColorFormat;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getHeight(): number;
 
-	getHeight(): number;
+    getPaddedBitmapYPadding(xPadding: number, yPadding: number): NTBitmap;
 
-	getPaddedBitmapYPadding(xPadding: number, yPadding: number): NTBitmap;
+    getPixelData(): NTBinaryData;
 
-	getPixelData(): NTBinaryData;
+    getRGBABitmap(): NTBitmap;
 
-	getRGBABitmap(): NTBitmap;
+    getResizedBitmapHeight(width: number, height: number): NTBitmap;
 
-	getResizedBitmapHeight(width: number, height: number): NTBitmap;
+    getSubBitmapYOffsetWidthHeight(xOffset: number, yOffset: number, width: number, height: number): NTBitmap;
 
-	getSubBitmapYOffsetWidthHeight(xOffset: number, yOffset: number, width: number, height: number): NTBitmap;
+    getWidth(): number;
 
-	getWidth(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithPixelDataWidthHeightColorFormatBytesPerRow(pixelData: NTBinaryData, width: number, height: number, colorFormat: NTColorFormat, bytesPerRow: number): this;
 
-	initWithPixelDataWidthHeightColorFormatBytesPerRow(pixelData: NTBinaryData, width: number, height: number, colorFormat: NTColorFormat, bytesPerRow: number): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTBitmapOverlayRasterTileDataSource extends NTTileDataSource {
+    static alloc(): NTBitmapOverlayRasterTileDataSource; // inherited from NSObject
 
-	static alloc(): NTBitmapOverlayRasterTileDataSource; // inherited from NSObject
+    static new(): NTBitmapOverlayRasterTileDataSource; // inherited from NSObject
 
-	static new(): NTBitmapOverlayRasterTileDataSource; // inherited from NSObject
+    constructor(o: { minZoom: number; maxZoom: number; bitmap: NTBitmap; projection: NTProjection; mapPoses: NTMapPosVector; bitmapPoses: NTScreenPosVector });
 
-	constructor(o: { minZoom: number; maxZoom: number; bitmap: NTBitmap; projection: NTProjection; mapPoses: NTMapPosVector; bitmapPoses: NTScreenPosVector; });
+    getDataExtentSwigExplicitNTBitmapOverlayRasterTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTBitmapOverlayRasterTileDataSource(): NTMapBounds;
+    initWithMinZoomMaxZoomBitmapProjectionMapPosesBitmapPoses(
+        minZoom: number,
+        maxZoom: number,
+        bitmap: NTBitmap,
+        projection: NTProjection,
+        mapPoses: NTMapPosVector,
+        bitmapPoses: NTScreenPosVector
+    ): this;
 
-	initWithMinZoomMaxZoomBitmapProjectionMapPosesBitmapPoses(minZoom: number, maxZoom: number, bitmap: NTBitmap, projection: NTProjection, mapPoses: NTMapPosVector, bitmapPoses: NTScreenPosVector): this;
-
-	loadTileSwigExplicitNTBitmapOverlayRasterTileDataSource(mapTile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTBitmapOverlayRasterTileDataSource(mapTile: NTMapTile): NTTileData;
 }
 
 declare class NTBitmapUtils extends NSObject {
+    static alloc(): NTBitmapUtils; // inherited from NSObject
 
-	static alloc(): NTBitmapUtils; // inherited from NSObject
+    static createBitmapFromUIImage(image: UIImage): NTBitmap;
 
-	static createBitmapFromUIImage(image: UIImage): NTBitmap;
+    static createUIImageFromBitmap(bitmap: NTBitmap): UIImage;
 
-	static createUIImageFromBitmap(bitmap: NTBitmap): UIImage;
+    static loadBitmapFromAssets(assetPath: string): NTBitmap;
 
-	static loadBitmapFromAssets(assetPath: string): NTBitmap;
+    static loadBitmapFromFile(filePath: string): NTBitmap;
 
-	static loadBitmapFromFile(filePath: string): NTBitmap;
+    static new(): NTBitmapUtils; // inherited from NSObject
 
-	static new(): NTBitmapUtils; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 }
 
 declare class NTCacheTileDataSource extends NTTileDataSource {
+    static alloc(): NTCacheTileDataSource; // inherited from NSObject
 
-	static alloc(): NTCacheTileDataSource; // inherited from NSObject
+    static new(): NTCacheTileDataSource; // inherited from NSObject
 
-	static new(): NTCacheTileDataSource; // inherited from NSObject
+    constructor(o: { dataSource: NTTileDataSource });
 
-	constructor(o: { dataSource: NTTileDataSource; });
+    clear(): void;
 
-	clear(): void;
+    getCapacity(): number;
 
-	getCapacity(): number;
+    getDataExtentSwigExplicitNTCacheTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTCacheTileDataSource(): NTMapBounds;
+    getDataSource(): NTTileDataSource;
 
-	getDataSource(): NTTileDataSource;
+    getMaxZoomSwigExplicitNTCacheTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTCacheTileDataSource(): number;
+    getMinZoomSwigExplicitNTCacheTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTCacheTileDataSource(): number;
+    initWithDataSource(dataSource: NTTileDataSource): this;
 
-	initWithDataSource(dataSource: NTTileDataSource): this;
+    notifyTilesChangedSwigExplicitNTCacheTileDataSource(removeTiles: boolean): void;
 
-	notifyTilesChangedSwigExplicitNTCacheTileDataSource(removeTiles: boolean): void;
-
-	setCapacity(capacityInBytes: number): void;
-}
-
-declare const enum NTCartoBaseMapBuildingRenderMode {
-
-	T_CARTO_BASEMAP_BUILDING_RENDER_MODE_NONE = 0,
-
-	T_CARTO_BASEMAP_BUILDING_RENDER_MODE_2D = 1,
-
-	T_CARTO_BASEMAP_BUILDING_RENDER_MODE_3D = 2
-}
-
-declare const enum NTCartoBaseMapPOIRenderMode {
-
-	T_CARTO_BASEMAP_POI_RENDER_MODE_NONE = 0,
-
-	T_CARTO_BASEMAP_POI_RENDER_MODE_ICON = 1,
-
-	T_CARTO_BASEMAP_POI_RENDER_MODE_FULL = 2
-}
-
-declare const enum NTCartoBaseMapStyle {
-
-	T_CARTO_BASEMAP_STYLE_POSITRON = 0,
-
-	T_CARTO_BASEMAP_STYLE_DARKMATTER = 1,
-
-	T_CARTO_BASEMAP_STYLE_VOYAGER = 2
+    setCapacity(capacityInBytes: number): void;
 }
 
 declare class NTCartoCSSStyleSet extends NSObject {
+    static alloc(): NTCartoCSSStyleSet; // inherited from NSObject
 
-	static alloc(): NTCartoCSSStyleSet; // inherited from NSObject
+    static new(): NTCartoCSSStyleSet; // inherited from NSObject
 
-	static new(): NTCartoCSSStyleSet; // inherited from NSObject
+    constructor(o: { cartoCSS: string });
 
-	constructor(o: { cartoCSS: string; });
+    constructor(o: { cartoCSS: string; assetPackage: NTAssetPackage });
 
-	constructor(o: { cartoCSS: string; assetPackage: NTAssetPackage; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getAssetPackage(): NTAssetPackage;
 
-	getAssetPackage(): NTAssetPackage;
+    getCartoCSS(): string;
 
-	getCartoCSS(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCartoCSS(cartoCSS: string): this;
 
-	initWithCartoCSS(cartoCSS: string): this;
+    initWithCartoCSSAssetPackage(cartoCSS: string, assetPackage: NTAssetPackage): this;
 
-	initWithCartoCSSAssetPackage(cartoCSS: string, assetPackage: NTAssetPackage): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTCartoMapsService extends NSObject {
-
-	static alloc(): NTCartoMapsService; // inherited from NSObject
-
-	static new(): NTCartoMapsService; // inherited from NSObject
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	buildMap(mapConfig: NTVariant): NTLayerVector;
-
-	buildNamedMapTemplateParams(templateId: string, templateParams: NTStringVariantMap): NTLayerVector;
-
-	getAPIKey(): string;
-
-	getAPITemplate(): string;
-
-	getAuthTokens(): NTStringVector;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	getLayerIndices(): NTIntVector;
-
-	getUsername(): string;
-
-	getVectorTileAssetPackage(): NTAssetPackage;
-
-	getVectorTileBufferSize(): number;
-
-	hash(): number;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	isDefaultVectorLayerMode(): boolean;
-
-	isInteractive(): boolean;
-
-	isStrictMode(): boolean;
-
-	setAPIKey(apiKey: string): void;
-
-	setAPITemplate(apiTemplate: string): void;
-
-	setAuthTokens(authTokens: NTStringVector): void;
-
-	setDefaultVectorLayerMode(vectorLayerMode: boolean): void;
-
-	setInteractive(interactive: boolean): void;
-
-	setLayerIndices(layerIndices: NTIntVector): void;
-
-	setStrictMode(strictMode: boolean): void;
-
-	setUsername(username: string): void;
-
-	setVectorTileAssetPackage(assetPackage: NTAssetPackage): void;
-
-	setVectorTileBufferSize(bufferSize: number): void;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTCartoOfflineVectorTileLayer extends NTCartoVectorTileLayer {
-
-	static alloc(): NTCartoOfflineVectorTileLayer; // inherited from NSObject
-
-	static new(): NTCartoOfflineVectorTileLayer; // inherited from NSObject
-
-	constructor(o: { packageManager: NTCartoPackageManager; style: NTCartoBaseMapStyle; });
-
-	constructor(o: { packageManager: NTCartoPackageManager; styleAssetPackage: NTAssetPackage; });
-
-	initWithPackageManagerStyle(packageManager: NTCartoPackageManager, style: NTCartoBaseMapStyle): this;
-
-	initWithPackageManagerStyleAssetPackage(packageManager: NTCartoPackageManager, styleAssetPackage: NTAssetPackage): this;
-}
-
-declare class NTCartoOnlineRasterTileLayer extends NTRasterTileLayer {
-
-	static alloc(): NTCartoOnlineRasterTileLayer; // inherited from NSObject
-
-	static new(): NTCartoOnlineRasterTileLayer; // inherited from NSObject
-
-	constructor(o: { source: string; });
-
-	initWithSource(source: string): this;
-}
-
-declare class NTCartoOnlineRoutingService extends NTRoutingService {
-
-	static alloc(): NTCartoOnlineRoutingService; // inherited from NSObject
-
-	static new(): NTCartoOnlineRoutingService; // inherited from NSObject
-
-	constructor(o: { source: string; });
-
-	calculateRouteSwigExplicitNTCartoOnlineRoutingService(request: NTRoutingRequest): NTRoutingResult;
-
-	getProfileSwigExplicitNTCartoOnlineRoutingService(): string;
-
-	initWithSource(source: string): this;
-
-	matchRouteSwigExplicitNTCartoOnlineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
-
-	setProfileSwigExplicitNTCartoOnlineRoutingService(profile: string): void;
-}
-
-declare class NTCartoOnlineTileDataSource extends NTTileDataSource {
-
-	static alloc(): NTCartoOnlineTileDataSource; // inherited from NSObject
-
-	static new(): NTCartoOnlineTileDataSource; // inherited from NSObject
-
-	constructor(o: { source: string; });
-
-	getTimeout(): number;
-
-	initWithSource(source: string): this;
-
-	loadTileSwigExplicitNTCartoOnlineTileDataSource(mapTile: NTMapTile): NTTileData;
-
-	setTimeout(timeout: number): void;
-}
-
-declare class NTCartoOnlineVectorTileLayer extends NTCartoVectorTileLayer {
-
-	static alloc(): NTCartoOnlineVectorTileLayer; // inherited from NSObject
-
-	static createDataSource(style: NTCartoBaseMapStyle): NTTileDataSource;
-
-	static new(): NTCartoOnlineVectorTileLayer; // inherited from NSObject
-
-	constructor(o: { source: string; style: NTCartoBaseMapStyle; });
-
-	constructor(o: { source: string; styleAssetPackage: NTAssetPackage; });
-
-	constructor(o: { style: NTCartoBaseMapStyle; });
-
-	initWithSourceStyle(source: string, style: NTCartoBaseMapStyle): this;
-
-	initWithSourceStyleAssetPackage(source: string, styleAssetPackage: NTAssetPackage): this;
-
-	initWithStyle(style: NTCartoBaseMapStyle): this;
-}
-
-declare class NTCartoPackageManager extends NTPackageManager {
-
-	static alloc(): NTCartoPackageManager; // inherited from NSObject
-
-	static new(): NTCartoPackageManager; // inherited from NSObject
-
-	constructor(o: { source: string; dataFolder: string; });
-
-	getStyleAssetPackage(style: NTCartoBaseMapStyle): NTAssetPackage;
-
-	initWithSourceDataFolder(source: string, dataFolder: string): this;
-
-	startStyleDownload(style: NTCartoBaseMapStyle): boolean;
-}
-
-declare class NTCartoSQLService extends NSObject {
-
-	static alloc(): NTCartoSQLService; // inherited from NSObject
-
-	static new(): NTCartoSQLService; // inherited from NSObject
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	getAPIKey(): string;
-
-	getAPITemplate(): string;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	getUsername(): string;
-
-	hash(): number;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	queryData(sql: string): NTVariant;
-
-	queryFeaturesProj(sql: string, proj: NTProjection): NTFeatureCollection;
-
-	setAPIKey(apiKey: string): void;
-
-	setAPITemplate(apiTemplate: string): void;
-
-	setUsername(username: string): void;
-
-	swigGetRawPtr(): number;
-}
-
-declare class NTCartoVectorTileDecoder extends NTVectorTileDecoder {
-
-	static alloc(): NTCartoVectorTileDecoder; // inherited from NSObject
-
-	static new(): NTCartoVectorTileDecoder; // inherited from NSObject
-
-	constructor(o: { layerIds: NTStringVector; layerStyleSets: NTStringCartoCSSStyleSetMap; });
-
-	getLayerIds(): NTStringVector;
-
-	getLayerStyleSet(layerId: string): NTCartoCSSStyleSet;
-
-	initWithLayerIdsLayerStyleSets(layerIds: NTStringVector, layerStyleSets: NTStringCartoCSSStyleSetMap): this;
-
-	isLayerVisible(layerId: string): boolean;
-
-	setLayerStyleSetStyleSet(layerId: string, styleSet: NTCartoCSSStyleSet): void;
-
-	setLayerVisibleVisible(layerId: string, visible: boolean): void;
-}
-
-declare class NTCartoVectorTileLayer extends NTVectorTileLayer {
-
-	static alloc(): NTCartoVectorTileLayer; // inherited from NSObject
-
-	static createTileDecoderFromAssetPackage(styleAssetPackage: NTAssetPackage): NTVectorTileDecoder;
-
-	static createTileDecoderFromStyle(style: NTCartoBaseMapStyle): NTVectorTileDecoder;
-
-	static createTileDecoderStyleName(styleAssetPackage: NTAssetPackage, styleName: string): NTVectorTileDecoder;
-
-	static new(): NTCartoVectorTileLayer; // inherited from NSObject
-
-	constructor(o: { dataSource: NTTileDataSource; style: NTCartoBaseMapStyle; });
-
-	constructor(o: { dataSource: NTTileDataSource; styleAssetPackage: NTAssetPackage; });
-
-	constructor(o: { dataSource: NTTileDataSource; styleAssetPackage: NTAssetPackage; styleName: string; });
-
-	getBuildingRenderMode(): NTCartoBaseMapBuildingRenderMode;
-
-	getFallbackLanguage(): string;
-
-	getLanguage(): string;
-
-	getPOIRenderMode(): NTCartoBaseMapPOIRenderMode;
-
-	initWithDataSourceStyle(dataSource: NTTileDataSource, style: NTCartoBaseMapStyle): this;
-
-	initWithDataSourceStyleAssetPackage(dataSource: NTTileDataSource, styleAssetPackage: NTAssetPackage): this;
-
-	initWithDataSourceStyleAssetPackageStyleName(dataSource: NTTileDataSource, styleAssetPackage: NTAssetPackage, styleName: string): this;
-
-	setBuildingRenderMode(renderMode: NTCartoBaseMapBuildingRenderMode): void;
-
-	setFallbackLanguage(lang: string): void;
-
-	setLanguage(lang: string): void;
-
-	setPOIRenderMode(renderMode: NTCartoBaseMapPOIRenderMode): void;
+    swigGetRawPtr(): number;
 }
 
 declare class NTClickInfo extends NSObject {
+    static alloc(): NTClickInfo; // inherited from NSObject
 
-	static alloc(): NTClickInfo; // inherited from NSObject
+    static new(): NTClickInfo; // inherited from NSObject
 
-	static new(): NTClickInfo; // inherited from NSObject
+    constructor(o: { clickType: NTClickType; duration: number });
 
-	constructor(o: { clickType: NTClickType; duration: number; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    description(): string;
 
-	description(): string;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDuration(): number;
 
-	getDuration(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithClickTypeDuration(clickType: NTClickType, duration: number): this;
 
-	initWithClickTypeDuration(clickType: NTClickType, duration: number): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEqualInternal(clickInfo: NTClickInfo): boolean;
 
-	isEqualInternal(clickInfo: NTClickInfo): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTClickType {
+    T_CLICK_TYPE_SINGLE = 0,
 
-	T_CLICK_TYPE_SINGLE = 0,
+    T_CLICK_TYPE_LONG = 1,
 
-	T_CLICK_TYPE_LONG = 1,
+    T_CLICK_TYPE_DOUBLE = 2,
 
-	T_CLICK_TYPE_DOUBLE = 2,
-
-	T_CLICK_TYPE_DUAL = 3
+    T_CLICK_TYPE_DUAL = 3
 }
 
 declare const enum NTClusterBuilderMode {
+    T_CLUSTER_BUILDER_MODE_ELEMENTS = 0,
 
-	T_CLUSTER_BUILDER_MODE_ELEMENTS = 0,
-
-	T_CLUSTER_BUILDER_MODE_ELEMENT_COUNT = 1
+    T_CLUSTER_BUILDER_MODE_ELEMENT_COUNT = 1
 }
 
 declare class NTClusterElementBuilder extends NSObject {
+    static alloc(): NTClusterElementBuilder; // inherited from NSObject
 
-	static alloc(): NTClusterElementBuilder; // inherited from NSObject
+    static new(): NTClusterElementBuilder; // inherited from NSObject
 
-	static new(): NTClusterElementBuilder; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTClusterElementBuilder;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTClusterElementBuilder;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    buildClusterElementElementCount(mapPos: NTMapPos, elementCount: number): NTVectorElement;
 
-	buildClusterElementElementCount(mapPos: NTMapPos, elementCount: number): NTVectorElement;
+    buildClusterElementElements(mapPos: NTMapPos, elements: NTVectorElementVector): NTVectorElement;
 
-	buildClusterElementElements(mapPos: NTMapPos, elements: NTVectorElementVector): NTVectorElement;
+    buildClusterElementSwigExplicitNTClusterElementBuilderElementCount(mapPos: NTMapPos, elementCount: number): NTVectorElement;
 
-	buildClusterElementSwigExplicitNTClusterElementBuilderElementCount(mapPos: NTMapPos, elementCount: number): NTVectorElement;
+    buildClusterElementSwigExplicitNTClusterElementBuilderElements(mapPos: NTMapPos, elements: NTVectorElementVector): NTVectorElement;
 
-	buildClusterElementSwigExplicitNTClusterElementBuilderElements(mapPos: NTMapPos, elements: NTVectorElementVector): NTVectorElement;
+    getBuilderMode(): NTClusterBuilderMode;
 
-	getBuilderMode(): NTClusterBuilderMode;
+    getBuilderModeSwigExplicitNTClusterElementBuilder(): NTClusterBuilderMode;
 
-	getBuilderModeSwigExplicitNTClusterElementBuilder(): NTClusterBuilderMode;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTClusteredVectorLayer extends NTVectorLayer {
+    static alloc(): NTClusteredVectorLayer; // inherited from NSObject
 
-	static alloc(): NTClusteredVectorLayer; // inherited from NSObject
+    static new(): NTClusteredVectorLayer; // inherited from NSObject
 
-	static new(): NTClusteredVectorLayer; // inherited from NSObject
+    constructor(o: { dataSource: NTLocalVectorDataSource; clusterElementBuilder: NTClusterElementBuilder });
 
-	constructor(o: { dataSource: NTLocalVectorDataSource; clusterElementBuilder: NTClusterElementBuilder; });
+    expandClusterPx(clusterElement: NTVectorElement, px: number): boolean;
 
-	expandClusterPx(clusterElement: NTVectorElement, px: number): boolean;
+    getClusterElementBuilder(): NTClusterElementBuilder;
 
-	getClusterElementBuilder(): NTClusterElementBuilder;
+    getMaximumClusterZoom(): number;
 
-	getMaximumClusterZoom(): number;
+    getMinimumClusterDistance(): number;
 
-	getMinimumClusterDistance(): number;
+    initWithDataSourceClusterElementBuilder(dataSource: NTLocalVectorDataSource, clusterElementBuilder: NTClusterElementBuilder): this;
 
-	initWithDataSourceClusterElementBuilder(dataSource: NTLocalVectorDataSource, clusterElementBuilder: NTClusterElementBuilder): this;
+    isAnimatedClusters(): boolean;
 
-	isAnimatedClusters(): boolean;
+    setAnimatedClusters(animated: boolean): void;
 
-	setAnimatedClusters(animated: boolean): void;
+    setMaximumClusterZoom(maxZoom: number): void;
 
-	setMaximumClusterZoom(maxZoom: number): void;
-
-	setMinimumClusterDistance(px: number): void;
+    setMinimumClusterDistance(px: number): void;
 }
 
 declare class NTColor extends NSObject {
+    static alloc(): NTColor; // inherited from NSObject
 
-	static alloc(): NTColor; // inherited from NSObject
+    static new(): NTColor; // inherited from NSObject
 
-	static new(): NTColor; // inherited from NSObject
+    constructor(o: { color: number });
 
-	constructor(o: { color: number; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { r: number; g: number; b: number; a: number });
 
-	constructor(o: { r: number; g: number; b: number; a: number; });
+    description(): string;
 
-	description(): string;
+    getA(): number;
 
-	getA(): number;
+    getARGB(): number;
 
-	getARGB(): number;
+    getB(): number;
 
-	getB(): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getG(): number;
 
-	getG(): number;
+    getR(): number;
 
-	getR(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithColor(color: number): this;
 
-	initWithColor(color: number): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithRGBA(r: number, g: number, b: number, a: number): this;
 
-	initWithRGBA(r: number, g: number, b: number, a: number): this;
+    isEqualInternal(color: NTColor): boolean;
 
-	isEqualInternal(color: NTColor): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTColorFormat {
+    T_COLOR_FORMAT_UNSUPPORTED = 0,
 
-	T_COLOR_FORMAT_UNSUPPORTED = 0,
+    T_COLOR_FORMAT_GRAYSCALE = 6409,
 
-	T_COLOR_FORMAT_GRAYSCALE = 6409,
+    T_COLOR_FORMAT_GRAYSCALE_ALPHA = 6410,
 
-	T_COLOR_FORMAT_GRAYSCALE_ALPHA = 6410,
+    T_COLOR_FORMAT_RGB = 6407,
 
-	T_COLOR_FORMAT_RGB = 6407,
+    T_COLOR_FORMAT_RGBA = 6408,
 
-	T_COLOR_FORMAT_RGBA = 6408,
+    T_COLOR_FORMAT_BGRA = 1,
 
-	T_COLOR_FORMAT_BGRA = 1,
+    T_COLOR_FORMAT_RGBA_4444 = 2,
 
-	T_COLOR_FORMAT_RGBA_4444 = 2,
-
-	T_COLOR_FORMAT_RGB_565 = 3
+    T_COLOR_FORMAT_RGB_565 = 3
 }
 
 declare class NTCombinedTileDataSource extends NTTileDataSource {
+    static alloc(): NTCombinedTileDataSource; // inherited from NSObject
 
-	static alloc(): NTCombinedTileDataSource; // inherited from NSObject
+    static new(): NTCombinedTileDataSource; // inherited from NSObject
 
-	static new(): NTCombinedTileDataSource; // inherited from NSObject
+    constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource; zoomLevel: number });
 
-	constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource; zoomLevel: number; });
+    getDataExtentSwigExplicitNTCombinedTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTCombinedTileDataSource(): NTMapBounds;
+    getMaxZoomSwigExplicitNTCombinedTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTCombinedTileDataSource(): number;
+    getMinZoomSwigExplicitNTCombinedTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTCombinedTileDataSource(): number;
+    initWithDataSource1DataSource2ZoomLevel(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource, zoomLevel: number): this;
 
-	initWithDataSource1DataSource2ZoomLevel(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource, zoomLevel: number): this;
-
-	loadTileSwigExplicitNTCombinedTileDataSource(tile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTCombinedTileDataSource(tile: NTMapTile): NTTileData;
 }
 
 declare class NTCompiledStyleSet extends NSObject {
+    static alloc(): NTCompiledStyleSet; // inherited from NSObject
 
-	static alloc(): NTCompiledStyleSet; // inherited from NSObject
+    static new(): NTCompiledStyleSet; // inherited from NSObject
 
-	static new(): NTCompiledStyleSet; // inherited from NSObject
+    constructor(o: { assetPackage: NTAssetPackage });
 
-	constructor(o: { assetPackage: NTAssetPackage; });
+    constructor(o: { assetPackage: NTAssetPackage; styleName: string });
 
-	constructor(o: { assetPackage: NTAssetPackage; styleName: string; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getAssetPackage(): NTAssetPackage;
 
-	getAssetPackage(): NTAssetPackage;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getStyleAssetName(): string;
 
-	getStyleAssetName(): string;
+    getStyleName(): string;
 
-	getStyleName(): string;
+    hash(): number;
 
-	hash(): number;
+    initWithAssetPackage(assetPackage: NTAssetPackage): this;
 
-	initWithAssetPackage(assetPackage: NTAssetPackage): this;
+    initWithAssetPackageStyleName(assetPackage: NTAssetPackage, styleName: string): this;
 
-	initWithAssetPackageStyleName(assetPackage: NTAssetPackage, styleName: string): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTCullState extends NSObject {
+    static alloc(): NTCullState; // inherited from NSObject
 
-	static alloc(): NTCullState; // inherited from NSObject
+    static new(): NTCullState; // inherited from NSObject
 
-	static new(): NTCullState; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { envelope: NTMapEnvelope; viewState: NTViewState });
 
-	constructor(o: { envelope: NTMapEnvelope; viewState: NTViewState; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getProjectionEnvelope(projection: NTProjection): NTMapEnvelope;
 
-	getProjectionEnvelope(projection: NTProjection): NTMapEnvelope;
+    getViewState(): NTViewState;
 
-	getViewState(): NTViewState;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithEnvelopeViewState(envelope: NTMapEnvelope, viewState: NTViewState): this;
 
-	initWithEnvelopeViewState(envelope: NTMapEnvelope, viewState: NTViewState): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTCustomPopup extends NTPopup {
+    static alloc(): NTCustomPopup; // inherited from NSObject
 
-	static alloc(): NTCustomPopup; // inherited from NSObject
+    static new(): NTCustomPopup; // inherited from NSObject
 
-	static new(): NTCustomPopup; // inherited from NSObject
+    constructor(o: { baseBillboard: NTBillboard; style: NTPopupStyle; popupHandler: NTCustomPopupHandler });
 
-	constructor(o: { baseBillboard: NTBillboard; style: NTPopupStyle; popupHandler: NTCustomPopupHandler; });
+    constructor(o: { geometry: NTGeometry; style: NTPopupStyle; popupHandler: NTCustomPopupHandler });
 
-	constructor(o: { geometry: NTGeometry; style: NTPopupStyle; popupHandler: NTCustomPopupHandler; });
+    constructor(o: { pos: NTMapPos; style: NTPopupStyle; popupHandler: NTCustomPopupHandler });
 
-	constructor(o: { pos: NTMapPos; style: NTPopupStyle; popupHandler: NTCustomPopupHandler; });
+    getPopupHandler(): NTCustomPopupHandler;
 
-	getPopupHandler(): NTCustomPopupHandler;
+    initWithBaseBillboardStylePopupHandler(baseBillboard: NTBillboard, style: NTPopupStyle, popupHandler: NTCustomPopupHandler): this;
 
-	initWithBaseBillboardStylePopupHandler(baseBillboard: NTBillboard, style: NTPopupStyle, popupHandler: NTCustomPopupHandler): this;
+    initWithGeometryStylePopupHandler(geometry: NTGeometry, style: NTPopupStyle, popupHandler: NTCustomPopupHandler): this;
 
-	initWithGeometryStylePopupHandler(geometry: NTGeometry, style: NTPopupStyle, popupHandler: NTCustomPopupHandler): this;
-
-	initWithPosStylePopupHandler(pos: NTMapPos, style: NTPopupStyle, popupHandler: NTCustomPopupHandler): this;
+    initWithPosStylePopupHandler(pos: NTMapPos, style: NTPopupStyle, popupHandler: NTCustomPopupHandler): this;
 }
 
 declare class NTCustomPopupHandler extends NSObject {
+    static alloc(): NTCustomPopupHandler; // inherited from NSObject
 
-	static alloc(): NTCustomPopupHandler; // inherited from NSObject
+    static new(): NTCustomPopupHandler; // inherited from NSObject
 
-	static new(): NTCustomPopupHandler; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTCustomPopupHandler;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTCustomPopupHandler;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onDrawPopup(popupDrawInfo: NTPopupDrawInfo): NTBitmap;
 
-	onDrawPopup(popupDrawInfo: NTPopupDrawInfo): NTBitmap;
+    onDrawPopupSwigExplicitNTCustomPopupHandler(popupDrawInfo: NTPopupDrawInfo): NTBitmap;
 
-	onDrawPopupSwigExplicitNTCustomPopupHandler(popupDrawInfo: NTPopupDrawInfo): NTBitmap;
+    onPopupClicked(popupClickInfo: NTPopupClickInfo): boolean;
 
-	onPopupClicked(popupClickInfo: NTPopupClickInfo): boolean;
+    onPopupClickedSwigExplicitNTCustomPopupHandler(popupClickInfo: NTPopupClickInfo): boolean;
 
-	onPopupClickedSwigExplicitNTCustomPopupHandler(popupClickInfo: NTPopupClickInfo): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTDoubleVector extends NSObject {
+    static alloc(): NTDoubleVector; // inherited from NSObject
 
-	static alloc(): NTDoubleVector; // inherited from NSObject
+    static new(): NTDoubleVector; // inherited from NSObject
 
-	static new(): NTDoubleVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: number): void;
 
-	add(x: number): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): number;
 
-	get(i: number): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: number): void;
 
-	setVal(i: number, val: number): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTDouglasPeuckerGeometrySimplifier extends NTGeometrySimplifier {
+    static alloc(): NTDouglasPeuckerGeometrySimplifier; // inherited from NSObject
 
-	static alloc(): NTDouglasPeuckerGeometrySimplifier; // inherited from NSObject
+    static new(): NTDouglasPeuckerGeometrySimplifier; // inherited from NSObject
 
-	static new(): NTDouglasPeuckerGeometrySimplifier; // inherited from NSObject
+    constructor(o: { tolerance: number });
 
-	constructor(o: { tolerance: number; });
-
-	initWithTolerance(tolerance: number): this;
+    initWithTolerance(tolerance: number): this;
 }
 
 declare class NTEPSG3857 extends NTProjection {
+    static alloc(): NTEPSG3857; // inherited from NSObject
 
-	static alloc(): NTEPSG3857; // inherited from NSObject
-
-	static new(): NTEPSG3857; // inherited from NSObject
+    static new(): NTEPSG3857; // inherited from NSObject
 }
 
 declare class NTEPSG4326 extends NTProjection {
+    static alloc(): NTEPSG4326; // inherited from NSObject
 
-	static alloc(): NTEPSG4326; // inherited from NSObject
-
-	static new(): NTEPSG4326; // inherited from NSObject
+    static new(): NTEPSG4326; // inherited from NSObject
 }
 
 declare class NTEditableVectorLayer extends NTVectorLayer {
+    static alloc(): NTEditableVectorLayer; // inherited from NSObject
 
-	static alloc(): NTEditableVectorLayer; // inherited from NSObject
+    static new(): NTEditableVectorLayer; // inherited from NSObject
 
-	static new(): NTEditableVectorLayer; // inherited from NSObject
+    getSelectedVectorElement(): NTVectorElement;
 
-	getSelectedVectorElement(): NTVectorElement;
+    getVectorEditEventListener(): NTVectorEditEventListener;
 
-	getVectorEditEventListener(): NTVectorEditEventListener;
+    setSelectedVectorElement(element: NTVectorElement): void;
 
-	setSelectedVectorElement(element: NTVectorElement): void;
-
-	setVectorEditEventListener(listener: NTVectorEditEventListener): void;
+    setVectorEditEventListener(listener: NTVectorEditEventListener): void;
 }
 
 declare class NTElevationDecoder extends NSObject {
+    static alloc(): NTElevationDecoder; // inherited from NSObject
 
-	static alloc(): NTElevationDecoder; // inherited from NSObject
+    static new(): NTElevationDecoder; // inherited from NSObject
 
-	static new(): NTElevationDecoder; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTElevationDecoder;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTElevationDecoder;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTExceptionWrapper extends NSObject {
+    static alloc(): NTExceptionWrapper; // inherited from NSObject
 
-	static alloc(): NTExceptionWrapper; // inherited from NSObject
+    static catchExceptionError(tryBlock: () => void): boolean;
 
-	static catchExceptionError(tryBlock: () => void): boolean;
-
-	static new(): NTExceptionWrapper; // inherited from NSObject
+    static new(): NTExceptionWrapper; // inherited from NSObject
 }
 
 declare class NTFeature extends NSObject {
+    static alloc(): NTFeature; // inherited from NSObject
 
-	static alloc(): NTFeature; // inherited from NSObject
+    static new(): NTFeature; // inherited from NSObject
 
-	static new(): NTFeature; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTFeature;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTFeature;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { geometry: NTGeometry; properties: NTVariant });
 
-	constructor(o: { geometry: NTGeometry; properties: NTVariant; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getGeometry(): NTGeometry;
 
-	getGeometry(): NTGeometry;
+    getProperties(): NTVariant;
 
-	getProperties(): NTVariant;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithGeometryProperties(geometry: NTGeometry, properties: NTVariant): this;
 
-	initWithGeometryProperties(geometry: NTGeometry, properties: NTVariant): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTFeatureCollection extends NSObject {
+    static alloc(): NTFeatureCollection; // inherited from NSObject
 
-	static alloc(): NTFeatureCollection; // inherited from NSObject
+    static new(): NTFeatureCollection; // inherited from NSObject
 
-	static new(): NTFeatureCollection; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTFeatureCollection;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTFeatureCollection;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { features: NTFeatureVector });
 
-	constructor(o: { features: NTFeatureVector; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFeature(index: number): NTFeature;
 
-	getFeature(index: number): NTFeature;
+    getFeatureCount(): number;
 
-	getFeatureCount(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithFeatures(features: NTFeatureVector): this;
 
-	initWithFeatures(features: NTFeatureVector): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTFeatureCollectionSearchService extends NSObject {
+    static alloc(): NTFeatureCollectionSearchService; // inherited from NSObject
 
-	static alloc(): NTFeatureCollectionSearchService; // inherited from NSObject
+    static new(): NTFeatureCollectionSearchService; // inherited from NSObject
 
-	static new(): NTFeatureCollectionSearchService; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTFeatureCollectionSearchService;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTFeatureCollectionSearchService;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; featureCollection: NTFeatureCollection });
 
-	constructor(o: { projection: NTProjection; featureCollection: NTFeatureCollection; });
+    findFeatures(request: NTSearchRequest): NTFeatureCollection;
 
-	findFeatures(request: NTSearchRequest): NTFeatureCollection;
+    findFeaturesSwigExplicitNTFeatureCollectionSearchService(request: NTSearchRequest): NTFeatureCollection;
 
-	findFeaturesSwigExplicitNTFeatureCollectionSearchService(request: NTSearchRequest): NTFeatureCollection;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFeatureCollection(): NTFeatureCollection;
 
-	getFeatureCollection(): NTFeatureCollection;
+    getMaxResults(): number;
 
-	getMaxResults(): number;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionFeatureCollection(projection: NTProjection, featureCollection: NTFeatureCollection): this;
 
-	initWithProjectionFeatureCollection(projection: NTProjection, featureCollection: NTFeatureCollection): this;
+    setMaxResults(maxResults: number): void;
 
-	setMaxResults(maxResults: number): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTFeatureVector extends NSObject {
+    static alloc(): NTFeatureVector; // inherited from NSObject
 
-	static alloc(): NTFeatureVector; // inherited from NSObject
+    static new(): NTFeatureVector; // inherited from NSObject
 
-	static new(): NTFeatureVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTFeature): void;
 
-	add(x: NTFeature): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTFeature;
 
-	get(i: number): NTFeature;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTFeature): void;
 
-	setVal(i: number, val: NTFeature): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTGeoJSONGeometryReader extends NSObject {
+    static alloc(): NTGeoJSONGeometryReader; // inherited from NSObject
 
-	static alloc(): NTGeoJSONGeometryReader; // inherited from NSObject
+    static new(): NTGeoJSONGeometryReader; // inherited from NSObject
 
-	static new(): NTGeoJSONGeometryReader; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getTargetProjection(): NTProjection;
 
-	getTargetProjection(): NTProjection;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    readFeature(geoJSON: string): NTFeature;
 
-	readFeature(geoJSON: string): NTFeature;
+    readFeatureCollection(geoJSON: string): NTFeatureCollection;
 
-	readFeatureCollection(geoJSON: string): NTFeatureCollection;
+    readGeometry(geoJSON: string): NTGeometry;
 
-	readGeometry(geoJSON: string): NTGeometry;
-
-	setTargetProjection(proj: NTProjection): void;
+    setTargetProjection(proj: NTProjection): void;
 }
 
 declare class NTGeoJSONGeometryWriter extends NSObject {
+    static alloc(): NTGeoJSONGeometryWriter; // inherited from NSObject
 
-	static alloc(): NTGeoJSONGeometryWriter; // inherited from NSObject
+    static new(): NTGeoJSONGeometryWriter; // inherited from NSObject
 
-	static new(): NTGeoJSONGeometryWriter; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getSourceProjection(): NTProjection;
 
-	getSourceProjection(): NTProjection;
+    getZ(): boolean;
 
-	getZ(): boolean;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setSourceProjection(proj: NTProjection): void;
 
-	setSourceProjection(proj: NTProjection): void;
+    setZ(z: boolean): void;
 
-	setZ(z: boolean): void;
+    writeFeature(feature: NTFeature): string;
 
-	writeFeature(feature: NTFeature): string;
+    writeFeatureCollection(featureCollection: NTFeatureCollection): string;
 
-	writeFeatureCollection(featureCollection: NTFeatureCollection): string;
-
-	writeGeometry(geometry: NTGeometry): string;
+    writeGeometry(geometry: NTGeometry): string;
 }
 
 declare class NTGeoJSONVectorTileDataSource extends NTTileDataSource {
+    static alloc(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
 
-	static alloc(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
+    static new(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
 
-	static new(): NTGeoJSONVectorTileDataSource; // inherited from NSObject
+    addGeoJSONFeatureGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
 
-	addGeoJSONFeatureGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
+    addGeoJSONStringFeatureGeoJSON(layerIndex: number, geoJSON: string): void;
 
-	addGeoJSONStringFeatureGeoJSON(layerIndex: number, geoJSON: string): void;
+    createLayer(name: string): number;
 
-	createLayer(name: string): number;
+    deleteLayer(layerIndex: number): void;
 
-	deleteLayer(layerIndex: number): void;
+    getDataExtentSwigExplicitNTGeoJSONVectorTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTGeoJSONVectorTileDataSource(): NTMapBounds;
+    getDefaultLayerBuffer(): number;
 
-	getDefaultLayerBuffer(): number;
+    getSimplifyTolerance(): number;
 
-	getSimplifyTolerance(): number;
+    loadTileSwigExplicitNTGeoJSONVectorTileDataSource(mapTile: NTMapTile): NTTileData;
 
-	loadTileSwigExplicitNTGeoJSONVectorTileDataSource(mapTile: NTMapTile): NTTileData;
+    removeGeoJSONFeatureArg2(layerIndex: number, arg2: NTVariant): void;
 
-	removeGeoJSONFeatureArg2(layerIndex: number, arg2: NTVariant): void;
+    setDefaultLayerBuffer(tolerance: number): void;
 
-	setDefaultLayerBuffer(tolerance: number): void;
+    setLayerFeatureCollectionProjectionFeatureCollection(layerIndex: number, projection: NTProjection, featureCollection: NTFeatureCollection): void;
 
-	setLayerFeatureCollectionProjectionFeatureCollection(layerIndex: number, projection: NTProjection, featureCollection: NTFeatureCollection): void;
+    setLayerGeoJSONGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
 
-	setLayerGeoJSONGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
+    setLayerGeoJSONStringGeoJSON(layerIndex: number, geoJSON: string): void;
 
-	setLayerGeoJSONStringGeoJSON(layerIndex: number, geoJSON: string): void;
+    setSimplifyTolerance(tolerance: number): void;
 
-	setSimplifyTolerance(tolerance: number): void;
+    updateGeoJSONFeatureGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
 
-	updateGeoJSONFeatureGeoJSON(layerIndex: number, geoJSON: NTVariant): void;
-
-	updateGeoJSONStringFeatureGeoJSON(layerIndex: number, geoJSON: string): void;
+    updateGeoJSONStringFeatureGeoJSON(layerIndex: number, geoJSON: string): void;
 }
 
 declare class NTGeocodingAddress extends NTAddress {
+    static alloc(): NTGeocodingAddress; // inherited from NSObject
 
-	static alloc(): NTGeocodingAddress; // inherited from NSObject
-
-	static new(): NTGeocodingAddress; // inherited from NSObject
+    static new(): NTGeocodingAddress; // inherited from NSObject
 }
 
 declare class NTGeocodingRequest extends NSObject {
+    static alloc(): NTGeocodingRequest; // inherited from NSObject
 
-	static alloc(): NTGeocodingRequest; // inherited from NSObject
+    static new(): NTGeocodingRequest; // inherited from NSObject
 
-	static new(): NTGeocodingRequest; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; query: string });
 
-	constructor(o: { projection: NTProjection; query: string; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getCustomParameter(param: string): NTVariant;
 
-	getCustomParameter(param: string): NTVariant;
+    getLocation(): NTMapPos;
 
-	getLocation(): NTMapPos;
+    getLocationRadius(): number;
 
-	getLocationRadius(): number;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    getQuery(): string;
 
-	getQuery(): string;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionQuery(projection: NTProjection, query: string): this;
 
-	initWithProjectionQuery(projection: NTProjection, query: string): this;
+    setCustomParameterValue(param: string, value: NTVariant): void;
 
-	setCustomParameterValue(param: string, value: NTVariant): void;
+    setLocation(pos: NTMapPos): void;
 
-	setLocation(pos: NTMapPos): void;
+    setLocationRadius(radius: number): void;
 
-	setLocationRadius(radius: number): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTGeocodingResult extends NSObject {
+    static alloc(): NTGeocodingResult; // inherited from NSObject
 
-	static alloc(): NTGeocodingResult; // inherited from NSObject
+    static new(): NTGeocodingResult; // inherited from NSObject
 
-	static new(): NTGeocodingResult; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; address: NTGeocodingAddress; rank: number; featureCollection: NTFeatureCollection });
 
-	constructor(o: { projection: NTProjection; address: NTGeocodingAddress; rank: number; featureCollection: NTFeatureCollection; });
+    description(): string;
 
-	description(): string;
+    getAddress(): NTGeocodingAddress;
 
-	getAddress(): NTGeocodingAddress;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFeatureCollection(): NTFeatureCollection;
 
-	getFeatureCollection(): NTFeatureCollection;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    getRank(): number;
 
-	getRank(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionAddressRankFeatureCollection(projection: NTProjection, address: NTGeocodingAddress, rank: number, featureCollection: NTFeatureCollection): this;
 
-	initWithProjectionAddressRankFeatureCollection(projection: NTProjection, address: NTGeocodingAddress, rank: number, featureCollection: NTFeatureCollection): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTGeocodingResultVector extends NSObject {
+    static alloc(): NTGeocodingResultVector; // inherited from NSObject
 
-	static alloc(): NTGeocodingResultVector; // inherited from NSObject
+    static new(): NTGeocodingResultVector; // inherited from NSObject
 
-	static new(): NTGeocodingResultVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTGeocodingResult): void;
 
-	add(x: NTGeocodingResult): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTGeocodingResult;
 
-	get(i: number): NTGeocodingResult;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTGeocodingResult): void;
 
-	setVal(i: number, val: NTGeocodingResult): void;
-
-	size(): number;
+    size(): number;
 }
 
 declare class NTGeocodingService extends NSObject {
+    static alloc(): NTGeocodingService; // inherited from NSObject
 
-	static alloc(): NTGeocodingService; // inherited from NSObject
+    static new(): NTGeocodingService; // inherited from NSObject
 
-	static new(): NTGeocodingService; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTGeocodingService;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTGeocodingService;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    calculateAddresses(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddresses(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getLanguage(): string;
 
-	getLanguage(): string;
+    getMaxResults(): number;
 
-	getMaxResults(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isAutocomplete(): boolean;
 
-	isAutocomplete(): boolean;
+    setAutocomplete(autocomplete: boolean): void;
 
-	setAutocomplete(autocomplete: boolean): void;
+    setLanguage(lang: string): void;
 
-	setLanguage(lang: string): void;
+    setMaxResults(maxResults: number): void;
 
-	setMaxResults(maxResults: number): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTGeometry extends NSObject {
+    static alloc(): NTGeometry; // inherited from NSObject
 
-	static alloc(): NTGeometry; // inherited from NSObject
+    static new(): NTGeometry; // inherited from NSObject
 
-	static new(): NTGeometry; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTGeometry;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTGeometry;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getBounds(): NTMapBounds;
 
-	getBounds(): NTMapBounds;
+    getCenterPos(): NTMapPos;
 
-	getCenterPos(): NTMapPos;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTGeometryCollection extends NTVectorElement {
+    static alloc(): NTGeometryCollection; // inherited from NSObject
 
-	static alloc(): NTGeometryCollection; // inherited from NSObject
+    static new(): NTGeometryCollection; // inherited from NSObject
 
-	static new(): NTGeometryCollection; // inherited from NSObject
+    constructor(o: { geometry: NTMultiGeometry; style: NTGeometryCollectionStyle });
 
-	constructor(o: { geometry: NTMultiGeometry; style: NTGeometryCollectionStyle; });
+    getGeometry(): NTMultiGeometry;
 
-	getGeometry(): NTMultiGeometry;
+    getStyle(): NTGeometryCollectionStyle;
 
-	getStyle(): NTGeometryCollectionStyle;
+    initWithGeometryStyle(geometry: NTMultiGeometry, style: NTGeometryCollectionStyle): this;
 
-	initWithGeometryStyle(geometry: NTMultiGeometry, style: NTGeometryCollectionStyle): this;
+    setGeometry(geometry: NTMultiGeometry): void;
 
-	setGeometry(geometry: NTMultiGeometry): void;
-
-	setStyle(style: NTGeometryCollectionStyle): void;
+    setStyle(style: NTGeometryCollectionStyle): void;
 }
 
 declare class NTGeometryCollectionStyle extends NTStyle {
+    static alloc(): NTGeometryCollectionStyle; // inherited from NSObject
 
-	static alloc(): NTGeometryCollectionStyle; // inherited from NSObject
+    static new(): NTGeometryCollectionStyle; // inherited from NSObject
 
-	static new(): NTGeometryCollectionStyle; // inherited from NSObject
+    getLineStyle(): NTLineStyle;
 
-	getLineStyle(): NTLineStyle;
+    getPointStyle(): NTPointStyle;
 
-	getPointStyle(): NTPointStyle;
-
-	getPolygonStyle(): NTPolygonStyle;
+    getPolygonStyle(): NTPolygonStyle;
 }
 
 declare class NTGeometryCollectionStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTGeometryCollectionStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTGeometryCollectionStyleBuilder; // inherited from NSObject
+    static new(): NTGeometryCollectionStyleBuilder; // inherited from NSObject
 
-	static new(): NTGeometryCollectionStyleBuilder; // inherited from NSObject
+    buildStyle(): NTGeometryCollectionStyle;
 
-	buildStyle(): NTGeometryCollectionStyle;
+    getLineStyle(): NTLineStyle;
 
-	getLineStyle(): NTLineStyle;
+    getPointStyle(): NTPointStyle;
 
-	getPointStyle(): NTPointStyle;
+    getPolygonStyle(): NTPolygonStyle;
 
-	getPolygonStyle(): NTPolygonStyle;
+    setLineStyle(lineStyle: NTLineStyle): void;
 
-	setLineStyle(lineStyle: NTLineStyle): void;
+    setPointStyle(pointStyle: NTPointStyle): void;
 
-	setPointStyle(pointStyle: NTPointStyle): void;
-
-	setPolygonStyle(polygonStyle: NTPolygonStyle): void;
+    setPolygonStyle(polygonStyle: NTPolygonStyle): void;
 }
 
 declare class NTGeometrySimplifier extends NSObject {
+    static alloc(): NTGeometrySimplifier; // inherited from NSObject
 
-	static alloc(): NTGeometrySimplifier; // inherited from NSObject
+    static new(): NTGeometrySimplifier; // inherited from NSObject
 
-	static new(): NTGeometrySimplifier; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTGeometrySimplifier;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTGeometrySimplifier;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTGeometryVector extends NSObject {
+    static alloc(): NTGeometryVector; // inherited from NSObject
 
-	static alloc(): NTGeometryVector; // inherited from NSObject
+    static new(): NTGeometryVector; // inherited from NSObject
 
-	static new(): NTGeometryVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTGeometry): void;
 
-	add(x: NTGeometry): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTGeometry;
 
-	get(i: number): NTGeometry;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTGeometry): void;
 
-	setVal(i: number, val: NTGeometry): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTHTTPTileDataSource extends NTTileDataSource {
+    static alloc(): NTHTTPTileDataSource; // inherited from NSObject
 
-	static alloc(): NTHTTPTileDataSource; // inherited from NSObject
+    static new(): NTHTTPTileDataSource; // inherited from NSObject
 
-	static new(): NTHTTPTileDataSource; // inherited from NSObject
+    constructor(o: { minZoom: number; maxZoom: number; baseURL: string });
 
-	constructor(o: { minZoom: number; maxZoom: number; baseURL: string; });
+    buildTileURLSwigExplicitNTHTTPTileDataSourceTile(baseURL: string, tile: NTMapTile): string;
 
-	buildTileURLSwigExplicitNTHTTPTileDataSourceTile(baseURL: string, tile: NTMapTile): string;
+    buildTileURLTile(baseURL: string, tile: NTMapTile): string;
 
-	buildTileURLTile(baseURL: string, tile: NTMapTile): string;
+    getBaseURL(): string;
 
-	getBaseURL(): string;
+    getHTTPHeaders(): NTStringMap;
 
-	getHTTPHeaders(): NTStringMap;
+    getSubdomains(): NTStringVector;
 
-	getSubdomains(): NTStringVector;
+    getTimeout(): number;
 
-	getTimeout(): number;
+    initWithMinZoomMaxZoomBaseURL(minZoom: number, maxZoom: number, baseURL: string): this;
 
-	initWithMinZoomMaxZoomBaseURL(minZoom: number, maxZoom: number, baseURL: string): this;
+    isMaxAgeHeaderCheck(): boolean;
 
-	isMaxAgeHeaderCheck(): boolean;
+    isTMSScheme(): boolean;
 
-	isTMSScheme(): boolean;
+    loadTileSwigExplicitNTHTTPTileDataSource(mapTile: NTMapTile): NTTileData;
 
-	loadTileSwigExplicitNTHTTPTileDataSource(mapTile: NTMapTile): NTTileData;
+    setBaseURL(baseURL: string): void;
 
-	setBaseURL(baseURL: string): void;
+    setHTTPHeaders(headers: NTStringMap): void;
 
-	setHTTPHeaders(headers: NTStringMap): void;
+    setMaxAgeHeaderCheck(maxAgeCheck: boolean): void;
 
-	setMaxAgeHeaderCheck(maxAgeCheck: boolean): void;
+    setSubdomains(subdomains: NTStringVector): void;
 
-	setSubdomains(subdomains: NTStringVector): void;
+    setTMSScheme(tmsScheme: boolean): void;
 
-	setTMSScheme(tmsScheme: boolean): void;
-
-	setTimeout(timeout: number): void;
+    setTimeout(timeout: number): void;
 }
 
 declare class NTHillshadeRasterTileLayer extends NTRasterTileLayer {
+    static alloc(): NTHillshadeRasterTileLayer; // inherited from NSObject
 
-	static alloc(): NTHillshadeRasterTileLayer; // inherited from NSObject
+    static new(): NTHillshadeRasterTileLayer; // inherited from NSObject
 
-	static new(): NTHillshadeRasterTileLayer; // inherited from NSObject
+    constructor(o: { dataSource: NTTileDataSource; elevationDecoder: NTElevationDecoder });
 
-	constructor(o: { dataSource: NTTileDataSource; elevationDecoder: NTElevationDecoder; });
+    getAccentColor(): NTColor;
 
-	getAccentColor(): NTColor;
+    getContrast(): number;
 
-	getContrast(): number;
+    getElevation(pos: NTMapPos): number;
 
-	getElevation(pos: NTMapPos): number;
+    getElevations(poses: NTMapPosVector): NTDoubleVector;
 
-	getElevations(poses: NTMapPosVector): NTDoubleVector;
+    getExagerateHeightScaleEnabled(): boolean;
 
-	getExagerateHeightScaleEnabled(): boolean;
+    getHeightScale(): number;
 
-	getHeightScale(): number;
+    getHighlightColor(): NTColor;
 
-	getHighlightColor(): NTColor;
+    getIlluminationDirection(): NTMapVec;
 
-	getIlluminationDirection(): NTMapVec;
+    getIlluminationMapRotationEnabled(): boolean;
 
-	getIlluminationMapRotationEnabled(): boolean;
+    getNormalMapLightingShader(): string;
 
-	getNormalMapLightingShader(): string;
+    getShadowColor(): NTColor;
 
-	getShadowColor(): NTColor;
+    initWithDataSourceElevationDecoder(dataSource: NTTileDataSource, elevationDecoder: NTElevationDecoder): this;
 
-	initWithDataSourceElevationDecoder(dataSource: NTTileDataSource, elevationDecoder: NTElevationDecoder): this;
+    setAccentColor(color: NTColor): void;
 
-	setAccentColor(color: NTColor): void;
+    setContrast(contrast: number): void;
 
-	setContrast(contrast: number): void;
+    setExagerateHeightScaleEnabled(enabled: boolean): void;
 
-	setExagerateHeightScaleEnabled(enabled: boolean): void;
+    setHeightScale(heightScale: number): void;
 
-	setHeightScale(heightScale: number): void;
+    setHighlightColor(color: NTColor): void;
 
-	setHighlightColor(color: NTColor): void;
+    setIlluminationDirection(direction: NTMapVec): void;
 
-	setIlluminationDirection(direction: NTMapVec): void;
+    setIlluminationMapRotationEnabled(enabled: boolean): void;
 
-	setIlluminationMapRotationEnabled(enabled: boolean): void;
+    setNormalMapLightingShader(shader: string): void;
 
-	setNormalMapLightingShader(shader: string): void;
-
-	setShadowColor(color: NTColor): void;
-}
-
-declare class NTIntVector extends NSObject {
-
-	static alloc(): NTIntVector; // inherited from NSObject
-
-	static new(): NTIntVector; // inherited from NSObject
-
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
-
-	add(x: number): void;
-
-	capacity(): number;
-
-	clear(): void;
-
-	get(i: number): number;
-
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	isEmpty(): boolean;
-
-	reserve(n: number): void;
-
-	setVal(i: number, val: number): void;
-
-	size(): number;
-
-	swigGetRawPtr(): number;
+    setShadowColor(color: NTColor): void;
 }
 
 declare class NTLabel extends NTBillboard {
+    static alloc(): NTLabel; // inherited from NSObject
 
-	static alloc(): NTLabel; // inherited from NSObject
+    static new(): NTLabel; // inherited from NSObject
 
-	static new(): NTLabel; // inherited from NSObject
+    drawBitmap(dpToPX: number): NTBitmap;
 
-	drawBitmap(dpToPX: number): NTBitmap;
+    getStyle(): NTLabelStyle;
 
-	getStyle(): NTLabelStyle;
-
-	setStyle(style: NTLabelStyle): void;
+    setStyle(style: NTLabelStyle): void;
 }
 
 declare class NTLabelStyle extends NTBillboardStyle {
+    static alloc(): NTLabelStyle; // inherited from NSObject
 
-	static alloc(): NTLabelStyle; // inherited from NSObject
+    static new(): NTLabelStyle; // inherited from NSObject
 
-	static new(): NTLabelStyle; // inherited from NSObject
+    getAnchorPointX(): number;
 
-	getAnchorPointX(): number;
+    getAnchorPointY(): number;
 
-	getAnchorPointY(): number;
+    getOrientationMode(): NTBillboardOrientation;
 
-	getOrientationMode(): NTBillboardOrientation;
+    getRenderScale(): number;
 
-	getRenderScale(): number;
+    getScalingMode(): NTBillboardScaling;
 
-	getScalingMode(): NTBillboardScaling;
-
-	isFlippable(): boolean;
+    isFlippable(): boolean;
 }
 
 declare class NTLabelStyleBuilder extends NTBillboardStyleBuilder {
+    static alloc(): NTLabelStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTLabelStyleBuilder; // inherited from NSObject
+    static new(): NTLabelStyleBuilder; // inherited from NSObject
 
-	static new(): NTLabelStyleBuilder; // inherited from NSObject
+    buildStyle(): NTLabelStyle;
 
-	buildStyle(): NTLabelStyle;
+    getAnchorPointX(): number;
 
-	getAnchorPointX(): number;
+    getAnchorPointY(): number;
 
-	getAnchorPointY(): number;
+    getOrientationMode(): NTBillboardOrientation;
 
-	getOrientationMode(): NTBillboardOrientation;
+    getRenderScale(): number;
 
-	getRenderScale(): number;
+    getScalingMode(): NTBillboardScaling;
 
-	getScalingMode(): NTBillboardScaling;
+    isFlippable(): boolean;
 
-	isFlippable(): boolean;
+    setAnchorPointX(anchorPointX: number): void;
 
-	setAnchorPointX(anchorPointX: number): void;
+    setAnchorPointXAnchorPointY(anchorPointX: number, anchorPointY: number): void;
 
-	setAnchorPointXAnchorPointY(anchorPointX: number, anchorPointY: number): void;
+    setAnchorPointY(anchorPointY: number): void;
 
-	setAnchorPointY(anchorPointY: number): void;
+    setFlippable(flippable: boolean): void;
 
-	setFlippable(flippable: boolean): void;
+    setOrientationMode(orientationMode: NTBillboardOrientation): void;
 
-	setOrientationMode(orientationMode: NTBillboardOrientation): void;
+    setRenderScale(renderScale: number): void;
 
-	setRenderScale(renderScale: number): void;
-
-	setScalingMode(scalingMode: NTBillboardScaling): void;
+    setScalingMode(scalingMode: NTBillboardScaling): void;
 }
 
 declare class NTLayer extends NSObject {
+    static alloc(): NTLayer; // inherited from NSObject
 
-	static alloc(): NTLayer; // inherited from NSObject
+    static new(): NTLayer; // inherited from NSObject
 
-	static new(): NTLayer; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTLayer;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTLayer;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    containsMetaDataKey(key: string): boolean;
 
-	containsMetaDataKey(key: string): boolean;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMetaData(): NTStringVariantMap;
 
-	getMetaData(): NTStringVariantMap;
+    getMetaDataElement(key: string): NTVariant;
 
-	getMetaDataElement(key: string): NTVariant;
+    getOpacity(): number;
 
-	getOpacity(): number;
+    getUpdatePriority(): number;
 
-	getUpdatePriority(): number;
+    getVisibleZoomRange(): NTMapRange;
 
-	getVisibleZoomRange(): NTMapRange;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isUpdateInProgress(): boolean;
 
-	isUpdateInProgress(): boolean;
+    isVisible(): boolean;
 
-	isVisible(): boolean;
+    refresh(): void;
 
-	refresh(): void;
+    setCullDelay(delay: number): void;
 
-	setCullDelay(delay: number): void;
+    setMetaData(metaData: NTStringVariantMap): void;
 
-	setMetaData(metaData: NTStringVariantMap): void;
+    setMetaDataElementElement(key: string, element: NTVariant): void;
 
-	setMetaDataElementElement(key: string, element: NTVariant): void;
+    setOpacity(opacity: number): void;
 
-	setOpacity(opacity: number): void;
+    setUpdatePriority(priority: number): void;
 
-	setUpdatePriority(priority: number): void;
+    setVisible(visible: boolean): void;
 
-	setVisible(visible: boolean): void;
+    setVisibleZoomRange(range: NTMapRange): void;
 
-	setVisibleZoomRange(range: NTMapRange): void;
+    simulateClickScreenPosViewState(clickType: NTClickType, screenPos: NTScreenPos, viewState: NTViewState): void;
 
-	simulateClickScreenPosViewState(clickType: NTClickType, screenPos: NTScreenPos, viewState: NTViewState): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+    swigGetRawPtr(): number;
 
-	swigGetRawPtr(): number;
-
-	update(cullState: NTCullState): void;
+    update(cullState: NTCullState): void;
 }
 
 declare class NTLayerVector extends NSObject {
+    static alloc(): NTLayerVector; // inherited from NSObject
 
-	static alloc(): NTLayerVector; // inherited from NSObject
+    static new(): NTLayerVector; // inherited from NSObject
 
-	static new(): NTLayerVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTLayer): void;
 
-	add(x: NTLayer): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTLayer;
 
-	get(i: number): NTLayer;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTLayer): void;
 
-	setVal(i: number, val: NTLayer): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTLayers extends NSObject {
+    static alloc(): NTLayers; // inherited from NSObject
 
-	static alloc(): NTLayers; // inherited from NSObject
+    static new(): NTLayers; // inherited from NSObject
 
-	static new(): NTLayers; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(layer: NTLayer): void;
 
-	add(layer: NTLayer): void;
+    addAll(layers: NTLayerVector): void;
 
-	addAll(layers: NTLayerVector): void;
+    clear(): void;
 
-	clear(): void;
+    count(): number;
 
-	count(): number;
+    get(index: number): NTLayer;
 
-	get(index: number): NTLayer;
+    getAll(): NTLayerVector;
 
-	getAll(): NTLayerVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    insertLayer(index: number, layer: NTLayer): void;
 
-	insertLayer(index: number, layer: NTLayer): void;
+    remove(layer: NTLayer): boolean;
 
-	remove(layer: NTLayer): boolean;
+    removeAll(layers: NTLayerVector): boolean;
 
-	removeAll(layers: NTLayerVector): boolean;
+    setAll(layers: NTLayerVector): void;
 
-	setAll(layers: NTLayerVector): void;
+    setLayer(index: number, layer: NTLayer): void;
 
-	setLayer(index: number, layer: NTLayer): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTLine extends NTVectorElement {
+    static alloc(): NTLine; // inherited from NSObject
 
-	static alloc(): NTLine; // inherited from NSObject
+    static new(): NTLine; // inherited from NSObject
 
-	static new(): NTLine; // inherited from NSObject
+    constructor(o: { geometry: NTLineGeometry; style: NTLineStyle });
 
-	constructor(o: { geometry: NTLineGeometry; style: NTLineStyle; });
+    constructor(o: { poses: NTMapPosVector; style: NTLineStyle });
 
-	constructor(o: { poses: NTMapPosVector; style: NTLineStyle; });
+    getGeometry(): NTLineGeometry;
 
-	getGeometry(): NTLineGeometry;
+    getPoses(): NTMapPosVector;
 
-	getPoses(): NTMapPosVector;
+    getStyle(): NTLineStyle;
 
-	getStyle(): NTLineStyle;
+    initWithGeometryStyle(geometry: NTLineGeometry, style: NTLineStyle): this;
 
-	initWithGeometryStyle(geometry: NTLineGeometry, style: NTLineStyle): this;
+    initWithPosesStyle(poses: NTMapPosVector, style: NTLineStyle): this;
 
-	initWithPosesStyle(poses: NTMapPosVector, style: NTLineStyle): this;
+    setGeometry(geometry: NTLineGeometry): void;
 
-	setGeometry(geometry: NTLineGeometry): void;
+    setPoses(poses: NTMapPosVector): void;
 
-	setPoses(poses: NTMapPosVector): void;
-
-	setStyle(style: NTLineStyle): void;
+    setStyle(style: NTLineStyle): void;
 }
 
 declare const enum NTLineEndType {
+    T_LINE_END_TYPE_NONE = 0,
 
-	T_LINE_END_TYPE_NONE = 0,
+    T_LINE_END_TYPE_SQUARE = 1,
 
-	T_LINE_END_TYPE_SQUARE = 1,
-
-	T_LINE_END_TYPE_ROUND = 2
+    T_LINE_END_TYPE_ROUND = 2
 }
 
 declare class NTLineGeometry extends NTGeometry {
+    static alloc(): NTLineGeometry; // inherited from NSObject
 
-	static alloc(): NTLineGeometry; // inherited from NSObject
+    static new(): NTLineGeometry; // inherited from NSObject
 
-	static new(): NTLineGeometry; // inherited from NSObject
+    constructor(o: { poses: NTMapPosVector });
 
-	constructor(o: { poses: NTMapPosVector; });
+    getPoses(): NTMapPosVector;
 
-	getPoses(): NTMapPosVector;
-
-	initWithPoses(poses: NTMapPosVector): this;
+    initWithPoses(poses: NTMapPosVector): this;
 }
 
 declare class NTLineGeometryVector extends NSObject {
+    static alloc(): NTLineGeometryVector; // inherited from NSObject
 
-	static alloc(): NTLineGeometryVector; // inherited from NSObject
+    static new(): NTLineGeometryVector; // inherited from NSObject
 
-	static new(): NTLineGeometryVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTLineGeometry): void;
 
-	add(x: NTLineGeometry): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTLineGeometry;
 
-	get(i: number): NTLineGeometry;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTLineGeometry): void;
 
-	setVal(i: number, val: NTLineGeometry): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTLineJoinType {
+    T_LINE_JOIN_TYPE_NONE = 0,
 
-	T_LINE_JOIN_TYPE_NONE = 0,
+    T_LINE_JOIN_TYPE_MITER = 1,
 
-	T_LINE_JOIN_TYPE_MITER = 1,
+    T_LINE_JOIN_TYPE_BEVEL = 2,
 
-	T_LINE_JOIN_TYPE_BEVEL = 2,
-
-	T_LINE_JOIN_TYPE_ROUND = 3
+    T_LINE_JOIN_TYPE_ROUND = 3
 }
 
 declare class NTLineStyle extends NTStyle {
+    static alloc(): NTLineStyle; // inherited from NSObject
 
-	static alloc(): NTLineStyle; // inherited from NSObject
+    static new(): NTLineStyle; // inherited from NSObject
 
-	static new(): NTLineStyle; // inherited from NSObject
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getClickWidth(): number;
 
-	getClickWidth(): number;
+    getLineEndType(): NTLineEndType;
 
-	getLineEndType(): NTLineEndType;
+    getLineJoinType(): NTLineJoinType;
 
-	getLineJoinType(): NTLineJoinType;
+    getStretchFactor(): number;
 
-	getStretchFactor(): number;
-
-	getWidth(): number;
+    getWidth(): number;
 }
 
 declare class NTLineStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTLineStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTLineStyleBuilder; // inherited from NSObject
+    static new(): NTLineStyleBuilder; // inherited from NSObject
 
-	static new(): NTLineStyleBuilder; // inherited from NSObject
+    buildStyle(): NTLineStyle;
 
-	buildStyle(): NTLineStyle;
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getClickWidth(): number;
 
-	getClickWidth(): number;
+    getLineEndType(): NTLineEndType;
 
-	getLineEndType(): NTLineEndType;
+    getLineJoinType(): NTLineJoinType;
 
-	getLineJoinType(): NTLineJoinType;
+    getStretchFactor(): number;
 
-	getStretchFactor(): number;
+    getWidth(): number;
 
-	getWidth(): number;
+    setBitmap(bitmap: NTBitmap): void;
 
-	setBitmap(bitmap: NTBitmap): void;
+    setClickWidth(clickWidth: number): void;
 
-	setClickWidth(clickWidth: number): void;
+    setLineEndType(lineEndType: NTLineEndType): void;
 
-	setLineEndType(lineEndType: NTLineEndType): void;
+    setLineJoinType(lineJoinType: NTLineJoinType): void;
 
-	setLineJoinType(lineJoinType: NTLineJoinType): void;
+    setStretchFactor(stretchFactor: number): void;
 
-	setStretchFactor(stretchFactor: number): void;
-
-	setWidth(width: number): void;
+    setWidth(width: number): void;
 }
 
 declare const enum NTLocalSpatialIndexType {
+    T_LOCAL_SPATIAL_INDEX_TYPE_NULL = 0,
 
-	T_LOCAL_SPATIAL_INDEX_TYPE_NULL = 0,
-
-	T_LOCAL_SPATIAL_INDEX_TYPE_KDTREE = 1
+    T_LOCAL_SPATIAL_INDEX_TYPE_KDTREE = 1
 }
 
 declare class NTLocalVectorDataSource extends NTVectorDataSource {
+    static alloc(): NTLocalVectorDataSource; // inherited from NSObject
 
-	static alloc(): NTLocalVectorDataSource; // inherited from NSObject
+    static new(): NTLocalVectorDataSource; // inherited from NSObject
 
-	static new(): NTLocalVectorDataSource; // inherited from NSObject
+    constructor(o: { projection: NTProjection; spatialIndexType: NTLocalSpatialIndexType });
 
-	constructor(o: { projection: NTProjection; spatialIndexType: NTLocalSpatialIndexType; });
+    add(element: NTVectorElement): void;
 
-	add(element: NTVectorElement): void;
+    addAll(elements: NTVectorElementVector): void;
 
-	addAll(elements: NTVectorElementVector): void;
+    addFeatureCollectionStyle(featureCollection: NTFeatureCollection, style: NTStyle): void;
 
-	addFeatureCollectionStyle(featureCollection: NTFeatureCollection, style: NTStyle): void;
+    clear(): void;
 
-	clear(): void;
+    getAll(): NTVectorElementVector;
 
-	getAll(): NTVectorElementVector;
+    getDataExtentSwigExplicitNTLocalVectorDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTLocalVectorDataSource(): NTMapBounds;
+    getFeatureCollection(): NTFeatureCollection;
 
-	getFeatureCollection(): NTFeatureCollection;
+    getGeometrySimplifier(): NTGeometrySimplifier;
 
-	getGeometrySimplifier(): NTGeometrySimplifier;
+    initWithProjectionSpatialIndexType(projection: NTProjection, spatialIndexType: NTLocalSpatialIndexType): this;
 
-	initWithProjectionSpatialIndexType(projection: NTProjection, spatialIndexType: NTLocalSpatialIndexType): this;
+    loadElementsSwigExplicitNTLocalVectorDataSource(cullState: NTCullState): NTVectorData;
 
-	loadElementsSwigExplicitNTLocalVectorDataSource(cullState: NTCullState): NTVectorData;
+    remove(element: NTVectorElement): boolean;
 
-	remove(element: NTVectorElement): boolean;
+    removeAll(elements: NTVectorElementVector): boolean;
 
-	removeAll(elements: NTVectorElementVector): boolean;
+    setAll(elements: NTVectorElementVector): void;
 
-	setAll(elements: NTVectorElementVector): void;
-
-	setGeometrySimplifier(simplifier: NTGeometrySimplifier): void;
+    setGeometrySimplifier(simplifier: NTGeometrySimplifier): void;
 }
 
 declare class NTLog extends NSObject {
+    static alloc(): NTLog; // inherited from NSObject
 
-	static alloc(): NTLog; // inherited from NSObject
+    static debug(message: string): void;
 
-	static debug(message: string): void;
+    static error(message: string): void;
 
-	static error(message: string): void;
+    static fatal(message: string): void;
 
-	static fatal(message: string): void;
+    static getLogEventListener(): NTLogEventListener;
 
-	static getLogEventListener(): NTLogEventListener;
+    static getTag(): string;
 
-	static getTag(): string;
+    static info(message: string): void;
 
-	static info(message: string): void;
+    static isShowDebug(): boolean;
 
-	static isShowDebug(): boolean;
+    static isShowError(): boolean;
 
-	static isShowError(): boolean;
+    static isShowInfo(): boolean;
 
-	static isShowInfo(): boolean;
+    static isShowWarn(): boolean;
 
-	static isShowWarn(): boolean;
+    static new(): NTLog; // inherited from NSObject
 
-	static new(): NTLog; // inherited from NSObject
+    static setLogEventListener(listener: NTLogEventListener): void;
 
-	static setLogEventListener(listener: NTLogEventListener): void;
+    static setShowDebug(showDebug: boolean): void;
 
-	static setShowDebug(showDebug: boolean): void;
+    static setShowError(showError: boolean): void;
 
-	static setShowError(showError: boolean): void;
+    static setShowInfo(showInfo: boolean): void;
 
-	static setShowInfo(showInfo: boolean): void;
+    static setShowWarn(showWarn: boolean): void;
 
-	static setShowWarn(showWarn: boolean): void;
+    static setTag(tag: string): void;
 
-	static setTag(tag: string): void;
+    static warn(message: string): void;
 
-	static warn(message: string): void;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 }
 
 declare class NTLogEventListener extends NSObject {
+    static alloc(): NTLogEventListener; // inherited from NSObject
 
-	static alloc(): NTLogEventListener; // inherited from NSObject
+    static new(): NTLogEventListener; // inherited from NSObject
 
-	static new(): NTLogEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTLogEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTLogEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onDebugEvent(message: string): boolean;
 
-	onDebugEvent(message: string): boolean;
+    onDebugEventSwigExplicitNTLogEventListener(message: string): boolean;
 
-	onDebugEventSwigExplicitNTLogEventListener(message: string): boolean;
+    onErrorEvent(message: string): boolean;
 
-	onErrorEvent(message: string): boolean;
+    onErrorEventSwigExplicitNTLogEventListener(message: string): boolean;
 
-	onErrorEventSwigExplicitNTLogEventListener(message: string): boolean;
+    onFatalEvent(message: string): boolean;
 
-	onFatalEvent(message: string): boolean;
+    onFatalEventSwigExplicitNTLogEventListener(message: string): boolean;
 
-	onFatalEventSwigExplicitNTLogEventListener(message: string): boolean;
+    onInfoEvent(message: string): boolean;
 
-	onInfoEvent(message: string): boolean;
+    onInfoEventSwigExplicitNTLogEventListener(message: string): boolean;
 
-	onInfoEventSwigExplicitNTLogEventListener(message: string): boolean;
+    onWarnEvent(message: string): boolean;
 
-	onWarnEvent(message: string): boolean;
+    onWarnEventSwigExplicitNTLogEventListener(message: string): boolean;
 
-	onWarnEventSwigExplicitNTLogEventListener(message: string): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTMBTilesScheme {
+    T_MBTILES_SCHEME_TMS = 0,
 
-	T_MBTILES_SCHEME_TMS = 0,
-
-	T_MBTILES_SCHEME_XYZ = 1
+    T_MBTILES_SCHEME_XYZ = 1
 }
 
 declare class NTMBTilesTileDataSource extends NTTileDataSource {
+    static alloc(): NTMBTilesTileDataSource; // inherited from NSObject
 
-	static alloc(): NTMBTilesTileDataSource; // inherited from NSObject
+    static new(): NTMBTilesTileDataSource; // inherited from NSObject
 
-	static new(): NTMBTilesTileDataSource; // inherited from NSObject
+    constructor(o: { minZoom: number; maxZoom: number; path: string });
 
-	constructor(o: { minZoom: number; maxZoom: number; path: string; });
+    constructor(o: { minZoom: number; maxZoom: number; path: string; scheme: NTMBTilesScheme });
 
-	constructor(o: { minZoom: number; maxZoom: number; path: string; scheme: NTMBTilesScheme; });
+    constructor(o: { path: string });
 
-	constructor(o: { path: string; });
+    getDataExtentSwigExplicitNTMBTilesTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTMBTilesTileDataSource(): NTMapBounds;
+    getMaxZoomSwigExplicitNTMBTilesTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTMBTilesTileDataSource(): number;
+    getMetaData(): NTStringMap;
 
-	getMetaData(): NTStringMap;
+    getMinZoomSwigExplicitNTMBTilesTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTMBTilesTileDataSource(): number;
+    getTileMask(): string;
 
-	getTileMask(): string;
+    getTileMaskSwigExplicitNTMBTilesTileDataSource(): string;
 
-	getTileMaskSwigExplicitNTMBTilesTileDataSource(): string;
+    initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
 
-	initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
+    initWithMinZoomMaxZoomPathScheme(minZoom: number, maxZoom: number, path: string, scheme: NTMBTilesScheme): this;
 
-	initWithMinZoomMaxZoomPathScheme(minZoom: number, maxZoom: number, path: string, scheme: NTMBTilesScheme): this;
+    initWithPath(path: string): this;
 
-	initWithPath(path: string): this;
-
-	loadTileSwigExplicitNTMBTilesTileDataSource(mapTile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTMBTilesTileDataSource(mapTile: NTMapTile): NTTileData;
 }
 
 declare class NTMBVectorTileDecoder extends NTVectorTileDecoder {
+    static alloc(): NTMBVectorTileDecoder; // inherited from NSObject
 
-	static alloc(): NTMBVectorTileDecoder; // inherited from NSObject
+    static new(): NTMBVectorTileDecoder; // inherited from NSObject
 
-	static new(): NTMBVectorTileDecoder; // inherited from NSObject
+    constructor(o: { cartoCSSStyleSet: NTCartoCSSStyleSet });
 
-	constructor(o: { cartoCSSStyleSet: NTCartoCSSStyleSet; });
+    constructor(o: { compiledStyleSet: NTCompiledStyleSet });
 
-	constructor(o: { compiledStyleSet: NTCompiledStyleSet; });
+    getCartoCSSStyleSet(): NTCartoCSSStyleSet;
 
-	getCartoCSSStyleSet(): NTCartoCSSStyleSet;
+    getCompiledStyleSet(): NTCompiledStyleSet;
 
-	getCompiledStyleSet(): NTCompiledStyleSet;
+    getStyleParameter(param: string): string;
 
-	getStyleParameter(param: string): string;
+    getStyleParameters(): NTStringVector;
 
-	getStyleParameters(): NTStringVector;
+    initWithCartoCSSStyleSet(cartoCSSStyleSet: NTCartoCSSStyleSet): this;
 
-	initWithCartoCSSStyleSet(cartoCSSStyleSet: NTCartoCSSStyleSet): this;
+    initWithCompiledStyleSet(compiledStyleSet: NTCompiledStyleSet): this;
 
-	initWithCompiledStyleSet(compiledStyleSet: NTCompiledStyleSet): this;
+    isFeatureIdOverride(): boolean;
 
-	isFeatureIdOverride(): boolean;
+    setCartoCSSStyleSet(styleSet: NTCartoCSSStyleSet): void;
 
-	setCartoCSSStyleSet(styleSet: NTCartoCSSStyleSet): void;
+    setCompiledStyleSet(styleSet: NTCompiledStyleSet): void;
 
-	setCompiledStyleSet(styleSet: NTCompiledStyleSet): void;
+    setFeatureIdOverride(idOverride: boolean): void;
 
-	setFeatureIdOverride(idOverride: boolean): void;
+    setJSONStyleParameters(params: string): void;
 
-	setJSONStyleParameters(params: string): void;
+    setStyleParameterValue(param: string, value: string): boolean;
 
-	setStyleParameterValue(param: string, value: string): boolean;
-
-	setStyleParameters(params: NTStringMap): void;
+    setStyleParameters(params: NTStringMap): void;
 }
 
 declare class NTMapBounds extends NSObject {
+    static alloc(): NTMapBounds; // inherited from NSObject
 
-	static alloc(): NTMapBounds; // inherited from NSObject
+    static new(): NTMapBounds; // inherited from NSObject
 
-	static new(): NTMapBounds; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { min: NTMapPos; max: NTMapPos });
 
-	constructor(o: { min: NTMapPos; max: NTMapPos; });
+    containsBounds(bounds: NTMapBounds): boolean;
 
-	containsBounds(bounds: NTMapBounds): boolean;
+    containsPos(pos: NTMapPos): boolean;
 
-	containsPos(pos: NTMapPos): boolean;
+    description(): string;
 
-	description(): string;
+    getCenter(): NTMapPos;
 
-	getCenter(): NTMapPos;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDelta(): NTMapVec;
 
-	getDelta(): NTMapVec;
+    getMax(): NTMapPos;
 
-	getMax(): NTMapPos;
+    getMin(): NTMapPos;
 
-	getMin(): NTMapPos;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithMinMax(min: NTMapPos, max: NTMapPos): this;
 
-	initWithMinMax(min: NTMapPos, max: NTMapPos): this;
+    intersects(bounds: NTMapBounds): boolean;
 
-	intersects(bounds: NTMapBounds): boolean;
+    isEqualInternal(mapBounds: NTMapBounds): boolean;
 
-	isEqualInternal(mapBounds: NTMapBounds): boolean;
+    shrinkToIntersection(bounds: NTMapBounds): void;
 
-	shrinkToIntersection(bounds: NTMapBounds): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapBoxElevationDataDecoder extends NTElevationDecoder {
+    static alloc(): NTMapBoxElevationDataDecoder; // inherited from NSObject
 
-	static alloc(): NTMapBoxElevationDataDecoder; // inherited from NSObject
-
-	static new(): NTMapBoxElevationDataDecoder; // inherited from NSObject
+    static new(): NTMapBoxElevationDataDecoder; // inherited from NSObject
 }
 
 declare class NTMapBoxOnlineGeocodingService extends NTGeocodingService {
+    static alloc(): NTMapBoxOnlineGeocodingService; // inherited from NSObject
 
-	static alloc(): NTMapBoxOnlineGeocodingService; // inherited from NSObject
+    static new(): NTMapBoxOnlineGeocodingService; // inherited from NSObject
 
-	static new(): NTMapBoxOnlineGeocodingService; // inherited from NSObject
+    constructor(o: { accessToken: string });
 
-	constructor(o: { accessToken: string; });
+    calculateAddressesSwigExplicitNTMapBoxOnlineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTMapBoxOnlineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getLanguageSwigExplicitNTMapBoxOnlineGeocodingService(): string;
 
-	getLanguageSwigExplicitNTMapBoxOnlineGeocodingService(): string;
+    getMaxResultsSwigExplicitNTMapBoxOnlineGeocodingService(): number;
 
-	getMaxResultsSwigExplicitNTMapBoxOnlineGeocodingService(): number;
+    initWithAccessToken(accessToken: string): this;
 
-	initWithAccessToken(accessToken: string): this;
+    isAutocompleteSwigExplicitNTMapBoxOnlineGeocodingService(): boolean;
 
-	isAutocompleteSwigExplicitNTMapBoxOnlineGeocodingService(): boolean;
+    setAutocompleteSwigExplicitNTMapBoxOnlineGeocodingService(autocomplete: boolean): void;
 
-	setAutocompleteSwigExplicitNTMapBoxOnlineGeocodingService(autocomplete: boolean): void;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
+    setLanguageSwigExplicitNTMapBoxOnlineGeocodingService(lang: string): void;
 
-	setLanguageSwigExplicitNTMapBoxOnlineGeocodingService(lang: string): void;
-
-	setMaxResultsSwigExplicitNTMapBoxOnlineGeocodingService(maxResults: number): void;
+    setMaxResultsSwigExplicitNTMapBoxOnlineGeocodingService(maxResults: number): void;
 }
 
 declare class NTMapBoxOnlineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTMapBoxOnlineReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTMapBoxOnlineReverseGeocodingService; // inherited from NSObject
+    static new(): NTMapBoxOnlineReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTMapBoxOnlineReverseGeocodingService; // inherited from NSObject
+    constructor(o: { accessToken: string });
 
-	constructor(o: { accessToken: string; });
+    calculateAddressesSwigExplicitNTMapBoxOnlineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTMapBoxOnlineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getLanguageSwigExplicitNTMapBoxOnlineReverseGeocodingService(): string;
 
-	getLanguageSwigExplicitNTMapBoxOnlineReverseGeocodingService(): string;
+    initWithAccessToken(accessToken: string): this;
 
-	initWithAccessToken(accessToken: string): this;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
-
-	setLanguageSwigExplicitNTMapBoxOnlineReverseGeocodingService(lang: string): void;
+    setLanguageSwigExplicitNTMapBoxOnlineReverseGeocodingService(lang: string): void;
 }
 
 declare class NTMapClickInfo extends NSObject {
+    static alloc(): NTMapClickInfo; // inherited from NSObject
 
-	static alloc(): NTMapClickInfo; // inherited from NSObject
+    static new(): NTMapClickInfo; // inherited from NSObject
 
-	static new(): NTMapClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickPos(): NTMapPos;
 
-	getClickPos(): NTMapPos;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapEnvelope extends NSObject {
+    static alloc(): NTMapEnvelope; // inherited from NSObject
 
-	static alloc(): NTMapEnvelope; // inherited from NSObject
+    static new(): NTMapEnvelope; // inherited from NSObject
 
-	static new(): NTMapEnvelope; // inherited from NSObject
+    constructor(o: { bounds: NTMapBounds });
 
-	constructor(o: { bounds: NTMapBounds; });
+    constructor(o: { convexHull: NTMapPosVector });
 
-	constructor(o: { convexHull: NTMapPosVector; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    contains(envelope: NTMapEnvelope): boolean;
 
-	contains(envelope: NTMapEnvelope): boolean;
+    description(): string;
 
-	description(): string;
+    getBounds(): NTMapBounds;
 
-	getBounds(): NTMapBounds;
+    getConvexHull(): NTMapPosVector;
 
-	getConvexHull(): NTMapPosVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithBounds(bounds: NTMapBounds): this;
 
-	initWithBounds(bounds: NTMapBounds): this;
+    initWithConvexHull(convexHull: NTMapPosVector): this;
 
-	initWithConvexHull(convexHull: NTMapPosVector): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    intersects(envelope: NTMapEnvelope): boolean;
 
-	intersects(envelope: NTMapEnvelope): boolean;
+    isEqualInternal(envelope: NTMapEnvelope): boolean;
 
-	isEqualInternal(envelope: NTMapEnvelope): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapEventListener extends NSObject {
+    static alloc(): NTMapEventListener; // inherited from NSObject
 
-	static alloc(): NTMapEventListener; // inherited from NSObject
+    static new(): NTMapEventListener; // inherited from NSObject
 
-	static new(): NTMapEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTMapEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTMapEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onMapClicked(mapClickInfo: NTMapClickInfo): void;
 
-	onMapClicked(mapClickInfo: NTMapClickInfo): void;
+    onMapClickedSwigExplicitNTMapEventListener(mapClickInfo: NTMapClickInfo): void;
 
-	onMapClickedSwigExplicitNTMapEventListener(mapClickInfo: NTMapClickInfo): void;
+    onMapIdle(): void;
 
-	onMapIdle(): void;
+    onMapIdleSwigExplicitNTMapEventListener(): void;
 
-	onMapIdleSwigExplicitNTMapEventListener(): void;
+    onMapInteraction(mapInteractionInfo: NTMapInteractionInfo): void;
 
-	onMapInteraction(mapInteractionInfo: NTMapInteractionInfo): void;
+    onMapInteractionSwigExplicitNTMapEventListener(mapInteractionInfo: NTMapInteractionInfo): void;
 
-	onMapInteractionSwigExplicitNTMapEventListener(mapInteractionInfo: NTMapInteractionInfo): void;
+    onMapMoved(): void;
 
-	onMapMoved(): void;
+    onMapMovedSwigExplicitNTMapEventListener(): void;
 
-	onMapMovedSwigExplicitNTMapEventListener(): void;
+    onMapStable(): void;
 
-	onMapStable(): void;
+    onMapStableSwigExplicitNTMapEventListener(): void;
 
-	onMapStableSwigExplicitNTMapEventListener(): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapInteractionInfo extends NSObject {
+    static alloc(): NTMapInteractionInfo; // inherited from NSObject
 
-	static alloc(): NTMapInteractionInfo; // inherited from NSObject
+    static new(): NTMapInteractionInfo; // inherited from NSObject
 
-	static new(): NTMapInteractionInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isAnimationStarted(): boolean;
 
-	isAnimationStarted(): boolean;
+    isPanAction(): boolean;
 
-	isPanAction(): boolean;
+    isRotateAction(): boolean;
 
-	isRotateAction(): boolean;
+    isTiltAction(): boolean;
 
-	isTiltAction(): boolean;
+    isZoomAction(): boolean;
 
-	isZoomAction(): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapPos extends NSObject {
+    static alloc(): NTMapPos; // inherited from NSObject
 
-	static alloc(): NTMapPos; // inherited from NSObject
+    static new(): NTMapPos; // inherited from NSObject
 
-	static new(): NTMapPos; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { x: number; y: number });
 
-	constructor(o: { x: number; y: number; });
+    constructor(o: { x: number; y: number; z: number });
 
-	constructor(o: { x: number; y: number; z: number; });
+    add(v: NTMapVec): NTMapPos;
 
-	add(v: NTMapVec): NTMapPos;
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getX(): number;
 
-	getX(): number;
+    getY(): number;
 
-	getY(): number;
+    getZ(): number;
 
-	getZ(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithXY(x: number, y: number): this;
 
-	initWithXY(x: number, y: number): this;
+    initWithXYZ(x: number, y: number, z: number): this;
 
-	initWithXYZ(x: number, y: number, z: number): this;
+    isEqualInternal(p: NTMapPos): boolean;
 
-	isEqualInternal(p: NTMapPos): boolean;
+    subPos(p: NTMapPos): NTMapVec;
 
-	subPos(p: NTMapPos): NTMapVec;
+    subVec(v: NTMapVec): NTMapPos;
 
-	subVec(v: NTMapVec): NTMapPos;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapPosVector extends NSObject {
+    static alloc(): NTMapPosVector; // inherited from NSObject
 
-	static alloc(): NTMapPosVector; // inherited from NSObject
+    static new(): NTMapPosVector; // inherited from NSObject
 
-	static new(): NTMapPosVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTMapPos): void;
 
-	add(x: NTMapPos): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTMapPos;
 
-	get(i: number): NTMapPos;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTMapPos): void;
 
-	setVal(i: number, val: NTMapPos): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapPosVectorVector extends NSObject {
+    static alloc(): NTMapPosVectorVector; // inherited from NSObject
 
-	static alloc(): NTMapPosVectorVector; // inherited from NSObject
+    static new(): NTMapPosVectorVector; // inherited from NSObject
 
-	static new(): NTMapPosVectorVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTMapPosVector): void;
 
-	add(x: NTMapPosVector): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTMapPosVector;
 
-	get(i: number): NTMapPosVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTMapPosVector): void;
 
-	setVal(i: number, val: NTMapPosVector): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapRange extends NSObject {
+    static alloc(): NTMapRange; // inherited from NSObject
 
-	static alloc(): NTMapRange; // inherited from NSObject
+    static new(): NTMapRange; // inherited from NSObject
 
-	static new(): NTMapRange; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { min: number; max: number });
 
-	constructor(o: { min: number; max: number; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMax(): number;
 
-	getMax(): number;
+    getMidrange(): number;
 
-	getMidrange(): number;
+    getMin(): number;
 
-	getMin(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    inRange(value: number): boolean;
 
-	inRange(value: number): boolean;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithMinMax(min: number, max: number): this;
 
-	initWithMinMax(min: number, max: number): this;
+    isEqualInternal(mapRange: NTMapRange): boolean;
 
-	isEqualInternal(mapRange: NTMapRange): boolean;
+    length(): number;
 
-	length(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapRenderer extends NSObject {
+    static alloc(): NTMapRenderer; // inherited from NSObject
 
-	static alloc(): NTMapRenderer; // inherited from NSObject
+    static new(): NTMapRenderer; // inherited from NSObject
 
-	static new(): NTMapRenderer; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    captureRenderingWaitWhileUpdating(listener: NTRendererCaptureListener, waitWhileUpdating: boolean): void;
 
-	captureRenderingWaitWhileUpdating(listener: NTRendererCaptureListener, waitWhileUpdating: boolean): void;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMapRendererListener(): NTMapRendererListener;
 
-	getMapRendererListener(): NTMapRendererListener;
+    getViewState(): NTViewState;
 
-	getViewState(): NTViewState;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    requestRedraw(): void;
 
-	requestRedraw(): void;
+    setMapRendererListener(listener: NTMapRendererListener): void;
 
-	setMapRendererListener(listener: NTMapRendererListener): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapRendererListener extends NSObject {
+    static alloc(): NTMapRendererListener; // inherited from NSObject
 
-	static alloc(): NTMapRendererListener; // inherited from NSObject
+    static new(): NTMapRendererListener; // inherited from NSObject
 
-	static new(): NTMapRendererListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTMapRendererListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTMapRendererListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onAfterDrawFrame(): void;
 
-	onAfterDrawFrame(): void;
+    onAfterDrawFrameSwigExplicitNTMapRendererListener(): void;
 
-	onAfterDrawFrameSwigExplicitNTMapRendererListener(): void;
+    onBeforeDrawFrame(): void;
 
-	onBeforeDrawFrame(): void;
+    onBeforeDrawFrameSwigExplicitNTMapRendererListener(): void;
 
-	onBeforeDrawFrameSwigExplicitNTMapRendererListener(): void;
+    onSurfaceChangedHeight(width: number, height: number): void;
 
-	onSurfaceChangedHeight(width: number, height: number): void;
+    onSurfaceChangedSwigExplicitNTMapRendererListenerHeight(width: number, height: number): void;
 
-	onSurfaceChangedSwigExplicitNTMapRendererListenerHeight(width: number, height: number): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapTile extends NSObject {
+    static alloc(): NTMapTile; // inherited from NSObject
 
-	static alloc(): NTMapTile; // inherited from NSObject
+    static new(): NTMapTile; // inherited from NSObject
 
-	static new(): NTMapTile; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { x: number; y: number; zoom: number; frameNr: number });
 
-	constructor(o: { x: number; y: number; zoom: number; frameNr: number; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFrameNr(): number;
 
-	getFrameNr(): number;
+    getTileId(): number;
 
-	getTileId(): number;
+    getX(): number;
 
-	getX(): number;
+    getY(): number;
 
-	getY(): number;
+    getZoom(): number;
 
-	getZoom(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithXYZoomFrameNr(x: number, y: number, zoom: number, frameNr: number): this;
 
-	initWithXYZoomFrameNr(x: number, y: number, zoom: number, frameNr: number): this;
+    isEqualInternal(tile: NTMapTile): boolean;
 
-	isEqualInternal(tile: NTMapTile): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapTilerOnlineTileDataSource extends NTTileDataSource {
+    static alloc(): NTMapTilerOnlineTileDataSource; // inherited from NSObject
 
-	static alloc(): NTMapTilerOnlineTileDataSource; // inherited from NSObject
+    static new(): NTMapTilerOnlineTileDataSource; // inherited from NSObject
 
-	static new(): NTMapTilerOnlineTileDataSource; // inherited from NSObject
+    constructor(o: { key: string });
 
-	constructor(o: { key: string; });
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getTimeout(): number;
 
-	getTimeout(): number;
+    initWithKey(key: string): this;
 
-	initWithKey(key: string): this;
+    loadTileSwigExplicitNTMapTilerOnlineTileDataSource(mapTile: NTMapTile): NTTileData;
 
-	loadTileSwigExplicitNTMapTilerOnlineTileDataSource(mapTile: NTMapTile): NTTileData;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
-
-	setTimeout(timeout: number): void;
+    setTimeout(timeout: number): void;
 }
 
 declare class NTMapVec extends NSObject {
+    static alloc(): NTMapVec; // inherited from NSObject
 
-	static alloc(): NTMapVec; // inherited from NSObject
+    static new(): NTMapVec; // inherited from NSObject
 
-	static new(): NTMapVec; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { x: number; y: number });
 
-	constructor(o: { x: number; y: number; });
+    constructor(o: { x: number; y: number; z: number });
 
-	constructor(o: { x: number; y: number; z: number; });
+    add(v: NTMapVec): NTMapVec;
 
-	add(v: NTMapVec): NTMapVec;
+    crossProduct2D(v: NTMapVec): number;
 
-	crossProduct2D(v: NTMapVec): number;
+    crossProduct3D(v: NTMapVec): NTMapVec;
 
-	crossProduct3D(v: NTMapVec): NTMapVec;
+    description(): string;
 
-	description(): string;
+    div(divider: number): NTMapVec;
 
-	div(divider: number): NTMapVec;
+    dotProduct(v: NTMapVec): number;
 
-	dotProduct(v: NTMapVec): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getNormalized(): NTMapVec;
 
-	getNormalized(): NTMapVec;
+    getX(): number;
 
-	getX(): number;
+    getY(): number;
 
-	getY(): number;
+    getZ(): number;
 
-	getZ(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithXY(x: number, y: number): this;
 
-	initWithXY(x: number, y: number): this;
+    initWithXYZ(x: number, y: number, z: number): this;
 
-	initWithXYZ(x: number, y: number, z: number): this;
+    isEqualInternal(v: NTMapVec): boolean;
 
-	isEqualInternal(v: NTMapVec): boolean;
+    length(): number;
 
-	length(): number;
+    mul(multiplier: number): NTMapVec;
 
-	mul(multiplier: number): NTMapVec;
+    sub(v: NTMapVec): NTMapVec;
 
-	sub(v: NTMapVec): NTMapVec;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTMapView extends GLKView {
+    static alloc(): NTMapView; // inherited from NSObject
 
-	static alloc(): NTMapView; // inherited from NSObject
+    static appearance(): NTMapView; // inherited from UIAppearance
 
-	static appearance(): NTMapView; // inherited from UIAppearance
+    static appearanceForTraitCollection(trait: UITraitCollection): NTMapView; // inherited from UIAppearance
 
-	static appearanceForTraitCollection(trait: UITraitCollection): NTMapView; // inherited from UIAppearance
+    static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): NTMapView; // inherited from UIAppearance
 
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): NTMapView; // inherited from UIAppearance
+    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | (typeof NSObject)[]): NTMapView; // inherited from UIAppearance
 
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): NTMapView; // inherited from UIAppearance
+    static appearanceWhenContainedIn(ContainerClass: typeof NSObject): NTMapView; // inherited from UIAppearance
 
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): NTMapView; // inherited from UIAppearance
+    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | (typeof NSObject)[]): NTMapView; // inherited from UIAppearance
 
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): NTMapView; // inherited from UIAppearance
+    static new(): NTMapView; // inherited from NSObject
 
-	static new(): NTMapView; // inherited from NSObject
+    cancelAllTasks(): void;
 
-	static registerLicense(licenseKey: string): boolean;
+    clearAllCaches(): void;
 
-	cancelAllTasks(): void;
+    clearPreloadingCaches(): void;
 
-	clearAllCaches(): void;
+    getFocusPos(): NTMapPos;
 
-	clearPreloadingCaches(): void;
+    getLayers(): NTLayers;
 
-	getFocusPos(): NTMapPos;
+    getMapEventListener(): NTMapEventListener;
 
-	getLayers(): NTLayers;
+    getMapRenderer(): NTMapRenderer;
 
-	getMapEventListener(): NTMapEventListener;
+    getOptions(): NTOptions;
 
-	getMapRenderer(): NTMapRenderer;
+    getRotation(): number;
 
-	getOptions(): NTOptions;
+    getTilt(): number;
 
-	getRotation(): number;
+    getZoom(): number;
 
-	getTilt(): number;
+    mapToScreen(mapPos: NTMapPos): NTScreenPos;
 
-	getZoom(): number;
+    moveToFitBoundsScreenBoundsIntegerZoomDurationSeconds(mapBounds: NTMapBounds, screenBounds: NTScreenBounds, integerZoom: boolean, durationSeconds: number): void;
 
-	mapToScreen(mapPos: NTMapPos): NTScreenPos;
+    moveToFitBoundsScreenBoundsIntegerZoomResetRotationResetTiltDurationSeconds(
+        mapBounds: NTMapBounds,
+        screenBounds: NTScreenBounds,
+        integerZoom: boolean,
+        resetRotation: boolean,
+        resetTilt: boolean,
+        durationSeconds: number
+    ): void;
 
-	moveToFitBoundsScreenBoundsIntegerZoomDurationSeconds(mapBounds: NTMapBounds, screenBounds: NTScreenBounds, integerZoom: boolean, durationSeconds: number): void;
+    panDurationSeconds(deltaPos: NTMapVec, durationSeconds: number): void;
 
-	moveToFitBoundsScreenBoundsIntegerZoomResetRotationResetTiltDurationSeconds(mapBounds: NTMapBounds, screenBounds: NTScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number): void;
+    rotateDurationSeconds(deltaAngle: number, durationSeconds: number): void;
 
-	panDurationSeconds(deltaPos: NTMapVec, durationSeconds: number): void;
+    rotateTargetPosDurationSeconds(deltaAngle: number, targetPos: NTMapPos, durationSeconds: number): void;
 
-	rotateDurationSeconds(deltaAngle: number, durationSeconds: number): void;
+    screenToMap(screenPos: NTScreenPos): NTMapPos;
 
-	rotateTargetPosDurationSeconds(deltaAngle: number, targetPos: NTMapPos, durationSeconds: number): void;
+    setFocusPosDurationSeconds(pos: NTMapPos, durationSeconds: number): void;
 
-	screenToMap(screenPos: NTScreenPos): NTMapPos;
+    setMapEventListener(mapEventListener: NTMapEventListener): void;
 
-	setFocusPosDurationSeconds(pos: NTMapPos, durationSeconds: number): void;
+    setRotationDurationSeconds(angle: number, durationSeconds: number): void;
 
-	setMapEventListener(mapEventListener: NTMapEventListener): void;
+    setRotationTargetPosDurationSeconds(angle: number, targetPos: NTMapPos, durationSeconds: number): void;
 
-	setRotationDurationSeconds(angle: number, durationSeconds: number): void;
+    setTiltDurationSeconds(tilt: number, durationSeconds: number): void;
 
-	setRotationTargetPosDurationSeconds(angle: number, targetPos: NTMapPos, durationSeconds: number): void;
+    setZoomDurationSeconds(zoom: number, durationSeconds: number): void;
 
-	setTiltDurationSeconds(tilt: number, durationSeconds: number): void;
+    setZoomTargetPosDurationSeconds(zoom: number, targetPos: NTMapPos, durationSeconds: number): void;
 
-	setZoomDurationSeconds(zoom: number, durationSeconds: number): void;
+    tiltDurationSeconds(deltaTilt: number, durationSeconds: number): void;
 
-	setZoomTargetPosDurationSeconds(zoom: number, targetPos: NTMapPos, durationSeconds: number): void;
+    zoomDurationSeconds(deltaZoom: number, durationSeconds: number): void;
 
-	tiltDurationSeconds(deltaTilt: number, durationSeconds: number): void;
-
-	zoomDurationSeconds(deltaZoom: number, durationSeconds: number): void;
-
-	zoomTargetPosDurationSeconds(deltaZoom: number, targetPos: NTMapPos, durationSeconds: number): void;
+    zoomTargetPosDurationSeconds(deltaZoom: number, targetPos: NTMapPos, durationSeconds: number): void;
 }
 
 declare class NTMarker extends NTBillboard {
+    static alloc(): NTMarker; // inherited from NSObject
 
-	static alloc(): NTMarker; // inherited from NSObject
+    static new(): NTMarker; // inherited from NSObject
 
-	static new(): NTMarker; // inherited from NSObject
+    constructor(o: { baseBillboard: NTBillboard; style: NTMarkerStyle });
 
-	constructor(o: { baseBillboard: NTBillboard; style: NTMarkerStyle; });
+    constructor(o: { geometry: NTGeometry; style: NTMarkerStyle });
 
-	constructor(o: { geometry: NTGeometry; style: NTMarkerStyle; });
+    constructor(o: { pos: NTMapPos; style: NTMarkerStyle });
 
-	constructor(o: { pos: NTMapPos; style: NTMarkerStyle; });
+    getStyle(): NTMarkerStyle;
 
-	getStyle(): NTMarkerStyle;
+    initWithBaseBillboardStyle(baseBillboard: NTBillboard, style: NTMarkerStyle): this;
 
-	initWithBaseBillboardStyle(baseBillboard: NTBillboard, style: NTMarkerStyle): this;
+    initWithGeometryStyle(geometry: NTGeometry, style: NTMarkerStyle): this;
 
-	initWithGeometryStyle(geometry: NTGeometry, style: NTMarkerStyle): this;
+    initWithPosStyle(pos: NTMapPos, style: NTMarkerStyle): this;
 
-	initWithPosStyle(pos: NTMapPos, style: NTMarkerStyle): this;
-
-	setStyle(style: NTMarkerStyle): void;
+    setStyle(style: NTMarkerStyle): void;
 }
 
 declare class NTMarkerStyle extends NTBillboardStyle {
+    static alloc(): NTMarkerStyle; // inherited from NSObject
 
-	static alloc(): NTMarkerStyle; // inherited from NSObject
+    static new(): NTMarkerStyle; // inherited from NSObject
 
-	static new(): NTMarkerStyle; // inherited from NSObject
+    getAnchorPointX(): number;
 
-	getAnchorPointX(): number;
+    getAnchorPointY(): number;
 
-	getAnchorPointY(): number;
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getClickSize(): number;
 
-	getClickSize(): number;
+    getOrientationMode(): NTBillboardOrientation;
 
-	getOrientationMode(): NTBillboardOrientation;
+    getScalingMode(): NTBillboardScaling;
 
-	getScalingMode(): NTBillboardScaling;
-
-	getSize(): number;
+    getSize(): number;
 }
 
 declare class NTMarkerStyleBuilder extends NTBillboardStyleBuilder {
+    static alloc(): NTMarkerStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTMarkerStyleBuilder; // inherited from NSObject
+    static new(): NTMarkerStyleBuilder; // inherited from NSObject
 
-	static new(): NTMarkerStyleBuilder; // inherited from NSObject
+    buildStyle(): NTMarkerStyle;
 
-	buildStyle(): NTMarkerStyle;
+    getAnchorPointX(): number;
 
-	getAnchorPointX(): number;
+    getAnchorPointY(): number;
 
-	getAnchorPointY(): number;
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getClickSize(): number;
 
-	getClickSize(): number;
+    getOrientationMode(): NTBillboardOrientation;
 
-	getOrientationMode(): NTBillboardOrientation;
+    getScalingMode(): NTBillboardScaling;
 
-	getScalingMode(): NTBillboardScaling;
+    getSize(): number;
 
-	getSize(): number;
+    setAnchorPointX(anchorPointX: number): void;
 
-	setAnchorPointX(anchorPointX: number): void;
+    setAnchorPointXAnchorPointY(anchorPointX: number, anchorPointY: number): void;
 
-	setAnchorPointXAnchorPointY(anchorPointX: number, anchorPointY: number): void;
+    setAnchorPointY(anchorPointY: number): void;
 
-	setAnchorPointY(anchorPointY: number): void;
+    setBitmap(bitmap: NTBitmap): void;
 
-	setBitmap(bitmap: NTBitmap): void;
+    setClickSize(size: number): void;
 
-	setClickSize(size: number): void;
+    setOrientationMode(orientationMode: NTBillboardOrientation): void;
 
-	setOrientationMode(orientationMode: NTBillboardOrientation): void;
+    setScalingMode(scalingMode: NTBillboardScaling): void;
 
-	setScalingMode(scalingMode: NTBillboardScaling): void;
-
-	setSize(size: number): void;
+    setSize(size: number): void;
 }
 
 declare class NTMemoryCacheTileDataSource extends NTCacheTileDataSource {
+    static alloc(): NTMemoryCacheTileDataSource; // inherited from NSObject
 
-	static alloc(): NTMemoryCacheTileDataSource; // inherited from NSObject
+    static new(): NTMemoryCacheTileDataSource; // inherited from NSObject
 
-	static new(): NTMemoryCacheTileDataSource; // inherited from NSObject
+    clearSwigExplicitNTMemoryCacheTileDataSource(): void;
 
-	clearSwigExplicitNTMemoryCacheTileDataSource(): void;
+    getCapacitySwigExplicitNTMemoryCacheTileDataSource(): number;
 
-	getCapacitySwigExplicitNTMemoryCacheTileDataSource(): number;
+    loadTileSwigExplicitNTMemoryCacheTileDataSource(mapTile: NTMapTile): NTTileData;
 
-	loadTileSwigExplicitNTMemoryCacheTileDataSource(mapTile: NTMapTile): NTTileData;
-
-	setCapacitySwigExplicitNTMemoryCacheTileDataSource(capacityInBytes: number): void;
+    setCapacitySwigExplicitNTMemoryCacheTileDataSource(capacityInBytes: number): void;
 }
 
 declare class NTMergedMBVTTileDataSource extends NTTileDataSource {
+    static alloc(): NTMergedMBVTTileDataSource; // inherited from NSObject
 
-	static alloc(): NTMergedMBVTTileDataSource; // inherited from NSObject
+    static new(): NTMergedMBVTTileDataSource; // inherited from NSObject
 
-	static new(): NTMergedMBVTTileDataSource; // inherited from NSObject
+    constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource });
 
-	constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource; });
+    getDataExtentSwigExplicitNTMergedMBVTTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTMergedMBVTTileDataSource(): NTMapBounds;
+    getMaxZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
+    getMinZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
+    getTileMask(): string;
 
-	getTileMask(): string;
+    getTileMaskSwigExplicitNTMergedMBVTTileDataSource(): string;
 
-	getTileMaskSwigExplicitNTMergedMBVTTileDataSource(): string;
+    initWithDataSource1DataSource2(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource): this;
 
-	initWithDataSource1DataSource2(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource): this;
-
-	loadTileSwigExplicitNTMergedMBVTTileDataSource(tile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTMergedMBVTTileDataSource(tile: NTMapTile): NTTileData;
 }
 
 declare class NTMultiGeometry extends NTGeometry {
+    static alloc(): NTMultiGeometry; // inherited from NSObject
 
-	static alloc(): NTMultiGeometry; // inherited from NSObject
+    static new(): NTMultiGeometry; // inherited from NSObject
 
-	static new(): NTMultiGeometry; // inherited from NSObject
+    constructor(o: { geometries: NTGeometryVector });
 
-	constructor(o: { geometries: NTGeometryVector; });
+    getGeometry(index: number): NTGeometry;
 
-	getGeometry(index: number): NTGeometry;
+    getGeometryCount(): number;
 
-	getGeometryCount(): number;
-
-	initWithGeometries(geometries: NTGeometryVector): this;
+    initWithGeometries(geometries: NTGeometryVector): this;
 }
 
 declare class NTMultiLineGeometry extends NTMultiGeometry {
+    static alloc(): NTMultiLineGeometry; // inherited from NSObject
 
-	static alloc(): NTMultiLineGeometry; // inherited from NSObject
+    static new(): NTMultiLineGeometry; // inherited from NSObject
 
-	static new(): NTMultiLineGeometry; // inherited from NSObject
+    constructor(o: { geometries: NTLineGeometryVector });
 
-	constructor(o: { geometries: NTLineGeometryVector; });
+    getGeometry(index: number): NTLineGeometry;
 
-	getGeometry(index: number): NTLineGeometry;
-
-	initWithGeometries(geometries: NTLineGeometryVector): this;
+    initWithGeometries(geometries: NTLineGeometryVector): this;
 }
 
 declare class NTMultiOSMOfflineGeocodingService extends NTGeocodingService {
+    static alloc(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
 
-	static alloc(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
+    static new(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
 
-	static new(): NTMultiOSMOfflineGeocodingService; // inherited from NSObject
+    add(database: string): void;
 
-	add(database: string): void;
+    calculateAddressesSwigExplicitNTMultiOSMOfflineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTMultiOSMOfflineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(): string;
 
-	getLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(): string;
+    getMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(): number;
 
-	getMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(): number;
+    isAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(): boolean;
 
-	isAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(): boolean;
+    remove(database: string): boolean;
 
-	remove(database: string): boolean;
+    setAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(autocomplete: boolean): void;
 
-	setAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(autocomplete: boolean): void;
+    setLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(lang: string): void;
 
-	setLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(lang: string): void;
-
-	setMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(maxResults: number): void;
+    setMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(maxResults: number): void;
 }
 
 declare class NTMultiOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
+    static new(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
+    add(database: string): void;
 
-	add(database: string): void;
+    calculateAddressesSwigExplicitNTMultiOSMOfflineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTMultiOSMOfflineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(): string;
 
-	getLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(): string;
+    remove(database: string): boolean;
 
-	remove(database: string): boolean;
-
-	setLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(lang: string): void;
+    setLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(lang: string): void;
 }
 
 declare class NTMultiPointGeometry extends NTMultiGeometry {
+    static alloc(): NTMultiPointGeometry; // inherited from NSObject
 
-	static alloc(): NTMultiPointGeometry; // inherited from NSObject
+    static new(): NTMultiPointGeometry; // inherited from NSObject
 
-	static new(): NTMultiPointGeometry; // inherited from NSObject
+    constructor(o: { geometries: NTPointGeometryVector });
 
-	constructor(o: { geometries: NTPointGeometryVector; });
+    getGeometry(index: number): NTPointGeometry;
 
-	getGeometry(index: number): NTPointGeometry;
-
-	initWithGeometries(geometries: NTPointGeometryVector): this;
+    initWithGeometries(geometries: NTPointGeometryVector): this;
 }
 
 declare class NTMultiPolygonGeometry extends NTMultiGeometry {
+    static alloc(): NTMultiPolygonGeometry; // inherited from NSObject
 
-	static alloc(): NTMultiPolygonGeometry; // inherited from NSObject
+    static new(): NTMultiPolygonGeometry; // inherited from NSObject
 
-	static new(): NTMultiPolygonGeometry; // inherited from NSObject
+    constructor(o: { geometries: NTPolygonGeometryVector });
 
-	constructor(o: { geometries: NTPolygonGeometryVector; });
+    getGeometry(index: number): NTPolygonGeometry;
 
-	getGeometry(index: number): NTPolygonGeometry;
-
-	initWithGeometries(geometries: NTPolygonGeometryVector): this;
+    initWithGeometries(geometries: NTPolygonGeometryVector): this;
 }
 
 declare class NTMultiTileDataSource extends NTTileDataSource {
+    static alloc(): NTMultiTileDataSource; // inherited from NSObject
 
-	static alloc(): NTMultiTileDataSource; // inherited from NSObject
+    static new(): NTMultiTileDataSource; // inherited from NSObject
 
-	static new(): NTMultiTileDataSource; // inherited from NSObject
+    constructor(o: { maxOpenedPackages: number });
 
-	constructor(o: { maxOpenedPackages: number; });
+    add(datasource: NTTileDataSource): void;
 
-	add(datasource: NTTileDataSource): void;
+    addTileMask(datasource: NTTileDataSource, tileMask: string): void;
 
-	addTileMask(datasource: NTTileDataSource, tileMask: string): void;
+    getDataExtentSwigExplicitNTMultiTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTMultiTileDataSource(): NTMapBounds;
+    getMaxZoomSwigExplicitNTMultiTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTMultiTileDataSource(): number;
+    getMinZoomSwigExplicitNTMultiTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTMultiTileDataSource(): number;
+    initWithMaxOpenedPackages(maxOpenedPackages: number): this;
 
-	initWithMaxOpenedPackages(maxOpenedPackages: number): this;
+    loadTileSwigExplicitNTMultiTileDataSource(mapTile: NTMapTile): NTTileData;
 
-	loadTileSwigExplicitNTMultiTileDataSource(mapTile: NTMapTile): NTTileData;
-
-	remove(datasource: NTTileDataSource): boolean;
+    remove(datasource: NTTileDataSource): boolean;
 }
 
 declare class NTMultiValhallaOfflineRoutingService extends NTRoutingService {
+    static alloc(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
 
-	static alloc(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
+    static new(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
 
-	static new(): NTMultiValhallaOfflineRoutingService; // inherited from NSObject
+    add(database: string): void;
 
-	add(database: string): void;
+    addLocaleJson(key: string, json: string): void;
 
-	calculateRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    calculateRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	getConfigurationParameter(param: string): NTVariant;
+    getConfigurationParameter(param: string): NTVariant;
 
-	getProfileSwigExplicitNTMultiValhallaOfflineRoutingService(): string;
+    getProfileSwigExplicitNTMultiValhallaOfflineRoutingService(): string;
 
-	matchRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+    matchRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	remove(database: string): boolean;
+    remove(database: string): boolean;
 
-	setConfigurationParameterValue(param: string, value: NTVariant): void;
+    setConfigurationParameterValue(param: string, value: NTVariant): void;
 
-	setProfileSwigExplicitNTMultiValhallaOfflineRoutingService(profile: string): void;
+    setProfileSwigExplicitNTMultiValhallaOfflineRoutingService(profile: string): void;
 }
 
 declare class NTNMLModel extends NTBillboard {
+    static alloc(): NTNMLModel; // inherited from NSObject
 
-	static alloc(): NTNMLModel; // inherited from NSObject
+    static new(): NTNMLModel; // inherited from NSObject
 
-	static new(): NTNMLModel; // inherited from NSObject
+    constructor(o: { baseBillboard: NTBillboard; style: NTNMLModelStyle });
 
-	constructor(o: { baseBillboard: NTBillboard; style: NTNMLModelStyle; });
+    constructor(o: { geometry: NTGeometry; style: NTNMLModelStyle });
 
-	constructor(o: { geometry: NTGeometry; style: NTNMLModelStyle; });
+    constructor(o: { pos: NTMapPos; style: NTNMLModelStyle });
 
-	constructor(o: { pos: NTMapPos; style: NTNMLModelStyle; });
+    getRotationAngle(): number;
 
-	getRotationAngle(): number;
+    getRotationAxis(): NTMapVec;
 
-	getRotationAxis(): NTMapVec;
+    getScale(): number;
 
-	getScale(): number;
+    getStyle(): NTNMLModelStyle;
 
-	getStyle(): NTNMLModelStyle;
+    initWithBaseBillboardStyle(baseBillboard: NTBillboard, style: NTNMLModelStyle): this;
 
-	initWithBaseBillboardStyle(baseBillboard: NTBillboard, style: NTNMLModelStyle): this;
+    initWithGeometryStyle(geometry: NTGeometry, style: NTNMLModelStyle): this;
 
-	initWithGeometryStyle(geometry: NTGeometry, style: NTNMLModelStyle): this;
+    initWithPosStyle(pos: NTMapPos, style: NTNMLModelStyle): this;
 
-	initWithPosStyle(pos: NTMapPos, style: NTNMLModelStyle): this;
+    setRotationAngle(angle: number): void;
 
-	setRotationAngle(angle: number): void;
+    setRotationAxis(axis: NTMapVec): void;
 
-	setRotationAxis(axis: NTMapVec): void;
+    setScale(scale: number): void;
 
-	setScale(scale: number): void;
-
-	setStyle(style: NTNMLModelStyle): void;
+    setStyle(style: NTNMLModelStyle): void;
 }
 
 declare class NTNMLModelStyle extends NTBillboardStyle {
+    static alloc(): NTNMLModelStyle; // inherited from NSObject
 
-	static alloc(): NTNMLModelStyle; // inherited from NSObject
+    static new(): NTNMLModelStyle; // inherited from NSObject
 
-	static new(): NTNMLModelStyle; // inherited from NSObject
+    getModelAsset(): NTBinaryData;
 
-	getModelAsset(): NTBinaryData;
+    getOrientationMode(): NTBillboardOrientation;
 
-	getOrientationMode(): NTBillboardOrientation;
-
-	getScalingMode(): NTBillboardScaling;
+    getScalingMode(): NTBillboardScaling;
 }
 
 declare class NTNMLModelStyleBuilder extends NTBillboardStyleBuilder {
+    static alloc(): NTNMLModelStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTNMLModelStyleBuilder; // inherited from NSObject
+    static new(): NTNMLModelStyleBuilder; // inherited from NSObject
 
-	static new(): NTNMLModelStyleBuilder; // inherited from NSObject
+    buildStyle(): NTNMLModelStyle;
 
-	buildStyle(): NTNMLModelStyle;
+    getModelAsset(): NTBinaryData;
 
-	getModelAsset(): NTBinaryData;
+    getOrientationMode(): NTBillboardOrientation;
 
-	getOrientationMode(): NTBillboardOrientation;
+    getScalingMode(): NTBillboardScaling;
 
-	getScalingMode(): NTBillboardScaling;
+    setModelAsset(modelAsset: NTBinaryData): void;
 
-	setModelAsset(modelAsset: NTBinaryData): void;
+    setOrientationMode(orientationMode: NTBillboardOrientation): void;
 
-	setOrientationMode(orientationMode: NTBillboardOrientation): void;
-
-	setScalingMode(scalingMode: NTBillboardScaling): void;
+    setScalingMode(scalingMode: NTBillboardScaling): void;
 }
 
 declare class NTOSMOfflineGeocodingService extends NTGeocodingService {
+    static alloc(): NTOSMOfflineGeocodingService; // inherited from NSObject
 
-	static alloc(): NTOSMOfflineGeocodingService; // inherited from NSObject
+    static new(): NTOSMOfflineGeocodingService; // inherited from NSObject
 
-	static new(): NTOSMOfflineGeocodingService; // inherited from NSObject
+    constructor(o: { path: string });
 
-	constructor(o: { path: string; });
+    calculateAddressesSwigExplicitNTOSMOfflineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTOSMOfflineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getLanguageSwigExplicitNTOSMOfflineGeocodingService(): string;
 
-	getLanguageSwigExplicitNTOSMOfflineGeocodingService(): string;
+    getMaxResultsSwigExplicitNTOSMOfflineGeocodingService(): number;
 
-	getMaxResultsSwigExplicitNTOSMOfflineGeocodingService(): number;
+    initWithPath(path: string): this;
 
-	initWithPath(path: string): this;
+    isAutocompleteSwigExplicitNTOSMOfflineGeocodingService(): boolean;
 
-	isAutocompleteSwigExplicitNTOSMOfflineGeocodingService(): boolean;
+    setAutocompleteSwigExplicitNTOSMOfflineGeocodingService(autocomplete: boolean): void;
 
-	setAutocompleteSwigExplicitNTOSMOfflineGeocodingService(autocomplete: boolean): void;
+    setLanguageSwigExplicitNTOSMOfflineGeocodingService(lang: string): void;
 
-	setLanguageSwigExplicitNTOSMOfflineGeocodingService(lang: string): void;
-
-	setMaxResultsSwigExplicitNTOSMOfflineGeocodingService(maxResults: number): void;
+    setMaxResultsSwigExplicitNTOSMOfflineGeocodingService(maxResults: number): void;
 }
 
 declare class NTOSMOfflineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTOSMOfflineReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTOSMOfflineReverseGeocodingService; // inherited from NSObject
+    static new(): NTOSMOfflineReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTOSMOfflineReverseGeocodingService; // inherited from NSObject
+    constructor(o: { path: string });
 
-	constructor(o: { path: string; });
+    calculateAddressesSwigExplicitNTOSMOfflineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTOSMOfflineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(): string;
 
-	getLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(): string;
+    initWithPath(path: string): this;
 
-	initWithPath(path: string): this;
-
-	setLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(lang: string): void;
+    setLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(lang: string): void;
 }
 
 declare class NTOSRMOfflineRoutingService extends NTRoutingService {
+    static alloc(): NTOSRMOfflineRoutingService; // inherited from NSObject
 
-	static alloc(): NTOSRMOfflineRoutingService; // inherited from NSObject
+    static new(): NTOSRMOfflineRoutingService; // inherited from NSObject
 
-	static new(): NTOSRMOfflineRoutingService; // inherited from NSObject
+    constructor(o: { path: string });
 
-	constructor(o: { path: string; });
+    calculateRouteSwigExplicitNTOSRMOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	calculateRouteSwigExplicitNTOSRMOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    getProfileSwigExplicitNTOSRMOfflineRoutingService(): string;
 
-	getProfileSwigExplicitNTOSRMOfflineRoutingService(): string;
+    initWithPath(path: string): this;
 
-	initWithPath(path: string): this;
+    matchRouteSwigExplicitNTOSRMOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	matchRouteSwigExplicitNTOSRMOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
-
-	setProfileSwigExplicitNTOSRMOfflineRoutingService(profile: string): void;
+    setProfileSwigExplicitNTOSRMOfflineRoutingService(profile: string): void;
 }
 
 declare class NTOptions extends NSObject {
+    static alloc(): NTOptions; // inherited from NSObject
 
-	static alloc(): NTOptions; // inherited from NSObject
+    static new(): NTOptions; // inherited from NSObject
 
-	static new(): NTOptions; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getAmbientLightColor(): NTColor;
 
-	getAmbientLightColor(): NTColor;
+    getBackgroundBitmap(): NTBitmap;
 
-	getBackgroundBitmap(): NTBitmap;
+    getBaseProjection(): NTProjection;
 
-	getBaseProjection(): NTProjection;
+    getClearColor(): NTColor;
 
-	getClearColor(): NTColor;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDPI(): number;
 
-	getDPI(): number;
+    getDoubleClickMaxDuration(): number;
 
-	getDoubleClickMaxDuration(): number;
+    getDrawDistance(): number;
 
-	getDrawDistance(): number;
+    getEnvelopeThreadPoolSize(): number;
 
-	getEnvelopeThreadPoolSize(): number;
+    getFieldOfViewY(): number;
 
-	getFieldOfViewY(): number;
+    getFocusPointOffset(): NTScreenPos;
 
-	getFocusPointOffset(): NTScreenPos;
+    getLongClickDuration(): number;
 
-	getLongClickDuration(): number;
+    getMainLightColor(): NTColor;
 
-	getMainLightColor(): NTColor;
+    getMainLightDirection(): NTMapVec;
 
-	getMainLightDirection(): NTMapVec;
+    getPanBounds(): NTMapBounds;
 
-	getPanBounds(): NTMapBounds;
+    getPanningMode(): NTPanningMode;
 
-	getPanningMode(): NTPanningMode;
+    getPivotMode(): NTPivotMode;
 
-	getPivotMode(): NTPivotMode;
+    getRenderProjectionMode(): NTRenderProjectionMode;
 
-	getRenderProjectionMode(): NTRenderProjectionMode;
+    getSkyColor(): NTColor;
 
-	getSkyColor(): NTColor;
+    getTileDrawSize(): number;
 
-	getTileDrawSize(): number;
+    getTileThreadPoolSize(): number;
 
-	getTileThreadPoolSize(): number;
+    getTiltRange(): NTMapRange;
 
-	getTiltRange(): NTMapRange;
+    getZoomRange(): NTMapRange;
 
-	getWatermarkAlignmentX(): number;
+    hash(): number;
 
-	getWatermarkAlignmentY(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	getWatermarkBitmap(): NTBitmap;
+    isClickTypeDetection(): boolean;
 
-	getWatermarkPadding(): NTScreenPos;
+    isDoubleClickDetection(): boolean;
 
-	getWatermarkScale(): number;
+    isKineticPan(): boolean;
 
-	getZoomRange(): NTMapRange;
+    isKineticRotation(): boolean;
 
-	hash(): number;
+    isKineticZoom(): boolean;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isLayersLabelsProcessedInReverseOrder(): boolean;
 
-	isClickTypeDetection(): boolean;
+    isRestrictedPanning(): boolean;
 
-	isDoubleClickDetection(): boolean;
+    isRotatable(): boolean;
 
-	isKineticPan(): boolean;
+    isRotationGestures(): boolean;
 
-	isKineticRotation(): boolean;
+    isSeamlessPanning(): boolean;
 
-	isKineticZoom(): boolean;
+    isTiltGestureReversed(): boolean;
 
-	isLayersLabelsProcessedInReverseOrder(): boolean;
+    isUserInput(): boolean;
 
-	isRestrictedPanning(): boolean;
+    isZoomGestures(): boolean;
 
-	isRotatable(): boolean;
+    setAmbientLightColor(color: NTColor): void;
 
-	isRotationGestures(): boolean;
+    setBackgroundBitmap(backgroundBitmap: NTBitmap): void;
 
-	isSeamlessPanning(): boolean;
+    setBaseProjection(baseProjection: NTProjection): void;
 
-	isTiltGestureReversed(): boolean;
+    setClearColor(color: NTColor): void;
 
-	isUserInput(): boolean;
+    setClickTypeDetection(enabled: boolean): void;
 
-	isZoomGestures(): boolean;
+    setDPI(dpi: number): void;
 
-	setAmbientLightColor(color: NTColor): void;
+    setDoubleClickDetection(enabled: boolean): void;
 
-	setBackgroundBitmap(backgroundBitmap: NTBitmap): void;
+    setDoubleClickMaxDuration(duration: number): void;
 
-	setBaseProjection(baseProjection: NTProjection): void;
+    setDrawDistance(drawDistance: number): void;
 
-	setClearColor(color: NTColor): void;
+    setEnvelopeThreadPoolSize(poolSize: number): void;
 
-	setClickTypeDetection(enabled: boolean): void;
+    setFieldOfViewY(fovY: number): void;
 
-	setDPI(dpi: number): void;
+    setFocusPointOffset(offset: NTScreenPos): void;
 
-	setDoubleClickDetection(enabled: boolean): void;
+    setKineticPan(enabled: boolean): void;
 
-	setDoubleClickMaxDuration(duration: number): void;
+    setKineticRotation(enabled: boolean): void;
 
-	setDrawDistance(drawDistance: number): void;
+    setKineticZoom(enabled: boolean): void;
 
-	setEnvelopeThreadPoolSize(poolSize: number): void;
+    setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
 
-	setFieldOfViewY(fovY: number): void;
+    setLongClickDuration(duration: number): void;
 
-	setFocusPointOffset(offset: NTScreenPos): void;
+    setMainLightColor(color: NTColor): void;
 
-	setKineticPan(enabled: boolean): void;
+    setMainLightDirection(direction: NTMapVec): void;
 
-	setKineticRotation(enabled: boolean): void;
+    setPanBounds(panBounds: NTMapBounds): void;
 
-	setKineticZoom(enabled: boolean): void;
+    setPanningMode(panningMode: NTPanningMode): void;
 
-	setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
+    setPivotMode(pivotMode: NTPivotMode): void;
 
-	setLongClickDuration(duration: number): void;
+    setRenderProjectionMode(renderProjectionMode: NTRenderProjectionMode): void;
 
-	setMainLightColor(color: NTColor): void;
+    setRestrictedPanning(enabled: boolean): void;
 
-	setMainLightDirection(direction: NTMapVec): void;
+    setRotatable(enabled: boolean): void;
 
-	setPanBounds(panBounds: NTMapBounds): void;
+    setRotationGestures(enabled: boolean): void;
 
-	setPanningMode(panningMode: NTPanningMode): void;
+    setSeamlessPanning(enabled: boolean): void;
 
-	setPivotMode(pivotMode: NTPivotMode): void;
+    setSkyColor(color: NTColor): void;
 
-	setRenderProjectionMode(renderProjectionMode: NTRenderProjectionMode): void;
+    setTileDrawSize(tileDrawSize: number): void;
 
-	setRestrictedPanning(enabled: boolean): void;
+    setTileThreadPoolSize(poolSize: number): void;
 
-	setRotatable(enabled: boolean): void;
+    setTiltGestureReversed(reversed: boolean): void;
 
-	setRotationGestures(enabled: boolean): void;
+    setTiltRange(tiltRange: NTMapRange): void;
 
-	setSeamlessPanning(enabled: boolean): void;
+    setUserInput(enabled: boolean): void;
 
-	setSkyColor(color: NTColor): void;
+    setZoomGestures(enabled: boolean): void;
 
-	setTileDrawSize(tileDrawSize: number): void;
+    setZoomRange(zoomRange: NTMapRange): void;
 
-	setTileThreadPoolSize(poolSize: number): void;
-
-	setTiltGestureReversed(reversed: boolean): void;
-
-	setTiltRange(tiltRange: NTMapRange): void;
-
-	setUserInput(enabled: boolean): void;
-
-	setWatermarkAlignmentX(alignmentX: number): void;
-
-	setWatermarkAlignmentY(alignmentY: number): void;
-
-	setWatermarkBitmap(watermarkBitmap: NTBitmap): void;
-
-	setWatermarkPadding(padding: NTScreenPos): void;
-
-	setWatermarkScale(scale: number): void;
-
-	setZoomGestures(enabled: boolean): void;
-
-	setZoomRange(zoomRange: NTMapRange): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTOrderedTileDataSource extends NTTileDataSource {
+    static alloc(): NTOrderedTileDataSource; // inherited from NSObject
 
-	static alloc(): NTOrderedTileDataSource; // inherited from NSObject
+    static new(): NTOrderedTileDataSource; // inherited from NSObject
 
-	static new(): NTOrderedTileDataSource; // inherited from NSObject
+    constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource });
 
-	constructor(o: { dataSource1: NTTileDataSource; dataSource2: NTTileDataSource; });
+    getDataExtentSwigExplicitNTOrderedTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTOrderedTileDataSource(): NTMapBounds;
+    getMaxZoomSwigExplicitNTOrderedTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTOrderedTileDataSource(): number;
+    getMinZoomSwigExplicitNTOrderedTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTOrderedTileDataSource(): number;
+    initWithDataSource1DataSource2(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource): this;
 
-	initWithDataSource1DataSource2(dataSource1: NTTileDataSource, dataSource2: NTTileDataSource): this;
-
-	loadTileSwigExplicitNTOrderedTileDataSource(tile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTOrderedTileDataSource(tile: NTMapTile): NTTileData;
 }
 
 declare const enum NTPackageAction {
+    T_PACKAGE_ACTION_READY = 0,
 
-	T_PACKAGE_ACTION_READY = 0,
+    T_PACKAGE_ACTION_WAITING = 1,
 
-	T_PACKAGE_ACTION_WAITING = 1,
+    T_PACKAGE_ACTION_DOWNLOADING = 2,
 
-	T_PACKAGE_ACTION_DOWNLOADING = 2,
+    T_PACKAGE_ACTION_COPYING = 3,
 
-	T_PACKAGE_ACTION_COPYING = 3,
-
-	T_PACKAGE_ACTION_REMOVING = 4
+    T_PACKAGE_ACTION_REMOVING = 4
 }
 
 declare const enum NTPackageErrorType {
+    T_PACKAGE_ERROR_TYPE_SYSTEM = 0,
 
-	T_PACKAGE_ERROR_TYPE_SYSTEM = 0,
+    T_PACKAGE_ERROR_TYPE_CONNECTION = 1,
 
-	T_PACKAGE_ERROR_TYPE_CONNECTION = 1,
+    T_PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED = 2,
 
-	T_PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED = 2,
+    T_PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG = 3,
 
-	T_PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG = 3,
-
-	T_PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN = 4
+    T_PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN = 4
 }
 
 declare class NTPackageInfo extends NSObject {
+    static alloc(): NTPackageInfo; // inherited from NSObject
 
-	static alloc(): NTPackageInfo; // inherited from NSObject
+    static new(): NTPackageInfo; // inherited from NSObject
 
-	static new(): NTPackageInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { packageId: string; packageType: NTPackageType; version: number; size: number; serverURL: string; tileMask: NTPackageTileMask; metaInfo: NTPackageMetaInfo });
 
-	constructor(o: { packageId: string; packageType: NTPackageType; version: number; size: number; serverURL: string; tileMask: NTPackageTileMask; metaInfo: NTPackageMetaInfo; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMetaInfo(): NTPackageMetaInfo;
 
-	getMetaInfo(): NTPackageMetaInfo;
+    getName(): string;
 
-	getName(): string;
+    getNames(lang: string): NTStringVector;
 
-	getNames(lang: string): NTStringVector;
+    getPackageId(): string;
 
-	getPackageId(): string;
+    getPackageType(): NTPackageType;
 
-	getPackageType(): NTPackageType;
+    getSize(): number;
 
-	getSize(): number;
+    getTileMask(): NTPackageTileMask;
 
-	getTileMask(): NTPackageTileMask;
+    getVersion(): number;
 
-	getVersion(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithPackageIdPackageTypeVersionSizeServerURLTileMaskMetaInfo(
+        packageId: string,
+        packageType: NTPackageType,
+        version: number,
+        size: number,
+        serverURL: string,
+        tileMask: NTPackageTileMask,
+        metaInfo: NTPackageMetaInfo
+    ): this;
 
-	initWithPackageIdPackageTypeVersionSizeServerURLTileMaskMetaInfo(packageId: string, packageType: NTPackageType, version: number, size: number, serverURL: string, tileMask: NTPackageTileMask, metaInfo: NTPackageMetaInfo): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPackageInfoVector extends NSObject {
+    static alloc(): NTPackageInfoVector; // inherited from NSObject
 
-	static alloc(): NTPackageInfoVector; // inherited from NSObject
+    static new(): NTPackageInfoVector; // inherited from NSObject
 
-	static new(): NTPackageInfoVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTPackageInfo): void;
 
-	add(x: NTPackageInfo): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTPackageInfo;
 
-	get(i: number): NTPackageInfo;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTPackageInfo): void;
 
-	setVal(i: number, val: NTPackageInfo): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPackageManager extends NSObject {
+    static alloc(): NTPackageManager; // inherited from NSObject
 
-	static alloc(): NTPackageManager; // inherited from NSObject
+    static new(): NTPackageManager; // inherited from NSObject
 
-	static new(): NTPackageManager; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTPackageManager;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTPackageManager;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { packageListURL: string; dataFolder: string; serverEncKey: string; localEncKey: string });
 
-	constructor(o: { packageListURL: string; dataFolder: string; serverEncKey: string; localEncKey: string; });
+    cancelPackageTasks(packageId: string): void;
 
-	cancelPackageTasks(packageId: string): void;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getLocalPackage(packageId: string): NTPackageInfo;
 
-	getLocalPackage(packageId: string): NTPackageInfo;
+    getLocalPackageStatusVersion(packageId: string, version: number): NTPackageStatus;
 
-	getLocalPackageStatusVersion(packageId: string, version: number): NTPackageStatus;
+    getLocalPackages(): NTPackageInfoVector;
 
-	getLocalPackages(): NTPackageInfoVector;
+    getPackageManagerListener(): NTPackageManagerListener;
 
-	getPackageManagerListener(): NTPackageManagerListener;
+    getServerPackage(packageId: string): NTPackageInfo;
 
-	getServerPackage(packageId: string): NTPackageInfo;
+    getServerPackageListAge(): number;
 
-	getServerPackageListAge(): number;
+    getServerPackageListMetaInfo(): NTPackageMetaInfo;
 
-	getServerPackageListMetaInfo(): NTPackageMetaInfo;
+    getServerPackages(): NTPackageInfoVector;
 
-	getServerPackages(): NTPackageInfoVector;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithPackageListURLDataFolderServerEncKeyLocalEncKey(packageListURL: string, dataFolder: string, serverEncKey: string, localEncKey: string): this;
 
-	initWithPackageListURLDataFolderServerEncKeyLocalEncKey(packageListURL: string, dataFolder: string, serverEncKey: string, localEncKey: string): this;
+    isAreaDownloadedZoomProjection(mapBounds: NTMapBounds, zoom: number, projection: NTProjection): boolean;
 
-	isAreaDownloadedZoomProjection(mapBounds: NTMapBounds, zoom: number, projection: NTProjection): boolean;
+    setPackageManagerListener(listener: NTPackageManagerListener): void;
 
-	setPackageManagerListener(listener: NTPackageManagerListener): void;
+    setPackagePriorityPriority(packageId: string, priority: number): void;
 
-	setPackagePriorityPriority(packageId: string, priority: number): void;
+    start(): boolean;
 
-	start(): boolean;
+    startPackageDownload(packageId: string): boolean;
 
-	startPackageDownload(packageId: string): boolean;
+    startPackageImportVersionPackageFileName(packageId: string, version: number, packageFileName: string): boolean;
 
-	startPackageImportVersionPackageFileName(packageId: string, version: number, packageFileName: string): boolean;
+    startPackageListDownload(): boolean;
 
-	startPackageListDownload(): boolean;
+    startPackageRemove(packageId: string): boolean;
 
-	startPackageRemove(packageId: string): boolean;
+    stop(wait: boolean): void;
 
-	stop(wait: boolean): void;
+    suggestPackagesProjection(mapPos: NTMapPos, projection: NTProjection): NTPackageInfoVector;
 
-	suggestPackagesProjection(mapPos: NTMapPos, projection: NTProjection): NTPackageInfoVector;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPackageManagerGeocodingService extends NTGeocodingService {
+    static alloc(): NTPackageManagerGeocodingService; // inherited from NSObject
 
-	static alloc(): NTPackageManagerGeocodingService; // inherited from NSObject
+    static new(): NTPackageManagerGeocodingService; // inherited from NSObject
 
-	static new(): NTPackageManagerGeocodingService; // inherited from NSObject
+    constructor(o: { packageManager: NTPackageManager });
 
-	constructor(o: { packageManager: NTPackageManager; });
+    calculateAddressesSwigExplicitNTPackageManagerGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTPackageManagerGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getLanguageSwigExplicitNTPackageManagerGeocodingService(): string;
 
-	getLanguageSwigExplicitNTPackageManagerGeocodingService(): string;
+    getMaxResultsSwigExplicitNTPackageManagerGeocodingService(): number;
 
-	getMaxResultsSwigExplicitNTPackageManagerGeocodingService(): number;
+    initWithPackageManager(packageManager: NTPackageManager): this;
 
-	initWithPackageManager(packageManager: NTPackageManager): this;
+    isAutocompleteSwigExplicitNTPackageManagerGeocodingService(): boolean;
 
-	isAutocompleteSwigExplicitNTPackageManagerGeocodingService(): boolean;
+    setAutocompleteSwigExplicitNTPackageManagerGeocodingService(autocomplete: boolean): void;
 
-	setAutocompleteSwigExplicitNTPackageManagerGeocodingService(autocomplete: boolean): void;
+    setLanguageSwigExplicitNTPackageManagerGeocodingService(lang: string): void;
 
-	setLanguageSwigExplicitNTPackageManagerGeocodingService(lang: string): void;
-
-	setMaxResultsSwigExplicitNTPackageManagerGeocodingService(maxResults: number): void;
+    setMaxResultsSwigExplicitNTPackageManagerGeocodingService(maxResults: number): void;
 }
 
 declare class NTPackageManagerListener extends NSObject {
+    static alloc(): NTPackageManagerListener; // inherited from NSObject
 
-	static alloc(): NTPackageManagerListener; // inherited from NSObject
+    static new(): NTPackageManagerListener; // inherited from NSObject
 
-	static new(): NTPackageManagerListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTPackageManagerListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTPackageManagerListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onPackageCancelledSwigExplicitNTPackageManagerListenerVersion(arg1: string, version: number): void;
 
-	onPackageCancelledSwigExplicitNTPackageManagerListenerVersion(arg1: string, version: number): void;
+    onPackageCancelledVersion(arg1: string, version: number): void;
 
-	onPackageCancelledVersion(arg1: string, version: number): void;
+    onPackageFailedSwigExplicitNTPackageManagerListenerVersionErrorType(arg1: string, version: number, errorType: NTPackageErrorType): void;
 
-	onPackageFailedSwigExplicitNTPackageManagerListenerVersionErrorType(arg1: string, version: number, errorType: NTPackageErrorType): void;
+    onPackageFailedVersionErrorType(arg1: string, version: number, errorType: NTPackageErrorType): void;
 
-	onPackageFailedVersionErrorType(arg1: string, version: number, errorType: NTPackageErrorType): void;
+    onPackageListFailed(): void;
 
-	onPackageListFailed(): void;
+    onPackageListFailedSwigExplicitNTPackageManagerListener(): void;
 
-	onPackageListFailedSwigExplicitNTPackageManagerListener(): void;
+    onPackageListUpdated(): void;
 
-	onPackageListUpdated(): void;
+    onPackageListUpdatedSwigExplicitNTPackageManagerListener(): void;
 
-	onPackageListUpdatedSwigExplicitNTPackageManagerListener(): void;
+    onPackageStatusChangedSwigExplicitNTPackageManagerListenerVersionStatus(arg1: string, version: number, status: NTPackageStatus): void;
 
-	onPackageStatusChangedSwigExplicitNTPackageManagerListenerVersionStatus(arg1: string, version: number, status: NTPackageStatus): void;
+    onPackageStatusChangedVersionStatus(arg1: string, version: number, status: NTPackageStatus): void;
 
-	onPackageStatusChangedVersionStatus(arg1: string, version: number, status: NTPackageStatus): void;
+    onPackageUpdatedSwigExplicitNTPackageManagerListenerVersion(arg1: string, version: number): void;
 
-	onPackageUpdatedSwigExplicitNTPackageManagerListenerVersion(arg1: string, version: number): void;
+    onPackageUpdatedVersion(arg1: string, version: number): void;
 
-	onPackageUpdatedVersion(arg1: string, version: number): void;
+    onStyleFailed(styleName: string): void;
 
-	onStyleFailed(styleName: string): void;
+    onStyleFailedSwigExplicitNTPackageManagerListener(styleName: string): void;
 
-	onStyleFailedSwigExplicitNTPackageManagerListener(styleName: string): void;
+    onStyleUpdated(styleName: string): void;
 
-	onStyleUpdated(styleName: string): void;
+    onStyleUpdatedSwigExplicitNTPackageManagerListener(styleName: string): void;
 
-	onStyleUpdatedSwigExplicitNTPackageManagerListener(styleName: string): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPackageManagerReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTPackageManagerReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTPackageManagerReverseGeocodingService; // inherited from NSObject
+    static new(): NTPackageManagerReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTPackageManagerReverseGeocodingService; // inherited from NSObject
+    constructor(o: { packageManager: NTPackageManager });
 
-	constructor(o: { packageManager: NTPackageManager; });
+    calculateAddressesSwigExplicitNTPackageManagerReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTPackageManagerReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getLanguageSwigExplicitNTPackageManagerReverseGeocodingService(): string;
 
-	getLanguageSwigExplicitNTPackageManagerReverseGeocodingService(): string;
+    initWithPackageManager(packageManager: NTPackageManager): this;
 
-	initWithPackageManager(packageManager: NTPackageManager): this;
-
-	setLanguageSwigExplicitNTPackageManagerReverseGeocodingService(lang: string): void;
+    setLanguageSwigExplicitNTPackageManagerReverseGeocodingService(lang: string): void;
 }
 
 declare class NTPackageManagerRoutingService extends NTRoutingService {
+    static alloc(): NTPackageManagerRoutingService; // inherited from NSObject
 
-	static alloc(): NTPackageManagerRoutingService; // inherited from NSObject
+    static new(): NTPackageManagerRoutingService; // inherited from NSObject
 
-	static new(): NTPackageManagerRoutingService; // inherited from NSObject
+    constructor(o: { packageManager: NTPackageManager });
 
-	constructor(o: { packageManager: NTPackageManager; });
+    calculateRouteSwigExplicitNTPackageManagerRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	calculateRouteSwigExplicitNTPackageManagerRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    getProfileSwigExplicitNTPackageManagerRoutingService(): string;
 
-	getProfileSwigExplicitNTPackageManagerRoutingService(): string;
+    initWithPackageManager(packageManager: NTPackageManager): this;
 
-	initWithPackageManager(packageManager: NTPackageManager): this;
+    matchRouteSwigExplicitNTPackageManagerRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	matchRouteSwigExplicitNTPackageManagerRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
-
-	setProfileSwigExplicitNTPackageManagerRoutingService(profile: string): void;
+    setProfileSwigExplicitNTPackageManagerRoutingService(profile: string): void;
 }
 
 declare class NTPackageManagerTileDataSource extends NTTileDataSource {
+    static alloc(): NTPackageManagerTileDataSource; // inherited from NSObject
 
-	static alloc(): NTPackageManagerTileDataSource; // inherited from NSObject
+    static new(): NTPackageManagerTileDataSource; // inherited from NSObject
 
-	static new(): NTPackageManagerTileDataSource; // inherited from NSObject
+    constructor(o: { packageManager: NTPackageManager });
 
-	constructor(o: { packageManager: NTPackageManager; });
+    getPackageManager(): NTPackageManager;
 
-	getPackageManager(): NTPackageManager;
+    initWithPackageManager(packageManager: NTPackageManager): this;
 
-	initWithPackageManager(packageManager: NTPackageManager): this;
-
-	loadTileSwigExplicitNTPackageManagerTileDataSource(mapTile: NTMapTile): NTTileData;
+    loadTileSwigExplicitNTPackageManagerTileDataSource(mapTile: NTMapTile): NTTileData;
 }
 
 declare class NTPackageManagerValhallaRoutingService extends NTRoutingService {
+    static alloc(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
 
-	static alloc(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
+    static new(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
 
-	static new(): NTPackageManagerValhallaRoutingService; // inherited from NSObject
+    constructor(o: { packageManager: NTPackageManager });
 
-	constructor(o: { packageManager: NTPackageManager; });
+    addLocaleJson(key: string, json: string): void;
 
-	calculateRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    calculateRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	getConfigurationParameter(param: string): NTVariant;
+    getConfigurationParameter(param: string): NTVariant;
 
-	getProfileSwigExplicitNTPackageManagerValhallaRoutingService(): string;
+    getProfileSwigExplicitNTPackageManagerValhallaRoutingService(): string;
 
-	initWithPackageManager(packageManager: NTPackageManager): this;
+    initWithPackageManager(packageManager: NTPackageManager): this;
 
-	matchRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+    matchRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	setConfigurationParameterValue(param: string, value: NTVariant): void;
+    setConfigurationParameterValue(param: string, value: NTVariant): void;
 
-	setProfileSwigExplicitNTPackageManagerValhallaRoutingService(profile: string): void;
+    setProfileSwigExplicitNTPackageManagerValhallaRoutingService(profile: string): void;
 }
 
 declare class NTPackageMetaInfo extends NSObject {
+    static alloc(): NTPackageMetaInfo; // inherited from NSObject
 
-	static alloc(): NTPackageMetaInfo; // inherited from NSObject
+    static new(): NTPackageMetaInfo; // inherited from NSObject
 
-	static new(): NTPackageMetaInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { varnt: NTVariant });
 
-	constructor(o: { variant:NTVariant; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getVariant(): NTVariant;
 
-	getVariant(): NTVariant;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithVar(varnt: NTVariant): this;
 
-	initWithVar(variant:NTVariant): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPackageStatus extends NSObject {
+    static alloc(): NTPackageStatus; // inherited from NSObject
 
-	static alloc(): NTPackageStatus; // inherited from NSObject
+    static new(): NTPackageStatus; // inherited from NSObject
 
-	static new(): NTPackageStatus; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { currentAction: NTPackageAction; paused: boolean; progress: number });
 
-	constructor(o: { currentAction: NTPackageAction; paused: boolean; progress: number; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getCurrentAction(): NTPackageAction;
 
-	getCurrentAction(): NTPackageAction;
+    getProgress(): number;
 
-	getProgress(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCurrentActionPausedProgress(currentAction: NTPackageAction, paused: boolean, progress: number): this;
 
-	initWithCurrentActionPausedProgress(currentAction: NTPackageAction, paused: boolean, progress: number): this;
+    isPaused(): boolean;
 
-	isPaused(): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPackageTileMask extends NSObject {
+    static alloc(): NTPackageTileMask; // inherited from NSObject
 
-	static alloc(): NTPackageTileMask; // inherited from NSObject
+    static new(): NTPackageTileMask; // inherited from NSObject
 
-	static new(): NTPackageTileMask; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getBoundingPolygon(projection: NTProjection): NTMultiPolygonGeometry;
 
-	getBoundingPolygon(projection: NTProjection): NTMultiPolygonGeometry;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMaxZoomLevel(): number;
 
-	getMaxZoomLevel(): number;
+    getStringValue(): string;
 
-	getStringValue(): string;
+    getTileStatus(tile: NTMapTile): NTPackageTileStatus;
 
-	getTileStatus(tile: NTMapTile): NTPackageTileStatus;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTPackageTileStatus {
+    T_PACKAGE_TILE_STATUS_MISSING = 0,
 
-	T_PACKAGE_TILE_STATUS_MISSING = 0,
+    T_PACKAGE_TILE_STATUS_PARTIAL = 1,
 
-	T_PACKAGE_TILE_STATUS_PARTIAL = 1,
-
-	T_PACKAGE_TILE_STATUS_FULL = 2
+    T_PACKAGE_TILE_STATUS_FULL = 2
 }
 
 declare const enum NTPackageType {
+    T_PACKAGE_TYPE_MAP = 0,
 
-	T_PACKAGE_TYPE_MAP = 0,
+    T_PACKAGE_TYPE_ROUTING = 1,
 
-	T_PACKAGE_TYPE_ROUTING = 1,
+    T_PACKAGE_TYPE_GEOCODING = 2,
 
-	T_PACKAGE_TYPE_GEOCODING = 2,
-
-	T_PACKAGE_TYPE_VALHALLA_ROUTING = 3
+    T_PACKAGE_TYPE_VALHALLA_ROUTING = 3
 }
 
 declare const enum NTPanningMode {
+    T_PANNING_MODE_FREE = 0,
 
-	T_PANNING_MODE_FREE = 0,
+    T_PANNING_MODE_STICKY = 1,
 
-	T_PANNING_MODE_STICKY = 1,
-
-	T_PANNING_MODE_STICKY_FINAL = 2
+    T_PANNING_MODE_STICKY_FINAL = 2
 }
 
 declare class NTPeliasOnlineGeocodingService extends NTGeocodingService {
+    static alloc(): NTPeliasOnlineGeocodingService; // inherited from NSObject
 
-	static alloc(): NTPeliasOnlineGeocodingService; // inherited from NSObject
+    static new(): NTPeliasOnlineGeocodingService; // inherited from NSObject
 
-	static new(): NTPeliasOnlineGeocodingService; // inherited from NSObject
+    constructor(o: { apiKey: string });
 
-	constructor(o: { apiKey: string; });
+    calculateAddressesSwigExplicitNTPeliasOnlineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTPeliasOnlineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getLanguageSwigExplicitNTPeliasOnlineGeocodingService(): string;
 
-	getLanguageSwigExplicitNTPeliasOnlineGeocodingService(): string;
+    getMaxResultsSwigExplicitNTPeliasOnlineGeocodingService(): number;
 
-	getMaxResultsSwigExplicitNTPeliasOnlineGeocodingService(): number;
+    initWithApiKey(apiKey: string): this;
 
-	initWithApiKey(apiKey: string): this;
+    isAutocompleteSwigExplicitNTPeliasOnlineGeocodingService(): boolean;
 
-	isAutocompleteSwigExplicitNTPeliasOnlineGeocodingService(): boolean;
+    setAutocompleteSwigExplicitNTPeliasOnlineGeocodingService(autocomplete: boolean): void;
 
-	setAutocompleteSwigExplicitNTPeliasOnlineGeocodingService(autocomplete: boolean): void;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
+    setLanguageSwigExplicitNTPeliasOnlineGeocodingService(lang: string): void;
 
-	setLanguageSwigExplicitNTPeliasOnlineGeocodingService(lang: string): void;
-
-	setMaxResultsSwigExplicitNTPeliasOnlineGeocodingService(maxResults: number): void;
+    setMaxResultsSwigExplicitNTPeliasOnlineGeocodingService(maxResults: number): void;
 }
 
 declare class NTPeliasOnlineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTPeliasOnlineReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTPeliasOnlineReverseGeocodingService; // inherited from NSObject
+    static new(): NTPeliasOnlineReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTPeliasOnlineReverseGeocodingService; // inherited from NSObject
+    constructor(o: { apiKey: string });
 
-	constructor(o: { apiKey: string; });
+    calculateAddressesSwigExplicitNTPeliasOnlineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTPeliasOnlineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getLanguageSwigExplicitNTPeliasOnlineReverseGeocodingService(): string;
 
-	getLanguageSwigExplicitNTPeliasOnlineReverseGeocodingService(): string;
+    initWithApiKey(apiKey: string): this;
 
-	initWithApiKey(apiKey: string): this;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
-
-	setLanguageSwigExplicitNTPeliasOnlineReverseGeocodingService(lang: string): void;
+    setLanguageSwigExplicitNTPeliasOnlineReverseGeocodingService(lang: string): void;
 }
 
 declare class NTPersistentCacheTileDataSource extends NTCacheTileDataSource {
+    static alloc(): NTPersistentCacheTileDataSource; // inherited from NSObject
 
-	static alloc(): NTPersistentCacheTileDataSource; // inherited from NSObject
+    static new(): NTPersistentCacheTileDataSource; // inherited from NSObject
 
-	static new(): NTPersistentCacheTileDataSource; // inherited from NSObject
+    constructor(o: { dataSource: NTTileDataSource; databasePath: string });
 
-	constructor(o: { dataSource: NTTileDataSource; databasePath: string; });
+    clearSwigExplicitNTPersistentCacheTileDataSource(): void;
 
-	clearSwigExplicitNTPersistentCacheTileDataSource(): void;
+    close(): void;
 
-	close(): void;
+    getCapacitySwigExplicitNTPersistentCacheTileDataSource(): number;
 
-	getCapacitySwigExplicitNTPersistentCacheTileDataSource(): number;
+    initWithDataSourceDatabasePath(dataSource: NTTileDataSource, databasePath: string): this;
 
-	initWithDataSourceDatabasePath(dataSource: NTTileDataSource, databasePath: string): this;
+    isCacheOnlyMode(): boolean;
 
-	isCacheOnlyMode(): boolean;
+    isOpen(): boolean;
 
-	isOpen(): boolean;
+    loadTileSwigExplicitNTPersistentCacheTileDataSource(mapTile: NTMapTile): NTTileData;
 
-	loadTileSwigExplicitNTPersistentCacheTileDataSource(mapTile: NTMapTile): NTTileData;
+    setCacheOnlyMode(enabled: boolean): void;
 
-	setCacheOnlyMode(enabled: boolean): void;
+    setCapacitySwigExplicitNTPersistentCacheTileDataSource(capacityInBytes: number): void;
 
-	setCapacitySwigExplicitNTPersistentCacheTileDataSource(capacityInBytes: number): void;
+    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: NTMapBounds, minZoom: number, maxZoom: number, tileDownloadListener: NTTileDownloadListener): void;
 
-	startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: NTMapBounds, minZoom: number, maxZoom: number, tileDownloadListener: NTTileDownloadListener): void;
-
-	stopAllDownloads(): void;
+    stopAllDownloads(): void;
 }
 
 declare const enum NTPivotMode {
+    T_PIVOT_MODE_TOUCHPOINT = 0,
 
-	T_PIVOT_MODE_TOUCHPOINT = 0,
-
-	T_PIVOT_MODE_CENTERPOINT = 1
+    T_PIVOT_MODE_CENTERPOINT = 1
 }
 
 declare class NTPoint extends NTVectorElement {
+    static alloc(): NTPoint; // inherited from NSObject
 
-	static alloc(): NTPoint; // inherited from NSObject
+    static new(): NTPoint; // inherited from NSObject
 
-	static new(): NTPoint; // inherited from NSObject
+    constructor(o: { geometry: NTPointGeometry; style: NTPointStyle });
 
-	constructor(o: { geometry: NTPointGeometry; style: NTPointStyle; });
+    constructor(o: { pos: NTMapPos; style: NTPointStyle });
 
-	constructor(o: { pos: NTMapPos; style: NTPointStyle; });
+    getGeometry(): NTPointGeometry;
 
-	getGeometry(): NTPointGeometry;
+    getPos(): NTMapPos;
 
-	getPos(): NTMapPos;
+    getStyle(): NTPointStyle;
 
-	getStyle(): NTPointStyle;
+    initWithGeometryStyle(geometry: NTPointGeometry, style: NTPointStyle): this;
 
-	initWithGeometryStyle(geometry: NTPointGeometry, style: NTPointStyle): this;
+    initWithPosStyle(pos: NTMapPos, style: NTPointStyle): this;
 
-	initWithPosStyle(pos: NTMapPos, style: NTPointStyle): this;
+    setGeometry(geometry: NTPointGeometry): void;
 
-	setGeometry(geometry: NTPointGeometry): void;
+    setPos(pos: NTMapPos): void;
 
-	setPos(pos: NTMapPos): void;
-
-	setStyle(style: NTPointStyle): void;
+    setStyle(style: NTPointStyle): void;
 }
 
 declare class NTPointGeometry extends NTGeometry {
+    static alloc(): NTPointGeometry; // inherited from NSObject
 
-	static alloc(): NTPointGeometry; // inherited from NSObject
+    static new(): NTPointGeometry; // inherited from NSObject
 
-	static new(): NTPointGeometry; // inherited from NSObject
+    constructor(o: { pos: NTMapPos });
 
-	constructor(o: { pos: NTMapPos; });
+    getPos(): NTMapPos;
 
-	getPos(): NTMapPos;
-
-	initWithPos(pos: NTMapPos): this;
+    initWithPos(pos: NTMapPos): this;
 }
 
 declare class NTPointGeometryVector extends NSObject {
+    static alloc(): NTPointGeometryVector; // inherited from NSObject
 
-	static alloc(): NTPointGeometryVector; // inherited from NSObject
+    static new(): NTPointGeometryVector; // inherited from NSObject
 
-	static new(): NTPointGeometryVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTPointGeometry): void;
 
-	add(x: NTPointGeometry): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTPointGeometry;
 
-	get(i: number): NTPointGeometry;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTPointGeometry): void;
 
-	setVal(i: number, val: NTPointGeometry): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPointStyle extends NTStyle {
+    static alloc(): NTPointStyle; // inherited from NSObject
 
-	static alloc(): NTPointStyle; // inherited from NSObject
+    static new(): NTPointStyle; // inherited from NSObject
 
-	static new(): NTPointStyle; // inherited from NSObject
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getClickSize(): number;
 
-	getClickSize(): number;
-
-	getSize(): number;
+    getSize(): number;
 }
 
 declare class NTPointStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTPointStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTPointStyleBuilder; // inherited from NSObject
+    static new(): NTPointStyleBuilder; // inherited from NSObject
 
-	static new(): NTPointStyleBuilder; // inherited from NSObject
+    buildStyle(): NTPointStyle;
 
-	buildStyle(): NTPointStyle;
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getClickSize(): number;
 
-	getClickSize(): number;
+    getSize(): number;
 
-	getSize(): number;
+    setBitmap(bitmap: NTBitmap): void;
 
-	setBitmap(bitmap: NTBitmap): void;
+    setClickSize(size: number): void;
 
-	setClickSize(size: number): void;
-
-	setSize(size: number): void;
+    setSize(size: number): void;
 }
 
 declare class NTPolygon extends NTVectorElement {
+    static alloc(): NTPolygon; // inherited from NSObject
 
-	static alloc(): NTPolygon; // inherited from NSObject
+    static new(): NTPolygon; // inherited from NSObject
 
-	static new(): NTPolygon; // inherited from NSObject
+    constructor(o: { geometry: NTPolygonGeometry; style: NTPolygonStyle });
 
-	constructor(o: { geometry: NTPolygonGeometry; style: NTPolygonStyle; });
+    constructor(o: { poses: NTMapPosVector; holes: NTMapPosVectorVector; style: NTPolygonStyle });
 
-	constructor(o: { poses: NTMapPosVector; holes: NTMapPosVectorVector; style: NTPolygonStyle; });
+    constructor(o: { poses: NTMapPosVector; style: NTPolygonStyle });
 
-	constructor(o: { poses: NTMapPosVector; style: NTPolygonStyle; });
+    getGeometry(): NTPolygonGeometry;
 
-	getGeometry(): NTPolygonGeometry;
+    getHoles(): NTMapPosVectorVector;
 
-	getHoles(): NTMapPosVectorVector;
+    getPoses(): NTMapPosVector;
 
-	getPoses(): NTMapPosVector;
+    getStyle(): NTPolygonStyle;
 
-	getStyle(): NTPolygonStyle;
+    initWithGeometryStyle(geometry: NTPolygonGeometry, style: NTPolygonStyle): this;
 
-	initWithGeometryStyle(geometry: NTPolygonGeometry, style: NTPolygonStyle): this;
+    initWithPosesHolesStyle(poses: NTMapPosVector, holes: NTMapPosVectorVector, style: NTPolygonStyle): this;
 
-	initWithPosesHolesStyle(poses: NTMapPosVector, holes: NTMapPosVectorVector, style: NTPolygonStyle): this;
+    initWithPosesStyle(poses: NTMapPosVector, style: NTPolygonStyle): this;
 
-	initWithPosesStyle(poses: NTMapPosVector, style: NTPolygonStyle): this;
+    setGeometry(geometry: NTPolygonGeometry): void;
 
-	setGeometry(geometry: NTPolygonGeometry): void;
+    setHoles(holes: NTMapPosVectorVector): void;
 
-	setHoles(holes: NTMapPosVectorVector): void;
+    setPoses(poses: NTMapPosVector): void;
 
-	setPoses(poses: NTMapPosVector): void;
-
-	setStyle(style: NTPolygonStyle): void;
+    setStyle(style: NTPolygonStyle): void;
 }
 
 declare class NTPolygon3D extends NTVectorElement {
+    static alloc(): NTPolygon3D; // inherited from NSObject
 
-	static alloc(): NTPolygon3D; // inherited from NSObject
+    static new(): NTPolygon3D; // inherited from NSObject
 
-	static new(): NTPolygon3D; // inherited from NSObject
+    constructor(o: { geometry: NTPolygonGeometry; style: NTPolygon3DStyle; height: number });
 
-	constructor(o: { geometry: NTPolygonGeometry; style: NTPolygon3DStyle; height: number; });
+    constructor(o: { poses: NTMapPosVector; holes: NTMapPosVectorVector; style: NTPolygon3DStyle; height: number });
 
-	constructor(o: { poses: NTMapPosVector; holes: NTMapPosVectorVector; style: NTPolygon3DStyle; height: number; });
+    constructor(o: { poses: NTMapPosVector; style: NTPolygon3DStyle; height: number });
 
-	constructor(o: { poses: NTMapPosVector; style: NTPolygon3DStyle; height: number; });
+    getGeometry(): NTPolygonGeometry;
 
-	getGeometry(): NTPolygonGeometry;
+    getHeight(): number;
 
-	getHeight(): number;
+    getHoles(): NTMapPosVectorVector;
 
-	getHoles(): NTMapPosVectorVector;
+    getPoses(): NTMapPosVector;
 
-	getPoses(): NTMapPosVector;
+    getStyle(): NTPolygon3DStyle;
 
-	getStyle(): NTPolygon3DStyle;
+    initWithGeometryStyleHeight(geometry: NTPolygonGeometry, style: NTPolygon3DStyle, height: number): this;
 
-	initWithGeometryStyleHeight(geometry: NTPolygonGeometry, style: NTPolygon3DStyle, height: number): this;
+    initWithPosesHolesStyleHeight(poses: NTMapPosVector, holes: NTMapPosVectorVector, style: NTPolygon3DStyle, height: number): this;
 
-	initWithPosesHolesStyleHeight(poses: NTMapPosVector, holes: NTMapPosVectorVector, style: NTPolygon3DStyle, height: number): this;
+    initWithPosesStyleHeight(poses: NTMapPosVector, style: NTPolygon3DStyle, height: number): this;
 
-	initWithPosesStyleHeight(poses: NTMapPosVector, style: NTPolygon3DStyle, height: number): this;
+    setGeometry(geometry: NTPolygonGeometry): void;
 
-	setGeometry(geometry: NTPolygonGeometry): void;
+    setHeight(height: number): void;
 
-	setHeight(height: number): void;
+    setHoles(holes: NTMapPosVectorVector): void;
 
-	setHoles(holes: NTMapPosVectorVector): void;
+    setPoses(poses: NTMapPosVector): void;
 
-	setPoses(poses: NTMapPosVector): void;
-
-	setStyle(style: NTPolygon3DStyle): void;
+    setStyle(style: NTPolygon3DStyle): void;
 }
 
 declare class NTPolygon3DStyle extends NTStyle {
+    static alloc(): NTPolygon3DStyle; // inherited from NSObject
 
-	static alloc(): NTPolygon3DStyle; // inherited from NSObject
+    static new(): NTPolygon3DStyle; // inherited from NSObject
 
-	static new(): NTPolygon3DStyle; // inherited from NSObject
-
-	getSideColor(): NTColor;
+    getSideColor(): NTColor;
 }
 
 declare class NTPolygon3DStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTPolygon3DStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTPolygon3DStyleBuilder; // inherited from NSObject
+    static new(): NTPolygon3DStyleBuilder; // inherited from NSObject
 
-	static new(): NTPolygon3DStyleBuilder; // inherited from NSObject
+    buildStyle(): NTPolygon3DStyle;
 
-	buildStyle(): NTPolygon3DStyle;
+    getSideColor(): NTColor;
 
-	getSideColor(): NTColor;
-
-	setSideColor(sideColor: NTColor): void;
+    setSideColor(sideColor: NTColor): void;
 }
 
 declare class NTPolygonGeometry extends NTGeometry {
+    static alloc(): NTPolygonGeometry; // inherited from NSObject
 
-	static alloc(): NTPolygonGeometry; // inherited from NSObject
+    static new(): NTPolygonGeometry; // inherited from NSObject
 
-	static new(): NTPolygonGeometry; // inherited from NSObject
+    constructor(o: { poses: NTMapPosVector });
 
-	constructor(o: { poses: NTMapPosVector; });
+    constructor(o: { poses: NTMapPosVector; holes: NTMapPosVectorVector });
 
-	constructor(o: { poses: NTMapPosVector; holes: NTMapPosVectorVector; });
+    constructor(o: { rings: NTMapPosVectorVector });
 
-	constructor(o: { rings: NTMapPosVectorVector; });
+    getHoles(): NTMapPosVectorVector;
 
-	getHoles(): NTMapPosVectorVector;
+    getPoses(): NTMapPosVector;
 
-	getPoses(): NTMapPosVector;
+    getRings(): NTMapPosVectorVector;
 
-	getRings(): NTMapPosVectorVector;
+    initWithPoses(poses: NTMapPosVector): this;
 
-	initWithPoses(poses: NTMapPosVector): this;
+    initWithPosesHoles(poses: NTMapPosVector, holes: NTMapPosVectorVector): this;
 
-	initWithPosesHoles(poses: NTMapPosVector, holes: NTMapPosVectorVector): this;
-
-	initWithRings(rings: NTMapPosVectorVector): this;
+    initWithRings(rings: NTMapPosVectorVector): this;
 }
 
 declare class NTPolygonGeometryVector extends NSObject {
+    static alloc(): NTPolygonGeometryVector; // inherited from NSObject
 
-	static alloc(): NTPolygonGeometryVector; // inherited from NSObject
+    static new(): NTPolygonGeometryVector; // inherited from NSObject
 
-	static new(): NTPolygonGeometryVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTPolygonGeometry): void;
 
-	add(x: NTPolygonGeometry): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTPolygonGeometry;
 
-	get(i: number): NTPolygonGeometry;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTPolygonGeometry): void;
 
-	setVal(i: number, val: NTPolygonGeometry): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPolygonStyle extends NTStyle {
+    static alloc(): NTPolygonStyle; // inherited from NSObject
 
-	static alloc(): NTPolygonStyle; // inherited from NSObject
+    static new(): NTPolygonStyle; // inherited from NSObject
 
-	static new(): NTPolygonStyle; // inherited from NSObject
-
-	getLineStyle(): NTLineStyle;
+    getLineStyle(): NTLineStyle;
 }
 
 declare class NTPolygonStyleBuilder extends NTStyleBuilder {
+    static alloc(): NTPolygonStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTPolygonStyleBuilder; // inherited from NSObject
+    static new(): NTPolygonStyleBuilder; // inherited from NSObject
 
-	static new(): NTPolygonStyleBuilder; // inherited from NSObject
+    buildStyle(): NTPolygonStyle;
 
-	buildStyle(): NTPolygonStyle;
+    getLineStyle(): NTLineStyle;
 
-	getLineStyle(): NTLineStyle;
-
-	setLineStyle(lineStyle: NTLineStyle): void;
+    setLineStyle(lineStyle: NTLineStyle): void;
 }
 
 declare class NTPopup extends NTBillboard {
+    static alloc(): NTPopup; // inherited from NSObject
 
-	static alloc(): NTPopup; // inherited from NSObject
+    static new(): NTPopup; // inherited from NSObject
 
-	static new(): NTPopup; // inherited from NSObject
+    drawBitmapScreenWidthScreenHeightDpToPX(anchorScreenPos: NTScreenPos, screenWidth: number, screenHeight: number, dpToPX: number): NTBitmap;
 
-	drawBitmapScreenWidthScreenHeightDpToPX(anchorScreenPos: NTScreenPos, screenWidth: number, screenHeight: number, dpToPX: number): NTBitmap;
+    getAnchorPointX(): number;
 
-	getAnchorPointX(): number;
+    getAnchorPointY(): number;
 
-	getAnchorPointY(): number;
+    getStyle(): NTPopupStyle;
 
-	getStyle(): NTPopupStyle;
+    processClickClickPosElementClickPos(clickInfo: NTClickInfo, clickPos: NTMapPos, elementClickPos: NTScreenPos): boolean;
 
-	processClickClickPosElementClickPos(clickInfo: NTClickInfo, clickPos: NTMapPos, elementClickPos: NTScreenPos): boolean;
+    setAnchorPointX(anchorPointX: number): void;
 
-	setAnchorPointX(anchorPointX: number): void;
+    setAnchorPointXAnchorPointY(anchorPointX: number, anchorPointY: number): void;
 
-	setAnchorPointXAnchorPointY(anchorPointX: number, anchorPointY: number): void;
+    setAnchorPointY(anchorPointY: number): void;
 
-	setAnchorPointY(anchorPointY: number): void;
-
-	setStyle(style: NTPopupStyle): void;
+    setStyle(style: NTPopupStyle): void;
 }
 
 declare class NTPopupClickInfo extends NSObject {
+    static alloc(): NTPopupClickInfo; // inherited from NSObject
 
-	static alloc(): NTPopupClickInfo; // inherited from NSObject
+    static new(): NTPopupClickInfo; // inherited from NSObject
 
-	static new(): NTPopupClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickPos(): NTMapPos;
 
-	getClickPos(): NTMapPos;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getElementClickPos(): NTScreenPos;
 
-	getElementClickPos(): NTScreenPos;
+    getPopup(): NTPopup;
 
-	getPopup(): NTPopup;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPopupDrawInfo extends NSObject {
+    static alloc(): NTPopupDrawInfo; // inherited from NSObject
 
-	static alloc(): NTPopupDrawInfo; // inherited from NSObject
+    static new(): NTPopupDrawInfo; // inherited from NSObject
 
-	static new(): NTPopupDrawInfo; // inherited from NSObject
+    constructor(o: { anchorScreenPos: NTScreenPos; screenBounds: NTScreenBounds; popup: NTPopup; dpToPX: number });
 
-	constructor(o: { anchorScreenPos: NTScreenPos; screenBounds: NTScreenBounds; popup: NTPopup; dpToPX: number; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getAnchorScreenPos(): NTScreenPos;
 
-	getAnchorScreenPos(): NTScreenPos;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDPToPX(): number;
 
-	getDPToPX(): number;
+    getPopup(): NTPopup;
 
-	getPopup(): NTPopup;
+    getScreenBounds(): NTScreenBounds;
 
-	getScreenBounds(): NTScreenBounds;
+    hash(): number;
 
-	hash(): number;
+    initWithAnchorScreenPosScreenBoundsPopupDpToPX(anchorScreenPos: NTScreenPos, screenBounds: NTScreenBounds, popup: NTPopup, dpToPX: number): this;
 
-	initWithAnchorScreenPosScreenBoundsPopupDpToPX(anchorScreenPos: NTScreenPos, screenBounds: NTScreenBounds, popup: NTPopup, dpToPX: number): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTPopupStyle extends NTBillboardStyle {
+    static alloc(): NTPopupStyle; // inherited from NSObject
 
-	static alloc(): NTPopupStyle; // inherited from NSObject
-
-	static new(): NTPopupStyle; // inherited from NSObject
+    static new(): NTPopupStyle; // inherited from NSObject
 }
 
 declare class NTPopupStyleBuilder extends NTBillboardStyleBuilder {
+    static alloc(): NTPopupStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTPopupStyleBuilder; // inherited from NSObject
+    static new(): NTPopupStyleBuilder; // inherited from NSObject
 
-	static new(): NTPopupStyleBuilder; // inherited from NSObject
-
-	buildStyle(): NTPopupStyle;
+    buildStyle(): NTPopupStyle;
 }
 
 declare class NTProjection extends NSObject {
+    static alloc(): NTProjection; // inherited from NSObject
 
-	static alloc(): NTProjection; // inherited from NSObject
+    static new(): NTProjection; // inherited from NSObject
 
-	static new(): NTProjection; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTProjection;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTProjection;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    fromLatLng(lat: number, lng: number): NTMapPos;
 
-	fromLatLng(lat: number, lng: number): NTMapPos;
+    fromWgs84(pos: NTMapPos): NTMapPos;
 
-	fromWgs84(pos: NTMapPos): NTMapPos;
+    getBounds(): NTMapBounds;
 
-	getBounds(): NTMapBounds;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getName(): string;
 
-	getName(): string;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+    swigGetRawPtr(): number;
 
-	swigGetRawPtr(): number;
+    toLatLongY(x: number, y: number): NTMapPos;
 
-	toLatLongY(x: number, y: number): NTMapPos;
-
-	toWgs84(pos: NTMapPos): NTMapPos;
+    toWgs84(pos: NTMapPos): NTMapPos;
 }
 
 declare class NTRasterTileClickInfo extends NSObject {
+    static alloc(): NTRasterTileClickInfo; // inherited from NSObject
 
-	static alloc(): NTRasterTileClickInfo; // inherited from NSObject
+    static new(): NTRasterTileClickInfo; // inherited from NSObject
 
-	static new(): NTRasterTileClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickPos(): NTMapPos;
 
-	getClickPos(): NTMapPos;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getInterpolatedColor(): NTColor;
 
-	getInterpolatedColor(): NTColor;
+    getLayer(): NTLayer;
 
-	getLayer(): NTLayer;
+    getMapTile(): NTMapTile;
 
-	getMapTile(): NTMapTile;
+    getNearestColor(): NTColor;
 
-	getNearestColor(): NTColor;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRasterTileEventListener extends NSObject {
+    static alloc(): NTRasterTileEventListener; // inherited from NSObject
 
-	static alloc(): NTRasterTileEventListener; // inherited from NSObject
+    static new(): NTRasterTileEventListener; // inherited from NSObject
 
-	static new(): NTRasterTileEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRasterTileEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRasterTileEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onRasterTileClicked(clickInfo: NTRasterTileClickInfo): boolean;
 
-	onRasterTileClicked(clickInfo: NTRasterTileClickInfo): boolean;
+    onRasterTileClickedSwigExplicitNTRasterTileEventListener(clickInfo: NTRasterTileClickInfo): boolean;
 
-	onRasterTileClickedSwigExplicitNTRasterTileEventListener(clickInfo: NTRasterTileClickInfo): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTRasterTileFilterMode {
+    T_RASTER_TILE_FILTER_MODE_NEAREST = 0,
 
-	T_RASTER_TILE_FILTER_MODE_NEAREST = 0,
+    T_RASTER_TILE_FILTER_MODE_BILINEAR = 1,
 
-	T_RASTER_TILE_FILTER_MODE_BILINEAR = 1,
-
-	T_RASTER_TILE_FILTER_MODE_BICUBIC = 2
+    T_RASTER_TILE_FILTER_MODE_BICUBIC = 2
 }
 
 declare class NTRasterTileLayer extends NTTileLayer {
+    static alloc(): NTRasterTileLayer; // inherited from NSObject
 
-	static alloc(): NTRasterTileLayer; // inherited from NSObject
+    static new(): NTRasterTileLayer; // inherited from NSObject
 
-	static new(): NTRasterTileLayer; // inherited from NSObject
+    constructor(o: { dataSource: NTTileDataSource });
 
-	constructor(o: { dataSource: NTTileDataSource; });
+    getRasterTileEventListener(): NTRasterTileEventListener;
 
-	getRasterTileEventListener(): NTRasterTileEventListener;
+    getTextureCacheCapacity(): number;
 
-	getTextureCacheCapacity(): number;
+    getTileBlendingSpeed(): number;
 
-	getTileBlendingSpeed(): number;
+    getTileFilterMode(): NTRasterTileFilterMode;
 
-	getTileFilterMode(): NTRasterTileFilterMode;
+    initWithDataSource(dataSource: NTTileDataSource): this;
 
-	initWithDataSource(dataSource: NTTileDataSource): this;
+    setRasterTileEventListener(eventListener: NTRasterTileEventListener): void;
 
-	setRasterTileEventListener(eventListener: NTRasterTileEventListener): void;
+    setTextureCacheCapacity(capacityInBytes: number): void;
 
-	setTextureCacheCapacity(capacityInBytes: number): void;
+    setTileBlendingSpeed(speed: number): void;
 
-	setTileBlendingSpeed(speed: number): void;
-
-	setTileFilterMode(filterMode: NTRasterTileFilterMode): void;
+    setTileFilterMode(filterMode: NTRasterTileFilterMode): void;
 }
 
 declare class NTRedrawRequestListener extends NSObject {
+    static alloc(): NTRedrawRequestListener; // inherited from NSObject
 
-	static alloc(): NTRedrawRequestListener; // inherited from NSObject
+    static new(): NTRedrawRequestListener; // inherited from NSObject
 
-	static new(): NTRedrawRequestListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRedrawRequestListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRedrawRequestListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onRedrawRequested(): void;
 
-	onRedrawRequested(): void;
+    onRedrawRequestedSwigExplicitNTRedrawRequestListener(): void;
 
-	onRedrawRequestedSwigExplicitNTRedrawRequestListener(): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTRenderProjectionMode {
+    T_RENDER_PROJECTION_MODE_PLANAR = 0,
 
-	T_RENDER_PROJECTION_MODE_PLANAR = 0,
-
-	T_RENDER_PROJECTION_MODE_SPHERICAL = 1
+    T_RENDER_PROJECTION_MODE_SPHERICAL = 1
 }
 
 declare class NTRendererCaptureListener extends NSObject {
+    static alloc(): NTRendererCaptureListener; // inherited from NSObject
 
-	static alloc(): NTRendererCaptureListener; // inherited from NSObject
+    static new(): NTRendererCaptureListener; // inherited from NSObject
 
-	static new(): NTRendererCaptureListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRendererCaptureListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRendererCaptureListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onMapRendered(bitmap: NTBitmap): void;
 
-	onMapRendered(bitmap: NTBitmap): void;
+    onMapRenderedSwigExplicitNTRendererCaptureListener(bitmap: NTBitmap): void;
 
-	onMapRenderedSwigExplicitNTRendererCaptureListener(bitmap: NTBitmap): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTReverseGeocodingRequest extends NSObject {
+    static alloc(): NTReverseGeocodingRequest; // inherited from NSObject
 
-	static alloc(): NTReverseGeocodingRequest; // inherited from NSObject
+    static new(): NTReverseGeocodingRequest; // inherited from NSObject
 
-	static new(): NTReverseGeocodingRequest; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; location: NTMapPos });
 
-	constructor(o: { projection: NTProjection; location: NTMapPos; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getCustomParameter(param: string): NTVariant;
 
-	getCustomParameter(param: string): NTVariant;
+    getLocation(): NTMapPos;
 
-	getLocation(): NTMapPos;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    getSearchRadius(): number;
 
-	getSearchRadius(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionLocation(projection: NTProjection, location: NTMapPos): this;
 
-	initWithProjectionLocation(projection: NTProjection, location: NTMapPos): this;
+    setCustomParameterValue(param: string, value: NTVariant): void;
 
-	setCustomParameterValue(param: string, value: NTVariant): void;
+    setSearchRadius(radius: number): void;
 
-	setSearchRadius(radius: number): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTReverseGeocodingService extends NSObject {
+    static alloc(): NTReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTReverseGeocodingService; // inherited from NSObject
+    static new(): NTReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTReverseGeocodingService; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTReverseGeocodingService;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTReverseGeocodingService;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    calculateAddresses(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddresses(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getLanguage(): string;
 
-	getLanguage(): string;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setLanguage(lang: string): void;
 
-	setLanguage(lang: string): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRouteMatchingEdge extends NSObject {
+    static alloc(): NTRouteMatchingEdge; // inherited from NSObject
 
-	static alloc(): NTRouteMatchingEdge; // inherited from NSObject
+    static new(): NTRouteMatchingEdge; // inherited from NSObject
 
-	static new(): NTRouteMatchingEdge; // inherited from NSObject
+    constructor(o: { attributes: NTStringVariantMap });
 
-	constructor(o: { attributes: NTStringVariantMap; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    containsAttribute(name: string): boolean;
 
-	containsAttribute(name: string): boolean;
+    description(): string;
 
-	description(): string;
+    getAttribute(name: string): NTVariant;
 
-	getAttribute(name: string): NTVariant;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithAttributes(attributes: NTStringVariantMap): this;
 
-	initWithAttributes(attributes: NTStringVariantMap): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRouteMatchingEdgeVector extends NSObject {
+    static alloc(): NTRouteMatchingEdgeVector; // inherited from NSObject
 
-	static alloc(): NTRouteMatchingEdgeVector; // inherited from NSObject
+    static new(): NTRouteMatchingEdgeVector; // inherited from NSObject
 
-	static new(): NTRouteMatchingEdgeVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTRouteMatchingEdge): void;
 
-	add(x: NTRouteMatchingEdge): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTRouteMatchingEdge;
 
-	get(i: number): NTRouteMatchingEdge;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTRouteMatchingEdge): void;
 
-	setVal(i: number, val: NTRouteMatchingEdge): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRouteMatchingPoint extends NSObject {
+    static alloc(): NTRouteMatchingPoint; // inherited from NSObject
 
-	static alloc(): NTRouteMatchingPoint; // inherited from NSObject
+    static new(): NTRouteMatchingPoint; // inherited from NSObject
 
-	static new(): NTRouteMatchingPoint; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { pos: NTMapPos; type: NTRouteMatchingPointType; edgeIndex: number });
 
-	constructor(o: { pos: NTMapPos; type: NTRouteMatchingPointType; edgeIndex: number; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getEdgeIndex(): number;
 
-	getEdgeIndex(): number;
+    getPos(): NTMapPos;
 
-	getPos(): NTMapPos;
+    getType(): NTRouteMatchingPointType;
 
-	getType(): NTRouteMatchingPointType;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithPosTypeEdgeIndex(pos: NTMapPos, type: NTRouteMatchingPointType, edgeIndex: number): this;
 
-	initWithPosTypeEdgeIndex(pos: NTMapPos, type: NTRouteMatchingPointType, edgeIndex: number): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTRouteMatchingPointType {
+    T_ROUTE_MATCHING_POINT_UNMATCHED = 0,
 
-	T_ROUTE_MATCHING_POINT_UNMATCHED = 0,
+    T_ROUTE_MATCHING_POINT_INTERPOLATED = 1,
 
-	T_ROUTE_MATCHING_POINT_INTERPOLATED = 1,
-
-	T_ROUTE_MATCHING_POINT_MATCHED = 2
+    T_ROUTE_MATCHING_POINT_MATCHED = 2
 }
 
 declare class NTRouteMatchingPointVector extends NSObject {
+    static alloc(): NTRouteMatchingPointVector; // inherited from NSObject
 
-	static alloc(): NTRouteMatchingPointVector; // inherited from NSObject
+    static new(): NTRouteMatchingPointVector; // inherited from NSObject
 
-	static new(): NTRouteMatchingPointVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTRouteMatchingPoint): void;
 
-	add(x: NTRouteMatchingPoint): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTRouteMatchingPoint;
 
-	get(i: number): NTRouteMatchingPoint;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTRouteMatchingPoint): void;
 
-	setVal(i: number, val: NTRouteMatchingPoint): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRouteMatchingRequest extends NSObject {
+    static alloc(): NTRouteMatchingRequest; // inherited from NSObject
 
-	static alloc(): NTRouteMatchingRequest; // inherited from NSObject
+    static new(): NTRouteMatchingRequest; // inherited from NSObject
 
-	static new(): NTRouteMatchingRequest; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; points: NTMapPosVector; accuracy: number });
 
-	constructor(o: { projection: NTProjection; points: NTMapPosVector; accuracy: number; });
+    description(): string;
 
-	description(): string;
+    getAccuracy(): number;
 
-	getAccuracy(): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getCustomParameter(param: string): NTVariant;
 
-	getCustomParameter(param: string): NTVariant;
+    getPointParameterParam(index: number, param: string): NTVariant;
 
-	getPointParameterParam(index: number, param: string): NTVariant;
+    getPoints(): NTMapPosVector;
 
-	getPoints(): NTMapPosVector;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionPointsAccuracy(projection: NTProjection, points: NTMapPosVector, accuracy: number): this;
 
-	initWithProjectionPointsAccuracy(projection: NTProjection, points: NTMapPosVector, accuracy: number): this;
+    setCustomParameterValue(param: string, value: NTVariant): void;
 
-	setCustomParameterValue(param: string, value: NTVariant): void;
+    setPointParameterParamValue(index: number, param: string, value: NTVariant): void;
 
-	setPointParameterParamValue(index: number, param: string, value: NTVariant): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRouteMatchingResult extends NSObject {
+    static alloc(): NTRouteMatchingResult; // inherited from NSObject
 
-	static alloc(): NTRouteMatchingResult; // inherited from NSObject
+    static new(): NTRouteMatchingResult; // inherited from NSObject
 
-	static new(): NTRouteMatchingResult; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; matchingPoints: NTRouteMatchingPointVector; matchingEdges: NTRouteMatchingEdgeVector; rawResult: string });
 
-	constructor(o: { projection: NTProjection; matchingPoints: NTRouteMatchingPointVector; matchingEdges: NTRouteMatchingEdgeVector; rawResult: string; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMatchingEdges(): NTRouteMatchingEdgeVector;
 
-	getMatchingEdges(): NTRouteMatchingEdgeVector;
+    getMatchingPoints(): NTRouteMatchingPointVector;
 
-	getMatchingPoints(): NTRouteMatchingPointVector;
+    getPoints(): NTMapPosVector;
 
-	getPoints(): NTMapPosVector;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    getRawResult(): string;
 
-	getRawResult(): string;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionMatchingPointsMatchingEdgesRawResult(projection: NTProjection, matchingPoints: NTRouteMatchingPointVector, matchingEdges: NTRouteMatchingEdgeVector, rawResult: string): this;
 
-	initWithProjectionMatchingPointsMatchingEdgesRawResult(projection: NTProjection, matchingPoints: NTRouteMatchingPointVector, matchingEdges: NTRouteMatchingEdgeVector, rawResult: string): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTRoutingAction {
+    T_ROUTING_ACTION_HEAD_ON = 0,
 
-	T_ROUTING_ACTION_HEAD_ON = 0,
+    T_ROUTING_ACTION_FINISH = 1,
 
-	T_ROUTING_ACTION_FINISH = 1,
+    T_ROUTING_ACTION_NO_TURN = 2,
 
-	T_ROUTING_ACTION_NO_TURN = 2,
+    T_ROUTING_ACTION_GO_STRAIGHT = 3,
 
-	T_ROUTING_ACTION_GO_STRAIGHT = 3,
+    T_ROUTING_ACTION_TURN_RIGHT = 4,
 
-	T_ROUTING_ACTION_TURN_RIGHT = 4,
+    T_ROUTING_ACTION_UTURN = 5,
 
-	T_ROUTING_ACTION_UTURN = 5,
+    T_ROUTING_ACTION_TURN_LEFT = 6,
 
-	T_ROUTING_ACTION_TURN_LEFT = 6,
+    T_ROUTING_ACTION_REACH_VIA_LOCATION = 7,
 
-	T_ROUTING_ACTION_REACH_VIA_LOCATION = 7,
+    T_ROUTING_ACTION_ENTER_ROUNDABOUT = 8,
 
-	T_ROUTING_ACTION_ENTER_ROUNDABOUT = 8,
+    T_ROUTING_ACTION_LEAVE_ROUNDABOUT = 9,
 
-	T_ROUTING_ACTION_LEAVE_ROUNDABOUT = 9,
+    T_ROUTING_ACTION_STAY_ON_ROUNDABOUT = 10,
 
-	T_ROUTING_ACTION_STAY_ON_ROUNDABOUT = 10,
+    T_ROUTING_ACTION_START_AT_END_OF_STREET = 11,
 
-	T_ROUTING_ACTION_START_AT_END_OF_STREET = 11,
+    T_ROUTING_ACTION_ENTER_AGAINST_ALLOWED_DIRECTION = 12,
 
-	T_ROUTING_ACTION_ENTER_AGAINST_ALLOWED_DIRECTION = 12,
+    T_ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION = 13,
 
-	T_ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION = 13,
+    T_ROUTING_ACTION_GO_UP = 14,
 
-	T_ROUTING_ACTION_GO_UP = 14,
+    T_ROUTING_ACTION_GO_DOWN = 15,
 
-	T_ROUTING_ACTION_GO_DOWN = 15,
+    T_ROUTING_ACTION_WAIT = 16,
 
-	T_ROUTING_ACTION_WAIT = 16,
+    T_ROUTING_ACTION_ENTER_FERRY = 17,
 
-	T_ROUTING_ACTION_ENTER_FERRY = 17,
-
-	T_ROUTING_ACTION_LEAVE_FERRY = 18
+    T_ROUTING_ACTION_LEAVE_FERRY = 18
 }
 
 declare class NTRoutingInstruction extends NSObject {
+    static alloc(): NTRoutingInstruction; // inherited from NSObject
 
-	static alloc(): NTRoutingInstruction; // inherited from NSObject
+    static new(): NTRoutingInstruction; // inherited from NSObject
 
-	static new(): NTRoutingInstruction; // inherited from NSObject
+    constructor(o: {
+        action: NTRoutingAction;
+        pointIndex: number;
+        streetName: string;
+        instruction: string;
+        turnAngle: number;
+        azimuth: number;
+        distance: number;
+        time: number;
+        geometryTag: NTVariant;
+    });
 
-	constructor(o: { action: NTRoutingAction; pointIndex: number; streetName: string; instruction: string; turnAngle: number; azimuth: number; distance: number; time: number; geometryTag: NTVariant; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    description(): string;
 
-	description(): string;
+    getAction(): NTRoutingAction;
 
-	getAction(): NTRoutingAction;
+    getAzimuth(): number;
 
-	getAzimuth(): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDistance(): number;
 
-	getDistance(): number;
+    getGeometryTag(): NTVariant;
 
-	getGeometryTag(): NTVariant;
+    getInstruction(): string;
 
-	getInstruction(): string;
+    getPointIndex(): number;
 
-	getPointIndex(): number;
+    getStreetName(): string;
 
-	getStreetName(): string;
+    getTime(): number;
 
-	getTime(): number;
+    getTurnAngle(): number;
 
-	getTurnAngle(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithActionPointIndexStreetNameInstructionTurnAngleAzimuthDistanceTimeGeometryTag(
+        action: NTRoutingAction,
+        pointIndex: number,
+        streetName: string,
+        instruction: string,
+        turnAngle: number,
+        azimuth: number,
+        distance: number,
+        time: number,
+        geometryTag: NTVariant
+    ): this;
 
-	initWithActionPointIndexStreetNameInstructionTurnAngleAzimuthDistanceTimeGeometryTag(action: NTRoutingAction, pointIndex: number, streetName: string, instruction: string, turnAngle: number, azimuth: number, distance: number, time: number, geometryTag: NTVariant): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRoutingInstructionVector extends NSObject {
+    static alloc(): NTRoutingInstructionVector; // inherited from NSObject
 
-	static alloc(): NTRoutingInstructionVector; // inherited from NSObject
+    static new(): NTRoutingInstructionVector; // inherited from NSObject
 
-	static new(): NTRoutingInstructionVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTRoutingInstruction): void;
 
-	add(x: NTRoutingInstruction): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTRoutingInstruction;
 
-	get(i: number): NTRoutingInstruction;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTRoutingInstruction): void;
 
-	setVal(i: number, val: NTRoutingInstruction): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRoutingRequest extends NSObject {
+    static alloc(): NTRoutingRequest; // inherited from NSObject
 
-	static alloc(): NTRoutingRequest; // inherited from NSObject
+    static new(): NTRoutingRequest; // inherited from NSObject
 
-	static new(): NTRoutingRequest; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; points: NTMapPosVector });
 
-	constructor(o: { projection: NTProjection; points: NTMapPosVector; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getCustomParameter(param: string): NTVariant;
 
-	getCustomParameter(param: string): NTVariant;
+    getPointParameterParam(index: number, param: string): NTVariant;
 
-	getPointParameterParam(index: number, param: string): NTVariant;
+    getPoints(): NTMapPosVector;
 
-	getPoints(): NTMapPosVector;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionPoints(projection: NTProjection, points: NTMapPosVector): this;
 
-	initWithProjectionPoints(projection: NTProjection, points: NTMapPosVector): this;
+    setCustomParameterValue(param: string, value: NTVariant): void;
 
-	setCustomParameterValue(param: string, value: NTVariant): void;
+    setPointParameterParamValue(index: number, param: string, value: NTVariant): void;
 
-	setPointParameterParamValue(index: number, param: string, value: NTVariant): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRoutingResult extends NSObject {
+    static alloc(): NTRoutingResult; // inherited from NSObject
 
-	static alloc(): NTRoutingResult; // inherited from NSObject
+    static new(): NTRoutingResult; // inherited from NSObject
 
-	static new(): NTRoutingResult; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection; points: NTMapPosVector; instructions: NTRoutingInstructionVector; rawResult: string });
 
-	constructor(o: { projection: NTProjection; points: NTMapPosVector; instructions: NTRoutingInstructionVector; rawResult: string; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getInstructions(): NTRoutingInstructionVector;
 
-	getInstructions(): NTRoutingInstructionVector;
+    getPoints(): NTMapPosVector;
 
-	getPoints(): NTMapPosVector;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    getRawResult(): string;
 
-	getRawResult(): string;
+    getTotalDistance(): number;
 
-	getTotalDistance(): number;
+    getTotalTime(): number;
 
-	getTotalTime(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjectionPointsInstructionsRawResult(projection: NTProjection, points: NTMapPosVector, instructions: NTRoutingInstructionVector, rawResult: string): this;
 
-	initWithProjectionPointsInstructionsRawResult(projection: NTProjection, points: NTMapPosVector, instructions: NTRoutingInstructionVector, rawResult: string): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTRoutingService extends NSObject {
+    static alloc(): NTRoutingService; // inherited from NSObject
 
-	static alloc(): NTRoutingService; // inherited from NSObject
+    static new(): NTRoutingService; // inherited from NSObject
 
-	static new(): NTRoutingService; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRoutingService;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTRoutingService;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    calculateRoute(request: NTRoutingRequest): NTRoutingResult;
 
-	calculateRoute(request: NTRoutingRequest): NTRoutingResult;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getProfile(): string;
 
-	getProfile(): string;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	matchRoute(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+    setProfile(profile: string): void;
 
-	setProfile(profile: string): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTSGREOfflineRoutingService extends NTRoutingService {
+    static alloc(): NTSGREOfflineRoutingService; // inherited from NSObject
 
-	static alloc(): NTSGREOfflineRoutingService; // inherited from NSObject
+    static new(): NTSGREOfflineRoutingService; // inherited from NSObject
 
-	static new(): NTSGREOfflineRoutingService; // inherited from NSObject
+    constructor(o: { geoJSON: NTVariant; config: NTVariant });
 
-	constructor(o: { geoJSON: NTVariant; config: NTVariant; });
+    constructor(o: { projection: NTProjection; featureCollection: NTFeatureCollection; config: NTVariant });
 
-	constructor(o: { projection: NTProjection; featureCollection: NTFeatureCollection; config: NTVariant; });
+    calculateRouteSwigExplicitNTSGREOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	calculateRouteSwigExplicitNTSGREOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    getProfileSwigExplicitNTSGREOfflineRoutingService(): string;
 
-	getProfileSwigExplicitNTSGREOfflineRoutingService(): string;
+    getRoutingParameter(param: string): number;
 
-	getRoutingParameter(param: string): number;
+    initWithGeoJSONConfig(geoJSON: NTVariant, config: NTVariant): this;
 
-	initWithGeoJSONConfig(geoJSON: NTVariant, config: NTVariant): this;
+    initWithProjectionFeatureCollectionConfig(projection: NTProjection, featureCollection: NTFeatureCollection, config: NTVariant): this;
 
-	initWithProjectionFeatureCollectionConfig(projection: NTProjection, featureCollection: NTFeatureCollection, config: NTVariant): this;
+    matchRouteSwigExplicitNTSGREOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	matchRouteSwigExplicitNTSGREOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+    setProfileSwigExplicitNTSGREOfflineRoutingService(profile: string): void;
 
-	setProfileSwigExplicitNTSGREOfflineRoutingService(profile: string): void;
-
-	setRoutingParameterValue(param: string, value: number): void;
+    setRoutingParameterValue(param: string, value: number): void;
 }
 
 declare class NTScreenBounds extends NSObject {
+    static alloc(): NTScreenBounds; // inherited from NSObject
 
-	static alloc(): NTScreenBounds; // inherited from NSObject
+    static new(): NTScreenBounds; // inherited from NSObject
 
-	static new(): NTScreenBounds; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { min: NTScreenPos; max: NTScreenPos });
 
-	constructor(o: { min: NTScreenPos; max: NTScreenPos; });
+    containsBounds(bounds: NTScreenBounds): boolean;
 
-	containsBounds(bounds: NTScreenBounds): boolean;
+    containsPos(pos: NTScreenPos): boolean;
 
-	containsPos(pos: NTScreenPos): boolean;
+    description(): string;
 
-	description(): string;
+    getCenter(): NTScreenPos;
 
-	getCenter(): NTScreenPos;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getHeight(): number;
 
-	getHeight(): number;
+    getMax(): NTScreenPos;
 
-	getMax(): NTScreenPos;
+    getMin(): NTScreenPos;
 
-	getMin(): NTScreenPos;
+    getWidth(): number;
 
-	getWidth(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithMinMax(min: NTScreenPos, max: NTScreenPos): this;
 
-	initWithMinMax(min: NTScreenPos, max: NTScreenPos): this;
+    intersects(bounds: NTScreenBounds): boolean;
 
-	intersects(bounds: NTScreenBounds): boolean;
+    isEqualInternal(ScreenBounds: NTScreenBounds): boolean;
 
-	isEqualInternal(ScreenBounds: NTScreenBounds): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTScreenPos extends NSObject {
+    static alloc(): NTScreenPos; // inherited from NSObject
 
-	static alloc(): NTScreenPos; // inherited from NSObject
+    static new(): NTScreenPos; // inherited from NSObject
 
-	static new(): NTScreenPos; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { x: number; y: number });
 
-	constructor(o: { x: number; y: number; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getX(): number;
 
-	getX(): number;
+    getY(): number;
 
-	getY(): number;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithXY(x: number, y: number): this;
 
-	initWithXY(x: number, y: number): this;
+    isEqualInternal(p: NTScreenPos): boolean;
 
-	isEqualInternal(p: NTScreenPos): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTScreenPosVector extends NSObject {
+    static alloc(): NTScreenPosVector; // inherited from NSObject
 
-	static alloc(): NTScreenPosVector; // inherited from NSObject
+    static new(): NTScreenPosVector; // inherited from NSObject
 
-	static new(): NTScreenPosVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTScreenPos): void;
 
-	add(x: NTScreenPos): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTScreenPos;
 
-	get(i: number): NTScreenPos;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTScreenPos): void;
 
-	setVal(i: number, val: NTScreenPos): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTSearchRequest extends NSObject {
+    static alloc(): NTSearchRequest; // inherited from NSObject
 
-	static alloc(): NTSearchRequest; // inherited from NSObject
+    static new(): NTSearchRequest; // inherited from NSObject
 
-	static new(): NTSearchRequest; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    description(): string;
 
-	description(): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFilterExpression(): string;
 
-	getFilterExpression(): string;
+    getGeometry(): NTGeometry;
 
-	getGeometry(): NTGeometry;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    getRegexFilter(): string;
 
-	getRegexFilter(): string;
+    getSearchRadius(): number;
 
-	getSearchRadius(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setFilterExpression(expr: string): void;
 
-	setFilterExpression(expr: string): void;
+    setGeometry(geometry: NTGeometry): void;
 
-	setGeometry(geometry: NTGeometry): void;
+    setProjection(projection: NTProjection): void;
 
-	setProjection(projection: NTProjection): void;
+    setRegexFilter(regex: string): void;
 
-	setRegexFilter(regex: string): void;
+    setSearchRadius(radius: number): void;
 
-	setSearchRadius(radius: number): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTSolidLayer extends NTLayer {
+    static alloc(): NTSolidLayer; // inherited from NSObject
 
-	static alloc(): NTSolidLayer; // inherited from NSObject
+    static new(): NTSolidLayer; // inherited from NSObject
 
-	static new(): NTSolidLayer; // inherited from NSObject
+    constructor(o: { bitmap: NTBitmap });
 
-	constructor(o: { bitmap: NTBitmap; });
+    constructor(o: { color: NTColor });
 
-	constructor(o: { color: NTColor; });
+    getBitmap(): NTBitmap;
 
-	getBitmap(): NTBitmap;
+    getBitmapScale(): number;
 
-	getBitmapScale(): number;
+    getColor(): NTColor;
 
-	getColor(): NTColor;
+    initWithBitmap(bitmap: NTBitmap): this;
 
-	initWithBitmap(bitmap: NTBitmap): this;
+    initWithColor(color: NTColor): this;
 
-	initWithColor(color: NTColor): this;
+    setBitmap(bitmap: NTBitmap): void;
 
-	setBitmap(bitmap: NTBitmap): void;
+    setBitmapScale(scale: number): void;
 
-	setBitmapScale(scale: number): void;
-
-	setColor(color: NTColor): void;
+    setColor(color: NTColor): void;
 }
 
 declare class NTStringCartoCSSStyleSetMap extends NSObject {
+    static alloc(): NTStringCartoCSSStyleSetMap; // inherited from NSObject
 
-	static alloc(): NTStringCartoCSSStyleSetMap; // inherited from NSObject
+    static new(): NTStringCartoCSSStyleSetMap; // inherited from NSObject
 
-	static new(): NTStringCartoCSSStyleSetMap; // inherited from NSObject
+    constructor(o: { arg0: NTStringCartoCSSStyleSetMap });
 
-	constructor(o: { arg0: NTStringCartoCSSStyleSetMap; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    clear(): void;
 
-	clear(): void;
+    del(key: string): void;
 
-	del(key: string): void;
+    empty(): boolean;
 
-	empty(): boolean;
+    get(key: string): NTCartoCSSStyleSet;
 
-	get(key: string): NTCartoCSSStyleSet;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    get_key(idx: number): string;
 
-	get_key(idx: number): string;
+    has_key(key: string): boolean;
 
-	has_key(key: string): boolean;
+    initWithArg0(arg0: NTStringCartoCSSStyleSetMap): this;
 
-	initWithArg0(arg0: NTStringCartoCSSStyleSetMap): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setX(key: string, x: NTCartoCSSStyleSet): void;
 
-	setX(key: string, x: NTCartoCSSStyleSet): void;
-
-	size(): number;
+    size(): number;
 }
 
 declare class NTStringMap extends NSObject {
+    static alloc(): NTStringMap; // inherited from NSObject
 
-	static alloc(): NTStringMap; // inherited from NSObject
+    static new(): NTStringMap; // inherited from NSObject
 
-	static new(): NTStringMap; // inherited from NSObject
+    constructor(o: { arg0: NTStringMap });
 
-	constructor(o: { arg0: NTStringMap; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    clear(): void;
 
-	clear(): void;
+    del(key: string): void;
 
-	del(key: string): void;
+    empty(): boolean;
 
-	empty(): boolean;
+    get(key: string): string;
 
-	get(key: string): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    get_key(idx: number): string;
 
-	get_key(idx: number): string;
+    has_key(key: string): boolean;
 
-	has_key(key: string): boolean;
+    initWithArg0(arg0: NTStringMap): this;
 
-	initWithArg0(arg0: NTStringMap): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setX(key: string, x: string): void;
 
-	setX(key: string, x: string): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTStringVariantMap extends NSObject {
+    static alloc(): NTStringVariantMap; // inherited from NSObject
 
-	static alloc(): NTStringVariantMap; // inherited from NSObject
+    static new(): NTStringVariantMap; // inherited from NSObject
 
-	static new(): NTStringVariantMap; // inherited from NSObject
+    constructor(o: { arg0: NTStringVariantMap });
 
-	constructor(o: { arg0: NTStringVariantMap; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    clear(): void;
 
-	clear(): void;
+    del(key: string): void;
 
-	del(key: string): void;
+    empty(): boolean;
 
-	empty(): boolean;
+    get(key: string): NTVariant;
 
-	get(key: string): NTVariant;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    get_key(idx: number): string;
 
-	get_key(idx: number): string;
+    has_key(key: string): boolean;
 
-	has_key(key: string): boolean;
+    initWithArg0(arg0: NTStringVariantMap): this;
 
-	initWithArg0(arg0: NTStringVariantMap): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setX(key: string, x: NTVariant): void;
 
-	setX(key: string, x: NTVariant): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTStringVector extends NSObject {
+    static alloc(): NTStringVector; // inherited from NSObject
 
-	static alloc(): NTStringVector; // inherited from NSObject
+    static new(): NTStringVector; // inherited from NSObject
 
-	static new(): NTStringVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: string): void;
 
-	add(x: string): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): string;
 
-	get(i: number): string;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: string): void;
 
-	setVal(i: number, val: string): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTStyle extends NSObject {
+    static alloc(): NTStyle; // inherited from NSObject
 
-	static alloc(): NTStyle; // inherited from NSObject
+    static new(): NTStyle; // inherited from NSObject
 
-	static new(): NTStyle; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTStyle;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTStyle;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getColor(): NTColor;
 
-	getColor(): NTColor;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTStyleBuilder extends NSObject {
+    static alloc(): NTStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTStyleBuilder; // inherited from NSObject
+    static new(): NTStyleBuilder; // inherited from NSObject
 
-	static new(): NTStyleBuilder; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTStyleBuilder;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTStyleBuilder;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getColor(): NTColor;
 
-	getColor(): NTColor;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setColor(color: NTColor): void;
 
-	setColor(color: NTColor): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTTerrariumElevationDataDecoder extends NTElevationDecoder {
+    static alloc(): NTTerrariumElevationDataDecoder; // inherited from NSObject
 
-	static alloc(): NTTerrariumElevationDataDecoder; // inherited from NSObject
-
-	static new(): NTTerrariumElevationDataDecoder; // inherited from NSObject
+    static new(): NTTerrariumElevationDataDecoder; // inherited from NSObject
 }
 
 declare class NTText extends NTLabel {
+    static alloc(): NTText; // inherited from NSObject
 
-	static alloc(): NTText; // inherited from NSObject
+    static new(): NTText; // inherited from NSObject
 
-	static new(): NTText; // inherited from NSObject
+    constructor(o: { baseBillboard: NTBillboard; style: NTTextStyle; text: string });
 
-	constructor(o: { baseBillboard: NTBillboard; style: NTTextStyle; text: string; });
+    constructor(o: { geometry: NTGeometry; style: NTTextStyle; text: string });
 
-	constructor(o: { geometry: NTGeometry; style: NTTextStyle; text: string; });
+    constructor(o: { pos: NTMapPos; style: NTTextStyle; text: string });
 
-	constructor(o: { pos: NTMapPos; style: NTTextStyle; text: string; });
+    getStyle(): NTTextStyle;
 
-	getStyle(): NTTextStyle;
+    getText(): string;
 
-	getText(): string;
+    initWithBaseBillboardStyleText(baseBillboard: NTBillboard, style: NTTextStyle, text: string): this;
 
-	initWithBaseBillboardStyleText(baseBillboard: NTBillboard, style: NTTextStyle, text: string): this;
+    initWithGeometryStyleText(geometry: NTGeometry, style: NTTextStyle, text: string): this;
 
-	initWithGeometryStyleText(geometry: NTGeometry, style: NTTextStyle, text: string): this;
+    initWithPosStyleText(pos: NTMapPos, style: NTTextStyle, text: string): this;
 
-	initWithPosStyleText(pos: NTMapPos, style: NTTextStyle, text: string): this;
+    setStyle(style: NTTextStyle): void;
 
-	setStyle(style: NTTextStyle): void;
-
-	setText(text: string): void;
+    setText(text: string): void;
 }
 
 declare class NTTextMargins extends NSObject {
+    static alloc(): NTTextMargins; // inherited from NSObject
 
-	static alloc(): NTTextMargins; // inherited from NSObject
+    static new(): NTTextMargins; // inherited from NSObject
 
-	static new(): NTTextMargins; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { left: number; top: number; right: number; bottom: number });
 
-	constructor(o: { left: number; top: number; right: number; bottom: number; });
+    getBottom(): number;
 
-	getBottom(): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getLeft(): number;
 
-	getLeft(): number;
+    getRight(): number;
 
-	getRight(): number;
+    getTop(): number;
 
-	getTop(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithLeftTopRightBottom(left: number, top: number, right: number, bottom: number): this;
 
-	initWithLeftTopRightBottom(left: number, top: number, right: number, bottom: number): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTTextStyle extends NTLabelStyle {
+    static alloc(): NTTextStyle; // inherited from NSObject
 
-	static alloc(): NTTextStyle; // inherited from NSObject
+    static new(): NTTextStyle; // inherited from NSObject
 
-	static new(): NTTextStyle; // inherited from NSObject
+    getBackgroundColor(): NTColor;
 
-	getBackgroundColor(): NTColor;
+    getBorderColor(): NTColor;
 
-	getBorderColor(): NTColor;
+    getBorderWidth(): number;
 
-	getBorderWidth(): number;
+    getFontColor(): NTColor;
 
-	getFontColor(): NTColor;
+    getFontName(): string;
 
-	getFontName(): string;
+    getFontSize(): number;
 
-	getFontSize(): number;
+    getStrokeColor(): NTColor;
 
-	getStrokeColor(): NTColor;
+    getStrokeWidth(): number;
 
-	getStrokeWidth(): number;
+    getTextField(): string;
 
-	getTextField(): string;
+    getTextMargins(): NTTextMargins;
 
-	getTextMargins(): NTTextMargins;
-
-	isBreakLines(): boolean;
+    isBreakLines(): boolean;
 }
 
 declare class NTTextStyleBuilder extends NTLabelStyleBuilder {
+    static alloc(): NTTextStyleBuilder; // inherited from NSObject
 
-	static alloc(): NTTextStyleBuilder; // inherited from NSObject
+    static new(): NTTextStyleBuilder; // inherited from NSObject
 
-	static new(): NTTextStyleBuilder; // inherited from NSObject
+    buildStyle(): NTTextStyle;
 
-	buildStyle(): NTTextStyle;
+    getBackgroundColor(): NTColor;
 
-	getBackgroundColor(): NTColor;
+    getBorderColor(): NTColor;
 
-	getBorderColor(): NTColor;
+    getBorderWidth(): number;
 
-	getBorderWidth(): number;
+    getFontName(): string;
 
-	getFontName(): string;
+    getFontSize(): number;
 
-	getFontSize(): number;
+    getStrokeColor(): NTColor;
 
-	getStrokeColor(): NTColor;
+    getStrokeWidth(): number;
 
-	getStrokeWidth(): number;
+    getTextField(): string;
 
-	getTextField(): string;
+    getTextMargins(): NTTextMargins;
 
-	getTextMargins(): NTTextMargins;
+    isBreakLines(): boolean;
 
-	isBreakLines(): boolean;
+    setBackgroundColor(backgroundColor: NTColor): void;
 
-	setBackgroundColor(backgroundColor: NTColor): void;
+    setBorderColor(borderColor: NTColor): void;
 
-	setBorderColor(borderColor: NTColor): void;
+    setBorderWidth(borderWidth: number): void;
 
-	setBorderWidth(borderWidth: number): void;
+    setBreakLines(enable: boolean): void;
 
-	setBreakLines(enable: boolean): void;
+    setFontName(fontName: string): void;
 
-	setFontName(fontName: string): void;
+    setFontSize(size: number): void;
 
-	setFontSize(size: number): void;
+    setStrokeColor(strokeColor: NTColor): void;
 
-	setStrokeColor(strokeColor: NTColor): void;
+    setStrokeWidth(strokeWidth: number): void;
 
-	setStrokeWidth(strokeWidth: number): void;
+    setTextField(field: string): void;
 
-	setTextField(field: string): void;
-
-	setTextMargins(textMargins: NTTextMargins): void;
+    setTextMargins(textMargins: NTTextMargins): void;
 }
 
 declare class NTTileData extends NSObject {
+    static alloc(): NTTileData; // inherited from NSObject
 
-	static alloc(): NTTileData; // inherited from NSObject
+    static new(): NTTileData; // inherited from NSObject
 
-	static new(): NTTileData; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { data: NTBinaryData });
 
-	constructor(o: { data: NTBinaryData; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getData(): NTBinaryData;
 
-	getData(): NTBinaryData;
+    getMaxAge(): number;
 
-	getMaxAge(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithData(data: NTBinaryData): this;
 
-	initWithData(data: NTBinaryData): this;
+    isOverZoom(): boolean;
 
-	isOverZoom(): boolean;
+    isReplaceWithParent(): boolean;
 
-	isReplaceWithParent(): boolean;
+    setIsOverZoom(flag: boolean): void;
 
-	setIsOverZoom(flag: boolean): void;
+    setMaxAge(maxAge: number): void;
 
-	setMaxAge(maxAge: number): void;
+    setReplaceWithParent(flag: boolean): void;
 
-	setReplaceWithParent(flag: boolean): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTTileDataSource extends NSObject {
+    static alloc(): NTTileDataSource; // inherited from NSObject
 
-	static alloc(): NTTileDataSource; // inherited from NSObject
+    static new(): NTTileDataSource; // inherited from NSObject
 
-	static new(): NTTileDataSource; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTTileDataSource;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTTileDataSource;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { minZoom: number; maxZoom: number });
 
-	constructor(o: { minZoom: number; maxZoom: number; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDataExtent(): NTMapBounds;
 
-	getDataExtent(): NTMapBounds;
+    getDataExtentSwigExplicitNTTileDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTTileDataSource(): NTMapBounds;
+    getMaxOverzoomLevel(): number;
 
-	getMaxOverzoomLevel(): number;
+    getMaxZoom(): number;
 
-	getMaxZoom(): number;
+    getMaxZoomSwigExplicitNTTileDataSource(): number;
 
-	getMaxZoomSwigExplicitNTTileDataSource(): number;
+    getMaxZoomWithOverzoom(): number;
 
-	getMaxZoomWithOverzoom(): number;
+    getMaxZoomWithOverzoomSwigExplicitNTTileDataSource(): number;
 
-	getMaxZoomWithOverzoomSwigExplicitNTTileDataSource(): number;
+    getMinZoom(): number;
 
-	getMinZoom(): number;
+    getMinZoomSwigExplicitNTTileDataSource(): number;
 
-	getMinZoomSwigExplicitNTTileDataSource(): number;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithMinZoomMaxZoom(minZoom: number, maxZoom: number): this;
 
-	initWithMinZoomMaxZoom(minZoom: number, maxZoom: number): this;
+    isMaxOverzoomLevelSet(): boolean;
 
-	isMaxOverzoomLevelSet(): boolean;
+    loadTile(tile: NTMapTile): NTTileData;
 
-	loadTile(tile: NTMapTile): NTTileData;
+    notifyTilesChanged(removeTiles: boolean): void;
 
-	notifyTilesChanged(removeTiles: boolean): void;
+    notifyTilesChangedSwigExplicitNTTileDataSource(removeTiles: boolean): void;
 
-	notifyTilesChangedSwigExplicitNTTileDataSource(removeTiles: boolean): void;
+    setMaxOverzoomLevel(overzoomLevel: number): void;
 
-	setMaxOverzoomLevel(overzoomLevel: number): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTTileDownloadListener extends NSObject {
+    static alloc(): NTTileDownloadListener; // inherited from NSObject
 
-	static alloc(): NTTileDownloadListener; // inherited from NSObject
+    static new(): NTTileDownloadListener; // inherited from NSObject
 
-	static new(): NTTileDownloadListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTTileDownloadListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTTileDownloadListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onDownloadCompleted(): void;
 
-	onDownloadCompleted(): void;
+    onDownloadCompletedSwigExplicitNTTileDownloadListener(): void;
 
-	onDownloadCompletedSwigExplicitNTTileDownloadListener(): void;
+    onDownloadFailed(tile: NTMapTile): void;
 
-	onDownloadFailed(tile: NTMapTile): void;
+    onDownloadFailedSwigExplicitNTTileDownloadListener(tile: NTMapTile): void;
 
-	onDownloadFailedSwigExplicitNTTileDownloadListener(tile: NTMapTile): void;
+    onDownloadProgress(progress: number): void;
 
-	onDownloadProgress(progress: number): void;
+    onDownloadProgressSwigExplicitNTTileDownloadListener(progress: number): void;
 
-	onDownloadProgressSwigExplicitNTTileDownloadListener(progress: number): void;
+    onDownloadStarting(tileCount: number): void;
 
-	onDownloadStarting(tileCount: number): void;
+    onDownloadStartingSwigExplicitNTTileDownloadListener(tileCount: number): void;
 
-	onDownloadStartingSwigExplicitNTTileDownloadListener(tileCount: number): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTTileLayer extends NTLayer {
+    static alloc(): NTTileLayer; // inherited from NSObject
 
-	static alloc(): NTTileLayer; // inherited from NSObject
+    static new(): NTTileLayer; // inherited from NSObject
 
-	static new(): NTTileLayer; // inherited from NSObject
+    calculateMapTileBounds(mapTile: NTMapTile): NTMapBounds;
 
-	calculateMapTileBounds(mapTile: NTMapTile): NTMapBounds;
+    calculateMapTileOrigin(mapTile: NTMapTile): NTMapPos;
 
-	calculateMapTileOrigin(mapTile: NTMapTile): NTMapPos;
+    calculateMapTileZoom(mapPos: NTMapPos, zoom: number): NTMapTile;
 
-	calculateMapTileZoom(mapPos: NTMapPos, zoom: number): NTMapTile;
+    clearTileCaches(all: boolean): void;
 
-	clearTileCaches(all: boolean): void;
+    getDataSource(): NTTileDataSource;
 
-	getDataSource(): NTTileDataSource;
+    getFrameNr(): number;
 
-	getFrameNr(): number;
+    getMaxOverzoomLevel(): number;
 
-	getMaxOverzoomLevel(): number;
+    getMaxUnderzoomLevel(): number;
 
-	getMaxUnderzoomLevel(): number;
+    getTileLoadListener(): NTTileLoadListener;
 
-	getTileLoadListener(): NTTileLoadListener;
+    getTileSubstitutionPolicy(): NTTileSubstitutionPolicy;
 
-	getTileSubstitutionPolicy(): NTTileSubstitutionPolicy;
+    getUTFGridDataSource(): NTTileDataSource;
 
-	getUTFGridDataSource(): NTTileDataSource;
+    getUTFGridEventListener(): NTUTFGridEventListener;
 
-	getUTFGridEventListener(): NTUTFGridEventListener;
+    getZoomLevelBias(): number;
 
-	getZoomLevelBias(): number;
+    isPreloading(): boolean;
 
-	isPreloading(): boolean;
+    isSynchronizedRefresh(): boolean;
 
-	isSynchronizedRefresh(): boolean;
+    setFrameNr(frameNr: number): void;
 
-	setFrameNr(frameNr: number): void;
+    setMaxOverzoomLevel(overzoomLevel: number): void;
 
-	setMaxOverzoomLevel(overzoomLevel: number): void;
+    setMaxUnderzoomLevel(underzoomLevel: number): void;
 
-	setMaxUnderzoomLevel(underzoomLevel: number): void;
+    setPreloading(preloading: boolean): void;
 
-	setPreloading(preloading: boolean): void;
+    setSynchronizedRefresh(synchronizedRefresh: boolean): void;
 
-	setSynchronizedRefresh(synchronizedRefresh: boolean): void;
+    setTileLoadListener(tileLoadListener: NTTileLoadListener): void;
 
-	setTileLoadListener(tileLoadListener: NTTileLoadListener): void;
+    setTileSubstitutionPolicy(policy: NTTileSubstitutionPolicy): void;
 
-	setTileSubstitutionPolicy(policy: NTTileSubstitutionPolicy): void;
+    setUTFGridDataSource(dataSource: NTTileDataSource): void;
 
-	setUTFGridDataSource(dataSource: NTTileDataSource): void;
+    setUTFGridEventListener(utfGridEventListener: NTUTFGridEventListener): void;
 
-	setUTFGridEventListener(utfGridEventListener: NTUTFGridEventListener): void;
-
-	setZoomLevelBias(bias: number): void;
+    setZoomLevelBias(bias: number): void;
 }
 
 declare class NTTileLoadListener extends NSObject {
+    static alloc(): NTTileLoadListener; // inherited from NSObject
 
-	static alloc(): NTTileLoadListener; // inherited from NSObject
+    static new(): NTTileLoadListener; // inherited from NSObject
 
-	static new(): NTTileLoadListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTTileLoadListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTTileLoadListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onPreloadingTilesLoaded(): void;
 
-	onPreloadingTilesLoaded(): void;
+    onPreloadingTilesLoadedSwigExplicitNTTileLoadListener(): void;
 
-	onPreloadingTilesLoadedSwigExplicitNTTileLoadListener(): void;
+    onVisibleTilesLoaded(): void;
 
-	onVisibleTilesLoaded(): void;
+    onVisibleTilesLoadedSwigExplicitNTTileLoadListener(): void;
 
-	onVisibleTilesLoadedSwigExplicitNTTileLoadListener(): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTTileSubstitutionPolicy {
+    T_TILE_SUBSTITUTION_POLICY_ALL = 0,
 
-	T_TILE_SUBSTITUTION_POLICY_ALL = 0,
+    T_TILE_SUBSTITUTION_POLICY_VISIBLE = 1,
 
-	T_TILE_SUBSTITUTION_POLICY_VISIBLE = 1,
-
-	T_TILE_SUBSTITUTION_POLICY_NONE = 2
+    T_TILE_SUBSTITUTION_POLICY_NONE = 2
 }
 
 declare class NTTileUtils extends NSObject {
+    static alloc(): NTTileUtils; // inherited from NSObject
 
-	static alloc(): NTTileUtils; // inherited from NSObject
+    static calculateClippedMapTileZoomProj(mapPos: NTMapPos, zoom: number, proj: NTProjection): NTMapTile;
 
-	static calculateClippedMapTileZoomProj(mapPos: NTMapPos, zoom: number, proj: NTProjection): NTMapTile;
+    static calculateMapTileBoundsProj(mapTile: NTMapTile, proj: NTProjection): NTMapBounds;
 
-	static calculateMapTileBoundsProj(mapTile: NTMapTile, proj: NTProjection): NTMapBounds;
+    static calculateMapTileOriginProj(mapTile: NTMapTile, proj: NTProjection): NTMapPos;
 
-	static calculateMapTileOriginProj(mapTile: NTMapTile, proj: NTProjection): NTMapPos;
+    static calculateMapTileZoomProj(mapPos: NTMapPos, zoom: number, proj: NTProjection): NTMapTile;
 
-	static calculateMapTileZoomProj(mapPos: NTMapPos, zoom: number, proj: NTProjection): NTMapTile;
+    static new(): NTTileUtils; // inherited from NSObject
 
-	static new(): NTTileUtils; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
-
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 }
 
 declare class NTTomTomOnlineGeocodingService extends NTGeocodingService {
+    static alloc(): NTTomTomOnlineGeocodingService; // inherited from NSObject
 
-	static alloc(): NTTomTomOnlineGeocodingService; // inherited from NSObject
+    static new(): NTTomTomOnlineGeocodingService; // inherited from NSObject
 
-	static new(): NTTomTomOnlineGeocodingService; // inherited from NSObject
+    constructor(o: { apiKey: string });
 
-	constructor(o: { apiKey: string; });
+    calculateAddressesSwigExplicitNTTomTomOnlineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTTomTomOnlineGeocodingService(request: NTGeocodingRequest): NTGeocodingResultVector;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getLanguageSwigExplicitNTTomTomOnlineGeocodingService(): string;
 
-	getLanguageSwigExplicitNTTomTomOnlineGeocodingService(): string;
+    getMaxResultsSwigExplicitNTTomTomOnlineGeocodingService(): number;
 
-	getMaxResultsSwigExplicitNTTomTomOnlineGeocodingService(): number;
+    initWithApiKey(apiKey: string): this;
 
-	initWithApiKey(apiKey: string): this;
+    isAutocompleteSwigExplicitNTTomTomOnlineGeocodingService(): boolean;
 
-	isAutocompleteSwigExplicitNTTomTomOnlineGeocodingService(): boolean;
+    setAutocompleteSwigExplicitNTTomTomOnlineGeocodingService(autocomplete: boolean): void;
 
-	setAutocompleteSwigExplicitNTTomTomOnlineGeocodingService(autocomplete: boolean): void;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
+    setLanguageSwigExplicitNTTomTomOnlineGeocodingService(lang: string): void;
 
-	setLanguageSwigExplicitNTTomTomOnlineGeocodingService(lang: string): void;
-
-	setMaxResultsSwigExplicitNTTomTomOnlineGeocodingService(maxResults: number): void;
+    setMaxResultsSwigExplicitNTTomTomOnlineGeocodingService(maxResults: number): void;
 }
 
 declare class NTTomTomOnlineReverseGeocodingService extends NTReverseGeocodingService {
+    static alloc(): NTTomTomOnlineReverseGeocodingService; // inherited from NSObject
 
-	static alloc(): NTTomTomOnlineReverseGeocodingService; // inherited from NSObject
+    static new(): NTTomTomOnlineReverseGeocodingService; // inherited from NSObject
 
-	static new(): NTTomTomOnlineReverseGeocodingService; // inherited from NSObject
+    constructor(o: { apiKey: string });
 
-	constructor(o: { apiKey: string; });
+    calculateAddressesSwigExplicitNTTomTomOnlineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
 
-	calculateAddressesSwigExplicitNTTomTomOnlineReverseGeocodingService(request: NTReverseGeocodingRequest): NTGeocodingResultVector;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getLanguageSwigExplicitNTTomTomOnlineReverseGeocodingService(): string;
 
-	getLanguageSwigExplicitNTTomTomOnlineReverseGeocodingService(): string;
+    initWithApiKey(apiKey: string): this;
 
-	initWithApiKey(apiKey: string): this;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
-
-	setLanguageSwigExplicitNTTomTomOnlineReverseGeocodingService(lang: string): void;
+    setLanguageSwigExplicitNTTomTomOnlineReverseGeocodingService(lang: string): void;
 }
 
 declare class NTTorqueTileDecoder extends NTVectorTileDecoder {
+    static alloc(): NTTorqueTileDecoder; // inherited from NSObject
 
-	static alloc(): NTTorqueTileDecoder; // inherited from NSObject
+    static new(): NTTorqueTileDecoder; // inherited from NSObject
 
-	static new(): NTTorqueTileDecoder; // inherited from NSObject
+    constructor(o: { styleSet: NTCartoCSSStyleSet });
 
-	constructor(o: { styleSet: NTCartoCSSStyleSet; });
+    getAnimationDuration(): number;
 
-	getAnimationDuration(): number;
+    getFrameCount(): number;
 
-	getFrameCount(): number;
+    getResolution(): number;
 
-	getResolution(): number;
+    getStyleSet(): NTCartoCSSStyleSet;
 
-	getStyleSet(): NTCartoCSSStyleSet;
+    initWithStyleSet(styleSet: NTCartoCSSStyleSet): this;
 
-	initWithStyleSet(styleSet: NTCartoCSSStyleSet): this;
-
-	setStyleSet(styleSet: NTCartoCSSStyleSet): void;
+    setStyleSet(styleSet: NTCartoCSSStyleSet): void;
 }
 
 declare class NTTorqueTileLayer extends NTVectorTileLayer {
+    static alloc(): NTTorqueTileLayer; // inherited from NSObject
 
-	static alloc(): NTTorqueTileLayer; // inherited from NSObject
+    static new(): NTTorqueTileLayer; // inherited from NSObject
 
-	static new(): NTTorqueTileLayer; // inherited from NSObject
+    constructor(o: { dataSource: NTTileDataSource; decoder: NTTorqueTileDecoder });
 
-	constructor(o: { dataSource: NTTileDataSource; decoder: NTTorqueTileDecoder; });
+    countVisibleFeatures(frameNr: number): number;
 
-	countVisibleFeatures(frameNr: number): number;
-
-	initWithDataSourceDecoder(dataSource: NTTileDataSource, decoder: NTTorqueTileDecoder): this;
+    initWithDataSourceDecoder(dataSource: NTTileDataSource, decoder: NTTorqueTileDecoder): this;
 }
 
 declare class NTUTFGridClickInfo extends NSObject {
+    static alloc(): NTUTFGridClickInfo; // inherited from NSObject
 
-	static alloc(): NTUTFGridClickInfo; // inherited from NSObject
+    static new(): NTUTFGridClickInfo; // inherited from NSObject
 
-	static new(): NTUTFGridClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickPos(): NTMapPos;
 
-	getClickPos(): NTMapPos;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getElementInfo(): NTVariant;
 
-	getElementInfo(): NTVariant;
+    getLayer(): NTLayer;
 
-	getLayer(): NTLayer;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTUTFGridEventListener extends NSObject {
+    static alloc(): NTUTFGridEventListener; // inherited from NSObject
 
-	static alloc(): NTUTFGridEventListener; // inherited from NSObject
+    static new(): NTUTFGridEventListener; // inherited from NSObject
 
-	static new(): NTUTFGridEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTUTFGridEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTUTFGridEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onUTFGridClicked(clickInfo: NTUTFGridClickInfo): boolean;
 
-	onUTFGridClicked(clickInfo: NTUTFGridClickInfo): boolean;
+    onUTFGridClickedSwigExplicitNTUTFGridEventListener(clickInfo: NTUTFGridClickInfo): boolean;
 
-	onUTFGridClickedSwigExplicitNTUTFGridEventListener(clickInfo: NTUTFGridClickInfo): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTValhallaOfflineRoutingService extends NTRoutingService {
+    static alloc(): NTValhallaOfflineRoutingService; // inherited from NSObject
 
-	static alloc(): NTValhallaOfflineRoutingService; // inherited from NSObject
+    static new(): NTValhallaOfflineRoutingService; // inherited from NSObject
 
-	static new(): NTValhallaOfflineRoutingService; // inherited from NSObject
+    constructor(o: { path: string });
 
-	constructor(o: { path: string; });
+    addLocaleJson(key: string, json: string): void;
 
-	calculateRouteSwigExplicitNTValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    calculateRouteSwigExplicitNTValhallaOfflineRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	getConfigurationParameter(param: string): NTVariant;
+    getConfigurationParameter(param: string): NTVariant;
 
-	getProfileSwigExplicitNTValhallaOfflineRoutingService(): string;
+    getProfileSwigExplicitNTValhallaOfflineRoutingService(): string;
 
-	initWithPath(path: string): this;
+    initWithPath(path: string): this;
 
-	matchRouteSwigExplicitNTValhallaOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+    matchRouteSwigExplicitNTValhallaOfflineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	setConfigurationParameterValue(param: string, value: NTVariant): void;
+    setConfigurationParameterValue(param: string, value: NTVariant): void;
 
-	setProfileSwigExplicitNTValhallaOfflineRoutingService(profile: string): void;
+    setProfileSwigExplicitNTValhallaOfflineRoutingService(profile: string): void;
 }
 
 declare class NTValhallaOnlineRoutingService extends NTRoutingService {
+    static alloc(): NTValhallaOnlineRoutingService; // inherited from NSObject
 
-	static alloc(): NTValhallaOnlineRoutingService; // inherited from NSObject
+    static new(): NTValhallaOnlineRoutingService; // inherited from NSObject
 
-	static new(): NTValhallaOnlineRoutingService; // inherited from NSObject
+    constructor(o: { apiKey: string });
 
-	constructor(o: { apiKey: string; });
+    calculateRouteSwigExplicitNTValhallaOnlineRoutingService(request: NTRoutingRequest): NTRoutingResult;
 
-	calculateRouteSwigExplicitNTValhallaOnlineRoutingService(request: NTRoutingRequest): NTRoutingResult;
+    getCustomServiceURL(): string;
 
-	getCustomServiceURL(): string;
+    getProfileSwigExplicitNTValhallaOnlineRoutingService(): string;
 
-	getProfileSwigExplicitNTValhallaOnlineRoutingService(): string;
+    initWithApiKey(apiKey: string): this;
 
-	initWithApiKey(apiKey: string): this;
+    matchRouteSwigExplicitNTValhallaOnlineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
 
-	matchRouteSwigExplicitNTValhallaOnlineRoutingService(request: NTRouteMatchingRequest): NTRouteMatchingResult;
+    setCustomServiceURL(serviceURL: string): void;
 
-	setCustomServiceURL(serviceURL: string): void;
-
-	setProfileSwigExplicitNTValhallaOnlineRoutingService(profile: string): void;
+    setProfileSwigExplicitNTValhallaOnlineRoutingService(profile: string): void;
 }
 
 declare class NTVariant extends NSObject {
+    static alloc(): NTVariant; // inherited from NSObject
 
-	static alloc(): NTVariant; // inherited from NSObject
+    static fromString(str: string): NTVariant;
 
-	static fromString(str: string): NTVariant;
+    static new(): NTVariant; // inherited from NSObject
 
-	static new(): NTVariant; // inherited from NSObject
+    constructor(o: { array: NTVariantVector });
 
-	constructor(o: { array: NTVariantVector; });
+    constructor(o: { boolVal: boolean });
 
-	constructor(o: { boolVal: boolean; });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { doubleVal: number });
 
-	constructor(o: { doubleVal: number; });
+    constructor(o: { longVal: number });
 
-	constructor(o: { longVal: number; });
+    constructor(o: { object: NTStringVariantMap });
 
-	constructor(o: { object: NTStringVariantMap; });
+    constructor(o: { str: string });
 
-	constructor(o: { string: string; });
+    containsObjectKey(key: string): boolean;
 
-	containsObjectKey(key: string): boolean;
+    description(): string;
 
-	description(): string;
+    getArrayElement(idx: number): NTVariant;
 
-	getArrayElement(idx: number): NTVariant;
+    getArraySize(): number;
 
-	getArraySize(): number;
+    getBool(): boolean;
 
-	getBool(): boolean;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDouble(): number;
 
-	getDouble(): number;
+    getLong(): number;
 
-	getLong(): number;
+    getObjectElement(key: string): NTVariant;
 
-	getObjectElement(key: string): NTVariant;
+    getObjectKeys(): NTStringVector;
 
-	getObjectKeys(): NTStringVector;
+    getString(): string;
 
-	getString(): string;
+    getType(): NTVariantType;
 
-	getType(): NTVariantType;
+    hash(): number;
 
-	hash(): number;
+    hashInternal(): number;
 
-	hashInternal(): number;
+    initWithArray(array: NTVariantVector): this;
 
-	initWithArray(array: NTVariantVector): this;
+    initWithBoolVal(boolVal: boolean): this;
 
-	initWithBoolVal(boolVal: boolean): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithDoubleVal(doubleVal: number): this;
 
-	initWithDoubleVal(doubleVal: number): this;
+    initWithLongVal(longVal: number): this;
 
-	initWithLongVal(longVal: number): this;
+    initWithObject(object: NTStringVariantMap): this;
 
-	initWithObject(object: NTStringVariantMap): this;
+    initWithString(str: string): this;
 
-	initWithString(string: string): this;
+    isEqualInternal(varnt: NTVariant): boolean;
 
-	isEqualInternal(variant:NTVariant): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVariantArrayBuilder extends NSObject {
+    static alloc(): NTVariantArrayBuilder; // inherited from NSObject
 
-	static alloc(): NTVariantArrayBuilder; // inherited from NSObject
+    static new(): NTVariantArrayBuilder; // inherited from NSObject
 
-	static new(): NTVariantArrayBuilder; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    addBool(val: boolean): void;
 
-	addBool(val: boolean): void;
+    addDouble(val: number): void;
 
-	addDouble(val: number): void;
+    addLong(val: number): void;
 
-	addLong(val: number): void;
+    addString(str: string): void;
 
-	addString(str: string): void;
+    addVariant(varnt: NTVariant): void;
 
-	addVariant(variant:NTVariant): void;
+    buildVariant(): NTVariant;
 
-	buildVariant(): NTVariant;
+    clear(): void;
 
-	clear(): void;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVariantObjectBuilder extends NSObject {
+    static alloc(): NTVariantObjectBuilder; // inherited from NSObject
 
-	static alloc(): NTVariantObjectBuilder; // inherited from NSObject
+    static new(): NTVariantObjectBuilder; // inherited from NSObject
 
-	static new(): NTVariantObjectBuilder; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    buildVariant(): NTVariant;
 
-	buildVariant(): NTVariant;
+    clear(): void;
 
-	clear(): void;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setBoolVal(key: string, val: boolean): void;
 
-	setBoolVal(key: string, val: boolean): void;
+    setDoubleVal(key: string, val: number): void;
 
-	setDoubleVal(key: string, val: number): void;
+    setLongVal(key: string, val: number): void;
 
-	setLongVal(key: string, val: number): void;
+    setStringStr(key: string, str: string): void;
 
-	setStringStr(key: string, str: string): void;
+    setVariantVar(key: string, varnt: NTVariant): void;
 
-	setVariantVar(key: string, variant:NTVariant): void;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTVariantType {
+    T_VARIANT_TYPE_NULL = 0,
 
-	T_VARIANT_TYPE_NULL = 0,
+    T_VARIANT_TYPE_STRING = 1,
 
-	T_VARIANT_TYPE_STRING = 1,
+    T_VARIANT_TYPE_BOOL = 2,
 
-	T_VARIANT_TYPE_BOOL = 2,
+    T_VARIANT_TYPE_INTEGER = 3,
 
-	T_VARIANT_TYPE_INTEGER = 3,
+    T_VARIANT_TYPE_DOUBLE = 4,
 
-	T_VARIANT_TYPE_DOUBLE = 4,
+    T_VARIANT_TYPE_ARRAY = 5,
 
-	T_VARIANT_TYPE_ARRAY = 5,
-
-	T_VARIANT_TYPE_OBJECT = 6
+    T_VARIANT_TYPE_OBJECT = 6
 }
 
 declare class NTVariantVector extends NSObject {
+    static alloc(): NTVariantVector; // inherited from NSObject
 
-	static alloc(): NTVariantVector; // inherited from NSObject
+    static new(): NTVariantVector; // inherited from NSObject
 
-	static new(): NTVariantVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTVariant): void;
 
-	add(x: NTVariant): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTVariant;
 
-	get(i: number): NTVariant;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTVariant): void;
 
-	setVal(i: number, val: NTVariant): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorData extends NSObject {
+    static alloc(): NTVectorData; // inherited from NSObject
 
-	static alloc(): NTVectorData; // inherited from NSObject
+    static new(): NTVectorData; // inherited from NSObject
 
-	static new(): NTVectorData; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { elements: NTVectorElementVector });
 
-	constructor(o: { elements: NTVectorElementVector; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getElements(): NTVectorElementVector;
 
-	getElements(): NTVectorElementVector;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithElements(elements: NTVectorElementVector): this;
 
-	initWithElements(elements: NTVectorElementVector): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorDataSource extends NSObject {
+    static alloc(): NTVectorDataSource; // inherited from NSObject
 
-	static alloc(): NTVectorDataSource; // inherited from NSObject
+    static new(): NTVectorDataSource; // inherited from NSObject
 
-	static new(): NTVectorDataSource; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorDataSource;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorDataSource;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { projection: NTProjection });
 
-	constructor(o: { projection: NTProjection; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDataExtent(): NTMapBounds;
 
-	getDataExtent(): NTMapBounds;
+    getDataExtentSwigExplicitNTVectorDataSource(): NTMapBounds;
 
-	getDataExtentSwigExplicitNTVectorDataSource(): NTMapBounds;
+    getProjection(): NTProjection;
 
-	getProjection(): NTProjection;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithProjection(projection: NTProjection): this;
 
-	initWithProjection(projection: NTProjection): this;
+    loadElements(cullState: NTCullState): NTVectorData;
 
-	loadElements(cullState: NTCullState): NTVectorData;
+    notifyElementsChanged(): void;
 
-	notifyElementsChanged(): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorEditEventListener extends NSObject {
+    static alloc(): NTVectorEditEventListener; // inherited from NSObject
 
-	static alloc(): NTVectorEditEventListener; // inherited from NSObject
+    static new(): NTVectorEditEventListener; // inherited from NSObject
 
-	static new(): NTVectorEditEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorEditEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorEditEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onDragEnd(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
 
-	onDragEnd(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
+    onDragEndSwigExplicitNTVectorEditEventListener(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
 
-	onDragEndSwigExplicitNTVectorEditEventListener(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
+    onDragMove(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
 
-	onDragMove(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
+    onDragMoveSwigExplicitNTVectorEditEventListener(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
 
-	onDragMoveSwigExplicitNTVectorEditEventListener(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
+    onDragStart(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
 
-	onDragStart(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
+    onDragStartSwigExplicitNTVectorEditEventListener(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
 
-	onDragStartSwigExplicitNTVectorEditEventListener(dragInfo: NTVectorElementDragInfo): NTVectorElementDragResult;
+    onElementDelete(element: NTVectorElement): void;
 
-	onElementDelete(element: NTVectorElement): void;
+    onElementDeselected(element: NTVectorElement): void;
 
-	onElementDeselected(element: NTVectorElement): void;
+    onElementDeselectedSwigExplicitNTVectorEditEventListener(element: NTVectorElement): void;
 
-	onElementDeselectedSwigExplicitNTVectorEditEventListener(element: NTVectorElement): void;
+    onElementModifyGeometry(element: NTVectorElement, geometry: NTGeometry): void;
 
-	onElementModifyGeometry(element: NTVectorElement, geometry: NTGeometry): void;
+    onElementSelect(element: NTVectorElement): boolean;
 
-	onElementSelect(element: NTVectorElement): boolean;
+    onElementSelectSwigExplicitNTVectorEditEventListener(element: NTVectorElement): boolean;
 
-	onElementSelectSwigExplicitNTVectorEditEventListener(element: NTVectorElement): boolean;
+    onSelectDragPointStyleDragPointStyle(element: NTVectorElement, dragPointStyle: NTVectorElementDragPointStyle): NTPointStyle;
 
-	onSelectDragPointStyleDragPointStyle(element: NTVectorElement, dragPointStyle: NTVectorElementDragPointStyle): NTPointStyle;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorElement extends NSObject {
+    static alloc(): NTVectorElement; // inherited from NSObject
 
-	static alloc(): NTVectorElement; // inherited from NSObject
+    static new(): NTVectorElement; // inherited from NSObject
 
-	static new(): NTVectorElement; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorElement;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorElement;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    containsMetaDataKey(key: string): boolean;
 
-	containsMetaDataKey(key: string): boolean;
+    getBounds(): NTMapBounds;
 
-	getBounds(): NTMapBounds;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getGeometry(): NTGeometry;
 
-	getGeometry(): NTGeometry;
+    getId(): number;
 
-	getId(): number;
+    getMetaData(): NTStringVariantMap;
 
-	getMetaData(): NTStringVariantMap;
+    getMetaDataElement(key: string): NTVariant;
 
-	getMetaDataElement(key: string): NTVariant;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isVisible(): boolean;
 
-	isVisible(): boolean;
+    notifyElementChanged(): void;
 
-	notifyElementChanged(): void;
+    setId(arg1: number): void;
 
-	setId(arg1: number): void;
+    setMetaData(metaData: NTStringVariantMap): void;
 
-	setMetaData(metaData: NTStringVariantMap): void;
+    setMetaDataElementElement(key: string, element: NTVariant): void;
 
-	setMetaDataElementElement(key: string, element: NTVariant): void;
+    setVisible(visible: boolean): void;
 
-	setVisible(visible: boolean): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorElementClickInfo extends NSObject {
+    static alloc(): NTVectorElementClickInfo; // inherited from NSObject
 
-	static alloc(): NTVectorElementClickInfo; // inherited from NSObject
+    static new(): NTVectorElementClickInfo; // inherited from NSObject
 
-	static new(): NTVectorElementClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickPos(): NTMapPos;
 
-	getClickPos(): NTMapPos;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getElementClickPos(): NTMapPos;
 
-	getElementClickPos(): NTMapPos;
+    getLayer(): NTLayer;
 
-	getLayer(): NTLayer;
+    getVectorElement(): NTVectorElement;
 
-	getVectorElement(): NTVectorElement;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorElementDragInfo extends NSObject {
+    static alloc(): NTVectorElementDragInfo; // inherited from NSObject
 
-	static alloc(): NTVectorElementDragInfo; // inherited from NSObject
+    static new(): NTVectorElementDragInfo; // inherited from NSObject
 
-	static new(): NTVectorElementDragInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDragMode(): NTVectorElementDragMode;
 
-	getDragMode(): NTVectorElementDragMode;
+    getMapPos(): NTMapPos;
 
-	getMapPos(): NTMapPos;
+    getScreenPos(): NTScreenPos;
 
-	getScreenPos(): NTScreenPos;
+    getVectorElement(): NTVectorElement;
 
-	getVectorElement(): NTVectorElement;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare const enum NTVectorElementDragMode {
+    T_VECTOR_ELEMENT_DRAG_MODE_VERTEX = 0,
 
-	T_VECTOR_ELEMENT_DRAG_MODE_VERTEX = 0,
-
-	T_VECTOR_ELEMENT_DRAG_MODE_ELEMENT = 1
+    T_VECTOR_ELEMENT_DRAG_MODE_ELEMENT = 1
 }
 
 declare const enum NTVectorElementDragPointStyle {
+    T_VECTOR_ELEMENT_DRAG_POINT_STYLE_NORMAL = 0,
 
-	T_VECTOR_ELEMENT_DRAG_POINT_STYLE_NORMAL = 0,
+    T_VECTOR_ELEMENT_DRAG_POINT_STYLE_VIRTUAL = 1,
 
-	T_VECTOR_ELEMENT_DRAG_POINT_STYLE_VIRTUAL = 1,
-
-	T_VECTOR_ELEMENT_DRAG_POINT_STYLE_SELECTED = 2
+    T_VECTOR_ELEMENT_DRAG_POINT_STYLE_SELECTED = 2
 }
 
 declare const enum NTVectorElementDragResult {
+    T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE = 0,
 
-	T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE = 0,
+    T_VECTOR_ELEMENT_DRAG_RESULT_STOP = 1,
 
-	T_VECTOR_ELEMENT_DRAG_RESULT_STOP = 1,
+    T_VECTOR_ELEMENT_DRAG_RESULT_MODIFY = 2,
 
-	T_VECTOR_ELEMENT_DRAG_RESULT_MODIFY = 2,
-
-	T_VECTOR_ELEMENT_DRAG_RESULT_DELETE = 3
+    T_VECTOR_ELEMENT_DRAG_RESULT_DELETE = 3
 }
 
 declare class NTVectorElementEventListener extends NSObject {
+    static alloc(): NTVectorElementEventListener; // inherited from NSObject
 
-	static alloc(): NTVectorElementEventListener; // inherited from NSObject
+    static new(): NTVectorElementEventListener; // inherited from NSObject
 
-	static new(): NTVectorElementEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorElementEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorElementEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onVectorElementClicked(clickInfo: NTVectorElementClickInfo): boolean;
 
-	onVectorElementClicked(clickInfo: NTVectorElementClickInfo): boolean;
+    onVectorElementClickedSwigExplicitNTVectorElementEventListener(clickInfo: NTVectorElementClickInfo): boolean;
 
-	onVectorElementClickedSwigExplicitNTVectorElementEventListener(clickInfo: NTVectorElementClickInfo): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorElementSearchService extends NSObject {
+    static alloc(): NTVectorElementSearchService; // inherited from NSObject
 
-	static alloc(): NTVectorElementSearchService; // inherited from NSObject
+    static new(): NTVectorElementSearchService; // inherited from NSObject
 
-	static new(): NTVectorElementSearchService; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorElementSearchService;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorElementSearchService;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { dataSource: NTVectorDataSource });
 
-	constructor(o: { dataSource: NTVectorDataSource; });
+    findElements(request: NTSearchRequest): NTVectorElementVector;
 
-	findElements(request: NTSearchRequest): NTVectorElementVector;
+    findElementsSwigExplicitNTVectorElementSearchService(request: NTSearchRequest): NTVectorElementVector;
 
-	findElementsSwigExplicitNTVectorElementSearchService(request: NTSearchRequest): NTVectorElementVector;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDataSource(): NTVectorDataSource;
 
-	getDataSource(): NTVectorDataSource;
+    getMaxResults(): number;
 
-	getMaxResults(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithDataSource(dataSource: NTVectorDataSource): this;
 
-	initWithDataSource(dataSource: NTVectorDataSource): this;
+    setMaxResults(maxResults: number): void;
 
-	setMaxResults(maxResults: number): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorElementVector extends NSObject {
+    static alloc(): NTVectorElementVector; // inherited from NSObject
 
-	static alloc(): NTVectorElementVector; // inherited from NSObject
+    static new(): NTVectorElementVector; // inherited from NSObject
 
-	static new(): NTVectorElementVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTVectorElement): void;
 
-	add(x: NTVectorElement): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTVectorElement;
 
-	get(i: number): NTVectorElement;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTVectorElement): void;
 
-	setVal(i: number, val: NTVectorElement): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorLayer extends NTLayer {
+    static alloc(): NTVectorLayer; // inherited from NSObject
 
-	static alloc(): NTVectorLayer; // inherited from NSObject
+    static new(): NTVectorLayer; // inherited from NSObject
 
-	static new(): NTVectorLayer; // inherited from NSObject
+    constructor(o: { dataSource: NTVectorDataSource });
 
-	constructor(o: { dataSource: NTVectorDataSource; });
+    getDataSource(): NTVectorDataSource;
 
-	getDataSource(): NTVectorDataSource;
+    getVectorElementEventListener(): NTVectorElementEventListener;
 
-	getVectorElementEventListener(): NTVectorElementEventListener;
+    initWithDataSource(dataSource: NTVectorDataSource): this;
 
-	initWithDataSource(dataSource: NTVectorDataSource): this;
+    isZBuffering(): boolean;
 
-	isZBuffering(): boolean;
+    setVectorElementEventListener(eventListener: NTVectorElementEventListener): void;
 
-	setVectorElementEventListener(eventListener: NTVectorElementEventListener): void;
-
-	setZBuffering(enabled: boolean): void;
+    setZBuffering(enabled: boolean): void;
 }
 
 declare class NTVectorTileClickInfo extends NSObject {
+    static alloc(): NTVectorTileClickInfo; // inherited from NSObject
 
-	static alloc(): NTVectorTileClickInfo; // inherited from NSObject
+    static new(): NTVectorTileClickInfo; // inherited from NSObject
 
-	static new(): NTVectorTileClickInfo; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getClickInfo(): NTClickInfo;
 
-	getClickInfo(): NTClickInfo;
+    getClickPos(): NTMapPos;
 
-	getClickPos(): NTMapPos;
-	
-	getFeaturePosIndex(): number;
+    getClickType(): NTClickType;
 
-	getClickType(): NTClickType;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getFeature(): NTVectorTileFeature;
 
-	getFeature(): NTVectorTileFeature;
+    getFeatureClickPos(): NTMapPos;
 
-	getFeatureClickPos(): NTMapPos;
+    getFeatureId(): number;
 
-	getFeatureId(): number;
+    getFeatureLayerName(): string;
 
-	getFeatureLayerName(): string;
+    getFeaturePosIndex(): number;
 
-	getLayer(): NTLayer;
+    getLayer(): NTLayer;
 
-	getMapTile(): NTMapTile;
+    getMapTile(): NTMapTile;
 
-	hash(): number;
+    hash(): number;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorTileDecoder extends NSObject {
+    static alloc(): NTVectorTileDecoder; // inherited from NSObject
 
-	static alloc(): NTVectorTileDecoder; // inherited from NSObject
+    static new(): NTVectorTileDecoder; // inherited from NSObject
 
-	static new(): NTVectorTileDecoder; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorTileDecoder;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorTileDecoder;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    addFallbackFont(fontData: NTBinaryData): void;
 
-	addFallbackFont(fontData: NTBinaryData): void;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getMaxZoom(): number;
 
-	getMaxZoom(): number;
+    getMinZoom(): number;
 
-	getMinZoom(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    notifyDecoderChanged(): void;
 
-	notifyDecoderChanged(): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorTileEventListener extends NSObject {
+    static alloc(): NTVectorTileEventListener; // inherited from NSObject
 
-	static alloc(): NTVectorTileEventListener; // inherited from NSObject
+    static new(): NTVectorTileEventListener; // inherited from NSObject
 
-	static new(): NTVectorTileEventListener; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorTileEventListener;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorTileEventListener;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    onVectorTileClicked(clickInfo: NTVectorTileClickInfo): boolean;
 
-	onVectorTileClicked(clickInfo: NTVectorTileClickInfo): boolean;
+    onVectorTileClickedSwigExplicitNTVectorTileEventListener(clickInfo: NTVectorTileClickInfo): boolean;
 
-	onVectorTileClickedSwigExplicitNTVectorTileEventListener(clickInfo: NTVectorTileClickInfo): boolean;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorTileFeature extends NTFeature {
+    static alloc(): NTVectorTileFeature; // inherited from NSObject
 
-	static alloc(): NTVectorTileFeature; // inherited from NSObject
+    static new(): NTVectorTileFeature; // inherited from NSObject
 
-	static new(): NTVectorTileFeature; // inherited from NSObject
+    constructor(o: { arg0: number; mapTile: NTMapTile; layerName: string; geometry: NTGeometry; properties: NTVariant });
 
-	constructor(o: { arg0: number; mapTile: NTMapTile; layerName: string; geometry: NTGeometry; properties: NTVariant; });
+    getDistance(): number;
 
-	getDistance(): number;
+    getId(): number;
 
-	getId(): number;
+    getLayerName(): string;
 
-	getLayerName(): string;
+    getMapTile(): NTMapTile;
 
-	getMapTile(): NTMapTile;
+    initWithArg0MapTileLayerNameGeometryProperties(arg0: number, mapTile: NTMapTile, layerName: string, geometry: NTGeometry, properties: NTVariant): this;
 
-	initWithArg0MapTileLayerNameGeometryProperties(arg0: number, mapTile: NTMapTile, layerName: string, geometry: NTGeometry, properties: NTVariant): this;
-
-	setDistance(value: number): void;
+    setDistance(value: number): void;
 }
 
 declare class NTVectorTileFeatureCollection extends NTFeatureCollection {
+    static alloc(): NTVectorTileFeatureCollection; // inherited from NSObject
 
-	static alloc(): NTVectorTileFeatureCollection; // inherited from NSObject
+    static new(): NTVectorTileFeatureCollection; // inherited from NSObject
 
-	static new(): NTVectorTileFeatureCollection; // inherited from NSObject
+    constructor(o: { features: NTVectorTileFeatureVector });
 
-	constructor(o: { features: NTVectorTileFeatureVector; });
+    getFeature(index: number): NTVectorTileFeature;
 
-	getFeature(index: number): NTVectorTileFeature;
-
-	initWithFeatures(features: NTVectorTileFeatureVector): this;
+    initWithFeatures(features: NTVectorTileFeatureVector): this;
 }
 
 declare class NTVectorTileFeatureVector extends NSObject {
+    static alloc(): NTVectorTileFeatureVector; // inherited from NSObject
 
-	static alloc(): NTVectorTileFeatureVector; // inherited from NSObject
+    static new(): NTVectorTileFeatureVector; // inherited from NSObject
 
-	static new(): NTVectorTileFeatureVector; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    add(x: NTVectorTileFeature): void;
 
-	add(x: NTVectorTileFeature): void;
+    capacity(): number;
 
-	capacity(): number;
+    clear(): void;
 
-	clear(): void;
+    get(i: number): NTVectorTileFeature;
 
-	get(i: number): NTVectorTileFeature;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isEmpty(): boolean;
 
-	isEmpty(): boolean;
+    reserve(n: number): void;
 
-	reserve(n: number): void;
+    setVal(i: number, val: NTVectorTileFeature): void;
 
-	setVal(i: number, val: NTVectorTileFeature): void;
+    size(): number;
 
-	size(): number;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTVectorTileLayer extends NTTileLayer {
+    static alloc(): NTVectorTileLayer; // inherited from NSObject
 
-	static alloc(): NTVectorTileLayer; // inherited from NSObject
+    static new(): NTVectorTileLayer; // inherited from NSObject
 
-	static new(): NTVectorTileLayer; // inherited from NSObject
+    constructor(o: { dataSource: NTTileDataSource; decoder: NTVectorTileDecoder });
 
-	constructor(o: { dataSource: NTTileDataSource; decoder: NTVectorTileDecoder; });
+    getBuildingRenderOrder(): NTVectorTileRenderOrder;
 
-	getBuildingRenderOrder(): NTVectorTileRenderOrder;
+    getClickHandlerLayerFilter(): string;
 
-	getClickHandlerLayerFilter(): string;
+    getClickRadius(): number;
 
-	getClickRadius(): number;
+    getLabelBlendingSpeed(): number;
 
-	getLabelBlendingSpeed(): number;
+    getLabelRenderOrder(): NTVectorTileRenderOrder;
 
-	getLabelRenderOrder(): NTVectorTileRenderOrder;
+    getLayerBlendingSpeed(): number;
 
-	getLayerBlendingSpeed(): number;
+    getRendererLayerFilter(): string;
 
-	getRendererLayerFilter(): string;
+    getTileCacheCapacity(): number;
 
-	getTileCacheCapacity(): number;
+    getTileDecoder(): NTVectorTileDecoder;
 
-	getTileDecoder(): NTVectorTileDecoder;
+    getVectorTileEventListener(): NTVectorTileEventListener;
 
-	getVectorTileEventListener(): NTVectorTileEventListener;
+    initWithDataSourceDecoder(dataSource: NTTileDataSource, decoder: NTVectorTileDecoder): this;
 
-	initWithDataSourceDecoder(dataSource: NTTileDataSource, decoder: NTVectorTileDecoder): this;
+    setBuildingRenderOrder(renderOrder: NTVectorTileRenderOrder): void;
 
-	setBuildingRenderOrder(renderOrder: NTVectorTileRenderOrder): void;
+    setClickHandlerLayerFilter(filter: string): void;
 
-	setClickHandlerLayerFilter(filter: string): void;
+    setClickRadius(radius: number): void;
 
-	setClickRadius(radius: number): void;
+    setLabelBlendingSpeed(speed: number): void;
 
-	setLabelBlendingSpeed(speed: number): void;
+    setLabelRenderOrder(renderOrder: NTVectorTileRenderOrder): void;
 
-	setLabelRenderOrder(renderOrder: NTVectorTileRenderOrder): void;
+    setLayerBlendingSpeed(speed: number): void;
 
-	setLayerBlendingSpeed(speed: number): void;
+    setRendererLayerFilter(filter: string): void;
 
-	setRendererLayerFilter(filter: string): void;
+    setTileCacheCapacity(capacityInBytes: number): void;
 
-	setTileCacheCapacity(capacityInBytes: number): void;
-
-	setVectorTileEventListener(eventListener: NTVectorTileEventListener): void;
+    setVectorTileEventListener(eventListener: NTVectorTileEventListener): void;
 }
 
 declare const enum NTVectorTileRenderOrder {
+    T_VECTOR_TILE_RENDER_ORDER_HIDDEN = -1,
 
-	T_VECTOR_TILE_RENDER_ORDER_HIDDEN = -1,
+    T_VECTOR_TILE_RENDER_ORDER_LAYER = 0,
 
-	T_VECTOR_TILE_RENDER_ORDER_LAYER = 0,
-
-	T_VECTOR_TILE_RENDER_ORDER_LAST = 1
+    T_VECTOR_TILE_RENDER_ORDER_LAST = 1
 }
 
 declare class NTVectorTileSearchService extends NSObject {
+    static alloc(): NTVectorTileSearchService; // inherited from NSObject
 
-	static alloc(): NTVectorTileSearchService; // inherited from NSObject
+    static new(): NTVectorTileSearchService; // inherited from NSObject
 
-	static new(): NTVectorTileSearchService; // inherited from NSObject
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorTileSearchService;
 
-	static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): NTVectorTileSearchService;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    constructor(o: { dataSource: NTTileDataSource; tileDecoder: NTVectorTileDecoder });
 
-	constructor(o: { dataSource: NTTileDataSource; tileDecoder: NTVectorTileDecoder; });
+    findFeatures(request: NTSearchRequest): NTVectorTileFeatureCollection;
 
-	findFeatures(request: NTSearchRequest): NTVectorTileFeatureCollection;
+    findFeaturesSwigExplicitNTVectorTileSearchService(request: NTSearchRequest): NTVectorTileFeatureCollection;
 
-	findFeaturesSwigExplicitNTVectorTileSearchService(request: NTSearchRequest): NTVectorTileFeatureCollection;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDataSource(): NTTileDataSource;
 
-	getDataSource(): NTTileDataSource;
+    getLayers(): NTStringVector;
 
-	getLayers(): NTStringVector;
+    getMaxResults(): number;
 
-	getMaxResults(): number;
+    getMaxZoom(): number;
 
-	getMaxZoom(): number;
+    getMinZoom(): number;
 
-	getMinZoom(): number;
+    getPreventDuplicates(): boolean;
 
-	getPreventDuplicates(): boolean;
+    getSortByDistance(): boolean;
 
-	getSortByDistance(): boolean;
+    getTileDecoder(): NTVectorTileDecoder;
 
-	getTileDecoder(): NTVectorTileDecoder;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithDataSourceTileDecoder(dataSource: NTTileDataSource, tileDecoder: NTVectorTileDecoder): this;
 
-	initWithDataSourceTileDecoder(dataSource: NTTileDataSource, tileDecoder: NTVectorTileDecoder): this;
+    setLayers(layers: NTStringVector): void;
 
-	setLayers(layers: NTStringVector): void;
+    setMaxResults(maxResults: number): void;
 
-	setMaxResults(maxResults: number): void;
+    setMaxZoom(maxZoom: number): void;
 
-	setMaxZoom(maxZoom: number): void;
+    setMinZoom(minZoom: number): void;
 
-	setMinZoom(minZoom: number): void;
+    setPreventDuplicates(preventDuplicates: boolean): void;
 
-	setPreventDuplicates(preventDuplicates: boolean): void;
+    setSortByDistance(sortByDistance: boolean): void;
 
-	setSortByDistance(sortByDistance: boolean): void;
+    swigGetClassName(): string;
 
-	swigGetClassName(): string;
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-	swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTViewState extends NSObject {
+    static alloc(): NTViewState; // inherited from NSObject
 
-	static alloc(): NTViewState; // inherited from NSObject
+    static new(): NTViewState; // inherited from NSObject
 
-	static new(): NTViewState; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getAspectRatio(): number;
 
-	getAspectRatio(): number;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getDPI(): number;
 
-	getDPI(): number;
+    getDPToPX(): number;
 
-	getDPToPX(): number;
+    getFOVY(): number;
 
-	getFOVY(): number;
+    getFar(): number;
 
-	getFar(): number;
+    getHeight(): number;
 
-	getHeight(): number;
+    getNear(): number;
 
-	getNear(): number;
+    getRotation(): number;
 
-	getRotation(): number;
+    getScreenHeight(): number;
 
-	getScreenHeight(): number;
+    getScreenWidth(): number;
 
-	getScreenWidth(): number;
+    getTilt(): number;
 
-	getTilt(): number;
+    getUnitToDPCoef(): number;
 
-	getUnitToDPCoef(): number;
+    getUnitToPXCoef(): number;
 
-	getUnitToPXCoef(): number;
+    getWidth(): number;
 
-	getWidth(): number;
+    getZoom(): number;
 
-	getZoom(): number;
+    getZoom0Distance(): number;
 
-	getZoom0Distance(): number;
+    hash(): number;
 
-	hash(): number;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isCameraChanged(): boolean;
 
-	isCameraChanged(): boolean;
-
-	swigGetRawPtr(): number;
+    swigGetRawPtr(): number;
 }
 
 declare class NTWKBGeometryReader extends NSObject {
+    static alloc(): NTWKBGeometryReader; // inherited from NSObject
 
-	static alloc(): NTWKBGeometryReader; // inherited from NSObject
+    static new(): NTWKBGeometryReader; // inherited from NSObject
 
-	static new(): NTWKBGeometryReader; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	readGeometry(wkbData: NTBinaryData): NTGeometry;
+    readGeometry(wkbData: NTBinaryData): NTGeometry;
 }
 
 declare class NTWKBGeometryWriter extends NSObject {
+    static alloc(): NTWKBGeometryWriter; // inherited from NSObject
 
-	static alloc(): NTWKBGeometryWriter; // inherited from NSObject
+    static new(): NTWKBGeometryWriter; // inherited from NSObject
 
-	static new(): NTWKBGeometryWriter; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getBigEndian(): boolean;
 
-	getBigEndian(): boolean;
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getZ(): boolean;
 
-	getZ(): boolean;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setBigEndian(bigEndian: boolean): void;
 
-	setBigEndian(bigEndian: boolean): void;
+    setZ(z: boolean): void;
 
-	setZ(z: boolean): void;
-
-	writeGeometry(geometry: NTGeometry): NTBinaryData;
+    writeGeometry(geometry: NTGeometry): NTBinaryData;
 }
 
 declare class NTWKTGeometryReader extends NSObject {
+    static alloc(): NTWKTGeometryReader; // inherited from NSObject
 
-	static alloc(): NTWKTGeometryReader; // inherited from NSObject
+    static new(): NTWKTGeometryReader; // inherited from NSObject
 
-	static new(): NTWKTGeometryReader; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-	readGeometry(wkt: string): NTGeometry;
+    readGeometry(wkt: string): NTGeometry;
 }
 
 declare class NTWKTGeometryWriter extends NSObject {
+    static alloc(): NTWKTGeometryWriter; // inherited from NSObject
 
-	static alloc(): NTWKTGeometryWriter; // inherited from NSObject
+    static new(): NTWKTGeometryWriter; // inherited from NSObject
 
-	static new(): NTWKTGeometryWriter; // inherited from NSObject
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
 
-	constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+    getCptr(): interop.Pointer | interop.Reference<any>;
 
-	getCptr(): interop.Pointer | interop.Reference<any>;
+    getZ(): boolean;
 
-	getZ(): boolean;
+    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
-	initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    setZ(z: boolean): void;
 
-	setZ(z: boolean): void;
-
-	writeGeometry(geometry: NTGeometry): string;
+    writeGeometry(geometry: NTGeometry): string;
 }
 
 declare class NTZippedAssetPackage extends NTAssetPackage {
+    static alloc(): NTZippedAssetPackage; // inherited from NSObject
 
-	static alloc(): NTZippedAssetPackage; // inherited from NSObject
+    static new(): NTZippedAssetPackage; // inherited from NSObject
 
-	static new(): NTZippedAssetPackage; // inherited from NSObject
+    constructor(o: { zipData: NTBinaryData });
 
-	constructor(o: { zipData: NTBinaryData; });
+    constructor(o: { zipData: NTBinaryData; baseAssetPackage: NTAssetPackage });
 
-	constructor(o: { zipData: NTBinaryData; baseAssetPackage: NTAssetPackage; });
+    getLocalAssetNames(): NTStringVector;
 
-	getLocalAssetNames(): NTStringVector;
+    initWithZipData(zipData: NTBinaryData): this;
 
-	initWithZipData(zipData: NTBinaryData): this;
-
-	initWithZipDataBaseAssetPackage(zipData: NTBinaryData, baseAssetPackage: NTAssetPackage): this;
+    initWithZipDataBaseAssetPackage(zipData: NTBinaryData, baseAssetPackage: NTAssetPackage): this;
 }

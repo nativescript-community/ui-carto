@@ -24,15 +24,13 @@ import {
     MapInteractionEvent,
     MapMovedEvent,
     MapReadyEvent,
-    MapStableEvent,
-    isLicenseKeyRegistered,
-    setLicenseKeyRegistered
+    MapStableEvent
 } from './index.common';
 
 import { ImageSource, Property, Utils, booleanConverter } from '@nativescript/core';
 import { MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
-export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
+export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent };
 
 export const RenderProjectionMode = {
     get RENDER_PROJECTION_MODE_PLANAR() {

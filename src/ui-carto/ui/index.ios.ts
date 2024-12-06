@@ -25,14 +25,12 @@ import {
     MapInteractionEvent,
     MapMovedEvent,
     MapReadyEvent,
-    MapStableEvent,
-    isLicenseKeyRegistered,
-    setLicenseKeyRegistered
+    MapStableEvent
 } from './index.common';
 import { ImageSource } from '@nativescript/core';
 import { executeOnMainThread } from '@nativescript/core/utils';
 
-export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, setLicenseKeyRegistered };
+export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent };
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR = NTRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
@@ -44,20 +42,6 @@ export enum PanningMode {
     PANNING_MODE_STICKY_FINAL = NTPanningMode.T_PANNING_MODE_STICKY_FINAL
 }
 
-let licenseKey: string;
-export function registerLicense(value: string, callback?: (result: boolean) => void) {
-    const result = AKMapView.registerLicense(value);
-    if (result) {
-        licenseKey = value;
-    }
-    setLicenseKeyRegistered(result);
-    if (callback) {
-        callback(result);
-    }
-}
-export function getLicenseKey() {
-    return licenseKey;
-}
 
 let runOnMainThread = true;
 function mainThread(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -187,15 +171,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     static projection = new EPSG4326();
     nativeProjection: NTProjection;
     mProjection: IProjection;
-    constructor() {
-        super();
-        if (!isLicenseKeyRegistered()) {
-            const license = this.style['licenseKey'] || getLicenseKey();
-            if (license) {
-                registerLicense(license);
-            }
-        }
-    }
 
     public static setRunOnMainThread(value: boolean) {
         runOnMainThread = value;
