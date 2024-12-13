@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core';
+import { Color, ImageAsset, ImageSource } from '@nativescript/core';
 import { BasePointVectorElement, BillboardStyleBuilderOptions, PointVectorElementOptions } from '.';
 import { DefaultLatLonKeys } from '../core';
 import { BillboardStyleBuilder } from './index.ios';
@@ -12,9 +12,9 @@ export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOption
     descriptionFontSize?: number;
     descriptionWrap?: boolean;
     leftColor?: string | Color;
-    leftImage?: string;
+    leftImage?: string | ImageSource | ImageAsset;
     rightColor?: string | Color;
-    rightImage?: string;
+    rightImage?: string | ImageSource | ImageAsset;
     strokeColor?: string | Color;
     strokeWidth?: number;
     titleColor?: string | Color;
@@ -28,6 +28,7 @@ export class BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptio
     constructor(options: U);
     size?: number;
     color?: string | Color;
+    buildStyle();
 }
 
 export class BalloonPopupOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
@@ -47,9 +48,9 @@ export class BalloonPopup<T = DefaultLatLonKeys> extends BasePointVectorElement<
     description?: string;
     descriptionWrap?: boolean;
     leftColor?: string | Color;
-    leftImage?: string;
+    leftImage?: string | ImageSource | ImageAsset;
     rightColor?: string | Color;
-    rightImage?: string;
+    rightImage?: string | ImageSource | ImageAsset;
     strokeColor?: string | Color;
     strokeWidth?: number;
     titleColor?: string | Color;
