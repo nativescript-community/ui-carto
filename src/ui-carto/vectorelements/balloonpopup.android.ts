@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core';
+import { Color, ImageAsset, ImageSource } from '@nativescript/core';
 import { BasePointVectorElement, BillboardStyleBuilder } from '.';
 import { nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '..';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
@@ -14,9 +14,9 @@ export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<com.carto.st
     @nativeProperty descriptionFontSize: number;
     @nativeProperty descriptionWrap: boolean;
     @nativeColorProperty leftColor: string | Color;
-    @nativeCartoImageProperty leftImage: string;
+    @nativeCartoImageProperty leftImage: string | ImageSource | ImageAsset;
     @nativeColorProperty rightColor: string | Color;
-    @nativeCartoImageProperty rightImage: string;
+    @nativeCartoImageProperty rightImage: string | ImageSource | ImageAsset;
     @nativeColorProperty strokeColor: string | Color;
     @nativeProperty strokeWidth: number;
     @nativeColorProperty titleColor: string | Color;

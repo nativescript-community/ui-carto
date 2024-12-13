@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core';
+import { Color, ImageAsset, ImageSource } from '@nativescript/core';
 import { BillboardOrientation, BillboardScaling } from '.';
 import { geometryFromArgs, nativeAndroidEnumProperty, nativeCartoImageProperty, nativeColorProperty, nativeProperty } from '..';
 import { Geometry } from '../geometry';
@@ -13,7 +13,7 @@ export class MarkerStyleBuilder extends BillboardStyleBuilder<com.carto.styles.M
     @nativeProperty width: number;
     @nativeProperty size: number;
     @nativeColorProperty color: Color | string;
-    @nativeCartoImageProperty bitmap: string;
+    @nativeCartoImageProperty bitmap: string | ImageSource | ImageAsset;
     @nativeProperty anchorPointX: number;
     @nativeProperty anchorPointY: number;
     @nativeProperty clickSize: number;
