@@ -118,7 +118,7 @@ class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
                     };
                 },
                 get clickType(): ClickType {
-                    return Number(mapClickInfo.getClickType());
+                    return mapClickInfo.getClickType() as number;
                 },
                 get position() {
                     return fromNativeMapPos(mapClickInfo.getClickPos());
