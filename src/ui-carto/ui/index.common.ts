@@ -127,7 +127,6 @@ export abstract class CartoViewBase extends ContentView {
         if (this.hasListeners(eventName)) {
             this.notify({
                 eventName,
-                object: this,
                 data
             });
         }
