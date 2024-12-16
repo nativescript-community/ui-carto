@@ -1,4 +1,5 @@
 import {
+    ClickType,
     DefaultLatLonKeys,
     MapBounds,
     MapPos,
@@ -16,17 +17,8 @@ import { Layer, TileLayer } from '../layers';
 import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
-import { MapOptions } from '.';
-import {
-    Layers as BaseLayers,
-    CartoViewBase,
-    MapClickedEvent,
-    MapIdleEvent,
-    MapInteractionEvent,
-    MapMovedEvent,
-    MapReadyEvent,
-    MapStableEvent
-} from './index.common';
+import { MapClickInfo, MapGestureInfo, MapInteractionInfo, MapOptions } from '.';
+import { Layers as BaseLayers, CartoViewBase, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent } from './index.common';
 import { ImageSource } from '@nativescript/core';
 import { executeOnMainThread } from '@nativescript/core/utils';
 
@@ -42,8 +34,8 @@ export enum PanningMode {
     PANNING_MODE_STICKY_FINAL = NTPanningMode.T_PANNING_MODE_STICKY_FINAL
 }
 
-
 let runOnMainThread = true;
+
 function mainThread(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     //wrapping the original method
@@ -71,45 +63,37 @@ class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
 
     public onMapIdle() {
         const owner = this._owner?.get();
-        if (owner?.hasListeners(MapIdleEvent)) {
-            owner.notify({ eventName: MapIdleEvent, object: owner });
+        if (owner) {
+            owner.sendEvent(MapIdleEvent);
         }
     }
 
     public onMapMoved(userAction: boolean) {
         const owner = this._owner?.get();
-        if (owner?.hasListeners(MapMovedEvent)) {
-            owner.notify({
-                eventName: MapMovedEvent,
-                object: owner,
-                data: { userAction }
-            });
+        if (owner) {
+            owner.sendEvent<MapGestureInfo>(MapMovedEvent, { userAction });
         }
     }
     public onMapInteraction(interaction: NTMapInteractionInfo, userAction: boolean) {
         const owner = this._owner?.get();
-        if (owner?.hasListeners(MapInteractionEvent)) {
-            owner.notify({
-                eventName: MapInteractionEvent,
-                object: owner,
-                data: {
-                    userAction,
-                    interaction: {
-                        get isAnimationStarted() {
-                            return interaction.isAnimationStarted();
-                        },
-                        get isPanAction() {
-                            return interaction.isPanAction();
-                        },
-                        get isRotateAction() {
-                            return interaction.isRotateAction();
-                        },
-                        get isTiltAction() {
-                            return interaction.isTiltAction();
-                        },
-                        get isZoomAction() {
-                            return interaction.isZoomAction();
-                        }
+        if (owner) {
+            owner.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
+                userAction,
+                interaction: {
+                    get isAnimationStarted() {
+                        return interaction.isAnimationStarted();
+                    },
+                    get isPanAction() {
+                        return interaction.isPanAction();
+                    },
+                    get isRotateAction() {
+                        return interaction.isRotateAction();
+                    },
+                    get isTiltAction() {
+                        return interaction.isTiltAction();
+                    },
+                    get isZoomAction() {
+                        return interaction.isZoomAction();
                     }
                 }
             });
@@ -117,34 +101,27 @@ class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
     }
     public onMapStable(userAction: boolean) {
         const owner = this._owner?.get();
-
         if (owner) {
-            if (owner.hasListeners(MapStableEvent)) {
-                owner.notify({ eventName: MapStableEvent, object: owner, data: { userAction } });
-            }
+            owner.sendEvent<MapGestureInfo>(MapStableEvent, { userAction });
         }
     }
     public onMapClicked(mapClickInfo: NTMapClickInfo) {
         const owner = this._owner?.get();
-        if (owner?.hasListeners(MapClickedEvent)) {
-            owner.notify({
-                eventName: MapClickedEvent,
-                object: owner,
-                data: {
-                    get clickInfo() {
-                        return {
-                            get duration() {
-                                return mapClickInfo.getClickInfo().getDuration();
-                            }
-                        };
-                    },
-                    get clickType() {
-                        return mapClickInfo.getClickType();
-                    },
-                    get position() {
-                        return fromNativeMapPos(mapClickInfo.getClickPos());
-                    },
-                    ios: mapClickInfo
+        if (owner) {
+            owner.sendEvent<MapClickInfo>(MapClickedEvent, {
+                ios: mapClickInfo,
+                get clickInfo() {
+                    return {
+                        get duration(): number {
+                            return mapClickInfo.getClickInfo().getDuration();
+                        }
+                    };
+                },
+                get clickType(): ClickType {
+                    return Number(mapClickInfo.getClickType());
+                },
+                get position() {
+                    return fromNativeMapPos(mapClickInfo.getClickPos());
                 }
             });
         }

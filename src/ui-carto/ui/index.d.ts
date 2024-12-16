@@ -1,5 +1,5 @@
 import { EventData, ImageSource, Style, View } from '@nativescript/core';
-import { DefaultLatLonKeys, GenericMapPos, MapBounds, ScreenBounds, ScreenPos } from '../core';
+import { ClickType, DefaultLatLonKeys, GenericMapPos, MapBounds, ScreenBounds, ScreenPos } from '../core';
 import { Layer } from '../layers';
 import { Projection } from '../projections';
 import { Layers } from './index.common';
@@ -31,27 +31,53 @@ export const MapIdleEvent: string;
 export const MapMovedEvent: string;
 export const MapClickedEvent: string;
 
+export interface MapInfo {}
+
+export interface MapGestureInfo extends MapInfo {
+    userAction: boolean;
+}
+
+export interface MapInteractionInfo extends MapGestureInfo {
+    interaction: {
+        isAnimationStarted: boolean;
+        isPanAction: boolean;
+        isRotateAction: boolean;
+        isTiltAction: boolean;
+        isZoomAction: boolean;
+    };
+}
+
+export interface MapClickInfo<T = DefaultLatLonKeys> extends MapInfo {
+    android?: any;
+    ios?: any;
+    clickInfo: {
+        duration: number;
+    };
+    clickType: ClickType;
+    position: GenericMapPos<T>;
+}
+
 export interface MapEventData extends EventData {
-    data: any;
+    data?: MapInfo;
 }
 export interface MapPosEventData<T = DefaultLatLonKeys> extends EventData {
     MapPos: GenericMapPos<T>;
 }
 
-export interface MapClickInfo<T = DefaultLatLonKeys> {
-    clickType: number;
-    clickInfo: {
-        duration: number;
-    };
-    position: GenericMapPos<T>;
+export interface MapMovedEventData extends MapEventData {
+    data: MapGestureInfo;
 }
-export interface MapInteractionInfo {
-    userAction: boolean;
-    isAnimationStarted: boolean;
-    isPanAction: boolean;
-    isRotateAction: boolean;
-    isTiltAction: boolean;
-    isZoomAction: boolean;
+
+export interface MapStableEventData extends MapEventData {
+    data: MapGestureInfo;
+}
+
+export interface MapInteractionEventData extends MapEventData {
+    data: MapInteractionInfo;
+}
+
+export interface MapClickedEventData extends MapEventData {
+    data: MapClickInfo;
 }
 
 export class MapOptions {
@@ -232,4 +258,10 @@ export class CartoMap<T = DefaultLatLonKeys> extends View {
     clearPreloadingCaches();
     cancelAllTasks();
     captureRendering(wait?: boolean): Promise<ImageSource>;
+
+    on(event: 'mapReady' | 'mapIdle', callback: (args: EventData) => void, thisArg?: any): void;
+    on(event: 'mapStable', callback: (args: MapStableEventData) => void, thisArg?: any): void;
+    on(event: 'mapMoved', callback: (args: MapMovedEventData) => void, thisArg?: any): void;
+    on(event: 'mapInteraction', callback: (args: MapInteractionEventData) => void, thisArg?: any): void;
+    on(event: 'mapClicked', callback: (args: MapClickedEventData) => void, thisArg?: any): void;
 }

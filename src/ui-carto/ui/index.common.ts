@@ -3,8 +3,8 @@ import { CSSType, ContentView } from '@nativescript/core';
 import { BaseNative } from '../BaseNative';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
 import { Layer } from '../layers';
-import { nativeVectorToArray } from '../utils';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
+import { MapInfo } from '.';
 
 export const MapReadyEvent = 'mapReady';
 export const MapStableEvent = 'mapStable';
@@ -123,7 +123,7 @@ export abstract class CartoViewBase extends ContentView {
     @mapProperty maxZoom: number;
     @mapProperty restrictedPanning: boolean;
 
-    public sendEvent(eventName: string, data?) {
+    public sendEvent<T extends MapInfo = MapInfo>(eventName: string, data?: T) {
         if (this.hasListeners(eventName)) {
             this.notify({
                 eventName,

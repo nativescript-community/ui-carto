@@ -32,6 +32,14 @@ export class ScreenBounds {
     min: ScreenPos;
     max: ScreenPos;
 }
+
+export enum ClickType {
+    SINGLE,
+    LONG,
+    DOUBLE,
+    DUAL
+}
+
 // export namespace MapBounds {
 //     function fromCoordinates(southwest: MapPos, northeast: MapPos): MapBounds;
 // }
