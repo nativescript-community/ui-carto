@@ -134,7 +134,7 @@ class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
                     get clickInfo() {
                         return {
                             get duration() {
-                                return (mapClickInfo as any).getClickInfo().getDuration();
+                                return mapClickInfo.getClickInfo().getDuration();
                             }
                         };
                     },

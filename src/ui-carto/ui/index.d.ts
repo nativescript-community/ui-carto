@@ -39,10 +39,10 @@ export interface MapPosEventData<T = DefaultLatLonKeys> extends EventData {
 }
 
 export interface MapClickInfo<T = DefaultLatLonKeys> {
-    clickType: number,
-    clickInfo:{
-        duration:number
-    },
+    clickType: number;
+    clickInfo: {
+        duration: number;
+    };
     position: GenericMapPos<T>;
 }
 export interface MapInteractionInfo {
@@ -177,7 +177,7 @@ export class MapOptions {
     setLongClickDuration(param0: number): void;
     getDoubleClickMaxDuration(): number;
     setDoubleClickMaxDuration(param0: number): void;
-	setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
+    setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
     isLayersLabelsProcessedInReverseOrder(): boolean;
 }
 
@@ -192,6 +192,13 @@ interface CartoMapStyle extends Style {
 }
 
 export class CartoMap<T = DefaultLatLonKeys> extends View {
+    public static mapReadyEvent = 'mapReady';
+    public static mapStableEvent = 'mapStable';
+    public static mapIdleEvent = 'mapIdle';
+    public static mapMovedEvent = 'mapMoved';
+    public static mapInteractionEvent = 'mapInteraction';
+    public static mapClickedEvent = 'mapClicked';
+
     public static setRunOnMainThread(value: boolean);
     public projection: Projection;
     focusPos: GenericMapPos<T>;

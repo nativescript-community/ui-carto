@@ -95,6 +95,13 @@ export abstract class Layers<T = any> extends BaseNative<T, {}> {
 
 @CSSType('CartoMap')
 export abstract class CartoViewBase extends ContentView {
+    public static mapReadyEvent = MapReadyEvent;
+    public static mapStableEvent = MapStableEvent;
+    public static mapIdleEvent = MapIdleEvent;
+    public static mapMovedEvent = MapMovedEvent;
+    public static mapInteractionEvent = MapInteractionEvent;
+    public static mapClickedEvent = MapClickedEvent;
+
     public mapReady = false;
     nativeProjection: any;
     @mapProperty({
