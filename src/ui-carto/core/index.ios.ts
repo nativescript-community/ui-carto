@@ -2,15 +2,12 @@ import { BaseNative } from '../BaseNative';
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapVec, ScreenBounds, ScreenPos } from './index.common';
 export * from './index.common';
 
-export enum ClickType {
-    SINGLE = NTClickType.T_CLICK_TYPE_SINGLE,
-    LONG = NTClickType.T_CLICK_TYPE_LONG,
-    DOUBLE = NTClickType.T_CLICK_TYPE_DOUBLE,
-    DUAL = NTClickType.T_CLICK_TYPE_DUAL
-}
-
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<NTMapBounds, {}> {
-    constructor(public northeast?: GenericMapPos<T>, public southwest?: GenericMapPos<T>, native?: NTMapBounds) {
+    constructor(
+        public northeast?: GenericMapPos<T>,
+        public southwest?: GenericMapPos<T>,
+        native?: NTMapBounds
+    ) {
         super(undefined, native);
     }
     createNative() {

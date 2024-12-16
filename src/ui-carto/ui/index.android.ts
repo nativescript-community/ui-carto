@@ -1,4 +1,5 @@
 import {
+    ClickType,
     DefaultLatLonKeys,
     MapBounds,
     MapPos,
@@ -16,19 +17,10 @@ import {
 import { Layer, TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
-import {
-    Layers as BaseLayers,
-    CartoViewBase,
-    MapClickedEvent,
-    MapIdleEvent,
-    MapInteractionEvent,
-    MapMovedEvent,
-    MapReadyEvent,
-    MapStableEvent
-} from './index.common';
+import { Layers as BaseLayers, CartoViewBase, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent } from './index.common';
 
 import { ImageSource, Property, Utils, booleanConverter } from '@nativescript/core';
-import { MapOptions } from '.';
+import { MapClickInfo, MapGestureInfo, MapInteractionInfo, MapOptions } from '.';
 import { EPSG4326 } from '../projections/epsg4326';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent };
 
@@ -111,63 +103,54 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         }
         const listener = new com.akylas.carto.additions.AKMapEventListener({
             onMapIdle: () => {
-                if (this.hasListeners(MapIdleEvent)) {
-                    this.sendEvent(MapIdleEvent);
-                }
+                this.sendEvent(MapIdleEvent);
             },
             onMapMoved: (userAction: boolean) => {
-                if (this.hasListeners(MapMovedEvent)) {
-                    this.sendEvent(MapMovedEvent, { userAction });
-                }
+                this.sendEvent<MapGestureInfo>(MapMovedEvent, { userAction });
             },
             onMapInteraction: (interaction: com.carto.ui.MapInteractionInfo, userAction: boolean) => {
-                if (this.hasListeners(MapInteractionEvent)) {
-                    this.sendEvent(MapInteractionEvent, {
-                        interaction: {
-                            userAction,
-                            get isAnimationStarted() {
-                                return interaction.isAnimationStarted();
-                            },
-                            get isPanAction() {
-                                return interaction.isPanAction();
-                            },
-                            get isRotateAction() {
-                                return interaction.isRotateAction();
-                            },
-                            get isTiltAction() {
-                                return interaction.isTiltAction();
-                            },
-                            get isZoomAction() {
-                                return interaction.isZoomAction();
-                            }
+                this.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
+                    userAction,
+                    interaction: {
+                        get isAnimationStarted() {
+                            return interaction.isAnimationStarted();
+                        },
+                        get isPanAction() {
+                            return interaction.isPanAction();
+                        },
+                        get isRotateAction() {
+                            return interaction.isRotateAction();
+                        },
+                        get isTiltAction() {
+                            return interaction.isTiltAction();
+                        },
+                        get isZoomAction() {
+                            return interaction.isZoomAction();
                         }
-                    });
-                }
+                    }
+                });
             },
             onMapStable: (userAction: boolean) => {
-                if (this.hasListeners(MapStableEvent)) {
-                    this.sendEvent(MapStableEvent, { userAction });
-                }
+                this.sendEvent<MapGestureInfo>(MapStableEvent, { userAction });
             },
             onMapClicked: (mapClickInfo: com.carto.ui.MapClickInfo) => {
-                if (this.hasListeners(MapClickedEvent)) {
-                    this.sendEvent(MapClickedEvent, {
-                        android: mapClickInfo,
-                        get clickInfo() {
-                            return {
-                                get duration() {
-                                    return mapClickInfo.getClickInfo().getDuration();
-                                }
-                            };
-                        },
-                        get clickType() {
-                            return mapClickInfo.getClickType();
-                        },
-                        get position() {
-                            return fromNativeMapPos(mapClickInfo.getClickPos());
-                        }
-                    });
-                }
+                this.sendEvent<MapClickInfo>(MapClickedEvent, {
+                    android: mapClickInfo,
+                    get clickInfo() {
+                        return {
+                            get duration(): number {
+                                return mapClickInfo.getClickInfo().getDuration();
+                            }
+                        };
+                    },
+                    get clickType(): ClickType {
+                        // This will return an integer value that can be compared with the actual enum
+                        return mapClickInfo.getClickType().swigValue();
+                    },
+                    get position() {
+                        return fromNativeMapPos(mapClickInfo.getClickPos());
+                    }
+                });
             }
         });
         this.nativeViewProtected.listener = listener;

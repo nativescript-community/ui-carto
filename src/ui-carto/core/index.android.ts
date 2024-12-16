@@ -2,23 +2,12 @@ import { BaseNative } from '../BaseNative';
 import { AltitudeKey, DefaultLatLonKeys, GenericMapPos, LatitudeKey, LongitudeKey, MapVec, ScreenBounds, ScreenPos } from './index.common';
 export * from './index.common';
 
-export const ClickType = {
-    get SINGLE() {
-        return com.carto.ui.ClickType.CLICK_TYPE_SINGLE;
-    },
-    get LONG() {
-        return com.carto.ui.ClickType.CLICK_TYPE_LONG;
-    },
-    get DOUBLE() {
-        return com.carto.ui.ClickType.CLICK_TYPE_DOUBLE;
-    },
-    get DUAL() {
-        return com.carto.ui.ClickType.CLICK_TYPE_DUAL;
-    }
-};
-
 export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<com.carto.core.MapBounds, {}> {
-    constructor(public northeast?: GenericMapPos<T>, public southwest?: GenericMapPos<T>, native?: com.carto.core.MapBounds) {
+    constructor(
+        public northeast?: GenericMapPos<T>,
+        public southwest?: GenericMapPos<T>,
+        native?: com.carto.core.MapBounds
+    ) {
         super(undefined, native);
     }
     createNative() {
