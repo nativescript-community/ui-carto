@@ -141,7 +141,7 @@ export abstract class BaseVectorTileLayer<T extends com.carto.layers.VectorTileL
             };
             return (
                 this.listener.onVectorTileClicked.call(this.listener, {
-                    clickType: info.getClickType(),
+                    clickType: info.getClickType().swigValue(),
                     layer: this,
                     feature: geoFeature,
                     featureId: geoFeature.id,
@@ -223,7 +223,7 @@ export abstract class BaseVectorLayer<T extends com.carto.layers.VectorLayer, U 
             }
             return (
                 this.elementListener.onVectorElementClicked.call(this.elementListener, {
-                    clickType: info.getClickType(),
+                    clickType: info.getClickType().swigValue(),
                     layer: this,
                     element,
                     native: nElement,

@@ -57,7 +57,7 @@ export abstract class RasterTileLayerCommon<NativeClass extends com.carto.layers
             }
             return (
                 this.clickListener.onRasterTileClicked.call(this.clickListener, {
-                    clickType: info.getClickType(),
+                    clickType: info.getClickType().swigValue(),
                     layer: this,
                     nearestColor: new Color(info.getNearestColor().getARGB()),
                     interpolatedColor: new Color(info.getInterpolatedColor().getARGB()),
