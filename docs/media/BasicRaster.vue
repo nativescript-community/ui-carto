@@ -16,13 +16,19 @@
 import { HTTPTileDataSource } from '@nativescript-community/ui-carto/datasources/http';
 import { RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
 import { CartoMap, MapEventData } from '@nativescript-community/ui-carto/ui';
+import Vue from 'nativescript-vue';
+import { Component } from 'vue-property-decorator';
 
-export default {
-    data(){
-        return {title:''}
-    },
-    methods:{
-        onMapReady(e: MapEventData) {
+@Component({})
+export default class BasicRaster extends Vue {
+    title: string;
+
+    destroyed() {
+        setTimeout(function () {
+            __collect();
+        }, 2000);
+    }
+    onMapReady(e: MapEventData) {
         const mapView = e.object as CartoMap;
 
         mapView.setFocusPos({ longitude: 6, latitude: 45 }, 0);
@@ -39,8 +45,6 @@ export default {
         });
         mapView.addLayer(rasterLayer);
     }
-    }
-    
 }
 </script>
 
