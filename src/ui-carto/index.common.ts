@@ -1,7 +1,8 @@
 /* eslint-disable no-redeclare */
 import { ImageAsset, ImageSource, Utils, knownFolders, path } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
-import { fromNativeMapRange, toNativeMapRange } from './utils';
+import { fromNativeMapRange, nativeVectorToArray, toNativeMapRange } from './utils';
+import { arrayToNativeVector } from './utils/index.android';
 
 function createGetter(key: string, options: NativePropertyOptions) {
     const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
@@ -66,6 +67,20 @@ export function nativeMapRangeProperty(...args) {
             converter: {
                 fromNative: fromNativeMapRange,
                 toNative: toNativeMapRange
+            }
+        },
+        ...args
+    );
+}
+
+export function nativeStringListProperty(target: any, k?, desc?: PropertyDescriptor): any;
+export function nativeStringListProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
+export function nativeStringListProperty(...args) {
+    return nativeProperty(
+        {
+            converter: {
+                fromNative: nativeVectorToArray,
+                toNative: arrayToNativeVector
             }
         },
         ...args

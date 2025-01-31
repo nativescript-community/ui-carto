@@ -27,6 +27,7 @@ export interface VectorTileSearchServiceOptions extends SearchServiceOptions {
     decoder?: VectorTileDecoder;
     minZoom?: number;
     maxZoom?: number;
+    maxResults?: number;
     layers?: string[];
     preventDuplicates?: boolean;
     sortByDistance?: boolean;
@@ -40,6 +41,7 @@ export class VectorTileSearchService extends BaseNative<any, VectorTileSearchSer
     layers: string[];
     preventDuplicates: boolean;
     sortByDistance: boolean;
+    maxResults?: number;
     findFeatures<T = DefaultLatLonKeys>(options: SearchRequest<T>, callback?: (res: VectorTileFeatureCollection<T>) => void): VectorTileFeatureCollection<T>;
 }
 

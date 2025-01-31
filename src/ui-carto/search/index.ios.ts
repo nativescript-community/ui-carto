@@ -1,4 +1,4 @@
-import { nativeProperty } from '../index.common';
+import { nativeProperty, nativeStringListProperty } from '../index.common';
 import { BaseNative } from '../BaseNative';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
@@ -8,6 +8,11 @@ import { geometryFromArgs } from '..';
 export class VectorTileSearchService extends BaseNative<AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
     @nativeProperty maxZoom: number;
+    @nativeProperty maxResults: number;
+    @nativeProperty sortByDistance: boolean;
+    @nativeProperty preventDuplicates: boolean;
+    @nativeStringListProperty layers: string[];
+
     createNative(options: VectorTileSearchServiceOptions) {
         if (options.layer) {
             const layer = options.layer.getNative() as NTVectorTileLayer;
@@ -39,14 +44,6 @@ export class VectorTileSearchService extends BaseNative<AKVectorTileSearchServic
         } else {
             return new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
         }
-    }
-    set layers(value: string | string[]) {
-        const array = Array.isArray(value) ? value : value.split('');
-        const vector = NTStringVector.alloc().init();
-        for (let index = 0; index < array.length; index++) {
-            vector.add(array[index]);
-        }
-        this.native.setLayers(vector);
     }
 }
 

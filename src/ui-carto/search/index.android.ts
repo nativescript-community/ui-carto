@@ -1,4 +1,4 @@
-import { nativeProperty } from '../index.common';
+import { nativeProperty, nativeStringListProperty } from '../index.common';
 import { BaseNative } from '../BaseNative';
 import { toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
@@ -8,8 +8,11 @@ import { geometryFromArgs } from '..';
 export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
     @nativeProperty maxZoom: number;
+    @nativeProperty maxResults: number;
     @nativeProperty sortByDistance: boolean;
     @nativeProperty preventDuplicates: boolean;
+    @nativeStringListProperty layers: string[];
+
     createNative(options: VectorTileSearchServiceOptions) {
         if (options.layer) {
             const layer = options.layer.getNative() as com.carto.layers.VectorTileLayer;
@@ -49,15 +52,6 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
             return null;
         }
         return new VectorTileFeatureCollection(this.getNative().findFeatures(nRequest));
-    }
-
-    set layers(value: string | string[]) {
-        const array = Array.isArray(value) ? value : value.split('');
-        const vector = new com.carto.core.StringVector();
-        for (let index = 0; index < array.length; index++) {
-            vector.add(array[index]);
-        }
-        this.native.setLayers(vector);
     }
 }
 
