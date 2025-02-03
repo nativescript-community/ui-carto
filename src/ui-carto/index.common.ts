@@ -27,8 +27,9 @@ function createSetter(key, options: NativePropertyOptions) {
         if (this['_' + key] === newVal) {
             return;
         }
-        this['_' + key] = this.options[key] = newVal;
+        this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
+            this['_' + key] = newVal;
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
             this.getNative()[nativeSetterName](actualVal);
             this.mBuildStyle = null;
