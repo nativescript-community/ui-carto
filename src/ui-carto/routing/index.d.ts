@@ -103,6 +103,7 @@ export interface ValhallaOnlineRoutingServiceOptions extends ValhallaRoutingServ
     customServiceURL?: string;
 }
 export class ValhallaOnlineRoutingService extends ValhallaRoutingService<any, ValhallaOnlineRoutingServiceOptions> {
+    customServiceURL: string;
     profile: ValhallaProfile;
 }
 
