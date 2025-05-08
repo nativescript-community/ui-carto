@@ -2,7 +2,7 @@
 import { CSSType, ContentView } from '@nativescript/core';
 import { BaseNative } from '../BaseNative';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
-import { Layer, TileLayer } from '../layers';
+import { Layer } from '../layers';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { MapInfo } from '.';
 
@@ -88,15 +88,25 @@ export abstract class Layers<T = any> extends BaseNative<T, {}> {
         this.mLayerArray[index] = layer;
     }
 
-    removeAll(layers: Layer<any, any>[]) {
-        layers.forEach((layer) => this.remove(layer));
+    removeAll(layers: Layer<any, any>[]): boolean {
+        let hasRemovedAll: boolean = true;
+
+        layers.forEach((layer) => {
+            if (!this.remove(layer)) {
+                if (hasRemovedAll) {
+                    hasRemovedAll = false;
+                }
+            }
+        });
+        return hasRemovedAll;
     }
 
-    remove(layer: Layer<any, any>) {
+    remove(layer: Layer<any, any>): boolean {
         const index = this.mLayerArray.indexOf(layer);
         if (index >= 1) {
             this.mLayerArray.splice(index, 1);
         }
+        return true;
     }
 
     add(layer: Layer<any, any>) {
@@ -186,7 +196,7 @@ export abstract class CartoViewBase extends ContentView {
         return this.mLayers;
     }
 
-    addLayer(layer: TileLayer<any, any>, index?: number) {
+    addLayer(layer: Layer<any, any>, index?: number) {
         const layersInstance = this.getLayers();
         if (layersInstance) {
             if (index !== undefined && index <= layersInstance.count()) {
@@ -197,14 +207,14 @@ export abstract class CartoViewBase extends ContentView {
         }
     }
 
-    removeLayer(layer: TileLayer<any, any>) {
+    removeLayer(layer: Layer<any, any>) {
         const layersInstance = this.getLayers();
         if (layersInstance) {
             layersInstance.remove(layer);
         }
     }
 
-    removeAllLayers(layers: TileLayer<any, any>[]) {
+    removeAllLayers(layers: Layer<any, any>[]) {
         const layersInstance = this.getLayers();
         if (layersInstance) {
             layersInstance.removeAll(layers);

@@ -317,12 +317,12 @@ export class Layers extends BaseLayers<NTLayers> {
     }
     insert(index: number, layer: Layer<any, any>) {
         super.insert(index, layer);
-        return this.native.insertLayer(index, layer.getNative());
+        this.native.insertLayer(index, layer.getNative());
     }
     //@ts-ignore
     set(index: number, layer: Layer<any, any>) {
         super.set(index, layer);
-        return this.native.setLayer(index, layer.getNative());
+        this.native.setLayer(index, layer.getNative());
     }
 
     remove(layer: Layer<any, any>) {
@@ -331,7 +331,7 @@ export class Layers extends BaseLayers<NTLayers> {
     }
     add(layer: Layer<any, any>) {
         super.add(layer);
-        return this.native.add(layer.getNative());
+        this.native.add(layer.getNative());
     }
     //@ts-ignore
     get(index: number) {
@@ -342,7 +342,7 @@ export class Layers extends BaseLayers<NTLayers> {
     }
     clear() {
         super.clear();
-        return this.native.clear();
+        this.native.clear();
     }
 
     // public getNative() {

@@ -294,12 +294,12 @@ export class Layers extends BaseLayers<com.carto.components.Layers> {
     }
     insert(index: number, layer: Layer<any, any>) {
         super.insert(index, layer);
-        return this.native.insert(index, layer.getNative());
+        this.native.insert(index, layer.getNative());
     }
     //@ts-ignore
     set(index: number, layer: Layer<any, any>) {
         super.set(index, layer);
-        return this.native.set(index, layer.getNative());
+        this.native.set(index, layer.getNative());
     }
     remove(layer: Layer<any, any>) {
         super.remove(layer);
@@ -307,7 +307,7 @@ export class Layers extends BaseLayers<com.carto.components.Layers> {
     }
     add(layer: Layer<any, any>) {
         super.add(layer);
-        return this.native.add(layer.getNative());
+        this.native.add(layer.getNative());
     }
     //@ts-ignore
     get(index: number) {
@@ -318,7 +318,7 @@ export class Layers extends BaseLayers<com.carto.components.Layers> {
     }
     clear() {
         super.clear();
-        return this.native.clear();
+        this.native.clear();
     }
 
     // public getNative() {
