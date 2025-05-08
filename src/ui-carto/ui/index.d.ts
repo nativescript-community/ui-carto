@@ -232,6 +232,7 @@ export class CartoMap<T = DefaultLatLonKeys> extends View {
     bearing: number;
     tilt: number;
     restrictedPanning: boolean;
+    readonly mapView: any;
     readonly metersPerPixel: number;
 
     addLayer(layer: Layer<any, any>, index?: number);

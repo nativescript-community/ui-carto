@@ -146,18 +146,22 @@ class NTRendererCaptureListenerImpl extends AKRendererCaptureListener {
 }
 export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     static projection = new EPSG4326();
+
     nativeProjection: NTProjection;
     mProjection: IProjection;
 
     public static setRunOnMainThread(value: boolean) {
         runOnMainThread = value;
     }
-    get mapView() {
-        return this.nativeViewProtected as AKMapView;
+
+    override get mapView(): AKMapView {
+        return super.mapView;
     }
+
     get projection() {
         return this.mProjection;
     }
+
     set projection(proj: IProjection) {
         this.mProjection = proj;
         this.nativeProjection = this.mProjection.getNative();
@@ -186,7 +190,6 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
 
     disposeNativeView(): void {
         this.mapView.setMapEventListener(null);
-        this.mapView.getLayers().clear();
         this.nativeProjection = null;
         this.mProjection = null;
         super.disposeNativeView();
@@ -259,38 +262,10 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         this.mapView.getOptions().setRestrictedPanning(value);
     }
 
-    getLayers() {
-        if (this.mapView) {
-            return new Layers(this.mapView.getLayers());
-        }
-        return null;
-    }
-    addLayer(layer: TileLayer<any, any>, index?: number) {
-        if (this.mapView) {
-            const native: NTTileLayer = layer.getNative();
-            if (!!native) {
-                const layers = this.mapView.getLayers();
-                if (index !== undefined && index <= layers.count()) {
-                    layers.insertLayer(index, native);
-                } else {
-                    layers.add(native);
-                }
-            }
-        }
+    createLayersInstance(): Layers {
+        return new Layers(this.mapView.getLayers());
     }
 
-    removeLayer(layer: TileLayer<any, any>) {
-        if (this.mapView) {
-            this.mapView.getLayers().remove(layer.getNative());
-        }
-    }
-    removeAllLayers(layers: TileLayer<any, any>[]) {
-        if (this.mapView) {
-            const vector = NTLayerVector.alloc().init();
-            layers.forEach((l) => vector.add(l.getNative()));
-            this.mapView.getLayers().removeAll(vector);
-        }
-    }
     clearAllCaches() {
         this.mapView && this.mapView.clearAllCaches();
     }
@@ -341,36 +316,36 @@ export class Layers extends BaseLayers<NTLayers> {
         return this.native.count();
     }
     insert(index: number, layer: Layer<any, any>) {
+        super.insert(index, layer);
         return this.native.insertLayer(index, layer.getNative());
     }
     //@ts-ignore
     set(index: number, layer: Layer<any, any>) {
+        super.set(index, layer);
         return this.native.setLayer(index, layer.getNative());
     }
-    removeAll(layers: Layer<any, any>[]) {
-        layers.forEach(this.remove);
-    }
+
     remove(layer: Layer<any, any>) {
+        super.remove(layer);
         return this.native.remove(layer.getNative());
     }
     add(layer: Layer<any, any>) {
+        super.add(layer);
         return this.native.add(layer.getNative());
     }
     //@ts-ignore
     get(index: number) {
         return this.native.get(index);
     }
-    addAll(layers: Layer<any, any>[]) {
-        layers.forEach(this.add);
-    }
-    setAll(layers: Layer<any, any>[]) {
-        this.clear();
-        this.addAll(layers);
-    }
     getAll() {
         return nativeVectorToArray(this.native.getAll());
     }
     clear() {
+        super.clear();
         return this.native.clear();
     }
+
+    // public getNative() {
+    //     return this.native;
+    // }
 }

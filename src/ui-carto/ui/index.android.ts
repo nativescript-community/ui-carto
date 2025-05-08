@@ -55,9 +55,10 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
     };
     mProjection: IProjection;
 
-    get mapView() {
-        return this.nativeViewProtected;
+    override get mapView(): com.akylas.carto.additions.AKMapView {
+        return super.mapView;
     }
+
     get projection() {
         return this.mProjection;
     }
@@ -229,42 +230,10 @@ export class CartoMap<T = DefaultLatLonKeys> extends CartoViewBase {
         this.mapView.getOptions().setRestrictedPanning(value);
     }
 
-    getLayers() {
-        if (this.mapView) {
-            return new Layers(this.mapView.getLayers());
-        }
-        return null;
-    }
-    addLayer(layer: TileLayer<any, any>, index?: number) {
-        if (this.mapView) {
-            const native: com.carto.layers.TileLayer = layer.getNative();
-            if (!!native) {
-                try {
-                    const layers = this.mapView.getLayers();
-                    if (index !== undefined && index < layers.count()) {
-                        layers.insert(index, native);
-                    } else {
-                        layers.add(native);
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-        }
+    createLayersInstance(): Layers {
+        return new Layers(this.mapView.getLayers());
     }
 
-    removeLayer(layer: TileLayer<any, any>) {
-        if (this.mapView) {
-            this.mapView.getLayers().remove(layer.getNative());
-        }
-    }
-    removeAllLayers(layers: TileLayer<any, any>[]) {
-        if (this.mapView) {
-            const vector = new com.carto.layers.LayerVector();
-            layers.forEach((l) => vector.add(l.getNative()));
-            this.mapView.getLayers().removeAll(vector);
-        }
-    }
     clearAllCaches() {
         this.mapView && this.mapView.clearAllCaches();
     }
@@ -324,36 +293,31 @@ export class Layers extends BaseLayers<com.carto.components.Layers> {
         return this.native.count();
     }
     insert(index: number, layer: Layer<any, any>) {
+        super.insert(index, layer);
         return this.native.insert(index, layer.getNative());
     }
     //@ts-ignore
     set(index: number, layer: Layer<any, any>) {
+        super.set(index, layer);
         return this.native.set(index, layer.getNative());
     }
-    removeAll(layers: Layer<any, any>[]) {
-        layers.forEach(this.remove);
-    }
     remove(layer: Layer<any, any>) {
+        super.remove(layer);
         return this.native.remove(layer.getNative());
     }
     add(layer: Layer<any, any>) {
+        super.add(layer);
         return this.native.add(layer.getNative());
     }
     //@ts-ignore
     get(index: number) {
         return this.native.get(index);
     }
-    addAll(layers: Layer<any, any>[]) {
-        layers.forEach(this.add);
-    }
-    setAll(layers: Layer<any, any>[]) {
-        this.clear();
-        this.addAll(layers);
-    }
     getAll() {
         return nativeVectorToArray(this.native.getAll());
     }
     clear() {
+        super.clear();
         return this.native.clear();
     }
 
