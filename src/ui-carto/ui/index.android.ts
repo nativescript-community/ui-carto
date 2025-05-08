@@ -302,8 +302,11 @@ export class Layers extends BaseLayers<com.carto.components.Layers> {
         this.native.set(index, layer.getNative());
     }
     remove(layer: Layer<any, any>) {
-        super.remove(layer);
-        return this.native.remove(layer.getNative());
+        const removed = this.native.remove(layer.getNative());
+        if (removed) {
+            super.remove(layer);
+        }
+        return removed;
     }
     add(layer: Layer<any, any>) {
         super.add(layer);

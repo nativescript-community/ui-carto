@@ -105,8 +105,9 @@ export abstract class Layers<T = any> extends BaseNative<T, {}> {
         const index = this.mLayerArray.indexOf(layer);
         if (index >= 1) {
             this.mLayerArray.splice(index, 1);
+            return true;
         }
-        return true;
+        return false;
     }
 
     add(layer: Layer<any, any>) {
