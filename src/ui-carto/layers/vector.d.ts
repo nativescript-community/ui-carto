@@ -35,7 +35,7 @@ export interface VectorTileEventData<T = DefaultLatLonKeys> {
 }
 export interface VectorElementEventData<T = DefaultLatLonKeys> {
     clickType: ClickType;
-    layer: BaseVectorTileLayer<any, any>;
+    layer: BaseVectorLayer<any, any>;
     native: any;
     // featureId: number;
     // featureData: { [k: string]: string };
