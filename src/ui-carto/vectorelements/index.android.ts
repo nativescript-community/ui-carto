@@ -50,7 +50,7 @@ export abstract class BaseVectorElement<T extends com.carto.vectorelements.Vecto
         if (this.native) {
             const theMap = new com.carto.core.StringVariantMap();
             for (const key in value) {
-                theMap.set(key, new com.carto.core.Variant(value[key]));
+                theMap.set(key, JSVariantToNative(value[key]));
             }
             this.native.setMetaData(theMap);
         }

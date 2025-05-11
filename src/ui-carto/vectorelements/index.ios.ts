@@ -49,7 +49,7 @@ export abstract class BaseVectorElement<T extends NTVectorElement, U extends Vec
         if (this.native) {
             const theMap = NTStringVariantMap.alloc().init();
             for (const key in value) {
-                theMap.setX(key, NTVariant.alloc().initWithString(value[key]));
+                theMap.setX(key, JSVariantToNative(value[key]));
             }
             this.native.setMetaData(theMap);
         }
