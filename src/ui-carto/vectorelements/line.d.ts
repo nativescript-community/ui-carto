@@ -1,5 +1,5 @@
 import { Projection } from '../projections';
-import { MapPosVector } from '../core';
+import { MapBounds, MapPosVector } from '../core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
 import { Color } from '@nativescript/core';
 import { Geometry, LineGeometry } from '../geometry';

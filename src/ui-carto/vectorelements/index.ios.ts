@@ -131,32 +131,22 @@ export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElem
     containsMetaDataKey(key: string): boolean {
         return this.native ? this.native.containsMetaDataKey(key) : false;
     }
-
-    getBounds() {
-        if (this.native) {
-            return fromNativeMapBounds(this.native.getBounds());
-        }
-        return null;
-    }
-
-    getGeometry(): any {
-        if (this.native) {
-            return this.native.getGeometry();
-        }
-        return null;
-    }
-
     getMetadataElement(key: string): { [k: string]: string } {
         if (this.native) {
             return nativeVariantToJS(this.native.getMetaDataElement(key));
         }
         return undefined;
     }
-
     setMetadataElement(key: string, element: { [k: string]: string }): void {
         if (this.native) {
             this.native.setMetaDataElementElement(key, JSVariantToNative(element));
         }
+    }
+    getGeometry() {
+        return this.getNative().getGeometry();
+    }
+    getBounds() {
+        return fromNativeMapBounds(this.getNative().getBounds());
     }
 
     buildStyle() {}

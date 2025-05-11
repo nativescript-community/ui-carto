@@ -115,7 +115,7 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
             this.rebuildStyle();
         }
     }
-    get geometry(): LineGeometry {
+    get geometry(): com.carto.geometry.LineGeometry {
         return this.getGeometry();
     }
     set geometry(geometry: LineGeometry) {
@@ -130,24 +130,12 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
         }
     }
     getPoses() {
-        if (this.positions) {
-            return this.positions;
-        }
-        if (this.native) {
-            return this.native.getPoses();
-        }
-        return null;
+        return this.positions || this.getNative().getPoses();
+    }
+    getGeometry() {
+        return this.getNative().getGeometry();
     }
     getBounds() {
-        if (this.native) {
-            return fromNativeMapBounds(this.native.getBounds());
-        }
-        return null;
-    }
-    getGeometry(): any {
-        if (this.native) {
-            return this.native.getGeometry();
-        }
-        return null;
+        return fromNativeMapBounds(this.getNative().getBounds());
     }
 }

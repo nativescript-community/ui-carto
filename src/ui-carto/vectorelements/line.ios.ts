@@ -123,7 +123,7 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
     getPoses() {
         return this.positions;
     }
-    get geometry(): LineGeometry {
+    get geometry(): NTLineGeometry {
         return this.getGeometry();
     }
     set geometry(geometry: LineGeometry) {
@@ -131,16 +131,10 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
             this.native.setGeometry(geometryFromArgs(geometry));
         }
     }
-    getBounds() {
-        if (this.native) {
-            return fromNativeMapBounds(this.native.getBounds());
-        }
-        return null;
+    getGeometry() {
+        return this.getNative().getGeometry();
     }
-    getGeometry(): any {
-        if (this.native) {
-            return this.native.getGeometry();
-        }
-        return null;
+    getBounds() {
+        return fromNativeMapBounds(this.getNative().getBounds());
     }
 }
