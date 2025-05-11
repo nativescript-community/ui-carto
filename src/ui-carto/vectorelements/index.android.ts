@@ -2,11 +2,12 @@ import { AnimationStyle, BillboardStyleBuilderOptions, LineVectorElementOptions,
 // import { BaseVectorElement } from './vectorelements.common';
 import { nativeProperty } from '../index.common';
 import { BaseNative } from '../BaseNative';
-import { nativeMapToJS } from '../utils';
+import { JSVariantToNative, nativeMapToJS, nativeVariantToJS } from '../utils';
 import { Projection } from '../projections';
-import { MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
+import { MapPos, MapPosVector, fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
+import { Geometry } from '../geometry';
 export { BaseVectorElementStyleBuilder };
 
 export const BillboardOrientation = {
@@ -34,16 +35,17 @@ export const BillboardScaling = {
 };
 
 export abstract class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
+    @nativeProperty id: number;
     @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
     }
+
     get metaData(): { [k: string]: string } {
         if (this.native) {
             return nativeMapToJS(this.native.getMetaData());
-        } else {
-            return this.options.metaData;
         }
+        return this.options.metaData;
     }
     set metaData(value: { [k: string]: string }) {
         this.options.metaData = value;
@@ -55,7 +57,40 @@ export abstract class BaseVectorElement<T extends com.carto.vectorelements.Vecto
             this.native.setMetaData(theMap);
         }
     }
+
+    containsMetaDataKey(key: string): boolean {
+        return this.native ? this.native.containsMetaDataKey(key) : false;
+    }
+
+    getBounds() {
+        if (this.native) {
+            return fromNativeMapBounds(this.native.getBounds());
+        }
+        return null;
+    }
+
+    getGeometry(): any {
+        if (this.native) {
+            return this.native.getGeometry();
+        }
+        return null;
+    }
+
+    getMetadataElement(key: string): { [k: string]: string } {
+        if (this.native) {
+            return nativeVariantToJS(this.native.getMetaDataElement(key));
+        }
+        return undefined;
+    }
+
+    setMetadataElement(key: string, element: { [k: string]: string }): void {
+        if (this.native) {
+            this.native.setMetaDataElement(key, JSVariantToNative(element));
+        }
+    }
+
     abstract buildStyle();
+
     rebuildStyle() {
         (this.native as any).setStyle(this.buildStyle());
     }

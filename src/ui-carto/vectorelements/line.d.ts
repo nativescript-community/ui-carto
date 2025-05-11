@@ -1,5 +1,5 @@
 import { Projection } from '../projections';
-import { MapBounds, MapPos, MapPosVector } from '../core';
+import { MapPosVector } from '../core';
 import { BaseLineVectorElement, BaseVectorElementStyleBuilder, LineVectorElementOptions, VectorElementOptions } from '.';
 import { Color } from '@nativescript/core';
 import { Geometry, LineGeometry } from '../geometry';
@@ -52,5 +52,4 @@ export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Line
     setPoses(positions: MapPosVector<T> | GenericMapPos<T>[]);
     getPoses(): MapPosVector<T> | GenericMapPos<T>[];
     getGeometry(): LineGeometry<T>;
-    getBounds(): MapBounds<T>;
 }
