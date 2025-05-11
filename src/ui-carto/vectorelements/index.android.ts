@@ -35,7 +35,6 @@ export const BillboardScaling = {
 };
 
 export abstract class BaseVectorElement<T extends com.carto.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
-    @nativeProperty id: number;
     @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
@@ -55,37 +54,6 @@ export abstract class BaseVectorElement<T extends com.carto.vectorelements.Vecto
                 theMap.set(key, new com.carto.core.Variant(value[key]));
             }
             this.native.setMetaData(theMap);
-        }
-    }
-
-    containsMetaDataKey(key: string): boolean {
-        return this.native ? this.native.containsMetaDataKey(key) : false;
-    }
-
-    getBounds() {
-        if (this.native) {
-            return fromNativeMapBounds(this.native.getBounds());
-        }
-        return null;
-    }
-
-    getGeometry(): any {
-        if (this.native) {
-            return this.native.getGeometry();
-        }
-        return null;
-    }
-
-    getMetadataElement(key: string): { [k: string]: string } {
-        if (this.native) {
-            return nativeVariantToJS(this.native.getMetaDataElement(key));
-        }
-        return undefined;
-    }
-
-    setMetadataElement(key: string, element: { [k: string]: string }): void {
-        if (this.native) {
-            this.native.setMetaDataElement(key, JSVariantToNative(element));
         }
     }
 
@@ -153,6 +121,39 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<com.carto.vectorelements.VectorElement, VectorElementOptions> {
+    @nativeProperty id: number;
+
+    containsMetaDataKey(key: string): boolean {
+        return this.native ? this.native.containsMetaDataKey(key) : false;
+    }
+
+    getBounds() {
+        if (this.native) {
+            return fromNativeMapBounds(this.native.getBounds());
+        }
+        return null;
+    }
+
+    getGeometry(): any {
+        if (this.native) {
+            return this.native.getGeometry();
+        }
+        return null;
+    }
+
+    getMetadataElement(key: string): { [k: string]: string } {
+        if (this.native) {
+            return nativeVariantToJS(this.native.getMetaDataElement(key));
+        }
+        return undefined;
+    }
+
+    setMetadataElement(key: string, element: { [k: string]: string }): void {
+        if (this.native) {
+            this.native.setMetaDataElement(key, JSVariantToNative(element));
+        }
+    }
+
     buildStyle() {}
 }
 

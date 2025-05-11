@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '..';
-import { MapBounds, MapPos, MapPosVector } from '../core';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core';
 import { LineGeometry } from '../geometry';
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { BaseLineVectorElement } from './index.ios';
@@ -130,5 +130,17 @@ export class Line extends BaseLineVectorElement<NTLine, LineOptions> {
         if (this.native) {
             this.native.setGeometry(geometryFromArgs(geometry));
         }
+    }
+    getBounds() {
+        if (this.native) {
+            return fromNativeMapBounds(this.native.getBounds());
+        }
+        return null;
+    }
+    getGeometry(): any {
+        if (this.native) {
+            return this.native.getGeometry();
+        }
+        return null;
     }
 }

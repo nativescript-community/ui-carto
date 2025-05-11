@@ -56,14 +56,8 @@ export class BillboardStyleBuilderOptions extends VectorElementStyleBuilderOptio
 }
 
 export abstract class BaseVectorElement<T, U extends VectorElementOptions> extends BaseNative<T, U> {
-    id?: number;
     visible?: boolean;
     metaData: { [k: string]: string };
-    getBounds(): MapBounds<DefaultLatLonKeys>;
-    getGeometry(): Geometry<DefaultLatLonKeys>;
-    getMetadataElement(key: string): { [k: string]: string };
-    setMetadataElement(key: string, element: { [k: string]: string });
-
 }
 export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
     position?: GenericMapPos<K>;
@@ -77,7 +71,13 @@ export abstract class BaseLineVectorElement<T, U extends LineVectorElementOption
     positions?: MapPosVector<K> | GenericMapPos<K>[];
     projection?: Projection;
 }
-export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {}
+export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {
+    id?: number;
+    getBounds(): MapBounds<DefaultLatLonKeys>;
+    getGeometry(): Geometry<DefaultLatLonKeys>;
+    getMetadataElement(key: string): { [k: string]: string };
+    setMetadataElement(key: string, element: { [k: string]: string }): void;
+}
 export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementStyleBuilderOptions> extends BaseNative<T, U> {
     buildStyle(): any;
 }

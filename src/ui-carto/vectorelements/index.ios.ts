@@ -33,7 +33,6 @@ export const BillboardScaling = {
 };
 
 export abstract class BaseVectorElement<T extends NTVectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
-    @nativeProperty id: number;
     @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
@@ -53,37 +52,6 @@ export abstract class BaseVectorElement<T extends NTVectorElement, U extends Vec
                 theMap.setX(key, NTVariant.alloc().initWithString(value[key]));
             }
             this.native.setMetaData(theMap);
-        }
-    }
-
-    containsMetaDataKey(key: string): boolean {
-        return this.native ? this.native.containsMetaDataKey(key) : false;
-    }
-
-    getBounds() {
-        if (this.native) {
-            return fromNativeMapBounds(this.native.getBounds());
-        }
-        return null;
-    }
-
-    getGeometry(): any {
-        if (this.native) {
-            return this.native.getGeometry();
-        }
-        return null;
-    }
-
-    getMetadataElement(key: string): { [k: string]: string } {
-        if (this.native) {
-            return nativeVariantToJS(this.native.getMetaDataElement(key));
-        }
-        return undefined;
-    }
-
-    setMetadataElement(key: string, element: { [k: string]: string }): void {
-        if (this.native) {
-            this.native.setMetaDataElementElement(key, JSVariantToNative(element));
         }
     }
 
@@ -158,6 +126,39 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<NTVectorElement, VectorElementOptions> {
+    @nativeProperty id: number;
+
+    containsMetaDataKey(key: string): boolean {
+        return this.native ? this.native.containsMetaDataKey(key) : false;
+    }
+
+    getBounds() {
+        if (this.native) {
+            return fromNativeMapBounds(this.native.getBounds());
+        }
+        return null;
+    }
+
+    getGeometry(): any {
+        if (this.native) {
+            return this.native.getGeometry();
+        }
+        return null;
+    }
+
+    getMetadataElement(key: string): { [k: string]: string } {
+        if (this.native) {
+            return nativeVariantToJS(this.native.getMetaDataElement(key));
+        }
+        return undefined;
+    }
+
+    setMetadataElement(key: string, element: { [k: string]: string }): void {
+        if (this.native) {
+            this.native.setMetaDataElementElement(key, JSVariantToNative(element));
+        }
+    }
+
     buildStyle() {}
 }
 export class VectorElementVector extends BaseNative<NTVectorElementVector, any> {

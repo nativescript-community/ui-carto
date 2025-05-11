@@ -52,4 +52,5 @@ export class Line<T = DefaultLatLonKeys> extends BaseLineVectorElement<any, Line
     setPoses(positions: MapPosVector<T> | GenericMapPos<T>[]);
     getPoses(): MapPosVector<T> | GenericMapPos<T>[];
     getGeometry(): LineGeometry<T>;
+    getBounds(): MapBounds<T>;
 }

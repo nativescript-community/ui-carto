@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '..';
-import { MapBounds, MapPos, MapPosVector } from '../core';
+import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core';
 import { LineGeometry } from '../geometry';
 import { BaseLineVectorElement } from './index.android';
 import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
@@ -115,13 +115,6 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
             this.rebuildStyle();
         }
     }
-
-    setPoses(positions: MapPosVector | MapPos[]) {
-        this.positions = positions;
-        if (this.native) {
-            this.native.setPoses(mapPosVectorFromArgs(positions, this.options.ignoreAltitude));
-        }
-    }
     get geometry(): LineGeometry {
         return this.getGeometry();
     }
@@ -130,7 +123,31 @@ export class Line extends BaseLineVectorElement<com.carto.vectorelements.Line, L
             this.native.setGeometry(geometryFromArgs(geometry));
         }
     }
+    setPoses(positions: MapPosVector | MapPos[]) {
+        this.positions = positions;
+        if (this.native) {
+            this.native.setPoses(mapPosVectorFromArgs(positions, this.options.ignoreAltitude));
+        }
+    }
     getPoses() {
-        return this.positions || this.getNative().getPoses();
+        if (this.positions) {
+            return this.positions;
+        }
+        if (this.native) {
+            return this.native.getPoses();
+        }
+        return null;
+    }
+    getBounds() {
+        if (this.native) {
+            return fromNativeMapBounds(this.native.getBounds());
+        }
+        return null;
+    }
+    getGeometry(): any {
+        if (this.native) {
+            return this.native.getGeometry();
+        }
+        return null;
     }
 }
