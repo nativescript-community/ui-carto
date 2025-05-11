@@ -7,7 +7,6 @@ import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
-import { Geometry } from '../geometry';
 export { BaseVectorElementStyleBuilder };
 
 export const BillboardOrientation = {

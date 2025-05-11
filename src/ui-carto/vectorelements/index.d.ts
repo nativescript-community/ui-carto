@@ -1,7 +1,6 @@
 import { BaseNative } from '..';
-import { MapPos, MapPosVector } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapBounds, MapPos, MapPosVector } from '../core';
 import { Projection } from '../projections';
-import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 import { Geometry } from '../geometry';
 
 declare enum BillboardOrientation {

@@ -1,6 +1,6 @@
 import { Color } from '@nativescript/core';
 import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '..';
-import { fromNativeMapBounds, MapBounds, MapPos, MapPosVector } from '../core';
+import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineGeometry } from '../geometry';
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { BaseLineVectorElement } from './index.ios';
