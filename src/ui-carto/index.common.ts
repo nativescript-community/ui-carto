@@ -154,6 +154,9 @@ export function getFileName(str: string): string {
 
 export function getRelativePathToApp(str: string) {
     const filePath = getFileName(str);
+    if (!currentAppFolder) {
+         currentAppFolder = knownFolders.currentApp().path;
+    }
     const toReplace = currentAppFolder.split('/').slice(0, -1).join('/');
     if (filePath.indexOf(toReplace) === 0) {
         return filePath.replace(toReplace, '').slice(1);
