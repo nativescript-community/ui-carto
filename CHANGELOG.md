@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.12-alpha.1](https://github.com/nativescript-community/ui-carto/compare/v1.8.12-alpha.0...v1.8.12-alpha.1) (2025-06-16)
+
+### Bug Fixes
+
+* more VectorTileSearchService properties ([2e7c8ab](https://github.com/nativescript-community/ui-carto/commit/2e7c8ab3644bb7727c7bc3dfc7a98a39b2001f3a))
+* setting property on non initialized but created object would prevent the property from being applied ([a9fb500](https://github.com/nativescript-community/ui-carto/commit/a9fb500839c01482f6914f798b38815ecd701261))
+
+### Reverts
+
+* Revert "chore: test release" ([da7a61f](https://github.com/nativescript-community/ui-carto/commit/da7a61fb21fb892416ce58ca8e85a6760be62593))
+
 ## [1.8.12-alpha.0](https://github.com/nativescript-community/ui-carto/compare/v1.8.11...v1.8.12-alpha.0) (2025-01-29)
 
 ### Features
