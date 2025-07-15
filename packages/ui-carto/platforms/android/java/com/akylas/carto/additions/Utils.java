@@ -275,6 +275,7 @@ public class Utils {
             double y1 = mercator(lat1);
             double y3 = mercator(lat3);
             double[] xTry = new double[3];
+            double lastHavDist = -1;
             for (int index = 0; index < size; index++) {
                 MapPos point2 = poly.get(index);
                 double lat2 = toRadians(point2.getY());
@@ -298,7 +299,13 @@ public class Utils {
                         double latClosest = inverseMercator(yClosest);
                         double havDist = havDistance(lat3, latClosest, x3 - xClosest);
                         if (havDist < havTolerance) {
-                            return index;
+                            if (lastHavDist = -1) {
+                                lastHavDist = havDist;
+                            } else if (havDist < lastHavDist){
+                                lastHavDist = havDist;
+                            } else {
+                                return index;
+                            }
                         }
                     }
                 }
