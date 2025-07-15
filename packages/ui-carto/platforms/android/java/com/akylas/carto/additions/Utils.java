@@ -289,6 +289,7 @@ public class Utils {
                     // Also explore wrapping of x3Base around the world in both directions.
                     xTry[1] = x3Base + 2 * Math.PI;
                     xTry[2] = x3Base - 2 * Math.PI;
+                    boolean found = false;
                     for (int index2 = 0; index2 < xTry.length; index2++) {
                         double x3 = xTry[index2];
                         double dy = y2 - y1;
@@ -299,19 +300,23 @@ public class Utils {
                         double latClosest = inverseMercator(yClosest);
                         double havDist = havDistance(lat3, latClosest, x3 - xClosest);
                         if (havDist < havTolerance) {
-                            if (lastHavDist == -1) {
+                            if (lastHavDist == -1 || havDist < lastHavDist) {
                                 lastHavDist = havDist;
-                            } else if (havDist < lastHavDist){
-                                lastHavDist = havDist;
-                            } else {
-                                return index;
+                                found = true;
+                                break;
                             }
                         }
+                    }
+                    if (!found && lastHavDist != -1) {
+                        return index - 1;
                     }
                 }
                 lat1 = lat2;
                 lng1 = lng2;
                 y1 = y2;
+            }
+            if (lastHavDist != -1) {
+                return size - 1;
             }
         }
         return -1;
