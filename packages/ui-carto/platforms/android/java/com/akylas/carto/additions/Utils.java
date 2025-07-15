@@ -299,7 +299,7 @@ public class Utils {
                         double latClosest = inverseMercator(yClosest);
                         double havDist = havDistance(lat3, latClosest, x3 - xClosest);
                         if (havDist < havTolerance) {
-                            if (lastHavDist = -1) {
+                            if (lastHavDist == -1) {
                                 lastHavDist = havDist;
                             } else if (havDist < lastHavDist){
                                 lastHavDist = havDist;
