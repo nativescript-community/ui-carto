@@ -198,6 +198,7 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
     mCartoDirPath: string;
     loadUsingNS = false;
     mInterface: com.akylas.carto.additions.AKAssetPackage.Interface;
+    mBaseAssetPackage: com.akylas.carto.additions.AKAssetPackage;
     constructor(options) {
         super(options);
 
@@ -213,6 +214,7 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
     dispose(): void {
         this.mInterface = null;
         this.mAssetNames = null;
+        this.mBaseAssetPackage = null;
         super.dispose();
     }
     createNative(options: DirAssetPackageOptions) {
@@ -224,8 +226,16 @@ export class DirAssetPackage extends BaseNative<com.akylas.carto.additions.AKAss
                 getAssetNames: this.getAssetNames.bind(this),
                 loadAsset: this.loadAsset.bind(this)
             });
-            const result = new com.akylas.carto.additions.AKAssetPackage(this.mInterface);
 
+            if (options.basePack) {
+                this.mBaseAssetPackage = options.basePack.getNative();
+            }
+            let result: com.akylas.carto.additions.AKAssetPackage;
+            if (this.mBaseAssetPackage) {
+                result = new com.akylas.carto.additions.AKAssetPackage(this.mInterface, this.mBaseAssetPackage);
+            } else {
+                result = new com.akylas.carto.additions.AKAssetPackage(this.mInterface);
+            }
             this.loadUsingNS = !!options.loadUsingNS;
             return result;
         } else {

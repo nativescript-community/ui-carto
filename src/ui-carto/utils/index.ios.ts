@@ -116,12 +116,14 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
 @NativeClass
 export class NTDirAssetPackageImpl extends NTAssetPackage {
     assetNames: NTStringVector;
+    mBaseAssetPackage: NTAssetPackage;
     dirPath: string;
     cartoDirPath: string;
     loadUsingNS = false;
 
-    public static new(): NTDirAssetPackageImpl {
+    public static initWithBasePackage(basePackage): NTDirAssetPackageImpl {
         const result = NTDirAssetPackageImpl.alloc().init() as any;
+        result.mBaseAssetPackage = basePackage;
         return result;
     }
     public initialize(options: DirAssetPackageOptions) {
@@ -135,13 +137,18 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
             return null;
         }
         let result: NTBinaryData;
-        if (this.loadUsingNS) {
-            const data = File.fromPath(path.join(this.dirPath, name)).readSync() as NSData;
-            const arr = new ArrayBuffer(data.length);
-            data.getBytes(arr as any);
-            result = NTBinaryData.alloc().initWithDataPtrSize(arr as any, data.length);
-        } else {
-            result = NTAssetUtils.loadAsset(path.join(this.cartoDirPath, name));
+        if (this.mBaseAssetPackage != null) {
+            result = this.mBaseAssetPackage.loadAsset(name);
+        }
+        if (!result) {
+            if (this.loadUsingNS) {
+                const data = File.fromPath(path.join(this.dirPath, name)).readSync() as NSData;
+                const arr = new ArrayBuffer(data.length);
+                data.getBytes(arr as any);
+                result = NTBinaryData.alloc().initWithDataPtrSize(arr as any, data.length);
+            } else {
+                result = NTAssetUtils.loadAsset(path.join(this.cartoDirPath, name));
+            }
         }
         return result;
     }
@@ -149,10 +156,14 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
         if (this.assetNames == null) {
             try {
                 this.assetNames = NTStringVector.alloc().init();
-                const test = [];
+                if (this.mBaseAssetPackage) {
+                    const result2 = this.mBaseAssetPackage.getAssetNames();
+                    for (let i = 0; i < result2.size(); i++) {
+                        this.assetNames.add(result2.get(i));
+                    }
+                }
                 walkDir(this.dirPath, (fileRelPath: string) => {
                     this.assetNames.add(fileRelPath);
-                    test.push(fileRelPath);
                 });
             } catch (e) {}
         }
@@ -161,15 +172,23 @@ export class NTDirAssetPackageImpl extends NTAssetPackage {
 }
 
 export class DirAssetPackage extends BaseNative<NTDirAssetPackageImpl, DirAssetPackageOptions> {
+    mBaseAssetPackage: NTAssetPackage;
     createNative(options: DirAssetPackageOptions) {
         if (Folder.exists(getFileName(options.dirPath))) {
-            const result = NTDirAssetPackageImpl.new();
+            if (options.basePack) {
+                this.mBaseAssetPackage = options.basePack.getNative();
+            }
+            const result = NTDirAssetPackageImpl.initWithBasePackage(this.mBaseAssetPackage);
             result.initialize(options);
             return result;
         } else {
             console.error(`could not find dir: ${options.dirPath}`);
             return null;
         }
+    }
+    dispose(): void {
+        this.mBaseAssetPackage = null;
+        super.dispose();
     }
 }
 export function distanceToEnd<T = DefaultLatLonKeys>(index: number, coordinates: MapPosVector<T> | GenericMapPos<T>[]) {

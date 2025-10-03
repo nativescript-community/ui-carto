@@ -25,6 +25,7 @@ export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOption
     getAssetNames(): any; //NTStringVector | com.carto.core.StringVector
 }
 export interface DirAssetPackageOptions {
+    basePack?: DirAssetPackage | ZippedAssetPackage;
     dirPath: string;
     loadUsingNS?: boolean;
 }
