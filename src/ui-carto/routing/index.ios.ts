@@ -46,9 +46,12 @@ export abstract class RoutingService<T extends NTRoutingService, U extends Routi
                     nRequest.setCustomParameterValue(k, JSVariantToNative(options.customOptions[k]));
                 });
             }
-
-            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, (res, strRes) => {
-                resolve(strRes || (res ? new RoutingResult(res) : null));
+            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, (res, strRes, error) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(strRes || (res ? new RoutingResult(res) : null));
+                }
             });
         });
     }
@@ -134,8 +137,14 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<N
 }
 
 export class ValhallaOnlineRoutingService extends ValhallaRoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
+    @nativeProperty profile: string;
+    @nativeProperty customServiceURL: string;
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
-        return NTValhallaOnlineRoutingService.alloc().initWithApiKey(options.apiKey);
+        if (options.apiKey) {
+            return NTValhallaOnlineRoutingService.alloc().initWithApiKey(options.apiKey);
+        } else {
+            return NTValhallaOnlineRoutingService.alloc().init();
+        }
     }
 }
 

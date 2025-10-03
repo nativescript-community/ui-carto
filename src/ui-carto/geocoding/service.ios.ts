@@ -35,9 +35,10 @@ export abstract class GeocodingService<T extends NTGeocodingService, U extends G
         if (options.location) {
             nRequest.setLocation(toNativeMapPos(options.location));
         }
-        const vector = this.getNative().calculateAddresses(nRequest);
-        const result = vector ? new GeocodingResultVector(vector) : null;
-        callback(null, result);
+
+        AKGeocodingServiceAdditions.calculateAddress(this.getNative(), nRequest, (res, err) => {
+            callback(err as any, res ? new GeocodingResultVector(res) : null);
+        });
     }
 }
 export abstract class ReverseGeocodingService<T extends NTReverseGeocodingService, U extends ReverseGeocodingServiceOptions> extends BaseGeocodingService<T, U> {
@@ -49,6 +50,9 @@ export abstract class ReverseGeocodingService<T extends NTReverseGeocodingServic
         if (options.searchRadius !== undefined) {
             nRequest.setSearchRadius(options.searchRadius);
         }
+        AKGeocodingServiceAdditions.calculateAddressReverse(this.getNative(), nRequest, (res, err) => {
+            callback(err as any, res ? new GeocodingResultVector(res) : null);
+        });
         const vector = this.getNative().calculateAddresses(nRequest);
         const result = vector ? new GeocodingResultVector(vector) : null;
         callback(null, result);
