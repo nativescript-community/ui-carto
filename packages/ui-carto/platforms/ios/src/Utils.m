@@ -220,7 +220,7 @@ bool isOnSegmentGC(double lat1, double lng1, double lat2, double lng2, double la
           double latClosest = inverseMercator(yClosest);
           double havDist = havDistance(lat3, latClosest, x3 - xClosest);
           if (havDist < havTolerance) {
-            if (lastHavDist = -1) {
+            if (lastHavDist == -1) {
                 lastHavDist = havDist;
             } else if (havDist < lastHavDist){
                 lastHavDist = havDist;

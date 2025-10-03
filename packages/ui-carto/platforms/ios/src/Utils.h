@@ -5,27 +5,27 @@
 
 #pragma mark Public
 
-+(NTColor*) toNTColor: (UIColor*)color;
++(NTColor*_Nonnull) toNTColor: (UIColor*_Nonnull)color;
 
-+ (long)isLocationOn:(NTMapPos *)point
-                 poly:(NTMapPosVector *)poly;
++ (long)isLocationOn:(NTMapPos *_Nonnull)point
+                 poly:(NTMapPosVector *_Nonnull)poly;
 
-+ (long)isLocationOn:(NTMapPos *)point
-                 poly:(NTMapPosVector *)poly
++ (long)isLocationOn:(NTMapPos *_Nonnull)point
+                 poly:(NTMapPosVector *_Nonnull)poly
                                   closed:(bool)closed;
 
-+ (long)isLocationOn:(NTMapPos *)point
-                 poly:(NTMapPosVector *)poly
++ (long)isLocationOn:(NTMapPos *_Nonnull)point
+                 poly:(NTMapPosVector *_Nonnull)poly
                                   closed:(bool)closed
             geodesic:(bool)geodesic;
 
-+ (long)isLocationOn:(NTMapPos *)point
-                 poly:(NTMapPosVector *)poly
++ (long)isLocationOn:(NTMapPos *_Nonnull)point
+                 poly:(NTMapPosVector *_Nonnull)poly
                                   closed:(bool)closed
                                   geodesic:(bool)geodesic
                                    toleranceEarth:(double)toleranceEarth;
 
 + (double)distanceToEndWithInt:(int)index
-                          poly:(NTMapPosVector *)poly;
+                          poly:(NTMapPosVector *_Nonnull)poly;
 
 @end
