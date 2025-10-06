@@ -102,6 +102,9 @@ export abstract class CartoViewBase extends ContentView {
     public static mapInteractionEvent = MapInteractionEvent;
     public static mapClickedEvent = MapClickedEvent;
 
+    //TODO: remove as it needs to be added after TS 5.7 change https://github.com/microsoft/TypeScript/pull/59860
+    [key: symbol]: (...args: any[]) => any | void;
+
     public mapReady = false;
     nativeProjection: any;
     @mapProperty({

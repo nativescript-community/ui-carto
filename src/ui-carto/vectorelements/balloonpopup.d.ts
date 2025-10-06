@@ -35,7 +35,7 @@ export class BalloonPopupOptions<T = DefaultLatLonKeys> extends PointVectorEleme
     marker?: Marker<T>;
     title?: string;
     description?: string;
-    styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions | com.carto.styles.BalloonPopupStyle;
+    styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions | com.carto.styles.BalloonPopupStyle | NTBalloonPopupStyle;
 }
 export class BalloonPopup<T = DefaultLatLonKeys> extends BasePointVectorElement<any, BalloonPopupOptions<T>, T> {
     styleBuilder?: BalloonPopupStyleBuilder<any, any> | BalloonPopupStyleBuilderOptions;

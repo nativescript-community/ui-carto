@@ -51,7 +51,7 @@ export class BalloonPopup extends BasePointVectorElement<com.carto.vectorelement
     }
     buildStyle() {
         let style: com.carto.styles.BalloonPopupStyle;
-        const styleBuilder = this.options.styleBuilder;
+        const styleBuilder = this.options.styleBuilder as BalloonPopupStyleBuilder | com.carto.styles.BalloonPopupStyle | BalloonPopupStyleBuilderOptions;
         if (styleBuilder instanceof com.carto.styles.BalloonPopupStyle) {
             style = styleBuilder;
         } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
