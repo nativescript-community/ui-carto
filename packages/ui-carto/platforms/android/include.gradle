@@ -1,16 +1,8 @@
 
 repositories {
-	// maven {
-	// 	url  "https://dl.bintray.com/farfromrefug/carto-mobile-sdk"
-	// }
-	def projectRoot = "$rootDir/../../.."
-	flatDir {
-		dirs "$projectRoot/node_modules/@nativescript-community/ui-carto/platforms/android"
-	}
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 dependencies {
-	// implementation project(':carto_mobile_sdk')
-	// def cartoMobileVersion =  project.hasProperty("cartoMobileVersion") ? project.cartoMobileVersion : "4.3.3"
-	// implementation "com.carto:carto-mobile-sdk:$cartoMobileVersion@aar"
-    // implementation(name:'carto-mobile-sdk-4.4.9-rc.1', ext:'aar')
+	implementation 'com.github.Akylas:mobile-sdk-android-aar:5.0.0'
 }
