@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/nativescript-community/ui-carto/compare/v1.8.21...v2.0.0) (2025-10-15)
+
+### Features
+
+* using latest sdk and available native SDK on iOS and Android ([e3bb8b2](https://github.com/nativescript-community/ui-carto/commit/e3bb8b2d2d840426ae80ddd024c77a4f747ac755))
+
+### Bug Fixes
+
+* DirAssetPackage now supports base package ([182c743](https://github.com/nativescript-community/ui-carto/commit/182c743d47e64120281ac07e234e7e70c481541d))
+* **ios:** many fixes around search/routing ([e892540](https://github.com/nativescript-community/ui-carto/commit/e892540209a3086f9294e0bb85e6091a010b0c41))
+* **ios:** utils fix ([773cfc7](https://github.com/nativescript-community/ui-carto/commit/773cfc7251d15ec1e3bc7adacbc5c88db24792c5))
+
 ## [1.8.21](https://github.com/nativescript-community/ui-carto/compare/v1.8.20...v1.8.21) (2025-07-15)
 
 **Note:** Version bump only for package ui-carto
