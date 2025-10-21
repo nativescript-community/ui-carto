@@ -2,8 +2,6 @@ import { EventData, ImageSource, Style, View } from '@nativescript/core';
 import { ClickType, DefaultLatLonKeys, GenericMapPos, MapBounds, ScreenBounds, ScreenPos } from '../core';
 import { Layer } from '../layers';
 import { Projection } from '../projections';
-import { Layers } from './index.common';
-export { Layers };
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR,
@@ -207,6 +205,20 @@ export class MapOptions {
     isLayersLabelsProcessedInReverseOrder(): boolean;
 }
 
+export class Layers<T = any> {
+    abstract count(): number;
+    abstract insert(index: number, layer: Layer<any, any>): void;
+    abstract removeAll(layers: Layer<any, any>[]): boolean;
+    abstract remove(layer: Layer<any, any>): boolean;
+    abstract add(layer: Layer<any, any>): void;
+    abstract set(index: number, layer: Layer<any, any>): void;
+    abstract get(index: number): Layer<any, any>;
+    abstract addAll(layers: Layer<any, any>[]): void;
+    abstract setAll(layers: Layer<any, any>[]): void;
+    abstract getAll(): Layer<any, any>[];
+    abstract clear(): void;
+}
+
 interface CartoMapStyle extends Style {
     zoom: number;
     focusPos: GenericMapPos;
@@ -232,10 +244,12 @@ export class CartoMap<T = DefaultLatLonKeys> extends View {
     bearing: number;
     tilt: number;
     restrictedPanning: boolean;
+    readonly mapView: any;
     readonly metersPerPixel: number;
 
     addLayer(layer: Layer<any, any>, index?: number);
     removeLayer(layer: Layer<any, any>);
+    removeAllLayers(layers: Layer<any, any>[]);
     getLayers(): Layers<any>;
     screenToMap(pos: ScreenPos | any): GenericMapPos<T>;
     mapToScreen(pos: GenericMapPos<T> | any): ScreenPos;
