@@ -63,7 +63,7 @@ public class SynchronousHandler {
                     synchronized (runnable) {
                         try {
                             if (!runnable.isFinished()) {
-                                runnable.wait();
+                                runnable.wait(300);
                             }
                         } catch (InterruptedException is) {
                             // ignore
