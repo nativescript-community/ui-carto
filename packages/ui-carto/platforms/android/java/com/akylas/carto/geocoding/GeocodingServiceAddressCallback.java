@@ -1,4 +1,4 @@
-package com.akylas.carto.additions;
+package com.akylas.carto.geocoding;
 
 import com.carto.geocoding.GeocodingResultVector;
 

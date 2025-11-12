@@ -1,32 +1,30 @@
-package com.akylas.carto.additions;
+package com.akylas.carto.additions2;
 
 import android.os.Handler;
 import android.util.Log;
 
-import com.carto.search.VectorTileSearchService;
+import com.carto.search.FeatureCollectionSearchService;
 import com.carto.search.SearchRequest;
-import com.carto.datasources.TileDataSource;
-import com.carto.geometry.VectorTileFeatureCollection;
-import com.carto.vectortiles.VectorTileDecoder;
+import com.carto.projections.Projection;
+import com.carto.geometry.FeatureCollection;
 
 import java.io.IOException;
 
-public class AKVectorTileSearchService extends VectorTileSearchService {
-    private final String TAG = "AKVectorTileSearchService";
+public class AKFeatureCollectionSearchService extends FeatureCollectionSearchService {
+    private final String TAG = "AKFeatureCollectionSearchService";
 
 
-    public AKVectorTileSearchService(TileDataSource source, VectorTileDecoder decoder) {
-        super(source, decoder);
+    public AKFeatureCollectionSearchService(Projection projection , FeatureCollection features) {
+        super(projection, features);
     }
 
     static Handler mainHandler = null;
 
-    public void findFeaturesCallback(final SearchRequest request, final VectorTileSearchServiceCallback callback) {
-        final AKVectorTileSearchService that = this;
+    public void findFeaturesCallback(final SearchRequest request, final FeatureCollectionSearchServiceCallback callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final VectorTileFeatureCollection results = that.findFeatures(request);
+                final FeatureCollection results = AKFeatureCollectionSearchService.this.findFeatures(request);
                 if (AKMapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());

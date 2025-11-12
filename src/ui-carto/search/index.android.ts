@@ -5,7 +5,7 @@ import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feat
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
 import { geometryFromArgs } from '..';
 
-export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
+export class VectorTileSearchService extends BaseNative<com.akylas.carto.additions2.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
     @nativeProperty minZoom: number;
     @nativeProperty maxZoom: number;
     @nativeProperty maxResults: number;
@@ -16,9 +16,9 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
     createNative(options: VectorTileSearchServiceOptions) {
         if (options.layer) {
             const layer = options.layer.getNative() as com.carto.layers.VectorTileLayer;
-            return new com.akylas.carto.additions.AKVectorTileSearchService(layer.getDataSource(), layer.getTileDecoder());
+            return new com.akylas.carto.additions2.AKVectorTileSearchService(layer.getDataSource(), layer.getTileDecoder());
         } else {
-            return new com.akylas.carto.additions.AKVectorTileSearchService(options.dataSource.getNative(), options.decoder.getNative());
+            return new com.akylas.carto.additions2.AKVectorTileSearchService(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
     public findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void) {
@@ -43,7 +43,7 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
         if (callback) {
             this.getNative().findFeaturesCallback(
                 nRequest,
-                new com.akylas.carto.additions.VectorTileSearchServiceCallback({
+                new com.akylas.carto.additions2.VectorTileSearchServiceCallback({
                     onFindFeatures(res) {
                         callback(new VectorTileFeatureCollection(res));
                     }
@@ -55,9 +55,9 @@ export class VectorTileSearchService extends BaseNative<com.akylas.carto.additio
     }
 }
 
-export class FeatureCollectionSearchService extends BaseNative<com.akylas.carto.additions.AKFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
+export class FeatureCollectionSearchService extends BaseNative<com.akylas.carto.additions2.AKFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
     createNative(options: FeatureCollectionSearchServiceOptions) {
-        return new com.akylas.carto.additions.AKFeatureCollectionSearchService(options.projection.getNative(), options.features.getNative());
+        return new com.akylas.carto.additions2.AKFeatureCollectionSearchService(options.projection.getNative(), options.features.getNative());
     }
     public findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void) {
         const nRequest = new com.carto.search.SearchRequest();

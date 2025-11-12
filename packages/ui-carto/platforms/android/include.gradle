@@ -1,8 +1,33 @@
-
 repositories {
 	mavenCentral()
 	maven { url 'https://jitpack.io' }
 }
 dependencies {
-	implementation 'com.github.Akylas:mobile-sdk-android-aar:5.0.0'
+
+	def cartoSDKVersion =  project.hasProperty("cartoSDKVersion") ? project.cartoSDKVersion : "5.0.1"
+	def cartoSDKVariant =  project.hasProperty("cartoSDKVariant") ? project.cartoSDKVariant : "full"
+
+	if (cartoSDKVariant == "full") {
+		implementation "com.github.Akylas:mobile-sdk-android-aar:$cartoSDKVersion"
+	} else {
+		implementation "com.github.Akylas:mobile-sdk-android-aar:$cartoSDKVersion:$cartoSDKVariant@aar"
+	}
+}
+android {
+    sourceSets {
+        main {
+            java {
+                def cartoSDKVariant =  project.hasProperty("cartoSDKVariant") ? project.cartoSDKVariant : "full"
+                
+                // Exclude geocoding and routing if not using full variant
+                if (cartoSDKVariant != "full") {
+                    exclude '**/geocoding/**'
+                    exclude '**/routing/**'
+                }
+				if (cartoSDKVariant == "lite") {
+                    exclude '**/additions2/**'
+                }
+            }
+        }
+    }
 }

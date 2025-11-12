@@ -251,7 +251,7 @@ export class VectorLayer extends BaseVectorLayer<com.carto.layers.VectorLayer, V
 
 export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.EditableVectorLayer, VectorLayerOptions> {
     editListener?: IVectorEditEventListener;
-    nEditListener?: com.akylas.carto.additions.AKVectorEditEventListener;
+    nEditListener?: com.akylas.carto.additions2.AKVectorEditEventListener;
     constructor(options) {
         super(options);
         for (const property of ['editListener', 'nEditListener']) {
@@ -278,13 +278,13 @@ export class EditableVectorLayer extends BaseVectorLayer<com.carto.layers.Editab
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
         }
     }
-    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection, nativeClass = com.akylas.carto.additions.AKVectorEditEventListener) {
+    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection, nativeClass = com.akylas.carto.additions2.AKVectorEditEventListener) {
         this.editListener = listener;
         this.projection = projection;
         if (listener) {
             if (!this.nEditListener) {
                 this.nEditListener = new nativeClass(
-                    new com.akylas.carto.additions.AKVectorEditEventListener.Listener({
+                    new com.akylas.carto.additions2.AKVectorEditEventListener.Listener({
                         onDragEnd: this.onDragEnd.bind(this),
                         onDragMove: this.onDragMove.bind(this),
                         onDragStart: this.onDragStart.bind(this),

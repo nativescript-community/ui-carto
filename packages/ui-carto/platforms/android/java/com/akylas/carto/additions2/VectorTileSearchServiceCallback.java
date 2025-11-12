@@ -1,4 +1,4 @@
-package com.akylas.carto.additions;
+package com.akylas.carto.additions2;
 
 import com.carto.packagemanager.PackageInfo;
 import com.carto.geometry.VectorTileFeatureCollection;
