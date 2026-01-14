@@ -3,6 +3,9 @@ package com.akylas.carto.additions2;
 import android.os.Handler;
 import android.util.Log;
 
+import com.akylas.carto.additions.AKMapView;
+import com.akylas.carto.additions.SynchronousHandler;
+import com.akylas.carto.additions.FeatureCollectionSearchServiceCallback;
 import com.carto.search.FeatureCollectionSearchService;
 import com.carto.search.SearchRequest;
 import com.carto.projections.Projection;

@@ -3,6 +3,8 @@ package com.akylas.carto.additions2;
 import android.os.Handler;
 import android.util.Log;
 
+import com.akylas.carto.additions.AKMapView;
+import com.akylas.carto.additions.SynchronousHandler;
 import com.carto.geometry.Geometry;
 import com.carto.layers.VectorEditEventListener;
 import com.carto.layers.VectorElementDragPointStyle;

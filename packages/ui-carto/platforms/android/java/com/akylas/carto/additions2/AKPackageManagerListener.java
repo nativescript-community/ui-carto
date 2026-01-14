@@ -2,6 +2,8 @@ package com.akylas.carto.additions2;
 
 import android.os.Handler;
 
+import com.akylas.carto.additions.AKMapView;
+import com.akylas.carto.additions.SynchronousHandler;
 import com.carto.packagemanager.PackageErrorType;
 import com.carto.packagemanager.PackageManagerListener;
 import com.carto.packagemanager.PackageStatus;
