@@ -1,6 +1,5 @@
 import { CssProperty, Style, booleanConverter } from '@nativescript/core';
-import { LatitudeKey, LongitudeKey } from '../core';
-import { GenericMapPos } from '../core/index.common';
+import { GenericMapPos, LatitudeKey, LongitudeKey } from '../core';
 
 export const zoomProperty = new CssProperty<Style, number>({
     name: 'zoom',

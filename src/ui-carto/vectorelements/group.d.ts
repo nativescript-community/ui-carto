@@ -1,7 +1,6 @@
 import { BasePointVectorElement, PointVectorElementOptions, VectorElement, VectorElementVector } from '.';
-import { MapPos } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapPos } from '../core';
 import { Projection } from '../projections';
-import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
 
 export class GroupOptions<T = DefaultLatLonKeys> extends PointVectorElementOptions<T> {
     elements: { id: string; element: VectorElement<any, any> }[];
