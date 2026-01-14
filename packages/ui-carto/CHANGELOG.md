@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/nativescript-community/ui-carto/compare/v2.0.0...v2.0.1) (2026-01-14)
+
+### Bug Fixes
+
+* added synchronous handler timeout to prevent deadlock ([712c83b](https://github.com/nativescript-community/ui-carto/commit/712c83b53e101b860ac48866eb150be20e5e7f10))
+* **android:** build fix ([e18cd3b](https://github.com/nativescript-community/ui-carto/commit/e18cd3b3feff0434d95fdd64664331b5c3c84f5d))
+* **android:** you can now set version with cartoSDKVersion but also change variant with cartoSDKVariant. You can use lite/standard which are smaller builds than the default one. But you loose some features like rooting, geocoding ... ([0de72fd](https://github.com/nativescript-community/ui-carto/commit/0de72fd8eeebef4dbdd63862eb588cd9961d0aad))
+
 ## [2.0.0](https://github.com/nativescript-community/ui-carto/compare/v1.8.21...v2.0.0) (2025-10-15)
 
 ### Features

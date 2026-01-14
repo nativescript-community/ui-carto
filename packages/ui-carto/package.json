@@ -1,6 +1,6 @@
 {
     "name": "@nativescript-community/ui-carto",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "NativeScript plugin for CARTO Mobile SDK",
     "main": "index",
     "typings": "index.d.ts",
