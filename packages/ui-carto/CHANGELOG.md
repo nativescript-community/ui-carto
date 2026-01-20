@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/nativescript-community/ui-carto/compare/v2.0.1...v2.0.2) (2026-01-20)
+
+### Bug Fixes
+
+* **ios:** Update carto-mobile-sdk version to 5.0.1 ([579eb11](https://github.com/nativescript-community/ui-carto/commit/579eb11689857c5976a0011d36acc12fd92f5ca1))
+
 ## [2.0.1](https://github.com/nativescript-community/ui-carto/compare/v2.0.0...v2.0.1) (2026-01-14)
 
 ### Bug Fixes
