@@ -3,7 +3,7 @@ export default {
     SPMPackages: [
       {
         name: 'carto-mobile-sdk',
-        libs: ['CartoMobileSDK'],
+        libs: ['CartoMobileSDKCore'],
         repositoryURL: 'https://github.com/Akylas/mobile-sdk-ios-swift.git',
         version: '5.0.1',
       },
