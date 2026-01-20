@@ -5,7 +5,7 @@ export default {
         name: 'carto-mobile-sdk',
         libs: ['CartoMobileSDK'],
         repositoryURL: 'https://github.com/Akylas/mobile-sdk-ios-swift.git',
-        version: '5.0.0',
+        version: '5.0.1',
       },
     ],
   },
