@@ -87,24 +87,27 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<NTGeoJSONVectorT
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection) {
         this.getNative().setLayerFeatureCollectionProjectionFeatureCollection(layerIndex, projection?.getNative(), featureCollectionFromArgs(featureCollection));
     }
-    setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
+    setLayerGeoJSON(layerIndex: number, geoJSON: object) {
         this.getNative().setLayerGeoJSONGeoJSON(layerIndex, JSVariantToNative(geoJSON));
     }
-    setLayerGeoJSONString(layerIndex: number, geoJSON: string | Object) {
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string | object) {
         this.getNative().setLayerGeoJSONStringGeoJSON(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
 
-    addGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+    addGeoJSONFeature(layerIndex: number, geoJSON: object) {
         this.getNative().addGeoJSONFeatureGeoJSON(layerIndex, JSVariantToNative(geoJSON));
     }
-    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | object) {
         this.getNative().addGeoJSONStringFeatureGeoJSON(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
-    updateGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+    updateGeoJSONFeature(layerIndex: number, geoJSON: object) {
         this.getNative().updateGeoJSONFeatureGeoJSON(layerIndex, JSVariantToNative(geoJSON));
     }
-    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | object) {
         this.getNative().updateGeoJSONStringFeatureGeoJSON(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
+    }
+    removeGeoJSONFeature(layerIndex: number, id: string | number) {
+        this.getNative().removeGeoJSONFeatureArg2(layerIndex, JSVariantToNative(id));
     }
 }
 
