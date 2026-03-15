@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/nativescript-community/ui-carto/compare/v2.0.2...v2.0.3) (2026-01-20)
+
+### Bug Fixes
+
+* **ios:** build fix ([13d7b5e](https://github.com/nativescript-community/ui-carto/commit/13d7b5e9e5509e48a1328a9af6654dc6db065489))
+
+## [2.0.2](https://github.com/nativescript-community/ui-carto/compare/v2.0.1...v2.0.2) (2026-01-20)
+
+### Bug Fixes
+
+* **ios:** Update carto-mobile-sdk version to 5.0.1 ([579eb11](https://github.com/nativescript-community/ui-carto/commit/579eb11689857c5976a0011d36acc12fd92f5ca1))
+
+## [2.0.1](https://github.com/nativescript-community/ui-carto/compare/v2.0.0...v2.0.1) (2026-01-14)
+
+### Bug Fixes
+
+* added missing js reference for map layers ([#8](https://github.com/nativescript-community/ui-carto/issues/8)) ([6231bb2](https://github.com/nativescript-community/ui-carto/commit/6231bb2cd66acabc0bf52fbbcb4e83579f02b3f2))
+* added synchronous handler timeout to prevent deadlock ([712c83b](https://github.com/nativescript-community/ui-carto/commit/712c83b53e101b860ac48866eb150be20e5e7f10))
+* **android:** build fix ([e18cd3b](https://github.com/nativescript-community/ui-carto/commit/e18cd3b3feff0434d95fdd64664331b5c3c84f5d))
+* **android:** you can now set version with cartoSDKVersion but also change variant with cartoSDKVariant. You can use lite/standard which are smaller builds than the default one. But you loose some features like rooting, geocoding ... ([0de72fd](https://github.com/nativescript-community/ui-carto/commit/0de72fd8eeebef4dbdd63862eb588cd9961d0aad))
+
 ## [2.0.0](https://github.com/nativescript-community/ui-carto/compare/v1.8.21...v2.0.0) (2025-10-15)
 
 ### Features

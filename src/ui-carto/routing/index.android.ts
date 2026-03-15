@@ -15,8 +15,6 @@ import {
 import { BaseRoutingService, RouteMatchingResult, RoutingResult } from './index.common';
 import { JSVariantToNative, nativeVariantToJS } from '../utils';
 
-const AKRoutingServiceAdditions = com.akylas.carto.additions.AKRoutingServiceAdditions;
-
 export const RoutingAction = {
     get HEAD_ON() {
         return com.carto.routing.RoutingAction.ROUTING_ACTION_HEAD_ON;
@@ -80,19 +78,19 @@ abstract class RoutingService<T extends com.carto.routing.RoutingService, U exte
                     nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
                 });
             }
-            const callback = new com.akylas.carto.additions.RoutingServiceRouteCallback({
+            const callback = new com.akylas.carto.routing.RoutingServiceRouteCallback({
                 onRoutingResult: (err, res, strRes) => (err ? reject(err) : resolve(strRes || (res ? new RoutingResult(res) : null)))
             });
             console.log('calculateRoute', jsonStr);
-            AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, callback);
+            com.akylas.carto.routing.AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, callback);
         });
     }
     public routingResultToJSON(routingResult: RoutingResult) {
         return new Promise<string>((resolve, reject) => {
-            const callback = new com.akylas.carto.additions.RoutingResultToJSONCallback({
+            const callback = new com.akylas.carto.routing.RoutingResultToJSONCallback({
                 onJSON: (err, res) => (err ? reject(err) : resolve(res))
             });
-            AKRoutingServiceAdditions.routingResultToJSON(routingResult.getNative(), callback);
+            com.akylas.carto.routing.AKRoutingServiceAdditions.routingResultToJSON(routingResult.getNative(), callback);
         });
     }
 }
@@ -112,12 +110,12 @@ abstract class ValhallaRoutingService<
                     nRequest.setCustomParameter(k, JSVariantToNative(options.customOptions[k]));
                 });
             }
-            const callback = new com.akylas.carto.additions.RoutingServiceRouteMatchingCallback({
+            const callback = new com.akylas.carto.routing.RoutingServiceRouteMatchingCallback({
                 onRouteMatchingResult: (err, res) => (err ? reject(err) : resolve(res ? new RouteMatchingResult(res) : null))
             });
             // TODO: passing profile directly seems to break terser :s Find out why
             const test = profile;
-            AKRoutingServiceAdditions.matchRoute(this.getNative(), nRequest, test, callback);
+            com.akylas.carto.routing.AKRoutingServiceAdditions.matchRoute(this.getNative(), nRequest, test, callback);
         });
     }
 

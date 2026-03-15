@@ -31,10 +31,10 @@ export abstract class GeocodingService<T extends com.carto.geocoding.GeocodingSe
         if (options.location) {
             nRequest.setLocation(toNativeMapPos(options.location));
         }
-        com.akylas.carto.additions.AKGeocodingServiceAdditions.calculateAddress(
+        com.akylas.carto.geocoding.AKGeocodingServiceAdditions.calculateAddress(
             this.getNative(),
             nRequest,
-            new com.akylas.carto.additions.GeocodingServiceAddressCallback({
+            new com.akylas.carto.geocoding.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
                 }
@@ -48,10 +48,10 @@ export abstract class ReverseGeocodingService<T extends com.carto.geocoding.Reve
         if (options.searchRadius !== undefined) {
             nRequest.setSearchRadius(options.searchRadius);
         }
-        com.akylas.carto.additions.AKGeocodingServiceAdditions.calculateAddress(
+        com.akylas.carto.geocoding.AKGeocodingServiceAdditions.calculateAddress(
             this.getNative(),
             nRequest,
-            new com.akylas.carto.additions.GeocodingServiceAddressCallback({
+            new com.akylas.carto.geocoding.GeocodingServiceAddressCallback({
                 onGeoCodingResult(err, res) {
                     callback(err, res ? new GeocodingResultVector(res) : null);
                 }

@@ -90,7 +90,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace additions2 {
                 export class AKFeatureCollectionSearchService extends com.carto.search.FeatureCollectionSearchService {
                     public static class: java.lang.Class<AKFeatureCollectionSearchService>;
                     public constructor(param0: com.carto.projections.Projection, param1: com.carto.geometry.FeatureCollection);
@@ -105,7 +105,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace geocoding {
                 export class AKGeocodingService extends com.carto.geocoding.GeocodingService {
                     public static class: java.lang.Class<AKGeocodingService>;
                     public calculateAddressCallback(param0: com.carto.geocoding.GeocodingRequest, param1: GeocodingServiceAddressCallback): void;
@@ -120,7 +120,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace geocoding {
                 export class AKGeocodingServiceAdditions extends java.lang.Object {
                     public static class: java.lang.Class<AKGeocodingServiceAdditions>;
                     public static calculateAddress(
@@ -290,7 +290,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace additions2 {
                 export class AKPackageManagerListener extends com.carto.packagemanager.PackageManagerListener {
                     public static class: java.lang.Class<AKPackageManagerListener>;
                     public onPackageFailed(param0: string, param1: number, param2: com.carto.packagemanager.PackageErrorType): void;
@@ -341,7 +341,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace routing {
                 export class AKRoutingServiceAdditions extends java.lang.Object {
                     public static class: java.lang.Class<AKRoutingServiceAdditions>;
                     public constructor();
@@ -438,7 +438,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace additions2 {
                 export class AKVectorEditEventListener extends com.carto.layers.VectorEditEventListener {
                     public static class: java.lang.Class<AKVectorEditEventListener>;
                     public setListener(param0: AKVectorEditEventListener.Listener): void;
@@ -573,7 +573,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace additions2 {
                 export class AKVectorTileSearchService extends com.carto.search.VectorTileSearchService {
                     public static class: java.lang.Class<AKVectorTileSearchService>;
                     public findFeaturesCallback(param0: com.carto.search.SearchRequest, param1: VectorTileSearchServiceCallback): void;
@@ -639,7 +639,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace geocoding {
                 export class GeocodingServiceAddressCallback extends java.lang.Object {
                     public static class: java.lang.Class<GeocodingServiceAddressCallback>;
                     /**
@@ -686,7 +686,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace routing {
                 export class RoutingServiceRouteCallback extends java.lang.Object {
                     public static class: java.lang.Class<RoutingServiceRouteCallback>;
                     /**
@@ -713,7 +713,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace routing {
                 export class RoutingServiceRouteMatchingCallback extends java.lang.Object {
                     public static class: java.lang.Class<RoutingServiceRouteMatchingCallback>;
                     /**
@@ -731,7 +731,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace additions2 {
                 export class ServerPackagesCallback extends java.lang.Object {
                     public static class: java.lang.Class<ServerPackagesCallback>;
                     /**
@@ -771,7 +771,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions {
+            export namespace additions2 {
                 export class VectorTileSearchServiceCallback extends java.lang.Object {
                     public static class: java.lang.Class<VectorTileSearchServiceCallback>;
                     /**

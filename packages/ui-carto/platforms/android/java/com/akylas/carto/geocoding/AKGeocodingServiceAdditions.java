@@ -1,7 +1,10 @@
-package com.akylas.carto.additions;
+package com.akylas.carto.geocoding;
 
 import android.os.Handler;
 import android.util.Log;
+
+import com.akylas.carto.additions.AKMapView;
+
 
 import com.carto.geocoding.GeocodingRequest;
 import com.carto.geocoding.ReverseGeocodingRequest;

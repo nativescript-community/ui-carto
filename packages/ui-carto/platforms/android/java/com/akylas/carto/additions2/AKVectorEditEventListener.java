@@ -1,30 +1,38 @@
-package com.akylas.carto.additions;
+package com.akylas.carto.additions2;
 
 import android.os.Handler;
+import android.util.Log;
 
-import com.carto.packagemanager.PackageErrorType;
-import com.carto.packagemanager.PackageManagerListener;
-import com.carto.packagemanager.PackageStatus;
+import com.akylas.carto.additions.AKMapView;
+import com.akylas.carto.additions.SynchronousHandler;
+import com.carto.geometry.Geometry;
+import com.carto.layers.VectorEditEventListener;
+import com.carto.layers.VectorElementDragPointStyle;
+import com.carto.layers.VectorElementDragResult;
+import com.carto.styles.PointStyle;
+import com.carto.ui.VectorElementClickInfo;
+import com.carto.ui.VectorElementDragInfo;
+import com.carto.vectorelements.VectorElement;
 
-public class AKPackageManagerListener extends PackageManagerListener {
+public class AKVectorEditEventListener extends VectorEditEventListener {
     Handler mainHandler = null;
 
     public interface Listener {
-        void onPackageCancelled(String id, int version);
+        boolean onElementSelect(VectorElement element);
 
-        void onPackageFailed(String id, int version, PackageErrorType errorType);
+        PointStyle onSelectDragPointStyle(VectorElement element, VectorElementDragPointStyle dragPointStyle);
 
-        void onPackageListFailed();
+        VectorElementDragResult onDragEnd(VectorElementDragInfo dragInfo);
 
-        void onPackageListUpdated();
+        VectorElementDragResult onDragMove(VectorElementDragInfo dragInfo);
 
-        void onPackageStatusChanged(String id, int version, PackageStatus status);
+        VectorElementDragResult onDragStart(VectorElementDragInfo dragInfo);
 
-        void onPackageUpdated(String id, int version);
+        void onElementDelete(VectorElement element);
 
-        void onStyleFailed(String styleName);
+        void onElementDeselected(VectorElement element);
 
-        void onStyleUpdated(String styleName);
+        void onElementModify(VectorElement element, Geometry geometry);
     }
 
     protected Listener listener = null;
@@ -33,13 +41,14 @@ public class AKPackageManagerListener extends PackageManagerListener {
         this.listener = listener;
     }
 
-    public AKPackageManagerListener(Listener listener) {
+    public AKVectorEditEventListener(Listener listener) {
         super();
         setListener(listener);
     }
 
+
     @Override
-    public void onPackageCancelled(final String id, final int version) {
+    public boolean onElementSelect(final VectorElement element) {
         if (AKMapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -49,24 +58,100 @@ public class AKPackageManagerListener extends PackageManagerListener {
                 @Override
                 public void run() {
                     if (listener != null) {
-                        listener.onPackageCancelled(id, version);
+                        arr[0] = new Boolean(listener.onElementSelect(element));
                     } else {
-                        AKPackageManagerListener.super.onPackageCancelled(id, version);
+                        arr[0] = new Boolean(AKVectorEditEventListener.super.onElementSelect(element));
                     }
                 }
             });
 
+            return (Boolean) arr[0];
         } else {
             if (listener != null) {
-                listener.onPackageCancelled(id, version);
+                return new Boolean(listener.onElementSelect(element));
             } else {
-                super.onPackageCancelled(id, version);
+                return new Boolean(super.onElementSelect(element));
             }
         }
     }
 
     @Override
-    public void onPackageFailed(final String id, final int version, final PackageErrorType errorType) {
+    public void onElementDelete(final VectorElement element) {
+        if (AKMapView.RUN_ON_MAIN_THREAD) {
+            if (mainHandler == null) {
+                mainHandler = new Handler(android.os.Looper.getMainLooper());
+            }
+            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
+                @Override
+                public void run() {
+                    if (listener != null) {
+                        listener.onElementDelete(element);
+                    } else {
+                        AKVectorEditEventListener.super.onElementDelete(element);
+                    }
+                }
+            });
+        } else {
+            if (listener != null) {
+                listener.onElementDelete(element);
+            } else {
+                super.onElementDelete(element);
+            }
+        }
+    }
+
+    @Override
+    public void onElementDeselected(final VectorElement element) {
+        if (AKMapView.RUN_ON_MAIN_THREAD) {
+            if (mainHandler == null) {
+                mainHandler = new Handler(android.os.Looper.getMainLooper());
+            }
+            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
+                @Override
+                public void run() {
+                    if (listener != null) {
+                        listener.onElementDeselected(element);
+                    } else {
+                        AKVectorEditEventListener.super.onElementDeselected(element);
+                    }
+                }
+            });
+        } else {
+            if (listener != null) {
+                listener.onElementDeselected(element);
+            } else {
+                super.onElementDeselected(element);
+            }
+        }
+    }
+
+    @Override
+    public void onElementModify(final VectorElement element, final Geometry geometry) {
+        if (AKMapView.RUN_ON_MAIN_THREAD) {
+            if (mainHandler == null) {
+                mainHandler = new Handler(android.os.Looper.getMainLooper());
+            }
+            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
+                @Override
+                public void run() {
+                    if (listener != null) {
+                        listener.onElementModify(element, geometry);
+                    } else {
+                        AKVectorEditEventListener.super.onElementModify(element, geometry);
+                    }
+                }
+            });
+        } else {
+            if (listener != null) {
+                listener.onElementModify(element, geometry);
+            } else {
+                super.onElementModify(element, geometry);
+            }
+        }
+    }
+
+    @Override
+    public PointStyle onSelectDragPointStyle(final VectorElement element, final VectorElementDragPointStyle dragPointStyle) {
         if (AKMapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -76,24 +161,25 @@ public class AKPackageManagerListener extends PackageManagerListener {
                 @Override
                 public void run() {
                     if (listener != null) {
-                        listener.onPackageFailed(id, version, errorType);
+                        arr[0] = (listener.onSelectDragPointStyle(element, dragPointStyle));
                     } else {
-                        AKPackageManagerListener.super.onPackageFailed(id, version, errorType);
+                        arr[0] = (AKVectorEditEventListener.super.onSelectDragPointStyle(element, dragPointStyle));
                     }
                 }
             });
 
+            return (PointStyle) arr[0];
         } else {
             if (listener != null) {
-                listener.onPackageFailed(id, version, errorType);
+                return listener.onSelectDragPointStyle(element, dragPointStyle);
             } else {
-                super.onPackageFailed(id, version, errorType);
+                return super.onSelectDragPointStyle(element, dragPointStyle);
             }
         }
     }
 
     @Override
-    public void onPackageListFailed() {
+    public VectorElementDragResult onDragEnd(final VectorElementDragInfo dragInfo) {
         if (AKMapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -103,24 +189,25 @@ public class AKPackageManagerListener extends PackageManagerListener {
                 @Override
                 public void run() {
                     if (listener != null) {
-                        listener.onPackageListFailed();
+                        arr[0] = (listener.onDragEnd(dragInfo));
                     } else {
-                        AKPackageManagerListener.super.onPackageListFailed();
+                        arr[0] = (AKVectorEditEventListener.super.onDragEnd(dragInfo));
                     }
                 }
             });
 
+            return (VectorElementDragResult) arr[0];
         } else {
             if (listener != null) {
-                listener.onPackageListFailed();
+                return listener.onDragEnd(dragInfo);
             } else {
-                super.onPackageListFailed();
+                return super.onDragEnd(dragInfo);
             }
         }
     }
 
     @Override
-    public void onPackageListUpdated() {
+    public VectorElementDragResult onDragMove(final VectorElementDragInfo dragInfo) {
         if (AKMapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -130,24 +217,25 @@ public class AKPackageManagerListener extends PackageManagerListener {
                 @Override
                 public void run() {
                     if (listener != null) {
-                        listener.onPackageListUpdated();
+                        arr[0] = (listener.onDragMove(dragInfo));
                     } else {
-                        AKPackageManagerListener.super.onPackageListUpdated();
+                        arr[0] = (AKVectorEditEventListener.super.onDragMove(dragInfo));
                     }
                 }
             });
 
+            return (VectorElementDragResult) arr[0];
         } else {
             if (listener != null) {
-                listener.onPackageListUpdated();
+                return listener.onDragMove(dragInfo);
             } else {
-                super.onPackageListUpdated();
+                return super.onDragMove(dragInfo);
             }
         }
     }
 
     @Override
-    public void onPackageStatusChanged(final String id, final int version, final PackageStatus status) {
+    public VectorElementDragResult onDragStart(final VectorElementDragInfo dragInfo) {
         if (AKMapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -157,100 +245,21 @@ public class AKPackageManagerListener extends PackageManagerListener {
                 @Override
                 public void run() {
                     if (listener != null) {
-                        listener.onPackageStatusChanged(id, version, status);
+                        arr[0] = (listener.onDragStart(dragInfo));
                     } else {
-                        AKPackageManagerListener.super.onPackageStatusChanged(id, version, status);
+                        arr[0] = (AKVectorEditEventListener.super.onDragStart(dragInfo));
                     }
                 }
             });
 
+            return (VectorElementDragResult) arr[0];
         } else {
             if (listener != null) {
-                listener.onPackageStatusChanged(id, version, status);
+                return listener.onDragStart(dragInfo);
             } else {
-                super.onPackageStatusChanged(id, version, status);
+                return super.onDragStart(dragInfo);
             }
         }
     }
 
-    @Override
-    public void onPackageUpdated(final String id, final int version) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
-            final Object[] arr = new Object[1];
-            if (mainHandler == null) {
-                mainHandler = new Handler(android.os.Looper.getMainLooper());
-            }
-            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
-                @Override
-                public void run() {
-                    if (listener != null) {
-                        listener.onPackageUpdated(id, version);
-                    } else {
-                        AKPackageManagerListener.super.onPackageUpdated(id, version);
-                    }
-                }
-            });
-
-        } else {
-            if (listener != null) {
-                listener.onPackageUpdated(id, version);
-            } else {
-                super.onPackageUpdated(id, version);
-            }
-        }
-    }
-
-    @Override
-    public void onStyleFailed(final String styleName) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
-            final Object[] arr = new Object[1];
-            if (mainHandler == null) {
-                mainHandler = new Handler(android.os.Looper.getMainLooper());
-            }
-            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
-                @Override
-                public void run() {
-                    if (listener != null) {
-                        listener.onStyleFailed(styleName);
-                    } else {
-                        AKPackageManagerListener.super.onStyleFailed(styleName);
-                    }
-                }
-            });
-
-        } else {
-            if (listener != null) {
-                listener.onStyleFailed(styleName);
-            } else {
-                super.onStyleFailed(styleName);
-            }
-        }
-    }
-
-    @Override
-    public void onStyleUpdated(final String styleName) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
-            final Object[] arr = new Object[1];
-            if (mainHandler == null) {
-                mainHandler = new Handler(android.os.Looper.getMainLooper());
-            }
-            SynchronousHandler.postAndWait(mainHandler, new Runnable() {
-                @Override
-                public void run() {
-                    if (listener != null) {
-                        listener.onStyleUpdated(styleName);
-                    } else {
-                        AKPackageManagerListener.super.onStyleUpdated(styleName);
-                    }
-                }
-            });
-
-        } else {
-            if (listener != null) {
-                listener.onStyleUpdated(styleName);
-            } else {
-                super.onStyleUpdated(styleName);
-            }
-        }
-    }
 }

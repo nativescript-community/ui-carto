@@ -71,22 +71,64 @@ export function mapProperty(...args) {
 }
 
 export abstract class Layers<T = any> extends BaseNative<T, {}> {
+    private readonly mLayerArray: Layer<any, any>[] = [];
+
     constructor(native) {
         super(null, native);
     }
+
     abstract count(): number;
-    abstract insert(index: number, layer: Layer<any, any>);
-    abstract removeAll(layers: Layer<any, any>[]);
-    abstract remove(layer: Layer<any, any>);
-    abstract add(layer: Layer<any, any>);
+
+    insert(index: number, layer: Layer<any, any>) {
+        this.mLayerArray.splice(index, 0, layer);
+    }
+
     //@ts-ignore
-    abstract set(index: number, layer: Layer<any, any>);
+    set(index: number, layer: Layer<any, any>) {
+        this.mLayerArray[index] = layer;
+    }
+
+    removeAll(layers: Layer<any, any>[]): boolean {
+        let hasRemovedAll: boolean = true;
+
+        layers.forEach((layer) => {
+            if (!this.remove(layer)) {
+                if (hasRemovedAll) {
+                    hasRemovedAll = false;
+                }
+            }
+        });
+        return hasRemovedAll;
+    }
+
+    remove(layer: Layer<any, any>): boolean {
+        const index = this.mLayerArray.indexOf(layer);
+        if (index >= 1) {
+            this.mLayerArray.splice(index, 1);
+            return true;
+        }
+        return false;
+    }
+
+    add(layer: Layer<any, any>) {
+        this.mLayerArray.push(layer);
+    }
+
+    addAll(layers: Layer<any, any>[]) {
+        layers.forEach((layer) => this.add(layer));
+    }
+    setAll(layers: Layer<any, any>[]) {
+        this.clear();
+        this.addAll(layers);
+    }
+
     //@ts-ignore
     abstract get(index: number): Layer<any, any>;
-    abstract addAll(layers: Layer<any, any>[]);
-    abstract setAll(layers: Layer<any, any>[]);
     abstract getAll(): Layer<any, any>[];
-    abstract clear();
+
+    clear() {
+        this.mLayerArray.splice(0);
+    }
 
     // public getNative() {
     //     return this.native;
@@ -126,6 +168,12 @@ export abstract class CartoViewBase extends ContentView {
     @mapProperty maxZoom: number;
     @mapProperty restrictedPanning: boolean;
 
+    private mLayers: Layers;
+
+    get mapView() {
+        return this.nativeViewProtected;
+    }
+
     public sendEvent<T extends MapInfo = MapInfo>(eventName: string, data?: T) {
         if (this.hasListeners(eventName)) {
             this.notify({
@@ -143,8 +191,48 @@ export abstract class CartoViewBase extends ContentView {
         }
     }
 
+    abstract createLayersInstance();
+
+    getLayers(): Layers {
+        if (!this.mLayers && this.mapView) {
+            this.mLayers = this.createLayersInstance();
+        }
+        return this.mLayers;
+    }
+
+    addLayer(layer: Layer<any, any>, index?: number) {
+        const layersInstance = this.getLayers();
+        if (layersInstance) {
+            if (index !== undefined && index <= layersInstance.count()) {
+                layersInstance.insert(index, layer);
+            } else {
+                layersInstance.add(layer);
+            }
+        }
+    }
+
+    removeLayer(layer: Layer<any, any>) {
+        const layersInstance = this.getLayers();
+        if (layersInstance) {
+            layersInstance.remove(layer);
+        }
+    }
+
+    removeAllLayers(layers: Layer<any, any>[]) {
+        const layersInstance = this.getLayers();
+        if (layersInstance) {
+            layersInstance.removeAll(layers);
+        }
+    }
+
     disposeNativeView() {
         this.mapReady = false;
+
+        if (this.mLayers) {
+            this.mLayers.clear();
+            this.mLayers = null;
+        }
+
         super.disposeNativeView();
     }
 
