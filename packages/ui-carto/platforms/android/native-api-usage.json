@@ -1,6 +1,6 @@
 {
     "uses": [
-        "com.akylas.carto.additions*:*", "com.carto*:*"
+        "com.akylas.carto*:*", "com.carto*:*"
     ],
     "blacklist":["com.carto*:*JNI"]
 }
