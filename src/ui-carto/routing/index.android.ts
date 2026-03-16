@@ -81,7 +81,6 @@ abstract class RoutingService<T extends com.carto.routing.RoutingService, U exte
             const callback = new com.akylas.carto.routing.RoutingServiceRouteCallback({
                 onRoutingResult: (err, res, strRes) => (err ? reject(err) : resolve(strRes || (res ? new RoutingResult(res) : null)))
             });
-            console.log('calculateRoute', jsonStr);
             com.akylas.carto.routing.AKRoutingServiceAdditions.calculateRoute(this.getNative(), nRequest, profile, jsonStr, callback);
         });
     }

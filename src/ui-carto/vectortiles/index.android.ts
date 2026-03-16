@@ -65,12 +65,10 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.carto.vectort
         if (this.native) {
             if (this.pack) {
                 const pack = this.nativePack;
-                console.log('reloadStyle', this.native, pack, this.options.cartoCss, this.options.style);
                 if (this.options.cartoCss) {
                     this.getNative().setCartoCSSStyleSet(new com.carto.styles.CartoCSSStyleSet(this.options.cartoCss, pack));
                 } else {
                     const compiled = new com.carto.styles.CompiledStyleSet(pack, this.options.style);
-                    console.log('compiled', compiled);
                     this.getNative().setCompiledStyleSet(compiled);
                 }
             } else if (this.options.cartoCss) {
