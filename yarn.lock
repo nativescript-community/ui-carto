@@ -1715,11 +1715,11 @@ __metadata:
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=76abb6&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=b5994b&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/ui-carto": "npm:*"
     vue-property-decorator: "npm:9.1.2"
-  checksum: 10/ef929bdc1ba5e4de07361d69ba78c85d639af7407adb03358abfec03245dd2812e15184a3c88604b1cff630771472c4d411d105ac7b24df175b6bb5ec6d03ccc
+  checksum: 10/577189604605ffcb062623f7b469b6915a23fe47f02dfc0c77d4dc2c877a3c204b91c0c89a7dfc4b2a90ffa5fa8d85876363841d5fc54e6ec6d0e3ec2015fc9d
   languageName: node
   linkType: hard
 
@@ -1808,6 +1808,7 @@ __metadata:
     nativescript-vue-template-compiler: "npm:2.9.3"
     typescript: "npm:5.9.3"
     vue: "npm:2.7.16"
+    vue-property-decorator: "npm:8.5.1"
   languageName: unknown
   linkType: soft
 
@@ -13403,6 +13404,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vue-class-component@npm:^7.1.0":
+  version: 7.2.6
+  resolution: "vue-class-component@npm:7.2.6"
+  peerDependencies:
+    vue: ^2.0.0
+  checksum: 10/d0ff279fa5d22f15b291fc07cabb116a4a3f748070a478cdd42f73bd9ceb6d46f0dc86bb2bad2ac408d4f11c53290207268d6cfdf3d27039ff34de02adfd5a8f
+  languageName: node
+  linkType: hard
+
 "vue-eslint-parser@npm:10.2.0":
   version: 10.2.0
   resolution: "vue-eslint-parser@npm:10.2.0"
@@ -13462,6 +13472,17 @@ __metadata:
     vue:
       optional: true
   checksum: 10/88760fe6a56fbf7d9422caea98f49613012e6a656d31c959b6bdeb84ff1075a5000798928048aa29b0c6b0734d6aba8eea03daf5f356233ec2146de1b849cea1
+  languageName: node
+  linkType: hard
+
+"vue-property-decorator@npm:8.5.1":
+  version: 8.5.1
+  resolution: "vue-property-decorator@npm:8.5.1"
+  dependencies:
+    vue-class-component: "npm:^7.1.0"
+  peerDependencies:
+    vue: "*"
+  checksum: 10/f294f7880c77a2b2691c270f8eb7babe30352500a38a7fca3b15ab0d05692b33a27fb0d8be8af514f918f006a3f3ecaf49176891a402e3c1e2631a9d0d3cb1b1
   languageName: node
   linkType: hard
 
