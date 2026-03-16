@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/nativescript-community/ui-carto/compare/v2.0.5...v2.0.6) (2026-03-16)
+
+### Bug Fixes
+
+* **ios:** ios build fix by using SPM ([1a8b0dc](https://github.com/nativescript-community/ui-carto/commit/1a8b0dcc69efebf8ccc3394352a43725c2048a44))
+
 ## [2.0.5](https://github.com/nativescript-community/ui-carto/compare/v2.0.4...v2.0.5) (2026-03-16)
 
 ### Bug Fixes
