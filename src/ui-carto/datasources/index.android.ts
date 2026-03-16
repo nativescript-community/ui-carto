@@ -96,23 +96,23 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<com.carto.dataso
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection) {
         this.getNative().setLayerFeatureCollection(layerIndex, projection?.getNative(), featureCollectionFromArgs(featureCollection));
     }
-    setLayerGeoJSON(layerIndex: number, geoJSON: Object) {
+    setLayerGeoJSON(layerIndex: number, geoJSON: object) {
         this.getNative().setLayerGeoJSON(layerIndex, JSVariantToNative(geoJSON));
     }
-    setLayerGeoJSONString(layerIndex: number, geoJSON: string | Object) {
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string | object) {
         this.getNative().setLayerGeoJSONString(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
 
-    addGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+    addGeoJSONFeature(layerIndex: number, geoJSON: object) {
         this.getNative().addGeoJSONFeature(layerIndex, JSVariantToNative(geoJSON));
     }
-    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | object) {
         this.getNative().addGeoJSONStringFeature(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
-    updateGeoJSONFeature(layerIndex: number, geoJSON: Object) {
+    updateGeoJSONFeature(layerIndex: number, geoJSON: object) {
         this.getNative().updateGeoJSONFeature(layerIndex, JSVariantToNative(geoJSON));
     }
-    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object) {
+    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | object) {
         this.getNative().updateGeoJSONStringFeature(layerIndex, typeof geoJSON === 'string' ? geoJSON : JSON.stringify(geoJSON));
     }
     deleteLayer(index: number) {

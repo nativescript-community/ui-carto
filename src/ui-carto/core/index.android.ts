@@ -130,7 +130,7 @@ export function toNativeScreenBounds(bounds: ScreenBounds) {
     return new com.carto.core.ScreenBounds();
 }
 
-export abstract class NativeVector<T, U = T> extends BaseNative<U, {}> {
+export abstract class NativeVector<T, U = T> extends BaseNative<U, any> {
     constructor(native) {
         super(null, native);
     }

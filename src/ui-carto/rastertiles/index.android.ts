@@ -1,7 +1,5 @@
-import { BaseNative, mapPosVectorFromArgs } from '..';
-import { IntVector, MapPos, MapPosVector, fromNativeMapPos, toNativeMapPos } from '../core';
 import { ElevationDataDecoderOptions, MapBoxElevationDataDecoderOptions, TerrariumElevationDataDecoderOptions } from '.';
-import { TileDataSource } from '../datasources';
+import { BaseNative } from '..';
 
 export abstract class ElevationDataDecoder<N extends com.carto.rastertiles.ElevationDecoder, O extends ElevationDataDecoderOptions> extends BaseNative<
     com.carto.rastertiles.ElevationDecoder,

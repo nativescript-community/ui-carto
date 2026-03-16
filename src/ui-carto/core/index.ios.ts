@@ -121,7 +121,7 @@ export function toNativeScreenBounds(bounds: ScreenBounds) {
     return NTScreenBounds.alloc().init();
 }
 
-export abstract class NativeVector<T, U = any> extends BaseNative<U, {}> {
+export abstract class NativeVector<T, U = any> extends BaseNative<U, any> {
     constructor(native) {
         super(null, native);
     }
@@ -186,6 +186,12 @@ export class MapPosVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPos, 
             result.push(fromNativeMapPos(this.get(i)));
         }
         return result;
+    }
+}
+
+export class DoubleVector extends NativeVector<NTDoubleVector, NTDoubleVector> {
+    createNative() {
+        return NTDoubleVector.alloc().init();
     }
 }
 export class MapPosVectorVector<T = DefaultLatLonKeys> extends NativeVector<NTMapPosVector, NTMapPosVectorVector> {
