@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/nativescript-community/ui-carto/compare/v2.0.4...v2.0.5) (2026-03-16)
+
+### Bug Fixes
+
+* **android:** native api usage fix ([c7c4b3b](https://github.com/nativescript-community/ui-carto/commit/c7c4b3b208ef585d27c16b2a268ed662c92f1ff8))
+
 ## [2.0.4](https://github.com/nativescript-community/ui-carto/compare/v2.0.3...v2.0.4) (2026-03-15)
 
 ### Bug Fixes
