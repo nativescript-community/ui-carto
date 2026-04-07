@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/nativescript-community/ui-carto/compare/v2.0.6...v2.0.7) (2026-04-07)
+
+### Bug Fixes
+
+* support new sdk features (pmtiles...) ([2b22c77](https://github.com/nativescript-community/ui-carto/commit/2b22c77af4b9f8616f8ac9693172a478eb10ce13))
+
 ## [2.0.6](https://github.com/nativescript-community/ui-carto/compare/v2.0.5...v2.0.6) (2026-03-16)
 
 ### Bug Fixes
