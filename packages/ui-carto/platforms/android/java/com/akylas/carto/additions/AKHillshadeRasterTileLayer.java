@@ -27,6 +27,9 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
     public AKHillshadeRasterTileLayer(TileDataSource datasource, ElevationDecoder decoder) {
         super(datasource, decoder);
     }
+    public AKHillshadeRasterTileLayer(TileDataSource datasource) {
+        super(datasource, null);
+    }
 
     public void getElevationCallback(final MapPos pos, final ElevationCallback callback) {
         final AKHillshadeRasterTileLayer fThis = this;

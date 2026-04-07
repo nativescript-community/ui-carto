@@ -1,4 +1,10 @@
-import { HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, RasterTileFilterMode as IRasterTileFilterMode, RasterTileLayerOptions } from './raster';
+import {
+    HillshadeRasterTileLayerOptions,
+    HillshadeMethod as IHillshadeMethod,
+    RasterTileEventListener as IRasterTileEventListener,
+    RasterTileFilterMode as IRasterTileFilterMode,
+    RasterTileLayerOptions
+} from './raster';
 import { RasterTileLayerBase } from './raster.common';
 import { mapPosVectorFromArgs, nativeMapVecProperty, nativeProperty } from '../';
 import { Projection } from '../projections';
@@ -15,6 +21,24 @@ export const RasterTileFilterMode = {
     },
     get RASTER_TILE_FILTER_MODE_BICUBIC() {
         return NTRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BICUBIC;
+    }
+};
+
+export const HillshadeMethod = {
+    get STANDARD() {
+        return NTHillshadeMethod.STANDARD;
+    },
+    get COMBINED() {
+        return NTHillshadeMethod.COMBINED;
+    },
+    get IGOR() {
+        return NTHillshadeMethod.IGOR;
+    },
+    get MULTIDIRECTIONAL() {
+        return NTHillshadeMethod.MULTIDIRECTIONAL;
+    },
+    get BASIC() {
+        return NTHillshadeMethod.BASIC;
     }
 };
 
@@ -92,6 +116,7 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRas
     @nativeProperty contrast: number;
     @nativeProperty exagerateHeightScaleEnabled: boolean;
     @nativeProperty normalMapLightingShader: string;
+    @nativeProperty hillshadeMethod: IHillshadeMethod;
     @nativeMapVecProperty illuminationDirection: MapVec | [number, number, number];
     @nativeColorProperty highlightColor: string | Color;
     @nativeColorProperty shadowColor: string | Color;

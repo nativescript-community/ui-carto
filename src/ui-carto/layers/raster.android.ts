@@ -2,7 +2,13 @@ import { Color } from '@nativescript/core';
 import { mapPosVectorFromArgs, nativeColorProperty, nativeMapVecProperty, nativeProperty } from '../';
 import { DoubleVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
 import { Projection } from '../projections';
-import { HillshadeRasterTileLayerOptions, RasterTileEventListener as IRasterTileEventListener, RasterTileFilterMode as IRasterTileFilterMode, RasterTileLayerOptions } from './raster';
+import {
+    HillshadeRasterTileLayerOptions,
+    HillshadeMethod as IHillshadeMethod,
+    RasterTileEventListener as IRasterTileEventListener,
+    RasterTileFilterMode as IRasterTileFilterMode,
+    RasterTileLayerOptions
+} from './raster';
 import { RasterTileLayerBase } from './raster.common';
 
 export const RasterTileFilterMode = {
@@ -14,6 +20,25 @@ export const RasterTileFilterMode = {
     },
     get RASTER_TILE_FILTER_MODE_BICUBIC() {
         return com.carto.layers.RasterTileFilterMode.RASTER_TILE_FILTER_MODE_BICUBIC;
+    }
+};
+
+export const HillshadeMethod = {
+    get STANDARD() {
+        console.log('com.carto.layers.HillshadeMethod.' ,com.carto.layers.HillshadeMethod);
+        return com.carto.layers.HillshadeMethod.STANDARD;
+    },
+    get COMBINED() {
+        return com.carto.layers.HillshadeMethod.COMBINED;
+    },
+    get IGOR() {
+        return com.carto.layers.HillshadeMethod.IGOR;
+    },
+    get MULTIDIRECTIONAL() {
+        return com.carto.layers.HillshadeMethod.MULTIDIRECTIONAL;
+    },
+    get BASIC() {
+        return com.carto.layers.HillshadeMethod.BASIC;
     }
 };
 
@@ -86,6 +111,7 @@ export class HillshadeRasterTileLayer extends RasterTileLayerCommon<com.akylas.c
     @nativeColorProperty shadowColor: string | Color;
     @nativeColorProperty accentColor: string | Color;
     @nativeProperty tileFilterMode: IRasterTileFilterMode;
+    @nativeProperty hillshadeMethod: IHillshadeMethod;
     createNative(options: HillshadeRasterTileLayerOptions) {
         if (options.decoder) {
             return new com.akylas.carto.additions.AKHillshadeRasterTileLayer(options.dataSource.getNative(), options.decoder.getNative());

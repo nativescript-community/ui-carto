@@ -9,6 +9,13 @@ export enum RasterTileFilterMode {
     RASTER_TILE_FILTER_MODE_BILINEAR,
     RASTER_TILE_FILTER_MODE_BICUBIC
 }
+export enum HillshadeMethod {
+    STANDARD,
+    COMBINED,
+    IGOR,
+    MULTIDIRECTIONAL,
+    BASIC
+}
 
 export interface RasterTileClickInfo<T = DefaultLatLonKeys> {
     clickType: ClickType;
@@ -24,6 +31,7 @@ export interface RasterTileEventListener<T = DefaultLatLonKeys> {
 export interface RasterTileLayerOptions extends TileLayerOptions {
     tileFilterMode?: RasterTileFilterMode;
     dataSource?: TileDataSource<any, any>;
+    hillshadeMethod?: HillshadeMethod;
 }
 export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {
     // dataSource?: TileDataSource<any, any>;
@@ -52,6 +60,7 @@ export class HillshadeRasterTileLayer extends TileLayer<any, HillshadeRasterTile
     exagerateHeightScaleEnabled?: boolean;
     normalMapLightingShader?: string;
     tileFilterMode?: RasterTileFilterMode;
+    hillshadeMethod?: HillshadeMethod;
     public getElevation<T = DefaultLatLonKeys>(pos: GenericMapPos<T>): number;
     public getElevationAsync<T = DefaultLatLonKeys>(pos: GenericMapPos<T>, callback: (error: Error, res: number) => void);
     public getElevations<T = DefaultLatLonKeys>(pos: MapPosVector<T> | GenericMapPos<T>[]): DoubleVector;

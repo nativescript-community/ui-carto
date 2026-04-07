@@ -8,6 +8,7 @@ export interface DataSourceOptions {
 }
 export interface TileDataSourceOptions extends DataSourceOptions {
     maxOverzoomLevel?: number;
+    encoding?: string;
 }
 export abstract class DataSource<T, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection(): Projection;
@@ -15,7 +16,8 @@ export abstract class DataSource<T, U extends DataSourceOptions> extends BaseNat
 export class TileDataSource<T, U extends TileDataSourceOptions> extends DataSource<T, U> {
     minZoom?: number;
     maxZoom?: number;
-    maxOverzoomLevel: number;
+    maxOverzoomLevel?: number;
+    encoding?: string;
 
     loadTile(x, y, z): any;
 }
@@ -53,11 +55,11 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<any, GeoJSONVect
     createLayer(name: string): number;
     deleteLayer(index: number);
     setLayerFeatureCollection(layerIndex: number, projection: Projection, featureCollection: FeatureCollection);
-    setLayerGeoJSON(layerIndex: number, geoJSON: Object);
-    setLayerGeoJSONString(layerIndex: number, geoJSON: string | Object);
-    addGeoJSONFeature(layerIndex: number, geoJSON: Object);
-    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object);
-    updateGeoJSONFeature(layerIndex: number, geoJSON: Object);
-    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | Object);
+    setLayerGeoJSON(layerIndex: number, geoJSON: object);
+    setLayerGeoJSONString(layerIndex: number, geoJSON: string | object);
+    addGeoJSONFeature(layerIndex: number, geoJSON: object);
+    addGeoJSONStringFeature(layerIndex: number, geoJSON: string | object);
+    updateGeoJSONFeature(layerIndex: number, geoJSON: object);
+    updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | object);
     removeGeoJSONFeature(layerIndex: number, id: string | number);
 }

@@ -24,9 +24,9 @@ export default class BasicRaster extends Vue {
     title: string;
 
     destroyed() {
-        setTimeout(function () {
-            __collect();
-        }, 2000);
+        // setTimeout(function () {
+        //     __collect();
+        // }, 2000);
     }
     onMapReady(e: MapEventData) {
         const mapView = e.object as CartoMap;

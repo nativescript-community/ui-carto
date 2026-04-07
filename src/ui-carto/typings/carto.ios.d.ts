@@ -2291,6 +2291,26 @@ declare class NTMBTilesTileDataSource extends NTTileDataSource {
     loadTileSwigExplicitNTMBTilesTileDataSource(mapTile: NTMapTile): NTTileData;
 }
 
+
+declare class NTPMTilesTileDataSource extends NTTileDataSource {
+    static alloc(): NTPMTilesTileDataSource; // inherited from NSObject
+
+    static new(): NTPMTilesTileDataSource; // inherited from NSObject
+
+    constructor(o: { minZoom: number; maxZoom: number; path: string });
+
+    constructor(o: { minZoom: number; maxZoom: number; path: string; scheme: NTMBTilesScheme });
+
+    constructor(o: { path: string });
+
+
+    getMetaData(): NTStringMap;
+
+    initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
+
+    initWithPath(path: string): this;
+}
+
 declare class NTMBVectorTileDecoder extends NTVectorTileDecoder {
     static alloc(): NTMBVectorTileDecoder; // inherited from NSObject
 
@@ -4432,6 +4452,19 @@ declare const enum NTRasterTileFilterMode {
     T_RASTER_TILE_FILTER_MODE_BILINEAR = 1,
 
     T_RASTER_TILE_FILTER_MODE_BICUBIC = 2
+}
+
+
+declare const enum NTHillshadeMethod {
+    STANDARD = 0,
+
+    COMBINED = 1,
+
+    IGOR = 2,
+
+    MULTIDIRECTIONAL = 3,
+
+    BASIC = 4
 }
 
 declare class NTRasterTileLayer extends NTTileLayer {
