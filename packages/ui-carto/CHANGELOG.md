@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9](https://github.com/nativescript-community/ui-carto/compare/v2.0.8...v2.0.9) (2026-04-14)
+
+### Bug Fixes
+
+* **ui-carto:** android support for latest sdk ([ea1b21e](https://github.com/nativescript-community/ui-carto/commit/ea1b21ecefeedfa232c62dfafb029b6c7ad94799))
+
 ## [2.0.8](https://github.com/nativescript-community/ui-carto/compare/v2.0.7...v2.0.8) (2026-04-13)
 
 ### Bug Fixes
