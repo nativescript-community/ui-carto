@@ -22,6 +22,7 @@ android {
                 // Exclude geocoding and routing if not using full variant
                 if (cartoSDKVariant != "full") {
                     exclude '**/geocoding/**'
+                    exclude '**/packagemanager/**'
                     exclude '**/routing/**'
                 }
 				if (cartoSDKVariant == "lite") {

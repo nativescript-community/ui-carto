@@ -290,7 +290,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions2 {
+            export namespace packagemanager {
                 export class AKPackageManagerListener extends com.carto.packagemanager.PackageManagerListener {
                     public static class: java.lang.Class<AKPackageManagerListener>;
                     public onPackageFailed(param0: string, param1: number, param2: com.carto.packagemanager.PackageErrorType): void;
@@ -731,7 +731,7 @@ declare namespace com {
 declare namespace com {
     export namespace akylas {
         export namespace carto {
-            export namespace additions2 {
+            export namespace packagemanager {
                 export class ServerPackagesCallback extends java.lang.Object {
                     public static class: java.lang.Class<ServerPackagesCallback>;
                     /**

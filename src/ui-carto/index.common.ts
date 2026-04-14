@@ -1,4 +1,3 @@
-/* eslint-disable no-redeclare */
 import { ImageAsset, ImageSource, Utils, knownFolders, path } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { fromNativeMapRange, nativeVectorToArray, toNativeMapRange } from './utils';
@@ -31,14 +30,13 @@ function createSetter(key, options: NativePropertyOptions) {
         if (this.native && this.native[nativeSetterName]) {
             this['_' + key] = newVal;
             const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
-            console.log('nativeSetterName', nativeSetterName, newVal, actualVal, this.getNative()[nativeSetterName]);
             this.getNative()[nativeSetterName](actualVal);
             this.mBuildStyle = null;
         }
     };
 }
 
-function nativePropertyGenerator(target: Object, key: string, options?: NativePropertyOptions) {
+function nativePropertyGenerator(target: object, key: string, options?: NativePropertyOptions) {
     Object.defineProperty(target, key, {
         get: createGetter(key, options),
         set: createSetter(key, options),
@@ -156,7 +154,7 @@ export function getFileName(str: string): string {
 export function getRelativePathToApp(str: string) {
     const filePath = getFileName(str);
     if (!currentAppFolder) {
-         currentAppFolder = knownFolders.currentApp().path;
+        currentAppFolder = knownFolders.currentApp().path;
     }
     const toReplace = currentAppFolder.split('/').slice(0, -1).join('/');
     if (filePath.indexOf(toReplace) === 0) {
