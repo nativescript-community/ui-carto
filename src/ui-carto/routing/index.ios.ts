@@ -139,12 +139,20 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<N
 export class ValhallaOnlineRoutingService extends ValhallaRoutingService<NTValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
     @nativeProperty profile: string;
     @nativeProperty customServiceURL: string;
+    @nativeProperty timeout: number;
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
         if (options.apiKey) {
             return NTValhallaOnlineRoutingService.alloc().initWithApiKey(options.apiKey);
         } else {
             return NTValhallaOnlineRoutingService.alloc().init();
         }
+    }
+    set httpHeaders(value: { [k: string]: string }) {
+        const map = NTStringMap.alloc().init();
+        for (const key in value) {
+            map.setX(key, value[key]);
+        }
+        this.native.setHTTPHeaders(map);
     }
 }
 

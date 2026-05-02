@@ -5938,6 +5938,8 @@ declare class NTValhallaOnlineRoutingService extends NTRoutingService {
 
     setCustomServiceURL(serviceURL: string): void;
 
+    setHTTPHeaders(headers: NTStringMap): void;
+
     setProfileSwigExplicitNTValhallaOnlineRoutingService(profile: string): void;
 }
 

@@ -177,12 +177,23 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<c
 export class ValhallaOnlineRoutingService extends ValhallaRoutingService<com.carto.routing.ValhallaOnlineRoutingService, ValhallaOnlineRoutingServiceOptions> {
     @nativeProperty profile: string;
     @nativeProperty customServiceURL: string;
+    @nativeProperty timeout: number;
+
     createNative(options: ValhallaOnlineRoutingServiceOptions) {
         if (options.apiKey) {
             return new com.carto.routing.ValhallaOnlineRoutingService(options.apiKey);
         } else {
             return new com.carto.routing.ValhallaOnlineRoutingService();
         }
+    }
+
+    set httpHeaders(value: { [k: string]: string }) {
+        const map = new com.carto.core.StringMap();
+        for (const key in value) {
+            map.set(key, value[key]);
+        }
+        console.log('httpHeaders', map, this.native.setHTTPHeaders);
+        this.native.setHTTPHeaders(map);
     }
 }
 

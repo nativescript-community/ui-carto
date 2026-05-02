@@ -1,10 +1,15 @@
 repositories {
 	mavenCentral()
 	maven { url 'https://jitpack.io' }
+
+	// flatDir {
+	// 	dirs "/home/mguillon/dev/carto/mobile-sdk/dist/android"
+	// }
 }
 dependencies {
+    // implementation(name:'carto-mobile-sdk-android-5.2.1-full', ext:'aar')
 
-	def cartoSDKVersion =  project.hasProperty("cartoSDKVersion") ? project.cartoSDKVersion : "5.0.1"
+	def cartoSDKVersion =  project.hasProperty("cartoSDKVersion") ? project.cartoSDKVersion : "5.2.2"
 	def cartoSDKVariant =  project.hasProperty("cartoSDKVariant") ? project.cartoSDKVariant : "full"
 
 	if (cartoSDKVariant == "full") {

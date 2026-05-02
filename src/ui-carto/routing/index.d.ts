@@ -101,9 +101,13 @@ export class MultiValhallaOfflineRoutingService extends ValhallaRoutingService<a
 export interface ValhallaOnlineRoutingServiceOptions extends ValhallaRoutingServiceOptions {
     apiKey?: string;
     customServiceURL?: string;
+    httpHeaders?: { [k: string]: string };
+    timeout?: number;
 }
 export class ValhallaOnlineRoutingService extends ValhallaRoutingService<any, ValhallaOnlineRoutingServiceOptions> {
     customServiceURL: string;
+    httpHeaders?: { [k: string]: string };
+    timeout?: number;
     profile: ValhallaProfile;
 }
 

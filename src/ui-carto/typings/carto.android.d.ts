@@ -4763,7 +4763,7 @@ declare namespace com {
 				public getCustomServiceURL(): string;
 				public calculateRoute(request: com.carto.routing.RoutingRequest): com.carto.routing.RoutingResult;
 				
-				
+				public setHTTPHeaders(headers: com.carto.core.StringMap): void;
 				
 				
 				public constructor();
