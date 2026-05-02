@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/nativescript-community/ui-carto/compare/v2.0.10...v2.1.0) (2026-05-02)
+
+### Features
+
+* support httpHeaders for ValhallaOnlineRoutingService ([ce02e8d](https://github.com/nativescript-community/ui-carto/commit/ce02e8d78c5e959f89c6c713d06941571147d004))
+
 ## [2.0.10](https://github.com/nativescript-community/ui-carto/compare/v2.0.9...v2.0.10) (2026-04-14)
 
 ### Bug Fixes
