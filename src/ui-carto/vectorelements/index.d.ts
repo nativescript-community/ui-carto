@@ -1,7 +1,7 @@
 import { BaseNative } from '..';
-import { MapPos, MapPosVector } from '../core';
+import { DefaultLatLonKeys, GenericMapPos, MapBounds, MapPos, MapPosVector } from '../core';
 import { Projection } from '../projections';
-import { DefaultLatLonKeys, GenericMapPos } from '../core/index.common';
+import { Geometry } from '../geometry';
 
 declare enum BillboardOrientation {
     FACE_CAMERA,
@@ -70,7 +70,13 @@ export abstract class BaseLineVectorElement<T, U extends LineVectorElementOption
     positions?: MapPosVector<K> | GenericMapPos<K>[];
     projection?: Projection;
 }
-export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {}
+export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {
+    id?: number;
+    getBounds(): MapBounds<DefaultLatLonKeys>;
+    getGeometry(): Geometry<DefaultLatLonKeys>;
+    getMetadataElement(key: string): { [k: string]: string };
+    setMetadataElement(key: string, element: { [k: string]: string }): void;
+}
 export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementStyleBuilderOptions> extends BaseNative<T, U> {
     buildStyle(): any;
 }
