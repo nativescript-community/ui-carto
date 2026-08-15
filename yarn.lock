@@ -24,25 +24,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@akylas/nativescript@npm:8.9.15":
-  version: 8.9.15
-  resolution: "@akylas/nativescript@npm:8.9.15"
-  dependencies:
-    "@csstools/css-calc": "npm:~2.1.2"
-    "@csstools/css-color-parser": "npm:^3.0.8"
-    "@csstools/css-parser-algorithms": "npm:^3.0.4"
-    "@csstools/css-tokenizer": "npm:^3.0.3"
-    "@nativescript/hook": "npm:~2.0.0"
-    acorn: "npm:^8.7.0"
-    css-tree: "npm:^1.1.2"
-    css-what: "npm:^6.1.0"
-    emoji-regex: "npm:^10.3.0"
-    reduce-css-calc: "npm:^2.1.8"
-    tslib: "npm:^2.6.3"
-  checksum: 10/9c0d29807984240a587fc177c12aa0ac13ebf551b84843a18bd90f2037c0931f10b2c51b1109cdada4ed112d4bb8d9a2b608cbcc4e416bb292bfce48fb50a29b
-  languageName: node
-  linkType: hard
-
 "@ampproject/remapping@npm:^2.2.0, @ampproject/remapping@npm:^2.2.1":
   version: 2.3.0
   resolution: "@ampproject/remapping@npm:2.3.0"
@@ -1740,11 +1721,11 @@ __metadata:
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=c7bf83&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=b5994b&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/ui-carto": "npm:*"
     vue-property-decorator: "npm:9.1.2"
-  checksum: 10/a0e30cce05a7375b848f382fb8ffda4fdd79097199a3a44b40e2873be7cb348dac9e3ee0da4d83b1722bcea7b66db8acb15bffb74d28da1eee2d6dfb9dd641bf
+  checksum: 10/577189604605ffcb062623f7b469b6915a23fe47f02dfc0c77d4dc2c877a3c204b91c0c89a7dfc4b2a90ffa5fa8d85876363841d5fc54e6ec6d0e3ec2015fc9d
   languageName: node
   linkType: hard
 
@@ -1833,6 +1814,13 @@ __metadata:
   version: 3.0.5
   resolution: "@nativescript/hook@npm:3.0.5"
   checksum: 10/ff2b1bc85a88e51e4d0b271d4c043b23bc640f47936dd65c9473be1a8faf8e5835504ac4430669c32f1e6cfb0e5c2a5eb3c363f9717c530e17f70ba2e8cfd829
+  languageName: node
+  linkType: hard
+
+"@nativescript/ios@npm:8.9.4":
+  version: 8.9.4
+  resolution: "@nativescript/ios@npm:8.9.4"
+  checksum: 10/3495c23232a4a57696f2c32d8ab8529f0191c3afc4d497350ad0b04d9085e6bb5bb8b2302cca886a016271e68ba00cf5407804ccce9dd95a55926fa292b0b1c1
   languageName: node
   linkType: hard
 
@@ -5852,12 +5840,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo-svelte@workspace:demo-svelte"
   dependencies:
-    "@akylas/nativescript": "npm:8.9.15"
+    "@akylas/nativescript": "npm:8.9.10"
     "@nativescript-community/svelte-native": "npm:1.0.32"
     "@nativescript-community/template-snippet": "npm:*"
     "@nativescript/android": "npm:8.9.2"
     "@nativescript/core": "npm:8.9.9"
-    "@nativescript/ios": "npm:8.9.5"
+    "@nativescript/ios": "npm:8.9.4"
     "@nativescript/theme": "npm:3.1.0"
     "@nativescript/types": "npm:8.9.1"
     "@nativescript/webpack": "npm:5.0.29"
