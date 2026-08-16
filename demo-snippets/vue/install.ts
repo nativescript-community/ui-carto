@@ -1,5 +1,5 @@
 import Vue from 'nativescript-vue';
-import Pager from '@nativescript-community/ui-carto/vue';
+import Pager from '@nativescript-community/ui-massifmaps/vue';
 
 import BasicRaster from './BasicRaster.vue';
 export function installPlugin() {

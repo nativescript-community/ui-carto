@@ -1,0 +1,18 @@
+import MassifMaps
+
+@objc(AKRendererCaptureListener)
+@objcMembers
+class AKRendererCaptureListener: MSFRendererCaptureListener {
+  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  func onMapRenderedThreaded(_ bitmap: MSFBitmap!) {
+  }
+  override func onMapRendered(_ bitmap: MSFBitmap!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onMapRenderedThreaded(bitmap)
+      }
+    } else {
+      return onMapRenderedThreaded(bitmap)
+    }
+  }
+}

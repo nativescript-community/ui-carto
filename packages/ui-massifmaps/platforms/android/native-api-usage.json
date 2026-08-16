@@ -1,0 +1,6 @@
+{
+    "uses": [
+        "com.nativescript.massifmaps*:*", "com.massifmaps*:*"
+    ],
+    "blacklist":["com.massifmaps*:*JNI"]
+}

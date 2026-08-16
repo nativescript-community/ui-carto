@@ -1723,7 +1723,7 @@ __metadata:
   version: 0.0.1
   resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=b5994b&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
-    "@nativescript-community/ui-carto": "npm:*"
+    "@nativescript-community/ui-massifmaps": "npm:*"
     vue-property-decorator: "npm:9.1.2"
   checksum: 10/577189604605ffcb062623f7b469b6915a23fe47f02dfc0c77d4dc2c877a3c204b91c0c89a7dfc4b2a90ffa5fa8d85876363841d5fc54e6ec6d0e3ec2015fc9d
   languageName: node
@@ -1733,14 +1733,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nativescript-community/template-snippet@workspace:demo-snippets"
   dependencies:
-    "@nativescript-community/ui-carto": "npm:*"
+    "@nativescript-community/ui-massifmaps": "npm:*"
     vue-property-decorator: "npm:9.1.2"
   languageName: unknown
   linkType: soft
 
-"@nativescript-community/ui-carto@npm:*, @nativescript-community/ui-carto@workspace:packages/ui-carto":
+"@nativescript-community/ui-massifmaps@npm:*, @nativescript-community/ui-massifmaps@workspace:packages/ui-massifmaps":
   version: 0.0.0-use.local
-  resolution: "@nativescript-community/ui-carto@workspace:packages/ui-carto"
+  resolution: "@nativescript-community/ui-massifmaps@workspace:packages/ui-massifmaps"
   languageName: unknown
   linkType: soft
 

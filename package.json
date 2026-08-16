@@ -1,12 +1,12 @@
 {
     "version": "1.4.8",
-    "homepage": "https://github.com/nativescript-community/ui-carto#readme",
+    "homepage": "https://github.com/nativescript-community/ui-massifmaps#readme",
     "bugs": {
-        "url": "https://github.com/nativescript-community/ui-carto/issues"
+        "url": "https://github.com/nativescript-community/ui-massifmaps/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nativescript-community/ui-carto.git"
+        "url": "git+https://github.com/nativescript-community/ui-massifmaps.git"
     },
     "license": "ISC",
     "author": "",

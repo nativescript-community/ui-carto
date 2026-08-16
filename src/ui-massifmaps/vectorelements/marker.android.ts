@@ -1,0 +1,77 @@
+import { Color, ImageAsset, ImageSource } from '@nativescript/core';
+import { BillboardOrientation, BillboardScaling } from '.';
+import { geometryFromArgs, nativeAndroidEnumProperty, nativeMassifImageProperty, nativeColorProperty, nativeProperty } from '..';
+import { Geometry } from '../geometry';
+import { BaseBillboardVectorElement, BillboardStyleBuilder } from './index.android';
+import { styleBuilderProperty } from './index.common';
+import { MarkerOptions, MarkerStyleBuilderOptions } from './marker';
+
+export class MarkerStyleBuilder extends BillboardStyleBuilder<com.massifmaps.styles.MarkerStyleBuilder, MarkerStyleBuilderOptions> {
+    createNative(options: MarkerStyleBuilderOptions) {
+        return new com.massifmaps.styles.MarkerStyleBuilder();
+    }
+    @nativeProperty width: number;
+    @nativeProperty size: number;
+    @nativeColorProperty color: Color | string;
+    @nativeMassifImageProperty bitmap: string | ImageSource | ImageAsset;
+    @nativeProperty anchorPointX: number;
+    @nativeProperty anchorPointY: number;
+    @nativeProperty clickSize: number;
+    @nativeProperty scalingMode: BillboardScaling;
+    @nativeProperty orientationMode: BillboardOrientation;
+
+    mBuildStyle: com.massifmaps.styles.MarkerStyle;
+    buildStyle() {
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
+        }
+        return this.mBuildStyle;
+    }
+}
+
+export class Marker extends BaseBillboardVectorElement<com.massifmaps.vectorelements.Marker, MarkerOptions> {
+    @styleBuilderProperty color: Color | string;
+    @styleBuilderProperty bitmap: string;
+    @styleBuilderProperty size: number;
+    @styleBuilderProperty width: number;
+    @styleBuilderProperty clickSize: number;
+    @styleBuilderProperty anchorPointX: number;
+    @styleBuilderProperty anchorPointY: number;
+    createNative(options: MarkerOptions) {
+        const style = this.buildStyle();
+        let result: com.massifmaps.vectorelements.Marker;
+        if (options.geometry) {
+            result = new com.massifmaps.vectorelements.Marker(geometryFromArgs(options.geometry), style);
+        } else {
+            const nativePos = this.getNativePos(options.position, options.projection);
+            result = new com.massifmaps.vectorelements.Marker(nativePos, style);
+        }
+        return result;
+    }
+    buildStyle() {
+        let style: com.massifmaps.styles.MarkerStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof com.massifmaps.styles.MarkerStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof MarkerStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new MarkerStyleBuilder(styleBuilder as MarkerStyleBuilderOptions).buildStyle();
+        }
+        return style;
+    }
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : this.options.styleBuilder;
+    }
+    set styleBuilder(value: MarkerStyleBuilder | com.massifmaps.styles.MarkerStyle | MarkerStyleBuilderOptions) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
+            this.native.setStyle(this.buildStyle());
+        }
+    }
+    set geometry(geometry: Geometry) {
+        if (this.native) {
+            this.native.setGeometry(geometryFromArgs(geometry));
+        }
+    }
+}

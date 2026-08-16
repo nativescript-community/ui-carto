@@ -1,0 +1,104 @@
+import { Color, ImageAsset, ImageSource } from '@nativescript/core';
+import { nativeMassifImageProperty, nativeColorProperty, nativeProperty } from '..';
+import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
+import { BasePointVectorElement, BillboardStyleBuilder } from './index.ios';
+
+export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<MSFBalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
+    createNative(options: BalloonPopupStyleBuilderOptions) {
+        return MSFBalloonPopupStyleBuilder.alloc().init();
+    }
+    @nativeColorProperty color: string | Color;
+    @nativeProperty cornerRadius: number;
+    @nativeColorProperty descriptionColor: string | Color;
+    @nativeProperty descriptionFontName: string;
+    @nativeProperty descriptionFontSize: number;
+    @nativeProperty descriptionWrap: boolean;
+    @nativeColorProperty leftColor: string | Color;
+    @nativeMassifImageProperty leftImage: string | ImageSource | ImageAsset;
+    @nativeColorProperty rightColor: string | Color;
+    @nativeMassifImageProperty rightImage: string | ImageSource | ImageAsset;
+    @nativeColorProperty strokeColor: string | Color;
+    @nativeProperty strokeWidth: number;
+    @nativeColorProperty titleColor: string | Color;
+    @nativeProperty titleFontName: string;
+    @nativeProperty titleFontSize: number;
+    @nativeProperty titleWrap: boolean;
+    @nativeProperty triangleHeight: number;
+    @nativeProperty triangleWidth: number;
+
+    mBuildStyle: MSFBalloonPopupStyle;
+    buildStyle() {
+        if (!this.mBuildStyle) {
+            this.mBuildStyle = this.getNative().buildStyle();
+        }
+        return this.mBuildStyle;
+    }
+}
+
+export class BalloonPopup extends BasePointVectorElement<MSFBalloonPopup, BalloonPopupOptions> {
+    createNative(options: BalloonPopupOptions) {
+        const style = this.buildStyle();
+        let result: MSFBalloonPopup;
+        if (options.marker) {
+            result = MSFBalloonPopup.alloc().initWithBaseBillboardStyleTitleDesc(options.marker.getNative(), style, options.title, options.description);
+        } else {
+            const nativePos = this.getNativePos(options.position, options.projection);
+
+            result = MSFBalloonPopup.alloc().initWithPosStyleTitleDesc(nativePos, style, options.title, options.description);
+        }
+        // result['owner'] = new WeakRef(this);
+        return result;
+    }
+    buildStyle() {
+        let style: MSFBalloonPopupStyle;
+        const styleBuilder = this.options.styleBuilder;
+        if (styleBuilder instanceof MSFBalloonPopupStyle) {
+            style = styleBuilder;
+        } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
+            style = styleBuilder.buildStyle();
+        } else if (styleBuilder.hasOwnProperty) {
+            style = new BalloonPopupStyleBuilder(styleBuilder as BalloonPopupStyleBuilderOptions).buildStyle();
+        }
+        return style;
+    }
+    get styleBuilder() {
+        return this.native ? this.native.getStyle() : (this.options.styleBuilder as BalloonPopupStyleBuilder | MSFBalloonPopupStyle | BalloonPopupStyleBuilderOptions);
+    }
+    set styleBuilder(value: BalloonPopupStyleBuilder | MSFBalloonPopupStyle | BalloonPopupStyleBuilderOptions) {
+        if (this.native && !this.duringInit) {
+            this.options.styleBuilder = value as any;
+            this.native.setStyle(this.buildStyle());
+        }
+    }
+}
+
+// class BuildingStyleObject<BO extends VectorElementStyleBuilderOptions, OptionsType extends VectorElementOptions, N, SN, E extends BaseVectorElement<N, OptionsType>, B extends BaseVectorElementStyleBuilder<SN, BO>> {
+//     _styleBuilder: B;
+//     _builtStyle: SN;
+//     buildStyle() {
+//         let style: MSFBalloonPopupStyle;
+//         const styleBuilder = this._styleBuilder;
+//         if (styleBuilder instanceof MSFBalloonPopupStyle) {
+//             style = styleBuilder;
+//         } else if (styleBuilder instanceof BalloonPopupStyleBuilder) {
+//             style = styleBuilder.buildStyle();
+//         } else if (styleBuilder.hasOwnProperty) {
+//             style = new BalloonPopupStyleBuilder(styleBuilder).buildStyle();
+//         }
+//         return styleBuilder.buildStyle();
+//     }
+//     get styleBuilder() {
+//         return this._styleBuilder;
+//     }
+//     set styleBuilder(value: OptionsType | B) {
+//         if ((value as any).getNative) {
+//             this._styleBuilder = value as B;
+//         } else {
+//             this._styleBuilder = new OptionsType(value);
+//         }
+//         this.options.styleBuilder = value as any;
+//         if (this.native) {
+//             this.native.setStyle(this.buildStyle());
+//         }
+//     }
+// }

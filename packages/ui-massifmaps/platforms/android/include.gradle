@@ -1,0 +1,39 @@
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+
+	// flatDir {
+	// 	dirs "/home/mguillon/dev/massif-maps/MassifMaps/dist/android"
+	// }
+}
+dependencies {
+    // implementation(name:'massif-android-6.0.0-full', ext:'aar')
+
+	def massifSDKVersion =  project.hasProperty("massifSDKVersion") ? project.massifSDKVersion : "6.0.0"
+	def massifSDKVariant =  project.hasProperty("massifSDKVariant") ? project.massifSDKVariant : "full"
+
+	if (massifSDKVariant == "full") {
+		implementation "com.github.massif-maps:MassifMaps-android-aar:$massifSDKVersion"
+	} else {
+		implementation "com.github.massif-maps:MassifMaps-android-aar:$massifSDKVersion:$massifSDKVariant@aar"
+	}
+}
+android {
+    sourceSets {
+        main {
+            java {
+                def massifSDKVariant =  project.hasProperty("massifSDKVariant") ? project.massifSDKVariant : "full"
+                
+                // Exclude geocoding and routing if not using full variant
+                if (massifSDKVariant != "full") {
+                    exclude '**/geocoding/**'
+                    exclude '**/packagemanager/**'
+                    exclude '**/routing/**'
+                }
+				if (massifSDKVariant == "lite") {
+                    exclude '**/additions2/**'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+import { HTTPTileDataSourceOptions } from './http';
+import { TileDataSource } from '.';
+import { nativeProperty } from '..';
+
+export class HTTPTileDataSource extends TileDataSource<MSFHTTPTileDataSource, HTTPTileDataSourceOptions> {
+    @nativeProperty({
+        nativeGetterName: 'isTMSScheme'
+    })
+    TMSScheme: boolean;
+    @nativeProperty maxAgeHeaderCheck: boolean;
+    @nativeProperty baseUrl: string;
+    @nativeProperty timeout: number;
+    createNative(options: HTTPTileDataSourceOptions) {
+        return MSFHTTPTileDataSource.alloc().initWithMinZoomMaxZoomBaseURL(options.minZoom, options.maxZoom, options.url);
+    }
+    // set autoHD(value: boolean) {
+    //     this.native.setAutoHD(value);
+    // }
+    set httpHeaders(value: { [k: string]: string }) {
+        const map = MSFStringMap.alloc().init();
+        for (const key in value) {
+            map.setX(key, value[key]);
+        }
+        this.native.setHTTPHeaders(map);
+    }
+    set subdomains(value: string | string[]) {
+        const array = Array.isArray(value) ? value : value.split('');
+        const vector = MSFStringVector.alloc().init();
+        for (let index = 0; index < array.length; index++) {
+            vector.add(array[index]);
+        }
+        this.native.setSubdomains(vector);
+    }
+}

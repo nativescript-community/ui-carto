@@ -18,14 +18,14 @@
       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<h1 align="center">@nativescript-community/ui-carto</h1>
+<h1 align="center">@nativescript-community/ui-massifmaps</h1>
 <p align="center">
-		<a href="https://npmcharts.com/compare/@nativescript-community/ui-carto?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/@nativescript-community/ui-carto.svg" height="20"/></a>
-<a href="https://www.npmjs.com/package/@nativescript-community/ui-carto"><img alt="NPM Version" src="https://img.shields.io/npm/v/@nativescript-community/ui-carto.svg" height="20"/></a>
+		<a href="https://npmcharts.com/compare/@nativescript-community/ui-massifmaps?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/@nativescript-community/ui-massifmaps.svg" height="20"/></a>
+<a href="https://www.npmjs.com/package/@nativescript-community/ui-massifmaps"><img alt="NPM Version" src="https://img.shields.io/npm/v/@nativescript-community/ui-massifmaps.svg" height="20"/></a>
 	</p>
 
 <p align="center">
-  <b>NativeScript plugin for CARTO Mobile SDK</b></br>
+  <b>NativeScript plugin for MassifMaps SDK</b></br>
   <sub><sub>
 </p>
 
@@ -67,7 +67,7 @@
 ## Installation
 Run the following command from the root of your project:
 
-`ns plugin add @nativescript-community/ui-carto`
+`ns plugin add @nativescript-community/ui-massifmaps`
 
 
 [](#api)
@@ -77,7 +77,7 @@ Run the following command from the root of your project:
 
 ## API
 
-The API documentation for this plugin is available [here](https://nativescript-community.github.io/ui-carto/).
+The API documentation for this plugin is available [here](https://nativescript-community.github.io/ui-massifmaps/).
 
 
 [](#usage-in-svelte)

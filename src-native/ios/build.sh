@@ -3,8 +3,8 @@ set -o pipefail
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-SOURCE_NAME="CartoAdditions"
+SOURCE_NAME="MassifMapsAdditions"
 IOS_SOURCE_DIR="$CURRENT_DIR"
 
 cd $IOS_SOURCE_DIR
-xcodebuild -workspace CartoAdditions.xcworkspace -scheme universal -sdk iphonesimulator
+xcodebuild -workspace MassifMapsAdditions.xcworkspace -scheme universal -sdk iphonesimulator

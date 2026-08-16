@@ -1,6 +1,0 @@
-framework module CartoAdditions {
-  umbrella header "CartoAdditions.h"
-
-  export *
-  module * { export * }
-}

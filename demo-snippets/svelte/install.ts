@@ -1,10 +1,10 @@
-import { CartoMap } from '@nativescript-community/ui-carto/ui';
-import { registerNativeViewElement } from 'svelte-native/dom';
+import { MassifMap } from '@nativescript-community/ui-massifmaps/ui';
+import { registerNativeViewElement } from '@nativescript-community/svelte-native/dom';
 
 import BasicRaster from './BasicRaster.svelte';
 
 export function installPlugin() {
-    registerNativeViewElement('cartomap', () => CartoMap);
+    registerNativeViewElement('massifmap', () => MassifMap);
 }
 
 export const demos = [{ name: 'Basic Raster', path: 'raster', component: BasicRaster }];
