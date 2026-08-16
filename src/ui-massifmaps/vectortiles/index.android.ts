@@ -1,0 +1,127 @@
+import { File, profile } from '@nativescript/core';
+import type { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
+import { getFileName, getRelativePathToApp } from '../index.common';
+import { DirAssetPackage, ZippedAssetPackage, nativeVectorToArray } from '../utils';
+import { BaseVectorTileDecoder } from './index.common';
+
+export class VectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
+    createNative(options: VectorTileDecoderOptions) {
+        return null;
+    }
+}
+
+export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
+    pack: com.massifmaps.utils.AssetPackage | DirAssetPackage | ZippedAssetPackage;
+    mInterface: com.nativescript.massifmaps.additions.AKAssetPackage.Interface;
+    constructor(options) {
+        super(options);
+        for (const property of ['mInterface']) {
+            const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
+            if (descriptor) {
+                descriptor.enumerable = false;
+            }
+        }
+    }
+    createNative(options: MBVectorTileDecoderOptions) {
+        let pack: com.massifmaps.utils.AssetPackage;
+        if (options.pack) {
+            pack = this.pack = options.pack.getNative();
+        } else if (!!options.zipPath) {
+            pack = this.pack = new ZippedAssetPackage(options as any).getNative();
+        } else if (!!options.dirPath) {
+            pack = this.pack = new DirAssetPackage({ dirPath: options.dirPath, loadUsingNS: options.liveReload }).getNative();
+        }
+        if (options.cartoCss) {
+            if (pack) {
+                return new com.massifmaps.vectortiles.MBVectorTileDecoder(new com.massifmaps.styles.CartoCSSStyleSet(options.cartoCss, pack));
+            } else {
+                return new com.massifmaps.vectortiles.MBVectorTileDecoder(new com.massifmaps.styles.CartoCSSStyleSet(options.cartoCss));
+            }
+        } else if (pack) {
+            const vectorTileStyleSet = new com.massifmaps.styles.CompiledStyleSet(pack, options.style);
+            const result = new com.massifmaps.vectortiles.MBVectorTileDecoder(vectorTileStyleSet);
+            return result;
+        } else {
+            console.error(`could not create MBVectorTileDecoder pack for options: ${options}`);
+            return null;
+        }
+    }
+
+    set style(style: string) {
+        this.options.style = style;
+        if (this.native && !this.duringInit) {
+            this.getNative().setCompiledStyleSet(new com.massifmaps.styles.CompiledStyleSet(this.nativePack, style));
+        }
+    }
+    get style() {
+        return this.options.style;
+    }
+
+    get nativePack() {
+        return this.pack['getNative'] ? this.pack['getNative']() : this.pack;
+    }
+
+    reloadStyle() {
+        if (this.native) {
+            if (this.pack) {
+                const pack = this.nativePack;
+                if (this.options.cartoCss) {
+                    this.getNative().setCartoCSSStyleSet(new com.massifmaps.styles.CartoCSSStyleSet(this.options.cartoCss, pack));
+                } else {
+                    const compiled = new com.massifmaps.styles.CompiledStyleSet(pack, this.options.style);
+                    this.getNative().setCompiledStyleSet(compiled);
+                }
+            } else if (this.options.cartoCss) {
+                this.getNative().setCartoCSSStyleSet(new com.massifmaps.styles.CartoCSSStyleSet(this.options.cartoCss));
+            }
+        }
+    }
+
+    setStyleParameter(param: string, value: string) {
+        this.getNative().setStyleParameter(param, value);
+    }
+    setStyleParameters(value: Record<string, string> | com.massifmaps.core.StringMap) {
+        let map: com.massifmaps.core.StringMap = value as any;
+        if (!(value instanceof com.massifmaps.core.StringMap)) {
+            map = new com.massifmaps.core.StringMap();
+            Object.keys(value).forEach((k) => {
+                map.set(k, value[k]);
+            });
+        }
+        this.getNative().setStyleParameters(map);
+    }
+    setJSONStyleParameters(value: Record<string, string> | string) {
+        this.getNative().setJSONStyleParameters(typeof value === 'string' ? value : JSON.stringify(value));
+    }
+    setCartoCSSStyleSet(cartoCss: string) {
+        if (this.pack) {
+            this.getNative().setCartoCSSStyleSet(new com.massifmaps.styles.CartoCSSStyleSet(cartoCss, this.nativePack));
+        } else {
+            this.getNative().setCartoCSSStyleSet(new com.massifmaps.styles.CartoCSSStyleSet(cartoCss));
+        }
+    }
+    setCompiledStyleSet(param0: com.massifmaps.styles.CompiledStyleSet) {
+        this.getNative().setCompiledStyleSet(param0);
+    }
+    getCompiledStyleSet() {
+        return this.getNative().getCompiledStyleSet();
+    }
+    getCartoCSSStyleSet() {
+        return this.getNative().getCartoCSSStyleSet();
+    }
+    getStyleParameter(param0: string) {
+        return this.getNative().getStyleParameter(param0);
+    }
+    getStyleParameters() {
+        return nativeVectorToArray(this.getNative().getStyleParameters());
+    }
+    addFallbackFont(param0: com.massifmaps.core.BinaryData) {
+        return this.getNative().addFallbackFont(param0);
+    }
+    getMinZoom() {
+        return this.getNative().getMinZoom();
+    }
+    getMaxZoom() {
+        return this.getNative().getMaxZoom();
+    }
+}

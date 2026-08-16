@@ -3,7 +3,7 @@ set -o pipefail
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-SOURCE_NAME="cartoadditions"
+SOURCE_NAME="massifmapsadditions"
 ANDROID_SOURCE_DIR="$CURRENT_DIR"
 
 PROJECT_NAME="$SOURCE_NAME"

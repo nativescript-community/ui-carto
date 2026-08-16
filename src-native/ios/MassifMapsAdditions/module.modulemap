@@ -1,0 +1,6 @@
+framework module MassifMapsAdditions {
+  umbrella header "MassifMapsAdditions.h"
+
+  export *
+  module * { export * }
+}

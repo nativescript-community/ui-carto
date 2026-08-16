@@ -2,8 +2,8 @@
     "extends": "./tools/tsconfig",
     "compilerOptions": {
         "paths": {
-            "@nativescript-community/ui-carto": ["src/ui-carto"],
-            "@nativescript-community/ui-carto/*": ["src/ui-carto/*"]
+            "@nativescript-community/ui-massifmaps": ["src/ui-massifmaps"],
+            "@nativescript-community/ui-massifmaps/*": ["src/ui-massifmaps/*"]
         }
     }
 }

@@ -1,17 +1,17 @@
 <script lang="ts">
-    import { HTTPTileDataSource } from '@nativescript-community/ui-carto/datasources/http';
-    import { LocalVectorDataSource } from '@nativescript-community/ui-carto/datasources/vector';
-    import { RasterTileLayer } from '@nativescript-community/ui-carto/layers/raster';
-    import { VectorLayer } from '@nativescript-community/ui-carto/layers/vector';
-    import { CartoMap } from '@nativescript-community/ui-carto/ui';
-import { PanningMode } from '@nativescript-community/ui-carto/ui';
-    import { setShowDebug, setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-carto/utils';
-    import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/line';
-    import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/marker';
-    import { Point, PointStyleBuilder } from '@nativescript-community/ui-carto/vectorelements/point';
+    import { HTTPTileDataSource } from '@nativescript-community/ui-massifmaps/datasources/http';
+    import { LocalVectorDataSource } from '@nativescript-community/ui-massifmaps/datasources/vector';
+    import { RasterTileLayer } from '@nativescript-community/ui-massifmaps/layers/raster';
+    import { VectorLayer } from '@nativescript-community/ui-massifmaps/layers/vector';
+    import { MassifMap } from '@nativescript-community/ui-massifmaps/ui';
+import { PanningMode } from '@nativescript-community/ui-massifmaps/ui';
+    import { setShowDebug, setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-massifmaps/utils';
+    import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-massifmaps/vectorelements/line';
+    import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-massifmaps/vectorelements/marker';
+    import { Point, PointStyleBuilder } from '@nativescript-community/ui-massifmaps/vectorelements/point';
     import { goBack } from 'svelte-native';
 
-    let cartoMap: CartoMap;
+    let massifMap: MassifMap;
     let rasterLayer: RasterTileLayer;
 
     function logEvent(e) {
@@ -19,9 +19,9 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui';
     }
 
     function onMainMapReady(e) {
-        cartoMap = e.object as CartoMap;
+        massifMap = e.object as MassifMap;
         console.log('onMainMapReady');
-        const options = cartoMap.getOptions();
+        const options = massifMap.getOptions();
         options.setRestrictedPanning(true);
         options.setPanningMode(PanningMode.PANNING_MODE_STICKY_FINAL);
         options.setEnvelopeThreadPoolSize(2);
@@ -31,7 +31,7 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui';
         options.setDoubleClickMaxDuration(0.3);
         options.setLongClickDuration(0.5);
         options.setKineticRotation(false);
-        cartoMap.setFocusPos({ longitude: 6, latitude: 45 }, 0);
+        massifMap.setFocusPos({ longitude: 6, latitude: 45 }, 0);
         const dataSource = new HTTPTileDataSource({
             minZoom: 0,
             maxZoom: 22,
@@ -45,22 +45,22 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui';
             zoomLevelBias: 1
             // opacity: 0.5
         });
-        cartoMap.addLayer(rasterLayer);
+        massifMap.addLayer(rasterLayer);
 
         const localDataSource = new LocalVectorDataSource({
-            projection: cartoMap.projection
+            projection: massifMap.projection
         });
         const vectorLayer = new VectorLayer({
             dataSource: localDataSource,
             visibleZoomRange: [0, 24]
         });
-        cartoMap.addLayer(vectorLayer);
+        massifMap.addLayer(vectorLayer);
         const markerStyleBuilder = new MarkerStyleBuilder({
             size: 30,
             color: '#00FF00'
         });
         const marker = new Marker({
-            projection: cartoMap.projection,
+            projection: massifMap.projection,
             styleBuilder: markerStyleBuilder,
             position: {
                 latitude: 45.1887104,
@@ -74,7 +74,7 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui';
             color: '#ff0000'
         });
         const point = new Point({
-            projection: cartoMap.projection,
+            projection: massifMap.projection,
             styleBuilder: pointStyleBuilder,
             position: {
                 latitude: 45.1887104,
@@ -90,7 +90,7 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui';
             color: '#0000ff'
         });
         const line = new Line({
-            projection: cartoMap.projection,
+            projection: massifMap.projection,
             styleBuilder: lineStyleBuilder,
             positions: [
                 {
@@ -116,6 +116,6 @@ import { PanningMode } from '@nativescript-community/ui-carto/ui';
         <navigationButton text="Go back" on:tap={() => goBack()} />
     </actionBar>
     <gridLayout class="page">
-        <cartomap zoom="10" on:mapReady={onMainMapReady} on:mapMove={logEvent} on:mapStable={logEvent} on:mapIdle={logEvent} on:mapClicked={logEvent} on:mapInteraction={logEvent}/>
+        <massifmap zoom="10" on:mapReady={onMainMapReady} on:mapMove={logEvent} on:mapStable={logEvent} on:mapIdle={logEvent} on:mapClicked={logEvent} on:mapInteraction={logEvent}/>
     </gridLayout>
 </page>

@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "../../src/ui-massifmaps",
+        "outDir": "./"
+    },
+    "include": ["../../src/ui-massifmaps/**/*", "../../references.d.ts", "../../tools/references.d.ts", "../../src/references.d.ts"],
+    "exclude": ["../../src/ui-pager/angular/**"]
+}
