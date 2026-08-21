@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/nativescript-community/ui-massifmaps/compare/v2.1.0...v3.0.0) (2026-08-21)
+
+### ⚠ BREAKING CHANGES
+
+* the package is now @nativescript-community/ui-massifmaps
+and the public API classes/functions have been renamed.
+
+Package and layout:
+- @nativescript-community/ui-carto -> @nativescript-community/ui-massifmaps
+- src/ui-carto -> src/ui-massifmaps, packages/ui-carto -> packages/ui-massifmaps
+- typings carto.*.d.ts -> massifmaps.*.d.ts, ak.carto.*.d.ts -> ak.massifmaps.*.d.ts
+
+Native API references:
+- Android: com.carto.* -> com.massifmaps.*
+- iOS: NT* class prefix -> MSF*
+- native additions package com.akylas.carto.* -> com.nativescript.massifmaps.*
+- CartoAdditions Xcode project/module -> MassifMapsAdditions
+- CartoMobileSDK module -> MassifMaps
+
+Public API:
+- CartoMap -> MassifMap (XML element and CSSType are now MassifMap)
+- CartoViewBase -> MassifMapViewBase
+- CartoMapStyle -> MassifMapStyle
+- getCartoBitmap -> getMassifBitmap
+- nativeCartoImageProperty -> nativeMassifImageProperty
+- gradle properties cartoSDKVersion/cartoSDKVariant ->
+  massifSDKVersion/massifSDKVariant
+
+Dependencies now target MassifMaps 6.0.0:
+- com.github.massif-maps:MassifMaps-android-aar
+- SPM massif-maps/MassifMaps-ios-swift (currently commented out)
+- src-native Podfile pod 'MassifMaps'
+
+CartoCSS names (CartoCSSStyleSet, StringCartoCSSStyleSetMap, the cartoCss
+property) are kept, since upstream MassifMaps kept them. Both CHANGELOG.md
+files are left untouched as historical records.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+### Features
+
+* generate native bindings from the ambient typings ([0fe2b62](https://github.com/nativescript-community/ui-massifmaps/commit/0fe2b62c79e0e3bb59cadc6a551fcbd97d54d8cd))
+* rename plugin to ui-massifmaps ([33b1661](https://github.com/nativescript-community/ui-massifmaps/commit/33b1661777cd477af29910ef5f0fad3fc6e2625b))
+
 ## [2.1.0](https://github.com/nativescript-community/ui-carto/compare/v2.0.10...v2.1.0) (2026-05-02)
 
 ### Features
