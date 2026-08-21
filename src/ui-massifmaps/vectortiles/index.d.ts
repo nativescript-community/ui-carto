@@ -1,5 +1,9 @@
 import { BaseNative } from '..';
 import { DirAssetPackage } from '../utils/index.ios';
+import { Accessors as Acc_VectorTileDecoder } from '../bindings/vectortiles/VectorTileDecoder';
+import { Accessors as Acc_MBVectorTileDecoder } from '../bindings/vectortiles/MBVectorTileDecoder';
+import { Methods as Met_VectorTileDecoder } from '../bindings/vectortiles/VectorTileDecoder';
+import { Methods as Met_MBVectorTileDecoder } from '../bindings/vectortiles/MBVectorTileDecoder';
 
 export interface VectorTileDecoderOptions {}
 
@@ -59,3 +63,26 @@ export class MBVectorTileDecoder extends BaseNative<any, MBVectorTileDecoderOpti
 //     constructor(options: MassifVectorTileDecoderOptions, native?: any);
 //     setStyleParameter(param: string, value: string);
 // }
+
+export interface VectorTileDecoder extends Acc_VectorTileDecoder, Met_VectorTileDecoder {}
+
+export interface MBVectorTileDecoder
+    extends Omit<VectorTileDecoder, 'native' | 'options' | 'getNative' | 'initNativeView'>,
+        Acc_MBVectorTileDecoder,
+        Omit<
+            Met_MBVectorTileDecoder,
+            | 'addFallbackFont'
+            | 'getCartoCSSStyleSet'
+            | 'getCompiledStyleSet'
+            | 'getMaxZoom'
+            | 'getMinZoom'
+            | 'getStyleParameter'
+            | 'getStyleParameters'
+            | 'setCartoCSSStyleSet'
+            | 'setCompiledStyleSet'
+            | 'setJSONStyleParameters'
+            | 'setStyleParameter'
+            | 'setStyleParameters'
+        > {}
+
+export interface MBVectorTileDecoder extends Acc_VectorTileDecoder, Omit<Met_VectorTileDecoder, 'addFallbackFont' | 'getMaxZoom' | 'getMinZoom'> {}

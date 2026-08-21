@@ -4,21 +4,30 @@ import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feat
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
 import { toNativeMapPos } from '../core';
 import { geometryFromArgs } from '..';
+import {
+    ACCESSORS as ACC_VectorTileSearchService,
+    Accessors as Acc_VectorTileSearchService,
+    METHODS as MET_VectorTileSearchService,
+    Methods as Met_VectorTileSearchService,
+    SELECTORS as SEL_VectorTileSearchService
+} from '../bindings/search/VectorTileSearchService';
+import { bindNative } from '../nativeclass.common';
+import { stringListConverter } from '..';
+import {
+    ACCESSORS as ACC_FeatureCollectionSearchService,
+    Accessors as Acc_FeatureCollectionSearchService,
+    METHODS as MET_FeatureCollectionSearchService,
+    Methods as Met_FeatureCollectionSearchService,
+    SELECTORS as SEL_FeatureCollectionSearchService
+} from '../bindings/search/FeatureCollectionSearchService';
 
-export class VectorTileSearchService extends BaseNative<AKVectorTileSearchService, VectorTileSearchServiceOptions> {
-    @nativeProperty minZoom: number;
-    @nativeProperty maxZoom: number;
-    @nativeProperty maxResults: number;
-    @nativeProperty sortByDistance: boolean;
-    @nativeProperty preventDuplicates: boolean;
-    @nativeStringListProperty layers: string[];
-
+export class VectorTileSearchService extends BaseNative<NSMSFVectorTileSearchService, VectorTileSearchServiceOptions> {
     createNative(options: VectorTileSearchServiceOptions) {
         if (options.layer) {
             const layer = options.layer.getNative() as MSFVectorTileLayer;
-            return AKVectorTileSearchService.alloc().initWithDataSourceTileDecoder(layer.getDataSource(), layer.getTileDecoder());
+            return NSMSFVectorTileSearchService.alloc().initWithDataSourceTileDecoder(layer.getDataSource(), layer.getTileDecoder());
         } else {
-            return AKVectorTileSearchService.alloc().initWithDataSourceTileDecoder(options.dataSource.getNative(), options.decoder.getNative());
+            return NSMSFVectorTileSearchService.alloc().initWithDataSourceTileDecoder(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
     public findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void) {
@@ -49,9 +58,9 @@ export class VectorTileSearchService extends BaseNative<AKVectorTileSearchServic
     }
 }
 
-export class FeatureCollectionSearchService extends BaseNative<AKFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
+export class FeatureCollectionSearchService extends BaseNative<NSMSFFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
     createNative(options: FeatureCollectionSearchServiceOptions) {
-        return AKFeatureCollectionSearchService.alloc().initWithProjectionFeatureCollection(options.projection.getNative(), options.features.getNative());
+        return NSMSFFeatureCollectionSearchService.alloc().initWithProjectionFeatureCollection(options.projection.getNative(), options.features.getNative());
     }
     public findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void) {
         const nRequest = MSFSearchRequest.alloc().init();
@@ -82,3 +91,9 @@ export class FeatureCollectionSearchService extends BaseNative<AKFeatureCollecti
         }
     }
 }
+
+export interface VectorTileSearchService extends Acc_VectorTileSearchService, Omit<Met_VectorTileSearchService, 'findFeatures'> {}
+bindNative(VectorTileSearchService, MET_VectorTileSearchService, ACC_VectorTileSearchService, { selectors: SEL_VectorTileSearchService, converters: { layers: stringListConverter } });
+
+export interface FeatureCollectionSearchService extends Acc_FeatureCollectionSearchService, Omit<Met_FeatureCollectionSearchService, 'findFeatures'> {}
+bindNative(FeatureCollectionSearchService, MET_FeatureCollectionSearchService, ACC_FeatureCollectionSearchService, { selectors: SEL_FeatureCollectionSearchService });

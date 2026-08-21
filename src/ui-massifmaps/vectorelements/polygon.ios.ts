@@ -5,12 +5,22 @@ import { BaseVectorElementStyleBuilder, lineStyleBuilderProperty, styleBuilderPr
 import { BaseLineVectorElement } from './index.ios';
 import { LineStyleBuilder, LineStyleBuilderOptions } from './line';
 import { PolygonOptions, PolygonStyleBuilderOptions } from './polygon';
+import {
+    ACCESSORS as ACC_PolygonStyleBuilder,
+    Accessors as Acc_PolygonStyleBuilder,
+    METHODS as MET_PolygonStyleBuilder,
+    Methods as Met_PolygonStyleBuilder,
+    SELECTORS as SEL_PolygonStyleBuilder
+} from '../bindings/styles/PolygonStyleBuilder';
+import { bindNative } from '../nativeclass.common';
+import { ACCESSORS as ACC_Polygon, Accessors as Acc_Polygon, METHODS as MET_Polygon, Methods as Met_Polygon, SELECTORS as SEL_Polygon } from '../bindings/vectorelements/Polygon';
+import { ACCESSORS as ACC_StyleBuilder, Accessors as Acc_StyleBuilder, METHODS as MET_StyleBuilder, Methods as Met_StyleBuilder, SELECTORS as SEL_StyleBuilder } from '../bindings/styles/StyleBuilder';
+import { colorConverter } from '..';
 
 export class PolygonStyleBuilder extends BaseVectorElementStyleBuilder<MSFPolygonStyleBuilder, PolygonStyleBuilderOptions> {
     createNative(options: PolygonStyleBuilderOptions) {
         return MSFPolygonStyleBuilder.alloc().init();
     }
-    @nativeColorProperty color: Color | string;
 
     get lineStyleBuilder() {
         return this.options.lineStyleBuilder;
@@ -97,3 +107,12 @@ export class Polygon extends BaseLineVectorElement<MSFPolygon, PolygonOptions> {
         this.rebuildStyle();
     }
 }
+
+export interface PolygonStyleBuilder extends Acc_PolygonStyleBuilder, Omit<Met_PolygonStyleBuilder, 'buildStyle'> {}
+bindNative(PolygonStyleBuilder, MET_PolygonStyleBuilder, ACC_PolygonStyleBuilder, { selectors: SEL_PolygonStyleBuilder });
+
+export interface Polygon extends Omit<Acc_Polygon, 'geometry'>, Omit<Met_Polygon, 'getGeometry'> {}
+bindNative(Polygon, MET_Polygon, ACC_Polygon, { selectors: SEL_Polygon });
+
+export interface PolygonStyleBuilder extends Acc_StyleBuilder, Met_StyleBuilder {}
+bindNative(PolygonStyleBuilder, MET_StyleBuilder, ACC_StyleBuilder, { selectors: SEL_StyleBuilder, converters: { color: colorConverter } });

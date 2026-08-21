@@ -1,6 +1,8 @@
 import { BaseNative } from '..';
 import { DataSource, TileDataSource } from '../datasources';
 import { Projection } from '../projections';
+import { Accessors as Acc_Layer, Methods as Met_Layer } from '../bindings/layers/Layer';
+import { Accessors as Acc_TileLayer, Methods as Met_TileLayer } from '../bindings/layers/TileLayer';
 
 export interface LayerOptions {
     updatePriority?: number;
@@ -71,3 +73,9 @@ export class TileLayer<T, U extends TileLayerOptions> extends Layer<T, U> {
     readonly dataSource: TileDataSource<any, any>;
     projection?: Projection;
 }
+
+export interface Layer<T, U extends LayerOptions> extends Omit<Acc_Layer, 'opacity' | 'updatePriority' | 'visible' | 'visibleZoomRange'>, Omit<Met_Layer, 'refresh'> {}
+
+export interface TileLayer<T, U extends TileLayerOptions>
+    extends Omit<Acc_TileLayer, 'maxOverzoomLevel' | 'maxUnderzoomLevel' | 'preloading' | 'synchronizedRefresh' | 'tileSubstitutionPolicy' | 'zoomLevelBias'>,
+        Omit<Met_TileLayer, 'clearTileCaches'> {}

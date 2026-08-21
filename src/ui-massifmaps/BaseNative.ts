@@ -1,7 +1,10 @@
 import { Observable } from '@nativescript/core';
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
-    constructor(public options: U = {} as any, native?: T) {
+    constructor(
+        public options: U = {} as any,
+        native?: T
+    ) {
         super();
         if (native) {
             this.native = native;

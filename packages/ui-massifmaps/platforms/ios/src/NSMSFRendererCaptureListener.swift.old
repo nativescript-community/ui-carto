@@ -1,0 +1,18 @@
+import MassifMaps
+
+@objc(NSMSFRendererCaptureListener)
+@objcMembers
+class NSMSFRendererCaptureListener: MSFRendererCaptureListener {
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
+  func onMapRenderedThreaded(_ bitmap: MSFBitmap!) {
+  }
+  override func onMapRendered(_ bitmap: MSFBitmap!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onMapRenderedThreaded(bitmap)
+      }
+    } else {
+      return onMapRenderedThreaded(bitmap)
+    }
+  }
+}

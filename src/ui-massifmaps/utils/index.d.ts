@@ -1,5 +1,9 @@
 import { BaseNative } from '..';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector } from '../core';
+import { Accessors as Acc_ZippedAssetPackage } from '../bindings/utils/ZippedAssetPackage';
+import { Methods as Met_ZippedAssetPackage } from '../bindings/utils/ZippedAssetPackage';
+import { Accessors as Acc_DirAssetPackage, Methods as Met_DirAssetPackage } from '../bindings/utils/AssetPackage';
+import { Accessors as Acc_AssetPackage, Methods as Met_AssetPackage } from '../bindings/utils/AssetPackage';
 
 export function nativeVectorToArray<T = any>(nVector): T[];
 export function arrayToNativeVector(array: T[]): NativeVector[T];
@@ -44,3 +48,9 @@ export function isLocationOnPath<T = DefaultLatLonKeys>(
 
 export declare function fromNativeMapRange(value): MapRange;
 export declare function toNativeMapRange(value: MapRange): any;
+
+export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Omit<Met_ZippedAssetPackage, 'getAssetNames'> {}
+
+export interface DirAssetPackage extends Acc_DirAssetPackage, Met_DirAssetPackage {}
+
+export interface ZippedAssetPackage extends Acc_AssetPackage, Omit<Met_AssetPackage, 'getAssetNames' | 'loadAsset'> {}

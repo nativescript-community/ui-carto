@@ -3,6 +3,14 @@ import { BasePointVectorElement, BillboardStyleBuilderOptions, PointVectorElemen
 import { DefaultLatLonKeys } from '../core';
 import { BillboardStyleBuilder } from './index.ios';
 import { Marker } from './marker';
+import { Accessors as Acc_BalloonPopup } from '../bindings/vectorelements/BalloonPopup';
+import { Accessors as Acc_BalloonPopupStyleBuilder, Methods as Met_BalloonPopupStyleBuilder } from '../bindings/styles/BalloonPopupStyleBuilder';
+import { Accessors as Acc_PopupStyleBuilder, Methods as Met_PopupStyleBuilder } from '../bindings/styles/PopupStyleBuilder';
+import { Accessors as Acc_BillboardStyleBuilder, Methods as Met_BillboardStyleBuilder } from '../bindings/styles/BillboardStyleBuilder';
+import { Accessors as Acc_StyleBuilder, Methods as Met_StyleBuilder } from '../bindings/styles/StyleBuilder';
+import { Accessors as Acc_Popup, Methods as Met_Popup } from '../bindings/vectorelements/Popup';
+import { Accessors as Acc_Billboard, Methods as Met_Billboard } from '../bindings/vectorelements/Billboard';
+import { Accessors as Acc_VectorElement, Methods as Met_VectorElement } from '../bindings/vectorelements/VectorElement';
 
 export class BalloonPopupStyleBuilderOptions extends BillboardStyleBuilderOptions {
     color?: string | Color;
@@ -62,3 +70,15 @@ export class BalloonPopup<T = DefaultLatLonKeys> extends BasePointVectorElement<
     triangleWidth?: number;
     placementPriority?: number;
 }
+
+export interface BalloonPopup<T = DefaultLatLonKeys> extends Acc_BalloonPopup {}
+
+export interface BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends Acc_BalloonPopupStyleBuilder, Omit<Met_BalloonPopupStyleBuilder, 'buildStyle'> {}
+
+export interface BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends Acc_PopupStyleBuilder, Omit<Met_PopupStyleBuilder, 'buildStyle'> {}
+export interface BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends Acc_BillboardStyleBuilder, Met_BillboardStyleBuilder {}
+export interface BalloonPopupStyleBuilder<T, U extends BalloonPopupStyleBuilderOptions> extends Omit<Acc_StyleBuilder, 'color'>, Met_StyleBuilder {}
+
+export interface BalloonPopup<T = DefaultLatLonKeys> extends Omit<Acc_Popup, 'style'>, Omit<Met_Popup, 'drawBitmap' | 'getStyle' | 'processClick' | 'setStyle'> {}
+export interface BalloonPopup<T = DefaultLatLonKeys> extends Acc_Billboard, Met_Billboard {}
+export interface BalloonPopup<T = DefaultLatLonKeys> extends Acc_VectorElement, Omit<Met_VectorElement, 'getBounds' | 'getGeometry'> {}

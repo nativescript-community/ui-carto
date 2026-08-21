@@ -3,7 +3,7 @@ import { MapPos } from '../core';
 import { Projection } from '../projections';
 import { GroupOptions } from './group';
 
-export abstract class GroupBase extends VectorElementVector implements BasePointVectorElement<any, GroupOptions> {
+export abstract class GroupBase extends VectorElementVector {
     position: MapPos;
     projection?: Projection;
     elements: BasePointVectorElement<any, any>[];

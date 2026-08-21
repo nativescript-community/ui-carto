@@ -1,9 +1,11 @@
+import { NativeConverter } from './nativeclass.common';
 import { ImageAsset, ImageSource, Utils, knownFolders, path } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { fromNativeMapRange, nativeVectorToArray, toNativeMapRange } from './utils';
 import { arrayToNativeVector } from './utils/index.android';
 
 function createGetter(key: string, options: NativePropertyOptions) {
+    console.log('🚀 ~ index.common.ts ~ createGetter ~ key:', key);
     const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
@@ -37,6 +39,11 @@ function createSetter(key, options: NativePropertyOptions) {
 }
 
 function nativePropertyGenerator(target: object, key: string, options?: NativePropertyOptions) {
+    console.log('🚀 ~ index.common.ts ~ nativePropertyGenerator ~ key:', key);
+    if (!key) {
+        console.log(new Error().stack)
+    }
+    
     Object.defineProperty(target, key, {
         get: createGetter(key, options),
         set: createSetter(key, options),
@@ -44,12 +51,28 @@ function nativePropertyGenerator(target: object, key: string, options?: NativePr
         configurable: true
     });
 }
+/**
+ * The converters, named so a generated binding table can point at one.
+ *
+ * `bindNative` takes them by property name; the `@native*Property` decorators wrap the
+ * same objects, so a hand-written decorator and a generated accessor marshal identically.
+ */
+export const mapRangeConverter: NativeConverter = {
+    fromNative: fromNativeMapRange,
+    toNative: toNativeMapRange
+};
+export const stringListConverter: NativeConverter = {
+    fromNative: nativeVectorToArray,
+    toNative: arrayToNativeVector
+};
+
 export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeProperty(...args) {
     if (args.length === 1) {
         /// this must be a factory
         return function (target: any, key?: string, descriptor?: PropertyDescriptor) {
+            console.log('nativeProperty', key)
             return nativePropertyGenerator(target, key, args[0] || {});
         };
     } else {
@@ -62,29 +85,13 @@ export function nativeProperty(...args) {
 export function nativeMapRangeProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeMapRangeProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeMapRangeProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative: fromNativeMapRange,
-                toNative: toNativeMapRange
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: mapRangeConverter }, ...args);
 }
 
 export function nativeStringListProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeStringListProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeStringListProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative: nativeVectorToArray,
-                toNative: arrayToNativeVector
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: stringListConverter }, ...args);
 }
 
 export function nonenumerable(target: any, name: string): void;

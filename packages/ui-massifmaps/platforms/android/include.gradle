@@ -7,16 +7,22 @@ repositories {
 	// }
 }
 dependencies {
-    // implementation(name:'massif-android-6.0.0-full', ext:'aar')
+    if (System.env.DEBUGMASSIF) {
+        implementation project(path: ':massif')
+    } else if (project.hasProperty('massifAar')) {
+        implementation(name:project.massifAar, ext:'aar')
 
-	def massifSDKVersion =  project.hasProperty("massifSDKVersion") ? project.massifSDKVersion : "6.0.0"
-	def massifSDKVariant =  project.hasProperty("massifSDKVariant") ? project.massifSDKVariant : "full"
+    } else {
 
-	if (massifSDKVariant == "full") {
-		implementation "com.github.massif-maps:MassifMaps-android-aar:$massifSDKVersion"
-	} else {
-		implementation "com.github.massif-maps:MassifMaps-android-aar:$massifSDKVersion:$massifSDKVariant@aar"
-	}
+	    def massifSDKVersion =  project.hasProperty("massifSDKVersion") ? project.massifSDKVersion : "6.0.0"
+	    def massifSDKVariant =  project.hasProperty("massifSDKVariant") ? project.massifSDKVariant : "full"
+
+        if (massifSDKVariant == "full") {
+            implementation "com.github.massif-maps:MassifMaps-android-aar:$massifSDKVersion"
+        } else {
+            implementation "com.github.massif-maps:MassifMaps-android-aar:$massifSDKVersion:$massifSDKVariant@aar"
+        }
+    }
 }
 android {
     sourceSets {

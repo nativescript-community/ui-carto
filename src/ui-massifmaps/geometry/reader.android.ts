@@ -1,20 +1,28 @@
 import { BaseNative } from '../BaseNative';
-import { GeoJSONGeometryReaderOptions, WKBGeometryReaderOptions, WKTGeometryReaderOptions } from './reader';
+import { GeoJSONGeometryReaderOptions } from './reader';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
 import { nativeProperty } from '..';
 import { MapPosVector } from '../core';
 import { Geometry, PolygonGeometry } from '.';
 import { LineGeometry, PointGeometry } from './index.android';
+import {
+    ACCESSORS as ACC_GeoJSONGeometryReader,
+    Accessors as Acc_GeoJSONGeometryReader,
+    METHODS as MET_GeoJSONGeometryReader,
+    Methods as Met_GeoJSONGeometryReader,
+    SELECTORS as SEL_GeoJSONGeometryReader
+} from '../bindings/geometry/GeoJSONGeometryReader';
+import { bindNative } from '../nativeclass.common';
 
 export class GeoJSONGeometryReader extends BaseNative<com.massifmaps.geometry.GeoJSONGeometryReader, GeoJSONGeometryReaderOptions> {
     createNative() {
         return new com.massifmaps.geometry.GeoJSONGeometryReader();
     }
-    readFeatureCollection(str: string | Object) {
+    readFeatureCollection(str: string | object) {
         return new FeatureCollection(this.getNative().readFeatureCollection(typeof str === 'string' ? str : JSON.stringify(str)));
     }
-    readGeometry(value: string | Object) {
+    readGeometry(value: string | object) {
         const result = this.getNative().readGeometry(typeof value === 'string' ? value : JSON.stringify(value));
         if (result instanceof com.massifmaps.geometry.LineGeometry) {
             return new LineGeometry(null, result);
@@ -33,37 +41,5 @@ export class GeoJSONGeometryReader extends BaseNative<com.massifmaps.geometry.Ge
     }
 }
 
-export class WKBGeometryReader extends BaseNative<com.massifmaps.geometry.WKBGeometryReader, WKBGeometryReaderOptions> {
-    @nativeProperty z: boolean;
-    createNative() {
-        return new com.massifmaps.geometry.WKBGeometryReader();
-    }
-    readGeometry(value: number[] | ArrayBuffer | com.massifmaps.core.BinaryData) {
-        if (!(value instanceof com.massifmaps.core.BinaryData)) {
-            value = new com.massifmaps.core.BinaryData(value as any);
-        }
-        const result = this.getNative().readGeometry(value);
-        if (result instanceof com.massifmaps.geometry.LineGeometry) {
-            return new LineGeometry(null, result);
-        } else if (result instanceof com.massifmaps.geometry.PointGeometry) {
-            return new PointGeometry(null, result);
-        }
-        return null;
-    }
-}
-
-export class WKTGeometryReader extends BaseNative<com.massifmaps.geometry.WKTGeometryReader, WKTGeometryReaderOptions> {
-    @nativeProperty z: boolean;
-    createNative() {
-        return new com.massifmaps.geometry.WKTGeometryReader();
-    }
-    readGeometry(value) {
-        const result = this.getNative().readGeometry(value);
-        if (result instanceof com.massifmaps.geometry.LineGeometry) {
-            return new LineGeometry(null, result);
-        } else if (result instanceof com.massifmaps.geometry.PointGeometry) {
-            return new PointGeometry(null, result);
-        }
-        return null;
-    }
-}
+export interface GeoJSONGeometryReader extends Omit<Acc_GeoJSONGeometryReader, 'targetProjection'>, Omit<Met_GeoJSONGeometryReader, 'readFeatureCollection' | 'readGeometry'> {}
+bindNative(GeoJSONGeometryReader, MET_GeoJSONGeometryReader, ACC_GeoJSONGeometryReader, { selectors: SEL_GeoJSONGeometryReader });

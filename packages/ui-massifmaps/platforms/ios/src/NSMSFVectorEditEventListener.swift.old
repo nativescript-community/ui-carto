@@ -1,0 +1,114 @@
+//
+//  NSMSFVectorEditEventListener.swift
+//  demosvelte
+//
+//  Created by Martin Guillon on 14/02/2024.
+//  Copyright © 2024 NativeScript. All rights reserved.
+//
+
+import MassifMaps
+
+@objc(NSMSFVectorEditEventListener)
+@objcMembers
+class NSMSFVectorEditEventListener: MSFVectorEditEventListener {
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
+  
+  func onDragStartThreaded(_ clickInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
+    return MSFVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+  }
+  func onDragMoveThreaded(_ clickInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
+    return MSFVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+  }
+  func onDragEndThreaded(_ clickInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
+    return MSFVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
+  }
+  func onSelectDragPointStyleThreaded(_  element: MSFVectorElement!, dragPointStyle: MSFVectorElementDragPointStyle) -> MSFPointStyle? {
+    return nil;
+  }
+  override func onDragStart(_ dragInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
+    if (runOnMainThread) {
+      var result: MSFVectorElementDragResult? = nil;
+      DispatchQueue.main.sync() {
+        result = onDragStartThreaded(dragInfo)
+      }
+      return result!
+    } else {
+      return onDragStartThreaded(dragInfo)
+    }
+  }
+  override func onDragEnd(_ dragInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
+    if (runOnMainThread) {
+      var result: MSFVectorElementDragResult? = nil;
+      DispatchQueue.main.sync() {
+        result = onDragEndThreaded(dragInfo)
+      }
+      return result!
+    } else {
+      return onDragEndThreaded(dragInfo)
+    }
+  }
+  override func onDragMove(_ dragInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
+    if (runOnMainThread) {
+      var result: MSFVectorElementDragResult? = nil;
+      DispatchQueue.main.sync() {
+        result = onDragMoveThreaded(dragInfo)
+      }
+      return result!
+    } else {
+      return onDragMoveThreaded(dragInfo)
+    }
+  }
+  override func onSelectDragPointStyle(_ element: MSFVectorElement!, dragPointStyle: MSFVectorElementDragPointStyle) -> MSFPointStyle!{
+    if (runOnMainThread) {
+      var result: MSFPointStyle? = nil;
+      DispatchQueue.main.sync() {
+        result = onSelectDragPointStyleThreaded(element, dragPointStyle: dragPointStyle)
+      }
+      return result!
+    } else {
+      return onSelectDragPointStyleThreaded(element, dragPointStyle: dragPointStyle)!
+    }
+  }
+  func onElementDeleteThreaded(_ element: MSFVectorElement!) {}
+  override func onElementDelete(_ element: MSFVectorElement!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onElementDeleteThreaded(element)
+      }
+    } else {
+      onElementDeleteThreaded(element)
+    }
+  }
+  func onElementSelectThreaded(_ element: MSFVectorElement!) -> Bool { return false }
+  override func onElementSelect(_ element: MSFVectorElement!) -> Bool {
+    if (runOnMainThread) {
+      var result = false
+      DispatchQueue.main.sync() {
+       result = self.onElementSelectThreaded(element)
+      }
+      return result
+    } else {
+      return onElementSelectThreaded(element)
+    }
+  }
+  func onElementDeselectedThreaded(_ element: MSFVectorElement!) {}
+  override func onElementDeselected(_ element: MSFVectorElement!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onElementDeselectedThreaded(element)
+      }
+    } else {
+      onElementDeselectedThreaded(element)
+    }
+  }
+  func onElementModifyThreaded(_ element: MSFVectorElement!, geometry: MSFGeometry!) {}
+  override func onElementModify(_ element: MSFVectorElement!, geometry: MSFGeometry!) {
+    if (runOnMainThread) {
+      DispatchQueue.main.async() {
+        self.onElementModifyThreaded(element, geometry: geometry)
+      }
+    } else {
+      onElementModifyThreaded(element, geometry: geometry)
+    }
+  }
+}

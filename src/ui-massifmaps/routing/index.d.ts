@@ -2,6 +2,18 @@ import { BaseNative } from '..';
 import { Projection } from '../projections';
 import { FeatureCollection } from '../geometry/feature';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, NativeVector } from '../core';
+import { Accessors as Acc_PackageManagerRoutingService } from '../bindings/routing/PackageManagerRoutingService';
+import { Accessors as Acc_SGREOfflineRoutingService } from '../bindings/routing/SGREOfflineRoutingService';
+import { Accessors as Acc_OSRMOfflineRoutingService } from '../bindings/routing/OSRMOfflineRoutingService';
+import { Methods as Met_PackageManagerRoutingService } from '../bindings/routing/PackageManagerRoutingService';
+import { Methods as Met_SGREOfflineRoutingService } from '../bindings/routing/SGREOfflineRoutingService';
+import { Methods as Met_OSRMOfflineRoutingService } from '../bindings/routing/OSRMOfflineRoutingService';
+import { Accessors as Acc_ValhallaOfflineRoutingService, Methods as Met_ValhallaOfflineRoutingService } from '../bindings/routing/ValhallaOfflineRoutingService';
+import { Accessors as Acc_MultiValhallaOfflineRoutingService, Methods as Met_MultiValhallaOfflineRoutingService } from '../bindings/routing/MultiValhallaOfflineRoutingService';
+import { Accessors as Acc_ValhallaOnlineRoutingService, Methods as Met_ValhallaOnlineRoutingService } from '../bindings/routing/ValhallaOnlineRoutingService';
+import { Accessors as Acc_PackageManagerValhallaRoutingService, Methods as Met_PackageManagerValhallaRoutingService } from '../bindings/routing/PackageManagerValhallaRoutingService';
+import { Accessors as Acc_RoutingService, Methods as Met_RoutingService } from '../bindings/routing/RoutingService';
+import { Accessors as Acc_ValhallaRoutingService, Methods as Met_ValhallaRoutingService } from '../bindings/routing/PackageManagerValhallaRoutingService';
 
 declare enum RoutingAction {
     HEAD_ON,
@@ -67,7 +79,7 @@ export interface RouteMatchingResult<T = DefaultLatLonKeys> {
 }
 
 export class RoutingService<T, U extends RoutingServiceOptions> extends BaseNative<T, U> {
-    calculateRoute<T = DefaultLatLonKeys, U extends boolean = false>(options: RoutingRequest<T>, profile?: string, jsonStr?: U): Promise<U extends true ? String : RoutingResult<T>>;
+    calculateRoute<T = DefaultLatLonKeys, U extends boolean = false>(options: RoutingRequest<T>, profile?: string, jsonStr?: U): Promise<U extends true ? string : RoutingResult<T>>;
     routingResultToJSON<T = DefaultLatLonKeys>(options: RoutingResult<T>): Promise<string>;
 }
 export class ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions> extends RoutingService<T, U> {
@@ -127,3 +139,37 @@ export interface OSRMOfflineRoutingServiceOptions {
     path?: string;
 }
 export class OSRMOfflineRoutingService extends RoutingService<any, OSRMOfflineRoutingServiceOptions> {}
+
+export interface PackageManagerRoutingService extends Acc_PackageManagerRoutingService, Met_PackageManagerRoutingService {}
+
+export interface SGREOfflineRoutingService extends Acc_SGREOfflineRoutingService, Met_SGREOfflineRoutingService {}
+
+export interface OSRMOfflineRoutingService extends Acc_OSRMOfflineRoutingService, Met_OSRMOfflineRoutingService {}
+
+export interface ValhallaOfflineRoutingService extends Omit<Acc_ValhallaOfflineRoutingService, 'profile'>, Met_ValhallaOfflineRoutingService {}
+
+export interface MultiValhallaOfflineRoutingService extends Acc_MultiValhallaOfflineRoutingService, Omit<Met_MultiValhallaOfflineRoutingService, 'add' | 'remove'> {}
+
+export interface ValhallaOnlineRoutingService extends Omit<Acc_ValhallaOnlineRoutingService, 'customServiceURL' | 'httpHeaders' | 'profile' | 'timeout'>, Met_ValhallaOnlineRoutingService {}
+
+export interface PackageManagerValhallaRoutingService extends Acc_PackageManagerValhallaRoutingService, Met_PackageManagerValhallaRoutingService {}
+
+export interface RoutingService<T, U extends RoutingServiceOptions> extends Acc_RoutingService, Omit<Met_RoutingService, 'calculateRoute'> {}
+
+export interface ValhallaRoutingService<T, U extends ValhallaRoutingServiceOptions>
+    extends Omit<Acc_ValhallaRoutingService, 'profile'>,
+        Omit<Met_ValhallaRoutingService, 'addLocale' | 'getConfigurationParameter' | 'matchRoute' | 'setConfigurationParameter'> {}
+
+export interface PackageManagerRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}
+
+export interface SGREOfflineRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}
+
+export interface OSRMOfflineRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}
+
+export interface ValhallaOfflineRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}
+
+export interface MultiValhallaOfflineRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}
+
+export interface ValhallaOnlineRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}
+
+export interface PackageManagerValhallaRoutingService extends Omit<Acc_RoutingService, 'profile'>, Omit<Met_RoutingService, 'calculateRoute' | 'getProfile' | 'matchRoute' | 'setProfile'> {}

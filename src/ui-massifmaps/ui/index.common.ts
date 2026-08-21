@@ -1,4 +1,3 @@
-/* eslint-disable no-redeclare */
 import { CSSType, ContentView } from '@nativescript/core';
 import { BaseNative } from '../BaseNative';
 import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
@@ -49,7 +48,7 @@ function createSetter(key, options: MapPropertyOptions) {
     };
 }
 
-function mapPropertyGenerator(target: Object, key: string, options?: MapPropertyOptions) {
+function mapPropertyGenerator(target: object, key: string, options?: MapPropertyOptions) {
     Object.defineProperty(target, key, {
         get: createGetter(key, options),
         set: createSetter(key, options),

@@ -1,4 +1,3 @@
-/* eslint-disable no-redeclare */
 import { ImageAsset, ImageSource, Observable } from '@nativescript/core';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapPosVectorVector } from './core';
 import { Geometry } from './geometry';
@@ -79,3 +78,11 @@ export declare function nativeImageProperty(...args);
 export declare function nativeMapVecProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export declare function nativeMapVecProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export declare function nativeMapVecProperty(...args);
+
+import { NativeConverter } from './nativeclass.common';
+/** shared by the @native*Property decorators and by bindNative() */
+export declare const colorConverter: NativeConverter;
+export declare const massifImageConverter: NativeConverter;
+export declare const mapVecConverter: NativeConverter;
+export declare const mapRangeConverter: NativeConverter;
+export declare const stringListConverter: NativeConverter;

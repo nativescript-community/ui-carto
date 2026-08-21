@@ -6,7 +6,7 @@ import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 
 @NativeClass
-export class ClusterElementBuilderImpl extends AkClusterElementBuilder {
+export class ClusterElementBuilderImpl extends NSMSFClusterElementBuilder {
     private _owner: WeakRef<ClusterElementBuilder>;
 
     public static initWithOwner(owner: WeakRef<ClusterElementBuilder>): ClusterElementBuilderImpl {
@@ -28,7 +28,7 @@ export class ClusterElementBuilderImpl extends AkClusterElementBuilder {
     }
 }
 
-export class ClusterElementBuilder extends BaseNative<MSFClusterElementBuilder, ClusterElementBuilderOptions> {
+export class ClusterElementBuilder extends BaseNative<NSMSFClusterElementBuilder, ClusterElementBuilderOptions> {
     @nativeImageProperty bitmap: string;
     @nativeColorProperty color: string | Color;
     @nativeProperty size: number;
@@ -41,7 +41,7 @@ export class ClusterElementBuilder extends BaseNative<MSFClusterElementBuilder, 
         if (!!options.buildClusterElement) {
             return ClusterElementBuilderImpl.initWithOwner(new WeakRef(this));
         } else {
-            return AkClusterElementBuilder.alloc().init();
+            return NSMSFClusterElementBuilder.alloc().init();
         }
     }
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | MSFVectorElement;

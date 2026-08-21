@@ -1,36 +1,37 @@
 import { Color, ImageAsset, ImageSource } from '@nativescript/core';
 import { BasePointVectorElement, BillboardStyleBuilder } from '.';
-import { nativeMassifImageProperty, nativeColorProperty, nativeProperty } from '..';
+import { nativeColorProperty, nativeMassifImageProperty, nativeProperty } from '..';
 import { BalloonPopupOptions, BalloonPopupStyleBuilderOptions } from './balloonpopup';
+import {
+    ACCESSORS as ACC_BalloonPopupStyleBuilder,
+    Accessors as Acc_BalloonPopupStyleBuilder,
+    METHODS as MET_BalloonPopupStyleBuilder,
+    Methods as Met_BalloonPopupStyleBuilder,
+    SELECTORS as SEL_BalloonPopupStyleBuilder
+} from '../bindings/styles/BalloonPopupStyleBuilder';
+import { bindNative } from '../nativeclass.common';
+import { colorConverter, massifImageConverter } from '..';
+import {
+    ACCESSORS as ACC_BalloonPopup,
+    Accessors as Acc_BalloonPopup,
+    METHODS as MET_BalloonPopup,
+    Methods as Met_BalloonPopup,
+    SELECTORS as SEL_BalloonPopup
+} from '../bindings/vectorelements/BalloonPopup';
+import { ACCESSORS as ACC_PopupStyleBuilder, Accessors as Acc_PopupStyleBuilder, METHODS as MET_PopupStyleBuilder, Methods as Met_PopupStyleBuilder, SELECTORS as SEL_PopupStyleBuilder } from '../bindings/styles/PopupStyleBuilder';
+import { ACCESSORS as ACC_StyleBuilder, Accessors as Acc_StyleBuilder, METHODS as MET_StyleBuilder, Methods as Met_StyleBuilder, SELECTORS as SEL_StyleBuilder } from '../bindings/styles/StyleBuilder';
+import { ACCESSORS as ACC_Popup, Accessors as Acc_Popup, METHODS as MET_Popup, Methods as Met_Popup, SELECTORS as SEL_Popup } from '../bindings/vectorelements/Popup';
+import { ACCESSORS as ACC_Billboard, Accessors as Acc_Billboard, METHODS as MET_Billboard, Methods as Met_Billboard, SELECTORS as SEL_Billboard } from '../bindings/vectorelements/Billboard';
 
 export class BalloonPopupStyleBuilder extends BillboardStyleBuilder<com.massifmaps.styles.BalloonPopupStyleBuilder, BalloonPopupStyleBuilderOptions> {
     createNative(options: BalloonPopupStyleBuilderOptions) {
         return new com.massifmaps.styles.BalloonPopupStyleBuilder();
     }
-    @nativeColorProperty color: string | Color;
-    @nativeProperty cornerRadius: number;
-    @nativeColorProperty descriptionColor: string | Color;
-    @nativeProperty descriptionFontName: string;
-    @nativeProperty descriptionFontSize: number;
-    @nativeProperty descriptionWrap: boolean;
-    @nativeColorProperty leftColor: string | Color;
-    @nativeMassifImageProperty leftImage: string | ImageSource | ImageAsset;
-    @nativeColorProperty rightColor: string | Color;
-    @nativeMassifImageProperty rightImage: string | ImageSource | ImageAsset;
-    @nativeColorProperty strokeColor: string | Color;
-    @nativeProperty strokeWidth: number;
-    @nativeColorProperty titleColor: string | Color;
-    @nativeProperty titleFontName: string;
-    @nativeProperty titleFontSize: number;
-    @nativeProperty titleWrap: boolean;
-    @nativeProperty triangleHeight: number;
-    @nativeProperty triangleWidth: number;
-    @nativeProperty placementPriority: number;
 
     mBuildStyle: com.massifmaps.styles.BalloonPopupStyle;
     buildStyle() {
         if (!this.mBuildStyle) {
-            this.mBuildStyle = this.getNative().buildStyle();
+            this.mBuildStyle = this.getNative().buildStyle() as com.massifmaps.styles.BalloonPopupStyle;
         }
         return this.mBuildStyle;
     }
@@ -71,3 +72,32 @@ export class BalloonPopup extends BasePointVectorElement<com.massifmaps.vectorel
         }
     }
 }
+
+export interface BalloonPopupStyleBuilder extends Acc_BalloonPopupStyleBuilder, Omit<Met_BalloonPopupStyleBuilder, 'buildStyle'> {}
+bindNative(BalloonPopupStyleBuilder, MET_BalloonPopupStyleBuilder, ACC_BalloonPopupStyleBuilder, {
+    selectors: SEL_BalloonPopupStyleBuilder,
+    converters: {
+        descriptionColor: colorConverter,
+        leftColor: colorConverter,
+        leftImage: massifImageConverter,
+        rightColor: colorConverter,
+        rightImage: massifImageConverter,
+        strokeColor: colorConverter,
+        titleColor: colorConverter
+    }
+});
+
+export interface BalloonPopup extends Acc_BalloonPopup, Met_BalloonPopup {}
+bindNative(BalloonPopup, MET_BalloonPopup, ACC_BalloonPopup, { selectors: SEL_BalloonPopup });
+
+export interface BalloonPopupStyleBuilder extends Acc_PopupStyleBuilder, Omit<Met_PopupStyleBuilder, 'buildStyle'> {}
+bindNative(BalloonPopupStyleBuilder, MET_PopupStyleBuilder, ACC_PopupStyleBuilder, { selectors: SEL_PopupStyleBuilder });
+
+export interface BalloonPopupStyleBuilder extends Acc_StyleBuilder, Met_StyleBuilder {}
+bindNative(BalloonPopupStyleBuilder, MET_StyleBuilder, ACC_StyleBuilder, { selectors: SEL_StyleBuilder, converters: { color: colorConverter } });
+
+export interface BalloonPopup extends Omit<Acc_Popup, 'style'>, Omit<Met_Popup, 'drawBitmap' | 'getStyle' | 'processClick' | 'setStyle'> {}
+bindNative(BalloonPopup, MET_Popup, ACC_Popup, { selectors: SEL_Popup });
+
+export interface BalloonPopup extends Acc_Billboard, Omit<Met_Billboard, 'getBounds' | 'getGeometry'> {}
+bindNative(BalloonPopup, MET_Billboard, ACC_Billboard, { selectors: SEL_Billboard });

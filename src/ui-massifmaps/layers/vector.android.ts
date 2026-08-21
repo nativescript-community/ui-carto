@@ -1,5 +1,5 @@
 import { Layer, TileLayer } from '.';
-import { BaseNative, nativeProperty } from '..';
+import { BaseNative } from '..';
 import { fromNativeMapPos, fromNativeScreenPos } from '../core';
 import { Projection } from '../projections';
 import { VectorElement } from '../vectorelements';
@@ -13,6 +13,43 @@ import {
     VectorLayerOptions,
     VectorTileLayerOptions
 } from './vector';
+import {
+    ACCESSORS as ACC_VectorTileLayer,
+    Accessors as Acc_VectorTileLayer,
+    METHODS as MET_VectorTileLayer,
+    Methods as Met_VectorTileLayer,
+    SELECTORS as SEL_VectorTileLayer
+} from '../bindings/layers/VectorTileLayer';
+import { bindNative } from '../nativeclass.common';
+import { ACCESSORS as ACC_VectorLayer, Accessors as Acc_VectorLayer, METHODS as MET_VectorLayer, Methods as Met_VectorLayer, SELECTORS as SEL_VectorLayer } from '../bindings/layers/VectorLayer';
+import {
+    ACCESSORS as ACC_EditableVectorLayer,
+    Accessors as Acc_EditableVectorLayer,
+    METHODS as MET_EditableVectorLayer,
+    Methods as Met_EditableVectorLayer,
+    SELECTORS as SEL_EditableVectorLayer
+} from '../bindings/layers/EditableVectorLayer';
+import {
+    ACCESSORS as ACC_ClusteredVectorLayer,
+    Accessors as Acc_ClusteredVectorLayer,
+    METHODS as MET_ClusteredVectorLayer,
+    Methods as Met_ClusteredVectorLayer,
+    SELECTORS as SEL_ClusteredVectorLayer
+} from '../bindings/layers/ClusteredVectorLayer';
+import {
+    ACCESSORS as ACC_BaseVectorTileLayer,
+    Accessors as Acc_BaseVectorTileLayer,
+    METHODS as MET_BaseVectorTileLayer,
+    Methods as Met_BaseVectorTileLayer,
+    SELECTORS as SEL_BaseVectorTileLayer
+} from '../bindings/layers/VectorTileLayer';
+import {
+    ACCESSORS as ACC_BaseVectorLayer,
+    Accessors as Acc_BaseVectorLayer,
+    METHODS as MET_BaseVectorLayer,
+    Methods as Met_BaseVectorLayer,
+    SELECTORS as SEL_BaseVectorLayer
+} from '../bindings/layers/VectorLayer';
 
 export { VectorTileDecoder };
 
@@ -54,16 +91,8 @@ function getGeojsonWriter() {
 export abstract class BaseVectorTileLayer<T extends com.massifmaps.layers.VectorTileLayer, U extends VectorTileLayerOptions> extends TileLayer<T, U> {
     listenerProjection?: Projection;
     listener?: IVectorTileEventListener;
-    nListener?: com.nativescript.massifmaps.additions.AKVectorTileEventListener | com.massifmaps.layers.VectorTileEventListener;
+    nListener?: com.nativescript.massifmaps.additions.VectorTileEventListener | com.massifmaps.layers.VectorTileEventListener;
 
-    @nativeProperty layerBlendingSpeed: number;
-    @nativeProperty labelBlendingSpeed: number;
-    @nativeProperty tileCacheCapacity: number;
-    @nativeProperty clickRadius: number;
-    @nativeProperty labelRenderOrder: IVectorTileRenderOrder;
-    @nativeProperty buildingRenderOrder: IVectorTileRenderOrder;
-    @nativeProperty rendererLayerFilter: string;
-    @nativeProperty clickHandlerLayerFilter: string;
     constructor(options) {
         super(options);
         for (const property of ['listener', 'nListener']) {
@@ -73,7 +102,7 @@ export abstract class BaseVectorTileLayer<T extends com.massifmaps.layers.Vector
             }
         }
     }
-    setVectorTileEventListener(listener: IVectorTileEventListener | any, projection?: Projection, nativeClass = com.nativescript.massifmaps.additions.AKVectorTileEventListener) {
+    setVectorTileEventListener(listener: IVectorTileEventListener | any, projection?: Projection, nativeClass = com.nativescript.massifmaps.additions.VectorTileEventListener) {
         this.listener = listener;
         this.listenerProjection = projection;
         if (listener) {
@@ -82,7 +111,7 @@ export abstract class BaseVectorTileLayer<T extends com.massifmaps.layers.Vector
             } else {
                 if (!this.nListener) {
                     this.nListener = new nativeClass(
-                        new com.nativescript.massifmaps.additions.AKVectorTileEventListener.Listener({
+                        new com.nativescript.massifmaps.additions.VectorTileEventListener.Listener({
                             onVectorTileClicked: this.onTileClicked.bind(this)
                         })
                     );
@@ -181,7 +210,7 @@ export class VectorTileLayer extends BaseVectorTileLayer<com.massifmaps.layers.V
 export abstract class BaseVectorLayer<T extends com.massifmaps.layers.VectorLayer, U extends VectorLayerOptions> extends Layer<T, U> {
     projection?: Projection;
     elementListener?: IVectorElementEventListener;
-    nElementListener?: com.nativescript.massifmaps.additions.AKVectorElementEventListener;
+    nElementListener?: com.nativescript.massifmaps.additions.VectorElementEventListener;
     constructor(options) {
         super(options);
         for (const property of ['elementListener', 'nElementListener']) {
@@ -191,13 +220,13 @@ export abstract class BaseVectorLayer<T extends com.massifmaps.layers.VectorLaye
             }
         }
     }
-    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection, nativeClass = com.nativescript.massifmaps.additions.AKVectorElementEventListener) {
+    setVectorElementEventListener(listener: IVectorElementEventListener, projection?: Projection, nativeClass = com.nativescript.massifmaps.additions.VectorElementEventListener) {
         this.elementListener = listener;
         this.projection = projection;
         if (listener) {
             if (!this.nElementListener) {
                 this.nElementListener = new nativeClass(
-                    new com.nativescript.massifmaps.additions.AKVectorElementEventListener.Listener({
+                    new com.nativescript.massifmaps.additions.VectorElementEventListener.Listener({
                         onVectorElementClicked: this.onElementClicked.bind(this)
                     })
                 );
@@ -251,7 +280,7 @@ export class VectorLayer extends BaseVectorLayer<com.massifmaps.layers.VectorLay
 
 export class EditableVectorLayer extends BaseVectorLayer<com.massifmaps.layers.EditableVectorLayer, VectorLayerOptions> {
     editListener?: IVectorEditEventListener;
-    nEditListener?: com.nativescript.massifmaps.additions2.AKVectorEditEventListener;
+    nEditListener?: com.nativescript.massifmaps.additions2.VectorEditEventListener;
     constructor(options) {
         super(options);
         for (const property of ['editListener', 'nEditListener']) {
@@ -278,13 +307,13 @@ export class EditableVectorLayer extends BaseVectorLayer<com.massifmaps.layers.E
             this.native.setSelectedVectorElement(element instanceof BaseNative ? element.getNative() : element);
         }
     }
-    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection, nativeClass = com.nativescript.massifmaps.additions2.AKVectorEditEventListener) {
+    setVectorEditEventListener(listener: IVectorEditEventListener, projection?: Projection, nativeClass = com.nativescript.massifmaps.additions2.VectorEditEventListener) {
         this.editListener = listener;
         this.projection = projection;
         if (listener) {
             if (!this.nEditListener) {
                 this.nEditListener = new nativeClass(
-                    new com.nativescript.massifmaps.additions2.AKVectorEditEventListener.Listener({
+                    new com.nativescript.massifmaps.additions2.VectorEditEventListener.Listener({
                         onDragEnd: this.onDragEnd.bind(this),
                         onDragMove: this.onDragMove.bind(this),
                         onDragStart: this.onDragStart.bind(this),
@@ -386,14 +415,26 @@ export class ClusteredVectorLayer extends BaseVectorLayer<com.massifmaps.layers.
         return new com.massifmaps.layers.ClusteredVectorLayer(options.dataSource.getNative(), options.builder.getNative?.() || options.builder);
     }
 
-    @nativeProperty minimumClusterDistance: number;
-    @nativeProperty maximumClusterZoom: number;
-    @nativeProperty({
-        nativeGetterName: 'isAnimatedClusters'
-    })
-    animatedClusters: boolean;
-
     expandCluster(element: VectorElement<any, any>, px: number) {
         this.getNative().expandCluster(element.getNative(), px);
     }
 }
+
+export interface VectorTileLayer extends Acc_VectorTileLayer, Omit<Met_VectorTileLayer, 'getTileDecoder' | 'setVectorTileEventListener'> {}
+bindNative(VectorTileLayer, MET_VectorTileLayer, ACC_VectorTileLayer, { selectors: SEL_VectorTileLayer });
+
+export interface VectorLayer extends Acc_VectorLayer, Omit<Met_VectorLayer, 'setVectorElementEventListener'> {}
+bindNative(VectorLayer, MET_VectorLayer, ACC_VectorLayer, { selectors: SEL_VectorLayer });
+
+export interface EditableVectorLayer extends Acc_EditableVectorLayer, Omit<Met_EditableVectorLayer, 'setSelectedVectorElement' | 'setVectorEditEventListener'> {}
+bindNative(EditableVectorLayer, MET_EditableVectorLayer, ACC_EditableVectorLayer, { selectors: SEL_EditableVectorLayer });
+
+export interface ClusteredVectorLayer extends Acc_ClusteredVectorLayer, Omit<Met_ClusteredVectorLayer, 'expandCluster' | 'refresh'> {}
+bindNative(ClusteredVectorLayer, MET_ClusteredVectorLayer, ACC_ClusteredVectorLayer, { selectors: SEL_ClusteredVectorLayer });
+
+export interface BaseVectorTileLayer<T extends com.massifmaps.layers.VectorTileLayer, U extends VectorTileLayerOptions>
+    extends Acc_BaseVectorTileLayer, Omit<Met_BaseVectorTileLayer, 'getTileDecoder' | 'setVectorTileEventListener'> {}
+bindNative(BaseVectorTileLayer, MET_BaseVectorTileLayer, ACC_BaseVectorTileLayer, { selectors: SEL_BaseVectorTileLayer });
+
+export interface BaseVectorLayer<T extends com.massifmaps.layers.VectorLayer, U extends VectorLayerOptions> extends Acc_BaseVectorLayer, Omit<Met_BaseVectorLayer, 'setVectorElementEventListener'> {}
+bindNative(BaseVectorLayer, MET_BaseVectorLayer, ACC_BaseVectorLayer, { selectors: SEL_BaseVectorLayer });

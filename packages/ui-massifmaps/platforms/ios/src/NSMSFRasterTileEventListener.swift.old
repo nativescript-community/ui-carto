@@ -1,0 +1,31 @@
+//
+//  NSMSFFeatureCollectionSearchService.swift
+//  demosvelte
+//
+//  Created by Martin Guillon on 14/02/2024.
+//  Copyright © 2024 NativeScript. All rights reserved.
+//
+import MassifMaps
+
+@objc(NSMSFRasterTileEventListener)
+@objcMembers
+class NSMSFRasterTileEventListener: MSFRasterTileEventListener {
+  
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
+  func onRasterTileClickedThreaded(_ clickInfo: MSFRasterTileClickInfo!) -> Bool {
+    return false;
+  }
+  override func onRasterTileClicked(_ clickInfo: MSFRasterTileClickInfo!) -> Bool {
+    if (runOnMainThread) {
+      var result = false;
+      DispatchQueue.main.sync() {
+        result = onRasterTileClickedThreaded(clickInfo)
+      }
+      return result
+    } else {
+      return onRasterTileClickedThreaded(clickInfo)
+    }
+  }
+}
+
+

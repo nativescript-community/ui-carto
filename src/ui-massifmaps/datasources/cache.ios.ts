@@ -2,9 +2,25 @@ import { MemoryCacheTileDataSourceOptions, PersistentCacheTileDataSourceOptions,
 import { TileDataSource } from '.';
 import { MapBounds, toNativeMapBounds } from '../core';
 import { nativeProperty } from '..';
+import {
+    ACCESSORS as ACC_PersistentCacheTileDataSource,
+    Accessors as Acc_PersistentCacheTileDataSource,
+    METHODS as MET_PersistentCacheTileDataSource,
+    Methods as Met_PersistentCacheTileDataSource,
+    SELECTORS as SEL_PersistentCacheTileDataSource
+} from '../bindings/datasources/PersistentCacheTileDataSource';
+import { bindNative } from '../nativeclass.common';
+import {
+    ACCESSORS as ACC_MemoryCacheTileDataSource,
+    Accessors as Acc_MemoryCacheTileDataSource,
+    METHODS as MET_MemoryCacheTileDataSource,
+    Methods as Met_MemoryCacheTileDataSource,
+    SELECTORS as SEL_MemoryCacheTileDataSource
+} from '../bindings/datasources/MemoryCacheTileDataSource';
+import { ACCESSORS as ACC_CacheTileDataSource, Accessors as Acc_CacheTileDataSource, METHODS as MET_CacheTileDataSource, Methods as Met_CacheTileDataSource, SELECTORS as SEL_CacheTileDataSource } from '../bindings/datasources/CacheTileDataSource';
 
 @NativeClass
-class MSFTileDownloadListenerImpl extends AKTileDownloadListener {
+class MSFTileDownloadListenerImpl extends NSMSFTileDownloadListener {
     private _owner: WeakRef<TileDownloadListener>;
     private mOnComplete;
     public static initWithOwner(owner: WeakRef<TileDownloadListener>, onComplete): MSFTileDownloadListenerImpl {
@@ -47,8 +63,6 @@ class MSFTileDownloadListenerImpl extends AKTileDownloadListener {
     }
 }
 export class PersistentCacheTileDataSource extends TileDataSource<MSFPersistentCacheTileDataSource, PersistentCacheTileDataSourceOptions> {
-    @nativeProperty capacity: number;
-    @nativeProperty cacheOnlyMode: number;
     createNative(options: PersistentCacheTileDataSourceOptions) {
         if (options.databasePath) {
             return MSFPersistentCacheTileDataSource.alloc().initWithDataSourceDatabasePath(options.dataSource.getNative(), options.databasePath);
@@ -70,25 +84,32 @@ export class PersistentCacheTileDataSource extends TileDataSource<MSFPersistentC
     stopAllDownloads() {
         return this.native && this.native.stopAllDownloads();
     }
-    startDownloadArea(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener) {
-        return new Promise<void>((resolve,reject)=>{
-            let loaderListener = MSFTileDownloadListenerImpl.initWithOwner(new WeakRef(tileDownloadListener), ()=>{
+    startDownloadArea(mapBounds: MapBounds, minZoom: number, maxZoom: number, tileDownloadListener: TileDownloadListener, fetchDelay: number = 0) {
+        return new Promise<void>((resolve, reject) => {
+            let loaderListener = MSFTileDownloadListenerImpl.initWithOwner(new WeakRef(tileDownloadListener), () => {
                 resolve();
                 loaderListener = null;
-            })
-            this.getNative().startDownloadAreaMinZoomMaxZoomTileDownloadListener(
-                toNativeMapBounds(mapBounds),
-                minZoom,
-                maxZoom,
-                loaderListener
-            );
-        })
+            });
+            this.getNative().startDownloadAreaMinZoomMaxZoomFetchDelayTileDownloadListener(toNativeMapBounds(mapBounds), minZoom, maxZoom, fetchDelay, loaderListener);
+        });
     }
 }
 
 export class MemoryCacheTileDataSource extends TileDataSource<MSFMemoryCacheTileDataSource, MemoryCacheTileDataSourceOptions> {
-    @nativeProperty capacity: number;
     createNative(options: MemoryCacheTileDataSourceOptions) {
         return MSFMemoryCacheTileDataSource.alloc().initWithDataSource(options.dataSource.getNative());
     }
 }
+
+export interface PersistentCacheTileDataSource
+    extends Acc_PersistentCacheTileDataSource, Omit<Met_PersistentCacheTileDataSource, 'clear' | 'close' | 'isOpen' | 'loadTile' | 'startDownloadArea' | 'stopAllDownloads'> {}
+bindNative(PersistentCacheTileDataSource, MET_PersistentCacheTileDataSource, ACC_PersistentCacheTileDataSource, { selectors: SEL_PersistentCacheTileDataSource });
+
+export interface MemoryCacheTileDataSource extends Acc_MemoryCacheTileDataSource, Omit<Met_MemoryCacheTileDataSource, 'loadTile'> {}
+bindNative(MemoryCacheTileDataSource, MET_MemoryCacheTileDataSource, ACC_MemoryCacheTileDataSource, { selectors: SEL_MemoryCacheTileDataSource });
+
+export interface PersistentCacheTileDataSource extends Omit<Acc_CacheTileDataSource, 'capacity'>, Omit<Met_CacheTileDataSource, 'clear' | 'getCapacity' | 'setCapacity'> {}
+bindNative(PersistentCacheTileDataSource, MET_CacheTileDataSource, ACC_CacheTileDataSource, { selectors: SEL_CacheTileDataSource });
+
+export interface MemoryCacheTileDataSource extends Omit<Acc_CacheTileDataSource, 'capacity'>, Omit<Met_CacheTileDataSource, 'clear' | 'getCapacity' | 'setCapacity'> {}
+bindNative(MemoryCacheTileDataSource, MET_CacheTileDataSource, ACC_CacheTileDataSource, { selectors: SEL_CacheTileDataSource });

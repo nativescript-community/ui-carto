@@ -6,7 +6,7 @@ import { nativeProperty } from '../index.common';
 import { BaseVectorElement, VectorElementVector } from '../vectorelements';
 import { ClusterElementBuilderOptions } from './cluster';
 
-export class ClusterElementBuilder extends BaseNative<com.nativescript.massifmaps.additions.AKClusterElementBuilder, ClusterElementBuilderOptions> {
+export class ClusterElementBuilder extends BaseNative<com.nativescript.massifmaps.additions.ClusterElementBuilder, ClusterElementBuilderOptions> {
     @nativeImageProperty bitmap: string;
     @nativeColorProperty color: string | Color;
     @nativeProperty size: number;
@@ -17,10 +17,10 @@ export class ClusterElementBuilder extends BaseNative<com.nativescript.massifmap
     @nativeProperty bbox: boolean;
     buildClusterElement?: (position: MapPos, elements: VectorElementVector) => BaseVectorElement<any, any> | com.massifmaps.vectorelements.VectorElement;
     createNative(options: ClusterElementBuilderOptions) {
-        const result = new com.nativescript.massifmaps.additions.AKClusterElementBuilder(Screen.mainScreen.scale);
+        const result = new com.nativescript.massifmaps.additions.ClusterElementBuilder(Screen.mainScreen.scale);
         if (!!options.buildClusterElement) {
             result.setInterface(
-                new com.nativescript.massifmaps.additions.AKClusterElementBuilder.Interface({
+                new com.nativescript.massifmaps.additions.ClusterElementBuilder.Interface({
                     buildClusterElement: this.nBuildClusterElement.bind(this)
                 })
             );

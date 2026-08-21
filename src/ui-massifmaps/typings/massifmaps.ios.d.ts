@@ -2,25 +2,268 @@
 /* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 /* eslint-disable no-redeclare */
 
+// GENERATED FILE - do not edit by hand.
+// Regenerate with `npm run typings.android` / `npm run typings.ios`.
+
+
+declare class MGLContext extends NSObject {
+
+    static alloc(): MGLContext; // inherited from NSObject
+
+    static currentContext(): MGLContext;
+
+    static currentLayer(): MGLLayer;
+
+    static new(): MGLContext; // inherited from NSObject
+
+    static setCurrentContext(context: MGLContext): boolean;
+
+    static setCurrentContextForLayer(context: MGLContext, layer: MGLLayer): boolean;
+
+    readonly API: MGLRenderingAPI;
+
+    readonly eglDisplay: interop.Pointer | interop.Reference<any>;
+
+    readonly sharegroup: MGLSharegroup;
+
+    constructor(o: { API: MGLRenderingAPI; });
+
+    constructor(o: { API: MGLRenderingAPI; sharegroup: MGLSharegroup; });
+
+    initWithAPI(api: MGLRenderingAPI): this;
+
+    initWithAPISharegroup(api: MGLRenderingAPI, sharegroup: MGLSharegroup): this;
+
+    present(layer: MGLLayer): boolean;
+}
+
+declare const enum MGLDrawableColorFormat {
+
+    RGBA8888 = 32,
+
+    SRGBA8888 = -32,
+
+    RGB565 = 16
+}
+
+declare const enum MGLDrawableDepthFormat {
+
+    FormatNone = 0,
+
+    Format16 = 16,
+
+    Format24 = 24
+}
+
+declare const enum MGLDrawableMultisample {
+
+    MultisampleNone = 0,
+
+    Multisample4X = 4
+}
+
+declare const enum MGLDrawableStencilFormat {
+
+    FormatNone = 0,
+
+    Format8 = 8
+}
+
+declare class MGLKView extends UIView {
+
+    static alloc(): MGLKView; // inherited from NSObject
+
+    static appearance(): MGLKView; // inherited from UIAppearance
+
+    /**
+     * @since 8.0
+     */
+    static appearanceForTraitCollection(trait: UITraitCollection): MGLKView; // inherited from UIAppearance
+
+    /**
+     * @since 8.0
+     * @deprecated 9.0
+     */
+    static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): MGLKView; // inherited from UIAppearance
+
+    /**
+     * @since 9.0
+     */
+    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): MGLKView; // inherited from UIAppearance
+
+    /**
+     * @since 5.0
+     * @deprecated 9.0
+     */
+    static appearanceWhenContainedIn(ContainerClass: typeof NSObject): MGLKView; // inherited from UIAppearance
+
+    /**
+     * @since 9.0
+     */
+    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): MGLKView; // inherited from UIAppearance
+
+    static new(): MGLKView; // inherited from NSObject
+
+    context: MGLContext;
+
+    readonly defaultOpenGLFrameBufferID: number;
+
+    delegate: MGLKViewDelegate;
+
+    drawableColorFormat: MGLDrawableColorFormat;
+
+    drawableDepthFormat: MGLDrawableDepthFormat;
+
+    readonly drawableHeight: number;
+
+    drawableMultisample: MGLDrawableMultisample;
+
+    readonly drawableSize: CGSize;
+
+    drawableStencilFormat: MGLDrawableStencilFormat;
+
+    readonly drawableWidth: number;
+
+    enableSetNeedsDisplay: boolean;
+
+    readonly glLayer: MGLLayer;
+
+    retainedBacking: boolean;
+
+    readonly snapshot: UIImage;
+
+    constructor(o: { frame: CGRect; context: MGLContext; });
+
+    bindDrawable(): void;
+
+    display(): void;
+
+    initWithFrameContext(frame: CGRect, context: MGLContext): this;
+}
+
+declare class MGLKViewController extends UIViewController implements MGLKViewDelegate {
+
+    static alloc(): MGLKViewController; // inherited from NSObject
+
+    static new(): MGLKViewController; // inherited from NSObject
+
+    delegate: MGLKViewControllerDelegate;
+
+    readonly framesDisplayed: number;
+
+    readonly glView: MGLKView;
+
+    pauseOnWillResignActive: boolean;
+
+    paused: boolean;
+
+    preferredFramesPerSecond: number;
+
+    resumeOnDidBecomeActive: boolean;
+
+    readonly timeSinceLastUpdate: number;
+
+    readonly debugDescription: string; // inherited from NSObjectProtocol
+
+    readonly description: string; // inherited from NSObjectProtocol
+
+    readonly hash: number; // inherited from NSObjectProtocol
+
+    readonly isProxy: boolean; // inherited from NSObjectProtocol
+
+    readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
+
+    readonly  // inherited from NSObjectProtocol
+
+    class(): typeof NSObject;
+
+    conformsToProtocol(aProtocol: any /* Protocol */): boolean;
+
+    isEqual(object: any): boolean;
+
+    isKindOfClass(aClass: typeof NSObject): boolean;
+
+    isMemberOfClass(aClass: typeof NSObject): boolean;
+
+    mglkViewDrawInRect(view: MGLKView, rect: CGRect): void;
+
+    performSelector(aSelector: string): any;
+
+    performSelectorWithObject(aSelector: string, object: any): any;
+
+    performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
+
+    respondsToSelector(aSelector: string): boolean;
+
+    retainCount(): number;
+
+    self(): this;
+}
+
+interface MGLKViewControllerDelegate extends NSObjectProtocol {
+
+    mglkViewControllerUpdate(controller: MGLKViewController): void;
+}
+declare var MGLKViewControllerDelegate: {  prototype: MGLKViewControllerDelegate; };
+
+interface MGLKViewDelegate extends NSObjectProtocol {
+
+    mglkViewDrawInRect(view: MGLKView, rect: CGRect): void;
+}
+declare var MGLKViewDelegate: {  prototype: MGLKViewDelegate; };
+
+declare class MGLLayer extends CALayer {
+
+    static alloc(): MGLLayer; // inherited from NSObject
+
+    static layer(): MGLLayer; // inherited from CALayer
+
+    static new(): MGLLayer; // inherited from NSObject
+
+    readonly defaultOpenGLFrameBufferID: number;
+
+    drawableColorFormat: MGLDrawableColorFormat;
+
+    drawableDepthFormat: MGLDrawableDepthFormat;
+
+    drawableMultisample: MGLDrawableMultisample;
+
+    readonly drawableSize: CGSize;
+
+    drawableStencilFormat: MGLDrawableStencilFormat;
+
+    retainedBacking: boolean;
+
+    bindDefaultFrameBuffer(): void;
+
+    present(): boolean;
+}
+
+declare const enum MGLRenderingAPI {
+
+    kMGLRenderingAPIOpenGLES1 = 1,
+
+    kMGLRenderingAPIOpenGLES2 = 2,
+
+    kMGLRenderingAPIOpenGLES3 = 3
+}
+
+declare class MGLSharegroup extends NSObject {
+
+    static alloc(): MGLSharegroup; // inherited from NSObject
+
+    static new(): MGLSharegroup; // inherited from NSObject
+}
+
 declare class MSFAddress extends NSObject {
+
     static alloc(): MSFAddress; // inherited from NSObject
 
     static new(): MSFAddress; // inherited from NSObject
 
-    constructor(o: {
-        country: string;
-        region: string;
-        county: string;
-        locality: string;
-        neighbourhood: string;
-        street: string;
-        postcode: string;
-        houseNumber: string;
-        name: string;
-        categories: MSFStringVector;
-    });
+    constructor(o: { country: string; region: string; county: string; locality: string; neighbourhood: string; street: string; postcode: string; houseNumber: string; name: string; categories: MSFStringVector; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     description(): string;
 
@@ -29,8 +272,6 @@ declare class MSFAddress extends NSObject {
     getCountry(): string;
 
     getCounty(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getHouseNumber(): string;
 
@@ -50,36 +291,20 @@ declare class MSFAddress extends NSObject {
 
     hashInternal(): number;
 
-    initWithCountryRegionCountyLocalityNeighbourhoodStreetPostcodeHouseNumberNameCategories(
-        country: string,
-        region: string,
-        county: string,
-        locality: string,
-        neighbourhood: string,
-        street: string,
-        postcode: string,
-        houseNumber: string,
-        name: string,
-        categories: MSFStringVector
-    ): this;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    initWithCountryRegionCountyLocalityNeighbourhoodStreetPostcodeHouseNumberNameCategories(country: string, region: string, county: string, locality: string, neighbourhood: string, street: string, postcode: string, houseNumber: string, name: string, categories: MSFStringVector): this;
 
     isEqualInternal(address: MSFAddress): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFAnimationStyle extends NSObject {
+
     static alloc(): MSFAnimationStyle; // inherited from NSObject
 
     static new(): MSFAnimationStyle; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFAnimationStyle;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getFadeAnimationType(): MSFAnimationType;
 
@@ -93,27 +318,22 @@ declare class MSFAnimationStyle extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFAnimationStyleBuilder extends NSObject {
+
     static alloc(): MSFAnimationStyleBuilder; // inherited from NSObject
 
     static new(): MSFAnimationStyleBuilder; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFAnimationStyleBuilder;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     buildStyle(): MSFAnimationStyle;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getFadeAnimationType(): MSFAnimationType;
 
@@ -124,8 +344,6 @@ declare class MSFAnimationStyleBuilder extends NSObject {
     getRelativeSpeed(): number;
 
     getSizeAnimationType(): MSFAnimationType;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     setFadeAnimationType(animType: MSFAnimationType): void;
 
@@ -140,65 +358,57 @@ declare class MSFAnimationStyleBuilder extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFAnimationType {
-    T_ANIMATION_TYPE_NONE = 0,
 
-    T_ANIMATION_TYPE_STEP = 1,
+    F_ANIMATION_TYPE_NONE = 0,
 
-    T_ANIMATION_TYPE_LINEAR = 2,
+    F_ANIMATION_TYPE_STEP = 1,
 
-    T_ANIMATION_TYPE_SMOOTHSTEP = 3,
+    F_ANIMATION_TYPE_LINEAR = 2,
 
-    T_ANIMATION_TYPE_SPRING = 4
+    F_ANIMATION_TYPE_SMOOTHSTEP = 3,
+
+    F_ANIMATION_TYPE_SPRING = 4
 }
 
 declare class MSFAssetPackage extends NSObject {
+
     static alloc(): MSFAssetPackage; // inherited from NSObject
 
     static new(): MSFAssetPackage; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFAssetPackage;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getAssetNames(): MSFStringVector;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     loadAsset(name: string): MSFBinaryData;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFAssetTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFAssetTileDataSource; // inherited from NSObject
 
     static new(): MSFAssetTileDataSource; // inherited from NSObject
 
-    constructor(o: { minZoom: number; maxZoom: number; basePath: string });
-
-    buildAssetPathSwigExplicitNTAssetTileDataSourceTile(basePath: string, tile: MSFMapTile): string;
+    constructor(o: { minZoom: number; maxZoom: number; basePath: string; });
 
     buildAssetPathTile(basePath: string, tile: MSFMapTile): string;
 
     initWithMinZoomMaxZoomBasePath(minZoom: number, maxZoom: number, basePath: string): this;
-
-    loadTileSwigExplicitNTAssetTileDataSource(tile: MSFMapTile): MSFTileData;
 }
 
 declare class MSFAssetUtils extends NSObject {
+
     static alloc(): MSFAssetUtils; // inherited from NSObject
 
     static calculateResourcePath(resourceName: string): string;
@@ -209,23 +419,20 @@ declare class MSFAssetUtils extends NSObject {
 
     static new(): MSFAssetUtils; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 }
 
 declare class MSFBalloonPopup extends MSFPopup {
+
     static alloc(): MSFBalloonPopup; // inherited from NSObject
 
     static new(): MSFBalloonPopup; // inherited from NSObject
 
-    constructor(o: { baseBillboard: MSFBillboard; style: MSFBalloonPopupStyle; title: string; desc: string });
+    constructor(o: { baseBillboard: MSFBillboard; style: MSFBalloonPopupStyle; title: string; desc: string; });
 
-    constructor(o: { geometry: MSFGeometry; style: MSFBalloonPopupStyle; title: string; desc: string });
+    constructor(o: { geometry: MSFGeometry; style: MSFBalloonPopupStyle; title: string; desc: string; });
 
-    constructor(o: { pos: MSFMapPos; style: MSFBalloonPopupStyle; title: string; desc: string });
+    constructor(o: { pos: MSFMapPos; style: MSFBalloonPopupStyle; title: string; desc: string; });
 
     addButton(button: MSFBalloonPopupButton): void;
 
@@ -259,25 +466,22 @@ declare class MSFBalloonPopup extends MSFPopup {
 }
 
 declare class MSFBalloonPopupButton extends NSObject {
+
     static alloc(): MSFBalloonPopupButton; // inherited from NSObject
 
     static new(): MSFBalloonPopupButton; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFBalloonPopupButton;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { style: MSFBalloonPopupButtonStyle; text: string });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { style: MSFBalloonPopupButtonStyle; text: string; });
 
     getStyle(): MSFBalloonPopupButtonStyle;
 
     getTag(): MSFVariant;
 
     getText(): string;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithStyleText(style: MSFBalloonPopupButtonStyle, text: string): this;
 
@@ -286,16 +490,15 @@ declare class MSFBalloonPopupButton extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFBalloonPopupButtonClickInfo extends NSObject {
+
     static alloc(): MSFBalloonPopupButtonClickInfo; // inherited from NSObject
 
     static new(): MSFBalloonPopupButtonClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getButton(): MSFBalloonPopupButton;
 
@@ -303,18 +506,13 @@ declare class MSFBalloonPopupButtonClickInfo extends NSObject {
 
     getClickType(): MSFClickType;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getVectorElement(): MSFVectorElement;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFBalloonPopupButtonStyle extends MSFStyle {
+
     static alloc(): MSFBalloonPopupButtonStyle; // inherited from NSObject
 
     static new(): MSFBalloonPopupButtonStyle; // inherited from NSObject
@@ -339,6 +537,7 @@ declare class MSFBalloonPopupButtonStyle extends MSFStyle {
 }
 
 declare class MSFBalloonPopupButtonStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFBalloonPopupButtonStyleBuilder; // inherited from NSObject
 
     static new(): MSFBalloonPopupButtonStyleBuilder; // inherited from NSObject
@@ -379,41 +578,33 @@ declare class MSFBalloonPopupButtonStyleBuilder extends MSFStyleBuilder {
 }
 
 declare class MSFBalloonPopupEventListener extends NSObject {
+
     static alloc(): MSFBalloonPopupEventListener; // inherited from NSObject
 
     static new(): MSFBalloonPopupEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFBalloonPopupEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onButtonClicked(clickInfo: MSFBalloonPopupButtonClickInfo): boolean;
-
-    onButtonClickedSwigExplicitNTBalloonPopupEventListener(clickInfo: MSFBalloonPopupButtonClickInfo): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFBalloonPopupMargins extends NSObject {
+
     static alloc(): MSFBalloonPopupMargins; // inherited from NSObject
 
     static new(): MSFBalloonPopupMargins; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { left: number; top: number; right: number; bottom: number });
+    constructor(o: { left: number; top: number; right: number; bottom: number; });
 
     getBottom(): number;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getLeft(): number;
 
@@ -421,14 +612,11 @@ declare class MSFBalloonPopupMargins extends NSObject {
 
     getTop(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithLeftTopRightBottom(left: number, top: number, right: number, bottom: number): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFBalloonPopupStyle extends MSFPopupStyle {
+
     static alloc(): MSFBalloonPopupStyle; // inherited from NSObject
 
     static new(): MSFBalloonPopupStyle; // inherited from NSObject
@@ -485,6 +673,7 @@ declare class MSFBalloonPopupStyle extends MSFPopupStyle {
 }
 
 declare class MSFBalloonPopupStyleBuilder extends MSFPopupStyleBuilder {
+
     static alloc(): MSFBalloonPopupStyleBuilder; // inherited from NSObject
 
     static new(): MSFBalloonPopupStyleBuilder; // inherited from NSObject
@@ -589,6 +778,7 @@ declare class MSFBalloonPopupStyleBuilder extends MSFPopupStyleBuilder {
 }
 
 declare class MSFBillboard extends MSFVectorElement {
+
     static alloc(): MSFBillboard; // inherited from NSObject
 
     static new(): MSFBillboard; // inherited from NSObject
@@ -609,22 +799,25 @@ declare class MSFBillboard extends MSFVectorElement {
 }
 
 declare const enum MSFBillboardOrientation {
-    T_BILLBOARD_ORIENTATION_FACE_CAMERA = 0,
 
-    T_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND = 1,
+    F_BILLBOARD_ORIENTATION_FACE_CAMERA = 0,
 
-    T_BILLBOARD_ORIENTATION_GROUND = 2
+    F_BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND = 1,
+
+    F_BILLBOARD_ORIENTATION_GROUND = 2
 }
 
 declare const enum MSFBillboardScaling {
-    T_BILLBOARD_SCALING_WORLD_SIZE = 0,
 
-    T_BILLBOARD_SCALING_SCREEN_SIZE = 1,
+    F_BILLBOARD_SCALING_WORLD_SIZE = 0,
 
-    T_BILLBOARD_SCALING_CONST_SCREEN_SIZE = 2
+    F_BILLBOARD_SCALING_SCREEN_SIZE = 1,
+
+    F_BILLBOARD_SCALING_CONST_SCREEN_SIZE = 2
 }
 
 declare class MSFBillboardStyle extends MSFStyle {
+
     static alloc(): MSFBillboardStyle; // inherited from NSObject
 
     static new(): MSFBillboardStyle; // inherited from NSObject
@@ -649,6 +842,7 @@ declare class MSFBillboardStyle extends MSFStyle {
 }
 
 declare class MSFBillboardStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFBillboardStyleBuilder; // inherited from NSObject
 
     static new(): MSFBillboardStyleBuilder; // inherited from NSObject
@@ -693,41 +887,37 @@ declare class MSFBillboardStyleBuilder extends MSFStyleBuilder {
 }
 
 declare class MSFBinaryData extends NSObject {
+
     static alloc(): MSFBinaryData; // inherited from NSObject
 
     static new(): MSFBinaryData; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { dataPtr: string | interop.Pointer | interop.Reference<any>; size: number });
+    constructor(o: { dataPtr: string | interop.Pointer | interop.Reference<any>; size: number; });
 
     description(): string;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    getData(): string;
+    getData(): interop.Pointer | interop.Reference<any>;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithDataPtrSize(dataPtr: string | interop.Pointer | interop.Reference<any>, size: number): this;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFBitmap extends NSObject {
+
     static alloc(): MSFBitmap; // inherited from NSObject
 
     static createFromCompressed(compressedData: MSFBinaryData): MSFBitmap;
 
     static new(): MSFBitmap; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { pixelData: MSFBinaryData; width: number; height: number; colorFormat: MSFColorFormat; bytesPerRow: number });
+    constructor(o: { pixelData: MSFBinaryData; width: number; height: number; colorFormat: MSFColorFormat; bytesPerRow: number; });
 
     compressToInternal(): MSFBinaryData;
 
@@ -736,8 +926,6 @@ declare class MSFBitmap extends NSObject {
     getBytesPerPixel(): number;
 
     getColorFormat(): MSFColorFormat;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getHeight(): number;
 
@@ -755,35 +943,22 @@ declare class MSFBitmap extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithPixelDataWidthHeightColorFormatBytesPerRow(pixelData: MSFBinaryData, width: number, height: number, colorFormat: MSFColorFormat, bytesPerRow: number): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFBitmapOverlayRasterTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFBitmapOverlayRasterTileDataSource; // inherited from NSObject
 
     static new(): MSFBitmapOverlayRasterTileDataSource; // inherited from NSObject
 
-    constructor(o: { minZoom: number; maxZoom: number; bitmap: MSFBitmap; projection: MSFProjection; mapPoses: MSFMapPosVector; bitmapPoses: MSFScreenPosVector });
+    constructor(o: { minZoom: number; maxZoom: number; bitmap: MSFBitmap; projection: MSFProjection; mapPoses: MSFMapPosVector; bitmapPoses: MSFScreenPosVector; });
 
-    getDataExtentSwigExplicitNTBitmapOverlayRasterTileDataSource(): MSFMapBounds;
-
-    initWithMinZoomMaxZoomBitmapProjectionMapPosesBitmapPoses(
-        minZoom: number,
-        maxZoom: number,
-        bitmap: MSFBitmap,
-        projection: MSFProjection,
-        mapPoses: MSFMapPosVector,
-        bitmapPoses: MSFScreenPosVector
-    ): this;
-
-    loadTileSwigExplicitNTBitmapOverlayRasterTileDataSource(mapTile: MSFMapTile): MSFTileData;
+    initWithMinZoomMaxZoomBitmapProjectionMapPosesBitmapPoses(minZoom: number, maxZoom: number, bitmap: MSFBitmap, projection: MSFProjection, mapPoses: MSFMapPosVector, bitmapPoses: MSFScreenPosVector): this;
 }
 
 declare class MSFBitmapUtils extends NSObject {
+
     static alloc(): MSFBitmapUtils; // inherited from NSObject
 
     static createBitmapFromUIImage(image: UIImage): MSFBitmap;
@@ -796,81 +971,230 @@ declare class MSFBitmapUtils extends NSObject {
 
     static new(): MSFBitmapUtils; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 }
 
 declare class MSFCacheTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFCacheTileDataSource; // inherited from NSObject
 
     static new(): MSFCacheTileDataSource; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFTileDataSource });
+    constructor(o: { dataSource: MSFTileDataSource; });
 
     clear(): void;
 
     getCapacity(): number;
 
-    getDataExtentSwigExplicitNTCacheTileDataSource(): MSFMapBounds;
-
     getDataSource(): MSFTileDataSource;
 
-    getMaxZoomSwigExplicitNTCacheTileDataSource(): number;
-
-    getMinZoomSwigExplicitNTCacheTileDataSource(): number;
-
     initWithDataSource(dataSource: MSFTileDataSource): this;
-
-    notifyTilesChangedSwigExplicitNTCacheTileDataSource(removeTiles: boolean): void;
 
     setCapacity(capacityInBytes: number): void;
 }
 
 declare class MSFCartoCSSStyleSet extends NSObject {
+
     static alloc(): MSFCartoCSSStyleSet; // inherited from NSObject
 
     static new(): MSFCartoCSSStyleSet; // inherited from NSObject
 
-    constructor(o: { cartoCSS: string });
+    constructor(o: { cartoCSS: string; });
 
-    constructor(o: { cartoCSS: string; assetPackage: MSFAssetPackage });
+    constructor(o: { cartoCSS: string; assetPackage: MSFAssetPackage; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getAssetPackage(): MSFAssetPackage;
 
     getCartoCSS(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     hash(): number;
 
     initWithCartoCSS(cartoCSS: string): this;
 
     initWithCartoCSSAssetPackage(cartoCSS: string, assetPackage: MSFAssetPackage): this;
+}
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+declare class MSFCelestialArc extends MSFCelestialObject {
 
-    swigGetRawPtr(): number;
+    static alloc(): MSFCelestialArc; // inherited from NSObject
+
+    static new(): MSFCelestialArc; // inherited from NSObject
+
+    getClickRadius(): number;
+
+    getDirections(): MSFDoubleVector;
+
+    getRadius(): number;
+
+    getWidth(): number;
+
+    isBelowHorizonVisible(): boolean;
+
+    isSegmented(): boolean;
+
+    setBelowHorizonVisible(visible: boolean): void;
+
+    setCircleAxisAltitudeRadius(axisAzimuth: number, axisAltitude: number, radius: number): void;
+
+    setClickRadius(degrees: number): void;
+
+    setDirections(directions: MSFDoubleVector): void;
+
+    setSegments(directions: MSFDoubleVector): void;
+
+    setWidth(pixels: number): void;
+}
+
+declare class MSFCelestialEventListener extends NSObject {
+
+    static alloc(): MSFCelestialEventListener; // inherited from NSObject
+
+    static new(): MSFCelestialEventListener; // inherited from NSObject
+
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFCelestialEventListener;
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    onCelestialObjectClickedCelestialObject(clickInfo: MSFClickInfo, celestialObject: MSFCelestialObject): boolean;
+
+    swigGetClassName(): string;
+
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+}
+
+declare class MSFCelestialLayer extends MSFLayer {
+
+    static alloc(): MSFCelestialLayer; // inherited from NSObject
+
+    static new(): MSFCelestialLayer; // inherited from NSObject
+
+    add(object: MSFCelestialObject): void;
+
+    addAll(objects: MSFCelestialObjectVector): void;
+
+    clear(): void;
+
+    getAll(): MSFCelestialObjectVector;
+
+    getCelestialEventListener(): MSFCelestialEventListener;
+
+    remove(object: MSFCelestialObject): boolean;
+
+    setCelestialEventListener(listener: MSFCelestialEventListener): void;
+}
+
+declare class MSFCelestialObject extends NSObject {
+
+    static alloc(): MSFCelestialObject; // inherited from NSObject
+
+    static new(): MSFCelestialObject; // inherited from NSObject
+
+    static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFCelestialObject;
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    getAltitude(): number;
+
+    getAzimuth(): number;
+
+    getColor(): MSFColor;
+
+    getDistance(): number;
+
+    getMetaDataElement(key: string): MSFVariant;
+
+    getPosition(): MSFMapPos;
+
+    getPositionAltitude(): number;
+
+    hash(): number;
+
+    isDirectionAnchored(): boolean;
+
+    isVisible(): boolean;
+
+    setColor(color: MSFColor): void;
+
+    setDirectionAltitudeDistance(azimuth: number, altitude: number, distance: number): void;
+
+    setMetaDataElementElement(key: string, element: MSFVariant): void;
+
+    setPositionAltitude(pos: MSFMapPos, altitude: number): void;
+
+    setVisible(visible: boolean): void;
+
+    swigGetClassName(): string;
+
+    swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+}
+
+declare class MSFCelestialObjectVector extends NSObject {
+
+    static alloc(): MSFCelestialObjectVector; // inherited from NSObject
+
+    static new(): MSFCelestialObjectVector; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    add(x: MSFCelestialObject): void;
+
+    capacity(): number;
+
+    clear(): void;
+
+    get(i: number): MSFCelestialObject;
+
+    isEmpty(): boolean;
+
+    reserve(n: number): void;
+
+    setVal(i: number, val: MSFCelestialObject): void;
+
+    size(): number;
+}
+
+declare class MSFCelestialSprite extends MSFCelestialObject {
+
+    static alloc(): MSFCelestialSprite; // inherited from NSObject
+
+    static new(): MSFCelestialSprite; // inherited from NSObject
+
+    getAngularSize(): number;
+
+    getBitmap(): MSFBitmap;
+
+    getClickRadius(): number;
+
+    getScreenSize(): number;
+
+    getSoftness(): number;
+
+    setAngularSize(degrees: number): void;
+
+    setBitmap(bitmap: MSFBitmap): void;
+
+    setClickRadius(degrees: number): void;
+
+    setScreenSize(pixels: number): void;
+
+    setSoftness(softness: number): void;
 }
 
 declare class MSFClickInfo extends NSObject {
+
     static alloc(): MSFClickInfo; // inherited from NSObject
 
     static new(): MSFClickInfo; // inherited from NSObject
 
-    constructor(o: { clickType: MSFClickType; duration: number });
+    constructor(o: { clickType: MSFClickType; duration: number; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     description(): string;
 
     getClickType(): MSFClickType;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDuration(): number;
 
@@ -880,67 +1204,55 @@ declare class MSFClickInfo extends NSObject {
 
     initWithClickTypeDuration(clickType: MSFClickType, duration: number): this;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEqualInternal(clickInfo: MSFClickInfo): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFClickType {
-    T_CLICK_TYPE_SINGLE = 0,
 
-    T_CLICK_TYPE_LONG = 1,
+    F_CLICK_TYPE_SINGLE = 0,
 
-    T_CLICK_TYPE_DOUBLE = 2,
+    F_CLICK_TYPE_LONG = 1,
 
-    T_CLICK_TYPE_DUAL = 3
+    F_CLICK_TYPE_DOUBLE = 2,
+
+    F_CLICK_TYPE_DUAL = 3
 }
 
 declare const enum MSFClusterBuilderMode {
-    T_CLUSTER_BUILDER_MODE_ELEMENTS = 0,
 
-    T_CLUSTER_BUILDER_MODE_ELEMENT_COUNT = 1
+    F_CLUSTER_BUILDER_MODE_ELEMENTS = 0,
+
+    F_CLUSTER_BUILDER_MODE_ELEMENT_COUNT = 1
 }
 
 declare class MSFClusterElementBuilder extends NSObject {
+
     static alloc(): MSFClusterElementBuilder; // inherited from NSObject
 
     static new(): MSFClusterElementBuilder; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFClusterElementBuilder;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     buildClusterElementElementCount(mapPos: MSFMapPos, elementCount: number): MSFVectorElement;
 
     buildClusterElementElements(mapPos: MSFMapPos, elements: MSFVectorElementVector): MSFVectorElement;
 
-    buildClusterElementSwigExplicitNTClusterElementBuilderElementCount(mapPos: MSFMapPos, elementCount: number): MSFVectorElement;
-
-    buildClusterElementSwigExplicitNTClusterElementBuilderElements(mapPos: MSFMapPos, elements: MSFVectorElementVector): MSFVectorElement;
-
     getBuilderMode(): MSFClusterBuilderMode;
-
-    getBuilderModeSwigExplicitNTClusterElementBuilder(): MSFClusterBuilderMode;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFClusteredVectorLayer extends MSFVectorLayer {
+
     static alloc(): MSFClusteredVectorLayer; // inherited from NSObject
 
     static new(): MSFClusteredVectorLayer; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFLocalVectorDataSource; clusterElementBuilder: MSFClusterElementBuilder });
+    constructor(o: { dataSource: MSFLocalVectorDataSource; clusterElementBuilder: MSFClusterElementBuilder; });
 
     expandClusterPx(clusterElement: MSFVectorElement, px: number): boolean;
 
@@ -962,15 +1274,16 @@ declare class MSFClusteredVectorLayer extends MSFVectorLayer {
 }
 
 declare class MSFColor extends NSObject {
+
     static alloc(): MSFColor; // inherited from NSObject
 
     static new(): MSFColor; // inherited from NSObject
 
-    constructor(o: { color: number });
+    constructor(o: { color: number; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { r: number; g: number; b: number; a: number });
+    constructor(o: { r: number; g: number; b: number; a: number; });
 
     description(): string;
 
@@ -979,8 +1292,6 @@ declare class MSFColor extends NSObject {
     getARGB(): number;
 
     getB(): number;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getG(): number;
 
@@ -992,65 +1303,54 @@ declare class MSFColor extends NSObject {
 
     initWithColor(color: number): this;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithRGBA(r: number, g: number, b: number, a: number): this;
 
     isEqualInternal(color: MSFColor): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFColorFormat {
-    T_COLOR_FORMAT_UNSUPPORTED = 0,
 
-    T_COLOR_FORMAT_GRAYSCALE = 6409,
+    F_COLOR_FORMAT_UNSUPPORTED = 0,
 
-    T_COLOR_FORMAT_GRAYSCALE_ALPHA = 6410,
+    F_COLOR_FORMAT_GRAYSCALE = 6409,
 
-    T_COLOR_FORMAT_RGB = 6407,
+    F_COLOR_FORMAT_GRAYSCALE_ALPHA = 6410,
 
-    T_COLOR_FORMAT_RGBA = 6408,
+    F_COLOR_FORMAT_RGB = 6407,
 
-    T_COLOR_FORMAT_BGRA = 1,
+    F_COLOR_FORMAT_RGBA = 6408,
 
-    T_COLOR_FORMAT_RGBA_4444 = 2,
+    F_COLOR_FORMAT_BGRA = 1,
 
-    T_COLOR_FORMAT_RGB_565 = 3
+    F_COLOR_FORMAT_RGBA_4444 = 2,
+
+    F_COLOR_FORMAT_RGB_565 = 3
 }
 
 declare class MSFCombinedTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFCombinedTileDataSource; // inherited from NSObject
 
     static new(): MSFCombinedTileDataSource; // inherited from NSObject
 
-    constructor(o: { dataSource1: MSFTileDataSource; dataSource2: MSFTileDataSource; zoomLevel: number });
-
-    getDataExtentSwigExplicitNTCombinedTileDataSource(): MSFMapBounds;
-
-    getMaxZoomSwigExplicitNTCombinedTileDataSource(): number;
-
-    getMinZoomSwigExplicitNTCombinedTileDataSource(): number;
+    constructor(o: { dataSource1: MSFTileDataSource; dataSource2: MSFTileDataSource; zoomLevel: number; });
 
     initWithDataSource1DataSource2ZoomLevel(dataSource1: MSFTileDataSource, dataSource2: MSFTileDataSource, zoomLevel: number): this;
-
-    loadTileSwigExplicitNTCombinedTileDataSource(tile: MSFMapTile): MSFTileData;
 }
 
 declare class MSFCompiledStyleSet extends NSObject {
+
     static alloc(): MSFCompiledStyleSet; // inherited from NSObject
 
     static new(): MSFCompiledStyleSet; // inherited from NSObject
 
-    constructor(o: { assetPackage: MSFAssetPackage });
+    constructor(o: { assetPackage: MSFAssetPackage; });
 
-    constructor(o: { assetPackage: MSFAssetPackage; styleName: string });
+    constructor(o: { assetPackage: MSFAssetPackage; styleName: string; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getAssetPackage(): MSFAssetPackage;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getStyleAssetName(): string;
 
@@ -1061,22 +1361,120 @@ declare class MSFCompiledStyleSet extends NSObject {
     initWithAssetPackage(assetPackage: MSFAssetPackage): this;
 
     initWithAssetPackageStyleName(assetPackage: MSFAssetPackage, styleName: string): this;
+}
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+declare const enum MSFCompositeSourceType {
 
-    swigGetRawPtr(): number;
+    F_COMPOSITE_SOURCE_TYPE_RASTER = 0,
+
+    F_COMPOSITE_SOURCE_TYPE_HILLSHADE = 1,
+
+    F_COMPOSITE_SOURCE_TYPE_VECTOR = 2
+}
+
+declare class MSFCompositeVectorTileLayer extends MSFVectorTileLayer {
+
+    static alloc(): MSFCompositeVectorTileLayer; // inherited from NSObject
+
+    static new(): MSFCompositeVectorTileLayer; // inherited from NSObject
+
+    addExternalDataSourceDataSourceType(name: string, dataSource: MSFTileDataSource, type: MSFCompositeSourceType): void;
+
+    addExternalDataSourceDataSourceTypeElevationDecoder(name: string, dataSource: MSFTileDataSource, type: MSFCompositeSourceType, elevationDecoder: MSFElevationDecoder): void;
+
+    addVectorDataSourceDataSource(name: string, dataSource: MSFTileDataSource): void;
+
+    clearExternalDataSourceZoomLevelBias(name: string): void;
+
+    getExternalDataSourceMaxOverzoomLevel(name: string): number;
+
+    getExternalDataSourceNames(): MSFStringVector;
+
+    getExternalDataSourceZoomLevelBias(name: string): number;
+
+    isSinglePassRenderingEnabled(): boolean;
+
+    removeExternalDataSource(name: string): boolean;
+
+    setExternalDataSourceMaxOverzoomLevelLevel(name: string, level: number): void;
+
+    setExternalDataSourceZoomLevelBiasBias(name: string, bias: number): void;
+
+    setSinglePassRenderingEnabled(enabled: boolean): void;
+}
+
+declare class MSFContourTileDataSource extends MSFTileDataSource {
+
+    static alloc(): MSFContourTileDataSource; // inherited from NSObject
+
+    static new(): MSFContourTileDataSource; // inherited from NSObject
+
+    constructor(o: { dataSource: MSFTileDataSource; });
+
+    constructor(o: { dataSource: MSFTileDataSource; elevationDecoder: MSFElevationDecoder; });
+
+    clearIntervalMultipliers(): void;
+
+    clearResolutionsForZoom(): void;
+
+    getBaseInterval(): number;
+
+    getIntervalMultiplier(zoom: number): number;
+
+    getLabelInterval(): number;
+
+    getLayerName(): string;
+
+    getMinVisibleZoom(): number;
+
+    getResolution(): number;
+
+    getResolutionForZoom(zoom: number): number;
+
+    getSimplifyTolerance(): number;
+
+    getTerrainOptions(): MSFTerrainOptions;
+
+    initWithDataSource(dataSource: MSFTileDataSource): this;
+
+    initWithDataSourceElevationDecoder(dataSource: MSFTileDataSource, elevationDecoder: MSFElevationDecoder): this;
+
+    isLabelStubsEnabled(): boolean;
+
+    isSeamlessEdgesEnabled(): boolean;
+
+    setBaseInterval(interval: number): void;
+
+    setIntervalMultiplierMultiplier(maxZoom: number, multiplier: number): void;
+
+    setLabelInterval(interval: number): void;
+
+    setLabelStubsEnabled(enabled: boolean): void;
+
+    setLayerName(name: string): void;
+
+    setMinVisibleZoom(zoom: number): void;
+
+    setResolution(resolution: number): void;
+
+    setResolutionForZoomResolution(maxZoom: number, resolution: number): void;
+
+    setSeamlessEdgesEnabled(enabled: boolean): void;
+
+    setSimplifyTolerance(tolerance: number): void;
+
+    setTerrainOptions(terrainOptions: MSFTerrainOptions): void;
 }
 
 declare class MSFCullState extends NSObject {
+
     static alloc(): MSFCullState; // inherited from NSObject
 
     static new(): MSFCullState; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { envelope: MSFMapEnvelope; viewState: MSFViewState });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { envelope: MSFMapEnvelope; viewState: MSFViewState; });
 
     getProjectionEnvelope(projection: MSFProjection): MSFMapEnvelope;
 
@@ -1084,23 +1482,20 @@ declare class MSFCullState extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithEnvelopeViewState(envelope: MSFMapEnvelope, viewState: MSFViewState): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFCustomPopup extends MSFPopup {
+
     static alloc(): MSFCustomPopup; // inherited from NSObject
 
     static new(): MSFCustomPopup; // inherited from NSObject
 
-    constructor(o: { baseBillboard: MSFBillboard; style: MSFPopupStyle; popupHandler: MSFCustomPopupHandler });
+    constructor(o: { baseBillboard: MSFBillboard; style: MSFPopupStyle; popupHandler: MSFCustomPopupHandler; });
 
-    constructor(o: { geometry: MSFGeometry; style: MSFPopupStyle; popupHandler: MSFCustomPopupHandler });
+    constructor(o: { geometry: MSFGeometry; style: MSFPopupStyle; popupHandler: MSFCustomPopupHandler; });
 
-    constructor(o: { pos: MSFMapPos; style: MSFPopupStyle; popupHandler: MSFCustomPopupHandler });
+    constructor(o: { pos: MSFMapPos; style: MSFPopupStyle; popupHandler: MSFCustomPopupHandler; });
 
     getPopupHandler(): MSFCustomPopupHandler;
 
@@ -1112,39 +1507,63 @@ declare class MSFCustomPopup extends MSFPopup {
 }
 
 declare class MSFCustomPopupHandler extends NSObject {
+
     static alloc(): MSFCustomPopupHandler; // inherited from NSObject
 
     static new(): MSFCustomPopupHandler; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFCustomPopupHandler;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onDrawPopup(popupDrawInfo: MSFPopupDrawInfo): MSFBitmap;
 
-    onDrawPopupSwigExplicitNTCustomPopupHandler(popupDrawInfo: MSFPopupDrawInfo): MSFBitmap;
-
     onPopupClicked(popupClickInfo: MSFPopupClickInfo): boolean;
-
-    onPopupClickedSwigExplicitNTCustomPopupHandler(popupClickInfo: MSFPopupClickInfo): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+}
 
-    swigGetRawPtr(): number;
+declare class MSFCustomRasterTileLayer extends MSFRasterTileLayer {
+
+    static alloc(): MSFCustomRasterTileLayer; // inherited from NSObject
+
+    static new(): MSFCustomRasterTileLayer; // inherited from NSObject
+
+    getShaderSource(): string;
+
+    setShaderSource(shaderSource: string): void;
+}
+
+declare class MSFDirAssetPackage extends MSFAssetPackage {
+
+    static alloc(): MSFDirAssetPackage; // inherited from NSObject
+
+    static new(): MSFDirAssetPackage; // inherited from NSObject
+
+    constructor(o: { dirPath: string; });
+
+    constructor(o: { dirPath: string; baseAssetPackage: MSFAssetPackage; });
+
+    getDirPath(): string;
+
+    getLocalAssetNames(): MSFStringVector;
+
+    initWithDirPath(dirPath: string): this;
+
+    initWithDirPathBaseAssetPackage(dirPath: string, baseAssetPackage: MSFAssetPackage): this;
+
+    reload(): void;
 }
 
 declare class MSFDoubleVector extends NSObject {
+
     static alloc(): MSFDoubleVector; // inherited from NSObject
 
     static new(): MSFDoubleVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: number): void;
 
@@ -1154,10 +1573,6 @@ declare class MSFDoubleVector extends NSObject {
 
     get(i: number): number;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -1165,33 +1580,35 @@ declare class MSFDoubleVector extends NSObject {
     setVal(i: number, val: number): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFDouglasPeuckerGeometrySimplifier extends MSFGeometrySimplifier {
+
     static alloc(): MSFDouglasPeuckerGeometrySimplifier; // inherited from NSObject
 
     static new(): MSFDouglasPeuckerGeometrySimplifier; // inherited from NSObject
 
-    constructor(o: { tolerance: number });
+    constructor(o: { tolerance: number; });
 
     initWithTolerance(tolerance: number): this;
 }
 
 declare class MSFEPSG3857 extends MSFProjection {
+
     static alloc(): MSFEPSG3857; // inherited from NSObject
 
     static new(): MSFEPSG3857; // inherited from NSObject
 }
 
 declare class MSFEPSG4326 extends MSFProjection {
+
     static alloc(): MSFEPSG4326; // inherited from NSObject
 
     static new(): MSFEPSG4326; // inherited from NSObject
 }
 
 declare class MSFEditableVectorLayer extends MSFVectorLayer {
+
     static alloc(): MSFEditableVectorLayer; // inherited from NSObject
 
     static new(): MSFEditableVectorLayer; // inherited from NSObject
@@ -1206,28 +1623,26 @@ declare class MSFEditableVectorLayer extends MSFVectorLayer {
 }
 
 declare class MSFElevationDecoder extends NSObject {
+
     static alloc(): MSFElevationDecoder; // inherited from NSObject
 
     static new(): MSFElevationDecoder; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFElevationDecoder;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    getMinimumHeightScale(): number;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFExceptionWrapper extends NSObject {
+
     static alloc(): MSFExceptionWrapper; // inherited from NSObject
 
     static catchExceptionError(tryBlock: () => void): boolean;
@@ -1236,17 +1651,16 @@ declare class MSFExceptionWrapper extends NSObject {
 }
 
 declare class MSFFeature extends NSObject {
+
     static alloc(): MSFFeature; // inherited from NSObject
 
     static new(): MSFFeature; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFFeature;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { geometry: MSFGeometry; properties: MSFVariant });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { geometry: MSFGeometry; properties: MSFVariant; });
 
     getGeometry(): MSFGeometry;
 
@@ -1254,69 +1668,55 @@ declare class MSFFeature extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithGeometryProperties(geometry: MSFGeometry, properties: MSFVariant): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFFeatureCollection extends NSObject {
+
     static alloc(): MSFFeatureCollection; // inherited from NSObject
 
     static new(): MSFFeatureCollection; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFFeatureCollection;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { features: MSFFeatureVector });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { features: MSFFeatureVector; });
 
     getFeature(index: number): MSFFeature;
 
     getFeatureCount(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithFeatures(features: MSFFeatureVector): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFFeatureCollectionSearchService extends NSObject {
+
     static alloc(): MSFFeatureCollectionSearchService; // inherited from NSObject
 
     static new(): MSFFeatureCollectionSearchService; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFFeatureCollectionSearchService;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; featureCollection: MSFFeatureCollection });
+    constructor(o: { projection: MSFProjection; featureCollection: MSFFeatureCollection; });
 
     findFeatures(request: MSFSearchRequest): MSFFeatureCollection;
-
-    findFeaturesSwigExplicitNTFeatureCollectionSearchService(request: MSFSearchRequest): MSFFeatureCollection;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getFeatureCollection(): MSFFeatureCollection;
 
     getMaxResults(): number;
 
     getProjection(): MSFProjection;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithProjectionFeatureCollection(projection: MSFProjection, featureCollection: MSFFeatureCollection): this;
 
@@ -1325,16 +1725,15 @@ declare class MSFFeatureCollectionSearchService extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFFeatureVector extends NSObject {
+
     static alloc(): MSFFeatureVector; // inherited from NSObject
 
     static new(): MSFFeatureVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFFeature): void;
 
@@ -1344,10 +1743,6 @@ declare class MSFFeatureVector extends NSObject {
 
     get(i: number): MSFFeature;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -1355,22 +1750,75 @@ declare class MSFFeatureVector extends NSObject {
     setVal(i: number, val: MSFFeature): void;
 
     size(): number;
+}
 
-    swigGetRawPtr(): number;
+declare class MSFFogOptions extends NSObject {
+
+    static alloc(): MSFFogOptions; // inherited from NSObject
+
+    static new(): MSFFogOptions; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    getColor(): MSFColor;
+
+    getHighColor(): MSFColor;
+
+    getHorizonAngle(): number;
+
+    getHorizonBlend(): number;
+
+    getRangeEnd(): number;
+
+    getRangeStart(): number;
+
+    getShaderSource(): string;
+
+    getSpaceColor(): MSFColor;
+
+    getStarIntensity(): number;
+
+    isEnabled(): boolean;
+
+    setColor(color: MSFColor): void;
+
+    setEnabled(enabled: boolean): void;
+
+    setHighColor(color: MSFColor): void;
+
+    setHorizonAngle(degrees: number): void;
+
+    setHorizonBlend(horizonBlend: number): void;
+
+    setRangeEnd(rangeEnd: number): void;
+
+    setRangeStart(rangeStart: number): void;
+
+    setShaderSource(shaderSource: string): void;
+
+    setSpaceColor(color: MSFColor): void;
+
+    setStarIntensity(starIntensity: number): void;
+}
+
+declare const enum MSFFreeRoamMode {
+
+    F_FREE_ROAM_MODE_OFF = 0,
+
+    F_FREE_ROAM_MODE_LOOK = 1,
+
+    F_FREE_ROAM_MODE_FIRST_PERSON = 2
 }
 
 declare class MSFGeoJSONGeometryReader extends NSObject {
+
     static alloc(): MSFGeoJSONGeometryReader; // inherited from NSObject
 
     static new(): MSFGeoJSONGeometryReader; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getTargetProjection(): MSFProjection;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     readFeature(geoJSON: string): MSFFeature;
 
@@ -1382,19 +1830,16 @@ declare class MSFGeoJSONGeometryReader extends NSObject {
 }
 
 declare class MSFGeoJSONGeometryWriter extends NSObject {
+
     static alloc(): MSFGeoJSONGeometryWriter; // inherited from NSObject
 
     static new(): MSFGeoJSONGeometryWriter; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getSourceProjection(): MSFProjection;
 
     getZ(): boolean;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     setSourceProjection(proj: MSFProjection): void;
 
@@ -1408,6 +1853,7 @@ declare class MSFGeoJSONGeometryWriter extends NSObject {
 }
 
 declare class MSFGeoJSONVectorTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFGeoJSONVectorTileDataSource; // inherited from NSObject
 
     static new(): MSFGeoJSONVectorTileDataSource; // inherited from NSObject
@@ -1420,13 +1866,9 @@ declare class MSFGeoJSONVectorTileDataSource extends MSFTileDataSource {
 
     deleteLayer(layerIndex: number): void;
 
-    getDataExtentSwigExplicitNTGeoJSONVectorTileDataSource(): MSFMapBounds;
-
     getDefaultLayerBuffer(): number;
 
     getSimplifyTolerance(): number;
-
-    loadTileSwigExplicitNTGeoJSONVectorTileDataSource(mapTile: MSFMapTile): MSFTileData;
 
     removeGeoJSONFeatureArg2(layerIndex: number, arg2: MSFVariant): void;
 
@@ -1446,23 +1888,23 @@ declare class MSFGeoJSONVectorTileDataSource extends MSFTileDataSource {
 }
 
 declare class MSFGeocodingAddress extends MSFAddress {
+
     static alloc(): MSFGeocodingAddress; // inherited from NSObject
 
     static new(): MSFGeocodingAddress; // inherited from NSObject
 }
 
 declare class MSFGeocodingRequest extends NSObject {
+
     static alloc(): MSFGeocodingRequest; // inherited from NSObject
 
     static new(): MSFGeocodingRequest; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; query: string });
+    constructor(o: { projection: MSFProjection; query: string; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getCustomParameter(param: string): MSFVariant;
 
@@ -1476,8 +1918,6 @@ declare class MSFGeocodingRequest extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionQuery(projection: MSFProjection, query: string): this;
 
     setCustomParameterValue(param: string, value: MSFVariant): void;
@@ -1485,24 +1925,21 @@ declare class MSFGeocodingRequest extends NSObject {
     setLocation(pos: MSFMapPos): void;
 
     setLocationRadius(radius: number): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFGeocodingResult extends NSObject {
+
     static alloc(): MSFGeocodingResult; // inherited from NSObject
 
     static new(): MSFGeocodingResult; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; address: MSFGeocodingAddress; rank: number; featureCollection: MSFFeatureCollection });
+    constructor(o: { projection: MSFProjection; address: MSFGeocodingAddress; rank: number; featureCollection: MSFFeatureCollection; });
 
     description(): string;
 
     getAddress(): MSFGeocodingAddress;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getFeatureCollection(): MSFFeatureCollection;
 
@@ -1512,19 +1949,16 @@ declare class MSFGeocodingResult extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionAddressRankFeatureCollection(projection: MSFProjection, address: MSFGeocodingAddress, rank: number, featureCollection: MSFFeatureCollection): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFGeocodingResultVector extends NSObject {
+
     static alloc(): MSFGeocodingResultVector; // inherited from NSObject
 
     static new(): MSFGeocodingResultVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFGeocodingResult): void;
 
@@ -1533,10 +1967,6 @@ declare class MSFGeocodingResultVector extends NSObject {
     clear(): void;
 
     get(i: number): MSFGeocodingResult;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     isEmpty(): boolean;
 
@@ -1548,23 +1978,20 @@ declare class MSFGeocodingResultVector extends NSObject {
 }
 
 declare class MSFGeocodingService extends NSObject {
+
     static alloc(): MSFGeocodingService; // inherited from NSObject
 
     static new(): MSFGeocodingService; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFGeocodingService;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     calculateAddresses(request: MSFGeocodingRequest): MSFGeocodingResultVector;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getLanguage(): string;
 
     getMaxResults(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     isAutocomplete(): boolean;
 
@@ -1577,42 +2004,36 @@ declare class MSFGeocodingService extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFGeometry extends NSObject {
+
     static alloc(): MSFGeometry; // inherited from NSObject
 
     static new(): MSFGeometry; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFGeometry;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getBounds(): MSFMapBounds;
 
     getCenterPos(): MSFMapPos;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFGeometryCollection extends MSFVectorElement {
+
     static alloc(): MSFGeometryCollection; // inherited from NSObject
 
     static new(): MSFGeometryCollection; // inherited from NSObject
 
-    constructor(o: { geometry: MSFMultiGeometry; style: MSFGeometryCollectionStyle });
+    constructor(o: { geometry: MSFMultiGeometry; style: MSFGeometryCollectionStyle; });
 
     getGeometry(): MSFMultiGeometry;
 
@@ -1626,6 +2047,7 @@ declare class MSFGeometryCollection extends MSFVectorElement {
 }
 
 declare class MSFGeometryCollectionStyle extends MSFStyle {
+
     static alloc(): MSFGeometryCollectionStyle; // inherited from NSObject
 
     static new(): MSFGeometryCollectionStyle; // inherited from NSObject
@@ -1638,6 +2060,7 @@ declare class MSFGeometryCollectionStyle extends MSFStyle {
 }
 
 declare class MSFGeometryCollectionStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFGeometryCollectionStyleBuilder; // inherited from NSObject
 
     static new(): MSFGeometryCollectionStyleBuilder; // inherited from NSObject
@@ -1658,33 +2081,29 @@ declare class MSFGeometryCollectionStyleBuilder extends MSFStyleBuilder {
 }
 
 declare class MSFGeometrySimplifier extends NSObject {
+
     static alloc(): MSFGeometrySimplifier; // inherited from NSObject
 
     static new(): MSFGeometrySimplifier; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFGeometrySimplifier;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFGeometryVector extends NSObject {
+
     static alloc(): MSFGeometryVector; // inherited from NSObject
 
     static new(): MSFGeometryVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFGeometry): void;
 
@@ -1694,10 +2113,6 @@ declare class MSFGeometryVector extends NSObject {
 
     get(i: number): MSFGeometry;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -1705,18 +2120,15 @@ declare class MSFGeometryVector extends NSObject {
     setVal(i: number, val: MSFGeometry): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFHTTPTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFHTTPTileDataSource; // inherited from NSObject
 
     static new(): MSFHTTPTileDataSource; // inherited from NSObject
 
-    constructor(o: { minZoom: number; maxZoom: number; baseURL: string });
-
-    buildTileURLSwigExplicitNTHTTPTileDataSourceTile(baseURL: string, tile: MSFMapTile): string;
+    constructor(o: { minZoom: number; maxZoom: number; baseURL: string; });
 
     buildTileURLTile(baseURL: string, tile: MSFMapTile): string;
 
@@ -1734,8 +2146,6 @@ declare class MSFHTTPTileDataSource extends MSFTileDataSource {
 
     isTMSScheme(): boolean;
 
-    loadTileSwigExplicitNTHTTPTileDataSource(mapTile: MSFMapTile): MSFTileData;
-
     setBaseURL(baseURL: string): void;
 
     setHTTPHeaders(headers: MSFStringMap): void;
@@ -1749,14 +2159,34 @@ declare class MSFHTTPTileDataSource extends MSFTileDataSource {
     setTimeout(timeout: number): void;
 }
 
-declare class MSFHillshadeRasterTileLayer extends MSFRasterTileLayer {
+declare const enum MSFHillshadeMethod {
+
+    F_STANDARD = 0,
+
+    F_COMBINED = 1,
+
+    F_IGOR = 2,
+
+    F_MULTIDIRECTIONAL = 3,
+
+    F_BASIC = 4
+}
+
+declare class MSFHillshadeRasterTileLayer extends MSFCustomRasterTileLayer {
+
     static alloc(): MSFHillshadeRasterTileLayer; // inherited from NSObject
 
     static new(): MSFHillshadeRasterTileLayer; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFTileDataSource; elevationDecoder: MSFElevationDecoder });
+    constructor(o: { dataSource: MSFTileDataSource; elevationDecoder: MSFElevationDecoder; });
 
     getAccentColor(): MSFColor;
+
+    getContourColor(): MSFColor;
+
+    getContourInterval(): number;
+
+    getContourWidth(): number;
 
     getContrast(): number;
 
@@ -1766,9 +2196,13 @@ declare class MSFHillshadeRasterTileLayer extends MSFRasterTileLayer {
 
     getExagerateHeightScaleEnabled(): boolean;
 
+    getExaggeration(): number;
+
     getHeightScale(): number;
 
     getHighlightColor(): MSFColor;
+
+    getHillshadeMethod(): MSFHillshadeMethod;
 
     getIlluminationDirection(): MSFMapVec;
 
@@ -1780,26 +2214,57 @@ declare class MSFHillshadeRasterTileLayer extends MSFRasterTileLayer {
 
     initWithDataSourceElevationDecoder(dataSource: MSFTileDataSource, elevationDecoder: MSFElevationDecoder): this;
 
+    isContourEnabled(): boolean;
+
+    isElevationEncodingEnabled(): boolean;
+
+    isLegacyHeightScaleEnabled(): boolean;
+
+    isTerrainPaintEnabled(): boolean;
+
+    isTerrainPaintFullDetailEnabled(): boolean;
+
     setAccentColor(color: MSFColor): void;
+
+    setContourColor(color: MSFColor): void;
+
+    setContourEnabled(enabled: boolean): void;
+
+    setContourInterval(interval: number): void;
+
+    setContourWidth(width: number): void;
 
     setContrast(contrast: number): void;
 
+    setElevationEncodingEnabled(enabled: boolean): void;
+
     setExagerateHeightScaleEnabled(enabled: boolean): void;
+
+    setExaggeration(exaggeration: number): void;
 
     setHeightScale(heightScale: number): void;
 
     setHighlightColor(color: MSFColor): void;
 
+    setHillshadeMethod(method: MSFHillshadeMethod): void;
+
     setIlluminationDirection(direction: MSFMapVec): void;
 
     setIlluminationMapRotationEnabled(enabled: boolean): void;
 
+    setLegacyHeightScaleEnabled(enabled: boolean): void;
+
     setNormalMapLightingShader(shader: string): void;
 
     setShadowColor(color: MSFColor): void;
+
+    setTerrainPaintEnabled(enabled: boolean): void;
+
+    setTerrainPaintFullDetailEnabled(enabled: boolean): void;
 }
 
 declare class MSFLabel extends MSFBillboard {
+
     static alloc(): MSFLabel; // inherited from NSObject
 
     static new(): MSFLabel; // inherited from NSObject
@@ -1812,6 +2277,7 @@ declare class MSFLabel extends MSFBillboard {
 }
 
 declare class MSFLabelStyle extends MSFBillboardStyle {
+
     static alloc(): MSFLabelStyle; // inherited from NSObject
 
     static new(): MSFLabelStyle; // inherited from NSObject
@@ -1830,6 +2296,7 @@ declare class MSFLabelStyle extends MSFBillboardStyle {
 }
 
 declare class MSFLabelStyleBuilder extends MSFBillboardStyleBuilder {
+
     static alloc(): MSFLabelStyleBuilder; // inherited from NSObject
 
     static new(): MSFLabelStyleBuilder; // inherited from NSObject
@@ -1864,17 +2331,16 @@ declare class MSFLabelStyleBuilder extends MSFBillboardStyleBuilder {
 }
 
 declare class MSFLayer extends NSObject {
+
     static alloc(): MSFLayer; // inherited from NSObject
 
     static new(): MSFLayer; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFLayer;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     containsMetaDataKey(key: string): boolean;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getMetaData(): MSFStringVariantMap;
 
@@ -1888,7 +2354,7 @@ declare class MSFLayer extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    isPostProcessed(): boolean;
 
     isUpdateInProgress(): boolean;
 
@@ -1904,6 +2370,8 @@ declare class MSFLayer extends NSObject {
 
     setOpacity(opacity: number): void;
 
+    setPostProcessed(postProcessed: boolean): void;
+
     setUpdatePriority(priority: number): void;
 
     setVisible(visible: boolean): void;
@@ -1916,17 +2384,16 @@ declare class MSFLayer extends NSObject {
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
 
-    swigGetRawPtr(): number;
-
     update(cullState: MSFCullState): void;
 }
 
 declare class MSFLayerVector extends NSObject {
+
     static alloc(): MSFLayerVector; // inherited from NSObject
 
     static new(): MSFLayerVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFLayer): void;
 
@@ -1936,10 +2403,6 @@ declare class MSFLayerVector extends NSObject {
 
     get(i: number): MSFLayer;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -1947,16 +2410,15 @@ declare class MSFLayerVector extends NSObject {
     setVal(i: number, val: MSFLayer): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFLayers extends NSObject {
+
     static alloc(): MSFLayers; // inherited from NSObject
 
     static new(): MSFLayers; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(layer: MSFLayer): void;
 
@@ -1970,11 +2432,7 @@ declare class MSFLayers extends NSObject {
 
     getAll(): MSFLayerVector;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     insertLayer(index: number, layer: MSFLayer): void;
 
@@ -1985,18 +2443,84 @@ declare class MSFLayers extends NSObject {
     setAll(layers: MSFLayerVector): void;
 
     setLayer(index: number, layer: MSFLayer): void;
+}
 
-    swigGetRawPtr(): number;
+declare class MSFLightOptions extends NSObject {
+
+    static alloc(): MSFLightOptions; // inherited from NSObject
+
+    static new(): MSFLightOptions; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    getAmbientIntensity(): number;
+
+    getShadowBias(): number;
+
+    getShadowCascades(): number;
+
+    getShadowCasterMargin(): number;
+
+    getShadowDistance(): number;
+
+    getShadowMapSize(): number;
+
+    getShadowNormalOffset(): number;
+
+    getShadowSoftness(): number;
+
+    getShadowStrength(): number;
+
+    getSunAltitude(): number;
+
+    getSunAzimuth(): number;
+
+    getSunColor(): MSFColor;
+
+    getSunIntensity(): number;
+
+    isTerrainLightingEnabled(): boolean;
+
+    setAmbientIntensity(intensity: number): void;
+
+    setShadowBias(bias: number): void;
+
+    setShadowCascades(cascades: number): void;
+
+    setShadowCasterMargin(margin: number): void;
+
+    setShadowDistance(distance: number): void;
+
+    setShadowMapSize(size: number): void;
+
+    setShadowNormalOffset(offset: number): void;
+
+    setShadowSoftness(softness: number): void;
+
+    setShadowStrength(strength: number): void;
+
+    setSunAltitude(altitude: number): void;
+
+    setSunAzimuth(azimuth: number): void;
+
+    setSunColor(color: MSFColor): void;
+
+    setSunIntensity(intensity: number): void;
+
+    setSunPositionFromTimeMonthDayHourMinuteLatitudeLongitude(year: number, month: number, day: number, hour: number, minute: number, latitude: number, longitude: number): void;
+
+    setTerrainLightingEnabled(enabled: boolean): void;
 }
 
 declare class MSFLine extends MSFVectorElement {
+
     static alloc(): MSFLine; // inherited from NSObject
 
     static new(): MSFLine; // inherited from NSObject
 
-    constructor(o: { geometry: MSFLineGeometry; style: MSFLineStyle });
+    constructor(o: { geometry: MSFLineGeometry; style: MSFLineStyle; });
 
-    constructor(o: { poses: MSFMapPosVector; style: MSFLineStyle });
+    constructor(o: { poses: MSFMapPosVector; style: MSFLineStyle; });
 
     getGeometry(): MSFLineGeometry;
 
@@ -2016,19 +2540,21 @@ declare class MSFLine extends MSFVectorElement {
 }
 
 declare const enum MSFLineEndType {
-    T_LINE_END_TYPE_NONE = 0,
 
-    T_LINE_END_TYPE_SQUARE = 1,
+    F_LINE_END_TYPE_NONE = 0,
 
-    T_LINE_END_TYPE_ROUND = 2
+    F_LINE_END_TYPE_SQUARE = 1,
+
+    F_LINE_END_TYPE_ROUND = 2
 }
 
 declare class MSFLineGeometry extends MSFGeometry {
+
     static alloc(): MSFLineGeometry; // inherited from NSObject
 
     static new(): MSFLineGeometry; // inherited from NSObject
 
-    constructor(o: { poses: MSFMapPosVector });
+    constructor(o: { poses: MSFMapPosVector; });
 
     getPoses(): MSFMapPosVector;
 
@@ -2036,11 +2562,12 @@ declare class MSFLineGeometry extends MSFGeometry {
 }
 
 declare class MSFLineGeometryVector extends NSObject {
+
     static alloc(): MSFLineGeometryVector; // inherited from NSObject
 
     static new(): MSFLineGeometryVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFLineGeometry): void;
 
@@ -2050,10 +2577,6 @@ declare class MSFLineGeometryVector extends NSObject {
 
     get(i: number): MSFLineGeometry;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -2061,21 +2584,21 @@ declare class MSFLineGeometryVector extends NSObject {
     setVal(i: number, val: MSFLineGeometry): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFLineJoinType {
-    T_LINE_JOIN_TYPE_NONE = 0,
 
-    T_LINE_JOIN_TYPE_MITER = 1,
+    F_LINE_JOIN_TYPE_NONE = 0,
 
-    T_LINE_JOIN_TYPE_BEVEL = 2,
+    F_LINE_JOIN_TYPE_MITER = 1,
 
-    T_LINE_JOIN_TYPE_ROUND = 3
+    F_LINE_JOIN_TYPE_BEVEL = 2,
+
+    F_LINE_JOIN_TYPE_ROUND = 3
 }
 
 declare class MSFLineStyle extends MSFStyle {
+
     static alloc(): MSFLineStyle; // inherited from NSObject
 
     static new(): MSFLineStyle; // inherited from NSObject
@@ -2094,6 +2617,7 @@ declare class MSFLineStyle extends MSFStyle {
 }
 
 declare class MSFLineStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFLineStyleBuilder; // inherited from NSObject
 
     static new(): MSFLineStyleBuilder; // inherited from NSObject
@@ -2126,17 +2650,19 @@ declare class MSFLineStyleBuilder extends MSFStyleBuilder {
 }
 
 declare const enum MSFLocalSpatialIndexType {
-    T_LOCAL_SPATIAL_INDEX_TYPE_NULL = 0,
 
-    T_LOCAL_SPATIAL_INDEX_TYPE_KDTREE = 1
+    F_LOCAL_SPATIAL_INDEX_TYPE_NULL = 0,
+
+    F_LOCAL_SPATIAL_INDEX_TYPE_KDTREE = 1
 }
 
 declare class MSFLocalVectorDataSource extends MSFVectorDataSource {
+
     static alloc(): MSFLocalVectorDataSource; // inherited from NSObject
 
     static new(): MSFLocalVectorDataSource; // inherited from NSObject
 
-    constructor(o: { projection: MSFProjection; spatialIndexType: MSFLocalSpatialIndexType });
+    constructor(o: { projection: MSFProjection; spatialIndexType: MSFLocalSpatialIndexType; });
 
     add(element: MSFVectorElement): void;
 
@@ -2148,15 +2674,11 @@ declare class MSFLocalVectorDataSource extends MSFVectorDataSource {
 
     getAll(): MSFVectorElementVector;
 
-    getDataExtentSwigExplicitNTLocalVectorDataSource(): MSFMapBounds;
-
     getFeatureCollection(): MSFFeatureCollection;
 
     getGeometrySimplifier(): MSFGeometrySimplifier;
 
     initWithProjectionSpatialIndexType(projection: MSFProjection, spatialIndexType: MSFLocalSpatialIndexType): this;
-
-    loadElementsSwigExplicitNTLocalVectorDataSource(cullState: MSFCullState): MSFVectorData;
 
     remove(element: MSFVectorElement): boolean;
 
@@ -2168,6 +2690,7 @@ declare class MSFLocalVectorDataSource extends MSFVectorDataSource {
 }
 
 declare class MSFLog extends NSObject {
+
     static alloc(): MSFLog; // inherited from NSObject
 
     static debug(message: string): void;
@@ -2206,127 +2729,87 @@ declare class MSFLog extends NSObject {
 
     static warn(message: string): void;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 }
 
 declare class MSFLogEventListener extends NSObject {
+
     static alloc(): MSFLogEventListener; // inherited from NSObject
 
     static new(): MSFLogEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFLogEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onDebugEvent(message: string): boolean;
 
-    onDebugEventSwigExplicitNTLogEventListener(message: string): boolean;
-
     onErrorEvent(message: string): boolean;
-
-    onErrorEventSwigExplicitNTLogEventListener(message: string): boolean;
 
     onFatalEvent(message: string): boolean;
 
-    onFatalEventSwigExplicitNTLogEventListener(message: string): boolean;
-
     onInfoEvent(message: string): boolean;
 
-    onInfoEventSwigExplicitNTLogEventListener(message: string): boolean;
-
     onWarnEvent(message: string): boolean;
-
-    onWarnEventSwigExplicitNTLogEventListener(message: string): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFMBTilesScheme {
-    T_MBTILES_SCHEME_TMS = 0,
 
-    T_MBTILES_SCHEME_XYZ = 1
+    F_MBTILES_SCHEME_TMS = 0,
+
+    F_MBTILES_SCHEME_XYZ = 1
 }
 
 declare class MSFMBTilesTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFMBTilesTileDataSource; // inherited from NSObject
 
     static new(): MSFMBTilesTileDataSource; // inherited from NSObject
 
-    constructor(o: { minZoom: number; maxZoom: number; path: string });
+    constructor(o: { minZoom: number; maxZoom: number; path: string; });
 
-    constructor(o: { minZoom: number; maxZoom: number; path: string; scheme: MSFMBTilesScheme });
+    constructor(o: { minZoom: number; maxZoom: number; path: string; scheme: MSFMBTilesScheme; });
 
-    constructor(o: { path: string });
-
-    getDataExtentSwigExplicitNTMBTilesTileDataSource(): MSFMapBounds;
-
-    getMaxZoomSwigExplicitNTMBTilesTileDataSource(): number;
+    constructor(o: { path: string; });
 
     getMetaData(): MSFStringMap;
 
-    getMinZoomSwigExplicitNTMBTilesTileDataSource(): number;
-
     getTileMask(): string;
-
-    getTileMaskSwigExplicitNTMBTilesTileDataSource(): string;
 
     initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
 
     initWithMinZoomMaxZoomPathScheme(minZoom: number, maxZoom: number, path: string, scheme: MSFMBTilesScheme): this;
 
     initWithPath(path: string): this;
-
-    loadTileSwigExplicitNTMBTilesTileDataSource(mapTile: MSFMapTile): MSFTileData;
-}
-
-
-declare class MSFPMTilesTileDataSource extends MSFTileDataSource {
-    static alloc(): MSFPMTilesTileDataSource; // inherited from NSObject
-
-    static new(): MSFPMTilesTileDataSource; // inherited from NSObject
-
-    constructor(o: { minZoom: number; maxZoom: number; path: string });
-
-    constructor(o: { minZoom: number; maxZoom: number; path: string; scheme: MSFMBTilesScheme });
-
-    constructor(o: { path: string });
-
-
-    getMetaData(): MSFStringMap;
-
-    initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
-
-    initWithPath(path: string): this;
 }
 
 declare class MSFMBVectorTileDecoder extends MSFVectorTileDecoder {
+
     static alloc(): MSFMBVectorTileDecoder; // inherited from NSObject
 
     static new(): MSFMBVectorTileDecoder; // inherited from NSObject
 
-    constructor(o: { cartoCSSStyleSet: MSFCartoCSSStyleSet });
+    static parseTileFormat(format: string): MSFTileFormat;
 
-    constructor(o: { compiledStyleSet: MSFCompiledStyleSet });
+    constructor(o: { cartoCSSStyleSet: MSFCartoCSSStyleSet; });
+
+    constructor(o: { compiledStyleSet: MSFCompiledStyleSet; });
 
     getCartoCSSStyleSet(): MSFCartoCSSStyleSet;
 
     getCompiledStyleSet(): MSFCompiledStyleSet;
 
+    getStyleLayerNames(): MSFStringVector;
+
     getStyleParameter(param: string): string;
 
     getStyleParameters(): MSFStringVector;
+
+    getTileFormat(): MSFTileFormat;
 
     initWithCartoCSSStyleSet(cartoCSSStyleSet: MSFCartoCSSStyleSet): this;
 
@@ -2345,16 +2828,40 @@ declare class MSFMBVectorTileDecoder extends MSFVectorTileDecoder {
     setStyleParameterValue(param: string, value: string): boolean;
 
     setStyleParameters(params: MSFStringMap): void;
+
+    setTileFormat(format: MSFTileFormat): void;
+}
+
+declare class MSFManeuverArrowBuilder extends NSObject {
+
+    static alloc(): MSFManeuverArrowBuilder; // inherited from NSObject
+
+    static new(): MSFManeuverArrowBuilder; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    buildArrowAtIndexPointsManeuverIndex(projection: MSFProjection, points: MSFMapPosVector, maneuverIndex: number): MSFFeatureCollection;
+
+    buildArrowPointsManeuverPos(projection: MSFProjection, points: MSFMapPosVector, maneuverPos: MSFMapPos): MSFFeatureCollection;
+
+    getLengthAfter(): number;
+
+    getLengthBefore(): number;
+
+    setLengthAfter(length: number): void;
+
+    setLengthBefore(length: number): void;
 }
 
 declare class MSFMapBounds extends NSObject {
+
     static alloc(): MSFMapBounds; // inherited from NSObject
 
     static new(): MSFMapBounds; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { min: MSFMapPos; max: MSFMapPos });
+    constructor(o: { min: MSFMapPos; max: MSFMapPos; });
 
     containsBounds(bounds: MSFMapBounds): boolean;
 
@@ -2363,8 +2870,6 @@ declare class MSFMapBounds extends NSObject {
     description(): string;
 
     getCenter(): MSFMapPos;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDelta(): MSFMapVec;
 
@@ -2376,8 +2881,6 @@ declare class MSFMapBounds extends NSObject {
 
     hashInternal(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithMinMax(min: MSFMapPos, max: MSFMapPos): this;
 
     intersects(bounds: MSFMapBounds): boolean;
@@ -2385,70 +2888,52 @@ declare class MSFMapBounds extends NSObject {
     isEqualInternal(mapBounds: MSFMapBounds): boolean;
 
     shrinkToIntersection(bounds: MSFMapBounds): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapBoxElevationDataDecoder extends MSFElevationDecoder {
+
     static alloc(): MSFMapBoxElevationDataDecoder; // inherited from NSObject
 
     static new(): MSFMapBoxElevationDataDecoder; // inherited from NSObject
 }
 
 declare class MSFMapBoxOnlineGeocodingService extends MSFGeocodingService {
+
     static alloc(): MSFMapBoxOnlineGeocodingService; // inherited from NSObject
 
     static new(): MSFMapBoxOnlineGeocodingService; // inherited from NSObject
 
-    constructor(o: { accessToken: string });
-
-    calculateAddressesSwigExplicitNTMapBoxOnlineGeocodingService(request: MSFGeocodingRequest): MSFGeocodingResultVector;
+    constructor(o: { accessToken: string; });
 
     getCustomServiceURL(): string;
 
-    getLanguageSwigExplicitNTMapBoxOnlineGeocodingService(): string;
-
-    getMaxResultsSwigExplicitNTMapBoxOnlineGeocodingService(): number;
-
     initWithAccessToken(accessToken: string): this;
 
-    isAutocompleteSwigExplicitNTMapBoxOnlineGeocodingService(): boolean;
-
-    setAutocompleteSwigExplicitNTMapBoxOnlineGeocodingService(autocomplete: boolean): void;
-
     setCustomServiceURL(serviceURL: string): void;
-
-    setLanguageSwigExplicitNTMapBoxOnlineGeocodingService(lang: string): void;
-
-    setMaxResultsSwigExplicitNTMapBoxOnlineGeocodingService(maxResults: number): void;
 }
 
 declare class MSFMapBoxOnlineReverseGeocodingService extends MSFReverseGeocodingService {
+
     static alloc(): MSFMapBoxOnlineReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFMapBoxOnlineReverseGeocodingService; // inherited from NSObject
 
-    constructor(o: { accessToken: string });
-
-    calculateAddressesSwigExplicitNTMapBoxOnlineReverseGeocodingService(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
+    constructor(o: { accessToken: string; });
 
     getCustomServiceURL(): string;
-
-    getLanguageSwigExplicitNTMapBoxOnlineReverseGeocodingService(): string;
 
     initWithAccessToken(accessToken: string): this;
 
     setCustomServiceURL(serviceURL: string): void;
-
-    setLanguageSwigExplicitNTMapBoxOnlineReverseGeocodingService(lang: string): void;
 }
 
 declare class MSFMapClickInfo extends NSObject {
+
     static alloc(): MSFMapClickInfo; // inherited from NSObject
 
     static new(): MSFMapClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getClickInfo(): MSFClickInfo;
 
@@ -2456,25 +2941,20 @@ declare class MSFMapClickInfo extends NSObject {
 
     getClickType(): MSFClickType;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapEnvelope extends NSObject {
+
     static alloc(): MSFMapEnvelope; // inherited from NSObject
 
     static new(): MSFMapEnvelope; // inherited from NSObject
 
-    constructor(o: { bounds: MSFMapBounds });
+    constructor(o: { bounds: MSFMapBounds; });
 
-    constructor(o: { convexHull: MSFMapPosVector });
+    constructor(o: { convexHull: MSFMapPosVector; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     contains(envelope: MSFMapEnvelope): boolean;
 
@@ -2484,8 +2964,6 @@ declare class MSFMapEnvelope extends NSObject {
 
     getConvexHull(): MSFMapPosVector;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
 
     hashInternal(): number;
@@ -2494,67 +2972,45 @@ declare class MSFMapEnvelope extends NSObject {
 
     initWithConvexHull(convexHull: MSFMapPosVector): this;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     intersects(envelope: MSFMapEnvelope): boolean;
 
     isEqualInternal(envelope: MSFMapEnvelope): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapEventListener extends NSObject {
+
     static alloc(): MSFMapEventListener; // inherited from NSObject
 
     static new(): MSFMapEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFMapEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onMapClicked(mapClickInfo: MSFMapClickInfo): void;
 
-    onMapClickedSwigExplicitNTMapEventListener(mapClickInfo: MSFMapClickInfo): void;
-
     onMapIdle(): void;
-
-    onMapIdleSwigExplicitNTMapEventListener(): void;
 
     onMapInteraction(mapInteractionInfo: MSFMapInteractionInfo): void;
 
-    onMapInteractionSwigExplicitNTMapEventListener(mapInteractionInfo: MSFMapInteractionInfo): void;
-
     onMapMoved(): void;
 
-    onMapMovedSwigExplicitNTMapEventListener(): void;
-
     onMapStable(): void;
-
-    onMapStableSwigExplicitNTMapEventListener(): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapInteractionInfo extends NSObject {
+
     static alloc(): MSFMapInteractionInfo; // inherited from NSObject
 
     static new(): MSFMapInteractionInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     isAnimationStarted(): boolean;
 
@@ -2565,26 +3021,23 @@ declare class MSFMapInteractionInfo extends NSObject {
     isTiltAction(): boolean;
 
     isZoomAction(): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapPos extends NSObject {
+
     static alloc(): MSFMapPos; // inherited from NSObject
 
     static new(): MSFMapPos; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { x: number; y: number });
+    constructor(o: { x: number; y: number; });
 
-    constructor(o: { x: number; y: number; z: number });
+    constructor(o: { x: number; y: number; z: number; });
 
     add(v: MSFMapVec): MSFMapPos;
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getX(): number;
 
@@ -2596,8 +3049,6 @@ declare class MSFMapPos extends NSObject {
 
     hashInternal(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithXY(x: number, y: number): this;
 
     initWithXYZ(x: number, y: number, z: number): this;
@@ -2607,16 +3058,15 @@ declare class MSFMapPos extends NSObject {
     subPos(p: MSFMapPos): MSFMapVec;
 
     subVec(v: MSFMapVec): MSFMapPos;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapPosVector extends NSObject {
+
     static alloc(): MSFMapPosVector; // inherited from NSObject
 
     static new(): MSFMapPosVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFMapPos): void;
 
@@ -2626,10 +3076,6 @@ declare class MSFMapPosVector extends NSObject {
 
     get(i: number): MSFMapPos;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -2637,16 +3083,15 @@ declare class MSFMapPosVector extends NSObject {
     setVal(i: number, val: MSFMapPos): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapPosVectorVector extends NSObject {
+
     static alloc(): MSFMapPosVectorVector; // inherited from NSObject
 
     static new(): MSFMapPosVectorVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFMapPosVector): void;
 
@@ -2656,10 +3101,6 @@ declare class MSFMapPosVectorVector extends NSObject {
 
     get(i: number): MSFMapPosVector;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -2667,22 +3108,19 @@ declare class MSFMapPosVectorVector extends NSObject {
     setVal(i: number, val: MSFMapPosVector): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapRange extends NSObject {
+
     static alloc(): MSFMapRange; // inherited from NSObject
 
     static new(): MSFMapRange; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { min: number; max: number });
+    constructor(o: { min: number; max: number; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getMax(): number;
 
@@ -2696,87 +3134,72 @@ declare class MSFMapRange extends NSObject {
 
     inRange(value: number): boolean;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithMinMax(min: number, max: number): this;
 
     isEqualInternal(mapRange: MSFMapRange): boolean;
 
     length(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapRenderer extends NSObject {
+
     static alloc(): MSFMapRenderer; // inherited from NSObject
 
     static new(): MSFMapRenderer; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     captureRenderingWaitWhileUpdating(listener: MSFRendererCaptureListener, waitWhileUpdating: boolean): void;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getMapRendererListener(): MSFMapRendererListener;
+
+    getPostProcessEffect(): MSFPostProcessEffect;
 
     getViewState(): MSFViewState;
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    requestRedraw(callerFile: string): void;
 
-    requestRedraw(): void;
+    requestRedrawCallerLine(callerFile: string, callerLine: number): void;
 
     setMapRendererListener(listener: MSFMapRendererListener): void;
 
-    swigGetRawPtr(): number;
+    setPostProcessEffect(postProcessEffect: MSFPostProcessEffect): void;
 }
 
 declare class MSFMapRendererListener extends NSObject {
+
     static alloc(): MSFMapRendererListener; // inherited from NSObject
 
     static new(): MSFMapRendererListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFMapRendererListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onAfterDrawFrame(): void;
 
-    onAfterDrawFrameSwigExplicitNTMapRendererListener(): void;
-
     onBeforeDrawFrame(): void;
 
-    onBeforeDrawFrameSwigExplicitNTMapRendererListener(): void;
-
     onSurfaceChangedHeight(width: number, height: number): void;
-
-    onSurfaceChangedSwigExplicitNTMapRendererListenerHeight(width: number, height: number): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapTile extends NSObject {
+
     static alloc(): MSFMapTile; // inherited from NSObject
 
     static new(): MSFMapTile; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { x: number; y: number; zoom: number; frameNr: number });
+    constructor(o: { x: number; y: number; zoom: number; frameNr: number; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getFrameNr(): number;
 
@@ -2792,21 +3215,18 @@ declare class MSFMapTile extends NSObject {
 
     hashInternal(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithXYZoomFrameNr(x: number, y: number, zoom: number, frameNr: number): this;
 
     isEqualInternal(tile: MSFMapTile): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFMapTilerOnlineTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFMapTilerOnlineTileDataSource; // inherited from NSObject
 
     static new(): MSFMapTilerOnlineTileDataSource; // inherited from NSObject
 
-    constructor(o: { key: string });
+    constructor(o: { key: string; });
 
     getCustomServiceURL(): string;
 
@@ -2814,23 +3234,22 @@ declare class MSFMapTilerOnlineTileDataSource extends MSFTileDataSource {
 
     initWithKey(key: string): this;
 
-    loadTileSwigExplicitNTMapTilerOnlineTileDataSource(mapTile: MSFMapTile): MSFTileData;
-
     setCustomServiceURL(serviceURL: string): void;
 
     setTimeout(timeout: number): void;
 }
 
 declare class MSFMapVec extends NSObject {
+
     static alloc(): MSFMapVec; // inherited from NSObject
 
     static new(): MSFMapVec; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { x: number; y: number });
+    constructor(o: { x: number; y: number; });
 
-    constructor(o: { x: number; y: number; z: number });
+    constructor(o: { x: number; y: number; z: number; });
 
     add(v: MSFMapVec): MSFMapVec;
 
@@ -2844,8 +3263,6 @@ declare class MSFMapVec extends NSObject {
 
     dotProduct(v: MSFMapVec): number;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getNormalized(): MSFMapVec;
 
     getX(): number;
@@ -2858,8 +3275,6 @@ declare class MSFMapVec extends NSObject {
 
     hashInternal(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithXY(x: number, y: number): this;
 
     initWithXYZ(x: number, y: number, z: number): this;
@@ -2871,24 +3286,40 @@ declare class MSFMapVec extends NSObject {
     mul(multiplier: number): MSFMapVec;
 
     sub(v: MSFMapVec): MSFMapVec;
-
-    swigGetRawPtr(): number;
 }
 
-declare class MSFMapView extends GLKView {
+declare class MSFMapView extends MGLKView {
+
     static alloc(): MSFMapView; // inherited from NSObject
 
     static appearance(): MSFMapView; // inherited from UIAppearance
 
+    /**
+     * @since 8.0
+     */
     static appearanceForTraitCollection(trait: UITraitCollection): MSFMapView; // inherited from UIAppearance
 
+    /**
+     * @since 8.0
+     * @deprecated 9.0
+     */
     static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): MSFMapView; // inherited from UIAppearance
 
-    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | (typeof NSObject)[]): MSFMapView; // inherited from UIAppearance
+    /**
+     * @since 9.0
+     */
+    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): MSFMapView; // inherited from UIAppearance
 
+    /**
+     * @since 5.0
+     * @deprecated 9.0
+     */
     static appearanceWhenContainedIn(ContainerClass: typeof NSObject): MSFMapView; // inherited from UIAppearance
 
-    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | (typeof NSObject)[]): MSFMapView; // inherited from UIAppearance
+    /**
+     * @since 9.0
+     */
+    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): MSFMapView; // inherited from UIAppearance
 
     static new(): MSFMapView; // inherited from NSObject
 
@@ -2897,6 +3328,14 @@ declare class MSFMapView extends GLKView {
     clearAllCaches(): void;
 
     clearPreloadingCaches(): void;
+
+    flyToZoomDurationSeconds(pos: MSFMapPos, zoom: number, durationSeconds: number): void;
+
+    flyToZoomRotationTiltClimbHeightDurationSeconds(pos: MSFMapPos, zoom: number, rotation: number, tilt: number, climbHeight: number, durationSeconds: number): void;
+
+    flyToZoomRotationTiltDurationSeconds(pos: MSFMapPos, zoom: number, rotation: number, tilt: number, durationSeconds: number): void;
+
+    getFlightProgress(): number;
 
     getFocusPos(): MSFMapPos;
 
@@ -2914,18 +3353,13 @@ declare class MSFMapView extends GLKView {
 
     getZoom(): number;
 
+    isFlightActive(): boolean;
+
     mapToScreen(mapPos: MSFMapPos): MSFScreenPos;
 
     moveToFitBoundsScreenBoundsIntegerZoomDurationSeconds(mapBounds: MSFMapBounds, screenBounds: MSFScreenBounds, integerZoom: boolean, durationSeconds: number): void;
 
-    moveToFitBoundsScreenBoundsIntegerZoomResetRotationResetTiltDurationSeconds(
-        mapBounds: MSFMapBounds,
-        screenBounds: MSFScreenBounds,
-        integerZoom: boolean,
-        resetRotation: boolean,
-        resetTilt: boolean,
-        durationSeconds: number
-    ): void;
+    moveToFitBoundsScreenBoundsIntegerZoomResetRotationResetTiltDurationSeconds(mapBounds: MSFMapBounds, screenBounds: MSFScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number): void;
 
     panDurationSeconds(deltaPos: MSFMapVec, durationSeconds: number): void;
 
@@ -2945,9 +3379,13 @@ declare class MSFMapView extends GLKView {
 
     setTiltDurationSeconds(tilt: number, durationSeconds: number): void;
 
+    setTranslucent(translucent: boolean): void;
+
     setZoomDurationSeconds(zoom: number, durationSeconds: number): void;
 
     setZoomTargetPosDurationSeconds(zoom: number, targetPos: MSFMapPos, durationSeconds: number): void;
+
+    stopFlight(): void;
 
     tiltDurationSeconds(deltaTilt: number, durationSeconds: number): void;
 
@@ -2957,15 +3395,16 @@ declare class MSFMapView extends GLKView {
 }
 
 declare class MSFMarker extends MSFBillboard {
+
     static alloc(): MSFMarker; // inherited from NSObject
 
     static new(): MSFMarker; // inherited from NSObject
 
-    constructor(o: { baseBillboard: MSFBillboard; style: MSFMarkerStyle });
+    constructor(o: { baseBillboard: MSFBillboard; style: MSFMarkerStyle; });
 
-    constructor(o: { geometry: MSFGeometry; style: MSFMarkerStyle });
+    constructor(o: { geometry: MSFGeometry; style: MSFMarkerStyle; });
 
-    constructor(o: { pos: MSFMapPos; style: MSFMarkerStyle });
+    constructor(o: { pos: MSFMapPos; style: MSFMarkerStyle; });
 
     getStyle(): MSFMarkerStyle;
 
@@ -2979,6 +3418,7 @@ declare class MSFMarker extends MSFBillboard {
 }
 
 declare class MSFMarkerStyle extends MSFBillboardStyle {
+
     static alloc(): MSFMarkerStyle; // inherited from NSObject
 
     static new(): MSFMarkerStyle; // inherited from NSObject
@@ -2999,6 +3439,7 @@ declare class MSFMarkerStyle extends MSFBillboardStyle {
 }
 
 declare class MSFMarkerStyleBuilder extends MSFBillboardStyleBuilder {
+
     static alloc(): MSFMarkerStyleBuilder; // inherited from NSObject
 
     static new(): MSFMarkerStyleBuilder; // inherited from NSObject
@@ -3037,47 +3478,32 @@ declare class MSFMarkerStyleBuilder extends MSFBillboardStyleBuilder {
 }
 
 declare class MSFMemoryCacheTileDataSource extends MSFCacheTileDataSource {
+
     static alloc(): MSFMemoryCacheTileDataSource; // inherited from NSObject
 
     static new(): MSFMemoryCacheTileDataSource; // inherited from NSObject
-
-    clearSwigExplicitNTMemoryCacheTileDataSource(): void;
-
-    getCapacitySwigExplicitNTMemoryCacheTileDataSource(): number;
-
-    loadTileSwigExplicitNTMemoryCacheTileDataSource(mapTile: MSFMapTile): MSFTileData;
-
-    setCapacitySwigExplicitNTMemoryCacheTileDataSource(capacityInBytes: number): void;
 }
 
 declare class MSFMergedMBVTTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFMergedMBVTTileDataSource; // inherited from NSObject
 
     static new(): MSFMergedMBVTTileDataSource; // inherited from NSObject
 
-    constructor(o: { dataSource1: MSFTileDataSource; dataSource2: MSFTileDataSource });
-
-    getDataExtentSwigExplicitNTMergedMBVTTileDataSource(): MSFMapBounds;
-
-    getMaxZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
-
-    getMinZoomSwigExplicitNTMergedMBVTTileDataSource(): number;
+    constructor(o: { dataSource1: MSFTileDataSource; dataSource2: MSFTileDataSource; });
 
     getTileMask(): string;
 
-    getTileMaskSwigExplicitNTMergedMBVTTileDataSource(): string;
-
     initWithDataSource1DataSource2(dataSource1: MSFTileDataSource, dataSource2: MSFTileDataSource): this;
-
-    loadTileSwigExplicitNTMergedMBVTTileDataSource(tile: MSFMapTile): MSFTileData;
 }
 
 declare class MSFMultiGeometry extends MSFGeometry {
+
     static alloc(): MSFMultiGeometry; // inherited from NSObject
 
     static new(): MSFMultiGeometry; // inherited from NSObject
 
-    constructor(o: { geometries: MSFGeometryVector });
+    constructor(o: { geometries: MSFGeometryVector; });
 
     getGeometry(index: number): MSFGeometry;
 
@@ -3087,11 +3513,12 @@ declare class MSFMultiGeometry extends MSFGeometry {
 }
 
 declare class MSFMultiLineGeometry extends MSFMultiGeometry {
+
     static alloc(): MSFMultiLineGeometry; // inherited from NSObject
 
     static new(): MSFMultiLineGeometry; // inherited from NSObject
 
-    constructor(o: { geometries: MSFLineGeometryVector });
+    constructor(o: { geometries: MSFLineGeometryVector; });
 
     getGeometry(index: number): MSFLineGeometry;
 
@@ -3099,51 +3526,34 @@ declare class MSFMultiLineGeometry extends MSFMultiGeometry {
 }
 
 declare class MSFMultiOSMOfflineGeocodingService extends MSFGeocodingService {
+
     static alloc(): MSFMultiOSMOfflineGeocodingService; // inherited from NSObject
 
     static new(): MSFMultiOSMOfflineGeocodingService; // inherited from NSObject
 
     add(database: string): void;
 
-    calculateAddressesSwigExplicitNTMultiOSMOfflineGeocodingService(request: MSFGeocodingRequest): MSFGeocodingResultVector;
-
-    getLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(): string;
-
-    getMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(): number;
-
-    isAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(): boolean;
-
     remove(database: string): boolean;
-
-    setAutocompleteSwigExplicitNTMultiOSMOfflineGeocodingService(autocomplete: boolean): void;
-
-    setLanguageSwigExplicitNTMultiOSMOfflineGeocodingService(lang: string): void;
-
-    setMaxResultsSwigExplicitNTMultiOSMOfflineGeocodingService(maxResults: number): void;
 }
 
 declare class MSFMultiOSMOfflineReverseGeocodingService extends MSFReverseGeocodingService {
+
     static alloc(): MSFMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFMultiOSMOfflineReverseGeocodingService; // inherited from NSObject
 
     add(database: string): void;
 
-    calculateAddressesSwigExplicitNTMultiOSMOfflineReverseGeocodingService(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
-
-    getLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(): string;
-
     remove(database: string): boolean;
-
-    setLanguageSwigExplicitNTMultiOSMOfflineReverseGeocodingService(lang: string): void;
 }
 
 declare class MSFMultiPointGeometry extends MSFMultiGeometry {
+
     static alloc(): MSFMultiPointGeometry; // inherited from NSObject
 
     static new(): MSFMultiPointGeometry; // inherited from NSObject
 
-    constructor(o: { geometries: MSFPointGeometryVector });
+    constructor(o: { geometries: MSFPointGeometryVector; });
 
     getGeometry(index: number): MSFPointGeometry;
 
@@ -3151,11 +3561,12 @@ declare class MSFMultiPointGeometry extends MSFMultiGeometry {
 }
 
 declare class MSFMultiPolygonGeometry extends MSFMultiGeometry {
+
     static alloc(): MSFMultiPolygonGeometry; // inherited from NSObject
 
     static new(): MSFMultiPolygonGeometry; // inherited from NSObject
 
-    constructor(o: { geometries: MSFPolygonGeometryVector });
+    constructor(o: { geometries: MSFPolygonGeometryVector; });
 
     getGeometry(index: number): MSFPolygonGeometry;
 
@@ -3163,30 +3574,24 @@ declare class MSFMultiPolygonGeometry extends MSFMultiGeometry {
 }
 
 declare class MSFMultiTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFMultiTileDataSource; // inherited from NSObject
 
     static new(): MSFMultiTileDataSource; // inherited from NSObject
 
-    constructor(o: { maxOpenedPackages: number });
+    constructor(o: { maxOpenedPackages: number; });
 
     add(datasource: MSFTileDataSource): void;
 
     addTileMask(datasource: MSFTileDataSource, tileMask: string): void;
 
-    getDataExtentSwigExplicitNTMultiTileDataSource(): MSFMapBounds;
-
-    getMaxZoomSwigExplicitNTMultiTileDataSource(): number;
-
-    getMinZoomSwigExplicitNTMultiTileDataSource(): number;
-
     initWithMaxOpenedPackages(maxOpenedPackages: number): this;
-
-    loadTileSwigExplicitNTMultiTileDataSource(mapTile: MSFMapTile): MSFTileData;
 
     remove(datasource: MSFTileDataSource): boolean;
 }
 
 declare class MSFMultiValhallaOfflineRoutingService extends MSFRoutingService {
+
     static alloc(): MSFMultiValhallaOfflineRoutingService; // inherited from NSObject
 
     static new(): MSFMultiValhallaOfflineRoutingService; // inherited from NSObject
@@ -3195,31 +3600,24 @@ declare class MSFMultiValhallaOfflineRoutingService extends MSFRoutingService {
 
     addLocaleJson(key: string, json: string): void;
 
-    calculateRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
-
     getConfigurationParameter(param: string): MSFVariant;
-
-    getProfileSwigExplicitNTMultiValhallaOfflineRoutingService(): string;
-
-    matchRouteSwigExplicitNTMultiValhallaOfflineRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
 
     remove(database: string): boolean;
 
     setConfigurationParameterValue(param: string, value: MSFVariant): void;
-
-    setProfileSwigExplicitNTMultiValhallaOfflineRoutingService(profile: string): void;
 }
 
 declare class MSFNMLModel extends MSFBillboard {
+
     static alloc(): MSFNMLModel; // inherited from NSObject
 
     static new(): MSFNMLModel; // inherited from NSObject
 
-    constructor(o: { baseBillboard: MSFBillboard; style: MSFNMLModelStyle });
+    constructor(o: { baseBillboard: MSFBillboard; style: MSFNMLModelStyle; });
 
-    constructor(o: { geometry: MSFGeometry; style: MSFNMLModelStyle });
+    constructor(o: { geometry: MSFGeometry; style: MSFNMLModelStyle; });
 
-    constructor(o: { pos: MSFMapPos; style: MSFNMLModelStyle });
+    constructor(o: { pos: MSFMapPos; style: MSFNMLModelStyle; });
 
     getRotationAngle(): number;
 
@@ -3245,6 +3643,7 @@ declare class MSFNMLModel extends MSFBillboard {
 }
 
 declare class MSFNMLModelStyle extends MSFBillboardStyle {
+
     static alloc(): MSFNMLModelStyle; // inherited from NSObject
 
     static new(): MSFNMLModelStyle; // inherited from NSObject
@@ -3257,6 +3656,7 @@ declare class MSFNMLModelStyle extends MSFBillboardStyle {
 }
 
 declare class MSFNMLModelStyleBuilder extends MSFBillboardStyleBuilder {
+
     static alloc(): MSFNMLModelStyleBuilder; // inherited from NSObject
 
     static new(): MSFNMLModelStyleBuilder; // inherited from NSObject
@@ -3277,69 +3677,45 @@ declare class MSFNMLModelStyleBuilder extends MSFBillboardStyleBuilder {
 }
 
 declare class MSFOSMOfflineGeocodingService extends MSFGeocodingService {
+
     static alloc(): MSFOSMOfflineGeocodingService; // inherited from NSObject
 
     static new(): MSFOSMOfflineGeocodingService; // inherited from NSObject
 
-    constructor(o: { path: string });
-
-    calculateAddressesSwigExplicitNTOSMOfflineGeocodingService(request: MSFGeocodingRequest): MSFGeocodingResultVector;
-
-    getLanguageSwigExplicitNTOSMOfflineGeocodingService(): string;
-
-    getMaxResultsSwigExplicitNTOSMOfflineGeocodingService(): number;
+    constructor(o: { path: string; });
 
     initWithPath(path: string): this;
-
-    isAutocompleteSwigExplicitNTOSMOfflineGeocodingService(): boolean;
-
-    setAutocompleteSwigExplicitNTOSMOfflineGeocodingService(autocomplete: boolean): void;
-
-    setLanguageSwigExplicitNTOSMOfflineGeocodingService(lang: string): void;
-
-    setMaxResultsSwigExplicitNTOSMOfflineGeocodingService(maxResults: number): void;
 }
 
 declare class MSFOSMOfflineReverseGeocodingService extends MSFReverseGeocodingService {
+
     static alloc(): MSFOSMOfflineReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFOSMOfflineReverseGeocodingService; // inherited from NSObject
 
-    constructor(o: { path: string });
-
-    calculateAddressesSwigExplicitNTOSMOfflineReverseGeocodingService(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
-
-    getLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(): string;
+    constructor(o: { path: string; });
 
     initWithPath(path: string): this;
-
-    setLanguageSwigExplicitNTOSMOfflineReverseGeocodingService(lang: string): void;
 }
 
 declare class MSFOSRMOfflineRoutingService extends MSFRoutingService {
+
     static alloc(): MSFOSRMOfflineRoutingService; // inherited from NSObject
 
     static new(): MSFOSRMOfflineRoutingService; // inherited from NSObject
 
-    constructor(o: { path: string });
-
-    calculateRouteSwigExplicitNTOSRMOfflineRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
-
-    getProfileSwigExplicitNTOSRMOfflineRoutingService(): string;
+    constructor(o: { path: string; });
 
     initWithPath(path: string): this;
-
-    matchRouteSwigExplicitNTOSRMOfflineRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
-
-    setProfileSwigExplicitNTOSRMOfflineRoutingService(profile: string): void;
 }
 
 declare class MSFOptions extends NSObject {
+
     static alloc(): MSFOptions; // inherited from NSObject
 
     static new(): MSFOptions; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getAmbientLightColor(): MSFColor;
 
@@ -3348,8 +3724,6 @@ declare class MSFOptions extends NSObject {
     getBaseProjection(): MSFProjection;
 
     getClearColor(): MSFColor;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDPI(): number;
 
@@ -3363,6 +3737,16 @@ declare class MSFOptions extends NSObject {
 
     getFocusPointOffset(): MSFScreenPos;
 
+    getFogOptions(): MSFFogOptions;
+
+    getFreeRoamLookSensitivity(): number;
+
+    getFreeRoamMode(): MSFFreeRoamMode;
+
+    getFreeRoamMoveSpeed(): number;
+
+    getLightOptions(): MSFLightOptions;
+
     getLongClickDuration(): number;
 
     getMainLightColor(): MSFColor;
@@ -3373,13 +3757,21 @@ declare class MSFOptions extends NSObject {
 
     getPanningMode(): MSFPanningMode;
 
+    getPanningSpeedMode(): MSFPanningSpeedMode;
+
     getPivotMode(): MSFPivotMode;
 
     getRenderProjectionMode(): MSFRenderProjectionMode;
 
     getSkyColor(): MSFColor;
 
+    getSkyOptions(): MSFSkyOptions;
+
+    getTerrainOptions(): MSFTerrainOptions;
+
     getTileDrawSize(): number;
+
+    getTileLODFactor(): number;
 
     getTileThreadPoolSize(): number;
 
@@ -3389,9 +3781,9 @@ declare class MSFOptions extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isClickTypeDetection(): boolean;
+
+    isDebugTileBorders(): boolean;
 
     isDoubleClickDetection(): boolean;
 
@@ -3429,6 +3821,8 @@ declare class MSFOptions extends NSObject {
 
     setDPI(dpi: number): void;
 
+    setDebugTileBorders(enabled: boolean): void;
+
     setDoubleClickDetection(enabled: boolean): void;
 
     setDoubleClickMaxDuration(duration: number): void;
@@ -3441,6 +3835,14 @@ declare class MSFOptions extends NSObject {
 
     setFocusPointOffset(offset: MSFScreenPos): void;
 
+    setFogOptions(fogOptions: MSFFogOptions): void;
+
+    setFreeRoamLookSensitivity(degreesPerInch: number): void;
+
+    setFreeRoamMode(mode: MSFFreeRoamMode): void;
+
+    setFreeRoamMoveSpeed(distancePerInch: number): void;
+
     setKineticPan(enabled: boolean): void;
 
     setKineticRotation(enabled: boolean): void;
@@ -3448,6 +3850,8 @@ declare class MSFOptions extends NSObject {
     setKineticZoom(enabled: boolean): void;
 
     setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
+
+    setLightOptions(lightOptions: MSFLightOptions): void;
 
     setLongClickDuration(duration: number): void;
 
@@ -3458,6 +3862,8 @@ declare class MSFOptions extends NSObject {
     setPanBounds(panBounds: MSFMapBounds): void;
 
     setPanningMode(panningMode: MSFPanningMode): void;
+
+    setPanningSpeedMode(mode: MSFPanningSpeedMode): void;
 
     setPivotMode(pivotMode: MSFPivotMode): void;
 
@@ -3473,7 +3879,13 @@ declare class MSFOptions extends NSObject {
 
     setSkyColor(color: MSFColor): void;
 
+    setSkyOptions(skyOptions: MSFSkyOptions): void;
+
+    setTerrainOptions(terrainOptions: MSFTerrainOptions): void;
+
     setTileDrawSize(tileDrawSize: number): void;
+
+    setTileLODFactor(factor: number): void;
 
     setTileThreadPoolSize(poolSize: number): void;
 
@@ -3486,62 +3898,71 @@ declare class MSFOptions extends NSObject {
     setZoomGestures(enabled: boolean): void;
 
     setZoomRange(zoomRange: MSFMapRange): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFOrderedTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFOrderedTileDataSource; // inherited from NSObject
 
     static new(): MSFOrderedTileDataSource; // inherited from NSObject
 
-    constructor(o: { dataSource1: MSFTileDataSource; dataSource2: MSFTileDataSource });
-
-    getDataExtentSwigExplicitNTOrderedTileDataSource(): MSFMapBounds;
-
-    getMaxZoomSwigExplicitNTOrderedTileDataSource(): number;
-
-    getMinZoomSwigExplicitNTOrderedTileDataSource(): number;
+    constructor(o: { dataSource1: MSFTileDataSource; dataSource2: MSFTileDataSource; });
 
     initWithDataSource1DataSource2(dataSource1: MSFTileDataSource, dataSource2: MSFTileDataSource): this;
+}
 
-    loadTileSwigExplicitNTOrderedTileDataSource(tile: MSFMapTile): MSFTileData;
+declare class MSFPMTilesTileDataSource extends MSFTileDataSource {
+
+    static alloc(): MSFPMTilesTileDataSource; // inherited from NSObject
+
+    static new(): MSFPMTilesTileDataSource; // inherited from NSObject
+
+    constructor(o: { minZoom: number; maxZoom: number; path: string; });
+
+    constructor(o: { path: string; });
+
+    getMetaData(): string;
+
+    initWithMinZoomMaxZoomPath(minZoom: number, maxZoom: number, path: string): this;
+
+    initWithPath(path: string): this;
 }
 
 declare const enum MSFPackageAction {
-    T_PACKAGE_ACTION_READY = 0,
 
-    T_PACKAGE_ACTION_WAITING = 1,
+    F_PACKAGE_ACTION_READY = 0,
 
-    T_PACKAGE_ACTION_DOWNLOADING = 2,
+    F_PACKAGE_ACTION_WAITING = 1,
 
-    T_PACKAGE_ACTION_COPYING = 3,
+    F_PACKAGE_ACTION_DOWNLOADING = 2,
 
-    T_PACKAGE_ACTION_REMOVING = 4
+    F_PACKAGE_ACTION_COPYING = 3,
+
+    F_PACKAGE_ACTION_REMOVING = 4
 }
 
 declare const enum MSFPackageErrorType {
-    T_PACKAGE_ERROR_TYPE_SYSTEM = 0,
 
-    T_PACKAGE_ERROR_TYPE_CONNECTION = 1,
+    F_PACKAGE_ERROR_TYPE_SYSTEM = 0,
 
-    T_PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED = 2,
+    F_PACKAGE_ERROR_TYPE_CONNECTION = 1,
 
-    T_PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG = 3,
+    F_PACKAGE_ERROR_TYPE_DOWNLOAD_LIMIT_EXCEEDED = 2,
 
-    T_PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN = 4
+    F_PACKAGE_ERROR_TYPE_PACKAGE_TOO_BIG = 3,
+
+    F_PACKAGE_ERROR_TYPE_NO_OFFLINE_PLAN = 4
 }
 
 declare class MSFPackageInfo extends NSObject {
+
     static alloc(): MSFPackageInfo; // inherited from NSObject
 
     static new(): MSFPackageInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { packageId: string; packageType: MSFPackageType; version: number; size: number; serverURL: string; tileMask: MSFPackageTileMask; metaInfo: MSFPackageMetaInfo });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { packageId: string; packageType: MSFPackageType; version: number; size: number; serverURL: string; tileMask: MSFPackageTileMask; metaInfo: MSFPackageMetaInfo; });
 
     getMetaInfo(): MSFPackageMetaInfo;
 
@@ -3561,27 +3982,16 @@ declare class MSFPackageInfo extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    initWithPackageIdPackageTypeVersionSizeServerURLTileMaskMetaInfo(
-        packageId: string,
-        packageType: MSFPackageType,
-        version: number,
-        size: number,
-        serverURL: string,
-        tileMask: MSFPackageTileMask,
-        metaInfo: MSFPackageMetaInfo
-    ): this;
-
-    swigGetRawPtr(): number;
+    initWithPackageIdPackageTypeVersionSizeServerURLTileMaskMetaInfo(packageId: string, packageType: MSFPackageType, version: number, size: number, serverURL: string, tileMask: MSFPackageTileMask, metaInfo: MSFPackageMetaInfo): this;
 }
 
 declare class MSFPackageInfoVector extends NSObject {
+
     static alloc(): MSFPackageInfoVector; // inherited from NSObject
 
     static new(): MSFPackageInfoVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFPackageInfo): void;
 
@@ -3591,10 +4001,6 @@ declare class MSFPackageInfoVector extends NSObject {
 
     get(i: number): MSFPackageInfo;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -3602,24 +4008,21 @@ declare class MSFPackageInfoVector extends NSObject {
     setVal(i: number, val: MSFPackageInfo): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPackageManager extends NSObject {
+
     static alloc(): MSFPackageManager; // inherited from NSObject
 
     static new(): MSFPackageManager; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFPackageManager;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { packageListURL: string; dataFolder: string; serverEncKey: string; localEncKey: string });
+    constructor(o: { packageListURL: string; dataFolder: string; serverEncKey: string; localEncKey: string; });
 
     cancelPackageTasks(packageId: string): void;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getLocalPackage(packageId: string): MSFPackageInfo;
 
@@ -3638,8 +4041,6 @@ declare class MSFPackageManager extends NSObject {
     getServerPackages(): MSFPackageInfoVector;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithPackageListURLDataFolderServerEncKeyLocalEncKey(packageListURL: string, dataFolder: string, serverEncKey: string, localEncKey: string): this;
 
@@ -3666,190 +4067,128 @@ declare class MSFPackageManager extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPackageManagerGeocodingService extends MSFGeocodingService {
+
     static alloc(): MSFPackageManagerGeocodingService; // inherited from NSObject
 
     static new(): MSFPackageManagerGeocodingService; // inherited from NSObject
 
-    constructor(o: { packageManager: MSFPackageManager });
-
-    calculateAddressesSwigExplicitNTPackageManagerGeocodingService(request: MSFGeocodingRequest): MSFGeocodingResultVector;
-
-    getLanguageSwigExplicitNTPackageManagerGeocodingService(): string;
-
-    getMaxResultsSwigExplicitNTPackageManagerGeocodingService(): number;
+    constructor(o: { packageManager: MSFPackageManager; });
 
     initWithPackageManager(packageManager: MSFPackageManager): this;
-
-    isAutocompleteSwigExplicitNTPackageManagerGeocodingService(): boolean;
-
-    setAutocompleteSwigExplicitNTPackageManagerGeocodingService(autocomplete: boolean): void;
-
-    setLanguageSwigExplicitNTPackageManagerGeocodingService(lang: string): void;
-
-    setMaxResultsSwigExplicitNTPackageManagerGeocodingService(maxResults: number): void;
 }
 
 declare class MSFPackageManagerListener extends NSObject {
+
     static alloc(): MSFPackageManagerListener; // inherited from NSObject
 
     static new(): MSFPackageManagerListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFPackageManagerListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    onPackageCancelledSwigExplicitNTPackageManagerListenerVersion(arg1: string, version: number): void;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onPackageCancelledVersion(arg1: string, version: number): void;
-
-    onPackageFailedSwigExplicitNTPackageManagerListenerVersionErrorType(arg1: string, version: number, errorType: MSFPackageErrorType): void;
 
     onPackageFailedVersionErrorType(arg1: string, version: number, errorType: MSFPackageErrorType): void;
 
     onPackageListFailed(): void;
 
-    onPackageListFailedSwigExplicitNTPackageManagerListener(): void;
-
     onPackageListUpdated(): void;
 
-    onPackageListUpdatedSwigExplicitNTPackageManagerListener(): void;
-
-    onPackageStatusChangedSwigExplicitNTPackageManagerListenerVersionStatus(arg1: string, version: number, status: MSFPackageStatus): void;
-
     onPackageStatusChangedVersionStatus(arg1: string, version: number, status: MSFPackageStatus): void;
-
-    onPackageUpdatedSwigExplicitNTPackageManagerListenerVersion(arg1: string, version: number): void;
 
     onPackageUpdatedVersion(arg1: string, version: number): void;
 
     onStyleFailed(styleName: string): void;
 
-    onStyleFailedSwigExplicitNTPackageManagerListener(styleName: string): void;
-
     onStyleUpdated(styleName: string): void;
-
-    onStyleUpdatedSwigExplicitNTPackageManagerListener(styleName: string): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPackageManagerReverseGeocodingService extends MSFReverseGeocodingService {
+
     static alloc(): MSFPackageManagerReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFPackageManagerReverseGeocodingService; // inherited from NSObject
 
-    constructor(o: { packageManager: MSFPackageManager });
-
-    calculateAddressesSwigExplicitNTPackageManagerReverseGeocodingService(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
-
-    getLanguageSwigExplicitNTPackageManagerReverseGeocodingService(): string;
+    constructor(o: { packageManager: MSFPackageManager; });
 
     initWithPackageManager(packageManager: MSFPackageManager): this;
-
-    setLanguageSwigExplicitNTPackageManagerReverseGeocodingService(lang: string): void;
 }
 
 declare class MSFPackageManagerRoutingService extends MSFRoutingService {
+
     static alloc(): MSFPackageManagerRoutingService; // inherited from NSObject
 
     static new(): MSFPackageManagerRoutingService; // inherited from NSObject
 
-    constructor(o: { packageManager: MSFPackageManager });
-
-    calculateRouteSwigExplicitNTPackageManagerRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
-
-    getProfileSwigExplicitNTPackageManagerRoutingService(): string;
+    constructor(o: { packageManager: MSFPackageManager; });
 
     initWithPackageManager(packageManager: MSFPackageManager): this;
-
-    matchRouteSwigExplicitNTPackageManagerRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
-
-    setProfileSwigExplicitNTPackageManagerRoutingService(profile: string): void;
 }
 
 declare class MSFPackageManagerTileDataSource extends MSFTileDataSource {
+
     static alloc(): MSFPackageManagerTileDataSource; // inherited from NSObject
 
     static new(): MSFPackageManagerTileDataSource; // inherited from NSObject
 
-    constructor(o: { packageManager: MSFPackageManager });
+    constructor(o: { packageManager: MSFPackageManager; });
 
     getPackageManager(): MSFPackageManager;
 
     initWithPackageManager(packageManager: MSFPackageManager): this;
-
-    loadTileSwigExplicitNTPackageManagerTileDataSource(mapTile: MSFMapTile): MSFTileData;
 }
 
 declare class MSFPackageManagerValhallaRoutingService extends MSFRoutingService {
+
     static alloc(): MSFPackageManagerValhallaRoutingService; // inherited from NSObject
 
     static new(): MSFPackageManagerValhallaRoutingService; // inherited from NSObject
 
-    constructor(o: { packageManager: MSFPackageManager });
+    constructor(o: { packageManager: MSFPackageManager; });
 
     addLocaleJson(key: string, json: string): void;
 
-    calculateRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
-
     getConfigurationParameter(param: string): MSFVariant;
-
-    getProfileSwigExplicitNTPackageManagerValhallaRoutingService(): string;
 
     initWithPackageManager(packageManager: MSFPackageManager): this;
 
-    matchRouteSwigExplicitNTPackageManagerValhallaRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
-
     setConfigurationParameterValue(param: string, value: MSFVariant): void;
-
-    setProfileSwigExplicitNTPackageManagerValhallaRoutingService(profile: string): void;
 }
 
 declare class MSFPackageMetaInfo extends NSObject {
+
     static alloc(): MSFPackageMetaInfo; // inherited from NSObject
 
     static new(): MSFPackageMetaInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { varnt: MSFVariant });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { var: MSFVariant; });
 
     getVariant(): MSFVariant;
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    initWithVar(varnt: MSFVariant): this;
-
-    swigGetRawPtr(): number;
+    initWithVar(var_: MSFVariant): this;
 }
 
 declare class MSFPackageStatus extends NSObject {
+
     static alloc(): MSFPackageStatus; // inherited from NSObject
 
     static new(): MSFPackageStatus; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { currentAction: MSFPackageAction; paused: boolean; progress: number });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { currentAction: MSFPackageAction; paused: boolean; progress: number; });
 
     getCurrentAction(): MSFPackageAction;
 
@@ -3857,25 +4196,20 @@ declare class MSFPackageStatus extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithCurrentActionPausedProgress(currentAction: MSFPackageAction, paused: boolean, progress: number): this;
 
     isPaused(): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPackageTileMask extends NSObject {
+
     static alloc(): MSFPackageTileMask; // inherited from NSObject
 
     static new(): MSFPackageTileMask; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getBoundingPolygon(projection: MSFProjection): MSFMultiPolygonGeometry;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getMaxZoomLevel(): number;
 
@@ -3884,98 +4218,85 @@ declare class MSFPackageTileMask extends NSObject {
     getTileStatus(tile: MSFMapTile): MSFPackageTileStatus;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFPackageTileStatus {
-    T_PACKAGE_TILE_STATUS_MISSING = 0,
 
-    T_PACKAGE_TILE_STATUS_PARTIAL = 1,
+    F_PACKAGE_TILE_STATUS_MISSING = 0,
 
-    T_PACKAGE_TILE_STATUS_FULL = 2
+    F_PACKAGE_TILE_STATUS_PARTIAL = 1,
+
+    F_PACKAGE_TILE_STATUS_FULL = 2
 }
 
 declare const enum MSFPackageType {
-    T_PACKAGE_TYPE_MAP = 0,
 
-    T_PACKAGE_TYPE_ROUTING = 1,
+    F_PACKAGE_TYPE_MAP = 0,
 
-    T_PACKAGE_TYPE_GEOCODING = 2,
+    F_PACKAGE_TYPE_ROUTING = 1,
 
-    T_PACKAGE_TYPE_VALHALLA_ROUTING = 3
+    F_PACKAGE_TYPE_GEOCODING = 2,
+
+    F_PACKAGE_TYPE_VALHALLA_ROUTING = 3
 }
 
 declare const enum MSFPanningMode {
-    T_PANNING_MODE_FREE = 0,
 
-    T_PANNING_MODE_STICKY = 1,
+    F_PANNING_MODE_FREE = 0,
 
-    T_PANNING_MODE_STICKY_FINAL = 2
+    F_PANNING_MODE_STICKY = 1,
+
+    F_PANNING_MODE_STICKY_FINAL = 2
+}
+
+declare const enum MSFPanningSpeedMode {
+
+    F_PANNING_SPEED_MODE_MAP = 0,
+
+    F_PANNING_SPEED_MODE_ANCHORED = 1,
+
+    F_PANNING_SPEED_MODE_CONSTANT = 2
 }
 
 declare class MSFPeliasOnlineGeocodingService extends MSFGeocodingService {
+
     static alloc(): MSFPeliasOnlineGeocodingService; // inherited from NSObject
 
     static new(): MSFPeliasOnlineGeocodingService; // inherited from NSObject
 
-    constructor(o: { apiKey: string });
-
-    calculateAddressesSwigExplicitNTPeliasOnlineGeocodingService(request: MSFGeocodingRequest): MSFGeocodingResultVector;
+    constructor(o: { apiKey: string; });
 
     getCustomServiceURL(): string;
 
-    getLanguageSwigExplicitNTPeliasOnlineGeocodingService(): string;
-
-    getMaxResultsSwigExplicitNTPeliasOnlineGeocodingService(): number;
-
     initWithApiKey(apiKey: string): this;
 
-    isAutocompleteSwigExplicitNTPeliasOnlineGeocodingService(): boolean;
-
-    setAutocompleteSwigExplicitNTPeliasOnlineGeocodingService(autocomplete: boolean): void;
-
     setCustomServiceURL(serviceURL: string): void;
-
-    setLanguageSwigExplicitNTPeliasOnlineGeocodingService(lang: string): void;
-
-    setMaxResultsSwigExplicitNTPeliasOnlineGeocodingService(maxResults: number): void;
 }
 
 declare class MSFPeliasOnlineReverseGeocodingService extends MSFReverseGeocodingService {
+
     static alloc(): MSFPeliasOnlineReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFPeliasOnlineReverseGeocodingService; // inherited from NSObject
 
-    constructor(o: { apiKey: string });
-
-    calculateAddressesSwigExplicitNTPeliasOnlineReverseGeocodingService(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
+    constructor(o: { apiKey: string; });
 
     getCustomServiceURL(): string;
-
-    getLanguageSwigExplicitNTPeliasOnlineReverseGeocodingService(): string;
 
     initWithApiKey(apiKey: string): this;
 
     setCustomServiceURL(serviceURL: string): void;
-
-    setLanguageSwigExplicitNTPeliasOnlineReverseGeocodingService(lang: string): void;
 }
 
 declare class MSFPersistentCacheTileDataSource extends MSFCacheTileDataSource {
+
     static alloc(): MSFPersistentCacheTileDataSource; // inherited from NSObject
 
     static new(): MSFPersistentCacheTileDataSource; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFTileDataSource; databasePath: string });
-
-    clearSwigExplicitNTPersistentCacheTileDataSource(): void;
+    constructor(o: { dataSource: MSFTileDataSource; databasePath: string; });
 
     close(): void;
-
-    getCapacitySwigExplicitNTPersistentCacheTileDataSource(): number;
 
     initWithDataSourceDatabasePath(dataSource: MSFTileDataSource, databasePath: string): this;
 
@@ -3983,31 +4304,29 @@ declare class MSFPersistentCacheTileDataSource extends MSFCacheTileDataSource {
 
     isOpen(): boolean;
 
-    loadTileSwigExplicitNTPersistentCacheTileDataSource(mapTile: MSFMapTile): MSFTileData;
-
     setCacheOnlyMode(enabled: boolean): void;
 
-    setCapacitySwigExplicitNTPersistentCacheTileDataSource(capacityInBytes: number): void;
-
-    startDownloadAreaMinZoomMaxZoomTileDownloadListener(mapBounds: MSFMapBounds, minZoom: number, maxZoom: number, tileDownloadListener: MSFTileDownloadListener): void;
+    startDownloadAreaMinZoomMaxZoomFetchDelayTileDownloadListener(mapBounds: MSFMapBounds, minZoom: number, maxZoom: number, fetchDelay: number, tileDownloadListener: MSFTileDownloadListener): void;
 
     stopAllDownloads(): void;
 }
 
 declare const enum MSFPivotMode {
-    T_PIVOT_MODE_TOUCHPOINT = 0,
 
-    T_PIVOT_MODE_CENTERPOINT = 1
+    F_PIVOT_MODE_TOUCHPOINT = 0,
+
+    F_PIVOT_MODE_CENTERPOINT = 1
 }
 
 declare class MSFPoint extends MSFVectorElement {
+
     static alloc(): MSFPoint; // inherited from NSObject
 
     static new(): MSFPoint; // inherited from NSObject
 
-    constructor(o: { geometry: MSFPointGeometry; style: MSFPointStyle });
+    constructor(o: { geometry: MSFPointGeometry; style: MSFPointStyle; });
 
-    constructor(o: { pos: MSFMapPos; style: MSFPointStyle });
+    constructor(o: { pos: MSFMapPos; style: MSFPointStyle; });
 
     getGeometry(): MSFPointGeometry;
 
@@ -4027,11 +4346,12 @@ declare class MSFPoint extends MSFVectorElement {
 }
 
 declare class MSFPointGeometry extends MSFGeometry {
+
     static alloc(): MSFPointGeometry; // inherited from NSObject
 
     static new(): MSFPointGeometry; // inherited from NSObject
 
-    constructor(o: { pos: MSFMapPos });
+    constructor(o: { pos: MSFMapPos; });
 
     getPos(): MSFMapPos;
 
@@ -4039,11 +4359,12 @@ declare class MSFPointGeometry extends MSFGeometry {
 }
 
 declare class MSFPointGeometryVector extends NSObject {
+
     static alloc(): MSFPointGeometryVector; // inherited from NSObject
 
     static new(): MSFPointGeometryVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFPointGeometry): void;
 
@@ -4053,10 +4374,6 @@ declare class MSFPointGeometryVector extends NSObject {
 
     get(i: number): MSFPointGeometry;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -4064,11 +4381,10 @@ declare class MSFPointGeometryVector extends NSObject {
     setVal(i: number, val: MSFPointGeometry): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPointStyle extends MSFStyle {
+
     static alloc(): MSFPointStyle; // inherited from NSObject
 
     static new(): MSFPointStyle; // inherited from NSObject
@@ -4081,6 +4397,7 @@ declare class MSFPointStyle extends MSFStyle {
 }
 
 declare class MSFPointStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFPointStyleBuilder; // inherited from NSObject
 
     static new(): MSFPointStyleBuilder; // inherited from NSObject
@@ -4101,15 +4418,16 @@ declare class MSFPointStyleBuilder extends MSFStyleBuilder {
 }
 
 declare class MSFPolygon extends MSFVectorElement {
+
     static alloc(): MSFPolygon; // inherited from NSObject
 
     static new(): MSFPolygon; // inherited from NSObject
 
-    constructor(o: { geometry: MSFPolygonGeometry; style: MSFPolygonStyle });
+    constructor(o: { geometry: MSFPolygonGeometry; style: MSFPolygonStyle; });
 
-    constructor(o: { poses: MSFMapPosVector; holes: MSFMapPosVectorVector; style: MSFPolygonStyle });
+    constructor(o: { poses: MSFMapPosVector; holes: MSFMapPosVectorVector; style: MSFPolygonStyle; });
 
-    constructor(o: { poses: MSFMapPosVector; style: MSFPolygonStyle });
+    constructor(o: { poses: MSFMapPosVector; style: MSFPolygonStyle; });
 
     getGeometry(): MSFPolygonGeometry;
 
@@ -4135,15 +4453,16 @@ declare class MSFPolygon extends MSFVectorElement {
 }
 
 declare class MSFPolygon3D extends MSFVectorElement {
+
     static alloc(): MSFPolygon3D; // inherited from NSObject
 
     static new(): MSFPolygon3D; // inherited from NSObject
 
-    constructor(o: { geometry: MSFPolygonGeometry; style: MSFPolygon3DStyle; height: number });
+    constructor(o: { geometry: MSFPolygonGeometry; style: MSFPolygon3DStyle; height: number; });
 
-    constructor(o: { poses: MSFMapPosVector; holes: MSFMapPosVectorVector; style: MSFPolygon3DStyle; height: number });
+    constructor(o: { poses: MSFMapPosVector; holes: MSFMapPosVectorVector; style: MSFPolygon3DStyle; height: number; });
 
-    constructor(o: { poses: MSFMapPosVector; style: MSFPolygon3DStyle; height: number });
+    constructor(o: { poses: MSFMapPosVector; style: MSFPolygon3DStyle; height: number; });
 
     getGeometry(): MSFPolygonGeometry;
 
@@ -4173,6 +4492,7 @@ declare class MSFPolygon3D extends MSFVectorElement {
 }
 
 declare class MSFPolygon3DStyle extends MSFStyle {
+
     static alloc(): MSFPolygon3DStyle; // inherited from NSObject
 
     static new(): MSFPolygon3DStyle; // inherited from NSObject
@@ -4181,6 +4501,7 @@ declare class MSFPolygon3DStyle extends MSFStyle {
 }
 
 declare class MSFPolygon3DStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFPolygon3DStyleBuilder; // inherited from NSObject
 
     static new(): MSFPolygon3DStyleBuilder; // inherited from NSObject
@@ -4193,15 +4514,16 @@ declare class MSFPolygon3DStyleBuilder extends MSFStyleBuilder {
 }
 
 declare class MSFPolygonGeometry extends MSFGeometry {
+
     static alloc(): MSFPolygonGeometry; // inherited from NSObject
 
     static new(): MSFPolygonGeometry; // inherited from NSObject
 
-    constructor(o: { poses: MSFMapPosVector });
+    constructor(o: { poses: MSFMapPosVector; });
 
-    constructor(o: { poses: MSFMapPosVector; holes: MSFMapPosVectorVector });
+    constructor(o: { poses: MSFMapPosVector; holes: MSFMapPosVectorVector; });
 
-    constructor(o: { rings: MSFMapPosVectorVector });
+    constructor(o: { rings: MSFMapPosVectorVector; });
 
     getHoles(): MSFMapPosVectorVector;
 
@@ -4217,11 +4539,12 @@ declare class MSFPolygonGeometry extends MSFGeometry {
 }
 
 declare class MSFPolygonGeometryVector extends NSObject {
+
     static alloc(): MSFPolygonGeometryVector; // inherited from NSObject
 
     static new(): MSFPolygonGeometryVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFPolygonGeometry): void;
 
@@ -4231,10 +4554,6 @@ declare class MSFPolygonGeometryVector extends NSObject {
 
     get(i: number): MSFPolygonGeometry;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -4242,11 +4561,10 @@ declare class MSFPolygonGeometryVector extends NSObject {
     setVal(i: number, val: MSFPolygonGeometry): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPolygonStyle extends MSFStyle {
+
     static alloc(): MSFPolygonStyle; // inherited from NSObject
 
     static new(): MSFPolygonStyle; // inherited from NSObject
@@ -4255,6 +4573,7 @@ declare class MSFPolygonStyle extends MSFStyle {
 }
 
 declare class MSFPolygonStyleBuilder extends MSFStyleBuilder {
+
     static alloc(): MSFPolygonStyleBuilder; // inherited from NSObject
 
     static new(): MSFPolygonStyleBuilder; // inherited from NSObject
@@ -4267,6 +4586,7 @@ declare class MSFPolygonStyleBuilder extends MSFStyleBuilder {
 }
 
 declare class MSFPopup extends MSFBillboard {
+
     static alloc(): MSFPopup; // inherited from NSObject
 
     static new(): MSFPopup; // inherited from NSObject
@@ -4291,11 +4611,12 @@ declare class MSFPopup extends MSFBillboard {
 }
 
 declare class MSFPopupClickInfo extends NSObject {
+
     static alloc(): MSFPopupClickInfo; // inherited from NSObject
 
     static new(): MSFPopupClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getClickInfo(): MSFClickInfo;
 
@@ -4303,31 +4624,24 @@ declare class MSFPopupClickInfo extends NSObject {
 
     getClickType(): MSFClickType;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getElementClickPos(): MSFScreenPos;
 
     getPopup(): MSFPopup;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPopupDrawInfo extends NSObject {
+
     static alloc(): MSFPopupDrawInfo; // inherited from NSObject
 
     static new(): MSFPopupDrawInfo; // inherited from NSObject
 
-    constructor(o: { anchorScreenPos: MSFScreenPos; screenBounds: MSFScreenBounds; popup: MSFPopup; dpToPX: number });
+    constructor(o: { anchorScreenPos: MSFScreenPos; screenBounds: MSFScreenBounds; popup: MSFPopup; dpToPX: number; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getAnchorScreenPos(): MSFScreenPos;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDPToPX(): number;
 
@@ -4338,19 +4652,17 @@ declare class MSFPopupDrawInfo extends NSObject {
     hash(): number;
 
     initWithAnchorScreenPosScreenBoundsPopupDpToPX(anchorScreenPos: MSFScreenPos, screenBounds: MSFScreenBounds, popup: MSFPopup, dpToPX: number): this;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFPopupStyle extends MSFBillboardStyle {
+
     static alloc(): MSFPopupStyle; // inherited from NSObject
 
     static new(): MSFPopupStyle; // inherited from NSObject
 }
 
 declare class MSFPopupStyleBuilder extends MSFBillboardStyleBuilder {
+
     static alloc(): MSFPopupStyleBuilder; // inherited from NSObject
 
     static new(): MSFPopupStyleBuilder; // inherited from NSObject
@@ -4358,14 +4670,46 @@ declare class MSFPopupStyleBuilder extends MSFBillboardStyleBuilder {
     buildStyle(): MSFPopupStyle;
 }
 
+declare class MSFPostProcessEffect extends NSObject {
+
+    static alloc(): MSFPostProcessEffect; // inherited from NSObject
+
+    static new(): MSFPostProcessEffect; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    constructor(o: { name: string; fragmentShader: string; });
+
+    getColorParameter(name: string): MSFColor;
+
+    getFloatParameter(name: string): number;
+
+    getFragmentShader(): string;
+
+    getName(): string;
+
+    hash(): number;
+
+    initWithNameFragmentShader(name: string, fragmentShader: string): this;
+
+    isTerrainDepthRequired(): boolean;
+
+    setColorParameterColor(name: string, color: MSFColor): void;
+
+    setFloatParameterValue(name: string, value: number): void;
+
+    setTerrainDepthRequired(required: boolean): void;
+}
+
 declare class MSFProjection extends NSObject {
+
     static alloc(): MSFProjection; // inherited from NSObject
 
     static new(): MSFProjection; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFProjection;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     fromLatLng(lat: number, lng: number): MSFMapPos;
 
@@ -4373,19 +4717,13 @@ declare class MSFProjection extends NSObject {
 
     getBounds(): MSFMapBounds;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getName(): string;
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 
     toLatLongY(x: number, y: number): MSFMapPos;
 
@@ -4393,19 +4731,18 @@ declare class MSFProjection extends NSObject {
 }
 
 declare class MSFRasterTileClickInfo extends NSObject {
+
     static alloc(): MSFRasterTileClickInfo; // inherited from NSObject
 
     static new(): MSFRasterTileClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getClickInfo(): MSFClickInfo;
 
     getClickPos(): MSFMapPos;
 
     getClickType(): MSFClickType;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getInterpolatedColor(): MSFColor;
 
@@ -4416,63 +4753,41 @@ declare class MSFRasterTileClickInfo extends NSObject {
     getNearestColor(): MSFColor;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRasterTileEventListener extends NSObject {
+
     static alloc(): MSFRasterTileEventListener; // inherited from NSObject
 
     static new(): MSFRasterTileEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFRasterTileEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onRasterTileClicked(clickInfo: MSFRasterTileClickInfo): boolean;
-
-    onRasterTileClickedSwigExplicitNTRasterTileEventListener(clickInfo: MSFRasterTileClickInfo): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFRasterTileFilterMode {
-    T_RASTER_TILE_FILTER_MODE_NEAREST = 0,
 
-    T_RASTER_TILE_FILTER_MODE_BILINEAR = 1,
+    F_RASTER_TILE_FILTER_MODE_NEAREST = 0,
 
-    T_RASTER_TILE_FILTER_MODE_BICUBIC = 2
-}
+    F_RASTER_TILE_FILTER_MODE_BILINEAR = 1,
 
-
-declare const enum MSFHillshadeMethod {
-    STANDARD = 0,
-
-    COMBINED = 1,
-
-    IGOR = 2,
-
-    MULTIDIRECTIONAL = 3,
-
-    BASIC = 4
+    F_RASTER_TILE_FILTER_MODE_BICUBIC = 2
 }
 
 declare class MSFRasterTileLayer extends MSFTileLayer {
+
     static alloc(): MSFRasterTileLayer; // inherited from NSObject
 
     static new(): MSFRasterTileLayer; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFTileDataSource });
+    constructor(o: { dataSource: MSFTileDataSource; });
 
     getRasterTileEventListener(): MSFRasterTileEventListener;
 
@@ -4494,71 +4809,57 @@ declare class MSFRasterTileLayer extends MSFTileLayer {
 }
 
 declare class MSFRedrawRequestListener extends NSObject {
+
     static alloc(): MSFRedrawRequestListener; // inherited from NSObject
 
     static new(): MSFRedrawRequestListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFRedrawRequestListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onRedrawRequested(): void;
-
-    onRedrawRequestedSwigExplicitNTRedrawRequestListener(): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFRenderProjectionMode {
-    T_RENDER_PROJECTION_MODE_PLANAR = 0,
 
-    T_RENDER_PROJECTION_MODE_SPHERICAL = 1
+    F_RENDER_PROJECTION_MODE_PLANAR = 0,
+
+    F_RENDER_PROJECTION_MODE_SPHERICAL = 1
 }
 
 declare class MSFRendererCaptureListener extends NSObject {
+
     static alloc(): MSFRendererCaptureListener; // inherited from NSObject
 
     static new(): MSFRendererCaptureListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFRendererCaptureListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onMapRendered(bitmap: MSFBitmap): void;
-
-    onMapRenderedSwigExplicitNTRendererCaptureListener(bitmap: MSFBitmap): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFReverseGeocodingRequest extends NSObject {
+
     static alloc(): MSFReverseGeocodingRequest; // inherited from NSObject
 
     static new(): MSFReverseGeocodingRequest; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; location: MSFMapPos });
+    constructor(o: { projection: MSFProjection; location: MSFMapPos; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getCustomParameter(param: string): MSFVariant;
 
@@ -4570,51 +4871,43 @@ declare class MSFReverseGeocodingRequest extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionLocation(projection: MSFProjection, location: MSFMapPos): this;
 
     setCustomParameterValue(param: string, value: MSFVariant): void;
 
     setSearchRadius(radius: number): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFReverseGeocodingService extends NSObject {
+
     static alloc(): MSFReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFReverseGeocodingService; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFReverseGeocodingService;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     calculateAddresses(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getLanguage(): string;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     setLanguage(lang: string): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRouteMatchingEdge extends NSObject {
+
     static alloc(): MSFRouteMatchingEdge; // inherited from NSObject
 
     static new(): MSFRouteMatchingEdge; // inherited from NSObject
 
-    constructor(o: { attributes: MSFStringVariantMap });
+    constructor(o: { attributes: MSFStringVariantMap; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     containsAttribute(name: string): boolean;
 
@@ -4622,23 +4915,18 @@ declare class MSFRouteMatchingEdge extends NSObject {
 
     getAttribute(name: string): MSFVariant;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
 
     initWithAttributes(attributes: MSFStringVariantMap): this;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRouteMatchingEdgeVector extends NSObject {
+
     static alloc(): MSFRouteMatchingEdgeVector; // inherited from NSObject
 
     static new(): MSFRouteMatchingEdgeVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFRouteMatchingEdge): void;
 
@@ -4648,10 +4936,6 @@ declare class MSFRouteMatchingEdgeVector extends NSObject {
 
     get(i: number): MSFRouteMatchingEdge;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -4659,22 +4943,19 @@ declare class MSFRouteMatchingEdgeVector extends NSObject {
     setVal(i: number, val: MSFRouteMatchingEdge): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRouteMatchingPoint extends NSObject {
+
     static alloc(): MSFRouteMatchingPoint; // inherited from NSObject
 
     static new(): MSFRouteMatchingPoint; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { pos: MSFMapPos; type: MSFRouteMatchingPointType; edgeIndex: number });
+    constructor(o: { pos: MSFMapPos; type: MSFRouteMatchingPointType; edgeIndex: number; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getEdgeIndex(): number;
 
@@ -4684,27 +4965,25 @@ declare class MSFRouteMatchingPoint extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithPosTypeEdgeIndex(pos: MSFMapPos, type: MSFRouteMatchingPointType, edgeIndex: number): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFRouteMatchingPointType {
-    T_ROUTE_MATCHING_POINT_UNMATCHED = 0,
 
-    T_ROUTE_MATCHING_POINT_INTERPOLATED = 1,
+    F_ROUTE_MATCHING_POINT_UNMATCHED = 0,
 
-    T_ROUTE_MATCHING_POINT_MATCHED = 2
+    F_ROUTE_MATCHING_POINT_INTERPOLATED = 1,
+
+    F_ROUTE_MATCHING_POINT_MATCHED = 2
 }
 
 declare class MSFRouteMatchingPointVector extends NSObject {
+
     static alloc(): MSFRouteMatchingPointVector; // inherited from NSObject
 
     static new(): MSFRouteMatchingPointVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFRouteMatchingPoint): void;
 
@@ -4714,10 +4993,6 @@ declare class MSFRouteMatchingPointVector extends NSObject {
 
     get(i: number): MSFRouteMatchingPoint;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -4725,24 +5000,21 @@ declare class MSFRouteMatchingPointVector extends NSObject {
     setVal(i: number, val: MSFRouteMatchingPoint): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRouteMatchingRequest extends NSObject {
+
     static alloc(): MSFRouteMatchingRequest; // inherited from NSObject
 
     static new(): MSFRouteMatchingRequest; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; points: MSFMapPosVector; accuracy: number });
+    constructor(o: { projection: MSFProjection; points: MSFMapPosVector; accuracy: number; });
 
     description(): string;
 
     getAccuracy(): number;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getCustomParameter(param: string): MSFVariant;
 
@@ -4754,29 +5026,24 @@ declare class MSFRouteMatchingRequest extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionPointsAccuracy(projection: MSFProjection, points: MSFMapPosVector, accuracy: number): this;
 
     setCustomParameterValue(param: string, value: MSFVariant): void;
 
     setPointParameterParamValue(index: number, param: string, value: MSFVariant): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRouteMatchingResult extends NSObject {
+
     static alloc(): MSFRouteMatchingResult; // inherited from NSObject
 
     static new(): MSFRouteMatchingResult; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; matchingPoints: MSFRouteMatchingPointVector; matchingEdges: MSFRouteMatchingEdgeVector; rawResult: string });
+    constructor(o: { projection: MSFProjection; matchingPoints: MSFRouteMatchingPointVector; matchingEdges: MSFRouteMatchingEdgeVector; rawResult: string; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getMatchingEdges(): MSFRouteMatchingEdgeVector;
 
@@ -4790,79 +5057,65 @@ declare class MSFRouteMatchingResult extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionMatchingPointsMatchingEdgesRawResult(projection: MSFProjection, matchingPoints: MSFRouteMatchingPointVector, matchingEdges: MSFRouteMatchingEdgeVector, rawResult: string): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFRoutingAction {
-    T_ROUTING_ACTION_HEAD_ON = 0,
 
-    T_ROUTING_ACTION_FINISH = 1,
+    F_ROUTING_ACTION_HEAD_ON = 0,
 
-    T_ROUTING_ACTION_NO_TURN = 2,
+    F_ROUTING_ACTION_FINISH = 1,
 
-    T_ROUTING_ACTION_GO_STRAIGHT = 3,
+    F_ROUTING_ACTION_NO_TURN = 2,
 
-    T_ROUTING_ACTION_TURN_RIGHT = 4,
+    F_ROUTING_ACTION_GO_STRAIGHT = 3,
 
-    T_ROUTING_ACTION_UTURN = 5,
+    F_ROUTING_ACTION_TURN_RIGHT = 4,
 
-    T_ROUTING_ACTION_TURN_LEFT = 6,
+    F_ROUTING_ACTION_UTURN = 5,
 
-    T_ROUTING_ACTION_REACH_VIA_LOCATION = 7,
+    F_ROUTING_ACTION_TURN_LEFT = 6,
 
-    T_ROUTING_ACTION_ENTER_ROUNDABOUT = 8,
+    F_ROUTING_ACTION_REACH_VIA_LOCATION = 7,
 
-    T_ROUTING_ACTION_LEAVE_ROUNDABOUT = 9,
+    F_ROUTING_ACTION_ENTER_ROUNDABOUT = 8,
 
-    T_ROUTING_ACTION_STAY_ON_ROUNDABOUT = 10,
+    F_ROUTING_ACTION_LEAVE_ROUNDABOUT = 9,
 
-    T_ROUTING_ACTION_START_AT_END_OF_STREET = 11,
+    F_ROUTING_ACTION_STAY_ON_ROUNDABOUT = 10,
 
-    T_ROUTING_ACTION_ENTER_AGAINST_ALLOWED_DIRECTION = 12,
+    F_ROUTING_ACTION_START_AT_END_OF_STREET = 11,
 
-    T_ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION = 13,
+    F_ROUTING_ACTION_ENTER_AGAINST_ALLOWED_DIRECTION = 12,
 
-    T_ROUTING_ACTION_GO_UP = 14,
+    F_ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION = 13,
 
-    T_ROUTING_ACTION_GO_DOWN = 15,
+    F_ROUTING_ACTION_GO_UP = 14,
 
-    T_ROUTING_ACTION_WAIT = 16,
+    F_ROUTING_ACTION_GO_DOWN = 15,
 
-    T_ROUTING_ACTION_ENTER_FERRY = 17,
+    F_ROUTING_ACTION_WAIT = 16,
 
-    T_ROUTING_ACTION_LEAVE_FERRY = 18
+    F_ROUTING_ACTION_ENTER_FERRY = 17,
+
+    F_ROUTING_ACTION_LEAVE_FERRY = 18
 }
 
 declare class MSFRoutingInstruction extends NSObject {
+
     static alloc(): MSFRoutingInstruction; // inherited from NSObject
 
     static new(): MSFRoutingInstruction; // inherited from NSObject
 
-    constructor(o: {
-        action: MSFRoutingAction;
-        pointIndex: number;
-        streetName: string;
-        instruction: string;
-        turnAngle: number;
-        azimuth: number;
-        distance: number;
-        time: number;
-        geometryTag: MSFVariant;
-    });
+    constructor(o: { action: MSFRoutingAction; pointIndex: number; streetName: string; instruction: string; turnAngle: number; azimuth: number; distance: number; time: number; geometryTag: MSFVariant; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     description(): string;
 
     getAction(): MSFRoutingAction;
 
     getAzimuth(): number;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDistance(): number;
 
@@ -4880,29 +5133,16 @@ declare class MSFRoutingInstruction extends NSObject {
 
     hash(): number;
 
-    initWithActionPointIndexStreetNameInstructionTurnAngleAzimuthDistanceTimeGeometryTag(
-        action: MSFRoutingAction,
-        pointIndex: number,
-        streetName: string,
-        instruction: string,
-        turnAngle: number,
-        azimuth: number,
-        distance: number,
-        time: number,
-        geometryTag: MSFVariant
-    ): this;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
+    initWithActionPointIndexStreetNameInstructionTurnAngleAzimuthDistanceTimeGeometryTag(action: MSFRoutingAction, pointIndex: number, streetName: string, instruction: string, turnAngle: number, azimuth: number, distance: number, time: number, geometryTag: MSFVariant): this;
 }
 
 declare class MSFRoutingInstructionVector extends NSObject {
+
     static alloc(): MSFRoutingInstructionVector; // inherited from NSObject
 
     static new(): MSFRoutingInstructionVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFRoutingInstruction): void;
 
@@ -4912,10 +5152,6 @@ declare class MSFRoutingInstructionVector extends NSObject {
 
     get(i: number): MSFRoutingInstruction;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -4923,22 +5159,19 @@ declare class MSFRoutingInstructionVector extends NSObject {
     setVal(i: number, val: MSFRoutingInstruction): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRoutingRequest extends NSObject {
+
     static alloc(): MSFRoutingRequest; // inherited from NSObject
 
     static new(): MSFRoutingRequest; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; points: MSFMapPosVector });
+    constructor(o: { projection: MSFProjection; points: MSFMapPosVector; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getCustomParameter(param: string): MSFVariant;
 
@@ -4950,29 +5183,24 @@ declare class MSFRoutingRequest extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionPoints(projection: MSFProjection, points: MSFMapPosVector): this;
 
     setCustomParameterValue(param: string, value: MSFVariant): void;
 
     setPointParameterParamValue(index: number, param: string, value: MSFVariant): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRoutingResult extends NSObject {
+
     static alloc(): MSFRoutingResult; // inherited from NSObject
 
     static new(): MSFRoutingResult; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection; points: MSFMapPosVector; instructions: MSFRoutingInstructionVector; rawResult: string });
+    constructor(o: { projection: MSFProjection; points: MSFMapPosVector; instructions: MSFRoutingInstructionVector; rawResult: string; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getInstructions(): MSFRoutingInstructionVector;
 
@@ -4988,29 +5216,22 @@ declare class MSFRoutingResult extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithProjectionPointsInstructionsRawResult(projection: MSFProjection, points: MSFMapPosVector, instructions: MSFRoutingInstructionVector, rawResult: string): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFRoutingService extends NSObject {
+
     static alloc(): MSFRoutingService; // inherited from NSObject
 
     static new(): MSFRoutingService; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFRoutingService;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     calculateRoute(request: MSFRoutingRequest): MSFRoutingResult;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getProfile(): string;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     matchRoute(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
 
@@ -5019,22 +5240,17 @@ declare class MSFRoutingService extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFSGREOfflineRoutingService extends MSFRoutingService {
+
     static alloc(): MSFSGREOfflineRoutingService; // inherited from NSObject
 
     static new(): MSFSGREOfflineRoutingService; // inherited from NSObject
 
-    constructor(o: { geoJSON: MSFVariant; config: MSFVariant });
+    constructor(o: { geoJSON: MSFVariant; config: MSFVariant; });
 
-    constructor(o: { projection: MSFProjection; featureCollection: MSFFeatureCollection; config: MSFVariant });
-
-    calculateRouteSwigExplicitNTSGREOfflineRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
-
-    getProfileSwigExplicitNTSGREOfflineRoutingService(): string;
+    constructor(o: { projection: MSFProjection; featureCollection: MSFFeatureCollection; config: MSFVariant; });
 
     getRoutingParameter(param: string): number;
 
@@ -5042,21 +5258,18 @@ declare class MSFSGREOfflineRoutingService extends MSFRoutingService {
 
     initWithProjectionFeatureCollectionConfig(projection: MSFProjection, featureCollection: MSFFeatureCollection, config: MSFVariant): this;
 
-    matchRouteSwigExplicitNTSGREOfflineRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
-
-    setProfileSwigExplicitNTSGREOfflineRoutingService(profile: string): void;
-
     setRoutingParameterValue(param: string, value: number): void;
 }
 
 declare class MSFScreenBounds extends NSObject {
+
     static alloc(): MSFScreenBounds; // inherited from NSObject
 
     static new(): MSFScreenBounds; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { min: MSFScreenPos; max: MSFScreenPos });
+    constructor(o: { min: MSFScreenPos; max: MSFScreenPos; });
 
     containsBounds(bounds: MSFScreenBounds): boolean;
 
@@ -5065,8 +5278,6 @@ declare class MSFScreenBounds extends NSObject {
     description(): string;
 
     getCenter(): MSFScreenPos;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getHeight(): number;
 
@@ -5080,29 +5291,24 @@ declare class MSFScreenBounds extends NSObject {
 
     hashInternal(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithMinMax(min: MSFScreenPos, max: MSFScreenPos): this;
 
     intersects(bounds: MSFScreenBounds): boolean;
 
     isEqualInternal(ScreenBounds: MSFScreenBounds): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFScreenPos extends NSObject {
+
     static alloc(): MSFScreenPos; // inherited from NSObject
 
     static new(): MSFScreenPos; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { x: number; y: number });
+    constructor(o: { x: number; y: number; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getX(): number;
 
@@ -5112,21 +5318,18 @@ declare class MSFScreenPos extends NSObject {
 
     hashInternal(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithXY(x: number, y: number): this;
 
     isEqualInternal(p: MSFScreenPos): boolean;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFScreenPosVector extends NSObject {
+
     static alloc(): MSFScreenPosVector; // inherited from NSObject
 
     static new(): MSFScreenPosVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFScreenPos): void;
 
@@ -5136,10 +5339,6 @@ declare class MSFScreenPosVector extends NSObject {
 
     get(i: number): MSFScreenPos;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -5147,20 +5346,17 @@ declare class MSFScreenPosVector extends NSObject {
     setVal(i: number, val: MSFScreenPos): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFSearchRequest extends NSObject {
+
     static alloc(): MSFSearchRequest; // inherited from NSObject
 
     static new(): MSFSearchRequest; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     description(): string;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getFilterExpression(): string;
 
@@ -5174,8 +5370,6 @@ declare class MSFSearchRequest extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     setFilterExpression(expr: string): void;
 
     setGeometry(geometry: MSFGeometry): void;
@@ -5185,18 +5379,54 @@ declare class MSFSearchRequest extends NSObject {
     setRegexFilter(regex: string): void;
 
     setSearchRadius(radius: number): void;
+}
 
-    swigGetRawPtr(): number;
+declare class MSFSkyOptions extends NSObject {
+
+    static alloc(): MSFSkyOptions; // inherited from NSObject
+
+    static new(): MSFSkyOptions; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    getGroundColor(): MSFColor;
+
+    getHorizonBlend(): number;
+
+    getHorizonColor(): MSFColor;
+
+    getShaderSource(): string;
+
+    getSkyColor(): MSFColor;
+
+    isEnabled(): boolean;
+
+    isSunDiscEnabled(): boolean;
+
+    setEnabled(enabled: boolean): void;
+
+    setGroundColor(color: MSFColor): void;
+
+    setHorizonBlend(degrees: number): void;
+
+    setHorizonColor(color: MSFColor): void;
+
+    setShaderSource(shaderSource: string): void;
+
+    setSkyColor(color: MSFColor): void;
+
+    setSunDiscEnabled(enabled: boolean): void;
 }
 
 declare class MSFSolidLayer extends MSFLayer {
+
     static alloc(): MSFSolidLayer; // inherited from NSObject
 
     static new(): MSFSolidLayer; // inherited from NSObject
 
-    constructor(o: { bitmap: MSFBitmap });
+    constructor(o: { bitmap: MSFBitmap; });
 
-    constructor(o: { color: MSFColor });
+    constructor(o: { color: MSFColor; });
 
     getBitmap(): MSFBitmap;
 
@@ -5216,13 +5446,14 @@ declare class MSFSolidLayer extends MSFLayer {
 }
 
 declare class MSFStringCartoCSSStyleSetMap extends NSObject {
+
     static alloc(): MSFStringCartoCSSStyleSetMap; // inherited from NSObject
 
     static new(): MSFStringCartoCSSStyleSetMap; // inherited from NSObject
 
-    constructor(o: { arg0: MSFStringCartoCSSStyleSetMap });
+    constructor(o: { arg0: MSFStringCartoCSSStyleSetMap; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     clear(): void;
 
@@ -5232,15 +5463,11 @@ declare class MSFStringCartoCSSStyleSetMap extends NSObject {
 
     get(key: string): MSFCartoCSSStyleSet;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     get_key(idx: number): string;
 
     has_key(key: string): boolean;
 
     initWithArg0(arg0: MSFStringCartoCSSStyleSetMap): this;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     setX(key: string, x: MSFCartoCSSStyleSet): void;
 
@@ -5248,13 +5475,14 @@ declare class MSFStringCartoCSSStyleSetMap extends NSObject {
 }
 
 declare class MSFStringMap extends NSObject {
+
     static alloc(): MSFStringMap; // inherited from NSObject
 
     static new(): MSFStringMap; // inherited from NSObject
 
-    constructor(o: { arg0: MSFStringMap });
+    constructor(o: { arg0: MSFStringMap; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     clear(): void;
 
@@ -5264,31 +5492,26 @@ declare class MSFStringMap extends NSObject {
 
     get(key: string): string;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     get_key(idx: number): string;
 
     has_key(key: string): boolean;
 
     initWithArg0(arg0: MSFStringMap): this;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     setX(key: string, x: string): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFStringVariantMap extends NSObject {
+
     static alloc(): MSFStringVariantMap; // inherited from NSObject
 
     static new(): MSFStringVariantMap; // inherited from NSObject
 
-    constructor(o: { arg0: MSFStringVariantMap });
+    constructor(o: { arg0: MSFStringVariantMap; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     clear(): void;
 
@@ -5298,29 +5521,24 @@ declare class MSFStringVariantMap extends NSObject {
 
     get(key: string): MSFVariant;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     get_key(idx: number): string;
 
     has_key(key: string): boolean;
 
     initWithArg0(arg0: MSFStringVariantMap): this;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     setX(key: string, x: MSFVariant): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFStringVector extends NSObject {
+
     static alloc(): MSFStringVector; // inherited from NSObject
 
     static new(): MSFStringVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: string): void;
 
@@ -5330,10 +5548,6 @@ declare class MSFStringVector extends NSObject {
 
     get(i: number): string;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -5341,76 +5555,191 @@ declare class MSFStringVector extends NSObject {
     setVal(i: number, val: string): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFStyle extends NSObject {
+
     static alloc(): MSFStyle; // inherited from NSObject
 
     static new(): MSFStyle; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFStyle;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getColor(): MSFColor;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFStyleBuilder extends NSObject {
+
     static alloc(): MSFStyleBuilder; // inherited from NSObject
 
     static new(): MSFStyleBuilder; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFStyleBuilder;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getColor(): MSFColor;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     setColor(color: MSFColor): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+}
 
-    swigGetRawPtr(): number;
+declare class MSFTerrainOptions extends NSObject {
+
+    static alloc(): MSFTerrainOptions; // inherited from NSObject
+
+    static new(): MSFTerrainOptions; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    constructor(o: { dataSource: MSFTileDataSource; });
+
+    constructor(o: { dataSource: MSFTileDataSource; elevationDecoder: MSFElevationDecoder; });
+
+    getBackgroundColor(): MSFColor;
+
+    getBillboardOcclusionTolerance(): number;
+
+    getCameraClampDuration(): number;
+
+    getCameraClearance(): number;
+
+    getDataSource(): MSFTileDataSource;
+
+    getDepthBias(): number;
+
+    getDrapeResolution(): number;
+
+    getElevation(pos: MSFMapPos): number;
+
+    getElevationDecoder(): MSFElevationDecoder;
+
+    getElevations(poses: MSFMapPosVector): MSFDoubleVector;
+
+    getExaggeration(): number;
+
+    getMaxTileZoomCoarsening(): number;
+
+    getMaxTileZoomOffset(): number;
+
+    getMeshResolution(): number;
+
+    getMinZoom(): number;
+
+    getNoDrapeLayerFilter(): string;
+
+    getSurfaceColorParameter(name: string): MSFColor;
+
+    getSurfaceParameter(name: string): number;
+
+    getSurfaceShaderSource(): string;
+
+    getViewDistance(): number;
+
+    getViewDistanceFactor(): number;
+
+    initWithDataSource(dataSource: MSFTileDataSource): this;
+
+    initWithDataSourceElevationDecoder(dataSource: MSFTileDataSource, elevationDecoder: MSFElevationDecoder): this;
+
+    isBackgroundBitmapEnabled(): boolean;
+
+    isBillboardOcclusionEnabled(): boolean;
+
+    isDrapeFillsEnabled(): boolean;
+
+    isDrapeLinesEnabled(): boolean;
+
+    isElevationPrefetchEnabled(): boolean;
+
+    isEnabled(): boolean;
+
+    isSeamlessTileEdgesEnabled(): boolean;
+
+    isTileEdgeStitchingEnabled(): boolean;
+
+    setBackgroundBitmapEnabled(enabled: boolean): void;
+
+    setBackgroundColor(color: MSFColor): void;
+
+    setBillboardOcclusionEnabled(enabled: boolean): void;
+
+    setBillboardOcclusionTolerance(tolerance: number): void;
+
+    setCameraClampDuration(duration: number): void;
+
+    setCameraClearance(clearance: number): void;
+
+    setDepthBias(depthBias: number): void;
+
+    setDrapeFillsEnabled(enabled: boolean): void;
+
+    setDrapeLinesEnabled(enabled: boolean): void;
+
+    setDrapeResolution(resolution: number): void;
+
+    setElevationPrefetchEnabled(enabled: boolean): void;
+
+    setEnabled(enabled: boolean): void;
+
+    setExaggeration(exaggeration: number): void;
+
+    setMaxTileZoomCoarsening(levels: number): void;
+
+    setMaxTileZoomOffset(offset: number): void;
+
+    setMeshResolution(meshResolution: number): void;
+
+    setMinZoom(minZoom: number): void;
+
+    setNoDrapeLayerFilter(filter: string): void;
+
+    setSeamlessTileEdgesEnabled(enabled: boolean): void;
+
+    setSurfaceColorParameterColor(name: string, color: MSFColor): void;
+
+    setSurfaceParameterValue(name: string, value: number): void;
+
+    setSurfaceShaderSource(shaderSource: string): void;
+
+    setTileEdgeStitchingEnabled(enabled: boolean): void;
+
+    setViewDistance(distance: number): void;
+
+    setViewDistanceFactor(factor: number): void;
 }
 
 declare class MSFTerrariumElevationDataDecoder extends MSFElevationDecoder {
+
     static alloc(): MSFTerrariumElevationDataDecoder; // inherited from NSObject
 
     static new(): MSFTerrariumElevationDataDecoder; // inherited from NSObject
 }
 
 declare class MSFText extends MSFLabel {
+
     static alloc(): MSFText; // inherited from NSObject
 
     static new(): MSFText; // inherited from NSObject
 
-    constructor(o: { baseBillboard: MSFBillboard; style: MSFTextStyle; text: string });
+    constructor(o: { baseBillboard: MSFBillboard; style: MSFTextStyle; text: string; });
 
-    constructor(o: { geometry: MSFGeometry; style: MSFTextStyle; text: string });
+    constructor(o: { geometry: MSFGeometry; style: MSFTextStyle; text: string; });
 
-    constructor(o: { pos: MSFMapPos; style: MSFTextStyle; text: string });
+    constructor(o: { pos: MSFMapPos; style: MSFTextStyle; text: string; });
 
     getStyle(): MSFTextStyle;
 
@@ -5428,17 +5757,16 @@ declare class MSFText extends MSFLabel {
 }
 
 declare class MSFTextMargins extends NSObject {
+
     static alloc(): MSFTextMargins; // inherited from NSObject
 
     static new(): MSFTextMargins; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { left: number; top: number; right: number; bottom: number });
+    constructor(o: { left: number; top: number; right: number; bottom: number; });
 
     getBottom(): number;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getLeft(): number;
 
@@ -5446,14 +5774,11 @@ declare class MSFTextMargins extends NSObject {
 
     getTop(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithLeftTopRightBottom(left: number, top: number, right: number, bottom: number): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFTextStyle extends MSFLabelStyle {
+
     static alloc(): MSFTextStyle; // inherited from NSObject
 
     static new(): MSFTextStyle; // inherited from NSObject
@@ -5482,6 +5807,7 @@ declare class MSFTextStyle extends MSFLabelStyle {
 }
 
 declare class MSFTextStyleBuilder extends MSFLabelStyleBuilder {
+
     static alloc(): MSFTextStyleBuilder; // inherited from NSObject
 
     static new(): MSFTextStyleBuilder; // inherited from NSObject
@@ -5530,23 +5856,20 @@ declare class MSFTextStyleBuilder extends MSFLabelStyleBuilder {
 }
 
 declare class MSFTileData extends NSObject {
+
     static alloc(): MSFTileData; // inherited from NSObject
 
     static new(): MSFTileData; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { data: MSFBinaryData });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { data: MSFBinaryData; });
 
     getData(): MSFBinaryData;
 
     getMaxAge(): number;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithData(data: MSFBinaryData): this;
 
@@ -5559,44 +5882,37 @@ declare class MSFTileData extends NSObject {
     setMaxAge(maxAge: number): void;
 
     setReplaceWithParent(flag: boolean): void;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFTileDataSource extends NSObject {
+
     static alloc(): MSFTileDataSource; // inherited from NSObject
 
     static new(): MSFTileDataSource; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFTileDataSource;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { minZoom: number; maxZoom: number });
+    constructor(o: { minZoom: number; maxZoom: number; });
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    buildTagValues(tile: MSFMapTile): MSFStringMap;
 
     getDataExtent(): MSFMapBounds;
 
-    getDataExtentSwigExplicitNTTileDataSource(): MSFMapBounds;
+    getEncoding(): string;
 
     getMaxOverzoomLevel(): number;
 
     getMaxZoom(): number;
 
-    getMaxZoomSwigExplicitNTTileDataSource(): number;
-
     getMaxZoomWithOverzoom(): number;
 
-    getMaxZoomWithOverzoomSwigExplicitNTTileDataSource(): number;
+    getMetaData(key: string): string;
 
     getMinZoom(): number;
 
-    getMinZoomSwigExplicitNTTileDataSource(): number;
-
     getProjection(): MSFProjection;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithMinZoomMaxZoom(minZoom: number, maxZoom: number): this;
 
@@ -5606,54 +5922,49 @@ declare class MSFTileDataSource extends NSObject {
 
     notifyTilesChanged(removeTiles: boolean): void;
 
-    notifyTilesChangedSwigExplicitNTTileDataSource(removeTiles: boolean): void;
+    setEncoding(encoding: string): void;
 
     setMaxOverzoomLevel(overzoomLevel: number): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFTileDownloadListener extends NSObject {
+
     static alloc(): MSFTileDownloadListener; // inherited from NSObject
 
     static new(): MSFTileDownloadListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFTileDownloadListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onDownloadCompleted(): void;
 
-    onDownloadCompletedSwigExplicitNTTileDownloadListener(): void;
-
     onDownloadFailed(tile: MSFMapTile): void;
-
-    onDownloadFailedSwigExplicitNTTileDownloadListener(tile: MSFMapTile): void;
 
     onDownloadProgress(progress: number): void;
 
-    onDownloadProgressSwigExplicitNTTileDownloadListener(progress: number): void;
-
     onDownloadStarting(tileCount: number): void;
-
-    onDownloadStartingSwigExplicitNTTileDownloadListener(tileCount: number): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
+}
 
-    swigGetRawPtr(): number;
+declare const enum MSFTileFormat {
+
+    F_TILE_FORMAT_AUTO = 0,
+
+    F_TILE_FORMAT_MVT = 1,
+
+    F_TILE_FORMAT_MLT = 2
 }
 
 declare class MSFTileLayer extends MSFLayer {
+
     static alloc(): MSFTileLayer; // inherited from NSObject
 
     static new(): MSFTileLayer; // inherited from NSObject
@@ -5666,11 +5977,15 @@ declare class MSFTileLayer extends MSFLayer {
 
     clearTileCaches(all: boolean): void;
 
+    consumeShadowCastersMissingElevation(): number;
+
     getDataSource(): MSFTileDataSource;
 
     getFrameNr(): number;
 
     getMaxOverzoomLevel(): number;
+
+    getMaxStandInLevel(): number;
 
     getMaxUnderzoomLevel(): number;
 
@@ -5692,11 +6007,15 @@ declare class MSFTileLayer extends MSFLayer {
 
     setMaxOverzoomLevel(overzoomLevel: number): void;
 
+    setMaxStandInLevel(standInLevel: number): void;
+
     setMaxUnderzoomLevel(underzoomLevel: number): void;
 
     setPreloading(preloading: boolean): void;
 
     setSynchronizedRefresh(synchronizedRefresh: boolean): void;
+
+    setTerrainShadowMaskInvScreenWidthInvScreenHeight(texture: number, invScreenWidth: number, invScreenHeight: number): void;
 
     setTileLoadListener(tileLoadListener: MSFTileLoadListener): void;
 
@@ -5710,42 +6029,35 @@ declare class MSFTileLayer extends MSFLayer {
 }
 
 declare class MSFTileLoadListener extends NSObject {
+
     static alloc(): MSFTileLoadListener; // inherited from NSObject
 
     static new(): MSFTileLoadListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFTileLoadListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onPreloadingTilesLoaded(): void;
 
-    onPreloadingTilesLoadedSwigExplicitNTTileLoadListener(): void;
-
     onVisibleTilesLoaded(): void;
-
-    onVisibleTilesLoadedSwigExplicitNTTileLoadListener(): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFTileSubstitutionPolicy {
-    T_TILE_SUBSTITUTION_POLICY_ALL = 0,
 
-    T_TILE_SUBSTITUTION_POLICY_VISIBLE = 1,
+    F_TILE_SUBSTITUTION_POLICY_ALL = 0,
 
-    T_TILE_SUBSTITUTION_POLICY_NONE = 2
+    F_TILE_SUBSTITUTION_POLICY_VISIBLE = 1,
+
+    F_TILE_SUBSTITUTION_POLICY_NONE = 2
 }
 
 declare class MSFTileUtils extends NSObject {
+
     static alloc(): MSFTileUtils; // inherited from NSObject
 
     static calculateClippedMapTileZoomProj(mapPos: MSFMapPos, zoom: number, proj: MSFProjection): MSFMapTile;
@@ -5758,67 +6070,46 @@ declare class MSFTileUtils extends NSObject {
 
     static new(): MSFTileUtils; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 }
 
 declare class MSFTomTomOnlineGeocodingService extends MSFGeocodingService {
+
     static alloc(): MSFTomTomOnlineGeocodingService; // inherited from NSObject
 
     static new(): MSFTomTomOnlineGeocodingService; // inherited from NSObject
 
-    constructor(o: { apiKey: string });
-
-    calculateAddressesSwigExplicitNTTomTomOnlineGeocodingService(request: MSFGeocodingRequest): MSFGeocodingResultVector;
+    constructor(o: { apiKey: string; });
 
     getCustomServiceURL(): string;
 
-    getLanguageSwigExplicitNTTomTomOnlineGeocodingService(): string;
-
-    getMaxResultsSwigExplicitNTTomTomOnlineGeocodingService(): number;
-
     initWithApiKey(apiKey: string): this;
 
-    isAutocompleteSwigExplicitNTTomTomOnlineGeocodingService(): boolean;
-
-    setAutocompleteSwigExplicitNTTomTomOnlineGeocodingService(autocomplete: boolean): void;
-
     setCustomServiceURL(serviceURL: string): void;
-
-    setLanguageSwigExplicitNTTomTomOnlineGeocodingService(lang: string): void;
-
-    setMaxResultsSwigExplicitNTTomTomOnlineGeocodingService(maxResults: number): void;
 }
 
 declare class MSFTomTomOnlineReverseGeocodingService extends MSFReverseGeocodingService {
+
     static alloc(): MSFTomTomOnlineReverseGeocodingService; // inherited from NSObject
 
     static new(): MSFTomTomOnlineReverseGeocodingService; // inherited from NSObject
 
-    constructor(o: { apiKey: string });
-
-    calculateAddressesSwigExplicitNTTomTomOnlineReverseGeocodingService(request: MSFReverseGeocodingRequest): MSFGeocodingResultVector;
+    constructor(o: { apiKey: string; });
 
     getCustomServiceURL(): string;
-
-    getLanguageSwigExplicitNTTomTomOnlineReverseGeocodingService(): string;
 
     initWithApiKey(apiKey: string): this;
 
     setCustomServiceURL(serviceURL: string): void;
-
-    setLanguageSwigExplicitNTTomTomOnlineReverseGeocodingService(lang: string): void;
 }
 
 declare class MSFTorqueTileDecoder extends MSFVectorTileDecoder {
+
     static alloc(): MSFTorqueTileDecoder; // inherited from NSObject
 
     static new(): MSFTorqueTileDecoder; // inherited from NSObject
 
-    constructor(o: { styleSet: MSFCartoCSSStyleSet });
+    constructor(o: { styleSet: MSFCartoCSSStyleSet; });
 
     getAnimationDuration(): number;
 
@@ -5834,11 +6125,12 @@ declare class MSFTorqueTileDecoder extends MSFVectorTileDecoder {
 }
 
 declare class MSFTorqueTileLayer extends MSFVectorTileLayer {
+
     static alloc(): MSFTorqueTileLayer; // inherited from NSObject
 
     static new(): MSFTorqueTileLayer; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFTileDataSource; decoder: MSFTorqueTileDecoder });
+    constructor(o: { dataSource: MSFTileDataSource; decoder: MSFTorqueTileDecoder; });
 
     countVisibleFeatures(frameNr: number): number;
 
@@ -5846,11 +6138,12 @@ declare class MSFTorqueTileLayer extends MSFVectorTileLayer {
 }
 
 declare class MSFUTFGridClickInfo extends NSObject {
+
     static alloc(): MSFUTFGridClickInfo; // inherited from NSObject
 
     static new(): MSFUTFGridClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getClickInfo(): MSFClickInfo;
 
@@ -5858,111 +6151,91 @@ declare class MSFUTFGridClickInfo extends NSObject {
 
     getClickType(): MSFClickType;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     getElementInfo(): MSFVariant;
 
     getLayer(): MSFLayer;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFUTFGridEventListener extends NSObject {
+
     static alloc(): MSFUTFGridEventListener; // inherited from NSObject
 
     static new(): MSFUTFGridEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFUTFGridEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onUTFGridClicked(clickInfo: MSFUTFGridClickInfo): boolean;
-
-    onUTFGridClickedSwigExplicitNTUTFGridEventListener(clickInfo: MSFUTFGridClickInfo): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFValhallaOfflineRoutingService extends MSFRoutingService {
+
     static alloc(): MSFValhallaOfflineRoutingService; // inherited from NSObject
 
     static new(): MSFValhallaOfflineRoutingService; // inherited from NSObject
 
-    constructor(o: { path: string });
+    constructor(o: { path: string; });
 
     addLocaleJson(key: string, json: string): void;
 
-    calculateRouteSwigExplicitNTValhallaOfflineRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
-
     getConfigurationParameter(param: string): MSFVariant;
-
-    getProfileSwigExplicitNTValhallaOfflineRoutingService(): string;
 
     initWithPath(path: string): this;
 
-    matchRouteSwigExplicitNTValhallaOfflineRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
-
     setConfigurationParameterValue(param: string, value: MSFVariant): void;
-
-    setProfileSwigExplicitNTValhallaOfflineRoutingService(profile: string): void;
 }
 
 declare class MSFValhallaOnlineRoutingService extends MSFRoutingService {
+
     static alloc(): MSFValhallaOnlineRoutingService; // inherited from NSObject
 
     static new(): MSFValhallaOnlineRoutingService; // inherited from NSObject
 
-    constructor(o: { apiKey: string });
-
-    calculateRouteSwigExplicitNTValhallaOnlineRoutingService(request: MSFRoutingRequest): MSFRoutingResult;
+    constructor(o: { apiKey: string; });
 
     getCustomServiceURL(): string;
 
-    getProfileSwigExplicitNTValhallaOnlineRoutingService(): string;
+    getHTTPHeaders(): MSFStringMap;
+
+    getTimeout(): number;
 
     initWithApiKey(apiKey: string): this;
-
-    matchRouteSwigExplicitNTValhallaOnlineRoutingService(request: MSFRouteMatchingRequest): MSFRouteMatchingResult;
 
     setCustomServiceURL(serviceURL: string): void;
 
     setHTTPHeaders(headers: MSFStringMap): void;
 
-    setProfileSwigExplicitNTValhallaOnlineRoutingService(profile: string): void;
+    setTimeout(timeout: number): void;
 }
 
 declare class MSFVariant extends NSObject {
+
     static alloc(): MSFVariant; // inherited from NSObject
 
     static fromString(str: string): MSFVariant;
 
     static new(): MSFVariant; // inherited from NSObject
 
-    constructor(o: { array: MSFVariantVector });
+    constructor(o: { array: MSFVariantVector; });
 
-    constructor(o: { boolVal: boolean });
+    constructor(o: { boolVal: boolean; });
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { doubleVal: number });
+    constructor(o: { doubleVal: number; });
 
-    constructor(o: { longVal: number });
+    constructor(o: { longVal: number; });
 
-    constructor(o: { object: MSFStringVariantMap });
+    constructor(o: { object: MSFStringVariantMap; });
 
-    constructor(o: { str: string });
+    constructor(o: { string: string; });
 
     containsObjectKey(key: string): boolean;
 
@@ -5973,8 +6246,6 @@ declare class MSFVariant extends NSObject {
     getArraySize(): number;
 
     getBool(): boolean;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDouble(): number;
 
@@ -5996,27 +6267,24 @@ declare class MSFVariant extends NSObject {
 
     initWithBoolVal(boolVal: boolean): this;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithDoubleVal(doubleVal: number): this;
 
     initWithLongVal(longVal: number): this;
 
     initWithObject(object: MSFStringVariantMap): this;
 
-    initWithString(str: string): this;
+    initWithString(string: string): this;
 
-    isEqualInternal(varnt: MSFVariant): boolean;
-
-    swigGetRawPtr(): number;
+    isEqualInternal(var_: MSFVariant): boolean;
 }
 
 declare class MSFVariantArrayBuilder extends NSObject {
+
     static alloc(): MSFVariantArrayBuilder; // inherited from NSObject
 
     static new(): MSFVariantArrayBuilder; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     addBool(val: boolean): void;
 
@@ -6026,37 +6294,28 @@ declare class MSFVariantArrayBuilder extends NSObject {
 
     addString(str: string): void;
 
-    addVariant(varnt: MSFVariant): void;
+    addVariant(var_: MSFVariant): void;
 
     buildVariant(): MSFVariant;
 
     clear(): void;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVariantObjectBuilder extends NSObject {
+
     static alloc(): MSFVariantObjectBuilder; // inherited from NSObject
 
     static new(): MSFVariantObjectBuilder; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     buildVariant(): MSFVariant;
 
     clear(): void;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     setBoolVal(key: string, val: boolean): void;
 
@@ -6066,33 +6325,33 @@ declare class MSFVariantObjectBuilder extends NSObject {
 
     setStringStr(key: string, str: string): void;
 
-    setVariantVar(key: string, varnt: MSFVariant): void;
-
-    swigGetRawPtr(): number;
+    setVariantVar(key: string, var_: MSFVariant): void;
 }
 
 declare const enum MSFVariantType {
-    T_VARIANT_TYPE_NULL = 0,
 
-    T_VARIANT_TYPE_STRING = 1,
+    F_VARIANT_TYPE_NULL = 0,
 
-    T_VARIANT_TYPE_BOOL = 2,
+    F_VARIANT_TYPE_STRING = 1,
 
-    T_VARIANT_TYPE_INTEGER = 3,
+    F_VARIANT_TYPE_BOOL = 2,
 
-    T_VARIANT_TYPE_DOUBLE = 4,
+    F_VARIANT_TYPE_INTEGER = 3,
 
-    T_VARIANT_TYPE_ARRAY = 5,
+    F_VARIANT_TYPE_DOUBLE = 4,
 
-    T_VARIANT_TYPE_OBJECT = 6
+    F_VARIANT_TYPE_ARRAY = 5,
+
+    F_VARIANT_TYPE_OBJECT = 6
 }
 
 declare class MSFVariantVector extends NSObject {
+
     static alloc(): MSFVariantVector; // inherited from NSObject
 
     static new(): MSFVariantVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFVariant): void;
 
@@ -6102,10 +6361,6 @@ declare class MSFVariantVector extends NSObject {
 
     get(i: number): MSFVariant;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -6113,52 +6368,40 @@ declare class MSFVariantVector extends NSObject {
     setVal(i: number, val: MSFVariant): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorData extends NSObject {
+
     static alloc(): MSFVectorData; // inherited from NSObject
 
     static new(): MSFVectorData; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { elements: MSFVectorElementVector });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { elements: MSFVectorElementVector; });
 
     getElements(): MSFVectorElementVector;
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     initWithElements(elements: MSFVectorElementVector): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorDataSource extends NSObject {
+
     static alloc(): MSFVectorDataSource; // inherited from NSObject
 
     static new(): MSFVectorDataSource; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorDataSource;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { projection: MSFProjection });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { projection: MSFProjection; });
 
     getDataExtent(): MSFMapBounds;
 
-    getDataExtentSwigExplicitNTVectorDataSource(): MSFMapBounds;
-
     getProjection(): MSFProjection;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithProjection(projection: MSFProjection): this;
 
@@ -6169,70 +6412,52 @@ declare class MSFVectorDataSource extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorEditEventListener extends NSObject {
+
     static alloc(): MSFVectorEditEventListener; // inherited from NSObject
 
     static new(): MSFVectorEditEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorEditEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onDragEnd(dragInfo: MSFVectorElementDragInfo): MSFVectorElementDragResult;
 
-    onDragEndSwigExplicitNTVectorEditEventListener(dragInfo: MSFVectorElementDragInfo): MSFVectorElementDragResult;
-
     onDragMove(dragInfo: MSFVectorElementDragInfo): MSFVectorElementDragResult;
 
-    onDragMoveSwigExplicitNTVectorEditEventListener(dragInfo: MSFVectorElementDragInfo): MSFVectorElementDragResult;
-
     onDragStart(dragInfo: MSFVectorElementDragInfo): MSFVectorElementDragResult;
-
-    onDragStartSwigExplicitNTVectorEditEventListener(dragInfo: MSFVectorElementDragInfo): MSFVectorElementDragResult;
 
     onElementDelete(element: MSFVectorElement): void;
 
     onElementDeselected(element: MSFVectorElement): void;
 
-    onElementDeselectedSwigExplicitNTVectorEditEventListener(element: MSFVectorElement): void;
-
     onElementModifyGeometry(element: MSFVectorElement, geometry: MSFGeometry): void;
 
     onElementSelect(element: MSFVectorElement): boolean;
-
-    onElementSelectSwigExplicitNTVectorEditEventListener(element: MSFVectorElement): boolean;
 
     onSelectDragPointStyleDragPointStyle(element: MSFVectorElement, dragPointStyle: MSFVectorElementDragPointStyle): MSFPointStyle;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorElement extends NSObject {
+
     static alloc(): MSFVectorElement; // inherited from NSObject
 
     static new(): MSFVectorElement; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorElement;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     containsMetaDataKey(key: string): boolean;
 
     getBounds(): MSFMapBounds;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getGeometry(): MSFGeometry;
 
@@ -6243,8 +6468,6 @@ declare class MSFVectorElement extends NSObject {
     getMetaDataElement(key: string): MSFVariant;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     isVisible(): boolean;
 
@@ -6261,24 +6484,21 @@ declare class MSFVectorElement extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorElementClickInfo extends NSObject {
+
     static alloc(): MSFVectorElementClickInfo; // inherited from NSObject
 
     static new(): MSFVectorElementClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getClickInfo(): MSFClickInfo;
 
     getClickPos(): MSFMapPos;
 
     getClickType(): MSFClickType;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getElementClickPos(): MSFMapPos;
 
@@ -6287,20 +6507,15 @@ declare class MSFVectorElementClickInfo extends NSObject {
     getVectorElement(): MSFVectorElement;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorElementDragInfo extends NSObject {
+
     static alloc(): MSFVectorElementDragInfo; // inherited from NSObject
 
     static new(): MSFVectorElementDragInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getDragMode(): MSFVectorElementDragMode;
 
@@ -6311,82 +6526,69 @@ declare class MSFVectorElementDragInfo extends NSObject {
     getVectorElement(): MSFVectorElement;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare const enum MSFVectorElementDragMode {
-    T_VECTOR_ELEMENT_DRAG_MODE_VERTEX = 0,
 
-    T_VECTOR_ELEMENT_DRAG_MODE_ELEMENT = 1
+    F_VECTOR_ELEMENT_DRAG_MODE_VERTEX = 0,
+
+    F_VECTOR_ELEMENT_DRAG_MODE_ELEMENT = 1
 }
 
 declare const enum MSFVectorElementDragPointStyle {
-    T_VECTOR_ELEMENT_DRAG_POINT_STYLE_NORMAL = 0,
 
-    T_VECTOR_ELEMENT_DRAG_POINT_STYLE_VIRTUAL = 1,
+    F_VECTOR_ELEMENT_DRAG_POINT_STYLE_NORMAL = 0,
 
-    T_VECTOR_ELEMENT_DRAG_POINT_STYLE_SELECTED = 2
+    F_VECTOR_ELEMENT_DRAG_POINT_STYLE_VIRTUAL = 1,
+
+    F_VECTOR_ELEMENT_DRAG_POINT_STYLE_SELECTED = 2
 }
 
 declare const enum MSFVectorElementDragResult {
-    T_VECTOR_ELEMENT_DRAG_RESULT_IGNORE = 0,
 
-    T_VECTOR_ELEMENT_DRAG_RESULT_STOP = 1,
+    F_VECTOR_ELEMENT_DRAG_RESULT_IGNORE = 0,
 
-    T_VECTOR_ELEMENT_DRAG_RESULT_MODIFY = 2,
+    F_VECTOR_ELEMENT_DRAG_RESULT_STOP = 1,
 
-    T_VECTOR_ELEMENT_DRAG_RESULT_DELETE = 3
+    F_VECTOR_ELEMENT_DRAG_RESULT_MODIFY = 2,
+
+    F_VECTOR_ELEMENT_DRAG_RESULT_DELETE = 3
 }
 
 declare class MSFVectorElementEventListener extends NSObject {
+
     static alloc(): MSFVectorElementEventListener; // inherited from NSObject
 
     static new(): MSFVectorElementEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorElementEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onVectorElementClicked(clickInfo: MSFVectorElementClickInfo): boolean;
-
-    onVectorElementClickedSwigExplicitNTVectorElementEventListener(clickInfo: MSFVectorElementClickInfo): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorElementSearchService extends NSObject {
+
     static alloc(): MSFVectorElementSearchService; // inherited from NSObject
 
     static new(): MSFVectorElementSearchService; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorElementSearchService;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { dataSource: MSFVectorDataSource });
+    constructor(o: { dataSource: MSFVectorDataSource; });
 
     findElements(request: MSFSearchRequest): MSFVectorElementVector;
-
-    findElementsSwigExplicitNTVectorElementSearchService(request: MSFSearchRequest): MSFVectorElementVector;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDataSource(): MSFVectorDataSource;
 
     getMaxResults(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithDataSource(dataSource: MSFVectorDataSource): this;
 
@@ -6395,16 +6597,15 @@ declare class MSFVectorElementSearchService extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorElementVector extends NSObject {
+
     static alloc(): MSFVectorElementVector; // inherited from NSObject
 
     static new(): MSFVectorElementVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFVectorElement): void;
 
@@ -6414,10 +6615,6 @@ declare class MSFVectorElementVector extends NSObject {
 
     get(i: number): MSFVectorElement;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -6425,16 +6622,15 @@ declare class MSFVectorElementVector extends NSObject {
     setVal(i: number, val: MSFVectorElement): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorLayer extends MSFLayer {
+
     static alloc(): MSFVectorLayer; // inherited from NSObject
 
     static new(): MSFVectorLayer; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFVectorDataSource });
+    constructor(o: { dataSource: MSFVectorDataSource; });
 
     getDataSource(): MSFVectorDataSource;
 
@@ -6450,19 +6646,18 @@ declare class MSFVectorLayer extends MSFLayer {
 }
 
 declare class MSFVectorTileClickInfo extends NSObject {
+
     static alloc(): MSFVectorTileClickInfo; // inherited from NSObject
 
     static new(): MSFVectorTileClickInfo; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     getClickInfo(): MSFClickInfo;
 
     getClickPos(): MSFMapPos;
 
     getClickType(): MSFClickType;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getFeature(): MSFVectorTileFeature;
 
@@ -6479,24 +6674,19 @@ declare class MSFVectorTileClickInfo extends NSObject {
     getMapTile(): MSFMapTile;
 
     hash(): number;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorTileDecoder extends NSObject {
+
     static alloc(): MSFVectorTileDecoder; // inherited from NSObject
 
     static new(): MSFVectorTileDecoder; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorTileDecoder;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     addFallbackFont(fontData: MSFBinaryData): void;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getMaxZoom(): number;
 
@@ -6504,47 +6694,39 @@ declare class MSFVectorTileDecoder extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     notifyDecoderChanged(): void;
+
+    notifyDecoderRefreshed(): void;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorTileEventListener extends NSObject {
+
     static alloc(): MSFVectorTileEventListener; // inherited from NSObject
 
     static new(): MSFVectorTileEventListener; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorTileEventListener;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     onVectorTileClicked(clickInfo: MSFVectorTileClickInfo): boolean;
-
-    onVectorTileClickedSwigExplicitNTVectorTileEventListener(clickInfo: MSFVectorTileClickInfo): boolean;
 
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorTileFeature extends MSFFeature {
+
     static alloc(): MSFVectorTileFeature; // inherited from NSObject
 
     static new(): MSFVectorTileFeature; // inherited from NSObject
 
-    constructor(o: { arg0: number; mapTile: MSFMapTile; layerName: string; geometry: MSFGeometry; properties: MSFVariant });
+    constructor(o: { arg0: number; mapTile: MSFMapTile; layerName: string; geometry: MSFGeometry; properties: MSFVariant; });
 
     getDistance(): number;
 
@@ -6560,11 +6742,12 @@ declare class MSFVectorTileFeature extends MSFFeature {
 }
 
 declare class MSFVectorTileFeatureCollection extends MSFFeatureCollection {
+
     static alloc(): MSFVectorTileFeatureCollection; // inherited from NSObject
 
     static new(): MSFVectorTileFeatureCollection; // inherited from NSObject
 
-    constructor(o: { features: MSFVectorTileFeatureVector });
+    constructor(o: { features: MSFVectorTileFeatureVector; });
 
     getFeature(index: number): MSFVectorTileFeature;
 
@@ -6572,11 +6755,12 @@ declare class MSFVectorTileFeatureCollection extends MSFFeatureCollection {
 }
 
 declare class MSFVectorTileFeatureVector extends NSObject {
+
     static alloc(): MSFVectorTileFeatureVector; // inherited from NSObject
 
     static new(): MSFVectorTileFeatureVector; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
     add(x: MSFVectorTileFeature): void;
 
@@ -6586,10 +6770,6 @@ declare class MSFVectorTileFeatureVector extends NSObject {
 
     get(i: number): MSFVectorTileFeature;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isEmpty(): boolean;
 
     reserve(n: number): void;
@@ -6597,16 +6777,15 @@ declare class MSFVectorTileFeatureVector extends NSObject {
     setVal(i: number, val: MSFVectorTileFeature): void;
 
     size(): number;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFVectorTileLayer extends MSFTileLayer {
+
     static alloc(): MSFVectorTileLayer; // inherited from NSObject
 
     static new(): MSFVectorTileLayer; // inherited from NSObject
 
-    constructor(o: { dataSource: MSFTileDataSource; decoder: MSFVectorTileDecoder });
+    constructor(o: { dataSource: MSFTileDataSource; decoder: MSFVectorTileDecoder; });
 
     getBuildingRenderOrder(): MSFVectorTileRenderOrder;
 
@@ -6650,29 +6829,27 @@ declare class MSFVectorTileLayer extends MSFTileLayer {
 }
 
 declare const enum MSFVectorTileRenderOrder {
-    T_VECTOR_TILE_RENDER_ORDER_HIDDEN = -1,
 
-    T_VECTOR_TILE_RENDER_ORDER_LAYER = 0,
+    F_VECTOR_TILE_RENDER_ORDER_HIDDEN = -1,
 
-    T_VECTOR_TILE_RENDER_ORDER_LAST = 1
+    F_VECTOR_TILE_RENDER_ORDER_LAYER = 0,
+
+    F_VECTOR_TILE_RENDER_ORDER_LAST = 1
 }
 
 declare class MSFVectorTileSearchService extends NSObject {
+
     static alloc(): MSFVectorTileSearchService; // inherited from NSObject
 
     static new(): MSFVectorTileSearchService; // inherited from NSObject
 
     static swigCreatePolymorphicInstanceSwigOwnCObject(cPtr: interop.Pointer | interop.Reference<any>, cMemoryOwn: boolean): MSFVectorTileSearchService;
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 
-    constructor(o: { dataSource: MSFTileDataSource; tileDecoder: MSFVectorTileDecoder });
+    constructor(o: { dataSource: MSFTileDataSource; tileDecoder: MSFVectorTileDecoder; });
 
     findFeatures(request: MSFSearchRequest): MSFVectorTileFeatureCollection;
-
-    findFeaturesSwigExplicitNTVectorTileSearchService(request: MSFSearchRequest): MSFVectorTileFeatureCollection;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
 
     getDataSource(): MSFTileDataSource;
 
@@ -6689,8 +6866,6 @@ declare class MSFVectorTileSearchService extends NSObject {
     getSortByDistance(): boolean;
 
     getTileDecoder(): MSFVectorTileDecoder;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
 
     initWithDataSourceTileDecoder(dataSource: MSFTileDataSource, tileDecoder: MSFVectorTileDecoder): this;
 
@@ -6709,20 +6884,25 @@ declare class MSFVectorTileSearchService extends NSObject {
     swigGetClassName(): string;
 
     swigGetDirectorObject(): interop.Pointer | interop.Reference<any>;
-
-    swigGetRawPtr(): number;
 }
 
 declare class MSFViewState extends NSObject {
+
     static alloc(): MSFViewState; // inherited from NSObject
 
     static new(): MSFViewState; // inherited from NSObject
 
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
+
+    calculateCameraDistance(): number;
+
+    calculateViewDir(): SWIGTYPE_cglib__vec3T_double_t;
+
+    calculateViewDistance(options: MSFOptions): number;
 
     getAspectRatio(): number;
 
-    getCptr(): interop.Pointer | interop.Reference<any>;
+    getCameraTilt(): number;
 
     getDPI(): number;
 
@@ -6742,6 +6922,10 @@ declare class MSFViewState extends NSObject {
 
     getScreenWidth(): number;
 
+    getSkyHorizonNDC(): number;
+
+    getTerrainMaxZoom(): number;
+
     getTilt(): number;
 
     getUnitToDPCoef(): number;
@@ -6756,93 +6940,35 @@ declare class MSFViewState extends NSObject {
 
     hash(): number;
 
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
     isCameraChanged(): boolean;
 
-    swigGetRawPtr(): number;
-}
+    setTerrainHeightRangeMaxZ(minZ: number, maxZ: number): void;
 
-declare class MSFWKBGeometryReader extends NSObject {
-    static alloc(): MSFWKBGeometryReader; // inherited from NSObject
-
-    static new(): MSFWKBGeometryReader; // inherited from NSObject
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    readGeometry(wkbData: MSFBinaryData): MSFGeometry;
-}
-
-declare class MSFWKBGeometryWriter extends NSObject {
-    static alloc(): MSFWKBGeometryWriter; // inherited from NSObject
-
-    static new(): MSFWKBGeometryWriter; // inherited from NSObject
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getBigEndian(): boolean;
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    getZ(): boolean;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    setBigEndian(bigEndian: boolean): void;
-
-    setZ(z: boolean): void;
-
-    writeGeometry(geometry: MSFGeometry): MSFBinaryData;
-}
-
-declare class MSFWKTGeometryReader extends NSObject {
-    static alloc(): MSFWKTGeometryReader; // inherited from NSObject
-
-    static new(): MSFWKTGeometryReader; // inherited from NSObject
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    readGeometry(wkt: string): MSFGeometry;
-}
-
-declare class MSFWKTGeometryWriter extends NSObject {
-    static alloc(): MSFWKTGeometryWriter; // inherited from NSObject
-
-    static new(): MSFWKTGeometryWriter; // inherited from NSObject
-
-    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean });
-
-    getCptr(): interop.Pointer | interop.Reference<any>;
-
-    getZ(): boolean;
-
-    initWithCptrSwigOwnCObject(cptr: interop.Pointer | interop.Reference<any>, ownCObject: boolean): this;
-
-    setZ(z: boolean): void;
-
-    writeGeometry(geometry: MSFGeometry): string;
+    setViewTilt(tilt: number): void;
 }
 
 declare class MSFZippedAssetPackage extends MSFAssetPackage {
+
     static alloc(): MSFZippedAssetPackage; // inherited from NSObject
 
     static new(): MSFZippedAssetPackage; // inherited from NSObject
 
-    constructor(o: { zipData: MSFBinaryData });
+    constructor(o: { zipData: MSFBinaryData; });
 
-    constructor(o: { zipData: MSFBinaryData; baseAssetPackage: MSFAssetPackage });
+    constructor(o: { zipData: MSFBinaryData; baseAssetPackage: MSFAssetPackage; });
 
     getLocalAssetNames(): MSFStringVector;
 
     initWithZipData(zipData: MSFBinaryData): this;
 
     initWithZipDataBaseAssetPackage(zipData: MSFBinaryData, baseAssetPackage: MSFAssetPackage): this;
+}
+
+declare class SWIGTYPE_cglib__vec3T_double_t extends NSObject {
+
+    static alloc(): SWIGTYPE_cglib__vec3T_double_t; // inherited from NSObject
+
+    static new(): SWIGTYPE_cglib__vec3T_double_t; // inherited from NSObject
+
+    constructor(o: { cptr: interop.Pointer | interop.Reference<any>; swigOwnCObject: boolean; });
 }

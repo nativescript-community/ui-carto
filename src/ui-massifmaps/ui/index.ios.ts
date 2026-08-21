@@ -13,25 +13,27 @@ import {
     toNativeScreenBounds,
     toNativeScreenPos
 } from '../core';
+import { FogOptions, LightOptions, MapOptions, SkyOptions, TerrainOptions } from '../components';
 import { Layer, TileLayer } from '../layers';
 import { EPSG4326 } from '../projections/epsg4326';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
-import { MapClickInfo, MapGestureInfo, MapInteractionInfo, MapOptions } from '.';
-import { Layers as BaseLayers, MassifMapViewBase, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent } from './index.common';
+import { FlyToOptions, MapClickInfo, MapGestureInfo, MapInteractionInfo } from '.';
+import { PostProcessEffect } from '../renderers';
+import { Layers as BaseLayers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, MassifMapViewBase } from './index.common';
 import { ImageSource } from '@nativescript/core';
 import { executeOnMainThread } from '@nativescript/core/utils';
 
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent };
 
 export enum RenderProjectionMode {
-    RENDER_PROJECTION_MODE_PLANAR = MSFRenderProjectionMode.T_RENDER_PROJECTION_MODE_PLANAR,
-    RENDER_PROJECTION_MODE_SPHERICAL = MSFRenderProjectionMode.T_RENDER_PROJECTION_MODE_SPHERICAL
+    RENDER_PROJECTION_MODE_PLANAR = MSFRenderProjectionMode.F_RENDER_PROJECTION_MODE_PLANAR,
+    RENDER_PROJECTION_MODE_SPHERICAL = MSFRenderProjectionMode.F_RENDER_PROJECTION_MODE_SPHERICAL
 }
 export enum PanningMode {
-    PANNING_MODE_FREE = MSFPanningMode.T_PANNING_MODE_FREE,
-    PANNING_MODE_STICKY = MSFPanningMode.T_PANNING_MODE_STICKY,
-    PANNING_MODE_STICKY_FINAL = MSFPanningMode.T_PANNING_MODE_STICKY_FINAL
+    PANNING_MODE_FREE = MSFPanningMode.F_PANNING_MODE_FREE,
+    PANNING_MODE_STICKY = MSFPanningMode.F_PANNING_MODE_STICKY,
+    PANNING_MODE_STICKY_FINAL = MSFPanningMode.F_PANNING_MODE_STICKY_FINAL
 }
 
 let runOnMainThread = true;
@@ -51,12 +53,12 @@ function mainThread(target: any, propertyKey: string, descriptor: PropertyDescri
 }
 
 @NativeClass
-class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
-    public static ObjCProtocols = [AKMapEventListener];
+class NSMSFMapEventListenerImpl extends NSObject implements NSMSFMapEventListener {
+    public static ObjCProtocols = [NSMSFMapEventListener];
     private _owner: WeakRef<MassifMap<any>>;
 
-    public static initWithOwner(owner: WeakRef<MassifMap<any>>): AKMapEventListenerImpl {
-        const delegate = AKMapEventListenerImpl.new() as AKMapEventListenerImpl;
+    public static initWithOwner(owner: WeakRef<MassifMap<any>>): NSMSFMapEventListenerImpl {
+        const delegate = NSMSFMapEventListenerImpl.new() as NSMSFMapEventListenerImpl;
         delegate._owner = owner;
         return delegate;
     }
@@ -129,7 +131,7 @@ class AKMapEventListenerImpl extends NSObject implements AKMapEventListener {
 }
 
 @NativeClass
-class MSFRendererCaptureListenerImpl extends AKRendererCaptureListener {
+class MSFRendererCaptureListenerImpl extends NSMSFRendererCaptureListener {
     private _callback: WeakRef<Function>;
     public static initWithCallback(callback: WeakRef<Function>): MSFRendererCaptureListenerImpl {
         const delegate = MSFRendererCaptureListenerImpl.new() as MSFRendererCaptureListenerImpl;
@@ -154,7 +156,7 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         runOnMainThread = value;
     }
 
-    override get mapView(): AKMapView {
+    override get mapView(): NSMSFMapView {
         return super.mapView;
     }
 
@@ -170,22 +172,87 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         }
     }
 
-    public createNativeView(): Object {
-        return AKMapView.alloc().init();
+    public createNativeView(): object {
+        return NSMSFMapView.alloc().init();
     }
 
+    mOptions: MapOptions;
+    /**
+     * The map's Options, wrapped once and cached - the native instance never changes,
+     * and re-wrapping would drop the wrapper's own state (the cached TerrainOptions and
+     * friends). Null until the map is ready.
+     */
     getOptions() {
-        if (this.mapReady) {
-            return this.mapView.getOptions() as any as MapOptions;
+        if (!this.mapReady) {
+            return null;
         }
-        return null;
+        const native = this.mapView.getOptions();
+        if (this.mOptions?.getNative() !== native) {
+            this.mOptions = new MapOptions(undefined, native);
+        }
+        return this.mOptions;
+    }
+
+    getTerrainOptions() {
+        return this.getOptions()?.getTerrainOptions() ?? null;
+    }
+    /** install terrain built with `new TerrainOptions({ dataSource })` */
+    setTerrainOptions(terrain: TerrainOptions) {
+        this.getOptions()?.setTerrainOptions(terrain);
+    }
+    getSkyOptions() {
+        return this.getOptions()?.getSkyOptions() ?? null;
+    }
+    setSkyOptions(skyOptions: SkyOptions) {
+        this.getOptions()?.setSkyOptions(skyOptions);
+    }
+    getLightOptions() {
+        return this.getOptions()?.getLightOptions() ?? null;
+    }
+    setLightOptions(lightOptions: LightOptions) {
+        this.getOptions()?.setLightOptions(lightOptions);
+    }
+    getFogOptions() {
+        return this.getOptions()?.getFogOptions() ?? null;
+    }
+    setFogOptions(fogOptions: FogOptions) {
+        this.getOptions()?.setFogOptions(fogOptions);
+    }
+    mPostProcessEffect: PostProcessEffect;
+    getPostProcessEffect() {
+        const native = this.mapView?.getMapRenderer().getPostProcessEffect();
+        if (!native) {
+            return null;
+        }
+        if (this.mPostProcessEffect?.getNative() !== native) {
+            this.mPostProcessEffect = new PostProcessEffect(undefined, native);
+        }
+        return this.mPostProcessEffect;
+    }
+    setPostProcessEffect(effect: PostProcessEffect) {
+        this.mPostProcessEffect = effect;
+        this.mapView?.getMapRenderer().setPostProcessEffect(effect?.getNative() ?? null);
+    }
+
+    flyTo(position: MapPos, options: FlyToOptions = {}) {
+        const { bearing = this.mapView.getRotation(), climbHeight = 0, duration = 0, tilt = this.mapView.getTilt(), zoom = this.mapView.getZoom() } = options;
+        this.mapView.flyToZoomRotationTiltClimbHeightDurationSeconds(toNativeMapPos(position), zoom, bearing, tilt, climbHeight, duration / 1000);
+    }
+    getFlightProgress() {
+        return this.mapView.getFlightProgress();
+    }
+    isFlightActive() {
+        return this.mapView.isFlightActive();
+    }
+    stopFlight() {
+        this.mapView.stopFlight();
     }
     initNativeView(): void {
         super.initNativeView();
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
-        this.mapView.setAKMapEventListener(AKMapEventListenerImpl.initWithOwner(new WeakRef(this)));
+        this.mapView.setAKMapEventListener(NSMSFMapEventListenerImpl.initWithOwner(new WeakRef(this)));
     }
 
     disposeNativeView(): void {
@@ -276,7 +343,7 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         this.mapView && this.mapView.cancelAllTasks();
     }
     requestRedraw() {
-        this.mapView && this.mapView.getMapRenderer().requestRedraw();
+        this.mapView && this.mapView.getMapRenderer().requestRedraw('ui-massifmaps');
     }
     screenToMap(pos: ScreenPos | MSFScreenPos) {
         if (this.mapView) {

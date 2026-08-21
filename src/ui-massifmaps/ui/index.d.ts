@@ -2,6 +2,9 @@ import { EventData, ImageSource, Style, View } from '@nativescript/core';
 import { ClickType, DefaultLatLonKeys, GenericMapPos, MapBounds, ScreenBounds, ScreenPos } from '../core';
 import { Layer } from '../layers';
 import { Projection } from '../projections';
+import { FogOptions, LightOptions, MapOptions, SkyOptions, TerrainOptions } from '../components';
+import { PostProcessEffect } from '../renderers';
+import { BaseNative } from '../BaseNative';
 
 export enum RenderProjectionMode {
     RENDER_PROJECTION_MODE_PLANAR,
@@ -30,6 +33,21 @@ export const MapMovedEvent: string;
 export const MapClickedEvent: string;
 
 export interface MapInfo {}
+
+/**
+ * A flight is one move: the camera pulls back over a long distance and comes down at the
+ * target, instead of sliding the ground under a fixed height. Everything is optional and
+ * whatever is left out keeps its current value.
+ */
+export interface FlyToOptions {
+    zoom?: number;
+    bearing?: number;
+    tilt?: number;
+    /** extra height at the middle of the flight, in metres - the camera climbs over the way there */
+    climbHeight?: number;
+    /** milliseconds; 0 lets the SDK derive the duration from the length of the path */
+    duration?: number;
+}
 
 export interface MapGestureInfo extends MapInfo {
     userAction: boolean;
@@ -78,145 +96,20 @@ export interface MapClickedEventData extends MapEventData {
     data: MapClickInfo;
 }
 
-export class MapOptions {
-    /**
-     * @returns native MassifMaps Color
-     */
-    getAmbientLightColor(): any;
-    /**
-     * @returns native MassifMaps Bitmap
-     */
-    getBackgroundBitmap(): any;
-    getBaseProjection(): any;
-    /**
-     * @returns native MassifMaps Color
-     */
-    getClearColor(): any;
-    getDPI(): number;
-    getDrawDistance(): number;
-    getEnvelopeThreadPoolSize(): number;
-    getFieldOfViewY(): number;
-    /**
-     * @returns native MassifMaps MapPos
-     */
-    getFocusPointOffset(): any;
-    /**
-     * @returns native MassifMaps Color
-     */
-    getMainLightColor(): any;
-    /**
-     * @returns native MassifMaps MapVec
-     */
-    getMainLightDirection(): any;
-    /**
-     * @returns native MassifMaps MapBounds
-     */
-    getPanBounds(): any;
-    getPanningMode(): any;
-    getPivotMode(): any;
-    getRenderProjectionMode(): any;
-    /**
-     * @returns native MassifMaps Color
-     */
-    getSkyColor(): any;
-    getTileDrawSize(): number;
-    getTileThreadPoolSize(): number;
-    /**
-     * @returns native MassifMaps MapRange
-     */
-    getTiltRange(): any;
-    getZoomRange(): any;
-    isClickTypeDetection(): boolean;
-    isKineticPan(): boolean;
-    isKineticRotation(): boolean;
-    isKineticZoom(): boolean;
-    isRestrictedPanning(): boolean;
-    isRotatable(): boolean;
-    isSeamlessPanning(): boolean;
-    isTiltGestureReversed(): boolean;
-    isUserInput(): boolean;
-    isZoomGestures(): boolean;
-    isRotationGestures(): boolean;
-    /**
-     * @param color native MassifMaps Color
-     */
-    setAmbientLightColor(color: any): void;
-    /**
-     * @param backgroundBitmap native MassifMaps Bitmap
-     */
-    setBackgroundBitmap(backgroundBitmap: any): void;
-    setBaseProjection(baseProjection: any): void;
-    /**
-     * @param color native MassifMaps Color
-     */
-    setClearColor(color: any): void;
-    setClickTypeDetection(enabled: boolean): void;
-    setDPI(dpi: number): void;
-    setDrawDistance(drawDistance: number): void;
-    setEnvelopeThreadPoolSize(poolSize: number): void;
-    setFieldOfViewY(fovY: number): void;
-    /**
-     * @param offset native MassifMaps MapPos
-     */
-    setFocusPointOffset(offset: any): void;
-    setKineticPan(enabled: boolean): void;
-    setKineticRotation(enabled: boolean): void;
-    setKineticZoom(enabled: boolean): void;
-    setRotationGestures(enabled: boolean): void;
-    /**
-     * @param color  native MassifMaps Color
-     */
-    setMainLightColor(color: any): void;
-    /**
-     * @param direction native MassifMaps MapVec
-     */
-    setMainLightDirection(direction: any): void;
-    /**
-     * @param panBounds native MassifMaps MapBounds
-     */
-    setPanBounds(panBounds: any): void;
-    setPanningMode(panningMode: any): void;
-    setPivotMode(pivotMode: any): void;
-    setRenderProjectionMode(mode: any): void;
-    setRestrictedPanning(enabled: boolean): void;
-    setRotatable(enabled: boolean): void;
-    setSeamlessPanning(enabled: boolean): void;
-    setTileDrawSize(tileDrawSize: number): void;
-    setTileThreadPoolSize(poolSize: number): void;
-    setTiltGestureReversed(reversed: boolean): void;
-    /**
-     * @param tiltRange native MassifMaps  MapRange
-     */
-    setTiltRange(tiltRange: any): void;
-    setUserInput(enabled: boolean): void;
-    setZoomGestures(enabled: boolean): void;
-    /**
-     * @param zoomRange native MassifMaps  MapRange
-     */
-    setZoomRange(zoomRange: any);
+export { MapOptions };
 
-    setDoubleClickDetection(param0: boolean): void;
-    isDoubleClickDetection(): boolean;
-    getLongClickDuration(): number;
-    setLongClickDuration(param0: number): void;
-    getDoubleClickMaxDuration(): number;
-    setDoubleClickMaxDuration(param0: number): void;
-    setLayersLabelsProcessedInReverseOrder(enabled: boolean): void;
-    isLayersLabelsProcessedInReverseOrder(): boolean;
-}
-
-export class Layers<T = any> {
-    abstract count(): number;
-    abstract insert(index: number, layer: Layer<any, any>): void;
-    abstract removeAll(layers: Layer<any, any>[]): boolean;
-    abstract remove(layer: Layer<any, any>): boolean;
-    abstract add(layer: Layer<any, any>): void;
-    abstract set(index: number, layer: Layer<any, any>): void;
-    abstract get(index: number): Layer<any, any>;
-    abstract addAll(layers: Layer<any, any>[]): void;
-    abstract setAll(layers: Layer<any, any>[]): void;
-    abstract getAll(): Layer<any, any>[];
-    abstract clear(): void;
+export class Layers<T = any> extends BaseNative<T, any> {
+    count(): number;
+    insert(index: number, layer: Layer<any, any>): void;
+    removeAll(layers: Layer<any, any>[]): boolean;
+    remove(layer: Layer<any, any>): boolean;
+    add(layer: Layer<any, any>): void;
+    set(index: number, layer: Layer<any, any>): void;
+    get(index: number): Layer<any, any>;
+    addAll(layers: Layer<any, any>[]): void;
+    setAll(layers: Layer<any, any>[]): void;
+    getAll(): Layer<any, any>[];
+    clear(): void;
 }
 
 interface MassifMapStyle extends Style {
@@ -255,7 +148,26 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     mapToScreen(pos: GenericMapPos<T> | any): ScreenPos;
     sendEvent(eventName: string, data?);
     fromNativeMapPos(position: any): GenericMapPos<T>;
+    /** wrapped and cached; null until the map is ready */
     getOptions(): MapOptions;
+    getTerrainOptions(): TerrainOptions;
+    setTerrainOptions(terrain: TerrainOptions): void;
+    getSkyOptions(): SkyOptions;
+    setSkyOptions(sky: SkyOptions): void;
+    getLightOptions(): LightOptions;
+    setLightOptions(light: LightOptions): void;
+    getFogOptions(): FogOptions;
+    setFogOptions(fog: FogOptions): void;
+    /** full-screen shader run on the finished frame; null takes it off again */
+    getPostProcessEffect(): PostProcessEffect;
+    setPostProcessEffect(effect: PostProcessEffect): void;
+
+    /** camera flight to `position`; see FlyToOptions */
+    flyTo(position: GenericMapPos<T>, options?: FlyToOptions): void;
+    /** 0..1 while a flight is running, -1 when there is none */
+    getFlightProgress(): number;
+    isFlightActive(): boolean;
+    stopFlight(): void;
 
     getZoom(): number;
     setZoom(value: number, target: number | GenericMapPos<T>, duration?: number);

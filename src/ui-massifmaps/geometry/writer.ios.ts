@@ -2,9 +2,17 @@ import { BaseNative } from '../BaseNative';
 import { Projection } from '../projections';
 import { MapPosVector } from '../core';
 import { featureCollectionFromArgs, mapPosVectorFromArgs, nativeProperty } from '..';
-import { GeoJSONGeometryWriterOptions, WKBGeometryWriterOptions, WKTGeometryWriterOptions } from './writer';
+import { GeoJSONGeometryWriterOptions } from './writer';
 import { Geometry } from '.';
 import { FeatureCollection } from './feature';
+import {
+    ACCESSORS as ACC_GeoJSONGeometryWriter,
+    Accessors as Acc_GeoJSONGeometryWriter,
+    METHODS as MET_GeoJSONGeometryWriter,
+    Methods as Met_GeoJSONGeometryWriter,
+    SELECTORS as SEL_GeoJSONGeometryWriter
+} from '../bindings/geometry/GeoJSONGeometryWriter';
+import { bindNative } from '../nativeclass.common';
 
 export class GeoJSONGeometryWriter extends BaseNative<MSFGeoJSONGeometryWriter, GeoJSONGeometryWriterOptions> {
     createNative() {
@@ -28,24 +36,5 @@ export class GeoJSONGeometryWriter extends BaseNative<MSFGeoJSONGeometryWriter, 
     }
 }
 
-export class WKBGeometryWriter extends BaseNative<MSFWKBGeometryWriter, WKBGeometryWriterOptions> {
-    @nativeProperty z: boolean;
-    createNative() {
-        return MSFWKBGeometryWriter.alloc().init();
-    }
-    writeGeometry(value: Geometry<any, any>) {
-        const geometry = value.getNative ? value.getNative() : value;
-        return this.getNative().writeGeometry(geometry);
-    }
-}
-
-export class WKTGeometryWriter extends BaseNative<MSFWKTGeometryWriter, WKTGeometryWriterOptions> {
-    @nativeProperty z: boolean;
-    createNative() {
-        return MSFWKTGeometryWriter.alloc().init();
-    }
-    writeGeometry(value: Geometry<any, any>) {
-        const geometry = value.getNative ? value.getNative() : value;
-        return this.getNative().writeGeometry(geometry);
-    }
-}
+export interface GeoJSONGeometryWriter extends Omit<Acc_GeoJSONGeometryWriter, 'sourceProjection'>, Omit<Met_GeoJSONGeometryWriter, 'writeFeatureCollection' | 'writeGeometry'> {}
+bindNative(GeoJSONGeometryWriter, MET_GeoJSONGeometryWriter, ACC_GeoJSONGeometryWriter, { selectors: SEL_GeoJSONGeometryWriter });

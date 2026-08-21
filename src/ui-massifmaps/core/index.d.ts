@@ -77,7 +77,7 @@ export class MapBounds<T = DefaultLatLonKeys> extends BaseNative<any, {}> {
     getMin(): GenericMapPos<T>;
     getMax(): GenericMapPos<T>;
 }
-// eslint-disable-next-line no-redeclare
+
 export interface MapBounds<T = DefaultLatLonKeys> {
     northeast: GenericMapPos<T>;
     southwest: GenericMapPos<T>;

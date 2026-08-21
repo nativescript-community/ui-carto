@@ -1,10 +1,22 @@
 import { Color } from '@nativescript/core';
-import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs } from '..';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineGeometry } from '../geometry';
 import { BaseLineVectorElement } from './index.android';
 import { BaseVectorElementStyleBuilder, styleBuilderProperty } from './index.common';
 import { LineEndType as ILineEndType, LineJointType as ILineJointType, LineOptions, LineStyleBuilderOptions } from './line';
+import {
+    ACCESSORS as ACC_LineStyleBuilder,
+    Accessors as Acc_LineStyleBuilder,
+    METHODS as MET_LineStyleBuilder,
+    Methods as Met_LineStyleBuilder,
+    SELECTORS as SEL_LineStyleBuilder
+} from '../bindings/styles/LineStyleBuilder';
+import { bindNative } from '../nativeclass.common';
+import { massifImageConverter } from '..';
+import { ACCESSORS as ACC_Line, Accessors as Acc_Line, METHODS as MET_Line, Methods as Met_Line, SELECTORS as SEL_Line } from '../bindings/vectorelements/Line';
+import { ACCESSORS as ACC_StyleBuilder, Accessors as Acc_StyleBuilder, METHODS as MET_StyleBuilder, Methods as Met_StyleBuilder, SELECTORS as SEL_StyleBuilder } from '../bindings/styles/StyleBuilder';
+import { colorConverter } from '..';
 export { MapBounds };
 
 export const LineJointType = {
@@ -38,18 +50,22 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.massifma
         return new com.massifmaps.styles.LineStyleBuilder();
     }
 
-    @nativeProperty width: number;
-    @nativeColorProperty color: Color | string;
-    @nativeProperty({
-        nativeSetterName: 'setLineJoinType',
-        nativeGetterName: 'getLineJoinType'
-    }) joinType: ILineJointType;
-    @nativeProperty({
-        nativeSetterName: 'setLineEndType',
-        nativeGetterName: 'getLineEndType'
-    }) endType: ILineEndType;
-    @nativeProperty clickWidth: number;
-    @nativeProperty stretchFactor: number;
+    /**
+     * The SDK spells these `lineJoinType` / `lineEndType`, which the binding table
+     * synthesises; the plugin has always exposed the shorter names.
+     */
+    get joinType(): ILineJointType {
+        return this.lineJoinType as any;
+    }
+    set joinType(value: ILineJointType) {
+        (this as any).lineJoinType = value;
+    }
+    get endType(): ILineEndType {
+        return this.lineEndType as any;
+    }
+    set endType(value: ILineEndType) {
+        (this as any).lineEndType = value;
+    }
 
     mBuildStyle: com.massifmaps.styles.LineStyle;
     buildStyle() {
@@ -70,7 +86,10 @@ export class Line extends BaseLineVectorElement<com.massifmaps.vectorelements.Li
 
     mBuildStyle: com.massifmaps.styles.LineStyle;
 
-    constructor(public options: LineOptions = {} as any, native?: com.massifmaps.vectorelements.Line) {
+    constructor(
+        public options: LineOptions = {} as any,
+        native?: com.massifmaps.vectorelements.Line
+    ) {
         super(options, native);
         if (native && !options.styleBuilder) {
             const nStyle = native.getStyle();
@@ -116,7 +135,7 @@ export class Line extends BaseLineVectorElement<com.massifmaps.vectorelements.Li
         }
     }
     get geometry(): com.massifmaps.geometry.LineGeometry {
-        return this.getGeometry();
+        return this.getGeometry() as com.massifmaps.geometry.LineGeometry;
     }
     set geometry(geometry: LineGeometry) {
         if (this.native) {
@@ -139,3 +158,12 @@ export class Line extends BaseLineVectorElement<com.massifmaps.vectorelements.Li
         return fromNativeMapBounds(this.getNative().getBounds());
     }
 }
+
+export interface LineStyleBuilder extends Acc_LineStyleBuilder, Omit<Met_LineStyleBuilder, 'buildStyle'> {}
+bindNative(LineStyleBuilder, MET_LineStyleBuilder, ACC_LineStyleBuilder, { selectors: SEL_LineStyleBuilder, converters: { bitmap: massifImageConverter } });
+
+export interface Line extends Omit<Acc_Line, 'geometry'>, Omit<Met_Line, 'getGeometry' | 'getPoses' | 'setPoses'> {}
+bindNative(Line, MET_Line, ACC_Line, { selectors: SEL_Line });
+
+export interface LineStyleBuilder extends Acc_StyleBuilder, Met_StyleBuilder {}
+bindNative(LineStyleBuilder, MET_StyleBuilder, ACC_StyleBuilder, { selectors: SEL_StyleBuilder, converters: { color: colorConverter } });

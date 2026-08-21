@@ -1,6 +1,8 @@
 import { BaseNative } from '..';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
+import { Accessors as Acc_GeoJSONGeometryWriter } from '../bindings/geometry/GeoJSONGeometryWriter';
+import { Methods as Met_GeoJSONGeometryWriter } from '../bindings/geometry/GeoJSONGeometryWriter';
 
 export interface GeoJSONGeometryWriterOptions {
     sourceProjection?: Projection;
@@ -12,20 +14,4 @@ export class GeoJSONGeometryWriter<T = DefaultLatLonKeys> extends BaseNative<any
     writeFeatureCollection(value: FeatureCollection): string;
 }
 
-export interface WKBGeometryWriterOptions {
-    bigEndian?: boolean;
-    z?: boolean;
-}
-export class WKBGeometryWriter<T = DefaultLatLonKeys> extends BaseNative<any, WKBGeometryWriterOptions> {
-    bigEndian?: boolean;
-    z?: boolean;
-    writeGeometry(value: Geometry<T, any>);
-}
-
-export interface WKTGeometryWriterOptions {
-    z?: boolean;
-}
-export class WKTGeometryWriter<T = DefaultLatLonKeys> extends BaseNative<any, WKTGeometryWriterOptions> {
-    z?: boolean;
-    writeGeometry(value: Geometry<T, any>);
-}
+export interface GeoJSONGeometryWriter<T = DefaultLatLonKeys> extends Acc_GeoJSONGeometryWriter, Omit<Met_GeoJSONGeometryWriter, 'writeFeatureCollection' | 'writeGeometry'> {}

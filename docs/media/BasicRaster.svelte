@@ -9,7 +9,7 @@ import { PanningMode } from '@nativescript-community/ui-massifmaps/ui';
     import { Line, LineEndType, LineJointType, LineStyleBuilder } from '@nativescript-community/ui-massifmaps/vectorelements/line';
     import { Marker, MarkerStyleBuilder } from '@nativescript-community/ui-massifmaps/vectorelements/marker';
     import { Point, PointStyleBuilder } from '@nativescript-community/ui-massifmaps/vectorelements/point';
-    import { goBack } from 'svelte-native';
+    import { goBack } from '@nativescript-community/svelte-native';
 
     let massifMap: MassifMap;
     let rasterLayer: RasterTileLayer;
