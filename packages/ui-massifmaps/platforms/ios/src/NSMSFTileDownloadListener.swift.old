@@ -1,5 +1,5 @@
 //
-//  AKTileDownloadListener.swift
+//  NSMSFTileDownloadListener.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -8,11 +8,11 @@
 
 import MassifMaps
 
-@objc(AKTileDownloadListener)
+@objc(NSMSFTileDownloadListener)
 @objcMembers
-class AKTileDownloadListener: MSFTileDownloadListener {
+class NSMSFTileDownloadListener: MSFTileDownloadListener {
   
-  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
   func onDownloadCompletedThreaded() {}
   func onDownloadFailedThreaded(_ tile: MSFMapTile!) {}
   func onDownloadProgressThreaded(_ progress: Float) {}

@@ -3,21 +3,20 @@ package com.nativescript.massifmaps.additions2;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.AKMapView;
+import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.nativescript.massifmaps.additions.FeatureCollectionSearchServiceCallback;
-import com.massifmaps.search.FeatureCollectionSearchService;
 import com.massifmaps.search.SearchRequest;
 import com.massifmaps.projections.Projection;
 import com.massifmaps.geometry.FeatureCollection;
 
 import java.io.IOException;
 
-public class AKFeatureCollectionSearchService extends FeatureCollectionSearchService {
-    private final String TAG = "AKFeatureCollectionSearchService";
+public class FeatureCollectionSearchService extends com.massifmaps.search.FeatureCollectionSearchService {
+    private final String TAG = "FeatureCollectionSearchService";
 
 
-    public AKFeatureCollectionSearchService(Projection projection , FeatureCollection features) {
+    public FeatureCollectionSearchService(Projection projection , FeatureCollection features) {
         super(projection, features);
     }
 
@@ -27,8 +26,8 @@ public class AKFeatureCollectionSearchService extends FeatureCollectionSearchSer
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final FeatureCollection results = AKFeatureCollectionSearchService.this.findFeatures(request);
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                final FeatureCollection results = FeatureCollectionSearchService.this.findFeatures(request);
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }

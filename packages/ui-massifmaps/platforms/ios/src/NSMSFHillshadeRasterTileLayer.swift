@@ -1,5 +1,5 @@
 //
-//  AKHillshadeRasterTileLayer.swift
+//  NSMSFHillshadeRasterTileLayer.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -8,10 +8,10 @@
 
 import MassifMaps
 
-@objc(AKHillshadeRasterTileLayer)
+@objc(NSMSFHillshadeRasterTileLayer)
 @objcMembers
-class AKHillshadeRasterTileLayer: MSFHillshadeRasterTileLayer {
-  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+class NSMSFHillshadeRasterTileLayer: MSFHillshadeRasterTileLayer {
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
 
   func getElevation(_ pos: MSFMapPos, callback: @escaping (_ elevation: Double)-> Void) {
     DispatchQueue.global(qos: .background).async {

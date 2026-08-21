@@ -1,5 +1,13 @@
 import { MBTilesTileDataSourceOptions } from './mbtiles';
 import { TileDataSource } from '.';
+import {
+    ACCESSORS as ACC_MBTilesTileDataSource,
+    Accessors as Acc_MBTilesTileDataSource,
+    METHODS as MET_MBTilesTileDataSource,
+    Methods as Met_MBTilesTileDataSource,
+    SELECTORS as SEL_MBTilesTileDataSource
+} from '../bindings/datasources/MBTilesTileDataSource';
+import { bindNative } from '../nativeclass.common';
 
 export const MBTilesScheme = {
     get MBTILES_SCHEME_TMS() {
@@ -24,3 +32,6 @@ export class MBTilesTileDataSource extends TileDataSource<com.massifmaps.datasou
         }
     }
 }
+
+export interface MBTilesTileDataSource extends Acc_MBTilesTileDataSource, Omit<Met_MBTilesTileDataSource, 'loadTile'> {}
+bindNative(MBTilesTileDataSource, MET_MBTilesTileDataSource, ACC_MBTilesTileDataSource, { selectors: SEL_MBTilesTileDataSource });

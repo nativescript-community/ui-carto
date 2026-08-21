@@ -3,10 +3,9 @@ package com.nativescript.massifmaps.additions;
 import android.os.Handler;
 
 import com.massifmaps.core.MapTile;
-import com.massifmaps.datasources.TileDownloadListener;
 import com.massifmaps.ui.VectorElementClickInfo;
 
-public class AKTileDownloadListener extends TileDownloadListener {
+public class TileDownloadListener extends com.massifmaps.datasources.TileDownloadListener {
     Handler mainHandler = null;
 
     public interface Listener {
@@ -25,14 +24,14 @@ public class AKTileDownloadListener extends TileDownloadListener {
         this.listener = listener;
     }
 
-    public AKTileDownloadListener(Listener listener) {
+    public TileDownloadListener(Listener listener) {
         super();
         setListener(listener);
     }
 
     @Override
     public void onDownloadCompleted() {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -43,7 +42,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
                     if (listener != null) {
                         listener.onDownloadCompleted();
                     } else {
-                        AKTileDownloadListener.super.onDownloadCompleted();
+                        TileDownloadListener.super.onDownloadCompleted();
                     }
                 }
             });
@@ -59,7 +58,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
 
     @Override
     public void onDownloadFailed(final MapTile tile) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -70,7 +69,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
                     if (listener != null) {
                         listener.onDownloadFailed(tile);
                     } else {
-                        AKTileDownloadListener.super.onDownloadFailed(tile);
+                        TileDownloadListener.super.onDownloadFailed(tile);
                     }
                 }
             });
@@ -86,7 +85,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
 
     @Override
     public void onDownloadProgress(final float progress) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -97,7 +96,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
                     if (listener != null) {
                         listener.onDownloadProgress(progress);
                     } else {
-                        AKTileDownloadListener.super.onDownloadProgress(progress);
+                        TileDownloadListener.super.onDownloadProgress(progress);
                     }
                 }
             });
@@ -113,7 +112,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
 
     @Override
     public void onDownloadStarting(final int tileCount) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -124,7 +123,7 @@ public class AKTileDownloadListener extends TileDownloadListener {
                     if (listener != null) {
                         listener.onDownloadStarting(tileCount);
                     } else {
-                        AKTileDownloadListener.super.onDownloadStarting(tileCount);
+                        TileDownloadListener.super.onDownloadStarting(tileCount);
                     }
                 }
             });

@@ -4,6 +4,15 @@ import { mapPosVectorFromArgs } from '..';
 import { BaseNative } from '../BaseNative';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, NativeVector, toNativeMapPos } from '../core';
 import { getFileName, getRelativePathToApp } from '../index.common';
+import {
+    ACCESSORS as ACC_ZippedAssetPackage,
+    Accessors as Acc_ZippedAssetPackage,
+    METHODS as MET_ZippedAssetPackage,
+    Methods as Met_ZippedAssetPackage,
+    SELECTORS as SEL_ZippedAssetPackage
+} from '../bindings/utils/ZippedAssetPackage';
+import { bindNative } from '../nativeclass.common';
+import { ACCESSORS as ACC_AssetPackage, Accessors as Acc_AssetPackage, METHODS as MET_AssetPackage, Methods as Met_AssetPackage, SELECTORS as SEL_AssetPackage } from '../bindings/utils/AssetPackage';
 
 export function nativeVectorToArray<T>(vector: NativeVector<T>) {
     const count = vector.size();
@@ -214,3 +223,9 @@ export function toNativeMapRange(value: MapRange) {
     //  ignore z for now as points can get under the map!
     return MSFMapRange.alloc().initWithMinMax(value[0], value[1]);
 }
+
+export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Omit<Met_ZippedAssetPackage, 'getAssetNames'> {}
+bindNative(ZippedAssetPackage, MET_ZippedAssetPackage, ACC_ZippedAssetPackage, { selectors: SEL_ZippedAssetPackage });
+
+export interface ZippedAssetPackage extends Acc_AssetPackage, Omit<Met_AssetPackage, 'getAssetNames' | 'loadAsset'> {}
+bindNative(ZippedAssetPackage, MET_AssetPackage, ACC_AssetPackage, { selectors: SEL_AssetPackage });

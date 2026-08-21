@@ -14,7 +14,6 @@ import com.massifmaps.core.MapPos;
 import com.massifmaps.core.MapBounds;
 import com.massifmaps.vectorelements.VectorElement;
 import com.massifmaps.vectorelements.VectorElementVector;
-import com.massifmaps.layers.ClusterElementBuilder;
 import com.massifmaps.styles.MarkerStyle;
 import com.massifmaps.styles.Style;
 import com.massifmaps.styles.BillboardStyle;
@@ -35,7 +34,7 @@ import com.massifmaps.geometry.MultiPointGeometry;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AKClusterElementBuilder extends ClusterElementBuilder {
+public class ClusterElementBuilder extends com.massifmaps.layers.ClusterElementBuilder {
     static final Rect tempRect = new Rect();
     static final Rect tempRect2 = new Rect();
     static final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -43,7 +42,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         VectorElement buildClusterElement(MapPos pos, VectorElementVector nElements);
     }
 
-    public AKClusterElementBuilder(float screenScale) {
+    public ClusterElementBuilder(float screenScale) {
         super();
         this.screenScale = screenScale;
     }
@@ -65,7 +64,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
     private Typeface typeface = null;
 
     private String shape = "marker";
-    private final String TAG = "AKClusterElementBuilder";
+    private final String TAG = "ClusterElementBuilder";
 
     boolean useNativeBuilder = true;
 
@@ -104,7 +103,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
         if (useNativeBuilder) {
             return nativeBuildClusterElement(pos, elements);
         }
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -116,7 +115,7 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                     if (inter != null) {
                         arr[0] = inter.buildClusterElement(pos, elements);
                     } else {
-                        arr[0] = AKClusterElementBuilder.super.buildClusterElement(pos, elements);
+                        arr[0] = ClusterElementBuilder.super.buildClusterElement(pos, elements);
                     }
                 }
             });
@@ -151,11 +150,11 @@ public class AKClusterElementBuilder extends ClusterElementBuilder {
                 android.graphics.Bitmap canvasBitmap = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888);
                 android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap);
                 canvas.scale(screenScale, screenScale);
-                Paint paint = AKClusterElementBuilder.paint;
-                Rect bounds = AKClusterElementBuilder.tempRect;
+                Paint paint = ClusterElementBuilder.paint;
+                Rect bounds = ClusterElementBuilder.tempRect;
                 if (markerBitmap != null) {
                     bounds.set(0,0, markerBitmap.getWidth(), markerBitmap.getHeight());
-                    Rect dst = AKClusterElementBuilder.tempRect2;
+                    Rect dst = ClusterElementBuilder.tempRect2;
                     dst.set(0,0, markerSize, markerSize);
                     canvas.drawBitmap(markerBitmap, bounds, dst, paint);
                 } else {

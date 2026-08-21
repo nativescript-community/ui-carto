@@ -1,5 +1,5 @@
 //
-//  AKVectorEditEventListener.swift
+//  NSMSFVectorEditEventListener.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -8,10 +8,10 @@
 
 import MassifMaps
 
-@objc(AKVectorEditEventListener)
+@objc(NSMSFVectorEditEventListener)
 @objcMembers
-class AKVectorEditEventListener: MSFVectorEditEventListener {
-  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+class NSMSFVectorEditEventListener: MSFVectorEditEventListener {
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
   
   func onDragStartThreaded(_ clickInfo: MSFVectorElementDragInfo!) -> MSFVectorElementDragResult {
     return MSFVectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;

@@ -2,6 +2,12 @@ import { BaseNative } from '..';
 import { DefaultLatLonKeys, GenericMapPos, MapBounds, MapPos, MapPosVector } from '../core';
 import { Projection } from '../projections';
 import { Geometry } from '../geometry';
+import { Accessors as Acc_VectorElement, Methods as Met_VectorElement } from '../bindings/vectorelements/VectorElement';
+import { Accessors as Acc_BaseVectorElement, Methods as Met_BaseVectorElement } from '../bindings/vectorelements/VectorElement';
+import { Accessors as Acc_BasePointVectorElement, Methods as Met_BasePointVectorElement } from '../bindings/vectorelements/VectorElement';
+import { Accessors as Acc_BaseBillboardVectorElement, Methods as Met_BaseBillboardVectorElement } from '../bindings/vectorelements/Billboard';
+import { Accessors as Acc_BaseLineVectorElement, Methods as Met_BaseLineVectorElement } from '../bindings/vectorelements/VectorElement';
+import { Accessors as Acc_BillboardStyleBuilder, Methods as Met_BillboardStyleBuilder } from '../bindings/styles/BillboardStyleBuilder';
 
 declare enum BillboardOrientation {
     FACE_CAMERA,
@@ -57,6 +63,11 @@ export class BillboardStyleBuilderOptions extends VectorElementStyleBuilderOptio
 export abstract class BaseVectorElement<T, U extends VectorElementOptions> extends BaseNative<T, U> {
     visible?: boolean;
     metaData: { [k: string]: string };
+    id?: number;
+    getBounds(): MapBounds<DefaultLatLonKeys>;
+    getGeometry(): Geometry<DefaultLatLonKeys>;
+    getMetadataElement(key: string): { [k: string]: string };
+    setMetadataElement(key: string, element: { [k: string]: string }): void;
 }
 export abstract class BasePointVectorElement<T, U extends PointVectorElementOptions<K>, K = DefaultLatLonKeys> extends BaseVectorElement<T, U> {
     position?: GenericMapPos<K>;
@@ -70,13 +81,7 @@ export abstract class BaseLineVectorElement<T, U extends LineVectorElementOption
     positions?: MapPosVector<K> | GenericMapPos<K>[];
     projection?: Projection;
 }
-export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {
-    id?: number;
-    getBounds(): MapBounds<DefaultLatLonKeys>;
-    getGeometry(): Geometry<DefaultLatLonKeys>;
-    getMetadataElement(key: string): { [k: string]: string };
-    setMetadataElement(key: string, element: { [k: string]: string }): void;
-}
+export class VectorElement<T, U extends VectorElementOptions> extends BaseVectorElement<T, U> {}
 export abstract class BaseVectorElementStyleBuilder<T, U extends VectorElementStyleBuilderOptions> extends BaseNative<T, U> {
     buildStyle(): any;
 }
@@ -89,3 +94,18 @@ export class VectorElementVector extends BaseNative<any, any> {
     getElement(index: number): VectorElement<any, any>;
     add(element: VectorElement<any, any>);
 }
+
+
+export interface BaseVectorElement<T, U extends VectorElementOptions> extends Omit<Acc_BaseVectorElement, 'id' | 'metaData' | 'visible'>, Omit<Met_BaseVectorElement, 'getBounds' | 'getGeometry'> {}
+
+export interface BasePointVectorElement<T, U extends PointVectorElementOptions<K>, K = DefaultLatLonKeys> extends Acc_BasePointVectorElement, Met_BasePointVectorElement {}
+
+export interface BaseBillboardVectorElement<T, U extends BillboardVectorElementOptions<K>, K = DefaultLatLonKeys>
+    extends Omit<Acc_BaseBillboardVectorElement, 'rotation'>,
+        Met_BaseBillboardVectorElement {}
+
+export interface BaseLineVectorElement<T, U extends LineVectorElementOptions<K>, K = DefaultLatLonKeys> extends Acc_BaseLineVectorElement, Met_BaseLineVectorElement {}
+
+export interface BillboardStyleBuilder<T, U extends BillboardStyleBuilderOptions> extends Acc_BillboardStyleBuilder, Met_BillboardStyleBuilder {}
+
+export interface VectorElement<T, U extends VectorElementOptions> extends Acc_VectorElement, Met_VectorElement {}

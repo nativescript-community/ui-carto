@@ -1,11 +1,68 @@
-/* eslint-disable no-redeclare */
 import { Color, Font, ImageAsset, ImageSource } from '@nativescript/core';
 import { NativePropertyOptions } from '.';
 import { DefaultLatLonKeys, MapPos, MapPosVector, MapPosVectorVector, fromNativeMapVec, toNativeMapPos, toNativeMapVec } from './core';
 import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';
 import { _createImageSourceFromSrc, nativeProperty } from './index.common';
+import { NativeConverter } from './nativeclass.common';
 export { BaseNative } from './BaseNative';
+
+export * from './index.common';
+
+/**
+ * The converters, named so a generated binding table can point at one.
+ *
+ * `bindNative` takes them by property name; the `@native*Property` decorators wrap the
+ * same objects, so a hand-written decorator and a generated accessor marshal identically.
+ */
+export const colorConverter: NativeConverter = {
+    fromNative(value: MSFColor) {
+        return new Color(value.getARGB());
+    },
+    toNative(value): MSFColor {
+        const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
+        return MSFColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a);
+    }
+};
+export const nColorConverter: NativeConverter = {
+    fromNative(value: UIColor) {
+        return value;
+    },
+    toNative(value): UIColor {
+        const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
+        return theColor.ios;
+    }
+};
+export const fontConverter: NativeConverter = {
+    fromNative(value) {
+        // no easy from typeface to Font
+        return value;
+    },
+    toNative(value: Font) {
+        return value?.getUIFont(UIFont.systemFontOfSize(17));
+    }
+};
+export const massifImageConverter: NativeConverter = {
+    fromNative(value, key) {
+        return this.options[key];
+    },
+    toNative(value) {
+        return getMassifBitmap(value);
+    }
+};
+export const imageConverter: NativeConverter = {
+    fromNative(value, key) {
+        return this.options[key];
+    },
+    toNative(value) {
+        value = _createImageSourceFromSrc(value);
+        return value?.ios as UIImage;
+    }
+};
+export const mapVecConverter: NativeConverter = {
+    fromNative: fromNativeMapVec,
+    toNative: toNativeMapVec
+};
 import { BaseVectorElementStyleBuilder } from './vectorelements';
 export { nativeProperty };
 
@@ -17,57 +74,18 @@ export function getMassifBitmap(src: string | ImageSource | ImageAsset) {
 export function nativeColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeColorProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative(value: MSFColor) {
-                    return new Color(value.getARGB());
-                },
-                toNative(value): MSFColor {
-                    const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
-                    return MSFColor.alloc().initWithRGBA(theColor.r, theColor.g, theColor.b, theColor.a);
-                }
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: colorConverter }, ...args);
 }
 export function nativeNColorProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeNColorProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeNColorProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative(value: UIColor) {
-                    return value;
-                },
-                toNative(value): UIColor {
-                    const theColor = value instanceof Color ? value : value._argb ? new Color(value._argb) : new Color(value);
-                    return theColor.ios;
-                }
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: nColorConverter }, ...args);
 }
 
 export function nativeFontProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeFontProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeFontProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative(value) {
-                    // no easy from typeface to Font
-                    return value;
-                },
-                toNative(value: Font) {
-                    return value?.getUIFont(UIFont.systemFontOfSize(17));
-                }
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: fontConverter }, ...args);
 }
 
 export function nativeEnumProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -91,38 +109,13 @@ export function nativeEnumProperty(...args) {
 export function nativeMassifImageProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeMassifImageProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeMassifImageProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative(value, key) {
-                    return this.options[key];
-                },
-                toNative(value) {
-                    return getMassifBitmap(value);
-                }
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: massifImageConverter }, ...args);
 }
 
 export function nativeImageProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeImageProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeImageProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative(value, key) {
-                    return this.options[key];
-                },
-                toNative(value) {
-                    value = _createImageSourceFromSrc(value);
-                    return value?.ios as UIImage;
-                }
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: imageConverter }, ...args);
 }
 
 export function featureCollectionFromArgs<T = DefaultLatLonKeys>(collection: FeatureCollection<T>) {
@@ -195,13 +188,5 @@ export function mapPosVectorVectorFromArgs(positions: MapPosVectorVector | MapPo
 export function nativeMapVecProperty(target: any, k?, desc?: PropertyDescriptor): any;
 export function nativeMapVecProperty(options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any;
 export function nativeMapVecProperty(...args) {
-    return nativeProperty(
-        {
-            converter: {
-                fromNative: fromNativeMapVec,
-                toNative: toNativeMapVec
-            }
-        },
-        ...args
-    );
+    return nativeProperty({ converter: mapVecConverter }, ...args);
 }

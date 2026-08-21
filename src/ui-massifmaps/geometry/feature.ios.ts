@@ -2,6 +2,21 @@ import { BaseNative } from '../BaseNative';
 import { LatitudeKey, LongitudeKey, MapBounds, fromNativeMapBounds } from '../core';
 import { nativeVariantToJS } from '../utils';
 import { Feature, FeatureCollection as IFeatureCollection, VectorTileFeature } from './feature';
+import {
+    ACCESSORS as ACC_VectorTileFeatureCollection,
+    Accessors as Acc_VectorTileFeatureCollection,
+    METHODS as MET_VectorTileFeatureCollection,
+    Methods as Met_VectorTileFeatureCollection,
+    SELECTORS as SEL_VectorTileFeatureCollection
+} from '../bindings/geometry/VectorTileFeatureCollection';
+import { bindNative } from '../nativeclass.common';
+import {
+    ACCESSORS as ACC_FeatureCollection,
+    Accessors as Acc_FeatureCollection,
+    METHODS as MET_FeatureCollection,
+    Methods as Met_FeatureCollection,
+    SELECTORS as SEL_FeatureCollection
+} from '../bindings/geometry/FeatureCollection';
 
 export class FeatureCollection<T extends MSFFeatureCollection> extends BaseNative<T, {}> implements IFeatureCollection {
     constructor(native) {
@@ -64,3 +79,9 @@ export class VectorTileFeatureCollection extends FeatureCollection<MSFVectorTile
         } as VectorTileFeature;
     }
 }
+
+export interface VectorTileFeatureCollection extends Acc_VectorTileFeatureCollection, Omit<Met_VectorTileFeatureCollection, 'getFeature'> {}
+bindNative(VectorTileFeatureCollection, MET_VectorTileFeatureCollection, ACC_VectorTileFeatureCollection, { selectors: SEL_VectorTileFeatureCollection });
+
+export interface FeatureCollection<T extends MSFFeatureCollection> extends Acc_FeatureCollection, Omit<Met_FeatureCollection, 'getFeature'> {}
+bindNative(FeatureCollection, MET_FeatureCollection, ACC_FeatureCollection, { selectors: SEL_FeatureCollection });

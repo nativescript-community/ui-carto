@@ -2,24 +2,22 @@ package com.nativescript.massifmaps.additions;
 
 import com.massifmaps.core.BinaryData;
 import com.massifmaps.core.StringVector;
-import com.massifmaps.utils.AssetPackage;
-
-public class AKAssetPackage extends AssetPackage {
+public class AssetPackage extends com.massifmaps.utils.AssetPackage {
     public interface Interface {
         BinaryData loadAsset(String name);
         StringVector getAssetNames();
     }
     Interface inter = null;
-    AssetPackage basePackage = null;
+    com.massifmaps.utils.AssetPackage basePackage = null;
     public void setInterface(Interface inter) {
         this.inter = inter;
     }
 
-    public AKAssetPackage(Interface inter){
+    public AssetPackage(Interface inter){
         super();
         setInterface(inter);
     }
-    public AKAssetPackage(Interface inter, AssetPackage bPackage){
+    public AssetPackage(Interface inter, com.massifmaps.utils.AssetPackage bPackage){
         super();
         setInterface(inter);
         basePackage = bPackage;

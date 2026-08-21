@@ -1,7 +1,7 @@
 import MassifMaps
 
-@objc(AKMapEventListener)
-public protocol AKMapEventListener: AnyObject {
+@objc(NSMSFMapEventListener)
+public protocol NSMSFMapEventListener: AnyObject {
   
   
   /**

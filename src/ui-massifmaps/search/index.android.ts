@@ -4,21 +4,30 @@ import { toNativeMapPos } from '../core';
 import { FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { FeatureCollectionSearchServiceOptions, SearchRequest, VectorTileSearchServiceOptions } from '.';
 import { geometryFromArgs } from '..';
+import {
+    ACCESSORS as ACC_VectorTileSearchService,
+    Accessors as Acc_VectorTileSearchService,
+    METHODS as MET_VectorTileSearchService,
+    Methods as Met_VectorTileSearchService,
+    SELECTORS as SEL_VectorTileSearchService
+} from '../bindings/search/VectorTileSearchService';
+import { bindNative } from '../nativeclass.common';
+import { stringListConverter } from '..';
+import {
+    ACCESSORS as ACC_FeatureCollectionSearchService,
+    Accessors as Acc_FeatureCollectionSearchService,
+    METHODS as MET_FeatureCollectionSearchService,
+    Methods as Met_FeatureCollectionSearchService,
+    SELECTORS as SEL_FeatureCollectionSearchService
+} from '../bindings/search/FeatureCollectionSearchService';
 
-export class VectorTileSearchService extends BaseNative<com.nativescript.massifmaps.additions2.AKVectorTileSearchService, VectorTileSearchServiceOptions> {
-    @nativeProperty minZoom: number;
-    @nativeProperty maxZoom: number;
-    @nativeProperty maxResults: number;
-    @nativeProperty sortByDistance: boolean;
-    @nativeProperty preventDuplicates: boolean;
-    @nativeStringListProperty layers: string[];
-
+export class VectorTileSearchService extends BaseNative<com.nativescript.massifmaps.additions2.VectorTileSearchService, VectorTileSearchServiceOptions> {
     createNative(options: VectorTileSearchServiceOptions) {
         if (options.layer) {
             const layer = options.layer.getNative() as com.massifmaps.layers.VectorTileLayer;
-            return new com.nativescript.massifmaps.additions2.AKVectorTileSearchService(layer.getDataSource(), layer.getTileDecoder());
+            return new com.nativescript.massifmaps.additions2.VectorTileSearchService(layer.getDataSource(), layer.getTileDecoder());
         } else {
-            return new com.nativescript.massifmaps.additions2.AKVectorTileSearchService(options.dataSource.getNative(), options.decoder.getNative());
+            return new com.nativescript.massifmaps.additions2.VectorTileSearchService(options.dataSource.getNative(), options.decoder.getNative());
         }
     }
     public findFeatures(options: SearchRequest, callback?: (res: VectorTileFeatureCollection) => void) {
@@ -55,9 +64,9 @@ export class VectorTileSearchService extends BaseNative<com.nativescript.massifm
     }
 }
 
-export class FeatureCollectionSearchService extends BaseNative<com.nativescript.massifmaps.additions2.AKFeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
+export class FeatureCollectionSearchService extends BaseNative<com.nativescript.massifmaps.additions2.FeatureCollectionSearchService, FeatureCollectionSearchServiceOptions> {
     createNative(options: FeatureCollectionSearchServiceOptions) {
-        return new com.nativescript.massifmaps.additions2.AKFeatureCollectionSearchService(options.projection.getNative(), options.features.getNative());
+        return new com.nativescript.massifmaps.additions2.FeatureCollectionSearchService(options.projection.getNative(), options.features.getNative());
     }
     public findFeatures(options: SearchRequest, callback?: (res: FeatureCollection) => void) {
         const nRequest = new com.massifmaps.search.SearchRequest();
@@ -94,3 +103,9 @@ export class FeatureCollectionSearchService extends BaseNative<com.nativescript.
         return new FeatureCollection(this.getNative().findFeatures(nRequest));
     }
 }
+
+export interface VectorTileSearchService extends Acc_VectorTileSearchService, Omit<Met_VectorTileSearchService, 'findFeatures'> {}
+bindNative(VectorTileSearchService, MET_VectorTileSearchService, ACC_VectorTileSearchService, { selectors: SEL_VectorTileSearchService, converters: { layers: stringListConverter } });
+
+export interface FeatureCollectionSearchService extends Acc_FeatureCollectionSearchService, Omit<Met_FeatureCollectionSearchService, 'findFeatures'> {}
+bindNative(FeatureCollectionSearchService, MET_FeatureCollectionSearchService, ACC_FeatureCollectionSearchService, { selectors: SEL_FeatureCollectionSearchService });

@@ -1,6 +1,6 @@
-#import "AKRasterTileEventListener.h"
+#import "NSMSFRasterTileEventListener.h"
 
-@implementation AKRasterTileEventListener
+@implementation NSMSFRasterTileEventListener
 @synthesize runOnMainThread;
 - (BOOL)onRasterTileClickedThreaded:(MSFRasterTileClickInfo *)clickInfo{
     return FALSE;

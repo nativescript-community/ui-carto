@@ -1,4 +1,5 @@
 import {
+    CustomRasterTileLayerOptions,
     HillshadeRasterTileLayerOptions,
     HillshadeMethod as IHillshadeMethod,
     RasterTileEventListener as IRasterTileEventListener,
@@ -11,39 +12,63 @@ import { Projection } from '../projections';
 import { DoubleVector, MapPos, MapPosVector, MapVec, fromNativeMapPos, toNativeMapPos } from '../core';
 import { Color } from '@nativescript/core';
 import { nativeColorProperty } from '../index.ios';
+import {
+    ACCESSORS as ACC_RasterTileLayer,
+    Accessors as Acc_RasterTileLayer,
+    METHODS as MET_RasterTileLayer,
+    Methods as Met_RasterTileLayer,
+    SELECTORS as SEL_RasterTileLayer
+} from '../bindings/layers/RasterTileLayer';
+import { bindNative } from '../nativeclass.common';
+import {
+    ACCESSORS as ACC_RasterTileLayerCommon,
+    Accessors as Acc_RasterTileLayerCommon,
+    METHODS as MET_RasterTileLayerCommon,
+    Methods as Met_RasterTileLayerCommon,
+    SELECTORS as SEL_RasterTileLayerCommon
+} from '../bindings/layers/RasterTileLayer';
+import {
+    ACCESSORS as ACC_HillshadeRasterTileLayer,
+    Accessors as Acc_HillshadeRasterTileLayer,
+    METHODS as MET_HillshadeRasterTileLayer,
+    Methods as Met_HillshadeRasterTileLayer,
+    SELECTORS as SEL_HillshadeRasterTileLayer
+} from '../bindings/layers/HillshadeRasterTileLayer';
+import { colorConverter, mapVecConverter } from '..';
+import { ACCESSORS as ACC_CustomRasterTileLayer, Accessors as Acc_CustomRasterTileLayer, METHODS as MET_CustomRasterTileLayer, Methods as Met_CustomRasterTileLayer, SELECTORS as SEL_CustomRasterTileLayer } from '../bindings/layers/CustomRasterTileLayer';
 
 export const RasterTileFilterMode = {
     get RASTER_TILE_FILTER_MODE_NEAREST() {
-        return MSFRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_NEAREST;
+        return MSFRasterTileFilterMode.F_RASTER_TILE_FILTER_MODE_NEAREST;
     },
     get RASTER_TILE_FILTER_MODE_BILINEAR() {
-        return MSFRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BILINEAR;
+        return MSFRasterTileFilterMode.F_RASTER_TILE_FILTER_MODE_BILINEAR;
     },
     get RASTER_TILE_FILTER_MODE_BICUBIC() {
-        return MSFRasterTileFilterMode.T_RASTER_TILE_FILTER_MODE_BICUBIC;
+        return MSFRasterTileFilterMode.F_RASTER_TILE_FILTER_MODE_BICUBIC;
     }
 };
 
 export const HillshadeMethod = {
     get STANDARD() {
-        return MSFHillshadeMethod.STANDARD;
+        return MSFHillshadeMethod.F_STANDARD;
     },
     get COMBINED() {
-        return MSFHillshadeMethod.COMBINED;
+        return MSFHillshadeMethod.F_COMBINED;
     },
     get IGOR() {
-        return MSFHillshadeMethod.IGOR;
+        return MSFHillshadeMethod.F_IGOR;
     },
     get MULTIDIRECTIONAL() {
-        return MSFHillshadeMethod.MULTIDIRECTIONAL;
+        return MSFHillshadeMethod.F_MULTIDIRECTIONAL;
     },
     get BASIC() {
-        return MSFHillshadeMethod.BASIC;
+        return MSFHillshadeMethod.F_BASIC;
     }
 };
 
 @NativeClass
-export class MSFRasterTileEventListenerImpl extends AKRasterTileEventListener {
+export class MSFRasterTileEventListenerImpl extends NSMSFRasterTileEventListener {
     private _layer: WeakRef<RasterTileLayer>;
     private _owner: WeakRef<IRasterTileEventListener>;
     private projection?: Projection;
@@ -96,7 +121,7 @@ export abstract class RasterTileLayerCommon<NativeClass extends MSFRasterTileLay
         this.clickListener = listener;
         this.projection = projection;
         if (listener) {
-            this.nClickListener = MSFRasterTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this), projection);
+            this.nClickListener = MSFRasterTileEventListenerImpl.initWithOwner(new WeakRef(listener), new WeakRef(this as any as RasterTileLayer), projection);
             this.getNative().setRasterTileEventListener(this.nClickListener);
         } else {
             this.nClickListener = null;
@@ -111,23 +136,18 @@ export class RasterTileLayer extends RasterTileLayerCommon<MSFRasterTileLayer, R
     }
 }
 
-export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
-    @nativeProperty heightScale: number;
-    @nativeProperty contrast: number;
-    @nativeProperty exagerateHeightScaleEnabled: boolean;
-    @nativeProperty normalMapLightingShader: string;
-    @nativeProperty hillshadeMethod: IHillshadeMethod;
-    @nativeMapVecProperty illuminationDirection: MapVec | [number, number, number];
-    @nativeColorProperty highlightColor: string | Color;
-    @nativeColorProperty shadowColor: string | Color;
-    @nativeColorProperty accentColor: string | Color;
-    @nativeProperty tileFilterMode: IRasterTileFilterMode;
+export class CustomRasterTileLayer extends RasterTileLayerCommon<MSFCustomRasterTileLayer, CustomRasterTileLayerOptions> {
+    createNative(options: CustomRasterTileLayerOptions) {
+        return MSFCustomRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative());
+    }
+}
 
+export class HillshadeRasterTileLayer extends RasterTileLayerBase<NSMSFHillshadeRasterTileLayer, HillshadeRasterTileLayerOptions> {
     createNative(options) {
         if (options.decoder) {
-            return AKHillshadeRasterTileLayer.alloc().initWithDataSourceElevationDecoder(options.dataSource.getNative(), options.decoder.getNative());
+            return NSMSFHillshadeRasterTileLayer.alloc().initWithDataSourceElevationDecoder(options.dataSource.getNative(), options.decoder.getNative());
         } else {
-            return AKHillshadeRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative());
+            return NSMSFHillshadeRasterTileLayer.alloc().initWithDataSource(options.dataSource.getNative());
         }
     }
     public getElevation(pos: MapPos): number {
@@ -144,3 +164,22 @@ export class HillshadeRasterTileLayer extends RasterTileLayerBase<AKHillshadeRas
         this.getNative().getElevationsCallback(mapPosVectorFromArgs(pos), (res) => callback(null, res as any));
     }
 }
+
+export interface RasterTileLayer extends Acc_RasterTileLayer, Omit<Met_RasterTileLayer, 'setRasterTileEventListener'> {}
+bindNative(RasterTileLayer, MET_RasterTileLayer, ACC_RasterTileLayer, { selectors: SEL_RasterTileLayer });
+
+export interface RasterTileLayerCommon<NativeClass extends MSFRasterTileLayer, U extends RasterTileLayerOptions>
+    extends Acc_RasterTileLayer, Omit<Met_RasterTileLayer, 'setRasterTileEventListener'> {}
+bindNative(RasterTileLayerCommon, MET_RasterTileLayerCommon, ACC_RasterTileLayerCommon, { selectors: SEL_RasterTileLayerCommon });
+
+export interface HillshadeRasterTileLayer extends Acc_HillshadeRasterTileLayer, Omit<Met_HillshadeRasterTileLayer, 'getElevation' | 'getElevations'> {}
+bindNative(HillshadeRasterTileLayer, MET_HillshadeRasterTileLayer, ACC_HillshadeRasterTileLayer, {
+    selectors: SEL_HillshadeRasterTileLayer,
+    converters: { accentColor: colorConverter, contourColor: colorConverter, highlightColor: colorConverter, illuminationDirection: mapVecConverter, shadowColor: colorConverter }
+});
+
+export interface HillshadeRasterTileLayer extends Acc_CustomRasterTileLayer, Met_CustomRasterTileLayer {}
+bindNative(HillshadeRasterTileLayer, MET_CustomRasterTileLayer, ACC_CustomRasterTileLayer, { selectors: SEL_CustomRasterTileLayer });
+
+export interface CustomRasterTileLayer extends Acc_CustomRasterTileLayer, Met_CustomRasterTileLayer {}
+bindNative(CustomRasterTileLayer, MET_CustomRasterTileLayer, ACC_CustomRasterTileLayer, { selectors: SEL_CustomRasterTileLayer });

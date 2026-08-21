@@ -6,16 +6,13 @@ import android.util.Log;
 
 import com.massifmaps.ui.MapInteractionInfo;
 import com.massifmaps.ui.MapClickInfo;
-import com.massifmaps.ui.MapEventListener;
-import com.massifmaps.ui.TextureMapView;
-
 import android.view.MotionEvent;
 
-public class AKTextureMapView extends TextureMapView {
-    static final String TAG = "AKTextureMapView";
+public class TextureMapView extends com.massifmaps.ui.TextureMapView {
+    static final String TAG = "TextureMapView";
     Handler mainHandler = null;
     public boolean userAction = false;
-    private AKMapEventListener listener = null;
+    private MapEventListener listener = null;
 
     static public boolean RUN_ON_MAIN_THREAD = true;
 
@@ -23,7 +20,7 @@ public class AKTextureMapView extends TextureMapView {
         RUN_ON_MAIN_THREAD = value;
     }
 
-    public void setMapEventListener(AKMapEventListener listener) {
+    public void setMapEventListener(MapEventListener listener) {
         this.listener = listener;
         if (listener != null) {
             super.setMapEventListener(mapEventListener);
@@ -33,7 +30,7 @@ public class AKTextureMapView extends TextureMapView {
     }
 
     
-    public AKTextureMapView(Context context) {
+    public TextureMapView(Context context) {
         super(context);
         this.mainHandler = new Handler(context.getMainLooper());
     }
@@ -73,39 +70,39 @@ public class AKTextureMapView extends TextureMapView {
         return super.onTouchEvent(event);
     }
 
-    private final MapEventListener mapEventListener = new MapEventListener() {
+    private final com.massifmaps.ui.MapEventListener mapEventListener = new com.massifmaps.ui.MapEventListener() {
         @Override
         public void onMapMoved() {
-            if (AKTextureMapView.RUN_ON_MAIN_THREAD) {
+            if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (AKTextureMapView.this.listener != null) {
-                            AKTextureMapView.this.listener.onMapMoved(userAction);
+                        if (TextureMapView.this.listener != null) {
+                            TextureMapView.this.listener.onMapMoved(userAction);
                         }
                     }
                 });
             } else {
-                if (AKTextureMapView.this.listener != null) {
-                    AKTextureMapView.this.listener.onMapMoved(userAction);
+                if (TextureMapView.this.listener != null) {
+                    TextureMapView.this.listener.onMapMoved(userAction);
                 }
             }
         }
 
         @Override
         public void onMapIdle() {
-            if (AKTextureMapView.RUN_ON_MAIN_THREAD) {
+            if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (AKTextureMapView.this.listener != null) {
-                            AKTextureMapView.this.listener.onMapIdle();
+                        if (TextureMapView.this.listener != null) {
+                            TextureMapView.this.listener.onMapIdle();
                         }
                     }
                 });
             } else {
-                if (AKTextureMapView.this.listener != null) {
-                    AKTextureMapView.this.listener.onMapIdle();
+                if (TextureMapView.this.listener != null) {
+                    TextureMapView.this.listener.onMapIdle();
                 }
             }
             
@@ -113,55 +110,55 @@ public class AKTextureMapView extends TextureMapView {
 
         @Override
         public void onMapStable() {
-            if (AKTextureMapView.RUN_ON_MAIN_THREAD) {
+            if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (AKTextureMapView.this.listener != null) {
-                            AKTextureMapView.this.listener.onMapStable(AKTextureMapView.this.userAction);
+                        if (TextureMapView.this.listener != null) {
+                            TextureMapView.this.listener.onMapStable(TextureMapView.this.userAction);
                         }
-                        AKTextureMapView.this.userAction = false;
+                        TextureMapView.this.userAction = false;
                     }
                 });
             } else {
-                if (AKTextureMapView.this.listener != null) {
-                    AKTextureMapView.this.listener.onMapStable(AKTextureMapView.this.userAction);
+                if (TextureMapView.this.listener != null) {
+                    TextureMapView.this.listener.onMapStable(TextureMapView.this.userAction);
                 }
-                AKTextureMapView.this.userAction = false;
+                TextureMapView.this.userAction = false;
             }
         }
 
         @Override
         public void onMapClicked(final MapClickInfo mapClickInfo) {
-            if (AKTextureMapView.RUN_ON_MAIN_THREAD) {
+            if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (AKTextureMapView.this.listener != null) {
-                            AKTextureMapView.this.listener.onMapClicked(mapClickInfo);
+                        if (TextureMapView.this.listener != null) {
+                            TextureMapView.this.listener.onMapClicked(mapClickInfo);
                         }
                     }
                 });
             } else {
-                if (AKTextureMapView.this.listener != null) {
-                    AKTextureMapView.this.listener.onMapClicked(mapClickInfo);
+                if (TextureMapView.this.listener != null) {
+                    TextureMapView.this.listener.onMapClicked(mapClickInfo);
                 }
             }
         }
         @Override
         public void onMapInteraction(final MapInteractionInfo interaction) {
-            if (AKTextureMapView.RUN_ON_MAIN_THREAD) {
+            if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (AKTextureMapView.this.listener != null) {
-                            AKTextureMapView.this.listener.onMapInteraction(interaction, AKTextureMapView.this.userAction);
+                        if (TextureMapView.this.listener != null) {
+                            TextureMapView.this.listener.onMapInteraction(interaction, TextureMapView.this.userAction);
                         }
                     }
                 });
             } else {
-                if (AKTextureMapView.this.listener != null) {
-                    AKTextureMapView.this.listener.onMapInteraction(interaction, AKTextureMapView.this.userAction);
+                if (TextureMapView.this.listener != null) {
+                    TextureMapView.this.listener.onMapInteraction(interaction, TextureMapView.this.userAction);
                 }
             }
         }

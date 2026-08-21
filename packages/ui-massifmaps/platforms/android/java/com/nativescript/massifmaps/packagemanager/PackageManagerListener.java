@@ -2,13 +2,12 @@ package com.nativescript.massifmaps.packagemanager;
 
 import android.os.Handler;
 
-import com.nativescript.massifmaps.additions.AKMapView;
+import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.massifmaps.packagemanager.PackageErrorType;
-import com.massifmaps.packagemanager.PackageManagerListener;
 import com.massifmaps.packagemanager.PackageStatus;
 
-public class AKPackageManagerListener extends PackageManagerListener {
+public class PackageManagerListener extends com.massifmaps.packagemanager.PackageManagerListener {
     Handler mainHandler = null;
 
     public interface Listener {
@@ -35,14 +34,14 @@ public class AKPackageManagerListener extends PackageManagerListener {
         this.listener = listener;
     }
 
-    public AKPackageManagerListener(Listener listener) {
+    public PackageManagerListener(Listener listener) {
         super();
         setListener(listener);
     }
 
     @Override
     public void onPackageCancelled(final String id, final int version) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -53,7 +52,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onPackageCancelled(id, version);
                     } else {
-                        AKPackageManagerListener.super.onPackageCancelled(id, version);
+                        PackageManagerListener.super.onPackageCancelled(id, version);
                     }
                 }
             });
@@ -69,7 +68,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onPackageFailed(final String id, final int version, final PackageErrorType errorType) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -80,7 +79,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onPackageFailed(id, version, errorType);
                     } else {
-                        AKPackageManagerListener.super.onPackageFailed(id, version, errorType);
+                        PackageManagerListener.super.onPackageFailed(id, version, errorType);
                     }
                 }
             });
@@ -96,7 +95,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onPackageListFailed() {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -107,7 +106,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onPackageListFailed();
                     } else {
-                        AKPackageManagerListener.super.onPackageListFailed();
+                        PackageManagerListener.super.onPackageListFailed();
                     }
                 }
             });
@@ -123,7 +122,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onPackageListUpdated() {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -134,7 +133,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onPackageListUpdated();
                     } else {
-                        AKPackageManagerListener.super.onPackageListUpdated();
+                        PackageManagerListener.super.onPackageListUpdated();
                     }
                 }
             });
@@ -150,7 +149,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onPackageStatusChanged(final String id, final int version, final PackageStatus status) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -161,7 +160,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onPackageStatusChanged(id, version, status);
                     } else {
-                        AKPackageManagerListener.super.onPackageStatusChanged(id, version, status);
+                        PackageManagerListener.super.onPackageStatusChanged(id, version, status);
                     }
                 }
             });
@@ -177,7 +176,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onPackageUpdated(final String id, final int version) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -188,7 +187,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onPackageUpdated(id, version);
                     } else {
-                        AKPackageManagerListener.super.onPackageUpdated(id, version);
+                        PackageManagerListener.super.onPackageUpdated(id, version);
                     }
                 }
             });
@@ -204,7 +203,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onStyleFailed(final String styleName) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -215,7 +214,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onStyleFailed(styleName);
                     } else {
-                        AKPackageManagerListener.super.onStyleFailed(styleName);
+                        PackageManagerListener.super.onStyleFailed(styleName);
                     }
                 }
             });
@@ -231,7 +230,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
 
     @Override
     public void onStyleUpdated(final String styleName) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -242,7 +241,7 @@ public class AKPackageManagerListener extends PackageManagerListener {
                     if (listener != null) {
                         listener.onStyleUpdated(styleName);
                     } else {
-                        AKPackageManagerListener.super.onStyleUpdated(styleName);
+                        PackageManagerListener.super.onStyleUpdated(styleName);
                     }
                 }
             });

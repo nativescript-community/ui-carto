@@ -4,6 +4,22 @@ import { mapPosVectorFromArgs } from '..';
 import { BaseNative } from '../BaseNative';
 import { DefaultLatLonKeys, GenericMapPos, MapPosVector, MapRange, NativeVector, toNativeMapPos } from '../core';
 import { getFileName, getRelativePathToApp } from '../index.common';
+import {
+    ACCESSORS as ACC_ZippedAssetPackage,
+    Accessors as Acc_ZippedAssetPackage,
+    METHODS as MET_ZippedAssetPackage,
+    Methods as Met_ZippedAssetPackage,
+    SELECTORS as SEL_ZippedAssetPackage
+} from '../bindings/utils/ZippedAssetPackage';
+import { bindNative } from '../nativeclass.common';
+import {
+    ACCESSORS as ACC_DirAssetPackage,
+    Accessors as Acc_DirAssetPackage,
+    METHODS as MET_DirAssetPackage,
+    Methods as Met_DirAssetPackage,
+    SELECTORS as SEL_DirAssetPackage
+} from '../bindings/utils/AssetPackage';
+import { ACCESSORS as ACC_AssetPackage, Accessors as Acc_AssetPackage, METHODS as MET_AssetPackage, Methods as Met_AssetPackage, SELECTORS as SEL_AssetPackage } from '../bindings/utils/AssetPackage';
 
 export function nativeVectorToArray<T>(vector: NativeVector<T>) {
     const count = vector.size();
@@ -122,9 +138,9 @@ export function setShowError(value: boolean) {
 }
 
 export class ZippedAssetPackage extends BaseNative<com.massifmaps.utils.ZippedAssetPackage, ZippedAssetPackageOptions> {
-    mInterface: com.nativescript.massifmaps.additions.AKAssetPackage.Interface;
-    mBaseAssetPackage: com.nativescript.massifmaps.additions.AKAssetPackage;
-    mAssetPackage: com.nativescript.massifmaps.additions.AKAssetPackage;
+    mInterface: com.nativescript.massifmaps.additions.AssetPackage.Interface;
+    mBaseAssetPackage: com.nativescript.massifmaps.additions.AssetPackage;
+    mAssetPackage: com.nativescript.massifmaps.additions.AssetPackage;
     mVectorTileStyleSetData: com.massifmaps.core.BinaryData;
     constructor(options) {
         super(options);
@@ -159,11 +175,11 @@ export class ZippedAssetPackage extends BaseNative<com.massifmaps.utils.ZippedAs
             this.mBaseAssetPackage = options.basePack.getNative();
         }
         if (options.loadAsset && options.getAssetNames) {
-            this.mInterface = new com.nativescript.massifmaps.additions.AKAssetPackage.Interface({
+            this.mInterface = new com.nativescript.massifmaps.additions.AssetPackage.Interface({
                 getAssetNames: options.getAssetNames,
                 loadAsset: options.loadAsset
             });
-            this.mAssetPackage = new com.nativescript.massifmaps.additions.AKAssetPackage(this.mInterface, this.mBaseAssetPackage);
+            this.mAssetPackage = new com.nativescript.massifmaps.additions.AssetPackage(this.mInterface, this.mBaseAssetPackage);
         }
         if (this.mBaseAssetPackage || this.mAssetPackage) {
             return new com.massifmaps.utils.ZippedAssetPackage(this.mVectorTileStyleSetData, this.mAssetPackage || this.mBaseAssetPackage);
@@ -192,13 +208,13 @@ function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: str
         return true;
     });
 }
-export class DirAssetPackage extends BaseNative<com.nativescript.massifmaps.additions.AKAssetPackage, DirAssetPackageOptions> {
+export class DirAssetPackage extends BaseNative<com.nativescript.massifmaps.additions.AssetPackage, DirAssetPackageOptions> {
     mAssetNames: com.massifmaps.core.StringVector;
     mDirPath: string;
     mMassifDirPath: string;
     loadUsingNS = false;
-    mInterface: com.nativescript.massifmaps.additions.AKAssetPackage.Interface;
-    mBaseAssetPackage: com.nativescript.massifmaps.additions.AKAssetPackage;
+    mInterface: com.nativescript.massifmaps.additions.AssetPackage.Interface;
+    mBaseAssetPackage: com.nativescript.massifmaps.additions.AssetPackage;
     constructor(options) {
         super(options);
 
@@ -222,7 +238,7 @@ export class DirAssetPackage extends BaseNative<com.nativescript.massifmaps.addi
             const dirPath = options.dirPath;
             this.mDirPath = getFileName(dirPath);
             this.mMassifDirPath = getRelativePathToApp(dirPath);
-            this.mInterface = new com.nativescript.massifmaps.additions.AKAssetPackage.Interface({
+            this.mInterface = new com.nativescript.massifmaps.additions.AssetPackage.Interface({
                 getAssetNames: this.getAssetNames.bind(this),
                 loadAsset: this.loadAsset.bind(this)
             });
@@ -230,11 +246,11 @@ export class DirAssetPackage extends BaseNative<com.nativescript.massifmaps.addi
             if (options.basePack) {
                 this.mBaseAssetPackage = options.basePack.getNative();
             }
-            let result: com.nativescript.massifmaps.additions.AKAssetPackage;
+            let result: com.nativescript.massifmaps.additions.AssetPackage;
             if (this.mBaseAssetPackage) {
-                result = new com.nativescript.massifmaps.additions.AKAssetPackage(this.mInterface, this.mBaseAssetPackage);
+                result = new com.nativescript.massifmaps.additions.AssetPackage(this.mInterface, this.mBaseAssetPackage);
             } else {
-                result = new com.nativescript.massifmaps.additions.AKAssetPackage(this.mInterface);
+                result = new com.nativescript.massifmaps.additions.AssetPackage(this.mInterface);
             }
             this.loadUsingNS = !!options.loadUsingNS;
             return result;
@@ -297,3 +313,12 @@ export function toNativeMapRange(value: MapRange) {
     //  ignore z for now as points can get under the map!
     return new com.massifmaps.core.MapRange(value[0], value[1]);
 }
+
+export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Omit<Met_ZippedAssetPackage, 'getAssetNames'> {}
+bindNative(ZippedAssetPackage, MET_ZippedAssetPackage, ACC_ZippedAssetPackage, { selectors: SEL_ZippedAssetPackage });
+
+export interface DirAssetPackage extends Acc_DirAssetPackage, Omit<Met_DirAssetPackage, 'getAssetNames' | 'loadAsset'> {}
+bindNative(DirAssetPackage, MET_DirAssetPackage, ACC_DirAssetPackage, { selectors: SEL_DirAssetPackage });
+
+export interface ZippedAssetPackage extends Acc_AssetPackage, Omit<Met_AssetPackage, 'getAssetNames'> {}
+bindNative(ZippedAssetPackage, MET_AssetPackage, ACC_AssetPackage, { selectors: SEL_AssetPackage });

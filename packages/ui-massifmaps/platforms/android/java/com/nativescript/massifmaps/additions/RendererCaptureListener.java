@@ -21,7 +21,7 @@ public class RendererCaptureListener extends com.massifmaps.renderers.RendererCa
 
     @Override
     public void onMapRendered(final Bitmap bitmap) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());

@@ -7,13 +7,12 @@ import com.massifmaps.core.MapPos;
 import com.massifmaps.core.MapPosVector;
 import com.massifmaps.core.DoubleVector;
 
-import com.massifmaps.layers.HillshadeRasterTileLayer;
 import com.massifmaps.datasources.TileDataSource;
 import com.massifmaps.rastertiles.ElevationDecoder;
 
 import java.io.IOException;
 
-public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
+public class HillshadeRasterTileLayer extends com.massifmaps.layers.HillshadeRasterTileLayer {
     public interface ElevationCallback {
         void onElevation(Exception e, Double elevation);
     }
@@ -24,15 +23,15 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
 
     static Handler mainHandler = null;
 
-    public AKHillshadeRasterTileLayer(TileDataSource datasource, ElevationDecoder decoder) {
+    public HillshadeRasterTileLayer(TileDataSource datasource, ElevationDecoder decoder) {
         super(datasource, decoder);
     }
-    public AKHillshadeRasterTileLayer(TileDataSource datasource) {
+    public HillshadeRasterTileLayer(TileDataSource datasource) {
         super(datasource, null);
     }
 
     public void getElevationCallback(final MapPos pos, final ElevationCallback callback) {
-        final AKHillshadeRasterTileLayer fThis = this;
+        final HillshadeRasterTileLayer fThis = this;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -42,7 +41,7 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
                     result = fThis.getElevation(pos);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -59,7 +58,7 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
                 }
 
                 final Double fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -79,7 +78,7 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
     }
 
     public void getElevationsCallback(final MapPosVector poses,  final ElevationsCallback callback) {
-        final AKHillshadeRasterTileLayer fThis = this;
+        final HillshadeRasterTileLayer fThis = this;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -89,7 +88,7 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
                     result = fThis.getElevations(poses);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -106,7 +105,7 @@ public class AKHillshadeRasterTileLayer extends HillshadeRasterTileLayer {
                 }
 
                 final DoubleVector fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }

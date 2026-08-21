@@ -1,5 +1,5 @@
 //
-//  AKVectorElementEventListener.swift
+//  NSMSFVectorElementEventListener.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -8,10 +8,10 @@
 
 import MassifMaps
 
-@objc(AKVectorElementEventListener)
+@objc(NSMSFVectorElementEventListener)
 @objcMembers
-class AKVectorElementEventListener: MSFVectorElementEventListener {
-  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+class NSMSFVectorElementEventListener: MSFVectorElementEventListener {
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
   func onVectorElementClickedThreaded(_ clickInfo: MSFVectorElementClickInfo!) -> Bool {
     return false;
   }

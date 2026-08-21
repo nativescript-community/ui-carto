@@ -1,6 +1,6 @@
 #import <MassifMaps/MassifMaps.h>
 
-@interface AKVectorEditEventListener : MSFVectorEditEventListener
+@interface NSMSFVectorEditEventListener : MSFVectorEditEventListener
 @property(nonatomic, assign) BOOL runOnMainThread;
 - (MSFVectorElementDragResult)onDragStartThreaded:(MSFVectorElementDragInfo *)dragInfo;
 - (MSFVectorElementDragResult)onDragMoveThreaded:(MSFVectorElementDragInfo *)dragInfo;

@@ -1,5 +1,5 @@
 //
-//  AKFeatureCollectionSearchService.swift
+//  NSMSFFeatureCollectionSearchService.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -7,11 +7,11 @@
 //
 import MassifMaps
 
-@objc(AKRasterTileEventListener)
+@objc(NSMSFRasterTileEventListener)
 @objcMembers
-class AKRasterTileEventListener: MSFRasterTileEventListener {
+class NSMSFRasterTileEventListener: MSFRasterTileEventListener {
   
-  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
   func onRasterTileClickedThreaded(_ clickInfo: MSFRasterTileClickInfo!) -> Bool {
     return false;
   }

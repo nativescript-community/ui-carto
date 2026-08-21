@@ -1,6 +1,6 @@
 #import <MassifMaps/MassifMaps.h>
 
-@interface AKTileDownloadListener : MSFTileDownloadListener
+@interface NSMSFTileDownloadListener : MSFTileDownloadListener
 
 @property BOOL runOnMainThread;
 

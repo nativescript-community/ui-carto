@@ -3,10 +3,9 @@ package com.nativescript.massifmaps.additions;
 import android.os.Handler;
 import android.util.Log;
 
-import com.massifmaps.layers.VectorTileEventListener;
 import com.massifmaps.ui.VectorTileClickInfo;
 
-public class AKVectorTileEventListener extends VectorTileEventListener {
+public class VectorTileEventListener extends com.massifmaps.layers.VectorTileEventListener {
     Handler mainHandler = null;
 
     public interface Listener {
@@ -19,14 +18,14 @@ public class AKVectorTileEventListener extends VectorTileEventListener {
         this.listener = listener;
     }
 
-    public AKVectorTileEventListener(Listener listener) {
+    public VectorTileEventListener(Listener listener) {
         super();
         setListener(listener);
     }
 
     @Override
     public boolean onVectorTileClicked(final VectorTileClickInfo clickInfo) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -37,7 +36,7 @@ public class AKVectorTileEventListener extends VectorTileEventListener {
                     if (listener != null) {
                         arr[0] = new Boolean(listener.onVectorTileClicked(clickInfo));
                     } else {
-                        arr[0] = new Boolean(AKVectorTileEventListener.super.onVectorTileClicked(clickInfo));
+                        arr[0] = new Boolean(VectorTileEventListener.super.onVectorTileClicked(clickInfo));
                     }
                 }
             });

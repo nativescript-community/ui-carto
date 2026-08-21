@@ -1,9 +1,9 @@
 import MassifMaps
 
-@objc(AKVectorTileEventListener)
+@objc(NSMSFVectorTileEventListener)
 @objcMembers
-class AKVectorTileEventListener: MSFVectorTileEventListener {
-  var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+class NSMSFVectorTileEventListener: MSFVectorTileEventListener {
+  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
   func onVectorTileClickedThreaded(_ clickInfo: MSFVectorTileClickInfo!) -> Bool {
     return false;
   }

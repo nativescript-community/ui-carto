@@ -1,5 +1,5 @@
 //
-//  AKRoutingServiceAdditions.swift
+//  NSMSFRoutingServiceAdditions.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -10,10 +10,10 @@ import Foundation
 import MassifMaps
 import SwiftTryCatch
 
-@objc(AKRoutingServiceAdditions)
+@objc(NSMSFRoutingServiceAdditions)
 @objcMembers
-class AKRoutingServiceAdditions: NSObject {
-    static var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+class NSMSFRoutingServiceAdditions: NSObject {
+    static var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
     
     public static func stringifyRouteResult(_ result: MSFRoutingResult?)-> String? {
         if ((result) != nil) {

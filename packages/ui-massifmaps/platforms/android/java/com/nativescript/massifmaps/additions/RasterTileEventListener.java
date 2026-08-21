@@ -3,10 +3,9 @@ package com.nativescript.massifmaps.additions;
 import android.os.Handler;
 import android.util.Log;
 
-import com.massifmaps.layers.RasterTileEventListener;
 import com.massifmaps.ui.RasterTileClickInfo;
 
-public class AKRasterTileEventListener extends RasterTileEventListener {
+public class RasterTileEventListener extends com.massifmaps.layers.RasterTileEventListener {
     Handler mainHandler = null;
 
     public interface Listener {
@@ -19,14 +18,14 @@ public class AKRasterTileEventListener extends RasterTileEventListener {
         this.listener = listener;
     }
 
-    public AKRasterTileEventListener(Listener listener) {
+    public RasterTileEventListener(Listener listener) {
         super();
         setListener(listener);
     }
 
     @Override
     public boolean onRasterTileClicked(final RasterTileClickInfo clickInfo) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -37,7 +36,7 @@ public class AKRasterTileEventListener extends RasterTileEventListener {
                     if (listener != null) {
                         arr[0] = new Boolean(listener.onRasterTileClicked(clickInfo));
                     } else {
-                        arr[0] = new Boolean(AKRasterTileEventListener.super.onRasterTileClicked(clickInfo));
+                        arr[0] = new Boolean(RasterTileEventListener.super.onRasterTileClicked(clickInfo));
                     }
                 }
             });

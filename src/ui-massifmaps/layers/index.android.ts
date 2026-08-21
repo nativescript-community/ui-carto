@@ -3,6 +3,10 @@ import { TileDataSource } from '../datasources';
 import { Projection } from '../projections';
 import { LayerOptions, TileLayerOptions } from '.';
 import { BaseLayer } from './index.common';
+import { ACCESSORS as ACC_Layer, Accessors as Acc_Layer, METHODS as MET_Layer, Methods as Met_Layer, SELECTORS as SEL_Layer } from '../bindings/layers/Layer';
+import { bindNative } from '../nativeclass.common';
+import { mapRangeConverter } from '..';
+import { ACCESSORS as ACC_TileLayer, Accessors as Acc_TileLayer, METHODS as MET_TileLayer, Methods as Met_TileLayer, SELECTORS as SEL_TileLayer } from '../bindings/layers/TileLayer';
 
 export const TileSubstitutionPolicy = {
     get TILE_SUBSTITUTION_POLICY_ALL() {
@@ -58,12 +62,6 @@ export abstract class Layer<T extends com.massifmaps.layers.Layer, U extends Lay
     }
 }
 export abstract class TileLayer<T extends com.massifmaps.layers.TileLayer, U extends TileLayerOptions> extends Layer<T, U> {
-    @nativeProperty preloading: boolean;
-    @nativeProperty synchronizedRefresh: boolean;
-    @nativeProperty zoomLevelBias: number;
-    @nativeProperty maxOverzoomLevel: number;
-    @nativeProperty maxUnderzoomLevel: number;
-    @nativeProperty tileSubstitutionPolicy;
 
     clearTileCaches(all: boolean) {
         if (this.native) {
@@ -88,3 +86,9 @@ export abstract class TileLayer<T extends com.massifmaps.layers.TileLayer, U ext
         return new Projection(undefined, this.getNative().getDataSource().getProjection());
     }
 }
+
+export interface Layer<T extends com.massifmaps.layers.Layer, U extends LayerOptions> extends Omit<Acc_Layer, 'visibleZoomRange'>, Omit<Met_Layer, 'refresh'> {}
+bindNative(Layer, MET_Layer, ACC_Layer, { selectors: SEL_Layer, converters: { visibleZoomRange: mapRangeConverter } });
+
+export interface TileLayer<T extends com.massifmaps.layers.TileLayer, U extends TileLayerOptions> extends Acc_TileLayer, Omit<Met_TileLayer, 'clearTileCaches'> {}
+bindNative(TileLayer, MET_TileLayer, ACC_TileLayer, { selectors: SEL_TileLayer });

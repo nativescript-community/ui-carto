@@ -1,7 +1,7 @@
-#include "AkClusterElementBuilder.h"
+#include "NSMSFClusterElementBuilder.h"
 #include "Utils.h"
 
-@interface AkClusterElementBuilder ()
+@interface NSMSFClusterElementBuilder ()
 
 @property NSMutableDictionary* markerStyles;
 @property (nonatomic) UIImage *markerImage;
@@ -14,7 +14,7 @@
 @property (nonatomic) UIFont* font;
 
 @end
-@implementation AkClusterElementBuilder : MSFClusterElementBuilder
+@implementation NSMSFClusterElementBuilder : MSFClusterElementBuilder
 
 -(id)init {
      if (self = [super init])  {

@@ -1,6 +1,6 @@
-#import "AKTileDownloadListener.h"
+#import "NSMSFTileDownloadListener.h"
 
-@implementation AKTileDownloadListener
+@implementation NSMSFTileDownloadListener
 @synthesize runOnMainThread;
 - (void)onDownloadCompletedThreaded{}
 - (void)onDownloadFailedThreaded:(MSFMapTile *)tile{}

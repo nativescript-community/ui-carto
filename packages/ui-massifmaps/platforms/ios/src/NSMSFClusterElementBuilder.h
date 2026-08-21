@@ -1,5 +1,5 @@
 #include <MassifMaps/MassifMaps.h>
-@interface AkClusterElementBuilder : MSFClusterElementBuilder
+@interface NSMSFClusterElementBuilder : MSFClusterElementBuilder
 
 - (void) setBitmap: (UIImage *)value;
 - (void) setColor: (UIColor *)value;

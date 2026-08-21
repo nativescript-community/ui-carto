@@ -1,16 +1,16 @@
 
 import MassifMaps
 
-@objc(AKMapView)
+@objc(NSMSFMapView)
 @objcMembers
-class AKMapView: MSFMapView {
+class NSMSFMapView: MSFMapView {
   static var RUN_ON_MAIN_THREAD = true
-  var listener: AKMapEventListener? = nil
+  var listener: NSMSFMapEventListener? = nil
   var userAction: Bool = false
   
   class MapEventListener : MSFMapEventListener {
-    unowned var parent: AKMapView? = nil
-    init(_ parent: AKMapView) {
+    unowned var parent: NSMSFMapView? = nil
+    init(_ parent: NSMSFMapView) {
       super.init()
       self.parent = parent
     }
@@ -20,7 +20,7 @@ class AKMapView: MSFMapView {
     
     
     override func onMapIdle() {
-      if (!AKMapView.RUN_ON_MAIN_THREAD) {
+      if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
         parent!.listener?.onMapIdle()
       } else {
         DispatchQueue.main.async() {
@@ -29,7 +29,7 @@ class AKMapView: MSFMapView {
       }
     }
     override func onMapStable() {
-      if (!AKMapView.RUN_ON_MAIN_THREAD) {
+      if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
         parent!.listener?.onMapStable(parent!.userAction)
       } else {
         DispatchQueue.main.async() {
@@ -39,7 +39,7 @@ class AKMapView: MSFMapView {
       parent!.userAction = false;
     }
     override func onMapMoved() {
-      if (!AKMapView.RUN_ON_MAIN_THREAD) {
+      if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
         parent!.listener?.onMapMoved(parent!.userAction)
       } else {
         DispatchQueue.main.async() {
@@ -48,7 +48,7 @@ class AKMapView: MSFMapView {
       }
     }
     override func onMapClicked(_ mapClickInfo: MSFMapClickInfo!) {
-      if (!AKMapView.RUN_ON_MAIN_THREAD) {
+      if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
         parent!.listener?.onMapClicked(mapClickInfo)
       } else {
         DispatchQueue.main.async() {
@@ -57,7 +57,7 @@ class AKMapView: MSFMapView {
       }
     }
     override func onMapInteraction(_ mapInteractionInfo: MSFMapInteractionInfo!) {
-      if (!AKMapView.RUN_ON_MAIN_THREAD) {
+      if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
         parent!.listener?.onMapInteraction(mapInteractionInfo, self.parent!.userAction)
       } else {
         DispatchQueue.main.async() {
@@ -86,7 +86,7 @@ class AKMapView: MSFMapView {
     RUN_ON_MAIN_THREAD = value;
   }
   
-  func setAKMapEventListener(_ listener: AKMapEventListener!) {
+  func setAKMapEventListener(_ listener: NSMSFMapEventListener!) {
     self.listener = listener
     if (listener != nil) {
       super.setMapEventListener(_mapEventListener)

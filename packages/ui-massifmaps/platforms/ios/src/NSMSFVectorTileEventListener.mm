@@ -1,6 +1,6 @@
-#import "AKVectorTileEventListener.h"
+#import "NSMSFVectorTileEventListener.h"
 
-@implementation AKVectorTileEventListener
+@implementation NSMSFVectorTileEventListener
 @synthesize runOnMainThread;
 -(id)init {
      if (self = [super init])  {

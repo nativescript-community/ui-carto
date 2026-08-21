@@ -8,6 +8,15 @@ import { Projection } from '../projections';
 import { Geometry } from '../geometry';
 import { PointStyleBuilder } from '../vectorelements/point';
 import { VectorDataSource } from '../datasources/vector';
+import { Accessors as Acc_EditableVectorLayer } from '../bindings/layers/EditableVectorLayer';
+import { Accessors as Acc_VectorTileLayer, Methods as Met_VectorTileLayer } from '../bindings/layers/VectorTileLayer';
+import { Accessors as Acc_VectorLayer, Methods as Met_VectorLayer } from '../bindings/layers/VectorLayer';
+import { Methods as Met_EditableVectorLayer } from '../bindings/layers/EditableVectorLayer';
+import { Accessors as Acc_ClusteredVectorLayer, Methods as Met_ClusteredVectorLayer } from '../bindings/layers/ClusteredVectorLayer';
+import { Accessors as Acc_BaseVectorTileLayer, Methods as Met_BaseVectorTileLayer } from '../bindings/layers/VectorTileLayer';
+import { Accessors as Acc_BaseVectorLayer, Methods as Met_BaseVectorLayer } from '../bindings/layers/VectorLayer';
+import { Accessors as Acc_TileLayer, Methods as Met_TileLayer } from '../bindings/layers/TileLayer';
+import { Accessors as Acc_Layer, Methods as Met_Layer } from '../bindings/layers/Layer';
 
 export enum VectorTileRenderOrder {
     HIDDEN,
@@ -195,3 +204,31 @@ export class ClusteredVectorLayer extends BaseVectorLayer<any, ClusteredVectorLa
     animatedClusters?: boolean;
     expandCluster(element: VectorElement<any, any>, px: number);
 }
+
+export interface EditableVectorLayer extends Acc_EditableVectorLayer, Met_EditableVectorLayer {}
+
+export interface VectorTileLayer extends Acc_VectorTileLayer, Met_VectorTileLayer {}
+
+export interface VectorLayer extends Acc_VectorLayer, Met_VectorLayer {}
+
+export interface ClusteredVectorLayer extends Omit<Acc_ClusteredVectorLayer, 'animatedClusters' | 'maximumClusterZoom' | 'minimumClusterDistance'>, Omit<Met_ClusteredVectorLayer, 'expandCluster'> {}
+
+export interface BaseVectorTileLayer<T, U extends TileLayerOptions>
+    extends Omit<
+            Acc_BaseVectorTileLayer,
+            'buildingRenderOrder' | 'clickHandlerLayerFilter' | 'clickRadius' | 'labelBlendingSpeed' | 'labelRenderOrder' | 'layerBlendingSpeed' | 'rendererLayerFilter' | 'tileCacheCapacity'
+        >,
+        Omit<Met_BaseVectorTileLayer, 'getTileDecoder' | 'setBuildingRenderOrder' | 'setLabelRenderOrder' | 'setVectorTileEventListener'> {}
+
+export interface BaseVectorLayer<T, U extends VectorLayerOptions> extends Acc_BaseVectorLayer, Omit<Met_BaseVectorLayer, 'setVectorElementEventListener'> {}
+
+export interface VectorTileLayer extends Acc_TileLayer, Met_TileLayer {}
+export interface VectorTileLayer extends Acc_Layer, Omit<Met_Layer, 'isUpdateInProgress'> {}
+
+export interface VectorLayer extends Acc_Layer, Omit<Met_Layer, 'isUpdateInProgress'> {}
+
+export interface EditableVectorLayer extends Acc_VectorLayer, Met_VectorLayer {}
+export interface EditableVectorLayer extends Acc_Layer, Omit<Met_Layer, 'isUpdateInProgress'> {}
+
+export interface ClusteredVectorLayer extends Acc_VectorLayer, Met_VectorLayer {}
+export interface ClusteredVectorLayer extends Acc_Layer, Omit<Met_Layer, 'isUpdateInProgress' | 'refresh'> {}

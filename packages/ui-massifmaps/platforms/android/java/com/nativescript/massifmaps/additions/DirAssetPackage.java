@@ -7,17 +7,16 @@ import java.util.zip.ZipFile;
 import android.util.Log;
 import android.content.Context;
 
-import com.massifmaps.utils.AssetPackage;
 import com.massifmaps.utils.AssetUtils;
 import com.massifmaps.core.StringVector;
 
-public class AKDirAssetPackage extends AssetPackage {
-    private final static String TAG = "AKDirAssetPackage";
+public class DirAssetPackage extends com.massifmaps.utils.AssetPackage {
+    private final static String TAG = "DirAssetPackage";
     private final String dirPath;
     private final Context context;
     private StringVector assetNames;
 
-    public AKDirAssetPackage(Context context, String path) {
+    public DirAssetPackage(Context context, String path) {
         super();
         this.dirPath = path;
         this.context = context;

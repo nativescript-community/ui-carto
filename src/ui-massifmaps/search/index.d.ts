@@ -6,6 +6,8 @@ import { Projection } from '../projections';
 import { Geometry } from '../geometry';
 import { Feature, FeatureCollection, VectorTileFeatureCollection } from '../geometry/feature';
 import { GenericMapPos, MapPos } from '../core';
+import { Accessors as Acc_VectorTileSearchService, Methods as Met_VectorTileSearchService } from '../bindings/search/VectorTileSearchService';
+import { Accessors as Acc_FeatureCollectionSearchService, Methods as Met_FeatureCollectionSearchService } from '../bindings/search/FeatureCollectionSearchService';
 
 export interface SearchRequest<T = DefaultLatLonKeys> {
     projection?: Projection<T>;
@@ -52,3 +54,11 @@ export interface FeatureCollectionSearchServiceOptions {
 export class FeatureCollectionSearchService<U extends FeatureCollectionSearchServiceOptions> extends BaseNative<any, U> {
     findFeatures<T = DefaultLatLonKeys>(options: SearchRequest<T>, callback?: (res: FeatureCollection<T>) => void): FeatureCollection<T>;
 }
+
+export interface VectorTileSearchService
+    extends Omit<Acc_VectorTileSearchService, 'layers' | 'maxResults' | 'maxZoom' | 'minZoom' | 'preventDuplicates' | 'sortByDistance'>, Omit<Met_VectorTileSearchService, 'findFeatures'> {}
+
+
+export interface VectorTileSearchService extends Omit<Acc_VectorTileSearchService, 'layers' | 'maxResults' | 'maxZoom' | 'minZoom' | 'preventDuplicates' | 'sortByDistance'>, Omit<Met_VectorTileSearchService, 'findFeatures'> {}
+
+export interface FeatureCollectionSearchService<U extends FeatureCollectionSearchServiceOptions> extends Acc_FeatureCollectionSearchService, Omit<Met_FeatureCollectionSearchService, 'findFeatures'> {}

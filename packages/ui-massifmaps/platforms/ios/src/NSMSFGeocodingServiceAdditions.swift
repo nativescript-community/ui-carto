@@ -1,5 +1,5 @@
 //
-//  AKGeocodingServiceAdditions.swift
+//  NSMSFGeocodingServiceAdditions.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -10,10 +10,10 @@ import Foundation
 import MassifMaps
 import SwiftTryCatch
 
-@objc(AKGeocodingServiceAdditions)
+@objc(NSMSFGeocodingServiceAdditions)
 @objcMembers
-class AKGeocodingServiceAdditions: NSObject {
-    static var runOnMainThread = AKMapView.RUN_ON_MAIN_THREAD
+class NSMSFGeocodingServiceAdditions: NSObject {
+    static var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
     static func calculateAddress (_ service: MSFGeocodingService, _ request: MSFGeocodingRequest, _ callback: @escaping (_ result: MSFGeocodingResultVector?, _ error: NSException?) -> Void) {
         DispatchQueue.global(qos: .background).async {
             SwiftTryCatch.try {

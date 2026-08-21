@@ -1,10 +1,18 @@
 import { BaseNative } from '../BaseNative';
-import { GeoJSONGeometryWriterOptions, WKBGeometryWriterOptions, WKTGeometryWriterOptions } from './writer';
+import { GeoJSONGeometryWriterOptions } from './writer';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
 import { Geometry } from '.';
 import { MapPosVector } from '../core';
 import { featureCollectionFromArgs, mapPosVectorFromArgs, nativeProperty } from '..';
+import {
+    ACCESSORS as ACC_GeoJSONGeometryWriter,
+    Accessors as Acc_GeoJSONGeometryWriter,
+    METHODS as MET_GeoJSONGeometryWriter,
+    Methods as Met_GeoJSONGeometryWriter,
+    SELECTORS as SEL_GeoJSONGeometryWriter
+} from '../bindings/geometry/GeoJSONGeometryWriter';
+import { bindNative } from '../nativeclass.common';
 
 export class GeoJSONGeometryWriter extends BaseNative<com.massifmaps.geometry.GeoJSONGeometryWriter, GeoJSONGeometryWriterOptions> {
     createNative() {
@@ -28,24 +36,5 @@ export class GeoJSONGeometryWriter extends BaseNative<com.massifmaps.geometry.Ge
     }
 }
 
-export class WKBGeometryWriter extends BaseNative<com.massifmaps.geometry.WKBGeometryWriter, WKBGeometryWriterOptions> {
-    @nativeProperty z: boolean;
-    createNative() {
-        return new com.massifmaps.geometry.WKBGeometryWriter();
-    }
-    writeGeometry(value: Geometry<any, any>) {
-        const geometry = value.getNative ? value.getNative() : value;
-        return this.getNative().writeGeometry(geometry);
-    }
-}
-
-export class WKTGeometryWriter extends BaseNative<com.massifmaps.geometry.WKTGeometryWriter, WKTGeometryWriterOptions> {
-    @nativeProperty z: boolean;
-    createNative() {
-        return new com.massifmaps.geometry.WKTGeometryWriter();
-    }
-    writeGeometry(value: Geometry<any, any>) {
-        const geometry = value.getNative ? value.getNative() : value;
-        return this.getNative().writeGeometry(geometry);
-    }
-}
+export interface GeoJSONGeometryWriter extends Omit<Acc_GeoJSONGeometryWriter, 'sourceProjection'>, Omit<Met_GeoJSONGeometryWriter, 'writeFeatureCollection' | 'writeGeometry'> {}
+bindNative(GeoJSONGeometryWriter, MET_GeoJSONGeometryWriter, ACC_GeoJSONGeometryWriter, { selectors: SEL_GeoJSONGeometryWriter });

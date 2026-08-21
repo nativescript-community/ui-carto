@@ -1,43 +1,57 @@
 import { Color } from '@nativescript/core';
-import { geometryFromArgs, mapPosVectorFromArgs, nativeColorProperty, nativeProperty } from '..';
+import { geometryFromArgs, mapPosVectorFromArgs } from '..';
 import { MapBounds, MapPos, MapPosVector, fromNativeMapBounds } from '../core';
 import { LineGeometry } from '../geometry';
 import { BaseVectorElementStyleBuilder } from './index.common';
 import { BaseLineVectorElement } from './index.ios';
 import { LineOptions, LineStyleBuilderOptions } from './line';
+import {
+    ACCESSORS as ACC_LineStyleBuilder,
+    Accessors as Acc_LineStyleBuilder,
+    METHODS as MET_LineStyleBuilder,
+    Methods as Met_LineStyleBuilder,
+    SELECTORS as SEL_LineStyleBuilder
+} from '../bindings/styles/LineStyleBuilder';
+import { bindNative } from '../nativeclass.common';
+import { massifImageConverter } from '..';
+import { ACCESSORS as ACC_Line, Accessors as Acc_Line, METHODS as MET_Line, Methods as Met_Line, SELECTORS as SEL_Line } from '../bindings/vectorelements/Line';
+import { ACCESSORS as ACC_StyleBuilder, Accessors as Acc_StyleBuilder, METHODS as MET_StyleBuilder, Methods as Met_StyleBuilder, SELECTORS as SEL_StyleBuilder } from '../bindings/styles/StyleBuilder';
+import { colorConverter } from '..';
 
 export { MapBounds };
 export enum LineJointType {
-    BEVEL = MSFLineJoinType.T_LINE_JOIN_TYPE_BEVEL,
-    MITER = MSFLineJoinType.T_LINE_JOIN_TYPE_MITER,
-    NONE = MSFLineJoinType.T_LINE_JOIN_TYPE_NONE,
-    ROUND = MSFLineJoinType.T_LINE_JOIN_TYPE_ROUND
+    BEVEL = MSFLineJoinType.F_LINE_JOIN_TYPE_BEVEL,
+    MITER = MSFLineJoinType.F_LINE_JOIN_TYPE_MITER,
+    NONE = MSFLineJoinType.F_LINE_JOIN_TYPE_NONE,
+    ROUND = MSFLineJoinType.F_LINE_JOIN_TYPE_ROUND
 }
 
 export enum LineEndType {
-    ROUND = MSFLineEndType.T_LINE_END_TYPE_ROUND,
-    SQUARE = MSFLineEndType.T_LINE_END_TYPE_SQUARE,
-    NONE = MSFLineEndType.T_LINE_END_TYPE_NONE
+    ROUND = MSFLineEndType.F_LINE_END_TYPE_ROUND,
+    SQUARE = MSFLineEndType.F_LINE_END_TYPE_SQUARE,
+    NONE = MSFLineEndType.F_LINE_END_TYPE_NONE
 }
 
 export class LineStyleBuilder extends BaseVectorElementStyleBuilder<MSFLineStyleBuilder, LineStyleBuilderOptions> {
     createNative(options: LineStyleBuilderOptions) {
         return MSFLineStyleBuilder.alloc().init();
     }
-    @nativeProperty width: number;
-    @nativeColorProperty color: Color | string;
-    @nativeProperty({
-        nativeSetterName: 'setLineJoinType',
-        nativeGetterName: 'getLineJoinType'
-    })
-    joinType: LineJointType;
-    @nativeProperty({
-        nativeSetterName: 'setLineEndType',
-        nativeGetterName: 'getLineEndType'
-    })
-    endType: LineEndType;
-    @nativeProperty clickWidth: number;
-    @nativeProperty stretchFactor: number;
+    /**
+     * The SDK spells these `lineJoinType` / `lineEndType`, which the binding table
+     * synthesises; the plugin has always exposed the shorter names.
+     */
+    get joinType(): LineJointType {
+        return this.lineJoinType as any;
+    }
+    set joinType(value: LineJointType) {
+        (this as any).lineJoinType = value;
+    }
+    get endType(): LineEndType {
+        return this.lineEndType as any;
+    }
+    set endType(value: LineEndType) {
+        (this as any).lineEndType = value;
+    }
 
     mBuildStyle: MSFLineStyle;
     buildStyle() {
@@ -68,7 +82,10 @@ export class Line extends BaseLineVectorElement<MSFLine, LineOptions> {
     @styleBuilderProperty clickWidth: number;
     @styleBuilderProperty stretchFactor: number;
 
-    constructor(public options: LineOptions = {} as any, native?: MSFLine) {
+    constructor(
+        public options: LineOptions = {} as any,
+        native?: MSFLine
+    ) {
         super(options, native);
         if (native && !options.styleBuilder) {
             const nStyle = native.getStyle();
@@ -138,3 +155,12 @@ export class Line extends BaseLineVectorElement<MSFLine, LineOptions> {
         return fromNativeMapBounds(this.getNative().getBounds());
     }
 }
+
+export interface LineStyleBuilder extends Acc_LineStyleBuilder, Omit<Met_LineStyleBuilder, 'buildStyle'> {}
+bindNative(LineStyleBuilder, MET_LineStyleBuilder, ACC_LineStyleBuilder, { selectors: SEL_LineStyleBuilder, converters: { bitmap: massifImageConverter } });
+
+export interface Line extends Omit<Acc_Line, 'geometry'>, Omit<Met_Line, 'getGeometry' | 'getPoses' | 'setPoses'> {}
+bindNative(Line, MET_Line, ACC_Line, { selectors: SEL_Line });
+
+export interface LineStyleBuilder extends Acc_StyleBuilder, Met_StyleBuilder {}
+bindNative(LineStyleBuilder, MET_StyleBuilder, ACC_StyleBuilder, { selectors: SEL_StyleBuilder, converters: { color: colorConverter } });

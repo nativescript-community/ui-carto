@@ -1,5 +1,13 @@
 import { PMTilesTileDataSourceOptions } from './pmtiles';
 import { TileDataSource } from '.';
+import {
+    ACCESSORS as ACC_PMTilesTileDataSource,
+    Accessors as Acc_PMTilesTileDataSource,
+    METHODS as MET_PMTilesTileDataSource,
+    Methods as Met_PMTilesTileDataSource,
+    SELECTORS as SEL_PMTilesTileDataSource
+} from '../bindings/datasources/PMTilesTileDataSource';
+import { bindNative } from '../nativeclass.common';
 
 export class PMTilesTileDataSource extends TileDataSource<com.massifmaps.datasources.PMTilesTileDataSource, PMTilesTileDataSourceOptions> {
     createNative(options: PMTilesTileDataSourceOptions) {
@@ -10,3 +18,6 @@ export class PMTilesTileDataSource extends TileDataSource<com.massifmaps.datasou
         }
     }
 }
+
+export interface PMTilesTileDataSource extends Acc_PMTilesTileDataSource, Omit<Met_PMTilesTileDataSource, 'loadTile'> {}
+bindNative(PMTilesTileDataSource, MET_PMTilesTileDataSource, ACC_PMTilesTileDataSource, { selectors: SEL_PMTilesTileDataSource });

@@ -3,10 +3,9 @@ package com.nativescript.massifmaps.additions;
 import android.os.Handler;
 import android.util.Log;
 
-import com.massifmaps.layers.VectorElementEventListener;
 import com.massifmaps.ui.VectorElementClickInfo;
 
-public class AKVectorElementEventListener extends VectorElementEventListener {
+public class VectorElementEventListener extends com.massifmaps.layers.VectorElementEventListener {
     Handler mainHandler = null;
 
     public interface Listener {
@@ -17,14 +16,14 @@ public class AKVectorElementEventListener extends VectorElementEventListener {
         this.listener = listener;
     }
 
-    public AKVectorElementEventListener(Listener listener) {
+    public VectorElementEventListener(Listener listener) {
         super();
         setListener(listener);
     }
 
     @Override
     public boolean onVectorElementClicked(final VectorElementClickInfo clickInfo) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -35,7 +34,7 @@ public class AKVectorElementEventListener extends VectorElementEventListener {
                     if (listener != null) {
                         arr[0] = new Boolean(listener.onVectorElementClicked(clickInfo));
                     } else {
-                        arr[0] = new Boolean(AKVectorElementEventListener.super.onVectorElementClicked(clickInfo));
+                        arr[0] = new Boolean(VectorElementEventListener.super.onVectorElementClicked(clickInfo));
                     }
                 }
             });

@@ -3,7 +3,7 @@ package com.nativescript.massifmaps.additions;
 import com.massifmaps.ui.MapClickInfo;
 import com.massifmaps.ui.MapInteractionInfo;
 
-public interface AKMapEventListener {
+public interface MapEventListener {
 
     public void onMapInteraction(MapInteractionInfo interaction, boolean userAction);
 

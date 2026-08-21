@@ -56,4 +56,7 @@ packages/**/*.metadata.json
 
 /blueprint.md
 
+!demo-snippets/hooks
+!demo-snippets/hooks/**
+
 *.tsbuildinfo

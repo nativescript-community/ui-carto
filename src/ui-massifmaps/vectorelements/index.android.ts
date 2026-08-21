@@ -7,6 +7,49 @@ import { Projection } from '../projections';
 import { MapPos, MapPosVector, fromNativeMapBounds, fromNativeMapPos, toNativeMapPos } from '../core';
 import { mapPosVectorFromArgs } from '..';
 import { BaseVectorElementStyleBuilder } from './index.common';
+import {
+    ACCESSORS as ACC_VectorElement,
+    Accessors as Acc_VectorElement,
+    METHODS as MET_VectorElement,
+    Methods as Met_VectorElement,
+    SELECTORS as SEL_VectorElement
+} from '../bindings/vectorelements/VectorElement';
+import { bindNative } from '../nativeclass.common';
+import {
+    ACCESSORS as ACC_BaseVectorElement,
+    Accessors as Acc_BaseVectorElement,
+    METHODS as MET_BaseVectorElement,
+    Methods as Met_BaseVectorElement,
+    SELECTORS as SEL_BaseVectorElement
+} from '../bindings/vectorelements/VectorElement';
+import {
+    ACCESSORS as ACC_BasePointVectorElement,
+    Accessors as Acc_BasePointVectorElement,
+    METHODS as MET_BasePointVectorElement,
+    Methods as Met_BasePointVectorElement,
+    SELECTORS as SEL_BasePointVectorElement
+} from '../bindings/vectorelements/VectorElement';
+import {
+    ACCESSORS as ACC_BaseBillboardVectorElement,
+    Accessors as Acc_BaseBillboardVectorElement,
+    METHODS as MET_BaseBillboardVectorElement,
+    Methods as Met_BaseBillboardVectorElement,
+    SELECTORS as SEL_BaseBillboardVectorElement
+} from '../bindings/vectorelements/Billboard';
+import {
+    ACCESSORS as ACC_BaseLineVectorElement,
+    Accessors as Acc_BaseLineVectorElement,
+    METHODS as MET_BaseLineVectorElement,
+    Methods as Met_BaseLineVectorElement,
+    SELECTORS as SEL_BaseLineVectorElement
+} from '../bindings/vectorelements/VectorElement';
+import {
+    ACCESSORS as ACC_BillboardStyleBuilder,
+    Accessors as Acc_BillboardStyleBuilder,
+    METHODS as MET_BillboardStyleBuilder,
+    Methods as Met_BillboardStyleBuilder,
+    SELECTORS as SEL_BillboardStyleBuilder
+} from '../bindings/styles/BillboardStyleBuilder';
 export { BaseVectorElementStyleBuilder };
 
 export const BillboardOrientation = {
@@ -34,7 +77,6 @@ export const BillboardScaling = {
 };
 
 export abstract class BaseVectorElement<T extends com.massifmaps.vectorelements.VectorElement, U extends VectorElementOptions> extends BaseNative<T, U> {
-    @nativeProperty visible: boolean;
     createNative(options: U) {
         return null;
     }
@@ -54,6 +96,27 @@ export abstract class BaseVectorElement<T extends com.massifmaps.vectorelements.
             }
             this.native.setMetaData(theMap);
         }
+    }
+
+    containsMetaDataKey(key: string): boolean {
+        return this.native ? this.native.containsMetaDataKey(key) : false;
+    }
+    getMetadataElement(key: string): { [k: string]: string } {
+        if (this.native) {
+            return nativeVariantToJS(this.native.getMetaDataElement(key));
+        }
+        return undefined;
+    }
+    setMetadataElement(key: string, element: { [k: string]: string }): void {
+        if (this.native) {
+            this.native.setMetaDataElement(key, JSVariantToNative(element));
+        }
+    }
+    getGeometry() {
+        return this.getNative().getGeometry();
+    }
+    getBounds() {
+        return fromNativeMapBounds(this.getNative().getBounds());
     }
 
     abstract buildStyle();
@@ -89,9 +152,7 @@ export abstract class BasePointVectorElement<
     }
 }
 
-export abstract class BaseBillboardVectorElement<T extends com.massifmaps.vectorelements.Billboard, U extends PointVectorElementOptions> extends BasePointVectorElement<T, U> {
-    @nativeProperty rotation: number;
-}
+export abstract class BaseBillboardVectorElement<T extends com.massifmaps.vectorelements.Billboard, U extends PointVectorElementOptions> extends BasePointVectorElement<T, U> {}
 
 export abstract class BaseLineVectorElement<
     T extends com.massifmaps.vectorelements.VectorElement & {
@@ -120,8 +181,6 @@ export abstract class BaseLineVectorElement<
 }
 
 export class VectorElement extends BaseVectorElement<com.massifmaps.vectorelements.VectorElement, VectorElementOptions> {
-    @nativeProperty id: number;
-
     containsMetaDataKey(key: string): boolean {
         return this.native ? this.native.containsMetaDataKey(key) : false;
     }
@@ -178,15 +237,6 @@ export abstract class BillboardStyleBuilder<T extends com.massifmaps.styles.Bill
     createNative(options: BillboardStyleBuilderOptions) {
         return null;
     }
-    @nativeProperty scaleWithDPI: boolean;
-    @nativeProperty hideIfOverlapped: boolean;
-    @nativeProperty horizontalOffset: number;
-    @nativeProperty verticalOffset: number;
-    @nativeProperty animationStyle: AnimationStyle;
-    @nativeProperty placementPriority: number;
-    @nativeProperty causesOverlap: boolean;
-    @nativeProperty attachAnchorPointX: number;
-    @nativeProperty attachAnchorPointY: number;
 
     mBuildStyle: com.massifmaps.styles.Style;
     abstract buildStyle();
@@ -196,3 +246,35 @@ export abstract class BillboardStyleBuilder<T extends com.massifmaps.styles.Bill
         super.dispose();
     }
 }
+
+export interface VectorElement extends Omit<Acc_VectorElement, 'metaData'>, Omit<Met_VectorElement, 'containsMetaDataKey' | 'getBounds' | 'getGeometry'> {}
+bindNative(VectorElement, MET_VectorElement, ACC_VectorElement, { selectors: SEL_VectorElement });
+
+export interface BaseVectorElement<T extends com.massifmaps.vectorelements.VectorElement, U extends VectorElementOptions>
+    extends Omit<Acc_BaseVectorElement, 'metaData'>, Omit<Met_BaseVectorElement, 'containsMetaDataKey' | 'getBounds' | 'getGeometry'> {}
+bindNative(BaseVectorElement, MET_BaseVectorElement, ACC_BaseVectorElement, { selectors: SEL_BaseVectorElement });
+
+export interface BasePointVectorElement<
+    T extends com.massifmaps.vectorelements.VectorElement & {
+        getPos?(): com.massifmaps.core.MapPos;
+        setPos?(pos: com.massifmaps.core.MapPos);
+    },
+    U extends PointVectorElementOptions
+> extends Omit<Acc_BasePointVectorElement, 'metaData'>, Omit<Met_BasePointVectorElement, 'containsMetaDataKey' | 'getBounds' | 'getGeometry'> {}
+bindNative(BasePointVectorElement, MET_BasePointVectorElement, ACC_BasePointVectorElement, { selectors: SEL_BasePointVectorElement });
+
+export interface BaseBillboardVectorElement<T extends com.massifmaps.vectorelements.Billboard, U extends PointVectorElementOptions>
+    extends Omit<Acc_BaseBillboardVectorElement, 'geometry'>, Omit<Met_BaseBillboardVectorElement, 'getBounds' | 'getGeometry'> {}
+bindNative(BaseBillboardVectorElement, MET_BaseBillboardVectorElement, ACC_BaseBillboardVectorElement, { selectors: SEL_BaseBillboardVectorElement });
+
+export interface BaseLineVectorElement<
+    T extends com.massifmaps.vectorelements.VectorElement & {
+        getPoses?(): com.massifmaps.core.MapPosVector;
+        setPoses?(pos: com.massifmaps.core.MapPosVector);
+    },
+    U extends LineVectorElementOptions
+> extends Omit<Acc_BaseLineVectorElement, 'metaData'>, Omit<Met_BaseLineVectorElement, 'containsMetaDataKey' | 'getBounds' | 'getGeometry'> {}
+bindNative(BaseLineVectorElement, MET_BaseLineVectorElement, ACC_BaseLineVectorElement, { selectors: SEL_BaseLineVectorElement });
+
+export interface BillboardStyleBuilder<T extends com.massifmaps.styles.BillboardStyleBuilder, U extends BillboardStyleBuilderOptions> extends Acc_BillboardStyleBuilder, Met_BillboardStyleBuilder {}
+bindNative(BillboardStyleBuilder, MET_BillboardStyleBuilder, ACC_BillboardStyleBuilder, { selectors: SEL_BillboardStyleBuilder });

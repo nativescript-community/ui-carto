@@ -3,7 +3,7 @@ package com.nativescript.massifmaps.geocoding;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.AKMapView;
+import com.nativescript.massifmaps.additions.MapView;
 
 
 import com.massifmaps.geocoding.GeocodingRequest;
@@ -15,8 +15,8 @@ import com.massifmaps.geocoding.ReverseGeocodingService;
 
 import java.io.IOException;
 
-public class AKGeocodingServiceAdditions {
-    static final String TAG = "AKGeocodingServiceAdditions";
+public class GeocodingServiceAdditions {
+    static final String TAG = "GeocodingServiceAdditions";
     static Handler mainHandler = null;
 
     public static void calculateAddress (final GeocodingService service, final GeocodingRequest request, final GeocodingServiceAddressCallback callback  ) {
@@ -29,7 +29,7 @@ public class AKGeocodingServiceAdditions {
                     results = service.calculateAddresses(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -46,7 +46,7 @@ public class AKGeocodingServiceAdditions {
                 }
                 
                 final GeocodingResultVector fRa = results;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -74,7 +74,7 @@ public class AKGeocodingServiceAdditions {
                     results = service.calculateAddresses(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -91,7 +91,7 @@ public class AKGeocodingServiceAdditions {
                 }
                 
                 final GeocodingResultVector fRa = results;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }

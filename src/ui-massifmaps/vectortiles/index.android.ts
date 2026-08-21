@@ -3,6 +3,22 @@ import type { MBVectorTileDecoderOptions, VectorTileDecoderOptions } from '.';
 import { getFileName, getRelativePathToApp } from '../index.common';
 import { DirAssetPackage, ZippedAssetPackage, nativeVectorToArray } from '../utils';
 import { BaseVectorTileDecoder } from './index.common';
+import {
+    ACCESSORS as ACC_VectorTileDecoder,
+    Accessors as Acc_VectorTileDecoder,
+    METHODS as MET_VectorTileDecoder,
+    Methods as Met_VectorTileDecoder,
+    SELECTORS as SEL_VectorTileDecoder
+} from '../bindings/vectortiles/VectorTileDecoder';
+import { bindNative } from '../nativeclass.common';
+import {
+    ACCESSORS as ACC_MBVectorTileDecoder,
+    Accessors as Acc_MBVectorTileDecoder,
+    METHODS as MET_MBVectorTileDecoder,
+    Methods as Met_MBVectorTileDecoder,
+    SELECTORS as SEL_MBVectorTileDecoder
+} from '../bindings/vectortiles/MBVectorTileDecoder';
+import { stringListConverter } from '..';
 
 export class VectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vectortiles.VectorTileDecoder, VectorTileDecoderOptions> {
     createNative(options: VectorTileDecoderOptions) {
@@ -12,7 +28,7 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vect
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: com.massifmaps.utils.AssetPackage | DirAssetPackage | ZippedAssetPackage;
-    mInterface: com.nativescript.massifmaps.additions.AKAssetPackage.Interface;
+    mInterface: com.nativescript.massifmaps.additions.AssetPackage.Interface;
     constructor(options) {
         super(options);
         for (const property of ['mInterface']) {
@@ -78,7 +94,7 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.ve
     }
 
     setStyleParameter(param: string, value: string) {
-        this.getNative().setStyleParameter(param, value);
+        return this.getNative().setStyleParameter(param, value);
     }
     setStyleParameters(value: Record<string, string> | com.massifmaps.core.StringMap) {
         let map: com.massifmaps.core.StringMap = value as any;
@@ -125,3 +141,9 @@ export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.ve
         return this.getNative().getMaxZoom();
     }
 }
+
+export interface VectorTileDecoder extends Acc_VectorTileDecoder, Met_VectorTileDecoder {}
+bindNative(VectorTileDecoder, MET_VectorTileDecoder, ACC_VectorTileDecoder, { selectors: SEL_VectorTileDecoder });
+
+export interface MBVectorTileDecoder extends Acc_MBVectorTileDecoder, Omit<Met_MBVectorTileDecoder, 'addFallbackFont' | 'getCartoCSSStyleSet' | 'getCompiledStyleSet' | 'getMaxZoom' | 'getMinZoom' | 'getStyleParameter' | 'getStyleParameters' | 'setCartoCSSStyleSet' | 'setCompiledStyleSet' | 'setJSONStyleParameters' | 'setStyleParameter' | 'setStyleParameters'> {}
+bindNative(MBVectorTileDecoder, MET_MBVectorTileDecoder, ACC_MBVectorTileDecoder, { selectors: SEL_MBVectorTileDecoder, converters: { styleParameters: stringListConverter } });

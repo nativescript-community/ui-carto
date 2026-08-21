@@ -3,10 +3,9 @@ package com.nativescript.massifmaps.additions2;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.AKMapView;
+import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.massifmaps.geometry.Geometry;
-import com.massifmaps.layers.VectorEditEventListener;
 import com.massifmaps.layers.VectorElementDragPointStyle;
 import com.massifmaps.layers.VectorElementDragResult;
 import com.massifmaps.styles.PointStyle;
@@ -14,7 +13,7 @@ import com.massifmaps.ui.VectorElementClickInfo;
 import com.massifmaps.ui.VectorElementDragInfo;
 import com.massifmaps.vectorelements.VectorElement;
 
-public class AKVectorEditEventListener extends VectorEditEventListener {
+public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEventListener {
     Handler mainHandler = null;
 
     public interface Listener {
@@ -41,7 +40,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
         this.listener = listener;
     }
 
-    public AKVectorEditEventListener(Listener listener) {
+    public VectorEditEventListener(Listener listener) {
         super();
         setListener(listener);
     }
@@ -49,7 +48,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public boolean onElementSelect(final VectorElement element) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -60,7 +59,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         arr[0] = new Boolean(listener.onElementSelect(element));
                     } else {
-                        arr[0] = new Boolean(AKVectorEditEventListener.super.onElementSelect(element));
+                        arr[0] = new Boolean(VectorEditEventListener.super.onElementSelect(element));
                     }
                 }
             });
@@ -77,7 +76,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public void onElementDelete(final VectorElement element) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
@@ -87,7 +86,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         listener.onElementDelete(element);
                     } else {
-                        AKVectorEditEventListener.super.onElementDelete(element);
+                        VectorEditEventListener.super.onElementDelete(element);
                     }
                 }
             });
@@ -102,7 +101,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public void onElementDeselected(final VectorElement element) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
@@ -112,7 +111,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         listener.onElementDeselected(element);
                     } else {
-                        AKVectorEditEventListener.super.onElementDeselected(element);
+                        VectorEditEventListener.super.onElementDeselected(element);
                     }
                 }
             });
@@ -127,7 +126,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public void onElementModify(final VectorElement element, final Geometry geometry) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
@@ -137,7 +136,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         listener.onElementModify(element, geometry);
                     } else {
-                        AKVectorEditEventListener.super.onElementModify(element, geometry);
+                        VectorEditEventListener.super.onElementModify(element, geometry);
                     }
                 }
             });
@@ -152,7 +151,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public PointStyle onSelectDragPointStyle(final VectorElement element, final VectorElementDragPointStyle dragPointStyle) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -163,7 +162,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         arr[0] = (listener.onSelectDragPointStyle(element, dragPointStyle));
                     } else {
-                        arr[0] = (AKVectorEditEventListener.super.onSelectDragPointStyle(element, dragPointStyle));
+                        arr[0] = (VectorEditEventListener.super.onSelectDragPointStyle(element, dragPointStyle));
                     }
                 }
             });
@@ -180,7 +179,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public VectorElementDragResult onDragEnd(final VectorElementDragInfo dragInfo) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -191,7 +190,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         arr[0] = (listener.onDragEnd(dragInfo));
                     } else {
-                        arr[0] = (AKVectorEditEventListener.super.onDragEnd(dragInfo));
+                        arr[0] = (VectorEditEventListener.super.onDragEnd(dragInfo));
                     }
                 }
             });
@@ -208,7 +207,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public VectorElementDragResult onDragMove(final VectorElementDragInfo dragInfo) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -219,7 +218,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         arr[0] = (listener.onDragMove(dragInfo));
                     } else {
-                        arr[0] = (AKVectorEditEventListener.super.onDragMove(dragInfo));
+                        arr[0] = (VectorEditEventListener.super.onDragMove(dragInfo));
                     }
                 }
             });
@@ -236,7 +235,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
 
     @Override
     public VectorElementDragResult onDragStart(final VectorElementDragInfo dragInfo) {
-        if (AKMapView.RUN_ON_MAIN_THREAD) {
+        if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -247,7 +246,7 @@ public class AKVectorEditEventListener extends VectorEditEventListener {
                     if (listener != null) {
                         arr[0] = (listener.onDragStart(dragInfo));
                     } else {
-                        arr[0] = (AKVectorEditEventListener.super.onDragStart(dragInfo));
+                        arr[0] = (VectorEditEventListener.super.onDragStart(dragInfo));
                     }
                 }
             });

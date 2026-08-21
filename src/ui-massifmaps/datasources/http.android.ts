@@ -1,15 +1,31 @@
 import { HTTPTileDataSourceOptions } from './http';
 import { TileDataSource } from '.';
-import { nativeProperty } from '..';
+
+import {
+    ACCESSORS as ACC_HTTPTileDataSource,
+    Accessors as Acc_HTTPTileDataSource,
+    METHODS as MET_HTTPTileDataSource,
+    Methods as Met_HTTPTileDataSource,
+    SELECTORS as SEL_HTTPTileDataSource
+} from '../bindings/datasources/HTTPTileDataSource';
+import { bindNative } from '../nativeclass.common';
+import { stringListConverter } from '..';
 
 export class HTTPTileDataSource extends TileDataSource<com.massifmaps.datasources.HTTPTileDataSource, HTTPTileDataSourceOptions> {
-    @nativeProperty({
-        nativeGetterName: 'isTMSScheme'
-    })
-    TMSScheme: boolean;
-    @nativeProperty maxAgeHeaderCheck: boolean;
-    @nativeProperty baseUrl: string;
-    @nativeProperty timeout: number;
+    /** @deprecated the native accessor is getBaseURL/setBaseURL - use `baseURL` */
+    get baseUrl() {
+        return this.baseURL;
+    }
+    set baseUrl(value: string) {
+        this.baseURL = value;
+    }
+    /** the SDK accessor is isTMSScheme/setTMSScheme, which the table synthesises as `tmsScheme` */
+    get TMSScheme(): boolean {
+        return this.tmsScheme;
+    }
+    set TMSScheme(value: boolean) {
+        this.tmsScheme = value;
+    }
     createNative(options: HTTPTileDataSourceOptions) {
         return new com.massifmaps.datasources.HTTPTileDataSource(options.minZoom, options.maxZoom, options.url);
     }
@@ -32,3 +48,6 @@ export class HTTPTileDataSource extends TileDataSource<com.massifmaps.datasource
         this.native.setSubdomains(vector);
     }
 }
+
+export interface HTTPTileDataSource extends Omit<Acc_HTTPTileDataSource, 'httpHeaders' | 'subdomains'>, Omit<Met_HTTPTileDataSource, 'loadTile'> {}
+bindNative(HTTPTileDataSource, MET_HTTPTileDataSource, ACC_HTTPTileDataSource, { selectors: SEL_HTTPTileDataSource, converters: { subdomains: stringListConverter } });

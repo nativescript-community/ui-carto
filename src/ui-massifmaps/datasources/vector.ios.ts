@@ -5,6 +5,15 @@ import { GeometrySimplifier } from '../geometry/simplifier';
 import { FeatureCollection } from '../geometry/feature';
 import { fromNativeMapBounds } from '../core';
 import { featureCollectionFromArgs, styleFromArgs } from '..';
+import {
+    ACCESSORS as ACC_LocalVectorDataSource,
+    Accessors as Acc_LocalVectorDataSource,
+    METHODS as MET_LocalVectorDataSource,
+    Methods as Met_LocalVectorDataSource,
+    SELECTORS as SEL_LocalVectorDataSource
+} from '../bindings/datasources/LocalVectorDataSource';
+import { bindNative } from '../nativeclass.common';
+import { ACCESSORS as ACC_VectorDataSource, Accessors as Acc_VectorDataSource, METHODS as MET_VectorDataSource, Methods as Met_VectorDataSource, SELECTORS as SEL_VectorDataSource } from '../bindings/datasources/VectorDataSource';
 
 export abstract class VectorDataSource<T extends MSFVectorDataSource, U extends LocalVectorDataSourceOptions> extends DataSource<T, U> {
     // createNative(options: U) {
@@ -51,3 +60,10 @@ export class LocalVectorDataSource extends VectorDataSource<MSFLocalVectorDataSo
         return fromNativeMapBounds(this.getNative().getDataExtent());
     }
 }
+
+export interface LocalVectorDataSource
+    extends Acc_LocalVectorDataSource, Omit<Met_LocalVectorDataSource, 'add' | 'addAll' | 'addFeatureCollection' | 'clear' | 'getAll' | 'getDataExtent' | 'remove' | 'removeAll' | 'setGeometrySimplifier'> {}
+bindNative(LocalVectorDataSource, MET_LocalVectorDataSource, ACC_LocalVectorDataSource, { selectors: SEL_LocalVectorDataSource });
+
+export interface LocalVectorDataSource extends Acc_VectorDataSource, Omit<Met_VectorDataSource, 'getDataExtent' | 'getProjection' | 'loadElements'> {}
+bindNative(LocalVectorDataSource, MET_VectorDataSource, ACC_VectorDataSource, { selectors: SEL_VectorDataSource });

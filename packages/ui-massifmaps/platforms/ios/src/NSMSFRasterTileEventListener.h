@@ -1,6 +1,6 @@
 #import <MassifMaps/MassifMaps.h>
 
-@interface AKRasterTileEventListener : MSFRasterTileEventListener
+@interface NSMSFRasterTileEventListener : MSFRasterTileEventListener
 
 @property (nonatomic, assign) BOOL runOnMainThread;
 

@@ -2,8 +2,26 @@
     "name": "@nativescript-community/template-snippet",
     "private": true,
     "version": "0.0.1",
+    "scripts": {
+        "postinstall": "node ./scripts/install-hooks.js"
+    },
+    "nativescript": {
+        "hooks": [
+            {
+                "name": "template-snippet-include-settings",
+                "type": "after-prepareNativeApp",
+                "script": "hooks/after-prepareNativeApp/include-settings.js",
+                "inject": true
+            }
+        ]
+    },
     "dependencies": {
+        "@nativescript-community/ui-drawer": "^0.1.32",
         "@nativescript-community/ui-massifmaps": "*",
+        "@nativescript-community/ui-material-core": "^7.3.2",
+        "@nativescript-community/ui-material-segmentedbar": "^7.3.2",
+        "@nativescript-community/ui-material-slider": "^7.3.2",
+        "@nativescript-community/ui-persistent-bottomsheet": "^0.1.12",
         "vue-property-decorator": "9.1.2"
     }
 }

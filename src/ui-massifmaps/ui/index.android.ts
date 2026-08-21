@@ -1,3 +1,4 @@
+import { FogOptions, LightOptions, MapOptions, SkyOptions, TerrainOptions } from '../components';
 import {
     ClickType,
     DefaultLatLonKeys,
@@ -17,10 +18,11 @@ import {
 import { Layer, TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
-import { Layers as BaseLayers, MassifMapViewBase, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent } from './index.common';
+import { Layers as BaseLayers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, MassifMapViewBase } from './index.common';
 
 import { ImageSource, Property, Utils, booleanConverter } from '@nativescript/core';
-import { MapClickInfo, MapGestureInfo, MapInteractionInfo, MapOptions } from '.';
+import { FlyToOptions, MapClickInfo, MapGestureInfo, MapInteractionInfo } from '.';
+import { PostProcessEffect } from '../renderers';
 import { EPSG4326 } from '../projections/epsg4326';
 export { MapClickedEvent, MapIdleEvent, MapMovedEvent, MapReadyEvent, MapStableEvent };
 
@@ -47,15 +49,15 @@ export const PanningMode = {
 export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
     public useTextureView: boolean;
     public static setRunOnMainThread(value: boolean) {
-        com.nativescript.massifmaps.additions.AKMapView.setRunOnMainThread(value);
+        com.nativescript.massifmaps.additions.MapView.setRunOnMainThread(value);
     }
 
-    nativeViewProtected: com.nativescript.massifmaps.additions.AKMapView & {
-        listener: com.nativescript.massifmaps.additions.AKMapEventListener;
+    nativeViewProtected: com.nativescript.massifmaps.additions.MapView & {
+        listener: com.nativescript.massifmaps.additions.MapEventListener;
     };
     mProjection: IProjection;
 
-    override get mapView(): com.nativescript.massifmaps.additions.AKMapView {
+    override get mapView(): com.nativescript.massifmaps.additions.MapView {
         return super.mapView;
     }
 
@@ -68,12 +70,12 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
             this.mapView.getOptions().setBaseProjection(proj ? proj.getNative() : null);
         }
     }
-    public createNativeView(): Object {
+    public createNativeView() {
         let view;
         if (this.useTextureView) {
-            view = new com.nativescript.massifmaps.additions.AKTextureMapView(this._context);
+            view = new com.nativescript.massifmaps.additions.TextureMapView(this._context);
         } else {
-            view = new com.nativescript.massifmaps.additions.AKMapView(this._context);
+            view = new com.nativescript.massifmaps.additions.MapView(this._context);
         }
         return view;
     }
@@ -91,18 +93,83 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         }
     }
 
+    mOptions: MapOptions;
+    /**
+     * The map's Options, wrapped once and cached - the native instance never changes,
+     * and re-wrapping would drop the wrapper's own state (the cached TerrainOptions and
+     * friends). Null until the map is ready.
+     */
     getOptions() {
-        if (this.mapReady) {
-            return this.mapView.getOptions() as any as MapOptions;
+        if (!this.mapReady) {
+            return null;
         }
-        return null;
+        const native = this.mapView.getOptions();
+        if (this.mOptions?.getNative() !== native) {
+            this.mOptions = new MapOptions(undefined, native);
+        }
+        return this.mOptions;
+    }
+
+    getTerrainOptions() {
+        return this.getOptions()?.getTerrainOptions() ?? null;
+    }
+    /** install terrain built with `new TerrainOptions({ dataSource })` */
+    setTerrainOptions(terrain: TerrainOptions) {
+        this.getOptions()?.setTerrainOptions(terrain);
+    }
+    getSkyOptions() {
+        return this.getOptions()?.getSkyOptions() ?? null;
+    }
+    setSkyOptions(skyOptions: SkyOptions) {
+        this.getOptions()?.setSkyOptions(skyOptions);
+    }
+    getLightOptions() {
+        return this.getOptions()?.getLightOptions() ?? null;
+    }
+    setLightOptions(lightOptions: LightOptions) {
+        this.getOptions()?.setLightOptions(lightOptions);
+    }
+    getFogOptions() {
+        return this.getOptions()?.getFogOptions() ?? null;
+    }
+    setFogOptions(fogOptions: FogOptions) {
+        this.getOptions()?.setFogOptions(fogOptions);
+    }
+    mPostProcessEffect: PostProcessEffect;
+    getPostProcessEffect() {
+        const native = this.mapView?.getMapRenderer().getPostProcessEffect();
+        if (!native) {
+            return null;
+        }
+        if (this.mPostProcessEffect?.getNative() !== native) {
+            this.mPostProcessEffect = new PostProcessEffect(undefined, native);
+        }
+        return this.mPostProcessEffect;
+    }
+    setPostProcessEffect(effect: PostProcessEffect) {
+        this.mPostProcessEffect = effect;
+        this.mapView?.getMapRenderer().setPostProcessEffect(effect?.getNative() ?? null);
+    }
+
+    flyTo(position: MapPos, options: FlyToOptions = {}) {
+        const { bearing = this.mapView.getMapRotation(), climbHeight = 0, duration = 0, tilt = this.mapView.getTilt(), zoom = this.mapView.getZoom() } = options;
+        this.mapView.flyTo(toNativeMapPos(position), zoom, bearing, tilt, climbHeight, duration / 1000);
+    }
+    getFlightProgress() {
+        return this.mapView.getFlightProgress();
+    }
+    isFlightActive() {
+        return this.mapView.isFlightActive();
+    }
+    stopFlight() {
+        this.mapView.stopFlight();
     }
     initNativeView(): void {
         super.initNativeView();
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
-        const listener = new com.nativescript.massifmaps.additions.AKMapEventListener({
+        const listener = new com.nativescript.massifmaps.additions.MapEventListener({
             onMapIdle: () => {
                 this.sendEvent(MapIdleEvent);
             },

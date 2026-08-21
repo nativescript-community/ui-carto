@@ -3,7 +3,7 @@ package com.nativescript.massifmaps.routing;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.AKMapView;
+import com.nativescript.massifmaps.additions.MapView;
 
 import org.json.JSONException;
 import org.json.JSONArray;
@@ -23,7 +23,7 @@ import com.massifmaps.routing.MultiValhallaOfflineRoutingService;
 import java.io.IOException;
 
 
-public class AKRoutingServiceAdditions {
+public class RoutingServiceAdditions {
     enum RoutingAction {
         HEAD_ON,
         FINISH,
@@ -44,7 +44,7 @@ public class AKRoutingServiceAdditions {
         WAIT
     }
 
-    static final String TAG = "AKRoutingServiceAdditions";
+    static final String TAG = "RoutingServiceAdditions";
     static Handler mainHandler = null;
 
     public static void calculateRoute (final RoutingService service, final RoutingRequest request, final String profile, final boolean stringify,  final RoutingServiceRouteCallback callback) {
@@ -61,7 +61,7 @@ public class AKRoutingServiceAdditions {
                     }
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -79,7 +79,7 @@ public class AKRoutingServiceAdditions {
                 
                 final RoutingResult fRa = result;
                 final String fStrResult = strResult;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -138,7 +138,7 @@ public class AKRoutingServiceAdditions {
                     result = stringifyRoutingResult(routingResult);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -155,7 +155,7 @@ public class AKRoutingServiceAdditions {
                 }
                 
                 final String fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -185,7 +185,7 @@ public class AKRoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -202,7 +202,7 @@ public class AKRoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -231,7 +231,7 @@ public class AKRoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -248,7 +248,7 @@ public class AKRoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -277,7 +277,7 @@ public class AKRoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -294,7 +294,7 @@ public class AKRoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -322,7 +322,7 @@ public class AKRoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (AKMapView.RUN_ON_MAIN_THREAD) {
+                    if (MapView.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -339,7 +339,7 @@ public class AKRoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (MapView.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -368,7 +368,7 @@ public class AKRoutingServiceAdditions {
     //                 result = service.rawCall(option, request);
     //             } catch (final Exception e) {
     //                 e.printStackTrace();
-    //                 if (AKMapView.RUN_ON_MAIN_THREAD) {
+    //                 if (MapView.RUN_ON_MAIN_THREAD) {
     //                     if (mainHandler == null) {
     //                         mainHandler = new Handler(android.os.Looper.getMainLooper());
     //                     }
@@ -385,7 +385,7 @@ public class AKRoutingServiceAdditions {
     //             }
                 
     //             final String fRa = result;
-    //             if (AKMapView.RUN_ON_MAIN_THREAD) {
+    //             if (MapView.RUN_ON_MAIN_THREAD) {
     //                 if (mainHandler == null) {
     //                     mainHandler = new Handler(android.os.Looper.getMainLooper());
     //                 }

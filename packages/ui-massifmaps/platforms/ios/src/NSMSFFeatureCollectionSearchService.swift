@@ -1,5 +1,5 @@
 //
-//  AKFeatureCollectionSearchService.swift
+//  NSMSFFeatureCollectionSearchService.swift
 //  demosvelte
 //
 //  Created by Martin Guillon on 14/02/2024.
@@ -7,14 +7,14 @@
 //
 import MassifMaps
 
-@objc(AKFeatureCollectionSearchService)
+@objc(NSMSFFeatureCollectionSearchService)
 @objcMembers
-class AKFeatureCollectionSearchService: MSFFeatureCollectionSearchService {
+class NSMSFFeatureCollectionSearchService: MSFFeatureCollectionSearchService {
   
   func findFeaturesCallback(_ request: MSFSearchRequest!, _ callback: @escaping (_ features: MSFFeatureCollection?) -> Void) {
     DispatchQueue.global(qos: .background).async {
       let result = self.findFeatures(request)
-      if (AKMapView.RUN_ON_MAIN_THREAD) {
+      if (NSMSFMapView.RUN_ON_MAIN_THREAD) {
         DispatchQueue.main.async() {
           callback(result)
         }

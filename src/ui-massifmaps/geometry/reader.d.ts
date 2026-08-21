@@ -1,28 +1,16 @@
 import { BaseNative } from '..';
 import { FeatureCollection } from './feature';
 import { Projection } from '../projections';
+import { Accessors as Acc_GeoJSONGeometryReader } from '../bindings/geometry/GeoJSONGeometryReader';
+import { Methods as Met_GeoJSONGeometryReader } from '../bindings/geometry/GeoJSONGeometryReader';
 
 export interface GeoJSONGeometryReaderOptions {
     targetProjection?: Projection;
 }
 export class GeoJSONGeometryReader extends BaseNative<any, GeoJSONGeometryReaderOptions> {
     targetProjection?: Projection;
-    readGeometry(value: string | Object): Geometry<T>;
-    readFeatureCollection(str: string | Object): FeatureCollection;
+    readGeometry(value: string | object): Geometry<T>;
+    readFeatureCollection(str: string | object): FeatureCollection;
 }
 
-export interface WKBGeometryReaderOptions {
-    bigEndian?: boolean;
-    z?: boolean;
-}
-export class WKBGeometryReader<T = DefaultLatLonKeys> extends BaseNative<any, WKBGeometryReaderOptions> {
-    readGeometry(value: any): Geometry<T>;
-}
-
-export interface WKTGeometryReaderOptions {
-    bigEndian?: boolean;
-    z?: boolean;
-}
-export class WKTGeometryReader<T = DefaultLatLonKeys> extends BaseNative<any, WKTGeometryReaderOptions> {
-    readGeometry(value: string): Geometry<T>;
-}
+export interface GeoJSONGeometryReader extends Omit<Acc_GeoJSONGeometryReader, 'targetProjection'>, Omit<Met_GeoJSONGeometryReader, 'readFeatureCollection' | 'readGeometry'> {}

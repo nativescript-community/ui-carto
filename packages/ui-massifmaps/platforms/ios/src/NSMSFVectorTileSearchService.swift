@@ -1,15 +1,15 @@
 import MassifMaps
 import SwiftTryCatch
 
-@objc(AKVectorTileSearchService)
+@objc(NSMSFVectorTileSearchService)
 @objcMembers
-class AKVectorTileSearchService: MSFVectorTileSearchService {
+class NSMSFVectorTileSearchService: MSFVectorTileSearchService {
     
     func findFeaturesCallback(_ request: MSFSearchRequest!, _ callback: @escaping (_ features: MSFVectorTileFeatureCollection?, _ error: NSException?) -> Void) {
         DispatchQueue.global(qos: .background).async {
             SwiftTryCatch.try {
                 let result = self.findFeatures(request)
-                if (AKMapView.RUN_ON_MAIN_THREAD) {
+                if (NSMSFMapView.RUN_ON_MAIN_THREAD) {
                     DispatchQueue.main.async() {
                         callback(result, nil)
                     }

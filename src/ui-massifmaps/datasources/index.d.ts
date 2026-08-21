@@ -1,6 +1,14 @@
 import { BaseNative } from '..';
 import { Projection } from '../projections';
 import { FeatureCollection } from '../geometry/feature';
+import { Accessors as Acc_MergedMBVTTileDataSource } from '../bindings/datasources/MergedMBVTTileDataSource';
+import { Accessors as Acc_MultiTileDataSource } from '../bindings/datasources/MultiTileDataSource';
+import { Methods as Met_MergedMBVTTileDataSource } from '../bindings/datasources/MergedMBVTTileDataSource';
+import { Methods as Met_MultiTileDataSource } from '../bindings/datasources/MultiTileDataSource';
+import { Accessors as Acc_OrderedTileDataSource, Methods as Met_OrderedTileDataSource } from '../bindings/datasources/OrderedTileDataSource';
+import { Accessors as Acc_CombinedTileDataSource, Methods as Met_CombinedTileDataSource } from '../bindings/datasources/CombinedTileDataSource';
+import { Accessors as Acc_GeoJSONVectorTileDataSource, Methods as Met_GeoJSONVectorTileDataSource } from '../bindings/datasources/GeoJSONVectorTileDataSource';
+import { Accessors as Acc_TileDataSource, Methods as Met_TileDataSource } from '../bindings/datasources/TileDataSource';
 
 export interface DataSourceOptions {
     minZoom?: number;
@@ -63,3 +71,32 @@ export class GeoJSONVectorTileDataSource extends TileDataSource<any, GeoJSONVect
     updateGeoJSONStringFeature(layerIndex: number, geoJSON: string | object);
     removeGeoJSONFeature(layerIndex: number, id: string | number);
 }
+
+
+
+
+
+export interface GeoJSONVectorTileDataSource
+    extends Omit<Acc_GeoJSONVectorTileDataSource, 'defaultLayerBuffer' | 'simplifyTolerance'>, Omit<Met_GeoJSONVectorTileDataSource, 'addGeoJSONFeature' | 'addGeoJSONStringFeature' | 'createLayer' | 'deleteLayer' | 'removeGeoJSONFeature' | 'setLayerFeatureCollection' | 'setLayerGeoJSON' | 'setLayerGeoJSONString' | 'updateGeoJSONFeature' | 'updateGeoJSONStringFeature'> {}
+
+export interface TileDataSource<T, U extends TileDataSourceOptions> extends Omit<Acc_TileDataSource, 'encoding' | 'maxOverzoomLevel'>, Omit<Met_TileDataSource, 'loadTile'> {}
+
+export interface GeoJSONVectorTileDataSource extends Omit<Acc_GeoJSONVectorTileDataSource, 'defaultLayerBuffer' | 'simplifyTolerance'>, Omit<Met_GeoJSONVectorTileDataSource, 'addGeoJSONFeature' | 'addGeoJSONStringFeature' | 'createLayer' | 'deleteLayer' | 'removeGeoJSONFeature' | 'setLayerFeatureCollection' | 'setLayerGeoJSON' | 'setLayerGeoJSONString' | 'updateGeoJSONFeature' | 'updateGeoJSONStringFeature'> {}
+
+export interface OrderedTileDataSource<T, U extends OrderedTileDataSourceOptions> extends Acc_OrderedTileDataSource, Met_OrderedTileDataSource {}
+
+export interface CombinedTileDataSource<T, U extends CombinedTileDataSourceOptions> extends Acc_CombinedTileDataSource, Met_CombinedTileDataSource {}
+
+export interface MergedMBVTTileDataSource<T, U extends MergedMBVTTileDataSourceOptions> extends Acc_MergedMBVTTileDataSource, Met_MergedMBVTTileDataSource {}
+
+export interface MultiTileDataSource<T, U extends MultiTileDataSourceOptions> extends Acc_MultiTileDataSource, Omit<Met_MultiTileDataSource, 'add' | 'remove'> {}
+
+export interface OrderedTileDataSource<T, U extends OrderedTileDataSourceOptions> extends Acc_TileDataSource, Omit<Met_TileDataSource, 'getDataExtent' | 'getMaxZoom' | 'getMetaData' | 'getMinZoom' | 'loadTile'> {}
+
+export interface CombinedTileDataSource<T, U extends CombinedTileDataSourceOptions> extends Acc_TileDataSource, Omit<Met_TileDataSource, 'getDataExtent' | 'getMaxZoom' | 'getMetaData' | 'getMinZoom' | 'loadTile'> {}
+
+export interface MergedMBVTTileDataSource<T, U extends MergedMBVTTileDataSourceOptions> extends Acc_TileDataSource, Omit<Met_TileDataSource, 'getDataExtent' | 'getMaxZoom' | 'getMinZoom' | 'loadTile'> {}
+
+export interface GeoJSONVectorTileDataSource extends Acc_TileDataSource, Omit<Met_TileDataSource, 'getDataExtent' | 'loadTile'> {}
+
+export interface MultiTileDataSource<T, U extends MultiTileDataSourceOptions> extends Acc_TileDataSource, Omit<Met_TileDataSource, 'getDataExtent' | 'getMaxZoom' | 'getMinZoom' | 'loadTile'> {}

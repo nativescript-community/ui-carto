@@ -1,3 +1,6 @@
+import { bindNative } from '../nativeclass.common';
+import { ACCESSORS as TDS_ACC, METHODS as TDS_MET, SELECTORS as TDS_SEL, Accessors as TdsAcc } from '../bindings/datasources/TileDataSource';
+import { ACCESSORS as GEO_ACC, METHODS as GEO_MET, SELECTORS as GEO_SEL, Accessors as GeoAcc } from '../bindings/datasources/GeoJSONVectorTileDataSource';
 import {
     CombinedTileDataSourceOptions,
     DataSourceOptions,
@@ -12,6 +15,35 @@ import { FeatureCollection } from '../geometry/feature';
 import { BaseNative } from '../BaseNative';
 import { Projection } from '../projections';
 import { JSVariantToNative, jsonVariant } from '../utils';
+import {
+    ACCESSORS as ACC_MergedMBVTTileDataSource,
+    Accessors as Acc_MergedMBVTTileDataSource,
+    METHODS as MET_MergedMBVTTileDataSource,
+    Methods as Met_MergedMBVTTileDataSource,
+    SELECTORS as SEL_MergedMBVTTileDataSource
+} from '../bindings/datasources/MergedMBVTTileDataSource';
+import {
+    ACCESSORS as ACC_MultiTileDataSource,
+    Accessors as Acc_MultiTileDataSource,
+    METHODS as MET_MultiTileDataSource,
+    Methods as Met_MultiTileDataSource,
+    SELECTORS as SEL_MultiTileDataSource
+} from '../bindings/datasources/MultiTileDataSource';
+import {
+    ACCESSORS as ACC_OrderedTileDataSource,
+    Accessors as Acc_OrderedTileDataSource,
+    METHODS as MET_OrderedTileDataSource,
+    Methods as Met_OrderedTileDataSource,
+    SELECTORS as SEL_OrderedTileDataSource
+} from '../bindings/datasources/OrderedTileDataSource';
+import {
+    ACCESSORS as ACC_CombinedTileDataSource,
+    Accessors as Acc_CombinedTileDataSource,
+    METHODS as MET_CombinedTileDataSource,
+    Methods as Met_CombinedTileDataSource,
+    SELECTORS as SEL_CombinedTileDataSource
+} from '../bindings/datasources/CombinedTileDataSource';
+import { ACCESSORS as ACC_DataSource, Accessors as Acc_DataSource, METHODS as MET_DataSource, Methods as Met_DataSource, SELECTORS as SEL_DataSource } from '../bindings/datasources/TileDataSource';
 
 export abstract class DataSource<T extends MSFTileDataSource, U extends DataSourceOptions> extends BaseNative<T, U> {
     getProjection() {
@@ -22,8 +54,6 @@ export abstract class DataSource<T extends MSFTileDataSource, U extends DataSour
     }
 }
 export class TileDataSource<T extends MSFTileDataSource, U extends TileDataSourceOptions> extends DataSource<T, U> {
-    @nativeProperty maxOverzoomLevel: number;
-    @nativeProperty encoding: string;
     createNative(options) {
         return null;
     }
@@ -73,8 +103,6 @@ export class MergedMBVTTileDataSource extends TileDataSource<MSFMergedMBVTTileDa
 }
 
 export class GeoJSONVectorTileDataSource extends TileDataSource<MSFGeoJSONVectorTileDataSource, GeoJSONVectorTileDataSourceOptions> {
-    @nativeProperty simplifyTolerance: number;
-    @nativeProperty defaultLayerBuffer: number;
     createNative(options: GeoJSONVectorTileDataSourceOptions) {
         return MSFGeoJSONVectorTileDataSource.alloc().initWithMinZoomMaxZoom(options.minZoom, options.maxZoom);
     }
@@ -133,3 +161,21 @@ export class MultiTileDataSource extends TileDataSource<MSFMultiTileDataSource, 
         }
     }
 }
+
+export interface TileDataSource<T extends MSFTileDataSource, U extends TileDataSourceOptions> extends TdsAcc {}
+bindNative(TileDataSource, TDS_MET, TDS_ACC, { selectors: TDS_SEL });
+
+export interface GeoJSONVectorTileDataSource extends GeoAcc {}
+bindNative(GeoJSONVectorTileDataSource, GEO_MET, GEO_ACC, { selectors: GEO_SEL });
+
+export interface MergedMBVTTileDataSource extends Acc_MergedMBVTTileDataSource, Omit<Met_MergedMBVTTileDataSource, 'loadTile'> {}
+bindNative(MergedMBVTTileDataSource, MET_MergedMBVTTileDataSource, ACC_MergedMBVTTileDataSource, { selectors: SEL_MergedMBVTTileDataSource });
+
+export interface MultiTileDataSource extends Acc_MultiTileDataSource, Omit<Met_MultiTileDataSource, 'add' | 'loadTile' | 'remove'> {}
+bindNative(MultiTileDataSource, MET_MultiTileDataSource, ACC_MultiTileDataSource, { selectors: SEL_MultiTileDataSource });
+
+export interface OrderedTileDataSource extends Acc_OrderedTileDataSource, Omit<Met_OrderedTileDataSource, 'loadTile'> {}
+bindNative(OrderedTileDataSource, MET_OrderedTileDataSource, ACC_OrderedTileDataSource, { selectors: SEL_OrderedTileDataSource });
+
+export interface CombinedTileDataSource extends Acc_CombinedTileDataSource, Omit<Met_CombinedTileDataSource, 'loadTile'> {}
+bindNative(CombinedTileDataSource, MET_CombinedTileDataSource, ACC_CombinedTileDataSource, { selectors: SEL_CombinedTileDataSource });
