@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/nativescript-community/ui-massifmaps/compare/v3.0.0...v3.0.1) (2026-08-22)
+
+### Bug Fixes
+
+* add publishConfig access public for scoped npm package ([a345740](https://github.com/nativescript-community/ui-massifmaps/commit/a345740d0d02003a407ec6bffb4416f19bd8ae5d))
+
 ## [3.0.0](https://github.com/nativescript-community/ui-massifmaps/compare/v2.1.0...v3.0.0) (2026-08-21)
 
 ### ⚠ BREAKING CHANGES
