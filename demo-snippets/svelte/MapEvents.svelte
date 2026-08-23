@@ -8,16 +8,20 @@
      * "ignore the next stable" after a programmatic move, and no falling back to `mapIdle`.
      */
     import { MassifMap, MapMovedEvent, MapStableEvent } from '@nativescript-community/ui-massifmaps/ui';
+    import { attach, MassifMap as MassifMapApi } from '@nativescript-community/ui-massifmaps/api';
     import MapShell from './common/MapShell.svelte';
     import SettingSwitch from './common/SettingSwitch.svelte';
     import { createBaseMap } from './common/basemap';
     import { GRENOBLE } from './common/sources';
 
     let map: MassifMap;
+    let api: MassifMapApi;
     let status = 'drag the map, then use the button';
     let refreshes = 0;
     let moves = 0;
     let stables = 0;
+    let tracked = 0;
+    let settled = 0;
     let userOnly = true;
 
     const baseMap = createBaseMap();
@@ -26,7 +30,7 @@
     /** Stands in for the real work - a fetch of whatever is on screen now. */
     function refreshData(reason: string) {
         refreshes++;
-        status = `refreshed (${reason}) · ${moves} moves, ${stables} stable, ${refreshes} refreshes`;
+        status = `refreshed (${reason}) · ${moves} moves, ${tracked} throttled, ${stables} stable, ${refreshes} refreshes`;
     }
 
     function setup(m: MassifMap) {
@@ -36,6 +40,29 @@
         m.on(MapMovedEvent, (e) => {
             moves++;
         });
+
+        // THROTTLE - the leading edge. The same event, at most one every 250 ms, for a readout
+        // that should track the movement. Events inside the window are DROPPED, not delivered
+        // late: the payload does not outlive the emit, so there is nothing to deliver later.
+        //
+        // The subscription options live on the facade object, so this goes through `attach`
+        // rather than the view's own `on`.
+        api = attach(m, { id: 'events-demo' });
+        api.subscribe('map.moved', (e) => {
+            tracked++;
+        }, { throttle: 250 });
+
+        // DEBOUNCE - the trailing edge. Fires once, 400 ms after the map goes quiet, and each new
+        // event restarts the clock. Its payload is a SNAPSHOT read at emit time, so `e.get(...)`
+        // reads the frozen copy rather than a handle the facade has already freed.
+        //
+        // Note this is NOT how you get "the map settled": mapStable already fires exactly once at
+        // the end of a movement. Reach for debounce when you want to wait PAST the settle - to
+        // coalesce several movements into one fetch, say.
+        api.subscribe('map.stable', (e) => {
+            settled++;
+            status = `settled ${settled}x, 400 ms after the last movement (${e.get('reason')})`;
+        }, { debounce: 400 });
 
         // Once per movement, at the end of it. `e` is typed from the event name, so `e.data.reason`
         // is 'gesture' | 'animation' | 'api' and a typo does not compile.
@@ -68,5 +95,7 @@
             onChange={(v) => (userOnly = v)} />
         <button text="fly to Chamonix" on:tap={flyElsewhere} />
         <label class="setting-hint" text="A tap that does not move the camera raises no stable at all." textWrap="true" />
+        <label class="section-title" text="Rates" />
+        <label class="setting-hint" text={`${moves} raw moves -> ${tracked} after throttle(250) -> ${stables} stable -> ${settled} after debounce(400)`} textWrap="true" />
     </stackLayout>
 </MapShell>

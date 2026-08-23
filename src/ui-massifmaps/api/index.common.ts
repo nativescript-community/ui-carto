@@ -1854,9 +1854,9 @@ export function attach(view: MapViewLike, options: AttachOptions = {}): MassifMa
     bridge.attachMapEvents(view.mapView, handle);
 
     const map = new MassifMap(handle as Handle<'massif::Options'>, id, view);
-    const { projection, throttle } = options;
-    if (projection || throttle) {
-        map.eventOptions({ projection, throttle });
+    const { projection, throttle, debounce } = options;
+    if (projection || throttle || debounce) {
+        map.eventOptions({ projection, throttle, debounce });
     }
     return map;
 }
