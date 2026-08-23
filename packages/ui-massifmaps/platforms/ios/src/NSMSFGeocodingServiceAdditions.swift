@@ -13,7 +13,7 @@ import SwiftTryCatch
 @objc(NSMSFGeocodingServiceAdditions)
 @objcMembers
 class NSMSFGeocodingServiceAdditions: NSObject {
-    static var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
+    static var runOnMainThread = NSMSFMainThread.RUN_ON_MAIN_THREAD
     static func calculateAddress (_ service: MSFGeocodingService, _ request: MSFGeocodingRequest, _ callback: @escaping (_ result: MSFGeocodingResultVector?, _ error: NSException?) -> Void) {
         DispatchQueue.global(qos: .background).async {
             SwiftTryCatch.try {

@@ -47,17 +47,15 @@ export const PanningMode = {
 };
 
 export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
-    public useTextureView: boolean;
     public static setRunOnMainThread(value: boolean) {
-        com.nativescript.massifmaps.additions.MapView.setRunOnMainThread(value);
+        com.nativescript.massifmaps.additions.SynchronousHandler.setRunOnMainThread(value);
     }
 
-    nativeViewProtected: com.nativescript.massifmaps.additions.MapView & {
-        listener: com.nativescript.massifmaps.additions.MapEventListener;
-    };
+    public useTextureView: boolean;
+    nativeViewProtected: com.massifmaps.ui.MapView;
     mProjection: IProjection;
 
-    override get mapView(): com.nativescript.massifmaps.additions.MapView {
+    override get mapView(): com.massifmaps.ui.MapView {
         return super.mapView;
     }
 
@@ -73,9 +71,9 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
     public createNativeView() {
         let view;
         if (this.useTextureView) {
-            view = new com.nativescript.massifmaps.additions.TextureMapView(this._context);
+            view = new com.massifmaps.ui.TextureMapView(this._context);
         } else {
-            view = new com.nativescript.massifmaps.additions.MapView(this._context);
+            view = new com.massifmaps.ui.MapView(this._context);
         }
         return view;
     }
@@ -169,69 +167,11 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
-        const listener = new com.nativescript.massifmaps.additions.MapEventListener({
-            onMapIdle: () => {
-                this.sendEvent(MapIdleEvent);
-            },
-            onMapMoved: (reason: number) => {
-                this.sendEvent<MapGestureInfo>(MapMovedEvent, moveEventData(reason));
-            },
-            onMapInteraction: (interaction: com.massifmaps.ui.MapInteractionInfo, reason: number) => {
-                this.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
-                    ...moveEventData(reason),
-                    interaction: {
-                        get isAnimationStarted() {
-                            return interaction.isAnimationStarted();
-                        },
-                        get isPanAction() {
-                            return interaction.isPanAction();
-                        },
-                        get isRotateAction() {
-                            return interaction.isRotateAction();
-                        },
-                        get isTiltAction() {
-                            return interaction.isTiltAction();
-                        },
-                        get isZoomAction() {
-                            return interaction.isZoomAction();
-                        }
-                    }
-                });
-            },
-            onMapStable: (reason: number) => {
-                this.sendEvent<MapGestureInfo>(MapStableEvent, moveEventData(reason));
-            },
-            onMapClicked: (mapClickInfo: com.massifmaps.ui.MapClickInfo) => {
-                this.sendEvent<MapClickInfo>(MapClickedEvent, {
-                    android: mapClickInfo,
-                    get clickInfo() {
-                        return {
-                            get duration(): number {
-                                return mapClickInfo.getClickInfo().getDuration();
-                            }
-                        };
-                    },
-                    get clickType(): ClickType {
-                        // This will return an integer value that can be compared with the actual enum
-                        return mapClickInfo.getClickType();
-                    },
-                    get position() {
-                        return fromNativeMapPos(mapClickInfo.getClickPos());
-                    }
-                });
-            }
-        });
-        this.nativeViewProtected.listener = listener;
-        this.nativeViewProtected.setMapEventListener(listener);
     }
 
     disposeNativeView(): void {
         this.mProjection = null;
         this.nativeProjection = null;
-        if (this.nativeViewProtected.listener) {
-            this.nativeViewProtected.listener = null;
-            this.nativeViewProtected.setMapEventListener(null);
-        }
         this.nativeView.owner = null;
         super.disposeNativeView();
     }

@@ -1,9 +1,9 @@
 package com.nativescript.massifmaps.routing;
 
+import com.nativescript.massifmaps.additions.SynchronousHandler;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.MapView;
 
 import org.json.JSONException;
 import org.json.JSONArray;
@@ -41,7 +41,7 @@ public class RoutingServiceAdditions {
                     }
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -59,7 +59,7 @@ public class RoutingServiceAdditions {
                 
                 final RoutingResult fRa = result;
                 final String fStrResult = strResult;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -121,7 +121,7 @@ public class RoutingServiceAdditions {
                     result = stringifyRoutingResult(routingResult);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -138,7 +138,7 @@ public class RoutingServiceAdditions {
                 }
                 
                 final String fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -168,7 +168,7 @@ public class RoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -185,7 +185,7 @@ public class RoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -214,7 +214,7 @@ public class RoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -231,7 +231,7 @@ public class RoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -260,7 +260,7 @@ public class RoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -277,7 +277,7 @@ public class RoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -305,7 +305,7 @@ public class RoutingServiceAdditions {
                     result = service.matchRoute(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -322,7 +322,7 @@ public class RoutingServiceAdditions {
                 }
                 
                 final RouteMatchingResult fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -351,7 +351,7 @@ public class RoutingServiceAdditions {
     //                 result = service.rawCall(option, request);
     //             } catch (final Exception e) {
     //                 e.printStackTrace();
-    //                 if (MapView.RUN_ON_MAIN_THREAD) {
+    //                 if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
     //                     if (mainHandler == null) {
     //                         mainHandler = new Handler(android.os.Looper.getMainLooper());
     //                     }
@@ -368,7 +368,7 @@ public class RoutingServiceAdditions {
     //             }
                 
     //             final String fRa = result;
-    //             if (MapView.RUN_ON_MAIN_THREAD) {
+    //             if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
     //                 if (mainHandler == null) {
     //                     mainHandler = new Handler(android.os.Looper.getMainLooper());
     //                 }

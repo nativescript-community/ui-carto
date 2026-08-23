@@ -6,6 +6,34 @@ import android.os.Looper;
 
 public class SynchronousHandler {
 
+    /**
+     * Whether the plugin's listeners hop to the main thread and WAIT before calling into
+     * JavaScript.
+     *
+     * It lives here, next to the hop, rather than on a map view: the SDK emits from its render,
+     * tile and routing threads, where NativeScript has no runtime at all, and every listener in
+     * this plugin - map events, routing, geocoding, search, hillshade, tile downloads - has the
+     * same problem whether or not the surface API is in play. It is plugin policy, so it does not
+     * belong on the SDK's MapView either.
+     *
+     * Waiting rather than posting is what lets a consuming callback answer in time, and what
+     * keeps a facade payload alive until the handler has read it.
+     */
+    public static boolean RUN_ON_MAIN_THREAD = true;
+
+    public static void setRunOnMainThread(boolean value) {
+        RUN_ON_MAIN_THREAD = value;
+    }
+
+    /** The whole pattern in one call: hop and wait when asked to, otherwise run here. */
+    public static void run(final Handler handler, final Runnable r) {
+        if (RUN_ON_MAIN_THREAD) {
+            postAndWait(handler, r);
+        } else {
+            r.run();
+        }
+    }
+
     private static class NotifyRunnable implements Runnable {
         private final Runnable mRunnable;
         private boolean mFinished = false;

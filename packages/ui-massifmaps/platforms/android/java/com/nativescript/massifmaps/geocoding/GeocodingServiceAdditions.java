@@ -1,9 +1,9 @@
 package com.nativescript.massifmaps.geocoding;
 
+import com.nativescript.massifmaps.additions.SynchronousHandler;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.MapView;
 
 
 import com.massifmaps.geocoding.GeocodingRequest;
@@ -29,7 +29,7 @@ public class GeocodingServiceAdditions {
                     results = service.calculateAddresses(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -46,7 +46,7 @@ public class GeocodingServiceAdditions {
                 }
                 
                 final GeocodingResultVector fRa = results;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -74,7 +74,7 @@ public class GeocodingServiceAdditions {
                     results = service.calculateAddresses(request);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -91,7 +91,7 @@ public class GeocodingServiceAdditions {
                 }
                 
                 final GeocodingResultVector fRa = results;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }

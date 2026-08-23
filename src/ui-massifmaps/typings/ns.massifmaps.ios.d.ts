@@ -182,67 +182,6 @@ declare class NSMSFHillshadeRasterTileLayer extends MSFHillshadeRasterTileLayer 
     getElevationsCallback(pos: MSFMapPosVector, callback: (p1: MSFDoubleVector) => void): void;
 }
 
-interface NSMSFMapEventListener {
-
-    onMapClicked(mapClickInfo: MSFMapClickInfo): void;
-
-    onMapIdle(): void;
-
-    onMapInteraction(mapInteractionInfo: MSFMapInteractionInfo, reason: number): void;
-
-    onMapMoved(reason: number): void;
-
-    onMapStable(reason: number): void;
-}
-
-declare var NSMSFMapEventListener: {  prototype: NSMSFMapEventListener; };
-
-declare class NSMSFMapView extends MSFMapView {
-
-    static alloc(): NSMSFMapView; // inherited from NSObject
-
-    static appearance(): NSMSFMapView; // inherited from UIAppearance
-
-    /**
-     * @since 8.0
-     */
-    static appearanceForTraitCollection(trait: UITraitCollection): NSMSFMapView; // inherited from UIAppearance
-
-    /**
-     * @since 8.0
-     * @deprecated 9.0
-     */
-    static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): NSMSFMapView; // inherited from UIAppearance
-
-    /**
-     * @since 9.0
-     */
-    static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): NSMSFMapView; // inherited from UIAppearance
-
-    /**
-     * @since 5.0
-     * @deprecated 9.0
-     */
-    static appearanceWhenContainedIn(ContainerClass: typeof NSObject): NSMSFMapView; // inherited from UIAppearance
-
-    /**
-     * @since 9.0
-     */
-    static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): NSMSFMapView; // inherited from UIAppearance
-
-    static new(): NSMSFMapView; // inherited from NSObject
-
-    static setRUN_ON_MAIN_THREAD(value: boolean): void;
-
-    static setRunOnMainThreadWithValue(value: boolean): void;
-
-    listener: NSMSFMapEventListener;
-
-    static RUN_ON_MAIN_THREAD: boolean;
-
-    setAKMapEventListener(listener: NSMSFMapEventListener): void;
-}
-
 declare class NSMSFRoutingServiceAdditions extends NSObject {
 
     static alloc(): NSMSFRoutingServiceAdditions; // inherited from NSObject
@@ -267,4 +206,14 @@ declare class NSMSFVectorTileSearchService extends MSFVectorTileSearchService {
     static new(): NSMSFVectorTileSearchService; // inherited from NSObject
 
     findFeaturesCallback(request: MSFSearchRequest, callback: (p1: MSFVectorTileFeatureCollection, p2: NSException) => void): void;
+}
+
+declare class NSMSFMainThread extends NSObject {
+    static alloc(): NSMSFMainThread; // inherited from NSObject
+
+    static new(): NSMSFMainThread; // inherited from NSObject
+
+    static setRunOnMainThreadWithValue(value: boolean): void;
+
+    static RUN_ON_MAIN_THREAD: boolean;
 }

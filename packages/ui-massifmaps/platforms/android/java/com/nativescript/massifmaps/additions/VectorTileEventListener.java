@@ -25,7 +25,7 @@ public class VectorTileEventListener extends com.massifmaps.layers.VectorTileEve
 
     @Override
     public boolean onVectorTileClicked(final VectorTileClickInfo clickInfo) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());

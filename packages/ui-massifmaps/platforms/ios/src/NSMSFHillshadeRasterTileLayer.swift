@@ -11,7 +11,7 @@ import MassifMaps
 @objc(NSMSFHillshadeRasterTileLayer)
 @objcMembers
 class NSMSFHillshadeRasterTileLayer: MSFHillshadeRasterTileLayer {
-  var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
+  var runOnMainThread = NSMSFMainThread.RUN_ON_MAIN_THREAD
 
   func getElevation(_ pos: MSFMapPos, callback: @escaping (_ elevation: Double)-> Void) {
     DispatchQueue.global(qos: .background).async {

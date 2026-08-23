@@ -1,10 +1,11 @@
 import { CSSType, ContentView } from '@nativescript/core';
 import { BaseNative } from '../BaseNative';
-import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
+import { LatitudeKey, LongitudeKey, MapPos, fromNativeMapPos } from '../core';
 import { Layer } from '../layers';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { MapInfo } from '.';
 import { attach as attachFacade, isAvailable as isApiAvailable } from '../api';
+import { enumValue } from '../api/resolve';
 
 export const MapReadyEvent = 'mapReady';
 export const MapStableEvent = 'mapStable';
@@ -19,22 +20,38 @@ export const MapClickedEvent = 'mapClicked';
  */
 const MAP_MOVE_REASONS = ['gesture', 'animation', 'api'] as const;
 
-/** Turns the native reason into the string the events carry. */
-export function mapMoveReason(reason: number) {
-    return MAP_MOVE_REASONS[reason];
+/**
+ * The reason as the short string these events carry, from either shape the SDK offers it in.
+ *
+ * The facade names its enums, so a payload says `MAP_MOVE_REASON_GESTURE`; an index is accepted
+ * too. Undefined for anything else - including an older SDK that raises map.moved with NO
+ * payload at all, where the alternative would be reporting someone else's reason.
+ */
+export function mapMoveReason(reason: number | string | undefined) {
+    if (typeof reason === 'number') {
+        return MAP_MOVE_REASONS[reason];
+    }
+    if (typeof reason === 'string' && reason.startsWith('MAP_MOVE_REASON_')) {
+        const short = reason.substring('MAP_MOVE_REASON_'.length).toLowerCase();
+        return MAP_MOVE_REASONS.indexOf(short as any) >= 0 ? (short as (typeof MAP_MOVE_REASONS)[number]) : undefined;
+    }
+    return undefined;
 }
 
 /** The payload shared by mapMoved and mapStable. */
-export function moveEventData(reason: number) {
+export function moveEventData(reason: number | string | undefined) {
     const name = mapMoveReason(reason);
     return { reason: name, userAction: name === 'gesture' };
 }
 
 /**
- * The facade event each of the view's events is raised from, for the surface-API path below.
+ * The facade event each of the view's events is raised from.
  *
  * The view's names are historical and the facade's are the SDK's, so the map is explicit rather
  * than derived - a rename on either side has to be made here, deliberately.
+ *
+ * `mapReady` is not in it: it is the plugin's own, raised when the view is loaded, and the SDK
+ * has no equivalent.
  */
 const FACADE_EVENTS: [string, string][] = [
     [MapMovedEvent, 'map.moved'],
@@ -43,6 +60,58 @@ const FACADE_EVENTS: [string, string][] = [
     [MapClickedEvent, 'map.clicked'],
     [MapInteractionEvent, 'map.interaction']
 ];
+
+/**
+ * One facade payload, reshaped into the data the view's events have always carried.
+ *
+ * Read EAGERLY - the payload dies when the handler returns, and a debounced delivery has only a
+ * snapshot to begin with, so a lazy getter would read nothing.
+ */
+/** `'CLICK_TYPE_SINGLE'` back to the number the mapClicked event has always carried. */
+function clickTypeValue(name: string): number {
+    const value = enumValue(name);
+    return value === undefined ? -1 : value;
+}
+
+function facadeEventData(viewEvent: string, e: any) {
+    // An SDK older than the payload it is described as carrying sends none - reading through
+    // would throw, and an exception here crosses a JNI director and aborts the process.
+    if (viewEvent !== MapIdleEvent && !e.payload) {
+        return viewEvent === MapMovedEvent || viewEvent === MapStableEvent ? moveEventData(undefined) : undefined;
+    }
+    switch (viewEvent) {
+        case MapMovedEvent:
+        case MapStableEvent:
+            return moveEventData(e.reason);
+        case MapInteractionEvent:
+            return {
+                // An interaction is by definition the user: the SDK only raises it from the
+                // touch pipeline.
+                reason: 'gesture',
+                userAction: true,
+                interaction: {
+                    isAnimationStarted: e.animationStarted,
+                    isPanAction: e.panAction,
+                    isRotateAction: e.rotateAction,
+                    isTiltAction: e.tiltAction,
+                    isZoomAction: e.zoomAction
+                }
+            };
+        case MapClickedEvent: {
+            const at = e.getPos('clickPos');
+            return {
+                // The numeric ClickType this event has always carried. The facade names its
+                // enums, so it comes back as 'CLICK_TYPE_SINGLE' and is mapped back here rather
+                // than changing what an existing handler compares against.
+                clickType: clickTypeValue(e.clickType),
+                clickInfo: { duration: e.get('clickInfo.duration') },
+                position: at ? ({ [LatitudeKey]: at[1], [LongitudeKey]: at[0] } as any) : null
+            };
+        }
+        default:
+            return undefined;
+    }
+}
 
 export interface MapPropertyOptions {
     converter?: Function;
@@ -202,13 +271,6 @@ export abstract class MassifMapViewBase extends ContentView {
     private mLayers: Layers;
     private mFacade: any = null;
     private mFacadeSubscriptions: any[] = [];
-    private mFacadeOwned: { [event: string]: boolean } = {};
-
-    /**
-     * Raise the events named in `eventOptions` through the facade, so their subscription options
-     * apply. Opt-in - see useFacadeEventsIfAsked.
-     */
-    facadeEvents = false;
 
     /** Per-event subscription options, keyed by the view's event name. */
     eventOptions: { [event: string]: { throttle?: number; debounce?: number; projection?: string } };
@@ -218,12 +280,6 @@ export abstract class MassifMapViewBase extends ContentView {
     }
 
     public sendEvent<T extends MapInfo = MapInfo>(eventName: string, data?: T) {
-        // One guard here rather than at each of the ten native call sites: an event the facade
-        // has taken over must not also be raised by the native listener, which is still installed
-        // and still chained to for everything else.
-        if (this.facadeOwns(eventName)) {
-            return;
-        }
         this.raise(eventName, data);
     }
 
@@ -241,80 +297,70 @@ export abstract class MassifMapViewBase extends ContentView {
         if (!this.mapReady) {
             this.mapReady = true;
             setTimeout(() => {
-                this.useFacadeEventsIfAsked();
+                this.enableFacadeEvents();
                 this.sendEvent(MapReadyEvent);
             }, 0);
         }
     }
 
     /**
-     * Raises the map's events through the facade instead of the native listener, which is what
-     * makes the subscription options - throttle, debounce, projection - reachable per event.
+     * Subscribes the map's events through the facade. This is the ONLY path: the native
+     * MapEventListener the plugin used to install is gone, and with it the compile-time coupling
+     * to the SDK's Java and Obj-C listener signatures - the facade addresses events by string, so
+     * a change to those signatures can no longer break the plugin's build.
      *
-     * OPT-IN for now (`facadeEvents="true"`): the two paths raise the same view events, so having
-     * both on would deliver everything twice, and the native one is what every existing app is
-     * running against. Only the events named in `eventOptions` move over; the rest stay on the
-     * native listener, so a page that only wants a throttle on `mapMoved` pays for nothing else.
-     */
-    private useFacadeEventsIfAsked() {
-        if (this.facadeEvents) {
-            this.enableFacadeEvents();
-        }
-    }
-
-    /**
-     * The same, callable once the map is ready - which is where an app that decides its options
-     * at runtime can reach it, `facadeEvents` in the markup being read before that.
+     * It does mean map events need an SDK built WITH the surface API. Without one the map still
+     * works; it raises no events, and says so once.
      *
-     * @param eventOptions Per-event options; defaults to whatever the property holds.
+     * Delivery is unchanged: the facade CAN deliver on another thread - that is what its
+     * `delivery` option is for - but this plugin always subscribes with ORIGIN and hops in its
+     * own native listener, which is what lets a consuming handler answer in time and keeps the
+     * payload alive while it reads. See api/index.common.ts.
+     *
+     * @param eventOptions Per-event subscription options; defaults to whatever the property holds.
      */
     enableFacadeEvents(eventOptions = this.eventOptions) {
         this.eventOptions = eventOptions;
-        if (!this.mapView || this.mFacade) {
+        if (!this.mapView) {
+            return;
+        }
+        if (this.mFacade) {
+            // Already attached - re-subscribe so new options apply, rather than registering the
+            // map a second time.
+            for (const subscription of this.mFacadeSubscriptions) {
+                subscription.remove();
+            }
+            this.mFacadeSubscriptions = [];
+            this.subscribeFacadeEvents();
             return;
         }
         if (!isApiAvailable()) {
-            console.warn('MassifMap: facadeEvents needs an SDK built with the surface API - staying on the native listener');
+            console.warn('MassifMap: this MassifMaps build has no surface API, so the map raises no events');
             return;
         }
         try {
             this.mFacade = attachFacade(this as any, { id: `massif-map-${this._domId}` });
         } catch (error) {
-            // A map whose events silently stopped is far worse than one that logs and carries on
-            // with the listener it already had.
-            console.warn(`MassifMap: could not attach the facade, staying on the native listener - ${error}`);
+            console.warn(`MassifMap: could not attach the map's events - ${error}`);
             return;
         }
-        for (const [viewEvent, facadeEvent] of FACADE_EVENTS) {
-            const options = this.eventOptions?.[viewEvent];
-            if (!options) {
-                continue;
-            }
-            this.mFacadeSubscriptions.push(
-                this.mFacade.subscribe(facadeEvent as never, (e) => this.sendFacadeEvent(viewEvent, e), options)
-            );
-            this.mFacadeOwned[viewEvent] = true;
-        }
-    }
-
-    /** Whether the native listener should still raise this event, or the facade has taken it. */
-    protected facadeOwns(eventName: string) {
-        return this.mFacadeOwned[eventName] === true;
+        this.subscribeFacadeEvents();
     }
 
     /**
-     * One facade payload, reshaped into the `{ data }` an existing handler already expects.
-     *
-     * Read eagerly: the payload dies when the handler returns, and a debounced delivery has only
-     * a snapshot to begin with.
+     * The facade handle this view attached for its own events, so `api.attach()` reuses it rather
+     * than registering the same map twice. Null before the map has loaded.
      */
-    private sendFacadeEvent(eventName: string, e: any) {
-        const data: any = {};
-        if (eventName === MapMovedEvent || eventName === MapStableEvent) {
-            const reason = e.get('reason');
-            Object.assign(data, moveEventData(typeof reason === 'number' ? reason : 0));
+    facadeMap() {
+        return this.mFacade;
+    }
+
+    private subscribeFacadeEvents() {
+        for (const [viewEvent, facadeEvent] of FACADE_EVENTS) {
+            this.mFacadeSubscriptions.push(
+                this.mFacade.subscribe(facadeEvent as never, (e) => this.raise(viewEvent, facadeEventData(viewEvent, e)), this.eventOptions?.[viewEvent])
+            );
         }
-        this.raise(eventName, data);
     }
 
     abstract createLayersInstance();
@@ -358,7 +404,6 @@ export abstract class MassifMapViewBase extends ContentView {
             subscription.remove();
         }
         this.mFacadeSubscriptions = [];
-        this.mFacadeOwned = {};
         if (this.mFacade) {
             this.mFacade.destroy();
             this.mFacade = null;

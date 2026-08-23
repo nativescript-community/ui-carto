@@ -14,7 +14,7 @@ class NSMSFFeatureCollectionSearchService: MSFFeatureCollectionSearchService {
   func findFeaturesCallback(_ request: MSFSearchRequest!, _ callback: @escaping (_ features: MSFFeatureCollection?) -> Void) {
     DispatchQueue.global(qos: .background).async {
       let result = self.findFeatures(request)
-      if (NSMSFMapView.RUN_ON_MAIN_THREAD) {
+      if (NSMSFMainThread.RUN_ON_MAIN_THREAD) {
         DispatchQueue.main.async() {
           callback(result)
         }

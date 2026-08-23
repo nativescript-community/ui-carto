@@ -41,7 +41,7 @@ public class HillshadeRasterTileLayer extends com.massifmaps.layers.HillshadeRas
                     result = fThis.getElevation(pos);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -58,7 +58,7 @@ public class HillshadeRasterTileLayer extends com.massifmaps.layers.HillshadeRas
                 }
 
                 final Double fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
@@ -88,7 +88,7 @@ public class HillshadeRasterTileLayer extends com.massifmaps.layers.HillshadeRas
                     result = fThis.getElevations(poses);
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    if (MapView.RUN_ON_MAIN_THREAD) {
+                    if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                         if (mainHandler == null) {
                             mainHandler = new Handler(android.os.Looper.getMainLooper());
                         }
@@ -105,7 +105,7 @@ public class HillshadeRasterTileLayer extends com.massifmaps.layers.HillshadeRas
                 }
 
                 final DoubleVector fRa = result;
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }

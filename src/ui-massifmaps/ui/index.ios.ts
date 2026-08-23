@@ -53,82 +53,6 @@ function mainThread(target: any, propertyKey: string, descriptor: PropertyDescri
 }
 
 @NativeClass
-class NSMSFMapEventListenerImpl extends NSObject implements NSMSFMapEventListener {
-    public static ObjCProtocols = [NSMSFMapEventListener];
-    private _owner: WeakRef<MassifMap<any>>;
-
-    public static initWithOwner(owner: WeakRef<MassifMap<any>>): NSMSFMapEventListenerImpl {
-        const delegate = NSMSFMapEventListenerImpl.new() as NSMSFMapEventListenerImpl;
-        delegate._owner = owner;
-        return delegate;
-    }
-
-    public onMapIdle() {
-        const owner = this._owner?.get();
-        if (owner) {
-            owner.sendEvent(MapIdleEvent);
-        }
-    }
-
-    public onMapMoved(reason: number) {
-        const owner = this._owner?.get();
-        if (owner) {
-            owner.sendEvent<MapGestureInfo>(MapMovedEvent, moveEventData(reason));
-        }
-    }
-    public onMapInteraction(interaction: MSFMapInteractionInfo, reason: number) {
-        const owner = this._owner?.get();
-        if (owner) {
-            owner.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
-                ...moveEventData(reason),
-                interaction: {
-                    get isAnimationStarted() {
-                        return interaction.isAnimationStarted();
-                    },
-                    get isPanAction() {
-                        return interaction.isPanAction();
-                    },
-                    get isRotateAction() {
-                        return interaction.isRotateAction();
-                    },
-                    get isTiltAction() {
-                        return interaction.isTiltAction();
-                    },
-                    get isZoomAction() {
-                        return interaction.isZoomAction();
-                    }
-                }
-            });
-        }
-    }
-    public onMapStable(reason: number) {
-        const owner = this._owner?.get();
-        if (owner) {
-            owner.sendEvent<MapGestureInfo>(MapStableEvent, moveEventData(reason));
-        }
-    }
-    public onMapClicked(mapClickInfo: MSFMapClickInfo) {
-        const owner = this._owner?.get();
-        if (owner) {
-            owner.sendEvent<MapClickInfo>(MapClickedEvent, {
-                ios: mapClickInfo,
-                get clickInfo() {
-                    return {
-                        get duration(): number {
-                            return mapClickInfo.getClickInfo().getDuration();
-                        }
-                    };
-                },
-                get clickType(): ClickType {
-                    return mapClickInfo.getClickType() as number;
-                },
-                get position() {
-                    return fromNativeMapPos(mapClickInfo.getClickPos());
-                }
-            });
-        }
-    }
-}
 
 @NativeClass
 class MSFRendererCaptureListenerImpl extends NSMSFRendererCaptureListener {
@@ -147,16 +71,15 @@ class MSFRendererCaptureListenerImpl extends NSMSFRendererCaptureListener {
     }
 }
 export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
-    static projection = new EPSG4326();
+    public static setRunOnMainThread(value: boolean) {
+        NSMSFMainThread.setRunOnMainThreadWithValue(value);
+    }
 
+    static projection = new EPSG4326();
     nativeProjection: MSFProjection;
     mProjection: IProjection;
 
-    public static setRunOnMainThread(value: boolean) {
-        runOnMainThread = value;
-    }
-
-    override get mapView(): NSMSFMapView {
+    override get mapView(): MSFMapView {
         return super.mapView;
     }
 
@@ -173,7 +96,7 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
     }
 
     public createNativeView(): object {
-        return NSMSFMapView.alloc().init();
+        return MSFMapView.alloc().init();
     }
 
     mOptions: MapOptions;
@@ -252,11 +175,9 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
-        this.mapView.setAKMapEventListener(NSMSFMapEventListenerImpl.initWithOwner(new WeakRef(this)));
     }
 
     disposeNativeView(): void {
-        this.mapView.setMapEventListener(null);
         this.nativeProjection = null;
         this.mProjection = null;
         super.disposeNativeView();

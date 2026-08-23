@@ -18,12 +18,22 @@
             // geometry is only serialised if you ask for it.
             const name = e.get('feature.properties.name');
             const kind = e.get('feature.properties.class');
+            if (!name) {
+                // Nothing worth stopping for - let the click carry on to the map.
+                return;
+            }
             const where = e.getPos('featurePos') as Position;
-            host.caption(
-                [e.get('featureLayerName'), name ? `- ${name}` : '', kind ? `(${kind})` : '', where ? `  ${where[1].toFixed(5)}, ${where[0].toFixed(5)}` : ''].filter(Boolean).join(' ')
-            );
+            host.caption(['took', e.get('featureLayerName'), `- ${name}`, kind ? `(${kind})` : '', where ? `  ${where[1].toFixed(5)}, ${where[0].toFixed(5)}` : ''].filter(Boolean).join(' '));
+            // CLAIMS the click: nothing after this handler sees it - no other subscriber, and no
+            // map.clicked. That is how you stop as soon as you have found the feature you care
+            // about, instead of letting the tap fall through and also drop a pin.
+            e.consumed = true;
         });
-        host.caption('Tap a road, a building or the water.');
+
+        // Only reached when the handler above declined: a named feature never gets here.
+        map.onClick(() => host.caption('nothing named there - the click fell through to the map'));
+
+        host.caption('Tap a named road or building, then somewhere empty.');
     }
 </script>
 

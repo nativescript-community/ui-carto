@@ -31,7 +31,7 @@ public class TileDownloadListener extends com.massifmaps.datasources.TileDownloa
 
     @Override
     public void onDownloadCompleted() {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -58,7 +58,7 @@ public class TileDownloadListener extends com.massifmaps.datasources.TileDownloa
 
     @Override
     public void onDownloadFailed(final MapTile tile) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -85,7 +85,7 @@ public class TileDownloadListener extends com.massifmaps.datasources.TileDownloa
 
     @Override
     public void onDownloadProgress(final float progress) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -112,7 +112,7 @@ public class TileDownloadListener extends com.massifmaps.datasources.TileDownloa
 
     @Override
     public void onDownloadStarting(final int tileCount) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());

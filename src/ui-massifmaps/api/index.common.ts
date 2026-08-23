@@ -1,7 +1,7 @@
 import { EventData, Observable } from '@nativescript/core';
 import { bridge } from './bridge';
 import type { Delivery as NativeDelivery } from './bridge';
-import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, resolveMethod, resolvePath } from './resolve';
+import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, propertyNames, resolveMethod, resolvePath } from './resolve';
 import type {
     Bounds,
     ClassName,
@@ -160,27 +160,77 @@ export interface SubscribeOptions {
  * `payload` is valid ONLY while the handler runs: the facade frees it on the way out. Read what
  * you need, do not keep the object.
  */
-export interface MassifEventData<C extends ClassName = any, E extends EventName<C> = EventName<C>> extends EventData {
-    eventName: string;
-    object: MassifObject<C>;
-    /** The event's data, or null when it carries none (`map.idle`, `map.moved`). */
-    payload: MassifObject<PayloadClass<C, E>> | null;
-    /**
-     * Set this to true to claim the event: the SDK stops offering it to anything behind you -
-     * later subscribers, and the map's own handling.
-     *
-     * Only a CONSUMABLE event can be claimed - `vectortile.clicked` and `vectorelement.clicked`;
-     * `consumable` on this object says which. Setting it on anything else is ignored, and warned
-     * about once rather than silently doing nothing.
-     */
-    consumed: boolean;
-    /** Whether setting `consumed` on this event does anything. */
-    readonly consumable: boolean;
-    /** Shorthand for `payload.get(path)`. Throws when the event carries no payload. */
-    get<P extends ValuePath<PayloadClass<C, E>>>(path: P): ValueAt<PayloadClass<C, E>, P>;
-    /** Shorthand for `payload.getPos(path, projection)`. */
-    getPos(path: PositionPath<PayloadClass<C, E>> | (string & {}), projection?: ProjectionName): Position | Bounds | null;
+/**
+ * The prototype an event of this payload class is created from, with a getter per property so a
+ * handler reads `e.reason` or `e.clickType` instead of `e.get('reason')`.
+ *
+ * Built ONCE per class and cached: the alternative, defining the properties on each event, costs
+ * a defineProperty per property per event, and `map.moved` arrives 47 to 159 times a second.
+ * Creating an event is then one Object.create.
+ *
+ * Nothing here touches native. Each getter is one read AT ACCESS TIME through the event's own
+ * `get`, which is what keeps the promise that asking for one property never parses the whole
+ * feature - and what makes an event nobody reads free. Own properties (`get`, `payload`, ...)
+ * shadow the prototype, so a payload property sharing one of those names cannot hide it.
+ *
+ * Nested paths (`feature.properties.name`) are not property names and stay with `get`.
+ */
+const payloadProtos: { [cls: string]: object } = {};
+
+function payloadProto(payloadClass: string): object {
+    let proto = payloadProtos[payloadClass];
+    if (!proto) {
+        proto = payloadProtos[payloadClass] = {};
+        for (const name of propertyNames(payloadClass)) {
+            Object.defineProperty(proto, name, {
+                enumerable: true,
+                configurable: true,
+                get(this: MassifEventData) {
+                    return (this as any).get(name);
+                }
+            });
+        }
+    }
+    return proto;
 }
+
+
+/** A payload path that is a property name, i.e. not a walk into a struct. */
+type TopLevelPath<P> = P extends `${string}.${string}` ? never : P;
+
+/**
+ * The payload's own properties, readable straight off the event - see withPayloadGetters.
+ *
+ * Names that would shadow the event's own fields are dropped: the event keeps its meaning, and
+ * the property is still reachable through `get`.
+ */
+export type PayloadFields<C extends ClassName, E extends EventName<C>> = Omit<
+    { readonly [K in TopLevelPath<ValuePath<PayloadClass<C, E>>>]: ValueAt<PayloadClass<C, E>, K> },
+    'eventName' | 'object' | 'payload' | 'consumed' | 'consumable' | 'get' | 'getPos'
+>;
+
+export type MassifEventData<C extends ClassName = any, E extends EventName<C> = EventName<C>> = EventData &
+    PayloadFields<C, E> & {
+        eventName: string;
+        object: MassifObject<C>;
+        /** The event's data, or null when it carries none - `map.idle` is the only one left. */
+        payload: MassifObject<PayloadClass<C, E>> | null;
+        /**
+         * Set this to true to claim the event: the SDK stops offering it to anything behind you -
+         * later subscribers, and the map's own handling.
+         *
+         * Only a CONSUMABLE event can be claimed - `vectortile.clicked` and
+         * `vectorelement.clicked`; `consumable` on this object says which. Setting it on anything
+         * else is ignored, and warned about once rather than silently doing nothing.
+         */
+        consumed: boolean;
+        /** Whether setting `consumed` on this event does anything. */
+        readonly consumable: boolean;
+        /** Shorthand for `payload.get(path)`. Throws when the event carries no payload. */
+        get<P extends ValuePath<PayloadClass<C, E>>>(path: P): ValueAt<PayloadClass<C, E>, P>;
+        /** Shorthand for `payload.getPos(path, projection)`. */
+        getPos(path: PositionPath<PayloadClass<C, E>> | (string & {}), projection?: ProjectionName): Position | Bounds | null;
+    };
 
 /** A live subscription. Removing it twice is an error the SDK reports, so this is idempotent. */
 export class Subscription {
@@ -744,35 +794,51 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         }
         let last = 0;
         let timer: any = null;
-        let cancel: (() => void) | null = null;
+
+        const deliver = (payload: number) => {
+            if (throttle) {
+                // Date.now() rather than a timer: dropping is the point, and a queued handler
+                // would read a payload the facade has already freed.
+                const now = Date.now();
+                if (now - last < throttle) {
+                    return false;
+                }
+                last = now;
+            }
+            if (debounce) {
+                // The payload dies when this returns, so the delayed handler gets a snapshot read
+                // NOW. Trailing edge: each event replaces the pending one, and only the last of a
+                // burst is delivered.
+                const snapshot = payload ? parseJson(bridge.getString(payload as Handle, '')) : null;
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    timer = null;
+                    try {
+                        handler(0, snapshot);
+                    } catch (error) {
+                        console.error(`MassifMaps: debounced handler for '${event}' threw`, error);
+                    }
+                }, debounce);
+                return false;
+            }
+            return handler(payload);
+        };
+
         const id = bridge.on(
             this.handle,
             event,
             (_target, _event, payload) => {
-                if (throttle) {
-                    // Date.now() rather than a timer: dropping is the point, and a queued
-                    // handler would read a payload the facade has already freed.
-                    const now = Date.now();
-                    if (now - last < throttle) {
-                        return false;
-                    }
-                    last = now;
-                }
-                if (debounce) {
-                    // The payload dies when this returns, so the delayed handler gets a snapshot
-                    // read NOW. Trailing edge: each event replaces the pending one, and only the
-                    // last of a burst is delivered.
-                    const snapshot = payload ? parseJson(bridge.getString(payload as Handle, '')) : null;
-                    if (timer) {
-                        clearTimeout(timer);
-                    }
-                    timer = setTimeout(() => {
-                        timer = null;
-                        handler(0, snapshot);
-                    }, debounce);
+                try {
+                    return deliver(payload);
+                } catch (error) {
+                    // This returns through a SWIG director into C++, and an exception crossing
+                    // that boundary aborts the PROCESS rather than unwinding it. A handler that
+                    // throws must not take the app down with it.
+                    console.error(`MassifMaps: handler for '${event}' threw`, error);
                     return false;
                 }
-                return handler(payload);
             },
             DELIVERY_ORIGIN,
             false,
@@ -784,13 +850,12 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         }
         const subscription = new Subscription(id);
         if (debounce) {
-            cancel = () => {
+            subscription.onRemove(() => {
                 if (timer) {
                     clearTimeout(timer);
                     timer = null;
                 }
-            };
-            subscription.onRemove(cancel);
+            });
         }
         return subscription;
     }
@@ -802,32 +867,46 @@ export class MassifObject<C extends ClassName = any> extends Observable {
 
     private eventData(event: string, payload: number, consumable: boolean, snapshot?: Json): MassifEventData {
         const info = findEvent(this.className, event);
-        const object = payload && info?.payload ? new MassifObject(payload as Handle, info.payload as ClassName) : null;
         // A debounced delivery has no live payload left - see SubscribeOptions.debounce - so its
         // reads come out of the snapshot taken at emit time.
         const fromSnapshot = snapshot !== undefined && snapshot !== null;
-        return {
+        // Wrapped lazily: an event nobody reads should not allocate an Observable per delivery.
+        let object: MassifObject | null | undefined;
+        const payloadObject = () => {
+            if (object === undefined) {
+                object = payload && info?.payload ? new MassifObject(payload as Handle, info.payload as ClassName) : null;
+            }
+            return object;
+        };
+        // Only when a payload actually ARRIVED, not merely when the schema says the event has
+        // one: an older SDK sends none, and a getter that read through would throw.
+        const proto = (payload || fromSnapshot) && info?.payload ? payloadProto(info.payload) : null;
+        const data = Object.assign(proto ? Object.create(proto) : {}, {
             eventName: event,
             object: this as MassifObject,
-            payload: object as never,
             consumed: false,
             consumable,
             get: (path: string) => {
                 if (fromSnapshot) {
                     return path ? (snapshot as any)[path] : snapshot;
                 }
-                if (!object) {
+                const target = payloadObject();
+                if (!target) {
                     throw new MassifApiError(`${event} carries no payload`);
                 }
-                return object.get(path as never);
+                return target.get(path as never);
             },
             getPos: (path: string, projection?: ProjectionName) => {
                 if (fromSnapshot) {
                     return ((snapshot as any)[path] ?? null) as never;
                 }
-                return object ? object.getPos(path, projection) : null;
+                const target = payloadObject();
+                return target ? target.getPos(path, projection) : null;
             }
-        } as MassifEventData;
+        }) as MassifEventData;
+        // `payload` is a getter of its own so the wrapper is still only built if it is asked for.
+        Object.defineProperty(data, 'payload', { enumerable: true, configurable: true, get: payloadObject });
+        return data;
     }
 
     /**
@@ -1842,6 +1921,19 @@ export class MassifMap extends MassifObject<'massif::Options'> {
  */
 export function attach(view: MapViewLike, options: AttachOptions = {}): MassifMap {
     requireApi();
+    // The view attaches itself when it loads, to raise its own events. Registering the same map
+    // a second time under another id would give the SDK two handles onto one object and leave
+    // whichever is destroyed first dangling - so reuse it, and let the options through.
+    const existing = (view as any).facadeMap?.();
+    if (existing) {
+        const { projection: existingProjection, throttle: existingThrottle, debounce: existingDebounce } = options;
+        if (existingProjection || existingThrottle || existingDebounce) {
+            existing.eventOptions({ projection: existingProjection, throttle: existingThrottle, debounce: existingDebounce });
+            // Re-subscribes the view's own events, which were made before these options existed.
+            (view as any).enableFacadeEvents?.();
+        }
+        return existing;
+    }
     const nativeOptions = view.getOptions()?.getNative();
     if (!nativeOptions) {
         throw new MassifApiError('the map is not ready yet - attach from the mapReady event');

@@ -130,19 +130,6 @@ declare namespace com {
     export namespace nativescript {
         export namespace massifmaps {
             export namespace additions {
-                export class MapEventListener extends java.lang.Object {
-                    public static class: java.lang.Class<com.nativescript.massifmaps.additions.MapEventListener>;
-                    /**
-                     * Constructs a new instance of the com.nativescript.massifmaps.additions.MapEventListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-                     */
-                    public constructor(implementation: { onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: number): void; onMapMoved(param0: number): void; onMapIdle(): void; onMapStable(param0: number): void; onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void; });
-                    public constructor();
-                    public onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: number): void;
-                    public onMapMoved(param0: number): void;
-                    public onMapIdle(): void;
-                    public onMapStable(param0: number): void;
-                    public onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void;
-                }
             }
         }
     }
@@ -153,14 +140,13 @@ declare namespace com {
         export namespace massifmaps {
             export namespace additions {
                 export class MapView extends com.massifmaps.ui.MapView {
-                    public static class: java.lang.Class<com.nativescript.massifmaps.additions.MapView>;
+                    public static class: java.lang.Class<com.massifmaps.ui.MapView>;
                     public static RUN_ON_MAIN_THREAD: boolean;
                     public tilt(param0: number, param1: number): void;
                     public setZoom(param0: number, param1: number): void;
                     public surfaceRedrawNeededAsync(holder: globalAndroid.view.SurfaceHolder, drawingFinished: java.lang.Runnable): void;
                     public getLayers(): com.massifmaps.components.Layers;
                     public mapToScreen(param0: com.massifmaps.core.MapPos): com.massifmaps.core.ScreenPos;
-                    public setMapEventListener(mapEventListener: com.massifmaps.ui.MapEventListener): void;
                     public getFocusPos(): com.massifmaps.core.MapPos;
                     public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number, defStyleRes: number);
                     public rotate(deltaAngle: number, targetPos: com.massifmaps.core.MapPos, durationSeconds: number): void;
@@ -194,7 +180,6 @@ declare namespace com {
                     public getMapEventListener(): com.massifmaps.ui.MapEventListener;
                     public onSurfaceCreated(param0: javax.microedition.khronos.opengles.GL10, param1: javax.microedition.khronos.egl.EGLConfig): void;
                     public constructor(e: globalAndroid.content.Context, m: globalAndroid.util.AttributeSet);
-                    public setMapEventListener(listener: com.nativescript.massifmaps.additions.MapEventListener): void;
                     public onDrawFrame(param0: javax.microedition.khronos.opengles.GL10): void;
                     public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number);
                     public getMapRotation(): number;
@@ -283,6 +268,9 @@ declare namespace com {
                     public static class: java.lang.Class<com.nativescript.massifmaps.additions.SynchronousHandler>;
                     public constructor();
                     public static postAndWait(is: globalAndroid.os.Handler, runnable: java.lang.Runnable): void;
+                    public static run(is: globalAndroid.os.Handler, runnable: java.lang.Runnable): void;
+                    public static setRunOnMainThread(value: boolean): void;
+                    public static RUN_ON_MAIN_THREAD: boolean;
                 }
                 export namespace SynchronousHandler {
                     export class NotifyRunnable extends java.lang.Object implements java.lang.Runnable {
@@ -291,80 +279,6 @@ declare namespace com {
                         public isFinished(): boolean;
                         public constructor(r: java.lang.Runnable);
                     }
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace nativescript {
-        export namespace massifmaps {
-            export namespace additions {
-                export class TextureMapView extends com.massifmaps.ui.TextureMapView {
-                    public static class: java.lang.Class<com.nativescript.massifmaps.additions.TextureMapView>;
-                    public static RUN_ON_MAIN_THREAD: boolean;
-                    public tilt(param0: number, param1: number): void;
-                    public setZoom(param0: number, param1: number): void;
-                    public getLayers(): com.massifmaps.components.Layers;
-                    public mapToScreen(param0: com.massifmaps.core.MapPos): com.massifmaps.core.ScreenPos;
-                    public setMapEventListener(mapEventListener: com.massifmaps.ui.MapEventListener): void;
-                    public getFocusPos(): com.massifmaps.core.MapPos;
-                    public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number, defStyleRes: number);
-                    public onSurfaceTextureAvailable(param0: globalAndroid.graphics.SurfaceTexture, param1: number, param2: number): void;
-                    public rotate(deltaAngle: number, targetPos: com.massifmaps.core.MapPos, durationSeconds: number): void;
-                    public setMapRotation(param0: number, param1: number): void;
-                    public onKeyUp(param0: number, param1: globalAndroid.view.KeyEvent): boolean;
-                    public zoom(deltaZoom: number, targetPos: com.massifmaps.core.MapPos, durationSeconds: number): void;
-                    public setMapRotation(angle: number, targetPos: com.massifmaps.core.MapPos, durationSeconds: number): void;
-                    public unscheduleDrawable(who: globalAndroid.graphics.drawable.Drawable): void;
-                    public onSurfaceChanged(param0: javax.microedition.khronos.opengles.GL10, param1: number, param2: number): void;
-                    public getMapRenderer(): com.massifmaps.renderers.MapRenderer;
-                    public rotate(param0: number, param1: com.massifmaps.core.MapPos, param2: number): void;
-                    public screenToMap(param0: com.massifmaps.core.ScreenPos): com.massifmaps.core.MapPos;
-                    public moveToFitBounds(mapBounds: com.massifmaps.core.MapBounds, screenBounds: com.massifmaps.core.ScreenBounds, integerZoom: boolean, resetRotation: boolean, resetTilt: boolean, durationSeconds: number): void;
-                    public moveToFitBounds(param0: com.massifmaps.core.MapBounds, param1: com.massifmaps.core.ScreenBounds, param2: boolean, param3: number): void;
-                    public pan(param0: com.massifmaps.core.MapVec, param1: number): void;
-                    public onSurfaceTextureUpdated(param0: globalAndroid.graphics.SurfaceTexture): void;
-                    public setZoom(zoom: number, targetPos: com.massifmaps.core.MapPos, durationSeconds: number): void;
-                    public static setRunOnMainThread(value: boolean): void;
-                    public onResume(): void;
-                    public getTilt(): number;
-                    public clearAllCaches(): void;
-                    public unscheduleDrawable(param0: globalAndroid.graphics.drawable.Drawable, param1: java.lang.Runnable): void;
-                    public setTilt(param0: number, param1: number): void;
-                    public onKeyLongPress(param0: number, param1: globalAndroid.view.KeyEvent): boolean;
-                    public constructor(context: globalAndroid.content.Context);
-                    public scheduleDrawable(param0: globalAndroid.graphics.drawable.Drawable, param1: java.lang.Runnable, param2: number): void;
-                    public onSurfaceTextureSizeChanged(param0: globalAndroid.graphics.SurfaceTexture, param1: number, param2: number): void;
-                    public setFocusPos(param0: com.massifmaps.core.MapPos, param1: number): void;
-                    public setMapRotation(param0: number, param1: com.massifmaps.core.MapPos, param2: number): void;
-                    public setZoom(param0: number, param1: com.massifmaps.core.MapPos, param2: number): void;
-                    public setMapEventListener(param0: com.massifmaps.ui.MapEventListener): void;
-                    public getMapEventListener(): com.massifmaps.ui.MapEventListener;
-                    public onSurfaceCreated(param0: javax.microedition.khronos.opengles.GL10, param1: javax.microedition.khronos.egl.EGLConfig): void;
-                    public constructor(e: globalAndroid.content.Context, this_: globalAndroid.util.AttributeSet);
-                    public setMapEventListener(listener: com.nativescript.massifmaps.additions.MapEventListener): void;
-                    public onDrawFrame(param0: javax.microedition.khronos.opengles.GL10): void;
-                    public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number);
-                    public onLayoutChange(param0: globalAndroid.view.View, param1: number, param2: number, param3: number, param4: number, param5: number, param6: number, param7: number, param8: number): void;
-                    public getMapRotation(): number;
-                    public sendAccessibilityEvent(param0: number): void;
-                    public getZoom(): number;
-                    public onKeyDown(param0: number, param1: globalAndroid.view.KeyEvent): boolean;
-                    public moveToFitBounds(param0: com.massifmaps.core.MapBounds, param1: com.massifmaps.core.ScreenBounds, param2: boolean, param3: boolean, param4: boolean, param5: number): void;
-                    public cancelAllTasks(): void;
-                    public getOptions(): com.massifmaps.components.Options;
-                    public onSurfaceTextureDestroyed(param0: globalAndroid.graphics.SurfaceTexture): boolean;
-                    public onTouchEvent(event: globalAndroid.view.MotionEvent): boolean;
-                    public sendAccessibilityEventUnchecked(param0: globalAndroid.view.accessibility.AccessibilityEvent): void;
-                    public onKeyMultiple(param0: number, param1: number, param2: globalAndroid.view.KeyEvent): boolean;
-                    public zoom(param0: number, param1: com.massifmaps.core.MapPos, param2: number): void;
-                    public rotate(param0: number, param1: number): void;
-                    public onPause(): void;
-                    public invalidateDrawable(param0: globalAndroid.graphics.drawable.Drawable): void;
-                    public zoom(param0: number, param1: number): void;
-                    public clearPreloadingCaches(): void;
                 }
             }
         }

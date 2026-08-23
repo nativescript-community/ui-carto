@@ -40,16 +40,14 @@
             status = `moving (${e.data.reason}) - ${tracked} delivered, throttled to 4 a second`;
         });
 
-        // mapMoved moves onto the facade so a subscription option applies to it: THROTTLED to one
-        // every 250 ms - the leading edge, for a readout that should track the movement. Events
-        // inside the window are DROPPED, not delivered late, because the payload does not outlive
-        // the emit.
+        // Every map event comes from the surface API, so each one can carry subscription options.
+        // mapMoved is THROTTLED to one every 250 ms - the leading edge, for a readout that should
+        // track the movement. Events inside the window are DROPPED, not delivered late, because
+        // the payload does not outlive the emit.
         //
-        // mapStable is left on the native path deliberately: it already fires exactly once per
-        // movement, so there is nothing to throttle and nothing to debounce. Reach for debounce
-        // only to wait PAST the settle - to coalesce several movements into one fetch.
-        //
-        // The handlers below are ordinary view handlers either way; only the delivery changes.
+        // mapStable gets no options on purpose: it already fires exactly once per movement, so
+        // there is nothing to throttle. Reach for debounce only to wait PAST the settle - to
+        // coalesce several movements into one fetch.
         m.enableFacadeEvents({ mapMoved: { throttle: 250 } });
 
         // Once per movement, at the end of it. `e` is typed from the event name, so `e.data.reason`

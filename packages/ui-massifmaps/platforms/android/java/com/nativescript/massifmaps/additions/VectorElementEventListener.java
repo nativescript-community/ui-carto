@@ -23,7 +23,7 @@ public class VectorElementEventListener extends com.massifmaps.layers.VectorElem
 
     @Override
     public boolean onVectorElementClicked(final VectorElementClickInfo clickInfo) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
