@@ -178,6 +178,9 @@ const EVENT_FIELDS = ['eventName', 'object', 'payload', 'consumed', 'consumable'
  * property names and stay with `get`.
  */
 function withPayloadGetters(data: MassifEventData, payloadClass?: string): MassifEventData {
+    // Only when a payload actually ARRIVED, not merely when the schema says the event has one:
+    // an older SDK emits an event the typings describe as carrying a payload and sends none, and
+    // a getter that read through to `get` would throw instead of answering undefined.
     if (!payloadClass) {
         return data;
     }
@@ -793,35 +796,51 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         }
         let last = 0;
         let timer: any = null;
-        let cancel: (() => void) | null = null;
+
+        const deliver = (payload: number) => {
+            if (throttle) {
+                // Date.now() rather than a timer: dropping is the point, and a queued handler
+                // would read a payload the facade has already freed.
+                const now = Date.now();
+                if (now - last < throttle) {
+                    return false;
+                }
+                last = now;
+            }
+            if (debounce) {
+                // The payload dies when this returns, so the delayed handler gets a snapshot read
+                // NOW. Trailing edge: each event replaces the pending one, and only the last of a
+                // burst is delivered.
+                const snapshot = payload ? parseJson(bridge.getString(payload as Handle, '')) : null;
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    timer = null;
+                    try {
+                        handler(0, snapshot);
+                    } catch (error) {
+                        console.error(`MassifMaps: debounced handler for '${event}' threw`, error);
+                    }
+                }, debounce);
+                return false;
+            }
+            return handler(payload);
+        };
+
         const id = bridge.on(
             this.handle,
             event,
             (_target, _event, payload) => {
-                if (throttle) {
-                    // Date.now() rather than a timer: dropping is the point, and a queued
-                    // handler would read a payload the facade has already freed.
-                    const now = Date.now();
-                    if (now - last < throttle) {
-                        return false;
-                    }
-                    last = now;
-                }
-                if (debounce) {
-                    // The payload dies when this returns, so the delayed handler gets a snapshot
-                    // read NOW. Trailing edge: each event replaces the pending one, and only the
-                    // last of a burst is delivered.
-                    const snapshot = payload ? parseJson(bridge.getString(payload as Handle, '')) : null;
-                    if (timer) {
-                        clearTimeout(timer);
-                    }
-                    timer = setTimeout(() => {
-                        timer = null;
-                        handler(0, snapshot);
-                    }, debounce);
+                try {
+                    return deliver(payload);
+                } catch (error) {
+                    // This returns through a SWIG director into C++, and an exception crossing
+                    // that boundary aborts the PROCESS rather than unwinding it. A handler that
+                    // throws must not take the app down with it.
+                    console.error(`MassifMaps: handler for '${event}' threw`, error);
                     return false;
                 }
-                return handler(payload);
             },
             DELIVERY_ORIGIN,
             false,
@@ -833,13 +852,12 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         }
         const subscription = new Subscription(id);
         if (debounce) {
-            cancel = () => {
+            subscription.onRemove(() => {
                 if (timer) {
                     clearTimeout(timer);
                     timer = null;
                 }
-            };
-            subscription.onRemove(cancel);
+            });
         }
         return subscription;
     }
@@ -877,7 +895,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
                 return object ? object.getPos(path, projection) : null;
             }
         } as MassifEventData;
-        return withPayloadGetters(data, info?.payload as string);
+        return withPayloadGetters(data, payload || fromSnapshot ? (info?.payload as string) : undefined);
     }
 
     /**

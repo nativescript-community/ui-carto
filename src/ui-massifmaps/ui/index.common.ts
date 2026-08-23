@@ -20,13 +20,26 @@ export const MapClickedEvent = 'mapClicked';
  */
 const MAP_MOVE_REASONS = ['gesture', 'animation', 'api'] as const;
 
-/** Turns the native reason into the string the events carry. */
-export function mapMoveReason(reason: number) {
-    return MAP_MOVE_REASONS[reason];
+/**
+ * The reason as the short string these events carry, from either shape the SDK offers it in.
+ *
+ * The facade names its enums, so a payload says `MAP_MOVE_REASON_GESTURE`; an index is accepted
+ * too. Undefined for anything else - including an older SDK that raises map.moved with NO
+ * payload at all, where the alternative would be reporting someone else's reason.
+ */
+export function mapMoveReason(reason: number | string | undefined) {
+    if (typeof reason === 'number') {
+        return MAP_MOVE_REASONS[reason];
+    }
+    if (typeof reason === 'string' && reason.startsWith('MAP_MOVE_REASON_')) {
+        const short = reason.substring('MAP_MOVE_REASON_'.length).toLowerCase();
+        return MAP_MOVE_REASONS.indexOf(short as any) >= 0 ? (short as (typeof MAP_MOVE_REASONS)[number]) : undefined;
+    }
+    return undefined;
 }
 
 /** The payload shared by mapMoved and mapStable. */
-export function moveEventData(reason: number) {
+export function moveEventData(reason: number | string | undefined) {
     const name = mapMoveReason(reason);
     return { reason: name, userAction: name === 'gesture' };
 }
@@ -61,6 +74,11 @@ function clickTypeValue(name: string): number {
 }
 
 function facadeEventData(viewEvent: string, e: any) {
+    // An SDK older than the payload it is described as carrying sends none - reading through
+    // would throw, and an exception here crosses a JNI director and aborts the process.
+    if (viewEvent !== MapIdleEvent && !e.payload) {
+        return viewEvent === MapMovedEvent || viewEvent === MapStableEvent ? moveEventData(undefined) : undefined;
+    }
     switch (viewEvent) {
         case MapMovedEvent:
         case MapStableEvent:
