@@ -1,0 +1,279 @@
+/**
+ * What the generated typings are supposed to do, as code the compiler checks.
+ *
+ * Every `@ts-expect-error` is a NEGATIVE test: if the line ever stops being an error, tsc fails
+ * the build. That is what keeps "a wrong path is a compile error" from quietly becoming false
+ * when the schema or the generator changes.
+ *
+ * Run with `npm run typings.api.check`.
+ */
+import { MapCamera, MassifMap, MassifObject, attach, create, createLayer, createSource, find } from '../../../../src/ui-massifmaps/api/index.common';
+
+declare const view: any;
+
+// --- create -----------------------------------------------------------------------------------
+
+const osm = createSource('osm', { type: 'http', minZoom: 0, maxZoom: 14, url: 'https://tiles/{z}/{x}/{y}.pbf' });
+
+// @ts-expect-error `url` is required: no HTTPTileDataSource constructor overload does without it.
+createSource('bad', { type: 'http', maxZoom: 14 });
+
+// @ts-expect-error a key the SDK would drop with a warning is a compile error instead
+createSource('typo', { type: 'http', url: 'x', maxZom: 14 });
+
+// @ts-expect-error `local` needs a projection - both of its overloads take one
+createSource('nolocal', { type: 'local' });
+
+// A nested child is either an inline spec of the kind that builds it, or a registry id.
+createSource('cached', { type: 'memory-cache', capacity: 33554432, source: { type: 'http', url: 'https://tiles/{z}/{x}/{y}.png' } });
+createSource('cached2', { type: 'memory-cache', source: 'osm' });
+
+// @ts-expect-error a style spec is not a source spec
+createSource('wrongchild', { type: 'memory-cache', source: { type: 'mbvt' } });
+
+const base = createLayer('base', {
+    type: 'vector',
+    opacity: 0.8,
+    source: 'osm',
+    style: { type: 'mbvt', cartocss: { type: 'cartocss', css: '#water{polygon-fill:#0000ff;}' } }
+});
+
+// --- the created handle carries its concrete class --------------------------------------------
+
+// VectorTileLayer's own property, reached because the spec type named the class.
+base.set('labelBlendingSpeed', 1.5);
+// Layer's, reached through the base chain.
+base.set('opacity', 0.5);
+// TileDataSource's, on the source.
+osm.set('maxOverzoomLevel', 2);
+
+// @ts-expect-error a raster layer's property is not a vector layer's
+base.set('rasterFilterMode', 'RASTER_TILE_FILTER_MODE_BILINEAR');
+
+// @ts-expect-error a read-only property cannot be written
+osm.set('minZoom', 3);
+
+// --- enums are constant names, not numbers ----------------------------------------------------
+
+base.set('labelRenderOrder', 'VECTOR_TILE_RENDER_ORDER_LAST');
+
+// @ts-expect-error a number is not one of the constant names
+base.set('labelRenderOrder', 1);
+
+// @ts-expect-error a constant from another enum is not one of them either
+base.set('labelRenderOrder', 'CLICK_TYPE_SINGLE');
+
+const order: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' = base.get('labelRenderOrder');
+void order;
+
+// --- values come back as the JavaScript type they should be -----------------------------------
+
+const speed: number = base.get('labelBlendingSpeed');
+const filter: string = base.get('rendererLayerFilter');
+const extent: [[number, number] | [number, number, number], [number, number] | [number, number, number]] = osm.get('dataExtent');
+void speed;
+void filter;
+void extent;
+
+// @ts-expect-error a float property is not a string
+const wrong: string = base.get('opacity');
+void wrong;
+
+// --- dotted paths -----------------------------------------------------------------------------
+
+const map: MassifMap = attach(view);
+map.set('fogOptions.rangeStart', 2.5);
+map.fog().set('rangeEnd', 4);
+map.terrain().set('exaggeration', 1.4);
+
+// @ts-expect-error a scalar is not traversable
+map.set('fieldOfViewY.x', 1);
+
+// @ts-expect-error an object property is not readable as a value - group() is how you reach it
+map.get('fogOptions');
+
+// group() carries the class through, so the nested property completes.
+const range: number = map.group('fogOptions').get('rangeStart');
+void range;
+
+// @ts-expect-error not a property of FogOptions
+map.group('fogOptions').set('exaggeration', 1);
+
+// --- methods ----------------------------------------------------------------------------------
+
+const tile = osm.call('loadTile', [8467, 5852, 14]);
+const bytes: ArrayBuffer | null = tile.getData('data');
+tile.destroy();
+void bytes;
+
+// @ts-expect-error a tile is [x, y, zoom], not a pair
+osm.call('loadTile', [8467, 5852]);
+
+// @ts-expect-error loadTile is on a source, not on a layer
+base.call('loadTile', [8467, 5852, 14]);
+
+base.call('clearTileCaches', true);
+base.call('refresh');
+
+const hillshade = createLayer('hs', { type: 'hillshade', source: 'dem' });
+const metres: number[] = hillshade.call('getElevations', [
+    [5.76, 45.24],
+    [5.77, 45.25]
+]);
+void metres;
+
+// --- events -----------------------------------------------------------------------------------
+
+map.on('map.clicked', (e) => {
+    const at = e.getPos('clickPos', 'EPSG:4326');
+    void at;
+});
+
+// The Observable form narrows the same way.
+base.on('vectortile.clicked', (e) => {
+    const name: string = e.get('featureLayerName');
+    void name;
+});
+
+// @ts-expect-error not an event this class declares
+map.on('map.wiggled', () => {});
+
+base.subscribe('vectortile.clicked', (e) => {
+    // The payload's class comes from the event table, so its own properties complete.
+    const layerName: string = e.get('featureLayerName');
+    const id: number = e.get('featureId');
+    void layerName;
+    void id;
+});
+
+// --- consuming ---------------------------------------------------------------------------------
+
+base.on('vectortile.clicked', (e) => {
+    if (e.get('featureLayerName') === 'poi') {
+        e.consumed = true; // nothing behind this handler sees the click
+    }
+    const claimable: boolean = e.consumable;
+    void claimable;
+});
+
+map.on('map.clicked', (e) => {
+    // Settable on every event, but `consumable` is false here - MapEventListener::onMapClicked
+    // returns void, so there is nothing to tell.
+    e.consumed = true;
+});
+
+base.on('vectortile.clicked', (e) => {
+    // @ts-expect-error `consumable` is what the event reports, not something a handler sets
+    e.consumable = true;
+});
+
+// @ts-expect-error a source has no click event
+osm.subscribe('vectortile.clicked', () => {});
+
+// @ts-expect-error not an event this class declares
+map.subscribe('map.wiggled', () => {});
+
+// --- find -------------------------------------------------------------------------------------
+
+const found: MassifObject<'massif::VectorTileLayer'> | null = find('layer', 'base', 'massif::VectorTileLayer');
+found?.set('opacity', 1);
+
+// @ts-expect-error not a class the tables know
+find('layer', 'base', 'massif::NotAClass');
+
+// --- the fluent surface --------------------------------------------------------------------------
+
+base.visible(true).opacity(0.5).zoomRange([4, 18]).refresh();
+const isVisible: boolean = base.visible();
+const currentOpacity: number = base.opacity();
+void isVisible;
+void currentOpacity;
+
+// @ts-expect-error the setter takes a boolean
+base.visible(1);
+
+const camera: MapCamera = map.camera();
+camera.animate(400).zoom(14).tilt(45).rotation(0);
+camera.moveTo([5.7606, 45.2442], { zoom: 13.6, tilt: 25, duration: 800 });
+camera.moveTo({ lat: 45.2442, lon: 5.7606 }, { zoom: 13.6 });
+camera.fitBounds([
+    [5.7, 45.1],
+    [5.8, 45.3]
+]);
+
+const here: [number, number] | [number, number, number] = camera.position();
+const z: number = camera.zoom();
+void here;
+void z;
+
+map.eventProjection('EPSG:4326').onClick((e) => {
+    const at = e.getPos('clickPos');
+    void at;
+});
+map.onIdle(() => {});
+
+const dem = createSource('dem', { type: 'http', url: 'https://dem/{z}/{x}/{y}.png' });
+const bytes2: ArrayBuffer | null = dem.loadTile([8467, 5852, 14]);
+void bytes2;
+
+// @ts-expect-error a tile is [x, y, zoom]
+dem.loadTile([8467, 5852]);
+
+const profile: number[] = hillshade.elevations([[5.76, 45.24], { lat: 45.25, lon: 5.77 }]);
+void profile;
+
+// --- threads and throttling ----------------------------------------------------------------------
+
+// Every handler is main-thread; there is no delivery knob to get wrong.
+map.on('map.moved', () => {});
+map.subscribe('map.moved', () => {}, { throttle: 16 });
+map.subscribe('map.clicked', () => {}, { projection: 'EPSG:3857' });
+
+// @ts-expect-error delivery is not a thing - see the note on DELIVERY_ORIGIN
+map.subscribe('map.moved', () => {}, { delivery: 'ui' });
+
+// @ts-expect-error nor is the facade's coalescing, which does nothing on this delivery
+map.subscribe('map.moved', () => {}, { coalesce: true });
+
+// --- routing needs no plugin code: it is create + callAsync --------------------------------------
+
+const router = map.object('routing', 'valhalla', {
+    type: 'valhalla-online',
+    profile: 'bicycle',
+    customServiceURL: 'https://valhalla1.openstreetmap.de/{service}'
+});
+
+// @ts-expect-error `profile` is a real property; this is not
+map.object('routing', 'bad', { type: 'valhalla-online', proffile: 'bicycle' });
+
+// The request is one of the hand-written factories, so it names its class to get its methods.
+const route = map.object(
+    'routing',
+    'route-request',
+    {
+        type: 'request',
+        projection: 'EPSG:4326',
+        points: [
+            [5.72, 45.18],
+            [5.74, 45.24]
+        ]
+    },
+    'massif::RoutingRequest'
+);
+route.call('setCustomParameter', 'language', 'fr-FR');
+
+async function computeRoute() {
+    const summary = await router.callAsync('calculateRoute', [route.handle], (result) => ({
+        // Properties of RoutingResult, straight off the generated table.
+        metres: result.get('totalDistance'),
+        seconds: result.get('totalTime'),
+        // The path is the FLAT channel - x0,y0,x1,y1,… - because a 9 km route is 562 positions.
+        path: result.call('getPoints'),
+        // A collection is read one element per crossing; the counts are properties.
+        steps: result.collect((step) => step.get('streetName'), { countPath: 'instructionCount', method: 'getInstruction' })
+    }));
+    void summary.metres;
+    void summary.path;
+    void summary.steps;
+}
+void computeRoute;

@@ -238,6 +238,7 @@
         "com.massifmaps.utils:AssetPackage",
         "com.massifmaps.utils:AssetUtils",
         "com.massifmaps.utils:BitmapUtils",
+        "com.massifmaps.utils:BundleAssetPackage",
         "com.massifmaps.utils:DirAssetPackage",
         "com.massifmaps.utils:Log",
         "com.massifmaps.utils:LogEventListener",

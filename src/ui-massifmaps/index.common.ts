@@ -4,6 +4,17 @@ import { NativePropertyOptions } from '.';
 import { fromNativeMapRange, nativeVectorToArray, toNativeMapRange } from './utils';
 import { arrayToNativeVector } from './utils/index.android';
 
+/**
+ * The surface API, namespaced so it lives alongside the object API rather than colliding with it -
+ * both surfaces spell a layer `MassifLayer` and a map `MassifMap`.
+ *
+ * ```ts
+ * import { api } from '@nativescript-community/ui-massifmaps';
+ * const map = api.attach(mapView, { projection: 'EPSG:4326' });
+ * ```
+ */
+export * as api from './api';
+
 function createGetter(key: string, options: NativePropertyOptions) {
     console.log('🚀 ~ index.common.ts ~ createGetter ~ key:', key);
     const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);

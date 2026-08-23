@@ -213,7 +213,7 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
                     },
                     get clickType(): ClickType {
                         // This will return an integer value that can be compared with the actual enum
-                        return mapClickInfo.getClickType().swigValue();
+                        return mapClickInfo.getClickType();
                     },
                     get position() {
                         return fromNativeMapPos(mapClickInfo.getClickPos());

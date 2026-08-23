@@ -1536,6 +1536,27 @@ declare class MSFCustomRasterTileLayer extends MSFRasterTileLayer {
     setShaderSource(shaderSource: string): void;
 }
 
+declare class MSFBundleAssetPackage extends MSFAssetPackage {
+
+    static alloc(): MSFBundleAssetPackage; // inherited from NSObject
+
+    static new(): MSFBundleAssetPackage; // inherited from NSObject
+
+    constructor(o: { basePath: string; });
+
+    constructor(o: { basePath: string; baseAssetPackage: MSFAssetPackage; });
+
+    getBasePath(): string;
+
+    getLocalAssetNames(): MSFStringVector;
+
+    initWithBasePath(basePath: string): this;
+
+    initWithBasePathBaseAssetPackage(basePath: string, baseAssetPackage: MSFAssetPackage): this;
+
+    reload(): void;
+}
+
 declare class MSFDirAssetPackage extends MSFAssetPackage {
 
     static alloc(): MSFDirAssetPackage; // inherited from NSObject

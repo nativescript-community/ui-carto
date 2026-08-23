@@ -170,7 +170,7 @@ export abstract class BaseVectorTileLayer<T extends com.massifmaps.layers.Vector
             };
             return (
                 this.listener.onVectorTileClicked.call(this.listener, {
-                    clickType: info.getClickType().swigValue(),
+                    clickType: info.getClickType(),
                     layer: this,
                     feature: geoFeature,
                     featureId: geoFeature.id,
@@ -252,7 +252,7 @@ export abstract class BaseVectorLayer<T extends com.massifmaps.layers.VectorLaye
             }
             return (
                 this.elementListener.onVectorElementClicked.call(this.elementListener, {
-                    clickType: info.getClickType().swigValue(),
+                    clickType: info.getClickType(),
                     layer: this,
                     element,
                     native: nElement,
@@ -332,7 +332,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.massifmaps.layers.E
         }
     }
 
-    onDragEnd(dragInfo: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult {
+    onDragEnd(dragInfo: com.massifmaps.ui.VectorElementDragInfo): number {
         if (this.editListener && this.editListener.onDragEnd) {
             return this.editListener.onDragEnd.call(this.editListener, {
                 layer: this,
@@ -345,7 +345,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.massifmaps.layers.E
         return com.massifmaps.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
-    onDragMove(dragInfo: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult {
+    onDragMove(dragInfo: com.massifmaps.ui.VectorElementDragInfo): number {
         if (this.editListener && this.editListener.onDragMove) {
             return this.editListener.onDragMove.call(this.editListener, {
                 layer: this,
@@ -358,7 +358,7 @@ export class EditableVectorLayer extends BaseVectorLayer<com.massifmaps.layers.E
         return com.massifmaps.layers.VectorElementDragResult.VECTOR_ELEMENT_DRAG_RESULT_IGNORE;
     }
 
-    onDragStart(dragInfo: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult {
+    onDragStart(dragInfo: com.massifmaps.ui.VectorElementDragInfo): number {
         if (this.editListener && this.editListener.onDragStart) {
             return this.editListener.onDragStart.call(this.editListener, {
                 layer: this,

@@ -22,6 +22,7 @@
         "MassifMaps:MSFBitmap",
         "MassifMaps:MSFBitmapOverlayRasterTileDataSource",
         "MassifMaps:MSFBitmapUtils",
+        "MassifMaps:MSFBundleAssetPackage",
         "MassifMaps:MSFCacheTileDataSource",
         "MassifMaps:MSFCartoCSSStyleSet",
         "MassifMaps:MSFCelestialArc",

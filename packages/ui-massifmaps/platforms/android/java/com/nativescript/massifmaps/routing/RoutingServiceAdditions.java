@@ -24,26 +24,6 @@ import java.io.IOException;
 
 
 public class RoutingServiceAdditions {
-    enum RoutingAction {
-        HEAD_ON,
-        FINISH,
-        NO_TURN,
-        GO_STRAIGHT,
-        TURN_RIGHT,
-        UTURN,
-        TURN_LEFT,
-        REACH_VIA_LOCATION,
-        ENTER_ROUNDABOUT,
-        LEAVE_ROUNDABOUT,
-        STAY_ON_ROUNDABOUT,
-        START_AT_END_OF_STREET,
-        ENTER_AGAINST_ALLOWED_DIRECTION,
-        LEAVE_AGAINST_ALLOWED_DIRECTION,
-        GO_UP,
-        GO_DOWN,
-        WAIT
-    }
-
     static final String TAG = "RoutingServiceAdditions";
     static Handler mainHandler = null;
 
@@ -105,7 +85,10 @@ public class RoutingServiceAdditions {
             RoutingInstruction instruction = rInstructions.get(i);
             int index = instruction.getPointIndex();
             JSONObject obj = new JSONObject();
-            obj.put("a", RoutingAction.valueOf(instruction.getAction().toString().replace("ROUTING_ACTION_", "")).ordinal());
+            // getAction() IS the ordinal now that the SDK's Java enums are int constants, so the
+            // name round trip is gone - and with it the throw on ENTER_FERRY / LEAVE_FERRY, which
+            // the local mirror of the enum never listed. Same numbers for every other action.
+            obj.put("a", instruction.getAction());
             obj.put("az", Math.round(instruction.getAzimuth()));
             obj.put("dist", instruction.getDistance());
             obj.put("time", instruction.getTime());

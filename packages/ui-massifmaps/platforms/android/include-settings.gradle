@@ -1,6 +1,20 @@
-println 'debugMassif settings: ' + System.env.DEBUGMASSIF
 if (System.env.DEBUGMASSIF) {
+    // MASSIF_SDK_HOME is REQUIRED here, and its absence has to be loud. Unset, the path below
+    // became "null/scripts/android-dev/massif": gradle accepted the include, the project had no
+    // variants, and the app silently kept whatever libmassif.so was already in its intermediates.
+    // A whole afternoon went into a bug that had already been fixed in a library nothing rebuilt.
+    def home = System.env.MASSIF_SDK_HOME
+    if (!home) {
+        throw new GradleException('DEBUGMASSIF is set but MASSIF_SDK_HOME is not - '
+            + 'cannot locate the local massif project. Set it to your mobile-sdk checkout, '
+            + 'or unset DEBUGMASSIF to build against the published AAR.')
+    }
+    def dir = new File("${home}/scripts/android-dev/massif")
+    if (!dir.isDirectory()) {
+        throw new GradleException("MASSIF_SDK_HOME does not look like a mobile-sdk checkout: "
+            + "${dir} is not a directory")
+    }
+    println "debugMassif project: ${dir}"
     include ':massif'
-    println 'debugMassif project: ' + "${System.env.MASSIF_SDK_HOME}/scripts/android-dev/massif"
-    project(':massif').projectDir = new File("${System.env.MASSIF_SDK_HOME}/scripts/android-dev/massif")
+    project(':massif').projectDir = dir
 }

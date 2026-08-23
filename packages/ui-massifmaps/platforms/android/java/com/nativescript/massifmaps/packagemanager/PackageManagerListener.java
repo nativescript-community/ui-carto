@@ -13,7 +13,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
     public interface Listener {
         void onPackageCancelled(String id, int version);
 
-        void onPackageFailed(String id, int version, PackageErrorType errorType);
+        void onPackageFailed(String id, int version, @PackageErrorType.Value int errorType);
 
         void onPackageListFailed();
 
@@ -67,7 +67,8 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
     }
 
     @Override
-    public void onPackageFailed(final String id, final int version, final PackageErrorType errorType) {
+    public void onPackageFailed(final String id, final int version,
+            final @PackageErrorType.Value int errorType) {
         if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {

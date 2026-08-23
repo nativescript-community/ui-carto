@@ -19,21 +19,27 @@ export function setShowError(value: boolean);
 
 export interface ZippedAssetPackageOptions {
     zipPath: string;
+    /** Read the archive from the file system rather than from the app bundle. */
     liveReload?: boolean;
+    /** Looked in when the archive does not have the asset - shared fonts, say. */
     basePack?: DirAssetPackage | ZippedAssetPackage;
-    loadAsset?(param0: string): com.massifmaps.core.BinaryData;
-    getAssetNames?(): com.massifmaps.core.StringVector;
 }
 
-export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {
-    getAssetNames(): any; //MSFStringVector | com.massifmaps.core.StringVector
-}
+/** The SDK's ZippedAssetPackage, handed the archive's bytes. */
+export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {}
+
 export interface DirAssetPackageOptions {
+    /** Looked in when the folder does not have the asset - shared fonts, say. */
     basePack?: DirAssetPackage | ZippedAssetPackage;
     dirPath: string;
+    /**
+     * Read the real file system, for a live-reloaded style. The default reads the app's own
+     * bundled assets, which on Android are inside the APK and have no file path.
+     */
     loadUsingNS?: boolean;
 }
 
+/** The SDK's DirAssetPackage or BundleAssetPackage, chosen by `loadUsingNS`. */
 export class DirAssetPackage extends BaseNative<any, DirAssetPackageOptions> {}
 export function encodeMapPosVector<T = DefaultLatLonKeys>(coordinates: MapPosVector<T> | GenericMapPos<T>[], includeElevation: boolean, precision: number): string;
 export function decodeMapPosVector<T = DefaultLatLonKeys>(str: string, includeElevation: boolean, precision: number): MapPosVector<T>;
@@ -49,8 +55,8 @@ export function isLocationOnPath<T = DefaultLatLonKeys>(
 export declare function fromNativeMapRange(value): MapRange;
 export declare function toNativeMapRange(value: MapRange): any;
 
-export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Omit<Met_ZippedAssetPackage, 'getAssetNames'> {}
+export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Met_ZippedAssetPackage {}
 
 export interface DirAssetPackage extends Acc_DirAssetPackage, Met_DirAssetPackage {}
 
-export interface ZippedAssetPackage extends Acc_AssetPackage, Omit<Met_AssetPackage, 'getAssetNames' | 'loadAsset'> {}
+export interface ZippedAssetPackage extends Acc_AssetPackage, Met_AssetPackage {}
