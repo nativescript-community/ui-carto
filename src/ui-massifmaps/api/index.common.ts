@@ -1,7 +1,7 @@
 import { EventData, Observable } from '@nativescript/core';
 import { bridge } from './bridge';
 import type { Delivery as NativeDelivery } from './bridge';
-import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, resolveMethod, resolvePath } from './resolve';
+import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, propertyNames, resolveMethod, resolvePath } from './resolve';
 import type {
     Bounds,
     ClassName,
@@ -160,27 +160,76 @@ export interface SubscribeOptions {
  * `payload` is valid ONLY while the handler runs: the facade frees it on the way out. Read what
  * you need, do not keep the object.
  */
-export interface MassifEventData<C extends ClassName = any, E extends EventName<C> = EventName<C>> extends EventData {
-    eventName: string;
-    object: MassifObject<C>;
-    /** The event's data, or null when it carries none (`map.idle`, `map.moved`). */
-    payload: MassifObject<PayloadClass<C, E>> | null;
-    /**
-     * Set this to true to claim the event: the SDK stops offering it to anything behind you -
-     * later subscribers, and the map's own handling.
-     *
-     * Only a CONSUMABLE event can be claimed - `vectortile.clicked` and `vectorelement.clicked`;
-     * `consumable` on this object says which. Setting it on anything else is ignored, and warned
-     * about once rather than silently doing nothing.
-     */
-    consumed: boolean;
-    /** Whether setting `consumed` on this event does anything. */
-    readonly consumable: boolean;
-    /** Shorthand for `payload.get(path)`. Throws when the event carries no payload. */
-    get<P extends ValuePath<PayloadClass<C, E>>>(path: P): ValueAt<PayloadClass<C, E>, P>;
-    /** Shorthand for `payload.getPos(path, projection)`. */
-    getPos(path: PositionPath<PayloadClass<C, E>> | (string & {}), projection?: ProjectionName): Position | Bounds | null;
+/**
+ * The event's own fields. A payload property with one of these names keeps the event's meaning
+ * and stays reachable through `get`, rather than shadowing it.
+ */
+const EVENT_FIELDS = ['eventName', 'object', 'payload', 'consumed', 'consumable', 'get', 'getPos'];
+
+/**
+ * Hangs a getter on the event for every property of its payload class, so a handler reads
+ * `e.reason` or `e.clickType` instead of `e.get('reason')`.
+ *
+ * Derived from the generated schema, never a per-event list: a new payload class, or a new
+ * property on an existing one, is covered the next time the typings are regenerated.
+ *
+ * Lazy - each getter is ONE read at access time, which is what keeps the promise that asking for
+ * one property never parses the whole feature. Nested paths (`clickInfo.duration`) are not
+ * property names and stay with `get`.
+ */
+function withPayloadGetters(data: MassifEventData, payloadClass?: string): MassifEventData {
+    if (!payloadClass) {
+        return data;
+    }
+    for (const name of propertyNames(payloadClass)) {
+        if (EVENT_FIELDS.indexOf(name) >= 0 || name in data) {
+            continue;
+        }
+        Object.defineProperty(data, name, {
+            enumerable: true,
+            configurable: true,
+            get: () => (data as any).get(name)
+        });
+    }
+    return data;
 }
+
+/** A payload path that is a property name, i.e. not a walk into a struct. */
+type TopLevelPath<P> = P extends `${string}.${string}` ? never : P;
+
+/**
+ * The payload's own properties, readable straight off the event - see withPayloadGetters.
+ *
+ * Names that would shadow the event's own fields are dropped: the event keeps its meaning, and
+ * the property is still reachable through `get`.
+ */
+export type PayloadFields<C extends ClassName, E extends EventName<C>> = Omit<
+    { readonly [K in TopLevelPath<ValuePath<PayloadClass<C, E>>>]: ValueAt<PayloadClass<C, E>, K> },
+    'eventName' | 'object' | 'payload' | 'consumed' | 'consumable' | 'get' | 'getPos'
+>;
+
+export type MassifEventData<C extends ClassName = any, E extends EventName<C> = EventName<C>> = EventData &
+    PayloadFields<C, E> & {
+        eventName: string;
+        object: MassifObject<C>;
+        /** The event's data, or null when it carries none - `map.idle` is the only one left. */
+        payload: MassifObject<PayloadClass<C, E>> | null;
+        /**
+         * Set this to true to claim the event: the SDK stops offering it to anything behind you -
+         * later subscribers, and the map's own handling.
+         *
+         * Only a CONSUMABLE event can be claimed - `vectortile.clicked` and
+         * `vectorelement.clicked`; `consumable` on this object says which. Setting it on anything
+         * else is ignored, and warned about once rather than silently doing nothing.
+         */
+        consumed: boolean;
+        /** Whether setting `consumed` on this event does anything. */
+        readonly consumable: boolean;
+        /** Shorthand for `payload.get(path)`. Throws when the event carries no payload. */
+        get<P extends ValuePath<PayloadClass<C, E>>>(path: P): ValueAt<PayloadClass<C, E>, P>;
+        /** Shorthand for `payload.getPos(path, projection)`. */
+        getPos(path: PositionPath<PayloadClass<C, E>> | (string & {}), projection?: ProjectionName): Position | Bounds | null;
+    };
 
 /** A live subscription. Removing it twice is an error the SDK reports, so this is idempotent. */
 export class Subscription {
@@ -806,7 +855,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         // A debounced delivery has no live payload left - see SubscribeOptions.debounce - so its
         // reads come out of the snapshot taken at emit time.
         const fromSnapshot = snapshot !== undefined && snapshot !== null;
-        return {
+        const data = {
             eventName: event,
             object: this as MassifObject,
             payload: object as never,
@@ -828,6 +877,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
                 return object ? object.getPos(path, projection) : null;
             }
         } as MassifEventData;
+        return withPayloadGetters(data, info?.payload as string);
     }
 
     /**

@@ -66,6 +66,26 @@ function parseMethods(cls: string) {
     return table;
 }
 
+/**
+ * Every property name on a class and its bases, nearest first.
+ *
+ * Used to hang getters off an event payload, so a handler reads `e.reason` rather than
+ * `e.get('reason')`. Names only - the shapes come from findProperty when one is read.
+ */
+export function propertyNames(cls: string): string[] {
+    const names: string[] = [];
+    let walk: string | undefined = cls;
+    while (walk) {
+        for (const name of Object.keys(parseProps(walk))) {
+            if (names.indexOf(name) < 0) {
+                names.push(name);
+            }
+        }
+        walk = BASES[walk];
+    }
+    return names;
+}
+
 /** One property, found on the class or on any of its bases - which is where most of them live. */
 export function findProperty(cls: string, name: string): PropInfo | null {
     let walk: string | undefined = cls;

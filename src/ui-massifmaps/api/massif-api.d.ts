@@ -140,6 +140,7 @@ export type ClassName =
     | 'massif::MapEnvelope'
     | 'massif::MapEventListener'
     | 'massif::MapInteractionInfo'
+    | 'massif::MapMoveInfo'
     | 'massif::MapPos'
     | 'massif::MapRange'
     | 'massif::MapRenderer'
@@ -426,6 +427,15 @@ export type MBTilesScheme =
     | 'MBTILES_SCHEME_TMS'
     /** Alternative to TMS scheme. Vertical coordinate is flipped. */
     | 'MBTILES_SCHEME_XYZ'
+    ;
+
+export type MapMoveReason =
+    /** The user, directly: a gesture, a mouse wheel, or the inertia that follows one. */
+    | 'MAP_MOVE_REASON_GESTURE'
+    /** An animation the SDK is stepping - a flight, or a move given a duration. The call that started it reported the reason it was made with; every frame after that is this one. */
+    | 'MAP_MOVE_REASON_ANIMATION'
+    /** The app, through a call that took effect immediately: setFocusPos, setZoom, an option change that moved the camera. */
+    | 'MAP_MOVE_REASON_API'
     ;
 
 export type PackageAction =
@@ -2968,6 +2978,10 @@ export interface PropertyTypes {
         readonly 'tiltAction': boolean;
         /** (read-only) Returns true if the interaction included a zoom action. */
         readonly 'zoomAction': boolean;
+    };
+    'massif::MapMoveInfo': {
+        /** (read-only) Returns what caused the movement. */
+        readonly 'reason': 'MAP_MOVE_REASON_GESTURE' | 'MAP_MOVE_REASON_ANIMATION' | 'MAP_MOVE_REASON_API';
     };
     'massif::MapPos': {
         /** (read-only) Returns the x coordinate of this map position. */
@@ -6143,6 +6157,8 @@ export interface PositionPaths {
     };
     'massif::MapInteractionInfo': {
     };
+    'massif::MapMoveInfo': {
+    };
     'massif::MapPos': {
     };
     'massif::MapRange': {
@@ -6922,6 +6938,8 @@ export interface ObjectPaths {
     'massif::MapEventListener': {
     };
     'massif::MapInteractionInfo': {
+    };
+    'massif::MapMoveInfo': {
     };
     'massif::MapPos': {
     };
@@ -7755,6 +7773,8 @@ export interface VariantPaths {
     'massif::MapEventListener': {
     };
     'massif::MapInteractionInfo': {
+    };
+    'massif::MapMoveInfo': {
     };
     'massif::MapPos': {
     };
@@ -9535,6 +9555,8 @@ export interface MethodTypes {
     };
     'massif::MapInteractionInfo': {
     };
+    'massif::MapMoveInfo': {
+    };
     'massif::MapPos': {
     };
     'massif::MapRange': {
@@ -10050,6 +10072,8 @@ export interface EventTypes {
     };
     'massif::MapInteractionInfo': {
     };
+    'massif::MapMoveInfo': {
+    };
     'massif::MapPos': {
     };
     'massif::MapRange': {
@@ -10112,8 +10136,8 @@ export interface EventTypes {
         'map.clicked': 'massif::MapClickInfo';
         'map.idle': null;
         'map.interaction': 'massif::MapInteractionInfo';
-        'map.moved': null;
-        'map.stable': null;
+        'map.moved': 'massif::MapMoveInfo';
+        'map.stable': 'massif::MapMoveInfo';
     };
     'massif::OptionsListener': {
     };

@@ -93,7 +93,8 @@ export const exampleSections: ExampleSection[] = [
         title: "Interaction",
         description: "Clicks, features and live updates.",
         examples: [
-            entry("feature-click", "Get the feature under a tap", "The click payload is read lazily by path, so asking for one property never parses the whole feature - and the geometry is only serialised if you want it.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/feature-click.png", () => require('./FeatureClick.svelte')),
+            entry("feature-click", "Get the feature under a tap", "The click payload is read lazily by path, so asking for one property never parses the whole feature - and a handler that found what it wanted returns true to claim the click, so nothing after it sees the tap.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/feature-click.png", () => require('./FeatureClick.svelte')),
+            entry("map-events", "Refresh data when the map settles", "map.stable fires once when a movement ends, with the reason that caused it - so a data refresh runs once per gesture, and never for your own camera calls.", null, () => require('./MapEvents.svelte')),
         ]
     },
     {
