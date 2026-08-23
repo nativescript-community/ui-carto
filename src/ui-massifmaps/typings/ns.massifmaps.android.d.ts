@@ -130,19 +130,6 @@ declare namespace com {
     export namespace nativescript {
         export namespace massifmaps {
             export namespace additions {
-                export class MapEventListener extends java.lang.Object {
-                    public static class: java.lang.Class<com.nativescript.massifmaps.additions.MapEventListener>;
-                    /**
-                     * Constructs a new instance of the com.nativescript.massifmaps.additions.MapEventListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-                     */
-                    public constructor(implementation: { onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: number): void; onMapMoved(param0: number): void; onMapIdle(): void; onMapStable(param0: number): void; onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void; });
-                    public constructor();
-                    public onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: number): void;
-                    public onMapMoved(param0: number): void;
-                    public onMapIdle(): void;
-                    public onMapStable(param0: number): void;
-                    public onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void;
-                }
             }
         }
     }
@@ -160,7 +147,6 @@ declare namespace com {
                     public surfaceRedrawNeededAsync(holder: globalAndroid.view.SurfaceHolder, drawingFinished: java.lang.Runnable): void;
                     public getLayers(): com.massifmaps.components.Layers;
                     public mapToScreen(param0: com.massifmaps.core.MapPos): com.massifmaps.core.ScreenPos;
-                    public setMapEventListener(mapEventListener: com.massifmaps.ui.MapEventListener): void;
                     public getFocusPos(): com.massifmaps.core.MapPos;
                     public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number, defStyleRes: number);
                     public rotate(deltaAngle: number, targetPos: com.massifmaps.core.MapPos, durationSeconds: number): void;
@@ -194,7 +180,6 @@ declare namespace com {
                     public getMapEventListener(): com.massifmaps.ui.MapEventListener;
                     public onSurfaceCreated(param0: javax.microedition.khronos.opengles.GL10, param1: javax.microedition.khronos.egl.EGLConfig): void;
                     public constructor(e: globalAndroid.content.Context, m: globalAndroid.util.AttributeSet);
-                    public setMapEventListener(listener: com.nativescript.massifmaps.additions.MapEventListener): void;
                     public onDrawFrame(param0: javax.microedition.khronos.opengles.GL10): void;
                     public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number);
                     public getMapRotation(): number;
@@ -308,7 +293,6 @@ declare namespace com {
                     public setZoom(param0: number, param1: number): void;
                     public getLayers(): com.massifmaps.components.Layers;
                     public mapToScreen(param0: com.massifmaps.core.MapPos): com.massifmaps.core.ScreenPos;
-                    public setMapEventListener(mapEventListener: com.massifmaps.ui.MapEventListener): void;
                     public getFocusPos(): com.massifmaps.core.MapPos;
                     public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number, defStyleRes: number);
                     public onSurfaceTextureAvailable(param0: globalAndroid.graphics.SurfaceTexture, param1: number, param2: number): void;
@@ -344,7 +328,6 @@ declare namespace com {
                     public getMapEventListener(): com.massifmaps.ui.MapEventListener;
                     public onSurfaceCreated(param0: javax.microedition.khronos.opengles.GL10, param1: javax.microedition.khronos.egl.EGLConfig): void;
                     public constructor(e: globalAndroid.content.Context, this_: globalAndroid.util.AttributeSet);
-                    public setMapEventListener(listener: com.nativescript.massifmaps.additions.MapEventListener): void;
                     public onDrawFrame(param0: javax.microedition.khronos.opengles.GL10): void;
                     public constructor(context: globalAndroid.content.Context, attrs: globalAndroid.util.AttributeSet, defStyleAttr: number);
                     public onLayoutChange(param0: globalAndroid.view.View, param1: number, param2: number, param3: number, param4: number, param5: number, param6: number, param7: number, param8: number): void;

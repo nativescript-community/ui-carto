@@ -52,9 +52,7 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         com.nativescript.massifmaps.additions.MapView.setRunOnMainThread(value);
     }
 
-    nativeViewProtected: com.nativescript.massifmaps.additions.MapView & {
-        listener: com.nativescript.massifmaps.additions.MapEventListener;
-    };
+    nativeViewProtected: com.nativescript.massifmaps.additions.MapView;
     mProjection: IProjection;
 
     override get mapView(): com.nativescript.massifmaps.additions.MapView {
@@ -169,69 +167,11 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
         if (!this.projection) {
             this.projection = new EPSG4326();
         }
-        const listener = new com.nativescript.massifmaps.additions.MapEventListener({
-            onMapIdle: () => {
-                this.sendEvent(MapIdleEvent);
-            },
-            onMapMoved: (reason: number) => {
-                this.sendEvent<MapGestureInfo>(MapMovedEvent, moveEventData(reason));
-            },
-            onMapInteraction: (interaction: com.massifmaps.ui.MapInteractionInfo, reason: number) => {
-                this.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
-                    ...moveEventData(reason),
-                    interaction: {
-                        get isAnimationStarted() {
-                            return interaction.isAnimationStarted();
-                        },
-                        get isPanAction() {
-                            return interaction.isPanAction();
-                        },
-                        get isRotateAction() {
-                            return interaction.isRotateAction();
-                        },
-                        get isTiltAction() {
-                            return interaction.isTiltAction();
-                        },
-                        get isZoomAction() {
-                            return interaction.isZoomAction();
-                        }
-                    }
-                });
-            },
-            onMapStable: (reason: number) => {
-                this.sendEvent<MapGestureInfo>(MapStableEvent, moveEventData(reason));
-            },
-            onMapClicked: (mapClickInfo: com.massifmaps.ui.MapClickInfo) => {
-                this.sendEvent<MapClickInfo>(MapClickedEvent, {
-                    android: mapClickInfo,
-                    get clickInfo() {
-                        return {
-                            get duration(): number {
-                                return mapClickInfo.getClickInfo().getDuration();
-                            }
-                        };
-                    },
-                    get clickType(): ClickType {
-                        // This will return an integer value that can be compared with the actual enum
-                        return mapClickInfo.getClickType();
-                    },
-                    get position() {
-                        return fromNativeMapPos(mapClickInfo.getClickPos());
-                    }
-                });
-            }
-        });
-        this.nativeViewProtected.listener = listener;
-        this.nativeViewProtected.setMapEventListener(listener);
     }
 
     disposeNativeView(): void {
         this.mProjection = null;
         this.nativeProjection = null;
-        if (this.nativeViewProtected.listener) {
-            this.nativeViewProtected.listener = null;
-            this.nativeViewProtected.setMapEventListener(null);
-        }
         this.nativeView.owner = null;
         super.disposeNativeView();
     }

@@ -174,29 +174,32 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     public static mapInteractionEvent = 'mapInteraction';
     public static mapClickedEvent = 'mapClicked';
 
+    /**
+     * Whether the plugin's native listeners hop to the main thread and wait before calling into
+     * JavaScript. True by default, and what makes a handler safe to write - the SDK emits from
+     * its render and tile threads, where NativeScript has no runtime at all.
+     *
+     * It applies to the map's events too, which come from the surface API: the plugin subscribes
+     * them with the facade's ORIGIN delivery and does the hop in its own listener, rather than
+     * asking the facade for UI delivery - that would need a dispatcher whose post() is itself
+     * called on the producing thread.
+     */
     public static setRunOnMainThread(value: boolean);
 
     /**
-     * Raise the events named in `eventOptions` through the facade rather than the native
-     * listener, which is what makes their subscription options apply.
-     *
-     * Opt-in, and per event: an event with no entry in `eventOptions` stays on the native path,
-     * so a page that only wants a throttle on `mapMoved` pays for nothing else. Needs an SDK
-     * built with the surface API; without one it warns once and keeps the native listener.
-     *
-     * ```html
-     * <MassifMap facadeEvents="true" eventOptions="{{ { mapMoved: { throttle: 250 } } }}" />
-     * ```
-     */
-    facadeEvents: boolean;
-
-    /**
-     * Turns the facade path on at runtime, which is where an app that decides its options after
-     * `mapReady` can reach it - `facadeEvents` in the markup is read before that.
+     * Re-subscribes the map's events with new options. Called for you when the map loads, so an
+     * app only needs it to change the options afterwards.
      */
     enableFacadeEvents(eventOptions?: { [event in keyof MassifMapEventMap]?: { throttle?: number; debounce?: number; projection?: string } }): void;
 
-    /** Per-event subscription options, keyed by the view's event name. See `facadeEvents`. */
+    /**
+     * Per-event subscription options, keyed by the view's event name. Set before the map loads -
+     * from markup, say - or pass them to `enableFacadeEvents` afterwards.
+     *
+     * ```html
+     * <MassifMap eventOptions="{{ { mapMoved: { throttle: 250 } } }}" />
+     * ```
+     */
     eventOptions: { [event in keyof MassifMapEventMap]?: { throttle?: number; debounce?: number; projection?: string } };
     public projection: Projection;
     focusPos: GenericMapPos<T>;

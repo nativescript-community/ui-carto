@@ -182,20 +182,7 @@ declare class NSMSFHillshadeRasterTileLayer extends MSFHillshadeRasterTileLayer 
     getElevationsCallback(pos: MSFMapPosVector, callback: (p1: MSFDoubleVector) => void): void;
 }
 
-interface NSMSFMapEventListener {
 
-    onMapClicked(mapClickInfo: MSFMapClickInfo): void;
-
-    onMapIdle(): void;
-
-    onMapInteraction(mapInteractionInfo: MSFMapInteractionInfo, reason: number): void;
-
-    onMapMoved(reason: number): void;
-
-    onMapStable(reason: number): void;
-}
-
-declare var NSMSFMapEventListener: {  prototype: NSMSFMapEventListener; };
 
 declare class NSMSFMapView extends MSFMapView {
 
@@ -236,11 +223,9 @@ declare class NSMSFMapView extends MSFMapView {
 
     static setRunOnMainThreadWithValue(value: boolean): void;
 
-    listener: NSMSFMapEventListener;
 
     static RUN_ON_MAIN_THREAD: boolean;
 
-    setAKMapEventListener(listener: NSMSFMapEventListener): void;
 }
 
 declare class NSMSFRoutingServiceAdditions extends NSObject {
