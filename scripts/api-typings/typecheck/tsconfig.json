@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": false,
+        "strictNullChecks": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "lib": ["es2020", "dom"],
+        "baseUrl": ".",
+        "paths": {
+            "@nativescript/core": ["stubs/nativescript-core"]
+        }
+    },
+    "include": ["stubs/**/*.ts", "cases/**/*.ts", "../../../src/ui-massifmaps/api/massif-api.ts", "../../../src/ui-massifmaps/api/schema.ts", "../../../src/ui-massifmaps/api/resolve.ts", "../../../src/ui-massifmaps/api/index.common.ts", "../../../src/ui-massifmaps/api/bridge.d.ts"]
+}

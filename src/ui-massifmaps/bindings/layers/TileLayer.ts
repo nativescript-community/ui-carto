@@ -4,7 +4,7 @@
 import { TileSubstitutionPolicy } from '../../layers/index';
 
 /** com.massifmaps.layers.TileLayer / MSFTileLayer */
-export const METHODS = ['calculateMapTile', 'calculateMapTileBounds', 'calculateMapTileOrigin', 'clearTileCaches', 'getDataSource', 'getFrameNr', 'getMaxOverzoomLevel', 'getMaxStandInLevel', 'getMaxUnderzoomLevel', 'getTileLoadListener', 'getTileSubstitutionPolicy', 'getUTFGridDataSource', 'getUTFGridEventListener', 'getZoomLevelBias', 'isPreloading', 'isSynchronizedRefresh', 'isUpdateInProgress', 'setFrameNr', 'setMaxOverzoomLevel', 'setMaxStandInLevel', 'setMaxUnderzoomLevel', 'setPreloading', 'setSynchronizedRefresh', 'setTerrainShadowMask', 'setTileLoadListener', 'setTileSubstitutionPolicy', 'setUTFGridDataSource', 'setUTFGridEventListener', 'setZoomLevelBias'] as const;
+export const METHODS = ['calculateMapTile', 'calculateMapTileBounds', 'calculateMapTileOrigin', 'clearTileCaches', 'consumeShadowCastersMissingElevation', 'getDataSource', 'getFrameNr', 'getMaxOverzoomLevel', 'getMaxStandInLevel', 'getMaxUnderzoomLevel', 'getTileLoadListener', 'getTileSubstitutionPolicy', 'getUTFGridDataSource', 'getUTFGridEventListener', 'getZoomLevelBias', 'isPreloading', 'isSynchronizedRefresh', 'isUpdateInProgress', 'setFrameNr', 'setMaxOverzoomLevel', 'setMaxStandInLevel', 'setMaxUnderzoomLevel', 'setPreloading', 'setSynchronizedRefresh', 'setTerrainShadowMask', 'setTileLoadListener', 'setTileSubstitutionPolicy', 'setUTFGridDataSource', 'setUTFGridEventListener', 'setZoomLevelBias'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
@@ -12,6 +12,7 @@ export interface Methods {
     calculateMapTileBounds(arg0: any): any;
     calculateMapTileOrigin(arg0: any): any;
     clearTileCaches(arg0: boolean): void;
+    consumeShadowCastersMissingElevation(): number;
     getDataSource(): any;
     getFrameNr(): number;
     getMaxOverzoomLevel(): number;

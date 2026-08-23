@@ -4,6 +4,25 @@ import { Geometry } from './geometry';
 import { FeatureCollection } from './geometry/feature';
 import { BaseVectorElementStyleBuilder } from './vectorelements';
 
+/**
+ * The surface API - the SDK's id/handle + JSON facade, typed from the SDK's own property table.
+ *
+ * Namespaced because it lives ALONGSIDE the object API below rather than replacing it, and both
+ * spell a layer `MassifLayer` and a map `MassifMap`:
+ *
+ * ```ts
+ * import { api } from '@nativescript-community/ui-massifmaps';
+ *
+ * const map = api.attach(mapView, { projection: 'EPSG:4326' });
+ * map.addLayer('base', { type: 'vector', source: 'osm', style: 'streets' });
+ * map.fog().set('rangeStart', 2.5);
+ * map.on('map.clicked', (e) => console.log(e.getPos('clickPos')));
+ * ```
+ *
+ * See `api/index.ts` for the whole surface.
+ */
+export * as api from './api';
+
 export function getMassifBitmap(src: string | ImageSource | ImageAsset): any;
 
 // type BaseInterface<T> = {

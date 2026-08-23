@@ -96,15 +96,18 @@ export function nativeEnumProperty(options: NativePropertyOptions): (target: any
 export function nativeEnumProperty(...args) {
     return nativeProperty({}, ...args);
 }
+// The SDK's Java enums are int constants now, so both directions are the identity - there is no
+// swigValue()/swigToEnum() to call, and a number IS the constant. `androidEnum` is kept so the
+// call sites do not all have to change.
 export function nativeAndroidEnumProperty(androidEnum, options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any {
     return nativeProperty(
         Object.assign(options || {}, {
             converter: {
-                fromNative(value: typeof androidEnum) {
-                    return value.swigValue();
+                fromNative(value: number) {
+                    return value;
                 },
                 toNative(value: any) {
-                    return androidEnum.swigToEnum(value);
+                    return value;
                 }
             }
         })

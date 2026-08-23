@@ -60,3 +60,6 @@ packages/**/*.metadata.json
 !demo-snippets/hooks/**
 
 *.tsbuildinfo
+
+# scratch tsconfig + extracted scripts from `npm run examples.check`
+scripts/examples/.check/

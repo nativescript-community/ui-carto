@@ -9,36 +9,6 @@ declare namespace com {
     export namespace nativescript {
         export namespace massifmaps {
             export namespace additions {
-                export class AssetPackage extends com.massifmaps.utils.AssetPackage {
-                    public static class: java.lang.Class<com.nativescript.massifmaps.additions.AssetPackage>;
-                    public constructor();
-                    public setInterface(inter: com.nativescript.massifmaps.additions.AssetPackage.Interface): void;
-                    public constructor(inter: com.nativescript.massifmaps.additions.AssetPackage.Interface);
-                    public loadAsset(name: string): com.massifmaps.core.BinaryData;
-                    public constructor(inter: com.nativescript.massifmaps.additions.AssetPackage.Interface, bPackage: com.massifmaps.utils.AssetPackage);
-                    public getAssetNames(): com.massifmaps.core.StringVector;
-                }
-                export namespace AssetPackage {
-                    export class Interface extends java.lang.Object {
-                        public static class: java.lang.Class<com.nativescript.massifmaps.additions.AssetPackage.Interface>;
-                        /**
-                         * Constructs a new instance of the com.nativescript.massifmaps.additions.AssetPackage$Interface interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-                         */
-                        public constructor(implementation: { loadAsset(param0: string): com.massifmaps.core.BinaryData; getAssetNames(): com.massifmaps.core.StringVector; });
-                        public constructor();
-                        public loadAsset(param0: string): com.massifmaps.core.BinaryData;
-                        public getAssetNames(): com.massifmaps.core.StringVector;
-                    }
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace nativescript {
-        export namespace massifmaps {
-            export namespace additions {
                 export class CelestialEventListener extends com.massifmaps.layers.CelestialEventListener {
                     public static class: java.lang.Class<com.nativescript.massifmaps.additions.CelestialEventListener>;
                     public listener: com.nativescript.massifmaps.additions.CelestialEventListener.Listener;
@@ -95,22 +65,6 @@ declare namespace com {
                         public constructor();
                         public buildClusterElement(param0: com.massifmaps.core.MapPos, param1: com.massifmaps.vectorelements.VectorElementVector): com.massifmaps.vectorelements.VectorElement;
                     }
-                }
-            }
-        }
-    }
-}
-
-declare namespace com {
-    export namespace nativescript {
-        export namespace massifmaps {
-            export namespace additions {
-                export class DirAssetPackage extends com.massifmaps.utils.AssetPackage {
-                    public static class: java.lang.Class<com.nativescript.massifmaps.additions.DirAssetPackage>;
-                    public constructor();
-                    public loadAsset(name: string): com.massifmaps.core.BinaryData;
-                    public constructor(context: globalAndroid.content.Context, path: string);
-                    public getAssetNames(): com.massifmaps.core.StringVector;
                 }
             }
         }
@@ -569,14 +523,14 @@ declare namespace com {
                 export class VectorEditEventListener extends com.massifmaps.layers.VectorEditEventListener {
                     public static class: java.lang.Class<com.nativescript.massifmaps.additions2.VectorEditEventListener>;
                     public listener: com.nativescript.massifmaps.additions2.VectorEditEventListener.Listener;
-                    public onDragEnd(this_: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult;
+                    public onSelectDragPointStyle(this_: com.massifmaps.vectorelements.VectorElement, element: number): com.massifmaps.styles.PointStyle;
+                    public onDragMove(this_: com.massifmaps.ui.VectorElementDragInfo): number;
+                    public onDragEnd(this_: com.massifmaps.ui.VectorElementDragInfo): number;
                     public constructor();
                     public onElementDelete(element: com.massifmaps.vectorelements.VectorElement): void;
-                    public onSelectDragPointStyle(this_: com.massifmaps.vectorelements.VectorElement, element: com.massifmaps.layers.VectorElementDragPointStyle): com.massifmaps.styles.PointStyle;
-                    public onDragStart(this_: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult;
+                    public onDragStart(this_: com.massifmaps.ui.VectorElementDragInfo): number;
                     public onElementModify(element: com.massifmaps.vectorelements.VectorElement, geometry: com.massifmaps.geometry.Geometry): void;
                     public onElementDeselected(element: com.massifmaps.vectorelements.VectorElement): void;
-                    public onDragMove(this_: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult;
                     public constructor(listener: com.nativescript.massifmaps.additions2.VectorEditEventListener.Listener);
                     public setListener(listener: com.nativescript.massifmaps.additions2.VectorEditEventListener.Listener): void;
                     public onElementSelect(this_: com.massifmaps.vectorelements.VectorElement): boolean;
@@ -587,15 +541,15 @@ declare namespace com {
                         /**
                          * Constructs a new instance of the com.nativescript.massifmaps.additions2.VectorEditEventListener$Listener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
                          */
-                        public constructor(implementation: { onElementSelect(param0: com.massifmaps.vectorelements.VectorElement): boolean; onSelectDragPointStyle(param0: com.massifmaps.vectorelements.VectorElement, param1: com.massifmaps.layers.VectorElementDragPointStyle): com.massifmaps.styles.PointStyle; onDragEnd(param0: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult; onDragMove(param0: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult; onDragStart(param0: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult; onElementDelete(param0: com.massifmaps.vectorelements.VectorElement): void; onElementDeselected(param0: com.massifmaps.vectorelements.VectorElement): void; onElementModify(param0: com.massifmaps.vectorelements.VectorElement, param1: com.massifmaps.geometry.Geometry): void; });
+                        public constructor(implementation: { onElementSelect(param0: com.massifmaps.vectorelements.VectorElement): boolean; onSelectDragPointStyle(param0: com.massifmaps.vectorelements.VectorElement, param1: number): com.massifmaps.styles.PointStyle; onDragEnd(param0: com.massifmaps.ui.VectorElementDragInfo): number; onDragMove(param0: com.massifmaps.ui.VectorElementDragInfo): number; onDragStart(param0: com.massifmaps.ui.VectorElementDragInfo): number; onElementDelete(param0: com.massifmaps.vectorelements.VectorElement): void; onElementDeselected(param0: com.massifmaps.vectorelements.VectorElement): void; onElementModify(param0: com.massifmaps.vectorelements.VectorElement, param1: com.massifmaps.geometry.Geometry): void; });
                         public constructor();
-                        public onDragEnd(param0: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult;
                         public onElementDeselected(param0: com.massifmaps.vectorelements.VectorElement): void;
                         public onElementDelete(param0: com.massifmaps.vectorelements.VectorElement): void;
                         public onElementSelect(param0: com.massifmaps.vectorelements.VectorElement): boolean;
-                        public onSelectDragPointStyle(param0: com.massifmaps.vectorelements.VectorElement, param1: com.massifmaps.layers.VectorElementDragPointStyle): com.massifmaps.styles.PointStyle;
-                        public onDragStart(param0: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult;
-                        public onDragMove(param0: com.massifmaps.ui.VectorElementDragInfo): com.massifmaps.layers.VectorElementDragResult;
+                        public onDragEnd(param0: com.massifmaps.ui.VectorElementDragInfo): number;
+                        public onDragMove(param0: com.massifmaps.ui.VectorElementDragInfo): number;
+                        public onSelectDragPointStyle(param0: com.massifmaps.vectorelements.VectorElement, param1: number): com.massifmaps.styles.PointStyle;
+                        public onDragStart(param0: com.massifmaps.ui.VectorElementDragInfo): number;
                         public onElementModify(param0: com.massifmaps.vectorelements.VectorElement, param1: com.massifmaps.geometry.Geometry): void;
                     }
                 }
@@ -630,6 +584,34 @@ declare namespace com {
                     public constructor(implementation: { onFindFeatures(param0: com.massifmaps.geometry.VectorTileFeatureCollection): void; });
                     public constructor();
                     public onFindFeatures(param0: com.massifmaps.geometry.VectorTileFeatureCollection): void;
+                }
+            }
+        }
+    }
+}
+
+declare namespace com {
+    export namespace nativescript {
+        export namespace massifmaps {
+            export namespace api {
+                export class EventListener extends com.massifmaps.api.EventListener {
+                    public static class: java.lang.Class<com.nativescript.massifmaps.api.EventListener>;
+                    public listener: com.nativescript.massifmaps.api.EventListener.Listener;
+                    public constructor(listener: com.nativescript.massifmaps.api.EventListener.Listener);
+                    public setListener(listener: com.nativescript.massifmaps.api.EventListener.Listener): void;
+                    public constructor();
+                    public onEvent(target: number, event: string, payload: number): boolean;
+                }
+                export namespace EventListener {
+                    export class Listener extends java.lang.Object {
+                        public static class: java.lang.Class<com.nativescript.massifmaps.api.EventListener.Listener>;
+                        /**
+                         * Constructs a new instance of the com.nativescript.massifmaps.api.EventListener$Listener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                         */
+                        public constructor(implementation: { onEvent(param0: number, param1: string, param2: number): boolean; });
+                        public constructor();
+                        public onEvent(param0: number, param1: string, param2: number): boolean;
+                    }
                 }
             }
         }
@@ -694,6 +676,7 @@ declare namespace com {
                     public constructor(listener: com.nativescript.massifmaps.packagemanager.PackageManagerListener.Listener);
                     public onStyleUpdated(this_: string): void;
                     public onPackageCancelled(this_: string, id: number): void;
+                    public onPackageFailed(this_: string, id: number, version: number): void;
                     public onPackageListUpdated(): void;
                     public onStyleFailed(this_: string): void;
                     public constructor();
@@ -701,7 +684,6 @@ declare namespace com {
                     public setListener(listener: com.nativescript.massifmaps.packagemanager.PackageManagerListener.Listener): void;
                     public onPackageListFailed(): void;
                     public onPackageStatusChanged(this_: string, id: number, version: com.massifmaps.packagemanager.PackageStatus): void;
-                    public onPackageFailed(this_: string, id: number, version: com.massifmaps.packagemanager.PackageErrorType): void;
                 }
                 export namespace PackageManagerListener {
                     export class Listener extends java.lang.Object {
@@ -709,11 +691,11 @@ declare namespace com {
                         /**
                          * Constructs a new instance of the com.nativescript.massifmaps.packagemanager.PackageManagerListener$Listener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
                          */
-                        public constructor(implementation: { onPackageCancelled(param0: string, param1: number): void; onPackageFailed(param0: string, param1: number, param2: com.massifmaps.packagemanager.PackageErrorType): void; onPackageListFailed(): void; onPackageListUpdated(): void; onPackageStatusChanged(param0: string, param1: number, param2: com.massifmaps.packagemanager.PackageStatus): void; onPackageUpdated(param0: string, param1: number): void; onStyleFailed(param0: string): void; onStyleUpdated(param0: string): void; });
+                        public constructor(implementation: { onPackageCancelled(param0: string, param1: number): void; onPackageFailed(param0: string, param1: number, param2: number): void; onPackageListFailed(): void; onPackageListUpdated(): void; onPackageStatusChanged(param0: string, param1: number, param2: com.massifmaps.packagemanager.PackageStatus): void; onPackageUpdated(param0: string, param1: number): void; onStyleFailed(param0: string): void; onStyleUpdated(param0: string): void; });
                         public constructor();
+                        public onPackageFailed(param0: string, param1: number, param2: number): void;
                         public onPackageUpdated(param0: string, param1: number): void;
                         public onStyleFailed(param0: string): void;
-                        public onPackageFailed(param0: string, param1: number, param2: com.massifmaps.packagemanager.PackageErrorType): void;
                         public onPackageListFailed(): void;
                         public onPackageCancelled(param0: string, param1: number): void;
                         public onStyleUpdated(param0: string): void;
@@ -776,31 +758,6 @@ declare namespace com {
                     public static stringifyRoutingResult(instruction: com.massifmaps.routing.RoutingResult): string;
                     public static matchRoute(service: com.massifmaps.routing.PackageManagerValhallaRoutingService, request: com.massifmaps.routing.RouteMatchingRequest, profile: string, callback: com.nativescript.massifmaps.routing.RoutingServiceRouteMatchingCallback): void;
                     public static routingResultToJSON(routingResult: com.massifmaps.routing.RoutingResult, callback: com.nativescript.massifmaps.routing.RoutingResultToJSONCallback): void;
-                }
-                export namespace RoutingServiceAdditions {
-                    export class RoutingAction {
-                        public static class: java.lang.Class<com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction>;
-                        public static HEAD_ON: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static FINISH: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static NO_TURN: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static GO_STRAIGHT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static TURN_RIGHT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static UTURN: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static TURN_LEFT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static REACH_VIA_LOCATION: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static ENTER_ROUNDABOUT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static LEAVE_ROUNDABOUT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static STAY_ON_ROUNDABOUT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static START_AT_END_OF_STREET: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static ENTER_AGAINST_ALLOWED_DIRECTION: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static LEAVE_AGAINST_ALLOWED_DIRECTION: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static GO_UP: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static GO_DOWN: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static WAIT: com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static values(): androidNative.Array<com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction>;
-                        public static valueOf(name: string): com.nativescript.massifmaps.routing.RoutingServiceAdditions.RoutingAction;
-                        public static valueOf(enumClass: java.lang.Class<any>, name: string): java.lang.Enum<any>;
-                    }
                 }
             }
         }

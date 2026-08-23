@@ -19,13 +19,14 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
     public interface Listener {
         boolean onElementSelect(VectorElement element);
 
-        PointStyle onSelectDragPointStyle(VectorElement element, VectorElementDragPointStyle dragPointStyle);
+        PointStyle onSelectDragPointStyle(VectorElement element,
+                @VectorElementDragPointStyle.Value int dragPointStyle);
 
-        VectorElementDragResult onDragEnd(VectorElementDragInfo dragInfo);
+        @VectorElementDragResult.Value int onDragEnd(VectorElementDragInfo dragInfo);
 
-        VectorElementDragResult onDragMove(VectorElementDragInfo dragInfo);
+        @VectorElementDragResult.Value int onDragMove(VectorElementDragInfo dragInfo);
 
-        VectorElementDragResult onDragStart(VectorElementDragInfo dragInfo);
+        @VectorElementDragResult.Value int onDragStart(VectorElementDragInfo dragInfo);
 
         void onElementDelete(VectorElement element);
 
@@ -150,7 +151,8 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
     }
 
     @Override
-    public PointStyle onSelectDragPointStyle(final VectorElement element, final VectorElementDragPointStyle dragPointStyle) {
+    public PointStyle onSelectDragPointStyle(final VectorElement element,
+            final @VectorElementDragPointStyle.Value int dragPointStyle) {
         if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -178,7 +180,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
     }
 
     @Override
-    public VectorElementDragResult onDragEnd(final VectorElementDragInfo dragInfo) {
+    public @VectorElementDragResult.Value int onDragEnd(final VectorElementDragInfo dragInfo) {
         if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -195,7 +197,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
                 }
             });
 
-            return (VectorElementDragResult) arr[0];
+            return (Integer) arr[0];
         } else {
             if (listener != null) {
                 return listener.onDragEnd(dragInfo);
@@ -206,7 +208,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
     }
 
     @Override
-    public VectorElementDragResult onDragMove(final VectorElementDragInfo dragInfo) {
+    public @VectorElementDragResult.Value int onDragMove(final VectorElementDragInfo dragInfo) {
         if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -223,7 +225,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
                 }
             });
 
-            return (VectorElementDragResult) arr[0];
+            return (Integer) arr[0];
         } else {
             if (listener != null) {
                 return listener.onDragMove(dragInfo);
@@ -234,7 +236,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
     }
 
     @Override
-    public VectorElementDragResult onDragStart(final VectorElementDragInfo dragInfo) {
+    public @VectorElementDragResult.Value int onDragStart(final VectorElementDragInfo dragInfo) {
         if (MapView.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
@@ -251,7 +253,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
                 }
             });
 
-            return (VectorElementDragResult) arr[0];
+            return (Integer) arr[0];
         } else {
             if (listener != null) {
                 return listener.onDragStart(dragInfo);

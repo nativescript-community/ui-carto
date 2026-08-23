@@ -1,4 +1,4 @@
-import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core';
+import { File, Folder } from '@nativescript/core';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { BaseNative } from '../BaseNative';
@@ -78,126 +78,46 @@ export function setShowError(value: boolean) {
     MSFLog.setShowError(value);
 }
 
-const currentAppFolder = knownFolders.currentApp();
-
 export class ZippedAssetPackage extends BaseNative<MSFZippedAssetPackage, ZippedAssetPackageOptions> {
     createNative(options: ZippedAssetPackageOptions) {
-        let zipPath;
+        const zipPath = getRelativePathToApp(options.zipPath);
         try {
-            const fullZipPath = getFileName(options.zipPath);
-            zipPath = getRelativePathToApp(options.zipPath);
-            if (File.exists(fullZipPath)) {
-                let assetPackage: MSFAssetPackage;
-                if (options.basePack) {
-                    assetPackage = options.basePack.getNative();
-                }
-                const vectorTileStyleSetData = MSFAssetUtils.loadAsset(zipPath);
-                if (assetPackage) {
-                    return MSFZippedAssetPackage.alloc().initWithZipDataBaseAssetPackage(vectorTileStyleSetData, assetPackage);
-                } else {
-                    return MSFZippedAssetPackage.alloc().initWithZipData(vectorTileStyleSetData);
-                }
-            } else {
+            if (!File.exists(getFileName(options.zipPath))) {
                 throw new Error(`could not find zip file: ${options.zipPath}(${zipPath})`);
             }
+            // The archive is bytes, not a path, which is the one thing a ZippedAssetPackage cannot
+            // read itself.
+            const data = MSFAssetUtils.loadAsset(zipPath);
+            const base: MSFAssetPackage = options.basePack?.getNative();
+            return base ? MSFZippedAssetPackage.alloc().initWithZipDataBaseAssetPackage(data, base) : MSFZippedAssetPackage.alloc().initWithZipData(data);
         } catch (error) {
             console.error(`ZippedAssetPackage(${zipPath}, ${options.zipPath}): ${error}`);
             throw error;
         }
     }
-    getAssetNames() {
-        return this.getNative().getAssetNames();
-    }
 }
 
-function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
-    const folder = Folder.fromPath(dirPath);
-    folder.eachEntity((entity: FileSystemEntity) => {
-        if (Folder.exists(entity.path)) {
-            walkDir(entity.path, cb, currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
-        } else {
-            cb(currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
-        }
-        return true;
-    });
-}
-
-@NativeClass
-export class MSFDirAssetPackageImpl extends MSFAssetPackage {
-    assetNames: MSFStringVector;
-    mBaseAssetPackage: MSFAssetPackage;
-    dirPath: string;
-    massifDirPath: string;
-    loadUsingNS = false;
-
-    public static initWithBasePackage(basePackage): MSFDirAssetPackageImpl {
-        const result = MSFDirAssetPackageImpl.alloc().init() as any;
-        result.mBaseAssetPackage = basePackage;
-        return result;
-    }
-    public initialize(options: DirAssetPackageOptions) {
-        const dirPath = options.dirPath;
-        this.loadUsingNS = !!options.loadUsingNS;
-        this.dirPath = getFileName(dirPath);
-        this.massifDirPath = getRelativePathToApp(dirPath);
-    }
-    public loadAsset(name) {
-        if (!name) {
-            return null;
-        }
-        let result: MSFBinaryData;
-        if (this.mBaseAssetPackage != null) {
-            result = this.mBaseAssetPackage.loadAsset(name);
-        }
-        if (!result) {
-            if (this.loadUsingNS) {
-                const data = File.fromPath(path.join(this.dirPath, name)).readSync() as NSData;
-                const arr = new ArrayBuffer(data.length);
-                data.getBytes(arr as any);
-                result = MSFBinaryData.alloc().initWithDataPtrSize(arr as any, data.length);
-            } else {
-                result = MSFAssetUtils.loadAsset(path.join(this.massifDirPath, name));
-            }
-        }
-        return result;
-    }
-    public getAssetNames() {
-        if (this.assetNames == null) {
-            try {
-                this.assetNames = MSFStringVector.alloc().init();
-                if (this.mBaseAssetPackage) {
-                    const result2 = this.mBaseAssetPackage.getAssetNames();
-                    for (let i = 0; i < result2.size(); i++) {
-                        this.assetNames.add(result2.get(i));
-                    }
-                }
-                walkDir(this.dirPath, (fileRelPath: string) => {
-                    this.assetNames.add(fileRelPath);
-                });
-            } catch (e) {}
-        }
-        return this.assetNames;
-    }
-}
-
-export class DirAssetPackage extends BaseNative<MSFDirAssetPackageImpl, DirAssetPackageOptions> {
-    mBaseAssetPackage: MSFAssetPackage;
+/**
+ * A style read from a folder.
+ *
+ * Two native classes, because a folder is two different things: `loadUsingNS` reads the real file
+ * system, which is what a live-reloaded style needs, and the default reads the app's own bundled
+ * assets. On iOS both are directories, but only the bundle one resolves against the bundle root -
+ * and only it behaves the same way on Android, where the assets sit inside the APK.
+ */
+export class DirAssetPackage extends BaseNative<MSFAssetPackage, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
-        if (Folder.exists(getFileName(options.dirPath))) {
-            if (options.basePack) {
-                this.mBaseAssetPackage = options.basePack.getNative();
-            }
-            const result = MSFDirAssetPackageImpl.initWithBasePackage(this.mBaseAssetPackage);
-            result.initialize(options);
-            return result;
-        } else {
+        if (!Folder.exists(getFileName(options.dirPath))) {
             console.error(`could not find dir: ${options.dirPath}`);
             return null;
         }
-    }
-    dispose(): void {
-        this.mBaseAssetPackage = null;
-        super.dispose();
+        const base: MSFAssetPackage = options.basePack?.getNative();
+        if (options.loadUsingNS) {
+            const dirPath = getFileName(options.dirPath);
+            return base ? MSFDirAssetPackage.alloc().initWithDirPathBaseAssetPackage(dirPath, base) : MSFDirAssetPackage.alloc().initWithDirPath(dirPath);
+        }
+        const basePath = getRelativePathToApp(options.dirPath);
+        return base ? MSFBundleAssetPackage.alloc().initWithBasePathBaseAssetPackage(basePath, base) : MSFBundleAssetPackage.alloc().initWithBasePath(basePath);
     }
 }
 export function distanceToEnd<T = DefaultLatLonKeys>(index: number, coordinates: MapPosVector<T> | GenericMapPos<T>[]) {
@@ -224,8 +144,13 @@ export function toNativeMapRange(value: MapRange) {
     return MSFMapRange.alloc().initWithMinMax(value[0], value[1]);
 }
 
-export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Omit<Met_ZippedAssetPackage, 'getAssetNames'> {}
+export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Met_ZippedAssetPackage {}
 bindNative(ZippedAssetPackage, MET_ZippedAssetPackage, ACC_ZippedAssetPackage, { selectors: SEL_ZippedAssetPackage });
 
-export interface ZippedAssetPackage extends Acc_AssetPackage, Omit<Met_AssetPackage, 'getAssetNames' | 'loadAsset'> {}
+export interface ZippedAssetPackage extends Acc_AssetPackage, Met_AssetPackage {}
 bindNative(ZippedAssetPackage, MET_AssetPackage, ACC_AssetPackage, { selectors: SEL_AssetPackage });
+
+// The base only: this wraps a DirAssetPackage or a BundleAssetPackage depending on loadUsingNS,
+// so getDirPath/getBasePath are not on every instance.
+export interface DirAssetPackage extends Acc_AssetPackage, Met_AssetPackage {}
+bindNative(DirAssetPackage, MET_AssetPackage, ACC_AssetPackage, { selectors: SEL_AssetPackage });

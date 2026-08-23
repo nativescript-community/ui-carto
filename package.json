@@ -34,6 +34,10 @@
         "typings": "node ./scripts/typings/index.mjs",
         "typings.android": "node ./scripts/typings/index.mjs android",
         "typings.ios": "node ./scripts/typings/index.mjs ios",
+        "typings.api": "node ./scripts/api-typings/index.mjs",
+        "typings.api.check": "tsc -p ./scripts/api-typings/typecheck/tsconfig.json",
+        "examples": "node ./scripts/examples/index.mjs",
+        "examples.check": "node ./scripts/examples/check.mjs",
         "sync": "node ./tools/sync.mjs",
         "update": "node ./tools/update.js",
         "fullclean": "npm run clean && rimraf -g 'packages/**/node_modules' 'demo-*/hooks' 'demo-*/node_modules' 'package-lock.json' 'pnpm-lock.yaml' 'node_modules'",
@@ -58,6 +62,10 @@
             "demo.svelte.ios": "Runs the Svelte demo on iOS.",
             "demo.vue.android": "Runs the Vue demo on Android.",
             "demo.vue.ios": "Runs the Vue demo on iOS.",
+            "typings.api": "Regenerate the surface API typings from the SDK's API schema.",
+            "typings.api.check": "Typecheck the surface API and its typing tests.",
+            "examples": "Rebuild the example gallery from the SDK's example manifest.",
+            "examples.check": "Typecheck every example's script against the plugin typings.",
             "watch": "Watch for changes in the plugin source and re-build."
         }
     },

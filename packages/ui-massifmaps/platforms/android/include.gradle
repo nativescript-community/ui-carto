@@ -39,6 +39,14 @@ android {
 				if (massifSDKVariant == "lite") {
                     exclude '**/additions2/**'
                 }
+
+                // The surface API's listener extends com.massifmaps.api.EventListener, which only
+                // exists in an SDK built with all/native/api. Turn it off with -PmassifApi=false
+                // when pinning an older SDK; the plugin's object API is unaffected.
+                def massifApi = project.hasProperty("massifApi") ? project.massifApi.toString() : "true"
+                if (massifApi == "false") {
+                    exclude '**/nativescript/massifmaps/api/**'
+                }
             }
         }
     }

@@ -28,16 +28,6 @@ export class VectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vect
 
 export class MBVectorTileDecoder extends BaseVectorTileDecoder<com.massifmaps.vectortiles.MBVectorTileDecoder, MBVectorTileDecoderOptions> {
     pack: com.massifmaps.utils.AssetPackage | DirAssetPackage | ZippedAssetPackage;
-    mInterface: com.nativescript.massifmaps.additions.AssetPackage.Interface;
-    constructor(options) {
-        super(options);
-        for (const property of ['mInterface']) {
-            const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
-            if (descriptor) {
-                descriptor.enumerable = false;
-            }
-        }
-    }
     createNative(options: MBVectorTileDecoderOptions) {
         let pack: com.massifmaps.utils.AssetPackage;
         if (options.pack) {

@@ -1,4 +1,4 @@
-import { File, FileSystemEntity, Folder, knownFolders, path } from '@nativescript/core';
+import { File, Folder } from '@nativescript/core';
 import { DirAssetPackageOptions, ZippedAssetPackageOptions } from '.';
 import { mapPosVectorFromArgs } from '..';
 import { BaseNative } from '../BaseNative';
@@ -138,149 +138,40 @@ export function setShowError(value: boolean) {
 }
 
 export class ZippedAssetPackage extends BaseNative<com.massifmaps.utils.ZippedAssetPackage, ZippedAssetPackageOptions> {
-    mInterface: com.nativescript.massifmaps.additions.AssetPackage.Interface;
-    mBaseAssetPackage: com.nativescript.massifmaps.additions.AssetPackage;
-    mAssetPackage: com.nativescript.massifmaps.additions.AssetPackage;
-    mVectorTileStyleSetData: com.massifmaps.core.BinaryData;
-    constructor(options) {
-        super(options);
-        // Object.defineProperty(this, 'mInterface', { enumerable: false });
-        // Object.defineProperty(this, 'mBaseAssetPackage', { enumerable: false });
-        // Object.defineProperty(this, 'mAssetPackage', { enumerable: false });
-        // Object.defineProperty(this, 'mVectorTileStyleSetData', { enumerable: false });
-        // for (const property of ['mInterface']) {
-        //     const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
-        //     if (descriptor) {
-        //         descriptor.enumerable = false;
-        //     }
-        // }
-    }
-    dispose(): void {
-        super.dispose();
-        this.mInterface = null;
-        this.mBaseAssetPackage = null;
-        this.mAssetPackage = null;
-        this.mVectorTileStyleSetData = null;
-    }
     createNative(options: ZippedAssetPackageOptions) {
-        // if (File.exists(options.zipPath)) {
-        if (options.liveReload === true) {
-            const data = File.fromPath(getFileName(options.zipPath)).readSync();
-            this.mVectorTileStyleSetData = new com.massifmaps.core.BinaryData(data);
-        } else {
-            const zipPath = getRelativePathToApp(options.zipPath);
-            this.mVectorTileStyleSetData = com.massifmaps.utils.AssetUtils.loadAsset(zipPath);
+        // The archive is bytes, not a path, which is the one thing a ZippedAssetPackage cannot read
+        // itself: live from the file system when reloading, from the bundle otherwise.
+        const data = options.liveReload === true
+            ? new com.massifmaps.core.BinaryData(File.fromPath(getFileName(options.zipPath)).readSync())
+            : com.massifmaps.utils.AssetUtils.loadAsset(getRelativePathToApp(options.zipPath));
+        if (!data) {
+            throw new Error(`could not read zip file: ${options.zipPath}`);
         }
-        if (options.basePack) {
-            this.mBaseAssetPackage = options.basePack.getNative();
-        }
-        if (options.loadAsset && options.getAssetNames) {
-            this.mInterface = new com.nativescript.massifmaps.additions.AssetPackage.Interface({
-                getAssetNames: options.getAssetNames,
-                loadAsset: options.loadAsset
-            });
-            this.mAssetPackage = new com.nativescript.massifmaps.additions.AssetPackage(this.mInterface, this.mBaseAssetPackage);
-        }
-        if (this.mBaseAssetPackage || this.mAssetPackage) {
-            return new com.massifmaps.utils.ZippedAssetPackage(this.mVectorTileStyleSetData, this.mAssetPackage || this.mBaseAssetPackage);
-        } else {
-            return new com.massifmaps.utils.ZippedAssetPackage(this.mVectorTileStyleSetData);
-        }
-        // } else {
-        //     console.error(`could not find zip file: ${options.zipPath}`);
-        //     return null;
-        // }
-    }
-
-    getAssetNames() {
-        return this.getNative().getAssetNames();
+        const base = options.basePack?.getNative();
+        return base ? new com.massifmaps.utils.ZippedAssetPackage(data, base) : new com.massifmaps.utils.ZippedAssetPackage(data);
     }
 }
 
-function walkDir(dirPath: string, cb: (str: string) => void, currentSubDir?: string) {
-    const folder = Folder.fromPath(dirPath);
-    folder.eachEntity((entity: FileSystemEntity) => {
-        if (Folder.exists(entity.path)) {
-            walkDir(entity.path, cb, currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
-        } else {
-            cb(currentSubDir ? path.join(currentSubDir, entity.name) : entity.name);
-        }
-        return true;
-    });
-}
-export class DirAssetPackage extends BaseNative<com.nativescript.massifmaps.additions.AssetPackage, DirAssetPackageOptions> {
-    mAssetNames: com.massifmaps.core.StringVector;
-    mDirPath: string;
-    mMassifDirPath: string;
-    loadUsingNS = false;
-    mInterface: com.nativescript.massifmaps.additions.AssetPackage.Interface;
-    mBaseAssetPackage: com.nativescript.massifmaps.additions.AssetPackage;
-    constructor(options) {
-        super(options);
-
-        // Object.defineProperty(this, 'mInterface', { enumerable: false });
-        // Object.defineProperty(this, 'mAssetNames', { enumerable: false });
-        for (const property of ['mInterface']) {
-            const descriptor = Object.getOwnPropertyDescriptor(DirAssetPackage.prototype, property);
-            if (descriptor) {
-                descriptor.enumerable = false;
-            }
-        }
-    }
-    dispose(): void {
-        this.mInterface = null;
-        this.mAssetNames = null;
-        this.mBaseAssetPackage = null;
-        super.dispose();
-    }
+/**
+ * A style read from a folder.
+ *
+ * Two native classes, because a folder is two different things: `loadUsingNS` reads the real file
+ * system, which is what a live-reloaded style needs, and the default reads the app's own bundled
+ * assets - inside the APK on Android, where no file path reaches them.
+ */
+export class DirAssetPackage extends BaseNative<com.massifmaps.utils.AssetPackage, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
-        if (Folder.exists(getFileName(options.dirPath))) {
-            const dirPath = options.dirPath;
-            this.mDirPath = getFileName(dirPath);
-            this.mMassifDirPath = getRelativePathToApp(dirPath);
-            this.mInterface = new com.nativescript.massifmaps.additions.AssetPackage.Interface({
-                getAssetNames: this.getAssetNames.bind(this),
-                loadAsset: this.loadAsset.bind(this)
-            });
-
-            if (options.basePack) {
-                this.mBaseAssetPackage = options.basePack.getNative();
-            }
-            let result: com.nativescript.massifmaps.additions.AssetPackage;
-            if (this.mBaseAssetPackage) {
-                result = new com.nativescript.massifmaps.additions.AssetPackage(this.mInterface, this.mBaseAssetPackage);
-            } else {
-                result = new com.nativescript.massifmaps.additions.AssetPackage(this.mInterface);
-            }
-            this.loadUsingNS = !!options.loadUsingNS;
-            return result;
-        } else {
+        if (!Folder.exists(getFileName(options.dirPath))) {
             console.error(`could not find dir: ${options.dirPath}`);
             return null;
         }
-    }
-    public loadAsset(name) {
-        if (!name) {
-            return null;
+        const base = options.basePack?.getNative();
+        if (options.loadUsingNS) {
+            const dirPath = getFileName(options.dirPath);
+            return base ? new com.massifmaps.utils.DirAssetPackage(dirPath, base) : new com.massifmaps.utils.DirAssetPackage(dirPath);
         }
-        let result: com.massifmaps.core.BinaryData;
-        if (this.loadUsingNS) {
-            result = new com.massifmaps.core.BinaryData(File.fromPath(path.join(this.mDirPath, name)).readSync());
-        } else {
-            result = com.massifmaps.utils.AssetUtils.loadAsset(path.join(this.mMassifDirPath, name));
-        }
-        return result;
-    }
-    public getAssetNames() {
-        if (!this.mAssetNames) {
-            try {
-                this.mAssetNames = new com.massifmaps.core.StringVector();
-                walkDir(this.mDirPath, (fileRelPath: string) => {
-                    this.mAssetNames.add(fileRelPath);
-                });
-            } catch (e) {}
-        }
-        return this.mAssetNames;
+        const basePath = getRelativePathToApp(options.dirPath);
+        return base ? new com.massifmaps.utils.BundleAssetPackage(basePath, base) : new com.massifmaps.utils.BundleAssetPackage(basePath);
     }
 }
 
@@ -314,11 +205,13 @@ export function toNativeMapRange(value: MapRange) {
     return new com.massifmaps.core.MapRange(value[0], value[1]);
 }
 
-export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Omit<Met_ZippedAssetPackage, 'getAssetNames'> {}
+export interface ZippedAssetPackage extends Acc_ZippedAssetPackage, Met_ZippedAssetPackage {}
 bindNative(ZippedAssetPackage, MET_ZippedAssetPackage, ACC_ZippedAssetPackage, { selectors: SEL_ZippedAssetPackage });
 
-export interface DirAssetPackage extends Acc_DirAssetPackage, Omit<Met_DirAssetPackage, 'getAssetNames' | 'loadAsset'> {}
+// The base only: this wraps a DirAssetPackage or a BundleAssetPackage depending on loadUsingNS,
+// so getDirPath/getBasePath are not on every instance.
+export interface DirAssetPackage extends Acc_DirAssetPackage, Met_DirAssetPackage {}
 bindNative(DirAssetPackage, MET_DirAssetPackage, ACC_DirAssetPackage, { selectors: SEL_DirAssetPackage });
 
-export interface ZippedAssetPackage extends Acc_AssetPackage, Omit<Met_AssetPackage, 'getAssetNames'> {}
+export interface ZippedAssetPackage extends Acc_AssetPackage, Met_AssetPackage {}
 bindNative(ZippedAssetPackage, MET_AssetPackage, ACC_AssetPackage, { selectors: SEL_AssetPackage });
