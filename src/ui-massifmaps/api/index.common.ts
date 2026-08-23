@@ -161,41 +161,39 @@ export interface SubscribeOptions {
  * you need, do not keep the object.
  */
 /**
- * The event's own fields. A payload property with one of these names keeps the event's meaning
- * and stays reachable through `get`, rather than shadowing it.
+ * The prototype an event of this payload class is created from, with a getter per property so a
+ * handler reads `e.reason` or `e.clickType` instead of `e.get('reason')`.
+ *
+ * Built ONCE per class and cached: the alternative, defining the properties on each event, costs
+ * a defineProperty per property per event, and `map.moved` arrives 47 to 159 times a second.
+ * Creating an event is then one Object.create.
+ *
+ * Nothing here touches native. Each getter is one read AT ACCESS TIME through the event's own
+ * `get`, which is what keeps the promise that asking for one property never parses the whole
+ * feature - and what makes an event nobody reads free. Own properties (`get`, `payload`, ...)
+ * shadow the prototype, so a payload property sharing one of those names cannot hide it.
+ *
+ * Nested paths (`feature.properties.name`) are not property names and stay with `get`.
  */
-const EVENT_FIELDS = ['eventName', 'object', 'payload', 'consumed', 'consumable', 'get', 'getPos'];
+const payloadProtos: { [cls: string]: object } = {};
 
-/**
- * Hangs a getter on the event for every property of its payload class, so a handler reads
- * `e.reason` or `e.clickType` instead of `e.get('reason')`.
- *
- * Derived from the generated schema, never a per-event list: a new payload class, or a new
- * property on an existing one, is covered the next time the typings are regenerated.
- *
- * Lazy - each getter is ONE read at access time, which is what keeps the promise that asking for
- * one property never parses the whole feature. Nested paths (`clickInfo.duration`) are not
- * property names and stay with `get`.
- */
-function withPayloadGetters(data: MassifEventData, payloadClass?: string): MassifEventData {
-    // Only when a payload actually ARRIVED, not merely when the schema says the event has one:
-    // an older SDK emits an event the typings describe as carrying a payload and sends none, and
-    // a getter that read through to `get` would throw instead of answering undefined.
-    if (!payloadClass) {
-        return data;
-    }
-    for (const name of propertyNames(payloadClass)) {
-        if (EVENT_FIELDS.indexOf(name) >= 0 || name in data) {
-            continue;
+function payloadProto(payloadClass: string): object {
+    let proto = payloadProtos[payloadClass];
+    if (!proto) {
+        proto = payloadProtos[payloadClass] = {};
+        for (const name of propertyNames(payloadClass)) {
+            Object.defineProperty(proto, name, {
+                enumerable: true,
+                configurable: true,
+                get(this: MassifEventData) {
+                    return (this as any).get(name);
+                }
+            });
         }
-        Object.defineProperty(data, name, {
-            enumerable: true,
-            configurable: true,
-            get: () => (data as any).get(name)
-        });
     }
-    return data;
+    return proto;
 }
+
 
 /** A payload path that is a property name, i.e. not a walk into a struct. */
 type TopLevelPath<P> = P extends `${string}.${string}` ? never : P;
@@ -869,33 +867,46 @@ export class MassifObject<C extends ClassName = any> extends Observable {
 
     private eventData(event: string, payload: number, consumable: boolean, snapshot?: Json): MassifEventData {
         const info = findEvent(this.className, event);
-        const object = payload && info?.payload ? new MassifObject(payload as Handle, info.payload as ClassName) : null;
         // A debounced delivery has no live payload left - see SubscribeOptions.debounce - so its
         // reads come out of the snapshot taken at emit time.
         const fromSnapshot = snapshot !== undefined && snapshot !== null;
-        const data = {
+        // Wrapped lazily: an event nobody reads should not allocate an Observable per delivery.
+        let object: MassifObject | null | undefined;
+        const payloadObject = () => {
+            if (object === undefined) {
+                object = payload && info?.payload ? new MassifObject(payload as Handle, info.payload as ClassName) : null;
+            }
+            return object;
+        };
+        // Only when a payload actually ARRIVED, not merely when the schema says the event has
+        // one: an older SDK sends none, and a getter that read through would throw.
+        const proto = (payload || fromSnapshot) && info?.payload ? payloadProto(info.payload) : null;
+        const data = Object.assign(proto ? Object.create(proto) : {}, {
             eventName: event,
             object: this as MassifObject,
-            payload: object as never,
             consumed: false,
             consumable,
             get: (path: string) => {
                 if (fromSnapshot) {
                     return path ? (snapshot as any)[path] : snapshot;
                 }
-                if (!object) {
+                const target = payloadObject();
+                if (!target) {
                     throw new MassifApiError(`${event} carries no payload`);
                 }
-                return object.get(path as never);
+                return target.get(path as never);
             },
             getPos: (path: string, projection?: ProjectionName) => {
                 if (fromSnapshot) {
                     return ((snapshot as any)[path] ?? null) as never;
                 }
-                return object ? object.getPos(path, projection) : null;
+                const target = payloadObject();
+                return target ? target.getPos(path, projection) : null;
             }
-        } as MassifEventData;
-        return withPayloadGetters(data, payload || fromSnapshot ? (info?.payload as string) : undefined);
+        }) as MassifEventData;
+        // `payload` is a getter of its own so the wrapper is still only built if it is asked for.
+        Object.defineProperty(data, 'payload', { enumerable: true, configurable: true, get: payloadObject });
+        return data;
     }
 
     /**
