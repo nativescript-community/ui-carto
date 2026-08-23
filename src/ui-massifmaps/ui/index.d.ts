@@ -175,6 +175,29 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     public static mapClickedEvent = 'mapClicked';
 
     public static setRunOnMainThread(value: boolean);
+
+    /**
+     * Raise the events named in `eventOptions` through the facade rather than the native
+     * listener, which is what makes their subscription options apply.
+     *
+     * Opt-in, and per event: an event with no entry in `eventOptions` stays on the native path,
+     * so a page that only wants a throttle on `mapMoved` pays for nothing else. Needs an SDK
+     * built with the surface API; without one it warns once and keeps the native listener.
+     *
+     * ```html
+     * <MassifMap facadeEvents="true" eventOptions="{{ { mapMoved: { throttle: 250 } } }}" />
+     * ```
+     */
+    facadeEvents: boolean;
+
+    /**
+     * Turns the facade path on at runtime, which is where an app that decides its options after
+     * `mapReady` can reach it - `facadeEvents` in the markup is read before that.
+     */
+    enableFacadeEvents(eventOptions?: { [event in keyof MassifMapEventMap]?: { throttle?: number; debounce?: number; projection?: string } }): void;
+
+    /** Per-event subscription options, keyed by the view's event name. See `facadeEvents`. */
+    eventOptions: { [event in keyof MassifMapEventMap]?: { throttle?: number; debounce?: number; projection?: string } };
     public projection: Projection;
     focusPos: GenericMapPos<T>;
     zoom: number;
