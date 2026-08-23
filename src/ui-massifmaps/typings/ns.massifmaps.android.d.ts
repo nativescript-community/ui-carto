@@ -135,12 +135,12 @@ declare namespace com {
                     /**
                      * Constructs a new instance of the com.nativescript.massifmaps.additions.MapEventListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
                      */
-                    public constructor(implementation: { onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: boolean): void; onMapMoved(param0: boolean): void; onMapIdle(): void; onMapStable(param0: boolean): void; onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void; });
+                    public constructor(implementation: { onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: number): void; onMapMoved(param0: number): void; onMapIdle(): void; onMapStable(param0: number): void; onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void; });
                     public constructor();
-                    public onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: boolean): void;
-                    public onMapMoved(param0: boolean): void;
+                    public onMapInteraction(param0: com.massifmaps.ui.MapInteractionInfo, param1: number): void;
+                    public onMapMoved(param0: number): void;
                     public onMapIdle(): void;
-                    public onMapStable(param0: boolean): void;
+                    public onMapStable(param0: number): void;
                     public onMapClicked(param0: com.massifmaps.ui.MapClickInfo): void;
                 }
             }
@@ -154,7 +154,6 @@ declare namespace com {
             export namespace additions {
                 export class MapView extends com.massifmaps.ui.MapView {
                     public static class: java.lang.Class<com.nativescript.massifmaps.additions.MapView>;
-                    public userAction: boolean;
                     public static RUN_ON_MAIN_THREAD: boolean;
                     public tilt(param0: number, param1: number): void;
                     public setZoom(param0: number, param1: number): void;
@@ -304,7 +303,6 @@ declare namespace com {
             export namespace additions {
                 export class TextureMapView extends com.massifmaps.ui.TextureMapView {
                     public static class: java.lang.Class<com.nativescript.massifmaps.additions.TextureMapView>;
-                    public userAction: boolean;
                     public static RUN_ON_MAIN_THREAD: boolean;
                     public tilt(param0: number, param1: number): void;
                     public setZoom(param0: number, param1: number): void;

@@ -18,7 +18,7 @@ import {
 import { Layer, TileLayer } from '../layers';
 import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
-import { Layers as BaseLayers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, MassifMapViewBase } from './index.common';
+import { Layers as BaseLayers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, MassifMapViewBase, moveEventData } from './index.common';
 
 import { ImageSource, Property, Utils, booleanConverter } from '@nativescript/core';
 import { FlyToOptions, MapClickInfo, MapGestureInfo, MapInteractionInfo } from '.';
@@ -173,12 +173,12 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
             onMapIdle: () => {
                 this.sendEvent(MapIdleEvent);
             },
-            onMapMoved: (userAction: boolean) => {
-                this.sendEvent<MapGestureInfo>(MapMovedEvent, { userAction });
+            onMapMoved: (reason: number) => {
+                this.sendEvent<MapGestureInfo>(MapMovedEvent, moveEventData(reason));
             },
-            onMapInteraction: (interaction: com.massifmaps.ui.MapInteractionInfo, userAction: boolean) => {
+            onMapInteraction: (interaction: com.massifmaps.ui.MapInteractionInfo, reason: number) => {
                 this.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
-                    userAction,
+                    ...moveEventData(reason),
                     interaction: {
                         get isAnimationStarted() {
                             return interaction.isAnimationStarted();
@@ -198,8 +198,8 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
                     }
                 });
             },
-            onMapStable: (userAction: boolean) => {
-                this.sendEvent<MapGestureInfo>(MapStableEvent, { userAction });
+            onMapStable: (reason: number) => {
+                this.sendEvent<MapGestureInfo>(MapStableEvent, moveEventData(reason));
             },
             onMapClicked: (mapClickInfo: com.massifmaps.ui.MapClickInfo) => {
                 this.sendEvent<MapClickInfo>(MapClickedEvent, {

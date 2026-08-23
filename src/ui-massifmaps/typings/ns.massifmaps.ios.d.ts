@@ -188,11 +188,11 @@ interface NSMSFMapEventListener {
 
     onMapIdle(): void;
 
-    onMapInteraction(mapInteractionInfo: MSFMapInteractionInfo, userAction: boolean): void;
+    onMapInteraction(mapInteractionInfo: MSFMapInteractionInfo, reason: number): void;
 
-    onMapMoved(userAction: boolean): void;
+    onMapMoved(reason: number): void;
 
-    onMapStable(userAction: boolean): void;
+    onMapStable(reason: number): void;
 }
 
 declare var NSMSFMapEventListener: {  prototype: NSMSFMapEventListener; };
@@ -237,8 +237,6 @@ declare class NSMSFMapView extends MSFMapView {
     static setRunOnMainThreadWithValue(value: boolean): void;
 
     listener: NSMSFMapEventListener;
-
-    userAction: boolean;
 
     static RUN_ON_MAIN_THREAD: boolean;
 

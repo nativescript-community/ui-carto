@@ -12,6 +12,23 @@ export const MapMovedEvent = 'mapMoved';
 export const MapInteractionEvent = 'mapInteraction';
 export const MapClickedEvent = 'mapClicked';
 
+/**
+ * The SDK's MapMoveReason enum, in declaration order (MapMoveReason.h). Indexed rather than
+ * switched so a reason added later reads as undefined instead of silently becoming 'api'.
+ */
+const MAP_MOVE_REASONS = ['gesture', 'animation', 'api'] as const;
+
+/** Turns the native reason into the string the events carry. */
+export function mapMoveReason(reason: number) {
+    return MAP_MOVE_REASONS[reason];
+}
+
+/** The payload shared by mapMoved and mapStable. */
+export function moveEventData(reason: number) {
+    const name = mapMoveReason(reason);
+    return { reason: name, userAction: name === 'gesture' };
+}
+
 export interface MapPropertyOptions {
     converter?: Function;
     defaultValue?: any;

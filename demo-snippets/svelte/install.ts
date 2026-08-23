@@ -80,6 +80,7 @@ function demo(name: string, path: string, load: () => any, description = '', ima
 const pluginDemos = [
     demo('Basic Raster', 'raster', () => require('./BasicRaster.svelte')),
     demo('Interactions', 'interactions', () => require('./Interactions.svelte')),
+    demo('Map events', 'mapevents', () => require('./MapEvents.svelte')),
     demo('Vector elements', 'vector-elements', () => require('./VectorElements.svelte')),
     demo('Clusters', 'clusters', () => require('./Clusters.svelte')),
     demo('Terrain + fog', 'terrain', () => require('./Terrain.svelte')),

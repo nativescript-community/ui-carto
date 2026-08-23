@@ -6,12 +6,10 @@ import android.util.Log;
 
 import com.massifmaps.ui.MapInteractionInfo;
 import com.massifmaps.ui.MapClickInfo;
-import android.view.MotionEvent;
 
 public class TextureMapView extends com.massifmaps.ui.TextureMapView {
     static final String TAG = "TextureMapView";
     Handler mainHandler = null;
-    public boolean userAction = false;
     private MapEventListener listener = null;
 
     static public boolean RUN_ON_MAIN_THREAD = true;
@@ -45,46 +43,22 @@ public class TextureMapView extends com.massifmaps.ui.TextureMapView {
         super.onResume();
     }
 
-    @Override
-    public  boolean onTouchEvent(MotionEvent event) {
-
-        boolean clickable = isClickable() || isLongClickable();
-        if (!isEnabled() || !clickable) {
-            return clickable;
-        }
-
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_POINTER_DOWN:
-            case MotionEvent.ACTION_DOWN:
-                this.userAction = false;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                this.userAction = true;
-                break;
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_UP:
-                // this.userAction = false;
-                break;
-        }
-        return super.onTouchEvent(event);
-    }
 
     private final com.massifmaps.ui.MapEventListener mapEventListener = new com.massifmaps.ui.MapEventListener() {
         @Override
-        public void onMapMoved() {
+        public void onMapMoved(int reason) {
             if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         if (TextureMapView.this.listener != null) {
-                            TextureMapView.this.listener.onMapMoved(userAction);
+                            TextureMapView.this.listener.onMapMoved(reason);
                         }
                     }
                 });
             } else {
                 if (TextureMapView.this.listener != null) {
-                    TextureMapView.this.listener.onMapMoved(userAction);
+                    TextureMapView.this.listener.onMapMoved(reason);
                 }
             }
         }
@@ -109,22 +83,20 @@ public class TextureMapView extends com.massifmaps.ui.TextureMapView {
         }
 
         @Override
-        public void onMapStable() {
+        public void onMapStable(int reason) {
             if (TextureMapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         if (TextureMapView.this.listener != null) {
-                            TextureMapView.this.listener.onMapStable(TextureMapView.this.userAction);
+                            TextureMapView.this.listener.onMapStable(reason);
                         }
-                        TextureMapView.this.userAction = false;
                     }
                 });
             } else {
                 if (TextureMapView.this.listener != null) {
-                    TextureMapView.this.listener.onMapStable(TextureMapView.this.userAction);
+                    TextureMapView.this.listener.onMapStable(reason);
                 }
-                TextureMapView.this.userAction = false;
             }
         }
 
@@ -152,13 +124,13 @@ public class TextureMapView extends com.massifmaps.ui.TextureMapView {
                     @Override
                     public void run() {
                         if (TextureMapView.this.listener != null) {
-                            TextureMapView.this.listener.onMapInteraction(interaction, TextureMapView.this.userAction);
+                            TextureMapView.this.listener.onMapInteraction(interaction, com.massifmaps.ui.MapMoveReason.MAP_MOVE_REASON_GESTURE);
                         }
                     }
                 });
             } else {
                 if (TextureMapView.this.listener != null) {
-                    TextureMapView.this.listener.onMapInteraction(interaction, TextureMapView.this.userAction);
+                    TextureMapView.this.listener.onMapInteraction(interaction, com.massifmaps.ui.MapMoveReason.MAP_MOVE_REASON_GESTURE);
                 }
             }
         }

@@ -50,11 +50,11 @@
 
     function setup(m: MassifMap) {
         map = m;
-        m.on('mapClicked', (e: any) => push(`clicked (${e.data.clickType}) @ ${e.data.position.latitude.toFixed(4)}, ${e.data.position.longitude.toFixed(4)}`));
-        m.on('mapStable', (e: any) => push(`stable (userAction ${e.data.userAction})`));
+        m.on('mapClicked', (e) => push(`clicked (${e.data.clickType}) @ ${e.data.position.latitude.toFixed(4)}, ${e.data.position.longitude.toFixed(4)}`));
+        m.on('mapStable', (e) => push(`stable (${e.data.reason})`));
         m.on('mapIdle', () => push('idle'));
-        m.on('mapMoved', (e: any) => logMoves && push(`moved (userAction ${e.data.userAction})`));
-        m.on('mapInteraction', (e: any) => {
+        m.on('mapMoved', (e) => logMoves && push(`moved (${e.data.reason})`));
+        m.on('mapInteraction', (e) => {
             if (!logMoves) {
                 return;
             }
