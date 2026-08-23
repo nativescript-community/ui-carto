@@ -137,6 +137,21 @@ export interface SubscribeOptions {
      * Never use it on a consumable event: a dropped click is one the SDK is still waiting on.
      */
     throttle?: number;
+    /**
+     * Deliver only the LAST event of a burst, this many milliseconds after the burst stops.
+     *
+     * The trailing edge, where `throttle` is the leading one: use this for work that should
+     * happen once the map settles - saving the camera, refetching what is on screen - and
+     * `throttle` for work that should track the movement.
+     *
+     * The payload the handler gets is a **snapshot**, read at emit time and frozen: the facade
+     * frees the real one the moment the emit returns, long before this fires. `data.payload` is
+     * therefore null and `data.get(path)` reads the snapshot.
+     *
+     * Never use it on a consumable event - the SDK is waiting for the answer now, not later -
+     * and note that `map.stable` is already once-per-movement in the SDK, so it rarely needs one.
+     */
+    debounce?: number;
 }
 
 /**
@@ -170,6 +185,8 @@ export interface MassifEventData<C extends ClassName = any, E extends EventName<
 /** A live subscription. Removing it twice is an error the SDK reports, so this is idempotent. */
 export class Subscription {
     private mRemoved = false;
+    /** Cancels a debounced delivery that has not fired yet, so `remove()` really means removed. */
+    private mCancelPending: (() => void) | null = null;
 
     constructor(readonly id: number) {}
 
@@ -182,7 +199,16 @@ export class Subscription {
             return false;
         }
         this.mRemoved = true;
+        if (this.mCancelPending) {
+            this.mCancelPending();
+            this.mCancelPending = null;
+        }
         return bridge.off(this.id);
+    }
+
+    /** @internal */
+    onRemove(cancel: () => void) {
+        this.mCancelPending = cancel;
     }
 }
 
@@ -691,8 +717,8 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         const consumable = this.consumes(event as string);
         return this.subscribeRaw(
             event as string,
-            (payload) => {
-                const data = this.eventData(event as string, payload, consumable) as unknown as MassifEventData<C, E>;
+            (payload, snapshot) => {
+                const data = this.eventData(event as string, payload, consumable, snapshot) as unknown as MassifEventData<C, E>;
                 handler(data);
                 warnIfIgnored(data, consumable, event as string);
                 return consumable && data.consumed;
@@ -706,12 +732,19 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         return bridge.canConsume && !!findEvent(this.className, event)?.consume;
     }
 
-    private subscribeRaw(event: string, handler: (payload: number) => boolean, options?: SubscribeOptions): Subscription {
+    private subscribeRaw(event: string, handler: (payload: number, snapshot?: Json) => boolean, options?: SubscribeOptions): Subscription {
         requireApi();
         this.beforeSubscribe(event);
         const merged = { ...this.mDefaults, ...options };
         const throttle = merged.throttle ?? 0;
+        const debounce = merged.debounce ?? 0;
+        const consumable = this.consumes(event);
+        if (debounce && consumable) {
+            throw new MassifApiError(`${event} is consumable, so it cannot be debounced - the SDK is waiting for the answer now, not in ${debounce} ms`);
+        }
         let last = 0;
+        let timer: any = null;
+        let cancel: (() => void) | null = null;
         const id = bridge.on(
             this.handle,
             event,
@@ -725,17 +758,41 @@ export class MassifObject<C extends ClassName = any> extends Observable {
                     }
                     last = now;
                 }
+                if (debounce) {
+                    // The payload dies when this returns, so the delayed handler gets a snapshot
+                    // read NOW. Trailing edge: each event replaces the pending one, and only the
+                    // last of a burst is delivered.
+                    const snapshot = payload ? parseJson(bridge.getString(payload as Handle, '')) : null;
+                    if (timer) {
+                        clearTimeout(timer);
+                    }
+                    timer = setTimeout(() => {
+                        timer = null;
+                        handler(0, snapshot);
+                    }, debounce);
+                    return false;
+                }
                 return handler(payload);
             },
             DELIVERY_ORIGIN,
             false,
             merged.projection ?? '',
-            this.consumes(event)
+            consumable
         );
         if (!id) {
             throw new MassifApiError(`could not subscribe to ${event} on ${this.className} - a stale handle, or an unknown projection`);
         }
-        return new Subscription(id);
+        const subscription = new Subscription(id);
+        if (debounce) {
+            cancel = () => {
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+            };
+            subscription.onRemove(cancel);
+        }
+        return subscription;
     }
 
     /** Hook for a subclass that has to install a native listener before the first subscription. */
@@ -743,9 +800,12 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         // nothing by default
     }
 
-    private eventData(event: string, payload: number, consumable: boolean): MassifEventData {
+    private eventData(event: string, payload: number, consumable: boolean, snapshot?: Json): MassifEventData {
         const info = findEvent(this.className, event);
         const object = payload && info?.payload ? new MassifObject(payload as Handle, info.payload as ClassName) : null;
+        // A debounced delivery has no live payload left - see SubscribeOptions.debounce - so its
+        // reads come out of the snapshot taken at emit time.
+        const fromSnapshot = snapshot !== undefined && snapshot !== null;
         return {
             eventName: event,
             object: this as MassifObject,
@@ -753,12 +813,20 @@ export class MassifObject<C extends ClassName = any> extends Observable {
             consumed: false,
             consumable,
             get: (path: string) => {
+                if (fromSnapshot) {
+                    return path ? (snapshot as any)[path] : snapshot;
+                }
                 if (!object) {
                     throw new MassifApiError(`${event} carries no payload`);
                 }
                 return object.get(path as never);
             },
-            getPos: (path: string, projection?: ProjectionName) => (object ? object.getPos(path, projection) : null)
+            getPos: (path: string, projection?: ProjectionName) => {
+                if (fromSnapshot) {
+                    return ((snapshot as any)[path] ?? null) as never;
+                }
+                return object ? object.getPos(path, projection) : null;
+            }
         } as MassifEventData;
     }
 
@@ -793,10 +861,10 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         for (const name of splitEvents(eventNames)) {
             if (!this.mSubscriptions[name] && findEvent(this.className, name) !== null) {
                 const consumable = this.consumes(name);
-                this.mSubscriptions[name] = this.subscribeRaw(name, (payload) => {
+                this.mSubscriptions[name] = this.subscribeRaw(name, (payload, snapshot) => {
                     // One data object for every listener, so whichever of them sets `consumed`
                     // claims the event - the same rule as a DOM handler calling preventDefault.
-                    const data = this.eventData(name, payload, consumable);
+                    const data = this.eventData(name, payload, consumable, snapshot);
                     this.notify(data);
                     warnIfIgnored(data, consumable, name);
                     return consumable && data.consumed;

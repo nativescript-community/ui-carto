@@ -15,22 +15,27 @@ export enum PanningMode {
     PANNING_MODE_STICKY,
     PANNING_MODE_STICKY_FINAL
 }
-export const MapReadyEvent: string;
+export const MapReadyEvent: 'mapReady';
 /**
- * Listener method that gets called when map is in 'stable' state - map animations have finished,
- user has lifted fingers from the screen.
+ * Fires once a movement has ENDED - animations finished, fingers lifted, inertia died out.
+ *
+ * Once per movement, carrying the `reason` that caused it. A touch that did not move the camera
+ * does not fire it at all, so there is no "did it actually move?" flag to keep. This is the one
+ * to hang a data refresh on.
  */
-export const MapStableEvent: string;
+export const MapStableEvent: 'mapStable';
 /**
- * Listener method that gets called at the end of the rendering process when the
-map view needs no further refreshing.
+ * Fires when the renderer has nothing left to draw. Tiles may still be loading - this is the end
+ * of the frame queue, not of the data.
  */
-export const MapIdleEvent: string;
+export const MapIdleEvent: 'mapIdle';
 /**
- * Listener method that gets called when the map is panned, rotated, tilted or zoomed.
+ * Fires on every camera change, whatever caused it. Well above frame rate during a drag, so it
+ * is the wrong place to refresh anything - use `mapStable` for that.
  */
-export const MapMovedEvent: string;
-export const MapClickedEvent: string;
+export const MapMovedEvent: 'mapMoved';
+export const MapClickedEvent: 'mapClicked';
+export const MapInteractionEvent: 'mapInteraction';
 
 export interface MapInfo {}
 
@@ -49,7 +54,16 @@ export interface FlyToOptions {
     duration?: number;
 }
 
+/** What moved the camera. The SDK's MapMoveReason, as a string. */
+export type MapMoveReason = 'gesture' | 'animation' | 'api';
+
 export interface MapGestureInfo extends MapInfo {
+    /**
+     * `gesture` for a drag, pinch, wheel or the inertia after one; `animation` for a frame of a
+     * flight or any move given a duration; `api` for a call that took effect immediately.
+     */
+    reason: MapMoveReason;
+    /** @deprecated Use `reason === 'gesture'`. Kept so existing handlers keep working. */
     userAction: boolean;
 }
 
@@ -94,6 +108,36 @@ export interface MapInteractionEventData extends MapEventData {
 
 export interface MapClickedEventData extends MapEventData {
     data: MapClickInfo;
+}
+
+export interface MapReadyEventData extends MapEventData {}
+export interface MapIdleEventData extends MapEventData {}
+
+/*
+ * The same types again under the event-constant names, so one import serves both sides of a
+ * handler - `import { MapStableEvent }` brings in the string to subscribe with AND the type to
+ * annotate the argument, which is what a Svelte `on:mapStable` needs:
+ *
+ *     import { MapStableEvent } from '@nativescript-community/ui-massifmaps';
+ *     function onStable(e: MapStableEvent) { if (e.data.reason === 'gesture') refresh(); }
+ *
+ * An interface and a const may share a name - they live in different declaration spaces.
+ */
+export interface MapReadyEvent extends MapReadyEventData {}
+export interface MapIdleEvent extends MapIdleEventData {}
+export interface MapMovedEvent extends MapMovedEventData {}
+export interface MapStableEvent extends MapStableEventData {}
+export interface MapInteractionEvent extends MapInteractionEventData {}
+export interface MapClickedEvent extends MapClickedEventData {}
+
+/** Every event the map raises, keyed by name. */
+export interface MassifMapEventMap {
+    mapReady: MapReadyEvent;
+    mapIdle: MapIdleEvent;
+    mapMoved: MapMovedEvent;
+    mapStable: MapStableEvent;
+    mapInteraction: MapInteractionEvent;
+    mapClicked: MapClickedEvent;
 }
 
 export { MapOptions };
@@ -185,9 +229,12 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     cancelAllTasks();
     captureRendering(wait?: boolean): Promise<ImageSource>;
 
-    on(event: 'mapReady' | 'mapIdle', callback: (args: EventData) => void, thisArg?: any): void;
-    on(event: 'mapStable', callback: (args: MapStableEventData) => void, thisArg?: any): void;
-    on(event: 'mapMoved', callback: (args: MapMovedEventData) => void, thisArg?: any): void;
-    on(event: 'mapInteraction', callback: (args: MapInteractionEventData) => void, thisArg?: any): void;
-    on(event: 'mapClicked', callback: (args: MapClickedEventData) => void, thisArg?: any): void;
+    on<K extends keyof MassifMapEventMap>(event: K, callback: (args: MassifMapEventMap[K]) => void, thisArg?: any): void;
+    on(event: string, callback: (args: EventData) => void, thisArg?: any): void;
+
+    once<K extends keyof MassifMapEventMap>(event: K, callback: (args: MassifMapEventMap[K]) => void, thisArg?: any): void;
+    once(event: string, callback: (args: EventData) => void, thisArg?: any): void;
+
+    off<K extends keyof MassifMapEventMap>(event: K, callback?: (args: MassifMapEventMap[K]) => void, thisArg?: any): void;
+    off(event: string, callback?: (args: EventData) => void, thisArg?: any): void;
 }

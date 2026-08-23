@@ -6,12 +6,10 @@ import android.util.Log;
 
 import com.massifmaps.ui.MapInteractionInfo;
 import com.massifmaps.ui.MapClickInfo;
-import android.view.MotionEvent;
 
 public class MapView extends com.massifmaps.ui.MapView {
     static final String TAG = "MapView";
     Handler mainHandler = null;
-    public boolean userAction = false;
     private MapEventListener listener = null;
 
     static public boolean RUN_ON_MAIN_THREAD = true;
@@ -45,46 +43,22 @@ public class MapView extends com.massifmaps.ui.MapView {
         super.onResume();
     }
 
-    @Override
-    public  boolean onTouchEvent(MotionEvent event) {
-
-        boolean clickable = isClickable() || isLongClickable();
-        if (!isEnabled() || !clickable) {
-            return clickable;
-        }
-
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_POINTER_DOWN:
-            case MotionEvent.ACTION_DOWN:
-                this.userAction = false;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                this.userAction = true;
-                break;
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_UP:
-                // this.userAction = false;
-                break;
-        }
-        return super.onTouchEvent(event);
-    }
 
     private final com.massifmaps.ui.MapEventListener mapEventListener = new com.massifmaps.ui.MapEventListener() {
         @Override
-        public void onMapMoved() {
+        public void onMapMoved(int reason) {
             if (MapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         if (MapView.this.listener != null) {
-                            MapView.this.listener.onMapMoved(userAction);
+                            MapView.this.listener.onMapMoved(reason);
                         }
                     }
                 });
             } else {
                 if (MapView.this.listener != null) {
-                    MapView.this.listener.onMapMoved(userAction);
+                    MapView.this.listener.onMapMoved(reason);
                 }
             }
         }
@@ -109,22 +83,20 @@ public class MapView extends com.massifmaps.ui.MapView {
         }
 
         @Override
-        public void onMapStable() {
+        public void onMapStable(int reason) {
             if (MapView.RUN_ON_MAIN_THREAD) {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         if (MapView.this.listener != null) {
-                            MapView.this.listener.onMapStable(MapView.this.userAction);
+                            MapView.this.listener.onMapStable(reason);
                         }
-                        MapView.this.userAction = false;
                     }
                 });
             } else {
                 if (MapView.this.listener != null) {
-                    MapView.this.listener.onMapStable(MapView.this.userAction);
+                    MapView.this.listener.onMapStable(reason);
                 }
-                MapView.this.userAction = false;
             }
         }
 
@@ -153,13 +125,13 @@ public class MapView extends com.massifmaps.ui.MapView {
                     @Override
                     public void run() {
                         if (MapView.this.listener != null) {
-                            MapView.this.listener.onMapInteraction(interaction, MapView.this.userAction);
+                            MapView.this.listener.onMapInteraction(interaction, com.massifmaps.ui.MapMoveReason.MAP_MOVE_REASON_GESTURE);
                         }
                     }
                 });
             } else {
                 if (MapView.this.listener != null) {
-                    MapView.this.listener.onMapInteraction(interaction, MapView.this.userAction);
+                    MapView.this.listener.onMapInteraction(interaction, com.massifmaps.ui.MapMoveReason.MAP_MOVE_REASON_GESTURE);
                 }
             }
         }

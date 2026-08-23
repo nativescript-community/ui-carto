@@ -6,7 +6,6 @@ import MassifMaps
 class NSMSFMapView: MSFMapView {
   static var RUN_ON_MAIN_THREAD = true
   var listener: NSMSFMapEventListener? = nil
-  var userAction: Bool = false
   
   class MapEventListener : MSFMapEventListener {
     unowned var parent: NSMSFMapView? = nil
@@ -28,22 +27,23 @@ class NSMSFMapView: MSFMapView {
         }
       }
     }
-    override func onMapStable() {
+    override func onMapStable(_ reason: MSFMapMoveReason) {
+      let value = reason.rawValue
       if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
-        parent!.listener?.onMapStable(parent!.userAction)
+        parent!.listener?.onMapStable(value)
       } else {
         DispatchQueue.main.async() {
-          self.parent!.listener?.onMapStable(self.parent!.userAction)
+          self.parent!.listener?.onMapStable(value)
         }
       }
-      parent!.userAction = false;
     }
-    override func onMapMoved() {
+    override func onMapMoved(_ reason: MSFMapMoveReason) {
+      let value = reason.rawValue
       if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
-        parent!.listener?.onMapMoved(parent!.userAction)
+        parent!.listener?.onMapMoved(value)
       } else {
         DispatchQueue.main.async() {
-          self.parent!.listener?.onMapMoved(self.parent!.userAction)
+          self.parent!.listener?.onMapMoved(value)
         }
       }
     }
@@ -57,11 +57,13 @@ class NSMSFMapView: MSFMapView {
       }
     }
     override func onMapInteraction(_ mapInteractionInfo: MSFMapInteractionInfo!) {
+      // An interaction is by definition the user: the SDK only raises it from the touch pipeline.
+      let value = MSFMapMoveReason.MAP_MOVE_REASON_GESTURE.rawValue
       if (!NSMSFMapView.RUN_ON_MAIN_THREAD) {
-        parent!.listener?.onMapInteraction(mapInteractionInfo, self.parent!.userAction)
+        parent!.listener?.onMapInteraction(mapInteractionInfo, value)
       } else {
         DispatchQueue.main.async() {
-          self.parent!.listener?.onMapInteraction(mapInteractionInfo, self.parent!.userAction)
+          self.parent!.listener?.onMapInteraction(mapInteractionInfo, value)
         }
       }
     }
@@ -93,14 +95,5 @@ class NSMSFMapView: MSFMapView {
     } else {
       super.setMapEventListener(nil)
     }
-  }
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
-    self.userAction = false
-  }
-  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesMoved(touches, with: event)
-    self.userAction = true
   }
 }

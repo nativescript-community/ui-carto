@@ -20,7 +20,7 @@ import { IProjection } from '../projections';
 import { restrictedPanningProperty } from './cssproperties';
 import { FlyToOptions, MapClickInfo, MapGestureInfo, MapInteractionInfo } from '.';
 import { PostProcessEffect } from '../renderers';
-import { Layers as BaseLayers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, MassifMapViewBase } from './index.common';
+import { Layers as BaseLayers, MapClickedEvent, MapIdleEvent, MapInteractionEvent, MapMovedEvent, MapReadyEvent, MapStableEvent, MassifMapViewBase, moveEventData } from './index.common';
 import { ImageSource } from '@nativescript/core';
 import { executeOnMainThread } from '@nativescript/core/utils';
 
@@ -70,17 +70,17 @@ class NSMSFMapEventListenerImpl extends NSObject implements NSMSFMapEventListene
         }
     }
 
-    public onMapMoved(userAction: boolean) {
+    public onMapMoved(reason: number) {
         const owner = this._owner?.get();
         if (owner) {
-            owner.sendEvent<MapGestureInfo>(MapMovedEvent, { userAction });
+            owner.sendEvent<MapGestureInfo>(MapMovedEvent, moveEventData(reason));
         }
     }
-    public onMapInteraction(interaction: MSFMapInteractionInfo, userAction: boolean) {
+    public onMapInteraction(interaction: MSFMapInteractionInfo, reason: number) {
         const owner = this._owner?.get();
         if (owner) {
             owner.sendEvent<MapInteractionInfo>(MapInteractionEvent, {
-                userAction,
+                ...moveEventData(reason),
                 interaction: {
                     get isAnimationStarted() {
                         return interaction.isAnimationStarted();
@@ -101,10 +101,10 @@ class NSMSFMapEventListenerImpl extends NSObject implements NSMSFMapEventListene
             });
         }
     }
-    public onMapStable(userAction: boolean) {
+    public onMapStable(reason: number) {
         const owner = this._owner?.get();
         if (owner) {
-            owner.sendEvent<MapGestureInfo>(MapStableEvent, { userAction });
+            owner.sendEvent<MapGestureInfo>(MapStableEvent, moveEventData(reason));
         }
     }
     public onMapClicked(mapClickInfo: MSFMapClickInfo) {
