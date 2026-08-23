@@ -4,6 +4,7 @@ import { LatitudeKey, MapPos, fromNativeMapPos } from '../core';
 import { Layer } from '../layers';
 import { bearingProperty, focusPosProperty, tiltProperty, zoomProperty } from './cssproperties';
 import { MapInfo } from '.';
+import { attach as attachFacade, isAvailable as isApiAvailable } from '../api';
 
 export const MapReadyEvent = 'mapReady';
 export const MapStableEvent = 'mapStable';
@@ -28,6 +29,20 @@ export function moveEventData(reason: number) {
     const name = mapMoveReason(reason);
     return { reason: name, userAction: name === 'gesture' };
 }
+
+/**
+ * The facade event each of the view's events is raised from, for the surface-API path below.
+ *
+ * The view's names are historical and the facade's are the SDK's, so the map is explicit rather
+ * than derived - a rename on either side has to be made here, deliberately.
+ */
+const FACADE_EVENTS: [string, string][] = [
+    [MapMovedEvent, 'map.moved'],
+    [MapStableEvent, 'map.stable'],
+    [MapIdleEvent, 'map.idle'],
+    [MapClickedEvent, 'map.clicked'],
+    [MapInteractionEvent, 'map.interaction']
+];
 
 export interface MapPropertyOptions {
     converter?: Function;
@@ -185,12 +200,34 @@ export abstract class MassifMapViewBase extends ContentView {
     @mapProperty restrictedPanning: boolean;
 
     private mLayers: Layers;
+    private mFacade: any = null;
+    private mFacadeSubscriptions: any[] = [];
+    private mFacadeOwned: { [event: string]: boolean } = {};
+
+    /**
+     * Raise the events named in `eventOptions` through the facade, so their subscription options
+     * apply. Opt-in - see useFacadeEventsIfAsked.
+     */
+    facadeEvents = false;
+
+    /** Per-event subscription options, keyed by the view's event name. */
+    eventOptions: { [event: string]: { throttle?: number; debounce?: number; projection?: string } };
 
     get mapView() {
         return this.nativeViewProtected;
     }
 
     public sendEvent<T extends MapInfo = MapInfo>(eventName: string, data?: T) {
+        // One guard here rather than at each of the ten native call sites: an event the facade
+        // has taken over must not also be raised by the native listener, which is still installed
+        // and still chained to for everything else.
+        if (this.facadeOwns(eventName)) {
+            return;
+        }
+        this.raise(eventName, data);
+    }
+
+    private raise(eventName: string, data?: any) {
         if (this.hasListeners(eventName)) {
             this.notify({
                 eventName,
@@ -203,8 +240,81 @@ export abstract class MassifMapViewBase extends ContentView {
         super.onLoaded();
         if (!this.mapReady) {
             this.mapReady = true;
-            setTimeout(() => this.sendEvent(MapReadyEvent), 0);
+            setTimeout(() => {
+                this.useFacadeEventsIfAsked();
+                this.sendEvent(MapReadyEvent);
+            }, 0);
         }
+    }
+
+    /**
+     * Raises the map's events through the facade instead of the native listener, which is what
+     * makes the subscription options - throttle, debounce, projection - reachable per event.
+     *
+     * OPT-IN for now (`facadeEvents="true"`): the two paths raise the same view events, so having
+     * both on would deliver everything twice, and the native one is what every existing app is
+     * running against. Only the events named in `eventOptions` move over; the rest stay on the
+     * native listener, so a page that only wants a throttle on `mapMoved` pays for nothing else.
+     */
+    private useFacadeEventsIfAsked() {
+        if (this.facadeEvents) {
+            this.enableFacadeEvents();
+        }
+    }
+
+    /**
+     * The same, callable once the map is ready - which is where an app that decides its options
+     * at runtime can reach it, `facadeEvents` in the markup being read before that.
+     *
+     * @param eventOptions Per-event options; defaults to whatever the property holds.
+     */
+    enableFacadeEvents(eventOptions = this.eventOptions) {
+        this.eventOptions = eventOptions;
+        if (!this.mapView || this.mFacade) {
+            return;
+        }
+        if (!isApiAvailable()) {
+            console.warn('MassifMap: facadeEvents needs an SDK built with the surface API - staying on the native listener');
+            return;
+        }
+        try {
+            this.mFacade = attachFacade(this as any, { id: `massif-map-${this._domId}` });
+        } catch (error) {
+            // A map whose events silently stopped is far worse than one that logs and carries on
+            // with the listener it already had.
+            console.warn(`MassifMap: could not attach the facade, staying on the native listener - ${error}`);
+            return;
+        }
+        for (const [viewEvent, facadeEvent] of FACADE_EVENTS) {
+            const options = this.eventOptions?.[viewEvent];
+            if (!options) {
+                continue;
+            }
+            this.mFacadeSubscriptions.push(
+                this.mFacade.subscribe(facadeEvent as never, (e) => this.sendFacadeEvent(viewEvent, e), options)
+            );
+            this.mFacadeOwned[viewEvent] = true;
+        }
+    }
+
+    /** Whether the native listener should still raise this event, or the facade has taken it. */
+    protected facadeOwns(eventName: string) {
+        return this.mFacadeOwned[eventName] === true;
+    }
+
+    /**
+     * One facade payload, reshaped into the `{ data }` an existing handler already expects.
+     *
+     * Read eagerly: the payload dies when the handler returns, and a debounced delivery has only
+     * a snapshot to begin with.
+     */
+    private sendFacadeEvent(eventName: string, e: any) {
+        const data: any = {};
+        if (eventName === MapMovedEvent || eventName === MapStableEvent) {
+            const reason = e.get('reason');
+            Object.assign(data, moveEventData(typeof reason === 'number' ? reason : 0));
+        }
+        this.raise(eventName, data);
     }
 
     abstract createLayersInstance();
@@ -243,6 +353,16 @@ export abstract class MassifMapViewBase extends ContentView {
 
     disposeNativeView() {
         this.mapReady = false;
+
+        for (const subscription of this.mFacadeSubscriptions) {
+            subscription.remove();
+        }
+        this.mFacadeSubscriptions = [];
+        this.mFacadeOwned = {};
+        if (this.mFacade) {
+            this.mFacade.destroy();
+            this.mFacade = null;
+        }
 
         if (this.mLayers) {
             this.mLayers.clear();
