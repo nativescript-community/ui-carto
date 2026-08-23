@@ -71,16 +71,15 @@ class MSFRendererCaptureListenerImpl extends NSMSFRendererCaptureListener {
     }
 }
 export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
-    static projection = new EPSG4326();
+    public static setRunOnMainThread(value: boolean) {
+        NSMSFMainThread.setRunOnMainThreadWithValue(value);
+    }
 
+    static projection = new EPSG4326();
     nativeProjection: MSFProjection;
     mProjection: IProjection;
 
-    public static setRunOnMainThread(value: boolean) {
-        runOnMainThread = value;
-    }
-
-    override get mapView(): NSMSFMapView {
+    override get mapView(): MSFMapView {
         return super.mapView;
     }
 
@@ -97,7 +96,7 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
     }
 
     public createNativeView(): object {
-        return NSMSFMapView.alloc().init();
+        return MSFMapView.alloc().init();
     }
 
     mOptions: MapOptions;

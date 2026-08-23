@@ -13,7 +13,7 @@ import SwiftTryCatch
 @objc(NSMSFRoutingServiceAdditions)
 @objcMembers
 class NSMSFRoutingServiceAdditions: NSObject {
-    static var runOnMainThread = NSMSFMapView.RUN_ON_MAIN_THREAD
+    static var runOnMainThread = NSMSFMainThread.RUN_ON_MAIN_THREAD
     
     public static func stringifyRouteResult(_ result: MSFRoutingResult?)-> String? {
         if ((result) != nil) {

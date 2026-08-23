@@ -2,7 +2,6 @@ package com.nativescript.massifmaps.packagemanager;
 
 import android.os.Handler;
 
-import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.massifmaps.packagemanager.PackageErrorType;
 import com.massifmaps.packagemanager.PackageStatus;
@@ -41,7 +40,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onPackageCancelled(final String id, final int version) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -69,7 +68,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
     @Override
     public void onPackageFailed(final String id, final int version,
             final @PackageErrorType.Value int errorType) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -96,7 +95,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onPackageListFailed() {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -123,7 +122,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onPackageListUpdated() {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -150,7 +149,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onPackageStatusChanged(final String id, final int version, final PackageStatus status) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -177,7 +176,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onPackageUpdated(final String id, final int version) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -204,7 +203,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onStyleFailed(final String styleName) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -231,7 +230,7 @@ public class PackageManagerListener extends com.massifmaps.packagemanager.Packag
 
     @Override
     public void onStyleUpdated(final String styleName) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());

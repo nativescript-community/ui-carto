@@ -3,7 +3,6 @@ package com.nativescript.massifmaps.additions2;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.massifmaps.geometry.Geometry;
 import com.massifmaps.layers.VectorElementDragPointStyle;
@@ -49,7 +48,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public boolean onElementSelect(final VectorElement element) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -77,7 +76,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public void onElementDelete(final VectorElement element) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
@@ -102,7 +101,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public void onElementDeselected(final VectorElement element) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
@@ -127,7 +126,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public void onElementModify(final VectorElement element, final Geometry geometry) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }
@@ -153,7 +152,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
     @Override
     public PointStyle onSelectDragPointStyle(final VectorElement element,
             final @VectorElementDragPointStyle.Value int dragPointStyle) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -181,7 +180,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public @VectorElementDragResult.Value int onDragEnd(final VectorElementDragInfo dragInfo) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -209,7 +208,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public @VectorElementDragResult.Value int onDragMove(final VectorElementDragInfo dragInfo) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
@@ -237,7 +236,7 @@ public class VectorEditEventListener extends com.massifmaps.layers.VectorEditEve
 
     @Override
     public @VectorElementDragResult.Value int onDragStart(final VectorElementDragInfo dragInfo) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());

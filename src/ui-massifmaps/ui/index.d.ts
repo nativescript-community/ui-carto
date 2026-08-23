@@ -175,14 +175,18 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     public static mapClickedEvent = 'mapClicked';
 
     /**
-     * Whether the plugin's native listeners hop to the main thread and wait before calling into
-     * JavaScript. True by default, and what makes a handler safe to write - the SDK emits from
-     * its render and tile threads, where NativeScript has no runtime at all.
+     * Whether the plugin's native listeners hop to the main thread and WAIT before calling into
+     * JavaScript. True by default, and what makes a handler safe to write - the SDK calls back
+     * from its render, tile and routing threads, where NativeScript has no runtime at all.
      *
-     * It applies to the map's events too, which come from the surface API: the plugin subscribes
-     * them with the facade's ORIGIN delivery and does the hop in its own listener, rather than
-     * asking the facade for UI delivery - that would need a dispatcher whose post() is itself
-     * called on the producing thread.
+     * It covers EVERY listener the plugin installs - map events, routing, geocoding, search,
+     * hillshade, tile downloads - whether or not the surface API is in use. The flag lives with
+     * the hop itself (SynchronousHandler on Android, NSMSFMainThread on iOS) rather than on a map
+     * view, because most of those listeners have nothing to do with one.
+     *
+     * The map's events are no exception. They come from the surface API, which CAN deliver on the
+     * UI thread itself - but only by QUEUEING, and a consuming callback has to answer now, so the
+     * plugin subscribes with ORIGIN delivery and does the waiting hop for all of them alike.
      */
     public static setRunOnMainThread(value: boolean);
 

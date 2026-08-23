@@ -26,7 +26,7 @@ public class CelestialEventListener extends com.massifmaps.layers.CelestialEvent
 
     @Override
     public boolean onCelestialObjectClicked(final ClickInfo arg0, final CelestialObject arg1) {
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());
             }

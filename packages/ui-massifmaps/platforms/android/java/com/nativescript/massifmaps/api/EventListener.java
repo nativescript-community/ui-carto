@@ -3,7 +3,6 @@ package com.nativescript.massifmaps.api;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 
 /**
@@ -43,7 +42,7 @@ public class EventListener extends com.massifmaps.api.EventListener {
         if (current == null) {
             return false;
         }
-        if (!MapView.RUN_ON_MAIN_THREAD) {
+        if (!SynchronousHandler.RUN_ON_MAIN_THREAD) {
             return current.onEvent(target, event, payload);
         }
         if (mainHandler == null) {

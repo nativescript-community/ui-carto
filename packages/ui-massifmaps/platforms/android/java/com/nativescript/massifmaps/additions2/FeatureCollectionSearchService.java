@@ -3,7 +3,6 @@ package com.nativescript.massifmaps.additions2;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.nativescript.massifmaps.additions.FeatureCollectionSearchServiceCallback;
 import com.massifmaps.search.SearchRequest;
@@ -27,7 +26,7 @@ public class FeatureCollectionSearchService extends com.massifmaps.search.Featur
             @Override
             public void run() {
                 final FeatureCollection results = FeatureCollectionSearchService.this.findFeatures(request);
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }

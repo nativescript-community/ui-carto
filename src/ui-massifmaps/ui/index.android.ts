@@ -47,15 +47,15 @@ export const PanningMode = {
 };
 
 export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
-    public useTextureView: boolean;
     public static setRunOnMainThread(value: boolean) {
-        com.nativescript.massifmaps.additions.MapView.setRunOnMainThread(value);
+        com.nativescript.massifmaps.additions.SynchronousHandler.setRunOnMainThread(value);
     }
 
-    nativeViewProtected: com.nativescript.massifmaps.additions.MapView;
+    public useTextureView: boolean;
+    nativeViewProtected: com.massifmaps.ui.MapView;
     mProjection: IProjection;
 
-    override get mapView(): com.nativescript.massifmaps.additions.MapView {
+    override get mapView(): com.massifmaps.ui.MapView {
         return super.mapView;
     }
 
@@ -71,9 +71,9 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
     public createNativeView() {
         let view;
         if (this.useTextureView) {
-            view = new com.nativescript.massifmaps.additions.TextureMapView(this._context);
+            view = new com.massifmaps.ui.TextureMapView(this._context);
         } else {
-            view = new com.nativescript.massifmaps.additions.MapView(this._context);
+            view = new com.massifmaps.ui.MapView(this._context);
         }
         return view;
     }

@@ -103,7 +103,7 @@ public class ClusterElementBuilder extends com.massifmaps.layers.ClusterElementB
         if (useNativeBuilder) {
             return nativeBuildClusterElement(pos, elements);
         }
-        if (MapView.RUN_ON_MAIN_THREAD) {
+        if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
             final Object[] arr = new Object[1];
             if (mainHandler == null) {
                 mainHandler = new Handler(android.os.Looper.getMainLooper());

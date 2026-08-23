@@ -9,7 +9,7 @@ class NSMSFVectorTileSearchService: MSFVectorTileSearchService {
         DispatchQueue.global(qos: .background).async {
             SwiftTryCatch.try {
                 let result = self.findFeatures(request)
-                if (NSMSFMapView.RUN_ON_MAIN_THREAD) {
+                if (NSMSFMainThread.RUN_ON_MAIN_THREAD) {
                     DispatchQueue.main.async() {
                         callback(result, nil)
                     }

@@ -3,7 +3,6 @@ package com.nativescript.massifmaps.additions2;
 import android.os.Handler;
 import android.util.Log;
 
-import com.nativescript.massifmaps.additions.MapView;
 import com.nativescript.massifmaps.additions.SynchronousHandler;
 import com.massifmaps.search.SearchRequest;
 import com.massifmaps.datasources.TileDataSource;
@@ -28,7 +27,7 @@ public class VectorTileSearchService extends com.massifmaps.search.VectorTileSea
             @Override
             public void run() {
                 final VectorTileFeatureCollection results = that.findFeatures(request);
-                if (MapView.RUN_ON_MAIN_THREAD) {
+                if (SynchronousHandler.RUN_ON_MAIN_THREAD) {
                     if (mainHandler == null) {
                         mainHandler = new Handler(android.os.Looper.getMainLooper());
                     }
