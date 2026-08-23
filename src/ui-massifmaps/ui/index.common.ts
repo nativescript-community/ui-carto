@@ -303,7 +303,17 @@ export abstract class MassifMapViewBase extends ContentView {
      */
     enableFacadeEvents(eventOptions = this.eventOptions) {
         this.eventOptions = eventOptions;
-        if (!this.mapView || this.mFacade) {
+        if (!this.mapView) {
+            return;
+        }
+        if (this.mFacade) {
+            // Already attached - re-subscribe so new options apply, rather than registering the
+            // map a second time.
+            for (const subscription of this.mFacadeSubscriptions) {
+                subscription.remove();
+            }
+            this.mFacadeSubscriptions = [];
+            this.subscribeFacadeEvents();
             return;
         }
         if (!isApiAvailable()) {
@@ -316,6 +326,18 @@ export abstract class MassifMapViewBase extends ContentView {
             console.warn(`MassifMap: could not attach the map's events - ${error}`);
             return;
         }
+        this.subscribeFacadeEvents();
+    }
+
+    /**
+     * The facade handle this view attached for its own events, so `api.attach()` reuses it rather
+     * than registering the same map twice. Null before the map has loaded.
+     */
+    facadeMap() {
+        return this.mFacade;
+    }
+
+    private subscribeFacadeEvents() {
         for (const [viewEvent, facadeEvent] of FACADE_EVENTS) {
             this.mFacadeSubscriptions.push(
                 this.mFacade.subscribe(facadeEvent as never, (e) => this.raise(viewEvent, facadeEventData(viewEvent, e)), this.eventOptions?.[viewEvent])

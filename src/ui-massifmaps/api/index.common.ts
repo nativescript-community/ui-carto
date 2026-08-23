@@ -1892,6 +1892,19 @@ export class MassifMap extends MassifObject<'massif::Options'> {
  */
 export function attach(view: MapViewLike, options: AttachOptions = {}): MassifMap {
     requireApi();
+    // The view attaches itself when it loads, to raise its own events. Registering the same map
+    // a second time under another id would give the SDK two handles onto one object and leave
+    // whichever is destroyed first dangling - so reuse it, and let the options through.
+    const existing = (view as any).facadeMap?.();
+    if (existing) {
+        const { projection: existingProjection, throttle: existingThrottle, debounce: existingDebounce } = options;
+        if (existingProjection || existingThrottle || existingDebounce) {
+            existing.eventOptions({ projection: existingProjection, throttle: existingThrottle, debounce: existingDebounce });
+            // Re-subscribes the view's own events, which were made before these options existed.
+            (view as any).enableFacadeEvents?.();
+        }
+        return existing;
+    }
     const nativeOptions = view.getOptions()?.getNative();
     if (!nativeOptions) {
         throw new MassifApiError('the map is not ready yet - attach from the mapReady event');
