@@ -173,6 +173,13 @@ filter strips the class and the getter returns `undefined`. `npm run bindings` e
 do not maintain the list by hand. Whitelisting only the enums a bound method mentions is not
 enough: `MBTilesScheme` appears solely in a constructor signature, which the parser drops as noise.
 
+An enum is recognised by the shape of its class body (`isEnumBody` in `scripts/bindings/parse.mjs`):
+UPPER_SNAKE int constants, nothing callable but the constructor. It used to be the `swigToEnum`
+member, which the current typings no longer carry — and because two files tested for it
+independently, every enum silently became a plain `number` *and* lost its metadata entry at once.
+One predicate now, used by both. **The count is printed by `npm run bindings` — read it.** A drop to
+`0 swig enums` is that failure, and nothing else reports it.
+
 ## native-api-usage.json
 
 Both files come out of the same model, so they cannot drift apart:
@@ -185,6 +192,35 @@ Both files come out of the same model, so they cannot drift apart:
 A consuming app has its own `App_Resources/Android/native-api-usage.json` with
 `"whitelist-plugins-usages": true`, which is what pulls this plugin's `uses` list in. An app only
 needs its own entries for SDK classes it touches directly, outside the plugin's wrappers.
+
+### Keeping a class is not enough — it needs its base and its signature types
+
+`uses` is per class, and it is only half a class. Three different symptoms, one cause:
+
+| What is missing | What breaks |
+|---|---|
+| a **base class** (`android.opengl.GLSurfaceView`) | inherited methods vanish — `MapView.onResume()` is `not a function` |
+| a class the plugin reaches but never binds (`com.massifmaps.api.*`) | the whole facade is gone; the plugin reports *"this build has no surface API"*, which reads like a mis-built SDK |
+| a **type in a kept method's signature** (`BaseMapView`) | the signature will not resolve, the type degrades to `Object`, and the method itself is gone — `NoSuchMethodError`, not a missing property |
+
+All three only bite in an app that *has* a `native-api-usage.json`. `demo-svelte` has none, so it
+has no filter and every one of these works there — which is exactly what makes them hard to place.
+
+`emitApiUsage` (`scripts/bindings/emit.mjs`) handles it in two ways:
+
+- **Seeded packages** for what the model cannot yield, because it only holds *bound* classes:
+  `com.massifmaps.api*:*`, `com.massifmaps.ui*:*`, and `android.opengl:GLSurfaceView` — the last the
+  way `ui-webview` lists `android.webkit:WebView`. The two massif packages are wildcarded because
+  three separate misses inside them were three separate crashes.
+- **Signature closure**: every `com.massifmaps.*` type named by a kept method's parameters or
+  return is added too. That is what pulls in `GeocodingAddress`, `GeometrySimplifier` and
+  `PopupStyle`, none of which any bound class *is*.
+
+An app's own `blacklist` still wins over all of this, so wildcarding costs a size-conscious app
+nothing it did not already choose.
+
+The base-class case was hidden for a long time by `com.nativescript.massifmaps.additions.MapView`,
+a subclass that *declared* `onResume`/`onPause` itself. Deleting that subclass is what exposed it.
 
 ## Fallback: generating typings by hand
 

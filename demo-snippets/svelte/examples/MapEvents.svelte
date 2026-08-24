@@ -32,7 +32,6 @@
         // does not fire it, so there is no "did it actually move?" flag to keep - and no debounce
         // to add either, because it already fires exactly once per movement.
         map.subscribe('map.stable', (e) => {
-            console.log('payload:', !!e.payload, 'reason:', e.reason, 'keys:', Object.keys(e).join(','));
             stables++;
             const reason = e.reason;
             // A refresh should follow the USER, not the app's own camera calls - otherwise the
