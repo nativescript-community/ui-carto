@@ -1,7 +1,7 @@
 import { EventData, Observable } from '@nativescript/core';
 import { bridge } from './bridge';
 import type { Delivery as NativeDelivery } from './bridge';
-import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, isSubclassOf, propertyNames, resolveMethod, resolvePath } from './resolve';
+import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, isSubclassOf, propertyNames, resolveMethod, resolvePath, specKindOf } from './resolve';
 import type {
     Bounds,
     ClassName,
@@ -24,6 +24,7 @@ import type {
     SpecArg,
     SpecType,
     ValueAt,
+    WriteAt,
     ValuePath,
     WritablePath
 } from './massif-api';
@@ -293,6 +294,20 @@ function parseJson(text: string | null): Json {
     }
 }
 
+/** A spec written inline: a plain object with a `type`, not a handle and not a live object. */
+type SpecObject = { type: string } & { [key: string]: unknown };
+
+function isSpec(value: unknown): value is SpecObject {
+    return (
+        !!value &&
+        typeof value === 'object' &&
+        !Array.isArray(value) &&
+        !(value instanceof MassifObject) &&
+        typeof (value as { handle?: unknown }).handle !== 'number' &&
+        typeof (value as { type?: unknown }).type === 'string'
+    );
+}
+
 function handleOf(value: unknown): number {
     if (typeof value === 'number') {
         return value;
@@ -376,13 +391,13 @@ export class PropertyGroup<C extends ClassName = any> {
         return this.owner.get(this.path(path) as never) as ValueAt<C, P>;
     }
 
-    set<P extends WritablePath<C>>(path: P, value: ValueAt<C, P>): this {
+    set<P extends WritablePath<C>>(path: P, value: WriteAt<C, P>): this {
         this.owner.set(this.path(path) as never, value as never);
         return this;
     }
 
     /** Applies several properties in one call, in the object's own key order. */
-    apply(values: Partial<{ [P in WritablePath<C>]: ValueAt<C, P> }>): this {
+    apply(values: Partial<{ [P in WritablePath<C>]: WriteAt<C, P> }>): this {
         for (const key of Object.keys(values)) {
             this.set(key as WritablePath<C>, (values as never)[key]);
         }
@@ -500,7 +515,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
      * Writes a property. Every path but an object one takes the JavaScript value directly - an
      * enum by its constant name, a position as an array.
      */
-    set<P extends WritablePath<C>>(path: P, value: ValueAt<C, P>): this {
+    set<P extends WritablePath<C>>(path: P, value: WriteAt<C, P>): this {
         const result = this.write(path as string, value);
         if (result !== Result.OK) {
             throw new MassifApiError(`${this.className}.${path}: ${resultName(result)}`, result);
@@ -509,7 +524,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
     }
 
     /** The same without throwing, for a path that may legitimately not be there. */
-    trySet<P extends WritablePath<C>>(path: P, value: ValueAt<C, P>): number {
+    trySet<P extends WritablePath<C>>(path: P, value: WriteAt<C, P>): number {
         return this.write(path as string, value);
     }
 
@@ -528,7 +543,9 @@ export class MassifObject<C extends ClassName = any> extends Observable {
             case 'e':
                 return bridge.setInt(this.handle, path, enumValue(String(value)) ?? Number(value));
             case 'o':
-                return bridge.setObject(this.handle, path, handleOf(value));
+                return isSpec(value)
+                    ? this.writeSpec(path, info.arg as string, value)
+                    : bridge.setObject(this.handle, path, handleOf(value));
             case 'p':
             case 't':
             case 'v':
@@ -536,6 +553,28 @@ export class MassifObject<C extends ClassName = any> extends Observable {
             default:
                 return this.writeByType(path, value);
         }
+    }
+
+    /**
+     * An OBJECT property written from an INLINE SPEC, the way a constructor argument takes one.
+     *
+     * `setObject` carries a handle and nothing else, so a spec used to collapse to NULL_HANDLE -
+     * which CLEARS the property and returns OK. Setting `backgroundBitmap` that way blanked the
+     * map background and reported success.
+     *
+     * The built object is registered under an id derived from the target, so it stays alive as
+     * long as the property points at it and a second write replaces it rather than leaking.
+     */
+    private writeSpec(path: string, objectClass: string, spec: SpecObject): number {
+        const kind = specKindOf(objectClass);
+        if (!kind) {
+            return Result.UNKNOWN_CLASS;
+        }
+        const id = `${this.id ?? this.handle}.${path}`;
+        // A different spec under a live id is refused, so the previous one goes first.
+        find(kind, id, objectClass as ClassName)?.destroy();
+        const built = create(kind, id, spec as never, objectClass as ClassName);
+        return bridge.setObject(this.handle, path, built.handle);
     }
 
     /** The fallback for a path the tables cannot resolve: pick the verb from the value. */
@@ -558,7 +597,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
     }
 
     /** Applies several properties in one call. */
-    apply(values: Partial<{ [P in WritablePath<C>]: ValueAt<C, P> }>): this {
+    apply(values: Partial<{ [P in WritablePath<C>]: WriteAt<C, P> }>): this {
         for (const key of Object.keys(values)) {
             this.set(key as WritablePath<C>, (values as never)[key]);
         }

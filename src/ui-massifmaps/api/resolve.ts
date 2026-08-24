@@ -2,7 +2,7 @@
  * @internal
  * @module
  */
-import { BASES, CLASS_NAMES, ENUMS, EVENTS, METHODS, PROPS, SPEC_CLASS } from './schema';
+import { BASES, CLASS_NAMES, ENUMS, EVENTS, KIND_OF_CLASS, METHODS, PROPS, SPEC_CLASS } from './schema';
 
 /**
  * Path resolution over the generated tables, the way the C++ property table does it.
@@ -232,6 +232,11 @@ export function enumName(enumType: string | undefined, value: number): string | 
 /** The class `create` registers for a kind and spec type. */
 export function classOfSpec(kind: string, type: string): string | null {
     return SPEC_CLASS[kind]?.[type] ?? null;
+}
+
+/** The other direction: which kind builds a class, for a spec written into an OBJECT property. */
+export function specKindOf(cppClass: string): string | null {
+    return KIND_OF_CLASS[cppClass] ?? null;
 }
 
 let known: { [short: string]: true } | undefined;
