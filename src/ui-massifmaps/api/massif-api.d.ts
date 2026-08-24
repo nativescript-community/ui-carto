@@ -239,6 +239,7 @@ export type ClassName =
     | 'massif::TileData'
     | 'massif::TileDataSource'
     | 'massif::TileDecoderListener'
+    | 'massif::TileDownloadInfo'
     | 'massif::TileDownloadListener'
     | 'massif::TileInfo'
     | 'massif::TileLayer'
@@ -756,6 +757,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -766,6 +769,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -780,6 +785,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -790,6 +797,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -966,6 +975,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'vectorElement.geometry.bounds': Bounds;
         readonly 'vectorElement.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'vectorElement.geometry.geoJSON': string;
         readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'vectorElement.id': number;
@@ -1242,6 +1253,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -1252,6 +1265,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -1786,6 +1801,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -1796,6 +1813,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -1808,6 +1827,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -1820,6 +1841,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -1995,6 +2018,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'selectedVectorElement.geometry.bounds': Bounds;
         readonly 'selectedVectorElement.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'selectedVectorElement.geometry.geoJSON': string;
         readonly 'selectedVectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'selectedVectorElement.id': number;
@@ -2023,6 +2048,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** (read-only) Returns the feature's geometry as a GeoJSON string, in its own coordinates. Serialising a geometry otherwise means constructing a GeoJSONGeometryWriter in the binding, which every binding then does differently and, in a scripting one, slowly. */
         readonly 'geometryGeoJSON': string;
@@ -2035,6 +2062,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
     };
     'massif::FeatureCollection': {
@@ -2180,6 +2209,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
     };
     'massif::GeometryCollection': {
@@ -2189,6 +2220,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometry.geometryCount': number;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -2530,6 +2563,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -2540,6 +2575,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -2552,6 +2589,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -2562,6 +2601,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -2759,6 +2800,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the list of of map positions defining the line. */
         readonly 'geometry.poses': Json;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -2797,6 +2840,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the list of of map positions defining the line. */
         readonly 'poses': Json;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -3064,6 +3109,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -3074,6 +3121,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -3086,6 +3135,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -3096,6 +3147,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -3324,6 +3377,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -3332,6 +3387,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -3348,6 +3405,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -3356,6 +3415,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -3392,6 +3453,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -3402,6 +3465,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -3414,6 +3479,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -3424,6 +3491,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -3968,6 +4037,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the position of the point. */
         readonly 'geometry.pos': Position;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -4000,6 +4071,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the position of the point. */
         readonly 'pos': Position;
         readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
@@ -4047,6 +4120,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the list of map position lists defining the inner rings of the polygon (holes). */
         readonly 'geometry.holes': Json;
         /** (read-only) Returns the list of map positions defining the outer ring of the polygon. */
@@ -4088,6 +4163,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the list of map position lists defining the inner rings of the polygon (holes). */
         readonly 'geometry.holes': Json;
         /** (read-only) Returns the list of map positions defining the outer ring of the polygon. */
@@ -4126,6 +4203,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'bounds': Bounds;
         readonly 'centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geoJSON': string;
         /** (read-only) Returns the list of map position lists defining the inner rings of the polygon (holes). */
         readonly 'holes': Json;
         /** (read-only) Returns the list of map positions defining the outer ring of the polygon. */
@@ -4206,6 +4285,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -4216,6 +4297,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -4228,6 +4311,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -4238,6 +4323,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -4316,6 +4403,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'popup.geometry.bounds': Bounds;
         readonly 'popup.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'popup.geometry.geoJSON': string;
         readonly 'popup.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'popup.id': number;
@@ -4326,6 +4415,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'popup.rootGeometry.bounds': Bounds;
         readonly 'popup.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'popup.rootGeometry.geoJSON': string;
         readonly 'popup.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'popup.rotation': number;
@@ -4390,6 +4481,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'popup.geometry.bounds': Bounds;
         readonly 'popup.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'popup.geometry.geoJSON': string;
         readonly 'popup.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'popup.id': number;
@@ -4400,6 +4493,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'popup.rootGeometry.bounds': Bounds;
         readonly 'popup.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'popup.rootGeometry.geoJSON': string;
         readonly 'popup.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'popup.rotation': number;
@@ -4708,6 +4803,8 @@ export interface PropertyTypes {
         readonly 'instructionCount': number;
         /** (read-only) Returns the turn-by-turn instruction list. */
         readonly 'instructions': Json;
+        /** (read-only) Returns every turn-by-turn instruction as one JSON array. A maneuver is nine scalars, and reading them one instruction at a time costs a call per field: a mountain route has hundreds. The keys are the property names (`action`, `pointIndex`, `streetName`, `instruction`, `turnAngle`, `azimuth`, `distance`, `time`), and `action` is the enum's constant name. */
+        readonly 'instructionsJSON': string;
         /** (read-only) Returns the number of points in the path. */
         readonly 'pointCount': number;
         /** (read-only) Returns the point list of the result. The list contains all the points the route must pass in correct order. */
@@ -4752,6 +4849,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the projection to use for search geometry. */
         'projection': Handle;
@@ -4878,6 +4977,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.geometry.bounds': Bounds;
         readonly 'baseBillboard.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.geometry.geoJSON': string;
         readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
@@ -4888,6 +4989,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'baseBillboard.rootGeometry.bounds': Bounds;
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'baseBillboard.rootGeometry.geoJSON': string;
         readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
@@ -4900,6 +5003,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -4910,6 +5015,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'rootGeometry.bounds': Bounds;
         readonly 'rootGeometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'rootGeometry.geoJSON': string;
         readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
@@ -5148,6 +5255,14 @@ export interface PropertyTypes {
         readonly 'projection.name': string;
     };
     'massif::TileDecoderListener': {
+    };
+    'massif::TileDownloadInfo': {
+        /** (read-only) Returns the progress of the download. */
+        readonly 'progress': number;
+        /** (read-only) Returns the tile the event concerns, which is only meaningful for a failure. */
+        readonly 'tile': Tile;
+        /** (read-only) Returns the number of tiles the download will fetch. */
+        readonly 'tileCount': number;
     };
     'massif::TileDownloadListener': {
     };
@@ -5441,6 +5556,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'id': number;
@@ -5483,6 +5600,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'vectorElement.geometry.bounds': Bounds;
         readonly 'vectorElement.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'vectorElement.geometry.geoJSON': string;
         readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'vectorElement.id': number;
@@ -5505,6 +5624,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'vectorElement.geometry.bounds': Bounds;
         readonly 'vectorElement.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'vectorElement.geometry.geoJSON': string;
         readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the internal id of this vector element. */
         'vectorElement.id': number;
@@ -5574,6 +5695,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'feature.geometry.bounds': Bounds;
         readonly 'feature.geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'feature.geometry.geoJSON': string;
         readonly 'feature.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** (read-only) Returns the feature's geometry as a GeoJSON string, in its own coordinates. Serialising a geometry otherwise means constructing a GeoJSONGeometryWriter in the binding, which every binding then does differently and, in a scripting one, slowly. */
         readonly 'feature.geometryGeoJSON': string;
@@ -5627,6 +5750,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** (read-only) Returns the feature's geometry as a GeoJSON string, in its own coordinates. Serialising a geometry otherwise means constructing a GeoJSONGeometryWriter in the binding, which every binding then does differently and, in a scripting one, slowly. */
         readonly 'geometryGeoJSON': string;
@@ -5645,6 +5770,8 @@ export interface PropertyTypes {
         /** (read-only) Returns the minimal bounds for the geometry. */
         readonly 'geometry.bounds': Bounds;
         readonly 'geometry.centerPos': Position;
+        /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
+        readonly 'geometry.geoJSON': string;
         readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
         /** Returns the id of the builder. */
         'id': number;
@@ -6472,6 +6599,8 @@ export interface PositionPaths {
     };
     'massif::TileDecoderListener': {
     };
+    'massif::TileDownloadInfo': {
+    };
     'massif::TileDownloadListener': {
     };
     'massif::TileInfo': {
@@ -7260,6 +7389,8 @@ export interface ObjectPaths {
         'projection': 'massif::Projection';
     };
     'massif::TileDecoderListener': {
+    };
+    'massif::TileDownloadInfo': {
     };
     'massif::TileDownloadListener': {
     };
@@ -8153,6 +8284,9 @@ export interface VariantPaths {
     };
     'massif::TileDecoderListener': {
     };
+    'massif::TileDownloadInfo': {
+        'tile': true;
+    };
     'massif::TileDownloadListener': {
     };
     'massif::TileInfo': {
@@ -8453,6 +8587,20 @@ export interface ElementSpec_balloon {
     visible?: boolean;
 }
 
+export interface ElementSpec_line {
+    type: 'line';
+    geometry?: Handle | string | GeometrySpec;
+    /** Returns the internal id of this vector element. */
+    id?: number;
+    /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+    metaData?: Record<string, Json>;
+    poses?: Json;
+    /** Returns the style of this line. */
+    style: Handle | string | ElementstyleSpec;
+    /** Returns the state of the visibility flag of this vector element. */
+    visible?: boolean;
+}
+
 export interface ElementSpec_marker {
     type: 'marker';
     /** Returns the base billboard this billboard is attached to. */
@@ -8472,7 +8620,58 @@ export interface ElementSpec_marker {
     visible?: boolean;
 }
 
-export type ElementSpec = ElementSpec_balloon | ElementSpec_marker;
+export interface ElementSpec_point {
+    type: 'point';
+    geometry?: Handle | string | GeometrySpec;
+    /** Returns the internal id of this vector element. */
+    id?: number;
+    /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+    metaData?: Record<string, Json>;
+    position?: Position;
+    /** Returns the style of this point. */
+    style: Handle | string | ElementstyleSpec;
+    /** Returns the state of the visibility flag of this vector element. */
+    visible?: boolean;
+}
+
+export interface ElementSpec_polygon {
+    type: 'polygon';
+    geometry?: Handle | string | GeometrySpec;
+    holes?: Json;
+    /** Returns the internal id of this vector element. */
+    id?: number;
+    /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+    metaData?: Record<string, Json>;
+    poses?: Json;
+    /** Returns the style of this polygon. */
+    style: Handle | string | ElementstyleSpec;
+    /** Returns the state of the visibility flag of this vector element. */
+    visible?: boolean;
+}
+
+export interface ElementSpec_text {
+    type: 'text';
+    /** Returns the base billboard this billboard is attached to. */
+    baseBillboard?: Handle | string | ElementSpec;
+    /** Returns the geometry object that defines the location of this billboard. */
+    geometry?: Handle | string | GeometrySpec;
+    /** Returns the internal id of this vector element. */
+    id?: number;
+    /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+    metaData?: Record<string, Json>;
+    position?: Position;
+    /** Returns the rotation angle of this billboard. */
+    rotation?: number;
+    /** Returns the style of this text label. */
+    style: Handle | string | ElementstyleSpec;
+    text: string;
+    /** Returns the display text. */
+    title?: string;
+    /** Returns the state of the visibility flag of this vector element. */
+    visible?: boolean;
+}
+
+export type ElementSpec = ElementSpec_balloon | ElementSpec_line | ElementSpec_marker | ElementSpec_point | ElementSpec_polygon | ElementSpec_text;
 
 export interface ElementstyleSpec_balloon {
     type: 'balloon';
@@ -8546,6 +8745,24 @@ export interface ElementstyleSpec_balloon {
     verticalOffset?: number;
 }
 
+export interface ElementstyleSpec_line {
+    type: 'line';
+    /** Returns the bitmap of the line. */
+    bitmap?: Handle;
+    /** Returns the width of the line used for click detection. */
+    clickWidth?: number;
+    /** Returns the color of the vector element. */
+    color?: number;
+    /** Returns the end point type of the line. */
+    lineEndType?: 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+    /** Returns the join type of the line. */
+    lineJoinType?: 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+    /** Returns the stretch factor of the line. */
+    stretchFactor?: number;
+    /** Returns the width of the line. */
+    width?: number;
+}
+
 export interface ElementstyleSpec_marker {
     type: 'marker';
     /** Returns the horizontal anchor point of the marker. */
@@ -8584,7 +8801,83 @@ export interface ElementstyleSpec_marker {
     verticalOffset?: number;
 }
 
-export type ElementstyleSpec = ElementstyleSpec_balloon | ElementstyleSpec_marker;
+export interface ElementstyleSpec_point {
+    type: 'point';
+    /** Returns the bitmap of the point. */
+    bitmap?: Handle;
+    /** Returns the size of the point used for click detection. */
+    clickSize?: number;
+    /** Returns the color of the vector element. */
+    color?: number;
+    /** Returns the size of the point. */
+    size?: number;
+}
+
+export interface ElementstyleSpec_polygon {
+    type: 'polygon';
+    /** Returns the color of the vector element. */
+    color?: number;
+    /** Returns the line style of the edges of the polygon. */
+    lineStyle?: Handle;
+}
+
+export interface ElementstyleSpec_text {
+    type: 'text';
+    /** Returns the horizontal anchor point of the label. */
+    anchorPointX?: number;
+    /** Returns the vertical anchor point of the label. */
+    anchorPointY?: number;
+    /** Returns the animation style of the billboard. */
+    animationStyle?: Handle;
+    /** Returns the horizontal attaching anchor point of the billboard. */
+    attachAnchorPointX?: number;
+    /** Returns the vertical attaching anchor point of the billboard. */
+    attachAnchorPointY?: number;
+    /** Returns the background color for the text label. */
+    backgroundColor?: number;
+    /** Returns the border color for the text label. */
+    borderColor?: number;
+    /** Returns the border width for the text label. */
+    borderWidth?: number;
+    /** Returns the state of the 'break lines' flag. */
+    breakLines?: boolean;
+    /** Returns the state of the causes overlap flag. */
+    causesOverlap?: boolean;
+    /** Returns the color of the vector element. */
+    color?: number;
+    /** Returns the state of the flippable flag. */
+    flippable?: boolean;
+    /** Returns the font name for the text label. */
+    fontName?: string;
+    /** Returns the font size for the text label. */
+    fontSize?: number;
+    /** Returns the state of the allow overlap flag. */
+    hideIfOverlapped?: boolean;
+    /** Returns the horizontal offset of the billboard. */
+    horizontalOffset?: number;
+    /** Returns the orientation mode of the label. */
+    orientationMode?: 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+    /** Returns the placement priority of the billboard. */
+    placementPriority?: number;
+    /** Returns the relative rendering scale for the label. */
+    renderScale?: number;
+    /** Returns the state of the scale with DPI flag. */
+    scaleWithDPI?: boolean;
+    /** Returns the scaling mode of the label. */
+    scalingMode?: 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+    /** Returns the stroke color for the text label. */
+    strokeColor?: number;
+    /** Returns the stroke width for the text label. */
+    strokeWidth?: number;
+    /** Returns the text field variable. If not empty, this variable is used to read actual text string from object meta info. */
+    textField?: string;
+    /** Returns the margins for the text. */
+    textMargins?: Json;
+    /** Returns the vertical offset of the billboard. */
+    verticalOffset?: number;
+}
+
+export type ElementstyleSpec = ElementstyleSpec_balloon | ElementstyleSpec_line | ElementstyleSpec_marker | ElementstyleSpec_point | ElementstyleSpec_polygon | ElementstyleSpec_text;
 
 export interface FeatureSpec_feature {
     type: 'feature';
@@ -8594,12 +8887,38 @@ export interface FeatureSpec_feature {
 
 export type FeatureSpec = FeatureSpec_feature;
 
+export interface GeocodingSpec_multi_osm_offline {
+    type: 'multi-osm-offline';
+    autocomplete?: boolean;
+    language?: string;
+    maxResults?: number;
+}
+
+export interface GeocodingSpec_multi_osm_offline_reverse {
+    type: 'multi-osm-offline-reverse';
+    language?: string;
+}
+
+export type GeocodingSpec = GeocodingSpec_multi_osm_offline | GeocodingSpec_multi_osm_offline_reverse;
+
+export interface GeometrySpec_line {
+    type: 'line';
+    poses: Json;
+}
+
 export interface GeometrySpec_point {
     type: 'point';
     pos: Position;
 }
 
-export type GeometrySpec = GeometrySpec_point;
+export interface GeometrySpec_polygon {
+    type: 'polygon';
+    holes?: Json;
+    poses?: Json;
+    rings?: Json;
+}
+
+export type GeometrySpec = GeometrySpec_line | GeometrySpec_point | GeometrySpec_polygon;
 
 export interface LayerSpec_composite_vector {
     type: 'composite-vector';
@@ -8820,11 +9139,11 @@ export interface LayerSpec_raster {
 export interface LayerSpec_solid {
     type: 'solid';
     /** Returns the bitmap of this layer. */
-    bitmap?: Handle;
+    bitmap?: Handle | string | Record<string, Json>;
     /** Returns the bitmap scaling factor. */
     bitmapScale?: number;
     /** Returns the color of this layer. */
-    color: number;
+    color?: number;
     /** Returns the culling delay of the layer in milliseconds. */
     cullDelay?: number;
     /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
@@ -9029,6 +9348,11 @@ export interface OptionsSpec_terrain {
 
 export type OptionsSpec = OptionsSpec_fog | OptionsSpec_light | OptionsSpec_sky | OptionsSpec_terrain;
 
+export interface RoutingSpec_multi_valhalla_offline {
+    type: 'multi-valhalla-offline';
+    profile?: string;
+}
+
 export interface RoutingSpec_valhalla_offline {
     type: 'valhalla-offline';
     path: string;
@@ -9047,7 +9371,7 @@ export interface RoutingSpec_valhalla_online {
     timeout?: number;
 }
 
-export type RoutingSpec = RoutingSpec_valhalla_offline | RoutingSpec_valhalla_online;
+export type RoutingSpec = RoutingSpec_multi_valhalla_offline | RoutingSpec_valhalla_offline | RoutingSpec_valhalla_online;
 
 export interface SearchSpec_request {
     type: 'request';
@@ -9149,6 +9473,19 @@ export interface SourceSpec_local {
     spatialIndexType?: 'LOCAL_SPATIAL_INDEX_TYPE_NULL' | 'LOCAL_SPATIAL_INDEX_TYPE_KDTREE';
 }
 
+export interface SourceSpec_maptiler {
+    type: 'maptiler';
+    /** Returns the custom backend service URL. */
+    customServiceURL?: string;
+    /** Gets the current encoding type. */
+    encoding?: string;
+    key: string;
+    /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+    maxOverzoomLevel?: number;
+    /** Returns the current timeout value. */
+    timeout?: number;
+}
+
 export interface SourceSpec_mbtiles {
     type: 'mbtiles';
     /** Gets the current encoding type. */
@@ -9169,6 +9506,16 @@ export interface SourceSpec_memory_cache {
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
     source: string | SourceSpec;
+}
+
+export interface SourceSpec_merged_mbvt {
+    type: 'merged-mbvt';
+    /** Gets the current encoding type. */
+    encoding?: string;
+    /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+    maxOverzoomLevel?: number;
+    source: string | SourceSpec;
+    source2: string | SourceSpec;
 }
 
 export interface SourceSpec_multi {
@@ -9203,7 +9550,7 @@ export interface SourceSpec_persistent_cache {
     source: string | SourceSpec;
 }
 
-export type SourceSpec = SourceSpec_assets | SourceSpec_combined | SourceSpec_geojson | SourceSpec_http | SourceSpec_local | SourceSpec_mbtiles | SourceSpec_memory_cache | SourceSpec_multi | SourceSpec_ordered | SourceSpec_persistent_cache;
+export type SourceSpec = SourceSpec_assets | SourceSpec_combined | SourceSpec_geojson | SourceSpec_http | SourceSpec_local | SourceSpec_maptiler | SourceSpec_mbtiles | SourceSpec_memory_cache | SourceSpec_merged_mbvt | SourceSpec_multi | SourceSpec_ordered | SourceSpec_persistent_cache;
 
 export interface StyleSpec_mbvt {
     type: 'mbvt';
@@ -9240,6 +9587,7 @@ export interface SpecOf {
     'element': ElementSpec;
     'elementstyle': ElementstyleSpec;
     'feature': FeatureSpec;
+    'geocoding': GeocodingSpec;
     'geometry': GeometrySpec;
     'layer': LayerSpec;
     'options': OptionsSpec;
@@ -9260,17 +9608,31 @@ export interface SpecClass {
     };
     'element': {
         'balloon': 'massif::BalloonPopup';
+        'line': 'massif::Line';
         'marker': 'massif::Marker';
+        'point': 'massif::Point';
+        'polygon': 'massif::Polygon';
+        'text': 'massif::Text';
     };
     'elementstyle': {
         'balloon': 'massif::BalloonPopupStyle';
+        'line': 'massif::LineStyle';
         'marker': 'massif::MarkerStyle';
+        'point': 'massif::PointStyle';
+        'polygon': 'massif::PolygonStyle';
+        'text': 'massif::TextStyle';
     };
     'feature': {
         'feature': 'massif::Feature';
     };
+    'geocoding': {
+        'multi-osm-offline': 'massif::MultiOSMOfflineGeocodingService';
+        'multi-osm-offline-reverse': 'massif::MultiOSMOfflineReverseGeocodingService';
+    };
     'geometry': {
+        'line': 'massif::LineGeometry';
         'point': 'massif::PointGeometry';
+        'polygon': 'massif::PolygonGeometry';
     };
     'layer': {
         'composite-vector': 'massif::CompositeVectorTileLayer';
@@ -9287,6 +9649,7 @@ export interface SpecClass {
         'terrain': 'massif::TerrainOptions';
     };
     'routing': {
+        'multi-valhalla-offline': 'massif::MultiValhallaOfflineRoutingService';
         'valhalla-offline': 'massif::ValhallaOfflineRoutingService';
         'valhalla-online': 'massif::ValhallaOnlineRoutingService';
     };
@@ -9300,8 +9663,10 @@ export interface SpecClass {
         'geojson': 'massif::GeoJSONVectorTileDataSource';
         'http': 'massif::HTTPTileDataSource';
         'local': 'massif::LocalVectorDataSource';
+        'maptiler': 'massif::MapTilerOnlineTileDataSource';
         'mbtiles': 'massif::MBTilesTileDataSource';
         'memory-cache': 'massif::MemoryCacheTileDataSource';
+        'merged-mbvt': 'massif::MergedMBVTTileDataSource';
         'multi': 'massif::MultiTileDataSource';
         'ordered': 'massif::OrderedTileDataSource';
         'persistent-cache': 'massif::PersistentCacheTileDataSource';
@@ -9466,10 +9831,13 @@ export interface MethodTypes {
     'massif::GeoJSONGeometryWriter': {
     };
     'massif::GeoJSONVectorTileDataSource': {
+        addFeature: { args: [layer: number, feature: Json]; result: void };
         createLayer: { args: [name: string]; result: number };
         deleteLayer: { args: [layer: number]; result: void };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        removeFeature: { args: [layer: number, id: Json]; result: void };
         setLayerGeoJSON: { args: [layer: number, geoJson: Json]; result: void };
+        updateFeature: { args: [layer: number, feature: Json]; result: void };
     };
     'massif::GeocodingAddress': {
     };
@@ -9478,6 +9846,7 @@ export interface MethodTypes {
     'massif::GeocodingResult': {
     };
     'massif::GeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::Geometry': {
     };
@@ -9509,7 +9878,11 @@ export interface MethodTypes {
     };
     'massif::Layers': {
         add: { args: [layer: Handle]; result: void };
+        clear: { args: []; result: void };
+        get: { args: [index: number]; result: Handle<'massif::Layer'>; resultClass: 'massif::Layer' };
+        insert: { args: [index: number, layer: Handle]; result: void };
         remove: { args: [layer: Handle]; result: boolean };
+        set: { args: [index: number, layer: Handle]; result: void };
     };
     'massif::LightOptions': {
     };
@@ -9536,6 +9909,7 @@ export interface MethodTypes {
     'massif::MBVectorTileDecoder': {
         getStyleParameter: { args: [name: string]; result: string };
         setStyleParameter: { args: [name: string, value: string]; result: boolean };
+        setStyleParameters: { args: [params: Json]; result: void };
     };
     'massif::ManeuverArrowBuilder': {
     };
@@ -9544,8 +9918,10 @@ export interface MethodTypes {
     'massif::MapBoxElevationDataDecoder': {
     };
     'massif::MapBoxOnlineGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::MapBoxOnlineReverseGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::MapClickInfo': {
     };
@@ -9593,18 +9969,31 @@ export interface MethodTypes {
     'massif::MultiLineGeometry': {
     };
     'massif::MultiOSMOfflineGeocodingService': {
+        add: { args: [database: string]; result: void };
+        calculateAddresses: { args: [request: Handle]; result: Json };
+        remove: { args: [database: string]; result: boolean };
     };
     'massif::MultiOSMOfflineReverseGeocodingService': {
+        add: { args: [database: string]; result: void };
+        calculateAddresses: { args: [request: Handle]; result: Json };
+        remove: { args: [database: string]; result: boolean };
     };
     'massif::MultiPointGeometry': {
     };
     'massif::MultiPolygonGeometry': {
     };
     'massif::MultiTileDataSource': {
+        add: { args: [datasource: Handle, tileMask: string]; result: void };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        remove: { args: [datasource: Handle]; result: boolean };
     };
     'massif::MultiValhallaOfflineRoutingService': {
+        add: { args: [database: string]; result: void };
+        addLocale: { args: [key: string, json: string]; result: void };
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
+        remove: { args: [database: string]; result: boolean };
+        setConfigurationParameter: { args: [param: string, value: Json]; result: void };
     };
     'massif::NMLModel': {
     };
@@ -9613,11 +10002,14 @@ export interface MethodTypes {
     'massif::NMLModelStyleBuilder': {
     };
     'massif::OSMOfflineGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::OSMOfflineReverseGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::OSRMOfflineRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::OnChangeListener': {
     };
@@ -9636,19 +10028,23 @@ export interface MethodTypes {
     'massif::PackageManager': {
     };
     'massif::PackageManagerGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::PackageManagerListener': {
     };
     'massif::PackageManagerReverseGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::PackageManagerRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::PackageManagerTileDataSource': {
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
     };
     'massif::PackageManagerValhallaRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::PackageMetaInfo': {
     };
@@ -9657,11 +10053,16 @@ export interface MethodTypes {
     'massif::PackageTileMask': {
     };
     'massif::PeliasOnlineGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::PeliasOnlineReverseGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::PersistentCacheTileDataSource': {
+        clear: { args: []; result: void };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        startDownloadArea: { args: [bounds: Json, minZoom: number, maxZoom: number, fetchDelay: number]; result: void };
+        stopAllDownloads: { args: []; result: void };
     };
     'massif::PersistentTaskQueue': {
     };
@@ -9716,12 +10117,14 @@ export interface MethodTypes {
     'massif::ReverseGeocodingRequest': {
     };
     'massif::ReverseGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::RouteMatchingEdge': {
     };
     'massif::RouteMatchingPoint': {
     };
     'massif::RouteMatchingRequest': {
+        setCustomParameter: { args: [name: string, value: Json]; result: void };
     };
     'massif::RouteMatchingResult': {
     };
@@ -9736,9 +10139,11 @@ export interface MethodTypes {
     };
     'massif::RoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::SGREOfflineRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::ScreenBounds': {
     };
@@ -9774,6 +10179,8 @@ export interface MethodTypes {
     };
     'massif::TileDecoderListener': {
     };
+    'massif::TileDownloadInfo': {
+    };
     'massif::TileDownloadListener': {
     };
     'massif::TileInfo': {
@@ -9787,8 +10194,10 @@ export interface MethodTypes {
     'massif::TileUtils': {
     };
     'massif::TomTomOnlineGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::TomTomOnlineReverseGeocodingService': {
+        calculateAddresses: { args: [request: Handle]; result: Json };
     };
     'massif::TorqueTileDecoder': {
     };
@@ -9806,9 +10215,11 @@ export interface MethodTypes {
     };
     'massif::ValhallaOfflineRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::ValhallaOnlineRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
+        matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::Variant': {
     };
@@ -10172,6 +10583,10 @@ export interface EventTypes {
     'massif::PeliasOnlineReverseGeocodingService': {
     };
     'massif::PersistentCacheTileDataSource': {
+        'download.completed': null;
+        'download.failed': 'massif::TileDownloadInfo';
+        'download.progress': 'massif::TileDownloadInfo';
+        'download.started': 'massif::TileDownloadInfo';
     };
     'massif::PersistentTaskQueue': {
     };
@@ -10274,6 +10689,8 @@ export interface EventTypes {
     'massif::TileDataSource': {
     };
     'massif::TileDecoderListener': {
+    };
+    'massif::TileDownloadInfo': {
     };
     'massif::TileDownloadListener': {
     };
