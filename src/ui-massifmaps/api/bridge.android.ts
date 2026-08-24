@@ -106,6 +106,7 @@ export const bridge: NativeBridge = {
     setBool: (handle, path, value) => MassifApi.setBool(handle, path, value),
     setString: (handle, path, value) => MassifApi.setString(handle, path, value),
     setObject: (handle, path, value) => MassifApi.setObject(handle, path, value),
+    getObject: (handle, path) => MassifApi.getObject(handle, path),
 
     getFloat: (handle, path, defaultValue) => MassifApi.getFloat(handle, path, defaultValue),
     getInt: (handle, path, defaultValue) => MassifApi.getInt(handle, path, defaultValue),
@@ -175,6 +176,8 @@ export const bridge: NativeBridge = {
     adoptAssets: (kind, id, assets) => MassifInterop.adopt(kind, id, assets),
     getNativeLayer: (id) => MassifInterop.getLayer(id),
     getNativeSource: (id) => MassifInterop.getSource(id),
+    getNativeLayerByHandle: (handle) => MassifInterop.getLayerByHandle(handle),
+    getNativeSourceByHandle: (handle) => MassifInterop.getSourceByHandle(handle),
 
     attachMapEvents(mapView, handle) {
         mapView.setMapEventListener(MassifInterop.createEventBridge(handle, mapView.getMapEventListener()));

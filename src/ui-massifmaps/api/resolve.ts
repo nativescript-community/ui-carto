@@ -255,3 +255,20 @@ export function classOfShortName(short: string | null): string | null {
 export function isKnownClass(cls: string): boolean {
     return !!knownClasses()[cls.replace('massif::', '')];
 }
+
+/**
+ * Whether `cls` IS a `base`, walking the chain the same way property lookups do.
+ *
+ * What `instanceof` was: the facade addresses classes by name, so "is this layer a raster layer"
+ * is a question about the table, not about a JavaScript prototype.
+ */
+export function isSubclassOf(cls: string, base: string): boolean {
+    let walk: string | undefined = cls;
+    while (walk) {
+        if (walk === base) {
+            return true;
+        }
+        walk = BASES[walk];
+    }
+    return false;
+}

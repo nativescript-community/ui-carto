@@ -1,7 +1,7 @@
 import { EventData, Observable } from '@nativescript/core';
 import { bridge } from './bridge';
 import type { Delivery as NativeDelivery } from './bridge';
-import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, propertyNames, resolveMethod, resolvePath } from './resolve';
+import { classOfShortName, classOfSpec, enumName, enumValue, eventNames, findEvent, isKnownClass, isSubclassOf, propertyNames, resolveMethod, resolvePath } from './resolve';
 import type {
     Bounds,
     ClassName,
@@ -313,7 +313,9 @@ function handleOf(value: unknown): number {
  * configured keys.
  */
 export interface LatLon {
-    [key: string]: number;
+    // `| undefined` because an altitude is optional in every app's own position type, and an
+    // index signature of plain `number` refuses one.
+    [key: string]: number | undefined;
 }
 
 /** A position either way round, so the surface API and the view's own calls mix freely. */
@@ -332,7 +334,9 @@ function toPosition(position: AnyPosition): Position {
     if (Array.isArray(position)) {
         return position;
     }
-    const lng = position.longitude ?? position.lng;
+    // `lon` as well as `lng`: it is what the SDK's own MapPos spells, so an app moving off the
+    // object API has its positions in that shape already.
+    const lng = position.longitude ?? position.lng ?? position.lon;
     const lat = position.latitude ?? position.lat;
     const altitude = position.altitude ?? position.alt;
     if (lng === undefined || lat === undefined) {
@@ -392,6 +396,11 @@ export class PropertyGroup<C extends ClassName = any> {
     group<P extends ObjectPath<C>>(path: P): PropertyGroup<ClassAtPath<C, P>> {
         return this.owner.group(this.path(path) as never) as never;
     }
+
+    /** @see MassifObject.child */
+    child<P extends ObjectPath<C>>(path: P): MassifObject<ClassAtPath<C, P>> | null {
+        return this.owner.child(this.path(path) as never) as never;
+    }
 }
 
 /**
@@ -431,6 +440,16 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         super();
     }
 
+    /**
+     * Whether this object is of a class, or of one below it.
+     *
+     * `instanceof`, for an API that addresses classes by name: `layer.is('massif::RasterTileLayer')`
+     * is how an app asks "is this one of the raster ones" without the SDK's proxy classes.
+     */
+    is(className: ClassName): boolean {
+        return isSubclassOf(this.className as string, className as string);
+    }
+
     /** Whether the handle still resolves. False after `destroy`, and after the id was dropped. */
     get valid() {
         return !this.mDestroyed && bridge.isValid(this.handle);
@@ -468,7 +487,7 @@ export class MassifObject<C extends ClassName = any> extends Observable {
             case 't':
                 return parseJson(bridge.getString(this.handle, path));
             case 'o':
-                throw new MassifApiError(`${path} is an object property - reach it with group('${path}') or read a path through it`);
+                throw new MassifApiError(`${path} is an object property - reach it with group('${path}'), child('${path}') or read a path through it`);
             default:
                 // Unknown to the tables: a path into a Variant, or through an object whose
                 // concrete class is more derived than the declared one. The C++ resolves those;
@@ -566,6 +585,24 @@ export class MassifObject<C extends ClassName = any> extends Observable {
             throw new MassifApiError(`${this.className}.${path} is not an object property`);
         }
         return new PropertyGroup(this, path as string, info.arg as ClassName) as never;
+    }
+
+    /**
+     * The object an object property points at, as an object the CALLER OWNS - `destroy()` it.
+     *
+     * `group` reads THROUGH a child; this hands it over, which is what SHARING one needs: an
+     * overlay drawing the base map's tiles with a different style points at that source rather
+     * than building a second one over the same file.
+     *
+     * Null when the property is empty.
+     */
+    child<P extends ObjectPath<C>>(path: P): MassifObject<ClassAtPath<C, P>> | null {
+        const info = resolvePath(this.className, path as string);
+        if (!info || info.code !== 'o') {
+            throw new MassifApiError(`${this.className}.${path} is not an object property`);
+        }
+        const handle = bridge.getObject(this.handle, path as string);
+        return handle ? (new MassifObject(handle as Handle, info.arg as ClassName) as never) : null;
     }
 
     // --- methods ------------------------------------------------------------------------------
@@ -1053,9 +1090,9 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
         this.mBridged[event] = true;
     }
 
-    /** The native layer, to hand back to the object API. Null for a layer with no id. */
+    /** The native layer, to hand back to the object API - by id, or by handle when it has none. */
     get native(): any {
-        return this.id ? bridge.getNativeLayer(this.id) : null;
+        return this.id ? bridge.getNativeLayer(this.id) : bridge.getNativeLayerByHandle(this.handle);
     }
 
     // --- the handful of properties every app touches ------------------------------------------
@@ -1087,13 +1124,13 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
 
     /** Moves the layer within the map's stack. 0 is the bottom. */
     moveTo(index: number): this {
-        this.requireMap().view.mapView.getLayers().insert(index, this.requireNative());
+        this.requireMap().layers().insert(index, this);
         return this;
     }
 
     /** Takes it off the map. The object stays registered until it is destroyed. */
     detach(): this {
-        this.requireMap().view.mapView.getLayers().remove(this.requireNative());
+        this.requireMap().layers().remove(this);
         return this;
     }
 
@@ -1102,6 +1139,18 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
     refresh(): this {
         this.invoke('refresh', []);
         return this;
+    }
+
+    /**
+     * The layer's data source, as an object the CALLER OWNS.
+     *
+     * `child('dataSource')` typed as a source, so `.native` is there: handing the base map's tiles
+     * to the app's own native code is the one thing the facade cannot express, and this is the
+     * escape hatch for it.
+     */
+    source(): MassifSource | null {
+        const child = this.child('dataSource' as never);
+        return child ? new MassifSource(child.handle, child.className) : null;
     }
 
     /** Drops this layer's tiles. `all` includes the preloading caches, not just the visible set. */
@@ -1135,14 +1184,6 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
         return this.subscribe('vectorelement.clicked' as EventName<C>, handler, options);
     }
 
-    private requireNative(): any {
-        const native = this.native;
-        if (!native) {
-            throw new MassifApiError(`layer is no longer registered: ${this}`);
-        }
-        return native;
-    }
-
     private requireMap(): MassifMap {
         if (!this.map) {
             throw new MassifApiError(`layer is not attached to a map: ${this}`);
@@ -1152,9 +1193,9 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
 }
 
 export class MassifSource<C extends ClassName = any> extends MassifObject<C> {
-    /** The native source, to hand back to the object API. Null for a source with no id. */
+    /** The native source, to hand back to the object API - by id, or by handle when it has none. */
     get native(): any {
-        return this.id ? bridge.getNativeSource(this.id) : null;
+        return this.id ? bridge.getNativeSource(this.id) : bridge.getNativeSourceByHandle(this.handle);
     }
 
     /**
@@ -1187,7 +1228,7 @@ export class MassifSource<C extends ClassName = any> extends MassifObject<C> {
      * A string is parsed here rather than passed through: the argument crosses as JSON already,
      * and sending text would arrive as a string-valued argument instead of a document.
      */
-    setGeoJSON(layer: number, geojson: Json | string): this {
+    setGeoJSON(layer: number, geojson: Json | string | object): this {
         this.invoke('setLayerGeoJSON', [layer, typeof geojson === 'string' ? JSON.parse(geojson) : geojson]);
         return this;
     }
@@ -1195,6 +1236,27 @@ export class MassifSource<C extends ClassName = any> extends MassifObject<C> {
     /** Drops a declared layer and everything in it. */
     deleteLayer(layer: number): this {
         this.invoke('deleteLayer', [layer]);
+        return this;
+    }
+
+    /**
+     * One feature at a time, for an app that edits what it is showing.
+     *
+     * `setGeoJSON` re-encodes and re-tiles the whole document; on a few hundred saved routes that is
+     * the difference between instant and not. `update` matches on the feature's own `id`.
+     */
+    addFeature(layer: number, feature: Json | string | object): this {
+        this.invoke('addFeature', [layer, feature]);
+        return this;
+    }
+
+    updateFeature(layer: number, feature: Json | string | object): this {
+        this.invoke('updateFeature', [layer, feature]);
+        return this;
+    }
+
+    removeFeature(layer: number, id: string | number): this {
+        this.invoke('removeFeature', [layer, id]);
         return this;
     }
 
@@ -1484,6 +1546,36 @@ export interface MapViewLike {
     getOptions(): { getNative(): any } | null;
     getMeasuredWidth?(): number;
     getMeasuredHeight?(): number;
+    /** A screenshot of the map. Platform code - there is no facade verb for a framebuffer read. */
+    captureRendering?(wait?: boolean): Promise<any>;
+    /** Asks for a frame. Also platform code: the renderer is not in the property table. */
+    requestRedraw?(): void;
+}
+
+/**
+ * The plugin's own map view class, for registering the element:
+ *
+ * ```ts
+ * registerNativeViewElement('massifmap', () => mapViewClass());
+ * ```
+ *
+ * Here so an app that works entirely through this API imports nothing else from the plugin - the
+ * view is the one thing a surface API cannot hand out, because a UI framework needs the class.
+ * Required lazily, so `api` still does not pull `ui` in at import time.
+ */
+/**
+ * The SDK's logging switches.
+ *
+ * `Log` has no instance - its properties are static - so the context registers it under
+ * `static:Log` and this is the handle onto it. `log().apply({ showDebug: true, … })`.
+ */
+export function log(): MassifObject<'massif::Log'> {
+    return find('static', 'Log', 'massif::Log');
+}
+
+export function mapViewClass(): any {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    return require('../ui').MassifMap;
 }
 
 /**
@@ -1631,6 +1723,80 @@ export class MapCamera {
         const point = this.view.call('mapToScreen', toPosition(position)) as [number, number];
         return { x: point[0], y: point[1] };
     }
+
+    /**
+     * What the view currently covers, as `[min, max]`.
+     *
+     * The two screen corners unprojected, which is what the answer is: there is no "bounds"
+     * property, because a tilted or rotated camera does not have one - this is the axis-aligned box
+     * around what it shows.
+     */
+    bounds(): Bounds {
+        const { height, width } = this.size();
+        const first = this.screenToMap(0, 0);
+        const second = this.screenToMap(width, height);
+        return [
+            [Math.min(first[0], second[0]), Math.min(first[1], second[1])],
+            [Math.max(first[0], second[0]), Math.max(first[1], second[1])]
+        ];
+    }
+}
+
+/**
+ * The map's layer stack, as a list.
+ *
+ * The SDK draws layers in list order, so an app whose stack has a meaning of its own - base map,
+ * overlays, then its own markers - works out an index and places a layer there. Everything here is
+ * a facade call on the adopted `Layers`; nothing reaches the native list.
+ */
+export class MapLayers extends MassifObject<'massif::Layers'> {
+    constructor(handle: Handle<'massif::Layers'>, id: string) {
+        super(handle, 'massif::Layers', id);
+    }
+
+    /** How many layers the map is drawing, including any the object API put there. */
+    count(): number {
+        return this.get('count');
+    }
+
+    /** Appends. 0 is the bottom, so this puts the layer on top of everything else. */
+    add(layer: MassifLayer | number): this {
+        this.call('add', handleOf(layer) as Handle);
+        return this;
+    }
+
+    /** Puts the layer at `index`, moving everything at or above it up. */
+    insert(index: number, layer: MassifLayer | number): this {
+        this.call('insert', index, handleOf(layer) as Handle);
+        return this;
+    }
+
+    /**
+     * Replaces the layer at `index` - what a rebuilt decoder needs, keeping the position.
+     *
+     * Not `set`: that is the property writer every object has, and a two-argument overload of it
+     * would make every `layers.set('count', …)` typo compile.
+     */
+    replace(index: number, layer: MassifLayer | number): this {
+        this.call('set', index, handleOf(layer) as Handle);
+        return this;
+    }
+
+    /** The layer at `index`, as a bare `Layer` - the list does not record what each one is. */
+    at(index: number): MassifLayer<'massif::Layer'> | null {
+        const layer = this.call('get', index) as unknown as MassifObject<'massif::Layer'> | undefined;
+        return layer ? new MassifLayer(layer.handle as Handle, 'massif::Layer') : null;
+    }
+
+    remove(layer: MassifLayer | number): boolean {
+        return this.call('remove', handleOf(layer) as Handle);
+    }
+
+    /** Empties the stack. */
+    clear(): this {
+        this.call('clear');
+        return this;
+    }
 }
 
 export interface AttachOptions extends SubscribeOptions {
@@ -1649,7 +1815,7 @@ export interface AttachOptions extends SubscribeOptions {
  * that code. The passthroughs below reach it rather than reimplementing it.
  */
 export class MassifMap extends MassifObject<'massif::Options'> {
-    private mLayers?: MassifObject<'massif::Layers'>;
+    private mLayers?: MapLayers;
     private mCamera?: MapCamera;
     private mElements?: MassifElements;
     private readonly mLayerById: { [id: string]: MassifLayer } = {};
@@ -1665,8 +1831,14 @@ export class MassifMap extends MassifObject<'massif::Options'> {
         super(handle, 'massif::Options', id);
     }
 
-    /** The map's layer list, so a layer built from a spec can be put on the map. */
-    private layersObject(): MassifObject<'massif::Layers'> {
+    /**
+     * The map's layer list, ordered.
+     *
+     * `addLayer` covers the common case; this is for an app whose stack has an order of its own -
+     * base map, then overlays, then its own markers - and so places a layer at an index, swaps one
+     * in place when its decoder is rebuilt, or counts what is there.
+     */
+    layers(): MapLayers {
         if (!this.mLayers) {
             const id = `${this.id}:layers`;
             // Reused when it is already there. adopt() REFUSES a duplicate id, so a map attached
@@ -1680,7 +1852,7 @@ export class MassifMap extends MassifObject<'massif::Options'> {
                 }
                 this.mOwned.push(['layers', id]);
             }
-            this.mLayers = new MassifObject(handle as Handle<'massif::Layers'>, 'massif::Layers', id);
+            this.mLayers = new MapLayers(handle as Handle<'massif::Layers'>, id);
         }
         return this.mLayers;
     }
@@ -1704,15 +1876,30 @@ export class MassifMap extends MassifObject<'massif::Options'> {
         return this.add(this.object('layer', id, spec) as never) as never;
     }
 
+    /**
+     * Builds a layer this map OWNS but does not place it.
+     *
+     * For an app whose stack has an order of its own: it works out the index from the layers it has
+     * already added, then calls `add(layer, index)` or `layers().insert(...)`. `addLayer` is the
+     * one-liner for everything else.
+     */
+    buildLayer<T extends SpecType<'layer'>>(id: string, spec: SpecArg<'layer', T>): MassifLayer<ClassOfSpec<'layer', T>> {
+        const layer = this.object('layer', id, spec) as never as MassifLayer<ClassOfSpec<'layer', T>>;
+        layer.map = this;
+        return layer;
+    }
+
     /** Puts a layer built or adopted elsewhere on the map, optionally at a given index. */
     add<L extends MassifLayer>(layer: L, index?: number): L {
-        this.layersObject().call('add', layer.handle);
+        const layers = this.layers();
+        if (index === undefined) {
+            layers.add(layer);
+        } else {
+            layers.insert(index, layer);
+        }
         layer.map = this;
         if (layer.id) {
             this.mLayerById[layer.id] = layer;
-        }
-        if (index !== undefined) {
-            layer.moveTo(index);
         }
         return layer;
     }
@@ -1722,7 +1909,7 @@ export class MassifMap extends MassifObject<'massif::Options'> {
         if (layer instanceof MassifLayer && layer.id) {
             delete this.mLayerById[layer.id];
         }
-        return this.layersObject().call('remove', handleOf(layer) as Handle);
+        return this.layers().remove(layer);
     }
 
     /** A layer this map added or adopted, by the id it was given. */
@@ -1732,7 +1919,7 @@ export class MassifMap extends MassifObject<'massif::Options'> {
 
     /** How many layers the map is drawing, including any the object API put there. */
     layerCount(): number {
-        return this.view.mapView.getLayers().count();
+        return this.layers().count();
     }
 
     /** Adopts a layer built with the object API, and puts it under this map. */
@@ -1814,6 +2001,41 @@ export class MassifMap extends MassifObject<'massif::Options'> {
         return super.destroy();
     }
 
+    /**
+     * The view's size in pixels.
+     *
+     * A property of the VIEW, not of the map, but every caller that needs it has the map: framing a
+     * route, working out how many metres a screen width covers.
+     */
+    size(): { width: number; height: number } {
+        return { width: this.view.getMeasuredWidth?.() ?? 0, height: this.view.getMeasuredHeight?.() ?? 0 };
+    }
+
+    /**
+     * A screenshot of the map.
+     *
+     * The one thing on this class that is not a facade call: reading the framebuffer is platform
+     * code, and there is no verb for it. `wait` holds the capture until the tiles have settled.
+     */
+    capture(wait = false): Promise<any> {
+        if (!this.view.captureRendering) {
+            throw new MassifApiError('this map view cannot capture its rendering');
+        }
+        return this.view.captureRendering(wait);
+    }
+
+    /**
+     * Asks for a frame.
+     *
+     * Rarely needed: the SDK redraws when a property that changes the picture is written. It is
+     * here for the cases where an app knows better - a change made off the UI thread, or a view
+     * that was hidden while the map moved.
+     */
+    requestRedraw(): this {
+        this.view.requestRedraw?.();
+        return this;
+    }
+
     /** The camera. See MapCamera - a move is a flight, not a property. */
     camera(): MapCamera {
         if (!this.mCamera) {
@@ -1829,10 +2051,7 @@ export class MassifMap extends MassifObject<'massif::Options'> {
                 this.mOwned.push(['view', id]);
             }
             const view = new MassifObject(handle as Handle<'massif::BaseMapView'>, 'massif::BaseMapView', id);
-            this.mCamera = new MapCamera(view, () => ({
-                width: this.view.getMeasuredWidth?.() ?? 0,
-                height: this.view.getMeasuredHeight?.() ?? 0
-            }));
+            this.mCamera = new MapCamera(view, () => this.size());
         }
         return this.mCamera;
     }
