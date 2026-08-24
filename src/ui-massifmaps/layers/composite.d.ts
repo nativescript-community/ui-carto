@@ -29,8 +29,9 @@ export interface CompositeVectorTileLayerOptions extends VectorTileLayerOptions 
  * over the landcover - which stacking layers cannot do. If the style declares no such
  * layer the source is registered and never drawn, and the SDK only warns in the log; use
  * `getExternalDataSourceNames()` against the decoder's `getStyleLayerNames()` to tell the
- * two apart. Note a COMPILED Mapnik XML style cannot declare these slots at all - the XML
- * symbolizer set has no hillshade/raster config symbolizer, only CartoCSS has.
+ * two apart. A compiled Mapnik XML style carries the slots too: css2xml writes the config
+ * blocks out as `RasterConfigSymbolizer` / `HillshadeConfigSymbolizer` /
+ * `ContourConfigSymbolizer`, which the XML parser reads back.
  *
  * ANDROID ONLY. com.massifmaps.layers.CompositeVectorTileLayer has no MSF equivalent in
  * the iOS metadata we generate from, so on iOS this builds a plain VectorTileLayer and the
