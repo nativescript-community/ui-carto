@@ -1,8 +1,6 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { TileSubstitutionPolicy } from '../../layers/index';
-
 /** com.massifmaps.layers.TileLayer / MSFTileLayer */
 export const METHODS = ['calculateMapTile', 'calculateMapTileBounds', 'calculateMapTileOrigin', 'clearTileCaches', 'consumeShadowCastersMissingElevation', 'getDataSource', 'getFrameNr', 'getMaxOverzoomLevel', 'getMaxStandInLevel', 'getMaxUnderzoomLevel', 'getTileLoadListener', 'getTileSubstitutionPolicy', 'getUTFGridDataSource', 'getUTFGridEventListener', 'getZoomLevelBias', 'isPreloading', 'isSynchronizedRefresh', 'isUpdateInProgress', 'setFrameNr', 'setMaxOverzoomLevel', 'setMaxStandInLevel', 'setMaxUnderzoomLevel', 'setPreloading', 'setSynchronizedRefresh', 'setTerrainShadowMask', 'setTileLoadListener', 'setTileSubstitutionPolicy', 'setUTFGridDataSource', 'setUTFGridEventListener', 'setZoomLevelBias'] as const;
 
@@ -19,7 +17,7 @@ export interface Methods {
     getMaxStandInLevel(): number;
     getMaxUnderzoomLevel(): number;
     getTileLoadListener(): any;
-    getTileSubstitutionPolicy(): TileSubstitutionPolicy;
+    getTileSubstitutionPolicy(): number;
     getUTFGridDataSource(): any;
     getUTFGridEventListener(): any;
     getZoomLevelBias(): number;
@@ -34,7 +32,7 @@ export interface Methods {
     setSynchronizedRefresh(arg0: boolean): void;
     setTerrainShadowMask(arg0: number, arg1: number, arg2: number): void;
     setTileLoadListener(arg0: any): void;
-    setTileSubstitutionPolicy(arg0: TileSubstitutionPolicy): void;
+    setTileSubstitutionPolicy(arg0: number): void;
     setUTFGridDataSource(arg0: any): void;
     setUTFGridEventListener(arg0: any): void;
     setZoomLevelBias(arg0: number): void;
@@ -63,7 +61,7 @@ export interface Accessors {
     preloading: boolean;
     synchronizedRefresh: boolean;
     tileLoadListener: any;  // com.massifmaps.layers.TileLoadListener
-    tileSubstitutionPolicy: TileSubstitutionPolicy;  // com.massifmaps.layers.TileSubstitutionPolicy
+    tileSubstitutionPolicy: number;
     utfGridDataSource: any;  // com.massifmaps.datasources.TileDataSource
     utfGridEventListener: any;  // com.massifmaps.layers.UTFGridEventListener
     zoomLevelBias: number;

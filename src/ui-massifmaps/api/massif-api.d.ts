@@ -697,7 +697,7 @@ export interface PropertyTypes {
     };
     'massif::AnimationStyle': {
         /** (read-only) Returns the fade animation type. */
-        readonly 'fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -705,11 +705,11 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
     };
     'massif::AnimationStyleBuilder': {
         /** Returns the fade animation type. */
-        'fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        'fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the phase-in duration of the animation. */
         'phaseInDuration': number;
         /** Returns the phase-out duration of the animation. */
@@ -717,7 +717,7 @@ export interface PropertyTypes {
         /** Returns the relative speed of the animation. */
         'relativeSpeed': number;
         /** Returns the size-related animation type. */
-        'sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        'sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
     };
     'massif::AssetPackage': {
         readonly 'assetNames': string[];
@@ -759,7 +759,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -771,7 +771,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -787,7 +787,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -799,7 +799,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the style of this balloon popup. */
@@ -807,7 +807,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -815,7 +815,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -853,7 +853,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'style.leftImage.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'style.leftImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'style.leftImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'style.leftImage.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -869,7 +869,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'style.rightImage.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'style.rightImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'style.rightImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'style.rightImage.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -965,7 +965,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click info. */
         readonly 'clickInfo': ClickInfo;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the clicked vector element. */
         readonly 'vectorElement': Handle;
         /** (read-only) Returns the bounds of this vector element. */
@@ -977,7 +977,7 @@ export interface PropertyTypes {
         readonly 'vectorElement.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'vectorElement.geometry.geoJSON': string;
-        readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'vectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -1039,7 +1039,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -1047,7 +1047,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -1085,7 +1085,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'leftImage.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'leftImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'leftImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'leftImage.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -1101,7 +1101,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'rightImage.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'rightImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'rightImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'rightImage.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -1137,7 +1137,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -1145,7 +1145,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -1181,7 +1181,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'leftImage.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'leftImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'leftImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'leftImage.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -1197,7 +1197,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'rightImage.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'rightImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'rightImage.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'rightImage.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -1255,7 +1255,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -1267,7 +1267,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -1277,7 +1277,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -1285,7 +1285,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -1309,7 +1309,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -1317,7 +1317,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -1345,7 +1345,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -1495,7 +1495,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -1521,7 +1521,7 @@ export interface PropertyTypes {
     };
     'massif::ClickInfo': {
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the click duration in seconds. */
         readonly 'duration': number;
     };
@@ -1625,7 +1625,7 @@ export interface PropertyTypes {
         /** Returns the UTF grid event listener. */
         'UTFGridEventListener': Handle;
         /** Returns the current display order of the buildings. */
-        'buildingRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+        'buildingRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
         /** Returns the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
         'clickHandlerLayerFilter': string;
         /** Returns the click radius of vector tile features. Units are screen density independent pixels (DP or DIP). */
@@ -1654,7 +1654,7 @@ export interface PropertyTypes {
         /** Returns the current relative label blending speed. */
         'labelBlendingSpeed': number;
         /** Returns the current display order of the labels. */
-        'labelRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+        'labelRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
         /** Returns the current relative layer blending speed. */
         'layerBlendingSpeed': number;
         /** Gets the current maximum overzoom level for this layer. */
@@ -1689,7 +1689,7 @@ export interface PropertyTypes {
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the vector tile event listener. */
@@ -1803,7 +1803,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -1815,7 +1815,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -1829,7 +1829,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -1843,7 +1843,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the style of this Popup. */
@@ -1851,7 +1851,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -1859,7 +1859,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -1952,11 +1952,11 @@ export interface PropertyTypes {
         /** Returns the current relative tile blending speed. */
         'tileBlendingSpeed': number;
         /** Returns the current tile filter mode. */
-        'tileFilterMode': 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC';
+        'tileFilterMode': 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC' | number;
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the visibility of this layer. */
@@ -2020,7 +2020,7 @@ export interface PropertyTypes {
         readonly 'selectedVectorElement.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'selectedVectorElement.geometry.geoJSON': string;
-        readonly 'selectedVectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'selectedVectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'selectedVectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -2050,7 +2050,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** (read-only) Returns the feature's geometry as a GeoJSON string, in its own coordinates. Serialising a geometry otherwise means constructing a GeoJSONGeometryWriter in the binding, which every binding then does differently and, in a scripting one, slowly. */
         readonly 'geometryGeoJSON': string;
         /** (read-only) Returns the properties of the feature. */
@@ -2064,7 +2064,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::FeatureCollection': {
         /** (read-only) Returns the number of features in this container. */
@@ -2211,7 +2211,7 @@ export interface PropertyTypes {
         readonly 'centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geoJSON': string;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::GeometryCollection': {
         /** (read-only) Returns the bounds of this vector element. */
@@ -2224,7 +2224,7 @@ export interface PropertyTypes {
         readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometry.geometryCount': number;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -2242,9 +2242,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'style.lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'style.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'style.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'style.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'style.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'style.lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2278,7 +2278,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'lineStyle.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'lineStyle.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2288,9 +2288,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2302,7 +2302,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'pointStyle.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'pointStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'pointStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'pointStyle.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2326,9 +2326,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'polygonStyle.lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'polygonStyle.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'polygonStyle.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'polygonStyle.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'polygonStyle.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'polygonStyle.lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2344,7 +2344,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'lineStyle.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'lineStyle.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2354,9 +2354,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2368,7 +2368,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'pointStyle.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'pointStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'pointStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'pointStyle.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2392,9 +2392,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'polygonStyle.lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'polygonStyle.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'polygonStyle.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'polygonStyle.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'polygonStyle.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'polygonStyle.lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2495,7 +2495,7 @@ export interface PropertyTypes {
         /** Returns the shading color of areas that faces towards the light source. */
         'highlightColor': number;
         /** Returns the hillshade rendering method. */
-        'hillshadeMethod': 'STANDARD' | 'COMBINED' | 'IGOR' | 'MULTIDIRECTIONAL' | 'BASIC';
+        'hillshadeMethod': 'STANDARD' | 'COMBINED' | 'IGOR' | 'MULTIDIRECTIONAL' | 'BASIC' | number;
         /** Returns the illumination direction of the layer. */
         'illuminationDirection': Position;
         /** Returns wheter the illumination direction should change with the map rotation. */
@@ -2537,11 +2537,11 @@ export interface PropertyTypes {
         /** Returns the current relative tile blending speed. */
         'tileBlendingSpeed': number;
         /** Returns the current tile filter mode. */
-        'tileFilterMode': 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC';
+        'tileFilterMode': 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC' | number;
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the visibility of this layer. */
@@ -2565,7 +2565,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -2577,7 +2577,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -2591,7 +2591,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -2603,7 +2603,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the style of this label. */
@@ -2615,7 +2615,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -2623,7 +2623,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -2639,7 +2639,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the horizontal offset of the billboard. */
         readonly 'style.horizontalOffset': number;
         /** (read-only) Returns the orientation mode of the label. */
-        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'style.placementPriority': number;
         /** (read-only) Returns the relative rendering scale of the label. */
@@ -2647,7 +2647,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'style.scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the label. */
-        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the vertical offset of the billboard. */
         readonly 'style.verticalOffset': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -2661,7 +2661,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -2669,7 +2669,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -2685,7 +2685,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the horizontal offset of the billboard. */
         readonly 'horizontalOffset': number;
         /** (read-only) Returns the orientation mode of the label. */
-        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'placementPriority': number;
         /** (read-only) Returns the relative rendering scale of the label. */
@@ -2693,7 +2693,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the label. */
-        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the vertical offset of the billboard. */
         readonly 'verticalOffset': number;
     };
@@ -2705,7 +2705,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -2713,7 +2713,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -2729,7 +2729,7 @@ export interface PropertyTypes {
         /** Returns the horizontal offset of the billboard. */
         'horizontalOffset': number;
         /** Returns the orientation mode of the label. */
-        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** Returns the placement priority of the billboard. */
         'placementPriority': number;
         /** Returns the relative rendering scale for the label. */
@@ -2737,7 +2737,7 @@ export interface PropertyTypes {
         /** Returns the state of the scale with DPI flag. */
         'scaleWithDPI': boolean;
         /** Returns the scaling mode of the label. */
-        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** Returns the vertical offset of the billboard. */
         'verticalOffset': number;
     };
@@ -2804,7 +2804,7 @@ export interface PropertyTypes {
         readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the list of of map positions defining the line. */
         readonly 'geometry.poses': Json;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -2816,7 +2816,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'style.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'style.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'style.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'style.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2826,9 +2826,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'style.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'style.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'style.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'style.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'style.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'style.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2844,7 +2844,7 @@ export interface PropertyTypes {
         readonly 'geoJSON': string;
         /** (read-only) Returns the list of of map positions defining the line. */
         readonly 'poses': Json;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::LineStyle': {
         /** (read-only) Returns the bitmap of the line. */
@@ -2852,7 +2852,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2862,9 +2862,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -2876,7 +2876,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -2886,9 +2886,9 @@ export interface PropertyTypes {
         /** Returns the color of the vector element. */
         'color': number;
         /** Returns the end point type of the line. */
-        'lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        'lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** Returns the join type of the line. */
-        'lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        'lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** Returns the stretch factor of the line. */
         'stretchFactor': number;
         /** Returns the width of the line. */
@@ -2964,7 +2964,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the list of all available style parameters. */
         readonly 'styleParameters': string[];
         /** Returns the binary format the tiles are decoded as. */
-        'tileFormat': 'TILE_FORMAT_AUTO' | 'TILE_FORMAT_MVT' | 'TILE_FORMAT_MLT';
+        'tileFormat': 'TILE_FORMAT_AUTO' | 'TILE_FORMAT_MVT' | 'TILE_FORMAT_MLT' | number;
     };
     'massif::ManeuverArrowBuilder': {
         /** Returns the length of the arrow after the maneuver point. */
@@ -3002,7 +3002,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click position. */
         readonly 'clickPos': Position;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
     };
     'massif::MapEnvelope': {
         /** (read-only) Returns the map bounds of this map envelope. */
@@ -3026,7 +3026,7 @@ export interface PropertyTypes {
     };
     'massif::MapMoveInfo': {
         /** (read-only) Returns what caused the movement. */
-        readonly 'reason': 'MAP_MOVE_REASON_GESTURE' | 'MAP_MOVE_REASON_ANIMATION' | 'MAP_MOVE_REASON_API';
+        readonly 'reason': 'MAP_MOVE_REASON_GESTURE' | 'MAP_MOVE_REASON_ANIMATION' | 'MAP_MOVE_REASON_API' | number;
     };
     'massif::MapPos': {
         /** (read-only) Returns the x coordinate of this map position. */
@@ -3111,7 +3111,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -3123,7 +3123,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -3137,7 +3137,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -3149,7 +3149,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the style of this marker. */
@@ -3161,7 +3161,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -3169,7 +3169,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -3179,7 +3179,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'style.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'style.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'style.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'style.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -3195,13 +3195,13 @@ export interface PropertyTypes {
         /** (read-only) Returns the horizontal offset of the billboard. */
         readonly 'style.horizontalOffset': number;
         /** (read-only) Returns the orientation mode of the marker. */
-        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'style.placementPriority': number;
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'style.scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the marker. */
-        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the size of the marker. */
         readonly 'style.size': number;
         /** (read-only) Returns the vertical offset of the billboard. */
@@ -3217,7 +3217,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -3225,7 +3225,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -3235,7 +3235,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -3251,13 +3251,13 @@ export interface PropertyTypes {
         /** (read-only) Returns the horizontal offset of the billboard. */
         readonly 'horizontalOffset': number;
         /** (read-only) Returns the orientation mode of the marker. */
-        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'placementPriority': number;
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the marker. */
-        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the size of the marker. */
         readonly 'size': number;
         /** (read-only) Returns the vertical offset of the billboard. */
@@ -3271,7 +3271,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -3279,7 +3279,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -3289,7 +3289,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -3305,13 +3305,13 @@ export interface PropertyTypes {
         /** Returns the horizontal offset of the billboard. */
         'horizontalOffset': number;
         /** Returns the orientation mode of the marker. */
-        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** Returns the placement priority of the billboard. */
         'placementPriority': number;
         /** Returns the state of the scale with DPI flag. */
         'scaleWithDPI': boolean;
         /** Returns the scaling mode of the marker. */
-        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** Returns the size of the marker. */
         'size': number;
         /** Returns the vertical offset of the billboard. */
@@ -3381,7 +3381,7 @@ export interface PropertyTypes {
         readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::MultiLineGeometry': {
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -3391,7 +3391,7 @@ export interface PropertyTypes {
         readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::MultiOSMOfflineGeocodingService': {
         'autocomplete': boolean;
@@ -3409,7 +3409,7 @@ export interface PropertyTypes {
         readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::MultiPolygonGeometry': {
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -3419,7 +3419,7 @@ export interface PropertyTypes {
         readonly 'geoJSON': string;
         /** (read-only) Returns the number of geometry objects in this multi geometry container. */
         readonly 'geometryCount': number;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::MultiTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
@@ -3455,7 +3455,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -3467,7 +3467,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -3481,7 +3481,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -3493,7 +3493,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the rotation angle of this model. This is deprecated. Use getRotation instead. */
@@ -3507,7 +3507,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -3515,7 +3515,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -3533,13 +3533,13 @@ export interface PropertyTypes {
         /** (read-only) Returns the size of the data */
         readonly 'style.modelAsset.size': number;
         /** (read-only) Returns the orientation mode of the model. */
-        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'style.placementPriority': number;
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'style.scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the model. */
-        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the vertical offset of the billboard. */
         readonly 'style.verticalOffset': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -3549,7 +3549,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -3557,7 +3557,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -3575,13 +3575,13 @@ export interface PropertyTypes {
         /** (read-only) Returns the size of the data */
         readonly 'modelAsset.size': number;
         /** (read-only) Returns the orientation mode of the model. */
-        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'placementPriority': number;
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the model. */
-        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the vertical offset of the billboard. */
         readonly 'verticalOffset': number;
     };
@@ -3589,7 +3589,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -3597,7 +3597,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -3615,13 +3615,13 @@ export interface PropertyTypes {
         /** (read-only) Returns the size of the data */
         readonly 'modelAsset.size': number;
         /** Returns the orientation mode of the model. */
-        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** Returns the placement priority of the billboard. */
         'placementPriority': number;
         /** Returns the state of the scale with DPI flag. */
         'scaleWithDPI': boolean;
         /** Returns the scaling mode of the model. */
-        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** Returns the vertical offset of the billboard. */
         'verticalOffset': number;
     };
@@ -3648,7 +3648,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'backgroundBitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'backgroundBitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'backgroundBitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'backgroundBitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -3701,7 +3701,7 @@ export interface PropertyTypes {
         /** Returns how fast a free roam drag turns the view. */
         'freeRoamLookSensitivity': number;
         /** Returns the free roam mode. */
-        'freeRoamMode': 'FREE_ROAM_MODE_OFF' | 'FREE_ROAM_MODE_LOOK' | 'FREE_ROAM_MODE_FIRST_PERSON';
+        'freeRoamMode': 'FREE_ROAM_MODE_OFF' | 'FREE_ROAM_MODE_LOOK' | 'FREE_ROAM_MODE_FIRST_PERSON' | number;
         /** Returns how far a first person move drag travels. */
         'freeRoamMoveSpeed': number;
         /** Returns the state of the kinetic panning flag. */
@@ -3753,17 +3753,19 @@ export interface PropertyTypes {
         /** Returns the map panning bounds constraints. Map bounds minimum and maximum points are in the base projection's coordinate system. */
         'panBounds': Bounds;
         /** Returns the panning mode. */
-        'panningMode': 'PANNING_MODE_FREE' | 'PANNING_MODE_STICKY' | 'PANNING_MODE_STICKY_FINAL';
+        'panningMode': 'PANNING_MODE_FREE' | 'PANNING_MODE_STICKY' | 'PANNING_MODE_STICKY_FINAL' | number;
         /** Returns the panning speed mode. */
-        'panningSpeedMode': 'PANNING_SPEED_MODE_MAP' | 'PANNING_SPEED_MODE_ANCHORED' | 'PANNING_SPEED_MODE_CONSTANT';
+        'panningSpeedMode': 'PANNING_SPEED_MODE_MAP' | 'PANNING_SPEED_MODE_ANCHORED' | 'PANNING_SPEED_MODE_CONSTANT' | number;
         /** Returns the pivot mode. */
-        'pivotMode': 'PIVOT_MODE_TOUCHPOINT' | 'PIVOT_MODE_CENTERPOINT';
+        'pivotMode': 'PIVOT_MODE_TOUCHPOINT' | 'PIVOT_MODE_CENTERPOINT' | number;
         /** Returns the render projection mode. */
-        'renderProjectionMode': 'RENDER_PROJECTION_MODE_PLANAR' | 'RENDER_PROJECTION_MODE_SPHERICAL';
+        'renderProjectionMode': 'RENDER_PROJECTION_MODE_PLANAR' | 'RENDER_PROJECTION_MODE_SPHERICAL' | number;
         /** Returns the state of the restricted panning flag. */
         'restrictedPanning': boolean;
         /** Returns the state of the map rotatability flag. */
         'rotatable': boolean;
+        /** Returns the state of rotation gestures. */
+        'rotationGestures': boolean;
         /** Returns the state of seamless horizontal panning flag. */
         'seamlessPanning': boolean;
         /** Returns the sky color. */
@@ -3896,7 +3898,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the internal package id. This should not be displayed to the user. */
         readonly 'packageId': string;
         /** (read-only) Returns the package type. */
-        readonly 'packageType': 'PACKAGE_TYPE_MAP' | 'PACKAGE_TYPE_ROUTING' | 'PACKAGE_TYPE_GEOCODING' | 'PACKAGE_TYPE_VALHALLA_ROUTING';
+        readonly 'packageType': 'PACKAGE_TYPE_MAP' | 'PACKAGE_TYPE_ROUTING' | 'PACKAGE_TYPE_GEOCODING' | 'PACKAGE_TYPE_VALHALLA_ROUTING' | number;
         /** (read-only) Returns the size of the package in bytes. This can be displayed to the user. */
         readonly 'size': number;
         /** (read-only) Returns the encoded tile mask of the package. This is available for map packages but not for routing packages. This should not be displayed to the user. */
@@ -3965,7 +3967,7 @@ export interface PropertyTypes {
     };
     'massif::PackageStatus': {
         /** (read-only) Returns the current action being performed. */
-        readonly 'currentAction': 'PACKAGE_ACTION_READY' | 'PACKAGE_ACTION_WAITING' | 'PACKAGE_ACTION_DOWNLOADING' | 'PACKAGE_ACTION_COPYING' | 'PACKAGE_ACTION_REMOVING';
+        readonly 'currentAction': 'PACKAGE_ACTION_READY' | 'PACKAGE_ACTION_WAITING' | 'PACKAGE_ACTION_DOWNLOADING' | 'PACKAGE_ACTION_COPYING' | 'PACKAGE_ACTION_REMOVING' | number;
         /** (read-only) Returns the paused state of the action. */
         readonly 'paused': boolean;
         /** (read-only) Returns the progress of the action. */
@@ -4041,7 +4043,7 @@ export interface PropertyTypes {
         readonly 'geometry.geoJSON': string;
         /** (read-only) Returns the position of the point. */
         readonly 'geometry.pos': Position;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4053,7 +4055,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'style.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'style.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'style.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'style.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -4075,7 +4077,7 @@ export interface PropertyTypes {
         readonly 'geoJSON': string;
         /** (read-only) Returns the position of the point. */
         readonly 'pos': Position;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::PointStyle': {
         /** (read-only) Returns the bitmap of the point. */
@@ -4083,7 +4085,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -4101,7 +4103,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -4128,7 +4130,7 @@ export interface PropertyTypes {
         readonly 'geometry.poses': Json;
         /** (read-only) Returns the list of map position lists defining the rings of the polygon. */
         readonly 'geometry.rings': Json;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4146,9 +4148,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'style.lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'style.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'style.lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'style.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'style.lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'style.lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -4171,7 +4173,7 @@ export interface PropertyTypes {
         readonly 'geometry.poses': Json;
         /** (read-only) Returns the list of map position lists defining the rings of the polygon. */
         readonly 'geometry.rings': Json;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the height of this 3d polygon. */
         'height': number;
         /** Returns the internal id of this vector element. */
@@ -4211,7 +4213,7 @@ export interface PropertyTypes {
         readonly 'poses': Json;
         /** (read-only) Returns the list of map position lists defining the rings of the polygon. */
         readonly 'rings': Json;
-        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
     };
     'massif::PolygonStyle': {
         /** (read-only) Returns the color of the vector element. */
@@ -4223,7 +4225,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'lineStyle.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'lineStyle.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -4233,9 +4235,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -4251,7 +4253,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'lineStyle.bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'lineStyle.bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'lineStyle.bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -4261,9 +4263,9 @@ export interface PropertyTypes {
         /** (read-only) Returns the color of the vector element. */
         readonly 'lineStyle.color': number;
         /** (read-only) Returns the end point type of the line. */
-        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+        readonly 'lineStyle.lineEndType': 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
         /** (read-only) Returns the join type of the line. */
-        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+        readonly 'lineStyle.lineJoinType': 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
         /** (read-only) Returns the stretching factor of the line. */
         readonly 'lineStyle.stretchFactor': number;
         /** (read-only) Returns the width of the line. */
@@ -4287,7 +4289,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4299,7 +4301,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -4313,7 +4315,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4325,7 +4327,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the style of this Popup. */
@@ -4333,7 +4335,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -4341,7 +4343,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -4369,7 +4371,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click position. */
         readonly 'clickPos': Position;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the 2D click position on the clicked popup. */
         readonly 'elementClickPos': [number, number];
         /** (read-only) Returns the clicked popup. */
@@ -4405,7 +4407,7 @@ export interface PropertyTypes {
         readonly 'popup.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'popup.geometry.geoJSON': string;
-        readonly 'popup.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'popup.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'popup.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4417,7 +4419,7 @@ export interface PropertyTypes {
         readonly 'popup.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'popup.rootGeometry.geoJSON': string;
-        readonly 'popup.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'popup.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'popup.rotation': number;
         /** Returns the style of this Popup. */
@@ -4483,7 +4485,7 @@ export interface PropertyTypes {
         readonly 'popup.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'popup.geometry.geoJSON': string;
-        readonly 'popup.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'popup.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'popup.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4495,7 +4497,7 @@ export interface PropertyTypes {
         readonly 'popup.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'popup.rootGeometry.geoJSON': string;
-        readonly 'popup.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'popup.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'popup.rotation': number;
         /** Returns the style of this Popup. */
@@ -4529,7 +4531,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -4537,7 +4539,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -4561,7 +4563,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -4569,7 +4571,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -4608,7 +4610,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click position. */
         readonly 'clickPos': Position;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the interpolated color at the click position. */
         readonly 'interpolatedColor': number;
         /** (read-only) Returns the layer of the raster tile. */
@@ -4701,11 +4703,11 @@ export interface PropertyTypes {
         /** Returns the current relative tile blending speed. */
         'tileBlendingSpeed': number;
         /** Returns the current tile filter mode. */
-        'tileFilterMode': 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC';
+        'tileFilterMode': 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC' | number;
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the visibility of this layer. */
@@ -4741,7 +4743,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the position of the matching point. */
         readonly 'pos': Position;
         /** (read-only) Returns the type of the matching point. */
-        readonly 'type': 'ROUTE_MATCHING_POINT_UNMATCHED' | 'ROUTE_MATCHING_POINT_INTERPOLATED' | 'ROUTE_MATCHING_POINT_MATCHED';
+        readonly 'type': 'ROUTE_MATCHING_POINT_UNMATCHED' | 'ROUTE_MATCHING_POINT_INTERPOLATED' | 'ROUTE_MATCHING_POINT_MATCHED' | number;
     };
     'massif::RouteMatchingRequest': {
         /** (read-only) Returns the accuracy of the points in the request. */
@@ -4771,7 +4773,7 @@ export interface PropertyTypes {
     };
     'massif::RoutingInstruction': {
         /** (read-only) Returns the action of the instruction. */
-        readonly 'action': 'ROUTING_ACTION_HEAD_ON' | 'ROUTING_ACTION_FINISH' | 'ROUTING_ACTION_NO_TURN' | 'ROUTING_ACTION_GO_STRAIGHT' | 'ROUTING_ACTION_TURN_RIGHT' | 'ROUTING_ACTION_UTURN' | 'ROUTING_ACTION_TURN_LEFT' | 'ROUTING_ACTION_REACH_VIA_LOCATION' | 'ROUTING_ACTION_ENTER_ROUNDABOUT' | 'ROUTING_ACTION_LEAVE_ROUNDABOUT' | 'ROUTING_ACTION_STAY_ON_ROUNDABOUT' | 'ROUTING_ACTION_START_AT_END_OF_STREET' | 'ROUTING_ACTION_ENTER_AGAINST_ALLOWED_DIRECTION' | 'ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION' | 'ROUTING_ACTION_GO_UP' | 'ROUTING_ACTION_GO_DOWN' | 'ROUTING_ACTION_WAIT' | 'ROUTING_ACTION_ENTER_FERRY' | 'ROUTING_ACTION_LEAVE_FERRY';
+        readonly 'action': 'ROUTING_ACTION_HEAD_ON' | 'ROUTING_ACTION_FINISH' | 'ROUTING_ACTION_NO_TURN' | 'ROUTING_ACTION_GO_STRAIGHT' | 'ROUTING_ACTION_TURN_RIGHT' | 'ROUTING_ACTION_UTURN' | 'ROUTING_ACTION_TURN_LEFT' | 'ROUTING_ACTION_REACH_VIA_LOCATION' | 'ROUTING_ACTION_ENTER_ROUNDABOUT' | 'ROUTING_ACTION_LEAVE_ROUNDABOUT' | 'ROUTING_ACTION_STAY_ON_ROUNDABOUT' | 'ROUTING_ACTION_START_AT_END_OF_STREET' | 'ROUTING_ACTION_ENTER_AGAINST_ALLOWED_DIRECTION' | 'ROUTING_ACTION_LEAVE_AGAINST_ALLOWED_DIRECTION' | 'ROUTING_ACTION_GO_UP' | 'ROUTING_ACTION_GO_DOWN' | 'ROUTING_ACTION_WAIT' | 'ROUTING_ACTION_ENTER_FERRY' | 'ROUTING_ACTION_LEAVE_FERRY' | number;
         /** (read-only) Returns the azimuth of the initial position. */
         readonly 'azimuth': number;
         /** (read-only) Returns the distance to move along the given street. */
@@ -4851,7 +4853,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the projection to use for search geometry. */
         'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -4884,7 +4886,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'bitmap.bytesPerPixel': number;
         /** (read-only) Returns the color format of this bitmap. */
-        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565';
+        readonly 'bitmap.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
         /** (read-only) Returns the height of the bitmap. */
         readonly 'bitmap.height': number;
         /** (read-only) Returns the width of the bitmap. */
@@ -4979,7 +4981,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.geometry.geoJSON': string;
-        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -4991,7 +4993,7 @@ export interface PropertyTypes {
         readonly 'baseBillboard.rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'baseBillboard.rootGeometry.geoJSON': string;
-        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'baseBillboard.rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'baseBillboard.rotation': number;
         /** Returns the state of the visibility flag of this vector element. */
@@ -5005,7 +5007,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -5017,7 +5019,7 @@ export interface PropertyTypes {
         readonly 'rootGeometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'rootGeometry.geoJSON': string;
-        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'rootGeometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the rotation angle of this billboard. */
         'rotation': number;
         /** Returns the style of this text label. */
@@ -5029,7 +5031,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'style.animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'style.animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -5037,7 +5039,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'style.animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'style.animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'style.attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -5067,7 +5069,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the horizontal offset of the billboard. */
         readonly 'style.horizontalOffset': number;
         /** (read-only) Returns the orientation mode of the label. */
-        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'style.orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'style.placementPriority': number;
         /** (read-only) Returns the relative rendering scale of the label. */
@@ -5075,7 +5077,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'style.scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the label. */
-        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'style.scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the color of the stroke. */
         readonly 'style.strokeColor': number;
         /** (read-only) Returns the width of the stroke. */
@@ -5105,7 +5107,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the animation style of the billboard. */
         readonly 'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -5113,7 +5115,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the horizontal attaching anchor point of the billoard. */
         readonly 'attachAnchorPointX': number;
         /** (read-only) Returns the vertical attaching anchor point of the billoard. */
@@ -5143,7 +5145,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the horizontal offset of the billboard. */
         readonly 'horizontalOffset': number;
         /** (read-only) Returns the orientation mode of the label. */
-        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        readonly 'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** (read-only) Returns the placement priority of the billboard. */
         readonly 'placementPriority': number;
         /** (read-only) Returns the relative rendering scale of the label. */
@@ -5151,7 +5153,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the state of the scale with DPI flag. */
         readonly 'scaleWithDPI': boolean;
         /** (read-only) Returns the scaling mode of the label. */
-        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        readonly 'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** (read-only) Returns the color of the stroke. */
         readonly 'strokeColor': number;
         /** (read-only) Returns the width of the stroke. */
@@ -5171,7 +5173,7 @@ export interface PropertyTypes {
         /** Returns the animation style of the billboard. */
         'animationStyle': Handle;
         /** (read-only) Returns the fade animation type. */
-        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.fadeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** (read-only) Returns the phase-in duration of the animation. */
         readonly 'animationStyle.phaseInDuration': number;
         /** (read-only) Returns the phase-out duration of the animation. */
@@ -5179,7 +5181,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the relative speed of the animation. */
         readonly 'animationStyle.relativeSpeed': number;
         /** (read-only) Returns the size-related animation type. */
-        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING';
+        readonly 'animationStyle.sizeAnimationType': 'ANIMATION_TYPE_NONE' | 'ANIMATION_TYPE_STEP' | 'ANIMATION_TYPE_LINEAR' | 'ANIMATION_TYPE_SMOOTHSTEP' | 'ANIMATION_TYPE_SPRING' | number;
         /** Returns the horizontal attaching anchor point of the billboard. */
         'attachAnchorPointX': number;
         /** Returns the vertical attaching anchor point of the billboard. */
@@ -5207,7 +5209,7 @@ export interface PropertyTypes {
         /** Returns the horizontal offset of the billboard. */
         'horizontalOffset': number;
         /** Returns the orientation mode of the label. */
-        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+        'orientationMode': 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
         /** Returns the placement priority of the billboard. */
         'placementPriority': number;
         /** Returns the relative rendering scale for the label. */
@@ -5215,7 +5217,7 @@ export interface PropertyTypes {
         /** Returns the state of the scale with DPI flag. */
         'scaleWithDPI': boolean;
         /** Returns the scaling mode of the label. */
-        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+        'scalingMode': 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
         /** Returns the stroke color for the text label. */
         'strokeColor': number;
         /** Returns the stroke width for the text label. */
@@ -5331,7 +5333,7 @@ export interface PropertyTypes {
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the visibility of this layer. */
@@ -5395,7 +5397,7 @@ export interface PropertyTypes {
         /** Returns the UTF grid event listener. */
         'UTFGridEventListener': Handle;
         /** Returns the current display order of the buildings. */
-        'buildingRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+        'buildingRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
         /** Returns the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
         'clickHandlerLayerFilter': string;
         /** Returns the click radius of vector tile features. Units are screen density independent pixels (DP or DIP). */
@@ -5424,7 +5426,7 @@ export interface PropertyTypes {
         /** Returns the current relative label blending speed. */
         'labelBlendingSpeed': number;
         /** Returns the current display order of the labels. */
-        'labelRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+        'labelRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
         /** Returns the current relative layer blending speed. */
         'layerBlendingSpeed': number;
         /** Gets the current maximum overzoom level for this layer. */
@@ -5457,7 +5459,7 @@ export interface PropertyTypes {
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the vector tile event listener. */
@@ -5477,7 +5479,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click position. */
         readonly 'clickPos': Position;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the info tag of the clicked element. */
         readonly 'elementInfo': Json;
         /** (read-only) Returns the clicked layer. */
@@ -5527,7 +5529,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the string value of this variant. */
         readonly 'string': string;
         /** (read-only) Returns the type of this variant. */
-        readonly 'type': 'VARIANT_TYPE_NULL' | 'VARIANT_TYPE_STRING' | 'VARIANT_TYPE_BOOL' | 'VARIANT_TYPE_INTEGER' | 'VARIANT_TYPE_DOUBLE' | 'VARIANT_TYPE_ARRAY' | 'VARIANT_TYPE_OBJECT';
+        readonly 'type': 'VARIANT_TYPE_NULL' | 'VARIANT_TYPE_STRING' | 'VARIANT_TYPE_BOOL' | 'VARIANT_TYPE_INTEGER' | 'VARIANT_TYPE_DOUBLE' | 'VARIANT_TYPE_ARRAY' | 'VARIANT_TYPE_OBJECT' | number;
     };
     'massif::VariantArrayBuilder': {
     };
@@ -5558,7 +5560,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -5572,7 +5574,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click position. */
         readonly 'clickPos': Position;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the position on the clicked element, that is close to the click position. For points it will always be the center position, for lines it will be the closest point on the line, for billboards it will be the anchor point and for polygons it's equal to getClickPos(). */
         readonly 'elementClickPos': Position;
         /** (read-only) Returns the layer of the clicked vector element. */
@@ -5602,7 +5604,7 @@ export interface PropertyTypes {
         readonly 'vectorElement.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'vectorElement.geometry.geoJSON': string;
-        readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'vectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -5626,7 +5628,7 @@ export interface PropertyTypes {
         readonly 'vectorElement.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'vectorElement.geometry.geoJSON': string;
-        readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'vectorElement.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the internal id of this vector element. */
         'vectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
@@ -5634,7 +5636,7 @@ export interface PropertyTypes {
         /** Returns the state of the visibility flag of this vector element. */
         'vectorElement.visible': boolean;
         /** (read-only) Returns the drag mode. */
-        readonly 'vectorElementDragMode': 'VECTOR_ELEMENT_DRAG_MODE_VERTEX' | 'VECTOR_ELEMENT_DRAG_MODE_ELEMENT';
+        readonly 'vectorElementDragMode': 'VECTOR_ELEMENT_DRAG_MODE_VERTEX' | 'VECTOR_ELEMENT_DRAG_MODE_ELEMENT' | number;
     };
     'massif::VectorElementEventListener': {
     };
@@ -5686,7 +5688,7 @@ export interface PropertyTypes {
         /** (read-only) Returns the click position. */
         readonly 'clickPos': Position;
         /** (read-only) Returns the click type. */
-        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL';
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
         /** (read-only) Returns the clicked feature. */
         readonly 'feature': Handle;
         readonly 'feature.distance': number;
@@ -5697,7 +5699,7 @@ export interface PropertyTypes {
         readonly 'feature.geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'feature.geometry.geoJSON': string;
-        readonly 'feature.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'feature.geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** (read-only) Returns the feature's geometry as a GeoJSON string, in its own coordinates. Serialising a geometry otherwise means constructing a GeoJSONGeometryWriter in the binding, which every binding then does differently and, in a scripting one, slowly. */
         readonly 'feature.geometryGeoJSON': string;
         /** (read-only) Returns the id of the feature. */
@@ -5752,7 +5754,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** (read-only) Returns the feature's geometry as a GeoJSON string, in its own coordinates. Serialising a geometry otherwise means constructing a GeoJSONGeometryWriter in the binding, which every binding then does differently and, in a scripting one, slowly. */
         readonly 'geometryGeoJSON': string;
         /** (read-only) Returns the id of the feature. */
@@ -5772,7 +5774,7 @@ export interface PropertyTypes {
         readonly 'geometry.centerPos': Position;
         /** (read-only) Returns the geometry as a GeoJSON string, in its own coordinates. Here rather than only on Feature because serialising a shape otherwise means constructing a GeoJSONGeometryWriter, which no string-based binding can do. */
         readonly 'geometry.geoJSON': string;
-        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION';
+        readonly 'geometry.type': 'GEOMETRY_TYPE_POINT' | 'GEOMETRY_TYPE_LINE' | 'GEOMETRY_TYPE_POLYGON' | 'GEOMETRY_TYPE_MULTIPOINT' | 'GEOMETRY_TYPE_MULTILINE' | 'GEOMETRY_TYPE_MULTIPOLYGON' | 'GEOMETRY_TYPE_COLLECTION' | number;
         /** Returns the id of the builder. */
         'id': number;
         /** Returns the layer name of the builder. */
@@ -5805,7 +5807,7 @@ export interface PropertyTypes {
         /** Returns the UTF grid event listener. */
         'UTFGridEventListener': Handle;
         /** Returns the current display order of the buildings. */
-        'buildingRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+        'buildingRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
         /** Returns the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
         'clickHandlerLayerFilter': string;
         /** Returns the click radius of vector tile features. Units are screen density independent pixels (DP or DIP). */
@@ -5834,7 +5836,7 @@ export interface PropertyTypes {
         /** Returns the current relative label blending speed. */
         'labelBlendingSpeed': number;
         /** Returns the current display order of the labels. */
-        'labelRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+        'labelRenderOrder': 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
         /** Returns the current relative layer blending speed. */
         'layerBlendingSpeed': number;
         /** Gets the current maximum overzoom level for this layer. */
@@ -5867,7 +5869,7 @@ export interface PropertyTypes {
         /** Returns the tile load listener. */
         'tileLoadListener': Handle;
         /** Returns the current tile substitution policy. */
-        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+        'tileSubstitutionPolicy': 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
         /** Returns the layer task priority of this layer. */
         'updatePriority': number;
         /** Returns the vector tile event listener. */
@@ -8461,6 +8463,22 @@ export type Path<C extends ClassName> = keyof PropertyTypes[C] & string;
  */
 export type ValueAt<C extends ClassName, P extends Path<C> | ValuePath<C>> = P extends Path<C> ? PropertyTypes[C][P] : Json;
 
+/**
+ * A spec written inline, where an OBJECT property is expected.
+ *
+ * `setObject` carries only a handle, so a spec used to collapse to NULL_HANDLE and CLEAR the
+ * property while reporting success - which is what blanked `backgroundBitmap`. `set` builds it
+ * now, so the type has to allow it.
+ */
+export type SpecValue = { type: string } & { [key: string]: any };
+
+/**
+ * The type `set` ACCEPTS at a path: what `get` returns, plus an inline spec wherever the
+ * value is an object handle.
+ */
+export type WriteAt<C extends ClassName, P extends Path<C> | ValuePath<C>> =
+    ValueAt<C, P> extends Handle ? Handle | SpecValue : ValueAt<C, P>;
+
 /*
  * The paths that are NOT read-only.
  *
@@ -8754,9 +8772,9 @@ export interface ElementstyleSpec_line {
     /** Returns the color of the vector element. */
     color?: number;
     /** Returns the end point type of the line. */
-    lineEndType?: 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND';
+    lineEndType?: 'LINE_END_TYPE_NONE' | 'LINE_END_TYPE_SQUARE' | 'LINE_END_TYPE_ROUND' | number;
     /** Returns the join type of the line. */
-    lineJoinType?: 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND';
+    lineJoinType?: 'LINE_JOIN_TYPE_NONE' | 'LINE_JOIN_TYPE_MITER' | 'LINE_JOIN_TYPE_BEVEL' | 'LINE_JOIN_TYPE_ROUND' | number;
     /** Returns the stretch factor of the line. */
     stretchFactor?: number;
     /** Returns the width of the line. */
@@ -8788,13 +8806,13 @@ export interface ElementstyleSpec_marker {
     /** Returns the horizontal offset of the billboard. */
     horizontalOffset?: number;
     /** Returns the orientation mode of the marker. */
-    orientationMode?: 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+    orientationMode?: 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
     /** Returns the placement priority of the billboard. */
     placementPriority?: number;
     /** Returns the state of the scale with DPI flag. */
     scaleWithDPI?: boolean;
     /** Returns the scaling mode of the marker. */
-    scalingMode?: 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+    scalingMode?: 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
     /** Returns the size of the marker. */
     size?: number;
     /** Returns the vertical offset of the billboard. */
@@ -8856,7 +8874,7 @@ export interface ElementstyleSpec_text {
     /** Returns the horizontal offset of the billboard. */
     horizontalOffset?: number;
     /** Returns the orientation mode of the label. */
-    orientationMode?: 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND';
+    orientationMode?: 'BILLBOARD_ORIENTATION_FACE_CAMERA' | 'BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND' | 'BILLBOARD_ORIENTATION_GROUND' | number;
     /** Returns the placement priority of the billboard. */
     placementPriority?: number;
     /** Returns the relative rendering scale for the label. */
@@ -8864,7 +8882,7 @@ export interface ElementstyleSpec_text {
     /** Returns the state of the scale with DPI flag. */
     scaleWithDPI?: boolean;
     /** Returns the scaling mode of the label. */
-    scalingMode?: 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE';
+    scalingMode?: 'BILLBOARD_SCALING_WORLD_SIZE' | 'BILLBOARD_SCALING_SCREEN_SIZE' | 'BILLBOARD_SCALING_CONST_SCREEN_SIZE' | number;
     /** Returns the stroke color for the text label. */
     strokeColor?: number;
     /** Returns the stroke width for the text label. */
@@ -8927,7 +8945,7 @@ export interface LayerSpec_composite_vector {
     /** Returns the UTF grid event listener. */
     UTFGridEventListener?: Handle;
     /** Returns the current display order of the buildings. */
-    buildingRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+    buildingRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
     /** Returns the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
     clickHandlerLayerFilter?: string;
     /** Returns the click radius of vector tile features. Units are screen density independent pixels (DP or DIP). */
@@ -8939,7 +8957,7 @@ export interface LayerSpec_composite_vector {
     /** Returns the current relative label blending speed. */
     labelBlendingSpeed?: number;
     /** Returns the current display order of the labels. */
-    labelRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+    labelRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
     /** Returns the current relative layer blending speed. */
     layerBlendingSpeed?: number;
     /** Gets the current maximum overzoom level for this layer. */
@@ -8967,7 +8985,7 @@ export interface LayerSpec_composite_vector {
     /** Returns the tile load listener. */
     tileLoadListener?: Handle;
     /** Returns the current tile substitution policy. */
-    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
     /** Returns the layer task priority of this layer. */
     updatePriority?: number;
     /** Returns the vector tile event listener. */
@@ -9036,7 +9054,7 @@ export interface LayerSpec_hillshade {
     /** Returns the shading color of areas that faces towards the light source. */
     highlightColor?: number;
     /** Returns the hillshade rendering method. */
-    hillshadeMethod?: 'STANDARD' | 'COMBINED' | 'IGOR' | 'MULTIDIRECTIONAL' | 'BASIC';
+    hillshadeMethod?: 'STANDARD' | 'COMBINED' | 'IGOR' | 'MULTIDIRECTIONAL' | 'BASIC' | number;
     /** Returns the illumination direction of the layer. */
     illuminationDirection?: Position;
     /** Returns wheter the illumination direction should change with the map rotation. */
@@ -9074,11 +9092,11 @@ export interface LayerSpec_hillshade {
     /** Returns the current relative tile blending speed. */
     tileBlendingSpeed?: number;
     /** Returns the current tile filter mode. */
-    tileFilterMode?: 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC';
+    tileFilterMode?: 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC' | number;
     /** Returns the tile load listener. */
     tileLoadListener?: Handle;
     /** Returns the current tile substitution policy. */
-    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
     /** Returns the layer task priority of this layer. */
     updatePriority?: number;
     /** Returns the visibility of this layer. */
@@ -9121,11 +9139,11 @@ export interface LayerSpec_raster {
     /** Returns the current relative tile blending speed. */
     tileBlendingSpeed?: number;
     /** Returns the current tile filter mode. */
-    tileFilterMode?: 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC';
+    tileFilterMode?: 'RASTER_TILE_FILTER_MODE_NEAREST' | 'RASTER_TILE_FILTER_MODE_BILINEAR' | 'RASTER_TILE_FILTER_MODE_BICUBIC' | number;
     /** Returns the tile load listener. */
     tileLoadListener?: Handle;
     /** Returns the current tile substitution policy. */
-    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
     /** Returns the layer task priority of this layer. */
     updatePriority?: number;
     /** Returns the visibility of this layer. */
@@ -9167,7 +9185,7 @@ export interface LayerSpec_vector {
     /** Returns the UTF grid event listener. */
     UTFGridEventListener?: Handle;
     /** Returns the current display order of the buildings. */
-    buildingRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+    buildingRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
     /** Returns the click handler layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
     clickHandlerLayerFilter?: string;
     /** Returns the click radius of vector tile features. Units are screen density independent pixels (DP or DIP). */
@@ -9179,7 +9197,7 @@ export interface LayerSpec_vector {
     /** Returns the current relative label blending speed. */
     labelBlendingSpeed?: number;
     /** Returns the current display order of the labels. */
-    labelRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST';
+    labelRenderOrder?: 'VECTOR_TILE_RENDER_ORDER_HIDDEN' | 'VECTOR_TILE_RENDER_ORDER_LAYER' | 'VECTOR_TILE_RENDER_ORDER_LAST' | number;
     /** Returns the current relative layer blending speed. */
     layerBlendingSpeed?: number;
     /** Gets the current maximum overzoom level for this layer. */
@@ -9205,7 +9223,7 @@ export interface LayerSpec_vector {
     /** Returns the tile load listener. */
     tileLoadListener?: Handle;
     /** Returns the current tile substitution policy. */
-    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE';
+    tileSubstitutionPolicy?: 'TILE_SUBSTITUTION_POLICY_ALL' | 'TILE_SUBSTITUTION_POLICY_VISIBLE' | 'TILE_SUBSTITUTION_POLICY_NONE' | number;
     /** Returns the layer task priority of this layer. */
     updatePriority?: number;
     /** Returns the vector tile event listener. */
@@ -9563,7 +9581,7 @@ export interface StyleSpec_mbvt {
     featureIdOverride?: boolean;
     project?: string | StylesetSpec;
     /** Returns the binary format the tiles are decoded as. */
-    tileFormat?: 'TILE_FORMAT_AUTO' | 'TILE_FORMAT_MVT' | 'TILE_FORMAT_MLT';
+    tileFormat?: 'TILE_FORMAT_AUTO' | 'TILE_FORMAT_MVT' | 'TILE_FORMAT_MLT' | number;
 }
 
 export type StyleSpec = StyleSpec_mbvt;

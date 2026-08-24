@@ -3,7 +3,6 @@
 
 import { Color } from '@nativescript/core';
 import { MapVec } from '../../core/index';
-import { HillshadeMethod } from '../../layers/raster';
 
 /** com.massifmaps.layers.HillshadeRasterTileLayer / MSFHillshadeRasterTileLayer */
 export const METHODS = ['getAccentColor', 'getContourColor', 'getContourInterval', 'getContourWidth', 'getContrast', 'getElevation', 'getElevations', 'getExagerateHeightScaleEnabled', 'getExaggeration', 'getHeightScale', 'getHighlightColor', 'getHillshadeMethod', 'getIlluminationDirection', 'getIlluminationMapRotationEnabled', 'getNormalMapLightingShader', 'getShadowColor', 'isContourEnabled', 'isElevationEncodingEnabled', 'isLegacyHeightScaleEnabled', 'isTerrainPaintEnabled', 'isTerrainPaintFullDetailEnabled', 'setAccentColor', 'setContourColor', 'setContourEnabled', 'setContourInterval', 'setContourWidth', 'setContrast', 'setElevationEncodingEnabled', 'setExagerateHeightScaleEnabled', 'setExaggeration', 'setHeightScale', 'setHighlightColor', 'setHillshadeMethod', 'setIlluminationDirection', 'setIlluminationMapRotationEnabled', 'setLegacyHeightScaleEnabled', 'setNormalMapLightingShader', 'setShadowColor', 'setTerrainPaintEnabled', 'setTerrainPaintFullDetailEnabled'] as const;
@@ -21,7 +20,7 @@ export interface Methods {
     getExaggeration(): number;
     getHeightScale(): number;
     getHighlightColor(): Color;
-    getHillshadeMethod(): HillshadeMethod;
+    getHillshadeMethod(): number;
     getIlluminationDirection(): MapVec;
     getIlluminationMapRotationEnabled(): boolean;
     getNormalMapLightingShader(): string;
@@ -42,7 +41,7 @@ export interface Methods {
     setExaggeration(arg0: number): void;
     setHeightScale(arg0: number): void;
     setHighlightColor(arg0: Color | string): void;
-    setHillshadeMethod(arg0: HillshadeMethod): void;
+    setHillshadeMethod(arg0: number): void;
     setIlluminationDirection(arg0: MapVec): void;
     setIlluminationMapRotationEnabled(arg0: boolean): void;
     setLegacyHeightScaleEnabled(arg0: boolean): void;
@@ -87,7 +86,7 @@ export interface Accessors {
     exaggeration: number;
     heightScale: number;
     highlightColor: Color | string;
-    hillshadeMethod: HillshadeMethod;  // com.massifmaps.layers.HillshadeMethod
+    hillshadeMethod: number;
     illuminationDirection: MapVec;
     illuminationMapRotationEnabled: boolean;
     legacyHeightScaleEnabled: boolean;

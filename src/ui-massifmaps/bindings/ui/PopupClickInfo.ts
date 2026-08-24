@@ -1,8 +1,6 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { ClickType } from '../../core/index';
-
 /** com.massifmaps.ui.PopupClickInfo / MSFPopupClickInfo */
 export const METHODS = ['getClickInfo', 'getClickPos', 'getClickType', 'getElementClickPos', 'getPopup'] as const;
 
@@ -10,7 +8,7 @@ export const METHODS = ['getClickInfo', 'getClickPos', 'getClickType', 'getEleme
 export interface Methods {
     getClickInfo(): any;
     getClickPos(): any;
-    getClickType(): ClickType;
+    getClickType(): number;
     getElementClickPos(): any;
     getPopup(): any;
 }

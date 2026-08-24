@@ -1,8 +1,6 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { BillboardOrientation, BillboardScaling } from '../../vectorelements/index';
-
 /** com.massifmaps.styles.NMLModelStyleBuilder / MSFNMLModelStyleBuilder */
 export const METHODS = ['buildStyle', 'getModelAsset', 'getOrientationMode', 'getScalingMode', 'setModelAsset', 'setOrientationMode', 'setScalingMode'] as const;
 
@@ -10,11 +8,11 @@ export const METHODS = ['buildStyle', 'getModelAsset', 'getOrientationMode', 'ge
 export interface Methods {
     buildStyle(): any;
     getModelAsset(): any;
-    getOrientationMode(): BillboardOrientation;
-    getScalingMode(): BillboardScaling;
+    getOrientationMode(): number;
+    getScalingMode(): number;
     setModelAsset(arg0: any): void;
-    setOrientationMode(arg0: BillboardOrientation): void;
-    setScalingMode(arg0: BillboardScaling): void;
+    setOrientationMode(arg0: number): void;
+    setScalingMode(arg0: number): void;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {
@@ -26,8 +24,8 @@ export const ACCESSORS: Record<string, [string, string]> = {
 /** public shape of the accessors this class declares itself */
 export interface Accessors {
     modelAsset: any;  // com.massifmaps.core.BinaryData
-    orientationMode: BillboardOrientation;  // com.massifmaps.styles.BillboardOrientation
-    scalingMode: BillboardScaling;  // com.massifmaps.styles.BillboardScaling
+    orientationMode: number;
+    scalingMode: number;
 }
 
 /** properties needing a converter, and which one */

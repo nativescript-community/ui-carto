@@ -2,7 +2,6 @@
 // Regenerate with `npm run bindings`.
 
 import { ImageAsset, ImageSource } from '@nativescript/core';
-import { LineEndType } from '../../vectorelements/line';
 
 /** com.massifmaps.styles.LineStyleBuilder / MSFLineStyleBuilder */
 export const METHODS = ['buildStyle', 'getBitmap', 'getClickWidth', 'getLineEndType', 'getLineJoinType', 'getStretchFactor', 'getWidth', 'setBitmap', 'setClickWidth', 'setLineEndType', 'setLineJoinType', 'setStretchFactor', 'setWidth'] as const;
@@ -12,13 +11,13 @@ export interface Methods {
     buildStyle(): any;
     getBitmap(): ImageSource;
     getClickWidth(): number;
-    getLineEndType(): LineEndType;
+    getLineEndType(): number;
     getLineJoinType(): number;
     getStretchFactor(): number;
     getWidth(): number;
     setBitmap(arg0: string | ImageSource | ImageAsset): void;
     setClickWidth(arg0: number): void;
-    setLineEndType(arg0: LineEndType): void;
+    setLineEndType(arg0: number): void;
     setLineJoinType(arg0: number): void;
     setStretchFactor(arg0: number): void;
     setWidth(arg0: number): void;
@@ -37,8 +36,8 @@ export const ACCESSORS: Record<string, [string, string]> = {
 export interface Accessors {
     bitmap: string | ImageSource | ImageAsset;
     clickWidth: number;
-    lineEndType: LineEndType;  // com.massifmaps.styles.LineEndType
-    lineJoinType: number;  // com.massifmaps.styles.LineJoinType
+    lineEndType: number;
+    lineJoinType: number;
     stretchFactor: number;
     width: number;
 }

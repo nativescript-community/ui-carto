@@ -29,11 +29,11 @@ export const ACCESSORS: Record<string, [string, string]> = {
 
 /** public shape of the accessors this class declares itself */
 export interface Accessors {
-    fadeAnimationType: number;  // com.massifmaps.styles.AnimationType
+    fadeAnimationType: number;
     phaseInDuration: number;
     phaseOutDuration: number;
     relativeSpeed: number;
-    sizeAnimationType: number;  // com.massifmaps.styles.AnimationType
+    sizeAnimationType: number;
 }
 
 /** properties needing a converter, and which one */

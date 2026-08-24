@@ -47,6 +47,22 @@ function members(body) {
 }
 
 /**
+ * A SWIG enum, from the shape of its class body: UPPER_SNAKE int constants and nothing
+ * callable but the constructor.
+ *
+ * It used to be the `swigToEnum` member, which the typings no longer carry. Both consumers
+ * (the binding types and `native-api-usage.json`) went on testing for it, so every enum
+ * silently became a plain `number` AND lost its metadata entry. One predicate now, so the
+ * two cannot disagree again.
+ */
+export function isEnumBody(body) {
+    return (
+        /^\s*public static [A-Z][A-Z0-9_]*: number = -?\d+;/m.test(body) &&
+        !/^\s*public (?:static )?(?!constructor\b)[a-z]\w*\s*\(/m.test(body)
+    );
+}
+
+/**
  * android: `declare namespace com { export namespace massifmaps { export namespace <a> {
  * [export namespace <b> {] export class X extends Y {`
  *
@@ -68,7 +84,7 @@ export function parseAndroid(file = path.join(TYPINGS_DIR, 'massifmaps.android.d
             if (cl && (!ns || cl.index < ns.index)) {
                 const inner = bodyOf(rest, cl.index + cl[0].length - 1);
                 const pkg = chain.filter((c) => c !== 'massifmaps').join('.');
-                const isEnum = /\bswigToEnum\s*\(/.test(inner.body);
+                const isEnum = isEnumBody(inner.body);
                 const entry = classes.get(cl[1]) ?? { name: cl[1], pkg, extends: cl[2], isEnum, methods: new Map() };
                 for (const mem of members(inner.body)) {
                     entry.methods.set(mem.name, mem);

@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import * as path from 'node:path';
 import { ROOT, TYPINGS_DIR } from '../typings/config.mjs';
+import { isEnumBody } from './parse.mjs';
 
 /**
  * Which converter (if any) a property needs, inferred from the native accessor type.
@@ -34,12 +35,12 @@ const BY_TYPE = {
     'com.massifmaps.core.StringVector': { converter: 'stringListConverter', type: 'string[]' }
 };
 
-/** SWIG enums are classes carrying swigToEnum/swigValue; on JS they are plain numbers. */
+/** SWIG enums are plain numbers on JS; `isEnumBody` is what decides, for both consumers. */
 function enumClasses() {
     const src = readFileSync(path.join(TYPINGS_DIR, 'massifmaps.android.d.ts'), 'utf8');
     const names = new Set();
     for (const m of src.matchAll(/export class (\w+)[^{]*\{([\s\S]*?)\n {12}\}/g)) {
-        if (/\bswigToEnum\s*\(/.test(m[2])) {
+        if (isEnumBody(m[2])) {
             names.add(m[1]);
         }
     }

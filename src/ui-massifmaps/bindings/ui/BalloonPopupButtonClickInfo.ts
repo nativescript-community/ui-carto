@@ -1,8 +1,6 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { ClickType } from '../../core/index';
-
 /** com.massifmaps.ui.BalloonPopupButtonClickInfo / MSFBalloonPopupButtonClickInfo */
 export const METHODS = ['getButton', 'getClickInfo', 'getClickType', 'getVectorElement'] as const;
 
@@ -10,7 +8,7 @@ export const METHODS = ['getButton', 'getClickInfo', 'getClickType', 'getVectorE
 export interface Methods {
     getButton(): any;
     getClickInfo(): any;
-    getClickType(): ClickType;
+    getClickType(): number;
     getVectorElement(): any;
 }
 

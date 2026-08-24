@@ -52,6 +52,22 @@ export type Path<C extends ClassName> = keyof PropertyTypes[C] & string;
  */
 export type ValueAt<C extends ClassName, P extends Path<C> | ValuePath<C>> = P extends Path<C> ? PropertyTypes[C][P] : Json;
 
+/**
+ * A spec written inline, where an OBJECT property is expected.
+ *
+ * \`setObject\` carries only a handle, so a spec used to collapse to NULL_HANDLE and CLEAR the
+ * property while reporting success - which is what blanked \`backgroundBitmap\`. \`set\` builds it
+ * now, so the type has to allow it.
+ */
+export type SpecValue = { type: string } & { [key: string]: any };
+
+/**
+ * The type \`set\` ACCEPTS at a path: what \`get\` returns, plus an inline spec wherever the
+ * value is an object handle.
+ */
+export type WriteAt<C extends ClassName, P extends Path<C> | ValuePath<C>> =
+    ValueAt<C, P> extends Handle ? Handle | SpecValue : ValueAt<C, P>;
+
 /*
  * The paths that are NOT read-only.
  *

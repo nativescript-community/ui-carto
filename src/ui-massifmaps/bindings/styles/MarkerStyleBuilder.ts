@@ -2,7 +2,6 @@
 // Regenerate with `npm run bindings`.
 
 import { ImageAsset, ImageSource } from '@nativescript/core';
-import { BillboardOrientation, BillboardScaling } from '../../vectorelements/index';
 
 /** com.massifmaps.styles.MarkerStyleBuilder / MSFMarkerStyleBuilder */
 export const METHODS = ['buildStyle', 'getAnchorPointX', 'getAnchorPointY', 'getBitmap', 'getClickSize', 'getOrientationMode', 'getScalingMode', 'getSize', 'setAnchorPoint', 'setAnchorPointX', 'setAnchorPointY', 'setBitmap', 'setClickSize', 'setOrientationMode', 'setScalingMode', 'setSize'] as const;
@@ -14,16 +13,16 @@ export interface Methods {
     getAnchorPointY(): number;
     getBitmap(): ImageSource;
     getClickSize(): number;
-    getOrientationMode(): BillboardOrientation;
-    getScalingMode(): BillboardScaling;
+    getOrientationMode(): number;
+    getScalingMode(): number;
     getSize(): number;
     setAnchorPoint(arg0: number, arg1: number): void;
     setAnchorPointX(arg0: number): void;
     setAnchorPointY(arg0: number): void;
     setBitmap(arg0: string | ImageSource | ImageAsset): void;
     setClickSize(arg0: number): void;
-    setOrientationMode(arg0: BillboardOrientation): void;
-    setScalingMode(arg0: BillboardScaling): void;
+    setOrientationMode(arg0: number): void;
+    setScalingMode(arg0: number): void;
     setSize(arg0: number): void;
 }
 
@@ -43,8 +42,8 @@ export interface Accessors {
     anchorPointY: number;
     bitmap: string | ImageSource | ImageAsset;
     clickSize: number;
-    orientationMode: BillboardOrientation;  // com.massifmaps.styles.BillboardOrientation
-    scalingMode: BillboardScaling;  // com.massifmaps.styles.BillboardScaling
+    orientationMode: number;
+    scalingMode: number;
     size: number;
 }
 
