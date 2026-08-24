@@ -1,8 +1,6 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { BillboardOrientation, BillboardScaling } from '../../vectorelements/index';
-
 /** com.massifmaps.styles.LabelStyleBuilder / MSFLabelStyleBuilder */
 export const METHODS = ['buildStyle', 'getAnchorPointX', 'getAnchorPointY', 'getOrientationMode', 'getRenderScale', 'getScalingMode', 'isFlippable', 'setAnchorPoint', 'setAnchorPointX', 'setAnchorPointY', 'setFlippable', 'setOrientationMode', 'setRenderScale', 'setScalingMode'] as const;
 
@@ -11,17 +9,17 @@ export interface Methods {
     buildStyle(): any;
     getAnchorPointX(): number;
     getAnchorPointY(): number;
-    getOrientationMode(): BillboardOrientation;
+    getOrientationMode(): number;
     getRenderScale(): number;
-    getScalingMode(): BillboardScaling;
+    getScalingMode(): number;
     isFlippable(): boolean;
     setAnchorPoint(arg0: number, arg1: number): void;
     setAnchorPointX(arg0: number): void;
     setAnchorPointY(arg0: number): void;
     setFlippable(arg0: boolean): void;
-    setOrientationMode(arg0: BillboardOrientation): void;
+    setOrientationMode(arg0: number): void;
     setRenderScale(arg0: number): void;
-    setScalingMode(arg0: BillboardScaling): void;
+    setScalingMode(arg0: number): void;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {
@@ -38,9 +36,9 @@ export interface Accessors {
     anchorPointX: number;
     anchorPointY: number;
     flippable: boolean;
-    orientationMode: BillboardOrientation;  // com.massifmaps.styles.BillboardOrientation
+    orientationMode: number;
     renderScale: number;
-    scalingMode: BillboardScaling;  // com.massifmaps.styles.BillboardScaling
+    scalingMode: number;
 }
 
 /** properties needing a converter, and which one */

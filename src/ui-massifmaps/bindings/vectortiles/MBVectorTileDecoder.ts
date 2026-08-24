@@ -39,7 +39,7 @@ export interface Accessors {
     compiledStyleSet: any;  // com.massifmaps.styles.CompiledStyleSet
     featureIdOverride: boolean;
     styleParameters: string[];
-    tileFormat: number;  // com.massifmaps.vectortiles.TileFormat
+    tileFormat: number;
 }
 
 /** properties needing a converter, and which one */

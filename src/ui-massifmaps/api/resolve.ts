@@ -2,7 +2,7 @@
  * @internal
  * @module
  */
-import { BASES, CLASS_NAMES, ENUMS, EVENTS, METHODS, PROPS, SPEC_CLASS } from './schema';
+import { BASES, CLASS_NAMES, ENUMS, EVENTS, KIND_OF_CLASS, METHODS, PROPS, SPEC_CLASS } from './schema';
 
 /**
  * Path resolution over the generated tables, the way the C++ property table does it.
@@ -234,6 +234,11 @@ export function classOfSpec(kind: string, type: string): string | null {
     return SPEC_CLASS[kind]?.[type] ?? null;
 }
 
+/** The other direction: which kind builds a class, for a spec written into an OBJECT property. */
+export function specKindOf(cppClass: string): string | null {
+    return KIND_OF_CLASS[cppClass] ?? null;
+}
+
 let known: { [short: string]: true } | undefined;
 
 function knownClasses() {
@@ -254,4 +259,21 @@ export function classOfShortName(short: string | null): string | null {
 /** Whether a class is one the tables know, so a caller-supplied name can be checked. */
 export function isKnownClass(cls: string): boolean {
     return !!knownClasses()[cls.replace('massif::', '')];
+}
+
+/**
+ * Whether `cls` IS a `base`, walking the chain the same way property lookups do.
+ *
+ * What `instanceof` was: the facade addresses classes by name, so "is this layer a raster layer"
+ * is a question about the table, not about a JavaScript prototype.
+ */
+export function isSubclassOf(cls: string, base: string): boolean {
+    let walk: string | undefined = cls;
+    while (walk) {
+        if (walk === base) {
+            return true;
+        }
+        walk = BASES[walk];
+    }
+    return false;
 }

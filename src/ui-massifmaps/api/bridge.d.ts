@@ -38,6 +38,8 @@ export interface NativeBridge {
     setBool(handle: number, path: string, value: boolean): number;
     setString(handle: number, path: string, value: string): number;
     setObject(handle: number, path: string, value: number): number;
+    /** The object an object property points at, as a handle the caller owns. 0 when there is none. */
+    getObject(handle: number, path: string): number;
 
     getFloat(handle: number, path: string, defaultValue: number): number;
     getInt(handle: number, path: string, defaultValue: number): number;
@@ -107,6 +109,9 @@ export interface NativeBridge {
     /** The escape hatch: the native object behind an id, to hand back to the object API. */
     getNativeLayer(id: string): any;
     getNativeSource(id: string): any;
+    /** The same by handle, for an object with no id - a child read off a property. */
+    getNativeLayerByHandle(handle: number): any;
+    getNativeSourceByHandle(handle: number): any;
 
     // --- event bridges ------------------------------------------------------------------------
     //

@@ -1,8 +1,6 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { RasterTileFilterMode } from '../../layers/raster';
-
 /** com.massifmaps.layers.RasterTileLayer / MSFRasterTileLayer */
 export const METHODS = ['getRasterTileEventListener', 'getTextureCacheCapacity', 'getTileBlendingSpeed', 'getTileFilterMode', 'setRasterTileEventListener', 'setTextureCacheCapacity', 'setTileBlendingSpeed', 'setTileFilterMode'] as const;
 
@@ -11,11 +9,11 @@ export interface Methods {
     getRasterTileEventListener(): any;
     getTextureCacheCapacity(): number;
     getTileBlendingSpeed(): number;
-    getTileFilterMode(): RasterTileFilterMode;
+    getTileFilterMode(): number;
     setRasterTileEventListener(arg0: any): void;
     setTextureCacheCapacity(arg0: number): void;
     setTileBlendingSpeed(arg0: number): void;
-    setTileFilterMode(arg0: RasterTileFilterMode): void;
+    setTileFilterMode(arg0: number): void;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {
@@ -30,7 +28,7 @@ export interface Accessors {
     rasterTileEventListener: any;  // com.massifmaps.layers.RasterTileEventListener
     textureCacheCapacity: number;
     tileBlendingSpeed: number;
-    tileFilterMode: RasterTileFilterMode;  // com.massifmaps.layers.RasterTileFilterMode
+    tileFilterMode: number;
 }
 
 /** properties needing a converter, and which one */

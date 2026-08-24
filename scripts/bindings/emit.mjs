@@ -144,11 +144,36 @@ function emitClass(cls) {
  * Both files come from the same model so they cannot drift apart.
  */
 function emitApiUsage(model, enums) {
-    const androidUses = new Set(['com.nativescript.massifmaps*:*']);
+    /**
+     * Seeds the model cannot yield, because none of them is a bound class:
+     *
+     * - the whole facade package - `MassifApi` and every type it hands back. Strip it and the
+     *   plugin reports "this build has no surface API", which reads as a wrongly built SDK.
+     * - the whole ui package: the views, their GL bases, and `BaseMapView`. A class is kept
+     *   without its base and without the types in its signatures, so a missing one costs either
+     *   an inherited method (`MapView.onResume` - "not a function") or a whole call
+     *   (`getBaseMapView`, whose return type degrades to Object - NoSuchMethodError).
+     *   Wildcarded because three separate misses here were three separate crashes.
+     */
+    const androidUses = new Set(['com.nativescript.massifmaps*:*', 'com.massifmaps.api*:*', 'com.massifmaps.ui*:*', 'android.opengl:GLSurfaceView']);
     const iosUses = new Set(['MassifMapsAdditions:*', 'nsswiftsupport:NSMSF*']);
     for (const cls of model.values()) {
         androidUses.add(`com.massifmaps.${cls.pkg}:${cls.name}`);
         iosUses.add(`MassifMaps:MSF${cls.name}`);
+        /**
+         * Every type a kept method mentions, kept too. The filter resolves a signature against
+         * the metadata, so one absent parameter or return type degrades that type to Object and
+         * the whole method stops existing - `NoSuchMethodError`, not a missing property. Keeping
+         * the class without the types it talks about is only half the class.
+         */
+        for (const m of cls.methods.values()) {
+            for (const type of [m.returns, ...m.params]) {
+                const ref = /com\.massifmaps\.([a-z0-9.]+)\.([A-Z]\w*)/.exec(type ?? '');
+                if (ref) {
+                    androidUses.add(`com.massifmaps.${ref[1]}:${ref[2]}`);
+                }
+            }
+        }
     }
     /**
      * Every SWIG enum, not just the ones a bound method mentions: `MBTilesScheme` only

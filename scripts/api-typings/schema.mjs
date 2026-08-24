@@ -116,8 +116,10 @@ export function closure(cppClass, classes, depth = MAX_DEPTH, prefix = '', stack
 export function valueType(prop, enums) {
     if (SCALARS[prop.type]) return SCALARS[prop.type];
     if (prop.type === 'ENUM') {
+        // `| number` because the SDK takes either: the value IS an int, and a constant name is
+        // resolved to one. Names first so an editor completes those rather than offering `number`.
         const values = enums[prop.enum || ''];
-        return values ? values.map((v) => `'${v.name}'`).join(' | ') : 'number';
+        return values ? `${values.map((v) => `'${v.name}'`).join(' | ')} | number` : 'number';
     }
     // A bare Handle, not Handle<'X'>: the brand is invariant, so branding it here would reject
     // the SUBCLASSES the SDK accepts (a PolygonGeometry where a Geometry is declared). The class

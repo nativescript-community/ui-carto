@@ -6,7 +6,7 @@ export const METHODS = ['addExternalDataSource', 'addVectorDataSource', 'clearEx
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
-    addExternalDataSource(arg0: string, arg1: any, arg2: number): void;
+    addExternalDataSource(arg0: string, arg1: any, arg2: number, arg3: any): void;
     addVectorDataSource(arg0: string, arg1: any): void;
     clearExternalDataSourceZoomLevelBias(arg0: string): void;
     getExternalDataSourceMaxOverzoomLevel(arg0: string): number;
@@ -35,7 +35,7 @@ export const CONVERTERS = [] as const;
 
 /** ObjC concatenates selector parts, so these names differ on iOS */
 export const SELECTORS: Record<string, string> = {
-    addExternalDataSource: 'addExternalDataSourceDataSourceType',
+    addExternalDataSource: 'addExternalDataSourceDataSourceTypeElevationDecoder',
     addVectorDataSource: 'addVectorDataSourceDataSource',
     setExternalDataSourceMaxOverzoomLevel: 'setExternalDataSourceMaxOverzoomLevelLevel',
     setExternalDataSourceZoomLevelBias: 'setExternalDataSourceZoomLevelBiasBias',

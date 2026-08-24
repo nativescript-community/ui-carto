@@ -93,6 +93,16 @@ export function emitRuntime(schema) {
     }
     out.push('};\n\n');
 
+    // What lets `set` accept an inline spec for an OBJECT property: given the property's class,
+    // which kind builds it. Includes the hand-written factories (massif::Bitmap -> 'bitmap'),
+    // which appear in no !spec and so in no SPEC_CLASS entry.
+    out.push('/** The kind that builds each class, base chain included. */\n');
+    out.push('export const KIND_OF_CLASS: { [cls: string]: string } = {\n');
+    for (const [cls, kind] of Object.entries(schema.kindOfClass ?? {})) {
+        out.push(`    '${cls}': '${kind}',\n`);
+    }
+    out.push('};\n\n');
+
     // A call always comes back as a handle, so the runtime needs the shape to read out of it.
     out.push('/**\n');
     out.push(' * Per class, its own methods: `name,resultCode` and, for an object result, its class.\n');

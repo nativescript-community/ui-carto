@@ -2,7 +2,6 @@
 // Regenerate with `npm run bindings`.
 
 import { ImageAsset, ImageSource } from '@nativescript/core';
-import { LineEndType } from '../../vectorelements/line';
 
 /** com.massifmaps.styles.LineStyle / MSFLineStyle */
 export const METHODS = ['getBitmap', 'getClickWidth', 'getLineEndType', 'getLineJoinType', 'getStretchFactor', 'getWidth'] as const;
@@ -11,7 +10,7 @@ export const METHODS = ['getBitmap', 'getClickWidth', 'getLineEndType', 'getLine
 export interface Methods {
     getBitmap(): ImageSource;
     getClickWidth(): number;
-    getLineEndType(): LineEndType;
+    getLineEndType(): number;
     getLineJoinType(): number;
     getStretchFactor(): number;
     getWidth(): number;
