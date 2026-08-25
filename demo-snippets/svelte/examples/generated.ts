@@ -78,6 +78,7 @@ export const exampleSections: ExampleSection[] = [
         description: "Elevation, hillshade, sky and fog.",
         examples: [
             entry("terrain-3d", "3D terrain, hybrid", "Satellite imagery draped over an elevation mesh, with roads and summit labels above it. One DEM source drives the mesh, the hillshade and the elevation queries.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/terrain-3d.png", () => require('./Terrain3d.svelte')),
+            entry("terrain-2d-3d", "2D / 3D switch", "One animation moves the camera and raises the terrain together. Going back, the top-down view re-centres on where the camera was standing, not on what it was looking at.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/terrain-2d-3d.png", () => require('./Terrain2d3d.svelte')),
             entry("atmosphere", "Sky, fog and the day cycle", "A physical atmosphere over 3D terrain: dawn, noon, dusk and night, with the fog lit by the same sun, stars beyond it, and summits standing clear of the haze filling the valley.", null, () => require('./Atmosphere.svelte')),
         ]
     },

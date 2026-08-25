@@ -1697,6 +1697,11 @@ export class MapCamera {
         return this.moveTo(value);
     }
 
+    /** Where the camera IS, not what it looks at - kilometres apart at a low tilt. */
+    eyePosition(): Position {
+        return this.view.getPos('cameraPos') as Position;
+    }
+
     zoom(): number;
     zoom(value: number, target?: AnyPosition): this;
     zoom(value?: number, target?: AnyPosition) {
