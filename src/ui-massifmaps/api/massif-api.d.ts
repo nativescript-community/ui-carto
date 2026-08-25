@@ -764,6 +764,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -792,6 +794,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -982,6 +986,8 @@ export interface PropertyTypes {
         'vectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'vectorElement.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `vectorElement.metaData.${string}`]: Json;
         /** Returns the state of the visibility flag of this vector element. */
         'vectorElement.visible': boolean;
     };
@@ -1260,6 +1266,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -1454,6 +1462,8 @@ export interface PropertyTypes {
         'cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -1551,6 +1561,8 @@ export interface PropertyTypes {
         'maximumClusterZoom': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the current minimum distance between clusters (in device-independent pixels). */
         'minimumClusterDistance': number;
         /** Returns the opacity of this layer. */
@@ -1663,6 +1675,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -1678,6 +1692,27 @@ export interface PropertyTypes {
         'rendererLayerFilter': string;
         /** Returns whether single-pass segmented rendering is enabled (Milestone 6, optional). */
         'singlePassRenderingEnabled': boolean;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
+        /** (read-only) Returns the tile decoder assigned to this layer. */
+        readonly 'style': Handle;
+        readonly 'style.maxZoom': number;
+        readonly 'style.minZoom': number;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns the tile cache capacity. */
@@ -1808,6 +1843,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -1834,6 +1871,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the handler used for the popup. */
         readonly 'popupHandler': Handle;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
@@ -1930,6 +1969,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -1945,6 +1986,23 @@ export interface PropertyTypes {
         'rasterTileEventListener': Handle;
         /** Returns the custom fragment shader source. */
         'shaderSource': string;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns the tile texture cache capacity. */
@@ -2005,6 +2063,8 @@ export interface PropertyTypes {
         readonly 'dataSource.projection.name': string;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -2025,6 +2085,8 @@ export interface PropertyTypes {
         'selectedVectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'selectedVectorElement.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `selectedVectorElement.metaData.${string}`]: Json;
         /** Returns the state of the visibility flag of this vector element. */
         'selectedVectorElement.visible': boolean;
         /** Returns the layer task priority of this layer. */
@@ -2229,6 +2291,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the style of this geometry collection. */
         'style': Handle;
         /** (read-only) Returns the color of the vector element. */
@@ -2405,6 +2469,8 @@ export interface PropertyTypes {
     'massif::HTTPTileDataSource': {
         /** Returns the current set of HTTP headers used. Initially this set is empty and can be changed with setHTTPHeaders. */
         'HTTPHeaders': Record<string, string>;
+        /** Returns the current set of HTTP headers used. Initially this set is empty and can be changed with setHTTPHeaders. */
+        [key: `HTTPHeaders.${string}`]: string;
         /** Returns true/false based whether the TMS tiling scheme is used. */
         'TMSScheme': boolean;
         /** Returns the base URL template containing tags. */
@@ -2508,6 +2574,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         'normalMapLightingShader': string;
         /** Returns the opacity of this layer. */
         'opacity': number;
@@ -2526,6 +2594,23 @@ export interface PropertyTypes {
         'shaderSource': string;
         /** Returns the shading color of areas that face away from the light source. */
         'shadowColor': number;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns whether the layer may shade the 3D terrain's own elevation texture instead of loading a DEM tile set of its own. */
@@ -2570,6 +2655,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -2596,6 +2683,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -2746,6 +2835,8 @@ export interface PropertyTypes {
         'cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -2809,6 +2900,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the style of this line. */
         'style': Handle;
         /** (read-only) Returns the bitmap of the line. */
@@ -2959,6 +3052,10 @@ export interface PropertyTypes {
         'featureIdOverride': boolean;
         readonly 'maxZoom': number;
         readonly 'minZoom': number;
+        /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
+        'params': Record<string, string>;
+        /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
+        [key: `params.${string}`]: string;
         /** (read-only) Returns the ordered list of style layer names as declared by the style (the project JSON "layers" array, or the Layer elements of a Mapnik XML style). This defines both the draw order and which layers exist. CompositeVectorTileLayer uses it to place external data sources in the layer order: a source whose name is not in this list has no slot in the style and is not drawn, so this is the way to check a style before wiring sources into it. */
         readonly 'styleLayerNames': string[];
         /** (read-only) Returns the list of all available style parameters. */
@@ -3116,6 +3213,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -3142,6 +3241,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -3460,6 +3561,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -3486,6 +3589,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -3644,6 +3749,16 @@ export interface PropertyTypes {
         /** Returns the color of the ambient light. */
         'ambientLightColor': number;
         /** Returns the background bitmap. May be null. */
+        'background': Handle;
+        /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
+        readonly 'background.bytesPerPixel': number;
+        /** (read-only) Returns the color format of this bitmap. */
+        readonly 'background.colorFormat': 'COLOR_FORMAT_UNSUPPORTED' | 'COLOR_FORMAT_BGRA' | 'COLOR_FORMAT_RGBA_4444' | 'COLOR_FORMAT_RGB_565' | number;
+        /** (read-only) Returns the height of the bitmap. */
+        readonly 'background.height': number;
+        /** (read-only) Returns the width of the bitmap. */
+        readonly 'background.width': number;
+        /** Returns the background bitmap. May be null. */
         'backgroundBitmap': Handle;
         /** (read-only) Returns the bytes per pixel parameter of this bitmap. Valid values are 1, 2, 3 and 4. */
         readonly 'backgroundBitmap.bytesPerPixel': number;
@@ -3676,6 +3791,28 @@ export interface PropertyTypes {
         'fieldOfViewY': number;
         /** Returns the focus point offset (from screen center) in pixels. */
         'focusPointOffset': [number, number];
+        /** Returns the fog (atmosphere) options. May be null. */
+        'fog': Handle;
+        /** Returns the fog color. */
+        'fog.color': number;
+        /** Returns whether the fog is drawn at all. */
+        'fog.enabled': boolean;
+        /** Returns the color of the upper atmosphere. */
+        'fog.highColor': number;
+        /** Returns the elevation angle the fog is still at full strength at. */
+        'fog.horizonAngle': number;
+        /** Returns how far up the sky the fog is blended in. */
+        'fog.horizonBlend': number;
+        /** Returns where the fog reaches full strength. */
+        'fog.rangeEnd': number;
+        /** Returns where the fog starts. */
+        'fog.rangeStart': number;
+        /** Returns the custom fog fragment shader source, or an empty string if the built-in blend is used. */
+        'fog.shaderSource': string;
+        /** Returns the color of the sky at the zenith, beyond the atmosphere. */
+        'fog.spaceColor': number;
+        /** Returns how brightly stars are drawn beyond the atmosphere. */
+        'fog.starIntensity': number;
         /** Returns the fog (atmosphere) options. May be null. */
         'fogOptions': Handle;
         /** Returns the fog color. */
@@ -3712,6 +3849,38 @@ export interface PropertyTypes {
         'kineticZoom': boolean;
         /** Returns wether layers are processed in reversed order to process labels. */
         'layersLabelsProcessedInReverseOrder': boolean;
+        /** Returns the light (sun) options. May be null. */
+        'light': Handle;
+        /** Returns the ambient light color. */
+        'light.ambientColor': number;
+        /** Returns the ambient light intensity. */
+        'light.ambientIntensity': number;
+        /** Returns the shadow depth bias. */
+        'light.shadowBias': number;
+        /** Returns the number of shadow cascades. */
+        'light.shadowCascades': number;
+        /** Returns the shadow caster margin in tiles. */
+        'light.shadowCasterMargin': number;
+        /** Returns the shadow distance. */
+        'light.shadowDistance': number;
+        /** Returns the shadow map resolution. */
+        'light.shadowMapSize': number;
+        /** Returns the shadow normal offset. */
+        'light.shadowNormalOffset': number;
+        /** Returns the shadow softness. */
+        'light.shadowSoftness': number;
+        /** Returns the shadow strength. */
+        'light.shadowStrength': number;
+        /** Returns the sun altitude in degrees above the horizon. */
+        'light.sunAltitude': number;
+        /** Returns the sun azimuth in degrees. */
+        'light.sunAzimuth': number;
+        /** Returns the sun (directional light) color. */
+        'light.sunColor': number;
+        /** Returns the sun light intensity. */
+        'light.sunIntensity': number;
+        /** Returns whether the sun lights the 3D terrain surface. */
+        'light.terrainLightingEnabled': boolean;
         /** Returns the light (sun) options. May be null. */
         'lightOptions': Handle;
         /** Returns the ambient light color. */
@@ -3758,6 +3927,11 @@ export interface PropertyTypes {
         'panningSpeedMode': 'PANNING_SPEED_MODE_MAP' | 'PANNING_SPEED_MODE_ANCHORED' | 'PANNING_SPEED_MODE_CONSTANT' | number;
         /** Returns the pivot mode. */
         'pivotMode': 'PIVOT_MODE_TOUCHPOINT' | 'PIVOT_MODE_CENTERPOINT' | number;
+        /** Returns the base projection. */
+        'projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'projection.bounds': Bounds;
+        readonly 'projection.name': string;
         /** Returns the render projection mode. */
         'renderProjectionMode': 'RENDER_PROJECTION_MODE_PLANAR' | 'RENDER_PROJECTION_MODE_SPHERICAL' | number;
         /** Returns the state of the restricted panning flag. */
@@ -3768,6 +3942,22 @@ export interface PropertyTypes {
         'rotationGestures': boolean;
         /** Returns the state of seamless horizontal panning flag. */
         'seamlessPanning': boolean;
+        /** Returns the sky options. May be null. */
+        'sky': Handle;
+        /** Returns whether the shader sky is enabled. */
+        'sky.enabled': boolean;
+        /** Returns the ground color. */
+        'sky.groundColor': number;
+        /** Returns the angular blend width between the horizon color and the sky color. */
+        'sky.horizonBlend': number;
+        /** Returns the horizon color. */
+        'sky.horizonColor': number;
+        /** Returns the custom sky fragment shader source, or an empty string if the built-in shader is used. */
+        'sky.shaderSource': string;
+        /** Returns the zenith sky color. */
+        'sky.skyColor': number;
+        /** Returns whether the built-in shader draws a sun disc. */
+        'sky.sunDiscEnabled': boolean;
         /** Returns the sky color. */
         'skyColor': number;
         /** Returns the sky options. May be null. */
@@ -3786,6 +3976,53 @@ export interface PropertyTypes {
         'skyOptions.skyColor': number;
         /** Returns whether the built-in shader draws a sun disc. */
         'skyOptions.sunDiscEnabled': boolean;
+        /** Returns the terrain options. May be null if no terrain is configured. */
+        'terrain': Handle;
+        /** Returns the terrain background color. */
+        'terrain.backgroundColor': number;
+        /** Returns the billboard/label terrain occlusion state. */
+        'terrain.billboardOcclusionEnabled': boolean;
+        /** Returns the billboard/label terrain occlusion tolerance. */
+        'terrain.billboardOcclusionTolerance': number;
+        /** Returns the duration of the camera terrain-following correction animation. */
+        'terrain.cameraClampDuration': number;
+        /** Returns the camera terrain clearance: the minimum height the camera is kept above the terrain surface, in meters. */
+        'terrain.cameraClearance': number;
+        /** Returns the clip-space depth bias used when depth-testing draped 2D geometry against the terrain. */
+        'terrain.depthBias': number;
+        /** Returns whether polygon fills are draped as a render-to-texture surface. */
+        'terrain.drapeFillsEnabled': boolean;
+        /** Returns whether vt tile lines are also draped (in addition to fills). */
+        'terrain.drapeLinesEnabled': boolean;
+        /** Returns the per-tile drape texture resolution, 0 when it follows the screen. */
+        'terrain.drapeResolution': number;
+        /** Returns whether elevation tile prefetching is enabled. */
+        'terrain.elevationPrefetchEnabled': boolean;
+        /** Returns the enabled state of the terrain. */
+        'terrain.enabled': boolean;
+        /** Returns the terrain height exaggeration factor. */
+        'terrain.exaggeration': number;
+        /** Returns how many zoom levels below the camera a tile may coarsen to. */
+        'terrain.maxTileZoomCoarsening': number;
+        /** Returns the maximum visible tile zoom offset, relative to the camera zoom level. */
+        'terrain.maxTileZoomOffset': number;
+        /** Returns the terrain mesh resolution. */
+        'terrain.meshResolution': number;
+        'terrain.minZoom': number;
+        /** Returns the style layers that are kept out of the terrain drape bake. */
+        'terrain.noDrapeLayerFilter': string;
+        /** Returns whether seamless tile edge handling is enabled. */
+        'terrain.seamlessTileEdgesEnabled': boolean;
+        /** Returns the custom terrain surface fragment shader source, or an empty string if no shaded surface is drawn. */
+        'terrain.surfaceShaderSource': string;
+        /** Returns the opacity a label keeps while its anchor is behind 3D content. */
+        'terrain.textOcclusionOpacity': number;
+        /** Returns whether cross-LOD tile edge stitching is enabled. */
+        'terrain.tileEdgeStitchingEnabled': boolean;
+        /** Returns the absolute view distance, in meters. */
+        'terrain.viewDistance': number;
+        /** Returns the factor applied to the view distance. */
+        'terrain.viewDistanceFactor': number;
         /** Returns the terrain options. May be null if no terrain is configured. */
         'terrainOptions': Handle;
         /** Returns the terrain background color. */
@@ -4048,6 +4285,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the style of this point. */
         'style': Handle;
         /** (read-only) Returns the bitmap of the point. */
@@ -4135,6 +4374,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the style of this polygon. */
         'style': Handle;
         /** (read-only) Returns the color of the vector element. */
@@ -4180,6 +4421,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the style of this 3d polygon. */
         'style': Handle;
         /** (read-only) Returns the color of the vector element. */
@@ -4294,6 +4537,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -4320,6 +4565,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -4392,6 +4639,8 @@ export interface PropertyTypes {
         'popup.baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'popup.baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `popup.baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'popup.baseBillboard.rootGeometry': Handle;
         /** Returns the rotation angle of this billboard. */
@@ -4412,6 +4661,8 @@ export interface PropertyTypes {
         'popup.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'popup.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `popup.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'popup.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -4470,6 +4721,8 @@ export interface PropertyTypes {
         'popup.baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'popup.baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `popup.baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'popup.baseBillboard.rootGeometry': Handle;
         /** Returns the rotation angle of this billboard. */
@@ -4490,6 +4743,8 @@ export interface PropertyTypes {
         'popup.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'popup.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `popup.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'popup.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -4619,6 +4874,8 @@ export interface PropertyTypes {
         'layer.cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'layer.metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `layer.metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'layer.opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -4683,6 +4940,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -4696,6 +4955,23 @@ export interface PropertyTypes {
         readonly 'projection.name': string;
         /** Returns the raster tile event listener. */
         'rasterTileEventListener': Handle;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns the tile texture cache capacity. */
@@ -4792,6 +5068,10 @@ export interface PropertyTypes {
         readonly 'turnAngle': number;
     };
     'massif::RoutingRequest': {
+        /** Returns the custom parameter value of the request. */
+        'params': Record<string, Json>;
+        /** Returns the custom parameter value of the request. */
+        [key: `params.${string}`]: Json;
         /** (read-only) Returns the point list of the request. */
         readonly 'points': Json;
         /** (read-only) Returns the projection of the points in the request. */
@@ -4899,6 +5179,8 @@ export interface PropertyTypes {
         'cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -4986,6 +5268,8 @@ export interface PropertyTypes {
         'baseBillboard.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'baseBillboard.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `baseBillboard.metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'baseBillboard.rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -5012,6 +5296,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the location of the root billboard. If this billboard has a location, this method is equavalent to the Billboard::getGeometry method. If this billboard is attached to another billboard, the hierarchy is traveled recursively and the location of the root billboard is returned. */
         readonly 'rootGeometry': Handle;
         /** (read-only) Returns the minimal bounds for the geometry. */
@@ -5317,6 +5603,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5328,6 +5616,23 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'projection.bounds': Bounds;
         readonly 'projection.name': string;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns the tile load listener. */
@@ -5435,6 +5740,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5448,6 +5755,27 @@ export interface PropertyTypes {
         readonly 'projection.name': string;
         /** Returns the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
         'rendererLayerFilter': string;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
+        /** (read-only) Returns the tile decoder assigned to this layer. */
+        readonly 'style': Handle;
+        readonly 'style.maxZoom': number;
+        readonly 'style.minZoom': number;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns the tile cache capacity. */
@@ -5488,6 +5816,8 @@ export interface PropertyTypes {
         'layer.cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'layer.metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `layer.metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'layer.opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5509,6 +5839,8 @@ export interface PropertyTypes {
     'massif::ValhallaOnlineRoutingService': {
         /** Returns the current set of HTTP headers used. Initially this set is empty and can be changed with setHTTPHeaders. */
         'HTTPHeaders': Record<string, string>;
+        /** Returns the current set of HTTP headers used. Initially this set is empty and can be changed with setHTTPHeaders. */
+        [key: `HTTPHeaders.${string}`]: string;
         /** Returns the custom backend service URL. */
         'customServiceURL': string;
         'profile': string;
@@ -5565,6 +5897,8 @@ export interface PropertyTypes {
         'id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the state of the visibility flag of this vector element. */
         'visible': boolean;
     };
@@ -5583,6 +5917,8 @@ export interface PropertyTypes {
         'layer.cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'layer.metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `layer.metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'layer.opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5609,6 +5945,8 @@ export interface PropertyTypes {
         'vectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'vectorElement.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `vectorElement.metaData.${string}`]: Json;
         /** Returns the state of the visibility flag of this vector element. */
         'vectorElement.visible': boolean;
     };
@@ -5633,6 +5971,8 @@ export interface PropertyTypes {
         'vectorElement.id': number;
         /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
         'vectorElement.metaData': Record<string, Json>;
+        /** Returns a copy of the vector element meta data map. The changes you make to this map are NOT reflected in the actual meta data of the element. */
+        [key: `vectorElement.metaData.${string}`]: Json;
         /** Returns the state of the visibility flag of this vector element. */
         'vectorElement.visible': boolean;
         /** (read-only) Returns the drag mode. */
@@ -5669,6 +6009,8 @@ export interface PropertyTypes {
         readonly 'dataSource.projection.name': string;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5726,6 +6068,8 @@ export interface PropertyTypes {
         'layer.cullDelay': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'layer.metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `layer.metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'layer.opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5845,6 +6189,8 @@ export interface PropertyTypes {
         'maxUnderzoomLevel': number;
         /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
         'metaData': Record<string, Json>;
+        /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the opacity of this layer. */
         'opacity': number;
         /** Returns whether this layer goes through the post-process effect. */
@@ -5858,6 +6204,27 @@ export interface PropertyTypes {
         readonly 'projection.name': string;
         /** Returns the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
         'rendererLayerFilter': string;
+        /** (read-only) Returns the data source assigned to this layer. */
+        readonly 'source': Handle;
+        /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
+        readonly 'source.dataExtent': Bounds;
+        /** Gets the current encoding type. */
+        'source.encoding': string;
+        /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+        'source.maxOverzoomLevel': number;
+        /** (read-only) Returns the maximum zoom level supported by this data source. */
+        readonly 'source.maxZoom': number;
+        /** (read-only) Returns the minimum zoom level supported by this data source. */
+        readonly 'source.minZoom': number;
+        /** (read-only) Returns the projection of this tile source. */
+        readonly 'source.projection': Handle;
+        /** (read-only) Returns the bounds of this projection. */
+        readonly 'source.projection.bounds': Bounds;
+        readonly 'source.projection.name': string;
+        /** (read-only) Returns the tile decoder assigned to this layer. */
+        readonly 'style': Handle;
+        readonly 'style.maxZoom': number;
+        readonly 'style.minZoom': number;
         /** Returns the state of the synchronized refresh flag. */
         'synchronizedRefresh': boolean;
         /** Returns the tile cache capacity. */
@@ -6091,6 +6458,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::ContourTileDataSource': {
         'dataExtent': true;
@@ -6118,6 +6487,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::DataSourceListener': {
     };
@@ -6213,6 +6584,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::Label': {
         'baseBillboard.bounds': true;
@@ -6387,6 +6760,7 @@ export interface PositionPaths {
     'massif::Options': {
         'baseProjection.bounds': true;
         'panBounds': true;
+        'projection.bounds': true;
     };
     'massif::OptionsListener': {
     };
@@ -6520,6 +6894,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::RedrawRequestListener': {
     };
@@ -6613,6 +6989,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::TileLoadListener': {
     };
@@ -6630,6 +7008,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::TouchHandlerListener': {
     };
@@ -6713,6 +7093,8 @@ export interface PositionPaths {
         'dataSource.dataExtent': true;
         'dataSource.projection.bounds': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
     };
     'massif::VectorTileSearchService': {
         'dataSource.dataExtent': true;
@@ -6855,6 +7237,9 @@ export interface ObjectPaths {
         'dataSource': 'massif::TileDataSource';
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
+        'style': 'massif::VectorTileDecoder';
         'tileDecoder': 'massif::VectorTileDecoder';
         'tileLoadListener': 'massif::TileLoadListener';
         'vectorTileEventListener': 'massif::VectorTileEventListener';
@@ -6886,6 +7271,8 @@ export interface ObjectPaths {
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
         'rasterTileEventListener': 'massif::RasterTileEventListener';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
         'tileLoadListener': 'massif::TileLoadListener';
     };
     'massif::DataSourceListener': {
@@ -6997,6 +7384,8 @@ export interface ObjectPaths {
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
         'rasterTileEventListener': 'massif::RasterTileEventListener';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
         'tileLoadListener': 'massif::TileLoadListener';
     };
     'massif::Label': {
@@ -7164,11 +7553,17 @@ export interface ObjectPaths {
     'massif::OnChangeListener': {
     };
     'massif::Options': {
+        'background': 'massif::Bitmap';
         'backgroundBitmap': 'massif::Bitmap';
         'baseProjection': 'massif::Projection';
+        'fog': 'massif::FogOptions';
         'fogOptions': 'massif::FogOptions';
+        'light': 'massif::LightOptions';
         'lightOptions': 'massif::LightOptions';
+        'projection': 'massif::Projection';
+        'sky': 'massif::SkyOptions';
         'skyOptions': 'massif::SkyOptions';
+        'terrain': 'massif::TerrainOptions';
         'terrainOptions': 'massif::TerrainOptions';
     };
     'massif::OptionsListener': {
@@ -7312,6 +7707,8 @@ export interface ObjectPaths {
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
         'rasterTileEventListener': 'massif::RasterTileEventListener';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
         'tileLoadListener': 'massif::TileLoadListener';
     };
     'massif::RedrawRequestListener': {
@@ -7405,6 +7802,8 @@ export interface ObjectPaths {
         'dataSource': 'massif::TileDataSource';
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
         'tileLoadListener': 'massif::TileLoadListener';
     };
     'massif::TileLoadListener': {
@@ -7426,6 +7825,9 @@ export interface ObjectPaths {
         'dataSource': 'massif::TileDataSource';
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
+        'style': 'massif::VectorTileDecoder';
         'tileDecoder': 'massif::VectorTileDecoder';
         'tileLoadListener': 'massif::TileLoadListener';
         'vectorTileEventListener': 'massif::VectorTileEventListener';
@@ -7503,6 +7905,9 @@ export interface ObjectPaths {
         'dataSource': 'massif::TileDataSource';
         'dataSource.projection': 'massif::Projection';
         'projection': 'massif::Projection';
+        'source': 'massif::TileDataSource';
+        'source.projection': 'massif::Projection';
+        'style': 'massif::VectorTileDecoder';
         'tileDecoder': 'massif::VectorTileDecoder';
         'tileLoadListener': 'massif::TileLoadListener';
         'vectorTileEventListener': 'massif::VectorTileEventListener';
@@ -7678,6 +8083,8 @@ export interface VariantPaths {
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::ContourTileDataSource': {
@@ -7710,6 +8117,8 @@ export interface VariantPaths {
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::DataSourceListener': {
@@ -7819,6 +8228,8 @@ export interface VariantPaths {
         'illuminationDirection': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::Label': {
@@ -8016,6 +8427,7 @@ export interface VariantPaths {
         'focusPointOffset': true;
         'mainLightDirection': true;
         'panBounds': true;
+        'projection.bounds': true;
         'tiltRange': true;
         'zoomRange': true;
     };
@@ -8186,6 +8598,8 @@ export interface VariantPaths {
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::RedrawRequestListener': {
@@ -8300,6 +8714,8 @@ export interface VariantPaths {
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::TileLoadListener': {
@@ -8320,6 +8736,8 @@ export interface VariantPaths {
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::TouchHandlerListener': {
@@ -8430,6 +8848,8 @@ export interface VariantPaths {
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
+        'source.dataExtent': true;
+        'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::VectorTileSearchService': {
@@ -9579,6 +9999,8 @@ export interface StyleSpec_mbvt {
     compiledStyle?: Handle;
     /** Returns the value of feature id override flag. This is intended for cases when feature ids in tile are not globally unique. */
     featureIdOverride?: boolean;
+    /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
+    params?: Record<string, string>;
     project?: string | StylesetSpec;
     /** Returns the binary format the tiles are decoded as. */
     tileFormat?: 'TILE_FORMAT_AUTO' | 'TILE_FORMAT_MVT' | 'TILE_FORMAT_MLT' | number;

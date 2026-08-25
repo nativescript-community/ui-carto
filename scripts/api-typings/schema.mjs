@@ -69,6 +69,7 @@ export function enumTypeName(cppEnum) {
 export function ownProperties(cppClass, classes) {
     const out = [];
     const seen = new Set();
+    const aliases = new Map();
     let walk = cppClass;
     while (walk) {
         const entry = classes[walk];
@@ -79,7 +80,17 @@ export function ownProperties(cppClass, classes) {
                 out.push(prop);
             }
         }
+        // A second spelling of one segment - `fog` for `fogOptions` - so it completes exactly
+        // like the property it stands for and a dotted path carries on through it.
+        for (const [alias, path] of Object.entries(entry.aliases ?? {})) {
+            if (!aliases.has(alias)) aliases.set(alias, path);
+        }
         walk = entry.base;
+    }
+    const byName = new Map(out.map((prop) => [prop.name, prop]));
+    for (const [alias, path] of [...aliases].sort()) {
+        const target = byName.get(path);
+        if (target && !seen.has(alias)) out.push({ ...target, name: alias });
     }
     return out;
 }
@@ -106,6 +117,13 @@ export function closure(cppClass, classes, depth = MAX_DEPTH, prefix = '', stack
     for (const prop of ownProperties(cppClass, classes)) {
         const p = prefix + prop.name;
         paths[p] = prop;
+        if (prop.indexed) {
+            // A bag: the property itself takes every key at once, and `p.<anything>` is one
+            // entry. The keys are the app's, so that half is an index signature - see emitTypes.
+            const entry = prop.indexed === 'string' ? 'string' : 'Json';
+            paths[p] = { ...prop, readOnly: false };
+            paths[`${p}.*`] = { ...prop, readOnly: false, indexed: undefined, bagType: entry };
+        }
         if (prop.type === 'OBJECT') {
             Object.assign(paths, closure(prop.objectClass, classes, depth - 1, p + '.', [...stack, cppClass]));
         }
@@ -114,6 +132,9 @@ export function closure(cppClass, classes, depth = MAX_DEPTH, prefix = '', stack
 }
 
 export function valueType(prop, enums) {
+    // A bag takes an object of entries, whether it is written as a property or as a spec key.
+    if (prop.indexed) return `Record<string, ${prop.indexed === 'string' ? 'string' : 'Json'}>`;
+    if (prop.bagType) return prop.bagType;
     if (SCALARS[prop.type]) return SCALARS[prop.type];
     if (prop.type === 'ENUM') {
         // `| number` because the SDK takes either: the value IS an int, and a constant name is

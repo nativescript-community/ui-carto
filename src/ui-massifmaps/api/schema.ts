@@ -22,6 +22,7 @@
  *   b bool   i int    f float   c color (ARGB int)   s string   v variant (JSON)
  *   t struct (JSON)   p position struct (JSON, convertible between projections)
  *   e enum, followed by the enum's name       o object, followed by the declared class
+ *   g bag, followed by the code ONE entry carries - the rest of the path is its key
  */
 
 /** Per class, its own properties (not its bases'), encoded as described above. */
@@ -77,12 +78,12 @@ export const PROPS: { [cls: string]: string } = {
     'massif::GeometryCollection': 'geometry,o,massif::MultiGeometry;style,o,massif::GeometryCollectionStyle',
     'massif::GeometryCollectionStyle': 'lineStyle,o,massif::LineStyle;pointStyle,o,massif::PointStyle;polygonStyle,o,massif::PolygonStyle',
     'massif::GeometryCollectionStyleBuilder': 'lineStyle,o,massif::LineStyle;pointStyle,o,massif::PointStyle;polygonStyle,o,massif::PolygonStyle',
-    'massif::HTTPTileDataSource': 'HTTPHeaders,t;TMSScheme,b;baseURL,s;maxAgeHeaderCheck,b;subdomains,t;timeout,i',
+    'massif::HTTPTileDataSource': 'HTTPHeaders,g,s;TMSScheme,b;baseURL,s;maxAgeHeaderCheck,b;subdomains,t;timeout,i',
     'massif::HillshadeRasterTileLayer': 'accentColor,c;contourColor,c;contourEnabled,b;contourInterval,f;contourWidth,f;contrast,f;elevationEncodingEnabled,b;exagerateHeightScaleEnabled,b;exaggeration,f;heightScale,f;highlightColor,c;hillshadeMethod,e,HillshadeMethod;illuminationDirection,t;illuminationMapRotationEnabled,b;legacyHeightScaleEnabled,b;normalMapLightingShader,s;shadowColor,c;terrainPaintEnabled,b;terrainPaintFullDetailEnabled,b',
     'massif::Label': 'style,o,massif::LabelStyle',
     'massif::LabelStyle': 'anchorPointX,f;anchorPointY,f;flippable,b;orientationMode,e,BillboardOrientation;renderScale,f;scalingMode,e,BillboardScaling',
     'massif::LabelStyleBuilder': 'anchorPointX,f;anchorPointY,f;flippable,b;orientationMode,e,BillboardOrientation;renderScale,f;scalingMode,e,BillboardScaling',
-    'massif::Layer': 'cullDelay,i;metaData,t;opacity,f;postProcessed,b;updatePriority,i;visible,b;visibleZoomRange,t',
+    'massif::Layer': 'cullDelay,i;metaData,g,v;opacity,f;postProcessed,b;updatePriority,i;visible,b;visibleZoomRange,t',
     'massif::Layers': 'count,i',
     'massif::LightOptions': 'ambientColor,c;ambientIntensity,f;shadowBias,f;shadowCascades,i;shadowCasterMargin,i;shadowDistance,f;shadowMapSize,i;shadowNormalOffset,f;shadowSoftness,f;shadowStrength,f;sunAltitude,f;sunAzimuth,f;sunColor,c;sunIntensity,f;terrainLightingEnabled,b',
     'massif::Line': 'geometry,o,massif::LineGeometry;style,o,massif::LineStyle',
@@ -91,7 +92,7 @@ export const PROPS: { [cls: string]: string } = {
     'massif::LineStyleBuilder': 'bitmap,o,massif::Bitmap;clickWidth,f;lineEndType,e,LineEndType;lineJoinType,e,LineJoinType;stretchFactor,f;width,f',
     'massif::LocalVectorDataSource': 'geometrySimplifier,o,massif::GeometrySimplifier',
     'massif::Log': 'logEventListener,o,massif::LogEventListener;showDebug,b;showError,b;showInfo,b;showWarn,b;tag,s',
-    'massif::MBVectorTileDecoder': 'cartoCSSStyle,o,massif::CartoCSSStyleSet;compiledStyle,o,massif::CompiledStyleSet;featureIdOverride,b;styleLayerNames,t;styleParameters,t;tileFormat,e,TileFormat',
+    'massif::MBVectorTileDecoder': 'cartoCSSStyle,o,massif::CartoCSSStyleSet;compiledStyle,o,massif::CompiledStyleSet;featureIdOverride,b;params,g,s;styleLayerNames,t;styleParameters,t;tileFormat,e,TileFormat',
     'massif::ManeuverArrowBuilder': 'lengthAfter,f;lengthBefore,f',
     'massif::MapBounds': 'center,p;delta,t;max,p;min,p',
     'massif::MapBoxOnlineGeocodingService': 'customServiceURL,s',
@@ -147,7 +148,7 @@ export const PROPS: { [cls: string]: string } = {
     'massif::RouteMatchingRequest': 'accuracy,f;points,t;projection,o,massif::Projection',
     'massif::RouteMatchingResult': 'matchingEdges,t;matchingPoints,t;points,t;projection,o,massif::Projection;rawResult,s',
     'massif::RoutingInstruction': 'action,e,RoutingAction;azimuth,f;distance,f;geometryTag,v;instruction,s;pointIndex,i;streetName,s;time,f;turnAngle,f',
-    'massif::RoutingRequest': 'points,t;projection,o,massif::Projection',
+    'massif::RoutingRequest': 'params,g,v;points,t;projection,o,massif::Projection',
     'massif::RoutingResult': 'instructionCount,i;instructions,t;instructionsJSON,s;pointCount,i;points,t;projection,o,massif::Projection;rawResult,s;totalDistance,f;totalTime,f',
     'massif::RoutingService': 'profile,s',
     'massif::ScreenBounds': 'center,t;max,t;min,t',
@@ -170,11 +171,11 @@ export const PROPS: { [cls: string]: string } = {
     'massif::TomTomOnlineReverseGeocodingService': 'customServiceURL,s',
     'massif::TorqueTileDecoder': 'animationDuration,f;frameCount,i;resolution,i;styleSet,o,massif::CartoCSSStyleSet',
     'massif::UTFGridClickInfo': 'clickInfo,t;clickPos,p;clickType,e,ClickType;elementInfo,v;layer,o,massif::Layer',
-    'massif::ValhallaOnlineRoutingService': 'HTTPHeaders,t;customServiceURL,s;timeout,i',
+    'massif::ValhallaOnlineRoutingService': 'HTTPHeaders,g,s;customServiceURL,s;timeout,i',
     'massif::Variant': 'arraySize,i;bool,b;double,f;long,i;objectKeys,t;string,s;type,e,VariantType',
     'massif::VectorData': 'elements,t',
     'massif::VectorDataSource': 'dataExtent,p;projection,o,massif::Projection',
-    'massif::VectorElement': 'bounds,p;geometry,o,massif::Geometry;id,i;metaData,t;visible,b',
+    'massif::VectorElement': 'bounds,p;geometry,o,massif::Geometry;id,i;metaData,g,v;visible,b',
     'massif::VectorElementClickInfo': 'clickInfo,t;clickPos,p;clickType,e,ClickType;elementClickPos,p;layer,o,massif::Layer;vectorElement,o,massif::VectorElement',
     'massif::VectorElementDragInfo': 'mapPos,p;screenPos,t;vectorElement,o,massif::VectorElement;vectorElementDragMode,e,VectorElementDragMode',
     'massif::VectorElementSearchService': 'dataSource,o,massif::VectorDataSource;maxResults,i',
@@ -189,6 +190,13 @@ export const PROPS: { [cls: string]: string } = {
     'massif::WKBGeometryWriter': 'bigEndian,b;z,b',
     'massif::WKTGeometryWriter': 'z,b',
     'massif::ZippedAssetPackage': 'localAssetNames,t',
+};
+
+/** Per class, its aliases as `alias=path`. */
+export const ALIASES: { [cls: string]: string } = {
+    'massif::Options': 'background=backgroundBitmap;fog=fogOptions;light=lightOptions;projection=baseProjection;sky=skyOptions;terrain=terrainOptions',
+    'massif::TileLayer': 'source=dataSource',
+    'massif::VectorTileLayer': 'style=tileDecoder',
 };
 
 /** Each class' base, so a lookup walks the chain the C++ property table walks. */

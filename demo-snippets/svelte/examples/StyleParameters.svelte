@@ -50,9 +50,12 @@
         // example talks to it afterwards - a layer's style property cannot be read back as a
         // handle. A spec key that is a STRING is looked up in the registry, which is what
         // `style: 'alpine'` below does.
+        // The parameters are part of the spec, so the style is built with them already applied
+        // rather than being corrected on the first frame.
         const style = map.style('alpine', {
             type: 'mbvt',
-            project: { type: 'project', assets: { type: 'dir', path: folder }, name: 'alpine' }
+            project: { type: 'project', assets: { type: 'dir', path: folder }, name: 'alpine' },
+            params: { water_color: WATER[0], show_buildings: 'true' }
         });
 
         map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: 'alpine' });
@@ -60,13 +63,18 @@
 
         host.button('Water colour', () => {
             water = (water + 1) % WATER.length;
-            style.call('setStyleParameter', 'water_color', WATER[water]);
+            // A style parameter is a PROPERTY: the rest of the path is the parameter's name.
+            style.set('params.water_color', WATER[water]);
         });
         host.toggle('Buildings', true, (on) => {
-            // A STRING, and the typing is right to insist: setStyleParameter takes std::string.
-            // The SDK converts it against the parameter's DECLARED default - 'true' becomes a bool
+            // A STRING, and the typing is right to insist: a style parameter is std::string. The
+            // SDK converts it against the parameter's DECLARED default - 'true' becomes a bool
             // because the project declares `show_buildings: { default: true }`.
-            style.call('setStyleParameter', 'show_buildings', String(on));
+            style.set('params.show_buildings', String(on));
+        });
+        host.button('Night', () => {
+            // Several at once, in ONE crossing - which is what a theme swap is.
+            style.apply({ params: { water_color: '#0b2b4a', show_buildings: 'false' } });
         });
         host.caption('Two parameters, two costs: a colour swaps live, a filter re-decodes.');
     }

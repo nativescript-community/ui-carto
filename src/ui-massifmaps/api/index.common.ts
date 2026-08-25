@@ -396,11 +396,13 @@ export class PropertyGroup<C extends ClassName = any> {
         return this;
     }
 
-    /** Applies several properties in one call, in the object's own key order. */
+    /** Applies several properties in one call, prefixed - so the owner batches them as one. */
     apply(values: Partial<{ [P in WritablePath<C>]: WriteAt<C, P> }>): this {
+        const prefixed: { [path: string]: unknown } = {};
         for (const key of Object.keys(values)) {
-            this.set(key as WritablePath<C>, (values as never)[key]);
+            prefixed[this.path(key)] = (values as never)[key];
         }
+        this.owner.apply(prefixed as never);
         return this;
     }
 
@@ -596,9 +598,36 @@ export class MassifObject<C extends ClassName = any> extends Observable {
         return bridge.setString(this.handle, path, JSON.stringify(value));
     }
 
-    /** Applies several properties in one call. */
+    /**
+     * Applies several properties in ONE crossing.
+     *
+     * `set` per key is one JNI or JSI call each, and configuring a layer writes a dozen. The
+     * facade takes the whole object as JSON, which is the shape a spec already has.
+     *
+     * A key whose value is another object - a handle or an inline spec - cannot be JSON, so those
+     * go one by one as before. So does everything, on an SDK built before `setAll`.
+     */
     apply(values: Partial<{ [P in WritablePath<C>]: WriteAt<C, P> }>): this {
+        const setAll = bridge.setAll;
+        const batched: { [path: string]: unknown } = {};
+        const single: string[] = [];
         for (const key of Object.keys(values)) {
+            const value: unknown = (values as never)[key];
+            if (!setAll || value instanceof MassifObject || isSpec(value) || resolvePath(this.className, key)?.code === 'o') {
+                single.push(key);
+            } else {
+                batched[key] = value;
+            }
+        }
+        if (setAll && Object.keys(batched).length) {
+            const result = setAll(this.handle, JSON.stringify(batched), '');
+            // The batch is the fast path; the per-key one is the diagnosable one, so a failure
+            // replays it to name the key that failed rather than the object.
+            if (result !== Result.OK) {
+                single.unshift(...Object.keys(batched));
+            }
+        }
+        for (const key of single) {
             this.set(key as WritablePath<C>, (values as never)[key]);
         }
         return this;

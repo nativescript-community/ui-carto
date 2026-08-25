@@ -2,7 +2,7 @@
  * @internal
  * @module
  */
-import { BASES, CLASS_NAMES, ENUMS, EVENTS, KIND_OF_CLASS, METHODS, PROPS, SPEC_CLASS } from './schema';
+import { ALIASES, BASES, CLASS_NAMES, ENUMS, EVENTS, KIND_OF_CLASS, METHODS, PROPS, SPEC_CLASS } from './schema';
 
 /**
  * Path resolution over the generated tables, the way the C++ property table does it.
@@ -15,12 +15,15 @@ import { BASES, CLASS_NAMES, ENUMS, EVENTS, KIND_OF_CLASS, METHODS, PROPS, SPEC_
  * back to a string read instead of refusing.
  */
 
-/** b bool, i int, f float, c color, s string, v variant, t struct, p position, e enum, o object. */
-export type PropCode = 'b' | 'i' | 'f' | 'c' | 's' | 'v' | 't' | 'p' | 'e' | 'o';
+/**
+ * b bool, i int, f float, c color, s string, v variant, t struct, p position, e enum, o object,
+ * g bag - a property whose keys are the app's, where the rest of the path is one key.
+ */
+export type PropCode = 'b' | 'i' | 'f' | 'c' | 's' | 'v' | 't' | 'p' | 'e' | 'o' | 'g';
 
 export interface PropInfo {
     code: PropCode;
-    /** The enum's name for `e`, the declared class for `o`. */
+    /** The enum's name for `e`, the declared class for `o`, one entry's code for `g`. */
     arg?: string;
 }
 
@@ -34,6 +37,7 @@ export interface MethodInfo {
 }
 
 const propCache: { [cls: string]: { [name: string]: PropInfo } } = {};
+const aliasCache: { [cls: string]: { [alias: string]: string } } = {};
 const methodCache: { [cls: string]: { [name: string]: MethodInfo } } = {};
 
 function parseProps(cls: string) {
@@ -45,6 +49,21 @@ function parseProps(cls: string) {
             for (const entry of encoded.split(';')) {
                 const [name, code, arg] = entry.split(',');
                 table[name] = arg ? { code: code as PropCode, arg } : { code: code as PropCode };
+            }
+        }
+    }
+    return table;
+}
+
+function parseAliases(cls: string) {
+    let table = aliasCache[cls];
+    if (!table) {
+        table = aliasCache[cls] = {};
+        const encoded = ALIASES[cls];
+        if (encoded) {
+            for (const entry of encoded.split(';')) {
+                const [alias, path] = entry.split('=');
+                table[alias] = path;
             }
         }
     }
@@ -86,11 +105,16 @@ export function propertyNames(cls: string): string[] {
     return names;
 }
 
-/** One property, found on the class or on any of its bases - which is where most of them live. */
+/**
+ * One property, found on the class or on any of its bases - which is where most of them live.
+ *
+ * An alias is a second spelling of one segment (`fog` for `fogOptions`), resolved here so nothing
+ * above has to know one was used.
+ */
 export function findProperty(cls: string, name: string): PropInfo | null {
     let walk: string | undefined = cls;
     while (walk) {
-        const found = parseProps(walk)[name];
+        const found = parseProps(walk)[name] ?? parseProps(walk)[parseAliases(walk)[name]];
         if (found) {
             return found;
         }
@@ -118,11 +142,16 @@ export function resolvePath(cls: string, path: string): PropInfo | null {
             return null;
         }
         if (i === segments.length - 1) {
-            return prop;
+            // A bag written whole takes an object of entries, which crosses as JSON.
+            return prop.code === 'g' ? { code: 'v' } : prop;
         }
         if (prop.code === 'o') {
             current = prop.arg as string;
             continue;
+        }
+        // A bag: everything left is ONE key, whatever it contains - valhalla's parameters nest.
+        if (prop.code === 'g') {
+            return { code: (prop.arg as PropCode) ?? 's' };
         }
         // A struct or a variant: the rest of the path is read out of its JSON.
         return prop.code === 't' || prop.code === 'p' || prop.code === 'v' ? { code: 'v' } : null;
