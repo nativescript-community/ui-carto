@@ -22,6 +22,11 @@ export interface ExampleHost {
     button(label: string, action: () => void): void;
     /** An on/off button in the control row, starting in the given state. */
     toggle(label: string, on: boolean, action: (on: boolean) => void): void;
+    /**
+     * A slider in the control row, for a value worth sweeping rather than picking - a duration, an
+     * exaggeration. The label is shown with the current value appended.
+     */
+    slider(label: string, min: number, max: number, value: number, action: (value: number) => void): void;
     /** Runs something after a delay, cancelled when the example stops. */
     after(millis: number, action: () => void): void;
 }
