@@ -1,7 +1,7 @@
 <script lang="ts">
     /**
-     * Switching between a flat map and a 3D view as ONE animation: the camera flies while the
-     * terrain rises under it.
+     * The 2D/3D switch, and every way of driving it: the SDK's own animation, a tilt gesture, and
+     * the app's own clock for an exact match to a camera flight.
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
@@ -19,23 +19,29 @@
     /** tilt 90 is straight down in this SDK, so 2D is 90 and a landscape view is a LOW tilt. */
     const TILT_2D = 90;
     const TILT_3D = 20;
-    const FLIGHT_SECONDS = 2.5;
-    /** How often the terrain height is stepped to follow the flight. */
+    /** The tilt the auto rule switches at, and its default. */
+    const AUTO_TILT = 88;
+    /** How often the matched ramp samples the flight. */
     const TICK_MS = 32;
 
     function start(host: ExampleHost) {
         const map = host.map;
         let in3D = false;
-        let animating = false;
+        let autoByTilt = false;
+        let matchFlight = false;
+        let seconds = 2.5;
 
         map.addLayer('basemap', { type: 'raster', source: osmRaster() });
 
-        // Built flat: terrain off, and the height at 0 so the first rise starts from nothing. The
-        // automatic flattening has to be out of the way, or it flattens the map again the moment
-        // the tilt passes 88.
         map.terrain({ type: 'terrain', source: demTiles() }).apply({
-            enabled: false,
-            exaggeration: 0,
+            // Configured and left on. The switch is `flattened`, and it opens flat - set BEFORE any
+            // layer decodes, so not one tile is built for a 3D the map has not shown.
+            enabled: true,
+            flattened: true,
+            // The whole way: a flat map decodes and culls as if no terrain were attached. RENDER
+            // (the default) only stops the terrain passes and keeps 3D's triangles.
+            flattenMode: 'TERRAIN_FLATTEN_MODE_FULL',
+            // Off to start with, so the button below is the only thing switching.
             autoFlattenTilt: 0,
             autoFlattenParallax: 0,
             cameraClearance: 40
@@ -50,6 +56,16 @@
             sunAzimuth: 170,
             sunAltitude: 42
         });
+
+        /** One number for both animations, which is what makes them the same length. */
+        function applySeconds(value: number) {
+            map.terrain().apply({
+                autoFlattenDuration: value,
+                // Timed apart from the sinking one: this direction waited for its tiles.
+                autoFlattenRiseDuration: value
+            });
+        }
+        applySeconds(seconds);
 
         /**
          * Opens the flat map exactly where a round trip through 3D lands, which is what makes the
@@ -69,71 +85,134 @@
         }
         frameFlatStart();
 
-        /** Steps the terrain height with the flight's own progress, and settles when it lands. */
-        function ramp(rising: boolean) {
+        const flatCaption = () =>
+            autoByTilt
+                ? 'Flat. Tilt, or tap, to rise into the terrain.'
+                : 'Flat, top-down. Tap to rise into the terrain.';
+        const riseCaption = () =>
+            autoByTilt
+                ? '3D - the tilt asked for it, not the button.'
+                : '3D. The SDK waited for its tiles before lifting the ground.';
+
+        function fly() {
+            // Where the camera IS, not what it is looking at: at tilt 20 the focus is kilometres
+            // out in front, so re-centring on it would jump the map forward.
+            const target = in3D ? SUMMIT : map.camera().eyePosition();
+            map.camera()
+                .animate(seconds)
+                .moveTo(target, { zoom: ZOOM, rotation: ROTATION, tilt: in3D ? TILT_3D : TILT_2D });
+        }
+
+        /** Writing flattenRatio takes the ramp off the SDK's timer and puts it on the flight's. */
+        function rampWithFlight() {
             host.after(TICK_MS, () => {
                 if (map.camera().isMoving()) {
                     const progress = map.camera().progress();
-                    map.terrain().set('exaggeration', rising ? progress : 1 - progress);
-                    ramp(rising);
+                    map.terrain().set('flattenRatio', in3D ? 1 - progress : progress);
+                    rampWithFlight();
                     return;
                 }
-                map.terrain().set('exaggeration', rising ? 1 : 0);
-                if (!rising) {
-                    // Only now, with the map already flat: flipping the flag re-decodes every tile,
-                    // and at exaggeration 0 there is nothing of that to see.
-                    map.terrain().set('enabled', false);
-                }
-                in3D = rising;
-                animating = false;
-                host.caption(
-                    rising
-                        ? '3D. Tap to go back to the flat map.'
-                        : 'Flat, top-down. Tap to rise into the terrain.'
-                );
+                map.terrain().set('flattenRatio', in3D ? 0 : 1);
+                // Hand the ratio back, or the switch stays MANUAL - which also keeps auto-flattening
+                // suspended, and a tilt gesture would then do nothing.
+                map.terrain().set('flattened', !in3D);
+                host.caption(in3D ? riseCaption() : flatCaption());
             });
         }
 
-        function riseTo3D() {
-            // The flight goes FIRST. Turning the terrain on clears every tile cache, and that
-            // re-decode landing on the flight's frame zero starved it of frames - the first switch
-            // jumped while every later one animated, because only the first one is cold. Started a
-            // tick later it lands during the rise instead, where the exaggeration is still near 0
-            // and a flat-decoded tile renders exactly like the 2D map. The flight is never made to
-            // wait (https://github.com/massif-maps/MassifMaps/issues/177 removes the re-decode).
-            map.camera()
-                .animate(FLIGHT_SECONDS)
-                .moveTo(SUMMIT, { zoom: ZOOM, rotation: ROTATION, tilt: TILT_3D });
-            host.after(TICK_MS, () => map.terrain().set('enabled', true));
-            // The terrain follows the FLIGHT rather than a clock of its own, so the two cannot
-            // drift apart if the flight is interrupted or the frame rate drops.
-            ramp(true);
-            host.caption('Rising. The terrain follows the flight, not a separate clock.');
+        function waitForTiles() {
+            host.after(TICK_MS, () => {
+                if (map.terrain().get('switching')) {
+                    waitForTiles();
+                    return;
+                }
+                fly();
+                rampWithFlight();
+                host.caption("Rising on the flight's own clock.");
+            });
         }
 
-        function flattenTo2D() {
-            // Where the camera IS, not what it is looking at: at tilt 20 the focus is kilometres
-            // out in front, so re-centring on it would jump the map forward. This is the viewpoint.
-            const eye = map.camera().eyePosition();
-            map.camera()
-                .animate(FLIGHT_SECONDS)
-                .moveTo(eye, { zoom: ZOOM, rotation: ROTATION, tilt: TILT_2D });
-            ramp(false);
-            host.caption('Back down, centred on where the camera was standing.');
+        /**
+         * The app's own clock: feed the terrain the FLIGHT's progress, so the two cannot drift apart
+         * even if the frame rate drops or the flight is interrupted.
+         */
+        function matched() {
+            if (!in3D) {
+                fly(); // sinking has nothing to wait for
+                rampWithFlight();
+                host.caption("Sinking on the flight's own clock.");
+                return;
+            }
+            // Rising does. Ask for 3D so its tiles start loading, and let the flight go only once
+            // the switch stops holding the ground flat - driving the ratio up before then would be
+            // held anyway, and the animation would start with a jump.
+            map.terrain().set('flattened', false);
+            host.caption('Loading the tiles 3D needs before the flight starts.');
+            waitForTiles();
+        }
+
+        /**
+         * The SDK's own animation: ask for the state, and it ramps over autoFlattenDuration. Two
+         * timers of the same length - which is close, and is all most apps need.
+         */
+        function timed() {
+            fly();
+            // Written even with auto by tilt on: the rule fires on a THRESHOLD CROSSING, not every
+            // frame, so it leaves an explicit ask alone and the terrain moves with the flight
+            // instead of waiting for the tilt to reach 88.
+            map.terrain().set('flattened', !in3D);
+            host.caption(in3D ? riseCaption() : flatCaption());
         }
 
         host.button('2D / 3D', () => {
-            if (animating) {
+            if (map.camera().isMoving()) {
+                host.caption('Still flying - let it land first.');
                 return;
             }
-            animating = true;
-            if (in3D) {
-                flattenTo2D();
+            // Read the SDK's state rather than count button presses. With auto by tilt on, the RULE
+            // owns the state and a local flag drifts out of step with it - and then the button flies
+            // to the tilt the map is already at, the rule never crosses its threshold, and nothing
+            // moves.
+            in3D = map.terrain().get('flattened');
+            if (matchFlight) {
+                matched();
             } else {
-                riseTo3D();
+                timed();
             }
         });
-        host.caption('Flat, top-down. Tap to rise into the terrain.');
+        host.slider('seconds', 0, 6, seconds, (value) => {
+            seconds = value;
+            applySeconds(value);
+        });
+        host.toggle('Match flight', false, (on) => {
+            matchFlight = on;
+            host.caption(
+                on
+                    ? "Matched: the terrain reads the flight's own progress, so the two cannot drift."
+                    : 'Timed: two clocks of the same length. Close, but not the same clock.'
+            );
+        });
+        host.toggle('Full switch', true, (on) => {
+            map.terrain().set(
+                'flattenMode',
+                on ? 'TERRAIN_FLATTEN_MODE_FULL' : 'TERRAIN_FLATTEN_MODE_RENDER'
+            );
+            host.caption(
+                on
+                    ? 'FULL: flat costs nothing, each switch re-decodes the visible tiles.'
+                    : "RENDER: switching is free, but flat still carries 3D's triangles."
+            );
+        });
+        host.toggle('Auto by tilt', false, (on) => {
+            autoByTilt = on;
+            map.terrain().set('autoFlattenTilt', on ? AUTO_TILT : 0);
+            host.caption(
+                on
+                    ? 'Auto on: tilt with two fingers and it switches itself. The button still leads - the rule only fires when the tilt CROSSES 88.'
+                    : 'Auto off: only the button switches.'
+            );
+        });
+        host.caption(flatCaption());
     }
 </script>
 
