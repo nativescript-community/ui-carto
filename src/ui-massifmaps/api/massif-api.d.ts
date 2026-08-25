@@ -576,6 +576,22 @@ export type RoutingAction =
     | 'ROUTING_ACTION_LEAVE_FERRY'
     ;
 
+export type SkyQuality =
+    /** 5 samples along the view ray, 3 towards the sun. */
+    | 'SKY_QUALITY_LOW'
+    /** 8 and 4. The default. */
+    | 'SKY_QUALITY_MEDIUM'
+    /** 12 and 5. */
+    | 'SKY_QUALITY_HIGH'
+    ;
+
+export type SkyType =
+    /** A gradient between HorizonColor and SkyColor. What the SDK drew before the atmosphere existed; pick it for a flat, stylised or brand-coloured sky. */
+    | 'SKY_TYPE_GRADIENT'
+    /** Rayleigh and Mie single scattering, integrated along the view ray. The blue zenith, the reddening at a low sun and the halo around it all come out of the model rather than out of a colour ramp, so the sky follows the time of day on its own. */
+    | 'SKY_TYPE_ATMOSPHERE'
+    ;
+
 export type TileFormat =
     /** Detect the format from the tile data. The two are unambiguous in practice, but set the format explicitly when the source is known - it skips the check and cannot be fooled. */
     | 'TILE_FORMAT_AUTO'
@@ -725,12 +741,14 @@ export interface PropertyTypes {
     'massif::AssetTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1362,12 +1380,14 @@ export interface PropertyTypes {
     'massif::BitmapOverlayRasterTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1391,12 +1411,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1404,12 +1426,14 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1593,12 +1617,14 @@ export interface PropertyTypes {
     'massif::CombinedTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1621,12 +1647,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1648,12 +1676,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1696,12 +1726,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1741,8 +1773,6 @@ export interface PropertyTypes {
         'baseInterval': number;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Returns the contour interval used for label stubs. */
         'labelInterval': number;
         /** Returns whether only short label stubs are generated instead of full contour lines. */
@@ -1753,6 +1783,10 @@ export interface PropertyTypes {
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** Returns the minimum zoom at which contour geometry is generated. */
         'minVisibleZoom': number;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
@@ -1927,12 +1961,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1948,12 +1984,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -1990,12 +2028,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -2160,8 +2200,6 @@ export interface PropertyTypes {
         'enabled': boolean;
         /** Returns the color of the upper atmosphere. */
         'highColor': number;
-        /** Returns the elevation angle the fog is still at full strength at. */
-        'horizonAngle': number;
         /** Returns how far up the sky the fog is blended in. */
         'horizonBlend': number;
         /** Returns where the fog reaches full strength. */
@@ -2174,6 +2212,10 @@ export interface PropertyTypes {
         'spaceColor': number;
         /** Returns how brightly stars are drawn beyond the atmosphere. */
         'starIntensity': number;
+        /** Returns the altitude the fog has fully faded out at. */
+        'verticalRangeEnd': number;
+        /** Returns the altitude the fog starts fading out at. */
+        'verticalRangeStart': number;
     };
     'massif::GeoJSONGeometryReader': {
         /** Returns the current target projection. If target projection is set, all geometry coordinates will be converted from WGS84 to target projection coordinate system. */
@@ -2196,12 +2238,14 @@ export interface PropertyTypes {
         readonly 'dataExtent': Bounds;
         /** Returns the default layer buffer in tile pixels. */
         'defaultLayerBuffer': number;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -2477,14 +2521,16 @@ export interface PropertyTypes {
         'baseURL': string;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Returns true/false based on whether the max-age header check is used. If this is enabled, SDK will automatically refresh the tiles when tiles have expired. */
         'maxAgeHeaderCheck': boolean;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -2502,12 +2548,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -2535,12 +2583,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -2598,12 +2648,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3017,12 +3069,14 @@ export interface PropertyTypes {
     'massif::MBTilesTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3166,12 +3220,14 @@ export interface PropertyTypes {
         'customServiceURL': string;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3430,12 +3486,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3443,12 +3501,14 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3460,12 +3520,14 @@ export interface PropertyTypes {
     'massif::MergedMBVTTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3525,12 +3587,14 @@ export interface PropertyTypes {
     'massif::MultiTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -3799,8 +3863,6 @@ export interface PropertyTypes {
         'fog.enabled': boolean;
         /** Returns the color of the upper atmosphere. */
         'fog.highColor': number;
-        /** Returns the elevation angle the fog is still at full strength at. */
-        'fog.horizonAngle': number;
         /** Returns how far up the sky the fog is blended in. */
         'fog.horizonBlend': number;
         /** Returns where the fog reaches full strength. */
@@ -3813,6 +3875,10 @@ export interface PropertyTypes {
         'fog.spaceColor': number;
         /** Returns how brightly stars are drawn beyond the atmosphere. */
         'fog.starIntensity': number;
+        /** Returns the altitude the fog has fully faded out at. */
+        'fog.verticalRangeEnd': number;
+        /** Returns the altitude the fog starts fading out at. */
+        'fog.verticalRangeStart': number;
         /** Returns the fog (atmosphere) options. May be null. */
         'fogOptions': Handle;
         /** Returns the fog color. */
@@ -3821,8 +3887,6 @@ export interface PropertyTypes {
         'fogOptions.enabled': boolean;
         /** Returns the color of the upper atmosphere. */
         'fogOptions.highColor': number;
-        /** Returns the elevation angle the fog is still at full strength at. */
-        'fogOptions.horizonAngle': number;
         /** Returns how far up the sky the fog is blended in. */
         'fogOptions.horizonBlend': number;
         /** Returns where the fog reaches full strength. */
@@ -3835,6 +3899,10 @@ export interface PropertyTypes {
         'fogOptions.spaceColor': number;
         /** Returns how brightly stars are drawn beyond the atmosphere. */
         'fogOptions.starIntensity': number;
+        /** Returns the altitude the fog has fully faded out at. */
+        'fogOptions.verticalRangeEnd': number;
+        /** Returns the altitude the fog starts fading out at. */
+        'fogOptions.verticalRangeStart': number;
         /** Returns how fast a free roam drag turns the view. */
         'freeRoamLookSensitivity': number;
         /** Returns the free roam mode. */
@@ -3944,38 +4012,62 @@ export interface PropertyTypes {
         'seamlessPanning': boolean;
         /** Returns the sky options. May be null. */
         'sky': Handle;
+        /** Returns the tint applied to Rayleigh scattering. */
+        'sky.atmosphereColor': number;
+        /** Returns the exposure applied to the scattered light. */
+        'sky.atmosphereLuminance': number;
+        /** Returns the brightness of the sun driving the atmosphere. */
+        'sky.atmosphereSunIntensity': number;
         /** Returns whether the shader sky is enabled. */
         'sky.enabled': boolean;
         /** Returns the ground color. */
         'sky.groundColor': number;
+        /** Returns the tint applied to Mie scattering. */
+        'sky.haloColor': number;
         /** Returns the angular blend width between the horizon color and the sky color. */
         'sky.horizonBlend': number;
         /** Returns the horizon color. */
         'sky.horizonColor': number;
+        /** Returns how finely the atmosphere is integrated. */
+        'sky.quality': 'SKY_QUALITY_LOW' | 'SKY_QUALITY_MEDIUM' | 'SKY_QUALITY_HIGH' | number;
         /** Returns the custom sky fragment shader source, or an empty string if the built-in shader is used. */
         'sky.shaderSource': string;
         /** Returns the zenith sky color. */
         'sky.skyColor': number;
         /** Returns whether the built-in shader draws a sun disc. */
         'sky.sunDiscEnabled': boolean;
+        /** Returns what the sky pass draws. */
+        'sky.type': 'SKY_TYPE_GRADIENT' | 'SKY_TYPE_ATMOSPHERE' | number;
         /** Returns the sky color. */
         'skyColor': number;
         /** Returns the sky options. May be null. */
         'skyOptions': Handle;
+        /** Returns the tint applied to Rayleigh scattering. */
+        'skyOptions.atmosphereColor': number;
+        /** Returns the exposure applied to the scattered light. */
+        'skyOptions.atmosphereLuminance': number;
+        /** Returns the brightness of the sun driving the atmosphere. */
+        'skyOptions.atmosphereSunIntensity': number;
         /** Returns whether the shader sky is enabled. */
         'skyOptions.enabled': boolean;
         /** Returns the ground color. */
         'skyOptions.groundColor': number;
+        /** Returns the tint applied to Mie scattering. */
+        'skyOptions.haloColor': number;
         /** Returns the angular blend width between the horizon color and the sky color. */
         'skyOptions.horizonBlend': number;
         /** Returns the horizon color. */
         'skyOptions.horizonColor': number;
+        /** Returns how finely the atmosphere is integrated. */
+        'skyOptions.quality': 'SKY_QUALITY_LOW' | 'SKY_QUALITY_MEDIUM' | 'SKY_QUALITY_HIGH' | number;
         /** Returns the custom sky fragment shader source, or an empty string if the built-in shader is used. */
         'skyOptions.shaderSource': string;
         /** Returns the zenith sky color. */
         'skyOptions.skyColor': number;
         /** Returns whether the built-in shader draws a sun disc. */
         'skyOptions.sunDiscEnabled': boolean;
+        /** Returns what the sky pass draws. */
+        'skyOptions.type': 'SKY_TYPE_GRADIENT' | 'SKY_TYPE_ATMOSPHERE' | number;
         /** Returns the terrain options. May be null if no terrain is configured. */
         'terrain': Handle;
         /** Returns the terrain background color. */
@@ -4094,12 +4186,14 @@ export interface PropertyTypes {
     'massif::OrderedTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -4111,12 +4205,14 @@ export interface PropertyTypes {
     'massif::PMTilesTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -4172,12 +4268,14 @@ export interface PropertyTypes {
     'massif::PackageManagerTileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the package manager instance used by the data source. */
@@ -4238,12 +4336,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -4251,12 +4351,14 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the status of the cache database. */
@@ -4898,12 +5000,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -4919,12 +5023,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -4959,12 +5065,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5145,20 +5253,32 @@ export interface PropertyTypes {
         'searchRadius': number;
     };
     'massif::SkyOptions': {
+        /** Returns the tint applied to Rayleigh scattering. */
+        'atmosphereColor': number;
+        /** Returns the exposure applied to the scattered light. */
+        'atmosphereLuminance': number;
+        /** Returns the brightness of the sun driving the atmosphere. */
+        'atmosphereSunIntensity': number;
         /** Returns whether the shader sky is enabled. */
         'enabled': boolean;
         /** Returns the ground color. */
         'groundColor': number;
+        /** Returns the tint applied to Mie scattering. */
+        'haloColor': number;
         /** Returns the angular blend width between the horizon color and the sky color. */
         'horizonBlend': number;
         /** Returns the horizon color. */
         'horizonColor': number;
+        /** Returns how finely the atmosphere is integrated. */
+        'quality': 'SKY_QUALITY_LOW' | 'SKY_QUALITY_MEDIUM' | 'SKY_QUALITY_HIGH' | number;
         /** Returns the custom sky fragment shader source, or an empty string if the built-in shader is used. */
         'shaderSource': string;
         /** Returns the zenith sky color. */
         'skyColor': number;
         /** Returns whether the built-in shader draws a sun disc. */
         'sunDiscEnabled': boolean;
+        /** Returns what the sky pass draws. */
+        'type': 'SKY_TYPE_GRADIENT' | 'SKY_TYPE_ATMOSPHERE' | number;
     };
     'massif::SolidLayer': {
         /** Returns the bitmap of this layer. */
@@ -5528,12 +5648,14 @@ export interface PropertyTypes {
     'massif::TileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5561,12 +5683,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5582,12 +5706,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5620,12 +5746,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5686,12 +5814,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5713,12 +5843,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -5759,12 +5891,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -6135,12 +6269,14 @@ export interface PropertyTypes {
         'UTFGridDataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'UTFGridDataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'UTFGridDataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'UTFGridDataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'UTFGridDataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `UTFGridDataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'UTFGridDataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -6162,12 +6298,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -6208,12 +6346,14 @@ export interface PropertyTypes {
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'source.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'source.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'source.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'source.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'source.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `source.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'source.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -6253,12 +6393,14 @@ export interface PropertyTypes {
         readonly 'dataSource': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
         readonly 'dataSource.dataExtent': Bounds;
-        /** Gets the current encoding type. */
-        'dataSource.encoding': string;
         /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
         'dataSource.maxOverzoomLevel': number;
         /** (read-only) Returns the maximum zoom level supported by this data source. */
         readonly 'dataSource.maxZoom': number;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        'dataSource.metaData': Record<string, Json>;
+        /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+        [key: `dataSource.metaData.${string}`]: Json;
         /** (read-only) Returns the minimum zoom level supported by this data source. */
         readonly 'dataSource.minZoom': number;
         /** (read-only) Returns the projection of this tile source. */
@@ -7946,6 +8088,7 @@ export interface VariantPaths {
     };
     'massif::AssetTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::BalloonPopup': {
@@ -8025,6 +8168,7 @@ export interface VariantPaths {
     };
     'massif::BitmapOverlayRasterTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::BundleAssetPackage': {
@@ -8034,7 +8178,9 @@ export interface VariantPaths {
     'massif::CacheTileDataSource': {
         'dataExtent': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::CartoCSSStyleSet': {
@@ -8071,6 +8217,7 @@ export interface VariantPaths {
     };
     'massif::CombinedTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::CompiledStyleSet': {
@@ -8078,17 +8225,21 @@ export interface VariantPaths {
     };
     'massif::CompositeVectorTileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::ContourTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::CullState': {
@@ -8112,12 +8263,15 @@ export interface VariantPaths {
     };
     'massif::CustomRasterTileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
@@ -8183,6 +8337,7 @@ export interface VariantPaths {
     };
     'massif::GeoJSONVectorTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::GeocodingAddress': {
@@ -8217,18 +8372,22 @@ export interface VariantPaths {
     'massif::HTTPTileDataSource': {
         'HTTPHeaders': true;
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
         'subdomains': true;
     };
     'massif::HillshadeRasterTileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'illuminationDirection': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
@@ -8284,6 +8443,7 @@ export interface VariantPaths {
     };
     'massif::MBTilesTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::MBVectorTileDecoder': {
@@ -8332,6 +8492,7 @@ export interface VariantPaths {
     };
     'massif::MapTilerOnlineTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::MapVec': {
@@ -8362,11 +8523,14 @@ export interface VariantPaths {
     'massif::MemoryCacheTileDataSource': {
         'dataExtent': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::MergedMBVTTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::MultiGeometry': {
@@ -8391,6 +8555,7 @@ export interface VariantPaths {
     };
     'massif::MultiTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::MultiValhallaOfflineRoutingService': {
@@ -8435,10 +8600,12 @@ export interface VariantPaths {
     };
     'massif::OrderedTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::PMTilesTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::PackageInfo': {
@@ -8459,6 +8626,7 @@ export interface VariantPaths {
     };
     'massif::PackageManagerTileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'packageManager.localPackages': true;
         'packageManager.serverPackageListMetaInfo.variant': true;
         'packageManager.serverPackages': true;
@@ -8480,7 +8648,9 @@ export interface VariantPaths {
     'massif::PersistentCacheTileDataSource': {
         'dataExtent': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::PersistentTaskQueue': {
@@ -8593,12 +8763,15 @@ export interface VariantPaths {
     };
     'massif::RasterTileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
@@ -8696,6 +8869,7 @@ export interface VariantPaths {
     };
     'massif::TileDataSource': {
         'dataExtent': true;
+        'metaData': true;
         'projection.bounds': true;
     };
     'massif::TileDecoderListener': {
@@ -8709,12 +8883,15 @@ export interface VariantPaths {
     };
     'massif::TileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
@@ -8731,12 +8908,15 @@ export interface VariantPaths {
     };
     'massif::TorqueTileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
@@ -8843,17 +9023,21 @@ export interface VariantPaths {
     };
     'massif::VectorTileLayer': {
         'UTFGridDataSource.dataExtent': true;
+        'UTFGridDataSource.metaData': true;
         'UTFGridDataSource.projection.bounds': true;
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'metaData': true;
         'projection.bounds': true;
         'source.dataExtent': true;
+        'source.metaData': true;
         'source.projection.bounds': true;
         'visibleZoomRange': true;
     };
     'massif::VectorTileSearchService': {
         'dataSource.dataExtent': true;
+        'dataSource.metaData': true;
         'dataSource.projection.bounds': true;
         'layers': true;
         'projection.bounds': true;
@@ -9666,8 +9850,6 @@ export interface OptionsSpec_fog {
     enabled?: boolean;
     /** Returns the color of the upper atmosphere. */
     highColor?: number;
-    /** Returns the elevation angle the fog is still at full strength at. */
-    horizonAngle?: number;
     /** Returns how far up the sky the fog is blended in. */
     horizonBlend?: number;
     /** Returns where the fog reaches full strength. */
@@ -9680,6 +9862,10 @@ export interface OptionsSpec_fog {
     spaceColor?: number;
     /** Returns how brightly stars are drawn beyond the atmosphere. */
     starIntensity?: number;
+    /** Returns the altitude the fog has fully faded out at. */
+    verticalRangeEnd?: number;
+    /** Returns the altitude the fog starts fading out at. */
+    verticalRangeStart?: number;
 }
 
 export interface OptionsSpec_light {
@@ -9718,20 +9904,32 @@ export interface OptionsSpec_light {
 
 export interface OptionsSpec_sky {
     type: 'sky';
+    /** Returns the tint applied to Rayleigh scattering. */
+    atmosphereColor?: number;
+    /** Returns the exposure applied to the scattered light. */
+    atmosphereLuminance?: number;
+    /** Returns the brightness of the sun driving the atmosphere. */
+    atmosphereSunIntensity?: number;
     /** Returns whether the shader sky is enabled. */
     enabled?: boolean;
     /** Returns the ground color. */
     groundColor?: number;
+    /** Returns the tint applied to Mie scattering. */
+    haloColor?: number;
     /** Returns the angular blend width between the horizon color and the sky color. */
     horizonBlend?: number;
     /** Returns the horizon color. */
     horizonColor?: number;
+    /** Returns how finely the atmosphere is integrated. */
+    quality?: 'SKY_QUALITY_LOW' | 'SKY_QUALITY_MEDIUM' | 'SKY_QUALITY_HIGH' | number;
     /** Returns the custom sky fragment shader source, or an empty string if the built-in shader is used. */
     shaderSource?: string;
     /** Returns the zenith sky color. */
     skyColor?: number;
     /** Returns whether the built-in shader draws a sun disc. */
     sunDiscEnabled?: boolean;
+    /** Returns what the sky pass draws. */
+    type?: 'SKY_TYPE_GRADIENT' | 'SKY_TYPE_ATMOSPHERE' | number;
 }
 
 export interface OptionsSpec_terrain {
@@ -9847,21 +10045,21 @@ export type SearchSpec = SearchSpec_request | SearchSpec_vectortile;
 
 export interface SourceSpec_assets {
     type: 'assets';
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
     maxZoom?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     minZoom?: number;
     path: string;
 }
 
 export interface SourceSpec_combined {
     type: 'combined';
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     source: string | SourceSpec;
     source2: string | SourceSpec;
     zoomLevel?: number;
@@ -9871,11 +10069,11 @@ export interface SourceSpec_geojson {
     type: 'geojson';
     /** Returns the default layer buffer in tile pixels. */
     defaultLayerBuffer?: number;
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
     maxZoom?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     minZoom?: number;
     /** Returns the simplification tolerance in tile pixels. */
     simplifyTolerance?: number;
@@ -9887,13 +10085,13 @@ export interface SourceSpec_http {
     HTTPHeaders?: Record<string, string>;
     /** Returns true/false based whether the TMS tiling scheme is used. */
     TMSScheme?: boolean;
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Returns true/false based on whether the max-age header check is used. If this is enabled, SDK will automatically refresh the tiles when tiles have expired. */
     maxAgeHeaderCheck?: boolean;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
     maxZoom?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     minZoom?: number;
     /** Returns the subdomains for {s} tag. The default is ["a", "b", "c", "d"]. */
     subdomains?: string[];
@@ -9915,22 +10113,22 @@ export interface SourceSpec_maptiler {
     type: 'maptiler';
     /** Returns the custom backend service URL. */
     customServiceURL?: string;
-    /** Gets the current encoding type. */
-    encoding?: string;
     key: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     /** Returns the current timeout value. */
     timeout?: number;
 }
 
 export interface SourceSpec_mbtiles {
     type: 'mbtiles';
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
     maxZoom?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     minZoom?: number;
     path: string;
     scheme?: 'MBTILES_SCHEME_TMS' | 'MBTILES_SCHEME_XYZ';
@@ -9939,38 +10137,38 @@ export interface SourceSpec_mbtiles {
 export interface SourceSpec_memory_cache {
     type: 'memory-cache';
     capacity?: number;
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     source: string | SourceSpec;
 }
 
 export interface SourceSpec_merged_mbvt {
     type: 'merged-mbvt';
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     source: string | SourceSpec;
     source2: string | SourceSpec;
 }
 
 export interface SourceSpec_multi {
     type: 'multi';
-    /** Gets the current encoding type. */
-    encoding?: string;
     maxOpenedPackages?: number;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
 }
 
 export interface SourceSpec_ordered {
     type: 'ordered';
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     source: string | SourceSpec;
     source2: string | SourceSpec;
 }
@@ -9981,10 +10179,10 @@ export interface SourceSpec_persistent_cache {
     cacheOnlyMode?: boolean;
     capacity?: number;
     databasePath: string;
-    /** Gets the current encoding type. */
-    encoding?: string;
     /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
     maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
     source: string | SourceSpec;
 }
 
@@ -10135,7 +10333,9 @@ export interface MethodTypes {
     'massif::AssetPackage': {
     };
     'massif::AssetTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::BalloonPopup': {
     };
@@ -10174,12 +10374,16 @@ export interface MethodTypes {
     'massif::Bitmap': {
     };
     'massif::BitmapOverlayRasterTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::BundleAssetPackage': {
     };
     'massif::CacheTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::CartoCSSStyleSet': {
     };
@@ -10206,7 +10410,9 @@ export interface MethodTypes {
     'massif::Color': {
     };
     'massif::CombinedTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::CompiledStyleSet': {
     };
@@ -10215,7 +10421,9 @@ export interface MethodTypes {
         refresh: { args: []; result: void };
     };
     'massif::ContourTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::CullState': {
     };
@@ -10274,9 +10482,11 @@ export interface MethodTypes {
         addFeature: { args: [layer: number, feature: Json]; result: void };
         createLayer: { args: [name: string]; result: number };
         deleteLayer: { args: [layer: number]; result: void };
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
         removeFeature: { args: [layer: number, id: Json]; result: void };
         setLayerGeoJSON: { args: [layer: number, geoJson: Json]; result: void };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
         updateFeature: { args: [layer: number, feature: Json]; result: void };
     };
     'massif::GeocodingAddress': {
@@ -10299,7 +10509,9 @@ export interface MethodTypes {
     'massif::GeometrySimplifier': {
     };
     'massif::HTTPTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::HillshadeRasterTileLayer': {
         clearTileCaches: { args: [all: boolean]; result: void };
@@ -10344,7 +10556,9 @@ export interface MethodTypes {
     'massif::LogEventListener': {
     };
     'massif::MBTilesTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::MBVectorTileDecoder': {
         getStyleParameter: { args: [name: string]; result: string };
@@ -10384,7 +10598,9 @@ export interface MethodTypes {
     'massif::MapTile': {
     };
     'massif::MapTilerOnlineTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::MapVec': {
     };
@@ -10399,10 +10615,14 @@ export interface MethodTypes {
     'massif::MassifInterop': {
     };
     'massif::MemoryCacheTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::MergedMBVTTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::MultiGeometry': {
     };
@@ -10424,8 +10644,10 @@ export interface MethodTypes {
     };
     'massif::MultiTileDataSource': {
         add: { args: [datasource: Handle, tileMask: string]; result: void };
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
         remove: { args: [datasource: Handle]; result: boolean };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::MultiValhallaOfflineRoutingService': {
         add: { args: [database: string]; result: void };
@@ -10458,10 +10680,14 @@ export interface MethodTypes {
     'massif::OptionsListener': {
     };
     'massif::OrderedTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::PMTilesTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::PackageInfo': {
     };
@@ -10480,7 +10706,9 @@ export interface MethodTypes {
         matchRoute: { args: [request: Handle]; result: Handle<'massif::RouteMatchingResult'>; resultClass: 'massif::RouteMatchingResult' };
     };
     'massif::PackageManagerTileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::PackageManagerValhallaRoutingService': {
         calculateRoute: { args: [request: Handle]; result: Handle<'massif::RoutingResult'>; resultClass: 'massif::RoutingResult' };
@@ -10500,7 +10728,9 @@ export interface MethodTypes {
     };
     'massif::PersistentCacheTileDataSource': {
         clear: { args: []; result: void };
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
         startDownloadArea: { args: [bounds: Json, minZoom: number, maxZoom: number, fetchDelay: number]; result: void };
         stopAllDownloads: { args: []; result: void };
     };
@@ -10613,9 +10843,12 @@ export interface MethodTypes {
     'massif::TextStyleBuilder': {
     };
     'massif::TileData': {
+        getMetaDataElement: { args: [key: string]; result: Json };
     };
     'massif::TileDataSource': {
+        getMetaDataElement: { args: [key: string]; result: Json };
         loadTile: { args: [tile: Tile]; result: Handle<'massif::TileData'>; resultClass: 'massif::TileData' };
+        setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::TileDecoderListener': {
     };

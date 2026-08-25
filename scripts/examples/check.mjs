@@ -75,7 +75,7 @@ writeFileSync(
         '}',
         'export declare class File { static fromPath(p: string): File; writeTextSync(text: string): void; }',
         'export declare class Folder { static fromPath(p: string): Folder; readonly path: string; }',
-        'export declare const knownFolders: { temp(): Folder; currentApp(): Folder };',
+        'export declare const knownFolders: { temp(): Folder; documents(): Folder; currentApp(): Folder };',
         'export declare const path: { join(...parts: string[]): string };',
         ''
     ].join('\n')
