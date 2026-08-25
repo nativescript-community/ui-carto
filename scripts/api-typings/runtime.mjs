@@ -20,6 +20,9 @@ const CODES = {
 };
 
 function encode(prop) {
+    // A bag first: the rest of the path is a KEY, and the argument is what ONE entry holds, so
+    // `params.water_color` picks setString and a Variant bag picks the JSON verb.
+    if (prop.indexed) return `${prop.name},g,${prop.indexed === 'string' ? 's' : 'v'}`;
     if (prop.type === 'ENUM') return `${prop.name},e,${enumTypeName(prop.enum || '')}`;
     if (prop.type === 'OBJECT') return `${prop.name},o,${prop.objectClass}`;
     if (prop.type === 'STRUCT') return `${prop.name},${prop.position ? 'p' : 't'}`;
@@ -47,6 +50,7 @@ const PRELUDE = `${BANNER}
  *   b bool   i int    f float   c color (ARGB int)   s string   v variant (JSON)
  *   t struct (JSON)   p position struct (JSON, convertible between projections)
  *   e enum, followed by the enum's name       o object, followed by the declared class
+ *   g bag, followed by the code ONE entry carries - the rest of the path is its key
  */
 `;
 
@@ -63,6 +67,17 @@ export function emitRuntime(schema) {
         if (!props.length) continue;
         rows += props.length;
         out.push(`    '${cppClass}': '${props.map(encode).join(';')}',\n`);
+    }
+    out.push('};\n\n');
+
+    // A second spelling of one segment, resolved the way the C++ resolves it - so the runtime
+    // picks the right verb for `fog.rangeStart` rather than falling back to guessing by value.
+    out.push('/** Per class, its aliases as `alias=path`. */\n');
+    out.push('export const ALIASES: { [cls: string]: string } = {\n');
+    for (const cppClass of named) {
+        const aliases = Object.entries(classes[cppClass].aliases ?? {});
+        if (!aliases.length) continue;
+        out.push(`    '${cppClass}': '${aliases.map(([alias, path]) => `${alias}=${path}`).join(';')}',\n`);
     }
     out.push('};\n\n');
 

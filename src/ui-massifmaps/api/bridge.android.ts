@@ -106,6 +106,8 @@ export const bridge: NativeBridge = {
     setBool: (handle, path, value) => MassifApi.setBool(handle, path, value),
     setString: (handle, path, value) => MassifApi.setString(handle, path, value),
     setObject: (handle, path, value) => MassifApi.setObject(handle, path, value),
+    // Only on an SDK that carries it: an older one keeps the per-key path.
+    setAll: MassifApi?.setAll ? (handle, json, projection) => MassifApi.setAll(handle, json, projection) : undefined,
     getObject: (handle, path) => MassifApi.getObject(handle, path),
 
     getFloat: (handle, path, defaultValue) => MassifApi.getFloat(handle, path, defaultValue),

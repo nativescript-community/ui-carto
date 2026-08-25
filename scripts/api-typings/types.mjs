@@ -169,7 +169,13 @@ export function emitTypes(schema) {
         for (const p of Object.keys(paths).sort()) {
             const prop = paths[p];
             if (prop.doc) out.push(`        /** ${prop.readOnly ? '(read-only) ' : ''}${prop.doc} */\n`);
-            out.push(`        ${prop.readOnly ? 'readonly ' : ''}'${p}': ${valueType(prop, enums)};\n`);
+            if (p.endsWith('.*')) {
+                // A bag's keys are the app's, not the SDK's, so they are a template-literal index
+                // signature rather than a list: `params.water_color` completes and typechecks.
+                out.push(`        [key: \`${p.slice(0, -1)}\${string}\`]: ${valueType(prop, enums)};\n`);
+            } else {
+                out.push(`        ${prop.readOnly ? 'readonly ' : ''}'${p}': ${valueType(prop, enums)};\n`);
+            }
         }
         out.push('    };\n');
     }
@@ -182,7 +188,7 @@ export function emitTypes(schema) {
         const paths = closure(cppClass, classes);
         out.push(`    '${cppClass}': {\n`);
         for (const p of Object.keys(paths).sort()) {
-            if (paths[p].position) out.push(`        '${p}': true;\n`);
+            if (!p.endsWith('.*') && (paths[p].position)) out.push(`        '${p}': true;\n`);
         }
         out.push('    };\n');
     }
@@ -195,7 +201,7 @@ export function emitTypes(schema) {
         out.push(`    '${cppClass}': {\n`);
         for (const p of Object.keys(paths).sort()) {
             // The class it points at, not `true`: ClassAtPath reads it straight out of here.
-            if (paths[p].type === 'OBJECT') out.push(`        '${p}': '${paths[p].objectClass}';\n`);
+            if (!p.endsWith('.*') && (paths[p].type === 'OBJECT')) out.push(`        '${p}': '${paths[p].objectClass}';\n`);
         }
         out.push('    };\n');
     }
@@ -210,7 +216,7 @@ export function emitTypes(schema) {
         const paths = closure(cppClass, classes);
         out.push(`    '${cppClass}': {\n`);
         for (const p of Object.keys(paths).sort()) {
-            if (paths[p].type === 'VARIANT' || paths[p].type === 'STRUCT') out.push(`        '${p}': true;\n`);
+            if (!p.endsWith('.*') && (paths[p].type === 'VARIANT' || paths[p].type === 'STRUCT')) out.push(`        '${p}': true;\n`);
         }
         out.push('    };\n');
     }

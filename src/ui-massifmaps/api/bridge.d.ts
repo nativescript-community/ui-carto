@@ -38,6 +38,13 @@ export interface NativeBridge {
     setBool(handle: number, path: string, value: boolean): number;
     setString(handle: number, path: string, value: string): number;
     setObject(handle: number, path: string, value: number): number;
+    /**
+     * Several properties in ONE crossing, from a JSON object of path to value.
+     *
+     * Undefined on an SDK built before it, so a caller falls back to one call per key rather than
+     * failing - see MassifObject.apply.
+     */
+    setAll?(handle: number, json: string, projection: string): number;
     /** The object an object property points at, as a handle the caller owns. 0 when there is none. */
     getObject(handle: number, path: string): number;
 

@@ -35,14 +35,17 @@
         // Roads, place names and summits ON TOP, from a style with no background of its own.
         map.addLayer('labels', { type: 'vector', source: vectorTiles(), style: overlayStyle() });
 
-        map.terrain({ type: 'terrain', source: demTiles() })
-            .set('exaggeration', 1.25)
-            // How far the ground goes on: multiples of the camera-to-focus distance, so one
-            // value holds at every zoom. Pair a short one with fog or the ground ends on an edge.
-            .set('viewDistanceFactor', 1.6)
-            // The terrain normally holds the camera 200 m above the ground, which swings a close
-            // view into the nearest hillside. Lowered so the camera can sit among the peaks.
-            .set('cameraClearance', 40);
+        // apply, not three sets: one crossing for the whole group.
+        //
+        // viewDistanceFactor is how far the ground goes on, in multiples of the camera-to-focus
+        // distance, so one value holds at every zoom - pair a short one with fog or the ground
+        // ends on an edge. cameraClearance is normally 200 m, which swings a close view into the
+        // nearest hillside; lowered so the camera can sit among the peaks.
+        map.terrain({ type: 'terrain', source: demTiles() }).apply({
+            exaggeration: 1.25,
+            viewDistanceFactor: 1.6,
+            cameraClearance: 40
+        });
 
         // Options starts with these EMPTY, so they are BUILT here rather than written through.
         map.sky({ type: 'sky' });
@@ -61,7 +64,9 @@
 
         map.camera().moveTo(VIEW, { zoom: 11.5, rotation: 180, tilt: 33 });
 
-        host.toggle('Terrain', true, (on) => map.terrain().set('enabled', on));
+        // A path off the map itself, with the readable spelling: 'terrain' is an alias for
+        // 'terrainOptions', so this is map.set('terrainOptions.enabled', on).
+        host.toggle('Terrain', true, (on) => map.set('terrain.enabled', on));
         host.toggle('Labels', true, (on) => map.layer('labels')?.visible(on));
         host.button('Exaggerate', () => {
             const current = map.terrain().get('exaggeration');

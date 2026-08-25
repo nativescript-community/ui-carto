@@ -52,12 +52,25 @@ A spec's keys are the constructor's parameters **plus every writable property of
 
 ```ts
 map.set('fogOptions.rangeStart', 2.5); // a dotted path walks object properties
+map.set('fog.rangeStart', 2.5); // `fog` is an alias for `fogOptions` - same property
 map.fog().set('rangeEnd', 4); // or scope onto one
-map.terrain().apply({ exaggeration: 1.4, viewDistanceFactor: 2 });
+map.terrain().apply({ exaggeration: 1.4, viewDistanceFactor: 2 }); // ONE crossing, not two
 
 const speed: number = base.get('labelBlendingSpeed');
 const at = e.getPos('clickPos', 'EPSG:4326'); // a coordinate, in the projection you want
 ```
+
+A style's CartoCSS `param::` values, an HTTP header set and a layer's metadata are **bags**: the
+rest of the path is a key of your own, and the property itself takes every key at once.
+
+```ts
+style.set('params.water_color', '#0af');
+style.apply({ params: { water_color: '#0af', show_buildings: 'false' } });
+source.set('HTTPHeaders.User-Agent', 'my-app/1.0');
+```
+
+`apply` is one native call whatever the key count, which is what makes it worth using over a loop
+of `set`.
 
 Values cross as the JavaScript type they should be: an enum is its **constant name**, a position is `[lon, lat]`, a struct is the JSON it encodes, a colour is an ARGB integer.
 
@@ -136,7 +149,7 @@ const metres = hillshade.call('getElevations', [[5.76, 45.24], [5.77, 45.25]]); 
 const data = await source.callAsync('loadTile', [[8467, 5852, 14]], (t) => t.getData('data'));
 ```
 
-A method can be addressed through a path: `base.call('tileDecoder.setStyleParameter', 'buildings', 'false')`.
+A method can be addressed through a path: `base.call('tileDecoder.loadTile', [8467, 5852, 14])`. A style parameter is *not* one of them any more - it is a property, `base.set('style.params.buildings', 'false')`.
 
 ### Routing
 
@@ -152,7 +165,8 @@ const router = map.object('routing', 'valhalla', {
 const request = map.object('routing', 'trip',
     { type: 'request', projection: 'EPSG:4326', points: [[5.72, 45.18], [5.74, 45.24]] },
     'massif::RoutingRequest');
-request.call('setCustomParameter', 'language', 'fr-FR');
+request.set('params.language', 'fr-FR'); // a bag again - valhalla's parameters nest, so
+request.set('params.costing_options.bicycle.cycling_speed', 22); // a dotted key stays one key
 
 const trip = await router.callAsync('calculateRoute', [request.handle], (result) => ({
     metres: result.get('totalDistance'),

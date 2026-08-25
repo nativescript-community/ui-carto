@@ -53,6 +53,27 @@ base.set('rasterFilterMode', 'RASTER_TILE_FILTER_MODE_BILINEAR');
 // @ts-expect-error a read-only property cannot be written
 osm.set('minZoom', 3);
 
+// --- a bag: the last segment is a KEY the app chose --------------------------------------------
+
+const style = create('style', 'osm-style', { type: 'mbvt', cartocss: { type: 'cartocss', css: '#water{polygon-fill:#0af;}' } });
+
+// One style parameter, as a property rather than call('setStyleParameter', ...).
+style.set('params.water_color', '#0af');
+// And every one at once, which is a single crossing.
+style.set('params', { water_color: '#0af', land_color: '#eee' });
+
+// @ts-expect-error a style parameter is text - the SDK parses it against what the style declares
+style.set('params.water_color', 3);
+
+// --- aliases are the same property under a readable name --------------------------------------
+
+const aliased = attach(view);
+aliased.set('fog.rangeStart', 2.5);
+aliased.set('fogOptions.rangeStart', 2.5);
+
+// @ts-expect-error an alias resolves one segment, it does not invent the rest
+aliased.set('fog.nope', 1);
+
 // --- enums are constant names, not numbers ----------------------------------------------------
 
 base.set('labelRenderOrder', 'VECTOR_TILE_RENDER_ORDER_LAST');
