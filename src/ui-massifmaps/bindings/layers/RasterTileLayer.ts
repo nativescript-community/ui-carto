@@ -1,6 +1,9 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { RasterTileFilterMode } from '../../layers/raster';
+import { EnumValue } from '../enums';
+
 /** com.massifmaps.layers.RasterTileLayer / MSFRasterTileLayer */
 export const METHODS = ['getRasterTileEventListener', 'getTextureCacheCapacity', 'getTileBlendingSpeed', 'getTileFilterMode', 'setRasterTileEventListener', 'setTextureCacheCapacity', 'setTileBlendingSpeed', 'setTileFilterMode'] as const;
 
@@ -9,11 +12,11 @@ export interface Methods {
     getRasterTileEventListener(): any;
     getTextureCacheCapacity(): number;
     getTileBlendingSpeed(): number;
-    getTileFilterMode(): number;
+    getTileFilterMode(): RasterTileFilterMode;
     setRasterTileEventListener(arg0: any): void;
     setTextureCacheCapacity(arg0: number): void;
     setTileBlendingSpeed(arg0: number): void;
-    setTileFilterMode(arg0: number): void;
+    setTileFilterMode(arg0: EnumValue<RasterTileFilterMode>): void;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {
@@ -28,7 +31,7 @@ export interface Accessors {
     rasterTileEventListener: any;  // com.massifmaps.layers.RasterTileEventListener
     textureCacheCapacity: number;
     tileBlendingSpeed: number;
-    tileFilterMode: number;
+    tileFilterMode: EnumValue<RasterTileFilterMode>;  // com.massifmaps.layers.RasterTileFilterMode
 }
 
 /** properties needing a converter, and which one */

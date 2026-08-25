@@ -35,19 +35,43 @@ const BY_TYPE = {
     'com.massifmaps.core.StringVector': { converter: 'stringListConverter', type: 'string[]' }
 };
 
-/** SWIG enums are plain numbers on JS; `isEnumBody` is what decides, for both consumers. */
+/**
+ * Every SWIG enum and its constants, from the android typings: `isEnumBody` is what decides,
+ * for both consumers, and the static constants are the values `bindings/enums.ts` is built from.
+ *
+ * The values are the C++ enum's, so they are identical on iOS - checked over all 32 enums.
+ */
 function enumClasses() {
     const src = readFileSync(path.join(TYPINGS_DIR, 'massifmaps.android.d.ts'), 'utf8');
-    const names = new Set();
+    const found = new Map();
     for (const m of src.matchAll(/export class (\w+)[^{]*\{([\s\S]*?)\n {12}\}/g)) {
         if (isEnumBody(m[2])) {
-            names.add(m[1]);
+            const constants = [...m[2].matchAll(/public static ([A-Z][A-Z0-9_]*): number = (-?\d+);/g)].map((c) => [c[1], Number(c[2])]);
+            found.set(m[1], constants);
         }
     }
-    return names;
+    return found;
 }
 
 let ENUMS;
+
+/** name -> `[[CONSTANT, value], ...]`, for every SWIG enum the SDK declares */
+export function enumValues() {
+    ENUMS ??= enumClasses();
+    return ENUMS;
+}
+
+/** where the generated bindings put the enums the plugin does not declare by hand */
+export const GENERATED_ENUMS = 'bindings/enums';
+
+/**
+ * The module a generated binding imports an enum type from: the plugin's own declaration when
+ * it has one - those are the public API and keep their nominal identity - and the generated
+ * module otherwise. `null` means there is no type at all and the binding falls back to `number`.
+ */
+export function enumHome(name) {
+    return enumDeclarations().get(name) ?? (enumValues().has(name) ? GENERATED_ENUMS : null);
+}
 
 /**
  * @returns {{converter?: string, type: string, imports?: object, kind: string}}
@@ -56,6 +80,8 @@ export function inferConverter(nativeType) {
     ENUMS ??= enumClasses();
 
     if (nativeType === 'number' || nativeType === 'boolean' || nativeType === 'string') {
+        // an enum-typed accessor reaches here as `number` only when parse.mjs could not recover
+        // its enum from the iOS signature - the android typings carry `@IntDef`, not the type
         return { type: nativeType, kind: 'primitive' };
     }
     const known = BY_TYPE[nativeType];
@@ -64,9 +90,8 @@ export function inferConverter(nativeType) {
     }
     const simple = nativeType.split('.').pop();
     if (ENUMS.has(simple)) {
-        // the JS side of every SWIG enum is a number, and the plugin already exposes
-        // named constant objects (BillboardScaling, PanningMode, ...) for them
-        // the plugin re-exports a named constant object for each of these
+        // the JS side of every SWIG enum is a number; the TYPE comes from the plugin's own
+        // declaration or from the generated `bindings/enums.ts` - see enumHome()
         return { type: simple, kind: 'enum', enumName: simple };
     }
     // an SDK object: the forwarder unwraps `.getNative()` on the way in, and the getter

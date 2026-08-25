@@ -2,6 +2,8 @@
 // Regenerate with `npm run bindings`.
 
 import { ImageAsset, ImageSource } from '@nativescript/core';
+import { BillboardOrientation, BillboardScaling } from '../../vectorelements/index';
+import { EnumValue } from '../enums';
 
 /** com.massifmaps.styles.MarkerStyle / MSFMarkerStyle */
 export const METHODS = ['getAnchorPointX', 'getAnchorPointY', 'getBitmap', 'getClickSize', 'getOrientationMode', 'getScalingMode', 'getSize'] as const;
@@ -12,8 +14,8 @@ export interface Methods {
     getAnchorPointY(): number;
     getBitmap(): ImageSource;
     getClickSize(): number;
-    getOrientationMode(): number;
-    getScalingMode(): number;
+    getOrientationMode(): BillboardOrientation;
+    getScalingMode(): BillboardScaling;
     getSize(): number;
 }
 

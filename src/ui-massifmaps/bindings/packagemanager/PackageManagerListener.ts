@@ -1,13 +1,15 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { EnumValue, PackageErrorType } from '../enums';
+
 /** com.massifmaps.packagemanager.PackageManagerListener / MSFPackageManagerListener */
 export const METHODS = ['onPackageCancelled', 'onPackageFailed', 'onPackageListFailed', 'onPackageListUpdated', 'onPackageStatusChanged', 'onPackageUpdated', 'onStyleFailed', 'onStyleUpdated'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
     onPackageCancelled(arg0: string, arg1: number): void;
-    onPackageFailed(arg0: string, arg1: number, arg2: number): void;
+    onPackageFailed(arg0: string, arg1: number, arg2: EnumValue<PackageErrorType>): void;
     onPackageListFailed(): void;
     onPackageListUpdated(): void;
     onPackageStatusChanged(arg0: string, arg1: number, arg2: any): void;

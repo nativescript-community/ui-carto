@@ -1,6 +1,9 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { ClickType } from '../../core/index';
+import { EnumValue } from '../enums';
+
 /** com.massifmaps.ui.VectorElementClickInfo / MSFVectorElementClickInfo */
 export const METHODS = ['getClickInfo', 'getClickPos', 'getClickType', 'getElementClickPos', 'getLayer', 'getVectorElement'] as const;
 
@@ -8,7 +11,7 @@ export const METHODS = ['getClickInfo', 'getClickPos', 'getClickType', 'getEleme
 export interface Methods {
     getClickInfo(): any;
     getClickPos(): any;
-    getClickType(): number;
+    getClickType(): ClickType;
     getElementClickPos(): any;
     getLayer(): any;
     getVectorElement(): any;

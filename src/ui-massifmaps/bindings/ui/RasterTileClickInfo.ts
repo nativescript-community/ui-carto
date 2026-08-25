@@ -2,6 +2,8 @@
 // Regenerate with `npm run bindings`.
 
 import { Color } from '@nativescript/core';
+import { ClickType } from '../../core/index';
+import { EnumValue } from '../enums';
 
 /** com.massifmaps.ui.RasterTileClickInfo / MSFRasterTileClickInfo */
 export const METHODS = ['getClickInfo', 'getClickPos', 'getClickType', 'getInterpolatedColor', 'getLayer', 'getMapTile', 'getNearestColor'] as const;
@@ -10,7 +12,7 @@ export const METHODS = ['getClickInfo', 'getClickPos', 'getClickType', 'getInter
 export interface Methods {
     getClickInfo(): any;
     getClickPos(): any;
-    getClickType(): number;
+    getClickType(): ClickType;
     getInterpolatedColor(): Color;
     getLayer(): any;
     getMapTile(): any;

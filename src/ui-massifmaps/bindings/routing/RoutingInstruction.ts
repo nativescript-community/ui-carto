@@ -1,12 +1,15 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { RoutingAction } from '../../routing/index';
+import { EnumValue } from '../enums';
+
 /** com.massifmaps.routing.RoutingInstruction / MSFRoutingInstruction */
 export const METHODS = ['getAction', 'getAzimuth', 'getDistance', 'getGeometryTag', 'getInstruction', 'getPointIndex', 'getStreetName', 'getTime', 'getTurnAngle'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
-    getAction(): number;
+    getAction(): RoutingAction;
     getAzimuth(): number;
     getDistance(): number;
     getGeometryTag(): any;

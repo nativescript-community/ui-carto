@@ -3,6 +3,8 @@
 
 import { Color, ImageAsset, ImageSource } from '@nativescript/core';
 import { MapRange, MapVec } from '../../core/index';
+import { PanningMode, RenderProjectionMode } from '../../ui/index';
+import { EnumValue, FreeRoamMode, PanningSpeedMode, PivotMode } from '../enums';
 
 /** com.massifmaps.components.Options / MSFOptions */
 export const METHODS = ['getAmbientLightColor', 'getBackgroundBitmap', 'getBaseProjection', 'getClearColor', 'getDPI', 'getDoubleClickMaxDuration', 'getDrawDistance', 'getEnvelopeThreadPoolSize', 'getFieldOfViewY', 'getFocusPointOffset', 'getFogOptions', 'getFreeRoamLookSensitivity', 'getFreeRoamMode', 'getFreeRoamMoveSpeed', 'getLightOptions', 'getLongClickDuration', 'getMainLightColor', 'getMainLightDirection', 'getPanBounds', 'getPanningMode', 'getPanningSpeedMode', 'getPivotMode', 'getRenderProjectionMode', 'getSkyColor', 'getSkyOptions', 'getTerrainOptions', 'getTileDrawSize', 'getTileLODFactor', 'getTileThreadPoolSize', 'getTiltRange', 'getZoomRange', 'isClickTypeDetection', 'isDebugTileBorders', 'isDoubleClickDetection', 'isKineticPan', 'isKineticRotation', 'isKineticZoom', 'isLayersLabelsProcessedInReverseOrder', 'isRestrictedPanning', 'isRotatable', 'isRotationGestures', 'isSeamlessPanning', 'isTiltGestureReversed', 'isUserInput', 'isZoomGestures', 'setAmbientLightColor', 'setBackgroundBitmap', 'setBaseProjection', 'setClearColor', 'setClickTypeDetection', 'setDPI', 'setDebugTileBorders', 'setDoubleClickDetection', 'setDoubleClickMaxDuration', 'setDrawDistance', 'setEnvelopeThreadPoolSize', 'setFieldOfViewY', 'setFocusPointOffset', 'setFogOptions', 'setFreeRoamLookSensitivity', 'setFreeRoamMode', 'setFreeRoamMoveSpeed', 'setKineticPan', 'setKineticRotation', 'setKineticZoom', 'setLayersLabelsProcessedInReverseOrder', 'setLightOptions', 'setLongClickDuration', 'setMainLightColor', 'setMainLightDirection', 'setPanBounds', 'setPanningMode', 'setPanningSpeedMode', 'setPivotMode', 'setRenderProjectionMode', 'setRestrictedPanning', 'setRotatable', 'setRotationGestures', 'setSeamlessPanning', 'setSkyColor', 'setSkyOptions', 'setTerrainOptions', 'setTileDrawSize', 'setTileLODFactor', 'setTileThreadPoolSize', 'setTiltGestureReversed', 'setTiltRange', 'setUserInput', 'setZoomGestures', 'setZoomRange'] as const;
@@ -21,17 +23,17 @@ export interface Methods {
     getFocusPointOffset(): any;
     getFogOptions(): any;
     getFreeRoamLookSensitivity(): number;
-    getFreeRoamMode(): number;
+    getFreeRoamMode(): FreeRoamMode;
     getFreeRoamMoveSpeed(): number;
     getLightOptions(): any;
     getLongClickDuration(): number;
     getMainLightColor(): Color;
     getMainLightDirection(): MapVec;
     getPanBounds(): any;
-    getPanningMode(): number;
-    getPanningSpeedMode(): number;
-    getPivotMode(): number;
-    getRenderProjectionMode(): number;
+    getPanningMode(): PanningMode;
+    getPanningSpeedMode(): PanningSpeedMode;
+    getPivotMode(): PivotMode;
+    getRenderProjectionMode(): RenderProjectionMode;
     getSkyColor(): Color;
     getSkyOptions(): any;
     getTerrainOptions(): any;
@@ -69,7 +71,7 @@ export interface Methods {
     setFocusPointOffset(arg0: any): void;
     setFogOptions(arg0: any): void;
     setFreeRoamLookSensitivity(arg0: number): void;
-    setFreeRoamMode(arg0: number): void;
+    setFreeRoamMode(arg0: EnumValue<FreeRoamMode>): void;
     setFreeRoamMoveSpeed(arg0: number): void;
     setKineticPan(arg0: boolean): void;
     setKineticRotation(arg0: boolean): void;
@@ -80,10 +82,10 @@ export interface Methods {
     setMainLightColor(arg0: Color | string): void;
     setMainLightDirection(arg0: MapVec): void;
     setPanBounds(arg0: any): void;
-    setPanningMode(arg0: number): void;
-    setPanningSpeedMode(arg0: number): void;
-    setPivotMode(arg0: number): void;
-    setRenderProjectionMode(arg0: number): void;
+    setPanningMode(arg0: EnumValue<PanningMode>): void;
+    setPanningSpeedMode(arg0: EnumValue<PanningSpeedMode>): void;
+    setPivotMode(arg0: EnumValue<PivotMode>): void;
+    setRenderProjectionMode(arg0: EnumValue<RenderProjectionMode>): void;
     setRestrictedPanning(arg0: boolean): void;
     setRotatable(arg0: boolean): void;
     setRotationGestures(arg0: boolean): void;
@@ -166,7 +168,7 @@ export interface Accessors {
     focusPointOffset: any;  // com.massifmaps.core.ScreenPos
     fogOptions: any;  // com.massifmaps.components.FogOptions
     freeRoamLookSensitivity: number;
-    freeRoamMode: number;
+    freeRoamMode: EnumValue<FreeRoamMode>;  // com.massifmaps.components.FreeRoamMode
     freeRoamMoveSpeed: number;
     kineticPan: boolean;
     kineticRotation: boolean;
@@ -177,10 +179,10 @@ export interface Accessors {
     mainLightColor: Color | string;
     mainLightDirection: MapVec;
     panBounds: any;  // com.massifmaps.core.MapBounds
-    panningMode: number;
-    panningSpeedMode: number;
-    pivotMode: number;
-    renderProjectionMode: number;
+    panningMode: EnumValue<PanningMode>;  // com.massifmaps.components.PanningMode
+    panningSpeedMode: EnumValue<PanningSpeedMode>;  // com.massifmaps.components.PanningSpeedMode
+    pivotMode: EnumValue<PivotMode>;  // com.massifmaps.components.PivotMode
+    renderProjectionMode: EnumValue<RenderProjectionMode>;  // com.massifmaps.components.RenderProjectionMode
     restrictedPanning: boolean;
     rotatable: boolean;
     rotationGestures: boolean;

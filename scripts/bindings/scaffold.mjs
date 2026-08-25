@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import * as path from 'node:path';
 import { TYPINGS_DIR } from '../typings/config.mjs';
-import { enumDeclarations, inferConverter } from './converters.mjs';
+import { enumHome, inferConverter } from './converters.mjs';
 import { BINDINGS_DIR } from './emit.mjs';
 import { convertersOf, sdkChain } from './migrate.mjs';
 import { nativeListener } from './native.mjs';
@@ -56,10 +56,10 @@ function bindingImportPath(pkg) {
     return `../bindings/${pkg.split('.').join('/')}`;
 }
 
-/** the TypeScript spelling of a native type, degrading an unexported enum to `number` */
+/** the TypeScript spelling of a native type, degrading an enum with no home to `number` */
 function tsType(nativeType) {
     const info = inferConverter(nativeType);
-    if (info.kind === 'enum' && !enumDeclarations().has(info.enumName)) return 'number';
+    if (info.kind === 'enum' && !enumHome(info.enumName)) return 'number';
     return info.type;
 }
 
@@ -84,7 +84,7 @@ function typeImports(pkg, nativeTypes) {
             for (const n of info.plugin.names) local.get(from).add(n);
         }
         if (info.kind === 'enum') {
-            const home = enumDeclarations().get(info.enumName);
+            const home = enumHome(info.enumName);
             if (!home) continue;
             const from = up + home;
             if (!local.has(from)) local.set(from, new Set());

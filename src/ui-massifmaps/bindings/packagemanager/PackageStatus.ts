@@ -1,12 +1,14 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { EnumValue, PackageAction } from '../enums';
+
 /** com.massifmaps.packagemanager.PackageStatus / MSFPackageStatus */
 export const METHODS = ['getCurrentAction', 'getProgress', 'isPaused'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
-    getCurrentAction(): number;
+    getCurrentAction(): PackageAction;
     getProgress(): number;
     isPaused(): boolean;
 }

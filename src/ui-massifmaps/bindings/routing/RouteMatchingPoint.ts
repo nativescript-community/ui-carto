@@ -1,6 +1,8 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { EnumValue, RouteMatchingPointType } from '../enums';
+
 /** com.massifmaps.routing.RouteMatchingPoint / MSFRouteMatchingPoint */
 export const METHODS = ['getEdgeIndex', 'getPos', 'getType'] as const;
 
@@ -8,7 +10,7 @@ export const METHODS = ['getEdgeIndex', 'getPos', 'getType'] as const;
 export interface Methods {
     getEdgeIndex(): number;
     getPos(): any;
-    getType(): number;
+    getType(): RouteMatchingPointType;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {};

@@ -1,6 +1,9 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { BillboardOrientation, BillboardScaling } from '../../vectorelements/index';
+import { EnumValue } from '../enums';
+
 /** com.massifmaps.styles.LabelStyleBuilder / MSFLabelStyleBuilder */
 export const METHODS = ['buildStyle', 'getAnchorPointX', 'getAnchorPointY', 'getOrientationMode', 'getRenderScale', 'getScalingMode', 'isFlippable', 'setAnchorPoint', 'setAnchorPointX', 'setAnchorPointY', 'setFlippable', 'setOrientationMode', 'setRenderScale', 'setScalingMode'] as const;
 
@@ -9,17 +12,17 @@ export interface Methods {
     buildStyle(): any;
     getAnchorPointX(): number;
     getAnchorPointY(): number;
-    getOrientationMode(): number;
+    getOrientationMode(): BillboardOrientation;
     getRenderScale(): number;
-    getScalingMode(): number;
+    getScalingMode(): BillboardScaling;
     isFlippable(): boolean;
     setAnchorPoint(arg0: number, arg1: number): void;
     setAnchorPointX(arg0: number): void;
     setAnchorPointY(arg0: number): void;
     setFlippable(arg0: boolean): void;
-    setOrientationMode(arg0: number): void;
+    setOrientationMode(arg0: EnumValue<BillboardOrientation>): void;
     setRenderScale(arg0: number): void;
-    setScalingMode(arg0: number): void;
+    setScalingMode(arg0: EnumValue<BillboardScaling>): void;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {
@@ -36,9 +39,9 @@ export interface Accessors {
     anchorPointX: number;
     anchorPointY: number;
     flippable: boolean;
-    orientationMode: number;
+    orientationMode: EnumValue<BillboardOrientation>;  // com.massifmaps.styles.BillboardOrientation
     renderScale: number;
-    scalingMode: number;
+    scalingMode: EnumValue<BillboardScaling>;  // com.massifmaps.styles.BillboardScaling
 }
 
 /** properties needing a converter, and which one */

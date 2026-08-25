@@ -128,6 +128,32 @@ export function buildModel() {
     const model = new Map();
     const unmatched = [];
 
+    /**
+     * SWIG enums never reach `model`: every member they declare is swig noise, so they
+     * end up with zero bindable methods. They still need metadata on android, where each
+     * one is a real java class the plugin reads its constants off - see emitApiUsage().
+     */
+    const enums = new Map([...A.values()].filter((c) => c.isEnum).map((c) => [c.name, c.pkg]));
+
+    /**
+     * The SDK now declares its enums as ints (`@IntDef`), so the android typings spell every
+     * enum-typed accessor `number` and the java type is gone. iOS still names it
+     * (`getPanningMode(): MSFPanningMode`), so the enum is recovered from there - without this
+     * the generated bindings type 77 slots across 29 enums as a bare `number`.
+     */
+    const enumType = (androidType, iosType) => {
+        if (androidType !== 'number' || !iosType?.startsWith('MSF')) return androidType;
+        const name = iosType.slice(3);
+        const pkg = enums.get(name);
+        return pkg ? `com.massifmaps.${pkg}.${name}` : androidType;
+    };
+    const restoreEnums = (meta, ios) => {
+        if (!ios || ios.arity !== meta.arity) return meta;
+        const returns = enumType(meta.returns, ios.returns);
+        const params = meta.params.map((p, n) => enumType(p, ios.params[n]));
+        return { ...meta, returns, params };
+    };
+
     // iOS declares an override only where it exists; everything else is inherited,
     // so a name has to be looked up along the whole chain before calling it missing.
     const iosChain = (name) => {
@@ -145,7 +171,7 @@ export function buildModel() {
         const i = I.get(name);
         if (!i) continue;
         const chain = iosChain(name);
-        const has = (n) => chain.some((c) => c.methods.has(n));
+        const ownIos = (n) => chain.map((c) => c.methods.get(n)).find(Boolean);
         const candidatesFor = (n, arity) =>
             chain
                 .flatMap((c) => [...c.methods.values()])
@@ -155,13 +181,14 @@ export function buildModel() {
         const methods = [];
         const selectors = {};
         for (const [mname, meta] of a.methods) {
-            if (has(mname)) {
-                methods.push(meta);
+            const own = ownIos(mname);
+            if (own) {
+                methods.push(restoreEnums(meta, own));
                 continue;
             }
             const cands = candidatesFor(mname, meta.arity);
             if (cands.length) {
-                methods.push(meta);
+                methods.push(restoreEnums(meta, cands[0]));
                 selectors[mname] = cands[0].name;
                 continue;
             }
@@ -171,14 +198,6 @@ export function buildModel() {
             model.set(name, { name, pkg: a.pkg, extends: a.extends, methods, selectors });
         }
     }
-    /**
-     * SWIG enums never reach `model`: every member they declare is swig noise, so they
-     * end up with zero bindable methods. They still need metadata on android, where each
-     * one is a real java class the marshaller has to look up to turn a JS number into the
-     * instance a setter expects - see emitApiUsage().
-     */
-    const enums = new Map([...A.values()].filter((c) => c.isEnum).map((c) => [c.name, c.pkg]));
-
     return { model, enums, unmatched, androidOnly: [...A.keys()].filter((k) => !I.has(k)) };
 }
 

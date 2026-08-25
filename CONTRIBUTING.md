@@ -5,7 +5,7 @@
 | Path | Owner |
 | --- | --- |
 | `src/ui-massifmaps/typings/*.d.ts` | generated — `npm run typings` |
-| `src/ui-massifmaps/bindings/**` | generated — `npm run bindings` |
+| `src/ui-massifmaps/bindings/**` | generated — `npm run bindings` (includes `bindings/enums.ts`) |
 | `packages/ui-massifmaps/platforms/{android,ios}/native-api-usage.json` | generated — `npm run bindings` |
 | everything else under `src/ui-massifmaps/` | hand-written wrappers |
 | `packages/ui-massifmaps/**` (except the two files above) | build output — `npm run build` |
@@ -154,7 +154,8 @@ itself needs an `exclude` for them.
 
 ## Enums
 
-Enums are not bound. They are hand-written constant objects that read the native value:
+Enums are not bound. The ones the plugin exposes are hand-written constant objects that read the
+native value:
 
 ```ts
 export const RasterTileFilterMode = {
@@ -179,6 +180,29 @@ member, which the current typings no longer carry — and because two files test
 independently, every enum silently became a plain `number` *and* lost its metadata entry at once.
 One predicate now, used by both. **The count is printed by `npm run bindings` — read it.** A drop to
 `0 swig enums` is that failure, and nothing else reports it.
+
+### Where the enum TYPE comes from
+
+The SDK declares its enums as ints (`@IntDef`), so the android typings spell every enum-typed
+accessor `number` — the java type is gone. iOS still names it (`getPanningMode(): MSFPanningMode`),
+and `buildModel` recovers the enum from there; without that, 77 slots across 29 enums generate as a
+bare `number`. Nothing else in the android typings can tell them apart, so **an enum missing from
+the iOS typings has no type at all**.
+
+The name it resolves to (`enumHome` in `scripts/bindings/converters.mjs`):
+
+1. the plugin's own `export enum` if it has one — those are the public API, and their members are
+   nominal, so a second declaration of the same name would not be assignable to the first;
+2. otherwise `src/ui-massifmaps/bindings/enums.ts`, generated with a real TS enum per SDK enum the
+   plugin does not declare. Values come from the android static constants and are the C++ enum's —
+   identical on iOS, checked over all 32.
+
+A setter takes `EnumValue<E>`, not `E`: the constants are suggested, and the raw number the value
+actually is at runtime still compiles. It cannot be written `E | number` — TypeScript reduces that
+straight back to `number`, which is the whole bug. Getters return `E`.
+
+`npm run bindings.check` type-checks that, `@ts-expect-error` included
+(`scripts/bindings/typecheck/cases/enums.ts`). Run it after touching the generator.
 
 ## native-api-usage.json
 

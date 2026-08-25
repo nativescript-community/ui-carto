@@ -1,6 +1,8 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { EnumValue, TileFormat } from '../enums';
+
 /** com.massifmaps.vectortiles.MBVectorTileDecoder / MSFMBVectorTileDecoder */
 export const METHODS = ['addFallbackFont', 'getCartoCSSStyleSet', 'getCompiledStyleSet', 'getMaxZoom', 'getMinZoom', 'getStyleLayerNames', 'getStyleParameter', 'getStyleParameters', 'getTileFormat', 'isFeatureIdOverride', 'parseTileFormat', 'setCartoCSSStyleSet', 'setCompiledStyleSet', 'setFeatureIdOverride', 'setJSONStyleParameters', 'setStyleParameter', 'setStyleParameters', 'setTileFormat'] as const;
 
@@ -14,7 +16,7 @@ export interface Methods {
     getStyleLayerNames(): string[];
     getStyleParameter(arg0: string): string;
     getStyleParameters(): string[];
-    getTileFormat(): number;
+    getTileFormat(): TileFormat;
     isFeatureIdOverride(): boolean;
     setCartoCSSStyleSet(arg0: any): void;
     setCompiledStyleSet(arg0: any): void;
@@ -22,7 +24,7 @@ export interface Methods {
     setJSONStyleParameters(arg0: string): void;
     setStyleParameter(arg0: string, arg1: string): boolean;
     setStyleParameters(arg0: any): void;
-    setTileFormat(arg0: number): void;
+    setTileFormat(arg0: EnumValue<TileFormat>): void;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {
@@ -39,7 +41,7 @@ export interface Accessors {
     compiledStyleSet: any;  // com.massifmaps.styles.CompiledStyleSet
     featureIdOverride: boolean;
     styleParameters: string[];
-    tileFormat: number;
+    tileFormat: EnumValue<TileFormat>;  // com.massifmaps.vectortiles.TileFormat
 }
 
 /** properties needing a converter, and which one */
