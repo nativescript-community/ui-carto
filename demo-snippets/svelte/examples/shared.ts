@@ -15,35 +15,69 @@ import type { SourceSpec, StyleSpec } from '@nativescript-community/ui-massifmap
  */
 export const UA = 'MassifMapsExamples/1.0 (+https://github.com/massif-maps/MassifMaps)';
 
+/**
+ * A persistent tile cache in front of a remote source.
+ *
+ * Every example that reads from a server goes through one: a demo that gets panned around
+ * otherwise re-fetches the same tiles from somebody else's free service on every run.
+ */
+function cached(name: string, capacityMb: number, source: SourceSpec): SourceSpec {
+    return {
+        type: 'persistent-cache',
+        databasePath: path.join(knownFolders.documents().path, name),
+        capacity: capacityMb * 1024 * 1024,
+        source
+    };
+}
+
 /** OpenStreetMap's raster tiles - what most of the basics examples sit on. */
 export function osmRaster(): SourceSpec {
-    return {
+    return cached('osm-raster.db', 100, {
         type: 'http',
         url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         maxZoom: 19,
         HTTPHeaders: { 'User-Agent': UA }
-    };
+    });
 }
 
 /** OpenFreeMap's planet vector tiles, in the OpenMapTiles schema. */
 export function vectorTiles(): SourceSpec {
-    return {
+    return cached('openfreemap.db', 100, {
         type: 'http',
         url: 'https://tiles.openfreemap.org/planet/latest/{z}/{x}/{y}.pbf',
         maxZoom: 14,
         HTTPHeaders: { 'User-Agent': UA }
-    };
+    });
 }
 
-/** Open DEM tiles, terrarium-encoded - `encoding` is what picks the elevation decoder. */
+/** Esri's world imagery - the raster under the 3D terrain examples. */
+export function satelliteTiles(): SourceSpec {
+    return cached('world-imagery.db', 200, {
+        type: 'http',
+        // The {y}/{x} order is this server's; the template substitutes by name, so any order works.
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        maxZoom: 18,
+        HTTPHeaders: { 'User-Agent': UA }
+    });
+}
+
+/**
+ * Open DEM tiles, terrarium-encoded.
+ *
+ * `metaData.dem_encoding` is what picks the elevation decoder, and it is resolved per TILE - the
+ * source stamps its map on every tile it loads, so two encodings can sit behind one wrapper source.
+ * Without it the SDK assumes mapbox encoding and every height is wrong.
+ */
 export function demTiles(): SourceSpec {
-    return {
+    // The encoding stays on the HTTP source, not on the cache in front of it: a wrapper source
+    // with no map of its own answers with its wrapped source's.
+    return cached('mapterhorn-dem.db', 200, {
         type: 'http',
         url: 'https://tiles.mapterhorn.com/{z}/{x}/{y}.webp',
         minZoom: 1,
         maxZoom: 16,
-        encoding: 'terrarium'
-    };
+        metaData: { dem_encoding: 'terrarium' }
+    });
 }
 
 /**

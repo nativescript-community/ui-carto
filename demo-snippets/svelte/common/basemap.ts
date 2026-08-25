@@ -168,7 +168,7 @@ export function createBaseMap(initial: Partial<BaseMapState> = {}, spec: Partial
         if (!composite || !(composite instanceof CompositeVectorTileLayer)) {
             return;
         }
-        // hillshade: the elevation decoder is resolved from the source's 'encoding'
+        // hillshade: the elevation decoder is resolved from the source's 'dem_encoding' meta data
         if (state.slots.hillshade) {
             composite.addExternalDataSource('hillshade', demSource(), CompositeSourceType.COMPOSITE_SOURCE_TYPE_HILLSHADE);
             composite.setExternalDataSourceZoomLevelBias('hillshade', state.hillshadeZoomBias);

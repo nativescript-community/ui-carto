@@ -4,7 +4,7 @@
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { UA, demTiles, overlayStyle, vectorTiles } from './shared';
+    import { demTiles, overlayStyle, satelliteTiles, vectorTiles } from './shared';
 
     /**
      * Looking SOUTH at the Matterhorn from high over Zermatt.
@@ -20,17 +20,8 @@
     function start(host: ExampleHost) {
         const map = host.map;
 
-        // Imagery underneath. The {y}/{x} order is this server's; the template substitutes by
-        // name, so any order works.
-        map.addLayer('satellite', {
-            type: 'raster',
-            source: {
-                type: 'http',
-                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-                maxZoom: 18,
-                HTTPHeaders: { 'User-Agent': UA }
-            }
-        });
+        // Imagery underneath, cached on disk like every other remote source here.
+        map.addLayer('satellite', { type: 'raster', source: satelliteTiles() });
 
         // Roads, place names and summits ON TOP, from a style with no background of its own.
         map.addLayer('labels', { type: 'vector', source: vectorTiles(), style: overlayStyle() });

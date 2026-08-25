@@ -69,7 +69,7 @@ export const exampleSections: ExampleSection[] = [
         title: "Styles & layers",
         description: "CartoCSS, style projects and layer composition.",
         examples: [
-            entry("style-parameters", "Change a style at runtime", "A style project declares `param::` values the app sets while the map runs. A colour swaps live; a parameter used in a filter re-decodes the tiles.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/style-parameters.png", () => require('./StyleParameters.svelte')),
+            entry("style-parameters", "Change a style at runtime", "A style project declares `param::` values the app sets while the map runs, as properties: `params.<name>`. A colour swaps live; one used in a filter re-decodes the tiles.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/style-parameters.png", () => require('./StyleParameters.svelte')),
         ]
     },
     {
@@ -78,6 +78,7 @@ export const exampleSections: ExampleSection[] = [
         description: "Elevation, hillshade, sky and fog.",
         examples: [
             entry("terrain-3d", "3D terrain, hybrid", "Satellite imagery draped over an elevation mesh, with roads and summit labels above it. One DEM source drives the mesh, the hillshade and the elevation queries.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/terrain-3d.png", () => require('./Terrain3d.svelte')),
+            entry("atmosphere", "Sky, fog and the day cycle", "A physical atmosphere over 3D terrain: dawn, noon, dusk and night, with the fog lit by the same sun, stars beyond it, and summits standing clear of the haze filling the valley.", null, () => require('./Atmosphere.svelte')),
         ]
     },
     {
