@@ -1,6 +1,8 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { EnumValue, VariantType } from '../enums';
+
 /** com.massifmaps.core.Variant / MSFVariant */
 export const METHODS = ['containsObjectKey', 'fromString', 'getArrayElement', 'getArraySize', 'getBool', 'getDouble', 'getLong', 'getObjectElement', 'getObjectKeys', 'getString', 'getType'] as const;
 
@@ -15,7 +17,7 @@ export interface Methods {
     getObjectElement(arg0: string): any;
     getObjectKeys(): string[];
     getString(): string;
-    getType(): number;
+    getType(): VariantType;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {};

@@ -3,6 +3,8 @@
 
 import { Color } from '@nativescript/core';
 import { MapVec } from '../../core/index';
+import { HillshadeMethod } from '../../layers/raster';
+import { EnumValue } from '../enums';
 
 /** com.massifmaps.layers.HillshadeRasterTileLayer / MSFHillshadeRasterTileLayer */
 export const METHODS = ['getAccentColor', 'getContourColor', 'getContourInterval', 'getContourWidth', 'getContrast', 'getElevation', 'getElevations', 'getExagerateHeightScaleEnabled', 'getExaggeration', 'getHeightScale', 'getHighlightColor', 'getHillshadeMethod', 'getIlluminationDirection', 'getIlluminationMapRotationEnabled', 'getNormalMapLightingShader', 'getShadowColor', 'isContourEnabled', 'isElevationEncodingEnabled', 'isLegacyHeightScaleEnabled', 'isTerrainPaintEnabled', 'isTerrainPaintFullDetailEnabled', 'setAccentColor', 'setContourColor', 'setContourEnabled', 'setContourInterval', 'setContourWidth', 'setContrast', 'setElevationEncodingEnabled', 'setExagerateHeightScaleEnabled', 'setExaggeration', 'setHeightScale', 'setHighlightColor', 'setHillshadeMethod', 'setIlluminationDirection', 'setIlluminationMapRotationEnabled', 'setLegacyHeightScaleEnabled', 'setNormalMapLightingShader', 'setShadowColor', 'setTerrainPaintEnabled', 'setTerrainPaintFullDetailEnabled'] as const;
@@ -20,7 +22,7 @@ export interface Methods {
     getExaggeration(): number;
     getHeightScale(): number;
     getHighlightColor(): Color;
-    getHillshadeMethod(): number;
+    getHillshadeMethod(): HillshadeMethod;
     getIlluminationDirection(): MapVec;
     getIlluminationMapRotationEnabled(): boolean;
     getNormalMapLightingShader(): string;
@@ -41,7 +43,7 @@ export interface Methods {
     setExaggeration(arg0: number): void;
     setHeightScale(arg0: number): void;
     setHighlightColor(arg0: Color | string): void;
-    setHillshadeMethod(arg0: number): void;
+    setHillshadeMethod(arg0: EnumValue<HillshadeMethod>): void;
     setIlluminationDirection(arg0: MapVec): void;
     setIlluminationMapRotationEnabled(arg0: boolean): void;
     setLegacyHeightScaleEnabled(arg0: boolean): void;
@@ -86,7 +88,7 @@ export interface Accessors {
     exaggeration: number;
     heightScale: number;
     highlightColor: Color | string;
-    hillshadeMethod: number;
+    hillshadeMethod: EnumValue<HillshadeMethod>;  // com.massifmaps.layers.HillshadeMethod
     illuminationDirection: MapVec;
     illuminationMapRotationEnabled: boolean;
     legacyHeightScaleEnabled: boolean;

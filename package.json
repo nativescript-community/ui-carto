@@ -29,6 +29,7 @@
         "start": "./node_modules/.bin/ntl -A -s 15 -o",
         "submodules": "git submodule update --init",
         "bindings": "node ./scripts/bindings/index.mjs",
+        "bindings.check": "tsc -p ./scripts/bindings/typecheck/tsconfig.json",
         "bindings.coverage": "node ./scripts/bindings/index.mjs --coverage",
         "bindings.migrate": "node ./scripts/bindings/index.mjs --migrate-all",
         "typings": "node ./scripts/typings/index.mjs",

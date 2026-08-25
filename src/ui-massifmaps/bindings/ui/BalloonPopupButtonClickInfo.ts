@@ -1,6 +1,9 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { ClickType } from '../../core/index';
+import { EnumValue } from '../enums';
+
 /** com.massifmaps.ui.BalloonPopupButtonClickInfo / MSFBalloonPopupButtonClickInfo */
 export const METHODS = ['getButton', 'getClickInfo', 'getClickType', 'getVectorElement'] as const;
 
@@ -8,7 +11,7 @@ export const METHODS = ['getButton', 'getClickInfo', 'getClickType', 'getVectorE
 export interface Methods {
     getButton(): any;
     getClickInfo(): any;
-    getClickType(): number;
+    getClickType(): ClickType;
     getVectorElement(): any;
 }
 

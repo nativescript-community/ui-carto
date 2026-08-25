@@ -1,7 +1,8 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
-import { MapRange } from '../../core/index';
+import { ClickType, MapRange } from '../../core/index';
+import { EnumValue } from '../enums';
 
 /** com.massifmaps.layers.Layer / MSFLayer */
 export const METHODS = ['containsMetaDataKey', 'getMetaData', 'getMetaDataElement', 'getOpacity', 'getUpdatePriority', 'getVisibleZoomRange', 'isPostProcessed', 'isUpdateInProgress', 'isVisible', 'refresh', 'setCullDelay', 'setMetaData', 'setMetaDataElement', 'setOpacity', 'setPostProcessed', 'setUpdatePriority', 'setVisible', 'setVisibleZoomRange', 'simulateClick', 'update'] as const;
@@ -26,7 +27,7 @@ export interface Methods {
     setUpdatePriority(arg0: number): void;
     setVisible(arg0: boolean): void;
     setVisibleZoomRange(arg0: MapRange): void;
-    simulateClick(arg0: number, arg1: any, arg2: any): void;
+    simulateClick(arg0: EnumValue<ClickType>, arg1: any, arg2: any): void;
     update(arg0: any): void;
 }
 

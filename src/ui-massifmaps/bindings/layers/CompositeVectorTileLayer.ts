@@ -1,12 +1,14 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { CompositeSourceType, EnumValue } from '../enums';
+
 /** com.massifmaps.layers.CompositeVectorTileLayer / MSFCompositeVectorTileLayer */
 export const METHODS = ['addExternalDataSource', 'addVectorDataSource', 'clearExternalDataSourceZoomLevelBias', 'getExternalDataSourceMaxOverzoomLevel', 'getExternalDataSourceNames', 'getExternalDataSourceZoomLevelBias', 'isSinglePassRenderingEnabled', 'removeExternalDataSource', 'setExternalDataSourceMaxOverzoomLevel', 'setExternalDataSourceZoomLevelBias', 'setPreloading', 'setSinglePassRenderingEnabled', 'setZoomLevelBias'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
-    addExternalDataSource(arg0: string, arg1: any, arg2: number, arg3: any): void;
+    addExternalDataSource(arg0: string, arg1: any, arg2: EnumValue<CompositeSourceType>, arg3: any): void;
     addVectorDataSource(arg0: string, arg1: any): void;
     clearExternalDataSourceZoomLevelBias(arg0: string): void;
     getExternalDataSourceMaxOverzoomLevel(arg0: string): number;

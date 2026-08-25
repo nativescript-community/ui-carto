@@ -1,19 +1,22 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { VectorElementDragResult } from '../../layers/vector';
+import { EnumValue, VectorElementDragPointStyle } from '../enums';
+
 /** com.massifmaps.layers.VectorEditEventListener / MSFVectorEditEventListener */
 export const METHODS = ['onDragEnd', 'onDragMove', 'onDragStart', 'onElementDelete', 'onElementDeselected', 'onElementModify', 'onElementSelect', 'onSelectDragPointStyle'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
-    onDragEnd(arg0: any): number;
-    onDragMove(arg0: any): number;
-    onDragStart(arg0: any): number;
+    onDragEnd(arg0: any): VectorElementDragResult;
+    onDragMove(arg0: any): VectorElementDragResult;
+    onDragStart(arg0: any): VectorElementDragResult;
     onElementDelete(arg0: any): void;
     onElementDeselected(arg0: any): void;
     onElementModify(arg0: any, arg1: any): void;
     onElementSelect(arg0: any): boolean;
-    onSelectDragPointStyle(arg0: any, arg1: number): any;
+    onSelectDragPointStyle(arg0: any, arg1: EnumValue<VectorElementDragPointStyle>): any;
 }
 
 export const ACCESSORS: Record<string, [string, string]> = {};

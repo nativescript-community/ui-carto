@@ -2,6 +2,7 @@
 // Regenerate with `npm run bindings`.
 
 import { ImageAsset, ImageSource } from '@nativescript/core';
+import { ColorFormat, EnumValue } from '../enums';
 
 /** com.massifmaps.graphics.Bitmap / MSFBitmap */
 export const METHODS = ['compressToInternal', 'compressToPNG', 'createFromCompressed', 'getBytesPerPixel', 'getColorFormat', 'getHeight', 'getPaddedBitmap', 'getPixelData', 'getRGBABitmap', 'getResizedBitmap', 'getSubBitmap', 'getWidth'] as const;
@@ -11,7 +12,7 @@ export interface Methods {
     compressToInternal(): any;
     compressToPNG(): any;
     getBytesPerPixel(): number;
-    getColorFormat(): number;
+    getColorFormat(): ColorFormat;
     getHeight(): number;
     getPaddedBitmap(arg0: number, arg1: number): ImageSource;
     getPixelData(): any;

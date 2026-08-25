@@ -1,7 +1,7 @@
 import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import * as path from 'node:path';
 import { PACKAGE_DIR, ROOT } from '../typings/config.mjs';
-import { enumDeclarations, inferConverter } from './converters.mjs';
+import { GENERATED_ENUMS, enumDeclarations, enumHome, enumValues, inferConverter } from './converters.mjs';
 import { accessors, buildModel } from './parse.mjs';
 
 export const BINDINGS_DIR = path.join(ROOT, 'src', 'ui-massifmaps', 'bindings');
@@ -14,8 +14,10 @@ const HEADER = [
 
 /** relative import path from bindings/<pkg>/ back to a module under src/ui-massifmaps/ */
 function relImport(pkg, target) {
-    const up = '../'.repeat(pkg.split('.').length + 1);
-    return (up + target).replace(/\\/g, '/');
+    const depth = pkg.split('.').length;
+    // a target inside bindings/ (the generated enums) is one level closer than the rest
+    if (target.startsWith('bindings/')) return '../'.repeat(depth) + target.slice('bindings/'.length);
+    return ('../'.repeat(depth + 1) + target).replace(/\\/g, '/');
 }
 
 /**
@@ -28,13 +30,19 @@ function relImport(pkg, target) {
  */
 /**
  * The TypeScript spelling of a native type. `as: 'in'` widens to what a converter will
- * accept, `as: 'out'` is what actually comes back. An enum the plugin does not re-export
- * degrades to `number`, which is what it is on the JS side anyway.
+ * accept, `as: 'out'` is what actually comes back.
+ *
+ * An enum goes in as `EnumValue<E>` - the enum for completion, a raw number still accepted,
+ * since that is all the value ever is at runtime. `E | number` cannot be written directly:
+ * TypeScript reduces it straight back to `number`.
  */
 function tsType(nativeType, as) {
     if (nativeType === 'void') return 'void';
     const info = inferConverter(nativeType);
-    if (info.kind === 'enum' && !enumDeclarations().has(info.enumName)) return 'number';
+    if (info.kind === 'enum') {
+        if (!enumHome(info.enumName)) return 'number';
+        return as === 'out' ? info.enumName : `EnumValue<${info.enumName}>`;
+    }
     return as === 'out' ? (info.returns ?? info.type) : info.type;
 }
 
@@ -70,11 +78,15 @@ function emitClass(cls) {
             for (const n of info.plugin.names) local.get(from).add(n);
         }
         if (info.kind === 'enum') {
-            const home = enumDeclarations().get(info.enumName);
+            const home = enumHome(info.enumName);
             if (home) {
                 const from = relImport(cls.pkg, home);
                 if (!local.has(from)) local.set(from, new Set());
                 local.get(from).add(info.enumName);
+                // every enum is also written through EnumValue<>, which lives with the generated ones
+                const helper = relImport(cls.pkg, GENERATED_ENUMS);
+                if (!local.has(helper)) local.set(helper, new Set());
+                local.get(helper).add('EnumValue');
             }
         }
     }
@@ -105,8 +117,10 @@ function emitClass(cls) {
         for (const p of sorted) {
             const info = inferConverter(p.nativeType);
             let type = info.type;
-            if (info.kind === 'enum' && !enumDeclarations().has(info.enumName)) {
-                type = 'number';
+            if (info.kind === 'enum') {
+                // one type for read and write: `Omit<Accessors, ...>` is a mapped type all over
+                // the plugin, and a mapped type collapses a get/set pair to the read type
+                type = enumHome(info.enumName) ? `EnumValue<${info.enumName}>` : 'number';
             }
             const note = info.kind === 'native' || info.kind === 'enum' ? `  // ${p.nativeType}` : '';
             lines.push(`    ${p.key}: ${type};${note}`);
@@ -137,6 +151,37 @@ function emitClass(cls) {
         lines.push('export const SELECTORS: Record<string, string> = {};');
     }
     return lines.join('\n') + '\n';
+}
+
+/**
+ * `bindings/enums.ts`: a real TypeScript enum for every SWIG enum the plugin does not already
+ * declare by hand, so an enum-typed accessor has a type to name instead of `number`.
+ *
+ * The plugin's own declarations (`PanningMode` in `ui/index`, ...) are the public API and win -
+ * their members are nominal, so a second declaration of the same name would not be assignable
+ * to the first. Values come from the android typings and are the C++ enum's, identical on iOS.
+ */
+function emitEnums(enums) {
+    const lines = [HEADER];
+    lines.push('/**');
+    lines.push(' * An enum value, or the raw number it actually is at runtime.');
+    lines.push(' *');
+    lines.push(' * `E | number` cannot be written directly - TypeScript reduces it back to `number` and the');
+    lines.push(' * enum stops being suggested. `number & {}` is what keeps the union alive.');
+    lines.push(' */');
+    lines.push('export type EnumValue<E> = E | (number & {});');
+    lines.push('');
+    for (const [name, pkg] of [...enums].sort()) {
+        if (enumDeclarations().has(name)) continue;
+        const values = enumValues().get(name) ?? [];
+        if (!values.length) continue;
+        lines.push(`/** com.massifmaps.${pkg}.${name} / MSF${name} */`);
+        lines.push(`export enum ${name} {`);
+        lines.push(values.map(([k, v]) => `    ${k} = ${v}`).join(',\n'));
+        lines.push('}');
+        lines.push('');
+    }
+    return lines.join('\n');
 }
 
 /**
@@ -225,6 +270,9 @@ export function generate({ apiUsage = true } = {}) {
              ...subs.map((s) => `export * as ${s} from './${s}';`)].join('\n') + '\n');
     };
     for (const pkg of readdirSync(BINDINGS_DIR)) writeBarrels(path.join(BINDINGS_DIR, pkg));
+
+    // after the barrels: writeBarrels() walks directories, and this is a file at the root
+    writeFileSync(path.join(BINDINGS_DIR, 'enums.ts'), emitEnums(enums));
 
     if (apiUsage) {
         const usage = emitApiUsage(model, enums);

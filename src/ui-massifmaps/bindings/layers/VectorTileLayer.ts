@@ -1,26 +1,29 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { VectorTileRenderOrder } from '../../layers/vector';
+import { EnumValue } from '../enums';
+
 /** com.massifmaps.layers.VectorTileLayer / MSFVectorTileLayer */
 export const METHODS = ['getBuildingRenderOrder', 'getClickHandlerLayerFilter', 'getClickRadius', 'getLabelBlendingSpeed', 'getLabelRenderOrder', 'getLayerBlendingSpeed', 'getRendererLayerFilter', 'getTileCacheCapacity', 'getTileDecoder', 'getVectorTileEventListener', 'setBuildingRenderOrder', 'setClickHandlerLayerFilter', 'setClickRadius', 'setLabelBlendingSpeed', 'setLabelRenderOrder', 'setLayerBlendingSpeed', 'setRendererLayerFilter', 'setTileCacheCapacity', 'setVectorTileEventListener'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
-    getBuildingRenderOrder(): number;
+    getBuildingRenderOrder(): VectorTileRenderOrder;
     getClickHandlerLayerFilter(): string;
     getClickRadius(): number;
     getLabelBlendingSpeed(): number;
-    getLabelRenderOrder(): number;
+    getLabelRenderOrder(): VectorTileRenderOrder;
     getLayerBlendingSpeed(): number;
     getRendererLayerFilter(): string;
     getTileCacheCapacity(): number;
     getTileDecoder(): any;
     getVectorTileEventListener(): any;
-    setBuildingRenderOrder(arg0: number): void;
+    setBuildingRenderOrder(arg0: EnumValue<VectorTileRenderOrder>): void;
     setClickHandlerLayerFilter(arg0: string): void;
     setClickRadius(arg0: number): void;
     setLabelBlendingSpeed(arg0: number): void;
-    setLabelRenderOrder(arg0: number): void;
+    setLabelRenderOrder(arg0: EnumValue<VectorTileRenderOrder>): void;
     setLayerBlendingSpeed(arg0: number): void;
     setRendererLayerFilter(arg0: string): void;
     setTileCacheCapacity(arg0: number): void;
@@ -41,11 +44,11 @@ export const ACCESSORS: Record<string, [string, string]> = {
 
 /** public shape of the accessors this class declares itself */
 export interface Accessors {
-    buildingRenderOrder: number;
+    buildingRenderOrder: EnumValue<VectorTileRenderOrder>;  // com.massifmaps.layers.VectorTileRenderOrder
     clickHandlerLayerFilter: string;
     clickRadius: number;
     labelBlendingSpeed: number;
-    labelRenderOrder: number;
+    labelRenderOrder: EnumValue<VectorTileRenderOrder>;  // com.massifmaps.layers.VectorTileRenderOrder
     layerBlendingSpeed: number;
     rendererLayerFilter: string;
     tileCacheCapacity: number;

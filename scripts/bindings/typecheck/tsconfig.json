@@ -1,0 +1,7 @@
+{
+    "extends": "../../../tools/tsconfig",
+    "compilerOptions": {
+        "noEmit": true
+    },
+    "include": ["cases/**/*.ts", "../../../src/**/*", "../../../references.d.ts", "../../../tools/references.d.ts"]
+}

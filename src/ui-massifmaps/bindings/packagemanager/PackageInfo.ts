@@ -1,6 +1,8 @@
 // GENERATED FILE - do not edit by hand.
 // Regenerate with `npm run bindings`.
 
+import { EnumValue, PackageType } from '../enums';
+
 /** com.massifmaps.packagemanager.PackageInfo / MSFPackageInfo */
 export const METHODS = ['getMetaInfo', 'getName', 'getNames', 'getPackageId', 'getPackageType', 'getSize', 'getTileMask', 'getVersion'] as const;
 
@@ -10,7 +12,7 @@ export interface Methods {
     getName(): string;
     getNames(arg0: string): string[];
     getPackageId(): string;
-    getPackageType(): number;
+    getPackageType(): PackageType;
     getSize(): any;
     getTileMask(): any;
     getVersion(): number;
