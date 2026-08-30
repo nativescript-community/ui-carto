@@ -49,7 +49,7 @@
      * dusk instead of crossing it.
      */
     const MAPBOX = JSON.stringify([
-        { sunAltitude: -9, ambientColor: '#001438', ambientIntensity: 0.5, sunColor: '#3f4455', sunIntensity: 0.5 },
+        { sunAltitude: -9, ambientColor: '#464d69', ambientIntensity: 0.5, sunColor: '#3f4455', sunIntensity: 0.5 },
         { sunAltitude: 3, ambientColor: '#363e5e', ambientIntensity: 0.8, sunColor: '#fec286', sunIntensity: 0.2 },
         { sunAltitude: 12, ambientColor: '#363e5e', ambientIntensity: 0.8, sunColor: '#fec286', sunIntensity: 0.2 },
         { sunAltitude: 38, ambientColor: '#ffffff', ambientIntensity: 0.8, sunColor: '#ffffff', sunIntensity: 0.2 }
@@ -57,11 +57,19 @@
 
     const FORMULAS: Array<[string, string]> = [['Mapbox', MAPBOX], ['Psychedelic', PSYCHEDELIC]];
 
-    /** The hour is swept, not picked: the curve is continuous and that is the point of it. */
-    const START_HOUR = 17.4;
+    /**
+     * The SUN HEIGHT is what the curve is anchored on, so it is what the slider sweeps. An hour is
+     * one step further away, and a day's worth of hours crosses the twilight band (3 to 12 degrees
+     * up) in about 33 minutes - 2.3% of a 0-24 slider - so dawn and dusk cannot be dragged to.
+     */
+    const START_ALTITUDE = 10;
+    const PRESETS: Array<[string, number, boolean]> =
+        [['dawn', 40, true], ['day', 70, false], ['dusk', 10, false], ['night', -30, false]];
 
     let formula = 0;
-    let hour = START_HOUR;
+    let sunAltitude = START_ALTITUDE;
+    let rising = false;
+    let preset = 2;
 
     function start(host: ExampleHost) {
         const map = host.map;
@@ -109,15 +117,12 @@
         }
 
         function applyHour() {
-            // An hour is a sun POSITION; the curve turns that into a light.
-            map.light().apply({
-                sunAzimuth: 90 + (hour - 6) * 15,
-                sunAltitude: 62 * Math.sin((Math.PI * (hour - 6)) / 12)
-            });
+            // The curve reads a sun POSITION. East of north is morning, which is what picks dawn.
+            map.light().apply({ sunAzimuth: rising ? 90 : 270, sunAltitude });
         }
 
         function caption() {
-            host.caption(`${FORMULAS[formula][0]} formula`);
+            host.caption(`${PRESETS[preset][0]} - sun ${sunAltitude.toFixed(0)}\u00b0 - ${FORMULAS[formula][0]}`);
         }
 
         host.button('Formula', () => {
@@ -125,11 +130,17 @@
             applyFormula();
             caption();
         });
-        // A slider, because the curve is continuous: sweeping it is what shows the sun passing
-        // THROUGH dusk rather than jumping between presets.
-        host.slider('Hour', 0, 24, START_HOUR, (value) => {
-            hour = value;
+        host.slider('Sun', -30, 70, START_ALTITUDE, (value) => {
+            sunAltitude = value;
             applyHour();
+            caption();
+        });
+        // Straight to MapBox's own four, so the render can be held against theirs.
+        host.button('Preset', () => {
+            preset = (preset + 1) % PRESETS.length;
+            [, sunAltitude, rising] = PRESETS[preset];
+            applyHour();
+            caption();
         });
         host.caption('One palette, no night theme: the hour picks the light, the curve picks the look.');
     }
