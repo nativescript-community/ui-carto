@@ -70,6 +70,7 @@ export const exampleSections: ExampleSection[] = [
         description: "CartoCSS, style projects and layer composition.",
         examples: [
             entry("style-parameters", "Change a style at runtime", "A style project declares `param::` values the app sets while the map runs, as properties: `params.<name>`. A colour swaps live; one used in a filter re-decodes the tiles.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/style-parameters.png", () => require('./StyleParameters.svelte')),
+            entry("day-cycle-light", "Light the map by the hour", "One palette, no night theme: the scene light is read off a curve of `LightStop`s, and every colour on the map - 2D fills, labels, 3D walls - is derived from it. Swap the curve and the whole map changes character.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/day-cycle-light.png", () => require('./DayCycleLight.svelte')),
         ]
     },
     {
@@ -78,7 +79,7 @@ export const exampleSections: ExampleSection[] = [
         description: "Elevation, hillshade, sky and fog.",
         examples: [
             entry("terrain-3d", "3D terrain, hybrid", "Satellite imagery draped over an elevation mesh, with roads and summit labels above it. One DEM source drives the mesh, the hillshade and the elevation queries.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/terrain-3d.png", () => require('./Terrain3d.svelte')),
-            entry("terrain-2d-3d", "2D / 3D switch", "One flag switches the map between flat and 3D terrain. Full switch decides whether a flat map still pays for 3D, and auto by tilt lets a tilt gesture do the switching.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/terrain-2d-3d.png", () => require('./Terrain2d3d.svelte')),
+            entry("terrain-2d-3d", "2D / 3D switch", "One flag switches the map between flat and 3D terrain. Full switch decides whether a flat map still pays for 3D, auto by tilt lets a tilt gesture do the switching, and match flight drives the terrain off the camera's own clock.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/terrain-2d-3d.png", () => require('./Terrain2d3d.svelte')),
             entry("atmosphere", "Sky, fog and the day cycle", "A physical atmosphere over 3D terrain: dawn, noon, dusk and night, with the fog lit by the same sun, stars beyond it, and summits standing clear of the haze filling the valley.", null, () => require('./Atmosphere.svelte')),
         ]
     },
