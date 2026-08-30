@@ -42,9 +42,20 @@
         { sunAltitude: 60, ambientColor: '#00fff0', ambientIntensity: 1.0, sunColor: '#fff700', sunIntensity: 0.45 }
     ]);
 
-    // An EMPTY list is the built-in curve. Not '', which reads as "no value" through some
-    // bindings - the property has to arrive as a list for the SDK to clear the old one.
-    const FORMULAS: Array<[string, string]> = [['Mapbox', '[]'], ['Psychedelic', PSYCHEDELIC]];
+    /**
+     * The BUILT-IN curve written out: MapBox Standard's four light setups at the sun heights it
+     * states them for. An empty list selects exactly this; spelled out, it shows the shape. The
+     * doubled twilight stop holds the light flat from 3 to 12 degrees, so the sun passes THROUGH
+     * dusk instead of crossing it.
+     */
+    const MAPBOX = JSON.stringify([
+        { sunAltitude: -9, ambientColor: '#001438', ambientIntensity: 0.5, sunColor: '#3f4455', sunIntensity: 0.5 },
+        { sunAltitude: 3, ambientColor: '#363e5e', ambientIntensity: 0.8, sunColor: '#fec286', sunIntensity: 0.2 },
+        { sunAltitude: 12, ambientColor: '#363e5e', ambientIntensity: 0.8, sunColor: '#fec286', sunIntensity: 0.2 },
+        { sunAltitude: 38, ambientColor: '#ffffff', ambientIntensity: 0.8, sunColor: '#ffffff', sunIntensity: 0.2 }
+    ]);
+
+    const FORMULAS: Array<[string, string]> = [['Mapbox', MAPBOX], ['Psychedelic', PSYCHEDELIC]];
 
     /** The hour is swept, not picked: the curve is continuous and that is the point of it. */
     const START_HOUR = 17.4;
@@ -54,6 +65,11 @@
 
     function start(host: ExampleHost) {
         const map = host.map;
+
+        // How far a TILTED far field may coarsen: unbounded, the grazing term makes the horizon
+        // band jump between levels as the camera turns, so one side keeps its buildings and the
+        // other does not. This caps the grazing half alone; distance still coarsens freely.
+        map.set('tileLODForeshorteningLimit', 1.0);
 
         map.addLayer('basemap', {
             type: 'vector',
