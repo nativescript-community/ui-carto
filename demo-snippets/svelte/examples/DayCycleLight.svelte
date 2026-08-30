@@ -10,7 +10,7 @@
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { vectorTiles } from './shared';
+    import { demTiles, vectorTiles } from './shared';
 
     /**
      * `*-emissive-strength` is how much of a colour is EMITTED rather than lit. MapBox defaults
@@ -60,6 +60,11 @@
             source: vectorTiles(),
             style: { type: 'mbvt', cartocss: MSS }
         });
+
+        // A TERRAIN, for the shadows. Cast shadows are drawn from the drape pass and land on the
+        // terrain surface - with no terrain there is no surface to receive them and nothing casts
+        // at all, however high shadowStrength goes.
+        map.terrain({ type: 'terrain', source: demTiles() }).apply({ exaggeration: 1, cameraClearance: 40 });
 
         // The curve is only read while this is on; off, the style's and the app's own sun colours
         // stand, which is what every map did before the curve existed.
