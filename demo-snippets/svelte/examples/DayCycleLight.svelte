@@ -67,6 +67,9 @@
             type: 'light',
             dayCycleLightsEnabled: true,
             sunOverridingStyle: true,
+            // Without this the ground is never lit, and the shadow multiply lives in the same
+            // block - so the buildings cast nothing.
+            terrainLightingEnabled: true,
             // Buildings cast: a low sun is what the curve is most worth looking at, and it is also
             // when the shadows are longest. They follow the same sun the curve reads.
             shadowStrength: 0.35,
