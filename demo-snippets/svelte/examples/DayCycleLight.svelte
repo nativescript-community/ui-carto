@@ -42,18 +42,15 @@
         { sunAltitude: 60, ambientColor: '#00fff0', ambientIntensity: 1.0, sunColor: '#fff700', sunIntensity: 0.45 }
     ]);
 
-    const FORMULAS: Array<[string, string]> = [['Mapbox', ''], ['Psychedelic', PSYCHEDELIC]];
+    // An EMPTY list is the built-in curve. Not '', which reads as "no value" through some
+    // bindings - the property has to arrive as a list for the SDK to clear the old one.
+    const FORMULAS: Array<[string, string]> = [['Mapbox', '[]'], ['Psychedelic', PSYCHEDELIC]];
 
-    /**
-     * Four hours that land ON the curve's own anchors, so each shows a different light rather than
-     * a blend: noon overhead, 17.4h ten degrees up (dusk's anchor), 22h well under, and 8.7h forty
-     * degrees on the way UP - dawn, not dusk, because the azimuth has the sun east of north there.
-     */
-    const HOURS = [12, 17.4, 22, 8.7];
-    const HOUR_NAMES = ['noon', 'dusk', 'night', 'dawn'];
+    /** The hour is swept, not picked: the curve is continuous and that is the point of it. */
+    const START_HOUR = 17.4;
 
     let formula = 0;
-    let hour = 0;
+    let hour = START_HOUR;
 
     function start(host: ExampleHost) {
         const map = host.map;
@@ -66,7 +63,15 @@
 
         // The curve is only read while this is on; off, the style's and the app's own sun colours
         // stand, which is what every map did before the curve existed.
-        map.light({ type: 'light', dayCycleLightsEnabled: true, sunOverridingStyle: true });
+        map.light({
+            type: 'light',
+            dayCycleLightsEnabled: true,
+            sunOverridingStyle: true,
+            // Buildings cast: a low sun is what the curve is most worth looking at, and it is also
+            // when the shadows are longest. They follow the same sun the curve reads.
+            shadowStrength: 0.35,
+            shadowSoftness: 1.2
+        });
 
         applyFormula();
         applyHour();
@@ -81,15 +86,14 @@
 
         function applyHour() {
             // An hour is a sun POSITION; the curve turns that into a light.
-            const h = HOURS[hour];
             map.light().apply({
-                sunAzimuth: 90 + (h - 6) * 15,
-                sunAltitude: 62 * Math.sin((Math.PI * (h - 6)) / 12)
+                sunAzimuth: 90 + (hour - 6) * 15,
+                sunAltitude: 62 * Math.sin((Math.PI * (hour - 6)) / 12)
             });
         }
 
         function caption() {
-            host.caption(`${HOUR_NAMES[hour]} - ${FORMULAS[formula][0]} formula`);
+            host.caption(`${FORMULAS[formula][0]} formula`);
         }
 
         host.button('Formula', () => {
@@ -97,10 +101,11 @@
             applyFormula();
             caption();
         });
-        host.button('Hour', () => {
-            hour = (hour + 1) % HOURS.length;
+        // A slider, because the curve is continuous: sweeping it is what shows the sun passing
+        // THROUGH dusk rather than jumping between presets.
+        host.slider('Hour', 0, 24, START_HOUR, (value) => {
+            hour = value;
             applyHour();
-            caption();
         });
         host.caption('One palette, no night theme: the hour picks the light, the curve picks the look.');
     }
