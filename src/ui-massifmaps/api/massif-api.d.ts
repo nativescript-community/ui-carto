@@ -122,6 +122,7 @@ export type ClassName =
     | 'massif::Layer'
     | 'massif::Layers'
     | 'massif::LightOptions'
+    | 'massif::LightStop'
     | 'massif::Line'
     | 'massif::LineGeometry'
     | 'massif::LineStyle'
@@ -2935,6 +2936,12 @@ export interface PropertyTypes {
         'ambientColor': number;
         /** Returns the ambient light intensity. */
         'ambientIntensity': number;
+        /** Returns the day-cycle light curve - the "formula" an hour is turned into a look by. */
+        'dayCycleLightStops': Json;
+        /** Returns whether the sun's COLOURS follow its position. */
+        'dayCycleLightsEnabled': boolean;
+        /** Returns the curve used while the sun is RISING, if the app set one. */
+        'dayCycleRisingLightStops': Json;
         /** Returns the shadow depth bias. */
         'shadowBias': number;
         /** Returns the number of shadow cascades. */
@@ -2959,8 +2966,22 @@ export interface PropertyTypes {
         'sunColor': number;
         /** Returns the sun light intensity. */
         'sunIntensity': number;
+        /** Returns whether this sun overrides the one a style states. */
+        'sunOverridingStyle': boolean;
         /** Returns whether the sun lights the 3D terrain surface. */
         'terrainLightingEnabled': boolean;
+    };
+    'massif::LightStop': {
+        /** (read-only) Returns the ambient colour. */
+        readonly 'ambientColor': number;
+        /** (read-only) Returns the ambient intensity. */
+        readonly 'ambientIntensity': number;
+        /** (read-only) Returns the sun height this light belongs to. */
+        readonly 'sunAltitude': number;
+        /** (read-only) Returns the directional colour. */
+        readonly 'sunColor': number;
+        /** (read-only) Returns the directional intensity. */
+        readonly 'sunIntensity': number;
     };
     'massif::Line': {
         /** (read-only) Returns the bounds of this vector element. */
@@ -3949,6 +3970,12 @@ export interface PropertyTypes {
         'light.ambientColor': number;
         /** Returns the ambient light intensity. */
         'light.ambientIntensity': number;
+        /** Returns the day-cycle light curve - the "formula" an hour is turned into a look by. */
+        'light.dayCycleLightStops': Json;
+        /** Returns whether the sun's COLOURS follow its position. */
+        'light.dayCycleLightsEnabled': boolean;
+        /** Returns the curve used while the sun is RISING, if the app set one. */
+        'light.dayCycleRisingLightStops': Json;
         /** Returns the shadow depth bias. */
         'light.shadowBias': number;
         /** Returns the number of shadow cascades. */
@@ -3973,6 +4000,8 @@ export interface PropertyTypes {
         'light.sunColor': number;
         /** Returns the sun light intensity. */
         'light.sunIntensity': number;
+        /** Returns whether this sun overrides the one a style states. */
+        'light.sunOverridingStyle': boolean;
         /** Returns whether the sun lights the 3D terrain surface. */
         'light.terrainLightingEnabled': boolean;
         /** Returns the light (sun) options. May be null. */
@@ -3981,6 +4010,12 @@ export interface PropertyTypes {
         'lightOptions.ambientColor': number;
         /** Returns the ambient light intensity. */
         'lightOptions.ambientIntensity': number;
+        /** Returns the day-cycle light curve - the "formula" an hour is turned into a look by. */
+        'lightOptions.dayCycleLightStops': Json;
+        /** Returns whether the sun's COLOURS follow its position. */
+        'lightOptions.dayCycleLightsEnabled': boolean;
+        /** Returns the curve used while the sun is RISING, if the app set one. */
+        'lightOptions.dayCycleRisingLightStops': Json;
         /** Returns the shadow depth bias. */
         'lightOptions.shadowBias': number;
         /** Returns the number of shadow cascades. */
@@ -4005,6 +4040,8 @@ export interface PropertyTypes {
         'lightOptions.sunColor': number;
         /** Returns the sun light intensity. */
         'lightOptions.sunIntensity': number;
+        /** Returns whether this sun overrides the one a style states. */
+        'lightOptions.sunOverridingStyle': boolean;
         /** Returns whether the sun lights the 3D terrain surface. */
         'lightOptions.terrainLightingEnabled': boolean;
         /** Returns the long click duration in seconds. */
@@ -5717,10 +5754,16 @@ export interface PropertyTypes {
         readonly 'data': Handle;
         /** (read-only) Returns the size of the data */
         readonly 'data.size': number;
+        /** (read-only) The pixel height, or 0 when the data is an encoded file. */
+        readonly 'height': number;
         /** Returns the maximum age of the tile data, tile data will expire after that point. */
         'maxAge': number;
+        /** (read-only) Returns true when getData() holds raw RGBA8 pixels rather than an encoded file. A consumer that turns tiles into bitmaps has to check this before decoding. */
+        readonly 'rawPixels': boolean;
         /** Returns true if the tile should be replaced with parent tile. */
         'replaceWithParent': boolean;
+        /** (read-only) The pixel width, or 0 when the data is an encoded file. */
+        readonly 'width': number;
     };
     'massif::TileDataSource': {
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
@@ -6829,6 +6872,8 @@ export interface PositionPaths {
     };
     'massif::LightOptions': {
     };
+    'massif::LightStop': {
+    };
     'massif::Line': {
         'bounds': true;
         'geometry.bounds': true;
@@ -7629,6 +7674,8 @@ export interface ObjectPaths {
     'massif::Layers': {
     };
     'massif::LightOptions': {
+    };
+    'massif::LightStop': {
     };
     'massif::Line': {
         'geometry': 'massif::LineGeometry';
@@ -8495,6 +8542,10 @@ export interface VariantPaths {
     'massif::Layers': {
     };
     'massif::LightOptions': {
+        'dayCycleLightStops': true;
+        'dayCycleRisingLightStops': true;
+    };
+    'massif::LightStop': {
     };
     'massif::Line': {
         'bounds': true;
@@ -8669,6 +8720,10 @@ export interface VariantPaths {
     'massif::Options': {
         'baseProjection.bounds': true;
         'focusPointOffset': true;
+        'light.dayCycleLightStops': true;
+        'light.dayCycleRisingLightStops': true;
+        'lightOptions.dayCycleLightStops': true;
+        'lightOptions.dayCycleRisingLightStops': true;
         'mainLightDirection': true;
         'panBounds': true;
         'projection.bounds': true;
@@ -9953,6 +10008,12 @@ export interface OptionsSpec_light {
     ambientColor?: number;
     /** Returns the ambient light intensity. */
     ambientIntensity?: number;
+    /** Returns the day-cycle light curve - the "formula" an hour is turned into a look by. */
+    dayCycleLightStops?: Json;
+    /** Returns whether the sun's COLOURS follow its position. */
+    dayCycleLightsEnabled?: boolean;
+    /** Returns the curve used while the sun is RISING, if the app set one. */
+    dayCycleRisingLightStops?: Json;
     /** Returns the shadow depth bias. */
     shadowBias?: number;
     /** Returns the number of shadow cascades. */
@@ -9977,6 +10038,8 @@ export interface OptionsSpec_light {
     sunColor?: number;
     /** Returns the sun light intensity. */
     sunIntensity?: number;
+    /** Returns whether this sun overrides the one a style states. */
+    sunOverridingStyle?: boolean;
     /** Returns whether the sun lights the 3D terrain surface. */
     terrainLightingEnabled?: boolean;
 }
@@ -10632,6 +10695,8 @@ export interface MethodTypes {
     };
     'massif::LightOptions': {
     };
+    'massif::LightStop': {
+    };
     'massif::Line': {
     };
     'massif::LineGeometry': {
@@ -11213,6 +11278,8 @@ export interface EventTypes {
     'massif::Layers': {
     };
     'massif::LightOptions': {
+    };
+    'massif::LightStop': {
     };
     'massif::Line': {
     };
