@@ -43,33 +43,91 @@
     ]);
 
     /**
-     * The BUILT-IN curve written out: MapBox Standard's four light setups at the sun heights it
-     * states them for. An empty list selects exactly this; spelled out, it shows the shape. The
-     * doubled twilight stop holds the light flat from 3 to 12 degrees, so the sun passes THROUGH
-     * dusk instead of crossing it.
+     * The BUILT-IN curves written out: MapBox Standard's four light setups, byte for byte, at the
+     * sun heights the SDK anchors them at. Empty lists select exactly these.
+     *
+     * TWO curves, because Standard's `dawn` and `dusk` are different lights at the SAME sun height:
+     * the SDK reads the setting one while the sun is west and the rising one while it is east, so
+     * setting only `dayCycleLightStops` is what made a morning render as dusk.
+     *
+     * The doubled twilight stop holds the light FLAT from 3 to 12 degrees - that band, plus below
+     * -9 and above 38, is where the curve returns a preset exactly rather than a blend of two.
      */
-    const MAPBOX = JSON.stringify([
+    const MAPBOX_SETTING = JSON.stringify([
         { sunAltitude: -9, ambientColor: '#464d69', ambientIntensity: 0.5, sunColor: '#3f4455', sunIntensity: 0.5 },
         { sunAltitude: 3, ambientColor: '#363e5e', ambientIntensity: 0.8, sunColor: '#fec286', sunIntensity: 0.2 },
         { sunAltitude: 12, ambientColor: '#363e5e', ambientIntensity: 0.8, sunColor: '#fec286', sunIntensity: 0.2 },
         { sunAltitude: 38, ambientColor: '#ffffff', ambientIntensity: 0.8, sunColor: '#ffffff', sunIntensity: 0.2 }
     ]);
 
-    const FORMULAS: Array<[string, string]> = [['Mapbox', MAPBOX], ['Psychedelic', PSYCHEDELIC]];
+    const MAPBOX_RISING = JSON.stringify([
+        { sunAltitude: -9, ambientColor: '#464d69', ambientIntensity: 0.5, sunColor: '#3f4455', sunIntensity: 0.5 },
+        { sunAltitude: 3, ambientColor: '#ffecdc', ambientIntensity: 0.75, sunColor: '#feca8b', sunIntensity: 0.5 },
+        { sunAltitude: 12, ambientColor: '#ffecdc', ambientIntensity: 0.75, sunColor: '#feca8b', sunIntensity: 0.5 },
+        { sunAltitude: 38, ambientColor: '#ffffff', ambientIntensity: 0.8, sunColor: '#ffffff', sunIntensity: 0.2 }
+    ]);
+
+    /** [name, setting curve, rising curve] - one curve for both when a formula has no dawn. */
+    const FORMULAS: Array<[string, string, string]> = [
+        ['Mapbox', MAPBOX_SETTING, MAPBOX_RISING],
+        ['Psychedelic', PSYCHEDELIC, PSYCHEDELIC]
+    ];
+
+    /** Paris, and the camera the example opens on. */
+    const LON = 2.3376;
+    const LAT = 48.86;
 
     /**
-     * The SUN HEIGHT is what the curve is anchored on, so it is what the slider sweeps. An hour is
-     * one step further away, and a day's worth of hours crosses the twilight band (3 to 12 degrees
-     * up) in about 33 minutes - 2.3% of a 0-24 slider - so dawn and dusk cannot be dragged to.
+     * The EQUINOX, as its Julian day at noon UTC (2026-03-20). On it the sun rises at 6 and sets at
+     * 18 local solar time at every latitude, so the slider's hours mean the same thing anywhere.
      */
-    const START_ALTITUDE = 10;
-    const PRESETS: Array<[string, number, boolean]> =
-        [['dawn', 40, true], ['day', 70, false], ['dusk', 10, false], ['night', -30, false]];
+    const JULIAN_NOON = 2461120.0;
+
+    /** Local solar time: 12 is the sun at its highest, whatever the longitude. */
+    const START_HOUR = 17.4;
+    /**
+     * The hours that land on MapBox's four presets EXACTLY, at this camera on this date: dawn 6:48
+     * (sun 6.5° and east), day 12:00 (41.1°, past the 38° stop), dusk 17:24 (7.1° and west), night
+     * 22:00 (-33.9°, below the -9° stop). Anywhere else on the slider the curve blends two.
+     */
+    const PRESETS: Array<[string, number]> = [['dawn', 6.8], ['day', 12], ['dusk', 17.4], ['night', 22]];
 
     let formula = 0;
-    let sunAltitude = START_ALTITUDE;
-    let rising = false;
+    let hour = START_HOUR;
+    let sunAltitude = 0;
+    let sunAzimuth = 0;
     let preset = 2;
+
+    /**
+     * Local solar time to a sun position - the NOAA low-accuracy form, good to ~0.1 degree, which is
+     * what LightOptions.setSunPositionFromTime computes in C++; the facade cannot reach that method,
+     * so the example spells it out.
+     */
+    function sunPosition(local: number): [number, number] {
+        const rad = Math.PI / 180;
+        const n = JULIAN_NOON + (local - LON / 15 - 12) / 24 - 2451545.0;
+        const meanAnom = (357.528 + 0.9856003 * n) * rad;
+        const eclipticLong =
+            (280.46 + 0.9856474 * n + 1.915 * Math.sin(meanAnom) + 0.02 * Math.sin(2 * meanAnom)) * rad;
+        const obliquity = (23.439 - 0.0000004 * n) * rad;
+        const rightAsc = Math.atan2(Math.cos(obliquity) * Math.sin(eclipticLong), Math.cos(eclipticLong));
+        const decl = Math.asin(Math.sin(obliquity) * Math.sin(eclipticLong));
+
+        // Greenwich mean sidereal time, then the local hour angle.
+        let gmst = (18.697374558 + 24.06570982441908 * n) % 24;
+        if (gmst < 0) gmst += 24;
+        const hourAngle = (gmst * 15 + LON) * rad - rightAsc;
+
+        const lat = LAT * rad;
+        const altitude =
+            Math.asin(Math.sin(lat) * Math.sin(decl) + Math.cos(lat) * Math.cos(decl) * Math.cos(hourAngle)) / rad;
+        // atan2 here is measured from south; the SDK wants clockwise from north.
+        const azimuth =
+            Math.atan2(Math.sin(hourAngle), Math.cos(hourAngle) * Math.sin(lat) - Math.tan(decl) * Math.cos(lat)) /
+                rad +
+            180;
+        return [altitude, azimuth];
+    }
 
     function start(host: ExampleHost) {
         const map = host.map;
@@ -105,24 +163,53 @@
             shadowSoftness: 1.2
         });
 
+        // A sky, because the hour is the whole example: the atmosphere is integrated against the
+        // SAME sun, so it reddens and darkens with the slider without a value of its own. Options
+        // starts with no SkyOptions, so nothing is drawn behind the map until this line.
+        map.sky({ type: 'sky' });
+
         applyFormula();
         applyHour();
-        map.camera().moveTo([2.3376, 48.86], { zoom: 15.5, rotation: 20, tilt: 45 });
+        map.camera().moveTo([LON, LAT], { zoom: 15.5, rotation: 20, tilt: 45 });
 
         function applyFormula() {
-            // The whole formula, in one property. An empty list is the built-in curve; a list of
+            // The whole formula, in two properties. An empty list is the built-in curve; a list of
             // stops replaces it, and everything the SDK derives from the light follows without a
-            // re-decode - the tiles are untouched, so this is a redraw.
-            map.light().apply({ dayCycleLightStops: FORMULAS[formula][1] });
+            // re-decode - the tiles are untouched, so this is a redraw. Both are written every
+            // time, or a formula without a dawn of its own would keep the previous one's.
+            map.light().apply({
+                dayCycleLightStops: FORMULAS[formula][1],
+                dayCycleRisingLightStops: FORMULAS[formula][2]
+            });
         }
 
         function applyHour() {
-            // The curve reads a sun POSITION. East of north is morning, which is what picks dawn.
-            map.light().apply({ sunAzimuth: rising ? 90 : 270, sunAltitude });
+            // The curve reads a sun POSITION, and the hour is where the sun actually is then.
+            [sunAltitude, sunAzimuth] = sunPosition(hour);
+            map.light().apply({ sunAzimuth, sunAltitude });
+        }
+
+        /**
+         * Which MapBox preset this hour actually renders. The curve only returns one EXACTLY where
+         * it is flat - below -9, between 3 and 12, above 38 - and everything else is a blend of
+         * two, which is why an arbitrary hour never matches a `lightPreset` screenshot.
+         */
+        function light(): string {
+            if (formula !== 0) return 'custom curve';
+            const twilight = sunAzimuth <= 180 ? 'dawn' : 'dusk';
+            if (sunAltitude <= -9) return 'night';
+            if (sunAltitude >= 38) return 'day';
+            if (sunAltitude >= 3 && sunAltitude <= 12) return twilight;
+            return sunAltitude < 3 ? `night to ${twilight}` : `${twilight} to day`;
         }
 
         function caption() {
-            host.caption(`${PRESETS[preset][0]} - sun ${sunAltitude.toFixed(0)}\u00b0 - ${FORMULAS[formula][0]}`);
+            const minutes = Math.floor((hour % 1) * 60);
+            host.caption(
+                `${Math.floor(hour)}:${String(minutes).padStart(2, '0')} - sun ${sunAltitude.toFixed(
+                    0
+                )}\u00b0 - ${light()} - ${FORMULAS[formula][0]}`
+            );
         }
 
         host.button('Formula', () => {
@@ -130,15 +217,17 @@
             applyFormula();
             caption();
         });
-        host.slider('Sun', -30, 70, START_ALTITUDE, (value) => {
-            sunAltitude = value;
+        // The HOUR, because that is what a day is: the sun walks its real arc, so dawn and dusk
+        // come with the azimuth swinging round rather than being picked by hand.
+        host.slider('Hour', 0, 24, START_HOUR, (value) => {
+            hour = value;
             applyHour();
             caption();
         });
         // Straight to MapBox's own four, so the render can be held against theirs.
         host.button('Preset', () => {
             preset = (preset + 1) % PRESETS.length;
-            [, sunAltitude, rising] = PRESETS[preset];
+            [, hour] = PRESETS[preset];
             applyHour();
             caption();
         });
