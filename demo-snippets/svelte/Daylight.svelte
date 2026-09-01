@@ -39,7 +39,7 @@
     let altitude = 35;
     let sunIntensity = 1;
     let ambientIntensity = 0.35;
-    let shadowStrength = 0.75;
+    let shadowStrength = 1;
     let shadowSoftness = 1;
     let shadowDistance = 20000;
     let shadowCascades = 3;
@@ -199,7 +199,7 @@
         <SettingSwitch checked={shadows} hint="LightOptions.shadowStrength, 0 = no shadows" label="Cast shadows" onChange={(v) => { shadows = v; applyShadows(); }} />
         <SettingSlider
             label="Strength"
-            max={1}
+            max={2}
             min={0}
             onChange={(v) => {
                 shadowStrength = v;

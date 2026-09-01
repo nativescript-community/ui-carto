@@ -153,7 +153,7 @@
             verticalRangeEnd: 3200
         });
 
-        map.light({ type: 'light', terrainLightingEnabled: true, shadowStrength: 0.35, shadowSoftness: 1.5 });
+        map.light({ type: 'light', terrainLightingEnabled: true, shadowStrength: 1, shadowSoftness: 1.5 });
 
         /**
          * Owns both sky switches, because they are not independent: the custom shader calls
@@ -178,7 +178,9 @@
          * about the sky, not about ephemerides.
          *
          * The fog is NOT tinted here - the SDK lights the configured colour with the same sun the
-         * ground gets, so a fog tuned for daylight darkens through the night on its own.
+         * ground gets, so a fog tuned for daylight darkens through the night on its own. Neither is
+         * the shadow strength: the SDK scales it by how much of the light is direct, so it fades
+         * out as the sun sets without the hour touching it.
          */
         function applyHour() {
             const altitude = 62 * Math.sin((Math.PI * (hour - 6)) / 12);
@@ -190,8 +192,7 @@
                 sunAzimuth: azimuth,
                 sunAltitude: altitude,
                 sunIntensity: 0.15 + 0.85 * sunUp,
-                ambientIntensity: 0.45 - 0.15 * sunUp,
-                shadowStrength: 0.35 * sunUp
+                ambientIntensity: 0.45 - 0.15 * sunUp
             });
         }
 

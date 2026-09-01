@@ -49,7 +49,7 @@
             terrainLightingEnabled: true,
             sunAzimuth: 315,
             sunAltitude: 42,
-            shadowStrength: 0.35,
+            shadowStrength: 1,
             shadowSoftness: 1.5
         });
 

@@ -158,8 +158,9 @@
             // block - so the buildings cast nothing.
             terrainLightingEnabled: true,
             // Buildings cast: a low sun is what the curve is most worth looking at, and it is also
-            // when the shadows are longest. They follow the same sun the curve reads.
-            shadowStrength: 0.35,
+            // when the shadows are longest. They follow the same sun the curve reads, and fade out
+            // as it sets - the SDK scales this by how much of the light is direct. 1 is physical.
+            shadowStrength: 1,
             shadowSoftness: 1.2
         });
 

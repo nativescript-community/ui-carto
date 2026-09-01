@@ -59,7 +59,7 @@ export function applyDayCycleHour(light: LightOptions, sky: SkyOptions, hourUtc:
     light.sunColor = `rgb(255, ${Math.round(255 - 90 * warm)}, ${Math.round(255 - 190 * warm)})`;
     light.sunIntensity = 0.15 + 0.85 * day;
     light.ambientIntensity = 0.25 + 0.55 * day;
-    light.shadowStrength = 0.85 * day; // no sun, no shadows
+    light.shadowStrength = 1; // the SDK fades it with the sun itself - 1 is the physical depth
 
     const skyR = Math.round(10 + 48 * day);
     const skyG = Math.round(14 + 102 * day);
