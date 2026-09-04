@@ -52,6 +52,7 @@ const NativeEventListener = lookup('NSMSFApiEventListener');
 /** Keeps each subscription's director alive; the C++ side holds it as a raw pointer and ARC
  *  would otherwise collect it the moment `on` returns, silently and with no warning. */
 const listeners = new Map<number, any>();
+const eventBridges = new Map();   // next to the existing `listeners` map
 
 function toArrayBuffer(data: NSData): ArrayBuffer {
     const buffer = new ArrayBuffer(data.length);
@@ -76,9 +77,7 @@ export const bridge: NativeBridge = {
     setString: (handle, path, value) => MassifApi.setStringPathValue(handle, path, value),
     setObject: (handle, path, value) => MassifApi.setObjectPathValue(handle, path, value),
     // Only on an SDK that carries it: an older one keeps the per-key path.
-    setAll: MassifApi?.setAllJsonProjection
-        ? (handle, json, projection) => MassifApi.setAllJsonProjection(handle, json, projection)
-        : undefined,
+    setAll: MassifApi?.setAllJsonProjection ? (handle, json, projection) => MassifApi.setAllJsonProjection(handle, json, projection) : undefined,
     getObject: (handle, path) => MassifApi.getObjectPath(handle, path),
 
     getFloat: (handle, path, defaultValue) => MassifApi.getFloatPathDefaultValue(handle, path, defaultValue),
@@ -154,7 +153,9 @@ export const bridge: NativeBridge = {
     getNativeSourceByHandle: (handle) => MassifInterop.getSourceByHandle(handle),
 
     attachMapEvents(mapView, handle) {
-        mapView.setMapEventListener(MassifInterop.createEventBridgeChained(handle, mapView.getMapEventListener()));
+        const bridgeListener = MassifInterop.createEventBridgeChained(handle, mapView.getMapEventListener());
+        eventBridges.set(mapView, bridgeListener);
+        mapView.setMapEventListener(bridgeListener);
     },
     attachVectorTileEvents(layer, handle) {
         layer.setVectorTileEventListener(MassifInterop.createVectorTileEventBridgeChained(handle, layer.getVectorTileEventListener()));
@@ -175,22 +176,30 @@ export const bridge: NativeBridge = {
 /**
  * The JavaScript half of the shim: NSMSFApiEventListener does the thread hop and calls this.
  *
- * Declared with `extends` on a runtime lookup rather than on the global, because the class only
- * exists once the plugin's native additions were built against an SDK carrying the facade.
+ * Built on a runtime lookup rather than on the global, because the class only exists once the
+ * plugin's native additions were built against an SDK carrying the facade.
+ *
+ * `extend()` and NOT `class ApiEventListenerImpl extends ApiEventListenerBase`: an ES6 class over
+ * an Objective-C base registers no Objective-C subclass unless it carries `@NativeClass()`, so the
+ * override stays invisible to the runtime, `-onEventThreaded:event:payload:` falls through to
+ * NSMSFApiEventListener's own `return NO`, and every subscription goes silently undelivered -
+ * the SDK emits, the director runs, and JavaScript is never reached. Every other listener in this
+ * plugin is emitted as ES5 prototype code, which the runtime does register; only this file is
+ * emitted as an ES6 class, which is why only the facade's events were dead.
  */
-const ApiEventListenerBase = (NativeEventListener ?? NSObject) as { new (): any; alloc(): any };
+const ApiEventListenerBase = (NativeEventListener ?? NSObject) as { new (): any; alloc(): any; extend(members: any): any };
 
-class ApiEventListenerImpl extends ApiEventListenerBase {
-    private mHandler: NativeEventHandler;
-
-    static initWithHandler(handler: NativeEventHandler): ApiEventListenerImpl {
-        const listener = ApiEventListenerImpl.alloc().init() as ApiEventListenerImpl;
-        listener.mHandler = handler;
-        return listener;
-    }
-
+const ApiEventListenerClass = ApiEventListenerBase.extend({
     /** `-onEventThreaded:event:payload:` on NSMSFApiEventListener, already on the main queue. */
     onEventThreadedEventPayload(target: number, event: string, payload: number): boolean {
         return this.mHandler ? this.mHandler(target, event, payload) : false;
     }
-}
+});
+
+const ApiEventListenerImpl = {
+    initWithHandler(handler: NativeEventHandler) {
+        const listener = ApiEventListenerClass.alloc().init();
+        listener.mHandler = handler;
+        return listener;
+    }
+};
