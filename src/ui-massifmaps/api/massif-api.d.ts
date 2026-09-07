@@ -277,10 +277,6 @@ export type ClassName =
     | 'massif::VectorTileLayer'
     | 'massif::VectorTileSearchService'
     | 'massif::ViewState'
-    | 'massif::WKBGeometryReader'
-    | 'massif::WKBGeometryWriter'
-    | 'massif::WKTGeometryReader'
-    | 'massif::WKTGeometryWriter'
     | 'massif::ZippedAssetPackage'
     ;
 
@@ -607,6 +603,15 @@ export type TileFormat =
     | 'TILE_FORMAT_MVT'
     /** MapLibre Tile, the columnar format. Smaller tiles and faster decoding, but the whole tile is decoded at once - MVT decodes only the layers and attributes the style asks for. */
     | 'TILE_FORMAT_MLT'
+    ;
+
+export type TileLODProfile =
+    /** The reference density: TileLODFactor 1, which is tangram's rule, mapbox's and maplibre's alike - a tile is refined while it covers more than a 2x2 block of nominal tiles. Fewest tiles, and what every reference renderer ships. */
+    | 'TILE_LOD_PROFILE_REFERENCE'
+    /** Half a level finer than the reference, with a shorter style zoom lift. Meant for a phone: visibly sharper than the reference at roughly twice its tile count. */
+    | 'TILE_LOD_PROFILE_MOBILE'
+    /** A full level finer than the reference (TileLODFactor 0.5, the historical default), about 4x its tile count. Meant for a desktop or a web page on a real GPU. */
+    | 'TILE_LOD_PROFILE_DESKTOP'
     ;
 
 export type TileSubstitutionPolicy =
@@ -1828,18 +1833,24 @@ export interface PropertyTypes {
         'terrainOptions.billboardOcclusionEnabled': boolean;
         /** Returns the billboard/label terrain occlusion tolerance. */
         'terrainOptions.billboardOcclusionTolerance': number;
+        /** Returns whether bridges and tunnels stand on their own chord (3D bridges). */
+        'terrainOptions.bridges3DEnabled': boolean;
         /** Returns the duration of the camera terrain-following correction animation. */
         'terrainOptions.cameraClampDuration': number;
-        /** Returns the camera terrain clearance: the minimum height the camera is kept above the terrain surface, in meters. */
+        /** Returns the camera terrain clearance floor: an explicit minimum height the camera is kept above the terrain surface, in meters. */
         'terrainOptions.cameraClearance': number;
         /** Returns the clip-space depth bias used when depth-testing draped 2D geometry against the terrain. */
         'terrainOptions.depthBias': number;
+        /** Returns the drape cache budget in megabytes. */
+        'terrainOptions.drapeCacheSize': number;
         /** Returns whether polygon fills are draped as a render-to-texture surface. */
         'terrainOptions.drapeFillsEnabled': boolean;
         /** Returns whether vt tile lines are also draped (in addition to fills). */
         'terrainOptions.drapeLinesEnabled': boolean;
         /** Returns the per-tile drape texture resolution, 0 when it follows the screen. */
         'terrainOptions.drapeResolution': number;
+        /** Returns how many drape tiles the automatic resolution assumes are cached at once. */
+        'terrainOptions.drapeWorkingSet': number;
         /** Returns whether elevation tile prefetching is enabled. */
         'terrainOptions.elevationPrefetchEnabled': boolean;
         /** Returns the enabled state of the terrain. */
@@ -2942,7 +2953,7 @@ export interface PropertyTypes {
         'dayCycleLightsEnabled': boolean;
         /** Returns the curve used while the sun is RISING, if the app set one. */
         'dayCycleRisingLightStops': Json;
-        /** Returns the shadow depth bias. */
+        /** Returns the shadow depth bias scale. */
         'shadowBias': number;
         /** Returns the number of shadow cascades. */
         'shadowCascades': number;
@@ -3976,7 +3987,7 @@ export interface PropertyTypes {
         'light.dayCycleLightsEnabled': boolean;
         /** Returns the curve used while the sun is RISING, if the app set one. */
         'light.dayCycleRisingLightStops': Json;
-        /** Returns the shadow depth bias. */
+        /** Returns the shadow depth bias scale. */
         'light.shadowBias': number;
         /** Returns the number of shadow cascades. */
         'light.shadowCascades': number;
@@ -4016,7 +4027,7 @@ export interface PropertyTypes {
         'lightOptions.dayCycleLightsEnabled': boolean;
         /** Returns the curve used while the sun is RISING, if the app set one. */
         'lightOptions.dayCycleRisingLightStops': Json;
-        /** Returns the shadow depth bias. */
+        /** Returns the shadow depth bias scale. */
         'lightOptions.shadowBias': number;
         /** Returns the number of shadow cascades. */
         'lightOptions.shadowCascades': number;
@@ -4147,18 +4158,24 @@ export interface PropertyTypes {
         'terrain.billboardOcclusionEnabled': boolean;
         /** Returns the billboard/label terrain occlusion tolerance. */
         'terrain.billboardOcclusionTolerance': number;
+        /** Returns whether bridges and tunnels stand on their own chord (3D bridges). */
+        'terrain.bridges3DEnabled': boolean;
         /** Returns the duration of the camera terrain-following correction animation. */
         'terrain.cameraClampDuration': number;
-        /** Returns the camera terrain clearance: the minimum height the camera is kept above the terrain surface, in meters. */
+        /** Returns the camera terrain clearance floor: an explicit minimum height the camera is kept above the terrain surface, in meters. */
         'terrain.cameraClearance': number;
         /** Returns the clip-space depth bias used when depth-testing draped 2D geometry against the terrain. */
         'terrain.depthBias': number;
+        /** Returns the drape cache budget in megabytes. */
+        'terrain.drapeCacheSize': number;
         /** Returns whether polygon fills are draped as a render-to-texture surface. */
         'terrain.drapeFillsEnabled': boolean;
         /** Returns whether vt tile lines are also draped (in addition to fills). */
         'terrain.drapeLinesEnabled': boolean;
         /** Returns the per-tile drape texture resolution, 0 when it follows the screen. */
         'terrain.drapeResolution': number;
+        /** Returns how many drape tiles the automatic resolution assumes are cached at once. */
+        'terrain.drapeWorkingSet': number;
         /** Returns whether elevation tile prefetching is enabled. */
         'terrain.elevationPrefetchEnabled': boolean;
         /** Returns the enabled state of the terrain. */
@@ -4211,18 +4228,24 @@ export interface PropertyTypes {
         'terrainOptions.billboardOcclusionEnabled': boolean;
         /** Returns the billboard/label terrain occlusion tolerance. */
         'terrainOptions.billboardOcclusionTolerance': number;
+        /** Returns whether bridges and tunnels stand on their own chord (3D bridges). */
+        'terrainOptions.bridges3DEnabled': boolean;
         /** Returns the duration of the camera terrain-following correction animation. */
         'terrainOptions.cameraClampDuration': number;
-        /** Returns the camera terrain clearance: the minimum height the camera is kept above the terrain surface, in meters. */
+        /** Returns the camera terrain clearance floor: an explicit minimum height the camera is kept above the terrain surface, in meters. */
         'terrainOptions.cameraClearance': number;
         /** Returns the clip-space depth bias used when depth-testing draped 2D geometry against the terrain. */
         'terrainOptions.depthBias': number;
+        /** Returns the drape cache budget in megabytes. */
+        'terrainOptions.drapeCacheSize': number;
         /** Returns whether polygon fills are draped as a render-to-texture surface. */
         'terrainOptions.drapeFillsEnabled': boolean;
         /** Returns whether vt tile lines are also draped (in addition to fills). */
         'terrainOptions.drapeLinesEnabled': boolean;
         /** Returns the per-tile drape texture resolution, 0 when it follows the screen. */
         'terrainOptions.drapeResolution': number;
+        /** Returns how many drape tiles the automatic resolution assumes are cached at once. */
+        'terrainOptions.drapeWorkingSet': number;
         /** Returns whether elevation tile prefetching is enabled. */
         'terrainOptions.elevationPrefetchEnabled': boolean;
         /** Returns the enabled state of the terrain. */
@@ -4263,8 +4286,12 @@ export interface PropertyTypes {
         'tileDrawSize': number;
         /** Returns the factor on the screen size a tile may cover before it is refined. */
         'tileLODFactor': number;
-        /** Returns how many zoom levels a tile may lose to foreshortening. */
-        'tileLODForeshorteningLimit': number;
+        /** Returns how many distinct zoom levels a tilted view may spread over. */
+        'tileLODMaxZoomLevelsOnScreen': number;
+        /** Returns how many times more tiles a tilted view may load than a top-down one. */
+        'tileLODTileCountRatio': number;
+        /** Returns how many zoom levels above its own a coarsened tile may be styled at. */
+        'tileStyleZoomLift': number;
         /** Returns the number of threads used by the tile task pool. */
         'tileThreadPoolSize': number;
         /** Returns true if tilting gesture direction is reversed (and same as with Google Maps). */
@@ -5432,18 +5459,24 @@ export interface PropertyTypes {
         'billboardOcclusionEnabled': boolean;
         /** Returns the billboard/label terrain occlusion tolerance. */
         'billboardOcclusionTolerance': number;
+        /** Returns whether bridges and tunnels stand on their own chord (3D bridges). */
+        'bridges3DEnabled': boolean;
         /** Returns the duration of the camera terrain-following correction animation. */
         'cameraClampDuration': number;
-        /** Returns the camera terrain clearance: the minimum height the camera is kept above the terrain surface, in meters. */
+        /** Returns the camera terrain clearance floor: an explicit minimum height the camera is kept above the terrain surface, in meters. */
         'cameraClearance': number;
         /** Returns the clip-space depth bias used when depth-testing draped 2D geometry against the terrain. */
         'depthBias': number;
+        /** Returns the drape cache budget in megabytes. */
+        'drapeCacheSize': number;
         /** Returns whether polygon fills are draped as a render-to-texture surface. */
         'drapeFillsEnabled': boolean;
         /** Returns whether vt tile lines are also draped (in addition to fills). */
         'drapeLinesEnabled': boolean;
         /** Returns the per-tile drape texture resolution, 0 when it follows the screen. */
         'drapeResolution': number;
+        /** Returns how many drape tiles the automatic resolution assumes are cached at once. */
+        'drapeWorkingSet': number;
         /** Returns whether elevation tile prefetching is enabled. */
         'elevationPrefetchEnabled': boolean;
         /** Returns the enabled state of the terrain. */
@@ -6586,20 +6619,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the distance between the focus and the camera position, when the zoom level is set to 0. This parameter depends on the screen size, DPI, tile draw size and field of view settings. */
         readonly 'zoom0Distance': number;
     };
-    'massif::WKBGeometryReader': {
-    };
-    'massif::WKBGeometryWriter': {
-        /** Returns the endianness of output format. */
-        'bigEndian': boolean;
-        /** Returns the state of Z coordinate serialization. */
-        'z': boolean;
-    };
-    'massif::WKTGeometryReader': {
-    };
-    'massif::WKTGeometryWriter': {
-        /** Returns the state of Z coordinate serialization. */
-        'z': boolean;
-    };
     'massif::ZippedAssetPackage': {
         readonly 'assetNames': string[];
         readonly 'localAssetNames': string[];
@@ -7367,14 +7386,6 @@ export interface PositionPaths {
         'projection.bounds': true;
     };
     'massif::ViewState': {
-    };
-    'massif::WKBGeometryReader': {
-    };
-    'massif::WKBGeometryWriter': {
-    };
-    'massif::WKTGeometryReader': {
-    };
-    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };
@@ -8186,14 +8197,6 @@ export interface ObjectPaths {
         'tileDecoder': 'massif::VectorTileDecoder';
     };
     'massif::ViewState': {
-    };
-    'massif::WKBGeometryReader': {
-    };
-    'massif::WKBGeometryWriter': {
-    };
-    'massif::WKTGeometryReader': {
-    };
-    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };
@@ -9178,14 +9181,6 @@ export interface VariantPaths {
     };
     'massif::ViewState': {
     };
-    'massif::WKBGeometryReader': {
-    };
-    'massif::WKBGeometryWriter': {
-    };
-    'massif::WKTGeometryReader': {
-    };
-    'massif::WKTGeometryWriter': {
-    };
     'massif::ZippedAssetPackage': {
         'assetNames': true;
         'localAssetNames': true;
@@ -10014,7 +10009,7 @@ export interface OptionsSpec_light {
     dayCycleLightsEnabled?: boolean;
     /** Returns the curve used while the sun is RISING, if the app set one. */
     dayCycleRisingLightStops?: Json;
-    /** Returns the shadow depth bias. */
+    /** Returns the shadow depth bias scale. */
     shadowBias?: number;
     /** Returns the number of shadow cascades. */
     shadowCascades?: number;
@@ -10090,18 +10085,24 @@ export interface OptionsSpec_terrain {
     billboardOcclusionEnabled?: boolean;
     /** Returns the billboard/label terrain occlusion tolerance. */
     billboardOcclusionTolerance?: number;
+    /** Returns whether bridges and tunnels stand on their own chord (3D bridges). */
+    bridges3DEnabled?: boolean;
     /** Returns the duration of the camera terrain-following correction animation. */
     cameraClampDuration?: number;
-    /** Returns the camera terrain clearance: the minimum height the camera is kept above the terrain surface, in meters. */
+    /** Returns the camera terrain clearance floor: an explicit minimum height the camera is kept above the terrain surface, in meters. */
     cameraClearance?: number;
     /** Returns the clip-space depth bias used when depth-testing draped 2D geometry against the terrain. */
     depthBias?: number;
+    /** Returns the drape cache budget in megabytes. */
+    drapeCacheSize?: number;
     /** Returns whether polygon fills are draped as a render-to-texture surface. */
     drapeFillsEnabled?: boolean;
     /** Returns whether vt tile lines are also draped (in addition to fills). */
     drapeLinesEnabled?: boolean;
     /** Returns the per-tile drape texture resolution, 0 when it follows the screen. */
     drapeResolution?: number;
+    /** Returns how many drape tiles the automatic resolution assumes are cached at once. */
+    drapeWorkingSet?: number;
     /** Returns whether elevation tile prefetching is enabled. */
     elevationPrefetchEnabled?: boolean;
     /** Returns the enabled state of the terrain. */
@@ -10343,7 +10344,18 @@ export interface SourceSpec_persistent_cache {
     source: string | SourceSpec;
 }
 
-export type SourceSpec = SourceSpec_assets | SourceSpec_combined | SourceSpec_geojson | SourceSpec_http | SourceSpec_local | SourceSpec_maptiler | SourceSpec_mbtiles | SourceSpec_memory_cache | SourceSpec_merged_mbvt | SourceSpec_multi | SourceSpec_ordered | SourceSpec_persistent_cache;
+export interface SourceSpec_pmtiles {
+    type: 'pmtiles';
+    /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+    maxOverzoomLevel?: number;
+    maxZoom?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
+    minZoom?: number;
+    path: string;
+}
+
+export type SourceSpec = SourceSpec_assets | SourceSpec_combined | SourceSpec_geojson | SourceSpec_http | SourceSpec_local | SourceSpec_maptiler | SourceSpec_mbtiles | SourceSpec_memory_cache | SourceSpec_merged_mbvt | SourceSpec_multi | SourceSpec_ordered | SourceSpec_persistent_cache | SourceSpec_pmtiles;
 
 export interface StyleSpec_mbvt {
     type: 'mbvt';
@@ -10465,6 +10477,7 @@ export interface SpecClass {
         'multi': 'massif::MultiTileDataSource';
         'ordered': 'massif::OrderedTileDataSource';
         'persistent-cache': 'massif::PersistentCacheTileDataSource';
+        'pmtiles': 'massif::PMTilesTileDataSource';
     };
     'style': {
         'mbvt': 'massif::MBVectorTileDecoder';
@@ -11100,14 +11113,6 @@ export interface MethodTypes {
     };
     'massif::ViewState': {
     };
-    'massif::WKBGeometryReader': {
-    };
-    'massif::WKBGeometryWriter': {
-    };
-    'massif::WKTGeometryReader': {
-    };
-    'massif::WKTGeometryWriter': {
-    };
     'massif::ZippedAssetPackage': {
     };
 }
@@ -11600,14 +11605,6 @@ export interface EventTypes {
     'massif::VectorTileSearchService': {
     };
     'massif::ViewState': {
-    };
-    'massif::WKBGeometryReader': {
-    };
-    'massif::WKBGeometryWriter': {
-    };
-    'massif::WKTGeometryReader': {
-    };
-    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };
