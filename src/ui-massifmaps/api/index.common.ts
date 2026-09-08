@@ -18,6 +18,7 @@ import type {
     ObjectPath,
     PayloadClass,
     Position,
+    PositionAt,
     PositionPath,
     Tile,
     ProjectionName,
@@ -230,7 +231,8 @@ export type MassifEventData<C extends ClassName = any, E extends EventName<C> = 
         /** Shorthand for `payload.get(path)`. Throws when the event carries no payload. */
         get<P extends ValuePath<PayloadClass<C, E>>>(path: P): ValueAt<PayloadClass<C, E>, P>;
         /** Shorthand for `payload.getPos(path, projection)`. */
-        getPos(path: PositionPath<PayloadClass<C, E>> | (string & {}), projection?: ProjectionName): Position | Bounds | null;
+        getPos<P extends PositionPath<PayloadClass<C, E>>>(path: P, projection?: ProjectionName): PositionAt<PayloadClass<C, E>, P> | null;
+        getPos(path: string & {}, projection?: ProjectionName): Position | Bounds | null;
     };
 
 /** A live subscription. Removing it twice is an error the SDK reports, so this is idempotent. */
@@ -641,7 +643,10 @@ export class MassifObject<C extends ClassName = any> extends Observable {
      * coordinates instead. An object whose source projection is unknown is still left unconverted:
      * a wrong guess is worse than an unconverted number.
      */
-    getPos(path: PositionPath<C> | (string & {}), projection?: ProjectionName): Position | Bounds | null {
+    getPos<P extends PositionPath<C>>(path: P, projection?: ProjectionName): PositionAt<C, P> | null;
+    /** A path the tables do not carry - the concrete class is more derived than the declared one. */
+    getPos(path: string & {}, projection?: ProjectionName): Position | Bounds | null;
+    getPos(path: string, projection?: ProjectionName): Position | Bounds | null {
         const json = bridge.getPos(this.handle, path, projection ?? '');
         return json ? (JSON.parse(json) as Position | Bounds) : null;
     }
@@ -1242,14 +1247,19 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
 
     // --- clicks, by name ----------------------------------------------------------------------
 
+    // The payload is named OUTRIGHT rather than as MassifEventData<C, EventName<C>>: each of
+    // these subscribes to ONE event, and a layer whose class is not narrowed - the common case,
+    // since `layers().get(i)` and `child('dataSource')` hand back a bare `MassifLayer` - resolved
+    // that to MassifEventData<any, string>, which has no payload fields on it at all.
+
     /** `on('vectortile.clicked', …)`, named. Set `e.consumed` to claim the click. */
-    onFeatureClick(handler: (data: MassifEventData<C, EventName<C>>) => void, options?: SubscribeOptions): Subscription {
-        return this.subscribe('vectortile.clicked' as EventName<C>, handler, options);
+    onFeatureClick(handler: (data: MassifEventData<'massif::VectorTileLayer', 'vectortile.clicked'>) => void, options?: SubscribeOptions): Subscription {
+        return this.subscribe('vectortile.clicked' as EventName<C>, handler as never, options);
     }
 
     /** `on('vectorelement.clicked', …)`, named - a marker or a popup the app added. */
-    onElementClick(handler: (data: MassifEventData<C, EventName<C>>) => void, options?: SubscribeOptions): Subscription {
-        return this.subscribe('vectorelement.clicked' as EventName<C>, handler, options);
+    onElementClick(handler: (data: MassifEventData<'massif::VectorLayer', 'vectorelement.clicked'>) => void, options?: SubscribeOptions): Subscription {
+        return this.subscribe('vectorelement.clicked' as EventName<C>, handler as never, options);
     }
 
     private requireMap(): MassifMap {

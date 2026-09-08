@@ -35,14 +35,37 @@ export function constructorKeys(schema, enums) {
 
 const SPEC_KINDS_WITHOUT_SPECS = new Set(['data', 'projection', 'styleset-none']);
 
-function childType(childKind, schema) {
+/**
+ * What a nested object key accepts, wherever `childOf` reads one.
+ *
+ * The three shapes are that function's three branches: a STRING is a registry id, a NUMBER is a
+ * live handle - which is how an app shares an object it already holds, the base map's source
+ * under an overlay - and an object is a spec built on the spot.
+ */
+export function childType(childKind, schema) {
     const known = new Set(schema.specs.map((s) => s.kind));
     if (known.has(childKind) && !SPEC_KINDS_WITHOUT_SPECS.has(childKind)) {
-        return `string | ${kindPrefix(childKind)}Spec`;
+        return `Handle | string | ${kindPrefix(childKind)}Spec`;
     }
     // `data` and `projection` have hand-written factories, so no spec interface is generated
     // for them - an id or a free-form object is all that can be said.
-    return 'string | Record<string, Json>';
+    return 'Handle | string | Record<string, Json>';
+}
+
+/**
+ * The same, for an OBJECT key that is a writable PROPERTY rather than a constructor argument.
+ *
+ * `applySpecProperties` sends those through `applyObjectSpecProperty`, which is `childOf` again -
+ * so a polygon style's `lineStyle` takes an inline `{ type: 'line', … }` exactly like a
+ * constructor argument does, and typing it as a bare `Handle` refused the shape the SDK reads.
+ *
+ * A class no kind builds keeps the bare `Handle` it had: `applyObjectSpecProperty` bails with
+ * "nothing builds a X" before it gets to `childOf`, so neither a spec nor a handle reaches the
+ * setter and there is nothing better to say here.
+ */
+export function objectPropertyType(objectClass, schema) {
+    const childKind = schema.kindOfClass?.[objectClass];
+    return childKind ? childType(childKind, schema) : 'Handle';
 }
 
 /** Reads the argument type back out of the C++ reader expression the generator emitted. */

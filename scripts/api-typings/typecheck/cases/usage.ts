@@ -7,7 +7,7 @@
  *
  * Run with `npm run typings.api.check`.
  */
-import { MapCamera, MassifMap, MassifObject, attach, create, createLayer, createSource, find } from '../../../../src/ui-massifmaps/api/index.common';
+import { MapCamera, MassifLayer, MassifMap, MassifObject, attach, create, createLayer, createSource, find } from '../../../../src/ui-massifmaps/api/index.common';
 
 declare const view: any;
 
@@ -298,3 +298,94 @@ async function computeRoute() {
     void summary.steps;
 }
 void computeRoute;
+
+// --- a nested object key takes a handle, an id, or a spec ------------------------------------
+//
+// The three branches of `childOf`. A handle is how an app shares an object it already holds -
+// an overlay drawing the base map's tiles - and used to be a compile error on any key whose
+// class had no writable property of the same name.
+
+createSource('shared', { type: 'memory-cache', source: osm.handle });
+createLayer('overlay', { type: 'raster', source: osm.handle });
+
+// The same for a key that is a writable PROPERTY rather than a constructor argument:
+// applySpecProperties sends those through childOf too, so an inline spec is read there as well.
+create('elementstyle', 'border', {
+    type: 'polygon',
+    color: 0xff0e7afe,
+    lineStyle: { type: 'line', color: 0xff0e7afe, width: 1 }
+});
+create('elementstyle', 'border2', { type: 'polygon', lineStyle: 'someRegisteredLineStyle' });
+
+// @ts-expect-error a source spec is not an elementstyle spec
+create('elementstyle', 'wrongchild', { type: 'polygon', lineStyle: { type: 'http', url: 'x' } });
+
+// --- the hand-written factories ---------------------------------------------------------------
+//
+// Shapes SpecFactories.cpp accepts that no constructor signature describes, so the schema alone
+// cannot produce them - see scripts/api-typings/factories.mjs.
+
+// buildSearch: the layer already on the map, instead of the source/decoder pair.
+map.object('search', 'from-layer', { type: 'vectortile', layer: base.handle, minZoom: 14, maxZoom: 14, preventDuplicates: true });
+map.object('search', 'from-layer-id', { type: 'vectortile', layer: 'base' });
+
+// @ts-expect-error the constructor form still needs both of its arguments
+map.object('search', 'half', { type: 'vectortile', source: 'osm' });
+
+// buildGeometry: a document, where every other geometry type takes the shape it names.
+create('search', 'proximity', {
+    type: 'request',
+    filterExpression: "name='x'",
+    geometry: { type: 'geojson', geojson: { type: 'Point', coordinates: [5.76, 45.24] } }
+});
+create('geometry', 'from-text', { type: 'geojson', geojson: '{"type":"Point","coordinates":[5.76,45.24]}' });
+
+// @ts-expect-error a geojson geometry needs its document
+create('geometry', 'empty', { type: 'geojson' });
+
+// --- an object whose class is not narrowed ------------------------------------------------------
+//
+// What `layers().get(i)`, `source()` and `adoptLayer` hand back. Nothing is known about the class,
+// the C++ resolves the path against the runtime one, and the typings must not pretend otherwise -
+// `Path` and `WritablePath` already said `string` here while `ValuePath` and `MethodArgs` collapsed.
+
+declare const bare: MassifLayer;
+const anyValue: number = bare.get('maxZoom');
+bare.set('opacity', 0.5);
+bare.call('clearTileCaches', true);
+void anyValue;
+
+// A NARROWED class still checks, which is the whole point of the guard being conditional.
+// @ts-expect-error PersistentCacheTileDataSource has no readable `databasePath` - it is a constructor argument
+find('source', 'cached', 'massif::PersistentCacheTileDataSource')?.get('databasePath');
+
+// --- getPos says which of the two coordinate shapes it is --------------------------------------
+
+map.on('map.clicked', (e) => {
+    const at: [number, number] | [number, number, number] | null = e.getPos('clickPos');
+    void at;
+});
+const extentBounds: [[number, number] | [number, number, number], [number, number] | [number, number, number]] | null = osm.getPos('dataExtent');
+void extentBounds;
+
+// @ts-expect-error a MapPos path does not read back as a MapBounds
+const notBounds: [[number, number], [number, number]] | null = map.getPos('focusPos');
+void notBounds;
+
+// --- the named click helpers carry their own payload -------------------------------------------
+//
+// They subscribe to ONE event each, so the payload is that event's - not the layer's `C`, which
+// is `any` on everything the registry hands back and left the callback with no fields at all.
+
+bare.onFeatureClick((e) => {
+    const layerName: string = e.get('featureLayerName');
+    const clickedAt = e.getPos('clickPos');
+    e.consumed = true;
+    void layerName;
+    void clickedAt;
+});
+
+bare.onElementClick((e) => {
+    const meta = e.get('vectorElement.metaData');
+    void meta;
+});
