@@ -277,6 +277,10 @@ export type ClassName =
     | 'massif::VectorTileLayer'
     | 'massif::VectorTileSearchService'
     | 'massif::ViewState'
+    | 'massif::WKBGeometryReader'
+    | 'massif::WKBGeometryWriter'
+    | 'massif::WKTGeometryReader'
+    | 'massif::WKTGeometryWriter'
     | 'massif::ZippedAssetPackage'
     ;
 
@@ -1706,7 +1710,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Returns the current relative label blending speed. */
         'labelBlendingSpeed': number;
@@ -1728,6 +1731,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -1778,6 +1782,8 @@ export interface PropertyTypes {
         'vectorTileEventListener': Handle;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -2037,7 +2043,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Gets the current maximum overzoom level for this layer. */
         'maxOverzoomLevel': number;
@@ -2053,6 +2058,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -2097,6 +2103,8 @@ export interface PropertyTypes {
         'updatePriority': number;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -2642,7 +2650,6 @@ export interface PropertyTypes {
         'exagerateHeightScaleEnabled': boolean;
         /** Returns the per-frame relief exaggeration factor, i.e. the vertical exaggeration of the slope. Unlike height scale this is a shader uniform applied at render time (no tile re-decode), so it can be animated smoothly. */
         'exaggeration': number;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Returns the height scale of the hillshade overlay. */
         'heightScale': number;
@@ -2671,6 +2678,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -2721,6 +2729,8 @@ export interface PropertyTypes {
         'updatePriority': number;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -3897,6 +3907,8 @@ export interface PropertyTypes {
         readonly 'baseProjection.name': string;
         /** Returns the clear color used by the renderer before drawing anything else. By default, this is white. It should be set to (0, 0, 0, 0) if transparent MapView is needed. */
         'clearColor': number;
+        /** Returns how far a pointer may travel before a press stops counting as a click. */
+        'clickMovingTolerance': number;
         /** Returns the click type detection state. */
         'clickTypeDetection': boolean;
         /** Returns the state of the tile border debug overlay. */
@@ -4302,6 +4314,8 @@ export interface PropertyTypes {
         'userInput': boolean;
         /** Returns the state of zoom gestures. */
         'zoomGestures': boolean;
+        /** Returns how many zoom levels the camera is offset from the tile-size convention. */
+        'zoomOffset': number;
         /** Returns the zoom range constraint. */
         'zoomRange': [number, number];
     };
@@ -5162,7 +5176,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Gets the current maximum overzoom level for this layer. */
         'maxOverzoomLevel': number;
@@ -5178,6 +5191,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -5220,6 +5234,8 @@ export interface PropertyTypes {
         'updatePriority': number;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -5874,7 +5890,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Gets the current maximum overzoom level for this layer. */
         'maxOverzoomLevel': number;
@@ -5890,6 +5905,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -5924,6 +5940,8 @@ export interface PropertyTypes {
         'updatePriority': number;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -6011,7 +6029,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Returns the current relative label blending speed. */
         'labelBlendingSpeed': number;
@@ -6033,6 +6050,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -6081,6 +6099,8 @@ export interface PropertyTypes {
         'vectorTileEventListener': Handle;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -6466,7 +6486,6 @@ export interface PropertyTypes {
         /** (read-only) Returns the bounds of this projection. */
         readonly 'dataSource.projection.bounds': Bounds;
         readonly 'dataSource.projection.name': string;
-        /** Returns the current frame number. */
         'frameNr': number;
         /** Returns the current relative label blending speed. */
         'labelBlendingSpeed': number;
@@ -6488,6 +6507,7 @@ export interface PropertyTypes {
         'postProcessed': boolean;
         /** Returns the state of the preloading flag of this layer. */
         'preloading': boolean;
+        readonly 'preloadingTileCount': number;
         /** (read-only) Returns the projection this layer's data is in, which is its data source's. */
         readonly 'projection': Handle;
         /** (read-only) Returns the bounds of this projection. */
@@ -6536,6 +6556,8 @@ export interface PropertyTypes {
         'vectorTileEventListener': Handle;
         /** Returns the visibility of this layer. */
         'visible': boolean;
+        /** (read-only) How many tiles the last cull put on screen, and how many are preloaded around them. A diagnostic: it is what the tile LOD numbers actually cost. */
+        readonly 'visibleTileCount': number;
         /** Returns the visible zoom range of this layer. */
         'visibleZoomRange': [number, number];
         /** Gets the current zoom level bias for this layer. */
@@ -6618,6 +6640,20 @@ export interface PropertyTypes {
         readonly 'zoom': number;
         /** (read-only) Returns the distance between the focus and the camera position, when the zoom level is set to 0. This parameter depends on the screen size, DPI, tile draw size and field of view settings. */
         readonly 'zoom0Distance': number;
+    };
+    'massif::WKBGeometryReader': {
+    };
+    'massif::WKBGeometryWriter': {
+        /** Returns the endianness of output format. */
+        'bigEndian': boolean;
+        /** Returns the state of Z coordinate serialization. */
+        'z': boolean;
+    };
+    'massif::WKTGeometryReader': {
+    };
+    'massif::WKTGeometryWriter': {
+        /** Returns the state of Z coordinate serialization. */
+        'z': boolean;
     };
     'massif::ZippedAssetPackage': {
         readonly 'assetNames': string[];
@@ -7386,6 +7422,14 @@ export interface PositionPaths {
         'projection.bounds': true;
     };
     'massif::ViewState': {
+    };
+    'massif::WKBGeometryReader': {
+    };
+    'massif::WKBGeometryWriter': {
+    };
+    'massif::WKTGeometryReader': {
+    };
+    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };
@@ -8197,6 +8241,14 @@ export interface ObjectPaths {
         'tileDecoder': 'massif::VectorTileDecoder';
     };
     'massif::ViewState': {
+    };
+    'massif::WKBGeometryReader': {
+    };
+    'massif::WKBGeometryWriter': {
+    };
+    'massif::WKTGeometryReader': {
+    };
+    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };
@@ -9181,11 +9233,33 @@ export interface VariantPaths {
     };
     'massif::ViewState': {
     };
+    'massif::WKBGeometryReader': {
+    };
+    'massif::WKBGeometryWriter': {
+    };
+    'massif::WKTGeometryReader': {
+    };
+    'massif::WKTGeometryWriter': {
+    };
     'massif::ZippedAssetPackage': {
         'assetNames': true;
         'localAssetNames': true;
     };
 }
+
+/**
+ * Whether `C` says nothing about the class.
+ *
+ * True for `any` - the default, and so what a bare `MassifLayer` or `MassifObject` carries -
+ * and for the whole `ClassName` union, which is what `ClassAtPath` falls back to when the table
+ * does not record the class at the end of an object path. Both mean the same thing here: the class
+ * is not known at compile time, the C++ resolves against the runtime one, and a table lookup can
+ * only produce a wrong answer.
+ *
+ * The usual `0 extends 1 & C` probe does NOT work: `C` is constrained to `ClassName`, and the
+ * intersection resolves against that constraint rather than staying deferred.
+ */
+type Unnarrowed<C extends ClassName> = ClassName extends C ? true : false;
 
 export type Path<C extends ClassName> = keyof PropertyTypes[C] & string;
 /**
@@ -9230,6 +9304,18 @@ export type WritablePath<C extends ClassName> = {
 /** The paths the SDK flags as coordinates, so `getPos` can convert them to another projection. */
 export type PositionPath<C extends ClassName> = keyof PositionPaths[C] & string;
 
+/**
+ * The coordinate at a position path: a `MapPos` reads as a `Position`, a `MapBounds` as a
+ * `Bounds`. `PositionPaths` only records THAT a path is a coordinate; which of the two it is
+ * comes from the property table, so a caller does not have to narrow `Position | Bounds` back
+ * down by hand at every click handler.
+ */
+export type PositionAt<C extends ClassName, P extends PositionPath<C>> = Unnarrowed<C> extends true
+    ? Position | Bounds
+    : P extends Path<C>
+      ? Extract<PropertyTypes[C][P], Position | Bounds>
+      : Position | Bounds;
+
 /** The paths that point at another object. `group` scopes onto one; `get` cannot read one. */
 export type ObjectPath<C extends ClassName> = keyof ObjectPaths[C] & string;
 
@@ -9245,8 +9331,15 @@ export type VariantPath<C extends ClassName> = keyof VariantPaths[C] & string;
  * The template arm is free-form data: the C++ keeps walking inside a Variant, so
  * `feature.properties.name` resolves even though no table can know the leaf. Its type comes
  * back as `Json`, which is what it honestly is.
+ *
+ * An UNNARROWED object - `MassifLayer`, which is what `layers().get(i)` and `source()` hand
+ * back - takes any path, the way `Path` and `WritablePath` already do: nothing is known about the
+ * class, so nothing can be said about its paths, and the C++ resolves the path either way. Without
+ * the guard, `Path<any>` and `ObjectPath<any>` were both `string`, their `Exclude` was
+ * `never`, and only the dotted arm survived - so `get('maxZoom')` was an error on every object
+ * whose class had not been named.
  */
-export type ValuePath<C extends ClassName> = Exclude<Path<C>, ObjectPath<C>> | `${VariantPath<C>}.${string}`;
+export type ValuePath<C extends ClassName> = Unnarrowed<C> extends true ? string : Exclude<Path<C>, ObjectPath<C>> | `${VariantPath<C>}.${string}`;
 
 /** The class an object property points at, so a scope onto it stays typed all the way down. */
 export type ClassAtPath<C extends ClassName, P extends ObjectPath<C>> = ObjectPaths[C][P] extends ClassName ? ObjectPaths[C][P] : ClassName;
@@ -9266,7 +9359,15 @@ export type SpecArg<K extends Kind, T extends SpecType<K>> = SpecOf[K] & { type:
 export type ClassOfSpec<K extends Kind, T extends SpecType<K>> = SpecClass[K][T] extends ClassName ? SpecClass[K][T] : ClassName;
 
 export type MethodName<C extends ClassName> = keyof MethodTypes[C] & string;
-export type MethodArgs<C extends ClassName, M extends MethodName<C>> = MethodTypes[C][M] extends { args: infer A } ? (A extends unknown[] ? A : never) : never;
+/**
+ * A method's parameters, as a tuple.
+ *
+ * `unknown[]` for an unnarrowed object, for the same reason `ValuePath` takes any path there -
+ * and because this one is spread as a REST parameter: resolving to `any` is not a rest type at
+ * all, so `call('clearTileCaches', true)` reported its argument as `never` rather than accepting
+ * anything.
+ */
+export type MethodArgs<C extends ClassName, M extends MethodName<C>> = Unnarrowed<C> extends true ? unknown[] : MethodTypes[C][M] extends { args: infer A } ? (A extends unknown[] ? A : never) : never;
 export type MethodResult<C extends ClassName, M extends MethodName<C>> = MethodTypes[C][M] extends { result: infer R } ? R : never;
 
 /** The class of an object result, or never for a scalar one. */
@@ -9291,20 +9392,20 @@ export type PayloadClass<C extends ClassName, E extends EventName<C>> = EventTyp
 
 export interface AssetsSpec_bundle {
     type: 'bundle';
-    base?: string | AssetsSpec;
+    base?: Handle | string | AssetsSpec;
     path: string;
 }
 
 export interface AssetsSpec_dir {
     type: 'dir';
-    base?: string | AssetsSpec;
+    base?: Handle | string | AssetsSpec;
     path: string;
 }
 
 export interface AssetsSpec_zip {
     type: 'zip';
-    base?: string | AssetsSpec;
-    data: string | Record<string, Json>;
+    base?: Handle | string | AssetsSpec;
+    data: Handle | string | Record<string, Json>;
 }
 
 export type AssetsSpec = AssetsSpec_bundle | AssetsSpec_dir | AssetsSpec_zip;
@@ -9459,7 +9560,7 @@ export interface ElementstyleSpec_balloon {
     /** Returns the background color of the left part of the popup. */
     leftColor?: number;
     /** Returns the image of the left part of the popup. */
-    leftImage?: Handle;
+    leftImage?: Handle | string | Record<string, Json>;
     /** Returns the margins of the left part of the popup. */
     leftMargins?: Json;
     /** Returns the placement priority of the billboard. */
@@ -9467,7 +9568,7 @@ export interface ElementstyleSpec_balloon {
     /** Returns the background color of the right part of the popup. */
     rightColor?: number;
     /** Returns the image of the right part of the popup. */
-    rightImage?: Handle;
+    rightImage?: Handle | string | Record<string, Json>;
     /** Returns the margins of the right part of the popup. */
     rightMargins?: Json;
     /** Returns the state of the scale with DPI flag. */
@@ -9499,7 +9600,7 @@ export interface ElementstyleSpec_balloon {
 export interface ElementstyleSpec_line {
     type: 'line';
     /** Returns the bitmap of the line. */
-    bitmap?: Handle;
+    bitmap?: Handle | string | Record<string, Json>;
     /** Returns the width of the line used for click detection. */
     clickWidth?: number;
     /** Returns the color of the vector element. */
@@ -9527,7 +9628,7 @@ export interface ElementstyleSpec_marker {
     /** Returns the vertical attaching anchor point of the billboard. */
     attachAnchorPointY?: number;
     /** Returns the bitmap of the marker. */
-    bitmap?: Handle;
+    bitmap?: Handle | string | Record<string, Json>;
     /** Returns the state of the causes overlap flag. */
     causesOverlap?: boolean;
     /** Returns the size of the marker used for click detection. */
@@ -9555,7 +9656,7 @@ export interface ElementstyleSpec_marker {
 export interface ElementstyleSpec_point {
     type: 'point';
     /** Returns the bitmap of the point. */
-    bitmap?: Handle;
+    bitmap?: Handle | string | Record<string, Json>;
     /** Returns the size of the point used for click detection. */
     clickSize?: number;
     /** Returns the color of the vector element. */
@@ -9569,7 +9670,7 @@ export interface ElementstyleSpec_polygon {
     /** Returns the color of the vector element. */
     color?: number;
     /** Returns the line style of the edges of the polygon. */
-    lineStyle?: Handle;
+    lineStyle?: Handle | string | ElementstyleSpec;
 }
 
 export interface ElementstyleSpec_text {
@@ -9632,7 +9733,7 @@ export type ElementstyleSpec = ElementstyleSpec_balloon | ElementstyleSpec_line 
 
 export interface FeatureSpec_feature {
     type: 'feature';
-    geometry: string | GeometrySpec;
+    geometry: Handle | string | GeometrySpec;
     properties: Json;
 }
 
@@ -9669,12 +9770,24 @@ export interface GeometrySpec_polygon {
     rings?: Json;
 }
 
-export type GeometrySpec = GeometrySpec_line | GeometrySpec_point | GeometrySpec_polygon;
+/**
+ * A geometry read out of GeoJSON, which `buildGeometry` handles itself: every other
+ * type has a constructor taking the shape it names, and this one takes a document.
+ */
+export interface GeometrySpec_geojson {
+    type: 'geojson';
+    /** The document, as JSON or as the text of it - `GeoJSONGeometryReader` reads either. */
+    geojson: Json | string | object;
+    /** What to leave the coordinates in. GeoJSON is lon/lat by definition, so this is only for a consumer working in metres. */
+    projection?: ProjectionName;
+}
+
+export type GeometrySpec = GeometrySpec_line | GeometrySpec_point | GeometrySpec_polygon | GeometrySpec_geojson;
 
 export interface LayerSpec_composite_vector {
     type: 'composite-vector';
     /** Returns the tile data source of the associated UTF grid. By default this is null. */
-    UTFGridDataSource?: Handle;
+    UTFGridDataSource?: Handle | string | SourceSpec;
     /** Returns the UTF grid event listener. */
     UTFGridEventListener?: Handle;
     /** Returns the current display order of the buildings. */
@@ -9685,7 +9798,6 @@ export interface LayerSpec_composite_vector {
     clickRadius?: number;
     /** Returns the culling delay of the layer in milliseconds. */
     cullDelay?: number;
-    /** Returns the current frame number. */
     frameNr?: number;
     /** Returns the current relative label blending speed. */
     labelBlendingSpeed?: number;
@@ -9709,8 +9821,8 @@ export interface LayerSpec_composite_vector {
     rendererLayerFilter?: string;
     /** Returns whether single-pass segmented rendering is enabled (Milestone 6, optional). */
     singlePassRenderingEnabled?: boolean;
-    source: string | SourceSpec;
-    style: string | StyleSpec;
+    source: Handle | string | SourceSpec;
+    style: Handle | string | StyleSpec;
     /** Returns the state of the synchronized refresh flag. */
     synchronizedRefresh?: boolean;
     /** Returns the tile cache capacity. */
@@ -9743,7 +9855,7 @@ export interface LayerSpec_elements {
     opacity?: number;
     /** Returns whether this layer goes through the post-process effect. */
     postProcessed?: boolean;
-    source: string | SourceSpec;
+    source: Handle | string | SourceSpec;
     /** Returns the layer task priority of this layer. */
     updatePriority?: number;
     /** Returns the vector element event listener. */
@@ -9757,7 +9869,7 @@ export interface LayerSpec_elements {
 export interface LayerSpec_hillshade {
     type: 'hillshade';
     /** Returns the tile data source of the associated UTF grid. By default this is null. */
-    UTFGridDataSource?: Handle;
+    UTFGridDataSource?: Handle | string | SourceSpec;
     /** Returns the UTF grid event listener. */
     UTFGridEventListener?: Handle;
     /** Returns the shading color used to accentuate rugged terrain like sharp cliffs and gorges. */
@@ -9780,7 +9892,6 @@ export interface LayerSpec_hillshade {
     exagerateHeightScaleEnabled?: boolean;
     /** Returns the per-frame relief exaggeration factor, i.e. the vertical exaggeration of the slope. Unlike height scale this is a shader uniform applied at render time (no tile re-decode), so it can be animated smoothly. */
     exaggeration?: number;
-    /** Returns the current frame number. */
     frameNr?: number;
     /** Returns the height scale of the hillshade overlay. */
     heightScale?: number;
@@ -9813,7 +9924,7 @@ export interface LayerSpec_hillshade {
     shaderSource?: string;
     /** Returns the shading color of areas that face away from the light source. */
     shadowColor?: number;
-    source: string | SourceSpec;
+    source: Handle | string | SourceSpec;
     /** Returns the state of the synchronized refresh flag. */
     synchronizedRefresh?: boolean;
     /** Returns whether the layer may shade the 3D terrain's own elevation texture instead of loading a DEM tile set of its own. */
@@ -9843,12 +9954,11 @@ export interface LayerSpec_hillshade {
 export interface LayerSpec_raster {
     type: 'raster';
     /** Returns the tile data source of the associated UTF grid. By default this is null. */
-    UTFGridDataSource?: Handle;
+    UTFGridDataSource?: Handle | string | SourceSpec;
     /** Returns the UTF grid event listener. */
     UTFGridEventListener?: Handle;
     /** Returns the culling delay of the layer in milliseconds. */
     cullDelay?: number;
-    /** Returns the current frame number. */
     frameNr?: number;
     /** Gets the current maximum overzoom level for this layer. */
     maxOverzoomLevel?: number;
@@ -9864,7 +9974,7 @@ export interface LayerSpec_raster {
     preloading?: boolean;
     /** Returns the raster tile event listener. */
     rasterTileEventListener?: Handle;
-    source: string | SourceSpec;
+    source: Handle | string | SourceSpec;
     /** Returns the state of the synchronized refresh flag. */
     synchronizedRefresh?: boolean;
     /** Returns the tile texture cache capacity. */
@@ -9894,7 +10004,7 @@ export interface LayerSpec_solid {
     /** Returns the bitmap scaling factor. */
     bitmapScale?: number;
     /** Returns the color of this layer. */
-    color?: number;
+    color?: number | Json;
     /** Returns the culling delay of the layer in milliseconds. */
     cullDelay?: number;
     /** Returns a copy of the layer meta data map. The changes you make to this map are NOT reflected in the actual meta data of the layer. */
@@ -9914,7 +10024,7 @@ export interface LayerSpec_solid {
 export interface LayerSpec_vector {
     type: 'vector';
     /** Returns the tile data source of the associated UTF grid. By default this is null. */
-    UTFGridDataSource?: Handle;
+    UTFGridDataSource?: Handle | string | SourceSpec;
     /** Returns the UTF grid event listener. */
     UTFGridEventListener?: Handle;
     /** Returns the current display order of the buildings. */
@@ -9925,7 +10035,6 @@ export interface LayerSpec_vector {
     clickRadius?: number;
     /** Returns the culling delay of the layer in milliseconds. */
     cullDelay?: number;
-    /** Returns the current frame number. */
     frameNr?: number;
     /** Returns the current relative label blending speed. */
     labelBlendingSpeed?: number;
@@ -9947,8 +10056,8 @@ export interface LayerSpec_vector {
     preloading?: boolean;
     /** Returns the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
     rendererLayerFilter?: string;
-    source: string | SourceSpec;
-    style: string | StyleSpec;
+    source: Handle | string | SourceSpec;
+    style: Handle | string | StyleSpec;
     /** Returns the state of the synchronized refresh flag. */
     synchronizedRefresh?: boolean;
     /** Returns the tile cache capacity. */
@@ -10127,7 +10236,7 @@ export interface OptionsSpec_terrain {
     noDrapeLayerFilter?: string;
     /** Returns whether seamless tile edge handling is enabled. */
     seamlessTileEdgesEnabled?: boolean;
-    source: string | SourceSpec;
+    source: Handle | string | SourceSpec;
     /** Returns the custom terrain surface fragment shader source, or an empty string if no shaded surface is drawn. */
     surfaceShaderSource?: string;
     /** Returns the opacity a label keeps while its anchor is behind 3D content. */
@@ -10172,9 +10281,9 @@ export interface SearchSpec_request {
     /** Returns the string based search expression. If empty, then search expression is not used. */
     filterExpression?: string;
     /** Returns the geometry used for proximity search. */
-    geometry?: Handle;
+    geometry?: Handle | string | GeometrySpec;
     /** Returns the projection to use for search geometry. */
-    projection?: Handle;
+    projection?: Handle | string | Record<string, Json>;
     /** Returns the regular expression used to search all the fields. If empty, then the regular expression is not used. */
     regexFilter?: string;
     /** Returns the search radius for proximity search (in meters). The default is 0. */
@@ -10195,11 +10304,35 @@ export interface SearchSpec_vectortile {
     preventDuplicates?: boolean;
     /** Returns wether result features are sorted by distance */
     sortByDistance?: boolean;
-    source: string | SourceSpec;
-    style: string | StyleSpec;
+    source: Handle | string | SourceSpec;
+    style: Handle | string | StyleSpec;
 }
 
-export type SearchSpec = SearchSpec_request | SearchSpec_vectortile;
+/**
+ * A vector tile search over a layer that is already on the map.
+ *
+ * The constructor takes a source and a decoder; this takes the LAYER and reads both off
+ * it, so a search reads exactly what the user is looking at and neither is built twice.
+ */
+export interface SearchSpec_vectortile_layer {
+    type: 'vectortile';
+    /** The vector tile layer to search - its data source and its tile decoder are taken from it. */
+    layer: Handle | string | LayerSpec;
+    /** Returns the layers to filter while decoding tiles. */
+    layers?: string[];
+    /** Returns the maximum number of results the search service returns. */
+    maxResults?: number;
+    /** Returns the maximum zoom level of vector tiles used. By default the maximum zoom level is specified by data source. */
+    maxZoom?: number;
+    /** Returns the minimum zoom level of vector tiles used. By default the minimum zoom level is specified by data source and is usually 0. */
+    minZoom?: number;
+    /** Returns wether to prevent duplicate elements */
+    preventDuplicates?: boolean;
+    /** Returns wether result features are sorted by distance */
+    sortByDistance?: boolean;
+}
+
+export type SearchSpec = SearchSpec_request | SearchSpec_vectortile | SearchSpec_vectortile_layer;
 
 export interface SourceSpec_assets {
     type: 'assets';
@@ -10218,9 +10351,36 @@ export interface SourceSpec_combined {
     maxOverzoomLevel?: number;
     /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
     metaData?: Record<string, Json>;
-    source: string | SourceSpec;
-    source2: string | SourceSpec;
+    source: Handle | string | SourceSpec;
+    source2: Handle | string | SourceSpec;
     zoomLevel?: number;
+}
+
+export interface SourceSpec_contour {
+    type: 'contour';
+    /** Returns the base contour interval in meters. */
+    baseInterval?: number;
+    /** Returns the contour interval used for label stubs. */
+    labelInterval?: number;
+    /** Returns whether only short label stubs are generated instead of full contour lines. */
+    labelStubsEnabled?: boolean;
+    /** Returns the name of the generated vector tile layer. */
+    layerName?: string;
+    /** Gets the current maximum overzoom level for this datasource. Over it the datasource will not be "drawn" */
+    maxOverzoomLevel?: number;
+    /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
+    metaData?: Record<string, Json>;
+    /** Returns the minimum zoom at which contour geometry is generated. */
+    minVisibleZoom?: number;
+    /** Returns the target grid resolution used for contour tracing. */
+    resolution?: number;
+    /** Returns whether seamless tile edges are enabled. */
+    seamlessEdgesEnabled?: boolean;
+    /** Returns the simplification tolerance in tile pixels. */
+    simplifyTolerance?: number;
+    source: Handle | string | SourceSpec;
+    /** Returns the terrain options whose elevation manager the label stubs read. */
+    terrainOptions?: Handle | string | OptionsSpec;
 }
 
 export interface SourceSpec_geojson {
@@ -10263,7 +10423,7 @@ export interface SourceSpec_local {
     type: 'local';
     /** Returns the active geometry simplifier of the data source. */
     geometrySimplifier?: Handle;
-    projection: string | Record<string, Json>;
+    projection: Handle | string | Record<string, Json>;
     spatialIndexType?: 'LOCAL_SPATIAL_INDEX_TYPE_NULL' | 'LOCAL_SPATIAL_INDEX_TYPE_KDTREE';
 }
 
@@ -10299,7 +10459,7 @@ export interface SourceSpec_memory_cache {
     maxOverzoomLevel?: number;
     /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
     metaData?: Record<string, Json>;
-    source: string | SourceSpec;
+    source: Handle | string | SourceSpec;
 }
 
 export interface SourceSpec_merged_mbvt {
@@ -10308,8 +10468,8 @@ export interface SourceSpec_merged_mbvt {
     maxOverzoomLevel?: number;
     /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
     metaData?: Record<string, Json>;
-    source: string | SourceSpec;
-    source2: string | SourceSpec;
+    source: Handle | string | SourceSpec;
+    source2: Handle | string | SourceSpec;
 }
 
 export interface SourceSpec_multi {
@@ -10327,8 +10487,8 @@ export interface SourceSpec_ordered {
     maxOverzoomLevel?: number;
     /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
     metaData?: Record<string, Json>;
-    source: string | SourceSpec;
-    source2: string | SourceSpec;
+    source: Handle | string | SourceSpec;
+    source2: Handle | string | SourceSpec;
 }
 
 export interface SourceSpec_persistent_cache {
@@ -10341,7 +10501,7 @@ export interface SourceSpec_persistent_cache {
     maxOverzoomLevel?: number;
     /** Returns a copy of the data source meta data map. The changes you make to this map are NOT reflected in the actual meta data of the source. The map is attached to every tile this source loads, and consumers read their settings from it - "dem_encoding" ("mapbox" or "terrarium") selects the elevation decoder, for instance. A wrapper source with no map of its own answers with its wrapped source's. */
     metaData?: Record<string, Json>;
-    source: string | SourceSpec;
+    source: Handle | string | SourceSpec;
 }
 
 export interface SourceSpec_pmtiles {
@@ -10355,20 +10515,20 @@ export interface SourceSpec_pmtiles {
     path: string;
 }
 
-export type SourceSpec = SourceSpec_assets | SourceSpec_combined | SourceSpec_geojson | SourceSpec_http | SourceSpec_local | SourceSpec_maptiler | SourceSpec_mbtiles | SourceSpec_memory_cache | SourceSpec_merged_mbvt | SourceSpec_multi | SourceSpec_ordered | SourceSpec_persistent_cache | SourceSpec_pmtiles;
+export type SourceSpec = SourceSpec_assets | SourceSpec_combined | SourceSpec_contour | SourceSpec_geojson | SourceSpec_http | SourceSpec_local | SourceSpec_maptiler | SourceSpec_mbtiles | SourceSpec_memory_cache | SourceSpec_merged_mbvt | SourceSpec_multi | SourceSpec_ordered | SourceSpec_persistent_cache | SourceSpec_pmtiles;
 
 export interface StyleSpec_mbvt {
     type: 'mbvt';
     /** Returns the current CartoCSS style set used by the decoder. If decoder uses non-CartoCSS style set, null is returned. */
-    cartoCSSStyle?: Handle;
-    cartocss?: string | StylesetSpec;
+    cartoCSSStyle?: Handle | string | StylesetSpec;
+    cartocss?: Handle | string | StylesetSpec;
     /** Returns the current compiled style set used by the decoder. If decoder uses non-compiled style set, null is returned. */
-    compiledStyle?: Handle;
+    compiledStyle?: Handle | string | StylesetSpec;
     /** Returns the value of feature id override flag. This is intended for cases when feature ids in tile are not globally unique. */
     featureIdOverride?: boolean;
     /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
     params?: Record<string, string>;
-    project?: string | StylesetSpec;
+    project?: Handle | string | StylesetSpec;
     /** Returns the binary format the tiles are decoded as. */
     tileFormat?: 'TILE_FORMAT_AUTO' | 'TILE_FORMAT_MVT' | 'TILE_FORMAT_MLT' | number;
 }
@@ -10377,13 +10537,13 @@ export type StyleSpec = StyleSpec_mbvt;
 
 export interface StylesetSpec_cartocss {
     type: 'cartocss';
-    assets?: string | AssetsSpec;
+    assets?: Handle | string | AssetsSpec;
     css: string;
 }
 
 export interface StylesetSpec_project {
     type: 'project';
-    assets: string | AssetsSpec;
+    assets: Handle | string | AssetsSpec;
     name?: string;
 }
 
@@ -10440,6 +10600,7 @@ export interface SpecClass {
         'line': 'massif::LineGeometry';
         'point': 'massif::PointGeometry';
         'polygon': 'massif::PolygonGeometry';
+        'geojson': 'massif::Geometry';
     };
     'layer': {
         'composite-vector': 'massif::CompositeVectorTileLayer';
@@ -10467,6 +10628,7 @@ export interface SpecClass {
     'source': {
         'assets': 'massif::AssetTileDataSource';
         'combined': 'massif::CombinedTileDataSource';
+        'contour': 'massif::ContourTileDataSource';
         'geojson': 'massif::GeoJSONVectorTileDataSource';
         'http': 'massif::HTTPTileDataSource';
         'local': 'massif::LocalVectorDataSource';
@@ -10587,8 +10749,15 @@ export interface MethodTypes {
     'massif::CompiledStyleSet': {
     };
     'massif::CompositeVectorTileLayer': {
+        addExternalDataSource: { args: [name: string, dataSource: Handle, type: number]; result: void };
+        addVectorDataSource: { args: [name: string, dataSource: Handle]; result: void };
         clearTileCaches: { args: [all: boolean]; result: void };
+        getExternalChildLayer: { args: [name: string]; result: Handle<'massif::Layer'>; resultClass: 'massif::Layer' };
+        getExternalDataSourceNames: { args: []; result: Json };
         refresh: { args: []; result: void };
+        removeExternalDataSource: { args: [name: string]; result: boolean };
+        setExternalDataSourceMaxOverzoomLevel: { args: [name: string, level: number]; result: void };
+        setExternalDataSourceZoomLevelBias: { args: [name: string, bias: number]; result: void };
     };
     'massif::ContourTileDataSource': {
         getMetaDataElement: { args: [key: string]; result: Json };
@@ -10707,6 +10876,7 @@ export interface MethodTypes {
         set: { args: [index: number, layer: Handle]; result: void };
     };
     'massif::LightOptions': {
+        setSunPositionFromTime: { args: [year: number, month: number, day: number, hour: number, minute: number, latitude: number, longitude: number]; result: void };
     };
     'massif::LightStop': {
     };
@@ -10733,6 +10903,7 @@ export interface MethodTypes {
         setMetaDataElement: { args: [key: string, value: Json]; result: void };
     };
     'massif::MBVectorTileDecoder': {
+        addFallbackFont: { args: [font: Handle]; result: void };
         getStyleParameter: { args: [name: string]; result: string };
         setStyleParameter: { args: [name: string, value: string]; result: boolean };
         setStyleParameters: { args: [params: Json]; result: void };
@@ -11112,6 +11283,14 @@ export interface MethodTypes {
         findFeatures: { args: [request: Handle]; result: Handle<'massif::VectorTileFeatureCollection'>; resultClass: 'massif::VectorTileFeatureCollection' };
     };
     'massif::ViewState': {
+    };
+    'massif::WKBGeometryReader': {
+    };
+    'massif::WKBGeometryWriter': {
+    };
+    'massif::WKTGeometryReader': {
+    };
+    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };
@@ -11605,6 +11784,14 @@ export interface EventTypes {
     'massif::VectorTileSearchService': {
     };
     'massif::ViewState': {
+    };
+    'massif::WKBGeometryReader': {
+    };
+    'massif::WKBGeometryWriter': {
+    };
+    'massif::WKTGeometryReader': {
+    };
+    'massif::WKTGeometryWriter': {
     };
     'massif::ZippedAssetPackage': {
     };

@@ -1,5 +1,6 @@
 import { BANNER, closure, enumTypeName, inherited, kindPrefix, methodArgTuple, methodResult, ownProperties, specInterfaceName, valueType } from './schema.mjs';
-import { constructorKeys, registeredClass } from './specs.mjs';
+import { constructorKeys, objectPropertyType, registeredClass } from './specs.mjs';
+import { FACTORY_SPECS } from './factories.mjs';
 
 const PRELUDE = `${BANNER}
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -43,6 +44,20 @@ export type ProjectionName = 'EPSG:4326' | 'EPSG:3857' | (string & {});
 `;
 
 const TAIL = `
+/**
+ * Whether \`C\` says nothing about the class.
+ *
+ * True for \`any\` - the default, and so what a bare \`MassifLayer\` or \`MassifObject\` carries -
+ * and for the whole \`ClassName\` union, which is what \`ClassAtPath\` falls back to when the table
+ * does not record the class at the end of an object path. Both mean the same thing here: the class
+ * is not known at compile time, the C++ resolves against the runtime one, and a table lookup can
+ * only produce a wrong answer.
+ *
+ * The usual \`0 extends 1 & C\` probe does NOT work: \`C\` is constrained to \`ClassName\`, and the
+ * intersection resolves against that constraint rather than staying deferred.
+ */
+type Unnarrowed<C extends ClassName> = ClassName extends C ? true : false;
+
 export type Path<C extends ClassName> = keyof PropertyTypes[C] & string;
 /**
  * The type at the end of a path.
@@ -86,6 +101,18 @@ export type WritablePath<C extends ClassName> = {
 /** The paths the SDK flags as coordinates, so \`getPos\` can convert them to another projection. */
 export type PositionPath<C extends ClassName> = keyof PositionPaths[C] & string;
 
+/**
+ * The coordinate at a position path: a \`MapPos\` reads as a \`Position\`, a \`MapBounds\` as a
+ * \`Bounds\`. \`PositionPaths\` only records THAT a path is a coordinate; which of the two it is
+ * comes from the property table, so a caller does not have to narrow \`Position | Bounds\` back
+ * down by hand at every click handler.
+ */
+export type PositionAt<C extends ClassName, P extends PositionPath<C>> = Unnarrowed<C> extends true
+    ? Position | Bounds
+    : P extends Path<C>
+      ? Extract<PropertyTypes[C][P], Position | Bounds>
+      : Position | Bounds;
+
 /** The paths that point at another object. \`group\` scopes onto one; \`get\` cannot read one. */
 export type ObjectPath<C extends ClassName> = keyof ObjectPaths[C] & string;
 
@@ -101,8 +128,15 @@ export type VariantPath<C extends ClassName> = keyof VariantPaths[C] & string;
  * The template arm is free-form data: the C++ keeps walking inside a Variant, so
  * \`feature.properties.name\` resolves even though no table can know the leaf. Its type comes
  * back as \`Json\`, which is what it honestly is.
+ *
+ * An UNNARROWED object - \`MassifLayer\`, which is what \`layers().get(i)\` and \`source()\` hand
+ * back - takes any path, the way \`Path\` and \`WritablePath\` already do: nothing is known about the
+ * class, so nothing can be said about its paths, and the C++ resolves the path either way. Without
+ * the guard, \`Path<any>\` and \`ObjectPath<any>\` were both \`string\`, their \`Exclude\` was
+ * \`never\`, and only the dotted arm survived - so \`get('maxZoom')\` was an error on every object
+ * whose class had not been named.
  */
-export type ValuePath<C extends ClassName> = Exclude<Path<C>, ObjectPath<C>> | \`\${VariantPath<C>}.\${string}\`;
+export type ValuePath<C extends ClassName> = Unnarrowed<C> extends true ? string : Exclude<Path<C>, ObjectPath<C>> | \`\${VariantPath<C>}.\${string}\`;
 
 /** The class an object property points at, so a scope onto it stays typed all the way down. */
 export type ClassAtPath<C extends ClassName, P extends ObjectPath<C>> = ObjectPaths[C][P] extends ClassName ? ObjectPaths[C][P] : ClassName;
@@ -122,7 +156,15 @@ export type SpecArg<K extends Kind, T extends SpecType<K>> = SpecOf[K] & { type:
 export type ClassOfSpec<K extends Kind, T extends SpecType<K>> = SpecClass[K][T] extends ClassName ? SpecClass[K][T] : ClassName;
 
 export type MethodName<C extends ClassName> = keyof MethodTypes[C] & string;
-export type MethodArgs<C extends ClassName, M extends MethodName<C>> = MethodTypes[C][M] extends { args: infer A } ? (A extends unknown[] ? A : never) : never;
+/**
+ * A method's parameters, as a tuple.
+ *
+ * \`unknown[]\` for an unnarrowed object, for the same reason \`ValuePath\` takes any path there -
+ * and because this one is spread as a REST parameter: resolving to \`any\` is not a rest type at
+ * all, so \`call('clearTileCaches', true)\` reported its argument as \`never\` rather than accepting
+ * anything.
+ */
+export type MethodArgs<C extends ClassName, M extends MethodName<C>> = Unnarrowed<C> extends true ? unknown[] : MethodTypes[C][M] extends { args: infer A } ? (A extends unknown[] ? A : never) : never;
 export type MethodResult<C extends ClassName, M extends MethodName<C>> = MethodTypes[C][M] extends { result: infer R } ? R : never;
 
 /** The class of an object result, or never for a scalar one. */
@@ -242,6 +284,7 @@ export function emitTypes(schema) {
 
     for (const kind of Object.keys(byKind).sort()) {
         const names = [];
+        const emitted = {};
         for (const spec of [...byKind[kind]].sort((a, b) => a.type.localeCompare(b.type))) {
             const name = specInterfaceName(kind, spec.type);
             names.push(name);
@@ -253,7 +296,10 @@ export function emitTypes(schema) {
             for (const prop of ownProperties(spec.cppClass, classes)) {
                 if (prop.readOnly) continue;
                 const key = spec.aliases[prop.name] ?? prop.name;
-                keys[key] = { type: valueType(prop, enums), doc: prop.doc, required: false };
+                // An OBJECT property in a SPEC is not the bare handle it is on a path: the spec
+                // path resolves it with childOf, so an id and an inline spec are there too.
+                const type = prop.type === 'OBJECT' && !prop.indexed ? objectPropertyType(prop.objectClass, schema) : valueType(prop, enums);
+                keys[key] = { type, doc: prop.doc, required: false };
             }
             for (const [key, arg] of Object.entries(ctorKeys[`${kind}/${spec.type}`] ?? {})) {
                 keys[key] = keys[key] ? { ...keys[key], type: mergeTypes(keys[key].type, arg.type), required: arg.required } : { type: arg.type, doc: undefined, required: arg.required };
@@ -264,6 +310,26 @@ export function emitTypes(schema) {
                 const entry = keys[key];
                 if (entry.doc) out.push(`    /** ${entry.doc} */\n`);
                 out.push(`    ${/^[A-Za-z_$][\w$]*$/.test(key) ? key : `'${key}'`}${entry.required ? '' : '?'}: ${entry.type};\n`);
+            }
+            out.push('}\n\n');
+            emitted[name] = keys;
+        }
+        for (const extra of FACTORY_SPECS[kind] ?? []) {
+            names.push(extra.name);
+            out.push(`/**\n${extra.doc.map((line) => ` * ${line}`.trimEnd()).join('\n')}\n */\n`);
+            out.push(`export interface ${extra.name} {\n`);
+            for (const key of extra.keys) {
+                if (key.doc) out.push(`    /** ${key.doc} */\n`);
+                out.push(`    ${key.name}${key.required || key.name === 'type' ? '' : '?'}: ${key.type};\n`);
+            }
+            // The factory only replaces the CONSTRUCTOR: applySpecProperties still runs over what
+            // it did not consume, so the sibling spec's plain properties apply here as well.
+            const inherited = emitted[extra.inheritOptional] ?? {};
+            for (const key of Object.keys(inherited).sort()) {
+                const entry = inherited[key];
+                if (entry.required || extra.keys.some((k) => k.name === key)) continue;
+                if (entry.doc) out.push(`    /** ${entry.doc} */\n`);
+                out.push(`    ${/^[A-Za-z_$][\w$]*$/.test(key) ? key : `'${key}'`}?: ${entry.type};\n`);
             }
             out.push('}\n\n');
         }
@@ -281,6 +347,11 @@ export function emitTypes(schema) {
         out.push(`    '${kind}': {\n`);
         for (const spec of [...byKind[kind]].sort((a, b) => a.type.localeCompare(b.type))) {
             out.push(`        '${spec.type}': '${registeredClass(spec.cppClass, classes)}';\n`);
+        }
+        // A factory type the schema has no constructor for is still a type `create` accepts, so
+        // it belongs here too - SpecType reads this table, not the spec interfaces.
+        for (const extra of FACTORY_SPECS[kind] ?? []) {
+            if (extra.specType) out.push(`        '${extra.specType}': '${extra.cppClass}';\n`);
         }
         out.push('    };\n');
     }
