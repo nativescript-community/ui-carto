@@ -70,7 +70,7 @@ export const exampleSections: ExampleSection[] = [
         description: "CartoCSS, style projects and layer composition.",
         examples: [
             entry("style-parameters", "Change a style at runtime", "A style project declares `param::` values the app sets while the map runs, as properties: `params.<name>`. A colour swaps live; one used in a filter re-decodes the tiles.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/style-parameters.png", () => require('./StyleParameters.svelte')),
-            entry("day-cycle-light", "Light the map by the hour", "One palette, no night theme: the scene light is read off a curve of `LightStop`s, and every colour on the map - 2D fills, labels, 3D walls - is derived from it. Swap the curve and the whole map changes character.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/day-cycle-light.png", () => require('./DayCycleLight.svelte')),
+            entry("day-cycle-light", "Light the map by the hour", "One palette, no night theme: the scene light is read off a curve of `LightStop`s, and every colour on the map - 2D fills, labels, 3D walls - is derived from it. Swap the curve and the whole map changes character. The buildings follow the CAMERA as well as the hour: they rise over z15 and lie down when you zoom out (`building-height-scale`), sink towards the ground as the tilt approaches 90 (`building-height-view-scale`), and the map drops to a flat 2D render at the top of that tilt.", "https://raw.githubusercontent.com/massif-maps/MassifMaps/master/docs/examples/screenshots/day-cycle-light.png", () => require('./DayCycleLight.svelte')),
         ]
     },
     {

@@ -19,10 +19,21 @@
      * unstated colour as authored, so a style that wants to be lit has to say so.
      */
     const MSS = [
-        'Map { background-color: #f4f1ec; background-emissive-strength: 0; }',
+        // The two building-height scales are what makes the walls follow the CAMERA: they rise over
+        // z15 and lie down as you zoom out, and sink to a fifth of their height as the tilt reaches
+        // 90. Both are Map-block settings, evaluated per frame against the view.
+        'Map { background-color: #f4f1ec; background-emissive-strength: 0;',
+        '    building-height-scale: linear(([view::zoom] - 1), (15, 0), (15.3, 1));',
+        '    building-height-view-scale: 1 - 0.8 * linear([view::tilt], (80, 0), (90, 1));',
+        // The contact shadow belongs to the building standing in it, so it fades on the SAME ramp
+        // that lays the walls down - otherwise a flattened city keeps a dark ring around every
+        // footprint. A STYLE decision, written here rather than forced by the renderer.
+        '    building-ao-intensity: 0.2 * (1 - 0.8 * linear([view::tilt], (80, 0), (90, 1))); }',
         '#water { polygon-fill: #8fb8d8; polygon-emissive-strength: 0; }',
         '#landcover { polygon-fill: #dbe8cc; polygon-opacity: 0.6; polygon-emissive-strength: 0; }',
         '#building { polygon-fill: #d9d0c9; polygon-emissive-strength: 0; }',
+        '#building[zoom >= 15]::walls { building-height: [render_height]; building-fill: #d9d0c9;',
+        '    building-fill-opacity: 1; }',
         '#transportation { line-color: #ffffff; line-emissive-strength: 0;',
         '    line-width: linear([view::zoom], (10, 0.6), (16, 5)); line-join: round; line-cap: round; }'
     ].join('\n');
@@ -92,6 +103,10 @@
      */
     const PRESETS: Array<[string, number]> = [['dawn', 6.8], ['day', 12], ['dusk', 17.4], ['night', 22]];
 
+    /** The SDK's own thresholds, written out because the toggle switches between them and off. */
+    const AUTO_FLATTEN_TILT = 88;
+    const AUTO_FLATTEN_PARALLAX = 2;
+
     let formula = 0;
     let hour = START_HOUR;
     let sunAltitude = 0;
@@ -145,7 +160,14 @@
         // A TERRAIN, for the shadows. Cast shadows are drawn from the drape pass and land on the
         // terrain surface - with no terrain there is no surface to receive them and nothing casts
         // at all, however high shadowStrength goes.
-        map.terrain({ type: 'terrain', source: demTiles() }).apply({ exaggeration: 1, cameraClearance: 40 });
+        // The auto 2D/3D thresholds are the SDK's defaults, set out loud because the toggle below
+        // is what an app turns them off with.
+        map.terrain({ type: 'terrain', source: demTiles() }).apply({
+            exaggeration: 1,
+            cameraClearance: 40,
+            autoFlattenTilt: AUTO_FLATTEN_TILT,
+            autoFlattenParallax: AUTO_FLATTEN_PARALLAX
+        });
 
         // The curve is only read while this is on; off, the style's and the app's own sun colours
         // stand, which is what every map did before the curve existed.
@@ -230,7 +252,24 @@
             applyHour();
             caption();
         });
-        host.caption('One palette, no night theme: the hour picks the light, the curve picks the look.');
+        // Off holds the map in 3D at any tilt: the thresholds are a pair, and a 0 disables its own
+        // half of the rule. No Tilt drop button here - an INLINE style has no `param::` to drive,
+        // so the drop is written straight into the Map block above.
+        host.toggle('Auto 2D/3D', true, (on: boolean) => {
+            map.terrain().apply({
+                autoFlattenTilt: on ? AUTO_FLATTEN_TILT : 0,
+                autoFlattenParallax: on ? AUTO_FLATTEN_PARALLAX : 0
+            });
+            host.caption(
+                on
+                    ? 'Auto 2D/3D on: tilt past 88\u00b0 and the map renders flat.'
+                    : 'Auto 2D/3D off: the map stays 3D all the way to 90\u00b0.'
+            );
+        });
+        host.caption(
+            'One palette, no night theme: the hour picks the light, the curve picks the look. ' +
+                'Zoom out past z15, or tilt to 90, and the buildings lie down.'
+        );
     }
 </script>
 
