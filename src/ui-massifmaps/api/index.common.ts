@@ -1443,6 +1443,18 @@ export function wrap<C extends ClassName>(handle: number, className: C, id?: str
 }
 
 /**
+ * The same, as a LAYER - so `opacity()`, `visible()` and `zoomRange()` are there.
+ *
+ * For a layer the app did not build and cannot reach by id: a CompositeVectorTileLayer's external
+ * children are owned by their parent, and `getExternalChildLayer` hands back a plain handle. Those
+ * three are get/set on a property, so they work on a layer that is not in a map's stack; `moveTo`
+ * and `detach` are the ones that need one, and they throw as they would on any unattached layer.
+ */
+export function wrapLayer<C extends ClassName>(handle: number, className: C, id?: string): MassifLayer<C> {
+    return new MassifLayer(handle as Handle<C>, className, id);
+}
+
+/**
  * Gives an object built with the OBJECT api an id, and with it properties, methods and events.
  *
  * This is how an app moves over a piece at a time rather than rebuilding its map. The class is
