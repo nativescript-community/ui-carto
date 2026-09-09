@@ -29,12 +29,14 @@ export interface CompositeVectorTileLayerOptions extends VectorTileLayerOptions 
  * over the landcover - which stacking layers cannot do. If the style declares no such
  * layer the source is registered and never drawn, and the SDK only warns in the log; use
  * `getExternalDataSourceNames()` against the decoder's `getStyleLayerNames()` to tell the
- * two apart. Note a COMPILED Mapnik XML style cannot declare these slots at all - the XML
- * symbolizer set has no hillshade/raster config symbolizer, only CartoCSS has.
+ * two apart. A COMPILED Mapnik XML style carries these slots too - the parser and the
+ * generator both handle the hillshade/raster/contour config symbolizers - so a missing slot
+ * means the style does not NAME that layer, not that the format cannot express it.
  *
- * ANDROID ONLY. com.massifmaps.layers.CompositeVectorTileLayer has no MSF equivalent in
- * the iOS metadata we generate from, so on iOS this builds a plain VectorTileLayer and the
- * source methods are no-ops that warn - the map still draws, without the woven sources.
+ * THIS WRAPPER is android only: its iOS half is an unimplemented stub whose source methods
+ * are no-ops that warn, so the map draws without the woven sources. That is a gap in this
+ * object API, not in the SDK - MSFCompositeVectorTileLayer does exist, and the surface API
+ * (`api.createLayer(id, { type: 'composite-vector', ... })`) reaches it on both platforms.
  */
 export class CompositeVectorTileLayer extends VectorTileLayer {
     constructor(options: CompositeVectorTileLayerOptions, native?: any);
