@@ -99,7 +99,7 @@
             // out in front, so re-centring on it would jump the map forward.
             const target = in3D ? SUMMIT : map.camera().eyePosition();
             map.camera()
-                .animate(seconds)
+                .animate(seconds * 1000)
                 .moveTo(target, { zoom: ZOOM, rotation: ROTATION, tilt: in3D ? TILT_3D : TILT_2D });
         }
 

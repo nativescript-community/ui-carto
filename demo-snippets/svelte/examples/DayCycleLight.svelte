@@ -154,7 +154,7 @@
         map.addLayer('basemap', {
             type: 'vector',
             source: vectorTiles(),
-            style: { type: 'mbvt', cartocss: MSS }
+            style: { type: 'mbvt', cartocss: { type: 'cartocss', css: MSS } }
         });
 
         // A TERRAIN, for the shadows. Cast shadows are drawn from the drape pass and land on the
