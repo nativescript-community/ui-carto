@@ -30,13 +30,6 @@ function unsupported(method: string) {
 export class CompositeVectorTileLayer extends VectorTileLayer {
     readonly supported = false;
 
-    get singlePassRenderingEnabled() {
-        return false;
-    }
-    set singlePassRenderingEnabled(value: boolean) {
-        unsupported('singlePassRenderingEnabled');
-    }
-
     addExternalDataSource(name: string, dataSource: TileDataSource<any, any>, type: any) {
         unsupported('addExternalDataSource');
     }

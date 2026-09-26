@@ -1392,15 +1392,11 @@ declare class MSFCompositeVectorTileLayer extends MSFVectorTileLayer {
 
     getExternalDataSourceZoomLevelBias(name: string): number;
 
-    isSinglePassRenderingEnabled(): boolean;
-
     removeExternalDataSource(name: string): boolean;
 
     setExternalDataSourceMaxOverzoomLevelLevel(name: string, level: number): void;
 
     setExternalDataSourceZoomLevelBiasBias(name: string, bias: number): void;
-
-    setSinglePassRenderingEnabled(enabled: boolean): void;
 }
 
 declare class MSFContourTileDataSource extends MSFTileDataSource {

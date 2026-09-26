@@ -46,7 +46,6 @@ export interface BaseMapState {
     slots: { hillshade: boolean; satellite: boolean; contour: boolean };
     /** +1 = fetch the DEM one zoom level deeper than the base map */
     hillshadeZoomBias: number;
-    singlePass: boolean;
     /** what the last slot check found; shown in the drawer */
     slotStatus: string;
     /** which style/pack actually loaded - the fallbacks are silent otherwise */
@@ -109,7 +108,6 @@ export function createBaseMap(initial: Partial<BaseMapState> = {}, spec: Partial
         styleSource: 'inline',
         styleName: 'osm',
         hillshadeZoomBias: 0,
-        singlePass: true,
         slotStatus: '',
         styleStatus: '',
         inline: {},
@@ -153,7 +151,6 @@ export function createBaseMap(initial: Partial<BaseMapState> = {}, spec: Partial
         const composite = new CompositeVectorTileLayer({ dataSource: vectorSource(), decoder, preloading: true, tileCacheCapacity: 64 * 1024 * 1024 });
         // the woven sources draw under the labels, which stay on top of everything
         composite.labelRenderOrder = VectorTileRenderOrder.LAST;
-        composite.singlePassRenderingEnabled = state.singlePass;
         layer = composite;
         syncSources();
         return composite;

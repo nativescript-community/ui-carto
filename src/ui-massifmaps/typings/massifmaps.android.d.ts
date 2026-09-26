@@ -3786,9 +3786,7 @@ declare namespace com {
                 public addVectorDataSource(name: string, dataSource: com.massifmaps.datasources.TileDataSource): void;
                 public setExternalDataSourceMaxOverzoomLevel(name: string, level: number): void;
                 public setZoomLevelBias(bias: number): void;
-                public isSinglePassRenderingEnabled(): boolean;
                 public addExternalDataSource(name: string, dataSource: com.massifmaps.datasources.TileDataSource, type: number, elevationDecoder: com.massifmaps.rastertiles.ElevationDecoder): void;
-                public setSinglePassRenderingEnabled(enabled: boolean): void;
                 public clearExternalDataSourceZoomLevelBias(name: string): void;
                 public setPreloading(preloading: boolean): void;
                 public setExternalDataSourceZoomLevelBias(name: string, bias: number): void;

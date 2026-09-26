@@ -56,7 +56,6 @@ export const PROPS: { [cls: string]: string } = {
     'massif::ClusteredVectorLayer': 'animatedClusters,b;clusterElementBuilder,o,massif::ClusterElementBuilder;maximumClusterZoom,f;minimumClusterDistance,f',
     'massif::Color': 'ARGB,i;a,i;b,i;g,i;r,i',
     'massif::CompiledStyleSet': 'assetPackage,o,massif::AssetPackage;styleAssetName,s;styleName,s',
-    'massif::CompositeVectorTileLayer': 'singlePassRenderingEnabled,b',
     'massif::ContourTileDataSource': 'baseInterval,f;labelInterval,f;labelStubsEnabled,b;layerName,s;minVisibleZoom,i;resolution,i;seamlessEdgesEnabled,b;simplifyTolerance,f;terrainOptions,o,massif::TerrainOptions',
     'massif::CullState': 'viewState,t',
     'massif::CustomPopup': 'popupHandler,o,massif::CustomPopupHandler',

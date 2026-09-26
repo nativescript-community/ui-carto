@@ -15,10 +15,7 @@ export const CompositeSourceType: {
     COMPOSITE_SOURCE_TYPE_VECTOR: any;
 };
 
-export interface CompositeVectorTileLayerOptions extends VectorTileLayerOptions {
-    /** single-pass segmented rendering; the A/B switch of the composite renderer */
-    singlePassRenderingEnabled?: boolean;
-}
+export interface CompositeVectorTileLayerOptions extends VectorTileLayerOptions {}
 
 /**
  * One vector tile layer fed by SEVERAL sources, each woven into the style's own layer
@@ -42,7 +39,6 @@ export class CompositeVectorTileLayer extends VectorTileLayer {
     constructor(options: CompositeVectorTileLayerOptions, native?: any);
     /** true where the composite class actually exists (android) */
     readonly supported: boolean;
-    singlePassRenderingEnabled: boolean;
     addExternalDataSource(name: string, dataSource: TileDataSource<any, any>, type: any): void;
     /** shorthand for an external source of type VECTOR */
     addVectorDataSource(name: string, dataSource: TileDataSource<any, any>): void;
