@@ -1739,8 +1739,6 @@ export interface PropertyTypes {
         readonly 'projection.name': string;
         /** Returns the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
         'rendererLayerFilter': string;
-        /** Returns whether single-pass segmented rendering is enabled (Milestone 6, optional). */
-        'singlePassRenderingEnabled': boolean;
         /** (read-only) Returns the data source assigned to this layer. */
         readonly 'source': Handle;
         /** (read-only) Returns the extent of the tiles in this data source. The bounds are in coordinate system of the projection of the data source. */
@@ -9819,8 +9817,6 @@ export interface LayerSpec_composite_vector {
     preloading?: boolean;
     /** Returns the renderer layer filter. The filter is given as ECMA regular expression that is applied to qualified layer names. */
     rendererLayerFilter?: string;
-    /** Returns whether single-pass segmented rendering is enabled (Milestone 6, optional). */
-    singlePassRenderingEnabled?: boolean;
     source: Handle | string | SourceSpec;
     style: Handle | string | StyleSpec;
     /** Returns the state of the synchronized refresh flag. */

@@ -30,13 +30,6 @@ export class CompositeVectorTileLayer extends VectorTileLayer {
         return new com.massifmaps.layers.CompositeVectorTileLayer(dataSource, decoder);
     }
 
-    get singlePassRenderingEnabled() {
-        return this.getNative().isSinglePassRenderingEnabled();
-    }
-    set singlePassRenderingEnabled(value: boolean) {
-        this.getNative().setSinglePassRenderingEnabled(value);
-    }
-
     addExternalDataSource(name: string, dataSource: TileDataSource<any, any>, type: any) {
         this.getNative().addExternalDataSource(name, dataSource.getNative(), type);
     }

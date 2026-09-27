@@ -89,7 +89,6 @@
     <SettingSwitch checked={state.slots.hillshade} hint="fills the style's #hillshade rule" label="#hillshade" onChange={(v) => setSlot('hillshade', v)} />
     <SettingSwitch checked={state.slots.satellite} hint="fills #satellite" label="#satellite" onChange={(v) => setSlot('satellite', v)} />
     <SettingSwitch checked={state.slots.contour} hint="merged INTO the master tile" label="#contour" onChange={(v) => setSlot('contour', v)} />
-    <SettingSwitch checked={state.singlePass} hint="A/B switch of the composite renderer" label="Single-pass rendering" onChange={(v) => change({ singlePass: v })} />
     <SettingSlider
         format={(v) => (v > 0 ? `+${v.toFixed(1)}` : v.toFixed(1))}
         label="#hillshade zoom bias"

@@ -4,7 +4,7 @@
 import { CompositeSourceType, EnumValue } from '../enums';
 
 /** com.massifmaps.layers.CompositeVectorTileLayer / MSFCompositeVectorTileLayer */
-export const METHODS = ['addExternalDataSource', 'addVectorDataSource', 'clearExternalDataSourceZoomLevelBias', 'getExternalDataSourceMaxOverzoomLevel', 'getExternalDataSourceNames', 'getExternalDataSourceZoomLevelBias', 'isSinglePassRenderingEnabled', 'removeExternalDataSource', 'setExternalDataSourceMaxOverzoomLevel', 'setExternalDataSourceZoomLevelBias', 'setPreloading', 'setSinglePassRenderingEnabled', 'setZoomLevelBias'] as const;
+export const METHODS = ['addExternalDataSource', 'addVectorDataSource', 'clearExternalDataSourceZoomLevelBias', 'getExternalDataSourceMaxOverzoomLevel', 'getExternalDataSourceNames', 'getExternalDataSourceZoomLevelBias', 'removeExternalDataSource', 'setExternalDataSourceMaxOverzoomLevel', 'setExternalDataSourceZoomLevelBias', 'setPreloading', 'setZoomLevelBias'] as const;
 
 /** the forwarders METHODS installs, so they are visible to TypeScript */
 export interface Methods {
@@ -14,25 +14,17 @@ export interface Methods {
     getExternalDataSourceMaxOverzoomLevel(arg0: string): number;
     getExternalDataSourceNames(): string[];
     getExternalDataSourceZoomLevelBias(arg0: string): number;
-    isSinglePassRenderingEnabled(): boolean;
     removeExternalDataSource(arg0: string): boolean;
     setExternalDataSourceMaxOverzoomLevel(arg0: string, arg1: number): void;
     setExternalDataSourceZoomLevelBias(arg0: string, arg1: number): void;
     setPreloading(arg0: boolean): void;
-    setSinglePassRenderingEnabled(arg0: boolean): void;
     setZoomLevelBias(arg0: number): void;
 }
 
-export const ACCESSORS: Record<string, [string, string]> = {
-    singlePassRenderingEnabled: ['isSinglePassRenderingEnabled', 'setSinglePassRenderingEnabled'],
-};
+export const ACCESSORS: Record<string, [string, string]> = {};
 
-/** public shape of the accessors this class declares itself */
-export interface Accessors {
-    singlePassRenderingEnabled: boolean;
-}
+export interface Accessors {}
 
-/** properties needing a converter, and which one */
 export const CONVERTERS = [] as const;
 
 /** ObjC concatenates selector parts, so these names differ on iOS */
