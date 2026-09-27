@@ -648,7 +648,15 @@ export class MassifObject<C extends ClassName = any> extends Observable {
     getPos(path: string & {}, projection?: ProjectionName): Position | Bounds | null;
     getPos(path: string, projection?: ProjectionName): Position | Bounds | null {
         const json = bridge.getPos(this.handle, path, projection ?? '');
-        return json ? (JSON.parse(json) as Position | Bounds) : null;
+        if (!json) {
+            return null;
+        }
+        // Before its first layout a map view answers `[0, null]`, which JSON.parse throws on.
+        try {
+            return JSON.parse(json) as Position | Bounds;
+        } catch {
+            return null;
+        }
     }
 
     /** A scope over an object property, so its own properties read short. */
@@ -1684,6 +1692,9 @@ export function mapViewClass(): any {
  * ```
  */
 export class MapCamera {
+    /** Whether the linked SDK binary has BaseMapView::moveCameraTo; undefined until first tried. */
+    private static nativeCameraMove: boolean | undefined;
+
     private mDuration = 0;
 
     /**
@@ -1720,8 +1731,101 @@ export class MapCamera {
     }
 
     /** Where the camera IS, not what it looks at - kilometres apart at a low tilt. */
-    eyePosition(): Position {
-        return this.view.getPos('cameraPos') as Position;
+    eyePosition(): Position;
+    eyePosition(value: AnyPosition): this;
+    eyePosition(value?: AnyPosition) {
+        if (value === undefined) {
+            return this.view.getPos('cameraPos') as Position;
+        }
+        return this.moveEyeTo(value);
+    }
+
+    /**
+     * Puts the EYE at a position, where `moveTo` puts the focus - kilometres apart at a panorama's
+     * tilt, so "stand on this summit" needs this one.
+     */
+    moveEyeTo(position: AnyPosition, options: { zoom?: number; rotation?: number; tilt?: number; climbHeight?: number; duration?: number } = {}): this {
+        const target = toPosition(position);
+        const seconds = this.take(options.duration);
+        // Probed by calling it: the schema these typings come from can be newer than the linked
+        // binary. Older SDKs fall back to solving for the focus below.
+        if (seconds <= 0 && MapCamera.nativeCameraMove !== false) {
+            try {
+                this.view.call('moveCameraTo', target, options.zoom ?? this.zoom(), options.rotation ?? this.rotation(), options.tilt ?? this.tilt());
+                MapCamera.nativeCameraMove = true;
+                return this;
+            } catch {
+                MapCamera.nativeCameraMove = false;
+            }
+        }
+        // Resolved once: the getters read a snapshot republished per DRAWN frame, so re-reading
+        // them mid-solve on an undrawn map snaps the orientation back to the previous view.
+        const orientation = {
+            zoom: options.zoom ?? this.zoom(),
+            rotation: options.rotation ?? this.rotation(),
+            tilt: options.tilt ?? this.tilt()
+        };
+        // Start as moveTo would, so a failed or clamped solve still leaves the view on the target.
+        this.moveTo(target, orientation);
+        // 1e-7 degrees is about a centimetre.
+        const TOLERANCE = 1e-7;
+        const MAX_STEPS = 6;
+        const startFocus = this.readPos('focusPos');
+        if (!startFocus) {
+            return this;
+        }
+        let focus = startFocus;
+        // The focus is clamped (restricted panning, pan bounds), so a step may not apply: keep the
+        // best focus seen instead of the last one.
+        let bestFocus = focus;
+        let bestError = Number.POSITIVE_INFINITY;
+        for (let step = 0; step < MAX_STEPS; step++) {
+            const eye = this.readPos('cameraPos');
+            if (!eye) {
+                break;
+            }
+            const deltaLng = target[0] - eye[0];
+            const deltaLat = target[1] - eye[1];
+            const error = Math.abs(deltaLng) + Math.abs(deltaLat);
+            if (error < bestError) {
+                bestError = error;
+                bestFocus = focus;
+            }
+            if (error < TOLERANCE) {
+                break;
+            }
+            const candidate: [number, number] = [focus[0] + deltaLng, focus[1] + deltaLat];
+            this.moveTo(candidate, orientation);
+            const applied = this.readPos('focusPos');
+            if (!applied) {
+                break;
+            }
+            if (Math.abs(applied[0] - focus[0]) < TOLERANCE && Math.abs(applied[1] - focus[1]) < TOLERANCE) {
+                break;
+            }
+            focus = applied;
+        }
+        focus = bestFocus;
+        this.moveTo(focus, orientation);
+        if (seconds > 0) {
+            // The solve moved the camera; rewind to the start and fly the rest.
+            this.moveTo(startFocus, orientation);
+            this.view.call('flyTo', focus, orientation.zoom, orientation.rotation, orientation.tilt, options.climbHeight ?? 0, seconds, 'ease');
+        }
+        return this;
+    }
+
+    /** Null, not a throw or NaN, for a view that has not had its first layout. */
+    private readPos(path: 'focusPos' | 'cameraPos'): [number, number] | null {
+        try {
+            const pos = this.view.getPos(path) as Position;
+            if (!pos || !isFinite(pos[0]) || !isFinite(pos[1])) {
+                return null;
+            }
+            return [pos[0], pos[1]];
+        } catch {
+            return null;
+        }
     }
 
     zoom(): number;
