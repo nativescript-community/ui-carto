@@ -190,6 +190,9 @@ export const bridge: NativeBridge = {
     attachVectorElementEvents(layer, handle) {
         layer.setVectorElementEventListener(MassifInterop.createVectorElementEventBridge(handle, layer.getVectorElementEventListener()));
     },
+    attachCelestialEvents(layer, handle) {
+        layer.setCelestialEventListener(MassifInterop.createCelestialEventBridge(handle, layer.getCelestialEventListener()));
+    },
 
     nativeShortClassName(nativeObject) {
         if (!nativeObject || typeof nativeObject.getClass !== 'function') {

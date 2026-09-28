@@ -67,6 +67,7 @@ export type ClassName =
     | 'massif::CacheTileDataSource'
     | 'massif::CartoCSSStyleSet'
     | 'massif::CelestialArc'
+    | 'massif::CelestialClickInfo'
     | 'massif::CelestialEventListener'
     | 'massif::CelestialLabel'
     | 'massif::CelestialLayer'
@@ -358,6 +359,19 @@ export type CompositeSourceType =
     | 'COMPOSITE_SOURCE_TYPE_HILLSHADE'
     /** Another MBVT/protobuf source (including ContourTileDataSource), drawn at its style slot as its own child VectorTileLayer with the master decoder, so it overzooms independently via its own MaxOverzoomLevel. */
     | 'COMPOSITE_SOURCE_TYPE_VECTOR'
+    ;
+
+export type FlightEasing =
+    /** cubic-bezier(0.25, 0.1, 0.25, 1), the CSS "ease". The default, and mapbox-gl's. */
+    | 'FLIGHT_EASING_EASE'
+    /** No easing: the constant speed Van Wijk prescribes. Starts and stops abruptly. */
+    | 'FLIGHT_EASING_LINEAR'
+    /** cubic-bezier(0.42, 0, 1, 1). Gentle start, arrives at full speed. */
+    | 'FLIGHT_EASING_EASE_IN'
+    /** cubic-bezier(0, 0, 0.58, 1). Starts at full speed, comes to a stop. */
+    | 'FLIGHT_EASING_EASE_OUT'
+    /** cubic-bezier(0.42, 0, 0.58, 1). Symmetric, stronger than FLIGHT_EASING_EASE. */
+    | 'FLIGHT_EASING_EASE_IN_OUT'
     ;
 
 export type FreeRoamMode =
@@ -1499,6 +1513,10 @@ export interface PropertyTypes {
         readonly 'directionAnchored': boolean;
         /** (read-only) Returns the distance of a direction-anchored object. */
         readonly 'distance': number;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        [key: `metaData.${string}`]: Json;
         /** Returns whether the map in front hides the object. */
         'occludedByMap': boolean;
         /** (read-only) Returns the geographic position of a position-anchored object. */
@@ -1513,6 +1531,40 @@ export interface PropertyTypes {
         'visible': boolean;
         /** Returns the line width. */
         'width': number;
+    };
+    'massif::CelestialClickInfo': {
+        /** (read-only) Returns the altitude of the clicked object at the time of the click. */
+        readonly 'altitude': number;
+        /** (read-only) Returns the azimuth of the clicked object at the time of the click. */
+        readonly 'azimuth': number;
+        /** (read-only) Returns the clicked object. */
+        readonly 'celestialObject': Handle;
+        /** (read-only) Returns the altitude of a direction-anchored object. */
+        readonly 'celestialObject.altitude': number;
+        /** (read-only) Returns the azimuth of a direction-anchored object. */
+        readonly 'celestialObject.azimuth': number;
+        /** Returns the color of the object. */
+        'celestialObject.color': number;
+        /** (read-only) Returns true if the object is anchored by direction, false if by geographic position. */
+        readonly 'celestialObject.directionAnchored': boolean;
+        /** (read-only) Returns the distance of a direction-anchored object. */
+        readonly 'celestialObject.distance': number;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        'celestialObject.metaData': Record<string, Json>;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        [key: `celestialObject.metaData.${string}`]: Json;
+        /** Returns whether the map in front hides the object. */
+        'celestialObject.occludedByMap': boolean;
+        /** (read-only) Returns the geographic position of a position-anchored object. */
+        readonly 'celestialObject.position': Position;
+        /** (read-only) Returns the altitude of a position-anchored object. */
+        readonly 'celestialObject.positionAltitude': number;
+        /** Returns the visibility of the object. */
+        'celestialObject.visible': boolean;
+        /** (read-only) Returns the click info. */
+        readonly 'clickInfo': ClickInfo;
+        /** (read-only) Returns the click type. */
+        readonly 'clickType': 'CLICK_TYPE_SINGLE' | 'CLICK_TYPE_LONG' | 'CLICK_TYPE_DOUBLE' | 'CLICK_TYPE_DUAL' | number;
     };
     'massif::CelestialEventListener': {
     };
@@ -1545,6 +1597,10 @@ export interface PropertyTypes {
         'haloColor': number;
         /** Returns the halo width. */
         'haloWidth': number;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        [key: `metaData.${string}`]: Json;
         /** Returns whether the map in front hides the object. */
         'occludedByMap': boolean;
         /** (read-only) Returns the horizontal offset. */
@@ -1597,6 +1653,10 @@ export interface PropertyTypes {
         readonly 'directionAnchored': boolean;
         /** (read-only) Returns the distance of a direction-anchored object. */
         readonly 'distance': number;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        [key: `metaData.${string}`]: Json;
         /** Returns whether the map in front hides the object. */
         'occludedByMap': boolean;
         /** (read-only) Returns the geographic position of a position-anchored object. */
@@ -1631,6 +1691,10 @@ export interface PropertyTypes {
         readonly 'directionAnchored': boolean;
         /** (read-only) Returns the distance of a direction-anchored object. */
         readonly 'distance': number;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        'metaData': Record<string, Json>;
+        /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+        [key: `metaData.${string}`]: Json;
         /** Returns whether the map in front hides the object. */
         'occludedByMap': boolean;
         /** (read-only) Returns the geographic position of a position-anchored object. */
@@ -6958,6 +7022,9 @@ export interface PositionPaths {
     'massif::CelestialArc': {
         'position': true;
     };
+    'massif::CelestialClickInfo': {
+        'celestialObject.position': true;
+    };
     'massif::CelestialEventListener': {
     };
     'massif::CelestialLabel': {
@@ -7745,6 +7812,9 @@ export interface ObjectPaths {
         'assetPackage': 'massif::AssetPackage';
     };
     'massif::CelestialArc': {
+    };
+    'massif::CelestialClickInfo': {
+        'celestialObject': 'massif::CelestialObject';
     };
     'massif::CelestialEventListener': {
     };
@@ -8600,11 +8670,18 @@ export interface VariantPaths {
         'assetPackage.assetNames': true;
     };
     'massif::CelestialArc': {
+        'metaData': true;
         'position': true;
+    };
+    'massif::CelestialClickInfo': {
+        'celestialObject.metaData': true;
+        'celestialObject.position': true;
+        'clickInfo': true;
     };
     'massif::CelestialEventListener': {
     };
     'massif::CelestialLabel': {
+        'metaData': true;
         'position': true;
     };
     'massif::CelestialLayer': {
@@ -8612,9 +8689,11 @@ export interface VariantPaths {
         'visibleZoomRange': true;
     };
     'massif::CelestialObject': {
+        'metaData': true;
         'position': true;
     };
     'massif::CelestialSprite': {
+        'metaData': true;
         'position': true;
     };
     'massif::ClickInfo': {
@@ -9658,6 +9737,8 @@ export interface CelestialSpec_arc {
     clickRadius?: number;
     /** Returns the color of the object. */
     color?: number;
+    /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+    metaData?: Record<string, Json>;
     /** Returns whether the map in front hides the object. */
     occludedByMap?: boolean;
     /** Returns the visibility of the object. */
@@ -9684,6 +9765,8 @@ export interface CelestialSpec_label {
     haloColor?: number;
     /** Returns the halo width. */
     haloWidth?: number;
+    /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+    metaData?: Record<string, Json>;
     /** Returns whether the map in front hides the object. */
     occludedByMap?: boolean;
     /** Returns the horizontal padding between the text and the plate's edge. */
@@ -9708,6 +9791,8 @@ export interface CelestialSpec_sprite {
     clickRadius?: number;
     /** Returns the color of the object. */
     color?: number;
+    /** Returns a copy of the meta data map. Changes to the copy are not reflected in the object. */
+    metaData?: Record<string, Json>;
     /** Returns whether the map in front hides the object. */
     occludedByMap?: boolean;
     /** Returns the screen size of the sprite. */
@@ -11126,6 +11211,8 @@ export interface MethodTypes {
         setDirections: { args: [directions: Json]; result: void };
         setSegments: { args: [directions: Json]; result: void };
     };
+    'massif::CelestialClickInfo': {
+    };
     'massif::CelestialEventListener': {
     };
     'massif::CelestialLabel': {
@@ -11773,11 +11860,14 @@ export interface EventTypes {
     };
     'massif::CelestialArc': {
     };
+    'massif::CelestialClickInfo': {
+    };
     'massif::CelestialEventListener': {
     };
     'massif::CelestialLabel': {
     };
     'massif::CelestialLayer': {
+        'celestial.clicked': 'massif::CelestialClickInfo';
     };
     'massif::CelestialObject': {
     };
