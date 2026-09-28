@@ -10,15 +10,7 @@ import { MapPos, MapPosVector, toNativeMapPos } from '../core';
 import { FogOptionsOptions, LightOptionsOptions, MapOptionsOptions, SkyOptionsOptions, TerrainOptionsOptions } from '.';
 import { bindNative } from '../nativeclass.common';
 
-/**
- * The option objects that hang off the map's Options.
- *
- * TerrainOptions takes its DEM as a constructor argument - there is no setDataSource -
- * so it is built, then installed with `map.getOptions().setTerrainOptions(...)`.
- * SkyOptions, LightOptions and FogOptions default-construct; the map already owns one of
- * each, which is what `map.getSkyOptions()` / `map.getLightOptions()` /
- * `map.getOptions().getFogOptions()` hand back.
- */
+/** TerrainOptions takes its DEM as a constructor argument (no setDataSource); the map already owns a Sky/Light/FogOptions. */
 
 export const FreeRoamMode = {
     get FREE_ROAM_MODE_OFF() {
@@ -75,12 +67,6 @@ bindNative(TerrainOptions, TERRAIN_MET, TERRAIN_ACC, {
 });
 export interface TerrainOptions extends TerrainAcc {}
 
-/**
- * The distance haze, and everything above the horizon it fades into. It used to live on
- * TerrainOptions (`fogColor`/`fogStartDistance`/`fogDistance`) and on SkyOptions
- * (`fogBlend`/`fogHorizon`); since SDK 6 it is one object of its own, hanging off the
- * map's Options.
- */
 export class FogOptions extends BaseNative<com.massifmaps.components.FogOptions, FogOptionsOptions> {
     createNative() {
         return new com.massifmaps.components.FogOptions();
@@ -112,12 +98,8 @@ bindNative(LightOptions, LIGHT_MET, LIGHT_ACC, { selectors: LIGHT_SEL, converter
 export interface LightOptions extends LightAcc {}
 
 /**
- * The map's Options. Never constructed - `map.getOptions()` wraps the instance the map
- * owns, so `createNative` has nothing to build.
- *
- * The three option objects it holds are handed back as wrappers rather than raw natives,
- * and cached: the native instance behind each one never changes, and re-wrapping would
- * drop whatever state the wrapper holds.
+ * Never constructed: `map.getOptions()` wraps the map's own instance. Child option wrappers are
+ * cached, since re-wrapping would drop whatever state the wrapper holds.
  */
 export class MapOptions extends BaseNative<com.massifmaps.components.Options, MapOptionsOptions> {
     mTerrainOptions: TerrainOptions;

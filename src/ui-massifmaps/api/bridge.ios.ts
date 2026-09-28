@@ -1,18 +1,11 @@
 import { Delivery, NativeBridge, NativeEventHandler } from './bridge';
 
 /**
- * iOS half of the surface API bridge. See bridge.d.ts for why nothing here is typed against the
- * generated SDK typings.
- *
- * Selector spellings follow the SDK's Swig-ObjC convention - the method name, then the name of
- * every parameter after the first - so `setFloat(handle, path, value)` is
- * `-setFloat:path:value:` and reads here as `setFloatPathValue`.
+ * Swig-ObjC selectors are the method name then every parameter name after the first:
+ * `-setFloat:path:value:` reads here as `setFloatPathValue`.
  */
 
-/**
- * Stands in for "no default" when reading a string. Contains a NUL, so no real value equals it;
- * the same constant the SDK's own Objective-C sugar uses.
- */
+/** Stands in for a null default. Contains a NUL, so no real value equals it. */
 const ABSENT = '\u0000massif:absent';
 
 function lookup(name: string): any {
@@ -24,35 +17,20 @@ function lookup(name: string): any {
 }
 
 const MassifApi = lookup('MSFMassifApi');
-/**
- * MassifInterop is the half that takes SDK TYPES - adopt, the event bridges, the raw getters.
- * MassifApi itself is kept to strings, numbers and handles so a hand-written binding can carry it,
- * which is why these two are separate classes and not one.
- */
+/** MassifInterop takes SDK types; MassifApi is kept to strings, numbers and handles so a hand-written binding can carry it. */
 const MassifInterop = lookup('MSFMassifInterop');
 
-/**
- * Whether MassifApi.on takes the consume flag.
- *
- * The selector carries its parameter names, so the overload that lets a handler claim an event
- * is a different symbol from the one that does not - no arity guessing needed.
- */
 const CAN_CONSUME = typeof MassifApi?.onEventListenerDeliveryCoalesceProjectionConsume === 'function';
 
 /**
- * The plugin's own ObjC shim over the SDK's EventListener director.
- *
- * It exists for the thread: the SDK emits from the render and tile threads and NativeScript has
- * no JavaScript runtime there, so the shim does `dispatch_sync` onto the main queue - the same
- * dance NSMSFVectorTileEventListener does, and the reason a CONSUMING subscription can still
- * answer synchronously.
+ * ObjC shim: the SDK emits from render/tile threads with no JS runtime, so it `dispatch_sync`s
+ * onto the main queue - which is how a consuming subscription can still answer synchronously.
  */
 const NativeEventListener = lookup('NSMSFApiEventListener');
 
-/** Keeps each subscription's director alive; the C++ side holds it as a raw pointer and ARC
- *  would otherwise collect it the moment `on` returns, silently and with no warning. */
+/** Keeps each director alive: C++ holds a raw pointer and ARC would collect it once `on` returns. */
 const listeners = new Map<number, any>();
-const eventBridges = new Map();   // next to the existing `listeners` map
+const eventBridges = new Map();
 
 function toArrayBuffer(data: NSData): ArrayBuffer {
     const buffer = new ArrayBuffer(data.length);
@@ -109,8 +87,7 @@ export const bridge: NativeBridge = {
         return Array.from(new Float64Array(buffer));
     },
     getData(handle, path) {
-        // NSData over the raw bytes, not an MSFBinaryData proxy - the SDK dropped that from
-        // MassifApi so the class names no SDK type. Empty is what a non-blob path returns.
+        // Empty is what a non-blob path returns.
         const data: NSData = MassifApi.getDataPath(handle, path);
         return data && data.length ? toArrayBuffer(data) : null;
     },
@@ -139,8 +116,7 @@ export const bridge: NativeBridge = {
         return MassifApi.offAll(handle);
     },
 
-    // adopt:objectId:options: and friends - one selector per overload, which is why the bridge
-    // keeps five names rather than one.
+    // One selector per `adopt` overload (adopt:objectId:options: etc).
     adoptOptions: (kind, id, options) => MassifInterop.adoptObjectIdOptions(kind, id, options),
     adoptLayer: (kind, id, layer) => MassifInterop.adoptObjectIdLayer(kind, id, layer),
     adoptLayers: (kind, id, layers) => MassifInterop.adoptObjectIdLayers(kind, id, layers),
@@ -177,18 +153,8 @@ export const bridge: NativeBridge = {
 };
 
 /**
- * The JavaScript half of the shim: NSMSFApiEventListener does the thread hop and calls this.
- *
- * Built on a runtime lookup rather than on the global, because the class only exists once the
- * plugin's native additions were built against an SDK carrying the facade.
- *
- * `extend()` and NOT `class ApiEventListenerImpl extends ApiEventListenerBase`: an ES6 class over
- * an Objective-C base registers no Objective-C subclass unless it carries `@NativeClass()`, so the
- * override stays invisible to the runtime, `-onEventThreaded:event:payload:` falls through to
- * NSMSFApiEventListener's own `return NO`, and every subscription goes silently undelivered -
- * the SDK emits, the director runs, and JavaScript is never reached. Every other listener in this
- * plugin is emitted as ES5 prototype code, which the runtime does register; only this file is
- * emitted as an ES6 class, which is why only the facade's events were dead.
+ * `extend()`, not an ES6 class: without `@NativeClass()` an ES6 class registers no ObjC subclass,
+ * so the override falls through to NSMSFApiEventListener's `return NO` and events never arrive.
  */
 const ApiEventListenerBase = (NativeEventListener ?? NSObject) as { new (): any; alloc(): any; extend(members: any): any };
 

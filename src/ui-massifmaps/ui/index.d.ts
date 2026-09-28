@@ -17,11 +17,8 @@ export enum PanningMode {
 }
 export const MapReadyEvent: 'mapReady';
 /**
- * Fires once a movement has ENDED - animations finished, fingers lifted, inertia died out.
- *
- * Once per movement, carrying the `reason` that caused it. A touch that did not move the camera
- * does not fire it at all, so there is no "did it actually move?" flag to keep. This is the one
- * to hang a data refresh on.
+ * Once per movement, after it has ended (animations, fingers, inertia). Not fired when the camera
+ * did not move. The one to hang a data refresh on.
  */
 export const MapStableEvent: 'mapStable';
 /**
@@ -39,11 +36,7 @@ export const MapInteractionEvent: 'mapInteraction';
 
 export interface MapInfo {}
 
-/**
- * A flight is one move: the camera pulls back over a long distance and comes down at the
- * target, instead of sliding the ground under a fixed height. Everything is optional and
- * whatever is left out keeps its current value.
- */
+/** The camera pulls back over long distances and comes down at the target. Omitted fields keep their current value. */
 export interface FlyToOptions {
     zoom?: number;
     bearing?: number;
@@ -54,7 +47,6 @@ export interface FlyToOptions {
     duration?: number;
 }
 
-/** What moved the camera. The SDK's MapMoveReason, as a string. */
 export type MapMoveReason = 'gesture' | 'animation' | 'api';
 
 export interface MapGestureInfo extends MapInfo {
@@ -63,7 +55,7 @@ export interface MapGestureInfo extends MapInfo {
      * flight or any move given a duration; `api` for a call that took effect immediately.
      */
     reason: MapMoveReason;
-    /** @deprecated Use `reason === 'gesture'`. Kept so existing handlers keep working. */
+    /** @deprecated Use `reason === 'gesture'`. */
     userAction: boolean;
 }
 
@@ -113,16 +105,8 @@ export interface MapClickedEventData extends MapEventData {
 export interface MapReadyEventData extends MapEventData {}
 export interface MapIdleEventData extends MapEventData {}
 
-/*
- * The same types again under the event-constant names, so one import serves both sides of a
- * handler - `import { MapStableEvent }` brings in the string to subscribe with AND the type to
- * annotate the argument, which is what a Svelte `on:mapStable` needs:
- *
- *     import { MapStableEvent } from '@nativescript-community/ui-massifmaps';
- *     function onStable(e: MapStableEvent) { if (e.data.reason === 'gesture') refresh(); }
- *
- * An interface and a const may share a name - they live in different declaration spaces.
- */
+// Same types under the event-constant names, so `import { MapStableEvent }` gives both the event
+// string and the handler argument type.
 export interface MapReadyEvent extends MapReadyEventData {}
 export interface MapIdleEvent extends MapIdleEventData {}
 export interface MapMovedEvent extends MapMovedEventData {}
@@ -130,7 +114,6 @@ export interface MapStableEvent extends MapStableEventData {}
 export interface MapInteractionEvent extends MapInteractionEventData {}
 export interface MapClickedEvent extends MapClickedEventData {}
 
-/** Every event the map raises, keyed by name. */
 export interface MassifMapEventMap {
     mapReady: MapReadyEvent;
     mapIdle: MapIdleEvent;
@@ -175,35 +158,15 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     public static mapClickedEvent = 'mapClicked';
 
     /**
-     * Whether the plugin's native listeners hop to the main thread and WAIT before calling into
-     * JavaScript. True by default, and what makes a handler safe to write - the SDK calls back
-     * from its render, tile and routing threads, where NativeScript has no runtime at all.
-     *
-     * It covers EVERY listener the plugin installs - map events, routing, geocoding, search,
-     * hillshade, tile downloads - whether or not the surface API is in use. The flag lives with
-     * the hop itself (SynchronousHandler on Android, NSMSFMainThread on iOS) rather than on a map
-     * view, because most of those listeners have nothing to do with one.
-     *
-     * The map's events are no exception. They come from the surface API, which CAN deliver on the
-     * UI thread itself - but only by QUEUEING, and a consuming callback has to answer now, so the
-     * plugin subscribes with ORIGIN delivery and does the waiting hop for all of them alike.
+     * Whether every native listener the plugin installs hops to the main thread and waits before
+     * calling JS (default true): the SDK calls back from threads with no JS runtime.
      */
     public static setRunOnMainThread(value: boolean);
 
-    /**
-     * Re-subscribes the map's events with new options. Called for you when the map loads, so an
-     * app only needs it to change the options afterwards.
-     */
+    /** Called on map load; only needed to change the options afterwards. */
     enableFacadeEvents(eventOptions?: { [event in keyof MassifMapEventMap]?: { throttle?: number; debounce?: number; projection?: string } }): void;
 
-    /**
-     * Per-event subscription options, keyed by the view's event name. Set before the map loads -
-     * from markup, say - or pass them to `enableFacadeEvents` afterwards.
-     *
-     * ```html
-     * <MassifMap eventOptions="{{ { mapMoved: { throttle: 250 } } }}" />
-     * ```
-     */
+    /** Set before the map loads (e.g. from markup), or pass to `enableFacadeEvents` afterwards. */
     eventOptions: { [event in keyof MassifMapEventMap]?: { throttle?: number; debounce?: number; projection?: string } };
     public projection: Projection;
     focusPos: GenericMapPos<T>;
@@ -236,7 +199,6 @@ export class MassifMap<T = DefaultLatLonKeys> extends View {
     getPostProcessEffect(): PostProcessEffect;
     setPostProcessEffect(effect: PostProcessEffect): void;
 
-    /** camera flight to `position`; see FlyToOptions */
     flyTo(position: GenericMapPos<T>, options?: FlyToOptions): void;
     /** 0..1 while a flight is running, -1 when there is none */
     getFlightProgress(): number;

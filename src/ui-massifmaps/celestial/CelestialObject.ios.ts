@@ -1,5 +1,4 @@
 // SCAFFOLD - generated starting point, review before use.
-// MSFCelestialObject
 
 import { BaseNative } from '../BaseNative';
 import { bindNative } from '../nativeclass.common';
@@ -7,7 +6,6 @@ import { ACCESSORS, Accessors, METHODS, SELECTORS } from '../bindings/celestial/
 import { colorConverter } from '..';
 import { CelestialObjectOptions } from './CelestialObject';
 
-/** the generated accessors, so they are visible to TypeScript */
 export interface CelestialObject extends Accessors {}
 
 export class CelestialObject extends BaseNative<MSFCelestialObject, CelestialObjectOptions> {

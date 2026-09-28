@@ -1,19 +1,7 @@
 /**
- * Prototype-level binding for MassifMaps native classes.
- *
- * The SDK exposes the same API on both platforms, so a method that only forwards to
- * the native object does not need to be written twice (or at all). `bindNative`
- * installs those forwarders on the prototype from a generated name list, and turns
- * `getX()`/`setX(v)` pairs into a plain `x` property.
- *
- * Why a generated list rather than a Proxy: roughly half of the raw native surface is
- * SWIG plumbing that must never reach the public API, a Proxy forwards whatever the
- * native object answers to, and a list is also what feeds the two native-api-usage.json
- * files. Forwarders on the prototype are additionally ~2-6x cheaper per call than any
- * Proxy trap and show up properly in stack traces.
- *
- * Anything already on the prototype wins, so a hand-written method or an
- * `@nativeProperty` decorator always overrides the generated forwarder.
+ * Forwarders from a generated name list, not a Proxy: half the native surface is SWIG plumbing
+ * that must stay private, and prototype forwarders are far cheaper than Proxy traps.
+ * Anything already on the prototype (hand-written method, `@nativeProperty`) wins.
  */
 
 export interface NativeConverter {
@@ -32,12 +20,7 @@ export interface NativeBinding {
     exclude?: string[];
 }
 
-/**
- * Anything the plugin wraps is passed to the SDK as its native instance, so a value on
- * its way down is unwrapped whenever it can answer `getNative()`. That is what makes
- * `options.terrainOptions = terrain` work instead of `setTerrainOptions(terrain.getNative())`,
- * and it applies the same way to method arguments and to accessor setters.
- */
+/** Lets `options.terrainOptions = terrain` work instead of `setTerrainOptions(terrain.getNative())`. */
 export function unwrapNative(value: any) {
     return value !== null && typeof value === 'object' && typeof value.getNative === 'function' ? value.getNative() : value;
 }
@@ -122,20 +105,12 @@ export function bindNative(cls: any, methods: readonly string[], accessors: Reco
 
 type Uncap<S extends string> = S extends `${infer A}${infer B}` ? `${Lowercase<A>}${B}` : S;
 
-/**
- * `getSize(): number` paired with `setSize(v)` becomes `size: number`. The paired
- * check matters: a getter with no setter is not turned into a property at runtime,
- * so typing it as one would lie.
- */
+/** Only get/set pairs: a getter with no setter is not turned into a property at runtime. */
 type AccessorsWithPrefix<T, Pre extends string> = {
     [K in keyof T as K extends `${Pre}${infer P}` ? (T[K] extends () => any ? (`set${P}` extends keyof T ? Uncap<P> : never) : never) : never]: T[K] extends () => infer R ? R : never;
 };
 
-/**
- * The public property surface of a native class, derived from the generated ambient
- * typings. Covers both `getX`/`setX` and the boolean `isX`/`setX` form SWIG emits.
- * `Omit` the few keys that go through a converter and redeclare them.
- */
+/** Covers `getX`/`setX` and SWIG's boolean `isX`/`setX`. `Omit` keys that need a converter and redeclare them. */
 export type NativeAccessors<T> = AccessorsWithPrefix<T, 'get'> & AccessorsWithPrefix<T, 'is'>;
 
 export type NativeMethods<T> = {

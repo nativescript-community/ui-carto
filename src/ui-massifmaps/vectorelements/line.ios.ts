@@ -36,10 +36,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<MSFLineStyle
     createNative(options: LineStyleBuilderOptions) {
         return MSFLineStyleBuilder.alloc().init();
     }
-    /**
-     * The SDK spells these `lineJoinType` / `lineEndType`, which the binding table
-     * synthesises; the plugin has always exposed the shorter names.
-     */
+    /** the SDK names are `lineJoinType` / `lineEndType`; the plugin keeps the shorter names */
     get joinType(): LineJointType {
         return this.lineJoinType as any;
     }

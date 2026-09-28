@@ -11,12 +11,7 @@ export { BaseNative } from './BaseNative';
 
 export * from './index.common';
 
-/**
- * The converters, named so a generated binding table can point at one.
- *
- * `bindNative` takes them by property name; the `@native*Property` decorators wrap the
- * same objects, so a hand-written decorator and a generated accessor marshal identically.
- */
+/** Named so a generated binding table can point at one; the `@native*Property` decorators wrap the same objects. */
 export const colorConverter: NativeConverter = {
     fromNative(value) {
         if (typeof value === 'string') {
@@ -96,9 +91,7 @@ export function nativeEnumProperty(options: NativePropertyOptions): (target: any
 export function nativeEnumProperty(...args) {
     return nativeProperty({}, ...args);
 }
-// The SDK's Java enums are int constants now, so both directions are the identity - there is no
-// swigValue()/swigToEnum() to call, and a number IS the constant. `androidEnum` is kept so the
-// call sites do not all have to change.
+// SDK Java enums are int constants, so both directions are the identity; `androidEnum` is unused.
 export function nativeAndroidEnumProperty(androidEnum, options: NativePropertyOptions): (target: any, k?, desc?: PropertyDescriptor) => any {
     return nativeProperty(
         Object.assign(options || {}, {

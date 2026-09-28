@@ -9,12 +9,7 @@ export { BaseNative } from './BaseNative';
 
 export * from './index.common';
 
-/**
- * The converters, named so a generated binding table can point at one.
- *
- * `bindNative` takes them by property name; the `@native*Property` decorators wrap the
- * same objects, so a hand-written decorator and a generated accessor marshal identically.
- */
+/** Named so a generated binding table can point at one; the `@native*Property` decorators wrap the same objects. */
 export const colorConverter: NativeConverter = {
     fromNative(value: MSFColor) {
         return new Color(value.getARGB());

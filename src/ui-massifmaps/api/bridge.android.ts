@@ -1,20 +1,8 @@
 import { Delivery, NativeBridge, NativeEventHandler } from './bridge';
 
-/**
- * Android half of the surface API bridge. See bridge.d.ts for why nothing here is typed against
- * the generated SDK typings.
- */
-
-/**
- * Stands in for "no default" when reading a string.
- *
- * Swig's std::string typemap rejects null, so null cannot be passed as a default - which is
- * exactly what a nullable getter wants. The same constant as the SDK's own Java sugar; it
- * contains a NUL, so no real value equals it.
- */
+/** Stands in for a null default: Swig's std::string typemap rejects null. Contains a NUL, so no real value equals it. */
 const ABSENT = '\u0000massif:absent';
 
-/** The SWIG-generated `com.massifmaps.api.MassifApi`, or null on an SDK built without it. */
 function lookup(): any {
     try {
         return (com as any)?.massifmaps?.api?.MassifApi ?? null;
@@ -23,11 +11,7 @@ function lookup(): any {
     }
 }
 
-/**
- * MassifInterop is the half that takes SDK TYPES - adopt, the event bridges, the raw getters.
- * MassifApi itself is kept to strings, numbers and handles so a hand-written binding can carry it,
- * which is why these two are separate classes and not one.
- */
+/** MassifInterop takes SDK types; MassifApi is kept to strings, numbers and handles so a hand-written binding can carry it. */
 function lookupInterop(): any {
     try {
         return (com as any)?.massifmaps?.api?.MassifInterop ?? null;
@@ -37,12 +21,8 @@ function lookupInterop(): any {
 }
 
 /**
- * The plugin's own Java shim over the SDK's EventListener director.
- *
- * It exists for the thread: the SDK emits from the render and tile threads, and NativeScript has
- * no JavaScript runtime there, so the shim hops to the main looper and waits - the same
- * SynchronousHandler dance every other listener in this plugin does, and the reason a CONSUMING
- * subscription still gets to answer synchronously.
+ * Java shim: the SDK emits from render/tile threads with no JS runtime, so it hops to the main
+ * looper and waits - which is how a consuming subscription can still answer synchronously.
  */
 function lookupListener(): any {
     try {
@@ -56,12 +36,7 @@ const MassifApi = lookup();
 const MassifInterop = lookupInterop();
 const NativeEventListener = lookupListener();
 
-/**
- * Whether MassifApi.on takes the consume flag.
- *
- * Read off the reflected parameter count rather than guessed: an SDK whose `on` hardcodes
- * consume has six parameters, one that lets a handler claim the event has seven.
- */
+/** An SDK whose `on` hardcodes consume has 6 parameters; one taking the consume flag has 7. */
 const CAN_CONSUME = (() => {
     try {
         const methods = MassifApi?.class?.getDeclaredMethods() ?? [];
@@ -136,8 +111,7 @@ export const bridge: NativeBridge = {
         return out;
     },
     getData(handle, path) {
-        // Raw byte[], not a BinaryData proxy - the SDK dropped that from MassifApi so the class
-        // names no SDK type. An empty array is what a path that is not a blob returns.
+        // An empty array is what a path that is not a blob returns.
         const data = MassifApi.getData(handle, path);
         return data && data.length ? toArrayBuffer(data) : null;
     },

@@ -85,8 +85,7 @@ export class ZippedAssetPackage extends BaseNative<MSFZippedAssetPackage, Zipped
             if (!File.exists(getFileName(options.zipPath))) {
                 throw new Error(`could not find zip file: ${options.zipPath}(${zipPath})`);
             }
-            // The archive is bytes, not a path, which is the one thing a ZippedAssetPackage cannot
-            // read itself.
+            // ZippedAssetPackage takes bytes, not a path.
             const data = MSFAssetUtils.loadAsset(zipPath);
             const base: MSFAssetPackage = options.basePack?.getNative();
             return base ? MSFZippedAssetPackage.alloc().initWithZipDataBaseAssetPackage(data, base) : MSFZippedAssetPackage.alloc().initWithZipData(data);
@@ -98,12 +97,8 @@ export class ZippedAssetPackage extends BaseNative<MSFZippedAssetPackage, Zipped
 }
 
 /**
- * A style read from a folder.
- *
- * Two native classes, because a folder is two different things: `loadUsingNS` reads the real file
- * system, which is what a live-reloaded style needs, and the default reads the app's own bundled
- * assets. On iOS both are directories, but only the bundle one resolves against the bundle root -
- * and only it behaves the same way on Android, where the assets sit inside the APK.
+ * `loadUsingNS` reads the real file system (live reload); the default reads bundled assets,
+ * resolved against the bundle root the same way Android resolves them inside the APK.
  */
 export class DirAssetPackage extends BaseNative<MSFAssetPackage, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
@@ -140,7 +135,6 @@ export function toNativeMapRange(value: MapRange) {
     if (value instanceof MSFMapRange) {
         return value;
     }
-    //  ignore z for now as points can get under the map!
     return MSFMapRange.alloc().initWithMinMax(value[0], value[1]);
 }
 

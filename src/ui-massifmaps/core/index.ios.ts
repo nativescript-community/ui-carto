@@ -59,7 +59,7 @@ export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>
     if (position instanceof MSFMapPos) {
         return position;
     }
-    //  ignore z for now as points can get under the map!
+    // non-positive altitude is dropped: points can get under the map
     return MSFMapPos.alloc().initWithXYZ(position[LongitudeKey], position[LatitudeKey], !ignoreAltitude && position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
 }
 export function fromNativeScreenPos(position: MSFScreenPos) {
@@ -72,7 +72,6 @@ export function toNativeScreenPos(position: ScreenPos | MSFScreenPos) {
     if (position instanceof MSFScreenPos) {
         return position;
     }
-    //  ignore z for now as points can get under the map!
     return MSFScreenPos.alloc().initWithXY(position.x, position.y);
 }
 export function toNativeMapVec(value: MapVec | [number, number, number]) {

@@ -44,17 +44,8 @@ export class RasterTileLayer extends TileLayer<any, RasterTileLayerOptions> {
 }
 
 /**
- * A raster layer whose lighting is a shader of your own.
- *
- * Same class the hillshade layer is built on, without the hillshading: the shader is given
- * the tile's normal map and the RAW texel (`getRawColor()`), so it can colour by whatever
- * the source encodes - a hypsometric tint over a DEM, slope bands, anything. The source
- * must define
- *
- *     vec4 applyLighting(lowp vec4 color, mediump vec3 normal, mediump vec3 surfaceNormal, mediump float intensity);
- *
- * returning a PREMULTIPLIED colour, transparent where it draws nothing - an opaque black
- * greys out the map below.
+ * The shader gets the normal map and the raw texel (`getRawColor()`) and must define `vec4 applyLighting(lowp vec4 color,
+ * mediump vec3 normal, mediump vec3 surfaceNormal, mediump float intensity)` returning a premultiplied colour.
  */
 export interface CustomRasterTileLayerOptions extends RasterTileLayerOptions {
     shaderSource?: string;

@@ -139,8 +139,7 @@ export function setShowError(value: boolean) {
 
 export class ZippedAssetPackage extends BaseNative<com.massifmaps.utils.ZippedAssetPackage, ZippedAssetPackageOptions> {
     createNative(options: ZippedAssetPackageOptions) {
-        // The archive is bytes, not a path, which is the one thing a ZippedAssetPackage cannot read
-        // itself: live from the file system when reloading, from the bundle otherwise.
+        // ZippedAssetPackage takes bytes, not a path: from the file system when live-reloading, else from the bundle.
         const data = options.liveReload === true
             ? new com.massifmaps.core.BinaryData(File.fromPath(getFileName(options.zipPath)).readSync())
             : com.massifmaps.utils.AssetUtils.loadAsset(getRelativePathToApp(options.zipPath));
@@ -153,11 +152,8 @@ export class ZippedAssetPackage extends BaseNative<com.massifmaps.utils.ZippedAs
 }
 
 /**
- * A style read from a folder.
- *
- * Two native classes, because a folder is two different things: `loadUsingNS` reads the real file
- * system, which is what a live-reloaded style needs, and the default reads the app's own bundled
- * assets - inside the APK on Android, where no file path reaches them.
+ * `loadUsingNS` reads the real file system (live reload); the default reads bundled assets, which
+ * sit inside the APK where no file path reaches them.
  */
 export class DirAssetPackage extends BaseNative<com.massifmaps.utils.AssetPackage, DirAssetPackageOptions> {
     createNative(options: DirAssetPackageOptions) {
@@ -201,7 +197,6 @@ export function toNativeMapRange(value: MapRange) {
     if (value instanceof com.massifmaps.core.MapRange) {
         return value;
     }
-    //  ignore z for now as points can get under the map!
     return new com.massifmaps.core.MapRange(value[0], value[1]);
 }
 
