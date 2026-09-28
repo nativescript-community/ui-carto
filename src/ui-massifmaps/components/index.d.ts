@@ -14,20 +14,8 @@ import { Accessors as Acc_LightOptions, Methods as Met_LightOptions } from '../b
 import { Accessors as Acc_MapOptions, Methods as Met_MapOptions } from '../bindings/components/Options';
 
 /**
- * The four option objects that hang off the map's Options.
- *
- * TerrainOptions takes its DEM as a constructor argument - there is no setDataSource - so
- * you build one and install it with `map.setTerrainOptions(...)`. SkyOptions, LightOptions
- * and FogOptions are already owned by the map; `map.getSkyOptions()` /
- * `map.getLightOptions()` / `map.getOptions().getFogOptions()` hand back a cached wrapper
- * around the native instance the map created.
- */
-
-/**
- * Free roam: `LOOK` lets one finger look around while two fingers still pan/pinch/rotate
- * the map, `FIRST_PERSON` is mouse-look - the camera never moves - with two fingers
- * walking instead. Looking ABOVE the horizon also needs a negative `Options.tiltRange`
- * minimum, since in this SDK tilt 90 is straight down.
+ * `LOOK`: one finger looks, two still pan/pinch/rotate. `FIRST_PERSON`: mouse-look, two fingers walk.
+ * Looking above the horizon needs a negative `Options.tiltRange` minimum (tilt 90 is straight down).
  */
 export const FreeRoamMode: {
     FREE_ROAM_MODE_OFF: any;
@@ -78,11 +66,7 @@ export class TerrainOptions extends BaseNative<any, TerrainOptionsOptions> {
 export interface SkyOptions extends SkyAccessors {}
 export class SkyOptions extends BaseNative<any, SkyOptionsOptions> {}
 
-/**
- * The distance haze and the sky above the horizon it fades into. Before SDK 6 this was
- * `TerrainOptions.fogColor/fogStartDistance/fogDistance` plus `SkyOptions.fogBlend/
- * fogHorizon`; `rangeStart`/`rangeEnd` are the two distances, in metres.
- */
+/** `rangeStart`/`rangeEnd` are in metres. */
 export interface FogOptions extends FogAccessors {}
 export class FogOptions extends BaseNative<any, FogOptionsOptions> {}
 
@@ -92,13 +76,7 @@ export class LightOptions extends BaseNative<any, LightOptionsOptions> {
     setSunPositionFromTime(year: number, month: number, day: number, hour: number, minute: number, latitude: number, longitude: number): void;
 }
 
-/**
- * The map's Options, as returned by `map.getOptions()`. Never constructed directly.
- *
- * Everything the SDK declares is generated, so `options.tileDrawSize = 512` and
- * `options.clearColor = '#fff'` both work. The three nested option objects are the
- * exception: they are handed back as wrappers, not raw natives.
- */
+/** Returned by `map.getOptions()`, never constructed directly. Nested option objects come back as wrappers. */
 export interface MapOptions extends Omit<OptionsAccessors, 'terrainOptions' | 'skyOptions' | 'lightOptions' | 'fogOptions'> {}
 export class MapOptions extends BaseNative<any, MapOptionsOptions> {
     terrainOptions: TerrainOptions;

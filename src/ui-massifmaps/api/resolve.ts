@@ -5,14 +5,8 @@
 import { ALIASES, BASES, CLASS_NAMES, ENUMS, EVENTS, KIND_OF_CLASS, METHODS, PROPS, SPEC_CLASS } from './schema';
 
 /**
- * Path resolution over the generated tables, the way the C++ property table does it.
- *
- * Nothing here talks to native. It answers one question - "what shape is the value at the end of
- * this path" - so `get`/`set` can pick the right verb, translate an enum constant, and parse a
- * struct back out of its JSON. A path it cannot resolve is not an error: the concrete class of an
- * intermediate object is often more derived than the declared one (a layer's `tileDecoder` is
- * really an MBVectorTileDecoder), and the C++ resolves those where this cannot. The callers fall
- * back to a string read instead of refusing.
+ * An unresolvable path is not an error: an intermediate object is often more derived than declared
+ * (a layer's `tileDecoder` is really an MBVectorTileDecoder), so callers fall back to a string read.
  */
 
 /**
@@ -85,12 +79,7 @@ function parseMethods(cls: string) {
     return table;
 }
 
-/**
- * Every property name on a class and its bases, nearest first.
- *
- * Used to hang getters off an event payload, so a handler reads `e.reason` rather than
- * `e.get('reason')`. Names only - the shapes come from findProperty when one is read.
- */
+/** Nearest first. Used to hang getters off an event payload (`e.reason` rather than `e.get('reason')`). */
 export function propertyNames(cls: string): string[] {
     const names: string[] = [];
     let walk: string | undefined = cls;
@@ -105,12 +94,7 @@ export function propertyNames(cls: string): string[] {
     return names;
 }
 
-/**
- * One property, found on the class or on any of its bases - which is where most of them live.
- *
- * An alias is a second spelling of one segment (`fog` for `fogOptions`), resolved here so nothing
- * above has to know one was used.
- */
+/** An alias is a second spelling of one segment (`fog` for `fogOptions`). */
 export function findProperty(cls: string, name: string): PropInfo | null {
     let walk: string | undefined = cls;
     while (walk) {
@@ -124,11 +108,8 @@ export function findProperty(cls: string, name: string): PropInfo | null {
 }
 
 /**
- * The shape at the end of a dotted path.
- *
- * Every segment but the last has to be an object property. A path that walks INTO a struct or a
- * variant (`feature.properties.name`, `clickInfo.clickType`) resolves to `v`: the C++ keeps
- * walking inside the JSON and answers with the leaf's natural type, which this table cannot know.
+ * A path walking into a struct or variant (`feature.properties.name`) resolves to `v`: the C++
+ * reads the leaf out of the JSON with a type this table cannot know.
  */
 export function resolvePath(cls: string, path: string): PropInfo | null {
     if (!path) {
@@ -188,7 +169,6 @@ export interface EventInfo {
     consume: boolean;
 }
 
-/** One event's shape, found on the class or on any of its bases. Null when it is not an event. */
 export function findEvent(cls: string, event: string): EventInfo | null {
     let walk: string | undefined = cls;
     while (walk) {
@@ -201,7 +181,6 @@ export function findEvent(cls: string, event: string): EventInfo | null {
     return null;
 }
 
-/** Every facade event a class answers to, its own and its bases'. */
 export function eventNames(cls: string): string[] {
     const names: string[] = [];
     let walk: string | undefined = cls;
@@ -216,12 +195,7 @@ export function eventNames(cls: string): string[] {
     return names;
 }
 
-/*
- * Both enum directions, built on first use out of the one `NAME=value` table.
- *
- * Lazily, because an app that never reads or writes an enum property pays nothing, and because
- * parsing 99 constants once is cheaper to ship than two literal maps of them.
- */
+// Built lazily so an app that never touches an enum property pays nothing.
 interface EnumTables {
     byName: { [name: string]: number };
     byValue: { [enumType: string]: { [value: string]: string } };
@@ -247,7 +221,6 @@ function tables(): EnumTables {
     return enumTables;
 }
 
-/** The int the C++ stores for an enum constant, or undefined when the name is not one. */
 export function enumValue(name: string): number | undefined {
     return tables().byName[name];
 }
@@ -258,12 +231,11 @@ export function enumName(enumType: string | undefined, value: number): string | 
     return table && table[value] !== undefined ? table[value] : value;
 }
 
-/** The class `create` registers for a kind and spec type. */
 export function classOfSpec(kind: string, type: string): string | null {
     return SPEC_CLASS[kind]?.[type] ?? null;
 }
 
-/** The other direction: which kind builds a class, for a spec written into an OBJECT property. */
+/** Which kind builds a class, for a spec written into an object property. */
 export function specKindOf(cppClass: string): string | null {
     return KIND_OF_CLASS[cppClass] ?? null;
 }
@@ -285,17 +257,11 @@ export function classOfShortName(short: string | null): string | null {
     return short && knownClasses()[short] ? `massif::${short}` : null;
 }
 
-/** Whether a class is one the tables know, so a caller-supplied name can be checked. */
 export function isKnownClass(cls: string): boolean {
     return !!knownClasses()[cls.replace('massif::', '')];
 }
 
-/**
- * Whether `cls` IS a `base`, walking the chain the same way property lookups do.
- *
- * What `instanceof` was: the facade addresses classes by name, so "is this layer a raster layer"
- * is a question about the table, not about a JavaScript prototype.
- */
+/** `instanceof` over class names: the facade addresses classes by name, not JS prototypes. */
 export function isSubclassOf(cls: string, base: string): boolean {
     let walk: string | undefined = cls;
     while (walk) {

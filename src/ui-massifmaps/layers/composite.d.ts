@@ -2,12 +2,8 @@ import { VectorTileLayer, VectorTileLayerOptions } from './vector';
 import { TileDataSource } from '../datasources';
 
 /**
- * What an external source is drawn as, at the position of its style slot.
- *
- * `RASTER` paints the tiles (a satellite slot), `HILLSHADE` shades the DEM they carry (the
- * elevation decoder is resolved from the source's `encoding`), and `VECTOR` merges the
- * source's own layers into the master tile - which is what a contour source wants, and
- * what `addVectorDataSource` is shorthand for.
+ * `RASTER` paints the tiles, `HILLSHADE` shades their DEM (decoder from the source's `encoding`),
+ * `VECTOR` merges the source's layers into the master tile (e.g. contours).
  */
 export const CompositeSourceType: {
     COMPOSITE_SOURCE_TYPE_RASTER: any;
@@ -18,22 +14,9 @@ export const CompositeSourceType: {
 export interface CompositeVectorTileLayerOptions extends VectorTileLayerOptions {}
 
 /**
- * One vector tile layer fed by SEVERAL sources, each woven into the style's own layer
- * order instead of stacking as a separate map layer.
- *
- * A SLOT is the position of a style layer carrying the source's name: attaching a source
- * called `hillshade` draws it where the style's `#hillshade` rule sits - under the roads,
- * over the landcover - which stacking layers cannot do. If the style declares no such
- * layer the source is registered and never drawn, and the SDK only warns in the log; use
- * `getExternalDataSourceNames()` against the decoder's `getStyleLayerNames()` to tell the
- * two apart. A COMPILED Mapnik XML style carries these slots too - the parser and the
- * generator both handle the hillshade/raster/contour config symbolizers - so a missing slot
- * means the style does not NAME that layer, not that the format cannot express it.
- *
- * THIS WRAPPER is android only: its iOS half is an unimplemented stub whose source methods
- * are no-ops that warn, so the map draws without the woven sources. That is a gap in this
- * object API, not in the SDK - MSFCompositeVectorTileLayer does exist, and the surface API
- * (`api.createLayer(id, { type: 'composite-vector', ... })`) reaches it on both platforms.
+ * Each source draws where the style layer named after it sits; with no such layer it is never
+ * drawn (the SDK only logs a warning). Android only: on iOS the source methods are warning no-ops -
+ * use `api.createLayer(id, { type: 'composite-vector', ... })` there.
  */
 export class CompositeVectorTileLayer extends VectorTileLayer {
     constructor(options: CompositeVectorTileLayerOptions, native?: any);

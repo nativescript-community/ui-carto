@@ -4,15 +4,7 @@ import { NativePropertyOptions } from '.';
 import { fromNativeMapRange, nativeVectorToArray, toNativeMapRange } from './utils';
 import { arrayToNativeVector } from './utils/index.android';
 
-/**
- * The surface API, namespaced so it lives alongside the object API rather than colliding with it -
- * both surfaces spell a layer `MassifLayer` and a map `MassifMap`.
- *
- * ```ts
- * import { api } from '@nativescript-community/ui-massifmaps';
- * const map = api.attach(mapView, { projection: 'EPSG:4326' });
- * ```
- */
+/** Namespaced: the surface and object APIs both spell a layer `MassifLayer` and a map `MassifMap`. */
 export * as api from './api';
 
 function createGetter(key: string, options: NativePropertyOptions) {
@@ -62,12 +54,7 @@ function nativePropertyGenerator(target: object, key: string, options?: NativePr
         configurable: true
     });
 }
-/**
- * The converters, named so a generated binding table can point at one.
- *
- * `bindNative` takes them by property name; the `@native*Property` decorators wrap the
- * same objects, so a hand-written decorator and a generated accessor marshal identically.
- */
+/** Named so a generated binding table can point at one; the `@native*Property` decorators wrap the same objects. */
 export const mapRangeConverter: NativeConverter = {
     fromNative: fromNativeMapRange,
     toNative: toNativeMapRange

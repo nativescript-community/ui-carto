@@ -1,5 +1,4 @@
 // SCAFFOLD - generated starting point, review before use.
-// MSFCelestialLayer
 
 import { BaseNative } from '../BaseNative';
 import { bindNative } from '../nativeclass.common';
@@ -8,9 +7,7 @@ import { CelestialLayerOptions, CelestialEventListener as ICelestialEventListene
 import { ACCESSORS as ACC_Layer, Accessors as Acc_Layer, METHODS as MET_Layer, Methods as Met_Layer, SELECTORS as SEL_Layer } from '../bindings/layers/Layer';
 import { mapRangeConverter } from '..';
 
-// TODO NSMSFCelestialEventListener does not exist yet: copy
-// platforms/ios/src/NSMSFRasterTileEventListener.swift, rename it, and run
-// `npm run typings.ios` so the additions typings pick it up.
+// TODO add NSMSFCelestialEventListener (copy NSMSFRasterTileEventListener.swift, rerun typings.ios)
 export class MSFCelestialEventListenerImpl extends NSMSFCelestialEventListener {
     private _owner: WeakRef<ICelestialEventListener>;
     private _wrapper: WeakRef<CelestialLayer>;
@@ -30,7 +27,6 @@ export class MSFCelestialEventListenerImpl extends NSMSFCelestialEventListener {
     }
 }
 
-/** the generated accessors, so they are visible to TypeScript */
 export interface CelestialLayer extends Accessors {}
 
 export class CelestialLayer extends BaseNative<MSFCelestialLayer, CelestialLayerOptions> {

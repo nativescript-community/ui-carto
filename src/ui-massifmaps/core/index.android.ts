@@ -68,7 +68,7 @@ export function toNativeMapPos<T = DefaultLatLonKeys>(position: GenericMapPos<T>
         throw new Error(`toNativeMapPos: missing lat/lon parameters in ${position}`);
     }
     const result = new com.massifmaps.core.MapPos(position[LongitudeKey], position[LatitudeKey], !ignoreAltitude && position[AltitudeKey] > 0 ? position[AltitudeKey] : 0);
-    //  ignore z for now as points can get under the map!
+    // non-positive altitude is dropped: points can get under the map
     return result;
 }
 export function fromNativeScreenPos(position: com.massifmaps.core.ScreenPos) {

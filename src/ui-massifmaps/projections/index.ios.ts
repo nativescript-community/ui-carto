@@ -21,8 +21,7 @@ export abstract class ProjectionClass<T extends MSFProjection, U extends Project
 
 export class Projection extends ProjectionClass<MSFProjection, ProjectionOptions> {}
 
-// on the abstract base, so EPSG3857/EPSG4326 inherit the forwarders too - their own
-// tables are a subset of this one
+// on the abstract base so EPSG3857/EPSG4326 inherit the forwarders (their tables are a subset)
 export interface ProjectionClass<T extends MSFProjection, U extends ProjectionOptions> extends Omit<Acc_Projection, 'toLatLong'>, Omit<Met_Projection, 'fromWgs84' | 'toLatLong' | 'toWgs84'> {}
 bindNative(ProjectionClass, MET_Projection, ACC_Projection, { selectors: SEL_Projection });
 

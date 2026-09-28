@@ -25,17 +25,13 @@ export interface ZippedAssetPackageOptions {
     basePack?: DirAssetPackage | ZippedAssetPackage;
 }
 
-/** The SDK's ZippedAssetPackage, handed the archive's bytes. */
 export class ZippedAssetPackage extends BaseNative<any, ZippedAssetPackageOptions> {}
 
 export interface DirAssetPackageOptions {
     /** Looked in when the folder does not have the asset - shared fonts, say. */
     basePack?: DirAssetPackage | ZippedAssetPackage;
     dirPath: string;
-    /**
-     * Read the real file system, for a live-reloaded style. The default reads the app's own
-     * bundled assets, which on Android are inside the APK and have no file path.
-     */
+    /** Read the real file system (live reload). The default reads bundled assets, which on Android have no file path. */
     loadUsingNS?: boolean;
 }
 

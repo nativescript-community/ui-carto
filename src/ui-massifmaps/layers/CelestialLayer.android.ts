@@ -1,5 +1,4 @@
 // SCAFFOLD - generated starting point, review before use.
-// com.massifmaps.layers.CelestialLayer
 
 import { BaseNative } from '../BaseNative';
 import { bindNative } from '../nativeclass.common';
@@ -8,19 +7,14 @@ import { CelestialLayerOptions, CelestialEventListener as ICelestialEventListene
 import { ACCESSORS as ACC_Layer, Accessors as Acc_Layer, METHODS as MET_Layer, Methods as Met_Layer, SELECTORS as SEL_Layer } from '../bindings/layers/Layer';
 import { mapRangeConverter } from '..';
 
-/** the generated accessors, so they are visible to TypeScript */
 export interface CelestialLayer extends Accessors {}
 
 export class CelestialLayer extends BaseNative<com.massifmaps.layers.CelestialLayer, CelestialLayerOptions> {
-    // available native constructors:
-    //   new CelestialLayer()
     createNative(options: CelestialLayerOptions) {
         return new com.massifmaps.layers.CelestialLayer(); // TODO pick the right overload
     }
 
-    // TODO com.nativescript.massifmaps.additions.CelestialEventListener does not exist yet: copy
-    // platforms/android/java/com/nativescript/massifmaps/additions/RasterTileEventListener.java,
-    // rename it, and rebuild the demo so the additions typings pick it up.
+    // TODO additions.CelestialEventListener does not exist yet: copy RasterTileEventListener.java and rebuild the demo
     mCelestialEventListener?: ICelestialEventListener;
     nCelestialEventListener?: com.nativescript.massifmaps.additions.CelestialEventListener;
     setCelestialEventListener(listener: ICelestialEventListener) {

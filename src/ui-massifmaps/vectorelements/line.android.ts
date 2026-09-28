@@ -50,10 +50,7 @@ export class LineStyleBuilder extends BaseVectorElementStyleBuilder<com.massifma
         return new com.massifmaps.styles.LineStyleBuilder();
     }
 
-    /**
-     * The SDK spells these `lineJoinType` / `lineEndType`, which the binding table
-     * synthesises; the plugin has always exposed the shorter names.
-     */
+    /** Short aliases for the SDK's `lineJoinType` / `lineEndType`. */
     get joinType(): ILineJointType {
         return this.lineJoinType as any;
     }

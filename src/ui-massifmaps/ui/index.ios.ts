@@ -40,7 +40,6 @@ let runOnMainThread = true;
 
 function mainThread(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
-    //wrapping the original method
     descriptor.value = function (...args: any[]) {
         if (runOnMainThread) {
             executeOnMainThread(() => {
@@ -101,9 +100,8 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
 
     mOptions: MapOptions;
     /**
-     * The map's Options, wrapped once and cached - the native instance never changes,
-     * and re-wrapping would drop the wrapper's own state (the cached TerrainOptions and
-     * friends). Null until the map is ready.
+     * Wrapped once and cached: re-wrapping would drop the wrapper's own state (cached
+     * TerrainOptions...). Null until the map is ready.
      */
     getOptions() {
         if (!this.mapReady) {
@@ -119,7 +117,6 @@ export class MassifMap<T = DefaultLatLonKeys> extends MassifMapViewBase {
     getTerrainOptions() {
         return this.getOptions()?.getTerrainOptions() ?? null;
     }
-    /** install terrain built with `new TerrainOptions({ dataSource })` */
     setTerrainOptions(terrain: TerrainOptions) {
         this.getOptions()?.setTerrainOptions(terrain);
     }
