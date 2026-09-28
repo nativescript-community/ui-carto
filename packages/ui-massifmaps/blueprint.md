@@ -134,7 +134,7 @@ base.on('vectortile.clicked', (e) => {
 });
 ```
 
-`e.consumable` says whether that will do anything. Only a **consumable** event can be claimed — `vectortile.clicked` and `vectorelement.clicked`; `map.clicked` cannot, because `MapEventListener::onMapClicked` returns void and there is nothing to tell. Setting it anywhere else is accepted, ignored, and warned about once.
+`e.consumable` says whether that will do anything. Only a **consumable** event can be claimed — `vectortile.clicked`, `vectorelement.clicked` and `celestial.clicked`; `map.clicked` cannot, because `MapEventListener::onMapClicked` returns void and there is nothing to tell. Setting it anywhere else is accepted, ignored, and warned about once.
 
 ### Methods
 
