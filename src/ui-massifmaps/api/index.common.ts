@@ -137,7 +137,7 @@ export type MassifEventData<C extends ClassName = any, E extends EventName<C> = 
         payload: MassifObject<PayloadClass<C, E>> | null;
         /**
          * Set true to hide the event from later subscribers and the map. Only consumable events
-         * (`vectortile.clicked`, `vectorelement.clicked`, `celestial.clicked`); elsewhere ignored, warned once.
+         * (`vectortile.clicked`, `vectorelement.clicked`, `celestial.clicked`, `sky.clicked`); elsewhere ignored, warned once.
          */
         consumed: boolean;
         readonly consumable: boolean;
@@ -913,8 +913,11 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
             bridge.attachVectorTileEvents(native, this.handle);
         } else if (event === 'vectorelement.clicked') {
             bridge.attachVectorElementEvents(native, this.handle);
-        } else if (event === 'celestial.clicked') {
-            bridge.attachCelestialEvents(native, this.handle);
+        } else if (event === 'celestial.clicked' || event === 'sky.clicked') {
+            // One native bridge emits both: attaching a second would report every click twice.
+            if (!this.mBridged['celestial.clicked'] && !this.mBridged['sky.clicked']) {
+                bridge.attachCelestialEvents(native, this.handle);
+            }
         } else {
             return;
         }
@@ -994,6 +997,10 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
 
     onCelestialClick(handler: (data: MassifEventData<'massif::CelestialLayer', 'celestial.clicked'>) => void, options?: SubscribeOptions): Subscription {
         return this.subscribe('celestial.clicked' as EventName<C>, handler as never, options);
+    }
+
+    onSkyClick(handler: (data: MassifEventData<'massif::CelestialLayer', 'sky.clicked'>) => void, options?: SubscribeOptions): Subscription {
+        return this.subscribe('sky.clicked' as EventName<C>, handler as never, options);
     }
 
     private requireMap(): MassifMap {
