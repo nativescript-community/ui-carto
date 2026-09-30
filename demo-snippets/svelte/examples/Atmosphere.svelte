@@ -5,7 +5,7 @@
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { demTiles, overlayStyle, satelliteTiles, vectorTiles } from './shared';
+    import { demTiles, massifStyle, satelliteTiles, vectorTiles } from './shared';
 
     /** Looking south at the Matterhorn from over Zermatt - see Terrain3d for the framing. */
     const VIEW: [number, number] = [7.6586, 45.9763];
@@ -118,7 +118,7 @@
         }
     `;
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
         let moment = 2; // start at dusk: it is what shows the scattering off best
@@ -128,7 +128,7 @@
         let customSky = false;
 
         map.addLayer('satellite', { type: 'raster', source: satelliteTiles() });
-        map.addLayer('labels', { type: 'vector', source: vectorTiles(), style: overlayStyle() });
+        map.addLayer('labels', { type: 'vector', source: vectorTiles(), style: await massifStyle('hybrid') });
 
         map.terrain({ type: 'terrain', source: demTiles() }).apply({
             exaggeration: 1.25,

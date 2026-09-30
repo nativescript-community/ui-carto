@@ -1,22 +1,22 @@
 <script lang="ts">
     /**
-     * The smallest thing that is a map: one raster layer and a camera.
+     * The smallest thing that is a map: one layer with the Massif style, and a camera.
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { osmRaster } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
         // A spec describes the whole stack: the layer, and the source underneath it. Anything the
         // constructor does not take is applied as a property, so `opacity` needs no special case.
-        map.addLayer('basemap', { type: 'raster', opacity: 1, source: osmRaster() });
+        map.addLayer('basemap', { type: 'vector', opacity: 1, source: vectorTiles(), style: await massifStyle() });
 
         // Positions are lon/lat: the map was attached with EPSG:4326 as its event projection.
         map.camera().moveTo([6.8652, 45.8326], { zoom: 11 });
 
-        host.caption('Mont Blanc, from OpenStreetMap raster tiles.');
+        host.caption('Mont Blanc, drawn by the Massif streets style over OpenFreeMap vector tiles.');
     }
 </script>
 

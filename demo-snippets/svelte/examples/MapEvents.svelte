@@ -4,12 +4,12 @@
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { alpineStyle, vectorTiles } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
-        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: alpineStyle() });
+        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: await massifStyle() });
         map.camera().moveTo([6.8652, 45.8326], { zoom: 11 });
 
         let moves = 0;

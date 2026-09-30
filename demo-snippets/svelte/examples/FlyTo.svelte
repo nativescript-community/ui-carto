@@ -5,7 +5,7 @@
     import type { Position } from '@nativescript-community/ui-massifmaps/api';
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { osmRaster } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
     interface Place {
         name: string;
@@ -21,10 +21,10 @@
         { name: 'Verdon', at: [6.332, 43.75], zoom: 13, rotation: -30, tilt: 70 }
     ];
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
-        map.addLayer('basemap', { type: 'raster', source: osmRaster() });
+        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: await massifStyle() });
         map.camera().moveTo([5.7245, 45.1885], { zoom: 6 });
 
         for (const place of PLACES) {

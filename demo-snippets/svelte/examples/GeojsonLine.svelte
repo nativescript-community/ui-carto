@@ -6,7 +6,7 @@
     import type { Json } from '@nativescript-community/ui-massifmaps/api';
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { osmRaster } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
     /** A stretch of the Tour du Mont Blanc, plus the huts along it. */
     const ROUTE: Json = {
@@ -54,10 +54,10 @@
         '}'
     ].join('\n');
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
-        map.addLayer('basemap', { type: 'raster', source: osmRaster() });
+        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: await massifStyle() });
 
         // The source re-tiles whatever it is given, so replacing the document later is one call
         // rather than a layer rebuild.

@@ -5,7 +5,7 @@
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { demTiles, osmRaster } from './shared';
+    import { demTiles, massifStyle, vectorTiles } from './shared';
 
     /** What the 3D view looks AT. The viewpoint it is seen from is derived - see frameFlatStart. */
     const SUMMIT: [number, number] = [7.6586, 45.9763];
@@ -24,16 +24,24 @@
     /** How often the matched ramp samples the flight. */
     const TICK_MS = 32;
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
         let in3D = false;
         let autoByTilt = false;
         let matchFlight = false;
         let seconds = 2.5;
 
-        map.addLayer('basemap', { type: 'raster', source: osmRaster() });
+        // ONE DEM behind the terrain, the hillshade slot and the contour generator: fetched and decoded once.
+        const dem = map.source('dem', demTiles());
+        const contours = map.source('contours', { type: 'contour', source: 'dem', baseInterval: 20 });
+        // A composite layer weaves both into Massif's own order: relief under the contour lines, the lines
+        // under the roads, the contour labels among the names.
+        map.style('massif', await massifStyle('outdoor'));
+        const base = map.addLayer('basemap', { type: 'composite-vector', source: vectorTiles(), style: 'massif' });
+        base.call('addExternalDataSource', 'hillshade', dem.handle, 1);
+        base.call('addExternalDataSource', 'contour', contours.handle, 2);
 
-        map.terrain({ type: 'terrain', source: demTiles() }).apply({
+        map.terrain({ type: 'terrain', source: 'dem' }).apply({
             // Configured and left on. The switch is `flattened`, and it opens flat - set BEFORE any
             // layer decodes, so not one tile is built for a 3D the map has not shown.
             enabled: true,

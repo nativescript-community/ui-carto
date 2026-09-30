@@ -4,7 +4,7 @@
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { demTiles, overlayStyle, satelliteTiles, vectorTiles } from './shared';
+    import { demTiles, massifStyle, satelliteTiles, vectorTiles } from './shared';
 
     /**
      * Looking SOUTH at the Matterhorn from high over Zermatt.
@@ -17,14 +17,14 @@
      */
     const VIEW: [number, number] = [7.6586, 45.9763];
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
         // Imagery underneath, cached on disk like every other remote source here.
         map.addLayer('satellite', { type: 'raster', source: satelliteTiles() });
 
-        // Roads, place names and summits ON TOP, from a style with no background of its own.
-        map.addLayer('labels', { type: 'vector', source: vectorTiles(), style: overlayStyle() });
+        // Roads, place names and summits ON TOP: Massif's hybrid variant has no background of its own.
+        map.addLayer('labels', { type: 'vector', source: vectorTiles(), style: await massifStyle('hybrid') });
 
         // apply, not three sets: one crossing for the whole group.
         //

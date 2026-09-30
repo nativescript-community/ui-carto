@@ -5,12 +5,12 @@
     import type { Position } from '@nativescript-community/ui-massifmaps/api';
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { alpineStyle, vectorTiles } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
-        const base = map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: alpineStyle() });
+        const base = map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: await massifStyle() });
         map.camera().moveTo([5.7245, 45.1885], { zoom: 14.5 });
 
         base.onFeatureClick((e) => {
