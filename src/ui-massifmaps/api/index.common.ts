@@ -948,7 +948,10 @@ export class MassifLayer<C extends ClassName = any> extends MassifObject<C> {
 
     /** 0 is the bottom of the map's stack. */
     moveTo(index: number): this {
-        this.requireMap().layers().insert(index, this);
+        // insert does not take a layer out first: without the remove it is on the stack twice.
+        const layers = this.requireMap().layers();
+        layers.remove(this);
+        layers.insert(Math.min(index, layers.count()), this);
         return this;
     }
 
