@@ -77,6 +77,8 @@ writeFileSync(
         'export declare class Folder { static fromPath(p: string): Folder; readonly path: string; }',
         'export declare const knownFolders: { temp(): Folder; documents(): Folder; currentApp(): Folder };',
         'export declare const path: { join(...parts: string[]): string };',
+        'export declare const Http: { getImage(url: string): Promise<{ android: any; ios: any }> };',
+        'export declare const Screen: { mainScreen: { scale: number } };',
         ''
     ].join('\n')
 );
