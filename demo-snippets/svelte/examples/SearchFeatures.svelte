@@ -5,7 +5,7 @@
     import type { Position } from '@nativescript-community/ui-massifmaps/api';
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { alpineStyle, vectorTiles } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
     const CENTRE: Position = [5.7245, 45.1885];
     /** Degrees around the centre. A search with NO geometry scans the whole world at its zoom. */
@@ -15,10 +15,10 @@
         return [CENTRE[0] + dLon, CENTRE[1] + dLat];
     }
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
-        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: alpineStyle() });
+        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: await massifStyle() });
         map.camera().moveTo(CENTRE, { zoom: 13.5 });
 
         // The service is built FROM THE LAYER: it takes the source and the decoder the layer is

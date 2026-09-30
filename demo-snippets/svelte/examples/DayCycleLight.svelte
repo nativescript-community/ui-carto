@@ -2,41 +2,13 @@
     /**
      * The hour drives the whole palette, and the curve that decides how is the app's to replace.
      *
-     * Android and iOS ship the two CONVERTED styles as zipped assets (Mapbox Standard and MapTiler
-     * Streets, both through `massif-style mapbox2css --live-light`). Those are megabytes of sprite
-     * PNGs, so this port carries a small inline CartoCSS instead and drops the style switch; the
-     * API it demonstrates - the light curve, and what every colour on the map is derived from - is
-     * exactly the same.
+     * Massif is written to be lit by the hour: every layer states Standard's emissive strength, so
+     * the ground darkens at night while labels and lit streets keep their colour.
      */
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { demTiles, vectorTiles } from './shared';
+    import { demTiles, massifStyle, vectorTiles } from './shared';
 
-    /**
-     * `*-emissive-strength` is how much of a colour is EMITTED rather than lit. MapBox defaults
-     * geometry to 0 - entirely at the mercy of the scene light, which is what makes a night map
-     * dark - and labels to 1, which is what keeps a name legible over it. This SDK draws an
-     * unstated colour as authored, so a style that wants to be lit has to say so.
-     */
-    const MSS = [
-        // The two building-height scales are what makes the walls follow the CAMERA: they rise over
-        // z15 and lie down as you zoom out, and sink to a fifth of their height as the tilt reaches
-        // 90. Both are Map-block settings, evaluated per frame against the view.
-        'Map { background-color: #f4f1ec; background-emissive-strength: 0;',
-        '    building-height-scale: linear(([view::zoom] - 1), (15, 0), (15.3, 1));',
-        '    building-height-view-scale: 1 - 0.8 * linear([view::tilt], (80, 0), (90, 1));',
-        // The contact shadow belongs to the building standing in it, so it fades on the SAME ramp
-        // that lays the walls down - otherwise a flattened city keeps a dark ring around every
-        // footprint. A STYLE decision, written here rather than forced by the renderer.
-        '    building-ao-intensity: 0.2 * (1 - 0.8 * linear([view::tilt], (80, 0), (90, 1))); }',
-        '#water { polygon-fill: #8fb8d8; polygon-emissive-strength: 0; }',
-        '#landcover { polygon-fill: #dbe8cc; polygon-opacity: 0.6; polygon-emissive-strength: 0; }',
-        '#building { polygon-fill: #d9d0c9; polygon-emissive-strength: 0; }',
-        '#building[zoom >= 15]::walls { building-height: [render_height]; building-fill: #d9d0c9;',
-        '    building-fill-opacity: 1; }',
-        '#transportation { line-color: #ffffff; line-emissive-strength: 0;',
-        '    line-width: linear([view::zoom], (10, 0.6), (16, 5)); line-join: round; line-cap: round; }'
-    ].join('\n');
 
     /**
      * A curve is a list of lights anchored on SUN HEIGHTS, and the SDK interpolates between them.
@@ -144,7 +116,7 @@
         return [altitude, azimuth];
     }
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
         // Keep a TILTED far field uniform: a low levels-on-screen decays the grazing term more
@@ -154,7 +126,7 @@
         map.addLayer('basemap', {
             type: 'vector',
             source: vectorTiles(),
-            style: { type: 'mbvt', cartocss: { type: 'cartocss', css: MSS } }
+            style: await massifStyle()
         });
 
         // A TERRAIN, for the shadows. Cast shadows are drawn from the drape pass and land on the

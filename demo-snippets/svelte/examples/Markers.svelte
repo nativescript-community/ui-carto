@@ -5,7 +5,7 @@
     import type { MassifMap, MassifObject, Position } from '@nativescript-community/ui-massifmaps/api';
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
-    import { osmRaster } from './shared';
+    import { massifStyle, vectorTiles } from './shared';
 
     const SUMMITS: { name: string; at: Position; metres: number }[] = [
         { name: 'Mont Blanc', at: [6.8652, 45.8326], metres: 4808 },
@@ -16,10 +16,10 @@
 
     let popup: MassifObject | null = null;
 
-    function start(host: ExampleHost) {
+    async function start(host: ExampleHost) {
         const map = host.map;
 
-        map.addLayer('basemap', { type: 'raster', source: osmRaster() });
+        map.addLayer('basemap', { type: 'vector', source: vectorTiles(), style: await massifStyle() });
 
         // ONE style object shared by every marker - what matters once there are thousands of
         // them. A `style` key that is a STRING is looked up by id; an object is built inline.
