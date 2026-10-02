@@ -1,1 +1,4 @@
-OTHER_LDFLAGS=$(inherited) -framework GLKit -framework OpenGLES -framework CoreText
+// OpenGLES and GLKit do not exist on Mac Catalyst, whose slice renders through MetalANGLE
+MASSIF_GL_LDFLAGS = -framework GLKit -framework OpenGLES
+MASSIF_GL_LDFLAGS[sdk=macosx*] =
+OTHER_LDFLAGS=$(inherited) $(MASSIF_GL_LDFLAGS) -framework CoreText
