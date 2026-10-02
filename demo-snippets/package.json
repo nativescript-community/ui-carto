@@ -16,6 +16,7 @@
         ]
     },
     "dependencies": {
+        "@massif-maps/styles": "^1.0.0",
         "@nativescript-community/ui-drawer": "^0.1.32",
         "@nativescript-community/ui-massifmaps": "*",
         "@nativescript-community/ui-material-core": "^7.3.2",

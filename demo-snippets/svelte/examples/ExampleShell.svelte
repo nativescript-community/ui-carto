@@ -4,6 +4,7 @@
      * is that an example file contains the map code and nothing else.
      */
     import { api } from '@nativescript-community/ui-massifmaps';
+    import { setShowError, setShowInfo, setShowWarn } from '@nativescript-community/ui-massifmaps/utils';
     import type { MassifMap } from '@nativescript-community/ui-massifmaps/api';
     import type { ExampleHost } from './host';
     import { goBack } from '@nativescript-community/svelte-native';
@@ -14,7 +15,7 @@
     /** The registry id the map and everything it builds are scoped to. */
     export let id: string;
     /** Runs once the map is ready. This is the example. */
-    export let start: (host: ExampleHost) => void;
+    export let start: (host: ExampleHost) => void | Promise<void>;
 
     interface Control {
         label: string;
@@ -41,19 +42,28 @@
     let error = '';
     const timers: any[] = [];
 
-    function onMapReady(event) {
+    async function onMapReady(event) {
+        console.log(`[massif-ex] ${id}: mapReady, api available ${api.isAvailable()}`);
         if (!api.isAvailable()) {
             error = 'This build of the SDK has no surface API - see the plugin README.';
             return;
         }
+        setShowError(true);
+        setShowWarn(true);
+        setShowInfo(true);
         try {
             // EPSG:4326 once, so every position in the example - and every one read back out of
             // an event - is plain lon/lat rather than the map's own metres.
             map = api.attach(event.object, { id, projection: 'EPSG:4326' });
-            start(host());
+            console.log(`[massif-ex] ${id}: attached`);
+            map.subscribe('map.idle', () => console.log(`[massif-ex] ${id}: map.idle`));
+            map.subscribe('map.stable', (e) => console.log(`[massif-ex] ${id}: map.stable ${e.reason}`));
+            const started = Date.now();
+            await start(host());
+            console.log(`[massif-ex] ${id}: start done in ${Date.now() - started} ms`);
         } catch (e: any) {
             error = String(e?.message ?? e);
-            console.error(error, e?.stack);
+            console.error(`[massif-ex] ${id}: start failed: ${error}`, e?.stack);
         }
     }
 

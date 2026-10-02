@@ -1,12 +1,12 @@
 export default {
   ios: {
     SPMPackages: [
-      // {
-      //   name: 'massifmaps-sdk',
-      //   libs: ['MassifMaps'],
-      //   repositoryURL: 'https://github.com/massif-maps/MassifMaps-ios-swift.git',
-      //   version: '6.0.0',
-      // },
+      {
+        name: 'massifmaps-sdk',
+        libs: ['MassifMaps'],
+        repositoryURL: 'https://github.com/massif-maps/MassifMaps-ios-swift.git',
+        version: '6.1.0',
+      },
       {
         name: 'massifmaps-SwiftTryCatch-sdk',
         libs: ['SwiftTryCatch'],

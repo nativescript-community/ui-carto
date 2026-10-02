@@ -1,12 +1,10 @@
-import { File, Folder, Http, knownFolders, path } from '@nativescript/core';
+import { File, knownFolders, path } from '@nativescript/core';
 import type { SourceSpec, StyleSpec } from '@nativescript-community/ui-massifmaps/api';
 
 /**
  * What every ported example needs, in one place.
  *
- * These are the NativeScript equivalents of the constants the Android examples share. Where the
- * two differ it is noted - the only real difference is the style projects, which the Android app
- * bundles as a zipped asset and this one fetches (see `massifStyle`).
+ * These are the NativeScript equivalents of the constants the Android examples share.
  */
 
 /** A tile server wants to know who is asking: a real app identifies itself. */
@@ -19,9 +17,11 @@ export const UA = 'MassifMapsExamples/1.0 (+https://github.com/massif-maps/Massi
  * otherwise re-fetches the same tiles from somebody else's free service on every run.
  */
 function cached(name: string, capacityMb: number, source: SourceSpec): SourceSpec {
+    const databasePath = path.join(knownFolders.documents().path, name);
+    console.log(`[massif-ex] cache ${databasePath} exists ${File.exists(databasePath)}`);
     return {
         type: 'persistent-cache',
-        databasePath: path.join(knownFolders.documents().path, name),
+        databasePath,
         capacity: capacityMb * 1024 * 1024,
         source
     };
@@ -67,30 +67,12 @@ export function demTiles(): SourceSpec {
     });
 }
 
-/** The published Massif CartoCSS project (docs/styles/massif-sdk.md), which the style release keeps current. */
-const MASSIF_SITE = 'https://massif-maps.github.io/MassifMaps/styles/massif/carto/';
-const MASSIF_VARIANTS = ['streets', 'outdoor', 'topo', 'hybrid', 'eink'];
-
 /**
- * Massif as an `mbvt` style spec for `variant`. The Android and iOS apps bundle the repo's
- * styles/massif/carto; a plugin has nowhere to put it, so the project is fetched once into the app's
- * temp folder, and every variant is a style parameter of it (`style.set('params.variant', 'eink')`).
+ * Massif as an `mbvt` style spec for `variant`: the `cartocss` project of `@massif-maps/styles`, which
+ * demo-snippets/webpack.config.svelte.js copies into the app. Every variant is a style parameter of
+ * it (`style.set('params.variant', 'eink')`). Async to match the Android and web examples' call sites.
  */
 export async function massifStyle(variant = 'streets'): Promise<StyleSpec> {
-    const folder = path.join(knownFolders.temp().path, 'massif-style', 'massif');
-    if (!File.exists(path.join(folder, 'project.json'))) {
-        const project = await Http.getJSON<any>(MASSIF_SITE + 'project.json');
-        const texts = await Promise.all((project.styles as string[]).map((name) => Http.getString(MASSIF_SITE + name)));
-        const images = new Set<string>(Object.values(project.styleparameters ?? {}).filter((v) => typeof v === 'string' && /\.(png|jpg|svg)$/.test(v)) as string[]);
-        for (const text of texts) {
-            for (const match of text.matchAll(/[\w./-]+\.(?:png|jpg|svg)/g)) images.add(match[0]);
-        }
-        const names = ['project.json', ...MASSIF_VARIANTS.map((v) => `${v}.json`), ...project.styles, ...images, ...(project.fonts ?? []).map((f: string) => `fonts/${f}`)];
-        for (const name of names) {
-            const target = path.join(folder, name);
-            Folder.fromPath(target.slice(0, target.lastIndexOf('/')));
-            await Http.getFile(MASSIF_SITE + name, target);
-        }
-    }
-    return { type: 'mbvt', project: { type: 'project', assets: { type: 'dir', path: folder }, name: variant } } as StyleSpec;
+    // a bundle package, not a dir: on Android the copied folder stays in the APK, not under files/app
+    return { type: 'mbvt', project: { type: 'project', assets: { type: 'bundle', path: 'app/massif-style-iconfont' }, name: variant } } as StyleSpec;
 }
