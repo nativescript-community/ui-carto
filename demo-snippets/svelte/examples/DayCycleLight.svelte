@@ -119,10 +119,6 @@
     async function start(host: ExampleHost) {
         const map = host.map;
 
-        // Keep a TILTED far field uniform: a low levels-on-screen decays the grazing term more
-        // slowly, so the horizon band stops jumping between levels as the camera turns.
-        map.set('tileLODMaxZoomLevelsOnScreen', 6.0);
-
         map.addLayer('basemap', {
             type: 'vector',
             source: vectorTiles(),
@@ -163,7 +159,7 @@
 
         applyFormula();
         applyHour();
-        map.camera().moveTo([LON, LAT], { zoom: 15.5, rotation: 20, tilt: 45 });
+        map.camera().moveTo([LON, LAT], { zoom: 17.2, rotation: 20, tilt: 45 });
 
         function applyFormula() {
             // The whole formula, in two properties. An empty list is the built-in curve; a list of
