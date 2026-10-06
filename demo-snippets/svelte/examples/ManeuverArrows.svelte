@@ -2,7 +2,7 @@
     /**
      * Turn arrows cut from a route at each maneuver, the head drawn by the line style itself.
      */
-    import type { Json, Position } from '@nativescript-community/ui-massifmaps/api';
+    import type { Json, MassifObject, Position } from '@nativescript-community/ui-massifmaps/api';
     import ExampleShell from './ExampleShell.svelte';
     import type { ExampleHost } from './host';
     import { massifStyle, vectorTiles } from './shared';
@@ -52,38 +52,12 @@
         '}'
     ].join('\n');
 
-    const METRES_PER_DEGREE = 111319.5;
-
-    /**
-     * The route from `before` metres behind point `index` to `after` metres past it, clamped at the ends.
-     * The facade has no ManeuverArrowBuilder.buildArrow yet: this is its walk, in the same local plane.
-     */
-    function arrowAt(index: number, before: number, after: number): Position[] {
-        const k = Math.cos((ROUTE[index][1] * Math.PI) / 180);
-        const walk = (step: number, length: number) => {
-            const out: Position[] = [];
-            let at = ROUTE[index];
-            for (let i = index + step; i >= 0 && i < ROUTE.length && length > 0; i += step) {
-                const next = ROUTE[i];
-                const d = Math.hypot((next[0] - at[0]) * k, next[1] - at[1]) * METRES_PER_DEGREE;
-                const t = d > length ? length / d : 1;
-                out.push([at[0] + (next[0] - at[0]) * t, at[1] + (next[1] - at[1]) * t]);
-                length -= d;
-                at = next;
-            }
-            return out;
-        };
-        return [...walk(-1, before).reverse(), ROUTE[index], ...walk(1, after)];
-    }
-
-    function arrows(head: string): Json {
+    function arrows(builder: MassifObject<'massif::ManeuverArrowBuilder'>, head: string): Json {
         return {
             type: 'FeatureCollection',
-            features: MANEUVERS.map(([index]) => ({
-                type: 'Feature',
-                properties: { head },
-                geometry: { type: 'LineString', coordinates: arrowAt(index, 30, 30) }
-            }))
+            features: MANEUVERS.flatMap(([index]) =>
+                (builder.call('buildArrowAtIndex', ROUTE, index) as { features: { [key: string]: Json }[] }).features.map((arrow) => ({ ...arrow, properties: { head } }))
+            )
         };
     }
 
@@ -108,8 +82,9 @@
         // A layer of its own, added last: it draws over the route and every layer before it.
         const maneuvers = map.source('maneuver-data', { type: 'geojson', maxZoom: 18 });
         const layer = maneuvers.createLayer('maneuver');
+        const builder = map.object('geometry', 'maneuver-arrows', { type: 'maneuver-arrow', lengthBefore: 30, lengthAfter: 30 });
         let head = 0;
-        maneuvers.setGeoJSON(layer, arrows(HEADS[head]));
+        maneuvers.setGeoJSON(layer, arrows(builder, HEADS[head]));
         map.addLayer('maneuver', { type: 'vector', source: 'maneuver-data', style: { type: 'mbvt', cartocss: { type: 'cartocss', css: ARROW_STYLE } } });
 
         const overview = (duration: number) => {
@@ -127,7 +102,7 @@
         });
         host.button('Head shape', () => {
             head = (head + 1) % HEADS.length;
-            maneuvers.setGeoJSON(layer, arrows(HEADS[head]));
+            maneuvers.setGeoJSON(layer, arrows(builder, HEADS[head]));
             host.caption(`${HEADS[head]} head: line-arrow-width and -length, no marker and no bitmap.`);
         });
         host.button('Overview', () => overview(1500));

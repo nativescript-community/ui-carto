@@ -3372,9 +3372,9 @@ export interface PropertyTypes {
         'featureIdOverride': boolean;
         readonly 'maxZoom': number;
         readonly 'minZoom': number;
-        /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
+        /** Returns the value of the specified style parameter: its default, or the value last set. "table.key" returns one member of an object parameter. */
         'params': Record<string, string>;
-        /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
+        /** Returns the value of the specified style parameter: its default, or the value last set. "table.key" returns one member of an object parameter. */
         [key: `params.${string}`]: string;
         /** (read-only) Returns the ordered style layer names as declared by the style (project JSON "layers", or Mapnik XML Layers), i.e. the draw order. CompositeVectorTileLayer places external sources by it: a source whose name is not in this list is not drawn. */
         readonly 'styleLayerNames': string[];
@@ -10228,6 +10228,14 @@ export interface GeometrySpec_line {
     poses: Json;
 }
 
+export interface GeometrySpec_maneuver_arrow {
+    type: 'maneuver-arrow';
+    /** Returns the length of the arrow after the maneuver point. */
+    lengthAfter?: number;
+    /** Returns the length of the arrow before the maneuver point. */
+    lengthBefore?: number;
+}
+
 export interface GeometrySpec_point {
     type: 'point';
     pos: Position;
@@ -10252,7 +10260,7 @@ export interface GeometrySpec_geojson {
     projection?: ProjectionName;
 }
 
-export type GeometrySpec = GeometrySpec_line | GeometrySpec_point | GeometrySpec_polygon | GeometrySpec_geojson;
+export type GeometrySpec = GeometrySpec_line | GeometrySpec_maneuver_arrow | GeometrySpec_point | GeometrySpec_polygon | GeometrySpec_geojson;
 
 export interface LayerSpec_celestial {
     type: 'celestial';
@@ -11062,7 +11070,7 @@ export interface StyleSpec_mbvt {
     compiledStyle?: Handle | string | StylesetSpec;
     /** Returns the value of feature id override flag. This is intended for cases when feature ids in tile are not globally unique. */
     featureIdOverride?: boolean;
-    /** Returns the value of the specified style parameter. The style parameter must be declared in the current style. */
+    /** Returns the value of the specified style parameter: its default, or the value last set. "table.key" returns one member of an object parameter. */
     params?: Record<string, string>;
     project?: Handle | string | StylesetSpec;
     /** Returns the binary format the tiles are decoded as. */
@@ -11145,6 +11153,7 @@ export interface SpecClass {
     };
     'geometry': {
         'line': 'massif::LineGeometry';
+        'maneuver-arrow': 'massif::ManeuverArrowBuilder';
         'point': 'massif::PointGeometry';
         'polygon': 'massif::PolygonGeometry';
         'geojson': 'massif::Geometry';
@@ -11474,11 +11483,14 @@ export interface MethodTypes {
     };
     'massif::MBVectorTileDecoder': {
         addFallbackFont: { args: [font: Handle]; result: void };
+        getLegend: { args: [spec: Json]; result: Json };
         getStyleParameter: { args: [name: string]; result: string };
         setStyleParameter: { args: [name: string, value: string]; result: boolean };
         setStyleParameters: { args: [params: Json]; result: void };
     };
     'massif::ManeuverArrowBuilder': {
+        buildArrow: { args: [points: Position[], maneuverPos: Position]; result: Json };
+        buildArrowAtIndex: { args: [points: Position[], maneuverIndex: number]; result: Json };
     };
     'massif::MapBounds': {
     };
