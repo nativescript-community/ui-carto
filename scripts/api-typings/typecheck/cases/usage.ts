@@ -8,6 +8,7 @@
  * Run with `npm run typings.api.check`.
  */
 import { MapCamera, MassifLayer, MassifMap, MassifObject, attach, create, createLayer, createSource, find } from '../../../../src/ui-massifmaps/api/index.common';
+import type { Json } from '../../../../src/ui-massifmaps/api/index.common';
 
 declare const view: any;
 
@@ -403,3 +404,11 @@ bare.onCelestialClick((e) => {
 });
 
 map.object('celestial', 'sirius', { type: 'sprite', metaData: { id: 'star:Sirius' } });
+
+// A maneuver arrow comes back as GeoJSON, ready for setGeoJSON.
+const arrowBuilder = map.object('geometry', 'arrows', { type: 'maneuver-arrow', lengthBefore: 30 });
+const arrow: Json = arrowBuilder.call('buildArrowAtIndex', [[2.16, 41.39], [2.17, 41.39]], 1);
+void arrow;
+
+// @ts-expect-error the index is a number
+arrowBuilder.call('buildArrowAtIndex', [[2.16, 41.39]], 'one');
