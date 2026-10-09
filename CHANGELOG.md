@@ -3,6 +3,91 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/nativescript-community/ui-massifmaps/compare/v3.0.1...v4.0.0) (2026-10-09)
+
+### ⚠ BREAKING CHANGES
+
+* **layers:** CompositeVectorTileLayer.singlePassRenderingEnabled and the
+singlePassRenderingEnabled option are gone. Drop any assignment; it had no effect.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+* map events require a surface-API SDK, and mapClicked no longer carries its
+platform-specific `android` field.
+
+Verified: tsc clean, and `node scripts/examples/check.mjs` reports "examples typecheck OK". The
+Java and Swift are NOT compiled here and nothing ran on a device - the whole event path is
+untested at runtime.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+* requires an SDK with MapMoveReason on MapEventListener (MassifMaps #163).
+The native MapEventListener additions take an int reason where they took a boolean
+userAction. App code reading `e.data.userAction` still works; `e.data.reason` is the one to
+move to.
+
+Verified: tsc clean over the whole plugin, and a temporary type test confirmed
+`e.data.reason` infers as the string union from the event name (a deliberately wrong
+annotation failed the build). NOT run on a device, and the Java/Swift additions are not
+compile-checked here.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+### Features
+
+* **api:** accept a nested spec or a handle wherever an object is expected ([df6f66c](https://github.com/nativescript-community/ui-massifmaps/commit/df6f66cc1f5d23c3b430f9dee319f6d330478dd7))
+* **api:** add onCelestialClick for the celestial.clicked event ([7c1a540](https://github.com/nativescript-community/ui-massifmaps/commit/7c1a5407c03f02eeeaad8cac172ad31de5ce674b))
+* **api:** add onSkyClick for the sky.clicked event ([1288ff4](https://github.com/nativescript-community/ui-massifmaps/commit/1288ff4529212b88692ae4553e3ab1d52eec5f36))
+* **api:** add the celestial image object to the typings ([6176a97](https://github.com/nativescript-community/ui-massifmaps/commit/6176a972b37d77a64ba72dd11dcf4df4f1cb10c2))
+* **api:** add wrapLayer and regenerate composite typings ([3187f27](https://github.com/nativescript-community/ui-massifmaps/commit/3187f274105bf09755dd3995f46f055c9a14e1ab))
+* **api:** build the plugin on the SDK's surface API ([a6accd3](https://github.com/nativescript-community/ui-massifmaps/commit/a6accd31c2064236a9b76c03c93cb5a46bc07598)), closes [massif-maps/MassifMaps#146](https://github.com/massif-maps/MassifMaps/issues/146) [#159](https://github.com/nativescript-community/ui-massifmaps/issues/159)
+* **api:** everything an app needs so this is its ONLY import ([cd5ec84](https://github.com/nativescript-community/ui-massifmaps/commit/cd5ec8448f8a791c99f6c23c0f64f38714b0db26))
+* **api:** forward debounce through attach, and demo both rates ([79e8bb0](https://github.com/nativescript-community/ui-massifmaps/commit/79e8bb020d24d14db882d7331076b0cc2663535d))
+* **api:** read an event's payload as properties, and add the missing events example ([03358a5](https://github.com/nativescript-community/ui-massifmaps/commit/03358a566fd54147bcd0f4fe393cdc8598009475))
+* **api:** stand the camera eye on a position with MapCamera.moveEyeTo ([89ca8d6](https://github.com/nativescript-community/ui-massifmaps/commit/89ca8d621870c6c1aa4a60ebfee4e7521f6924e3))
+* **api:** style parameters, aliases and one-crossing writes ([eb9aa7c](https://github.com/nativescript-community/ui-massifmaps/commit/eb9aa7c7f31c902d1191ab694d3d0003c2a93d97))
+* **api:** use the SDK's ManeuverArrowBuilder in the maneuver-arrows example ([462cc8e](https://github.com/nativescript-community/ui-massifmaps/commit/462cc8e63eaa4ab335a04add14be08fa03413d35))
+* **examples:** add sky objects, label styling and maneuver arrow examples ([b91993f](https://github.com/nativescript-community/ui-massifmaps/commit/b91993fe1cb5fc60fdea9941ebbf79ee4227acba))
+* **examples:** add the 2D/3D switch example, and eyePosition on the camera ([bb34382](https://github.com/nativescript-community/ui-massifmaps/commit/bb343821373aea9edea136f346a058dda6daf06e))
+* **examples:** add the peak finder to the gallery ([78986ce](https://github.com/nativescript-community/ui-massifmaps/commit/78986ce9e59add1eddbb3598477d2b054474441a))
+* **examples:** add the sky/fog example, and cache every remote source ([948ad1b](https://github.com/nativescript-community/ui-massifmaps/commit/948ad1b6c20594c75d97f81fa98e24726804af3f))
+* **examples:** draw every example with Massif, and add a Massif variants example ([d486ef4](https://github.com/nativescript-community/ui-massifmaps/commit/d486ef46b5e518dfea2a7ae2fe55e4cdff0e8889))
+* **examples:** drive the 2D/3D switch three ways, and give the host a slider ([e2c822d](https://github.com/nativescript-community/ui-massifmaps/commit/e2c822dc29fb75badd3aec305858bdd669c6474f))
+* **examples:** drive the day-cycle example by the hour, on a real sun position ([0b03f34](https://github.com/nativescript-community/ui-massifmaps/commit/0b03f340e1e921231ec0a084e8b45cf6c07b243a))
+* **examples:** light the map by the hour, with a replaceable curve ([55419cb](https://github.com/nativescript-community/ui-massifmaps/commit/55419cbe2007f9f9fe9003ec2578879215037f41))
+* **examples:** move maneuver-arrows to Annecy, with roundabouts, a U-turn and a lane change ([1100122](https://github.com/nativescript-community/ui-massifmaps/commit/11001227f17af970007316c22cd64554c10ba51f))
+* **examples:** show the 2D/3D switch and the camera-driven building height in day-cycle-light ([3534ccf](https://github.com/nativescript-community/ui-massifmaps/commit/3534ccfd6148a2f04162f02a6d3e7a35064ece1d))
+* **examples:** show the built-in light curve, and bound the tilted LOD ([d7bdbdb](https://github.com/nativescript-community/ui-massifmaps/commit/d7bdbdbe863264f5bc0ae410ba8f8dd12f0ba84a))
+* take the map's events from the surface API, and delete the native listener ([657562a](https://github.com/nativescript-community/ui-massifmaps/commit/657562a24023778a35c45669cbdb3c8b86d85abc))
+* take the map's move reason from the SDK, and type every map event ([cc49474](https://github.com/nativescript-community/ui-massifmaps/commit/cc49474b034567ddf722c7655f1b1a36e60c48b2))
+* **ui:** let the map raise its events through the facade, per event ([f610728](https://github.com/nativescript-community/ui-massifmaps/commit/f61072849c008855fbb41433c026d9dd18138d42))
+
+### Bug Fixes
+
+* **api:** accept the handles, specs and paths the SDK already resolves ([7fef0d3](https://github.com/nativescript-community/ui-massifmaps/commit/7fef0d3b0a6ef19d7fdcc1673541e033340b86c9))
+* **api:** follow the tile LOD option rename in the day-cycle example and typings ([d8939a8](https://github.com/nativescript-community/ui-massifmaps/commit/d8939a89450656affc1f170d044691d8e6b14686))
+* **api:** move a layer instead of stacking it twice with moveTo ([806c5d5](https://github.com/nativescript-community/ui-massifmaps/commit/806c5d576b4209f312b4435ba739abec933631e2))
+* **api:** never let an event handler abort the process, and tolerate a missing payload ([5fdf11b](https://github.com/nativescript-community/ui-massifmaps/commit/5fdf11b99a5fc1cee93eca93903b15152de5ff2f))
+* **api:** reuse the view's facade in attach() instead of registering the map twice ([0054661](https://github.com/nativescript-community/ui-massifmaps/commit/0054661344c11af8c8210e40b0d741f264d55564))
+* **bindings:** detect a SWIG enum by its shape, not by a method it no longer carries ([46d8058](https://github.com/nativescript-community/ui-massifmaps/commit/46d80584e03ef6131ea1cb216a4bd7e3c02adf5d))
+* **bindings:** keep every class a facade call touches in the Android metadata ([eab0123](https://github.com/nativescript-community/ui-massifmaps/commit/eab0123f1bcd6b85b6576e805c093c0f097c7022))
+* **bindings:** type an enum-typed accessor again, now the SDK spells it int ([98a8f95](https://github.com/nativescript-community/ui-massifmaps/commit/98a8f9574adbf73680aee7bd120913c26f40f479))
+* **examples:** add the terrain the cast shadows land on ([1367339](https://github.com/nativescript-community/ui-massifmaps/commit/1367339c3b72f24fd5445c9cf2b997e828f2b296))
+* **examples:** enable terrain lighting so the buildings cast ([3b81359](https://github.com/nativescript-community/ui-massifmaps/commit/3b813590284f915cabbcffb0c7e7675584d154e4))
+* **examples:** load the day-cycle basemap and slow the 2D/3D flight to seconds ([b75239d](https://github.com/nativescript-community/ui-massifmaps/commit/b75239d28db3b85a71e04f871422589a93627d03))
+* **examples:** match flight flies at once instead of waiting for 3D tiles ([4da04a6](https://github.com/nativescript-community/ui-massifmaps/commit/4da04a674550a37da637997194f11230a56ac5f8))
+* **examples:** stop the day-cycle example drawing buildings out to the horizon ([407cdc1](https://github.com/nativescript-community/ui-massifmaps/commit/407cdc17d216412494d73b9998e23286e7da41cf))
+* **examples:** sweep the hour, and clear a curve with an empty list ([838375a](https://github.com/nativescript-community/ui-massifmaps/commit/838375aad51a64895a53ca1656e144ade5668a01))
+* **examples:** sweep the sun height, not the hour ([4f5a8de](https://github.com/nativescript-community/ui-massifmaps/commit/4f5a8de32bf37b9d19e316888bf44baaa8945930))
+* **ios:** link OpenGLES and GLKit only outside Mac Catalyst ([6c65478](https://github.com/nativescript-community/ui-massifmaps/commit/6c6547895cbe187e6cc22692c23281e7f56bbc94))
+* **ui-massifmaps:** register the iOS api event listener as a native class ([8117bc5](https://github.com/nativescript-community/ui-massifmaps/commit/8117bc589236ab63ed1d4a72c008944714a1b8f1))
+
+### Performance Improvements
+
+* **api:** build an event's payload getters once per class, not once per event ([8041e33](https://github.com/nativescript-community/ui-massifmaps/commit/8041e33eb6e68d1a218bc51198baa790fedb556f))
+
+### Code Refactoring
+
+* **layers:** remove CompositeVectorTileLayer's no-op singlePassRenderingEnabled ([d51addc](https://github.com/nativescript-community/ui-massifmaps/commit/d51addc12351a078ab64c425b008b8c1682b46ac))
+
 ## [3.0.1](https://github.com/nativescript-community/ui-massifmaps/compare/v3.0.0...v3.0.1) (2026-08-22)
 
 ### Bug Fixes

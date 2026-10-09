@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/nativescript-community/ui-massifmaps/compare/v3.0.1...v4.0.0) (2026-10-09)
+
+### ⚠ BREAKING CHANGES
+
+* map events require a surface-API SDK, and mapClicked no longer carries its
+platform-specific `android` field.
+
+Verified: tsc clean, and `node scripts/examples/check.mjs` reports "examples typecheck OK". The
+Java and Swift are NOT compiled here and nothing ran on a device - the whole event path is
+untested at runtime.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+* requires an SDK with MapMoveReason on MapEventListener (MassifMaps #163).
+The native MapEventListener additions take an int reason where they took a boolean
+userAction. App code reading `e.data.userAction` still works; `e.data.reason` is the one to
+move to.
+
+Verified: tsc clean over the whole plugin, and a temporary type test confirmed
+`e.data.reason` infers as the string union from the event name (a deliberately wrong
+annotation failed the build). NOT run on a device, and the Java/Swift additions are not
+compile-checked here.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+### Features
+
+* **api:** add onCelestialClick for the celestial.clicked event ([7c1a540](https://github.com/nativescript-community/ui-massifmaps/commit/7c1a5407c03f02eeeaad8cac172ad31de5ce674b))
+* **api:** build the plugin on the SDK's surface API ([a6accd3](https://github.com/nativescript-community/ui-massifmaps/commit/a6accd31c2064236a9b76c03c93cb5a46bc07598)), closes [massif-maps/MassifMaps#146](https://github.com/massif-maps/MassifMaps/issues/146) [#159](https://github.com/nativescript-community/ui-massifmaps/issues/159)
+* **api:** style parameters, aliases and one-crossing writes ([eb9aa7c](https://github.com/nativescript-community/ui-massifmaps/commit/eb9aa7c7f31c902d1191ab694d3d0003c2a93d97))
+* take the map's events from the surface API, and delete the native listener ([657562a](https://github.com/nativescript-community/ui-massifmaps/commit/657562a24023778a35c45669cbdb3c8b86d85abc))
+* take the map's move reason from the SDK, and type every map event ([cc49474](https://github.com/nativescript-community/ui-massifmaps/commit/cc49474b034567ddf722c7655f1b1a36e60c48b2))
+
+### Bug Fixes
+
+* **bindings:** keep every class a facade call touches in the Android metadata ([eab0123](https://github.com/nativescript-community/ui-massifmaps/commit/eab0123f1bcd6b85b6576e805c093c0f097c7022))
+* **ios:** link OpenGLES and GLKit only outside Mac Catalyst ([6c65478](https://github.com/nativescript-community/ui-massifmaps/commit/6c6547895cbe187e6cc22692c23281e7f56bbc94))
+
 ## [3.0.1](https://github.com/nativescript-community/ui-massifmaps/compare/v3.0.0...v3.0.1) (2026-08-22)
 
 ### Bug Fixes
